@@ -1,10 +1,10 @@
 class_name Enemy extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@onready var explosion: AnimatedSprite2D = $Explosion
 
 @export var speed: float = 80.0
-@export var max_healt: float = 10
+@export var max_healt: float = 100
 @export var gold_value: int = 1
 
 signal die(ememy: Enemy)
@@ -15,7 +15,7 @@ var _path_follow: PathFollow2D
 
 func get_damage(damage: float) -> void:
 	health -= damage
-	$Explosion.play()
+	$Explosion.play("Explosion")
 	#health_bar.set_current_health(health)
 	if health <= 0:
 		_die()

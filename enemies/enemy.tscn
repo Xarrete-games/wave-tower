@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cafqn48q104fs" path="res://enemies/enemy.gd" id="1_7frlh"]
 [ext_resource type="Texture2D" uid="uid://bojbsxlx3maff" path="res://assets/sprites/enemies/enemy1.png" id="1_fw1ev"]
-[ext_resource type="Texture2D" path="res://assets/sprites/proyectiles/Explosion01.png" id="3_3t1x0"]
-[ext_resource type="Texture2D" path="res://assets/sprites/proyectiles/Explosion02.png" id="4_epsnb"]
-[ext_resource type="Texture2D" path="res://assets/sprites/proyectiles/Explosion03.png" id="5_4w5fm"]
-[ext_resource type="Texture2D" path="res://assets/sprites/proyectiles/Explosion04.png" id="6_uba7a"]
+[ext_resource type="Texture2D" uid="uid://bm4ifvwlnaf3v" path="res://assets/sprites/proyectiles/Explosion01.png" id="3_3t1x0"]
+[ext_resource type="Texture2D" uid="uid://b64ekjerj72la" path="res://assets/sprites/proyectiles/Explosion02.png" id="4_epsnb"]
+[ext_resource type="Texture2D" uid="uid://cghq387lneluj" path="res://assets/sprites/proyectiles/Explosion03.png" id="5_4w5fm"]
+[ext_resource type="Texture2D" uid="uid://drq2ylbhn8b3w" path="res://assets/sprites/proyectiles/Explosion04.png" id="6_uba7a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7frlh"]
 radius = 46.010868
@@ -24,9 +24,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_uba7a")
+}, {
+"duration": 1.0,
+"texture": null
 }],
 "loop": false,
-"name": &"default",
+"name": &"Explosion",
 "speed": 10.0
 }]
 
@@ -46,6 +49,8 @@ texture = ExtResource("1_fw1ev")
 
 [node name="Explosion" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_28xqf")
-autoplay = "default"
+animation = &"Explosion"
+autoplay = "Explosion"
+frame = 4
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Explosion"]
