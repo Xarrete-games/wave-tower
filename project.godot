@@ -11,5 +11,10 @@ config_version=5
 [application]
 
 config/name="Game off Jam"
+run/main_scene="uid://b7dfj87j7n8hl"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+EnemyGenerator="*res://enemies/enemy_generator.gd"

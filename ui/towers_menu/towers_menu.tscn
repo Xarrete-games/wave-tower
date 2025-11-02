@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfym6wmesrxxa"]
+
+[ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/towers_menu/towers_menu.gd" id="1_d3tgk"]
+[ext_resource type="Texture2D" uid="uid://cpbfa0mts20bt" path="res://assets/sprites/tower_icons/red_tower_icon.png" id="1_rke6c"]
+
+[node name="TowersMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d3tgk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.80100006
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.048034668
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RedTowerButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+texture_normal = ExtResource("1_rke6c")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="pressed" from="HBoxContainer/RedTowerButton" to="." method="_on_red_tower_button_pressed"]

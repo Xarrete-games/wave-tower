@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://4fkas61wyppq"]
+
+[ext_resource type="Texture2D" uid="uid://bif7l67deifn7" path="res://assets/sprites/towers/Towers.png" id="1_wmotl"]
+
+[node name="Tower" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wmotl")
+region_enabled = true
+region_rect = Rect2(128, 0, 64, 128)

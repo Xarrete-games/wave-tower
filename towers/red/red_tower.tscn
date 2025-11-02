@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://d36t7geqp1sh"]
+
+[ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_d57o0"]
+
+[node name="Tower" instance=ExtResource("1_d57o0")]
