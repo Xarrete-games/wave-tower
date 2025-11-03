@@ -1,4 +1,4 @@
 Torretas:
 	Roja (Fuego): Monotarget.
-	Amarilla (Electricidad): Pega en línea.
+	Verde (Electricidad): Pega en línea.
 	Azul (Hielo): Un area a su alrededor.
