@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://d36t7geqp1sh"]
+[gd_scene load_steps=3 format=3 uid="uid://d36t7geqp1sh"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_d57o0"]
+[ext_resource type="Texture2D" uid="uid://ckhogt3wdifev" path="res://assets/sprites/towers/pochitorre.png" id="2_hb78a"]
 
 [node name="Tower" instance=ExtResource("1_d57o0")]
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(-5.9604645e-08, -43)
-scale = Vector2(0.2, 0.2)
-region_rect = Rect2(-11, 0, 760, 696)
+position = Vector2(0, -30)
+texture = ExtResource("2_hb78a")
+region_rect = Rect2(-1, 0, 65, 97)
