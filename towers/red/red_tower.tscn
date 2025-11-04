@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://d36t7geqp1sh"]
+[gd_scene load_steps=4 format=3 uid="uid://d36t7geqp1sh"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_d57o0"]
-[ext_resource type="Texture2D" uid="uid://ckhogt3wdifev" path="res://assets/sprites/towers/pochitorre.png" id="2_hb78a"]
+[ext_resource type="Texture2D" uid="uid://c60pslrwqqrwg" path="res://assets/sprites/towers/pochitorres.png" id="2_hb78a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxl1f"]
+atlas = ExtResource("2_hb78a")
 
 [node name="Tower" instance=ExtResource("1_d57o0")]
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(0, -30)
-texture = ExtResource("2_hb78a")
+position = Vector2(0, -62)
+texture = SubResource("AtlasTexture_cxl1f")
+hframes = 3
+region_enabled = false
 region_rect = Rect2(-1, 0, 65, 97)
