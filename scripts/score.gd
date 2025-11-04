@@ -17,5 +17,3 @@ func substract_gold(amount: int) -> void:
 func _ready():
 	pass
 	
-func _process(delta: float) -> void:
-	pass
