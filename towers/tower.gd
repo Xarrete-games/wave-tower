@@ -11,22 +11,26 @@ var _enabled: bool = false
 @onready var projectile_spawn_pos: Marker2D = $ProjectileSpawnPos
 @onready var red_projectil: RedProjectil = $RedProjectil
 
+#TODO disbale area before build
 
 func enable() -> void:
 	_enabled = true
 	red_projectil.set_is_casting(true)
+	red_projectil.appear()
 
 func _ready():
 	red_projectil.dissapear()
 
-
 func _physics_process(delta: float) -> void:
 	if not _current_target:
+		red_projectil.dissapear()
 		return
 	red_projectil.appear()
 	red_projectil.target_position = _current_target.global_position
 
 func _on_range_area_body_entered(body: Node2D) -> void:
+	if not _enabled:
+		return
 	var enemy = body as Enemy
 	enemy.die.connect(_on_enemy_die)
 	
