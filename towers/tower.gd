@@ -6,8 +6,13 @@ const PROJECTIL = preload("uid://dipmywfwdmrlo")
 
 var _targets_in_range: Array[Enemy] = [] 
 var _current_target: Enemy
+var _enabled: bool = false
 
 @onready var projectile_spawn_pos: Marker2D = $ProjectileSpawnPos
+
+
+func enable() -> void:
+	_enabled = true
 
 func _ready():
 	pass
@@ -44,7 +49,7 @@ func _remove_target_and_get_next(enemy: Enemy) -> void:
 
 
 func _on_attack_timer_timeout() -> void:
-	if _current_target == null:
+	if _current_target == null or not _enabled:
 		return
 	
 	# add proyectile

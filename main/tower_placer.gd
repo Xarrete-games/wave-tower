@@ -35,6 +35,7 @@ func _place_tower() -> void:
 	level_tile_map.set_tile_occupied(tile_pos)
 	Score.substract_gold(_current_tower_instance.build_price)
 	_is_placing = false
+	_current_tower_instance.enable()
 	_current_tower_instance = null
 
 func _on_tower_selected(tower_scene: PackedScene) -> void:
