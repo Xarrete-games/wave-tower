@@ -8,4 +8,5 @@ func _ready():
 	pass
 	
 func _on_red_tower_button_pressed() -> void:
-	tower_selected.emit(RED_TOWER)
+	if Score.gold >= Price.TowerBuild.RED:
+		tower_selected.emit(RED_TOWER)

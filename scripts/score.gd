@@ -3,16 +3,15 @@ extends Node
 
 signal gold_change(amount: int)
 
-var _gold: int = 50
-
+var gold: int = 50
 
 func add_gold(amount: int) -> void:
-	_gold += amount
-	gold_change.emit(_gold)
+	gold += amount
+	gold_change.emit(gold)
 	
 func substract_gold(amount: int) -> void:
-	_gold -= amount
-	gold_change.emit(_gold)
+	gold -= amount
+	gold_change.emit(gold)
 
 func _ready():
 	pass

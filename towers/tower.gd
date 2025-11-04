@@ -1,11 +1,13 @@
 class_name Tower extends Node2D
 
-@onready var projectile_spawn_pos: Marker2D = $ProjectileSpawnPos
+@export var build_price: Price.TowerBuild = Price.TowerBuild.RED
 
 const PROJECTIL = preload("uid://dipmywfwdmrlo")
 
 var _targets_in_range: Array[Enemy] = [] 
 var _current_target: Enemy
+
+@onready var projectile_spawn_pos: Marker2D = $ProjectileSpawnPos
 
 func _ready():
 	pass

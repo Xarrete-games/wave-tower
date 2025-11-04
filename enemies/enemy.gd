@@ -48,6 +48,7 @@ func _die() -> void:
 	#var blood = blood_resource.instantiate()
 	#get_tree().root.add_child(blood)
 	#blood.global_position = global_position
+	Score.add_gold(gold_value)
 	_path_follow.queue_free()
 	queue_free()
 

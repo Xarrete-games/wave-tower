@@ -28,10 +28,14 @@ func _input(event: InputEvent) -> void:
 	if _is_placing and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
 		if _is_valid_placement:
-			var tile_pos = level_tile_map.get_mouse_tile_pos()
-			level_tile_map.set_tile_occupied(tile_pos)
-			_is_placing = false
-			_current_tower_instance = null
+			_place_tower()
+
+func _place_tower() -> void:
+	var tile_pos = level_tile_map.get_mouse_tile_pos()
+	level_tile_map.set_tile_occupied(tile_pos)
+	Score.substract_gold(_current_tower_instance.build_price)
+	_is_placing = false
+	_current_tower_instance = null
 
 func _on_tower_selected(tower_scene: PackedScene) -> void:
 	if _is_placing:

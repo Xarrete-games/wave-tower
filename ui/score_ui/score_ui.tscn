@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bjj2sav3lh0or"]
+[gd_scene load_steps=2 format=3 uid="uid://bjj2sav3lh0or"]
+
+[ext_resource type="Script" uid="uid://bkbamp1u3wa1u" path="res://ui/score_ui/score_ui.gd" id="1_wrnqc"]
 
 [node name="ScoreUI" type="Control"]
 layout_mode = 3
@@ -7,8 +9,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wrnqc")
 
-[node name="Label" type="Label" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 64.0
+offset_bottom = 50.0
+
+[node name="DescriptionGoldLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "GOLD:"
+
+[node name="AmountGoldLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "0"
