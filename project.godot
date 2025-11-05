@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 EnemyGenerator="*res://enemies/enemy_generator.gd"
 Score="*res://scripts/score.gd"
 Price="*res://scripts/price.gd"
+AudioManager="*res://main/AudioManager.tscn"
 
 [layer_names]
 

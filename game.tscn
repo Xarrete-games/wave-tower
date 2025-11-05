@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxm7f15ow0544"]
+[gd_scene load_steps=3 format=3 uid="uid://bxm7f15ow0544"]
 
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/towers_menu/towers_menu.tscn" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://b3rjk0365pn1t" path="res://levels/test_level.tscn" id="2_feb5d"]
-[ext_resource type="AudioStream" uid="uid://djcbwpg7kcog1" path="res://assets/sounds/Win_Coins.ogg" id="3_feb5d"]
 
 [node name="Game" type="Node2D"]
 
@@ -13,6 +12,3 @@
 [node name="Level" type="Node2D" parent="."]
 
 [node name="TestLevel" parent="Level" instance=ExtResource("2_feb5d")]
-
-[node name="Win_Coins" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_feb5d")
