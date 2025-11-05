@@ -15,7 +15,7 @@ var _path_follow: PathFollow2D
 
 func get_damage(damage: float) -> void:
 	health -= damage
-	$Explosion.play("Explosion")
+	explosion.play("Explosion")
 	#health_bar.set_current_health(health)
 	if health <= 0:
 		_die()
