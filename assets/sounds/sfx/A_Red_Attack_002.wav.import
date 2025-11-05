@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c6m820cmdipge"
-path="res://.godot/imported/A_Red_Attack_002.wav-f8236add7620b2c47e17957ebb00f7d6.sample"
+path="res://.godot/imported/A_Red_Attack_002.wav-02bfedb4e2ba396f3ca285086c287e61.sample"
 
 [deps]
 
-source_file="res://assets/sounds/A_Red_Attack_002.wav"
-dest_files=["res://.godot/imported/A_Red_Attack_002.wav-f8236add7620b2c47e17957ebb00f7d6.sample"]
+source_file="res://assets/sounds/sfx/A_Red_Attack_002.wav"
+dest_files=["res://.godot/imported/A_Red_Attack_002.wav-02bfedb4e2ba396f3ca285086c287e61.sample"]
 
 [params]
 

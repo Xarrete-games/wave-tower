@@ -1,15 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://befy4fve56utf"]
 
-[ext_resource type="Script" uid="uid://bxc8cmt60846t" path="res://projectiles/red_projectil.gd" id="1_v5rqc"]
-[ext_resource type="AudioStream" uid="uid://djn8lqy06js3k" path="res://assets/sounds/A_Red_Attack_001.wav" id="2_5t1h8"]
-[ext_resource type="AudioStream" uid="uid://c6m820cmdipge" path="res://assets/sounds/A_Red_Attack_002.wav" id="3_sl0jr"]
-[ext_resource type="AudioStream" uid="uid://c0anj1eemcc0h" path="res://assets/sounds/A_Red_Attack_003.wav" id="4_oghx1"]
+[ext_resource type="Script" uid="uid://bxc8cmt60846t" path="res://towers/red/projectil/red_projectil.gd" id="1_v5rqc"]
+[ext_resource type="AudioStream" uid="uid://djn8lqy06js3k" path="res://assets/sounds/sfx/A_Red_Attack_001.wav" id="2_5t1h8"]
+[ext_resource type="AudioStream" uid="uid://c6m820cmdipge" path="res://assets/sounds/sfx/A_Red_Attack_002.wav" id="3_sl0jr"]
+[ext_resource type="AudioStream" uid="uid://c0anj1eemcc0h" path="res://assets/sounds/sfx/A_Red_Attack_003.wav" id="4_oghx1"]
 
 [node name="RedProjectil" type="Node2D"]
 script = ExtResource("1_v5rqc")
 
 [node name="Line2D" type="Line2D" parent="."]
-visible = false
 modulate = Color(1, 0, 0, 1)
 points = PackedVector2Array(0, 0, 100, 0)
 width = 25.0
