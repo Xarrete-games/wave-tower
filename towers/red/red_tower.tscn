@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_d57o0"]
 [ext_resource type="Texture2D" uid="uid://c60pslrwqqrwg" path="res://assets/sprites/towers/pochitorres.png" id="2_hb78a"]
 [ext_resource type="Script" uid="uid://buj7pdefu7r4s" path="res://towers/red/red_tower.gd" id="2_hvay6"]
-[ext_resource type="PackedScene" uid="uid://befy4fve56utf" path="res://projectiles/red_projectil.tscn" id="3_cxl1f"]
+[ext_resource type="PackedScene" uid="uid://befy4fve56utf" path="res://towers/red/projectil/red_projectil.tscn" id="3_cxl1f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cxl1f"]
 atlas = ExtResource("2_hb78a")

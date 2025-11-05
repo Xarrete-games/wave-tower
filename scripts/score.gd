@@ -14,6 +14,7 @@ func substract_gold(amount: int) -> void:
 	gold -= amount
 	gold_change.emit(gold)
 
-func _ready():
-	pass
+
+	
+	
 	

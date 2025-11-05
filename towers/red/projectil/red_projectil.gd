@@ -6,7 +6,6 @@ class_name RedProjectil extends Node2D
 @export var damage: float = 5
 @export var growth_time: float = 0.1
 
-
 var _target: Enemy 
 
 var tween: Tween = null

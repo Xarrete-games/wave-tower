@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b8ekm6efdmil7"]
+
+[ext_resource type="Shader" uid="uid://c47gu0nesi14a" path="res://assets/shaders/ring.gdshader" id="1_8obml"]
+
+[resource]
+shader = ExtResource("1_8obml")
+shader_parameter/radius = 5.0
+shader_parameter/width = 2.0
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/fade = true

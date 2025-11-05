@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfym6wmesrxxa"]
+[gd_scene load_steps=6 format=3 uid="uid://bfym6wmesrxxa"]
 
 [ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/towers_menu/towers_menu.gd" id="1_d3tgk"]
-[ext_resource type="Texture2D" uid="uid://cpbfa0mts20bt" path="res://assets/sprites/tower_icons/red_tower_icon.png" id="1_rke6c"]
+[ext_resource type="Texture2D" uid="uid://c60pslrwqqrwg" path="res://assets/sprites/towers/pochitorres.png" id="3_yrsgh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3tgk"]
+atlas = ExtResource("3_yrsgh")
+region = Rect2(0, 0, 128, 191)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrsgh"]
+atlas = ExtResource("3_yrsgh")
+region = Rect2(128, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oaxy"]
+atlas = ExtResource("3_yrsgh")
+region = Rect2(256, 0, 128, 192)
 
 [node name="TowersMenu" type="Control"]
 layout_mode = 3
@@ -11,6 +23,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d3tgk")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -140.0
+offset_right = 462.0
+grow_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -25,8 +48,26 @@ grow_vertical = 0
 [node name="RedTowerButton" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
-texture_normal = ExtResource("1_rke6c")
+texture_normal = SubResource("AtlasTexture_d3tgk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="BlueTowerButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_yrsgh")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="GreenTowerButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_0oaxy")
 ignore_texture_size = true
 stretch_mode = 0
 
 [connection signal="pressed" from="HBoxContainer/RedTowerButton" to="." method="_on_red_tower_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/BlueTowerButton" to="." method="_on_red_tower_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/GreenTowerButton" to="." method="_on_red_tower_button_pressed"]

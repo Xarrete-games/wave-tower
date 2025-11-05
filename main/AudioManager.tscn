@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://0urfxmq2ec80"]
+[gd_scene load_steps=3 format=3 uid="uid://bwc2vsl3mpnr5"]
 
-[ext_resource type="Script" uid="uid://cm6ghw116o51f" path="res://main/audio_manager.gd" id="1_8qypr"]
-[ext_resource type="AudioStream" uid="uid://djcbwpg7kcog1" path="res://assets/sounds/Win_Coins.ogg" id="2_53i8p"]
+[ext_resource type="Script" path="res://main/audio_manager.gd" id="1_8qypr"]
+[ext_resource type="AudioStream" uid="uid://djcbwpg7kcog1" path="res://assets/sounds/sfx/Win_Coins.ogg" id="2_53i8p"]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_8qypr")

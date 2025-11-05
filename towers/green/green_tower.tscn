@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://oj5ilwusjvuo"]
+
+[ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_wyhsg"]
+[ext_resource type="Texture2D" uid="uid://c60pslrwqqrwg" path="res://assets/sprites/towers/pochitorres.png" id="2_u51lm"]
+[ext_resource type="Script" uid="uid://dpashq3sbs7m7" path="res://towers/green/green_tower.gd" id="2_wdqmo"]
+
+[node name="GreenTower" instance=ExtResource("1_wyhsg")]
+script = ExtResource("2_wdqmo")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_u51lm")
+hframes = 3
+frame = 2
+region_enabled = false
