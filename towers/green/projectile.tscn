@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2p3kiv745w0i"]
+
+[sub_resource type="GDScript" id="GDScript_h738x"]
+script/source = "class_name Projectil extends Area2D
+
+@export var damage = 5
+@export var speed = 400
+
+var _direction: Vector2
+
+func set_direction(dir: Vector2) -> void:
+	_direction = dir
+	# La flecha mirará hacia la dirección de su movimiento
+	look_at(global_position + _direction)
+
+func _ready():
+	pass
+	
+func _process(delta: float) -> void:
+	global_position += _direction * speed * delta
+
+func _on_body_entered(body: Node2D) -> void:
+	var enemy = body as Enemy
+	enemy.get_damage(damage)
+	
+	queue_free()
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_al5vr"]
+load_path = "res://.godot/imported/red_tower_icon.png-8b358f6e79b2a1666c18b7adcae17ff7.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3ci8"]
+size = Vector2(21, 22)
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 2
+script = SubResource("GDScript_h738x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5707964
+scale = Vector2(0.05, 0.05)
+texture = SubResource("CompressedTexture2D_al5vr")
+region_rect = Rect2(1240, 786, 17, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_u3ci8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

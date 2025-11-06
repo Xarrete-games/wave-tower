@@ -12,10 +12,8 @@ atlas = ExtResource("2_hb78a")
 script = ExtResource("2_hvay6")
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(0, -62)
+position = Vector2(0, -60)
 texture = SubResource("AtlasTexture_cxl1f")
-hframes = 3
-region_enabled = false
 region_rect = Rect2(-1, 0, 65, 97)
 
 [node name="AttackTimer" parent="." index="2"]

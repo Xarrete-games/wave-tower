@@ -1,3 +1,95 @@
-[gd_scene format=3 uid="uid://ck6mf6m73ergh"]
+[gd_scene load_steps=12 format=3 uid="uid://ck6mf6m73ergh"]
 
-[node name="GreenProjectile" type="Node2D"]
+[ext_resource type="Script" uid="uid://q583klmvpknv" path="res://towers/green/projectil/green_projectile.gd" id="1_8lep0"]
+[ext_resource type="Texture2D" uid="uid://c4ogu05o4r7c5" path="res://assets/sprites/proyectiles/01.png" id="1_qvvkj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvvkj"]
+atlas = ExtResource("1_qvvkj")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lep0"]
+atlas = ExtResource("1_qvvkj")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg2fn"]
+atlas = ExtResource("1_qvvkj")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_710fh"]
+atlas = ExtResource("1_qvvkj")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v0nf"]
+atlas = ExtResource("1_qvvkj")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oenxw"]
+atlas = ExtResource("1_qvvkj")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exlxi"]
+atlas = ExtResource("1_qvvkj")
+region = Rect2(384, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7yvkt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvvkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lep0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg2fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_710fh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v0nf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oenxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exlxi")
+}],
+"loop": true,
+"name": &"anim",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvvkj"]
+size = Vector2(171, 55)
+
+[node name="GreenProjectile" type="Area2D"]
+script = ExtResource("1_8lep0")
+
+[node name="Waves" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Waves"]
+position = Vector2(-60, 0)
+sprite_frames = SubResource("SpriteFrames_7yvkt")
+animation = &"anim"
+frame_progress = 0.63660187
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Waves"]
+sprite_frames = SubResource("SpriteFrames_7yvkt")
+animation = &"anim"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Waves"]
+position = Vector2(60, 0)
+sprite_frames = SubResource("SpriteFrames_7yvkt")
+animation = &"anim"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_qvvkj")
+
+[node name="Duration" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]

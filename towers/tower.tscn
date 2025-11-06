@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://4fkas61wyppq"]
 
-[ext_resource type="Texture2D" uid="uid://bif7l67deifn7" path="res://assets/sprites/towers/Towers.png" id="1_wmotl"]
+[ext_resource type="Texture2D" uid="uid://c60pslrwqqrwg" path="res://assets/sprites/towers/pochitorres.png" id="1_wmotl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wmotl"]
 radius = 218.00229
@@ -11,7 +11,7 @@ radius = 218.00229
 z_index = 10
 position = Vector2(0, -37)
 texture = ExtResource("1_wmotl")
-region_enabled = true
+hframes = 3
 region_rect = Rect2(128, 0, 64, 128)
 
 [node name="RangeArea" type="Area2D" parent="."]

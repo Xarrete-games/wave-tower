@@ -6,10 +6,7 @@ const BLUE_PROJECTIL = preload("uid://csif0nju31dcs")
 
 func _ready():
 	super._ready()
-	
-func _process(delta: float) -> void:
-	pass
-	
+		
 func _fire() -> void:
 	var projectil: BlueProjectil = BLUE_PROJECTIL.instantiate()
 	add_child(projectil)
