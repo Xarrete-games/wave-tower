@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwyyp2r266blt"]
+[gd_scene load_steps=4 format=3 uid="uid://cwyyp2r266blt"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_orgjy"]
 [ext_resource type="Script" uid="uid://bpvj36tgrsr8g" path="res://towers/blue/blue_tower.gd" id="2_iq8f3"]
-[ext_resource type="PackedScene" uid="uid://csif0nju31dcs" path="res://towers/blue/projectil/blue_projectil.tscn" id="3_711aj"]
 [ext_resource type="Texture2D" uid="uid://c60pslrwqqrwg" path="res://assets/sprites/towers/pochitorres.png" id="3_866h1"]
 
 [node name="BlueTower" instance=ExtResource("1_orgjy")]
@@ -14,5 +13,5 @@ hframes = 3
 frame = 1
 region_enabled = false
 
-[node name="BlueProjectil" parent="." index="3" instance=ExtResource("3_711aj")]
-position = Vector2(0, -131)
+[node name="ProjectilSpawnPoint" type="Marker2D" parent="." index="3"]
+position = Vector2(0, 8)

@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://csif0nju31dcs"]
+[gd_scene load_steps=4 format=3 uid="uid://csif0nju31dcs"]
 
-[ext_resource type="Material" uid="uid://b8ekm6efdmil7" path="res://assets/material/ring_material.tres" id="1_l5w73"]
+[ext_resource type="Script" uid="uid://dvhoa4fsbi8gv" path="res://towers/blue/projectil/blue_projectil.gd" id="1_r6vk7"]
+[ext_resource type="Texture2D" uid="uid://c4ogu05o4r7c5" path="res://assets/sprites/proyectiles/01.png" id="2_r6vk7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_08vvf"]
 
 [node name="BlueProjectil" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_r6vk7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_08vvf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = ExtResource("1_l5w73")
+texture = ExtResource("2_r6vk7")
+hframes = 11
+vframes = 9
+frame = 66
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
