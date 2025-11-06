@@ -31,6 +31,7 @@ _data = {
 point_count = 5
 
 [node name="TestLevel" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_gmgay")
 
 [node name="LevelTileMap" type="TileMapLayer" parent="."]

@@ -1,22 +1,24 @@
 class_name Enemy extends CharacterBody2D
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var explosion: AnimatedSprite2D = $Explosion
+signal die(ememy: Enemy)
+signal reached_target(enemy: Enemy)
 
 @export var speed: float = 80.0
 @export var max_healt: float = 20
 @export var gold_value: int = 1
 
-signal die(ememy: Enemy)
-signal reached_target(enemy: Enemy)
-
 var health: float
 var _path_follow: PathFollow2D
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var explosion: AnimatedSprite2D = $Explosion
+@onready var health_bar: HealthBar = $HealthBar
+
 func get_damage(damage: float) -> void:
-	health -= damage
+
+	_set_health(health - damage)
 	explosion.play("Explosion")
-	#health_bar.set_current_health(health)
+
 	if health <= 0:
 		_die()
 		
@@ -24,7 +26,7 @@ func set_path_follow(path_follow: PathFollow2D) -> void:
 	_path_follow = path_follow
 
 func _ready() -> void:
-	#animation_player.play("mixamo_com")
+	health_bar.set_max_health(max_healt)
 	_set_health(max_healt)
 	
 func _process(delta):
@@ -56,7 +58,6 @@ func _on_target_reached() -> void:
 	reached_target.emit(self)
 	queue_free()
 	
-func _set_health(value: float) -> void:
-	self.health = value
-	#self.health_bar.set_max_health(value)
-	#self.health_bar.set_current_health(value)
+func _set_health(new_value: float) -> void:
+	health = new_value
+	health_bar.update_health(health)
