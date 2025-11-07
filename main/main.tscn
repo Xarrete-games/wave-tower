@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxm7f15ow0544"]
+[gd_scene load_steps=6 format=3 uid="uid://4cegttf0mxi0"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_vfw6y"]
 [ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="2_2fwfh"]
