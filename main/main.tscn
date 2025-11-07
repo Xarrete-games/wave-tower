@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://4cegttf0mxi0"]
+[gd_scene load_steps=7 format=3 uid="uid://4cegttf0mxi0"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_vfw6y"]
 [ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="2_2fwfh"]
+[ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="3_kfbq2"]
 [ext_resource type="PackedScene" uid="uid://b3rjk0365pn1t" path="res://levels/test_level.tscn" id="3_vfw6y"]
 [ext_resource type="PackedScene" uid="uid://bjj2sav3lh0or" path="res://ui/score_ui/score_ui.tscn" id="4_jc0vi"]
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/towers_menu/towers_menu.tscn" id="5_2c7eb"]
@@ -9,6 +10,10 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_vfw6y")
 levels = Array[PackedScene]([ExtResource("3_vfw6y")])
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(579, 323)
+script = ExtResource("3_kfbq2")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
