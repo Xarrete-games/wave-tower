@@ -22,6 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_d3tgk")
 
 [node name="Panel" type="Panel" parent="."]
@@ -67,7 +68,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [connection signal="pressed" from="HBoxContainer/RedTowerButton" to="." method="_on_red_tower_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/BlueTowerButton" to="." method="_on_red_tower_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/GreenTowerButton" to="." method="_on_red_tower_button_pressed"]

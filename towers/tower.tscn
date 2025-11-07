@@ -1,29 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://4fkas61wyppq"]
+[gd_scene load_steps=4 format=3 uid="uid://4fkas61wyppq"]
 
 [ext_resource type="Texture2D" uid="uid://c60pslrwqqrwg" path="res://assets/sprites/towers/pochitorres.png" id="1_wmotl"]
+[ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="2_uyl23"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wmotl"]
-radius = 218.00229
+radius = 200.0
 
 [node name="Tower" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 10
-position = Vector2(0, -37)
+position = Vector2(0, -60)
 texture = ExtResource("1_wmotl")
 hframes = 3
 region_rect = Rect2(128, 0, 64, 128)
 
 [node name="RangeArea" type="Area2D" parent="."]
-position = Vector2(0, -37)
 collision_layer = 0
+input_pickable = false
 
 [node name="RangeCollision" type="CollisionShape2D" parent="RangeArea"]
+scale = Vector2(1, 0.5)
 shape = SubResource("CircleShape2D_wmotl")
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="RangePreview" type="Node2D" parent="."]
+script = ExtResource("2_uyl23")
+radius = 200.0
+color_fill = Color(0, 0.69803923, 1, 0.5568628)
+
+[node name="MouseDetector" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -25.0
+offset_top = -143.0
+offset_right = 25.0
+offset_bottom = 17.0
 
 [connection signal="body_entered" from="RangeArea" to="." method="_on_range_area_body_entered"]
 [connection signal="body_exited" from="RangeArea" to="." method="_on_range_area_body_exited"]

@@ -1,3 +1,4 @@
+@tool
 class_name BlueTower extends Tower
 
 const BLUE_PROJECTIL = preload("uid://csif0nju31dcs")

@@ -12,9 +12,9 @@ levels = Array[PackedScene]([ExtResource("3_vfw6y")])
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="ScoreUI" parent="UILayer" instance=ExtResource("4_jc0vi")]
-
 [node name="TowersMenu" parent="UILayer" instance=ExtResource("5_2c7eb")]
+
+[node name="ScoreUI" parent="UILayer" instance=ExtResource("4_jc0vi")]
 
 [node name="TowerPlacer" parent="." node_paths=PackedStringArray("towers_menu") instance=ExtResource("2_2fwfh")]
 towers_menu = NodePath("../UILayer/TowersMenu")

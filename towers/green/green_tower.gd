@@ -1,3 +1,4 @@
+@tool
 class_name GreenTower extends Tower
 
 const GREEN_PROJECTILE = preload("uid://ck6mf6m73ergh")

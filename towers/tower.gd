@@ -1,23 +1,39 @@
 @abstract
+@tool
 class_name Tower extends Node2D
 
 @export var build_price: Price.TowerBuild = Price.TowerBuild.RED
+@export var damage: float = 5
+@export var radius: float = 200
 
 var _targets_in_range: Array[Enemy] = [] 
 var _current_target: Enemy
 var _enabled: bool = false
 
 @onready var range_area: Area2D = $RangeArea
+@onready var range_preview: RangePreview = $RangePreview
+@onready var range_collision: CollisionShape2D = $RangeArea/RangeCollision
+@onready var mouse_detector: Control = $MouseDetector
 
 func _ready():
+	placement_mode()
+	_set_radius()
+
+# sets the tower's state while it is being placed
+func placement_mode() -> void:
+	_enabled = false
 	range_area.monitoring = false
-	
+	range_preview.visible = true
+
 # Enables the tower after its construction/placement.
 # It is initially disabled to prevent actions while the player is placing it.
 func enable() -> void:
 	_enabled = true
 	range_area.monitoring = true
-
+	range_preview.visible = false
+	mouse_detector.mouse_entered.connect(_on_mouse_entered)
+	mouse_detector.mouse_exited.connect(_on_mouse_exited)
+	
 func _on_range_area_body_entered(body: Node2D) -> void:
 	if not _enabled:
 		return
@@ -56,5 +72,15 @@ func _on_attack_timer_timeout() -> void:
 	
 	_fire()
 
+func _set_radius() -> void:
+	range_preview.radius = radius
+	(range_collision.shape as CircleShape2D).radius = radius
+
+func _on_mouse_entered():
+	range_preview.visible = true
+
+func _on_mouse_exited():
+	range_preview.visible = false
+	
 @abstract
 func _fire() -> void

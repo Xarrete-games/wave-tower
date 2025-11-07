@@ -1,3 +1,4 @@
+@tool
 class_name RedTower extends Tower
 
 @onready var red_projectil: RedProjectil = $RedProjectil
