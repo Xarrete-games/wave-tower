@@ -1,3 +1,3 @@
 class_name EnemyWave extends Resource
 
-@export var groups: Array[EnemyGroupsData] = []
+@export var groups_data: Array[EnemyGroupData] = []

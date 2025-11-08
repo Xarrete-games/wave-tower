@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7ttkk4pasgin"]
+
+[ext_resource type="Script" uid="uid://b5fdnmk8kjh0g" path="res://ui/waves_ui/wasves_ui.gd" id="1_jsy43"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2mfnv"]
+font_size = 30
+
+[node name="WavesUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_jsy43")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.128
+offset_bottom = 0.055999756
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="NextWaveDescription" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "NEXT WAVE IN"
+
+[node name="NextWaveTime" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2mfnv")
+horizontal_alignment = 1

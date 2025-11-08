@@ -11,14 +11,12 @@ _data = {
 }
 point_count = 5
 
-[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("enemy_paths")]
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("enemy_paths", "ememies_container")]
 y_sort_enabled = true
 script = ExtResource("1_gmgay")
 waves_data = ExtResource("2_w7r7j")
 enemy_paths = NodePath("EnemyPaths")
-
-[node name="Towers" type="Node2D" parent="."]
-y_sort_enabled = true
+ememies_container = NodePath("EnemiesContainer")
 
 [node name="LevelTileMap" parent="." instance=ExtResource("2_x25rp")]
 
@@ -27,3 +25,8 @@ script = ExtResource("3_gmgay")
 
 [node name="Path1" type="Path2D" parent="EnemyPaths"]
 curve = SubResource("Curve2D_46lwt")
+
+[node name="TowersContainer" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="EnemiesContainer" type="Node2D" parent="."]
