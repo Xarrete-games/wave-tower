@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjj2sav3lh0or"]
+[gd_scene load_steps=3 format=3 uid="uid://bjj2sav3lh0or"]
 
 [ext_resource type="Script" uid="uid://bkbamp1u3wa1u" path="res://ui/score_ui/score_ui.gd" id="1_wrnqc"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/label_settings/label_settings_24.tres" id="2_btstv"]
 
 [node name="ScoreUI" type="Control"]
 layout_mode = 3
@@ -12,16 +13,22 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_wrnqc")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 15.0
-offset_right = 79.0
-offset_bottom = 50.0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
 
-[node name="DescriptionGoldLabel" type="Label" parent="VBoxContainer"]
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="DescriptionGoldLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "GOLD:"
+label_settings = ExtResource("2_btstv")
 
-[node name="AmountGoldLabel" type="Label" parent="VBoxContainer"]
+[node name="AmountGoldLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "0"
+label_settings = ExtResource("2_btstv")

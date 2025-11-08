@@ -9,8 +9,5 @@ script = ExtResource("2_wdqmo")
 [node name="Sprite2D" parent="." index="0"]
 frame = 2
 
-[node name="AttackTimer" parent="." index="2"]
-wait_time = 8.0
-
 [node name="ProjectilSpawnPosition" type="Marker2D" parent="." index="3"]
 position = Vector2(0, -126)
