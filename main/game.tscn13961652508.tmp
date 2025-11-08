@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3 uid="uid://6vgrx5dct8h8"]
+
+[ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
+[ext_resource type="Script" path="res://main/main_camera.gd" id="2_2c7eb"]
+[ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/towers_menu/towers_menu.tscn" id="3_4u4fy"]
+[ext_resource type="PackedScene" uid="uid://bjj2sav3lh0or" path="res://ui/score_ui/score_ui.tscn" id="4_j015t"]
+[ext_resource type="PackedScene" uid="uid://b7ttkk4pasgin" path="res://ui/waves_ui/wasves_ui.tscn" id="5_hlcqn"]
+[ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="6_v3ojx"]
+[ext_resource type="PackedScene" uid="uid://dwt8mx7gh0clq" path="res://main/enemy_generator/enemy_generator.tscn" id="7_f7m14"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_jc0vi")
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(579, 323)
+script = ExtResource("2_2c7eb")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="TowersMenu" parent="UILayer" instance=ExtResource("3_4u4fy")]
+
+[node name="ScoreUI" parent="UILayer" instance=ExtResource("4_j015t")]
+
+[node name="WavesUI" parent="UILayer" node_paths=PackedStringArray("enemy_generator") instance=ExtResource("5_hlcqn")]
+enemy_generator = NodePath("")
+
+[node name="TowerPlacer" parent="." node_paths=PackedStringArray("towers_menu") instance=ExtResource("6_v3ojx")]
+towers_menu = NodePath("")
+
+[node name="EnemyGenerator" parent="." instance=ExtResource("7_f7m14")]
+
+[node name="Level" type="Node2D" parent="."]

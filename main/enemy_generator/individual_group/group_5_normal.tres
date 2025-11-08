@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyGroup" load_steps=2 format=3 uid="uid://dqt57t6iuai6u"]
+[gd_resource type="Resource" script_class="EnemyIndividualGroup" load_steps=2 format=3 uid="uid://dqt57t6iuai6u"]
 
 [ext_resource type="Script" uid="uid://bgcq2ktq3w7dq" path="res://main/enemy_generator/resources_definitions/enemy_individual_group.gd" id="1_4nn0j"]
 
