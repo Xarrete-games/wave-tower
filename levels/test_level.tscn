@@ -18,7 +18,6 @@ _data = {
 point_count = 6
 
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("enemy_paths", "ememies_container")]
-y_sort_enabled = true
 script = ExtResource("1_gmgay")
 waves_data = ExtResource("2_w7r7j")
 enemy_paths = NodePath("EnemyPaths")
