@@ -1,7 +1,7 @@
 class_name EnemyGenerator extends Node
 
 signal enemy_die(enemy: Enemy)
-signal groud_handled()
+signal group_handled()
 
 const ENEMY_NORMAL = preload("uid://dmqbn2q5splor")
 const ENEMY_FAST = preload("uid://xk0wj86s8ddb")
@@ -9,6 +9,7 @@ const ENEMIES_SCENES: Dictionary = {
 	Enemy.EnemyType.NORMAL: ENEMY_NORMAL,
 	Enemy.EnemyType.FAST: ENEMY_FAST
 }
+
 var enemy_timer: Timer
 var _level: Level
 var waves_data: EnemyWavesData
@@ -24,7 +25,7 @@ var groups_handled_count: int
 @onready var next_wave_timer: Timer = $NextWaveTimer
 
 func _ready() -> void:
-	groud_handled.connect(_on_group_handled)
+	group_handled.connect(_on_group_handled)
 #
 func get_next_wave_seconds_left() -> int:
 	return int(next_wave_timer.time_left)
@@ -89,7 +90,7 @@ func _hand_enemy_group(
 	for _i in range(amount):
 		await get_tree().create_timer(interval_spawn).timeout
 		_generate_enemy(enemy_type, path)
-	groud_handled.emit()
+	group_handled.emit()
 		
 func _generate_enemy(enemy_type: Enemy.EnemyType, path: int) -> void:
 	var enemy: Enemy = ENEMIES_SCENES[enemy_type].instantiate()
