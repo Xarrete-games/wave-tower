@@ -5,7 +5,6 @@
 
 [node name="BlueTower" instance=ExtResource("1_orgjy")]
 script = ExtResource("2_iq8f3")
-radius = null
 
 [node name="Sprite2D" parent="." index="0"]
 frame = 1

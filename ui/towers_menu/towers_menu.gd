@@ -11,7 +11,7 @@ func _ready():
 	
 func _on_red_tower_button_pressed() -> void:
 	if Score.gold >= Price.TowerBuild.RED:
-		tower_selected.emit(BLUE_TOWER)
+		tower_selected.emit(RED_TOWER)
 
 func _on_blue_tower_button_pressed() -> void:
 	if Score.gold >= Price.TowerBuild.BLUE:
