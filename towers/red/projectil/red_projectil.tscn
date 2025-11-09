@@ -24,11 +24,14 @@ end_cap_mode = 2
 [node name="RedAttack_start" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_5t1h8")
 volume_db = -12.0
+bus = &"SFX"
 
 [node name="RedAttack_loop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_sl0jr")
 volume_db = -12.0
+bus = &"SFX"
 
 [node name="RedAttack_finish" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_oghx1")
 volume_db = -12.0
+bus = &"SFX"

@@ -66,7 +66,6 @@ size = Vector2(171, 55)
 
 [node name="GreenProjectile" type="Area2D"]
 script = ExtResource("1_8lep0")
-damage = 2
 
 [node name="Waves" type="Node2D" parent="."]
 
@@ -91,6 +90,7 @@ shape = SubResource("RectangleShape2D_qvvkj")
 
 [node name="GreenAttack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_eg2fn")
+bus = &"SFX"
 
 [node name="Duration" type="Timer" parent="."]
 wait_time = 20.0
