@@ -17,8 +17,8 @@ func _fire() -> void:
 	add_child(projectil)
 	projectil.global_position = projectil_spawn_position.global_position
 	
-	# calcular dirección correcta antes de lanzarlo
+	# get enemy direction
 	var dir = (_current_target.global_position - projectil.global_position).normalized()
-	projectil.set_direction(dir)
+	projectil.set_direction(dir, stats.damage)
 	
 	

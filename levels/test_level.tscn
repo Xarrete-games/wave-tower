@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://b3rjk0365pn1t"]
 
 [ext_resource type="Script" uid="uid://db7frkuuam42r" path="res://levels/level.gd" id="1_gmgay"]
-[ext_resource type="Resource" uid="uid://bd2l5xfknv7h" path="res://main/enemy_generator/waves_data/test_level_waves.tres" id="2_w7r7j"]
+[ext_resource type="Resource" uid="uid://bd2l5xfknv7h" path="res://enemies/enemy_generator/waves_data/test_level_waves.tres" id="2_w7r7j"]
 [ext_resource type="PackedScene" uid="uid://cat7x3rq7b56p" path="res://levels/level_tile_map/level_tile_map.tscn" id="2_x25rp"]
 [ext_resource type="Script" uid="uid://bvftccm02j4ej" path="res://levels/enemy_paths.gd" id="3_gmgay"]
 

@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://oj5ilwusjvuo"]
+[gd_scene load_steps=4 format=3 uid="uid://oj5ilwusjvuo"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower_base.tscn" id="1_wyhsg"]
 [ext_resource type="Script" uid="uid://dpashq3sbs7m7" path="res://towers/green/green_tower.gd" id="2_wdqmo"]
+[ext_resource type="Resource" uid="uid://c1d3qqqdi2oxp" path="res://towers/stats/green_tower_stats.tres" id="3_wdqmo"]
 
 [node name="GreenTower" instance=ExtResource("1_wyhsg")]
 script = ExtResource("2_wdqmo")
+stats = ExtResource("3_wdqmo")
 
 [node name="Sprite2D" parent="." index="0"]
 frame = 1

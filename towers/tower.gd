@@ -2,13 +2,14 @@
 @tool
 class_name Tower extends Node2D
 
-@export var build_price: Price.TowerBuild = Price.TowerBuild.RED
-@export var damage: float = 5
-@export var radius: float = 200
+@export var stats: TowerStats
 
 var _targets_in_range: Array[Enemy] = [] 
 var _current_target: Enemy
 var _enabled: bool = false
+var build_price:
+	get:
+		return stats.build_price
 
 @onready var range_area: Area2D = $RangeArea
 @onready var range_preview: RangePreview = $RangePreview
@@ -18,7 +19,8 @@ var _enabled: bool = false
 
 func _ready():
 	placement_mode()
-	_set_radius()
+	_set_stats()
+
 	await AudioManager.tempo
 	attack_timer.start()
 
@@ -75,9 +77,14 @@ func _on_attack_timer_timeout() -> void:
 	
 	_fire()
 
+func _set_stats() -> void:
+	if not stats:
+		push_error("[Tower] stats not assigned in tower %s" % name)
+	_set_radius()
+
 func _set_radius() -> void:
-	range_preview.radius = radius
-	(range_collision.shape as CircleShape2D).radius = radius
+	range_preview.radius = stats.attack_range
+	(range_collision.shape as CircleShape2D).radius = stats.attack_range
 
 func _on_mouse_entered():
 	range_preview.visible = true

@@ -1,14 +1,14 @@
 extends Area2D
 class_name BlueProjectil
 
-@export var damage: int = 2
-@export var max_radius: float = 5000.0
 @export var duration: float = 2
+
+var _damage: float
+var _area_range: float
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var blue_attack: AudioStreamPlayer2D = $BlueAttack
-
 
 var elapsed := 0.0
 var shape: CircleShape2D
@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	var t: float = clamp(elapsed / duration, 0.0, 1.0)
 
 	# radio actual en píxels (va de 0 a max_radius)
-	var current_radius: float = lerp(0.0, max_radius, t)
+	var current_radius: float = lerp(0.0, _area_range, t)
 	shape.radius = current_radius
 
 	# Escalar el sprite en función del tamaño real de la textura
@@ -38,12 +38,16 @@ func _process(delta: float) -> void:
 			sprite_2d.scale = Vector2.ONE * desired_scale
 
 	# Desvanecimiento vinculado a la fracción de radio (opcional)
-	sprite_2d.modulate.a = 1.0 - (current_radius / max_radius)
+	sprite_2d.modulate.a = 1.0 - (current_radius / _area_range)
 
 	# si llegamos al final, destruir
 	if t >= 1.0:
 		queue_free()
 
+func set_stats(damage: float, area_range: float) -> void:
+	_damage = damage
+	_area_range = area_range
+
 func _on_body_entered(body: Node2D) -> void:
 	if body is Enemy:
-		body.get_damage(damage)
+		body.get_damage(_damage)

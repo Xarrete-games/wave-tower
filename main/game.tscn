@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bjj2sav3lh0or" path="res://ui/score_ui/score_ui.tscn" id="4_j015t"]
 [ext_resource type="PackedScene" uid="uid://b7ttkk4pasgin" path="res://ui/waves_ui/wasves_ui.tscn" id="5_hlcqn"]
 [ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="6_v3ojx"]
-[ext_resource type="PackedScene" uid="uid://dwt8mx7gh0clq" path="res://main/enemy_generator/enemy_generator.tscn" id="7_f7m14"]
+[ext_resource type="PackedScene" uid="uid://dwt8mx7gh0clq" path="res://enemies/enemy_generator/enemy_generator.tscn" id="7_f7m14"]
 [ext_resource type="AudioStream" uid="uid://dwa84a50avm4a" path="res://assets/sounds/music/loop_percusivo.wav" id="9_4u4fy"]
 
 [node name="Game" type="Node2D"]

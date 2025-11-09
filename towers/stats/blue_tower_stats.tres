@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TowerStats" load_steps=2 format=3 uid="uid://by0giydu700gy"]
+
+[ext_resource type="Script" uid="uid://4g7dakacaab4" path="res://towers/tower_stats.gd" id="1_n1l4w"]
+
+[resource]
+script = ExtResource("1_n1l4w")
+attack_range = 400.0
+metadata/_custom_type_script = "uid://4g7dakacaab4"

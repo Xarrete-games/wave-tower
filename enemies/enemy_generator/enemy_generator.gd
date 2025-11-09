@@ -111,7 +111,8 @@ func _on_enemy_left(_node: Node) -> void:
 func _check_enemies_left() -> void:
 	if enemies_container.get_child_count() == 0:
 		_init_next_wave()
-		enemies_container.child_exiting_tree.disconnect(_on_enemy_left)
+		if enemies_container.child_exiting_tree.is_connected(_on_enemy_left):
+			enemies_container.child_exiting_tree.disconnect(_on_enemy_left)
 		
 # init the next wave or end the level if it's the last wave
 func _init_next_wave() -> void:
