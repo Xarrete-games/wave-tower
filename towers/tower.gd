@@ -77,12 +77,11 @@ func _on_attack_timer_timeout() -> void:
 	
 	_fire()
 
+# read stats from tower_stats and assigns the values ​​to the corresponding nodes
 func _set_stats() -> void:
 	if not stats:
 		push_error("[Tower] stats not assigned in tower %s" % name)
-	_set_radius()
-
-func _set_radius() -> void:
+	attack_timer.wait_time = stats.attack_speed
 	range_preview.radius = stats.attack_range
 	(range_collision.shape as CircleShape2D).radius = stats.attack_range
 
