@@ -8,6 +8,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cxl1f"]
 atlas = ExtResource("3_hvay6")
+region = Rect2(0, 0, 384, 192)
 
 [node name="RedTower" instance=ExtResource("1_d57o0")]
 script = ExtResource("2_hvay6")
@@ -24,5 +25,6 @@ monitoring = false
 wait_time = 1.0
 
 [node name="RedProjectil" parent="." index="3" instance=ExtResource("3_cxl1f")]
-position = Vector2(0, -127)
+z_index = 2
+position = Vector2(2.5331983e-07, -118)
 rotation = 0.09046668

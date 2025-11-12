@@ -1,8 +1,7 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://b7hgmpfhi17rw"]
 
 [resource]
-bus/0/volume_db = -12.137012
-bus/0/send = &"Instrumental"
+bus/0/volume_db = -80.0
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false

@@ -9,7 +9,7 @@ radius = 200.0
 [node name="Tower" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 10
+z_index = 1
 position = Vector2(0, -60)
 texture = ExtResource("1_crlvv")
 hframes = 3

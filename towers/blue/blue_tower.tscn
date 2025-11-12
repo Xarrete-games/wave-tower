@@ -14,5 +14,11 @@ frame = 2
 [node name="RangeArea" parent="." index="1"]
 monitoring = false
 
+[node name="AttackTimer" parent="." index="2"]
+wait_time = 1.0
+
 [node name="ProjectilSpawnPoint" type="Marker2D" parent="." index="3"]
 position = Vector2(0, 8)
+
+[node name="RangePreview" parent="." index="4"]
+radius = 400.0
