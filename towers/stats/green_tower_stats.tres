@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_c2jo0")
-build_price = 15
+damage = 1.0
+attack_range = 250.0
 metadata/_custom_type_script = "uid://4g7dakacaab4"

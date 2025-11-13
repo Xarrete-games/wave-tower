@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_n1l4w")
+damage = 2.5
 attack_range = 400.0
 attack_speed = 2.5
 metadata/_custom_type_script = "uid://4g7dakacaab4"
