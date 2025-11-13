@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_4nn0j")
+interval_spawn = 1.0
 metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"

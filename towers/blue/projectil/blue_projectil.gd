@@ -1,6 +1,8 @@
 extends Area2D
 class_name BlueProjectil
 
+const BLUE_EXPLOSION = preload("uid://bntnbljmfy1p4")
+
 @export var expand_speed: float = 300.0
 @export var y_scale: float = 0.5
 @export var thickness: float = 20.0
@@ -59,4 +61,11 @@ func _draw() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Enemy:
+		var explosion: CPUParticles2D = BLUE_EXPLOSION.instantiate()
 		body.get_damage(_damage)
+		add_child(explosion)
+		explosion.global_position = body.global_position
+		explosion.emitting = true
+		await explosion.finished
+		explosion.queue_free()
+		
