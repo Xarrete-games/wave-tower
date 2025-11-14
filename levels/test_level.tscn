@@ -39,3 +39,12 @@ curve = SubResource("Curve2D_w7r7j")
 y_sort_enabled = true
 
 [node name="EnemiesContainer" type="Node2D" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.4351923, 0.43519226, 0.43519226, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(0, -337)
+rotation = 1.2144977
+shadow_enabled = true
+height = 1.0

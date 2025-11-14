@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d36t7geqp1sh"]
+[gd_scene load_steps=6 format=3 uid="uid://d36t7geqp1sh"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower_base.tscn" id="1_d57o0"]
 [ext_resource type="Script" uid="uid://buj7pdefu7r4s" path="res://towers/red/red_tower.gd" id="2_hvay6"]
 [ext_resource type="Resource" uid="uid://bndxfmba1ltf8" path="res://towers/stats/red_tower_stats.tres" id="3_08l3r"]
 [ext_resource type="PackedScene" uid="uid://befy4fve56utf" path="res://towers/red/projectil/red_projectil.tscn" id="3_cxl1f"]
+[ext_resource type="Texture2D" uid="uid://bkw2d26tjvw7e" path="res://assets/textures/particles/particle_2.png" id="5_08l3r"]
 
 [node name="RedTower" instance=ExtResource("1_d57o0")]
 script = ExtResource("2_hvay6")
@@ -15,18 +16,22 @@ region_rect = Rect2(-1, 0, 65, 97)
 [node name="RangeArea" parent="." index="1"]
 monitoring = false
 
-[node name="AttackTimer" parent="." index="2"]
-wait_time = 1.0
-
 [node name="RedProjectil" parent="." index="3" instance=ExtResource("3_cxl1f")]
 z_index = 2
-position = Vector2(2.5331983e-07, -118)
-rotation = 0.09046668
+position = Vector2(0, -133)
 
 [node name="RangePreview" parent="." index="4"]
 radius = 250.0
 
 [node name="AttackTickTimer" type="Timer" parent="." index="6"]
 wait_time = 0.2
+
+[node name="CristalLight" type="PointLight2D" parent="." index="7"]
+position = Vector2(0, -133)
+enabled = false
+color = Color(0.6117647, 0, 0, 1)
+shadow_enabled = true
+texture = ExtResource("5_08l3r")
+texture_scale = 10.0
 
 [connection signal="timeout" from="AttackTickTimer" to="." method="_on_attack_tick_timer_timeout"]

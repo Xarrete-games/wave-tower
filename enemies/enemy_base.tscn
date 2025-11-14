@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://diax8n45uy1cu"]
+[gd_scene load_steps=11 format=3 uid="uid://diax8n45uy1cu"]
 
 [ext_resource type="Script" uid="uid://cafqn48q104fs" path="res://enemies/enemy.gd" id="1_fenyl"]
 [ext_resource type="Texture2D" uid="uid://bojbsxlx3maff" path="res://assets/sprites/enemies/enemy1.png" id="2_g0tqa"]
@@ -34,6 +34,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fenyl"]
+polygon = PackedVector2Array(-55, -30, -50, 35, -14, 35, -13, -30)
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_fenyl")
@@ -65,3 +68,7 @@ offset_bottom = -49.0
 
 [node name="GoldDroppedPos" type="Marker2D" parent="."]
 position = Vector2(-9, -40)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(30, -1)
+occluder = SubResource("OccluderPolygon2D_fenyl")

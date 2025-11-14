@@ -8,11 +8,11 @@ var _damage_per_hit = 0
 
 @onready var red_projectil: RedProjectil = $RedProjectil
 @onready var attack_tick_timer: Timer = $AttackTickTimer
+@onready var cristal_light: PointLight2D = $CristalLight
 
 func _ready():
 	super._ready()
-	var _damage_per_hit = stats.damage / TOTAL_HITS
-
+	_damage_per_hit = stats.damage / TOTAL_HITS
 
 func _process(_delta: float) -> void:
 	if not _current_target:	
@@ -25,9 +25,11 @@ func _fire() -> void:
 	
 func _on_attack_tick_timer_timeout() -> void:
 	red_projectil.hit_target()
+	cristal_light.enabled = true
 	_hits_count += 1
 	
 	if _hits_count == TOTAL_HITS:
 		attack_tick_timer.stop()
 		red_projectil.stop()
+		cristal_light.enabled = false
 		_hits_count = 0
