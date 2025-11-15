@@ -17,6 +17,7 @@ func _ready():
 	_load_level(current_level_number)
 		
 func _load_level(level_number: int) -> void:
+	music_handler.stop_music()
 	_current_level = levels[level_number - 1].instantiate()
 	current_level_number = level_number
 	level_container.add_child(_current_level)

@@ -7,6 +7,7 @@ const MAX_PLAYERS = 8
 @onready var red_players: Node = $RedPlayers
 @onready var blue_players: Node = $BluePlayers
 @onready var green_players: Node = $GreenPlayers
+@onready var base_player: AudioStreamPlayer = $BasePlayer
 
 var towers_placed = {
 	Tower.TowerType.RED: 0,
@@ -26,6 +27,7 @@ func _ready() -> void:
 	tower_placer.tower_placed.connect(_on_tower_placed)
 
 func play_music() -> void:
+	base_player.play()
 	_start_players(red_players)
 	_start_players(blue_players)
 	_start_players(green_players)
@@ -34,6 +36,7 @@ func stop_music() -> void:
 	_stop_players(red_players)
 	_stop_players(blue_players)
 	_stop_players(green_players)
+	base_player.stop()
 	
 func _start_players(node: Node) -> void:
 	for player: AudioStreamPlayer in node.get_children():
@@ -41,7 +44,7 @@ func _start_players(node: Node) -> void:
 
 func _stop_players(node: Node) -> void:
 	for player: AudioStreamPlayer in node.get_children():
-		player.stop()
+		_stop_player(player)
 		
 func _on_tower_placed(tower_type: Tower.TowerType) -> void:
 	if towers_placed[tower_type] == MAX_PLAYERS:

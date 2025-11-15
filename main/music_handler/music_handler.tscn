@@ -1,6 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://wd57nqjd0s2f"]
+[gd_scene load_steps=27 format=3 uid="uid://wd57nqjd0s2f"]
 
 [ext_resource type="Script" uid="uid://dutm1g4yq1rg" path="res://main/music_handler/music_handler.gd" id="1_wa3tw"]
+[ext_resource type="AudioStream" uid="uid://co3u27l2lmb01" path="res://assets/sounds/music/red_strings/01_STRINGS_stackattos.ogg" id="2_42wfv"]
+[ext_resource type="AudioStream" uid="uid://2e0ehrauiock" path="res://assets/sounds/music/red_strings/02_STRINGS_stackattos.ogg" id="3_q4bav"]
+[ext_resource type="AudioStream" uid="uid://508wsv4ddbba" path="res://assets/sounds/music/00_Base_piano.ogg" id="4_q4bav"]
+[ext_resource type="AudioStream" uid="uid://cre40uv8kxyss" path="res://assets/sounds/music/red_strings/03_STRINGS_Tremolo.ogg" id="4_yyod4"]
+[ext_resource type="AudioStream" uid="uid://bsieyo6euwmyu" path="res://assets/sounds/music/red_strings/04_STRINGS_8a-Down.ogg" id="5_4q6yh"]
+[ext_resource type="AudioStream" uid="uid://cwm2m0urpbec1" path="res://assets/sounds/music/red_strings/05_STRINGS_Legno.ogg" id="6_vvtp8"]
+[ext_resource type="AudioStream" uid="uid://c6g0udnp2abt4" path="res://assets/sounds/music/red_strings/06_STRINGS_Violin_solo.ogg" id="7_b0i18"]
+[ext_resource type="AudioStream" uid="uid://deca7in2vkc8m" path="res://assets/sounds/music/red_strings/07_STRINGS_High.ogg" id="8_qvdky"]
+[ext_resource type="AudioStream" uid="uid://deeocvdl7fgo2" path="res://assets/sounds/music/red_strings/08_STRINGS_EGuitar.ogg" id="9_5p8kg"]
+[ext_resource type="AudioStream" uid="uid://dlp6w8m8x7trb" path="res://assets/sounds/music/green_wind/01_WIND_Brass_Stack.ogg" id="10_gf0nl"]
+[ext_resource type="AudioStream" uid="uid://gbpew4f0wafj" path="res://assets/sounds/music/green_wind/02_WIND_Wood_Low.ogg" id="11_x0wgy"]
+[ext_resource type="AudioStream" uid="uid://dwf0q6hd6p7dl" path="res://assets/sounds/music/green_wind/03_WIND_Daegeum.ogg" id="12_38s13"]
+[ext_resource type="AudioStream" uid="uid://bny2f0eg48xqb" path="res://assets/sounds/music/green_wind/04_WIND_Wood_High.ogg" id="13_dhwgh"]
+[ext_resource type="AudioStream" uid="uid://cqqtri6bppgyp" path="res://assets/sounds/music/green_wind/05_WIND_Brass_Mid.ogg" id="14_7yicm"]
+[ext_resource type="AudioStream" uid="uid://dy6tknw3w4sae" path="res://assets/sounds/music/green_wind/06_WIND_Brass_Low.ogg" id="15_lbg8s"]
+[ext_resource type="AudioStream" uid="uid://wflbkiod3pvi" path="res://assets/sounds/music/green_wind/07_WIND_Wood_Stack.ogg" id="16_b6132"]
+[ext_resource type="AudioStream" uid="uid://dexi2jc5g6ait" path="res://assets/sounds/music/green_wind/08_WIND_Wood_Ensemble.ogg" id="17_eg1jw"]
+[ext_resource type="AudioStream" uid="uid://buioi64d5c0sj" path="res://assets/sounds/music/blue_perc/01_PERC_Tombecks.ogg" id="18_38s13"]
+[ext_resource type="AudioStream" uid="uid://d2m2vv2faxsyt" path="res://assets/sounds/music/blue_perc/02_PERC_Hi_Taiko.ogg" id="19_dhwgh"]
+[ext_resource type="AudioStream" uid="uid://fm0okroq3h2f" path="res://assets/sounds/music/blue_perc/03_PERC_Lo_Taiko.ogg" id="20_7yicm"]
+[ext_resource type="AudioStream" uid="uid://cttnpw6nw4tq7" path="res://assets/sounds/music/blue_perc/04_PERC_Bucket.ogg" id="21_lbg8s"]
+[ext_resource type="AudioStream" uid="uid://bhmxxmvjr7qoi" path="res://assets/sounds/music/blue_perc/05_PERC_Gong.ogg" id="22_lbg8s"]
+[ext_resource type="AudioStream" uid="uid://dlary6k4mgqjh" path="res://assets/sounds/music/blue_perc/06_PERC_Timpani.ogg" id="23_8nkyb"]
+[ext_resource type="AudioStream" uid="uid://481gyi3bqab4" path="res://assets/sounds/music/blue_perc/07_PERC_Toms.ogg" id="24_pyhtb"]
+[ext_resource type="AudioStream" uid="uid://400iwmjmloh1" path="res://assets/sounds/music/blue_perc/08_PERC_Snare_Kick.ogg" id="25_qv46s"]
 
 [node name="MusicHandler" type="Node"]
 script = ExtResource("1_wa3tw")
@@ -8,53 +33,80 @@ script = ExtResource("1_wa3tw")
 [node name="RedPlayers" type="Node" parent="."]
 
 [node name="RedPlayer1" type="AudioStreamPlayer" parent="RedPlayers"]
+stream = ExtResource("2_42wfv")
 
 [node name="RedPlayer2" type="AudioStreamPlayer" parent="RedPlayers"]
+stream = ExtResource("3_q4bav")
 
 [node name="RedPlayer3" type="AudioStreamPlayer" parent="RedPlayers"]
+stream = ExtResource("4_yyod4")
 
 [node name="RedPlayer4" type="AudioStreamPlayer" parent="RedPlayers"]
+stream = ExtResource("5_4q6yh")
 
 [node name="RedPlayer5" type="AudioStreamPlayer" parent="RedPlayers"]
+stream = ExtResource("6_vvtp8")
 
 [node name="RedPlayer6" type="AudioStreamPlayer" parent="RedPlayers"]
+stream = ExtResource("7_b0i18")
 
 [node name="RedPlayer7" type="AudioStreamPlayer" parent="RedPlayers"]
+stream = ExtResource("8_qvdky")
 
 [node name="RedPlayer8" type="AudioStreamPlayer" parent="RedPlayers"]
+stream = ExtResource("9_5p8kg")
 
 [node name="GreenPlayers" type="Node" parent="."]
 
 [node name="GreenPlayer1" type="AudioStreamPlayer" parent="GreenPlayers"]
+stream = ExtResource("10_gf0nl")
 
 [node name="GreenPlayer2" type="AudioStreamPlayer" parent="GreenPlayers"]
+stream = ExtResource("11_x0wgy")
 
 [node name="GreenPlayer3" type="AudioStreamPlayer" parent="GreenPlayers"]
+stream = ExtResource("12_38s13")
 
 [node name="GreenPlayer4" type="AudioStreamPlayer" parent="GreenPlayers"]
+stream = ExtResource("13_dhwgh")
 
 [node name="GreenPlayer5" type="AudioStreamPlayer" parent="GreenPlayers"]
+stream = ExtResource("14_7yicm")
 
 [node name="GreenPlayer6" type="AudioStreamPlayer" parent="GreenPlayers"]
+stream = ExtResource("15_lbg8s")
 
 [node name="GreenPlayer7" type="AudioStreamPlayer" parent="GreenPlayers"]
+stream = ExtResource("16_b6132")
 
 [node name="GreenPlayer8" type="AudioStreamPlayer" parent="GreenPlayers"]
+stream = ExtResource("17_eg1jw")
 
 [node name="BluePlayers" type="Node" parent="."]
 
 [node name="BluePlayer1" type="AudioStreamPlayer" parent="BluePlayers"]
+stream = ExtResource("18_38s13")
 
 [node name="BluePlayer2" type="AudioStreamPlayer" parent="BluePlayers"]
+stream = ExtResource("19_dhwgh")
 
 [node name="BluePlayer3" type="AudioStreamPlayer" parent="BluePlayers"]
+stream = ExtResource("20_7yicm")
 
 [node name="BluePlayer4" type="AudioStreamPlayer" parent="BluePlayers"]
+stream = ExtResource("21_lbg8s")
 
 [node name="BluePlayer5" type="AudioStreamPlayer" parent="BluePlayers"]
+stream = ExtResource("22_lbg8s")
 
 [node name="BluePlayer6" type="AudioStreamPlayer" parent="BluePlayers"]
+stream = ExtResource("23_8nkyb")
 
 [node name="BluePlayer7" type="AudioStreamPlayer" parent="BluePlayers"]
+stream = ExtResource("24_pyhtb")
 
 [node name="BluePlayer8" type="AudioStreamPlayer" parent="BluePlayers"]
+stream = ExtResource("25_qv46s")
+
+[node name="BasePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_q4bav")
