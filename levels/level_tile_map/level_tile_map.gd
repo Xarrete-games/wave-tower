@@ -22,7 +22,7 @@ func is_mouse_on_buildeable_tile() -> bool:
 
 func get_current_tile_pos() -> Vector2:
 	var center_pos_local = map_to_local(get_mouse_tile_pos())
-	# fix 96 px tile center
+	# fix 96 px tile center	
 	center_pos_local.y -= 16
 	return to_global(center_pos_local)
 

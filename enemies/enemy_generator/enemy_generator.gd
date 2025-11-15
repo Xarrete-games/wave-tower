@@ -2,6 +2,7 @@ class_name EnemyGenerator extends Node
 
 signal enemy_die(enemy: Enemy)
 signal group_handled()
+signal last_wave_done()
 
 const ENEMY_NORMAL = preload("uid://dmqbn2q5splor")
 const ENEMY_FAST = preload("uid://xk0wj86s8ddb")
@@ -118,6 +119,7 @@ func _check_enemies_left() -> void:
 func _init_next_wave() -> void:
 	if current_wave_number == total_waves:
 		print("LEVEL DONE")
+		last_wave_done.emit()
 	else:
 		current_wave_number += 1
 		init_wave() 
