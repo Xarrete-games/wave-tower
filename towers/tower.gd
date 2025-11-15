@@ -2,6 +2,9 @@
 @tool
 class_name Tower extends Node2D
 
+signal target_change(enemy: Enemy)
+
+
 enum TowerType { RED, GREEN, BLUE }
 
 @export var stats: TowerStats
@@ -71,9 +74,11 @@ func _remove_target_and_get_next(enemy: Enemy) -> void:
 		return
 	if _targets_in_range.is_empty():
 		_current_target = null
+		target_change.emit(_current_target)
 	else:
 		#logic to select next target
 		_current_target = _targets_in_range[0]
+		target_change.emit(_current_target)
 
 func _on_attack_timer_timeout() -> void:
 	if _current_target == null or not _enabled:

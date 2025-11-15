@@ -9,7 +9,7 @@ signal tower_selected(tower_scene: PackedScene)
 @export var tower_placer: TowerPlacer
 
 func _ready():
-	tower_placer.towers_placed.connect()
+	pass
 	
 func _on_red_tower_button_pressed() -> void:
 	if Score.gold >= Price.TowerBuild.RED:
