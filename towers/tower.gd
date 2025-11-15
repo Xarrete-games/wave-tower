@@ -27,8 +27,6 @@ var build_price:
 func _ready():
 	placement_mode()
 	_set_stats()
-
-	await AudioManager.tempo
 	attack_timer.start()
 
 # sets the tower's state while it is being placed

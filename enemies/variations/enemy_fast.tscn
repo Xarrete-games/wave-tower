@@ -5,6 +5,7 @@
 
 [node name="EnemyFast" instance=ExtResource("1_1hf55")]
 speed = 150.0
+gold_value = 3
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-2.5, 5.5)

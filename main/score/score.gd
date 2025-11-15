@@ -13,8 +13,3 @@ func add_gold(amount: int) -> void:
 func substract_gold(amount: int) -> void:
 	gold -= amount
 	gold_change.emit(gold)
-
-
-	
-	
-	

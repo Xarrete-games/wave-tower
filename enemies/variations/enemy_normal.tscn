@@ -5,7 +5,7 @@
 
 [node name="EnemyNormal" instance=ExtResource("1_oa8sg")]
 max_healt = 40.0
-gold_value = 3
+gold_value = 5
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-2, 1)
