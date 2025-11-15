@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyWave" load_steps=7 format=3 uid="uid://b5c6n0jds5tab"]
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=8 format=3 uid="uid://b5c6n0jds5tab"]
 
 [ext_resource type="Script" uid="uid://dcpnbeke2jpe" path="res://enemies/enemy_generator/resources_definitions/enemy_group_data.gd" id="1_lic82"]
 [ext_resource type="Resource" uid="uid://bw05aenxvb640" path="res://enemies/enemy_generator/individual_group/group_5_fast.tres" id="2_odjsx"]
@@ -16,7 +16,13 @@ enemy_group = ExtResource("3_odjsx")
 time_to_start = 5.0
 metadata/_custom_type_script = "uid://dcpnbeke2jpe"
 
+[sub_resource type="Resource" id="Resource_odjsx"]
+script = ExtResource("1_lic82")
+enemy_group = ExtResource("3_odjsx")
+time_to_start = 5.0
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
 [resource]
 script = ExtResource("3_g0jsh")
-groups_data = Array[ExtResource("1_lic82")]([SubResource("Resource_lic82"), SubResource("Resource_g0jsh")])
+groups_data = Array[ExtResource("1_lic82")]([SubResource("Resource_lic82"), SubResource("Resource_g0jsh"), SubResource("Resource_odjsx")])
 metadata/_custom_type_script = "uid://civj4pbtbhl5o"

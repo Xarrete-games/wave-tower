@@ -12,6 +12,7 @@ func _process(_delta: float) -> void:
 	pass
 	
 func _fire() -> void:
+	cristal_light.play()
 	var projectil: GreenProjectile = GREEN_PROJECTILE.instantiate()
 	
 	add_child(projectil)

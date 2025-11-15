@@ -24,4 +24,4 @@ y_sort_enabled = true
 position = Vector2(533, -681)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.8627451, 0.8627451, 0.8627451, 1)
+color = Color(0.8175215, 0.8175211, 0.8175215, 1)

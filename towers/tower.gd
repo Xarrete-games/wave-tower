@@ -16,6 +16,7 @@ var build_price:
 @onready var range_collision: CollisionShape2D = $RangeArea/RangeCollision
 @onready var mouse_detector: Control = $MouseDetector
 @onready var attack_timer: Timer = $AttackTimer
+@onready var cristal_light: CristalLight = $CristalLight
 
 func _ready():
 	placement_mode()

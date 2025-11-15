@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://4fkas61wyppq"]
+[gd_scene load_steps=5 format=3 uid="uid://4fkas61wyppq"]
 
-[ext_resource type="Texture2D" uid="uid://6rwht4l7x5rc" path="res://assets/sprites/towers/towers.png" id="1_crlvv"]
+[ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/cristal_light.tscn" id="1_7fffe"]
+[ext_resource type="Texture2D" uid="uid://6rwht4l7x5rc" path="res://assets/sprites/towers/Towers.png" id="1_crlvv"]
 [ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="2_uyl23"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wmotl"]
 radius = 400.0
 
 [node name="Tower" type="Node2D"]
+
+[node name="CristalLight" parent="." instance=ExtResource("1_7fffe")]
+position = Vector2(0, -136)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1

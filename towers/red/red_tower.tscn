@@ -12,23 +12,27 @@
 script = ExtResource("2_hvay6")
 stats = ExtResource("3_08l3r")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="CristalLight" parent="." index="0"]
+color = Color(0.6117647, 0, 0, 1)
+attack_animation_time = 0.2
+
+[node name="Sprite2D" parent="." index="1"]
 region_rect = Rect2(-1, 0, 65, 97)
 
-[node name="RangeArea" parent="." index="1"]
+[node name="RangeArea" parent="." index="2"]
 monitoring = false
 
 [node name="RedProjectil" parent="." index="3" instance=ExtResource("3_cxl1f")]
 z_index = 2
 position = Vector2(0, -133)
 
-[node name="RangePreview" parent="." index="4"]
+[node name="RangePreview" parent="." index="5"]
 radius = 250.0
 
 [node name="AttackTickTimer" type="Timer" parent="." index="6"]
 wait_time = 0.2
 
-[node name="CristalLight" type="PointLight2D" parent="." index="7"]
+[node name="CristalLight2" type="PointLight2D" parent="." index="7"]
 position = Vector2(0, -134)
 enabled = false
 color = Color(0.6117647, 0, 0, 1)

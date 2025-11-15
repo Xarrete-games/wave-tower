@@ -39,5 +39,8 @@ func _on_next_level_menu_next_leve_button_pressed() -> void:
 	_hide_next_level_menu()
 	current_level_number += 1
 	_current_level.queue_free()
-	_load_level(current_level_number)
+	if current_level_number  > levels.size():
+		print("END GAME")
+	else: 
+		_load_level(current_level_number)
 	

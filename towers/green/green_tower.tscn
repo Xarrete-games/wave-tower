@@ -10,20 +10,27 @@
 script = ExtResource("2_wdqmo")
 stats = ExtResource("3_wdqmo")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="CristalLight" parent="." index="0"]
+position = Vector2(2, -161)
+color = Color(0.5019608, 0.8156863, 0.5019608, 1)
+attack_animation_time = 0.3
+max_scale = 0.8
+max_energy = 1.0
+
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2(0, -89)
 frame = 1
 
-[node name="RangeArea" parent="." index="1"]
+[node name="RangeArea" parent="." index="2"]
 monitoring = false
-
-[node name="AttackTimer" parent="." index="2"]
-wait_time = 1.0
 
 [node name="ProjectilSpawnPosition" type="Marker2D" parent="." index="3"]
 position = Vector2(0, -126)
 
-[node name="RangePreview" parent="." index="4"]
+[node name="AttackTimer" parent="." index="4"]
+wait_time = 1.0
+
+[node name="RangePreview" parent="." index="5"]
 radius = 250.0
 
 [node name="PassiveLight" type="PointLight2D" parent="." index="6"]
