@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://brwfbw5bi2kmk"]
 
 [ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="1_0d1ck"]
-[ext_resource type="Script" uid="uid://cy2ppy08prusj" path="res://towers/cristal_light.gd" id="1_e5qlt"]
+[ext_resource type="Script" uid="uid://cy2ppy08prusj" path="res://towers/cristal_light/cristal_light.gd" id="1_e5qlt"]
 
 [node name="CristalLight" type="PointLight2D"]
 energy = 0.0

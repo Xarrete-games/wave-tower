@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://4fkas61wyppq"]
 
-[ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/cristal_light.tscn" id="1_7fffe"]
+[ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/cristal_light/cristal_light.tscn" id="1_7fffe"]
 [ext_resource type="Texture2D" uid="uid://6rwht4l7x5rc" path="res://assets/sprites/towers/Towers.png" id="1_crlvv"]
 [ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="2_uyl23"]
 
