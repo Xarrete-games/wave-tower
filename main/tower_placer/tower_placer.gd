@@ -1,5 +1,7 @@
 class_name TowerPlacer extends Node2D
 
+signal tower_placed(tower_type: Tower.TowerType)
+
 var level_tile_map: LevelTileMap
 # parent for all towers
 var towers_container: Node2D
@@ -47,6 +49,7 @@ func _place_tower() -> void:
 	level_tile_map.set_tile_occupied(tile_pos)
 	Score.substract_gold(_current_tower_instance.build_price)
 	_is_placing = false
+	tower_placed.emit(_current_tower_instance.type)
 	_current_tower_instance.enable()
 	_current_tower_instance = null
 

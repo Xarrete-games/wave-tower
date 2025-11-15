@@ -9,6 +9,7 @@
 [node name="GreenTower" instance=ExtResource("1_wyhsg")]
 script = ExtResource("2_wdqmo")
 stats = ExtResource("3_wdqmo")
+type = 1
 
 [node name="CristalLight" parent="." index="0"]
 position = Vector2(2, -161)

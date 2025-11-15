@@ -2,7 +2,10 @@
 @tool
 class_name Tower extends Node2D
 
+enum TowerType { RED, GREEN, BLUE }
+
 @export var stats: TowerStats
+@export var type: TowerType = TowerType.RED
 
 var _targets_in_range: Array[Enemy] = [] 
 var _current_target: Enemy
