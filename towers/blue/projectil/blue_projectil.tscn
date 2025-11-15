@@ -7,6 +7,7 @@
 
 [node name="BlueProjectil" type="Area2D"]
 collision_layer = 0
+input_pickable = false
 script = ExtResource("1_r6vk7")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]

@@ -56,8 +56,9 @@ func _process(delta):
 		_on_target_reached()
 		return
 	
-	var path_pos_2d = _path_follow.position
-	position = path_pos_2d
+	var path_global_pos = _path_follow.global_position
+	
+	global_position = path_global_pos
 	
 func _die() -> void:
 	die.emit(self)

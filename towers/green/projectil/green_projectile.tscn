@@ -9,6 +9,7 @@ size = Vector2(78, 55)
 
 [node name="GreenProjectile" type="Area2D"]
 z_index = 2
+input_pickable = false
 script = ExtResource("1_8lep0")
 
 [node name="Waves" type="Node2D" parent="."]

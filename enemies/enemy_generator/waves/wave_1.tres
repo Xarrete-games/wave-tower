@@ -5,24 +5,24 @@
 [ext_resource type="Resource" uid="uid://dqt57t6iuai6u" path="res://enemies/enemy_generator/individual_group/group_5_normal.tres" id="3_3bfjh"]
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="4_7676m"]
 
-[sub_resource type="Resource" id="Resource_jhiqy"]
+[sub_resource type="Resource" id="Resource_w7cq8"]
 script = ExtResource("1_jhiqy")
-enemy_group = ExtResource("2_pgnoa")
+enemy_group = ExtResource("3_3bfjh")
 metadata/_custom_type_script = "uid://dcpnbeke2jpe"
 
 [sub_resource type="Resource" id="Resource_pgnoa"]
 script = ExtResource("1_jhiqy")
 enemy_group = ExtResource("2_pgnoa")
-time_to_start = 5.0
+time_to_start = 60.0
 metadata/_custom_type_script = "uid://dcpnbeke2jpe"
 
 [sub_resource type="Resource" id="Resource_8es6g"]
 script = ExtResource("1_jhiqy")
 enemy_group = ExtResource("3_3bfjh")
-time_to_start = 10.0
+time_to_start = 60.0
 metadata/_custom_type_script = "uid://dcpnbeke2jpe"
 
 [resource]
 script = ExtResource("4_7676m")
-groups_data = Array[ExtResource("1_jhiqy")]([SubResource("Resource_jhiqy"), SubResource("Resource_pgnoa"), SubResource("Resource_8es6g")])
+groups_data = Array[ExtResource("1_jhiqy")]([SubResource("Resource_w7cq8"), SubResource("Resource_pgnoa"), SubResource("Resource_8es6g")])
 metadata/_custom_type_script = "uid://civj4pbtbhl5o"
