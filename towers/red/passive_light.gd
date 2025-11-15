@@ -1,8 +1,8 @@
 extends PointLight2D
 
 @export var velocidad: float = 6.0    # rapidez de la oscilación
-@export var escala_min: float = 0.5
-@export var escala_max: float = 0.7
+@export var escala_min: float = 0.7
+@export var escala_max: float = 1.0
 
 var t := 0.0
 
