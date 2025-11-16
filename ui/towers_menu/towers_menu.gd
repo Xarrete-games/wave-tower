@@ -14,9 +14,9 @@ signal tower_selected(tower_scene: PackedScene)
 @onready var blue_tower_count: TowerCount = $TowersCount/BlueTowerCount
 
 #BUTTONS
-@onready var red_tower_button: TowerButton = $BuildTowerMenu/HBoxContainer/RedTowerButton
-@onready var green_tower_button: TowerButton = $BuildTowerMenu/HBoxContainer/GreenTowerButton
-@onready var blue_tower_button: TowerButton = $BuildTowerMenu/HBoxContainer/BlueTowerButton
+@onready var red_tower_button: TowerButton = $CenterContainer/HBoxContainer/RedTowerButton
+@onready var green_tower_button: TowerButton = $CenterContainer/HBoxContainer/GreenTowerButton
+@onready var blue_tower_button: TowerButton = $CenterContainer/HBoxContainer/BlueTowerButton
 
 func _ready():
 	tower_placer.tower_placed.connect(_on_tower_placed)

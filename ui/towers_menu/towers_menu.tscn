@@ -9,6 +9,18 @@
 [ext_resource type="PackedScene" uid="uid://cupq5fkss800q" path="res://ui/towers_menu/tower_count/tower_count.tscn" id="5_1xlmg"]
 [ext_resource type="PackedScene" uid="uid://cwyyp2r266blt" path="res://towers/blue/blue_tower.tscn" id="5_61shu"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xlmg"]
+atlas = ExtResource("3_yrsgh")
+region = Rect2(20, 25, 59, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxxr0"]
+atlas = ExtResource("3_yrsgh")
+region = Rect2(121, 25, 59, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61shu"]
+atlas = ExtResource("3_yrsgh")
+region = Rect2(220, 25, 60, 49)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7564t"]
 load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
 
@@ -26,18 +38,6 @@ region = Rect2(131, 0, 125, 181)
 [sub_resource type="AtlasTexture" id="AtlasTexture_s4otn"]
 atlas = ExtResource("2_d3tgk")
 region = Rect2(249, 40, 132, 141)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1xlmg"]
-atlas = ExtResource("3_yrsgh")
-region = Rect2(20, 25, 59, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lxxr0"]
-atlas = ExtResource("3_yrsgh")
-region = Rect2(121, 25, 59, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_61shu"]
-atlas = ExtResource("3_yrsgh")
-region = Rect2(220, 25, 60, 49)
 
 [node name="TowersMenu" type="Control"]
 layout_mode = 3
@@ -57,36 +57,6 @@ anchor_bottom = 0.9990001
 offset_top = -0.28009033
 offset_right = -0.27999878
 offset_bottom = 0.079956055
-
-[node name="HBoxContainer" type="HBoxContainer" parent="BuildTowerMenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.02
-anchor_top = 0.80100006
-anchor_right = 1.0
-anchor_bottom = 0.983
-offset_left = 12.860001
-offset_top = -111.34401
-offset_right = 221.0
-offset_bottom = -7.552002
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 120
-
-[node name="RedTowerButton" parent="BuildTowerMenu/HBoxContainer" instance=ExtResource("3_1xlmg")]
-layout_mode = 2
-tower_scene = ExtResource("3_lxxr0")
-icon = SubResource("AtlasTexture_m2keh")
-
-[node name="GreenTowerButton" parent="BuildTowerMenu/HBoxContainer" instance=ExtResource("3_1xlmg")]
-layout_mode = 2
-tower_scene = ExtResource("4_lxxr0")
-icon = SubResource("AtlasTexture_7564t")
-
-[node name="BlueTowerButton" parent="BuildTowerMenu/HBoxContainer" instance=ExtResource("3_1xlmg")]
-layout_mode = 2
-tower_scene = ExtResource("5_61shu")
-icon = SubResource("AtlasTexture_s4otn")
 
 [node name="TowersCount" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -108,6 +78,40 @@ icon = SubResource("AtlasTexture_lxxr0")
 layout_mode = 2
 icon = SubResource("AtlasTexture_61shu")
 
-[connection signal="pressed" from="BuildTowerMenu/HBoxContainer/RedTowerButton" to="." method="_on_red_tower_button_pressed"]
-[connection signal="pressed" from="BuildTowerMenu/HBoxContainer/GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
-[connection signal="pressed" from="BuildTowerMenu/HBoxContainer/BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -100.0
+offset_right = 170.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(340, 100)
+layout_mode = 2
+theme_override_constants/separation = 120
+
+[node name="RedTowerButton" parent="CenterContainer/HBoxContainer" instance=ExtResource("3_1xlmg")]
+layout_mode = 2
+tower_scene = ExtResource("3_lxxr0")
+icon = SubResource("AtlasTexture_m2keh")
+
+[node name="GreenTowerButton" parent="CenterContainer/HBoxContainer" instance=ExtResource("3_1xlmg")]
+layout_mode = 2
+tower_scene = ExtResource("4_lxxr0")
+icon = SubResource("AtlasTexture_7564t")
+
+[node name="BlueTowerButton" parent="CenterContainer/HBoxContainer" instance=ExtResource("3_1xlmg")]
+layout_mode = 2
+tower_scene = ExtResource("5_61shu")
+icon = SubResource("AtlasTexture_s4otn")
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/RedTowerButton" to="." method="_on_red_tower_button_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]

@@ -26,6 +26,7 @@ script = ExtResource("2_2c7eb")
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="TowersMenu" parent="UILayer" node_paths=PackedStringArray("tower_placer") instance=ExtResource("3_4u4fy")]
+size_flags_horizontal = 4
 tower_placer = NodePath("../../TowerPlacer")
 
 [node name="ScoreUI" parent="UILayer" instance=ExtResource("4_j015t")]
