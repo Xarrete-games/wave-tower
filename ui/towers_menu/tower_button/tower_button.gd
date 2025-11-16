@@ -8,6 +8,11 @@ signal pressed(tower_scene: PackedScene)
 		icon = value
 		_update_texture()
 
+@export var icon_hover: AtlasTexture:
+	set(value):
+		icon_hover = value
+		_update_texture_hover()
+
 var price: int = 0:
 	set = set_price
 
@@ -24,6 +29,10 @@ func _ready() -> void:
 func _update_texture():
 	if tower_button:
 		tower_button.texture_normal = icon
+
+func _update_texture_hover():
+	if tower_button:
+		tower_button.texture_hover = icon_hover
 
 
 func _on_tower_button_pressed() -> void:

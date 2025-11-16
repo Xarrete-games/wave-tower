@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelWaves" load_steps=6 format=3 uid="uid://dcisjg50ubl2r"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=6 format=3 uid="uid://dcisjg50ubl2r"]
 
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="1_y52rk"]
 [ext_resource type="Resource" uid="uid://3fyn0ky2thbu" path="res://levels/levels/level1/waves/lv1_wave_1.tres" id="2_5ex6d"]

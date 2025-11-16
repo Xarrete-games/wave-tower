@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bfym6wmesrxxa"]
+[gd_scene load_steps=21 format=3 uid="uid://bfym6wmesrxxa"]
 
 [ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/towers_menu/towers_menu.gd" id="1_d3tgk"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="2_d3tgk"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://oj5ilwusjvuo" path="res://towers/green/green_tower.tscn" id="4_lxxr0"]
 [ext_resource type="PackedScene" uid="uid://cupq5fkss800q" path="res://ui/towers_menu/tower_count/tower_count.tscn" id="5_1xlmg"]
 [ext_resource type="PackedScene" uid="uid://cwyyp2r266blt" path="res://towers/blue/blue_tower.tscn" id="5_61shu"]
+[ext_resource type="Texture2D" uid="uid://dheamk0vu60q6" path="res://assets/sprites/towers/torreticas_hover.png" id="6_7564t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xlmg"]
 atlas = ExtResource("3_yrsgh")
@@ -28,6 +29,10 @@ load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4
 atlas = SubResource("CompressedTexture2D_7564t")
 region = Rect2(0, 0, 131, 181)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qst0h"]
+atlas = ExtResource("6_7564t")
+region = Rect2(0, 0, 131, 181)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s4otn"]
 load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
 
@@ -35,8 +40,16 @@ load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4
 atlas = SubResource("CompressedTexture2D_s4otn")
 region = Rect2(131, 0, 125, 181)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4t37"]
+atlas = ExtResource("6_7564t")
+region = Rect2(131, 0, 125, 181)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_s4otn"]
 atlas = ExtResource("2_d3tgk")
+region = Rect2(249, 40, 142, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whndq"]
+atlas = ExtResource("6_7564t")
 region = Rect2(249, 40, 142, 141)
 
 [node name="TowersMenu" type="Control"]
@@ -101,16 +114,19 @@ theme_override_constants/separation = 120
 layout_mode = 2
 tower_scene = ExtResource("3_lxxr0")
 icon = SubResource("AtlasTexture_m2keh")
+icon_hover = SubResource("AtlasTexture_qst0h")
 
 [node name="GreenTowerButton" parent="CenterContainer/HBoxContainer" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
 tower_scene = ExtResource("4_lxxr0")
 icon = SubResource("AtlasTexture_7564t")
+icon_hover = SubResource("AtlasTexture_f4t37")
 
 [node name="BlueTowerButton" parent="CenterContainer/HBoxContainer" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
 tower_scene = ExtResource("5_61shu")
 icon = SubResource("AtlasTexture_s4otn")
+icon_hover = SubResource("AtlasTexture_whndq")
 
 [connection signal="pressed" from="CenterContainer/HBoxContainer/RedTowerButton" to="." method="_on_red_tower_button_pressed"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/GreenTowerButton" to="." method="_on_green_tower_button_pressed"]

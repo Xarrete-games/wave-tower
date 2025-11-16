@@ -24,6 +24,7 @@ y_sort_enabled = true
 position = Vector2(533, -681)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.8175215, 0.8175211, 0.8175215, 1)
 
 [node name="CameraInitPos" type="Marker2D" parent="."]

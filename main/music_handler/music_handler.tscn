@@ -31,6 +31,7 @@
 script = ExtResource("1_wa3tw")
 
 [node name="RedPlayers" type="Node" parent="."]
+process_mode = 3
 
 [node name="RedPlayer1" type="AudioStreamPlayer" parent="RedPlayers"]
 stream = ExtResource("2_42wfv")
@@ -65,6 +66,7 @@ stream = ExtResource("9_5p8kg")
 bus = &"Strings"
 
 [node name="GreenPlayers" type="Node" parent="."]
+process_mode = 3
 
 [node name="GreenPlayer1" type="AudioStreamPlayer" parent="GreenPlayers"]
 stream = ExtResource("10_gf0nl")
@@ -99,6 +101,7 @@ stream = ExtResource("17_eg1jw")
 bus = &"Winds"
 
 [node name="BluePlayers" type="Node" parent="."]
+process_mode = 3
 
 [node name="BluePlayer1" type="AudioStreamPlayer" parent="BluePlayers"]
 stream = ExtResource("18_38s13")
