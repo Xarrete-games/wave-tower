@@ -1,16 +1,16 @@
 class_name Level extends Node2D
 
-@export var waves: LevelWaves
+@export var data: LevelData
 @export var enemy_paths: EnemyPaths
 @export var ememies_container: Node2D
 
 func _ready():
-	Score.gold = waves.initial_gold
-	
-func get_waves() -> LevelWaves:
-	if waves == null:
+	Score.gold = data.initial_gold
+
+func get_waves() -> Array[EnemyWave]:
+	if data == null:
 		push_error("[Level]: waves data not assigned in %s" % [name])
-	return waves
+	return data.enemy_waves
 
 func get_enemy_paths() -> EnemyPaths:
 	if enemy_paths == null:

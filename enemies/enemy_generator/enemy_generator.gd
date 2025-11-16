@@ -21,7 +21,7 @@ const ENEMIES_SCENES: Dictionary = {
 
 var enemy_timer: Timer
 var _level: Level
-var level_waves: LevelWaves
+var level_waves: Array[EnemyWave]
 var enemy_paths: EnemyPaths
 var enemies_container: Node2D
 var time_between_waves: int
@@ -41,7 +41,7 @@ func load_level_nodes(level: Level) -> void:
 	level_waves = level.get_waves()
 	enemy_paths = level.get_enemy_paths()
 	enemies_container = level.get_enemies_container()
-	total_waves = level_waves.enemy_waves.size()
+	total_waves = level_waves.size()
 	current_wave_number = 1
 	new_level_loaded.emit()
 	wave_change.emit(0)
@@ -49,7 +49,7 @@ func load_level_nodes(level: Level) -> void:
 func init_wave() -> void:
 	# get next wave
 	wave_change.emit(current_wave_number)
-	current_wave = level_waves.enemy_waves[current_wave_number - 1]
+	current_wave = level_waves[current_wave_number - 1]
 	# reset groups counter
 	total_groups = current_wave.groups_data.size()
 	groups_handled_count = 0
