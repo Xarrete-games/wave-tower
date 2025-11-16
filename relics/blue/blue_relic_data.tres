@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://davvdqevvhiyk"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://relics/relic_data.gd" id="1_46s0e"]
+[ext_resource type="Texture2D" uid="uid://cubmexn5ct6ht" path="res://assets/sprites/relics/blue_relic.png" id="2_agrwi"]
+
+[resource]
+script = ExtResource("1_46s0e")
+id = "Blue Relic"
+description = "Increase attack range of all towers by  10 "
+texture = ExtResource("2_agrwi")
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

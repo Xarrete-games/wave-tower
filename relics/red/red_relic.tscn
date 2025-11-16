@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhbm1iwasahsi"]
-
-[ext_resource type="Script" uid="uid://c377r6cagp0c0" path="res://relics/red/red_relic.gd" id="1_v2srr"]
-
-[node name="RedRelic" type="Node"]
-script = ExtResource("1_v2srr")

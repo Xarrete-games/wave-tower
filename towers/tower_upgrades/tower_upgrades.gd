@@ -87,10 +87,7 @@ func _on_relidc_selected(relic: Relic) -> void:
 	if rewards_ui:
 		rewards_ui.queue_free()
 		rewards_ui = null
-	print(relic.get_id())
-	print(get_stats(Tower.TowerType.BLUE).attack_range)
 	RelicsManager.add_relic(towers_stats, relic)
-	print(get_stats(Tower.TowerType.BLUE).attack_range)
 	_emit_all_status_change()
 
 func _add_green_relic() -> void:
