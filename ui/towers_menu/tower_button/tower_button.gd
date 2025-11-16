@@ -12,8 +12,7 @@ var price: int = 0:
 	set = set_price
 
 @onready var tower_button: TextureButton = $TowerButton
-@onready var price_label: Label = $PriceLabel
-
+@onready var price_label: Label = $HBoxContainer/PriceLabel
 
 func set_price(new_value: int) -> void:
 	price = new_value

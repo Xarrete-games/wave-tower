@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjj2sav3lh0or"]
+[gd_scene load_steps=4 format=3 uid="uid://bjj2sav3lh0or"]
 
 [ext_resource type="Script" uid="uid://bkbamp1u3wa1u" path="res://ui/score_ui/score_ui.gd" id="1_wrnqc"]
+[ext_resource type="Texture2D" uid="uid://b40ha6eiqhaek" path="res://assets/sprites/buttons/wavecoin_30px.png" id="2_0k4vh"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/label_settings/label_settings_24.tres" id="2_btstv"]
 
 [node name="ScoreUI" type="Control"]
@@ -22,11 +23,12 @@ theme_override_constants/margin_top = 20
 
 [node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 12
 
-[node name="DescriptionGoldLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="wavecoin" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "GOLD:"
-label_settings = ExtResource("2_btstv")
+texture = ExtResource("2_0k4vh")
+stretch_mode = 3
 
 [node name="AmountGoldLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

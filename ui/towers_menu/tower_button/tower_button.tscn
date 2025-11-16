@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://o248nju46k2n"]
+[gd_scene load_steps=7 format=3 uid="uid://o248nju46k2n"]
 
 [ext_resource type="Script" uid="uid://n67chfk5ae8t" path="res://ui/towers_menu/tower_button/tower_button.gd" id="1_bxa3v"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_s7tbd"]
+[ext_resource type="Texture2D" uid="uid://b40fqemjm70lg" path="res://assets/sprites/buttons/wavecoin_20px.png" id="3_c656n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7tbd"]
 bg_color = Color(0.1, 0.1, 0.1, 0.6)
@@ -41,12 +42,20 @@ texture_normal = SubResource("AtlasTexture_c656n")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="PriceLabel" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 63.0
 offset_top = 72.0
 offset_right = 103.0
-offset_bottom = 95.0
+offset_bottom = 112.0
+
+[node name="PriceLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
 text = "100"
+
+[node name="wavecoin" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_c656n")
+stretch_mode = 3
 
 [connection signal="pressed" from="TowerButton" to="." method="_on_tower_button_pressed"]
