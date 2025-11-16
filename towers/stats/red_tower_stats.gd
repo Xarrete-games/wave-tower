@@ -1,0 +1,1 @@
+class_name RedTowerStats extends TowerStats
