@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bcxsfb0ox3gmq"]
 
-[ext_resource type="Script" uid="uid://h554m5slo5ti" path="res://ui/relics/rewards_ui/rewards_ui.gd" id="1_003n2"]
+[ext_resource type="Script" uid="uid://h554m5slo5ti" path="res://ui/rewards_ui/rewards_ui.gd" id="1_003n2"]
 
 [node name="RewardsUi" type="Control" node_paths=PackedStringArray("cards_container")]
 layout_mode = 3

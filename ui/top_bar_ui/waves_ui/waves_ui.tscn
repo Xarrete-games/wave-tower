@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7ttkk4pasgin"]
 
-[ext_resource type="Script" uid="uid://b5fdnmk8kjh0g" path="res://ui/waves_ui/waves_ui.gd" id="1_jsy43"]
-[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="2_2mfnv"]
-[ext_resource type="Theme" uid="uid://dswsb3nw14dn7" path="res://ui/styles/themes/menu_theme.tres" id="3_yhuwv"]
+[ext_resource type="Script" uid="uid://b5fdnmk8kjh0g" path="res://ui/top_bar_ui/waves_ui/waves_ui.gd" id="1_dktk2"]
+[ext_resource type="Theme" uid="uid://dswsb3nw14dn7" path="res://ui/styles/themes/menu_theme.tres" id="2_5unyv"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="3_6lelp"]
 
 [node name="WavesUI" type="Control"]
 layout_mode = 3
@@ -12,7 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_jsy43")
+script = ExtResource("1_dktk2")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -29,7 +29,7 @@ layout_mode = 2
 
 [node name="NextWaveButton" type="Button" parent="CenterContainer/NextWaveContainer"]
 layout_mode = 2
-theme = ExtResource("3_yhuwv")
+theme = ExtResource("2_5unyv")
 text = "Next Wave"
 
 [node name="WavesCounterContainer" type="VBoxContainer" parent="."]
@@ -53,22 +53,22 @@ layout_mode = 2
 [node name="WavesCounterDescription" type="Label" parent="WavesCounterContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "WAVE: "
-label_settings = ExtResource("2_2mfnv")
+label_settings = ExtResource("3_6lelp")
 vertical_alignment = 1
 
 [node name="WavesCounterCurrent" type="Label" parent="WavesCounterContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "0"
-label_settings = ExtResource("2_2mfnv")
+label_settings = ExtResource("3_6lelp")
 
 [node name="WavesCounterSlash" type="Label" parent="WavesCounterContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "/"
-label_settings = ExtResource("2_2mfnv")
+label_settings = ExtResource("3_6lelp")
 
 [node name="WavesCounterTotal" type="Label" parent="WavesCounterContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "2"
-label_settings = ExtResource("2_2mfnv")
+label_settings = ExtResource("3_6lelp")
 
 [connection signal="pressed" from="CenterContainer/NextWaveContainer/NextWaveButton" to="." method="_on_next_wave_button_pressed"]

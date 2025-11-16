@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://f34dinc60kaa"]
 
-[ext_resource type="Script" uid="uid://dtjahob531d8j" path="res://ui/relics/top_bar_relic_ui/top_bar_relic.gd" id="1_lbxwm"]
+[ext_resource type="Script" uid="uid://dtjahob531d8j" path="res://ui/top_bar_ui/relics/top_bar_relic.gd" id="1_lbxwm"]
 [ext_resource type="Texture2D" uid="uid://ddc3y4ouv4tm6" path="res://assets/sprites/relics/paganinis_bow.png" id="2_lbxwm"]
 
 [node name="Control" type="Control"]

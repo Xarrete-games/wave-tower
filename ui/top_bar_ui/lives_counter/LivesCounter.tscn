@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c46d7j3yoj5p7"]
 
-[ext_resource type="Script" uid="uid://c0g7v5jjs5lls" path="res://ui/score_ui/lives_counter/lives_counter.gd" id="1_jul41"]
+[ext_resource type="Script" uid="uid://c0g7v5jjs5lls" path="res://ui/top_bar_ui/lives_counter/lives_counter.gd" id="1_jul41"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="1_riguy"]
 
 [node name="LivesCounter" type="Control"]
