@@ -19,7 +19,7 @@ var hit_tween: Tween
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var explosion: AnimatedSprite2D = $Explosion
 @onready var health_bar: HealthBar = $HealthBar
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var gold_dropped_pos: Marker2D = $GoldDroppedPos
 
 func get_damage(damage: float) -> void:
@@ -31,8 +31,8 @@ func get_damage(damage: float) -> void:
 	hit_tween = create_tween()
 	hit_tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
-	sprite_2d.modulate = Color.RED
-	hit_tween.tween_property(sprite_2d, "modulate", Color.WHITE, 0.2)
+	animated_sprite_2d.modulate = Color.RED
+	hit_tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.2)
 
 	if health <= 0:
 		_die()

@@ -1,15 +1,53 @@
-[gd_scene load_steps=10 format=3 uid="uid://diax8n45uy1cu"]
+[gd_scene load_steps=17 format=3 uid="uid://diax8n45uy1cu"]
 
 [ext_resource type="Script" uid="uid://cafqn48q104fs" path="res://enemies/enemy.gd" id="1_fenyl"]
-[ext_resource type="Texture2D" uid="uid://bojbsxlx3maff" path="res://assets/sprites/enemies/enemy1.png" id="2_g0tqa"]
+[ext_resource type="Texture2D" uid="uid://ck7funcss1gra" path="res://assets/sprites/enemies/espectro/sp1.png" id="2_puprq"]
+[ext_resource type="Texture2D" uid="uid://bsa7fc1up16d" path="res://assets/sprites/enemies/espectro/sp2.png" id="3_8cn0f"]
 [ext_resource type="Texture2D" uid="uid://bm4ifvwlnaf3v" path="res://assets/sprites/proyectiles/Explosion01.png" id="3_pn5yy"]
+[ext_resource type="Texture2D" uid="uid://0rsd0baw40eo" path="res://assets/sprites/enemies/espectro/sp3.png" id="4_igo4q"]
 [ext_resource type="Texture2D" uid="uid://b64ekjerj72la" path="res://assets/sprites/proyectiles/Explosion02.png" id="4_yfxnn"]
 [ext_resource type="Texture2D" uid="uid://cghq387lneluj" path="res://assets/sprites/proyectiles/Explosion03.png" id="5_3lj8x"]
+[ext_resource type="Texture2D" uid="uid://1imqmrl2xvda" path="res://assets/sprites/enemies/espectro/sp4.png" id="5_mah67"]
+[ext_resource type="Texture2D" uid="uid://ccli0iefh4ahb" path="res://assets/sprites/enemies/espectro/sp5.png" id="6_46u5g"]
 [ext_resource type="Texture2D" uid="uid://drq2ylbhn8b3w" path="res://assets/sprites/proyectiles/Explosion04.png" id="6_nu4s6"]
 [ext_resource type="PackedScene" uid="uid://bko3pruxq8viw" path="res://enemies/health_bar/health_bar.tscn" id="7_puprq"]
+[ext_resource type="Texture2D" uid="uid://dn0hbubu2qaji" path="res://assets/sprites/enemies/espectro/sp7.png" id="7_sa3g6"]
+[ext_resource type="Texture2D" uid="uid://hyvfjgflr8oj" path="res://assets/sprites/enemies/espectro/sp8.png" id="8_54ef2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epsnb"]
 size = Vector2(46, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mujyd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_puprq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8cn0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_igo4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mah67")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_46u5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_igo4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_sa3g6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_54ef2")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 10.0
+}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_28xqf"]
 animations = [{
@@ -42,10 +80,13 @@ script = ExtResource("1_fenyl")
 position = Vector2(-2.5, 1)
 shape = SubResource("RectangleShape2D_epsnb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -0.9999981)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_g0tqa")
+sprite_frames = SubResource("SpriteFrames_mujyd")
+animation = &"down right"
+autoplay = "down right"
+frame_progress = 0.9538257
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
