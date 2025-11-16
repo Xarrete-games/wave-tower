@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_46s0e")
-id = "Blue Relic"
+id = "Valve Amplifier 100W"
 description = "Increase attack range of all towers by 10"
 texture = ExtResource("2_iwf50")
 metadata/_custom_type_script = "uid://u8jtn52xm88d"
