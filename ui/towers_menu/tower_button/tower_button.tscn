@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://o248nju46k2n"]
+
+[ext_resource type="Script" uid="uid://n67chfk5ae8t" path="res://ui/towers_menu/tower_button/tower_button.gd" id="1_bxa3v"]
+[ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_s7tbd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7tbd"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Theme" id="Theme_bxa3v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c656n"]
+atlas = ExtResource("1_s7tbd")
+region = Rect2(0, 0, 128, 191)
+
+[node name="TowerButton" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_bxa3v")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s7tbd")
+
+[node name="TowerButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+theme = SubResource("Theme_bxa3v")
+texture_normal = SubResource("AtlasTexture_c656n")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PriceLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 72.0
+offset_right = 103.0
+offset_bottom = 95.0
+text = "100"
+
+[connection signal="pressed" from="TowerButton" to="." method="_on_tower_button_pressed"]

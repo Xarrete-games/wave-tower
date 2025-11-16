@@ -4,7 +4,6 @@ class_name Tower extends Node2D
 
 signal target_change(enemy: Enemy)
 
-
 enum TowerType { RED, GREEN, BLUE }
 
 @export var stats: TowerStats
@@ -13,9 +12,6 @@ enum TowerType { RED, GREEN, BLUE }
 var _targets_in_range: Array[Enemy] = [] 
 var _current_target: Enemy
 var _enabled: bool = false
-var build_price:
-	get:
-		return stats.build_price
 
 @onready var range_area: Area2D = $RangeArea
 @onready var range_preview: RangePreview = $RangePreview

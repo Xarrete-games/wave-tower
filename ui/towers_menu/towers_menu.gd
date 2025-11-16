@@ -8,27 +8,37 @@ signal tower_selected(tower_scene: PackedScene)
 
 @export var tower_placer: TowerPlacer
 
+#COUNTERS
 @onready var red_tower_count: TowerCount = $TowersCount/RedTowerCount
 @onready var green_tower_count: TowerCount = $TowersCount/GreenTowerCount
 @onready var blue_tower_count: TowerCount = $TowersCount/BlueTowerCount
 
+#BUTTONS
+@onready var red_tower_button: TowerButton = $BuildTowerMenu/HBoxContainer/RedTowerButton
+@onready var green_tower_button: TowerButton = $BuildTowerMenu/HBoxContainer/GreenTowerButton
+@onready var blue_tower_button: TowerButton = $BuildTowerMenu/HBoxContainer/BlueTowerButton
+
 func _ready():
 	tower_placer.tower_placed.connect(_on_tower_placed)
+	Price.tower_price_change.connect(_on_tower_price_change)
 	
-func _on_red_tower_button_pressed() -> void:
-	if Score.gold >= Price.TowerBuild.RED:
-		tower_selected.emit(RED_TOWER)
-
-func _on_blue_tower_button_pressed() -> void:
-	if Score.gold >= Price.TowerBuild.BLUE:
-		tower_selected.emit(BLUE_TOWER)
-
-func _on_green_tower_button_pressed() -> void:
-	if Score.gold >= Price.TowerBuild.GREEN:
-		tower_selected.emit(GREEN_TOWER)
-
 func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
 	match tower_type:
 		Tower.TowerType.RED: red_tower_count.count = amount
 		Tower.TowerType.GREEN: green_tower_count.count = amount
 		Tower.TowerType.BLUE: blue_tower_count.count = amount
+
+func _on_red_tower_button_pressed(tower_scene: PackedScene) -> void:
+	tower_selected.emit(tower_scene)
+
+func _on_green_tower_button_pressed(tower_scene: PackedScene) -> void:
+	tower_selected.emit(tower_scene)
+
+func _on_blue_tower_button_pressed(tower_scene: PackedScene) -> void:
+	tower_selected.emit(tower_scene)
+
+func _on_tower_price_change(tower_type: Tower.TowerType, price: int) -> void:
+	match tower_type:
+		Tower.TowerType.RED: red_tower_button.price = price
+		Tower.TowerType.GREEN: green_tower_button.price = price
+		Tower.TowerType.BLUE: blue_tower_button.price = price

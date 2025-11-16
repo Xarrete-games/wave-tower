@@ -24,6 +24,7 @@ func reset_towers_count() -> void:
 
 func _ready():
 	towers_menu.tower_selected.connect(_on_tower_selected)
+	reset_towers_count()
 
 func _process(_delta: float) -> void:
 	if not _is_placing or not is_instance_valid(_current_tower_instance):
@@ -58,11 +59,13 @@ func update_nodes_from_current_level(current_level: Level) -> void:
 func _update_tower_count(tower_type: Tower.TowerType, value: int) -> void:
 	towers_placed[tower_type] = value
 	tower_placed.emit(tower_type, value)
+	Price.tower_placed(tower_type, value)
 
 func _place_tower() -> void:
 	var tile_pos = level_tile_map.get_mouse_tile_pos()
 	level_tile_map.set_tile_occupied(tile_pos)
-	Score.substract_gold(_current_tower_instance.build_price)
+	var tower_price = Price.get_price(_current_tower_instance.type)
+	Score.substract_gold(tower_price)
 	_is_placing = false
 	
 	var tower_type = _current_tower_instance.type

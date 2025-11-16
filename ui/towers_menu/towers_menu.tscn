@@ -1,23 +1,31 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfym6wmesrxxa"]
+[gd_scene load_steps=17 format=3 uid="uid://bfym6wmesrxxa"]
 
 [ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/towers_menu/towers_menu.gd" id="1_d3tgk"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="2_d3tgk"]
+[ext_resource type="PackedScene" uid="uid://o248nju46k2n" path="res://ui/towers_menu/tower_button/tower_button.tscn" id="3_1xlmg"]
+[ext_resource type="PackedScene" uid="uid://d36t7geqp1sh" path="res://towers/red/red_tower.tscn" id="3_lxxr0"]
 [ext_resource type="Texture2D" uid="uid://kt17qx3lclba" path="res://assets/sprites/towers/gemas_RGB.png" id="3_yrsgh"]
+[ext_resource type="PackedScene" uid="uid://oj5ilwusjvuo" path="res://towers/green/green_tower.tscn" id="4_lxxr0"]
 [ext_resource type="PackedScene" uid="uid://cupq5fkss800q" path="res://ui/towers_menu/tower_count/tower_count.tscn" id="5_1xlmg"]
+[ext_resource type="PackedScene" uid="uid://cwyyp2r266blt" path="res://towers/blue/blue_tower.tscn" id="5_61shu"]
 
-[sub_resource type="Theme" id="Theme_d3tgk"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7564t"]
+load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d3tgk"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2keh"]
+atlas = SubResource("CompressedTexture2D_7564t")
+region = Rect2(0, 0, 131, 181)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s4otn"]
+load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7564t"]
+atlas = SubResource("CompressedTexture2D_s4otn")
+region = Rect2(131, 0, 125, 181)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4otn"]
 atlas = ExtResource("2_d3tgk")
-region = Rect2(0, 0, 128, 191)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yrsgh"]
-atlas = ExtResource("2_d3tgk")
-region = Rect2(256, 0, 128, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0oaxy"]
-atlas = ExtResource("2_d3tgk")
-region = Rect2(128, 0, 128, 192)
+region = Rect2(249, 40, 132, 141)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xlmg"]
 atlas = ExtResource("3_yrsgh")
@@ -50,17 +58,6 @@ offset_top = -0.28009033
 offset_right = -0.27999878
 offset_bottom = 0.079956055
 
-[node name="Panel" type="Panel" parent="BuildTowerMenu"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -144.0
-offset_right = 460.0
-offset_bottom = 1.0
-grow_vertical = 0
-
 [node name="HBoxContainer" type="HBoxContainer" parent="BuildTowerMenu"]
 layout_mode = 1
 anchors_preset = -1
@@ -68,34 +65,28 @@ anchor_left = 0.02
 anchor_top = 0.80100006
 anchor_right = 1.0
 anchor_bottom = 0.983
-offset_left = -5.14
-offset_top = -107.34401
-offset_right = 203.0
-offset_bottom = -3.552002
+offset_left = 12.860001
+offset_top = -111.34401
+offset_right = 221.0
+offset_bottom = -7.552002
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 120
 
-[node name="RedTowerButton" type="TextureButton" parent="BuildTowerMenu/HBoxContainer"]
-custom_minimum_size = Vector2(150, 100)
+[node name="RedTowerButton" parent="BuildTowerMenu/HBoxContainer" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
-theme = SubResource("Theme_d3tgk")
-texture_normal = SubResource("AtlasTexture_d3tgk")
-ignore_texture_size = true
-stretch_mode = 5
+tower_scene = ExtResource("3_lxxr0")
+icon = SubResource("AtlasTexture_m2keh")
 
-[node name="BlueTowerButton" type="TextureButton" parent="BuildTowerMenu/HBoxContainer"]
-custom_minimum_size = Vector2(150, 130)
+[node name="GreenTowerButton" parent="BuildTowerMenu/HBoxContainer" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_yrsgh")
-ignore_texture_size = true
-stretch_mode = 5
+tower_scene = ExtResource("4_lxxr0")
+icon = SubResource("AtlasTexture_7564t")
 
-[node name="GreenTowerButton" type="TextureButton" parent="BuildTowerMenu/HBoxContainer"]
-custom_minimum_size = Vector2(150, 100)
+[node name="BlueTowerButton" parent="BuildTowerMenu/HBoxContainer" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_0oaxy")
-ignore_texture_size = true
-stretch_mode = 5
+tower_scene = ExtResource("5_61shu")
+icon = SubResource("AtlasTexture_s4otn")
 
 [node name="TowersCount" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -118,5 +109,5 @@ layout_mode = 2
 icon = SubResource("AtlasTexture_61shu")
 
 [connection signal="pressed" from="BuildTowerMenu/HBoxContainer/RedTowerButton" to="." method="_on_red_tower_button_pressed"]
-[connection signal="pressed" from="BuildTowerMenu/HBoxContainer/BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
 [connection signal="pressed" from="BuildTowerMenu/HBoxContainer/GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
+[connection signal="pressed" from="BuildTowerMenu/HBoxContainer/BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
