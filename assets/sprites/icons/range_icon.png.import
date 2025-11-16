@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwqmn01etch8n"
-path="res://.godot/imported/green_relic.png-e270ec38c1dbf7205ae41a0975eba8d7.ctex"
+uid="uid://w6l2l83ebvmf"
+path="res://.godot/imported/range_icon.png-9e9f4d015b102541b259d0916f643c2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/green_relic.png"
-dest_files=["res://.godot/imported/green_relic.png-e270ec38c1dbf7205ae41a0975eba8d7.ctex"]
+source_file="res://assets/sprites/icons/range_icon.png"
+dest_files=["res://.godot/imported/range_icon.png-9e9f4d015b102541b259d0916f643c2c.ctex"]
 
 [params]
 
