@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="1_y52rk"]
 [ext_resource type="Resource" uid="uid://3fyn0ky2thbu" path="res://levels/levels/level1/waves/lv1_wave_1.tres" id="2_5ex6d"]
-[ext_resource type="Script" uid="uid://dx42a8fkpk6fb" path="res://enemies/enemy_generator/resources_definitions/enemy_waves_data.gd" id="2_420qx"]
+[ext_resource type="Script" uid="uid://dx42a8fkpk6fb" path="res://enemies/enemy_generator/resources_definitions/level_waves.gd" id="2_420qx"]
 [ext_resource type="Resource" uid="uid://dx7x0rdvakdb7" path="res://levels/levels/level1/waves/lv1_wave_2.tres" id="3_e0rvy"]
 [ext_resource type="Resource" uid="uid://ck7v8rikbgeqm" path="res://levels/levels/level1/waves/lv1_wave_3.tres" id="4_i5s7j"]
 

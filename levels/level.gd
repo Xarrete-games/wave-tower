@@ -5,7 +5,7 @@ class_name Level extends Node2D
 @export var ememies_container: Node2D
 
 func _ready():
-	pass
+	Score.gold = waves.initial_gold
 	
 func get_waves() -> LevelWaves:
 	if waves == null:

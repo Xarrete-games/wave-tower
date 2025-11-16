@@ -3,7 +3,10 @@ extends Node
 
 signal gold_change(amount: int)
 
-var gold: int = 100
+var gold: int = 100:
+	set(value):
+		gold = value
+		gold_change.emit(value)
 
 func add_gold(amount: int) -> void:
 	gold += amount

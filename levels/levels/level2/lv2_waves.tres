@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelWaves" load_steps=7 format=3 uid="uid://bm4xxhvoj4sle"]
 
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="1_1bqqy"]
-[ext_resource type="Script" uid="uid://dx42a8fkpk6fb" path="res://enemies/enemy_generator/resources_definitions/enemy_waves_data.gd" id="2_d36pq"]
+[ext_resource type="Script" uid="uid://dx42a8fkpk6fb" path="res://enemies/enemy_generator/resources_definitions/level_waves.gd" id="2_d36pq"]
 [ext_resource type="Resource" uid="uid://dy8eufu1y0bpq" path="res://levels/levels/level2/waves/lv2_wave1.tres" id="2_gg4ei"]
 [ext_resource type="Resource" uid="uid://b5c6n0jds5tab" path="res://levels/levels/level2/waves/lv2_wave2.tres" id="3_0e46p"]
 [ext_resource type="Resource" uid="uid://ehhfodc2uby2" path="res://levels/levels/level2/waves/lv2_wave3.tres" id="4_hycjd"]
