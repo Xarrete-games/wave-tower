@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://becnb17nd1vj1" path="res://ui/relics/rewards_ui/reward_card/reward_card.gd" id="1_eji2h"]
 [ext_resource type="Theme" uid="uid://bansa1f47pkw0" path="res://ui/styles/themes/reward_card.tres" id="1_vqiry"]
-[ext_resource type="Texture2D" uid="uid://b8g6877b08o51" path="res://assets/sprites/relics/relic_paganini_bow.png" id="3_rdsw6"]
 [ext_resource type="Texture2D" uid="uid://dg8wywkburwi0" path="res://assets/sprites/relics/reward_border.png" id="4_68l61"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdsw6"]
 bg_color = Color(0.6862745, 0.6, 0.6, 0.8117647)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yrs38"]
+load_path = "res://.godot/imported/relic_paganini_bow.png-9e0d996e0ad377b40d2c2aeb6b2d5aa1.ctex"
 
 [node name="RewardCard" type="Control"]
 layout_mode = 3
@@ -31,8 +33,9 @@ offset_left = 42.0
 offset_top = 48.0
 offset_right = 369.0
 offset_bottom = 381.0
-texture = ExtResource("3_rdsw6")
+texture = SubResource("CompressedTexture2D_yrs38")
 expand_mode = 1
+stretch_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0

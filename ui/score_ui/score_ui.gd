@@ -2,7 +2,7 @@ class_name ScoreUi extends Control
 
 @onready var amount_gold_label: Label = $MarginContainer/HBox/HBoxContainer/AmountGoldLabel
 @onready var relics_container: HBoxContainer = $MarginContainer/HBox/HBoxContainer/RelicsContainer
-
+const TOP_BAR_RELIC = preload("uid://f34dinc60kaa")
 
 func _ready():
 	_on_gold_change(Score.gold)
@@ -15,9 +15,10 @@ func _on_gold_change(amount: int) -> void:
 func _update_relics(relics: Array):
 	clear_relics_container()
 	for relic in relics:
-		var relic_texture = TextureRect.new()
-		relic_texture.texture = relic.get_texture()
-		relics_container.add_child(relic_texture)
+		var relic_instance = TOP_BAR_RELIC.instantiate()
+		relics_container.add_child(relic_instance)
+		relic_instance.get_texture().texture = relic.get_texture()
+		relic_instance.get_amount().text = relic.get_amount()
 
 func clear_relics_container() -> void:
 	for relic in relics_container.get_children():

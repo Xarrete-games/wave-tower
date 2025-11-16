@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://cj2bl454ksc7e"]
 
 [ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://relics/relic_data.gd" id="1_kwhye"]
-[ext_resource type="Texture2D" uid="uid://b8g6877b08o51" path="res://assets/sprites/relics/relic_paganini_bow.png" id="2_stt0s"]
+[ext_resource type="Texture2D" uid="uid://ddc3y4ouv4tm6" path="res://assets/sprites/relics/paganinis_bow.png" id="2_stt0s"]
 
 [resource]
 script = ExtResource("1_kwhye")

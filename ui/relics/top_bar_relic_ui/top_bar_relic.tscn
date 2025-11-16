@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://f34dinc60kaa"]
+
+[ext_resource type="Script" uid="uid://dtjahob531d8j" path="res://ui/relics/top_bar_relic_ui/top_bar_relic.gd" id="1_lbxwm"]
+[ext_resource type="Texture2D" uid="uid://ddc3y4ouv4tm6" path="res://assets/sprites/relics/paganinis_bow.png" id="2_lbxwm"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lbxwm")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="texture" type="TextureRect" parent="MarginContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_lbxwm")
+expand_mode = 3
+
+[node name="amount" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
