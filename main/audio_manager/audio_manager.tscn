@@ -9,6 +9,7 @@ script = ExtResource("1_8qypr")
 [node name="coins" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_53i8p")
 volume_db = -9.0
+bus = &"SFX"
 
 [node name="Tempo" type="Timer" parent="."]
 autostart = true
