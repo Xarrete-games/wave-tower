@@ -10,4 +10,3 @@ func init_stats_base(stats_base: TowerStatsBase) -> void:
 	damage = stats_base.base_damage
 	attack_range = stats_base.base_attack_range
 	attack_speed = stats_base.base_attack_speed
-	

@@ -11,7 +11,12 @@ enum TowerType { RED, GREEN, BLUE }
 var _targets_in_range: Array[Enemy] = [] 
 var _current_target: Enemy
 var _enabled: bool = false
+# global stats
 var stats = TowerStats
+# local stats
+var local_damage: float = 0
+var local_attack_range: float = 0
+var local_attack_speed: float = 0
 
 @onready var range_area: Area2D = $RangeArea
 @onready var range_preview: RangePreview = $RangePreview
@@ -83,6 +88,7 @@ func _on_attack_timer_timeout() -> void:
 
 # read stats from tower_stats and assigns the values ​​to the corresponding nodes
 func _set_stats(tower_stats: TowerStats) -> void:
+	#global stats
 	stats = tower_stats
 	attack_timer.wait_time = stats.attack_speed
 	range_preview.radius = stats.attack_range

@@ -9,7 +9,7 @@ var _enabled = false
 @export var cards_container: Control
 
 func _ready() -> void:
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.3).timeout
 	_enabled = true
 
 func set_relics(relics: Array[Relic]) -> void:

@@ -7,7 +7,6 @@ var _direction: Vector2
 var _damage: float = 5
 var _is_expanding: bool = true
 
-@onready var green_ring_3: Sprite2D = $Waves/GreenRing3
 @onready var waves: Node2D = $Waves
 @onready var green_attack: AudioStreamPlayer2D = $GreenAttack
 @onready var ring_animation_timer: Timer = $RingAnimationTimer
@@ -27,6 +26,7 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	var enemy = body as Enemy
 	enemy.get_damage(_damage)
+	queue_free()
 
 func _on_duration_timeout() -> void:
 	queue_free()

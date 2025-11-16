@@ -22,8 +22,8 @@ var hit_tween: Tween
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var gold_dropped_pos: Marker2D = $GoldDroppedPos
 
-func get_damage(damage: float) -> void:
-	_set_health(health - damage)
+func get_damage(damage_recived: float) -> void:
+	_set_health(health - damage_recived)
 
 	if hit_tween and hit_tween.is_running():
 		hit_tween.kill()
@@ -68,8 +68,6 @@ func _process(delta):
 	var animation = "top right" if previous_global_y > global_position.y else "down right"
 	if animated_sprite_2d.animation != animation:
 		animated_sprite_2d.play(animation)
-	
-
 	
 func _die() -> void:
 	die.emit(self)

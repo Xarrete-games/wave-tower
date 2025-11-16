@@ -27,9 +27,9 @@ var rewards_ui: RewardsUI
 
 # current stats
 var towers_stats = {
-	Tower.TowerType.RED: TowerStats.new(),
-	Tower.TowerType.GREEN: TowerStats.new(),
-	Tower.TowerType.BLUE: TowerStats.new(),
+	Tower.TowerType.RED: RedTowerStats.new(),
+	Tower.TowerType.GREEN: GreenTowerStats.new(),
+	Tower.TowerType.BLUE: BlueTowerStats.new(),
 }
 
 func _ready() -> void:
