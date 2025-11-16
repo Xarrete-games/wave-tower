@@ -10,6 +10,10 @@ func reset_relics() -> void:
 	relics = {}
 	relics_change.emit(relics)
 
+
+func add_relic(all_towers_stats: Dictionary, relic: RedRelic) -> void:
+	_apply_to_all(all_towers_stats, relic)
+
 func add_red_relic(all_towers_stats: Dictionary) -> void:
 	var relic = RedRelic.new()
 	_apply_to_all(all_towers_stats, relic)

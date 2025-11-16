@@ -12,25 +12,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_vqiry")
 script = ExtResource("1_eji2h")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 600.0
+texture_normal = ExtResource("3_vqiry")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="CardButton" type="TextureButton" parent="MarginContainer"]
-layout_mode = 2
-texture_normal = ExtResource("3_vqiry")
+mouse_filter = 2
 
 [node name="Border" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("4_68l61")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 25
@@ -38,6 +44,7 @@ theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -48,9 +55,10 @@ text = "Paganini's Bow"
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 text = "+10% damage on turrets"
 scroll_active = false
 autowrap_mode = 1
 horizontal_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/CardButton" to="." method="_on_card_button_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
