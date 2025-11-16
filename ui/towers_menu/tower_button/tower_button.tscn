@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://n67chfk5ae8t" path="res://ui/towers_menu/tower_button/tower_button.gd" id="1_bxa3v"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_s7tbd"]
 [ext_resource type="StyleBox" uid="uid://de1oid76vx20r" path="res://assets/shaders/panel_black_box.tres" id="2_u1kcm"]
-[ext_resource type="Texture2D" uid="uid://b40fqemjm70lg" path="res://assets/sprites/buttons/wavecoin_20px.png" id="3_c656n"]
+[ext_resource type="Texture2D" uid="uid://c62y50mho5j7e" path="res://assets/sprites/buttons/wavecoinv2_20px.png" id="4_u1kcm"]
 
 [sub_resource type="Theme" id="Theme_bxa3v"]
 
@@ -48,7 +48,7 @@ text = "100"
 
 [node name="wavecoin" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("3_c656n")
+texture = ExtResource("4_u1kcm")
 stretch_mode = 3
 
 [connection signal="pressed" from="VBoxContainer/CenterContainer/TowerButton" to="." method="_on_tower_button_pressed"]
