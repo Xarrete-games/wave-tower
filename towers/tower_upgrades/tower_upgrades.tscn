@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6636mwf0gahp"]
-
-[ext_resource type="Script" uid="uid://b10k457qgi5g7" path="res://towers/tower_upgrades/tower_upgrades.gd" id="1_lwqof"]
-
-[node name="TowerUpgrades" type="Node"]
-script = ExtResource("1_lwqof")

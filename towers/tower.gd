@@ -6,12 +6,12 @@ signal target_change(enemy: Enemy)
 
 enum TowerType { RED, GREEN, BLUE }
 
-@export var stats: TowerStats
 @export var type: TowerType = TowerType.RED
 
 var _targets_in_range: Array[Enemy] = [] 
 var _current_target: Enemy
 var _enabled: bool = false
+var stats = TowerStats
 
 @onready var range_area: Area2D = $RangeArea
 @onready var range_preview: RangePreview = $RangePreview
@@ -82,8 +82,7 @@ func _on_attack_timer_timeout() -> void:
 
 # read stats from tower_stats and assigns the values ​​to the corresponding nodes
 func _set_stats() -> void:
-	if not stats:
-		push_error("[Tower] stats not assigned in tower %s" % name)
+	stats = TowerUpgrades.get_stats(type)
 	attack_timer.wait_time = stats.attack_speed
 	range_preview.radius = stats.attack_range
 	(range_collision.shape as CircleShape2D).radius = stats.attack_range

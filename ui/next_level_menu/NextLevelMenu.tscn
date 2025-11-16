@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://crastw7xnqgvl"]
 
 [ext_resource type="Script" uid="uid://bapepoqni3ebq" path="res://ui/next_level_menu/next_level_menu.gd" id="1_bqcem"]
-[ext_resource type="Theme" uid="uid://dswsb3nw14dn7" path="res://ui/themes/menu_theme.tres" id="2_rufx6"]
+[ext_resource type="Theme" uid="uid://dswsb3nw14dn7" path="res://ui/styles/themes/menu_theme.tres" id="2_rufx6"]
 
 [node name="NextLevelMenu" type="Control"]
 layout_mode = 3

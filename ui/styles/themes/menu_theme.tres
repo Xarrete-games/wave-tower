@@ -1,0 +1,33 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dswsb3nw14dn7"]
+
+[ext_resource type="FontFile" uid="uid://teqiajjnkdyx" path="res://assets/fonts/RobotoMono-Bold.ttf" id="1_oqjw5"]
+[ext_resource type="StyleBox" uid="uid://dcjn1y7ofuii7" path="res://ui/styles/box_style/button_box.tres" id="3_hre0p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqjw5"]
+bg_color = Color(0.87, 0.56956, 0.5481, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(0.1561397, 0.060993627, 0.044769622, 1)
+Button/colors/font_pressed_color = Color(0.44291076, 0.44291076, 0.44291073, 1)
+Button/constants/line_spacing = 5
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("1_oqjw5")
+Button/styles/focus = SubResource("StyleBoxFlat_oqjw5")
+Button/styles/hover = SubResource("StyleBoxFlat_oqjw5")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_oqjw5")
+Button/styles/normal = ExtResource("3_hre0p")
+Button/styles/pressed = SubResource("StyleBoxFlat_oqjw5")

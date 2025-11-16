@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 Score="*res://main/score/score.gd"
 Price="*res://main/score/price.gd"
 AudioManager="*res://main/audio_manager/audio_manager.tscn"
+TowerUpgrades="*res://towers/tower_upgrades/tower_upgrades.gd"
+RelicsManager="*res://relics/relics_manager.gd"
 
 [display]
 

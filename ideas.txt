@@ -2,3 +2,5 @@ Torretas:
 	Roja (Fuego): Monotarget.
 	Verde (Electricidad): Pega en línea.
 	Azul (Hielo): Un area a su alrededor.
+
+Color: #de918c
