@@ -9,6 +9,7 @@
 collision_layer = 0
 input_pickable = false
 script = ExtResource("1_r6vk7")
+color = Color(0.4745098, 0.8117647, 1, 1)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.5)
