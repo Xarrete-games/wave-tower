@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://becnb17nd1vj1" path="res://ui/rewards_ui/reward_card/reward_card.gd" id="1_eji2h"]
 [ext_resource type="Theme" uid="uid://bansa1f47pkw0" path="res://ui/styles/themes/reward_card.tres" id="1_vqiry"]
-[ext_resource type="Texture2D" uid="uid://covna77ua37n7" path="res://assets/sprites/relics/relic_paganini_bow_thumb.png" id="3_pwyca"]
+[ext_resource type="Texture2D" uid="uid://2wxq7fkhufyf" path="res://assets/sprites/relics/relic_paganini_bow_thumb2.png" id="3_vqiry"]
 [ext_resource type="Texture2D" uid="uid://dg8wywkburwi0" path="res://assets/sprites/relics/reward_border.png" id="4_68l61"]
 
 [node name="RewardCard" type="Control"]
@@ -22,7 +22,7 @@ offset_bottom = 40.0
 
 [node name="CardButton" type="TextureButton" parent="MarginContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_pwyca")
+texture_normal = ExtResource("3_vqiry")
 
 [node name="Border" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
@@ -31,10 +31,10 @@ texture = ExtResource("4_68l61")
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_constants/margin_left = 12
+theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
@@ -45,7 +45,7 @@ size_flags_horizontal = 4
 text = "Paganini's Bow"
 
 [node name="Description" type="RichTextLabel" parent="MarginContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 130)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 text = "+10% damage on turrets"

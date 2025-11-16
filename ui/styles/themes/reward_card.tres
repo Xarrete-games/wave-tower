@@ -13,3 +13,4 @@ variation_opentype = {
 Label/colors/font_color = Color(0.8352941, 0.9647059, 1, 1)
 Label/font_sizes/font_size = 24
 Label/fonts/font = SubResource("FontVariation_hlq5w")
+RichTextLabel/colors/default_color = Color(0.8467109, 0.53742325, 0.49119037, 1)
