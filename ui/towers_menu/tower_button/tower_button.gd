@@ -11,8 +11,8 @@ signal pressed(tower_scene: PackedScene)
 var price: int = 0:
 	set = set_price
 
-@onready var tower_button: TextureButton = $TowerButton
-@onready var price_label: Label = $HBoxContainer/PriceLabel
+@onready var tower_button: TextureButton = $VBoxContainer/CenterContainer/TowerButton
+@onready var price_label: Label = $VBoxContainer/HBoxContainer/PriceLabel
 
 func set_price(new_value: int) -> void:
 	price = new_value

@@ -37,7 +37,7 @@ region = Rect2(131, 0, 125, 181)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s4otn"]
 atlas = ExtResource("2_d3tgk")
-region = Rect2(249, 40, 132, 141)
+region = Rect2(249, 40, 142, 141)
 
 [node name="TowersMenu" type="Control"]
 layout_mode = 3
