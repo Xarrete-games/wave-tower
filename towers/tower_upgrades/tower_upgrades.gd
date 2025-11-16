@@ -20,8 +20,8 @@ const AMOUNT_TO_REWARD_3 = 6
 const AMOUNT_TO_REWARD_4 = 8
 
 var rewards_red: Array[Relic] = [RedRelic.new()]
-var rewards_green: Array[Relic] = [RedRelic.new()]
-var rewards_blue: Array[Relic] = [RedRelic.new()]
+var rewards_green: Array[Relic] = [GreenRelic.new()]
+var rewards_blue: Array[Relic] = [BlueRelic.new()]
 
 var rewards_ui: RewardsUI
 
@@ -87,8 +87,10 @@ func _on_relidc_selected(relic: Relic) -> void:
 	if rewards_ui:
 		rewards_ui.queue_free()
 		rewards_ui = null
-	
+	print(relic.get_id())
+	print(get_stats(Tower.TowerType.BLUE).attack_range)
 	RelicsManager.add_relic(towers_stats, relic)
+	print(get_stats(Tower.TowerType.BLUE).attack_range)
 	_emit_all_status_change()
 
 func _add_green_relic() -> void:
@@ -96,7 +98,9 @@ func _add_green_relic() -> void:
 	_emit_all_status_change()
 
 func _add_blue_relic() -> void:
+	
 	RelicsManager.add_blue_relic(towers_stats)
+	
 	_emit_all_status_change()
 
 func _emit_all_status_change() -> void:

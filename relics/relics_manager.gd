@@ -11,7 +11,7 @@ func reset_relics() -> void:
 	relics_change.emit(relics)
 
 
-func add_relic(all_towers_stats: Dictionary, relic: RedRelic) -> void:
+func add_relic(all_towers_stats: Dictionary, relic: Relic) -> void:
 	_apply_to_all(all_towers_stats, relic)
 
 func add_red_relic(all_towers_stats: Dictionary) -> void:
