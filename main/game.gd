@@ -21,9 +21,7 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
-		get_tree().paused = not get_tree().paused
-		var pause_instance = pause.instantiate()
-		ui_layer.add_child(pause_instance)
+		_open_config_menu()
 
 func _load_level(level_number: int) -> void:
 	music_handler.stop_music()
@@ -34,6 +32,7 @@ func _load_level(level_number: int) -> void:
 	# on new level init
 	_update_camera_post()
 	tower_placer.update_nodes_from_current_level(_current_level)
+	tower_placer.reset_towers_count()
 	enemy_generator.load_level_nodes(_current_level)
 	music_handler.play_music()
 
@@ -63,3 +62,10 @@ func _on_next_level_menu_next_leve_button_pressed() -> void:
 	else: 
 		_load_level(current_level_number)
 	
+func _on_config_config_pressed() -> void:
+	_open_config_menu()
+	
+func _open_config_menu() -> void:
+	get_tree().paused = not get_tree().paused
+	var pause_instance = pause.instantiate()
+	ui_layer.add_child(pause_instance)

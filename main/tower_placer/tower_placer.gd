@@ -24,7 +24,6 @@ func reset_towers_count() -> void:
 
 func _ready():
 	towers_menu.tower_selected.connect(_on_tower_selected)
-	reset_towers_count()
 
 func _process(_delta: float) -> void:
 	if not _is_placing or not is_instance_valid(_current_tower_instance):

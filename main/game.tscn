@@ -51,4 +51,5 @@ waves_ui = NodePath("../UILayer/WavesUI")
 tower_placer = NodePath("../TowerPlacer")
 
 [connection signal="next_leve_button_pressed" from="UILayer/NextLevelMenu" to="." method="_on_next_level_menu_next_leve_button_pressed"]
+[connection signal="config_pressed" from="UILayer/Config" to="." method="_on_config_config_pressed"]
 [connection signal="last_wave_done" from="EnemyGenerator" to="." method="_on_enemy_generator_last_wave_done"]
