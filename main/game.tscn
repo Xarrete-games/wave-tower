@@ -1,12 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://6vgrx5dct8h8"]
+[gd_scene load_steps=14 format=3 uid="uid://6vgrx5dct8h8"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="2_2c7eb"]
 [ext_resource type="PackedScene" uid="uid://xiqcxnsaxliv" path="res://levels/levels/level1/level_1.tscn" id="2_hlcqn"]
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/towers_menu/towers_menu.tscn" id="3_4u4fy"]
 [ext_resource type="PackedScene" uid="uid://b1qa6yumd3yb6" path="res://levels/levels/level2/level_2.tscn" id="3_v3ojx"]
+[ext_resource type="PackedScene" uid="uid://b1rsi54eynysa" path="res://ui/pause_ui/pause_menu.tscn" id="4_f7m14"]
 [ext_resource type="PackedScene" uid="uid://bjj2sav3lh0or" path="res://ui/score_ui/score_ui.tscn" id="4_j015t"]
 [ext_resource type="PackedScene" uid="uid://b7ttkk4pasgin" path="res://ui/waves_ui/waves_ui.tscn" id="5_hlcqn"]
+[ext_resource type="PackedScene" uid="uid://bo3eo6rb8fwjd" path="res://ui/pause_ui/config_button.tscn" id="5_v3ojx"]
 [ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="6_v3ojx"]
 [ext_resource type="PackedScene" uid="uid://dwt8mx7gh0clq" path="res://enemies/enemy_generator/enemy_generator.tscn" id="7_f7m14"]
 [ext_resource type="PackedScene" uid="uid://crastw7xnqgvl" path="res://ui/next_level_menu/NextLevelMenu.tscn" id="7_j015t"]
@@ -15,6 +17,7 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_jc0vi")
 levels = Array[PackedScene]([ExtResource("2_hlcqn"), ExtResource("3_v3ojx")])
+pause = ExtResource("4_f7m14")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(579, 323)
@@ -31,6 +34,9 @@ tower_placer = NodePath("../../TowerPlacer")
 enemy_generator = NodePath("../../EnemyGenerator")
 
 [node name="NextLevelMenu" parent="UILayer" instance=ExtResource("7_j015t")]
+
+[node name="Config" parent="UILayer" instance=ExtResource("5_v3ojx")]
+mouse_filter = 2
 
 [node name="TowerPlacer" parent="." node_paths=PackedStringArray("towers_menu") instance=ExtResource("6_v3ojx")]
 towers_menu = NodePath("../UILayer/TowersMenu")

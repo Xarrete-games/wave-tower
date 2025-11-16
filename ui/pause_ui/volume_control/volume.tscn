@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj1vromg52jei"]
+
+[ext_resource type="PackedScene" uid="uid://bk5qffk5er2tl" path="res://ui/pause_ui/volume_control/slider_volumen/slider_volumen.tscn" id="1_1s6gx"]
+
+[node name="Volume" type="VBoxContainer"]
+theme_override_constants/separation = 20
+
+[node name="HBoxMaster" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Master" type="Label" parent="HBoxMaster"]
+layout_mode = 2
+text = "Master"
+horizontal_alignment = 2
+
+[node name="Master2" parent="HBoxMaster" instance=ExtResource("1_1s6gx")]
+layout_mode = 2
+size_flags_vertical = 1
+bus_name = "Master"
+
+[node name="HBoxMusic" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Music" type="Label" parent="HBoxMusic"]
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 2
+
+[node name="Music2" parent="HBoxMusic" instance=ExtResource("1_1s6gx")]
+layout_mode = 2
+size_flags_vertical = 1
+bus_name = "Music"
+
+[node name="HBoxSFX" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="SFX" type="Label" parent="HBoxSFX"]
+layout_mode = 2
+text = "SFX"
+horizontal_alignment = 2
+
+[node name="SFX2" parent="HBoxSFX" instance=ExtResource("1_1s6gx")]
+layout_mode = 2
+size_flags_vertical = 1
+bus_name = "SFX"

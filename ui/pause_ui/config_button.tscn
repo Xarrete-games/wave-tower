@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo3eo6rb8fwjd"]
+
+[ext_resource type="Script" uid="uid://2hn42atgdyhn" path="res://ui/pause_ui/config_button.gd" id="1_qeof5"]
+[ext_resource type="PackedScene" uid="uid://b1rsi54eynysa" path="res://ui/pause_ui/pause_menu.tscn" id="2_cv0sx"]
+[ext_resource type="Texture2D" uid="uid://gxr6syaocu2w" path="res://assets/sprites/buttons/configuracion_50px.png" id="2_w0s13"]
+[ext_resource type="Texture2D" uid="uid://kssnvku55i13" path="res://assets/sprites/buttons/configuracion_hover_50px.png" id="3_cv0sx"]
+
+[node name="Config" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qeof5")
+pause = ExtResource("2_cv0sx")
+
+[node name="ConfigButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1850.0
+offset_top = 20.0
+offset_right = 1900.0
+offset_bottom = 70.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("2_w0s13")
+texture_hover = ExtResource("3_cv0sx")
+stretch_mode = 0
+
+[connection signal="pressed" from="ConfigButton" to="." method="_on_config_button_pressed"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk5qffk5er2tl"]
+
+[ext_resource type="Script" uid="uid://dnnnp11jmm4tn" path="res://ui/pause_ui/volume_control/slider_volumen/slider_volumen.gd" id="1_rj2ka"]
+
+[node name="HSlider" type="HSlider"]
+custom_minimum_size = Vector2(300, 0)
+offset_right = 300.0
+offset_bottom = 16.0
+max_value = 1.0
+step = 0.001
+script = ExtResource("1_rj2ka")
