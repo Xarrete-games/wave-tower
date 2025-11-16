@@ -30,7 +30,7 @@ func _apply_to_all(all_towers_stats: Dictionary, relic: Relic) -> void:
 
 func _add_relic(relic: Relic) -> void:
 	if relics.has(relic.get_id()):
-		relics[relic.get_id()] += 1
+		(relics[relic.get_id()] as Relic).amount += 1
 	else:
-		relics[relic.get_id()] = 1
+		relics[relic.get_id()] = relic
 	relics_change.emit(relics)
