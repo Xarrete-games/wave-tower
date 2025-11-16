@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_0w33m")
-id = "Green Relic"
+id = "Metronome"
 description = "Increase attack speed of all towers by  10 "
 texture = ExtResource("2_3oo7t")
 metadata/_custom_type_script = "uid://u8jtn52xm88d"
