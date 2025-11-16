@@ -49,6 +49,7 @@ func _process(delta):
 		return
 	# save previous position	
 	var previous_global_x = global_position.x
+	var previous_global_y = global_position.y
 	#increse progress
 	_path_follow.progress += speed * delta
 	
@@ -62,8 +63,12 @@ func _process(delta):
 	global_position = path_global_pos
 	
 	# FLIP SPRITE
-	
 	animated_sprite_2d.flip_h = global_position.x > previous_global_x
+	# handle animation
+	var animation = "top right" if previous_global_y > global_position.y else "down right"
+	if animated_sprite_2d.animation != animation:
+		animated_sprite_2d.play(animation)
+	
 
 	
 func _die() -> void:
