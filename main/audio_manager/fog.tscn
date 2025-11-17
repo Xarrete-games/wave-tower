@@ -39,7 +39,7 @@ code = "shader_type canvas_item;
 
 uniform sampler2D noise_texture: repeat_enable, filter_nearest;
 uniform float density: hint_range(0.0, 1.0) = 1;
-uniform vec2 speed = vec2(0.03, 0.002);
+uniform vec2 speed = vec2(0.04, 0.03);
 
 void fragment() {
 	//move
@@ -67,7 +67,7 @@ seamless_blend_skirt = 0.75
 shader = SubResource("Shader_vkk0u")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_gcgcv")
 shader_parameter/density = 1.0
-shader_parameter/speed = Vector2(0.01, 0.0005)
+shader_parameter/speed = Vector2(0.04, 0.03)
 
 [node name="fog" type="ParallaxBackground"]
 scroll_ignore_camera_zoom = true
