@@ -28,7 +28,7 @@ position = Vector2(0, -133)
 radius = 250.0
 
 [node name="AttackTickTimer" type="Timer" parent="." index="6"]
-wait_time = 0.2
+wait_time = 0.1
 
 [node name="CristalLight2" type="PointLight2D" parent="." index="7"]
 position = Vector2(0, -134)
