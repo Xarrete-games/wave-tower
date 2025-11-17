@@ -16,35 +16,6 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_juoes")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_6646j")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_5ogci")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_pspon")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_fc4lt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_pspon")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_5ogci")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_6646j")
-}],
-"loop": true,
-"name": &"back",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("7_3i5r8")
 }, {
 "duration": 1.0,
@@ -69,7 +40,36 @@ animations = [{
 "texture": ExtResource("8_ig7o3")
 }],
 "loop": true,
-"name": &"front",
+"name": &"down right",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_juoes")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6646j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5ogci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pspon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fc4lt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pspon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5ogci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6646j")
+}],
+"loop": true,
+"name": &"top right",
 "speed": 12.0
 }]
 
@@ -82,6 +82,5 @@ position = Vector2(-2.5, 5.5)
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_53yg0")
-animation = &"front"
-autoplay = "front"
+autoplay = "top right"
 frame_progress = 0.0
