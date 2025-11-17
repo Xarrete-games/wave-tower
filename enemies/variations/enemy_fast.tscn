@@ -1,6 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://xk0wj86s8ddb"]
+[gd_scene load_steps=13 format=3 uid="uid://xk0wj86s8ddb"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_1hf55"]
+[ext_resource type="Texture2D" uid="uid://bquafk52g8s4m" path="res://assets/sprites/enemies/buba/buba_back_01.png" id="2_juoes"]
+[ext_resource type="Texture2D" uid="uid://c105xe8lldf3p" path="res://assets/sprites/enemies/buba/buba_back_02.png" id="3_6646j"]
+[ext_resource type="Texture2D" uid="uid://ckyuih2uwvoyx" path="res://assets/sprites/enemies/buba/buba_back_03.png" id="4_5ogci"]
+[ext_resource type="Texture2D" uid="uid://bp1f2iw4ucer" path="res://assets/sprites/enemies/buba/buba_back_04.png" id="5_pspon"]
+[ext_resource type="Texture2D" uid="uid://cy8bgd2updnt8" path="res://assets/sprites/enemies/buba/buba_back_05.png" id="6_fc4lt"]
+[ext_resource type="Texture2D" uid="uid://brrmjcksg8q6t" path="res://assets/sprites/enemies/buba/buba_front_01.png" id="7_3i5r8"]
+[ext_resource type="Texture2D" uid="uid://c1uttjsrd1iaj" path="res://assets/sprites/enemies/buba/buba_front_02.png" id="8_ig7o3"]
+[ext_resource type="Texture2D" uid="uid://b06dueijwfxye" path="res://assets/sprites/enemies/buba/buba_front_03.png" id="9_a61cs"]
+[ext_resource type="Texture2D" uid="uid://b4atole3ht7wb" path="res://assets/sprites/enemies/buba/buba_front_04.png" id="10_6bl03"]
+[ext_resource type="Texture2D" uid="uid://ddmc463c26xyy" path="res://assets/sprites/enemies/buba/buba_front_05.png" id="11_rm3q6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_53yg0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_3i5r8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ig7o3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_a61cs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6bl03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_rm3q6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6bl03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_a61cs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ig7o3")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_juoes")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6646j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5ogci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pspon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fc4lt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pspon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5ogci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6646j")
+}],
+"loop": true,
+"name": &"top right",
+"speed": 12.0
+}]
 
 [node name="EnemyFast" instance=ExtResource("1_1hf55")]
 speed = 150.0
@@ -10,4 +81,6 @@ gold_value = 3
 position = Vector2(-2.5, 5.5)
 
 [node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_53yg0")
+autoplay = "top right"
 frame_progress = 0.0

@@ -18,6 +18,7 @@
 script = ExtResource("1_jc0vi")
 levels = Array[PackedScene]([ExtResource("2_hlcqn"), ExtResource("3_v3ojx")])
 pause = ExtResource("4_f7m14")
+current_level_number = 2
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(579, 323)
