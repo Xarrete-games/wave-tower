@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower_base.tscn" id="1_orgjy"]
 [ext_resource type="Script" uid="uid://bpvj36tgrsr8g" path="res://towers/blue/blue_tower.gd" id="2_iq8f3"]
-[ext_resource type="Resource" uid="uid://by0giydu700gy" path="res://towers/stats/blue_tower_stats.tres" id="3_711aj"]
+[ext_resource type="Resource" uid="uid://by0giydu700gy" path="res://towers/stats/stats_base/blue_tower_stats.tres" id="3_711aj"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="4_ukmlm"]
 [ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/red/passive_light.gd" id="5_763pf"]
 
