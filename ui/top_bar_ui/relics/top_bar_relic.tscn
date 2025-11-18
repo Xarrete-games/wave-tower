@@ -19,7 +19,7 @@ offset_bottom = 40.0
 
 [node name="texture" type="TextureRect" parent="MarginContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
