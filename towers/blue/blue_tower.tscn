@@ -22,10 +22,7 @@ monitoring = false
 position = Vector2(0, 8)
 
 [node name="AttackTimer" parent="." index="4"]
-wait_time = 2.5
-
-[node name="RangePreview" parent="." index="5"]
-radius = 400.0
+wait_time = 3.0
 
 [node name="PassiveLight" type="PointLight2D" parent="." index="6"]
 position = Vector2(0, -66)

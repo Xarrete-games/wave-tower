@@ -22,6 +22,7 @@ Price="*res://main/score/price.gd"
 AudioManager="*res://main/audio_manager/audio_manager.tscn"
 TowerUpgrades="*res://towers/tower_upgrades/tower_upgrades.gd"
 RelicsManager="*res://relics/relics_manager.gd"
+EnemyDebuffManager="*res://enemies/enemy_debuff/enemy_debuff_manager.gd"
 
 [display]
 

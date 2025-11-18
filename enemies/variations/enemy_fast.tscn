@@ -82,5 +82,6 @@ position = Vector2(-2.5, 5.5)
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_53yg0")
+animation = &"down right"
 autoplay = "top right"
 frame_progress = 0.0
