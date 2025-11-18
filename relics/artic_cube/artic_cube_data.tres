@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://br0igrelenl0f"]
 
 [ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://relics/relic_data.gd" id="1_byrtf"]
-[ext_resource type="Texture2D" uid="uid://bjkrnfo2tgo6" path="res://assets/sprites/relics/arctic_cube.png" id="2_o460k"]
+[ext_resource type="Texture2D" uid="uid://cfbw0ybj5st27" path="res://assets/sprites/relics/ice_cube_relic.png" id="2_o460k"]
 
 [resource]
 script = ExtResource("1_byrtf")
@@ -9,4 +9,6 @@ id = "Artic Cube"
 description = "Blue turrets slow you down by 5% (+ 5% for each one)"
 texture = ExtResource("2_o460k")
 type = 1
+rarity = null
+max_stack = null
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

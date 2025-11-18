@@ -5,3 +5,4 @@ class_name RelicData extends Resource
 @export var texture: Texture2D
 @export var type: Relic.RelicType
 @export var rarity: Relic.RelicRarity
+@export var max_stack: int = 10

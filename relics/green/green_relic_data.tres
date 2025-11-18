@@ -8,4 +8,6 @@ script = ExtResource("1_0w33m")
 id = "Metronome"
 description = "Increase attack speed of all towers by  10 "
 texture = ExtResource("2_3oo7t")
+type = 3
+max_stack = 10
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

@@ -1,9 +1,9 @@
 #Reliocs Manager
 extends Node
 
-signal relics_change(relics_array: Array[Relic])
+signal relics_change(relics: Array[Relic])
 
-var relics: Dictionary = {
+var relics: Dictionary[String, Relic] = {
 }
 
 func reset_relics() -> void:
