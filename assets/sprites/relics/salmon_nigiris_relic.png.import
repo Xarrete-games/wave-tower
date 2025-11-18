@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8g6877b08o51"
-path="res://.godot/imported/relic_paganini_bow.png-9e0d996e0ad377b40d2c2aeb6b2d5aa1.ctex"
+uid="uid://52cx2ohdvnun"
+path="res://.godot/imported/salmon_nigiris_relic.png-bbcac8d5875c8c513bba64bfc0436936.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/relic_paganini_bow.png"
-dest_files=["res://.godot/imported/relic_paganini_bow.png-9e0d996e0ad377b40d2c2aeb6b2d5aa1.ctex"]
+source_file="res://assets/sprites/relics/salmon_nigiris_relic.png"
+dest_files=["res://.godot/imported/salmon_nigiris_relic.png-bbcac8d5875c8c513bba64bfc0436936.ctex"]
 
 [params]
 
