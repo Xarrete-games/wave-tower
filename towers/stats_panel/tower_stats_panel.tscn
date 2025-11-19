@@ -1,13 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3qi4qp0ko3iq"]
+[gd_scene load_steps=9 format=3 uid="uid://c3qi4qp0ko3iq"]
 
 [ext_resource type="Script" uid="uid://mlvqjhawbttl" path="res://towers/stats_panel/tower_stats_panel.gd" id="1_vyalh"]
-[ext_resource type="Texture2D" uid="uid://bfse46e4pge4a" path="res://assets/sprites/icons/icons_attack.png" id="2_vyalh"]
-[ext_resource type="Texture2D" uid="uid://bdok3jfleaa74" path="res://assets/sprites/icons/icons_velocity.png" id="3_dw57d"]
-[ext_resource type="Texture2D" uid="uid://bgvtmma21mnpp" path="res://assets/sprites/icons/icons_range1.png" id="4_vyalh"]
-[ext_resource type="Texture2D" uid="uid://bhxh0u4ljpkgc" path="res://assets/sprites/icons/icons_crit.png" id="5_vyalh"]
+[ext_resource type="Texture2D" uid="uid://dv68a541qeosv" path="res://assets/sprites/icons/icons_sword.png" id="2_vyalh"]
+[ext_resource type="Texture2D" uid="uid://bvev5rktov31p" path="res://assets/sprites/icons/icons_timer.png" id="3_dw57d"]
+[ext_resource type="Texture2D" uid="uid://dio1imbeyg458" path="res://assets/sprites/icons/icons_tower_range.png" id="4_725y3"]
+[ext_resource type="Texture2D" uid="uid://bme2x52a33nre" path="res://assets/sprites/icons/icons_explosion.png" id="5_cuf0w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyalh"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.78431374)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Theme" id="Theme_vyalh"]
+default_font_size = 16
+Label/colors/font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dw57d"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0, 0.7137255)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -32,16 +47,17 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vyalh")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(150, 200)
-offset_right = 65.0
-offset_bottom = 156.0
+offset_right = 138.0
+offset_bottom = 210.0
+theme = SubResource("Theme_vyalh")
+theme_override_styles/panel = SubResource("StyleBoxFlat_dw57d")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -50,13 +66,24 @@ theme_override_constants/separation = 12
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 texture_filter = 2
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_vyalh")
-expand_mode = 1
+expand_mode = 2
+stretch_mode = 4
 
-[node name="DamageLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="damage" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5794276, 0.76647013, 0.79482156, 1)
+theme_override_font_sizes/font_size = 14
+text = "Damage:"
+
+[node name="DamageLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "50"
@@ -72,9 +99,20 @@ custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_dw57d")
-expand_mode = 1
+expand_mode = 2
+stretch_mode = 4
 
-[node name="AttackSpeedLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5803922, 0.7647059, 0.79607844, 1)
+theme_override_font_sizes/font_size = 14
+text = "At. speed:"
+
+[node name="AttackSpeedLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "50"
@@ -89,10 +127,21 @@ texture_filter = 4
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("4_vyalh")
-expand_mode = 1
+texture = ExtResource("4_725y3")
+expand_mode = 2
+stretch_mode = 4
 
-[node name="RangeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5803922, 0.7647059, 0.79607844, 1)
+theme_override_font_sizes/font_size = 14
+text = "Range:"
+
+[node name="RangeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "50"
@@ -106,10 +155,21 @@ theme_override_constants/separation = 12
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("5_vyalh")
-expand_mode = 1
+texture = ExtResource("5_cuf0w")
+expand_mode = 2
+stretch_mode = 4
 
-[node name="CriticLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer4"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer4/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5803922, 0.7647059, 0.79607844, 1)
+theme_override_font_sizes/font_size = 14
+text = "Crit. chance:"
+
+[node name="CriticLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer4/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "50"

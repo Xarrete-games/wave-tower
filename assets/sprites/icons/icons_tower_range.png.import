@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgvtmma21mnpp"
-path="res://.godot/imported/icons_range1.png-8c45231bc5a465cde46dbb177e64b99f.ctex"
+uid="uid://dio1imbeyg458"
+path="res://.godot/imported/icons_tower_range.png-15d69c5d342892c79464016974c1e5b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/icons_range1.png"
-dest_files=["res://.godot/imported/icons_range1.png-8c45231bc5a465cde46dbb177e64b99f.ctex"]
+source_file="res://assets/sprites/icons/icons_tower_range.png"
+dest_files=["res://.godot/imported/icons_tower_range.png-15d69c5d342892c79464016974c1e5b9.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhxh0u4ljpkgc"
-path="res://.godot/imported/icons_crit.png-c76ac858ff5d74d4d3f49e8369f1c321.ctex"
+uid="uid://bvev5rktov31p"
+path="res://.godot/imported/icons_timer.png-0dbcb879ca1458957cec3edeeffa0f30.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/icons_crit.png"
-dest_files=["res://.godot/imported/icons_crit.png-c76ac858ff5d74d4d3f49e8369f1c321.ctex"]
+source_file="res://assets/sprites/icons/icons_timer.png"
+dest_files=["res://.godot/imported/icons_timer.png-0dbcb879ca1458957cec3edeeffa0f30.ctex"]
 
 [params]
 
