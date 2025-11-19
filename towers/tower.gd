@@ -20,13 +20,13 @@ var stats = TowerStats
 var damage: float = 0
 var attack_range: float = 0
 var attack_speed: float = 0
-var critic_change: float = 0
+var critic_chance: float = 0
 var critic_damage: float = 0
 # local stats
 var local_damage: float = 0
 var local_attack_range: float = 0
 var local_attack_speed: float = 0
-var local_critic_change: float = 0
+var local_critic_chance: float = 0
 var local_critic_damage: float = 0
 
 @onready var range_area: Area2D = $RangeArea
@@ -63,6 +63,19 @@ func enable() -> void:
 	mouse_detector.mouse_entered.connect(_on_mouse_entered)
 	mouse_detector.mouse_exited.connect(_on_mouse_exited)
 
+# --------------------
+# --- ATTACK ---
+# --------------------
+func _get_attack(new_debuffs: Array[EnemyDebuff] = []) -> Attack:
+	var is_critic = _is_critical_hit()
+	var attack_damege = damage * (1 + (critic_damage/100)) if is_critic else damage
+	
+	return Attack.new(attack_damege, is_critic, new_debuffs)
+	
+func _is_critical_hit() -> bool:
+	var random_value: float = randf()
+	return random_value < (critic_chance / 100.0)
+	
 # --------------------
 # --- TARGETING ---
 # --------------------
@@ -126,14 +139,14 @@ func _set_base_stats() -> void:
 	damage = stats_base.base_damage
 	attack_range = stats_base.base_attack_range
 	attack_speed = stats_base.base_attack_speed
-	critic_change = stats_base.base_critic_chance
-	critic_damage = stats_base.base_attack_range
+	critic_chance = stats_base.base_critic_chance
+	critic_damage = stats_base.base_critic_damege
 	#local status
 	local_damage = stats_base.base_damage
 	local_attack_range = stats_base.base_attack_range
 	local_attack_speed = stats_base.base_attack_speed
-	local_critic_change = stats_base.base_critic_chance
-	local_critic_damage = stats_base.base_attack_range
+	local_critic_chance = stats_base.base_critic_chance
+	local_critic_damage = stats_base.base_critic_damege
 	_apply_stats_changes()
 
 # read stats from tower_stats and assigns the values ​​to the corresponding nodes
@@ -145,7 +158,7 @@ func _set_buffs(tower_buff: TowerBuff) -> void:
 	# attck speed
 	attack_speed = (local_attack_speed - tower_buff.extra_attack_speed) * tower_buff.attack_speed_mult
 	# critic change
-	critic_change = (local_critic_change + tower_buff.extra_tower_critic_chance) * tower_buff.critic_chance_mult
+	critic_chance = (local_critic_chance + tower_buff.extra_tower_critic_chance) * tower_buff.critic_chance_mult
 	# critic damage
 	critic_damage = (local_critic_damage + tower_buff.extra_critic_damage) * tower_buff.critic_damage_mult
 	
@@ -157,14 +170,13 @@ func _apply_stats_changes() -> void:
 	(range_collision.shape as CircleShape2D).radius = attack_range
 	stats = TowerStats.new(self)
 	tower_stats_panel.update_stats(stats)
-
-# --------------------
-# --- MOUSE INTERACTION ---
-# --------------------
-
+	
 func _on_tower_buffs_change(tower_type: Tower.TowerType, tower_buffs: TowerBuff) -> void:
 	if tower_type == type:
 		_set_buffs(tower_buffs)
+# --------------------
+# --- MOUSE INTERACTION ---
+# --------------------
 
 func _on_mouse_entered():
 	var mouse_pos = get_viewport().get_mouse_position()

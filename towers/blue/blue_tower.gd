@@ -16,7 +16,10 @@ func _set_buffs(tower_buff: TowerBuff) -> void:
 func _fire() -> void:
 	cristal_light.play()
 	var projectil: BlueProjectil = BLUE_PROJECTIL.instantiate()
-	projectil.set_stats(damage, attack_range, freezing_power)
+	
+	var frost_debuff = EnemyDebuff.new(EnemyDebuff.DebuffType.FROST, freezing_power, 5)
+	var attack = _get_attack([frost_debuff])
+	projectil.set_stats(attack, attack_range)
 	call_deferred("_add_projectil", projectil)   
 
 func _add_projectil(projectil: BlueProjectil) -> void:

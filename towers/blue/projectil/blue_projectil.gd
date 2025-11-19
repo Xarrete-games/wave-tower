@@ -10,15 +10,11 @@ const BLUE_EXPLOSION = preload("uid://bntnbljmfy1p4")
 
 var radius: float = 0.0
 var shape: CircleShape2D
-var _debuffs: Array[EnemyDebuff] = []
-var _damage: float
+var _attack: Attack
 var _max_area_range: float
-var _freezing_power: float = 0
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape
 @onready var blue_attack: AudioStreamPlayer2D = $BlueAttack
-
-
 
 func _ready() -> void:
 	shape = collision_shape.shape as CircleShape2D
@@ -37,14 +33,9 @@ func _process(delta: float) -> void:
 	if radius >= _max_area_range:
 		queue_free()
 
-func set_stats(damage: float, area_range: float, freezing_power: float) -> void:
-	_damage = damage
+func set_stats(attack: Attack, area_range: float) -> void:
+	_attack = attack
 	_max_area_range = area_range
-	_freezing_power = freezing_power
-	
-	if _freezing_power > 0:
-		var frost_debuff = EnemyDebuff.new(EnemyDebuff.DebuffType.FROST, _freezing_power, 5)
-		_debuffs.append(frost_debuff)
 
 func _draw() -> void:
 	var radius_progress: float = clamp(radius / _max_area_range, 0.0, 1.0)
@@ -71,7 +62,7 @@ func _on_body_entered(body: Node2D) -> void:
 	var enemy = body as Enemy
 	var explosion: CPUParticles2D = BLUE_EXPLOSION.instantiate()
 	
-	enemy.get_damage(_damage, _debuffs)
+	enemy.get_damage(_attack)
 	add_child(explosion)
 	explosion.global_position = enemy.global_position
 	explosion.emitting = true

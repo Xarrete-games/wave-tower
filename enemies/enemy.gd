@@ -35,18 +35,10 @@ func get_remaining_heal() -> float:
 	
 	return min(100.0, percentage)
 
-func get_damage(damage_recived: float, debuffs: Array[EnemyDebuff] = []) -> void:
-	_handle_debuffs(debuffs)
-	_set_health(health - damage_recived)
-
-	if hit_tween and hit_tween.is_running():
-		hit_tween.kill()
-
-	hit_tween = create_tween()
-	hit_tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-
-	animated_sprite_2d.modulate = Color.RED
-	hit_tween.tween_property(animated_sprite_2d, "modulate", _default_modulate_color, 0.2)
+func get_damage(attack: Attack) -> void:
+	_handle_debuffs(attack.debuffs)
+	_set_health(health - attack.damage)
+	_play_hit_animation()
 
 	if health <= 0:
 		_die()
@@ -82,7 +74,21 @@ func _process(delta):
 	var animation = "top right" if previous_global_y > global_position.y else "down right"
 	if animated_sprite_2d.animation != animation:
 		animated_sprite_2d.play(animation)
-	
+
+# --------------------
+# --- HEALT ---
+# --------------------
+func _play_hit_animation() -> void:
+	if hit_tween and hit_tween.is_running():
+		hit_tween.kill()
+
+	hit_tween = create_tween()
+	hit_tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+
+	animated_sprite_2d.modulate = Color.RED
+	hit_tween.tween_property(animated_sprite_2d, "modulate", _default_modulate_color, 0.2)
+
+
 func _die() -> void:
 	die.emit(self)
 	_show_gold_dropped()
@@ -109,6 +115,10 @@ func _set_health(new_value: float) -> void:
 # --------------------
 func _handle_debuffs(debuffs: Array[EnemyDebuff]) -> void:
 	for debuff in debuffs:
+		# ignore debuffs with out value
+		if debuff.value == 0:
+			continue
+		
 		# if exist refreshing the debuff
 		if current_debuffs.has(debuff.type):
 			current_debuffs[debuff.type] = debuff

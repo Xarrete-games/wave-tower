@@ -10,5 +10,5 @@ func _init(tower: Tower) -> void:
 	damage = tower.damage
 	attack_range = tower.attack_range
 	attack_speed = tower.attack_speed
-	critic_chance = tower.critic_change
+	critic_chance = tower.critic_chance
 	critic_damage = tower.critic_damage

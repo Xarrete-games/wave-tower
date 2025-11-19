@@ -6,7 +6,7 @@ class_name RedProjectil extends Node2D
 @export var growth_time: float = 0.1
 
 var _target: Enemy 
-var _damage = 5
+var _attack: Attack
 var tween: Tween = null
 var current_laser_length: float = 0.0
 var is_casting: bool = false
@@ -59,16 +59,15 @@ func stop() -> void:
 	_target = null
 	_set_is_casting(false)
 
-func set_damage(damage: float) -> void:
-	_damage = damage
+func set_attack(new_attack: Attack) -> void:
+	_attack = new_attack
 
 #set the target to follow
-func set_target(target: Enemy, damage: float) -> void:
+func set_target(target: Enemy) -> void:
 	if target == _target:
 		return	
 	
 	_target = target
-	_damage = damage
 	
 	if not is_casting:
 		_set_is_casting(true)
@@ -77,7 +76,7 @@ func set_target(target: Enemy, damage: float) -> void:
 func hit_target() -> void:
 	if not _target:
 		return
-	_target.get_damage(_damage)
+	_target.get_damage(_attack)
 
 func set_color(new_color: Color) -> void:
 	color = new_color

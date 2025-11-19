@@ -25,15 +25,19 @@ func _fire() -> void:
 		if not _current_target:
 			await get_tree().create_timer(0.1).timeout
 			continue
-		cristal_light.play()
 		var projectil: GreenProjectile = GREEN_PROJECTILE.instantiate()
-		
-		add_child(projectil)
-		projectil.global_position = projectil_spawn_position.global_position
-		
-		# get enemy direction
-		var dir = (_current_target.global_position - projectil.global_position).normalized()
-		projectil.set_direction(dir, stats.damage)
+		call_deferred("_fire_projectil", projectil)
 		await get_tree().create_timer(0.1).timeout
+
+func _fire_projectil(projectil: GreenProjectile) -> void:
+	cristal_light.play()
+			
+	add_child(projectil)
+	projectil.global_position = projectil_spawn_position.global_position
+	
+	# get enemy direction
+	var dir = (_current_target.global_position - projectil.global_position).normalized()
+	var attack = _get_attack()
+	projectil.set_direction(dir, attack)
 	
 	

@@ -4,16 +4,16 @@ class_name GreenProjectile extends Area2D
 @export var speed = 400
 
 var _direction: Vector2
-var _damage: float = 5
+var _attack: Attack
 var _is_expanding: bool = true
 
 @onready var waves: Node2D = $Waves
 @onready var green_attack: AudioStreamPlayer2D = $GreenAttack
 @onready var ring_animation_timer: Timer = $RingAnimationTimer
 
-func set_direction(dir: Vector2, damage: float) -> void:
+func set_direction(dir: Vector2, attack: Attack) -> void:
 	_direction = dir
-	_damage = damage
+	_attack = attack
 	look_at(global_position + _direction)
 
 func _ready():
@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	var enemy = body as Enemy
-	enemy.get_damage(_damage)
+	enemy.get_damage(_attack)
 	queue_free()
 
 func _on_duration_timeout() -> void:
