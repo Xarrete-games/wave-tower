@@ -37,6 +37,3 @@ func _on_new_level() -> void:
 func _show_next_wave_button() -> void:
 	visible = true
 	next_wave_button.disabled = false
-	
-	
-	

@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="6_v3ojx"]
 [ext_resource type="PackedScene" uid="uid://dwt8mx7gh0clq" path="res://enemies/enemy_generator/enemy_generator.tscn" id="7_f7m14"]
 [ext_resource type="PackedScene" uid="uid://crastw7xnqgvl" path="res://ui/next_level_menu/next_level_menu.tscn" id="7_j015t"]
-[ext_resource type="PackedScene" uid="uid://bvafh0bf674y7" path="res://ui/top_bar_ui/bar_relics_ui.tscn" id="10_p6qvs"]
+[ext_resource type="PackedScene" uid="uid://bvafh0bf674y7" path="res://ui/top_bar_ui/relics/bar_relics_ui.tscn" id="10_p6qvs"]
 [ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/top_bar_ui/lives_counter/LivesCounter.tscn" id="11_yyuar"]
 [ext_resource type="PackedScene" uid="uid://bsbslu7gvbl5b" path="res://ui/top_bar_ui/waves_ui/waves_counter_ui.tscn" id="12_0coyo"]
 [ext_resource type="PackedScene" uid="uid://wd57nqjd0s2f" path="res://main/music_handler/music_handler.tscn" id="12_v3ojx"]
