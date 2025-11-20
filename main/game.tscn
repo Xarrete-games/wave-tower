@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://6vgrx5dct8h8"]
+[gd_scene load_steps=17 format=3 uid="uid://6vgrx5dct8h8"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="2_2c7eb"]
@@ -6,12 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/towers_menu/towers_menu.tscn" id="3_4u4fy"]
 [ext_resource type="PackedScene" uid="uid://b1qa6yumd3yb6" path="res://levels/levels/level2/level_2.tscn" id="3_v3ojx"]
 [ext_resource type="PackedScene" uid="uid://b1rsi54eynysa" path="res://ui/pause_ui/pause_menu.tscn" id="4_f7m14"]
-[ext_resource type="PackedScene" uid="uid://bjj2sav3lh0or" path="res://ui/top_bar_ui/top_bar_ui.tscn" id="4_j015t"]
+[ext_resource type="PackedScene" uid="uid://bjj2sav3lh0or" path="res://ui/top_bar_ui/gold_counter.tscn" id="4_j015t"]
 [ext_resource type="PackedScene" uid="uid://b7ttkk4pasgin" path="res://ui/top_bar_ui/waves_ui/waves_ui.tscn" id="5_hlcqn"]
 [ext_resource type="PackedScene" uid="uid://bo3eo6rb8fwjd" path="res://ui/pause_ui/config_button.tscn" id="5_v3ojx"]
 [ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="6_v3ojx"]
 [ext_resource type="PackedScene" uid="uid://dwt8mx7gh0clq" path="res://enemies/enemy_generator/enemy_generator.tscn" id="7_f7m14"]
 [ext_resource type="PackedScene" uid="uid://crastw7xnqgvl" path="res://ui/next_level_menu/next_level_menu.tscn" id="7_j015t"]
+[ext_resource type="PackedScene" uid="uid://bvafh0bf674y7" path="res://ui/top_bar_ui/bar_relics_ui.tscn" id="10_p6qvs"]
+[ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/top_bar_ui/lives_counter/LivesCounter.tscn" id="11_yyuar"]
+[ext_resource type="PackedScene" uid="uid://bsbslu7gvbl5b" path="res://ui/top_bar_ui/waves_ui/waves_counter_ui.tscn" id="12_0coyo"]
 [ext_resource type="PackedScene" uid="uid://wd57nqjd0s2f" path="res://main/music_handler/music_handler.tscn" id="12_v3ojx"]
 
 [node name="Game" type="Node2D"]
@@ -25,18 +28,64 @@ script = ExtResource("2_2c7eb")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="TowersMenu" parent="UILayer" node_paths=PackedStringArray("tower_placer") instance=ExtResource("3_4u4fy")]
+[node name="TowersMenu" parent="UILayer" instance=ExtResource("3_4u4fy")]
 size_flags_horizontal = 4
-tower_placer = NodePath("../../TowerPlacer")
 
 [node name="WavesUI" parent="UILayer" node_paths=PackedStringArray("enemy_generator") instance=ExtResource("5_hlcqn")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.0
+offset_top = 110.0
+offset_right = 86.0
+offset_bottom = 161.0
+grow_horizontal = 2
 enemy_generator = NodePath("../../EnemyGenerator")
-
-[node name="ScoreUI" parent="UILayer" instance=ExtResource("4_j015t")]
 
 [node name="NextLevelMenu" parent="UILayer" instance=ExtResource("7_j015t")]
 
-[node name="Config" parent="UILayer" instance=ExtResource("5_v3ojx")]
+[node name="MarginContainer" type="MarginContainer" parent="UILayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="TopBar" type="HBoxContainer" parent="UILayer/MarginContainer"]
+layout_mode = 2
+
+[node name="RelicsContainer" parent="UILayer/MarginContainer/TopBar" instance=ExtResource("10_p6qvs")]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+theme_override_constants/separation = 100
+
+[node name="Gold" parent="UILayer/MarginContainer/TopBar/HBoxContainer" instance=ExtResource("4_j015t")]
+layout_mode = 2
+
+[node name="LivesCounter" parent="UILayer/MarginContainer/TopBar/HBoxContainer" instance=ExtResource("11_yyuar")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="WavesCounter" parent="UILayer/MarginContainer/TopBar/HBoxContainer" node_paths=PackedStringArray("enemy_generator") instance=ExtResource("12_0coyo")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+enemy_generator = NodePath("../../../../../EnemyGenerator")
+
+[node name="Config" parent="UILayer/MarginContainer/TopBar/HBoxContainer" instance=ExtResource("5_v3ojx")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
 
 [node name="RewardsLayer" type="CanvasLayer" parent="."]
@@ -49,9 +98,8 @@ waves_ui = NodePath("../UILayer/WavesUI")
 
 [node name="LevelContainer" type="Node2D" parent="."]
 
-[node name="MusicHandler" parent="." node_paths=PackedStringArray("tower_placer") instance=ExtResource("12_v3ojx")]
-tower_placer = NodePath("../TowerPlacer")
+[node name="MusicHandler" parent="." instance=ExtResource("12_v3ojx")]
 
 [connection signal="next_leve_button_pressed" from="UILayer/NextLevelMenu" to="." method="_on_next_level_menu_next_leve_button_pressed"]
-[connection signal="config_pressed" from="UILayer/Config" to="." method="_on_config_config_pressed"]
+[connection signal="config_pressed" from="UILayer/MarginContainer/TopBar/HBoxContainer/Config" to="." method="_on_config_config_pressed"]
 [connection signal="last_wave_done" from="EnemyGenerator" to="." method="_on_enemy_generator_last_wave_done"]

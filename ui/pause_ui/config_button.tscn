@@ -7,19 +7,16 @@
 
 [node name="Config" type="Control"]
 layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-grow_horizontal = 0
+anchors_preset = 0
+offset_right = 50.0
+offset_bottom = 50.0
 script = ExtResource("1_qeof5")
 pause = ExtResource("2_cv0sx")
 
 [node name="ConfigButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = -86.0
-offset_top = 22.0
-offset_right = -36.0
-offset_bottom = 72.0
+layout_mode = 1
+offset_right = 50.0
+offset_bottom = 50.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 texture_normal = ExtResource("2_w0s13")

@@ -1,7 +1,6 @@
 class_name LivesCounter extends Control
 
-@onready var couner_label: Label = $VBoxContainer/CounerLabel
-
+@onready var counter_label: Label = $CounterLabel
 
 func _ready() -> void:
 	Score.lives_change.connect(func(value): lives = value)
@@ -9,4 +8,4 @@ func _ready() -> void:
 var lives: int:
 	set(value):
 		lives = value
-		couner_label.text = str(value)
+		counter_label.text = str(value)
