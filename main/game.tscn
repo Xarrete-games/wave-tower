@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://6vgrx5dct8h8"]
+[gd_scene load_steps=18 format=3 uid="uid://6vgrx5dct8h8"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="2_2c7eb"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/top_bar_ui/lives_counter/LivesCounter.tscn" id="11_yyuar"]
 [ext_resource type="PackedScene" uid="uid://bsbslu7gvbl5b" path="res://ui/top_bar_ui/waves_ui/waves_counter_ui.tscn" id="12_0coyo"]
 [ext_resource type="PackedScene" uid="uid://wd57nqjd0s2f" path="res://main/music_handler/music_handler.tscn" id="12_v3ojx"]
+[ext_resource type="PackedScene" uid="uid://dcpjh37iqj67m" path="res://ui/towers_menu/towers_counters.tscn" id="14_bc3cr"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_jc0vi")
@@ -27,9 +28,6 @@ position = Vector2(579, 323)
 script = ExtResource("2_2c7eb")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
-
-[node name="TowersMenu" parent="UILayer" instance=ExtResource("3_4u4fy")]
-size_flags_horizontal = 4
 
 [node name="WavesUI" parent="UILayer" node_paths=PackedStringArray("enemy_generator") instance=ExtResource("5_hlcqn")]
 anchors_preset = 5
@@ -45,14 +43,20 @@ enemy_generator = NodePath("../../EnemyGenerator")
 [node name="NextLevelMenu" parent="UILayer" instance=ExtResource("7_j015t")]
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer"]
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 75.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
+
+[node name="TowersCounters" parent="UILayer/MarginContainer" instance=ExtResource("14_bc3cr")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
 [node name="TopBar" type="HBoxContainer" parent="UILayer/MarginContainer"]
 layout_mode = 2
@@ -88,10 +92,15 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
+[node name="TowersMenu" parent="UILayer/MarginContainer" instance=ExtResource("3_4u4fy")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
 [node name="RewardsLayer" type="CanvasLayer" parent="."]
 
 [node name="TowerPlacer" parent="." node_paths=PackedStringArray("towers_menu") instance=ExtResource("6_v3ojx")]
-towers_menu = NodePath("../UILayer/TowersMenu")
+towers_menu = NodePath("../UILayer/MarginContainer/TowersMenu")
 
 [node name="EnemyGenerator" parent="." node_paths=PackedStringArray("waves_ui") instance=ExtResource("7_f7m14")]
 waves_ui = NodePath("../UILayer/WavesUI")

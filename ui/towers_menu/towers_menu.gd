@@ -6,25 +6,13 @@ const GREEN_TOWER = preload("uid://oj5ilwusjvuo")
 
 signal tower_selected(tower_scene: PackedScene)
 
-#COUNTERS
-@onready var red_tower_count: TowerCount = $TowersCount/RedTowerCount
-@onready var green_tower_count: TowerCount = $TowersCount/GreenTowerCount
-@onready var blue_tower_count: TowerCount = $TowersCount/BlueTowerCount
-
 #BUTTONS
-@onready var red_tower_button: TowerButton = $CenterContainer/HBoxContainer/RedTowerButton
-@onready var green_tower_button: TowerButton = $CenterContainer/HBoxContainer/GreenTowerButton
-@onready var blue_tower_button: TowerButton = $CenterContainer/HBoxContainer/BlueTowerButton
+@onready var red_tower_button: TowerButton = $RedTowerButton
+@onready var green_tower_button: TowerButton = $GreenTowerButton
+@onready var blue_tower_button: TowerButton = $BlueTowerButton
 
 func _ready():
-	TowerPlacementManager.tower_placed.connect(_on_tower_placed)
 	Price.tower_price_change.connect(_on_tower_price_change)
-	
-func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
-	match tower_type:
-		Tower.TowerType.RED: red_tower_count.count = amount
-		Tower.TowerType.GREEN: green_tower_count.count = amount
-		Tower.TowerType.BLUE: blue_tower_count.count = amount
 
 func _on_red_tower_button_pressed(tower_scene: PackedScene) -> void:
 	tower_selected.emit(tower_scene)
