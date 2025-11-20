@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://dmu2tjsh03m2f"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://relics/relic_data.gd" id="1_fup7c"]
+[ext_resource type="Texture2D" uid="uid://brrhmpps2pyg5" path="res://assets/sprites/relics/medical_kit_relic.png" id="2_mebo0"]
+
+[resource]
+script = ExtResource("1_fup7c")
+id = "First Aid"
+description = "Regain 10 lives"
+texture = ExtResource("2_mebo0")
+type = 3
+max_stack = 99
+metadata/_custom_type_script = "uid://u8jtn52xm88d"
