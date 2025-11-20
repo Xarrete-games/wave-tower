@@ -3,6 +3,7 @@ extends Node
 
 signal gold_change(amount: int)
 signal lives_change(amount: int)
+signal extra_gold_dropped_change(amount: int)
 
 var gold: int = 100:
 	set(value):
@@ -13,6 +14,11 @@ var lives: int = 10:
 	set(value):
 		lives = value
 		lives_change.emit(lives)
+
+var extra_gold_dropped: int = 0:
+	set(value):
+		extra_gold_dropped = value
+		extra_gold_dropped_change.emit(extra_gold_dropped)
 	
 func add_gold(amount: int) -> void:
 	gold += amount

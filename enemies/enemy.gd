@@ -10,11 +10,12 @@ const DAMAGE_NUMBERS = preload("uid://bkiu4qgh3ug1m")
 
 @export var base_speed: float = 80.0
 @export var max_healt: float = 20
-@export var gold_value: int = 1
+@export var base_gold_value: int = 1
 @export var damage: int = 1
 
 var health: float
 var hit_tween: Tween
+var gold_value: int
 var current_debuffs: Dictionary[EnemyDebuff.DebuffType, EnemyDebuff] = {}
 var current_debuffs_timers: Dictionary[EnemyDebuff.DebuffType, Timer] = {}
 var _path_follow: PathFollow2D
@@ -52,7 +53,10 @@ func set_path_follow(path_follow: PathFollow2D) -> void:
 func _ready() -> void:
 	health_bar.set_max_health(max_healt)
 	_set_health(max_healt)
-	
+	gold_value = base_gold_value + Score.extra_gold_dropped
+	Score.extra_gold_dropped_change.connect(
+		func(value): gold_value = base_gold_value + value)
+		
 func _process(delta):
 	if _path_follow == null:
 		return

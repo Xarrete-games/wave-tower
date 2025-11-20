@@ -10,3 +10,5 @@ script = ExtResource("1_dktk2")
 layout_mode = 2
 theme = ExtResource("2_5unyv")
 text = "Next Wave"
+
+[connection signal="pressed" from="NextWaveButton" to="." method="_on_next_wave_button_pressed"]
