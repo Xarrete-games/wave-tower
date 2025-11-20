@@ -57,7 +57,7 @@ func _get_attack_per_hit() -> Attack:
 	
 func _get_letal_attack() -> Attack:
 	var attack = _get_attack()
-	attack = EXECUTE_DAMAGE
+	attack.damage = EXECUTE_DAMAGE
 	attack.is_critic = true
 	return attack
 
