@@ -8,7 +8,7 @@ var relics: Dictionary[String, Relic] = {
 
 func reset_relics() -> void:
 	relics = {}
-	relics_change.emit([])
+	relics_change.emit([] as Array[Relic])
 
 func add_relic(towers_buffs: Dictionary[Tower.TowerType, TowerBuff], relic: Relic) -> void:
 	match (relic.type):
