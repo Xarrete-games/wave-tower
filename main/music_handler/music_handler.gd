@@ -2,8 +2,6 @@ class_name MusicHandler extends Node
 
 const MAX_PLAYERS = 8
 
-@export var tower_placer: TowerPlacer
-
 @onready var red_players: Node = $RedPlayers
 @onready var blue_players: Node = $BluePlayers
 @onready var green_players: Node = $GreenPlayers
@@ -18,7 +16,7 @@ func _ready() -> void:
 		Tower.TowerType.GREEN: green_players
 	}
 	stop_music()
-	tower_placer.tower_placed.connect(_on_tower_placed)
+	TowerPlacementManager.tower_placed.connect(_on_tower_placed)
 
 func play_music() -> void:
 	base_player.play()

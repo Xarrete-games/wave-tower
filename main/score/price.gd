@@ -14,7 +14,10 @@ var red_tower_price: int = TowerBuild.RED
 var green_tower_price: int = TowerBuild.GREEN
 var blue_tower_price: int = TowerBuild.BLUE
 
-func tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
+func _ready() -> void:
+	TowerPlacementManager.tower_placed.connect(_on_tower_placed)
+
+func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
 	var base_price: int
 
 	match tower_type:

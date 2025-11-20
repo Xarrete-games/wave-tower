@@ -22,7 +22,7 @@ var towers_buffs: Dictionary[Tower.TowerType, TowerBuff] = {
 }
 
 func _ready() -> void:
-	RewardsManager.tower_buffs_change.connect(_emit_all_status_change)
+	TowerPlacementManager.tower_placed.connect(_on_tower_placed)
 
 func reset_buffs() -> void:
 	towers_buffs = {
@@ -31,15 +31,21 @@ func reset_buffs() -> void:
 		Tower.TowerType.BLUE: BlueTowerBuff.new(),
 	}
 
-func on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
+func get_buffs(tower_type: Tower.TowerType) -> TowerBuff:
+	return towers_buffs[tower_type]
+
+func emit_all_buffs_change() -> void:
+	for tower_type in Tower.TowerType.values():
+		tower_buffs_change.emit(tower_type, get_buffs(tower_type))
+
+func emit_buffs_change(tower_type: Tower.TowerType) -> void:
+	tower_buffs_change.emit(tower_type, get_buffs(tower_type))
+
+func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
 	match tower_type:
 		Tower.TowerType.RED: _handle_red_updates(amount)
 		Tower.TowerType.GREEN: _handle_green_updates(amount)
 		Tower.TowerType.BLUE: _handle_blue_updates(amount)
-
-func get_buffs(tower_type: Tower.TowerType) -> TowerBuff:
-	return towers_buffs[tower_type]
-
 
 func _handle_red_updates(amount: int) -> void:
 	match amount:
@@ -62,7 +68,5 @@ func _handle_blue_updates(amount: int) -> void:
 		AMOUNT_TO_REWARD_3: RewardsManager.show_rewards_ui(towers_buffs)
 		AMOUNT_TO_REWARD_4: RewardsManager.show_rewards_ui(towers_buffs)
 		
-func _emit_all_status_change(_towers_buffs: Dictionary[Tower.TowerType, TowerBuff]) -> void:
-	for tower_type in Tower.TowerType.values():
-		tower_buffs_change.emit(tower_type, get_buffs(tower_type))
+
 	

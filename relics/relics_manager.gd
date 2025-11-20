@@ -10,23 +10,9 @@ func reset_relics() -> void:
 	relics = {}
 	relics_change.emit([] as Array[Relic])
 
-func add_relic(towers_buffs: Dictionary[Tower.TowerType, TowerBuff], relic: Relic) -> void:
-	match (relic.type):
-		RedRelic.RelicType.RED:
-			relic.apply_effect(towers_buffs[Tower.TowerType.RED])
-		RedRelic.RelicType.GREEN:
-			relic.apply_effect(towers_buffs[Tower.TowerType.GREEN])
-		RedRelic.RelicType.BLUE:
-			relic.apply_effect(towers_buffs[Tower.TowerType.BLUE])
-		RedRelic.RelicType.COMMON:
-			_apply_to_all(towers_buffs, relic)
-			
+func add_relic(relic: Relic) -> void:
+	relic.apply_effect()		
 	_add_relic(relic)
-
-func _apply_to_all(towers_buffs: Dictionary[Tower.TowerType, TowerBuff], relic: Relic) -> void:
-	for tower_type in Tower.TowerType.values():
-		var tower_buffs = towers_buffs[tower_type]
-		relic.apply_effect(tower_buffs)
 
 func _add_relic(relic: Relic) -> void:
 	if relics.has(relic.get_id()):

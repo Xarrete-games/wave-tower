@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/cristal_light/cristal_light.tscn" id="1_7fffe"]
 [ext_resource type="Texture2D" uid="uid://6rwht4l7x5rc" path="res://assets/sprites/towers/Towers.png" id="1_crlvv"]
-[ext_resource type="Script" path="res://towers/range_preview.gd" id="2_uyl23"]
+[ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="2_uyl23"]
 [ext_resource type="PackedScene" uid="uid://c3qi4qp0ko3iq" path="res://towers/stats_panel/tower_stats_panel.tscn" id="4_b46tn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wmotl"]
-radius = 400.0
+radius = 200.0
 
 [node name="Tower" type="Node2D"]
 
@@ -38,7 +38,6 @@ radius = 200.0
 color_fill = Color(0, 0.69803923, 1, 0.5568628)
 
 [node name="TowerStatsPanel" parent="." instance=ExtResource("4_b46tn")]
-follow_viewport_enabled = false
 
 [node name="MouseDetector" type="Control" parent="."]
 layout_mode = 3

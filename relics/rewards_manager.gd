@@ -11,8 +11,9 @@ const AMOUNT_TO_REWARD_3 = 6
 const AMOUNT_TO_REWARD_4 = 8
 #, 
 var all_rewards: Array[Relic] = [
-	RedRelic.new(), GreenRelic.new(), BlueRelic.new(),
-	ArticCube.new(), EchoOfVoid.new(), PerseusFury.new()
+	#RedRelic.new(), GreenRelic.new(), BlueRelic.new(),
+	#ArticCube.new(), EchoOfVoid.new(), PerseusFury.new(),
+	FirstAid.new()
 ]
 
 var rewards_ui: RewardsUI
@@ -40,7 +41,7 @@ func _on_relidc_selected(relic: Relic) -> void:
 	if rewards_ui:
 		rewards_ui.queue_free()
 		rewards_ui = null
-	RelicsManager.add_relic(towers_buffs, relic)
+	RelicsManager.add_relic(relic)
 	tower_buffs_change.emit(towers_buffs)
 
 func _on_relics_change(relics: Array[Relic]) -> void:
