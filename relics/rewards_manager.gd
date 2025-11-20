@@ -41,7 +41,7 @@ func _on_relidc_selected(relic: Relic) -> void:
 	if rewards_ui:
 		rewards_ui.queue_free()
 		rewards_ui = null
-	RelicsManager.add_relic(towers_buffs, relic)
+	RelicsManager.add_relic(relic)
 	tower_buffs_change.emit(towers_buffs)
 
 func _on_relics_change(relics: Array[Relic]) -> void:
