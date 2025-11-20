@@ -1,5 +1,4 @@
-class_name TopBarRelicDescription extends CanvasLayer
-
+class_name RelicDescriptionHover extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

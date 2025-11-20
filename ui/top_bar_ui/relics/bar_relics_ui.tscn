@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvafh0bf674y7"]
 
-[ext_resource type="Script" uid="uid://tbrrl7rtro83" path="res://ui/top_bar_ui/bar_relics_ui.gd" id="1_ekh0d"]
-[ext_resource type="PackedScene" uid="uid://f34dinc60kaa" path="res://ui/top_bar_ui/relics/top_bar_relic.tscn" id="4_0pb2c"]
+[ext_resource type="Script" uid="uid://tbrrl7rtro83" path="res://ui/top_bar_ui/relics/bar_relics_ui.gd" id="1_ekh0d"]
+[ext_resource type="PackedScene" uid="uid://f34dinc60kaa" path="res://ui/top_bar_ui/relics/relic_ui.tscn" id="4_0pb2c"]
 
 [node name="RelicsBar" type="HBoxContainer"]
 theme_override_constants/separation = 10
