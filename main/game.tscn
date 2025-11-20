@@ -28,11 +28,18 @@ script = ExtResource("2_2c7eb")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="TowersMenu" parent="UILayer" node_paths=PackedStringArray("tower_placer") instance=ExtResource("3_4u4fy")]
+[node name="TowersMenu" parent="UILayer" instance=ExtResource("3_4u4fy")]
 size_flags_horizontal = 4
-tower_placer = NodePath("../../TowerPlacer")
 
 [node name="WavesUI" parent="UILayer" node_paths=PackedStringArray("enemy_generator") instance=ExtResource("5_hlcqn")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.0
+offset_top = 110.0
+offset_right = 86.0
+offset_bottom = 161.0
+grow_horizontal = 2
 enemy_generator = NodePath("../../EnemyGenerator")
 
 [node name="NextLevelMenu" parent="UILayer" instance=ExtResource("7_j015t")]
@@ -42,10 +49,10 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 75.0
 grow_horizontal = 2
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
 [node name="TopBar" type="HBoxContainer" parent="UILayer/MarginContainer"]
 layout_mode = 2
@@ -91,8 +98,7 @@ waves_ui = NodePath("../UILayer/WavesUI")
 
 [node name="LevelContainer" type="Node2D" parent="."]
 
-[node name="MusicHandler" parent="." node_paths=PackedStringArray("tower_placer") instance=ExtResource("12_v3ojx")]
-tower_placer = NodePath("../TowerPlacer")
+[node name="MusicHandler" parent="." instance=ExtResource("12_v3ojx")]
 
 [connection signal="next_leve_button_pressed" from="UILayer/NextLevelMenu" to="." method="_on_next_level_menu_next_leve_button_pressed"]
 [connection signal="config_pressed" from="UILayer/MarginContainer/TopBar/HBoxContainer/Config" to="." method="_on_config_config_pressed"]

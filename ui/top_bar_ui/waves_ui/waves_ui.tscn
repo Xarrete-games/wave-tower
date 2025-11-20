@@ -3,32 +3,10 @@
 [ext_resource type="Script" uid="uid://b5fdnmk8kjh0g" path="res://ui/top_bar_ui/waves_ui/waves_ui.gd" id="1_dktk2"]
 [ext_resource type="Theme" uid="uid://dswsb3nw14dn7" path="res://ui/styles/themes/menu_theme.tres" id="2_5unyv"]
 
-[node name="WavesUI" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="NextWaveContainer" type="VBoxContainer"]
 script = ExtResource("1_dktk2")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.128
-offset_top = -2.5
-offset_bottom = 2.5559998
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NextWaveContainer" type="VBoxContainer" parent="CenterContainer"]
-layout_mode = 2
-
-[node name="NextWaveButton" type="Button" parent="CenterContainer/NextWaveContainer"]
+[node name="NextWaveButton" type="Button" parent="."]
 layout_mode = 2
 theme = ExtResource("2_5unyv")
 text = "Next Wave"
-
-[connection signal="pressed" from="CenterContainer/NextWaveContainer/NextWaveButton" to="." method="_on_next_wave_button_pressed"]

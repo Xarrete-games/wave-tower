@@ -4,8 +4,7 @@ signal next_wave()
 
 @export var enemy_generator: EnemyGenerator
 
-@onready var next_wave_container: VBoxContainer = $CenterContainer/NextWaveContainer
-@onready var next_wave_button: Button = $CenterContainer/NextWaveContainer/NextWaveButton
+@onready var next_wave_button: Button = $NextWaveButton
 
 var _total_waves: int = 0
 var _current_wave: int = 0
@@ -26,7 +25,7 @@ func _on_wave_finished() -> void:
 
 func _on_next_wave_button_pressed() -> void:
 	next_wave.emit()
-	next_wave_container.visible = false
+	visible = false
 	next_wave_button.disabled = true
 	
 func _on_new_level() -> void:
@@ -36,7 +35,7 @@ func _on_new_level() -> void:
 	_show_next_wave_button()
 	
 func _show_next_wave_button() -> void:
-	next_wave_container.visible = true
+	visible = true
 	next_wave_button.disabled = false
 	
 	
