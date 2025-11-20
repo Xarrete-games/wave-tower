@@ -24,6 +24,7 @@ TowerUpgrades="*res://towers/tower_upgrades/tower_upgrades.gd"
 RelicsManager="*res://relics/relics_manager.gd"
 EnemyDebuffManager="*res://enemies/enemy_debuff/enemy_debuff_manager.gd"
 RewardsManager="*res://relics/rewards_manager.gd"
+TowerPlacementManager="*res://towers/tower_placement_manager.gd"
 
 [display]
 

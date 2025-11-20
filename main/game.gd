@@ -32,7 +32,7 @@ func _load_level(level_number: int) -> void:
 	# on new level init
 	_update_camera_post()
 	tower_placer.update_nodes_from_current_level(_current_level)
-	tower_placer.reset_towers_count()
+	TowerPlacementManager.reset_towers_count()
 	RelicsManager.reset_relics()
 	enemy_generator.load_level_nodes(_current_level)
 	music_handler.play_music()
