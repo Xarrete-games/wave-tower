@@ -29,6 +29,9 @@ position = Vector2(0, -133)
 [node name="AttackTimer" parent="." index="4"]
 wait_time = 1.0
 
+[node name="RangePreview" parent="." index="5"]
+visible = false
+
 [node name="AttackTickTimer" type="Timer" parent="." index="6"]
 wait_time = 0.1
 
@@ -46,5 +49,8 @@ energy = 0.5
 texture = ExtResource("6_i2402")
 texture_scale = 3.0
 script = ExtResource("7_0cvpj")
+
+[node name="TowerStatsPanel" parent="." index="9"]
+visible = false
 
 [connection signal="timeout" from="AttackTickTimer" to="." method="_on_attack_tick_timer_timeout"]

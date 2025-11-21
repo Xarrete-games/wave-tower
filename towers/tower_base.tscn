@@ -38,6 +38,7 @@ radius = 200.0
 color_fill = Color(0, 0.69803923, 1, 0.5568628)
 
 [node name="TowerStatsPanel" parent="." instance=ExtResource("4_b46tn")]
+follow_viewport_enabled = false
 
 [node name="MouseDetector" type="Control" parent="."]
 layout_mode = 3
