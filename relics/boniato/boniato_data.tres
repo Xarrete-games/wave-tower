@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://uxa8ct8ljcw2"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://relics/relic_data.gd" id="1_7u41t"]
+[ext_resource type="Texture2D" uid="uid://bmog50xiu4wle" path="res://assets/sprites/relics/boniato_relic.png" id="2_u21ls"]
+
+[resource]
+script = ExtResource("1_7u41t")
+id = "Sweet Potato"
+description = "Increases the gold dropped by enemies, in exchange for 2 lives"
+texture = ExtResource("2_u21ls")
+type = 3
+metadata/_custom_type_script = "uid://u8jtn52xm88d"
