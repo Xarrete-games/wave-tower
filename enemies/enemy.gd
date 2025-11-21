@@ -21,6 +21,7 @@ var current_debuffs_timers: Dictionary[EnemyDebuff.DebuffType, Timer] = {}
 var _path_follow: PathFollow2D
 var _default_modulate_color: Color = Color.WHITE
 var _speed = base_speed
+var _last_is_right_direction: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var explosion: AnimatedSprite2D = $Explosion
@@ -76,7 +77,12 @@ func _process(delta):
 	global_position = path_global_pos
 	
 	# FLIP SPRITE
-	animated_sprite_2d.flip_h = global_position.x > previous_global_x
+	var is_right_direction = global_position.x > previous_global_x
+	if is_right_direction != _last_is_right_direction:
+		animated_sprite_2d.flip_h = is_right_direction
+		_path_follow.v_offset = _path_follow.v_offset if is_right_direction else -_path_follow.v_offset
+		_last_is_right_direction = is_right_direction
+	
 	# handle animation
 	var animation = "top right" if previous_global_y > global_position.y else "down right"
 	if animated_sprite_2d.animation != animation:

@@ -74,13 +74,12 @@ animations = [{
 }]
 
 [node name="EnemyFast" instance=ExtResource("1_1hf55")]
-speed = 150.0
-gold_value = 3
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2(-2.5, 5.5)
+position = Vector2(-1, -9.5)
 
 [node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(0, 6.9999995)
 sprite_frames = SubResource("SpriteFrames_53yg0")
 animation = &"down right"
 autoplay = "top right"

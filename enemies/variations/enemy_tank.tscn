@@ -3,12 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_s7s5g"]
 
 [node name="EnemyTank" instance=ExtResource("1_s7s5g")]
-speed = 60.0
 max_healt = 200.0
-gold_value = 10
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-0.5, 4.5)
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(0.1, 0.1)
+
+[node name="HealthBar" parent="." index="4"]
+offset_top = -74.0
+offset_bottom = -74.0
