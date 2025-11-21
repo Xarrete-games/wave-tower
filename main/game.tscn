@@ -29,17 +29,6 @@ script = ExtResource("2_2c7eb")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="WavesUI" parent="UILayer" node_paths=PackedStringArray("enemy_generator") instance=ExtResource("5_hlcqn")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -86.0
-offset_top = 110.0
-offset_right = 86.0
-offset_bottom = 161.0
-grow_horizontal = 2
-enemy_generator = NodePath("../../EnemyGenerator")
-
 [node name="NextLevelMenu" parent="UILayer" instance=ExtResource("7_j015t")]
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer"]
@@ -96,6 +85,17 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+
+[node name="WavesUI" parent="UILayer" node_paths=PackedStringArray("enemy_generator") instance=ExtResource("5_hlcqn")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.0
+offset_top = 110.0
+offset_right = 86.0
+offset_bottom = 161.0
+grow_horizontal = 2
+enemy_generator = NodePath("../../EnemyGenerator")
 
 [node name="RewardsLayer" type="CanvasLayer" parent="."]
 

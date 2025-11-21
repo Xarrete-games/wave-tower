@@ -21,6 +21,7 @@ var max_value: int = TIER_1_COUNT:
 
 @onready var current_label: Label = $RedCount/Value/CurrentLabel
 @onready var texture_rect: TextureRect = $RedCount/TextureRect
+@onready var panel: Panel = $Panel
 
 @onready var max_label: Label = $RedCount/Value/MaxLabel
 
