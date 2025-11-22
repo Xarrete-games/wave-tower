@@ -12,7 +12,7 @@ type = 2
 stats_base = ExtResource("3_711aj")
 
 [node name="Sprite2D" parent="." index="1"]
-position = Vector2(0, -52)
+position = Vector2(0, -57)
 frame = 2
 
 [node name="RangeArea" parent="." index="2"]
