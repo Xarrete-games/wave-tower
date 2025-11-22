@@ -50,7 +50,4 @@ texture = ExtResource("6_i2402")
 texture_scale = 3.0
 script = ExtResource("7_0cvpj")
 
-[node name="TowerStatsPanel" parent="." index="9"]
-visible = false
-
 [connection signal="timeout" from="AttackTickTimer" to="." method="_on_attack_tick_timer_timeout"]
