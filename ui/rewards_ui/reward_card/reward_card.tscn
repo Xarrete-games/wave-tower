@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgcv5fdqvfext"]
+[gd_scene load_steps=8 format=3 uid="uid://dgcv5fdqvfext"]
 
 [ext_resource type="Script" uid="uid://becnb17nd1vj1" path="res://ui/rewards_ui/reward_card/reward_card.gd" id="1_eji2h"]
 [ext_resource type="Theme" uid="uid://bansa1f47pkw0" path="res://ui/styles/themes/reward_card.tres" id="1_vqiry"]
 [ext_resource type="Texture2D" uid="uid://dg8wywkburwi0" path="res://assets/sprites/relics/reward_border.png" id="4_68l61"]
+[ext_resource type="Texture2D" uid="uid://b2f6c4qd0c0s2" path="res://assets/sprites/buttons/wavecoinv2_30px.png" id="4_pwyca"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_68l61"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdsw6"]
 bg_color = Color(0.6862745, 0.6, 0.6, 0.8117647)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yrs38"]
-load_path = "res://.godot/imported/relic_paganini_bow.png-9e0d996e0ad377b40d2c2aeb6b2d5aa1.ctex"
 
 [node name="RewardCard" type="Control"]
 layout_mode = 3
@@ -28,6 +29,12 @@ offset_bottom = 432.0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_rdsw6")
 
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 368.0
+offset_right = 400.0
+offset_bottom = 418.0
+
 [node name="RelicTexture" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 42.0
@@ -37,6 +44,11 @@ offset_bottom = 381.0
 texture = SubResource("CompressedTexture2D_yrs38")
 expand_mode = 1
 stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -75,5 +87,18 @@ text = "+10% damage on turrets"
 scroll_active = false
 autowrap_mode = 1
 horizontal_alignment = 1
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="wavecoin" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_pwyca")
+stretch_mode = 3
+
+[node name="AmountGoldLabel" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("5_68l61")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

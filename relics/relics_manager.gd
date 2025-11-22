@@ -2,6 +2,7 @@
 extends Node
 
 signal relics_change(relics: Array[Relic])
+signal relic_added(relic: Relic)
 
 var relics: Dictionary[String, Relic] = {
 }
@@ -11,12 +12,16 @@ func reset_relics() -> void:
 	relics_change.emit([] as Array[Relic])
 
 func add_relic(relic: Relic) -> void:
-	relic.apply_effect()		
+	relic.apply_effect()
+	# increase priece in 20%
+	Score.gold -= relic.price
+	relic.price = relic.price + (relic.price * 0.2)
 	_add_relic(relic)
 
 func _add_relic(relic: Relic) -> void:
-	if relics.has(relic.get_id()):
-		(relics[relic.get_id()] as Relic).amount += 1
+	if relics.has(relic.id):
+		(relics[relic.id] as Relic).amount += 1
 	else:
-		relics[relic.get_id()] = relic
+		relics[relic.id] = relic
 	relics_change.emit(relics.values())
+	relic_added.emit(relic)

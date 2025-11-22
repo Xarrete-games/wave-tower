@@ -2,7 +2,6 @@
 extends Node
 
 signal gold_change(amount: int)
-
 signal extra_gold_dropped_change(amount: int)
 
 var gold: int = 100:

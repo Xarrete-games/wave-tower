@@ -11,6 +11,8 @@ var type: RelicType
 var rarity: RelicRarity
 var max_stack: int
 var texture: Texture2D
+var base_price: int
+var price: int
 
 func _init() -> void:
 	var data = get_data()
@@ -20,15 +22,8 @@ func _init() -> void:
 	rarity = data.rarity
 	max_stack = data.max_stack
 	texture = data.texture
-
-func get_id() -> String:
-	return get_data().id
-
-func get_description() -> String:
-	return get_data().description
-
-func get_texture() -> Texture2D:
-	return get_data().texture
+	base_price = data.price
+	price = data.price
 
 @abstract
 func apply_effect() -> void

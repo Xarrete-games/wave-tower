@@ -9,18 +9,24 @@ const AMOUNT_TO_REWARD_1 = 2
 const AMOUNT_TO_REWARD_2 = 4
 const AMOUNT_TO_REWARD_3 = 6
 const AMOUNT_TO_REWARD_4 = 8
-#, 
-var all_rewards: Array[Relic] = [
+
+var relics_list: Array[Relic] = [
 	RedRelic.new(), GreenRelic.new(), BlueRelic.new(),
 	ArticCube.new(), EchoOfVoid.new(), PerseusFury.new(),
-	FirstAid.new(), MagicRing.new(), Boniato.new()
+	FirstAid.new(), MagicRing.new(), Boniato.new(),
+	SalmonNigiri.new(),
 ]
+
+var all_rewards: Array[Relic] = relics_list.duplicate()
 
 var rewards_ui: RewardsUI
 var towers_buffs: Dictionary[Tower.TowerType, TowerBuff]
 
 func _ready() -> void:
 	RelicsManager.relics_change.connect(_on_relics_change)
+
+func reset_rewards() -> void:
+	all_rewards = relics_list.duplicate()
 
 func show_rewards_ui(new_towers_buffs: Dictionary[Tower.TowerType, TowerBuff]) -> void:
 	towers_buffs = new_towers_buffs
@@ -30,6 +36,10 @@ func show_rewards_ui(new_towers_buffs: Dictionary[Tower.TowerType, TowerBuff]) -
 	canvas.add_child(rewards_ui)
 	rewards_ui.set_relics(rewards)
 	rewards_ui.reliq_selected.connect(_on_relidc_selected)
+
+func apply_discount_to_all_relics(discount: int) -> void:
+	for relic: Relic in all_rewards:
+		relic.price = round(relic.price - (relic.price * (discount / 100.0)))
 
 func _get_rewards() -> Array[Relic]:
 	randomize()
