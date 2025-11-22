@@ -7,11 +7,11 @@ class_name RelicUI extends Control
 func _ready() -> void:
 	relic_description.visible = false
 
-func get_texture():
-	return texture
-
-func get_amount():
-	return amount
+func set_relic(relic: Relic) -> void:
+	texture.texture = relic.texture
+	if relic.amount > 1:
+		amount.text = str(relic.amount)
+	relic_description.set_description(relic.description) 
 
 func _on_mouse_entered() -> void:
 	var mouse_pos = get_viewport().get_mouse_position()

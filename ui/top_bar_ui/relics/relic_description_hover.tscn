@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk0mu0fxl3rmm"]
+[gd_scene load_steps=4 format=3 uid="uid://bk0mu0fxl3rmm"]
 
 [ext_resource type="Script" uid="uid://b2xbv2x4k8kj5" path="res://ui/top_bar_ui/relics/relic_description_hover.gd" id="1_idw8k"]
 [ext_resource type="StyleBox" uid="uid://de1oid76vx20r" path="res://assets/shaders/panel_black_box.tres" id="2_p7ubt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p7ubt"]
+font_size = 24
 
 [node name="RelicDescriptionHover" type="CanvasLayer"]
 script = ExtResource("1_idw8k")
@@ -14,3 +17,4 @@ theme_override_styles/panel = ExtResource("2_p7ubt")
 [node name="DescriptionLabel" type="Label" parent="PanelContainer"]
 layout_mode = 2
 text = "Hace mucho daño"
+label_settings = SubResource("LabelSettings_p7ubt")
