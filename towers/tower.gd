@@ -73,8 +73,10 @@ func enable() -> void:
 	_enabled = true
 	range_area.monitoring = true
 	range_preview.visible = false
-	mouse_detector.gui_input.connect(_on_gui_input)
+	
+	await get_tree().create_timer(0.1).timeout
 	TowerPlacementManager.tower_selected.connect(_on_tower_selected)
+	mouse_detector.gui_input.connect(_on_gui_input)
 
 # --------------------
 # --- ATTACK ---
