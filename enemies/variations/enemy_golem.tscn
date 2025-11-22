@@ -100,8 +100,11 @@ animations = [{
 
 [node name="Enemy" instance=ExtResource("1_umep0")]
 
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, -4)
+
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_cwph5")
 animation = &"default"
 autoplay = ""
-frame_progress = 0.009673625
+frame_progress = 0.020143257
