@@ -40,6 +40,39 @@ size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 6
 
+[node name="ExpDataContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LevelContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ExpDataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/LevelContainer"]
+layout_mode = 2
+text = "Level:"
+
+[node name="LevelLabel" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/LevelContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="ExpContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ExpDataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
+layout_mode = 2
+text = "EXP"
+
+[node name="CurrentExpLabel" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
+layout_mode = 2
+text = "/"
+
+[node name="RequiredExpLabel" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
+layout_mode = 2
+text = "50"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
