@@ -52,7 +52,7 @@ func _ready():
 func placement_mode() -> void:
 	_enabled = false
 	range_area.monitoring = false
-	range_preview.visible = false
+	range_preview.visible = true
 
 # Enables the tower after its construction/placement.
 # It is initially disabled to prevent actions while the player is placing it.
