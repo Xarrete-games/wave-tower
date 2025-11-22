@@ -138,7 +138,7 @@ fill_from = Vector2(0.5071225, 0.4871795)
 rotation = -1.0471976
 skew = 0.5235988
 sprite_frames = SubResource("SpriteFrames_2m373")
-frame_progress = 0.48736614
+frame_progress = 0.6540786
 script = ExtResource("2_6eqc5")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]

@@ -1,39 +1,71 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8g0wp8j02vu4"]
+[gd_scene load_steps=22 format=3 uid="uid://b8g0wp8j02vu4"]
 
 [ext_resource type="Texture2D" uid="uid://dkwlrr7trj34m" path="res://assets/sprites/portals/orange_portal.png" id="1_wrevt"]
 [ext_resource type="Script" uid="uid://clb5nmsmw7qwo" path="res://levels/portal/portal.gd" id="2_ocubi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ocubi"]
 atlas = ExtResource("1_wrevt")
-region = Rect2(0, 0, 64, 64)
+region = Rect2(0, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrbyv"]
 atlas = ExtResource("1_wrevt")
-region = Rect2(64, 0, 64, 64)
+region = Rect2(600, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n2041"]
 atlas = ExtResource("1_wrevt")
-region = Rect2(128, 0, 64, 64)
+region = Rect2(1200, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bnx83"]
 atlas = ExtResource("1_wrevt")
-region = Rect2(192, 0, 64, 64)
+region = Rect2(1800, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eqkdw"]
 atlas = ExtResource("1_wrevt")
-region = Rect2(256, 0, 64, 64)
+region = Rect2(2400, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mqy7d"]
 atlas = ExtResource("1_wrevt")
-region = Rect2(320, 0, 64, 64)
+region = Rect2(3000, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o6g8y"]
 atlas = ExtResource("1_wrevt")
-region = Rect2(384, 0, 64, 64)
+region = Rect2(3600, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0mibc"]
 atlas = ExtResource("1_wrevt")
-region = Rect2(448, 0, 64, 64)
+region = Rect2(4200, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2et5"]
+atlas = ExtResource("1_wrevt")
+region = Rect2(4800, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42vmn"]
+atlas = ExtResource("1_wrevt")
+region = Rect2(5400, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlf6n"]
+atlas = ExtResource("1_wrevt")
+region = Rect2(6000, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emj5t"]
+atlas = ExtResource("1_wrevt")
+region = Rect2(6600, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhbjx"]
+atlas = ExtResource("1_wrevt")
+region = Rect2(7200, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1pbk"]
+atlas = ExtResource("1_wrevt")
+region = Rect2(7800, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlpaa"]
+atlas = ExtResource("1_wrevt")
+region = Rect2(8400, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqr8l"]
+atlas = ExtResource("1_wrevt")
+region = Rect2(9000, 0, 600, 600)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p2et5"]
 animations = [{
@@ -61,13 +93,53 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0mibc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2et5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42vmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlf6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emj5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhbjx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1pbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlpaa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqr8l")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 12.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_6eqc5"]
+offsets = PackedFloat32Array(0.12338858, 0.22651933, 0.25046042, 0.5119705, 0.6906077)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.69803923, 0, 1, 1, 0.72156864, 0, 1, 0.23430961, 0.14426121, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ocubi"]
+gradient = SubResource("Gradient_6eqc5")
+width = 1000
+height = 1000
+fill = 1
+fill_from = Vector2(0.5071225, 0.4871795)
+
 [node name="OrangePortal" type="AnimatedSprite2D"]
-scale = Vector2(5, 5)
+rotation = -1.0471976
+skew = 0.5235988
 sprite_frames = SubResource("SpriteFrames_p2et5")
+frame_progress = 0.22033152
 script = ExtResource("2_ocubi")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_ocubi")
