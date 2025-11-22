@@ -136,6 +136,7 @@ fill_from = Vector2(0.5071225, 0.4871795)
 
 [node name="OrangePortal" type="AnimatedSprite2D"]
 rotation = -1.0471976
+scale = Vector2(0.5, 0.5)
 skew = 0.5235988
 sprite_frames = SubResource("SpriteFrames_p2et5")
 frame_progress = 0.22033152
