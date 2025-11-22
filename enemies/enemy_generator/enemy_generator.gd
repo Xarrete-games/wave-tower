@@ -1,11 +1,14 @@
-class_name EnemyGenerator extends Node
+#EnemyGenerator 
+extends Node
 
 signal enemy_die(enemy: Enemy)
-signal group_handled()
-signal last_wave_done()
-signal wave_finished()
+
 signal new_level_loaded()
-signal wave_change(num: int)
+signal last_wave_finished()
+signal wave_finished()
+signal wave_init(num: int)
+# internal signal
+signal group_handled()
 
 const ENEMY_NORMAL = preload("uid://dmqbn2q5splor")
 const ENEMY_FAST = preload("uid://xk0wj86s8ddb")
@@ -33,7 +36,6 @@ var groups_handled_count: int
 
 func _ready() -> void:
 	group_handled.connect(_on_group_handled)
-	waves_ui.next_wave.connect(init_wave)
 #
 # call to load level_data
 func load_level_nodes(level: Level) -> void:
@@ -44,11 +46,11 @@ func load_level_nodes(level: Level) -> void:
 	total_waves = level_waves.size()
 	current_wave_number = 1
 	new_level_loaded.emit()
-	wave_change.emit(0)
+	wave_init.emit(0)
 	
-func init_wave() -> void:
+func init_next_wave() -> void:
 	# get next wave
-	wave_change.emit(current_wave_number)
+	wave_init.emit(current_wave_number)
 	current_wave = level_waves[current_wave_number - 1]
 	# reset groups counter
 	total_groups = current_wave.groups_data.size()
@@ -124,7 +126,7 @@ func _check_enemies_left() -> void:
 func _init_next_wave() -> void:
 	if current_wave_number == total_waves:
 		print("LEVEL DONE")
-		last_wave_done.emit()
+		last_wave_finished.emit()
 	else:
 		current_wave_number += 1
 		wave_finished.emit()

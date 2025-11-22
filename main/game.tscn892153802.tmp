@@ -87,7 +87,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="WavesUI" parent="UILayer" instance=ExtResource("5_hlcqn")]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

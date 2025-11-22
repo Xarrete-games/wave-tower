@@ -9,7 +9,6 @@ var _current_level: Level
 #current level parent
 @onready var level_container: Node2D = $LevelContainer
 @onready var tower_placer: TowerPlacer = $TowerPlacer
-@onready var enemy_generator: EnemyGenerator = $EnemyGenerator
 @onready var next_level_menu: NextLevelMenu = $UILayer/NextLevelMenu
 @onready var music_handler: MusicHandler = $MusicHandler
 @onready var ui_layer: CanvasLayer = $UILayer
@@ -23,6 +22,7 @@ func reset_current_level() -> void:
 func _ready():
 	_hide_next_level_menu()
 	_load_level(current_level_number)
+	EnemyGenerator.last_wave_finished.connect(_show_next_level_menu)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
@@ -39,7 +39,7 @@ func _load_level(level_number: int) -> void:
 	tower_placer.update_nodes_from_current_level(_current_level)
 	TowerPlacementManager.reset_towers_count()
 	RelicsManager.reset_relics()
-	enemy_generator.load_level_nodes(_current_level)
+	EnemyGenerator.load_level_nodes(_current_level)
 	music_handler.play_music()
 
 func _hide_next_level_menu() -> void:
@@ -55,9 +55,6 @@ func _show_next_level_menu() -> void:
 func _update_camera_post() -> void:
 	var new_pos = _current_level.get_camera_init_pos()
 	main_camera.global_position = new_pos
-
-func _on_enemy_generator_last_wave_done() -> void:
-	_show_next_level_menu()
 
 func _on_next_level_menu_next_leve_button_pressed() -> void:
 	_hide_next_level_menu()

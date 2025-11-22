@@ -30,8 +30,11 @@ func _fire() -> void:
 		await get_tree().create_timer(0.1).timeout
 
 func _fire_projectil(projectil: GreenProjectile) -> void:
+	if not _current_target:
+		return
+	
 	cristal_light.play()
-			
+	
 	add_child(projectil)
 	projectil.global_position = projectil_spawn_position.global_position
 	

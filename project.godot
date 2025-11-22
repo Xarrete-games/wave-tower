@@ -26,6 +26,7 @@ EnemyDebuffManager="*res://enemies/enemy_debuff/enemy_debuff_manager.gd"
 RewardsManager="*res://relics/rewards_manager.gd"
 TowerPlacementManager="*res://towers/tower_placement_manager.gd"
 LiveManager="*res://main/live_manager.gd"
+EnemyGenerator="*res://enemies/enemy_generator/enemy_generator.gd"
 
 [display]
 
