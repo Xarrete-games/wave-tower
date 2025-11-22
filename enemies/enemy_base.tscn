@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://jo1s7xj1apmc" path="res://assets/sprites/enemies/espectro/sp_top7.png" id="15_3oxun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epsnb"]
-size = Vector2(58, 69)
+size = Vector2(83, 107)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mujyd"]
 animations = [{

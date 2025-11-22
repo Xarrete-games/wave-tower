@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cdb5n1d4ubx72"]
+[gd_scene load_steps=27 format=3 uid="uid://cdb5n1d4ubx72"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_umep0"]
 [ext_resource type="Texture2D" uid="uid://b3ty7gregrde4" path="res://assets/sprites/enemies/golem/golem1.png" id="2_pqh0f"]
@@ -94,9 +94,91 @@ animations = [{
 "texture": ExtResource("23_g2jog")
 }],
 "loop": true,
-"name": &"default",
+"name": &"down right",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pqh0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6dubi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oye5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_56aeb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_isq2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ntwep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_u8w2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_eqkj0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8i6aa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_k1js5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_vfba5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_voydc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_uifg3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wrml7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_jh56b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_l67wi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ptxae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_chpdp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_hvij1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_jhpo0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_pdcow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_g2jog")
+}],
+"loop": true,
+"name": &"top right",
 "speed": 9.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_pqh0f"]
+offsets = PackedFloat32Array(0, 0.62062615)
+colors = PackedColorArray(0.55828667, 0.55828655, 0.55828655, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6dubi"]
+gradient = SubResource("Gradient_pqh0f")
+width = 600
+height = 400
+fill = 1
+fill_from = Vector2(0.5071225, 0.48433048)
 
 [node name="Enemy" instance=ExtResource("1_umep0")]
 
@@ -104,7 +186,13 @@ animations = [{
 position = Vector2(0, -4)
 
 [node name="AnimatedSprite2D" parent="." index="1"]
+light_mask = 0
 sprite_frames = SubResource("SpriteFrames_cwph5")
-animation = &"default"
-autoplay = ""
-frame_progress = 0.020143257
+frame_progress = 0.0
+flip_h = true
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="2"]
+position = Vector2(-1.0000001, 59)
+scale = Vector2(0.2, 0.2)
+blend_mode = 1
+texture = SubResource("GradientTexture2D_6dubi")

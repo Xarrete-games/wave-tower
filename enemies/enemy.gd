@@ -3,7 +3,7 @@ class_name Enemy extends CharacterBody2D
 signal die(ememy: Enemy)
 signal target_reached(enemy: Enemy)
 
-enum  EnemyType { NORMAL, FAST, TANK }
+enum  EnemyType { NORMAL, FAST, TANK, GOLEM }
 
 const GOLD_DROPPED = preload("uid://cxs4ar5enx4mn")
 const DAMAGE_NUMBERS = preload("uid://bkiu4qgh3ug1m")
@@ -57,7 +57,7 @@ func _ready() -> void:
 	gold_value = base_gold_value + Score.extra_gold_dropped
 	Score.extra_gold_dropped_change.connect(
 		func(value): gold_value = base_gold_value + value)
-		
+
 func _process(delta):
 	if _path_follow == null:
 		return
@@ -79,7 +79,7 @@ func _process(delta):
 	# FLIP SPRITE
 	var is_right_direction = global_position.x > previous_global_x
 	if is_right_direction != _last_is_right_direction:
-		animated_sprite_2d.flip_h = is_right_direction
+		animated_sprite_2d.flip_h = !animated_sprite_2d.flip_h
 		_path_follow.v_offset = _path_follow.v_offset if is_right_direction else -_path_follow.v_offset
 		_last_is_right_direction = is_right_direction
 	
