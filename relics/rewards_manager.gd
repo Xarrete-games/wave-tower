@@ -21,12 +21,20 @@ var relics_list: Array[Relic] = [
 var all_rewards: Array[Relic] = relics_list.duplicate()
 var rewards_ui: RewardsUI
 var towers_buffs: Dictionary[Tower.TowerType, TowerBuff]
+var reroll_price = 50
 
 func _ready() -> void:
 	RelicsManager.relics_change.connect(_on_relics_change)
 
 func reset_rewards() -> void:
 	all_rewards = relics_list.duplicate()
+	reroll_price = 50
+	
+func reroll() -> void:
+	Score.gold -= reroll_price
+	reroll_price += 50
+	var rewards = _get_rewards()
+	rewards_ui.set_relics(rewards)
 
 func show_rewards_ui(new_towers_buffs: Dictionary[Tower.TowerType, TowerBuff]) -> void:
 	towers_buffs = new_towers_buffs

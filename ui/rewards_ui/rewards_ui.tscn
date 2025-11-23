@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcxsfb0ox3gmq"]
+[gd_scene load_steps=5 format=3 uid="uid://bcxsfb0ox3gmq"]
 
 [ext_resource type="Script" uid="uid://h554m5slo5ti" path="res://ui/rewards_ui/rewards_ui.gd" id="1_003n2"]
+[ext_resource type="Theme" uid="uid://dswsb3nw14dn7" path="res://ui/styles/themes/menu_theme.tres" id="2_hcxtq"]
+[ext_resource type="Texture2D" uid="uid://b2f6c4qd0c0s2" path="res://assets/sprites/buttons/wavecoinv2_30px.png" id="3_kdqtn"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="4_my3js"]
 
-[node name="RewardsUi" type="Control" node_paths=PackedStringArray("cards_container")]
+[node name="RewardsUi" type="Control" node_paths=PackedStringArray("cards_container", "reroll_price_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,19 +14,66 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_003n2")
-cards_container = NodePath("HBoxContainer")
+cards_container = NodePath("VBoxContainer/CardsContainer")
+reroll_price_label = NodePath("VBoxContainer/ButtonsContainer/VBoxContainer/Gold/RerrolPriceLabel")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -350.0
-offset_right = 350.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 350
+
+[node name="CardsContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 350
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 100
+
+[node name="ExitButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_hcxtq")
+text = "Exit
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="RerollButton" type="Button" parent="VBoxContainer/ButtonsContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_hcxtq")
+text = "Reroll"
+
+[node name="Gold" type="HBoxContainer" parent="VBoxContainer/ButtonsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="wavecoin" type="TextureRect" parent="VBoxContainer/ButtonsContainer/VBoxContainer/Gold"]
+layout_mode = 2
+texture = ExtResource("3_kdqtn")
+stretch_mode = 3
+
+[node name="RerrolPriceLabel" type="Label" parent="VBoxContainer/ButtonsContainer/VBoxContainer/Gold"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("4_my3js")
+
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/VBoxContainer/RerollButton" to="." method="_on_reroll_button_pressed"]
