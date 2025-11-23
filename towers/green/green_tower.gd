@@ -4,6 +4,7 @@ class_name GreenTower extends Tower
 const GREEN_PROJECTILE = preload("uid://ck6mf6m73ergh")
 
 var num_waves = 3
+var poison_damage = 0
 var local_num_waves = 3
 
 @onready var projectil_spawn_position: Marker2D = $ProjectilSpawnPosition
@@ -19,6 +20,7 @@ func _set_buffs(tower_buffs: TowerBuff) -> void:
 	#green tower stats
 	var green_tower_buffs = tower_buffs as GreenTowerBuff
 	num_waves = local_num_waves + green_tower_buffs.extra_waves
+	poison_damage = green_tower_buffs.poison_damage
 	
 func _fire() -> void:
 	for i in range(num_waves):
@@ -40,7 +42,8 @@ func _fire_projectil(projectil: GreenProjectile) -> void:
 	
 	# get enemy direction
 	var dir = (_current_target.global_position - projectil.global_position).normalized()
-	var attack = _get_attack()
+	var poison_debuff = EnemyDebuff.new(EnemyDebuff.DebuffType.POISON, poison_damage, 5)
+	var attack = _get_attack([poison_debuff])
 	projectil.set_direction(dir, attack)
 	
 	

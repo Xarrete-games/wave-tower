@@ -29,6 +29,9 @@ var _last_is_right_direction: bool = false
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var numbers_displayed_pos: Marker2D = $NumbersDisplayedPos
 @onready var gold_dropped_pos: Marker2D = $GoldDroppedPos
+# debuffs timers
+@onready var poison_damage_timer: Timer = $PoisonDamageTimer
+@onready var burn_damage_timer: Timer = $BurnDamageTimer
 
 # percentage of remaining heal
 func get_remaining_heal() -> float:
@@ -173,11 +176,36 @@ func handle_new_debuff(debuff_type: EnemyDebuff.DebuffType) -> void:
 			_speed = base_speed * (1.0 - reduction_factor)
 			_default_modulate_color = Color.AQUA
 			animated_sprite_2d.modulate = Color.AQUA
+		EnemyDebuff.DebuffType.POISON:
+			poison_damage_timer.start()
+			_default_modulate_color = Color.CHARTREUSE
+			animated_sprite_2d.modulate = Color.CHARTREUSE
+		EnemyDebuff.DebuffType.BURN:
+			burn_damage_timer.start()
+			_default_modulate_color = Color.DARK_ORANGE
+			animated_sprite_2d.modulate = Color.DARK_ORANGE
 
 func handle_debuff_end(debuff_type: EnemyDebuff.DebuffType) -> void:
 	match(debuff_type):
 		# recover speed and color
 		EnemyDebuff.DebuffType.FROST: 
 			_speed = base_speed
-			_default_modulate_color = Color.WHITE
-			animated_sprite_2d.modulate = Color.WHITE
+		EnemyDebuff.DebuffType.POISON: 
+			poison_damage_timer.stop()
+		EnemyDebuff.DebuffType.BURN: 
+			burn_damage_timer.stop()
+	
+	if current_debuffs.size() == 0:
+				_default_modulate_color = Color.WHITE
+				animated_sprite_2d.modulate = Color.WHITE
+
+
+func _on_poison_damage_timer_timeout() -> void:
+	var poison_damage = current_debuffs[EnemyDebuff.DebuffType.POISON].value
+	var poison_attack = Attack.new(poison_damage, false, [])
+	get_damage(poison_attack)
+	
+func _on_burn_damage_timer_timeout() -> void:
+	var burn_damage = current_debuffs[EnemyDebuff.DebuffType.BURN].value
+	var burn_attack = Attack.new(burn_damage, false, [])
+	get_damage(burn_attack)

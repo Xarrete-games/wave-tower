@@ -13,8 +13,8 @@ const AMOUNT_TO_REWARD_4 = 8
 var relics_list: Array[Relic] = [
 	#RedRelic.new(), GreenRelic.new(), BlueRelic.new(),
 	#ArticCube.new(), EchoOfVoid.new(), PerseusFury.new(),
-	FirstAid.new(), MagicRing.new(), Boniato.new(),
-	#SalmonNigiri.new(),
+	#FirstAid.new(), MagicRing.new(), Boniato.new(),
+	SalmonNigiri.new(), FlowerPot.new()
 ]
 
 var all_rewards: Array[Relic] = relics_list.duplicate()
