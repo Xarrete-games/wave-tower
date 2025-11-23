@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://b6v7q5rgsmypm"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://relics/relic_data.gd" id="1_jfkmx"]
+[ext_resource type="Texture2D" uid="uid://bpm61ubby4nf5" path="res://assets/sprites/relics/pickaxe.png" id="2_d4t1q"]
+
+[resource]
+script = ExtResource("1_jfkmx")
+id = "Foundation Breaker"
+description = "Clears a blocked build slot"
+texture = ExtResource("2_d4t1q")
+type = 3
+max_stack = 3
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

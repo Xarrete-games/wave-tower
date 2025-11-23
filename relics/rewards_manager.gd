@@ -15,7 +15,7 @@ var relics_list: Array[Relic] = [
 	ArticCube.new(), EchoOfVoid.new(), PerseusFury.new(),
 	FirstAid.new(), MagicRing.new(), Boniato.new(),
 	SalmonNigiri.new(), FlowerPot.new(), HeadPhones.new(),
-	IgnitionVoltage.new()
+	IgnitionVoltage.new(), FoundationBreaker.new()
 ]
 
 var all_rewards: Array[Relic] = relics_list.duplicate()
