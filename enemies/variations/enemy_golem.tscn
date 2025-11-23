@@ -194,7 +194,7 @@ height = 400
 fill = 1
 fill_from = Vector2(0.5071225, 0.48433048)
 
-[node name="Enemy" instance=ExtResource("1_umep0")]
+[node name="Golem" instance=ExtResource("1_umep0")]
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, -4)

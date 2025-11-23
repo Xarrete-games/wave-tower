@@ -14,6 +14,7 @@ metadata/_custom_type_script = "uid://dcpnbeke2jpe"
 script = ExtResource("3_kdyqr")
 enemy_type = 3
 amount = 1
+interval_spawn = 1.5
 metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
 
 [sub_resource type="Resource" id="Resource_87yg1"]
@@ -25,7 +26,7 @@ metadata/_custom_type_script = "uid://dcpnbeke2jpe"
 script = ExtResource("3_kdyqr")
 enemy_type = 4
 amount = 10
-interval_spawn = 0.4
+interval_spawn = 2.0
 metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
 
 [sub_resource type="Resource" id="Resource_2jyof"]
