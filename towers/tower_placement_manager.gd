@@ -2,6 +2,7 @@
 extends Node
 
 signal tower_count_change(tower_type: Tower.TowerType, amount: int, event: TowerEvent)
+signal tower_sold(tower: Tower)
 signal tower_selected(tower: Tower)
 
 enum TowerEvent { PLACEMENT, SOLD, RESET }
@@ -48,6 +49,7 @@ func _on_tower_sold(tower: Tower) -> void:
 	var last_price = Price.get_sell_price(type)
 	Score.gold += last_price
 	_update_tower_count(tower.type, towers_placed[tower.type] - 1, TowerEvent.SOLD)
+	tower_sold.emit(tower)
 	tower.queue_free()
 
 func _on_tower_stats_change(tower: Tower) -> void:

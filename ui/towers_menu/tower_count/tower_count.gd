@@ -35,16 +35,16 @@ func _update_texture():
 
 func _set_count(value: int) -> void:
 	match value:
-		var x when x < TIER_1_COUNT:
+		var x when x < TIER_1_COUNT and max_value < TIER_1_COUNT:
 			max_value = TIER_1_COUNT
 			pass
-		var x when x >= TIER_1_COUNT and x < TIER_2_COUNT:
+		var x when x >= TIER_1_COUNT and x < TIER_2_COUNT and max_value < TIER_2_COUNT:
 			max_value = TIER_2_COUNT
 			pass
-		var x when x >= TIER_2_COUNT and x < TIER_3_COUNT:
+		var x when x >= TIER_2_COUNT and x < TIER_3_COUNT and max_value < TIER_3_COUNT:
 			max_value = TIER_3_COUNT
 			pass
-		var x when x >= TIER_3_COUNT and x < TIER_4_COUNT:
+		var x when x >= TIER_3_COUNT and x < TIER_4_COUNT and max_value < TIER_4_COUNT:
 			max_value = TIER_4_COUNT
 			pass
 		var x when x > TIER_4_COUNT:

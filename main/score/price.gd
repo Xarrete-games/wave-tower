@@ -60,7 +60,7 @@ func _on_tower_count_change(
 	event: TowerPlacementManager.TowerEvent) -> void:
 		if event == TowerPlacementManager.TowerEvent.SOLD:
 			_on_tower_sold(tower_type, amount)
-		elif event == TowerPlacementManager.TowerEvent.PLACEMENT:
+		else:
 			_on_tower_placed(tower_type, amount)
 
 func _on_tower_sold(tower_type: Tower.TowerType, amount: int) -> void:

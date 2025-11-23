@@ -36,6 +36,9 @@ var local_attack_range: float = 0
 var local_attack_speed: float = 0
 var local_critic_chance: float = 0
 var local_critic_damage: float = 0
+# tile_pos
+var tile_pos: Vector2i
+
 # level
 var exp_data: TowerExpData:
 	set(value):
