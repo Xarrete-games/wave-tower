@@ -1,13 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgcv5fdqvfext"]
+[gd_scene load_steps=11 format=3 uid="uid://dgcv5fdqvfext"]
 
 [ext_resource type="Script" uid="uid://becnb17nd1vj1" path="res://ui/rewards_ui/reward_card/reward_card.gd" id="1_eji2h"]
 [ext_resource type="Theme" uid="uid://bansa1f47pkw0" path="res://ui/styles/themes/reward_card.tres" id="1_vqiry"]
-[ext_resource type="Texture2D" uid="uid://dg8wywkburwi0" path="res://assets/sprites/relics/reward_border.png" id="4_68l61"]
+[ext_resource type="Texture2D" uid="uid://b2yl75fehdgdj" path="res://assets/textures/hexagon light.png" id="3_68l61"]
+[ext_resource type="Texture2D" uid="uid://bmog50xiu4wle" path="res://assets/sprites/relics/boniato_relic.png" id="3_pwyca"]
+[ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="4_ibm82"]
 [ext_resource type="Texture2D" uid="uid://b2f6c4qd0c0s2" path="res://assets/sprites/buttons/wavecoinv2_30px.png" id="4_pwyca"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_68l61"]
+[ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="5_sdsj4"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdsw6"]
-bg_color = Color(0.6862745, 0.6, 0.6, 0.8117647)
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sdsj4"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yrs38"]
 
@@ -21,82 +23,110 @@ grow_vertical = 2
 theme = ExtResource("1_vqiry")
 script = ExtResource("1_eji2h")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 8.0
-offset_right = 391.0
-offset_bottom = 432.0
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_rdsw6")
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
 
-[node name="Panel2" type="Panel" parent="."]
+[node name="HexagonBorder" type="Polygon2D" parent="Control"]
+texture_filter = 2
+material = SubResource("CanvasItemMaterial_sdsj4")
+scale = Vector2(0.9, 0.9)
+color = Color(0.74, 0.5056667, 0, 1)
+polygon = PackedVector2Array(0, 155, 134, 78, 134, -78, 0, -155, -134, -78, -134, 78)
+
+[node name="Hexagon" type="Polygon2D" parent="Control"]
+texture_filter = 2
+color = Color(0, 0, 0, 0.7058824)
+polygon = PackedVector2Array(0, 125, 107.5, 62.5, 107.5, -62.5, 0, -125, -107.5, -62.5, -107.5, 62.5)
+
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_top = 368.0
-offset_right = 400.0
-offset_bottom = 418.0
+offset_left = -90.0
+offset_top = -90.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("4_ibm82")
 
 [node name="RelicTexture" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 42.0
-offset_top = 48.0
-offset_right = 369.0
-offset_bottom = 381.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.078125
+anchor_bottom = 0.1388889
+offset_right = -150.0
+offset_bottom = -150.0
+scale = Vector2(0.5, 0.5)
 texture = SubResource("CompressedTexture2D_yrs38")
-expand_mode = 1
+expand_mode = 3
 stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="RelicTexture2" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_pwyca")
+expand_mode = 3
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 20
+texture = ExtResource("5_sdsj4")
+emission_shape = 1
+emission_sphere_radius = 128.0
+gravity = Vector2(0, -100)
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+
+[node name="Title" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 0
+offset_left = -150.0
+offset_top = 150.0
+offset_right = 150.0
+offset_bottom = 184.0
+size_flags_horizontal = 4
+mouse_filter = 1
+text = "Boniatillo"
+horizontal_alignment = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 7.0
+texture = ExtResource("3_68l61")
+texture_scale = 0.8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -150.0
+offset_top = 190.0
+offset_right = 150.0
+offset_bottom = 250.0
+alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 600.0
-
-[node name="Border" type="TextureRect" parent="MarginContainer"]
-layout_mode = 2
-texture = ExtResource("4_68l61")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Title" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 6
 mouse_filter = 1
-text = "Paganini's Bow"
-
-[node name="Description" type="RichTextLabel" parent="MarginContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 90)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 text = "+10% damage on turrets"
+fit_content = true
 scroll_active = false
-autowrap_mode = 1
+autowrap_mode = 2
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Gold" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 12
 
-[node name="wavecoin" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="wavecoin" type="TextureRect" parent="VBoxContainer/Gold"]
 layout_mode = 2
 texture = ExtResource("4_pwyca")
 stretch_mode = 3
 
-[node name="AmountGoldLabel" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="AmountGoldLabel" type="Label" parent="VBoxContainer/Gold"]
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("5_68l61")
