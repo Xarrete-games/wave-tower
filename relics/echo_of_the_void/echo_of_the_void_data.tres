@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://bqxxbovbmgaho"]
 
 [ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://relics/relic_data.gd" id="1_cyamb"]
-[ext_resource type="Texture2D" uid="uid://cppqtct7ql3yk" path="res://assets/sprites/relics/echo_of_the_void.png" id="2_8dpub"]
+[ext_resource type="Texture2D" uid="uid://c5ms3f8gmdkf0" path="res://assets/sprites/relics/echo_the_void.png" id="2_8dpub"]
 
 [resource]
 script = ExtResource("1_cyamb")
@@ -9,5 +9,6 @@ id = "Echo of void"
 description = "Increase by 1 the number of waves launched by the green towers"
 texture = ExtResource("2_8dpub")
 type = 2
+rarity = 2
 max_stack = 3
 metadata/_custom_type_script = "uid://u8jtn52xm88d"
