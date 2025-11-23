@@ -9,6 +9,6 @@ id = "Salmon Nigiri"
 description = "Reduces the cost of relics by 5%"
 texture = ExtResource("2_x4okx")
 type = 3
-rarity = 1
+rarity = 2
 max_stack = 2
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

@@ -29,8 +29,8 @@ anchors_preset = 0
 [node name="HexagonBorder" type="Polygon2D" parent="Control"]
 texture_filter = 2
 material = SubResource("CanvasItemMaterial_sdsj4")
-scale = Vector2(0.9, 0.9)
-color = Color(0.74, 0.5056667, 0, 1)
+scale = Vector2(0.88, 0.88)
+color = Color(0.87, 0.5945, 0, 1)
 polygon = PackedVector2Array(0, 155, 134, 78, 134, -78, 0, -155, -134, -78, -134, 78)
 
 [node name="Hexagon" type="Polygon2D" parent="Control"]
