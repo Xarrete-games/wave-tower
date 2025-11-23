@@ -89,6 +89,8 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 custom_data_layer_0/name = "buildeable"
 custom_data_layer_0/type = 1
+custom_data_layer_1/name = "blocked"
+custom_data_layer_1/type = 1
 sources/1 = SubResource("TileSetAtlasSource_3vx7l")
 sources/0 = SubResource("TileSetAtlasSource_nu2uv")
 
