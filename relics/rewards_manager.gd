@@ -14,11 +14,11 @@ var relics_list: Array[Relic] = [
 	RedRelic.new(), GreenRelic.new(), BlueRelic.new(),
 	ArticCube.new(), EchoOfVoid.new(), PerseusFury.new(),
 	FirstAid.new(), MagicRing.new(), Boniato.new(),
-	SalmonNigiri.new(), FlowerPot.new(), HeadPhones.new()
+	SalmonNigiri.new(), FlowerPot.new(), HeadPhones.new(),
+	IgnitionVoltage.new()
 ]
 
 var all_rewards: Array[Relic] = relics_list.duplicate()
-
 var rewards_ui: RewardsUI
 var towers_buffs: Dictionary[Tower.TowerType, TowerBuff]
 

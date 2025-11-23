@@ -99,10 +99,15 @@ func _set_is_casting(new_value: bool) -> void:
 
 #animation to make the laser disappear
 func _dissapear() -> void:
-	red_attack_loop.stop()
-	red_attack_finish.play()
+	if red_attack_loop.is_inside_tree():
+		red_attack_loop.stop()
+		
+	if red_attack_finish.is_inside_tree():
+		red_attack_finish.play()
+		
 	if not line_2d:
 		return
+		
 	if tween and tween.is_running():
 		tween.kill()
 		

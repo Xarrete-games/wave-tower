@@ -71,4 +71,3 @@ func _fill_blocked_dic() -> void:
 func _on_tower_sold(tower: Tower) -> void:
 	var tile = tower.tile_pos
 	set_tile_free(tile)
-		

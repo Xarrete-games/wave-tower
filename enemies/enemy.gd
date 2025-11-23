@@ -159,8 +159,7 @@ func _handle_debuffs(debuffs: Array[EnemyDebuff]) -> void:
 			# save data
 			current_debuffs[debuff.type] = debuff
 			current_debuffs_timers[debuff.type] = debuff_timer
-		
-		handle_new_debuff(debuff.type)
+			handle_new_debuff(debuff.type)
 			
 func _on_debuff_timer_end(debuff_type: EnemyDebuff.DebuffType) -> void:
 	current_debuffs.erase(debuff_type)
@@ -199,13 +198,16 @@ func handle_debuff_end(debuff_type: EnemyDebuff.DebuffType) -> void:
 				_default_modulate_color = Color.WHITE
 				animated_sprite_2d.modulate = Color.WHITE
 
-
 func _on_poison_damage_timer_timeout() -> void:
 	var poison_damage = current_debuffs[EnemyDebuff.DebuffType.POISON].value
 	var poison_attack = Attack.new(poison_damage, false, [])
+	_default_modulate_color = Color.CHARTREUSE
+	animated_sprite_2d.modulate = Color.CHARTREUSE
 	get_damage(poison_attack)
 	
 func _on_burn_damage_timer_timeout() -> void:
 	var burn_damage = current_debuffs[EnemyDebuff.DebuffType.BURN].value
 	var burn_attack = Attack.new(burn_damage, false, [])
+	_default_modulate_color = Color.DARK_ORANGE
+	animated_sprite_2d.modulate = Color.DARK_ORANGE
 	get_damage(burn_attack)

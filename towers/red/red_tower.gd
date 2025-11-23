@@ -6,6 +6,7 @@ const EXECUTE_DAMAGE: float = 9999
 
 var execute_threshold: float = 0.0
 var local_execute_threshold: float = 0.0
+var burn_damage: float = 0
 var _hits_count = 0
 
 @onready var red_projectil: RedProjectil = $RedProjectil
@@ -24,6 +25,7 @@ func _set_buffs(tower_buffs: TowerBuff) -> void:
 	#green tower stats
 	var red_tower_buffs = tower_buffs as RedTowerBuff
 	execute_threshold = local_execute_threshold + red_tower_buffs.extra_execute_threshold
+	burn_damage = red_tower_buffs.burn_damage
 	
 func _fire() -> void:
 	red_projectil.set_attack(_get_attack_per_hit())
@@ -51,7 +53,8 @@ func _on_attack_tick_timer_timeout() -> void:
 		_stop_attack()
 
 func _get_attack_per_hit() -> Attack:
-	var attack = _get_attack()
+	var burn_debuff = EnemyDebuff.new(EnemyDebuff.DebuffType.BURN, burn_damage, 5)
+	var attack = _get_attack([burn_debuff])
 	attack.damage = attack.damage / TOTAL_HITS
 	return attack
 	

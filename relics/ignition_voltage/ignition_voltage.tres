@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://dqejgch5dthnb"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://relics/relic_data.gd" id="1_miwk5"]
+[ext_resource type="Texture2D" uid="uid://rbr4l120kg8j" path="res://assets/sprites/relics/light.png" id="2_rpj8k"]
+
+[resource]
+script = ExtResource("1_miwk5")
+id = "Ignition Voltage"
+description = "Add burn to the red towers (each stack increases the damage)"
+texture = ExtResource("2_rpj8k")
+metadata/_custom_type_script = "uid://u8jtn52xm88d"
