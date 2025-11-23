@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgcv5fdqvfext"]
+[gd_scene load_steps=10 format=3 uid="uid://dgcv5fdqvfext"]
 
 [ext_resource type="Script" uid="uid://becnb17nd1vj1" path="res://ui/rewards_ui/reward_card/reward_card.gd" id="1_eji2h"]
 [ext_resource type="Theme" uid="uid://bansa1f47pkw0" path="res://ui/styles/themes/reward_card.tres" id="1_vqiry"]
 [ext_resource type="Texture2D" uid="uid://b2yl75fehdgdj" path="res://assets/textures/hexagon light.png" id="3_68l61"]
-[ext_resource type="Texture2D" uid="uid://bmog50xiu4wle" path="res://assets/sprites/relics/boniato_relic.png" id="3_pwyca"]
 [ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="4_ibm82"]
 [ext_resource type="Texture2D" uid="uid://b2f6c4qd0c0s2" path="res://assets/sprites/buttons/wavecoinv2_30px.png" id="4_pwyca"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_68l61"]
@@ -47,6 +46,7 @@ offset_bottom = 90.0
 texture = ExtResource("4_ibm82")
 
 [node name="RelicTexture" type="TextureRect" parent="."]
+texture_filter = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.078125
@@ -55,15 +55,6 @@ offset_right = -150.0
 offset_bottom = -150.0
 scale = Vector2(0.5, 0.5)
 texture = SubResource("CompressedTexture2D_yrs38")
-expand_mode = 3
-stretch_mode = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="RelicTexture2" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_pwyca")
 expand_mode = 3
 stretch_mode = 3
 metadata/_edit_use_anchors_ = true
