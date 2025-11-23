@@ -1,6 +1,6 @@
 class_name EnemyDebuff extends RefCounted
 
-enum DebuffType { FROST }
+enum DebuffType { FROST, POISON, BURN }
 
 var type: DebuffType 
 var value: float

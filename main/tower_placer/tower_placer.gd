@@ -52,6 +52,7 @@ func _place_tower() -> void:
 	TowerPlacementManager.tower_added(_current_tower_instance)
 	
 	_current_tower_instance.enable()
+	_current_tower_instance.tile_pos = tile_pos
 	_current_tower_instance = null
 
 func _on_tower_selected(tower_scene: PackedScene) -> void:

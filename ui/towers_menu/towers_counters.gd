@@ -10,9 +10,12 @@ const GREEN_TOWER = preload("uid://oj5ilwusjvuo")
 @onready var blue_tower_count: TowerCount = $BlueTowerCount
 
 func _ready():
-	TowerPlacementManager.tower_placed.connect(_on_tower_placed)
+	TowerPlacementManager.tower_count_change.connect(_on_tower_count_change)
 	
-func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
+func _on_tower_count_change(
+	tower_type: Tower.TowerType, 
+	amount: int, 
+	_event: TowerPlacementManager.TowerEvent) -> void:
 	match tower_type:
 		Tower.TowerType.RED: red_tower_count.count = amount
 		Tower.TowerType.GREEN: green_tower_count.count = amount

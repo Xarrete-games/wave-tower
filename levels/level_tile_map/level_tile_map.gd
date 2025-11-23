@@ -2,6 +2,9 @@ class_name LevelTileMap extends TileMapLayer
 
 var _occupied_tiles: Dictionary = {}
 
+func _ready() -> void:
+	TowerPlacementManager.tower_sold.connect(_on_tower_sold)
+
 func get_mouse_tile_pos() -> Vector2i:
 	var mouse_pos = get_global_mouse_position()
 	return local_to_map(to_local(mouse_pos))
@@ -33,6 +36,7 @@ func set_tile_free(map_coords: Vector2i):
 	if _occupied_tiles.has(map_coords):
 		_occupied_tiles.erase(map_coords)
 
-func _ready():
-	get_used_cells()
+func _on_tower_sold(tower: Tower) -> void:
+	var tile = tower.tile_pos
+	set_tile_free(tile)
 		

@@ -1,16 +1,18 @@
+@tool
 class_name TowerStatsPanel extends Control
 
 # stats
-@onready var damage_label: Label = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/DamageLabel
-@onready var attack_speed_label: Label = $PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer/AttackSpeedLabel
-@onready var range_label: Label = $PanelContainer/VBoxContainer/HBoxContainer3/VBoxContainer/RangeLabel
-@onready var critic_label: Label = $PanelContainer/VBoxContainer/HBoxContainer4/VBoxContainer2/CriticLabel
-@onready var panel_container: PanelContainer = $PanelContainer
-# exp
-@onready var level_label: Label = $PanelContainer/VBoxContainer/ExpDataContainer/LevelContainer/LevelLabel
-@onready var current_exp_label: Label = $PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer/CurrentExpLabel
-@onready var required_exp_label: Label = $PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer/RequiredExpLabel
+@export var damage_label: Label
+@export var attack_speed_label: Label
+@export var range_label: Label
+@export var critic_label: Label
 
+# exp
+@export var level_label: Label
+@export var current_exp_label: Label
+@export var required_exp_label: Label
+
+var curre_tower: Tower
 
 func _ready() -> void:
 	visible = false
@@ -22,14 +24,11 @@ func _on_tower_selected(tower: Tower) -> void:
 		return
 	
 	visible = true
-	
+	curre_tower = tower
 	var stats = tower.stats
 	var exp_data = tower.exp_data	
 	update_stats(stats)
 	update_exp_data(exp_data)
-
-func set_panel_position(new_position: Vector2) -> void:
-	panel_container.position = new_position
 
 func update_stats(tower_stats: TowerStats) -> void:
 	damage_label.text = str(tower_stats.damage)
@@ -41,3 +40,6 @@ func update_exp_data(exp_data: TowerExpData) -> void:
 	level_label.text = str(exp_data.level)
 	current_exp_label.text = str(exp_data.current_exp)
 	required_exp_label.text = str(exp_data.exp_for_next_level)
+
+func _on_sell_button_pressed() -> void:
+	curre_tower.sell()

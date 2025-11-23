@@ -13,6 +13,9 @@ signal tower_selected(tower_scene: PackedScene)
 
 func _ready():
 	Price.tower_price_change.connect(_on_tower_price_change)
+	red_tower_button.price = Price.get_price(Tower.TowerType.RED)
+	green_tower_button.price = Price.get_price(Tower.TowerType.GREEN)
+	blue_tower_button.price = Price.get_price(Tower.TowerType.BLUE)
 
 func _on_red_tower_button_pressed(tower_scene: PackedScene) -> void:
 	tower_selected.emit(tower_scene)

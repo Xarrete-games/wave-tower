@@ -6,6 +6,7 @@ signal target_change(enemy: Enemy)
 signal stats_change(tower: Tower)
 signal selected(tower: Tower)
 signal fire()
+signal sold(tower: Tower)
 
 enum TowerType { RED, GREEN, BLUE }
 
@@ -35,6 +36,9 @@ var local_attack_range: float = 0
 var local_attack_speed: float = 0
 var local_critic_chance: float = 0
 var local_critic_damage: float = 0
+# tile_pos
+var tile_pos: Vector2i
+
 # level
 var exp_data: TowerExpData:
 	set(value):
@@ -77,6 +81,11 @@ func enable() -> void:
 	await get_tree().create_timer(0.1).timeout
 	TowerPlacementManager.tower_selected.connect(_on_tower_selected)
 	mouse_detector.gui_input.connect(_on_gui_input)
+# --------------------
+# --- SELL ---
+# --------------------
+func sell() -> void:
+	sold.emit(self)
 
 # --------------------
 # --- ATTACK ---

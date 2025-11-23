@@ -16,7 +16,7 @@ func _ready() -> void:
 		Tower.TowerType.GREEN: green_players
 	}
 	stop_music()
-	TowerPlacementManager.tower_placed.connect(_on_tower_placed)
+	TowerPlacementManager.tower_count_change.connect(_on_tower_count_change)
 
 func play_music() -> void:
 	base_player.play()
@@ -38,7 +38,10 @@ func _stop_players(node: Node) -> void:
 	for player: AudioStreamPlayer in node.get_children():
 		_stop_player(player)
 		
-func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
+func _on_tower_count_change(
+	tower_type: Tower.TowerType, 
+	amount: int, 
+	_event: TowerPlacementManager.TowerEvent) -> void:
 	if amount > MAX_PLAYERS or amount == 0:
 		return
 

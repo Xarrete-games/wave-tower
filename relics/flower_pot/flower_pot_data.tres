@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://crf1ar2lgywhk"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://relics/relic_data.gd" id="1_t64k1"]
+[ext_resource type="Texture2D" uid="uid://dikmy1ryck3s2" path="res://assets/sprites/relics/flowerpot_relic.png" id="2_ecgna"]
+
+[resource]
+script = ExtResource("1_t64k1")
+id = "Flower pot"
+description = "Add poison to the green towers (each stack increases the damage)"
+texture = ExtResource("2_ecgna")
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

@@ -34,7 +34,6 @@ func _update_texture_hover():
 	if tower_button:
 		tower_button.texture_hover = icon_hover
 
-
 func _on_tower_button_pressed() -> void:
 	if Score.gold < price:
 		return

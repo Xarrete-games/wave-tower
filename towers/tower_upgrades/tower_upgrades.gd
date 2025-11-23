@@ -22,7 +22,7 @@ var towers_buffs: Dictionary[Tower.TowerType, TowerBuff] = {
 }
 
 func _ready() -> void:
-	TowerPlacementManager.tower_placed.connect(_on_tower_placed)
+	TowerPlacementManager.tower_count_change.connect(_on_tower_placed)
 
 func reset_buffs() -> void:
 	towers_buffs = {
@@ -41,7 +41,7 @@ func emit_all_buffs_change() -> void:
 func emit_buffs_change(tower_type: Tower.TowerType) -> void:
 	tower_buffs_change.emit(tower_type, get_buffs(tower_type))
 
-func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
+func _on_tower_placed(tower_type: Tower.TowerType, amount: int, _event) -> void:
 	match tower_type:
 		Tower.TowerType.RED: _handle_red_updates(amount)
 		Tower.TowerType.GREEN: _handle_green_updates(amount)

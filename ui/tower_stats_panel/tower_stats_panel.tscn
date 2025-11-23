@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3qi4qp0ko3iq"]
+[gd_scene load_steps=12 format=3 uid="uid://c3qi4qp0ko3iq"]
 
 [ext_resource type="Script" uid="uid://mlvqjhawbttl" path="res://ui/tower_stats_panel/tower_stats_panel.gd" id="1_vyalh"]
 [ext_resource type="Texture2D" uid="uid://dv68a541qeosv" path="res://assets/sprites/icons/icons_sword.png" id="2_vyalh"]
 [ext_resource type="Texture2D" uid="uid://bvev5rktov31p" path="res://assets/sprites/icons/icons_timer.png" id="3_dw57d"]
 [ext_resource type="Texture2D" uid="uid://dio1imbeyg458" path="res://assets/sprites/icons/icons_tower_range.png" id="4_725y3"]
 [ext_resource type="Texture2D" uid="uid://bme2x52a33nre" path="res://assets/sprites/icons/icons_explosion.png" id="5_cuf0w"]
+[ext_resource type="FontFile" uid="uid://teqiajjnkdyx" path="res://assets/fonts/RobotoMono-Bold.ttf" id="6_7nqn3"]
+[ext_resource type="StyleBox" uid="uid://dcjn1y7ofuii7" path="res://ui/styles/box_style/button_box.tres" id="7_876xl"]
 
 [sub_resource type="Theme" id="Theme_vyalh"]
 default_font_size = 16
@@ -21,66 +23,107 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="TowerStatsPanel" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqjw5"]
+bg_color = Color(0.87, 0.56956, 0.5481, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="Theme" id="Theme_gs8y8"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(0.15614, 0.0609936, 0.0447696, 1)
+Button/colors/font_pressed_color = Color(0.442911, 0.442911, 0.442911, 1)
+Button/constants/line_spacing = 5
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("6_7nqn3")
+Button/styles/focus = SubResource("StyleBoxFlat_oqjw5")
+Button/styles/hover = SubResource("StyleBoxFlat_oqjw5")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_oqjw5")
+Button/styles/normal = ExtResource("7_876xl")
+Button/styles/pressed = SubResource("StyleBoxFlat_oqjw5")
+
+[node name="TowerStatsPanel" type="Control" node_paths=PackedStringArray("damage_label", "attack_speed_label", "range_label", "critic_label", "level_label", "current_exp_label", "required_exp_label")]
+visible = false
 texture_filter = 4
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vyalh")
+damage_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/DamageLabel")
+attack_speed_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer/AttackSpeedLabel")
+range_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/VBoxContainer/RangeLabel")
+critic_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer4/VBoxContainer2/CriticLabel")
+level_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/LevelContainer/LevelLabel")
+current_exp_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer/CurrentExpLabel")
+required_exp_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer/RequiredExpLabel")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = -163.0
-offset_right = -1.0
-offset_bottom = 266.0
+offset_left = -174.0
+offset_right = -12.0
+offset_bottom = 327.0
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
 theme = SubResource("Theme_vyalh")
 theme_override_styles/panel = SubResource("StyleBoxFlat_dw57d")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 6
 
-[node name="ExpDataContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="ExpDataContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="LevelContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ExpDataContainer"]
+[node name="LevelContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/LevelContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/LevelContainer"]
 layout_mode = 2
 text = "Level:"
 
-[node name="LevelLabel" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/LevelContainer"]
+[node name="LevelLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/LevelContainer"]
 layout_mode = 2
 text = "1"
 
-[node name="ExpContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ExpDataContainer"]
+[node name="ExpContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
 layout_mode = 2
 text = "EXP"
 
-[node name="CurrentExpLabel" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
+[node name="CurrentExpLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
 layout_mode = 2
 text = "0"
 
-[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
+[node name="Label3" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
 layout_mode = 2
 text = "/"
 
-[node name="RequiredExpLabel" type="Label" parent="PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
+[node name="RequiredExpLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer"]
 layout_mode = 2
 text = "50"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 texture_filter = 2
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -89,27 +132,27 @@ texture = ExtResource("2_vyalh")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="damage" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="damage" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5794276, 0.76647013, 0.79482156, 1)
 theme_override_font_sizes/font_size = 14
 text = "Damage:"
 
-[node name="DamageLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="DamageLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "50"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 texture_filter = 2
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -118,27 +161,27 @@ texture = ExtResource("3_dw57d")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5803922, 0.7647059, 0.79607844, 1)
 theme_override_font_sizes/font_size = 14
 text = "At. speed:"
 
-[node name="AttackSpeedLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+[node name="AttackSpeedLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "50"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3"]
 texture_filter = 4
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -147,27 +190,27 @@ texture = ExtResource("4_725y3")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5803922, 0.7647059, 0.79607844, 1)
 theme_override_font_sizes/font_size = 14
 text = "Range:"
 
-[node name="RangeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="RangeLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "50"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer4"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer4"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
@@ -175,17 +218,27 @@ texture = ExtResource("5_cuf0w")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer4"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer4/VBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer4/VBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5803922, 0.7647059, 0.79607844, 1)
 theme_override_font_sizes/font_size = 14
 text = "Crit. chance:"
 
-[node name="CriticLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer4/VBoxContainer2"]
+[node name="CriticLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer4/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "50"
+
+[node name="ButtonsContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SellButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+theme = SubResource("Theme_gs8y8")
+text = "Sell"
+
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/SellButton" to="." method="_on_sell_button_pressed"]

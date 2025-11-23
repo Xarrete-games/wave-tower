@@ -10,86 +10,100 @@ enum TowerBuild {
 	BLUE = 70,
 }
 
-var red_tower_price: int = TowerBuild.RED
-var green_tower_price: int = TowerBuild.GREEN
-var blue_tower_price: int = TowerBuild.BLUE
-var _last_red_tower_price: int = TowerBuild.RED
-var _last_green_tower_price: int = TowerBuild.GREEN
-var _last_blue_tower_price: int = TowerBuild.BLUE
+var base_prices: Dictionary[Tower.TowerType, int] = {
+	Tower.TowerType.RED: TowerBuild.RED,
+	Tower.TowerType.GREEN: TowerBuild.GREEN,
+	Tower.TowerType.BLUE: TowerBuild.BLUE,
+}
+
+var build_prices: Dictionary[Tower.TowerType, int] = {
+	Tower.TowerType.RED: TowerBuild.RED,
+	Tower.TowerType.GREEN: TowerBuild.GREEN,
+	Tower.TowerType.BLUE: TowerBuild.BLUE,
+}
+
+var sell_prices: Dictionary[Tower.TowerType, int] = {
+	Tower.TowerType.RED: TowerBuild.RED,
+	Tower.TowerType.GREEN: TowerBuild.GREEN,
+	Tower.TowerType.BLUE: TowerBuild.BLUE,
+}
+
+
+# free towers
 var _free_towers_available = 0
 
 func _ready() -> void:
-	TowerPlacementManager.tower_placed.connect(_on_tower_placed)
+	TowerPlacementManager.tower_count_change.connect(_on_tower_count_change)
 
 func add_free_tower(amount: int = 1) -> void:
-	if _free_towers_available == 0:
-		_last_red_tower_price = red_tower_price
-		_last_green_tower_price = green_tower_price
-		_last_blue_tower_price = blue_tower_price
-		red_tower_price = 0
-		green_tower_price = 0
-		blue_tower_price = 0
-		_emit_all_towers_change()
-	
 	_free_towers_available += amount
-
-func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
-	if _are_free_towers_avaible():
-		return
-	
-	var base_price: int
-
-	match tower_type:
-		Tower.TowerType.RED:
-			base_price = TowerBuild.RED
-		Tower.TowerType.GREEN:
-			base_price = TowerBuild.GREEN
-		Tower.TowerType.BLUE:
-			base_price = TowerBuild.BLUE		
-		_:
-			push_error("[Price.gd] Invalid tower type")
-			return
-	
-	# calculate new price
-	var increase_amount = float(base_price) * price_increase_percent * float(amount)
-	var new_price = base_price + roundi(increase_amount)
-	
-	# update and emit new price
-	match tower_type:
-		Tower.TowerType.RED:
-			red_tower_price = new_price
-		Tower.TowerType.GREEN:
-			green_tower_price = new_price
-		Tower.TowerType.BLUE:
-			blue_tower_price = new_price
-
-	tower_price_change.emit(tower_type, new_price)
+	_emit_all_towers_change()
 
 func get_price(tower_type: Tower.TowerType) -> int:
-	match tower_type:
-		Tower.TowerType.RED: return red_tower_price
-		Tower.TowerType.GREEN: return green_tower_price
-		Tower.TowerType.BLUE: return blue_tower_price
-	
-	push_error("[Price.gd] Invalid tower type")
-	return 0
+	if _next_tower_is_free():
+		return 0	
+	return build_prices[tower_type]
 
-# handle free towers counter and indicates if prices must be increased
-func _are_free_towers_avaible() -> bool:
-	if _free_towers_available == 0:
-		return false
+func get_sell_price(tower_type: Tower.TowerType) -> int:
+	return sell_prices[tower_type]
+
+func get_base_price(tower_type: Tower.TowerType) -> int:
+	return base_prices[tower_type]
+
+func get_next_price(base_price: int, amount: int) -> int:
+	var increase_amount = float(base_price) * price_increase_percent * float(amount)
+	return base_price + roundi(increase_amount)
+
+func _on_tower_count_change(
+	tower_type: Tower.TowerType, 
+	amount: int, 
+	event: TowerPlacementManager.TowerEvent) -> void:
+		if event == TowerPlacementManager.TowerEvent.SOLD:
+			_on_tower_sold(tower_type, amount)
+		else:
+			_on_tower_placed(tower_type, amount)
+
+func _on_tower_sold(tower_type: Tower.TowerType, amount: int) -> void:
+	var base_price = get_base_price(tower_type)
+	var new_price = get_next_price(base_price, amount)
 	
-	_free_towers_available -= 1
+	build_prices[tower_type] = new_price
+	if amount >= 1:
+		var new_sell_price = get_next_price(base_price, amount - 1)
+		sell_prices[tower_type] = new_sell_price
+	else:
+		sell_prices[tower_type] = base_price
 	
-	# if no free towers avaible set last values again
-	if _free_towers_available == 0:
-		red_tower_price = _last_red_tower_price
-		green_tower_price = _last_green_tower_price
-		blue_tower_price = _last_blue_tower_price
-		_emit_all_towers_change()
-	return true
+	_emit_tower_price(tower_type)
+
+func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
+	# update build price and sell price
+	var base_price = get_base_price(tower_type)
+	var new_price = get_next_price(base_price, amount)
 	
+	sell_prices[tower_type] = build_prices[tower_type]
+	build_prices[tower_type] = new_price
+	if _next_tower_is_free():
+		_free_towers_available -= 1
+		if _free_towers_available == 0:
+			_emit_all_towers_change()
+	else:
+		_emit_tower_price(tower_type)
+	
+func _next_tower_is_free() -> bool:
+	return _free_towers_available >= 1
+
+func _emit_tower_price(tower_type: Tower.TowerType) -> void:
+	if _next_tower_is_free():
+		tower_price_change.emit(tower_type, 0)
+	else:
+		tower_price_change.emit(tower_type, build_prices[tower_type])
+
 func _emit_all_towers_change() -> void:
-	tower_price_change.emit(Tower.TowerType.RED, red_tower_price)
-	tower_price_change.emit(Tower.TowerType.GREEN, green_tower_price)
-	tower_price_change.emit(Tower.TowerType.BLUE, blue_tower_price)
+	# when towers are free
+	if _next_tower_is_free():
+		for tower_type in Tower.TowerType.values():
+			tower_price_change.emit(tower_type, 0)
+	else:
+		for tower_type in Tower.TowerType.values():
+			tower_price_change.emit(tower_type, build_prices[tower_type])

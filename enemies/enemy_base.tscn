@@ -142,3 +142,10 @@ position = Vector2(0, -56)
 
 [node name="GoldDroppedPos" type="Marker2D" parent="."]
 position = Vector2(0, -88)
+
+[node name="PoisonDamageTimer" type="Timer" parent="."]
+
+[node name="BurnDamageTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="PoisonDamageTimer" to="." method="_on_poison_damage_timer_timeout"]
+[connection signal="timeout" from="BurnDamageTimer" to="." method="_on_burn_damage_timer_timeout"]
