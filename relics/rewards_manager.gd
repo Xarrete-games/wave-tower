@@ -51,12 +51,18 @@ func reroll() -> void:
 	rewards_ui.set_relics(rewards)
 
 func show_rewards_ui() -> void:
+	if rewards_ui:
+		await rewards_ui.tree_exited
+	
 	rewards_ui = REWARDS_UI.instantiate()
 	var rewards = _get_rewards()
 	var canvas = get_tree().root.get_node("Game").get_node("RewardsLayer")
 	canvas.add_child(rewards_ui)
 	rewards_ui.set_relics(rewards)
 	rewards_ui.reliq_selected.connect(_on_relidc_selected)
+	rewards_ui.tree_exited.connect(func ():
+		rewards_ui = null
+		)
 
 func apply_discount_to_all_relics(discount: int) -> void:
 	for relic: Relic in all_rewards:
