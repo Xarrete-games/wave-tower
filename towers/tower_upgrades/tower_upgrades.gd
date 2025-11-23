@@ -41,32 +41,7 @@ func emit_all_buffs_change() -> void:
 func emit_buffs_change(tower_type: Tower.TowerType) -> void:
 	tower_buffs_change.emit(tower_type, get_buffs(tower_type))
 
-func _on_tower_placed(tower_type: Tower.TowerType, amount: int, _event) -> void:
-	match tower_type:
-		Tower.TowerType.RED: _handle_red_updates(amount)
-		Tower.TowerType.GREEN: _handle_green_updates(amount)
-		Tower.TowerType.BLUE: _handle_blue_updates(amount)
-
-func _handle_red_updates(amount: int) -> void:
-	match amount:
-		AMOUNT_TO_REWARD_1: RewardsManager.show_rewards_ui(towers_buffs)
-		AMOUNT_TO_REWARD_2: RewardsManager.show_rewards_ui(towers_buffs)
-		AMOUNT_TO_REWARD_3: RewardsManager.show_rewards_ui(towers_buffs)
-		AMOUNT_TO_REWARD_4: RewardsManager.show_rewards_ui(towers_buffs)
-	
-func _handle_green_updates(amount: int) -> void:
-	match amount:
-		AMOUNT_TO_REWARD_1: RewardsManager.show_rewards_ui(towers_buffs)
-		AMOUNT_TO_REWARD_2: RewardsManager.show_rewards_ui(towers_buffs)
-		AMOUNT_TO_REWARD_3: RewardsManager.show_rewards_ui(towers_buffs)
-		AMOUNT_TO_REWARD_4: RewardsManager.show_rewards_ui(towers_buffs)
-	
-func _handle_blue_updates(amount: int) -> void:
-	match amount:
-		AMOUNT_TO_REWARD_1: RewardsManager.show_rewards_ui(towers_buffs)
-		AMOUNT_TO_REWARD_2: RewardsManager.show_rewards_ui(towers_buffs)
-		AMOUNT_TO_REWARD_3: RewardsManager.show_rewards_ui(towers_buffs)
-		AMOUNT_TO_REWARD_4: RewardsManager.show_rewards_ui(towers_buffs)
-		
+func _on_tower_placed(_tower_type: Tower.TowerType, _amount: int, _event) -> void:
+	pass
 
 	

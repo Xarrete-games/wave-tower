@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bfym6wmesrxxa"]
+[gd_scene load_steps=18 format=3 uid="uid://bfym6wmesrxxa"]
 
 [ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/towers_menu/towers_menu.gd" id="1_d3tgk"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="2_d3tgk"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://oj5ilwusjvuo" path="res://towers/green/green_tower.tscn" id="4_lxxr0"]
 [ext_resource type="PackedScene" uid="uid://cwyyp2r266blt" path="res://towers/blue/blue_tower.tscn" id="5_61shu"]
 [ext_resource type="Texture2D" uid="uid://dheamk0vu60q6" path="res://assets/sprites/towers/torreticas_hover.png" id="6_7564t"]
+[ext_resource type="Theme" uid="uid://dswsb3nw14dn7" path="res://ui/styles/themes/menu_theme.tres" id="8_7564t"]
+[ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/shared/gold_price/gold_price.tscn" id="8_s4otn"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7564t"]
 load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
@@ -61,6 +63,25 @@ tower_scene = ExtResource("5_61shu")
 icon = SubResource("AtlasTexture_qst0h")
 icon_hover = SubResource("AtlasTexture_f4t37")
 
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="RewardsUIButon" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_7564t")
+text = "RELIC"
+
+[node name="GoldPrice" parent="MarginContainer/VBoxContainer" instance=ExtResource("8_s4otn")]
+layout_mode = 2
+alignment = 1
+
 [connection signal="pressed" from="RedTowerButton" to="." method="_on_red_tower_button_pressed"]
 [connection signal="pressed" from="GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
 [connection signal="pressed" from="BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/RewardsUIButon" to="." method="_on_rewards_ui_buton_pressed"]
