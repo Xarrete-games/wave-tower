@@ -50,4 +50,9 @@ texture = ExtResource("6_i2402")
 texture_scale = 3.0
 script = ExtResource("7_0cvpj")
 
+[node name="MouseDetector" parent="." index="9"]
+offset_left = -29.0
+offset_top = -153.0
+offset_right = 31.0
+
 [connection signal="timeout" from="AttackTickTimer" to="." method="_on_attack_tick_timer_timeout"]

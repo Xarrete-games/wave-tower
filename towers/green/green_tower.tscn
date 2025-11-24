@@ -38,3 +38,8 @@ energy = 0.5
 texture = ExtResource("4_f0nw3")
 texture_scale = 3.0
 script = ExtResource("5_xiqao")
+
+[node name="MouseDetector" parent="." index="7"]
+offset_left = -33.0
+offset_top = -183.0
+offset_right = 31.0

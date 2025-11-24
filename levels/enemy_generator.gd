@@ -104,6 +104,9 @@ func _check_enemies_left() -> void:
 		
 # init the next wave or end the level if it's the last wave
 func _init_next_wave() -> void:
+	if LiveManager.lives <= 0:
+		return
+		
 	if current_wave_number == total_waves:
 		print("LEVEL DONE")
 		EnemyManager.last_wave_finished.emit()
