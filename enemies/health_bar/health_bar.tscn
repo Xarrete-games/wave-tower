@@ -7,6 +7,7 @@
 [node name="HealthBar" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_uke46")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
@@ -14,6 +15,7 @@ layout_mode = 1
 anchors_preset = -1
 offset_right = 40.0
 offset_bottom = 8.0
+mouse_filter = 2
 value = 50.0
 nine_patch_stretch = true
 texture_under = ExtResource("2_olp7g")
