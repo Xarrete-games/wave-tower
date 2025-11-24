@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://bayb10jsajj4a"]
+
+[ext_resource type="FontFile" uid="uid://g71rdl455gfw" path="res://assets/fonts/RobotoMono-Medium.ttf" id="1_560gi"]
+[ext_resource type="Script" uid="uid://dxhoravxnebf" path="res://ui/main_menu/credits.gd" id="1_h5co8"]
+[ext_resource type="Theme" uid="uid://dswsb3nw14dn7" path="res://ui/styles/themes/menu_theme.tres" id="2_g65cv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5co8"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0.9019608)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g65cv"]
+font = ExtResource("1_560gi")
+font_size = 48
+font_color = Color(0.98758966, 0, 0.06100855, 1)
+
+[node name="Credits" type="CanvasLayer"]
+script = ExtResource("1_h5co8")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h5co8")
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="RibiLabel" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "CarlosRibesDev - programing"
+label_settings = SubResource("LabelSettings_g65cv")
+horizontal_alignment = 1
+
+[node name="AngelLabel" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "El Angelet - un poquet de todo (multitasking)"
+label_settings = SubResource("LabelSettings_g65cv")
+horizontal_alignment = 1
+
+[node name="SaraLabel" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Babu - isometric artist"
+label_settings = SubResource("LabelSettings_g65cv")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.92100006
+anchor_right = 1.0
+anchor_bottom = 0.075
+offset_left = 0.67993164
+grow_horizontal = 0
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+
+[node name="ExitButton" type="Button" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_g65cv")
+text = "Exit"
+
+[connection signal="pressed" from="MarginContainer/ExitButton" to="." method="_on_exit_button_pressed"]
