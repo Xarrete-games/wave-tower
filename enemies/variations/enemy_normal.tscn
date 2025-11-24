@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmqbn2q5splor"]
+
+[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_oa8sg"]
+
+[node name="EnemyNormal" instance=ExtResource("1_oa8sg")]
+max_healt = 40.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-2, 1)
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(12, -1)
+scale = Vector2(0.1, 0.1)
+
+[node name="HealthBar" parent="." index="4"]
+offset_top = -78.0
+offset_bottom = -78.0
