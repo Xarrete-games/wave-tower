@@ -19,7 +19,13 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed:
 			clear_tower_selected()
-			
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.is_pressed():
+			clear_tower_selected()
+			get_viewport().set_input_as_handled()
+		
 func reset_towers_count() -> void:
 	_update_tower_count(Tower.TowerType.RED, 0,TowerEvent.RESET)
 	_update_tower_count(Tower.TowerType.GREEN, 0,TowerEvent.RESET)
