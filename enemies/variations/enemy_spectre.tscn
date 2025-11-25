@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_skkk3"]
 
 [node name="EnemySpectre" instance=ExtResource("1_skkk3")]
-base_speed = 100.0
-max_healt = 50.0
+base_speed = 120.0
+max_healt = 120.0
 base_gold_value = 5
 
 [node name="CollisionShape2D" parent="." index="0"]

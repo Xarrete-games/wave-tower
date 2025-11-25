@@ -196,6 +196,7 @@ fill_from = Vector2(0.5071225, 0.48433048)
 
 [node name="Golem" instance=ExtResource("1_umep0")]
 base_speed = 60.0
+max_healt = 200.0
 base_gold_value = 20
 
 [node name="CollisionShape2D" parent="." index="0"]
@@ -203,6 +204,7 @@ position = Vector2(0, -4)
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 light_mask = 0
+scale = Vector2(0.14, 0.14)
 sprite_frames = SubResource("SpriteFrames_cwph5")
 frame_progress = 0.27539167
 flip_h = true
