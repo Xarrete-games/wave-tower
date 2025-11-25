@@ -10,6 +10,6 @@
 
 [resource]
 script = ExtResource("6_1wefi")
-enemy_waves = Array[ExtResource("1_p8paa")]([ExtResource("6_1rr4n"), ExtResource("4_k1cqn"), ExtResource("2_ulofb"), ExtResource("3_qycue"), ExtResource("5_2etpp"), null, null])
+enemy_waves = Array[ExtResource("1_p8paa")]([ExtResource("6_1rr4n"), ExtResource("4_k1cqn"), ExtResource("2_ulofb"), ExtResource("3_qycue"), ExtResource("5_2etpp")])
 initial_gold = 200
 metadata/_custom_type_script = "uid://dx42a8fkpk6fb"
