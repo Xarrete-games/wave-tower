@@ -1,0 +1,92 @@
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=18 format=3 uid="uid://bbuitwiq2ytka"]
+
+[ext_resource type="Script" uid="uid://dcpnbeke2jpe" path="res://enemies/enemy_generator/resources_definitions/enemy_group_data.gd" id="1_5vrmr"]
+[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="2_4n2wj"]
+[ext_resource type="Script" uid="uid://bgcq2ktq3w7dq" path="res://enemies/enemy_generator/resources_definitions/enemy_individual_group.gd" id="2_c2mhg"]
+
+[sub_resource type="Resource" id="Resource_4n2wj"]
+script = ExtResource("2_c2mhg")
+amount = 1
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_081ff"]
+script = ExtResource("1_5vrmr")
+enemy_group = SubResource("Resource_4n2wj")
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[sub_resource type="Resource" id="Resource_c2mhg"]
+script = ExtResource("2_c2mhg")
+enemy_type = 1
+amount = 1
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_wco3f"]
+script = ExtResource("1_5vrmr")
+enemy_group = SubResource("Resource_c2mhg")
+time_to_start = 2.0
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[sub_resource type="Resource" id="Resource_1vc77"]
+script = ExtResource("2_c2mhg")
+enemy_type = 2
+amount = 1
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_fxbmn"]
+script = ExtResource("1_5vrmr")
+enemy_group = SubResource("Resource_1vc77")
+time_to_start = 4.0
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[sub_resource type="Resource" id="Resource_6hnhq"]
+script = ExtResource("2_c2mhg")
+enemy_type = 3
+amount = 1
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_3pouv"]
+script = ExtResource("1_5vrmr")
+enemy_group = SubResource("Resource_6hnhq")
+time_to_start = 6.0
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[sub_resource type="Resource" id="Resource_hllxh"]
+script = ExtResource("2_c2mhg")
+enemy_type = 4
+amount = 3
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_hdbgb"]
+script = ExtResource("1_5vrmr")
+enemy_group = SubResource("Resource_hllxh")
+time_to_start = 8.0
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[sub_resource type="Resource" id="Resource_1b823"]
+script = ExtResource("2_c2mhg")
+enemy_type = 6
+amount = 3
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_1auey"]
+script = ExtResource("1_5vrmr")
+enemy_group = SubResource("Resource_1b823")
+time_to_start = 11.5
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[sub_resource type="Resource" id="Resource_oo3b6"]
+script = ExtResource("2_c2mhg")
+enemy_type = 5
+amount = 1
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_e1c3f"]
+script = ExtResource("1_5vrmr")
+enemy_group = SubResource("Resource_oo3b6")
+time_to_start = 15.0
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[resource]
+script = ExtResource("2_4n2wj")
+groups_data = Array[ExtResource("1_5vrmr")]([SubResource("Resource_081ff"), SubResource("Resource_wco3f"), SubResource("Resource_fxbmn"), SubResource("Resource_3pouv"), SubResource("Resource_hdbgb"), SubResource("Resource_1auey"), SubResource("Resource_e1c3f")])
+metadata/_custom_type_script = "uid://civj4pbtbhl5o"
