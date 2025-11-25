@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvlhurj1t8m8v"
-path="res://.godot/imported/enemy_tank.png-93f36d2d45ffc329cac766272b0d9251.ctex"
+uid="uid://cmtd3x3pprnva"
+path="res://.godot/imported/golem21.png-e8ac13861625927d26a25957b7973628.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/enemy_tank.png"
-dest_files=["res://.godot/imported/enemy_tank.png-93f36d2d45ffc329cac766272b0d9251.ctex"]
+source_file="res://assets/sprites/enemies/black_golem/golem21.png"
+dest_files=["res://.godot/imported/golem21.png-e8ac13861625927d26a25957b7973628.ctex"]
 
 [params]
 

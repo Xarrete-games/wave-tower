@@ -1,28 +1,34 @@
 [gd_resource type="Resource" script_class="EnemyWave" load_steps=8 format=3 uid="uid://bcrshs1yir3ko"]
 
 [ext_resource type="Script" uid="uid://dcpnbeke2jpe" path="res://enemies/enemy_generator/resources_definitions/enemy_group_data.gd" id="1_6g4c2"]
-[ext_resource type="Resource" uid="uid://bw05aenxvb640" path="res://enemies/enemy_generator/individual_group/group_5_fast.tres" id="2_yv0id"]
-[ext_resource type="Resource" uid="uid://dcdu1ge2xx6d6" path="res://enemies/enemy_generator/multi_group/5_normal_5_fast.tres" id="3_hcqbl"]
+[ext_resource type="Script" uid="uid://bgcq2ktq3w7dq" path="res://enemies/enemy_generator/resources_definitions/enemy_individual_group.gd" id="3_6g4c2"]
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="4_j2g56"]
 
-[sub_resource type="Resource" id="Resource_lic82"]
+[sub_resource type="Resource" id="Resource_ywqkd"]
+script = ExtResource("3_6g4c2")
+enemy_type = 3
+amount = 3
+interval_spawn = 2.0
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_6g4c2"]
 script = ExtResource("1_6g4c2")
-enemy_group = ExtResource("2_yv0id")
+enemy_group = SubResource("Resource_ywqkd")
 metadata/_custom_type_script = "uid://dcpnbeke2jpe"
 
-[sub_resource type="Resource" id="Resource_g0jsh"]
-script = ExtResource("1_6g4c2")
-enemy_group = ExtResource("3_hcqbl")
-time_to_start = 5.0
-metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+[sub_resource type="Resource" id="Resource_yv0id"]
+script = ExtResource("3_6g4c2")
+enemy_type = 5
+amount = 1
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
 
-[sub_resource type="Resource" id="Resource_tir47"]
+[sub_resource type="Resource" id="Resource_hcqbl"]
 script = ExtResource("1_6g4c2")
-enemy_group = ExtResource("3_hcqbl")
-time_to_start = 5.0
+enemy_group = SubResource("Resource_yv0id")
+time_to_start = 8.0
 metadata/_custom_type_script = "uid://dcpnbeke2jpe"
 
 [resource]
 script = ExtResource("4_j2g56")
-groups_data = Array[ExtResource("1_6g4c2")]([SubResource("Resource_lic82"), SubResource("Resource_g0jsh"), SubResource("Resource_tir47")])
+groups_data = Array[ExtResource("1_6g4c2")]([SubResource("Resource_6g4c2"), SubResource("Resource_hcqbl")])
 metadata/_custom_type_script = "uid://civj4pbtbhl5o"

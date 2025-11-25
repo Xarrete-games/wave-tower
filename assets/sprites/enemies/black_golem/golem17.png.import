@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx46xunttpggt"
-path="res://.godot/imported/enemy_normal.png-626102be6f2849d3de4dbed89cba7065.ctex"
+uid="uid://crfw8vfs3tlhy"
+path="res://.godot/imported/golem17.png-18d935350a5655116d6651bfde53f9dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/enemy_normal.png"
-dest_files=["res://.godot/imported/enemy_normal.png-626102be6f2849d3de4dbed89cba7065.ctex"]
+source_file="res://assets/sprites/enemies/black_golem/golem17.png"
+dest_files=["res://.godot/imported/golem17.png-18d935350a5655116d6651bfde53f9dc.ctex"]
 
 [params]
 

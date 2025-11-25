@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmar5ssgj8njo"
-path="res://.godot/imported/enemy_fast.png-f0a55fec097d06b8b8f067827ae45d11.ctex"
+uid="uid://1ubwjs2kvuia"
+path="res://.godot/imported/golem_back2_black.png-a8788a9b249d8e057df2b05e294b49cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/enemy_fast.png"
-dest_files=["res://.godot/imported/enemy_fast.png-f0a55fec097d06b8b8f067827ae45d11.ctex"]
+source_file="res://assets/sprites/enemies/black_golem/golem_back2_black.png"
+dest_files=["res://.godot/imported/golem_back2_black.png-a8788a9b249d8e057df2b05e294b49cd.ctex"]
 
 [params]
 

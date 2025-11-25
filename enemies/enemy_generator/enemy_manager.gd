@@ -19,13 +19,16 @@ const ENEMY_BUBA = preload("uid://xk0wj86s8ddb")
 const ENEMY_TANK = preload("uid://dvri0e4k4qwho")
 const ENEMY_GOLEM = preload("uid://cdb5n1d4ubx72")
 const ENEMY_SKELETON = preload("uid://bnpwdbi54cn00")
+const BOSS_BLACK_GOLEM = preload("uid://bbwwsea7icfed")
+
 
 const ENEMIES_SCENES: Dictionary[Enemy.EnemyType, PackedScene] = {
 	Enemy.EnemyType.NORMAL: ENEMY_NORMAL,
 	Enemy.EnemyType.BUBA: ENEMY_BUBA,
 	Enemy.EnemyType.TANK: ENEMY_TANK,
 	Enemy.EnemyType.GOLEM: ENEMY_GOLEM,
-	Enemy.EnemyType.SKELETON: ENEMY_SKELETON
+	Enemy.EnemyType.SKELETON: ENEMY_SKELETON,
+	Enemy.EnemyType.BLACK_GOLEM: BOSS_BLACK_GOLEM,
 }
 
 func get_enemy_scene(enemy_type: Enemy.EnemyType) -> PackedScene:
