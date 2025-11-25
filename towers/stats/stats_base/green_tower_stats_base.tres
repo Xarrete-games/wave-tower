@@ -4,11 +4,13 @@
 
 [resource]
 script = ExtResource("1_c2jo0")
-base_damage = 1.0
+base_damage = 6.0
 base_attack_range = 300.0
-base_attack_speed = 1.5
+base_attack_speed = 2.0
 base_critic_chance = 0.0
 damage_per_level = 0.0
 attack_range_level = 5.0
-attack_speed_per_level = -0.1
+attack_speed_per_level = -0.19
+critic_chance_per_level = 0.0
+critic_damage_per_level = 0.0
 metadata/_custom_type_script = "uid://4g7dakacaab4"

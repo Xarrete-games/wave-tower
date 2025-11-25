@@ -4,6 +4,5 @@
 
 [resource]
 script = ExtResource("1_y764q")
-enemy_type = 1
-interval_spawn = 2.0
+amount = 3
 metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
