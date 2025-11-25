@@ -9,6 +9,7 @@ var total_waves: int
 var current_wave: EnemyWave
 var total_groups: int
 var groups_handled_count: int
+var groups_init_count: int
 
 @onready var enemy_paths: EnemyPaths = $"../EnemyPaths"
 @onready var enemies_container: Node2D = $"../EnemiesContainer"
@@ -26,13 +27,23 @@ func init_next_wave() -> void:
 	# reset groups counter
 	total_groups = current_wave.groups_data.size()
 	groups_handled_count = 0
+	groups_init_count = 0
 	# handle groups
 	for enemy_group_data: EnemyGroupData in current_wave.groups_data:
+		if not enemy_group_data or not enemy_group_data.enemy_group:
+			push_error("[EnemyGenerator]: enemy group data is null")
+			continue
+		groups_init_count += 1
 		_handle_ememy_group(
 			enemy_group_data.enemy_group,
 			enemy_group_data.time_to_start,
 			enemy_group_data.path
 		)
+	
+	if groups_init_count == 0:
+		await get_tree().create_timer(0.1).timeout
+		push_error("[EnemyGenerator]: 0 enemy groups created force wave finish")
+		_report_finished()
 		
 func _load_level_data(level: Level) -> void:
 	_level = level
@@ -51,6 +62,7 @@ func _handle_ememy_group(
 	await get_tree().create_timer(time_to_start).timeout
 	# individual group
 	if ememy_group is EnemyIndividualGroup:
+		
 		_hand_enemy_group(
 			ememy_group.enemy_type,
 			ememy_group.amount,
@@ -85,6 +97,7 @@ func _generate_enemy(enemy_type: Enemy.EnemyType, path: int) -> void:
 	enemy.target_reached.connect(_on_enemy_target_reached)
 	enemies_container.add_child(enemy)
 	enemy.set_path_follow(enemy_paths.get_new_path_follow(path))
+	enemy.enable()
 
 func _on_group_handled() -> void:
 	groups_handled_count += 1
@@ -98,12 +111,12 @@ func _on_enemy_left(_node: Node) -> void:
 
 func _check_enemies_left() -> void:	
 	if enemies_container.get_child_count() == 0:
-		_init_next_wave()
+		_report_finished()
 		if enemies_container.child_exiting_tree.is_connected(_on_enemy_left):
 			enemies_container.child_exiting_tree.disconnect(_on_enemy_left)
 		
 # init the next wave or end the level if it's the last wave
-func _init_next_wave() -> void:
+func _report_finished() -> void:
 	if LiveManager.lives <= 0:
 		return
 		

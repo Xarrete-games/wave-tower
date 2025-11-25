@@ -11,6 +11,8 @@ var _is_valid_placement = false
 
 func _ready():
 	towers_menu.tower_selected.connect(_on_tower_selected)
+	EnemyManager.wave_finished.connect(_cancel_tower)
+	EnemyManager.last_wave_finished.connect(_cancel_tower)
 
 func _process(_delta: float) -> void:
 	if not _is_placing or not is_instance_valid(_current_tower_instance):
@@ -33,9 +35,8 @@ func _input(event: InputEvent) -> void:
 			_place_tower()
 	# calcel
 	elif event.is_action("exit"):
-		_current_tower_instance.queue_free()
-		_current_tower_instance = null
-		_is_placing = false
+		_cancel_tower()
+		
 
 # should be called each time a level is created
 func update_nodes_from_current_level(current_level: Level) -> void:
@@ -54,6 +55,12 @@ func _place_tower() -> void:
 	_current_tower_instance.enable()
 	_current_tower_instance.tile_pos = tile_pos
 	_current_tower_instance = null
+
+func _cancel_tower() -> void:
+	if _current_tower_instance:
+		_current_tower_instance.queue_free()
+		_current_tower_instance = null
+		_is_placing = false
 
 func _on_tower_selected(tower_scene: PackedScene) -> void:
 	if _is_placing:

@@ -29,32 +29,13 @@ var _last_is_right_direction: bool = false
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var numbers_displayed_pos: Marker2D = $NumbersDisplayedPos
 @onready var gold_dropped_pos: Marker2D = $GoldDroppedPos
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 # debuffs timers
 @onready var poison_damage_timer: Timer = $PoisonDamageTimer
 @onready var burn_damage_timer: Timer = $BurnDamageTimer
 
-# percentage of remaining heal
-func get_remaining_heal() -> float:
-	if max_healt <= 0:
-		return 0.0
-	var health_ratio: float = health / max_healt
-	var percentage: float = health_ratio * 100.0
-	
-	return min(100.0, percentage)
-
-func get_damage(attack: Attack) -> void:
-	_handle_debuffs(attack.debuffs)
-	_set_health(health - attack.damage)
-	_play_hit_animation()
-	_show_damage(attack)
-
-	if health <= 0:
-		_die()
-		
-func set_path_follow(path_follow: PathFollow2D) -> void:
-	_path_follow = path_follow
-
 func _ready() -> void:
+	disable()
 	_speed = base_speed
 	health_bar.set_max_health(max_healt)
 	_set_health(max_healt)
@@ -90,10 +71,39 @@ func _process(delta):
 	var animation = "top right" if previous_global_y > global_position.y else "down right"
 	if animated_sprite_2d.animation != animation:
 		animated_sprite_2d.play(animation)
+	
+func set_path_follow(path_follow: PathFollow2D) -> void:
+	_path_follow = path_follow
+	
 
+func disable() -> void:
+	animated_sprite_2d.visible = false
+	collision_shape_2d.disabled = true
+
+func enable() -> void:
+	animated_sprite_2d.visible = true
+	collision_shape_2d.disabled = false
 # --------------------
 # --- HEALT ---
 # --------------------
+# percentage of remaining heal
+func get_remaining_heal() -> float:
+	if max_healt <= 0:
+		return 0.0
+	var health_ratio: float = health / max_healt
+	var percentage: float = health_ratio * 100.0
+	
+	return min(100.0, percentage)
+
+func get_damage(attack: Attack) -> void:
+	_handle_debuffs(attack.debuffs)
+	_set_health(health - attack.damage)
+	_play_hit_animation()
+	_show_damage(attack)
+
+	if health <= 0:
+		_die()
+
 func _play_hit_animation() -> void:
 	if hit_tween and hit_tween.is_running():
 		hit_tween.kill()
