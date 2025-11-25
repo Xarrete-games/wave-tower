@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://dqupr6bw5e16g"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://relics/relic_data.gd" id="1_75g13"]
+[ext_resource type="Texture2D" uid="uid://bedv81wbj4j7e" path="res://assets/sprites/relics/metronome.png" id="2_p4a3n"]
+
+[resource]
+script = ExtResource("1_75g13")
+id = "Metronome"
+description = "Increase attack speed of all towers by 10"
+texture = ExtResource("2_p4a3n")
+type = 3
+rarity = 1
+metadata/_custom_type_script = "uid://u8jtn52xm88d"
