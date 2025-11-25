@@ -1,6 +1,6 @@
 class_name PauseMenu extends Control
 
-const MAIN_MENU = preload("uid://4i6kl0xurgeg")
+var MAIN_MENU = load("uid://4i6kl0xurgeg")
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
