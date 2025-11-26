@@ -163,7 +163,6 @@ fill_from = Vector2(0.5071225, 0.48433048)
 
 [node name="Skeleton" instance=ExtResource("1_s0nc2")]
 base_speed = 120.0
-base_gold_value = 3
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_r3u0i")

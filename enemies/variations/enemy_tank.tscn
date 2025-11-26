@@ -4,7 +4,8 @@
 
 [node name="EnemyTank" instance=ExtResource("1_s7s5g")]
 max_healt = 1000.0
-base_gold_value = 10
+base_gold_value = 100
+damage = 20
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-0.5, 4.5)

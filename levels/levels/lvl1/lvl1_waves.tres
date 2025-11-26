@@ -9,4 +9,5 @@
 [resource]
 script = ExtResource("5_ufb8k")
 enemy_waves = Array[ExtResource("1_7baw3")]([ExtResource("2_u2s2g"), ExtResource("3_va7fg"), ExtResource("4_4fmml")])
+initial_gold = 1000
 metadata/_custom_type_script = "uid://dx42a8fkpk6fb"

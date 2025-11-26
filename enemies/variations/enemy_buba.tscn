@@ -75,7 +75,7 @@ animations = [{
 
 [node name="EnemyBuba" instance=ExtResource("1_8wyci")]
 max_healt = 180.0
-base_gold_value = 5
+base_gold_value = 10
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-1, -9.5)
