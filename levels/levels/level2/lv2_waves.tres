@@ -11,4 +11,5 @@
 script = ExtResource("6_0e46p")
 enemy_waves = Array[ExtResource("1_1bqqy")]([ExtResource("2_gg4ei"), ExtResource("3_0e46p"), ExtResource("4_hycjd"), ExtResource("5_0e46p")])
 initial_gold = 200
+lives = 10
 metadata/_custom_type_script = "uid://dx42a8fkpk6fb"

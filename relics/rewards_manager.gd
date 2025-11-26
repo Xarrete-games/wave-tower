@@ -38,6 +38,14 @@ func _ready() -> void:
 	)
 	reset_rewards()
 
+func add_random_relics(amount: int) -> void:
+	if amount <= 0:
+		return
+	
+	for i in range(amount):
+		var relic = _get_random_relic()
+		RelicsManager.add_relic(relic, true)
+
 func reset_rewards() -> void:
 	all_rewards.clear()
 	for relic_object in relics_list:
@@ -47,7 +55,8 @@ func reset_rewards() -> void:
 	
 func reroll() -> void:
 	Score.gold -= reroll_price
-	reroll_price += 50
+	#dont increased reroll price
+	#reroll_price += 50
 	var rewards = _get_rewards()
 	rewards_ui.set_relics(rewards)
 
@@ -74,6 +83,12 @@ func _get_rewards() -> Array[Relic]:
 	var rewars_copy = all_rewards.duplicate()
 	rewars_copy.shuffle()
 	return rewars_copy.slice(0 ,3)
+
+func _get_random_relic() -> Relic:
+	randomize()
+	var rewars_copy = all_rewards.duplicate()
+	rewars_copy.shuffle()
+	return rewars_copy[0]
 	
 func _on_relidc_selected(relic: Relic) -> void:
 	if rewards_ui:

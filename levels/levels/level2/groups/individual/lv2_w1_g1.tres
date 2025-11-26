@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemyIndividualGroup" load_steps=2 format=3 uid="uid://dw2uabl2q5srd"]
+
+[ext_resource type="Script" uid="uid://bgcq2ktq3w7dq" path="res://enemies/enemy_generator/resources_definitions/enemy_individual_group.gd" id="1_fy86e"]
+
+[resource]
+script = ExtResource("1_fy86e")
+amount = 3
+interval_spawn = 1.0
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
