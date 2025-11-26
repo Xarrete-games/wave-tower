@@ -40,5 +40,6 @@ func _on_tower_price_change(tower_type: Tower.TowerType, price: int) -> void:
 
 func _on_rewards_ui_buton_pressed() -> void:
 	if RewardsManager.show_rewards_price <= Score.gold:
-		RewardsManager.show_rewards_price += 50
+		var next_price = roundi(RewardsManager.show_rewards_price * 1.10)
+		RewardsManager.show_rewards_price = next_price
 		RewardsManager.show_rewards_ui()

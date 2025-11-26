@@ -3,6 +3,7 @@ class_name Game extends Node2D
 @export var levels: Array[PackedScene]
 @export var pause : PackedScene
 @export var current_level_number: int = 1
+@export var initial_random_relics: int = 0
 
 var _current_level: Level
 
@@ -15,21 +16,23 @@ var _current_level: Level
 @onready var main_camera: MainCamera = $MainCamera
 @onready var config_layer: CanvasLayer = $ConfigLayer
 
+func _ready():
+	_hide_next_level_menu()
+	_load_level(current_level_number)
+	EnemyManager.last_wave_finished.connect(_show_next_level_menu)
+	await get_tree().create_timer(0.1).timeout
+	RewardsManager.add_random_relics(initial_random_relics)
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("exit"):
+		_open_config_menu()
+
 func reset_current_level() -> void:
 	if _current_level:
 		_current_level.queue_free()
 	RelicsManager.reset_relics()
 	RewardsManager.reset_rewards()
 	_load_level(current_level_number)
-
-func _ready():
-	_hide_next_level_menu()
-	_load_level(current_level_number)
-	EnemyManager.last_wave_finished.connect(_show_next_level_menu)
-
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("exit"):
-		_open_config_menu()
 
 func _load_level(level_number: int) -> void:
 	music_handler.stop_music()
