@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=6 format=3 uid="uid://c3gtvqdnqatph"]
+
+[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="1_7baw3"]
+[ext_resource type="Resource" uid="uid://vuun5hf1utr0" path="res://levels/levels/lvl1/waves/wave1.tres" id="2_u2s2g"]
+[ext_resource type="Resource" uid="uid://bxmb36xvn3m3h" path="res://levels/levels/lvl1/waves/wave2.tres" id="3_va7fg"]
+[ext_resource type="Resource" uid="uid://dpwrg7kn4jy1b" path="res://levels/levels/lvl1/waves/wave3.tres" id="4_4fmml"]
+[ext_resource type="Script" uid="uid://dx42a8fkpk6fb" path="res://enemies/enemy_generator/resources_definitions/level_data.gd" id="5_ufb8k"]
+
+[resource]
+script = ExtResource("5_ufb8k")
+enemy_waves = Array[ExtResource("1_7baw3")]([ExtResource("2_u2s2g"), ExtResource("3_va7fg"), ExtResource("4_4fmml")])
+metadata/_custom_type_script = "uid://dx42a8fkpk6fb"
