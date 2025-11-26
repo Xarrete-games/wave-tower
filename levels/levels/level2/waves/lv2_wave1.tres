@@ -1,15 +1,29 @@
-[gd_resource type="Resource" script_class="EnemyWave" load_steps=5 format=3 uid="uid://dy8eufu1y0bpq"]
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=8 format=3 uid="uid://dy8eufu1y0bpq"]
 
 [ext_resource type="Script" uid="uid://dcpnbeke2jpe" path="res://enemies/enemy_generator/resources_definitions/enemy_group_data.gd" id="1_v67sy"]
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="2_8xuls"]
-[ext_resource type="Resource" uid="uid://bw05aenxvb640" path="res://enemies/enemy_generator/individual_group/group_5_fast.tres" id="2_lvo3h"]
+[ext_resource type="Script" uid="uid://bgcq2ktq3w7dq" path="res://enemies/enemy_generator/resources_definitions/enemy_individual_group.gd" id="2_lvo3h"]
 
-[sub_resource type="Resource" id="Resource_v67sy"]
+[sub_resource type="Resource" id="Resource_nsuwa"]
+script = ExtResource("2_lvo3h")
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_vptlo"]
 script = ExtResource("1_v67sy")
-enemy_group = ExtResource("2_lvo3h")
+enemy_group = SubResource("Resource_nsuwa")
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[sub_resource type="Resource" id="Resource_8xuls"]
+script = ExtResource("2_lvo3h")
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_lvo3h"]
+script = ExtResource("1_v67sy")
+enemy_group = SubResource("Resource_8xuls")
+path = 1
 metadata/_custom_type_script = "uid://dcpnbeke2jpe"
 
 [resource]
 script = ExtResource("2_8xuls")
-groups_data = Array[ExtResource("1_v67sy")]([SubResource("Resource_v67sy")])
+groups_data = Array[ExtResource("1_v67sy")]([SubResource("Resource_vptlo"), SubResource("Resource_lvo3h")])
 metadata/_custom_type_script = "uid://civj4pbtbhl5o"
