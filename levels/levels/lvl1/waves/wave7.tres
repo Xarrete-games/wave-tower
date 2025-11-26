@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=12 format=3 uid="uid://bngyy8u8ofwud"]
+
+[ext_resource type="Script" uid="uid://dcpnbeke2jpe" path="res://enemies/enemy_generator/resources_definitions/enemy_group_data.gd" id="1_btxi3"]
+[ext_resource type="Script" uid="uid://bgcq2ktq3w7dq" path="res://enemies/enemy_generator/resources_definitions/enemy_individual_group.gd" id="2_4pun1"]
+[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="3_xklji"]
+
+[sub_resource type="Resource" id="Resource_btxi3"]
+script = ExtResource("2_4pun1")
+enemy_type = 4
+amount = 50
+interval_spawn = 0.3
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_4pun1"]
+script = ExtResource("1_btxi3")
+enemy_group = SubResource("Resource_btxi3")
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[sub_resource type="Resource" id="Resource_xklji"]
+script = ExtResource("2_4pun1")
+enemy_type = 4
+amount = 50
+interval_spawn = 0.25
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_by48i"]
+script = ExtResource("1_btxi3")
+enemy_group = SubResource("Resource_xklji")
+time_to_start = 15.0
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[sub_resource type="Resource" id="Resource_3un2m"]
+script = ExtResource("2_4pun1")
+enemy_type = 4
+amount = 50
+interval_spawn = 0.2
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_xlret"]
+script = ExtResource("1_btxi3")
+enemy_group = SubResource("Resource_3un2m")
+time_to_start = 27.5
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[sub_resource type="Resource" id="Resource_v3etd"]
+script = ExtResource("2_4pun1")
+enemy_type = 4
+amount = 20
+interval_spawn = 0.1
+metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"
+
+[sub_resource type="Resource" id="Resource_ktry1"]
+script = ExtResource("1_btxi3")
+enemy_group = SubResource("Resource_v3etd")
+time_to_start = 32.5
+metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+
+[resource]
+script = ExtResource("3_xklji")
+groups_data = Array[ExtResource("1_btxi3")]([SubResource("Resource_4pun1"), SubResource("Resource_by48i"), SubResource("Resource_xlret"), SubResource("Resource_ktry1")])
+metadata/_custom_type_script = "uid://civj4pbtbhl5o"
