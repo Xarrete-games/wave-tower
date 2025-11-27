@@ -16,7 +16,7 @@ var relics_list: Array[Object] = [
 	ArticCube, EchoOfVoid, PerseusFury,
 	FirstAid, MagicRing, Boniato,
 	SalmonNigiri, FlowerPot, HeadPhones,
-	IgnitionVoltage, FoundationBreaker
+	IgnitionVoltage, FoundationBreaker, SafetyHelmet
 ]
 
 var all_rewards: Array[Relic] = []
