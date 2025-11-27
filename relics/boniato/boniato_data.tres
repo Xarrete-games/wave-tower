@@ -6,7 +6,8 @@
 [resource]
 script = ExtResource("1_7u41t")
 id = "Sweet Potato"
-description = "Increases the gold dropped by enemies, in exchange for 2 lives"
+description = "Increases the gold dropped by enemies in 1, in exchange for 5 lives"
 texture = ExtResource("2_u21ls")
 type = 3
+rarity = 1
 metadata/_custom_type_script = "uid://u8jtn52xm88d"
