@@ -1,7 +1,7 @@
 class_name GreenProjectile extends Area2D
 
 @export var animation_time = 0.25
-@export var speed = 400
+@export var speed = 600
 
 var _direction: Vector2
 var _attack: Attack

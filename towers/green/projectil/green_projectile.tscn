@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dlvncixmqxa4n" path="res://assets/sprites/proyectiles/green_ring.png" id="4_710fh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qvvkj"]
-size = Vector2(24, 56)
+size = Vector2(24, 72)
 
 [node name="GreenProjectile" type="Area2D"]
 z_index = 2
@@ -21,7 +21,7 @@ scale = Vector2(0.15, 0.15)
 texture = ExtResource("4_710fh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 0)
+position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_qvvkj")
 
 [node name="GreenAttack" type="AudioStreamPlayer2D" parent="."]
