@@ -19,12 +19,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ye6dh")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="texture" type="TextureRect" parent="MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="texture" type="TextureRect" parent="VBoxContainer/MarginContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
@@ -33,15 +37,16 @@ size_flags_vertical = 4
 texture = ExtResource("2_vhbgb")
 expand_mode = 3
 
-[node name="amount" type="Label" parent="MarginContainer"]
+[node name="amount" type="Label" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 label_settings = SubResource("LabelSettings_ye6dh")
 
-[node name="TopBarRelicDescription" parent="." instance=ExtResource("3_iv7bk")]
+[node name="TopBarRelicDescription" parent="VBoxContainer" instance=ExtResource("3_iv7bk")]
+layout_mode = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="MarginContainer" to="." method="_on_margin_container_mouse_entered"]
-[connection signal="mouse_exited" from="MarginContainer" to="." method="_on_margin_container_mouse_exited"]
+[connection signal="mouse_entered" from="VBoxContainer/MarginContainer" to="." method="_on_margin_container_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/MarginContainer" to="." method="_on_margin_container_mouse_exited"]

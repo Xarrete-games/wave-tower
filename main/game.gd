@@ -25,7 +25,8 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
-		_open_config_menu()
+		if not TowerPlacementManager.is_placing:
+			_open_config_menu()
 
 func reset_current_level() -> void:
 	if _current_level:

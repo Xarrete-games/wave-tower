@@ -14,6 +14,7 @@ var towers_placed: Dictionary[Tower.TowerType, int] = {
 }
 
 var current_tower_selected: Tower
+var is_placing: bool = false
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:

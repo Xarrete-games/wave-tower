@@ -37,9 +37,9 @@ func _on_tower_price_change(tower_type: Tower.TowerType, price: int) -> void:
 		Tower.TowerType.GREEN: green_tower_button.price = price
 		Tower.TowerType.BLUE: blue_tower_button.price = price
 
-
 func _on_rewards_ui_buton_pressed() -> void:
 	if RewardsManager.show_rewards_price <= Score.gold:
+		Score.gold -= RewardsManager.show_rewards_price
 		var next_price = roundi(RewardsManager.show_rewards_price * 1.10)
 		RewardsManager.show_rewards_price = next_price
 		RewardsManager.show_rewards_ui()

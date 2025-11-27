@@ -3,13 +3,17 @@ class_name TowerPlacer extends Node2D
 var level_tile_map: LevelTileMap
 # parent for all towers
 var towers_container: Node2D
-var _is_placing = false
+var _is_placing = false:
+	set(value):
+		_is_placing = value
+		TowerPlacementManager.is_placing = value
 var _current_tower_instance: Tower = null
 var _is_valid_placement = false
 
 @export var towers_menu: TowersMenu
 
 func _ready():
+	_is_placing = false
 	towers_menu.tower_selected.connect(_on_tower_selected)
 	EnemyManager.wave_finished.connect(_cancel_tower)
 	EnemyManager.last_wave_finished.connect(_cancel_tower)
@@ -60,6 +64,8 @@ func _cancel_tower() -> void:
 	if _current_tower_instance:
 		_current_tower_instance.queue_free()
 		_current_tower_instance = null
+		await get_tree().process_frame 
+		await get_tree().process_frame
 		_is_placing = false
 
 func _on_tower_selected(tower_scene: PackedScene) -> void:

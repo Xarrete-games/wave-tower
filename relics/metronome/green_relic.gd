@@ -4,7 +4,7 @@ const GREEN_RELIC_DATA = preload("uid://dqupr6bw5e16g")
 
 func apply_effect() -> void:
 	for tower_buff in TowerUpgrades.towers_buffs.values():
-		tower_buff.attack_speed_mult -= 0.1
+		tower_buff.attack_speed_mult -= 0.05
 	TowerUpgrades.emit_all_buffs_change()
 
 func get_data() -> RelicData:

@@ -6,15 +6,13 @@
 [sub_resource type="LabelSettings" id="LabelSettings_p7ubt"]
 font_size = 24
 
-[node name="RelicDescriptionHover" type="CanvasLayer"]
-script = ExtResource("1_idw8k")
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = ExtResource("2_p7ubt")
+script = ExtResource("1_idw8k")
 
-[node name="DescriptionLabel" type="Label" parent="PanelContainer"]
+[node name="DescriptionLabel" type="Label" parent="."]
 layout_mode = 2
 text = "Hace mucho daño"
 label_settings = SubResource("LabelSettings_p7ubt")
