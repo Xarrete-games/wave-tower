@@ -162,7 +162,7 @@ fill = 1
 fill_from = Vector2(0.5071225, 0.48433048)
 
 [node name="Skeleton" instance=ExtResource("1_s0nc2")]
-base_speed = 180.0
+base_speed = 185.0
 max_healt = 40.0
 
 [node name="CollisionShape2D" parent="." index="0"]

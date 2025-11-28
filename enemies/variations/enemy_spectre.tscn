@@ -6,7 +6,6 @@
 radius = 20.0
 
 [node name="EnemySpectre" instance=ExtResource("1_skkk3")]
-base_speed = 90.0
 max_healt = 120.0
 base_gold_value = 5
 

@@ -15,7 +15,7 @@ var dic_exp_required: Dictionary[int, int] = {
 	6: 60,
 	7: 60,
 	8: 60,
-	9: 80,
+	9: 200,
 }
 var tower: Tower
 var level: int = 1:
