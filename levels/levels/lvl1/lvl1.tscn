@@ -82,178 +82,180 @@ rotation = 0.7853982
 scale = Vector2(0.70710677, 0.40824825)
 texture = ExtResource("7_wqqe2")
 
-[node name="Plant8" type="Sprite2D" parent="Node2D" index="5"]
+[node name="Stone7" type="Sprite2D" parent="Node2D" index="5"]
+position = Vector2(-3533.6306, -2658.3682)
+rotation = 0.7853981
+scale = Vector2(0.7, 0.405)
+texture = ExtResource("8_e1a5a")
+flip_h = true
+
+[node name="Stone8" type="Sprite2D" parent="Node2D" index="6"]
+position = Vector2(-713.6819, 505.68213)
+rotation = 0.7853982
+scale = Vector2(0.14142133, 0.08164964)
+texture = ExtResource("8_e1a5a")
+flip_h = true
+
+[node name="Plant8" type="Sprite2D" parent="Node2D" index="7"]
 position = Vector2(-1811.9316, -2828.0679)
 rotation = 0.7853982
 scale = Vector2(0.70710677, 0.40824825)
 texture = ExtResource("7_wqqe2")
 
-[node name="Stone5" type="Sprite2D" parent="Node2D/Plant8" index="0"]
-position = Vector2(-1551.9999, 3275.999)
-scale = Vector2(0.9899496, 0.9920435)
-texture = ExtResource("8_e1a5a")
-flip_h = true
-
-[node name="Stone6" type="Sprite2D" parent="Node2D/Plant8" index="1"]
-position = Vector2(4432.0005, 3872.0005)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("8_e1a5a")
-flip_h = true
-
-[node name="Plant9" type="Sprite2D" parent="Node2D" index="6"]
+[node name="Plant9" type="Sprite2D" parent="Node2D" index="8"]
 position = Vector2(-4262.436, -4121.5635)
 rotation = 0.7853982
 scale = Vector2(0.70710677, 0.40824825)
 texture = ExtResource("7_wqqe2")
 
-[node name="Plant11" type="Sprite2D" parent="Node2D" index="7"]
+[node name="Plant11" type="Sprite2D" parent="Node2D" index="9"]
 position = Vector2(-3661.3445, -2730.6555)
 rotation = 0.7853981
 scale = Vector2(0.56568533, 0.32659858)
 texture = ExtResource("11_rbrmv")
 
-[node name="Stone1" type="Sprite2D" parent="Node2D" index="8"]
+[node name="Stone1" type="Sprite2D" parent="Node2D" index="10"]
 z_index = 3
 position = Vector2(-1706.326, -1865.6746)
 rotation = 0.7853982
 scale = Vector2(0.5656854, 0.3265986)
 texture = ExtResource("8_e1a5a")
 
-[node name="Stone4" type="Sprite2D" parent="Node2D" index="9"]
+[node name="Stone4" type="Sprite2D" parent="Node2D" index="11"]
 z_index = 3
 position = Vector2(-4843.1997, -4720.801)
 rotation = 0.7853982
 scale = Vector2(0.8, 0.463)
 texture = ExtResource("8_e1a5a")
 
-[node name="Stone2" type="Sprite2D" parent="Node2D" index="10"]
+[node name="Stone2" type="Sprite2D" parent="Node2D" index="12"]
 position = Vector2(-3540.3135, -4147.6855)
 rotation = 0.7853982
 scale = Vector2(0.2828427, 0.1632993)
 texture = ExtResource("9_bdhiw")
 
-[node name="Stone3" type="Sprite2D" parent="Node2D" index="11"]
+[node name="Stone3" type="Sprite2D" parent="Node2D" index="13"]
 z_index = 3
 position = Vector2(-3188.6382, -1671.3617)
 rotation = 0.7853982
 scale = Vector2(0.4, 0.23)
 texture = ExtResource("10_yr858")
 
-[node name="Stone5" type="Sprite2D" parent="Node2D" index="12"]
+[node name="Stone5" type="Sprite2D" parent="Node2D" index="14"]
 position = Vector2(-1968.2919, -2635.7085)
 rotation = 0.7853982
 scale = Vector2(0.4, 0.23)
 texture = ExtResource("10_yr858")
 
-[node name="Stone6" type="Sprite2D" parent="Node2D" index="13"]
+[node name="Stone6" type="Sprite2D" parent="Node2D" index="15"]
 position = Vector2(105.86082, 690.1395)
 rotation = 0.7853982
 scale = Vector2(0.4, 0.23)
 texture = ExtResource("10_yr858")
 
-[node name="Plant4" type="Sprite2D" parent="Node2D" index="14"]
+[node name="Plant4" type="Sprite2D" parent="Node2D" index="16"]
 position = Vector2(-3591.0767, -4216.9243)
 rotation = 0.7853981
 scale = Vector2(0.5656854, 0.32659858)
 texture = ExtResource("11_rbrmv")
 
-[node name="Plant5" type="Sprite2D" parent="Node2D" index="15"]
+[node name="Plant5" type="Sprite2D" parent="Node2D" index="17"]
 position = Vector2(-3754.0266, -4305.9727)
 rotation = 0.7853981
 scale = Vector2(0.5656854, 0.32659858)
 texture = ExtResource("11_rbrmv")
 
-[node name="Plant10" type="Sprite2D" parent="Node2D" index="16"]
+[node name="Plant10" type="Sprite2D" parent="Node2D" index="18"]
 position = Vector2(-1976.113, -839.8872)
 rotation = 0.7853981
 scale = Vector2(0.5656854, 0.32659858)
 texture = ExtResource("11_rbrmv")
 
-[node name="Tree1" type="Sprite2D" parent="Node2D" index="17"]
+[node name="Tree1" type="Sprite2D" parent="Node2D" index="19"]
 position = Vector2(-1444.2693, -2171.7302)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree6" type="Sprite2D" parent="Node2D" index="18"]
+[node name="Tree6" type="Sprite2D" parent="Node2D" index="20"]
 position = Vector2(-3688.851, -3467.1482)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree14" type="Sprite2D" parent="Node2D" index="19"]
+[node name="Tree14" type="Sprite2D" parent="Node2D" index="21"]
 position = Vector2(-910.4441, 290.44482)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree15" type="Sprite2D" parent="Node2D" index="20"]
+[node name="Tree15" type="Sprite2D" parent="Node2D" index="22"]
 position = Vector2(-674.792, 426.7927)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree11" type="Sprite2D" parent="Node2D" index="21"]
+[node name="Tree11" type="Sprite2D" parent="Node2D" index="23"]
 position = Vector2(-4792.8613, -4959.1377)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree12" type="Sprite2D" parent="Node2D" index="22"]
+[node name="Tree12" type="Sprite2D" parent="Node2D" index="24"]
 position = Vector2(-4579.6016, -4824.398)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree2" type="Sprite2D" parent="Node2D" index="23"]
+[node name="Tree2" type="Sprite2D" parent="Node2D" index="25"]
 position = Vector2(-1300.4573, -1935.5422)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree3" type="Sprite2D" parent="Node2D" index="24"]
+[node name="Tree3" type="Sprite2D" parent="Node2D" index="26"]
 position = Vector2(-1175.883, -1700.1165)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree4" type="Sprite2D" parent="Node2D" index="25"]
+[node name="Tree4" type="Sprite2D" parent="Node2D" index="27"]
 position = Vector2(-1045.3086, -1458.6909)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree5" type="Sprite2D" parent="Node2D" index="26"]
+[node name="Tree5" type="Sprite2D" parent="Node2D" index="28"]
 position = Vector2(-903.66235, -1192.3372)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree7" type="Sprite2D" parent="Node2D" index="27"]
+[node name="Tree7" type="Sprite2D" parent="Node2D" index="29"]
 position = Vector2(-610.2871, -665.7124)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree9" type="Sprite2D" parent="Node2D" index="28"]
+[node name="Tree9" type="Sprite2D" parent="Node2D" index="30"]
 position = Vector2(-610.2871, -665.7124)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("12_yhxxw")
 
-[node name="Tree8" type="Sprite2D" parent="Node2D" index="29"]
+[node name="Tree8" type="Sprite2D" parent="Node2D" index="31"]
 position = Vector2(-756.2427, -931.75684)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("13_ylhto")
 
-[node name="Tree13" type="Sprite2D" parent="Node2D" index="30"]
+[node name="Tree13" type="Sprite2D" parent="Node2D" index="32"]
 position = Vector2(-4340.5684, -4675.431)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
 texture = ExtResource("13_ylhto")
 
-[node name="Tree10" type="Sprite2D" parent="Node2D" index="31"]
+[node name="Tree10" type="Sprite2D" parent="Node2D" index="33"]
 position = Vector2(-453.79562, -382.20392)
 rotation = 0.7853982
 scale = Vector2(0.84852815, 0.48989794)
