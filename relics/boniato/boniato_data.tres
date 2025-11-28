@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_7u41t")
 id = "Sweet Potato"
-description = "Increases the gold dropped by enemies in 1 in exchange for 5 lives. 
-BE CAREFUL!!"
+description = "Increases the gold dropped by enemies by 1 at the cost of 5 lives.
+Be careful!"
 texture = ExtResource("2_u21ls")
 type = 3
 rarity = 1

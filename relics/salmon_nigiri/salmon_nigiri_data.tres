@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_28wij")
 id = "Salmon Nigiri"
-description = "Reduces the cost of relics by 10%"
+description = "Reduces the cost of relics by 10%."
 texture = ExtResource("2_x4okx")
 type = 3
 rarity = 2

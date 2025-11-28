@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_fup7c")
 id = "First Aid"
-description = "Regain 10 lives"
+description = "Regain 10 lives."
 texture = ExtResource("2_mebo0")
 type = 3
 max_stack = 99

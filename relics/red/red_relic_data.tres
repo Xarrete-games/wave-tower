@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_kwhye")
 id = "Paganini's Bow"
-description = "Increase attack damage of all towers by 10 "
+description = "Increases the attack damage of all towers by 10."
 texture = ExtResource("2_stt0s")
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

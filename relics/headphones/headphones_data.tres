@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_876nw")
 id = "Headphones"
-description = "Blue turrets have a 10% chance of performing a double attack"
+description = "Blue turrets have a 10% chance to perform a double attack."
 texture = ExtResource("2_u8gne")
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

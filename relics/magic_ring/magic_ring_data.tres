@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_xpuv4")
 id = "Magic Ring"
-description = "Next tower its free"
+description = "The next tower is free."
 texture = ExtResource("2_q13qs")
 type = 3
 max_stack = 99

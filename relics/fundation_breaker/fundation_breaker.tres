@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_jfkmx")
 id = "Foundation Breaker"
-description = "Clears a blocked build slot"
+description = "Clears a blocked build slot."
 texture = ExtResource("2_d4t1q")
 type = 3
 max_stack = 3

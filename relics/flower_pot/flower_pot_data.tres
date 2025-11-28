@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_t64k1")
 id = "Flower pot"
-description = "Add poison to the green towers (increases the damage for each one)"
+description = "Adds poison to green towers (their damage increases for each copy)"
 texture = ExtResource("2_ecgna")
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_5o2ec")
 id = "Safety helmet"
-description = "Regain 1 lives"
+description = "Restores 1 life."
 texture = ExtResource("2_gxhg2")
 max_stack = 99
 price = 20

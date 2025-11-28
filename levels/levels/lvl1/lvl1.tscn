@@ -1,10 +1,18 @@
-[gd_scene load_steps=7 format=4 uid="uid://c7mje6qnw3kos"]
+[gd_scene load_steps=15 format=4 uid="uid://c7mje6qnw3kos"]
 
 [ext_resource type="PackedScene" uid="uid://b3rjk0365pn1t" path="res://levels/level_base.tscn" id="1_nybdg"]
 [ext_resource type="Resource" uid="uid://c3gtvqdnqatph" path="res://levels/levels/lvl1/lvl1_waves.tres" id="2_omon5"]
 [ext_resource type="TileSet" uid="uid://o7pvkiagionv" path="res://assets/sprites/tilesheet/base_tile_set.tres" id="3_se7l8"]
 [ext_resource type="PackedScene" uid="uid://gb8anbp5v7hc" path="res://levels/portal/blue_portal.tscn" id="3_vy21w"]
 [ext_resource type="PackedScene" uid="uid://b8g0wp8j02vu4" path="res://levels/portal/orange_portal.tscn" id="4_se7l8"]
+[ext_resource type="Texture2D" uid="uid://c22o1eieco5r3" path="res://assets/sprites/decoration/Plant1.png" id="6_m0um3"]
+[ext_resource type="Texture2D" uid="uid://cqmucrgq3oiq7" path="res://assets/sprites/decoration/Plant2.png" id="7_wqqe2"]
+[ext_resource type="Texture2D" uid="uid://dvqaayu7gl8m5" path="res://assets/sprites/decoration/Stone1.png" id="8_e1a5a"]
+[ext_resource type="Texture2D" uid="uid://dpq3114n1y0jr" path="res://assets/sprites/decoration/Stone2.png" id="9_bdhiw"]
+[ext_resource type="Texture2D" uid="uid://dygg2e7b7f887" path="res://assets/sprites/decoration/Stone3.png" id="10_yr858"]
+[ext_resource type="Texture2D" uid="uid://dyckwy1qhfaoa" path="res://assets/sprites/decoration/Plant3.png" id="11_rbrmv"]
+[ext_resource type="Texture2D" uid="uid://8k5oyrulleh2" path="res://assets/sprites/decoration/Tree1.png" id="12_yhxxw"]
+[ext_resource type="Texture2D" uid="uid://bhmn4g1282vrt" path="res://assets/sprites/decoration/Tree2.png" id="13_ylhto"]
 
 [sub_resource type="Curve2D" id="Curve2D_vy21w"]
 _data = {
@@ -12,7 +20,7 @@ _data = {
 }
 point_count = 13
 
-[node name="Level1" instance=ExtResource("1_nybdg")]
+[node name="LevelBase" instance=ExtResource("1_nybdg")]
 data = ExtResource("2_omon5")
 
 [node name="LevelTileMap" parent="." index="0"]
@@ -38,4 +46,217 @@ flip_h = true
 position = Vector2(2043.9999, 178.99983)
 frame_progress = 0.0
 
-[node name="Decoration" type="Node2D" parent="." index="9"]
+[node name="Node2D" type="Node2D" parent="." index="9"]
+position = Vector2(2043.9999, 178.99983)
+rotation = -1.0471976
+scale = Vector2(0.5, 0.5)
+skew = 0.5235988
+
+[node name="Plant1" type="Sprite2D" parent="Node2D" index="0"]
+position = Vector2(-2800.3076, -3631.6917)
+rotation = 0.7853982
+scale = Vector2(0.5656854, 0.3265986)
+texture = ExtResource("6_m0um3")
+
+[node name="Plant2" type="Sprite2D" parent="Node2D" index="1"]
+position = Vector2(-2737.8022, -2442.1987)
+rotation = 0.7853982
+scale = Vector2(0.5656854, 0.3265986)
+texture = ExtResource("6_m0um3")
+
+[node name="Plant6" type="Sprite2D" parent="Node2D" index="2"]
+position = Vector2(-2578.3154, -2349.6846)
+rotation = 0.7853982
+scale = Vector2(0.5656854, 0.3265986)
+texture = ExtResource("6_m0um3")
+
+[node name="Plant7" type="Sprite2D" parent="Node2D" index="3"]
+position = Vector2(-2406.21, -2253.7896)
+rotation = 0.7853982
+scale = Vector2(0.5656854, 0.3265986)
+texture = ExtResource("6_m0um3")
+
+[node name="Plant3" type="Sprite2D" parent="Node2D" index="4"]
+position = Vector2(-1921.5173, -3018.4832)
+rotation = 0.7853982
+scale = Vector2(0.70710677, 0.40824825)
+texture = ExtResource("7_wqqe2")
+
+[node name="Stone7" type="Sprite2D" parent="Node2D" index="5"]
+position = Vector2(-3533.6306, -2658.3682)
+rotation = 0.7853981
+scale = Vector2(0.7, 0.405)
+texture = ExtResource("8_e1a5a")
+flip_h = true
+
+[node name="Stone8" type="Sprite2D" parent="Node2D" index="6"]
+position = Vector2(-713.6819, 505.68213)
+rotation = 0.7853982
+scale = Vector2(0.14142133, 0.08164964)
+texture = ExtResource("8_e1a5a")
+flip_h = true
+
+[node name="Plant8" type="Sprite2D" parent="Node2D" index="7"]
+position = Vector2(-1811.9316, -2828.0679)
+rotation = 0.7853982
+scale = Vector2(0.70710677, 0.40824825)
+texture = ExtResource("7_wqqe2")
+
+[node name="Plant9" type="Sprite2D" parent="Node2D" index="8"]
+position = Vector2(-4262.436, -4121.5635)
+rotation = 0.7853982
+scale = Vector2(0.70710677, 0.40824825)
+texture = ExtResource("7_wqqe2")
+
+[node name="Plant11" type="Sprite2D" parent="Node2D" index="9"]
+position = Vector2(-3661.3445, -2730.6555)
+rotation = 0.7853981
+scale = Vector2(0.56568533, 0.32659858)
+texture = ExtResource("11_rbrmv")
+
+[node name="Stone1" type="Sprite2D" parent="Node2D" index="10"]
+z_index = 3
+position = Vector2(-1706.326, -1865.6746)
+rotation = 0.7853982
+scale = Vector2(0.5656854, 0.3265986)
+texture = ExtResource("8_e1a5a")
+
+[node name="Stone4" type="Sprite2D" parent="Node2D" index="11"]
+z_index = 3
+position = Vector2(-4843.1997, -4720.801)
+rotation = 0.7853982
+scale = Vector2(0.8, 0.463)
+texture = ExtResource("8_e1a5a")
+
+[node name="Stone2" type="Sprite2D" parent="Node2D" index="12"]
+position = Vector2(-3540.3135, -4147.6855)
+rotation = 0.7853982
+scale = Vector2(0.2828427, 0.1632993)
+texture = ExtResource("9_bdhiw")
+
+[node name="Stone3" type="Sprite2D" parent="Node2D" index="13"]
+z_index = 3
+position = Vector2(-3188.6382, -1671.3617)
+rotation = 0.7853982
+scale = Vector2(0.4, 0.23)
+texture = ExtResource("10_yr858")
+
+[node name="Stone5" type="Sprite2D" parent="Node2D" index="14"]
+position = Vector2(-1968.2919, -2635.7085)
+rotation = 0.7853982
+scale = Vector2(0.4, 0.23)
+texture = ExtResource("10_yr858")
+
+[node name="Stone6" type="Sprite2D" parent="Node2D" index="15"]
+position = Vector2(105.86082, 690.1395)
+rotation = 0.7853982
+scale = Vector2(0.4, 0.23)
+texture = ExtResource("10_yr858")
+
+[node name="Plant4" type="Sprite2D" parent="Node2D" index="16"]
+position = Vector2(-3591.0767, -4216.9243)
+rotation = 0.7853981
+scale = Vector2(0.5656854, 0.32659858)
+texture = ExtResource("11_rbrmv")
+
+[node name="Plant5" type="Sprite2D" parent="Node2D" index="17"]
+position = Vector2(-3754.0266, -4305.9727)
+rotation = 0.7853981
+scale = Vector2(0.5656854, 0.32659858)
+texture = ExtResource("11_rbrmv")
+
+[node name="Plant10" type="Sprite2D" parent="Node2D" index="18"]
+position = Vector2(-1976.113, -839.8872)
+rotation = 0.7853981
+scale = Vector2(0.5656854, 0.32659858)
+texture = ExtResource("11_rbrmv")
+
+[node name="Tree1" type="Sprite2D" parent="Node2D" index="19"]
+position = Vector2(-1444.2693, -2171.7302)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree6" type="Sprite2D" parent="Node2D" index="20"]
+position = Vector2(-3688.851, -3467.1482)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree14" type="Sprite2D" parent="Node2D" index="21"]
+position = Vector2(-910.4441, 290.44482)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree15" type="Sprite2D" parent="Node2D" index="22"]
+position = Vector2(-674.792, 426.7927)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree11" type="Sprite2D" parent="Node2D" index="23"]
+position = Vector2(-4792.8613, -4959.1377)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree12" type="Sprite2D" parent="Node2D" index="24"]
+position = Vector2(-4579.6016, -4824.398)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree2" type="Sprite2D" parent="Node2D" index="25"]
+position = Vector2(-1300.4573, -1935.5422)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree3" type="Sprite2D" parent="Node2D" index="26"]
+position = Vector2(-1175.883, -1700.1165)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree4" type="Sprite2D" parent="Node2D" index="27"]
+position = Vector2(-1045.3086, -1458.6909)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree5" type="Sprite2D" parent="Node2D" index="28"]
+position = Vector2(-903.66235, -1192.3372)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree7" type="Sprite2D" parent="Node2D" index="29"]
+position = Vector2(-610.2871, -665.7124)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree9" type="Sprite2D" parent="Node2D" index="30"]
+position = Vector2(-610.2871, -665.7124)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("12_yhxxw")
+
+[node name="Tree8" type="Sprite2D" parent="Node2D" index="31"]
+position = Vector2(-756.2427, -931.75684)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("13_ylhto")
+
+[node name="Tree13" type="Sprite2D" parent="Node2D" index="32"]
+position = Vector2(-4340.5684, -4675.431)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("13_ylhto")
+
+[node name="Tree10" type="Sprite2D" parent="Node2D" index="33"]
+position = Vector2(-453.79562, -382.20392)
+rotation = 0.7853982
+scale = Vector2(0.84852815, 0.48989794)
+texture = ExtResource("13_ylhto")
