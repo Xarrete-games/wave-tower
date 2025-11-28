@@ -1,9 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://o248nju46k2n"]
+[gd_scene load_steps=9 format=3 uid="uid://o248nju46k2n"]
 
 [ext_resource type="Script" uid="uid://n67chfk5ae8t" path="res://ui/towers_menu/tower_button/tower_button.gd" id="1_bxa3v"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_s7tbd"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="2_dfgrm"]
 [ext_resource type="StyleBox" uid="uid://de1oid76vx20r" path="res://assets/shaders/panel_black_box.tres" id="2_u1kcm"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/shared/gold_price/gold_price.tscn" id="5_dfgrm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfgrm"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 4.0
+expand_margin_right = 8.0
+expand_margin_bottom = 4.0
 
 [sub_resource type="Theme" id="Theme_bxa3v"]
 
@@ -14,16 +26,37 @@ region = Rect2(0, 0, 128, 191)
 [node name="TowerButton" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-mouse_filter = 2
+offset_right = 461.0
+offset_bottom = 210.0
 script = ExtResource("1_bxa3v")
+
+[node name="HintContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = -144.0
+offset_top = -7.0
+offset_right = 317.0
+offset_bottom = 62.0
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_dfgrm")
+
+[node name="HintLabel" type="Label" parent="HintContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Chains a beam that hits 5 times,
+ high attack speed."
+label_settings = ExtResource("2_dfgrm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
+offset_top = 73.0
 offset_right = 100.0
-offset_bottom = 127.0
+offset_bottom = 210.0
+size_flags_vertical = 10
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="Panel" type="Panel" parent="VBoxContainer/CenterContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -33,6 +66,7 @@ theme_override_styles/panel = ExtResource("2_u1kcm")
 [node name="TowerButton" type="TextureButton" parent="VBoxContainer/CenterContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+mouse_filter = 1
 theme = SubResource("Theme_bxa3v")
 texture_normal = SubResource("AtlasTexture_c656n")
 ignore_texture_size = true
@@ -41,8 +75,9 @@ stretch_mode = 5
 [node name="GoldPrice" parent="VBoxContainer" instance=ExtResource("5_dfgrm")]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
+[connection signal="mouse_entered" from="VBoxContainer/CenterContainer/TowerButton" to="." method="_on_tower_button_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/CenterContainer/TowerButton" to="." method="_on_tower_button_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/CenterContainer/TowerButton" to="." method="_on_tower_button_pressed"]
