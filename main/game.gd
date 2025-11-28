@@ -19,7 +19,7 @@ var _current_level: Level
 func _ready():
 	_hide_next_level_menu()
 	_load_level(current_level_number)
-	EnemyManager.last_wave_finished.connect(_show_next_level_menu)
+	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _show_next_level_menu())
 	await get_tree().create_timer(0.1).timeout
 	RewardsManager.add_random_relics(initial_random_relics)
 

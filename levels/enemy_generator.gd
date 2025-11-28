@@ -122,10 +122,10 @@ func _report_finished() -> void:
 		
 	if current_wave_number == total_waves:
 		print("LEVEL DONE")
-		EnemyManager.last_wave_finished.emit()
+		EnemyManager.last_wave_finished.emit(current_wave)
 	else:
 		current_wave_number += 1
-		EnemyManager.wave_finished.emit()
+		EnemyManager.wave_finished.emit(current_wave)
 		
 func _on_enemy_target_reached(enemy: Enemy) -> void:
 	LiveManager.lives -= enemy.damage

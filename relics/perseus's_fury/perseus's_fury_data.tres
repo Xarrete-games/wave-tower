@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_jlgur")
 id = "Perseus's Fury"
-description = "The red towers execute enemies with 5% health (does not work on bosses)
+description = "The red towers execute enemies with 5% health (increases by 5% for each one)
 "
 texture = ExtResource("2_o56p2")
 max_stack = 3

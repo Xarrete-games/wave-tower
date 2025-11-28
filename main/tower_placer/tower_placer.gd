@@ -15,8 +15,8 @@ var _is_valid_placement = false
 func _ready():
 	_is_placing = false
 	towers_menu.tower_selected.connect(_on_tower_selected)
-	EnemyManager.wave_finished.connect(_cancel_tower)
-	EnemyManager.last_wave_finished.connect(_cancel_tower)
+	EnemyManager.wave_finished.connect(func(_wave: EnemyWave): _cancel_tower())
+	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _cancel_tower())
 
 func _process(_delta: float) -> void:
 	if not _is_placing or not is_instance_valid(_current_tower_instance):

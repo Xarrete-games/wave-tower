@@ -13,6 +13,14 @@ var extra_gold_dropped: int = 0:
 	set(value):
 		extra_gold_dropped = value
 		extra_gold_dropped_change.emit(extra_gold_dropped)
+
+func _ready() -> void:
+	EnemyManager.wave_finished.connect(func(wave: EnemyWave):
+		add_gold(wave.gold_when_ends)
+	)
+	EnemyManager.last_wave_finished.connect(func(wave: EnemyWave):
+		add_gold(wave.gold_when_ends)
+	)
 	
 func add_gold(amount: int) -> void:
 	gold += amount
