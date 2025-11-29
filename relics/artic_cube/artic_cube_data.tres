@@ -9,6 +9,6 @@ id = "Artic Cube"
 description = "Blue turrets slow enemies by 50% for 1 second (+1 second for each artic cube)."
 texture = ExtResource("2_o460k")
 type = 1
-rarity = null
+rarity = 1
 max_stack = null
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

@@ -5,7 +5,7 @@ signal lives_change(amount: int)
 
 const DEATH_SCENE = preload("uid://dcq16u6g6ahsp")
 
-var lives: int = 10:
+var lives: int = 5:
 	set(value):
 		lives = value
 		lives_change.emit(lives)

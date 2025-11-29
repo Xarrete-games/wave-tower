@@ -8,4 +8,5 @@ script = ExtResource("1_miwk5")
 id = "Ignition Voltage"
 description = "Adds burn to red towers (their damage increases for each copy)."
 texture = ExtResource("2_rpj8k")
+rarity = 1
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

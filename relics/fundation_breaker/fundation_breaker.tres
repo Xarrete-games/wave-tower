@@ -10,4 +10,5 @@ description = "Clears a blocked build slot."
 texture = ExtResource("2_d4t1q")
 type = 3
 max_stack = 3
+price = 35
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

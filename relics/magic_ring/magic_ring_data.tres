@@ -10,4 +10,5 @@ description = "The next tower is free."
 texture = ExtResource("2_q13qs")
 type = 3
 max_stack = 99
+price = 30
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

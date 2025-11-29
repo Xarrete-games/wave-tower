@@ -4,6 +4,7 @@ class_name LivesCounter extends Control
 
 func _ready() -> void:
 	LiveManager.lives_change.connect(func(value): lives = value)
+	lives = LiveManager.lives
 
 var lives: int:
 	set(value):

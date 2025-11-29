@@ -37,6 +37,9 @@ tile_set = ExtResource("3_se7l8")
 [node name="Path2D" type="Path2D" parent="EnemyPaths" index="0"]
 curve = SubResource("Curve2D_vy21w")
 
+[node name="CameraInitPos" parent="." index="5"]
+position = Vector2(847, 222)
+
 [node name="BluePortal" parent="." index="7" instance=ExtResource("3_vy21w")]
 position = Vector2(207, -315.00003)
 frame_progress = 0.48736614

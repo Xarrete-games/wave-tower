@@ -8,5 +8,6 @@ script = ExtResource("1_jlgur")
 id = "Perseus's Fury"
 description = "Red towers execute enemies below 5% health (execution threshold increases by 5% for each copy)."
 texture = ExtResource("2_o56p2")
+rarity = 1
 max_stack = 3
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

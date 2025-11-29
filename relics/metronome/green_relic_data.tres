@@ -10,4 +10,5 @@ description = "Increases the attack speed of all towers by 5%."
 texture = ExtResource("2_p4a3n")
 type = 3
 rarity = 1
+price = 70
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

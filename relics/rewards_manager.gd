@@ -22,7 +22,7 @@ var relics_list: Array[Object] = [
 var all_rewards: Array[Relic] = []
 var rewards_ui: RewardsUI
 var towers_buffs: Dictionary[Tower.TowerType, TowerBuff]
-var reroll_price: int = 50:
+var reroll_price: int = 30:
 	set(value):
 		reroll_price = value
 		reroll_priece_change.emit(value)
@@ -52,7 +52,6 @@ func reset_rewards() -> void:
 	all_rewards.clear()
 	for relic_object in relics_list:
 		all_rewards.append(relic_object.new())
-	reroll_price = 50
 	show_rewards_price = 50
 	open_another_ui = false
 	if rewards_ui:
