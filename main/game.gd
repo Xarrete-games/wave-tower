@@ -35,6 +35,7 @@ func reset_current_level() -> void:
 	RewardsManager.reset_rewards()
 	TowerPlacementManager.reset_towers()
 	TowerUpgrades.reset_buffs()
+	LiveManager.lives = 5
 	_load_level(1)
 
 func _load_level(level_number: int) -> void:
