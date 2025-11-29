@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyWave" load_steps=8 format=3 uid="uid://bngyy8u8ofwud"]
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=10 format=3 uid="uid://bngyy8u8ofwud"]
 
 [ext_resource type="Script" uid="uid://dxrvobswk6in5" path="res://enemies/enemy_generator/resources_definitions/enemy_group.gd" id="1_0fly2"]
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="2_q1hhj"]
@@ -6,21 +6,35 @@
 [sub_resource type="Resource" id="Resource_hm7mg"]
 script = ExtResource("1_0fly2")
 enemy_type = 4
-amount = 10
-interval_spawn = 1.0
+amount = 1
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_q1hhj"]
 script = ExtResource("1_0fly2")
 enemy_type = 4
-amount = 15
+interval_spawn = 0.0
+time_to_start = 3.0
+metadata/_custom_type_script = "uid://dxrvobswk6in5"
+
+[sub_resource type="Resource" id="Resource_kwbs1"]
+script = ExtResource("1_0fly2")
+enemy_type = 4
+interval_spawn = 0.0
+time_to_start = 5.0
+metadata/_custom_type_script = "uid://dxrvobswk6in5"
+
+[sub_resource type="Resource" id="Resource_addfe"]
+script = ExtResource("1_0fly2")
+enemy_type = 4
+interval_spawn = 0.0
+time_to_start = 7.0
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_ljhn6"]
 script = ExtResource("1_0fly2")
 enemy_type = 4
 amount = 55
-interval_spawn = 0.3
+interval_spawn = 0.2
 time_to_start = 10.0
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
@@ -28,19 +42,19 @@ metadata/_custom_type_script = "uid://dxrvobswk6in5"
 script = ExtResource("1_0fly2")
 enemy_type = 4
 amount = 50
-interval_spawn = 0.2
-time_to_start = 35.0
+interval_spawn = 0.1
+time_to_start = 21.0
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_0fly2"]
 script = ExtResource("1_0fly2")
 enemy_type = 4
 amount = 70
-interval_spawn = 0.1
-time_to_start = 50.0
+interval_spawn = 0.05
+time_to_start = 26.0
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [resource]
 script = ExtResource("2_q1hhj")
-groups = Array[ExtResource("1_0fly2")]([SubResource("Resource_hm7mg"), SubResource("Resource_q1hhj"), SubResource("Resource_ljhn6"), SubResource("Resource_17ob0"), SubResource("Resource_0fly2")])
+groups = Array[ExtResource("1_0fly2")]([SubResource("Resource_hm7mg"), SubResource("Resource_q1hhj"), SubResource("Resource_kwbs1"), SubResource("Resource_addfe"), SubResource("Resource_ljhn6"), SubResource("Resource_17ob0"), SubResource("Resource_0fly2")])
 metadata/_custom_type_script = "uid://civj4pbtbhl5o"
