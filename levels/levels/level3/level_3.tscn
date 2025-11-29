@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dxw4slamsykme"]
+[gd_scene load_steps=14 format=4 uid="uid://dxw4slamsykme"]
 
 [ext_resource type="PackedScene" uid="uid://b3rjk0365pn1t" path="res://levels/level_base.tscn" id="1_0xng1"]
 [ext_resource type="Resource" uid="uid://q8qhurbqsark" path="res://levels/levels/level3/lv3_waves.tres" id="2_8dued"]
@@ -11,6 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://dygg2e7b7f887" path="res://assets/sprites/decoration/Stone3.png" id="10_mh2ki"]
 [ext_resource type="Texture2D" uid="uid://dvqaayu7gl8m5" path="res://assets/sprites/decoration/Stone1.png" id="11_4xq46"]
 [ext_resource type="Texture2D" uid="uid://dyckwy1qhfaoa" path="res://assets/sprites/decoration/Plant3.png" id="12_7ecfd"]
+
+[sub_resource type="Curve2D" id="Curve2D_h03xj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -356.05045, -88.4949, 0, 0, 0, 0, -105.63493, 181.31186, 0, 0, 0, 0, -67.634125, 241.9661, 0, 0, 0, 0, -103.68617, 310.98642, 0, 0, 0, 0, -356.05045, 584.97626, 0, 0, 0, 0, -382.3587, 647.72205, 0, 0, 0, 0, -357.9992, 710.4678, 0, 0, 0, 0, -106.609314, 982.3661, 0, 0, 0, 0, -80.301056, 1045.1118, 0, 0, 0, 0, -106.609314, 1109.9491, 0, 0, 0, 0, -228.40675, 1252.1729, 0, 0, 0, 0, -261.53564, 1323.2847, 0, 0, 0, 0, -226.458, 1383.939, 0, 0, 0, 0, -201.12413, 1446.6847, 0, 0, 0, 0, -256.66376, 1519.8881, 0, 0, 0, 0, 81.44594, 1856.6237, 0, 0, 0, 0, 389.34988, 2182.9016, 0, 0, 0, 0, 775.20416, 1787.6034, 0, 0, 0, 0, 1025.6198, 2063.6846, 0, 0, 0, 0, 1092.8519, 2092.966, 0, 0, 0, 0, 1088.9543, 2174.5354, 0, 0, 0, 0, 846.3339, 2440.1592, 0, 0, 0, 0, 1067.5181, 2682.7761, 0, 0, 0, 0, 1241.932, 2613.7559, 0, 0, 0, 0, 1424.141, 2620.0305, 0, 0, 0, 0, 2076.9753, 1911.0033, 0, 0, 0, 0, 1528.3995, 1310.7356, 0, 0, 0, 0, 1651.1714, 1174.7864, 0, 0, 0, 0, 1034.3892, 503.40674, 0, 0, 0, 0, 1296.4972, 214.77628)
+}
+point_count = 30
 
 [sub_resource type="Curve2D" id="Curve2D_ct1ur"]
 _data = {
@@ -27,7 +33,7 @@ tile_map_data = PackedByteArray("AAAAAAUAAAAIAAQAAAAAAAYAAAACAAQAAAAAAAcAAAACAAQ
 [node name="Path2D" type="Path2D" parent="EnemyPaths" index="0"]
 position = Vector2(-21.587494, -135.68881)
 scale = Vector2(1.0262941, 0.47811994)
-curve = SubResource("Curve2D_ct1ur")
+curve = SubResource("Curve2D_h03xj")
 
 [node name="Path2D2" type="Path2D" parent="EnemyPaths" index="1"]
 position = Vector2(-21.587494, -135.68881)
