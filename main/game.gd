@@ -35,7 +35,7 @@ func reset_current_level() -> void:
 	RewardsManager.reset_rewards()
 	TowerPlacementManager.reset_towers()
 	TowerUpgrades.reset_buffs()
-	_load_level(initial_random_relics)
+	_load_level(1)
 
 func _load_level(level_number: int) -> void:
 	music_handler.stop_music()
