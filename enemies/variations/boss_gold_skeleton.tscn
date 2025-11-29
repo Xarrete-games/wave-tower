@@ -42,6 +42,59 @@ radius = 36.013885
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("19_cj1ox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_sfvfw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_7dqa8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_x7p6h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_122tr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_qlmxx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_bk2e8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_gq0p5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_54egg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_80u25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_nddan")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_peu34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_rs05r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_xu028")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_8wmqu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_obaym")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("18_ldar5")
 }, {
 "duration": 1.0,
@@ -93,59 +146,6 @@ animations = [{
 "texture": ExtResource("17_k6e4s")
 }],
 "loop": true,
-"name": &"down right",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("19_cj1ox")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_sfvfw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_7dqa8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("22_x7p6h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_122tr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_qlmxx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_bk2e8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_gq0p5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_54egg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_80u25")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_nddan")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_peu34")
-}, {
-"duration": 1.0,
-"texture": ExtResource("31_rs05r")
-}, {
-"duration": 1.0,
-"texture": ExtResource("32_xu028")
-}, {
-"duration": 1.0,
-"texture": ExtResource("33_8wmqu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("34_obaym")
-}],
-"loop": true,
 "name": &"top right",
 "speed": 8.0
 }]
@@ -177,9 +177,7 @@ position = Vector2(0, -58)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_3cemo")
 animation = &"down right"
-autoplay = "top right"
 frame_progress = 0.0
-flip_h = true
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="2"]
 position = Vector2(-1.0000001, 59)
