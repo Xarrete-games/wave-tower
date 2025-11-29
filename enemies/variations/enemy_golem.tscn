@@ -198,9 +198,8 @@ fill = 1
 fill_from = Vector2(0.5071225, 0.48433048)
 
 [node name="Golem" instance=ExtResource("1_umep0")]
-base_speed = 65.0
-max_healt = 600.0
-base_gold_value = 20
+max_healt = 1500.0
+base_gold_value = 12
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, -4)

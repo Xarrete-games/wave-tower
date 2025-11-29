@@ -1,28 +1,25 @@
-[gd_resource type="Resource" script_class="EnemyWave" load_steps=8 format=3 uid="uid://bqws8nslfluil"]
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=5 format=3 uid="uid://bqws8nslfluil"]
 
-[ext_resource type="Script" uid="uid://dcpnbeke2jpe" path="res://enemies/enemy_generator/resources_definitions/enemy_group_data.gd" id="1_w7q5g"]
-[ext_resource type="Resource" uid="uid://bw05aenxvb640" path="res://enemies/enemy_generator/individual_group/group_5_fast.tres" id="2_w6hvn"]
-[ext_resource type="Resource" uid="uid://dcdu1ge2xx6d6" path="res://enemies/enemy_generator/multi_group/5_normal_5_fast.tres" id="3_een5n"]
+[ext_resource type="Script" uid="uid://dxrvobswk6in5" path="res://enemies/enemy_generator/resources_definitions/enemy_group.gd" id="1_5yxjb"]
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="4_iju2b"]
 
-[sub_resource type="Resource" id="Resource_lic82"]
-script = ExtResource("1_w7q5g")
-enemy_group = ExtResource("2_w6hvn")
-metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+[sub_resource type="Resource" id="Resource_kn23x"]
+script = ExtResource("1_5yxjb")
+enemy_type = 3
+amount = 10
+interval_spawn = 2.2
+metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
-[sub_resource type="Resource" id="Resource_g0jsh"]
-script = ExtResource("1_w7q5g")
-enemy_group = ExtResource("3_een5n")
-time_to_start = 5.0
-metadata/_custom_type_script = "uid://dcpnbeke2jpe"
-
-[sub_resource type="Resource" id="Resource_tir47"]
-script = ExtResource("1_w7q5g")
-enemy_group = ExtResource("3_een5n")
-time_to_start = 5.0
-metadata/_custom_type_script = "uid://dcpnbeke2jpe"
+[sub_resource type="Resource" id="Resource_ao6xs"]
+script = ExtResource("1_5yxjb")
+enemy_type = 6
+amount = 15
+interval_spawn = 0.4
+time_to_start = 30.0
+path = 1
+metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [resource]
 script = ExtResource("4_iju2b")
-groups_data = Array[ExtResource("1_w7q5g")]([SubResource("Resource_lic82"), SubResource("Resource_g0jsh"), SubResource("Resource_tir47")])
+groups = Array[ExtResource("1_5yxjb")]([SubResource("Resource_kn23x"), SubResource("Resource_ao6xs")])
 metadata/_custom_type_script = "uid://civj4pbtbhl5o"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=7 format=3 uid="uid://q8qhurbqsark"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=13 format=3 uid="uid://q8qhurbqsark"]
 
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="1_aimot"]
 [ext_resource type="Resource" uid="uid://biohv51iefht5" path="res://levels/levels/level3/waves/lv3_wave1.tres" id="2_5alfr"]
@@ -6,9 +6,15 @@
 [ext_resource type="Resource" uid="uid://bqws8nslfluil" path="res://levels/levels/level3/waves/lv3_wave3.tres" id="4_yw75y"]
 [ext_resource type="Resource" uid="uid://cvs4hedilby7y" path="res://levels/levels/level3/waves/lv3_wave4.tres" id="5_xsafd"]
 [ext_resource type="Script" uid="uid://dx42a8fkpk6fb" path="res://enemies/enemy_generator/resources_definitions/level_data.gd" id="6_i8oan"]
+[ext_resource type="Resource" uid="uid://0vnckj1i6xs8" path="res://levels/levels/level3/waves/lv3_wave5.tres" id="6_uw1sv"]
+[ext_resource type="Resource" uid="uid://bddq5074c2jcs" path="res://levels/levels/level3/waves/lv3_wave6.tres" id="7_regyr"]
+[ext_resource type="Resource" uid="uid://cwh8pp0sri25y" path="res://levels/levels/level3/waves/lv3_wave7.tres" id="8_mp11n"]
+[ext_resource type="Resource" uid="uid://bwpx1h2inosoa" path="res://levels/levels/level3/waves/lv3_wave8.tres" id="9_vmnpq"]
+[ext_resource type="Resource" uid="uid://bpgk5vpanucko" path="res://levels/levels/level3/waves/lv3_wave9.tres" id="10_rd2m4"]
+[ext_resource type="Resource" uid="uid://dkfloa2v0o3io" path="res://levels/levels/level3/waves/lv3_wave10.tres" id="11_jps5a"]
 
 [resource]
 script = ExtResource("6_i8oan")
-enemy_waves = Array[ExtResource("1_aimot")]([ExtResource("2_5alfr"), ExtResource("3_6ch5b"), ExtResource("4_yw75y"), ExtResource("5_xsafd")])
+enemy_waves = Array[ExtResource("1_aimot")]([ExtResource("2_5alfr"), ExtResource("3_6ch5b"), ExtResource("4_yw75y"), ExtResource("5_xsafd"), ExtResource("6_uw1sv"), ExtResource("7_regyr"), ExtResource("8_mp11n"), ExtResource("9_vmnpq"), ExtResource("10_rd2m4"), ExtResource("11_jps5a")])
 initial_gold = 200
 metadata/_custom_type_script = "uid://dx42a8fkpk6fb"
