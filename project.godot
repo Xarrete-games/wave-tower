@@ -27,6 +27,7 @@ RewardsManager="*res://relics/rewards_manager.gd"
 TowerPlacementManager="*res://towers/tower_placement_manager.gd"
 LiveManager="*res://main/live_manager.gd"
 EnemyManager="*res://enemies/enemy_generator/enemy_manager.gd"
+Settings="*res://main/settings.gd"
 
 [display]
 

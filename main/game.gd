@@ -4,6 +4,7 @@ class_name Game extends Node2D
 @export var pause : PackedScene
 @export var current_level_number: int = 1
 @export var initial_random_relics: int = 0
+@export var time_speed: float = 1.0
 
 var _current_level: Level
 
@@ -17,6 +18,7 @@ var _current_level: Level
 @onready var config_layer: CanvasLayer = $ConfigLayer
 
 func _ready():
+	Settings.time_speed = time_speed
 	_hide_next_level_menu()
 	_load_level(current_level_number)
 	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _show_next_level_menu())
@@ -35,6 +37,7 @@ func reset_current_level() -> void:
 	RewardsManager.reset_rewards()
 	TowerPlacementManager.reset_towers()
 	TowerUpgrades.reset_buffs()
+	LiveManager.lives = 5
 	_load_level(1)
 
 func _load_level(level_number: int) -> void:

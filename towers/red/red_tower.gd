@@ -14,6 +14,7 @@ var _hits_count = 0
 
 func _ready():
 	super._ready()
+	attack_tick_timer.wait_time = 0.1 / Settings.time_speed
 	target_change.connect(_on_target_change)
 	
 func _process(_delta: float) -> void:

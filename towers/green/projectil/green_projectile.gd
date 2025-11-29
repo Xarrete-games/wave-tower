@@ -19,6 +19,7 @@ func set_direction(dir: Vector2, attack: Attack) -> void:
 func _ready():
 	ring_animation_timer.wait_time = animation_time
 	ring_animation_timer.start()
+	speed = speed * Settings.time_speed
 	
 func _process(delta: float) -> void:
 	global_position += _direction * speed * delta
