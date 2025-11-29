@@ -20,7 +20,9 @@ var current_debuffs: Dictionary[EnemyDebuff.DebuffType, EnemyDebuff] = {}
 var current_debuffs_timers: Dictionary[EnemyDebuff.DebuffType, Timer] = {}
 var _path_follow: PathFollow2D
 var _default_modulate_color: Color = Color.WHITE
-var _speed = base_speed
+var _speed: float:
+	set(value):
+		_speed = value * Settings.time_speed
 var _last_is_right_direction: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer

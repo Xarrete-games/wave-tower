@@ -11,6 +11,7 @@ size = Vector2(27, 83)
 z_index = 2
 input_pickable = false
 script = ExtResource("1_8lep0")
+speed = 700
 
 [node name="Waves" type="Node2D" parent="."]
 
