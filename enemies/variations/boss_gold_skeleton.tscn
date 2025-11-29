@@ -161,9 +161,9 @@ height = 400
 fill = 1
 fill_from = Vector2(0.5071225, 0.48433048)
 
-[node name="BlackGolem" instance=ExtResource("1_wsiet")]
+[node name="GoldSkeleton" instance=ExtResource("1_wsiet")]
 base_speed = 30.0
-max_healt = 2000.0
+max_healt = 10000.0
 base_gold_value = 100
 damage = 999
 
