@@ -37,7 +37,7 @@ func init_next_wave() -> void:
 		_handle_ememy_group(
 			enemy_group_data.enemy_group,
 			enemy_group_data.time_to_start,
-			enemy_group_data.path
+			enemy_group_data.double_path
 		)
 	
 	if groups_init_count == 0:
@@ -57,28 +57,30 @@ func _load_level_data(level: Level) -> void:
 func _handle_ememy_group(
 	ememy_group: EnemyGroup, 
 	time_to_start: float, 
-	path: int) -> void:
+	is_double_path: bool) -> void:
 	# wait time
 	await get_tree().create_timer(time_to_start).timeout
 	# individual group
+	var paths = [0, 1] if is_double_path else [0]
 	if ememy_group is EnemyIndividualGroup:
-		
-		_hand_enemy_group(
-			ememy_group.enemy_type,
-			ememy_group.amount,
-			ememy_group.interval_spawn,
-			path
-		)
+		for path in paths:
+			_hand_enemy_group(
+				ememy_group.enemy_type,
+				ememy_group.amount,
+				ememy_group.interval_spawn,
+				path
+			)
 	# multi group
 	else :
 		var multi_group = ememy_group as EnemyMultiGroups
 		for next_group: EnemyIndividualGroup in multi_group.groups:
-			_hand_enemy_group(
-				next_group.enemy_type,
-				next_group.amount,
-				next_group.interval_spawn,
-				path
-			)
+			for path in paths:
+				_hand_enemy_group(
+					next_group.enemy_type,
+					next_group.amount,
+					next_group.interval_spawn,
+					path
+				)
 			
 func _hand_enemy_group(
 	enemy_type: Enemy.EnemyType,

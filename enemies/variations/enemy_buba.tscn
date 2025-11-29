@@ -81,7 +81,7 @@ base_gold_value = 10
 position = Vector2(-1, -9.5)
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-position = Vector2(0, 6.9999995)
+position = Vector2(0, 7.0000005)
 sprite_frames = SubResource("SpriteFrames_53yg0")
 animation = &"down right"
 autoplay = "top right"

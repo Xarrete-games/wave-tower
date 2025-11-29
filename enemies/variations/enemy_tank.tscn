@@ -12,9 +12,12 @@ damage = 20
 position = Vector2(-0.5, 4.5)
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-position = Vector2(12.999999, -19.000002)
+position = Vector2(19, -19)
 scale = Vector2(0.18, 0.18)
 
 [node name="HealthBar" parent="." index="4"]
+offset_left = -35.0
 offset_top = -99.0
+offset_right = -35.0
 offset_bottom = -99.0
+scale = Vector2(1.7600012, 1)

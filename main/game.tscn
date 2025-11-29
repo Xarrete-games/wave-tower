@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="2_2c7eb"]
-[ext_resource type="PackedScene" uid="uid://c7mje6qnw3kos" path="res://levels/levels/lvl1/lvl1.tscn" id="2_ompsl"]
+[ext_resource type="PackedScene" uid="uid://c7mje6qnw3kos" path="res://levels/levels/level1/level1.tscn" id="2_ompsl"]
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/towers_menu/towers_menu.tscn" id="3_4u4fy"]
 [ext_resource type="PackedScene" uid="uid://b1qa6yumd3yb6" path="res://levels/levels/level2/level_2.tscn" id="3_v3ojx"]
 [ext_resource type="PackedScene" uid="uid://dxw4slamsykme" path="res://levels/levels/level3/level_3.tscn" id="4_514y6"]
@@ -21,8 +21,10 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_jc0vi")
-levels = Array[PackedScene]([ExtResource("3_v3ojx"), ExtResource("4_514y6"), ExtResource("2_ompsl")])
+levels = Array[PackedScene]([ExtResource("2_ompsl"), ExtResource("3_v3ojx"), ExtResource("4_514y6")])
 pause = ExtResource("4_f7m14")
+current_level_number = 2
+initial_random_relics = 10
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(579, 323)
