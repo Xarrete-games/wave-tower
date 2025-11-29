@@ -51,3 +51,9 @@ func _check_price(current_gold: int) -> void:
 		else LABEL_SETTINGS_24_INVALID
 	)
 	
+
+func _on_mouse_entered() -> void:
+	relic_texture.scale = Vector2(0.6, 0.6)
+
+func _on_mouse_exited() -> void:
+	relic_texture.scale = Vector2(0.5, 0.5)
