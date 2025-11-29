@@ -42,6 +42,9 @@ radius = 36.013885
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("18_ldar5")
+}, {
+"duration": 1.0,
 "texture": ExtResource("2_28t7e")
 }, {
 "duration": 1.0,
@@ -88,9 +91,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("17_k6e4s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_ldar5")
 }],
 "loop": true,
 "name": &"bottom right",
