@@ -4,18 +4,25 @@
 [ext_resource type="Theme" uid="uid://bfml0mq4yid2" path="res://ui/styles/themes/menu_buttons_icon_theme.tres" id="2_dktk2"]
 [ext_resource type="Texture2D" uid="uid://8wejfimt1pjv" path="res://assets/sprites/icons/skull_icon_40px.png" id="3_dktk2"]
 
-[node name="NextWaveContainer" type="VBoxContainer"]
-offset_left = 27.0
-offset_top = 7.0
-offset_right = 284.0
-offset_bottom = 60.0
+[node name="NextWaveContainer" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_dktk2")
 
-[node name="NextWaveButton" type="Button" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_bottom = 400
+
+[node name="NextWaveButton" type="Button" parent="MarginContainer"]
 layout_mode = 2
 theme = ExtResource("2_dktk2")
 theme_override_icons/icon = ExtResource("3_dktk2")
 text = "Next Wave"
 icon = ExtResource("3_dktk2")
 
-[connection signal="pressed" from="NextWaveButton" to="." method="_on_next_wave_button_pressed"]
+[connection signal="pressed" from="MarginContainer/NextWaveButton" to="." method="_on_next_wave_button_pressed"]
