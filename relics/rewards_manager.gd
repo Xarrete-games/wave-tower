@@ -10,6 +10,7 @@ const AMOUNT_TO_REWARD_1 = 2
 const AMOUNT_TO_REWARD_2 = 4
 const AMOUNT_TO_REWARD_3 = 6
 const AMOUNT_TO_REWARD_4 = 8
+const REROLL_PRICE = 20
 
 var relics_list: Array[Object] = [
 	RedRelic, GreenRelic, BlueRelic,
@@ -22,7 +23,7 @@ var relics_list: Array[Object] = [
 var all_rewards: Array[Relic] = []
 var rewards_ui: RewardsUI
 var towers_buffs: Dictionary[Tower.TowerType, TowerBuff]
-var reroll_price: int = 30:
+var reroll_price: int = REROLL_PRICE:
 	set(value):
 		reroll_price = value
 		reroll_priece_change.emit(value)
