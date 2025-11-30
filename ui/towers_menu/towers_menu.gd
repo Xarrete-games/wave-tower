@@ -12,8 +12,10 @@ signal tower_selected(tower_scene: PackedScene)
 @onready var green_tower_button: TowerButton = $GreenTowerButton
 @onready var blue_tower_button: TowerButton = $BlueTowerButton
 @onready var gold_price: GoldPrice = $MarginContainer/HBoxContainer/VBoxContainer/GoldPrice
+@onready var relic_hint: Label = $MarginContainer/MarginContainer/PanelContainer/RelicHint
 
 func _ready():
+	relic_hint.visible = false
 	Price.tower_price_change.connect(_on_tower_price_change)
 	RewardsManager.show_rewards_price_change.connect(
 		func(value): gold_price.price = value)
@@ -43,3 +45,10 @@ func _on_rewards_ui_buton_pressed() -> void:
 		var next_price = roundi(RewardsManager.show_rewards_price * 1.10)
 		RewardsManager.show_rewards_price = next_price
 		RewardsManager.show_rewards_ui()
+
+
+func _on_rewards_ui_buton_mouse_entered() -> void:
+	relic_hint.visible = true
+	
+func _on_rewards_ui_buton_mouse_exited() -> void:
+	relic_hint.visible = false

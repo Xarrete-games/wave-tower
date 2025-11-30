@@ -88,15 +88,18 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
 size_flags_stretch_ratio = 0.0
+mouse_filter = 2
 theme_override_constants/margin_left = 30
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_constants/separation = 15
 alignment = 1
 
@@ -112,6 +115,7 @@ alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 160
 theme_override_constants/margin_top = 50
 
@@ -119,9 +123,10 @@ theme_override_constants/margin_top = 50
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_m2keh")
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/PanelContainer"]
+[node name="RelicHint" type="Label" parent="MarginContainer/MarginContainer/PanelContainer"]
 layout_mode = 2
 text = "You also have to pay the price of the relic"
 vertical_alignment = 1
@@ -129,4 +134,6 @@ vertical_alignment = 1
 [connection signal="pressed" from="RedTowerButton" to="." method="_on_red_tower_button_pressed"]
 [connection signal="pressed" from="GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
 [connection signal="pressed" from="BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/HBoxContainer/VBoxContainer/RewardsUIButon" to="." method="_on_rewards_ui_buton_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/HBoxContainer/VBoxContainer/RewardsUIButon" to="." method="_on_rewards_ui_buton_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/RewardsUIButon" to="." method="_on_rewards_ui_buton_pressed"]
