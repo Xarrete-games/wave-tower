@@ -164,7 +164,7 @@ fill_from = Vector2(0.5071225, 0.48433048)
 [node name="GoldSkeleton" instance=ExtResource("1_wsiet")]
 base_speed = 30.0
 max_healt = 10000.0
-base_gold_value = 100
+base_gold_value = 20
 damage = 999
 
 [node name="CollisionShape2D" parent="." index="0"]

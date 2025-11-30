@@ -1,29 +1,48 @@
-[gd_resource type="Resource" script_class="EnemyWave" load_steps=6 format=3 uid="uid://dkfloa2v0o3io"]
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=8 format=3 uid="uid://dkfloa2v0o3io"]
 
 [ext_resource type="Script" uid="uid://dxrvobswk6in5" path="res://enemies/enemy_generator/resources_definitions/enemy_group.gd" id="1_1wiup"]
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="2_u8gxv"]
 
 [sub_resource type="Resource" id="Resource_g5adu"]
 script = ExtResource("1_1wiup")
-amount = 2
+enemy_type = 3
+amount = 1
+path = 2
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_eybh1"]
 script = ExtResource("1_1wiup")
-enemy_type = 4
-amount = 20
-time_to_start = 1.0
+enemy_type = 6
+interval_spawn = 0.0
+time_to_start = 5.0
+path = 2
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_0jfdh"]
 script = ExtResource("1_1wiup")
-enemy_type = 1
-amount = 25
-interval_spawn = 0.8
-time_to_start = 5.0
+enemy_type = 5
+amount = 1
+interval_spawn = 0.0
+time_to_start = 8.0
+metadata/_custom_type_script = "uid://dxrvobswk6in5"
+
+[sub_resource type="Resource" id="Resource_1wiup"]
+script = ExtResource("1_1wiup")
+enemy_type = 6
+interval_spawn = 0.0
+time_to_start = 12.0
+path = 2
+metadata/_custom_type_script = "uid://dxrvobswk6in5"
+
+[sub_resource type="Resource" id="Resource_u8gxv"]
+script = ExtResource("1_1wiup")
+enemy_type = 6
+interval_spawn = 0.0
+time_to_start = 27.0
+path = 2
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [resource]
 script = ExtResource("2_u8gxv")
-groups = Array[ExtResource("1_1wiup")]([SubResource("Resource_g5adu"), SubResource("Resource_eybh1"), SubResource("Resource_0jfdh")])
+groups = Array[ExtResource("1_1wiup")]([SubResource("Resource_g5adu"), SubResource("Resource_eybh1"), SubResource("Resource_0jfdh"), SubResource("Resource_1wiup"), SubResource("Resource_u8gxv"), SubResource("Resource_u8gxv"), SubResource("Resource_u8gxv")])
 metadata/_custom_type_script = "uid://civj4pbtbhl5o"

@@ -5,22 +5,27 @@
 
 [sub_resource type="Resource" id="Resource_g5adu"]
 script = ExtResource("1_5l081")
-amount = 2
+enemy_type = 3
+amount = 20
+interval_spawn = 0.6
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_eybh1"]
 script = ExtResource("1_5l081")
-enemy_type = 4
+enemy_type = 3
 amount = 20
+interval_spawn = 0.6
 time_to_start = 1.0
+path = 1
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_0jfdh"]
 script = ExtResource("1_5l081")
-enemy_type = 1
-amount = 25
-interval_spawn = 0.8
+enemy_type = 3
+amount = 20
+interval_spawn = 0.3
 time_to_start = 5.0
+path = 2
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [resource]
