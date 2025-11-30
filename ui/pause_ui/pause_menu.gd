@@ -13,14 +13,14 @@ func resume():
 func pause():
 	get_tree().paused = true
 
-func _on_resume_pressed() -> void:
+func _on_resume_button_xarreta_pressed() -> void:
 	resume()
 
-func _on_restart_pressed() -> void:
+func _on_restart_button_xarreta_pressed() -> void:
 	resume()
 	get_tree().root.get_node("Game").reset_current_level()
 
-func _on_exit_button_pressed() -> void:
+func _on_exit_button_xarreta_pressed() -> void:
 	resume()
 	GameState.reset_run()
 	get_tree().change_scene_to_packed(MAIN_MENU)

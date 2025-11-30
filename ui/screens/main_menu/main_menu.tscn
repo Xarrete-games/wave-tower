@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dqo675n5we5gk" path="res://ui/screens/main_menu/main_menu.gd" id="1_omy8q"]
 [ext_resource type="Texture2D" uid="uid://bq6lt7tlxw0te" path="res://assets/sprites/ui/main_menu_background.png" id="2_i5wg5"]
 [ext_resource type="Texture2D" uid="uid://crut4djccohg3" path="res://assets/sprites/ui/wave_tower_logo.png" id="3_i5wg5"]
-[ext_resource type="Theme" uid="uid://br31q0n6y25o7" path="res://ui/styles/themes/menu_buttons_theme.tres" id="4_3c04x"]
+[ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/xarreta_menu_button/xarreta_menu_button.tscn" id="5_kadtk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3c04x"]
 texture = ExtResource("2_i5wg5")
@@ -42,29 +42,24 @@ theme_override_constants/margin_bottom = 60
 layout_mode = 2
 texture = ExtResource("3_i5wg5")
 
-[node name="NewRunButton" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
+[node name="NewRunButton" parent="PanelContainer/CenterContainer/VBoxContainer" instance=ExtResource("5_kadtk")]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("4_3c04x")
 text = "New Run"
 
-[node name="CreditsButton" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
+[node name="CreditsButton" parent="PanelContainer/CenterContainer/VBoxContainer" instance=ExtResource("5_kadtk")]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("4_3c04x")
-text = "Credits
-"
+text = "Credits"
 
-[node name="ExitButton" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
+[node name="ExitButton" parent="PanelContainer/CenterContainer/VBoxContainer" instance=ExtResource("5_kadtk")]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("4_3c04x")
-text = "Exit
-"
+text = "Exit"
 
-[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/NewRunButton" to="." method="_on_new_run_button_pressed"]
-[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="xarreta_pressed" from="PanelContainer/CenterContainer/VBoxContainer/NewRunButton" to="." method="_on_new_run_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="PanelContainer/CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="PanelContainer/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_xarreta_pressed"]

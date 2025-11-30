@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://fij53t05un2" path="res://assets/sprites/ui/explanation/relic_example.png" id="3_6gcom"]
 [ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="3_xtdxm"]
 [ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="4_gk24h"]
-[ext_resource type="Theme" uid="uid://br31q0n6y25o7" path="res://ui/styles/themes/menu_buttons_theme.tres" id="4_im3td"]
 [ext_resource type="Texture2D" uid="uid://cuf3ct4sm367w" path="res://assets/sprites/ui/explanation/Subida de lvl torres.png" id="4_xtdxm"]
+[ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/xarreta_menu_button/xarreta_menu_button.tscn" id="8_gk24h"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3c04x"]
 texture = ExtResource("2_05xss")
@@ -138,11 +138,10 @@ text = "Towers level up by attacking; click them to monitor their growth adjust 
 fit_content = true
 horizontal_alignment = 1
 
-[node name="DefendTheKingdom" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="XarretaMenuButton" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("8_gk24h")]
 custom_minimum_size = Vector2(800, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("4_im3td")
 text = "¡Defend the Kingdom of the Waves!"
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/DefendTheKingdom" to="." method="_on_defend_the_kingdom_pressed"]
+[connection signal="xarreta_pressed" from="PanelContainer/MarginContainer/VBoxContainer/XarretaMenuButton" to="." method="_on_xarreta_menu_button_xarreta_pressed"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2qbndgwbh6n5" path="res://ui/pause_ui/pause_menu.gd" id="1_bgnto"]
 [ext_resource type="PackedScene" uid="uid://dj1vromg52jei" path="res://ui/pause_ui/volume_control/volume.tscn" id="2_s7qyn"]
-[ext_resource type="Theme" uid="uid://br31q0n6y25o7" path="res://ui/styles/themes/menu_buttons_theme.tres" id="3_s7qyn"]
+[ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/xarreta_menu_button/xarreta_menu_button.tscn" id="4_snj08"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgnto"]
 bg_color = Color(0.09803922, 0.1254902, 0.09411765, 1)
@@ -56,21 +56,18 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Resume" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+[node name="ResumeButton" parent="CenterContainer/VBoxContainer/Buttons" instance=ExtResource("4_snj08")]
 layout_mode = 2
-theme = ExtResource("3_s7qyn")
 text = "Resume"
 
-[node name="Restart" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+[node name="RestartButton" parent="CenterContainer/VBoxContainer/Buttons" instance=ExtResource("4_snj08")]
 layout_mode = 2
-theme = ExtResource("3_s7qyn")
 text = "Restart"
 
-[node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+[node name="ExitButton" parent="CenterContainer/VBoxContainer/Buttons" instance=ExtResource("4_snj08")]
 layout_mode = 2
-theme = ExtResource("3_s7qyn")
 text = "Exit"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="xarreta_pressed" from="CenterContainer/VBoxContainer/Buttons/ResumeButton" to="." method="_on_resume_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="CenterContainer/VBoxContainer/Buttons/RestartButton" to="." method="_on_restart_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="CenterContainer/VBoxContainer/Buttons/ExitButton" to="." method="_on_exit_button_xarreta_pressed"]

@@ -57,12 +57,15 @@ func _set_stats(tower_stats: TowerStatsBase) -> void:
 	range_label.text = str(tower_stats.base_attack_range)
 
 func _on_tower_button_pressed() -> void:
+	AudioManager.play_button_click()
 	if Score.gold < price:
 		return
 	pressed.emit(tower_scene)
+	
 
 func _on_tower_button_mouse_entered() -> void:
 	hint_container.visible = true
+	AudioManager.play_button_hover()
 
 func _on_tower_button_mouse_exited() -> void:
 	hint_container.visible = false

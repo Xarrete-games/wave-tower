@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://huthfefiu18l"]
+
+[ext_resource type="Theme" uid="uid://br31q0n6y25o7" path="res://ui/styles/themes/menu_buttons_theme.tres" id="1_dp5ct"]
+[ext_resource type="Script" uid="uid://dyh5bok25ltg8" path="res://ui/components/xarreta_menu_button/xarreta_menu_button.gd" id="2_v3jmo"]
+
+[node name="XarretaMenuButton" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dp5ct")
+script = ExtResource("2_v3jmo")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

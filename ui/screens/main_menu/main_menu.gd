@@ -7,13 +7,13 @@ const CREDITS = preload("uid://bayb10jsajj4a")
 
 func _ready() -> void:
 	if direct_init:
-		_on_new_run_button_pressed()
+		_on_new_run_button_xarreta_pressed()
 
-func _on_exit_button_pressed() -> void:
-	get_tree().quit()
+func _on_new_run_button_xarreta_pressed() -> void:
+	get_tree().change_scene_to_packed(GAME)
 
-func _on_credits_button_pressed() -> void:
+func _on_credits_button_xarreta_pressed() -> void:
 	get_tree().root.add_child(CREDITS.instantiate())
 
-func _on_new_run_button_pressed() -> void:
-	get_tree().change_scene_to_packed(GAME)
+func _on_exit_button_xarreta_pressed() -> void:
+	get_tree().quit()

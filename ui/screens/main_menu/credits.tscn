@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dxhoravxnebf" path="res://ui/screens/main_menu/credits.gd" id="1_h5co8"]
 [ext_resource type="Texture2D" uid="uid://bq6lt7tlxw0te" path="res://assets/sprites/ui/main_menu_background.png" id="2_5h68c"]
 [ext_resource type="LabelSettings" uid="uid://buy1ngpem0c3b" path="res://ui/styles/label_settings/credits_label.tres" id="2_dcci6"]
-[ext_resource type="Theme" uid="uid://br31q0n6y25o7" path="res://ui/styles/themes/menu_buttons_theme.tres" id="3_h5co8"]
+[ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/xarreta_menu_button/xarreta_menu_button.tscn" id="5_gfe4y"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gfe4y"]
 texture = ExtResource("2_5h68c")
@@ -53,9 +53,8 @@ grow_horizontal = 2
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 
-[node name="ExitButton" type="Button" parent="MarginContainer"]
+[node name="XarretaMenuButton" parent="MarginContainer" instance=ExtResource("5_gfe4y")]
 layout_mode = 2
-theme = ExtResource("3_h5co8")
 text = "Exit"
 
-[connection signal="pressed" from="MarginContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="xarreta_pressed" from="MarginContainer/XarretaMenuButton" to="." method="_on_xarreta_menu_button_xarreta_pressed"]
