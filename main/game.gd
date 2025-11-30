@@ -33,11 +33,7 @@ func _process(_delta: float) -> void:
 func reset_current_level() -> void:
 	if _current_level:
 		_current_level.queue_free()
-	RelicsManager.reset_relics()
-	RewardsManager.reset_rewards()
-	TowerPlacementManager.reset_towers()
-	TowerUpgrades.reset_buffs()
-	LiveManager.lives = 5
+	GameState.reset_run()
 	_load_level(1)
 
 func _load_level(level_number: int) -> void:
