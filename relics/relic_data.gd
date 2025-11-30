@@ -7,3 +7,4 @@ class_name RelicData extends Resource
 @export var rarity: Relic.RelicRarity
 @export var max_stack: int = 10
 @export var price: int = 50
+@export var price_increased: bool = true

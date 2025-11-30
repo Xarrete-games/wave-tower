@@ -13,6 +13,7 @@ var max_stack: int
 var texture: Texture2D
 var base_price: int
 var price: int
+var price_increased: bool
 
 func _init() -> void:
 	var data = get_data()
@@ -24,6 +25,7 @@ func _init() -> void:
 	texture = data.texture
 	base_price = data.price
 	price = data.price
+	price_increased = data.price_increased
 
 @abstract
 func apply_effect() -> void

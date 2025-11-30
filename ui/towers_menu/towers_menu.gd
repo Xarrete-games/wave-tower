@@ -46,7 +46,6 @@ func _on_rewards_ui_buton_pressed() -> void:
 		RewardsManager.show_rewards_price = next_price
 		RewardsManager.show_rewards_ui()
 
-
 func _on_rewards_ui_buton_mouse_entered() -> void:
 	relic_hint.visible = true
 	

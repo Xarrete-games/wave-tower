@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfym6wmesrxxa"]
+[gd_scene load_steps=23 format=3 uid="uid://bfym6wmesrxxa"]
 
 [ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/towers_menu/towers_menu.gd" id="1_d3tgk"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="2_d3tgk"]
@@ -6,10 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://d36t7geqp1sh" path="res://towers/red/red_tower.tscn" id="3_lxxr0"]
 [ext_resource type="PackedScene" uid="uid://oj5ilwusjvuo" path="res://towers/green/green_tower.tscn" id="4_lxxr0"]
 [ext_resource type="PackedScene" uid="uid://cwyyp2r266blt" path="res://towers/blue/blue_tower.tscn" id="5_61shu"]
+[ext_resource type="Resource" uid="uid://bndxfmba1ltf8" path="res://towers/stats/stats_base/red_tower_stats_base.tres" id="5_whndq"]
 [ext_resource type="Texture2D" uid="uid://dheamk0vu60q6" path="res://assets/sprites/towers/torreticas_hover.png" id="6_7564t"]
+[ext_resource type="Resource" uid="uid://c1d3qqqdi2oxp" path="res://towers/stats/stats_base/green_tower_stats_base.tres" id="7_ffkn8"]
 [ext_resource type="Theme" uid="uid://bfml0mq4yid2" path="res://ui/styles/themes/menu_buttons_icon_theme.tres" id="8_m2keh"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/shared/gold_price/gold_price.tscn" id="8_s4otn"]
 [ext_resource type="Texture2D" uid="uid://dlix83276rvep" path="res://assets/sprites/icons/relic_icon_40px.png" id="9_m2keh"]
+[ext_resource type="Resource" uid="uid://by0giydu700gy" path="res://towers/stats/stats_base/blue_tower_stats_base.tres" id="10_1p1l7"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7564t"]
 load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
@@ -65,6 +68,7 @@ icon = SubResource("AtlasTexture_61shu")
 icon_hover = SubResource("AtlasTexture_s4otn")
 tower_description = "It fires a laser wave that hits the
  target 5 times."
+base_stats = ExtResource("5_whndq")
 
 [node name="GreenTowerButton" parent="." instance=ExtResource("3_1xlmg")]
 layout_mode = 2
@@ -73,6 +77,7 @@ icon = SubResource("AtlasTexture_7564t")
 icon_hover = SubResource("AtlasTexture_m2keh")
 tower_description = "It fires 3 waves that hit the first 
 thing they collide with."
+base_stats = ExtResource("7_ffkn8")
 
 [node name="BlueTowerButton" parent="." instance=ExtResource("3_1xlmg")]
 layout_mode = 2
@@ -81,6 +86,7 @@ icon = SubResource("AtlasTexture_qst0h")
 icon_hover = SubResource("AtlasTexture_f4t37")
 tower_description = "It creates a shockwave that 
 hits all enemies around."
+base_stats = ExtResource("10_1p1l7")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(100, 200)

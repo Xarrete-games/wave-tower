@@ -16,7 +16,8 @@ func add_relic(relic: Relic, is_free = false) -> void:
 	# increase priece in 20%
 	if not is_free:
 		Score.gold -= relic.price
-	relic.price = round(relic.price + (relic.price * 0.3))
+	if relic.price_increased:
+		relic.price = round(relic.price + (relic.price * 0.3))
 	_add_relic(relic)
 
 func _add_relic(relic: Relic) -> void:

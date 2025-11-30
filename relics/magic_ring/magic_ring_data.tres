@@ -6,9 +6,11 @@
 [resource]
 script = ExtResource("1_xpuv4")
 id = "Magic Ring"
-description = "The next tower is free."
+description = "The next tower is free.
+(no price increase)"
 texture = ExtResource("2_q13qs")
 type = 3
 max_stack = 99
 price = 30
+price_increased = false
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

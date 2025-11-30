@@ -6,9 +6,11 @@
 [resource]
 script = ExtResource("1_jfkmx")
 id = "Foundation Breaker"
-description = "Clears a random blocked build slot."
+description = "Clears a random blocked build slot.
+(no price increase)"
 texture = ExtResource("2_d4t1q")
 type = 3
 max_stack = 3
 price = 35
+price_increased = false
 metadata/_custom_type_script = "uid://u8jtn52xm88d"
