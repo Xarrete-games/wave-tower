@@ -221,7 +221,7 @@ text = "50"
 [node name="ButtonsContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/ButtonsContainer"]
+[node name="SellButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 theme = ExtResource("6_876xl")
 text = "Sell"
@@ -240,3 +240,5 @@ horizontal_alignment = 1
 layout_mode = 2
 texture = ExtResource("9_8m5ds")
 stretch_mode = 3
+
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/SellButton" to="." method="_on_sell_button_pressed"]

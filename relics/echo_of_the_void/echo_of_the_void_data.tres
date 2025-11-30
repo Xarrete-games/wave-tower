@@ -11,5 +11,5 @@ description = "Increases the number of waves launched by green towers by 1.
 texture = ExtResource("2_8dpub")
 type = 2
 rarity = 2
-max_stack = 3
+max_stack = 5
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

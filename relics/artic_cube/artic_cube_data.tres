@@ -11,5 +11,5 @@ description = "Blue turrets slow enemies by 50% for 1 second
 texture = ExtResource("2_o460k")
 type = 1
 rarity = 1
-max_stack = null
+max_stack = 9
 metadata/_custom_type_script = "uid://u8jtn52xm88d"
