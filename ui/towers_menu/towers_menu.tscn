@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfym6wmesrxxa"]
+[gd_scene load_steps=20 format=3 uid="uid://bfym6wmesrxxa"]
 
 [ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/towers_menu/towers_menu.gd" id="1_d3tgk"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="2_d3tgk"]
@@ -41,6 +41,15 @@ region = Rect2(249, 40, 142, 141)
 atlas = ExtResource("6_7564t")
 region = Rect2(249, 40, 142, 141)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m2keh"]
+bg_color = Color(0.033853274, 0.03385329, 0.033853233, 0.36078432)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
 [node name="TowersMenu" type="HBoxContainer"]
 custom_minimum_size = Vector2(340, 130)
 offset_top = -68.0
@@ -79,25 +88,45 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
 size_flags_stretch_ratio = 0.0
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="RewardsUIButon" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="RewardsUIButon" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_m2keh")
 theme_override_icons/icon = ExtResource("9_m2keh")
 text = "Relic"
 
-[node name="GoldPrice" parent="MarginContainer/VBoxContainer" instance=ExtResource("8_s4otn")]
+[node name="GoldPrice" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("8_s4otn")]
 layout_mode = 2
 alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_m2keh")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+text = "You also have to pay the price of the relic"
+vertical_alignment = 1
 
 [connection signal="pressed" from="RedTowerButton" to="." method="_on_red_tower_button_pressed"]
 [connection signal="pressed" from="GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
 [connection signal="pressed" from="BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/RewardsUIButon" to="." method="_on_rewards_ui_buton_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/RewardsUIButon" to="." method="_on_rewards_ui_buton_pressed"]

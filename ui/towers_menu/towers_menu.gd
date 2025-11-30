@@ -11,7 +11,7 @@ signal tower_selected(tower_scene: PackedScene)
 @onready var red_tower_button: TowerButton = $RedTowerButton
 @onready var green_tower_button: TowerButton = $GreenTowerButton
 @onready var blue_tower_button: TowerButton = $BlueTowerButton
-@onready var gold_price: GoldPrice = $MarginContainer/VBoxContainer/GoldPrice
+@onready var gold_price: GoldPrice = $MarginContainer/HBoxContainer/VBoxContainer/GoldPrice
 
 func _ready():
 	Price.tower_price_change.connect(_on_tower_price_change)

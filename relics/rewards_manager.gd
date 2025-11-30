@@ -19,7 +19,6 @@ var relics_list: Array[Object] = [
 	IgnitionVoltage, FoundationBreaker, SafetyHelmet
 ]
 
-
 var all_rewards: Array[Relic] = []
 var rewards_ui: RewardsUI
 var towers_buffs: Dictionary[Tower.TowerType, TowerBuff]
