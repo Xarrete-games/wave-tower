@@ -7,7 +7,7 @@ var _is_placing = false:
 	set(value):
 		_is_placing = value
 		TowerPlacementManager.is_placing = value
-		TowerPlacementManager.tower_placing.emit(value)
+
 var _current_tower_instance: Tower = null
 var _is_valid_placement = false
 
@@ -25,9 +25,11 @@ func _process(_delta: float) -> void:
 	
 	if level_tile_map.is_mouse_on_buildeable_tile():
 		_is_valid_placement = true
+		_current_tower_instance.normal_color()
 		_current_tower_instance.global_position = level_tile_map.get_current_tile_pos()
 	else:
 		_is_valid_placement = false
+		_current_tower_instance.phantom_mode()
 		_current_tower_instance.global_position = get_global_mouse_position()
 
 func _input(event: InputEvent) -> void:

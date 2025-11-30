@@ -11,6 +11,8 @@ signal attack_speed_change(value: float)
 
 enum TowerType { RED, GREEN, BLUE }
 
+const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
+
 @export var type: TowerType = TowerType.RED
 @export var stats_base: TowerStatsBase
 
@@ -57,6 +59,7 @@ var exp_data: TowerExpData:
 @onready var attack_timer: Timer = $AttackTimer
 @onready var cristal_light: CristalLight = $CristalLight
 @onready var experience_handler: ExprienceHandler = $ExperienceHandler
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 func _ready():
 	exp_data = experience_handler.exp_data
@@ -70,15 +73,24 @@ func _ready():
 # --------------------
 # --- MODES ---
 # --------------------
+
+func phantom_mode() -> void:
+	sprite_2d.modulate = PHANTOM_COLOR
+	range_preview.visible = false
+
+func normal_color() -> void:
+	sprite_2d.modulate = Color.WHITE
+	range_preview.visible = true
+
 # sets the tower's state while it is being placed
 func placement_mode() -> void:
 	_enabled = false
 	range_area.monitoring = false
-	range_preview.visible = true
-
+	
 # Enables the tower after its construction/placement.
 # It is initially disabled to prevent actions while the player is placing it.
 func enable() -> void:
+	sprite_2d.modulate = Color.WHITE
 	_enabled = true
 	range_area.monitoring = true
 	range_preview.visible = false
