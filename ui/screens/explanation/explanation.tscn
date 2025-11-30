@@ -141,6 +141,6 @@ custom_minimum_size = Vector2(800, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_im3td")
-text = "¡Defend the Kingdom of the waves!"
+text = "¡Defend the Kingdom of the Waves!"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/DefendTheKingdom" to="." method="_on_exit_button_pressed"]
