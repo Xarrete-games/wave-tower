@@ -23,6 +23,8 @@
 script = ExtResource("1_jc0vi")
 levels = Array[PackedScene]([ExtResource("2_ompsl"), ExtResource("3_v3ojx"), ExtResource("4_514y6")])
 pause = ExtResource("4_f7m14")
+current_level_number = 3
+initial_random_relics = 35
 time_speed = 2.0
 
 [node name="MainCamera" type="Camera2D" parent="."]
@@ -83,13 +85,10 @@ offset_bottom = 1068.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="TowerStatsPanel" parent="UILayer" instance=ExtResource("14_514y6")]
-visible = false
-size_flags_horizontal = 8
-size_flags_vertical = 4
-
 [node name="WavesUI" parent="UILayer" instance=ExtResource("5_hlcqn")]
 visible = false
+
+[node name="TowerStatsPanel" parent="UILayer" instance=ExtResource("14_514y6")]
 
 [node name="RewardsLayer" type="CanvasLayer" parent="."]
 

@@ -7,6 +7,7 @@ class_name Game extends Node2D
 @export var time_speed: float = 1.0
 
 var _current_level: Level
+const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 
 #current level parent
 @onready var level_container: Node2D = $LevelContainer
@@ -55,9 +56,12 @@ func _hide_next_level_menu() -> void:
 	next_level_menu.set_process(false)
 	
 func _show_next_level_menu() -> void:
-	next_level_menu.visible = true
-	next_level_menu.mouse_filter = Control.MOUSE_FILTER_STOP
-	next_level_menu.set_process(true)
+	if current_level_number == levels.size():
+		get_tree().change_scene_to_packed(END_GAME_SCENE)
+	else:
+		next_level_menu.visible = true
+		next_level_menu.mouse_filter = Control.MOUSE_FILTER_STOP
+		next_level_menu.set_process(true)
 
 func _update_camera_post() -> void:
 	var new_pos = _current_level.get_camera_init_pos()

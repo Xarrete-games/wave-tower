@@ -41,13 +41,14 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action("exit"):
 		_cancel_tower()
 		
-
 # should be called each time a level is created
 func update_nodes_from_current_level(current_level: Level) -> void:
 	level_tile_map = current_level.get_node("LevelTileMap")
 	towers_container = current_level.get_node("TowersContainer")
 
 func _place_tower() -> void:
+	if not _current_tower_instance:
+		return
 	var tile_pos = level_tile_map.get_mouse_tile_pos()
 	level_tile_map.set_tile_occupied(tile_pos)
 	var tower_price = Price.get_price(_current_tower_instance.type)

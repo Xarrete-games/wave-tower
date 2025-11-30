@@ -57,7 +57,13 @@ Button/styles/pressed = SubResource("StyleBoxFlat_oqjw5")
 [node name="TowerStatsPanel" type="Control" node_paths=PackedStringArray("damage_label", "attack_speed_label", "range_label", "critic_label", "level_label", "current_exp_label", "required_exp_label", "price_label")]
 texture_filter = 4
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
 script = ExtResource("1_vyalh")
 damage_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/DamageLabel")
 attack_speed_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer/AttackSpeedLabel")
