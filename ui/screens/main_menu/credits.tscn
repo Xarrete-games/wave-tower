@@ -32,7 +32,7 @@ theme_override_constants/separation = 20
 
 [node name="RibiLabel" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "CarlosRibesDev - programing"
+text = "CarlosRibesDev - programming"
 label_settings = SubResource("LabelSettings_g65cv")
 horizontal_alignment = 1
 
