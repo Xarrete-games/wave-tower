@@ -6,14 +6,14 @@
 [sub_resource type="Resource" id="Resource_kn23x"]
 script = ExtResource("1_5yxjb")
 enemy_type = 3
-amount = 10
+amount = 1
 interval_spawn = 2.2
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_ao6xs"]
 script = ExtResource("1_5yxjb")
 enemy_type = 6
-amount = 15
+amount = 20
 interval_spawn = 0.4
 time_to_start = 30.0
 path = 1
