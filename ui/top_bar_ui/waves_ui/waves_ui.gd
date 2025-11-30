@@ -1,6 +1,6 @@
 class_name WavesUi extends Control
 
-@onready var next_wave_button: Button = $NextWaveButton
+@onready var next_wave_button: Button = $MarginContainer/NextWaveButton
 
 func _ready():
 	EnemyManager.wave_finished.connect(func (_wave: EnemyWave):

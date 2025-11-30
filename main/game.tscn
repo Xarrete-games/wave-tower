@@ -35,90 +35,74 @@ script = ExtResource("2_2c7eb")
 
 [node name="NextLevelMenu" parent="UILayer" instance=ExtResource("7_j015t")]
 
-[node name="MarginContainer" type="MarginContainer" parent="UILayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="TowersCounters" parent="UILayer/MarginContainer" instance=ExtResource("14_bc3cr")]
+[node name="TowersCounters" parent="UILayer" instance=ExtResource("14_bc3cr")]
 visible = false
-layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="TopBar" type="HBoxContainer" parent="UILayer/MarginContainer"]
-layout_mode = 2
+[node name="TopBar" type="HBoxContainer" parent="UILayer"]
+offset_left = 2.0
+offset_top = 12.0
+offset_right = 1918.0
+offset_bottom = 101.0
 mouse_filter = 2
 
-[node name="RelicsContainer" parent="UILayer/MarginContainer/TopBar" instance=ExtResource("10_p6qvs")]
+[node name="RelicsContainer" parent="UILayer/TopBar" instance=ExtResource("10_p6qvs")]
 layout_mode = 2
 size_flags_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/TopBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 theme_override_constants/separation = 100
 
-[node name="Gold" parent="UILayer/MarginContainer/TopBar/HBoxContainer" instance=ExtResource("4_j015t")]
+[node name="Gold" parent="UILayer/TopBar/HBoxContainer" instance=ExtResource("4_j015t")]
 layout_mode = 2
 
-[node name="LivesCounter" parent="UILayer/MarginContainer/TopBar/HBoxContainer" instance=ExtResource("11_yyuar")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="WavesCounter" parent="UILayer/MarginContainer/TopBar/HBoxContainer" instance=ExtResource("12_0coyo")]
+[node name="LivesCounter" parent="UILayer/TopBar/HBoxContainer" instance=ExtResource("11_yyuar")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Config" parent="UILayer/MarginContainer/TopBar/HBoxContainer" instance=ExtResource("5_v3ojx")]
+[node name="WavesCounter" parent="UILayer/TopBar/HBoxContainer" instance=ExtResource("12_0coyo")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Config" parent="UILayer/TopBar/HBoxContainer" instance=ExtResource("5_v3ojx")]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="TowersMenu" parent="UILayer/MarginContainer" instance=ExtResource("3_4u4fy")]
-layout_mode = 2
+[node name="TowersMenu" parent="UILayer" instance=ExtResource("3_4u4fy")]
+offset_left = 686.0
+offset_top = 868.0
+offset_right = 1234.0
+offset_bottom = 1068.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="TowerStatsPanel" parent="UILayer/MarginContainer" instance=ExtResource("14_514y6")]
+[node name="TowerStatsPanel" parent="UILayer" instance=ExtResource("14_514y6")]
 visible = false
-layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
 [node name="WavesUI" parent="UILayer" instance=ExtResource("5_hlcqn")]
 visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -86.0
-offset_top = 110.0
-offset_right = 86.0
-offset_bottom = 161.0
-grow_horizontal = 2
 
 [node name="RewardsLayer" type="CanvasLayer" parent="."]
 
 [node name="ConfigLayer" type="CanvasLayer" parent="."]
 
 [node name="TowerPlacer" parent="." node_paths=PackedStringArray("towers_menu") instance=ExtResource("6_v3ojx")]
-towers_menu = NodePath("../UILayer/MarginContainer/TowersMenu")
+towers_menu = NodePath("../UILayer/TowersMenu")
 
 [node name="LevelContainer" type="Node2D" parent="."]
 
 [node name="MusicHandler" parent="." instance=ExtResource("12_v3ojx")]
 
 [connection signal="next_leve_button_pressed" from="UILayer/NextLevelMenu" to="." method="_on_next_level_menu_next_leve_button_pressed"]
-[connection signal="config_pressed" from="UILayer/MarginContainer/TopBar/HBoxContainer/Config" to="." method="_on_config_config_pressed"]
+[connection signal="config_pressed" from="UILayer/TopBar/HBoxContainer/Config" to="." method="_on_config_config_pressed"]
