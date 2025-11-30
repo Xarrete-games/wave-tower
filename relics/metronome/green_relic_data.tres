@@ -6,9 +6,11 @@
 [resource]
 script = ExtResource("1_75g13")
 id = "Metronome"
-description = "Increases the attack speed of all towers by 5%."
+description = "Increases the attack speed of all towers by 5%.
+(+5% for each one)."
 texture = ExtResource("2_p4a3n")
 type = 3
 rarity = 1
-price = 70
+max_stack = 5
+price = 90
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

@@ -6,8 +6,9 @@
 [resource]
 script = ExtResource("1_46s0e")
 id = "Valve Amplifier 100W"
-description = "Increases the attack range of all towers by 10%."
+description = "Increases the attack range of all towers by 10%.
+(+10% for each artic cube one)."
 texture = ExtResource("2_iwf50")
 type = 3
-price = 40
+max_stack = 5
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

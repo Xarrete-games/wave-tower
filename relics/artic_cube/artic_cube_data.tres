@@ -6,7 +6,8 @@
 [resource]
 script = ExtResource("1_byrtf")
 id = "Artic Cube"
-description = "Blue turrets slow enemies by 50% for 1 second (+1 second for each artic cube)."
+description = "Blue turrets slow enemies by 50% for 1 second 
+(+1 second for each one)."
 texture = ExtResource("2_o460k")
 type = 1
 rarity = 1

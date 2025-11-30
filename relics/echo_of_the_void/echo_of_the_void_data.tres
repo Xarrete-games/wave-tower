@@ -6,7 +6,8 @@
 [resource]
 script = ExtResource("1_cyamb")
 id = "Echo of the void"
-description = "Increases the number of waves launched by green towers by 1."
+description = "Increases the number of waves launched by green towers by 1.
+(+1 for each one)."
 texture = ExtResource("2_8dpub")
 type = 2
 rarity = 2
