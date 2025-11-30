@@ -14,7 +14,7 @@ config/name="Wave Tower"
 run/main_scene="uid://byy7o2o0hm4t"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/image="uid://csyaj47g8er2i"
-config/icon="uid://dlswnagmrrkqy"
+config/icon="uid://du6pcr3fpo4su"
 
 [autoload]
 
