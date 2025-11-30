@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://byy7o2o0hm4t"]
+[gd_scene load_steps=10 format=3 uid="uid://byy7o2o0hm4t"]
 
+[ext_resource type="Script" uid="uid://78rjwke2ur88" path="res://ui/screens/explanation/explanation.gd" id="1_gk24h"]
 [ext_resource type="Texture2D" uid="uid://bq6lt7tlxw0te" path="res://assets/sprites/ui/main_menu_background.png" id="2_05xss"]
 [ext_resource type="Texture2D" uid="uid://deipjkusxh5iy" path="res://assets/sprites/ui/explanation/place_towers.png" id="2_rxyxh"]
 [ext_resource type="Texture2D" uid="uid://fij53t05un2" path="res://assets/sprites/ui/explanation/relic_example.png" id="3_6gcom"]
@@ -18,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gk24h")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -143,4 +145,4 @@ size_flags_horizontal = 4
 theme = ExtResource("4_im3td")
 text = "¡Defend the Kingdom of the Waves!"
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/DefendTheKingdom" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/DefendTheKingdom" to="." method="_on_defend_the_kingdom_pressed"]
