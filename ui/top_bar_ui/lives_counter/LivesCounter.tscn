@@ -11,7 +11,7 @@ script = ExtResource("1_jul41")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-text = "LIVES:"
+text = "Lives:"
 label_settings = ExtResource("1_riguy")
 
 [node name="CounterLabel" type="Label" parent="."]

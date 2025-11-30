@@ -49,7 +49,7 @@ size_flags_horizontal = 2
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
-theme_override_constants/separation = 100
+theme_override_constants/separation = 80
 
 [node name="Gold" parent="UILayer/TopBar/HBoxContainer" instance=ExtResource("4_j015t")]
 layout_mode = 2

@@ -39,6 +39,7 @@ func reset_current_level() -> void:
 
 func _load_level(level_number: int) -> void:
 	music_handler.stop_music()
+	Settings.new_level_loaded.emit(level_number)
 	_current_level = levels[level_number - 1].instantiate()
 	current_level_number = level_number
 	level_container.add_child(_current_level)
