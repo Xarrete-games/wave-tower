@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://crastw7xnqgvl"]
+[gd_scene load_steps=4 format=3 uid="uid://crastw7xnqgvl"]
 
 [ext_resource type="Script" uid="uid://bapepoqni3ebq" path="res://ui/next_level_menu/next_level_menu.gd" id="1_bqcem"]
+[ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="2_ak2q7"]
 [ext_resource type="Theme" uid="uid://dswsb3nw14dn7" path="res://ui/styles/themes/menu_theme.tres" id="2_rufx6"]
 
 [node name="NextLevelMenu" type="Control"]
@@ -31,10 +32,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NextLevelButton" type="Button" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "LEVEL COMPLETED"
+label_settings = ExtResource("2_ak2q7")
+
+[node name="NextLevelButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_rufx6")
 theme_type_variation = &"icon button"
 text = "GO NEXT LEVEL"
 
-[connection signal="pressed" from="CenterContainer/NextLevelButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NextLevelButton" to="." method="_on_button_pressed"]
