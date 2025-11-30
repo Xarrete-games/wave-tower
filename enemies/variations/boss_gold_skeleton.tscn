@@ -180,7 +180,7 @@ animation = &"down right"
 frame_progress = 0.0
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="2"]
-position = Vector2(-1.0000001, 59)
+position = Vector2(0, 18)
 scale = Vector2(0.26, 0.2)
 energy = 1.2
 blend_mode = 1
