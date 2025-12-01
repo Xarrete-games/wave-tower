@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ck6mf6m73ergh"]
 
 [ext_resource type="Script" uid="uid://q583klmvpknv" path="res://towers/green/projectil/green_projectile.gd" id="1_8lep0"]
-[ext_resource type="AudioStream" uid="uid://crw2n0h5snfge" path="res://assets/sounds/sfx/Green_Attack.wav" id="3_eg2fn"]
+[ext_resource type="AudioStream" uid="uid://cp4evfqpqhdhy" path="res://assets/sounds/sfx/Green_attack.ogg" id="3_eg2fn"]
 [ext_resource type="Texture2D" uid="uid://dlvncixmqxa4n" path="res://assets/sprites/proyectiles/green_ring.png" id="4_710fh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qvvkj"]
