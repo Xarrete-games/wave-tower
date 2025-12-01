@@ -7,3 +7,4 @@ func reset_run() -> void:
 	TowerPlacementManager.reset_towers()
 	TowerUpgrades.reset_buffs()
 	LiveManager.lives = 5
+	Score.extra_gold_dropped = 0
