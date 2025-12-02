@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=13 format=3 uid="uid://cpempms31mf5t"]
+
+[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="1_2uf5g"]
+[ext_resource type="Script" uid="uid://dx42a8fkpk6fb" path="res://enemies/enemy_generator/resources_definitions/level_data.gd" id="2_g234b"]
+[ext_resource type="Resource" uid="uid://duq5suhmljd2l" path="res://levels/levels/level1a/waves/wave1.tres" id="2_tdhba"]
+[ext_resource type="Resource" uid="uid://b2xkbqd8f1wkx" path="res://levels/levels/level1a/waves/wave2.tres" id="3_vg2na"]
+[ext_resource type="Resource" uid="uid://bpa8ludd3oe1n" path="res://levels/levels/level1a/waves/wave3.tres" id="4_owg1i"]
+[ext_resource type="Resource" uid="uid://cwb8dvu4ipxlr" path="res://levels/levels/level1a/waves/wave4.tres" id="5_ce4gr"]
+[ext_resource type="Resource" uid="uid://btpxn2yosqkqf" path="res://levels/levels/level1a/waves/wave5.tres" id="6_ydjuw"]
+[ext_resource type="Resource" uid="uid://dsaogt1ltympd" path="res://levels/levels/level1a/waves/wave6.tres" id="7_d58u8"]
+[ext_resource type="Resource" uid="uid://y6ids0ilrjwo" path="res://levels/levels/level1a/waves/wave7.tres" id="8_f0t3t"]
+[ext_resource type="Resource" uid="uid://b4p1nlvv17l8j" path="res://levels/levels/level1a/waves/wave8.tres" id="9_ogpxf"]
+[ext_resource type="Resource" uid="uid://c0osdjy2h8lev" path="res://levels/levels/level1a/waves/wave9.tres" id="10_cifof"]
+[ext_resource type="Resource" uid="uid://fxs2jusuumx1" path="res://levels/levels/level1a/waves/wave10.tres" id="11_1sox1"]
+
+[resource]
+script = ExtResource("2_g234b")
+enemy_waves = Array[ExtResource("1_2uf5g")]([ExtResource("2_tdhba"), ExtResource("3_vg2na"), ExtResource("4_owg1i"), ExtResource("5_ce4gr"), ExtResource("6_ydjuw"), ExtResource("7_d58u8"), ExtResource("8_f0t3t"), ExtResource("9_ogpxf"), ExtResource("10_cifof"), ExtResource("11_1sox1")])
+initial_gold = 150
+metadata/_custom_type_script = "uid://dx42a8fkpk6fb"
