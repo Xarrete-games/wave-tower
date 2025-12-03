@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=6 format=3 uid="uid://ctiafxtqwtfi5"]
+
+[ext_resource type="Script" uid="uid://dxrvobswk6in5" path="res://enemies/enemy_generator/resources_definitions/enemy_group.gd" id="1_1lkcq"]
+[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="2_q0alh"]
+
+[sub_resource type="Resource" id="Resource_438pl"]
+script = ExtResource("1_1lkcq")
+amount = 6
+interval_spawn = 2.0
+metadata/_custom_type_script = "uid://dxrvobswk6in5"
+
+[sub_resource type="Resource" id="Resource_j8uhr"]
+script = ExtResource("1_1lkcq")
+enemy_type = 4
+interval_spawn = 0.8
+time_to_start = 1.0
+metadata/_custom_type_script = "uid://dxrvobswk6in5"
+
+[sub_resource type="Resource" id="Resource_ufguu"]
+script = ExtResource("1_1lkcq")
+interval_spawn = 2.0
+time_to_start = 18.0
+metadata/_custom_type_script = "uid://dxrvobswk6in5"
+
+[resource]
+script = ExtResource("2_q0alh")
+groups = Array[ExtResource("1_1lkcq")]([SubResource("Resource_438pl"), SubResource("Resource_j8uhr"), SubResource("Resource_ufguu")])
+metadata/_custom_type_script = "uid://civj4pbtbhl5o"
