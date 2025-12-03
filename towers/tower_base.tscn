@@ -8,13 +8,18 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_wmotl"]
 radius = 200.0
 
-[node name="Tower" type="Node2D"]
+[node name="Tower" type="Node2D" groups=["tower"]]
 
 [node name="CristalLight" parent="." instance=ExtResource("1_7fffe")]
 position = Vector2(0, -136)
 
+[node name="RangePreview" type="Node2D" parent="."]
+z_index = -1
+script = ExtResource("2_uyl23")
+radius = 200.0
+color_fill = Color(0, 0.69803923, 1, 0.5568628)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
 position = Vector2(0, -70)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_crlvv")
@@ -31,11 +36,6 @@ shape = SubResource("CircleShape2D_wmotl")
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
-
-[node name="RangePreview" type="Node2D" parent="."]
-script = ExtResource("2_uyl23")
-radius = 200.0
-color_fill = Color(0, 0.69803923, 1, 0.5568628)
 
 [node name="MouseDetector" type="Control" parent="."]
 layout_mode = 3

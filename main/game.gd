@@ -1,6 +1,6 @@
 class_name Game extends Node2D
 
-@export var levels: Array[PackedScene]
+@export var levels_paths: Array[String]
 @export var pause : PackedScene
 @export var current_level_number: int = 1
 @export var initial_random_relics: int = 0
@@ -41,7 +41,7 @@ func reset_current_level() -> void:
 func _load_level(level_number: int) -> void:
 	music_handler.stop_music()
 	Settings.new_level_loaded.emit(level_number)
-	_current_level = levels[level_number - 1].instantiate()
+	_current_level = load(levels_paths[level_number - 1]).instantiate()
 	current_level_number = level_number
 	level_container.add_child(_current_level)
 	
@@ -58,7 +58,7 @@ func _hide_next_level_menu() -> void:
 	next_level_menu.set_process(false)
 	
 func _show_next_level_menu() -> void:
-	if current_level_number == levels.size():
+	if current_level_number == levels_paths.size():
 		await  get_tree().create_timer(5).timeout
 		get_tree().change_scene_to_packed(END_GAME_SCENE)
 	else:
@@ -74,7 +74,7 @@ func _on_next_level_menu_next_leve_button_pressed() -> void:
 	_hide_next_level_menu()
 	current_level_number += 1
 	_current_level.queue_free()
-	if current_level_number  > levels.size():
+	if current_level_number  > levels_paths.size():
 		print("END GAME")
 	else: 
 		_load_level(current_level_number)
@@ -83,7 +83,6 @@ func _open_config_menu() -> void:
 	get_tree().paused = not get_tree().paused
 	var pause_instance = pause.instantiate()
 	config_layer.add_child(pause_instance)
-
 
 func _on_top_bar_config_pressed() -> void:
 	_open_config_menu()

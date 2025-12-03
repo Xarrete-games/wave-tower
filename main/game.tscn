@@ -1,15 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://6vgrx5dct8h8"]
+[gd_scene load_steps=13 format=3 uid="uid://6vgrx5dct8h8"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="2_2c7eb"]
-[ext_resource type="PackedScene" uid="uid://dl8jeedaejih" path="res://levels/levels/level3a/level_3a.tscn" id="2_5prg3"]
-[ext_resource type="PackedScene" uid="uid://c5ixy7gj2ygds" path="res://levels/levels/level1b/level_1b.tscn" id="2_514y6"]
-[ext_resource type="PackedScene" uid="uid://damqkhvr5bmap" path="res://levels/levels/level2a/level_2a.tscn" id="2_bc3cr"]
-[ext_resource type="PackedScene" uid="uid://c7mje6qnw3kos" path="res://levels/levels/level1/level1.tscn" id="2_ompsl"]
-[ext_resource type="PackedScene" uid="uid://cl4b07yitob60" path="res://levels/levels/level1a/level_1a.tscn" id="2_yu8fu"]
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/towers_menu/towers_menu.tscn" id="3_4u4fy"]
-[ext_resource type="PackedScene" uid="uid://b1qa6yumd3yb6" path="res://levels/levels/level2/level_2.tscn" id="3_v3ojx"]
-[ext_resource type="PackedScene" uid="uid://dxw4slamsykme" path="res://levels/levels/level3/level_3.tscn" id="4_514y6"]
 [ext_resource type="PackedScene" uid="uid://b1rsi54eynysa" path="res://ui/pause_ui/pause_menu.tscn" id="4_f7m14"]
 [ext_resource type="PackedScene" uid="uid://b7ttkk4pasgin" path="res://ui/top_bar_ui/waves_ui/waves_ui.tscn" id="5_hlcqn"]
 [ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="6_v3ojx"]
@@ -22,9 +15,8 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_jc0vi")
-levels = Array[PackedScene]([ExtResource("2_5prg3"), ExtResource("2_514y6"), ExtResource("2_bc3cr"), ExtResource("2_yu8fu"), ExtResource("2_ompsl"), ExtResource("3_v3ojx"), ExtResource("4_514y6")])
+levels_paths = Array[String](["res://levels/levels/level1/level1.tscn"])
 pause = ExtResource("4_f7m14")
-initial_random_relics = 36
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(579, 323)
