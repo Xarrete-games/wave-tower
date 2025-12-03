@@ -7,7 +7,6 @@
 script = ExtResource("1_waw2w")
 amount = 10
 interval_spawn = 1.0
-path = 1
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_yj36j"]
@@ -27,7 +26,6 @@ metadata/_custom_type_script = "uid://dxrvobswk6in5"
 script = ExtResource("1_waw2w")
 enemy_type = 1
 time_to_start = 10.0
-path = 1
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [resource]
