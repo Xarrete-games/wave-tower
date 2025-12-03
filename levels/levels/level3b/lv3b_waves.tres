@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=13 format=3 uid="uid://na5uh5ysm8b0"]
+
+[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="1_t7df0"]
+[ext_resource type="Resource" uid="uid://1d6tfrdxbsh8" path="res://levels/levels/level3b/waves/lv3_wave1.tres" id="2_3g6mt"]
+[ext_resource type="Resource" uid="uid://7qyxov7i4n61" path="res://levels/levels/level3b/waves/lv3_wave2.tres" id="3_kjdw7"]
+[ext_resource type="Resource" uid="uid://6es1tjppos16" path="res://levels/levels/level3b/waves/lv3_wave3.tres" id="4_rmlir"]
+[ext_resource type="Resource" uid="uid://ct6jbn0utn858" path="res://levels/levels/level3b/waves/lv3_wave4.tres" id="5_yd6y3"]
+[ext_resource type="Resource" uid="uid://df86jxdpmoio1" path="res://levels/levels/level3b/waves/lv3_wave5.tres" id="6_342ci"]
+[ext_resource type="Resource" uid="uid://hdno626n7bjc" path="res://levels/levels/level3b/waves/lv3_wave6.tres" id="7_lkd8l"]
+[ext_resource type="Resource" uid="uid://de8jvc2i32gig" path="res://levels/levels/level3b/waves/lv3_wave7.tres" id="8_tctl0"]
+[ext_resource type="Resource" uid="uid://dbcfsvarvvjtw" path="res://levels/levels/level3b/waves/lv3_wave8.tres" id="9_rrsyr"]
+[ext_resource type="Resource" uid="uid://b3hjcil1r7mss" path="res://levels/levels/level3b/waves/lv3_wave9.tres" id="10_aa6j3"]
+[ext_resource type="Resource" uid="uid://c32uqumprxjcf" path="res://levels/levels/level3b/waves/lv3_wave10.tres" id="11_qfust"]
+[ext_resource type="Script" uid="uid://dx42a8fkpk6fb" path="res://enemies/enemy_generator/resources_definitions/level_data.gd" id="12_m34ga"]
+
+[resource]
+script = ExtResource("12_m34ga")
+enemy_waves = Array[ExtResource("1_t7df0")]([ExtResource("2_3g6mt"), ExtResource("3_kjdw7"), ExtResource("4_rmlir"), ExtResource("5_yd6y3"), ExtResource("6_342ci"), ExtResource("7_lkd8l"), ExtResource("8_tctl0"), ExtResource("9_rrsyr"), ExtResource("10_aa6j3"), ExtResource("11_qfust")])
+initial_gold = 200
+metadata/_custom_type_script = "uid://dx42a8fkpk6fb"
