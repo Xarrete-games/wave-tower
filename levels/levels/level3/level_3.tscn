@@ -26,7 +26,7 @@ _data = {
 }
 point_count = 32
 
-[node name="Level2" instance=ExtResource("1_0xng1")]
+[node name="Level3" instance=ExtResource("1_0xng1")]
 data = ExtResource("2_8dued")
 
 [node name="LevelTileMap" parent="." index="0"]

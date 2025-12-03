@@ -19,7 +19,7 @@ _data = {
 }
 point_count = 12
 
-[node name="Level1a" instance=ExtResource("1_xhl6s")]
+[node name="Level1b" instance=ExtResource("1_xhl6s")]
 data = ExtResource("2_lorka")
 
 [node name="LevelTileMap" parent="." index="0"]
