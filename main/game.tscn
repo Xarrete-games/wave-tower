@@ -15,7 +15,7 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_jc0vi")
-levels_paths = Array[String](["res://levels/levels/level1/level1.tscn"])
+levels_paths = Array[String](["res://levels/levels/level1b/level_1b.tscn", "res://levels/levels/level2a/level_2a.tscn", "res://levels/levels/level3a/level_3a.tscn"])
 pause = ExtResource("4_f7m14")
 
 [node name="MainCamera" type="Camera2D" parent="."]
