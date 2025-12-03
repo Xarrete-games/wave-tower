@@ -62,6 +62,7 @@ var exp_data: TowerExpData:
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 func _ready():
+	range_collision.shape = CircleShape2D.new()
 	exp_data = experience_handler.exp_data
 	experience_handler.exp_data_change.connect(_on_exp_data_change)
 	experience_handler.level_up.connect(_on_level_up)
@@ -94,8 +95,9 @@ func enable() -> void:
 	_enabled = true
 	range_area.monitoring = true
 	range_preview.visible = false
-	
+
 	await get_tree().create_timer(0.1).timeout
+	
 	TowerPlacementManager.tower_selected.connect(_on_tower_selected)
 	mouse_detector.gui_input.connect(_on_gui_input)
 # --------------------
@@ -217,7 +219,7 @@ func _apply_stats_changes() -> void:
 	(range_collision.shape as CircleShape2D).radius = attack_range
 	stats = TowerStats.new(self)
 	#tower_stats_panel.update_stats(stats, exp_data)
-	
+
 func _on_tower_buffs_change(tower_type: Tower.TowerType, tower_buffs: TowerBuff) -> void:
 	if tower_type == type:
 		_set_buffs(tower_buffs)
