@@ -8,7 +8,6 @@ script = ExtResource("1_on5k8")
 enemy_type = 2
 amount = 1
 interval_spawn = 3.0
-path = 2
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [resource]

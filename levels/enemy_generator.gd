@@ -29,8 +29,8 @@ func init_next_wave() -> void:
 	total_groups = current_wave.groups.size()
 	for group in current_wave.groups:
 		# add extra group for double path
-		if group.path == EnemyGroup.PATH.BOTH:
-			total_groups += 1
+		var num_paths = group.paths.size()
+		total_groups += (num_paths - 1)
 			
 	groups_handled_count = 0
 	groups_init_count = 0
@@ -64,12 +64,8 @@ func _handle_ememy_group(
 	await get_tree().create_timer(ememy_group.time_to_start / Settings.time_speed).timeout
 	# individual group
 	var paths = []
-	match ememy_group.path:
-		EnemyGroup.PATH.PATH1: paths = [0]
-		EnemyGroup.PATH.PATH2: paths = [1]
-		EnemyGroup.PATH.BOTH: paths = [0,1]
-			
-	for path in paths:
+
+	for path in ememy_group.paths:
 		_hand_enemy_group(
 			ememy_group.enemy_type,
 			ememy_group.amount,

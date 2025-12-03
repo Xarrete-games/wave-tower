@@ -15,7 +15,6 @@ enemy_type = 6
 amount = 10
 interval_spawn = 0.0
 time_to_start = 3.0
-path = 1
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_kwbs1"]
@@ -32,7 +31,6 @@ enemy_type = 4
 amount = 10
 interval_spawn = 0.0
 time_to_start = 7.0
-path = 1
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_ljhn6"]
@@ -49,7 +47,6 @@ enemy_type = 6
 amount = 50
 interval_spawn = 0.05
 time_to_start = 13.0
-path = 1
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [sub_resource type="Resource" id="Resource_0fly2"]

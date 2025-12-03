@@ -16,7 +16,6 @@ enemy_type = 2
 amount = 10
 interval_spawn = 4.0
 time_to_start = 2.0
-path = 1
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [resource]
