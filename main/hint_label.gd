@@ -3,12 +3,10 @@ class_name HintLabel extends Label
 const INITIAL_HINT = "[WASD] Move Camera"
 
 var is_first_value: bool = true
-var is_first_value2: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	text = INITIAL_HINT
-	TowerPlacementManager.tower_selected.connect(_on_tower_selected)
 	TowerPlacementManager.tower_placing.connect(_on_tower_placing)
 	await get_tree().create_timer(10).timeout
 	if text == INITIAL_HINT:
@@ -24,14 +22,4 @@ func _on_tower_placing(value: bool) -> void:
 	else:
 		# Indica claramente la acción y la tecla
 		text = "[ESC] Cancel"
-
-func _on_tower_selected(tower: Tower) -> void:
-	if is_first_value2:
-		is_first_value2 = false
-		return
-	
-	if not tower:
-		text = ""
-	else:
-		text = "[Right Click] Unselect"
 	
