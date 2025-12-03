@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=4 format=3 uid="uid://ck042ydd6kk1e"]
+
+[ext_resource type="Script" uid="uid://dxrvobswk6in5" path="res://enemies/enemy_generator/resources_definitions/enemy_group.gd" id="1_sfvhv"]
+[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="2_y6b6m"]
+
+[sub_resource type="Resource" id="Resource_8xuls"]
+script = ExtResource("1_sfvhv")
+amount = 3
+interval_spawn = 2.0
+path = 2
+metadata/_custom_type_script = "uid://dxrvobswk6in5"
+
+[resource]
+script = ExtResource("2_y6b6m")
+groups = Array[ExtResource("1_sfvhv")]([SubResource("Resource_8xuls")])
+metadata/_custom_type_script = "uid://civj4pbtbhl5o"

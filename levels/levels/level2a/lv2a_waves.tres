@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=13 format=3 uid="uid://disxptn5lylu2"]
+
+[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="1_jc7vg"]
+[ext_resource type="Resource" uid="uid://ck042ydd6kk1e" path="res://levels/levels/level2a/waves/lv2_wave1.tres" id="2_ws3ik"]
+[ext_resource type="Resource" uid="uid://jymtet0lp7kn" path="res://levels/levels/level2a/waves/lv2_wave2.tres" id="3_82bwf"]
+[ext_resource type="Resource" uid="uid://dqo6pler88qp5" path="res://levels/levels/level2a/waves/lv2_wave3.tres" id="4_p37dg"]
+[ext_resource type="Resource" uid="uid://dbh74g0dqdcac" path="res://levels/levels/level2a/waves/lv2_wave4.tres" id="5_53ufc"]
+[ext_resource type="Resource" uid="uid://bkofanuldp68h" path="res://levels/levels/level2a/waves/lv2_wave5.tres" id="6_fyvtv"]
+[ext_resource type="Resource" uid="uid://cc26fiuwgvmne" path="res://levels/levels/level2a/waves/lv2_wave6.tres" id="7_egc7d"]
+[ext_resource type="Resource" uid="uid://nudg4xnwa6y0" path="res://levels/levels/level2a/waves/lv2_wave7.tres" id="8_gen85"]
+[ext_resource type="Resource" uid="uid://cnp2gos4ll6nq" path="res://levels/levels/level2a/waves/lv2_wave8.tres" id="9_b7uwy"]
+[ext_resource type="Resource" uid="uid://drp6r82xitxnb" path="res://levels/levels/level2a/waves/lv2_wave9.tres" id="10_xwlwx"]
+[ext_resource type="Resource" uid="uid://bc5rlnusrhphy" path="res://levels/levels/level2a/waves/lv2_wave10.tres" id="11_xpmvr"]
+[ext_resource type="Script" uid="uid://dx42a8fkpk6fb" path="res://enemies/enemy_generator/resources_definitions/level_data.gd" id="12_b5brt"]
+
+[resource]
+script = ExtResource("12_b5brt")
+enemy_waves = Array[ExtResource("1_jc7vg")]([ExtResource("2_ws3ik"), ExtResource("3_82bwf"), ExtResource("4_p37dg"), ExtResource("5_53ufc"), ExtResource("6_fyvtv"), ExtResource("7_egc7d"), ExtResource("8_gen85"), ExtResource("9_b7uwy"), ExtResource("10_xwlwx"), ExtResource("11_xpmvr")])
+initial_gold = 200
+metadata/_custom_type_script = "uid://dx42a8fkpk6fb"
