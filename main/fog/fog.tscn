@@ -46,6 +46,7 @@ motion_mirroring = Vector2(1920, 1080)
 material = SubResource("ShaderMaterial_gcgcv")
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
 motion_mirroring = Vector2(1920, 1080)
@@ -54,3 +55,4 @@ motion_mirroring = Vector2(1920, 1080)
 material = SubResource("ShaderMaterial_0xg2l")
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2

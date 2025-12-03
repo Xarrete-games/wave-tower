@@ -78,11 +78,12 @@ func _on_next_level_menu_next_leve_button_pressed() -> void:
 		print("END GAME")
 	else: 
 		_load_level(current_level_number)
-	
-func _on_config_config_pressed() -> void:
-	_open_config_menu()
-	
+		
 func _open_config_menu() -> void:
 	get_tree().paused = not get_tree().paused
 	var pause_instance = pause.instantiate()
 	config_layer.add_child(pause_instance)
+
+
+func _on_top_bar_config_pressed() -> void:
+	_open_config_menu()

@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhdmj77ytfxwb"]
+
+[ext_resource type="Script" uid="uid://cg40tjdw5e2lu" path="res://ui/top_bar_ui/top_bar.gd" id="1_8bief"]
+[ext_resource type="PackedScene" uid="uid://bvafh0bf674y7" path="res://ui/top_bar_ui/relics/bar_relics_ui.tscn" id="1_hcmpt"]
+[ext_resource type="PackedScene" uid="uid://bjj2sav3lh0or" path="res://ui/top_bar_ui/gold_ui/gold_counter.tscn" id="2_8bief"]
+[ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/top_bar_ui/lives_counter/LivesCounter.tscn" id="3_x151f"]
+[ext_resource type="PackedScene" uid="uid://bsbslu7gvbl5b" path="res://ui/top_bar_ui/waves_ui/waves_counter_ui.tscn" id="4_r3wen"]
+[ext_resource type="PackedScene" uid="uid://bo3eo6rb8fwjd" path="res://ui/pause_ui/config_button.tscn" id="5_3wuxx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hcmpt"]
+bg_color = Color(0.13682574, 0.13682574, 0.13682568, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+expand_margin_left = 20.0
+expand_margin_top = 5.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[node name="TopBar" type="MarginContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 24
+script = ExtResource("1_8bief")
+
+[node name="RelicsContainer" parent="." instance=ExtResource("1_hcmpt")]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hcmpt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_constants/separation = 80
+
+[node name="Gold" parent="PanelContainer/HBoxContainer" instance=ExtResource("2_8bief")]
+layout_mode = 2
+
+[node name="LivesCounter" parent="PanelContainer/HBoxContainer" instance=ExtResource("3_x151f")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="WavesCounter" parent="PanelContainer/HBoxContainer" instance=ExtResource("4_r3wen")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Config" parent="PanelContainer/HBoxContainer" instance=ExtResource("5_3wuxx")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[connection signal="config_pressed" from="PanelContainer/HBoxContainer/Config" to="." method="_on_config_config_pressed"]
