@@ -10,9 +10,10 @@ var current_wave: EnemyWave
 var total_groups: int
 var groups_handled_count: int
 var groups_init_count: int
+var _enemies_left: int
 
 @onready var enemy_paths: EnemyPaths = $"../EnemyPaths"
-@onready var enemies_container: Node2D = $"../EnemiesContainer"
+@onready var visual: Node2D = $"../Visual"
 
 func _ready() -> void:
 	_level = get_parent()
@@ -75,17 +76,6 @@ func _handle_ememy_group(
 			ememy_group.interval_spawn,
 			path
 		)
-	## multi group
-	#else :
-		#var multi_group = ememy_group as EnemyMultiGroups
-		#for next_group: EnemyIndividualGroup in multi_group.groups:
-			#for path in paths:
-				#_hand_enemy_group(
-					#next_group.enemy_type,
-					#next_group.amount,
-					#next_group.interval_spawn,
-					#path
-				#)
 			
 func _hand_enemy_group(
 	enemy_type: Enemy.EnemyType,
@@ -102,25 +92,29 @@ func _generate_enemy(enemy_type: Enemy.EnemyType, path: int) -> void:
 	var enemy: Enemy = EnemyManager.get_enemy_scene(enemy_type).instantiate()
 	enemy.die.connect(_on_enemy_die)
 	enemy.target_reached.connect(_on_enemy_target_reached)
-	enemies_container.add_child(enemy)
+	visual.add_child(enemy)
 	enemy.set_path_follow(enemy_paths.get_new_path_follow(path))
 	enemy.enable()
 
 func _on_group_handled() -> void:
 	groups_handled_count += 1
+	# all groups handled
 	if groups_handled_count == total_groups:
-		enemies_container.child_exiting_tree.connect(_on_enemy_left)	
+		_enemies_left = get_tree().get_nodes_in_group("enemy").size()
+		visual.child_exiting_tree.connect(_on_enemy_left)	
 
 # When an enemy is eliminated (either by death or by reaching the end), 
 # it is checked if there are more enemies left to finish the wave.
-func _on_enemy_left(_node: Node) -> void:
-	call_deferred("_check_enemies_left")
+func _on_enemy_left(node: Node) -> void:
+	if node.is_in_group("enemy"):
+		_enemies_left -= 1
+	if _enemies_left == 0:
+		call_deferred("_check_enemies_left")
 
 func _check_enemies_left() -> void:	
-	if enemies_container.get_child_count() == 0:
 		_report_finished()
-		if enemies_container.child_exiting_tree.is_connected(_on_enemy_left):
-			enemies_container.child_exiting_tree.disconnect(_on_enemy_left)
+		if visual.child_exiting_tree.is_connected(_on_enemy_left):
+			visual.child_exiting_tree.disconnect(_on_enemy_left)
 		
 # init the next wave or end the level if it's the last wave
 func _report_finished() -> void:

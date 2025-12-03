@@ -3,11 +3,19 @@ class_name Level extends Node2D
 @export var data: LevelData
 @export var enemy_paths: EnemyPaths
 @export var ememies_container: Node2D
+@export var fog_path: String
+@export var add_fog: bool = false
+
+var _fog_scene: PackedScene = null
 
 @onready var camera_init_pos: Marker2D = $CameraInitPos
 
 func _ready():
 	Score.gold = data.initial_gold
+	if add_fog:
+		if _fog_scene == null:
+			_fog_scene = load(fog_path)
+		add_child(_fog_scene.instantiate())
 
 func get_camera_init_pos() -> Vector2:
 	return camera_init_pos.global_position

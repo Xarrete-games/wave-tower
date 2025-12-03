@@ -47,7 +47,7 @@ func _input(event: InputEvent) -> void:
 # should be called each time a level is created
 func update_nodes_from_current_level(current_level: Level) -> void:
 	level_tile_map = current_level.get_node("LevelTileMap")
-	towers_container = current_level.get_node("TowersContainer")
+	towers_container = current_level.get_node("Visual")
 
 func _place_tower() -> void:
 	if not _current_tower_instance:
