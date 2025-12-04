@@ -7,6 +7,7 @@ const CREDITS = preload("uid://bayb10jsajj4a")
 
 func _ready() -> void:
 	AudioManager.play_main_piano()
+	GameState.state = GameState.STATE.ON_MAIN_MENU
 	if direct_init:
 		_on_new_run_button_xarreta_pressed()
 

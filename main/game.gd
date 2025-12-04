@@ -19,6 +19,7 @@ const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 
 func _ready():
 	GameState.reset_run()
+	GameState.state = GameState.STATE.IN_GAME
 	_hide_next_level_menu()
 	_load_level(current_level_number)
 	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _show_next_level_menu())

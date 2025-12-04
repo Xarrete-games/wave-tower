@@ -37,7 +37,9 @@ var open_another_ui: bool = false
 func _ready() -> void:
 	RelicsManager.relics_change.connect(_on_relics_change)
 	EnemyManager.wave_finished.connect(
-		func (_wave: EnemyWave): show_rewards_ui()
+		func (_wave: EnemyWave): 
+			if not GameState.is_on_main_menu():
+				show_rewards_ui()
 	)
 	reset_rewards()
 
