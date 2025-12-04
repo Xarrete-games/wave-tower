@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://uxa8ct8ljcw2"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://rewards/relics/relic_data.gd" id="1_5mfgk"]
+[ext_resource type="Texture2D" uid="uid://bmog50xiu4wle" path="res://assets/sprites/relics/boniato_relic.png" id="2_wep5s"]
+
+[resource]
+script = ExtResource("1_5mfgk")
+id = "Sweet Potato"
+description = "Increases the gold dropped by enemies by 1 at the cost of 5 lives.
+Be careful!"
+texture = ExtResource("2_wep5s")
+type = 3
+rarity = 2
+price = 0
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

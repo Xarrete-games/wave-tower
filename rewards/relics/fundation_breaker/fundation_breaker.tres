@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://b6v7q5rgsmypm"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://rewards/relics/relic_data.gd" id="1_tl3uv"]
+[ext_resource type="Texture2D" uid="uid://bpm61ubby4nf5" path="res://assets/sprites/relics/pickaxe.png" id="2_ulg7n"]
+
+[resource]
+script = ExtResource("1_tl3uv")
+id = "Foundation Breaker"
+description = "Clears a random blocked build slot.
+(no price increase)"
+texture = ExtResource("2_ulg7n")
+type = 3
+max_stack = 99
+price = 0
+price_increased = false
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bfym6wmesrxxa"]
+[gd_scene load_steps=19 format=3 uid="uid://bfym6wmesrxxa"]
 
 [ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/towers_menu/towers_menu.gd" id="1_d3tgk"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="2_d3tgk"]
@@ -9,10 +9,7 @@
 [ext_resource type="Resource" uid="uid://bndxfmba1ltf8" path="res://towers/stats/stats_base/red_tower_stats_base.tres" id="5_whndq"]
 [ext_resource type="Texture2D" uid="uid://dheamk0vu60q6" path="res://assets/sprites/towers/torreticas_hover.png" id="6_7564t"]
 [ext_resource type="Resource" uid="uid://c1d3qqqdi2oxp" path="res://towers/stats/stats_base/green_tower_stats_base.tres" id="7_ffkn8"]
-[ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/shared/gold_price/gold_price.tscn" id="8_s4otn"]
-[ext_resource type="Texture2D" uid="uid://dlix83276rvep" path="res://assets/sprites/icons/relic_icon_40px.png" id="9_m2keh"]
 [ext_resource type="Resource" uid="uid://by0giydu700gy" path="res://towers/stats/stats_base/blue_tower_stats_base.tres" id="10_1p1l7"]
-[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="14_ffkn8"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7564t"]
 load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
@@ -44,24 +41,23 @@ region = Rect2(249, 40, 142, 141)
 atlas = ExtResource("6_7564t")
 region = Rect2(249, 40, 142, 141)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m2keh"]
-bg_color = Color(0.033853274, 0.03385329, 0.033853233, 0.36078432)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 5.0
-expand_margin_right = 5.0
-
-[node name="TowersMenu" type="HBoxContainer"]
-custom_minimum_size = Vector2(340, 130)
-offset_top = -68.0
-offset_right = 548.0
-offset_bottom = 132.0
-theme_override_constants/separation = 120
+[node name="TowersMenu" type="MarginContainer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("1_d3tgk")
 
-[node name="RedTowerButton" parent="." instance=ExtResource("3_1xlmg")]
+[node name="TowersButtons" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(340, 150)
+layout_mode = 2
+theme_override_constants/separation = 120
+alignment = 1
+
+[node name="RedTowerButton" parent="TowersButtons" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
 tower_scene = ExtResource("3_lxxr0")
 icon = SubResource("AtlasTexture_61shu")
@@ -70,7 +66,7 @@ tower_description = "It fires a laser wave that hits the
  target 5 times."
 base_stats = ExtResource("5_whndq")
 
-[node name="GreenTowerButton" parent="." instance=ExtResource("3_1xlmg")]
+[node name="GreenTowerButton" parent="TowersButtons" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
 tower_scene = ExtResource("4_lxxr0")
 icon = SubResource("AtlasTexture_7564t")
@@ -79,7 +75,7 @@ tower_description = "It fires 3 waves that hit the first
 thing they collide with."
 base_stats = ExtResource("7_ffkn8")
 
-[node name="BlueTowerButton" parent="." instance=ExtResource("3_1xlmg")]
+[node name="BlueTowerButton" parent="TowersButtons" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
 tower_scene = ExtResource("5_61shu")
 icon = SubResource("AtlasTexture_qst0h")
@@ -88,57 +84,6 @@ tower_description = "It creates a shockwave that
 hits all enemies around."
 base_stats = ExtResource("10_1p1l7")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(100, 200)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 8
-size_flags_stretch_ratio = 0.0
-mouse_filter = 2
-theme_override_constants/margin_left = 30
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-mouse_filter = 2
-theme_override_constants/separation = 15
-alignment = 1
-
-[node name="RelicButton" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("14_ffkn8")]
-layout_mode = 2
-text = "Relic"
-icon = ExtResource("9_m2keh")
-
-[node name="GoldPrice" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("8_s4otn")]
-layout_mode = 2
-alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 160
-theme_override_constants/margin_top = 50
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_m2keh")
-
-[node name="RelicHint" type="Label" parent="MarginContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-text = "You also have to pay the price of the relic"
-vertical_alignment = 1
-
-[connection signal="pressed" from="RedTowerButton" to="." method="_on_red_tower_button_pressed"]
-[connection signal="pressed" from="GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
-[connection signal="pressed" from="BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
-[connection signal="xarreta_mouse_entered" from="MarginContainer/HBoxContainer/VBoxContainer/RelicButton" to="." method="_on_relic_button_xarreta_mouse_entered"]
-[connection signal="xarreta_mouse_exited" from="MarginContainer/HBoxContainer/VBoxContainer/RelicButton" to="." method="_on_relic_button_xarreta_mouse_exited"]
-[connection signal="xarreta_pressed" from="MarginContainer/HBoxContainer/VBoxContainer/RelicButton" to="." method="_on_relic_button_pressed"]
+[connection signal="pressed" from="TowersButtons/RedTowerButton" to="." method="_on_red_tower_button_pressed"]
+[connection signal="pressed" from="TowersButtons/GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
+[connection signal="pressed" from="TowersButtons/BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]

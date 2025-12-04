@@ -7,21 +7,15 @@ const GREEN_TOWER = preload("uid://oj5ilwusjvuo")
 signal tower_selected(tower_scene: PackedScene)
 
 #BUTTONS
-@onready var red_tower_button: TowerButton = $RedTowerButton
-@onready var green_tower_button: TowerButton = $GreenTowerButton
-@onready var blue_tower_button: TowerButton = $BlueTowerButton
-@onready var gold_price: GoldPrice = $MarginContainer/HBoxContainer/VBoxContainer/GoldPrice
-@onready var relic_hint: Label = $MarginContainer/MarginContainer/PanelContainer/RelicHint
+@onready var red_tower_button: TowerButton = $TowersButtons/RedTowerButton
+@onready var green_tower_button: TowerButton = $TowersButtons/GreenTowerButton
+@onready var blue_tower_button: TowerButton = $TowersButtons/BlueTowerButton
 
-func _ready():
-	relic_hint.visible = false
+func _ready():	
 	Price.tower_price_change.connect(_on_tower_price_change)
-	RewardsManager.show_rewards_price_change.connect(
-		func(value): gold_price.price = value)
 	red_tower_button.price = Price.get_price(Tower.TowerType.RED)
 	green_tower_button.price = Price.get_price(Tower.TowerType.GREEN)
 	blue_tower_button.price = Price.get_price(Tower.TowerType.BLUE)
-	gold_price.price = RewardsManager.show_rewards_price
 
 func _on_red_tower_button_pressed(tower_scene: PackedScene) -> void:
 	tower_selected.emit(tower_scene)
@@ -37,16 +31,3 @@ func _on_tower_price_change(tower_type: Tower.TowerType, price: int) -> void:
 		Tower.TowerType.RED: red_tower_button.price = price
 		Tower.TowerType.GREEN: green_tower_button.price = price
 		Tower.TowerType.BLUE: blue_tower_button.price = price
-
-func _on_relic_button_pressed() -> void:
-	if RewardsManager.show_rewards_price <= Score.gold:
-		Score.gold -= RewardsManager.show_rewards_price
-		var next_price = roundi(RewardsManager.show_rewards_price * 1.10)
-		RewardsManager.show_rewards_price = next_price
-		RewardsManager.show_rewards_ui()
-
-func _on_relic_button_xarreta_mouse_entered() -> void:
-	relic_hint.visible = true
-
-func _on_relic_button_xarreta_mouse_exited() -> void:
-	relic_hint.visible = false

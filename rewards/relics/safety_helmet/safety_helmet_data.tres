@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://cm7hdpkogsuyy"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://rewards/relics/relic_data.gd" id="1_yxnxk"]
+[ext_resource type="Texture2D" uid="uid://chee6unpg40xd" path="res://assets/sprites/relics/casco.png" id="2_e3tvx"]
+
+[resource]
+script = ExtResource("1_yxnxk")
+id = "Safety helmet"
+description = "Restores 1 life."
+texture = ExtResource("2_e3tvx")
+max_stack = 99
+price = 0
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

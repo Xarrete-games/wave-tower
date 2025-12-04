@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://d3sm1lct1grwo"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://rewards/relics/relic_data.gd" id="1_i4kmo"]
+[ext_resource type="Texture2D" uid="uid://vgwnobvkolg2" path="res://assets/sprites/relics/perseo's_fury_relic.png" id="2_euwv4"]
+
+[resource]
+script = ExtResource("1_i4kmo")
+id = "Perseus's Fury"
+description = "Red towers execute enemies below 5% health (execution threshold increases by 5% for each copy)."
+texture = ExtResource("2_euwv4")
+rarity = 1
+max_stack = 5
+price = 0
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

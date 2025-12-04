@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://br0igrelenl0f"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://rewards/relics/relic_data.gd" id="1_n17aj"]
+[ext_resource type="Texture2D" uid="uid://cfbw0ybj5st27" path="res://assets/sprites/relics/ice_cube_relic.png" id="2_ss3lh"]
+
+[resource]
+script = ExtResource("1_n17aj")
+id = "Artic Cube"
+description = "Blue turrets slow enemies by 50% for 1 second 
+(+1 second for each one)."
+texture = ExtResource("2_ss3lh")
+type = 1
+rarity = 1
+max_stack = 9
+price = 0
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3 uid="uid://dqejgch5dthnb"]
+
+[ext_resource type="Script" uid="uid://u8jtn52xm88d" path="res://rewards/relics/relic_data.gd" id="1_uebev"]
+[ext_resource type="Texture2D" uid="uid://rbr4l120kg8j" path="res://assets/sprites/relics/light.png" id="2_hd1tk"]
+
+[resource]
+script = ExtResource("1_uebev")
+id = "Ignition Voltage"
+description = "Adds burn to red towers (their damage increases for each copy)."
+texture = ExtResource("2_hd1tk")
+rarity = 1
+max_stack = 99
+price = 0
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

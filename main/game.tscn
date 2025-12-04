@@ -29,14 +29,6 @@ script = ExtResource("2_2c7eb")
 [node name="TopBar" parent="UILayer" instance=ExtResource("9_p6qvs")]
 offset_bottom = 84.0
 
-[node name="TowersMenu" parent="UILayer" instance=ExtResource("3_4u4fy")]
-offset_left = 686.0
-offset_top = 868.0
-offset_right = 1234.0
-offset_bottom = 1068.0
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
 [node name="WavesUI" parent="UILayer" instance=ExtResource("5_hlcqn")]
 visible = false
 
@@ -65,6 +57,8 @@ text = "press ESC to cancel"
 label_settings = ExtResource("16_514y6")
 horizontal_alignment = 1
 script = ExtResource("17_5prg3")
+
+[node name="TowersMenu" parent="UILayer" instance=ExtResource("3_4u4fy")]
 
 [node name="RewardsLayer" type="CanvasLayer" parent="."]
 
