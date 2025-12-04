@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0qrluaokqdpj"]
 
-[ext_resource type="Theme" uid="uid://bfml0mq4yid2" path="res://ui/styles/themes/menu_buttons_icon_theme.tres" id="1_76ro0"]
-[ext_resource type="Script" uid="uid://bsofj7vat83hr" path="res://ui/components/xarreta_action_button/xarrete_action_button.gd" id="1_b7w4a"]
+[ext_resource type="Theme" uid="uid://bfml0mq4yid2" path="res://ui/styles/themes/menu_buttons_icon_theme.tres" id="1_alcwj"]
+[ext_resource type="Script" uid="uid://bucqbucrgu1eb" path="res://ui/components/buttons/xarreta_button.gd" id="2_m8dqt"]
 
 [node name="XarreteActionButton" type="Button"]
 anchors_preset = 15
@@ -9,8 +9,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_76ro0")
-script = ExtResource("1_b7w4a")
+theme = ExtResource("1_alcwj")
+script = ExtResource("2_m8dqt")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

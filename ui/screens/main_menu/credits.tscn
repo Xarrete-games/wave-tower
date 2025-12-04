@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bq6lt7tlxw0te" path="res://assets/sprites/ui/main_menu_background.png" id="2_5h68c"]
 [ext_resource type="LabelSettings" uid="uid://buy1ngpem0c3b" path="res://ui/styles/label_settings/credits_label.tres" id="2_dcci6"]
 [ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="3_gfe4y"]
-[ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/xarreta_menu_button/xarreta_menu_button.tscn" id="5_gfe4y"]
+[ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/buttons/xarreta_menu_button.tscn" id="5_gfe4y"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gfe4y"]
 texture = ExtResource("2_5h68c")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bapepoqni3ebq" path="res://ui/next_level_menu/next_level_menu.gd" id="1_bqcem"]
 [ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="2_ak2q7"]
-[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/xarreta_action_button/xarrete_action_button.tscn" id="4_4xb6o"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="4_4xb6o"]
 
 [node name="NextLevelMenu" type="Control"]
 texture_filter = 2

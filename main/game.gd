@@ -4,7 +4,6 @@ class_name Game extends Node2D
 @export var pause : PackedScene
 @export var current_level_number: int = 1
 @export var initial_random_relics: int = 0
-@export var time_speed: float = 1.0
 
 var _current_level: Level
 const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
@@ -20,7 +19,6 @@ const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 
 func _ready():
 	GameState.reset_run()
-	Settings.time_speed = time_speed
 	_hide_next_level_menu()
 	_load_level(current_level_number)
 	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _show_next_level_menu())

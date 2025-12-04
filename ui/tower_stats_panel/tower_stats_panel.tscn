@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bvev5rktov31p" path="res://assets/sprites/icons/icons_timer.png" id="3_dw57d"]
 [ext_resource type="Texture2D" uid="uid://dio1imbeyg458" path="res://assets/sprites/icons/icons_tower_range.png" id="4_725y3"]
 [ext_resource type="Texture2D" uid="uid://bme2x52a33nre" path="res://assets/sprites/icons/icons_explosion.png" id="5_cuf0w"]
-[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/xarreta_action_button/xarrete_action_button.tscn" id="7_gs8y8"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="7_gs8y8"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="8_gs8y8"]
 [ext_resource type="Texture2D" uid="uid://b2f6c4qd0c0s2" path="res://assets/sprites/buttons/wavecoinv2_30px.png" id="9_8m5ds"]
 

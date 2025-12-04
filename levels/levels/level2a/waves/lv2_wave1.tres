@@ -7,7 +7,6 @@
 script = ExtResource("1_sfvhv")
 amount = 3
 interval_spawn = 2.0
-path = 2
 metadata/_custom_type_script = "uid://dxrvobswk6in5"
 
 [resource]

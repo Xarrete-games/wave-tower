@@ -7,7 +7,7 @@
 [ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="3_xtdxm"]
 [ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="4_gk24h"]
 [ext_resource type="Texture2D" uid="uid://cuf3ct4sm367w" path="res://assets/sprites/ui/explanation/Subida de lvl torres.png" id="7_gk24h"]
-[ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/xarreta_menu_button/xarreta_menu_button.tscn" id="8_gk24h"]
+[ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/buttons/xarreta_menu_button.tscn" id="8_gk24h"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3c04x"]
 texture = ExtResource("2_05xss")

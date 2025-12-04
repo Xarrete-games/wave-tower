@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://emvdt530upjb" path="res://ui/screens/death_scene/death_scene.gd" id="1_4klge"]
 [ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="2_iyktl"]
-[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/xarreta_action_button/xarrete_action_button.tscn" id="3_iyktl"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="3_iyktl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lg0me"]
 font = ExtResource("2_iyktl")

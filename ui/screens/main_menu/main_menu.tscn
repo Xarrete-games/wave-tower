@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dqo675n5we5gk" path="res://ui/screens/main_menu/main_menu.gd" id="1_omy8q"]
 [ext_resource type="Texture2D" uid="uid://bq6lt7tlxw0te" path="res://assets/sprites/ui/main_menu_background.png" id="2_i5wg5"]
 [ext_resource type="Texture2D" uid="uid://crut4djccohg3" path="res://assets/sprites/ui/wave_tower_logo.png" id="3_i5wg5"]
-[ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/xarreta_menu_button/xarreta_menu_button.tscn" id="5_kadtk"]
+[ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/buttons/xarreta_menu_button.tscn" id="5_kadtk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3c04x"]
 texture = ExtResource("2_i5wg5")

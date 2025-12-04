@@ -1,4 +1,4 @@
-class_name XarretaActionButton extends Button
+class_name XarretaButton extends Button
 
 signal xarreta_mouse_entered()
 signal xarreta_mouse_exited()

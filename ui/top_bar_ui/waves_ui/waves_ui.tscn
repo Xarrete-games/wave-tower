@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5fdnmk8kjh0g" path="res://ui/top_bar_ui/waves_ui/waves_ui.gd" id="1_dktk2"]
 [ext_resource type="Texture2D" uid="uid://35i1uisepolx" path="res://assets/sprites/icons/skull_icon.png" id="3_dktk2"]
-[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/xarreta_action_button/xarrete_action_button.tscn" id="4_5unyv"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="4_5unyv"]
 
 [node name="NextWaveContainer" type="CenterContainer"]
 anchors_preset = 15

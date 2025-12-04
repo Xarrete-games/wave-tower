@@ -61,7 +61,7 @@ func _load_level_data(level: Level) -> void:
 func _handle_ememy_group(
 	ememy_group: EnemyGroup) -> void:
 	# wait time
-	await get_tree().create_timer(ememy_group.time_to_start / Settings.time_speed).timeout
+	await get_tree().create_timer(ememy_group.time_to_start).timeout
 	# individual group
 	var paths = []
 
@@ -80,7 +80,7 @@ func _hand_enemy_group(
 	path: int
 ) -> void:
 	for _i in range(amount):
-		await get_tree().create_timer(interval_spawn / Settings.time_speed).timeout
+		await get_tree().create_timer(interval_spawn).timeout
 		_generate_enemy(enemy_type, path)
 	group_handled.emit()
 		

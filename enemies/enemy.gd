@@ -22,7 +22,7 @@ var _path_follow: PathFollow2D
 var _default_modulate_color: Color = Color.WHITE
 var _speed: float:
 	set(value):
-		_speed = value * Settings.time_speed
+		_speed = value
 var _last_is_right_direction: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer

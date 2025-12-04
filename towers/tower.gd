@@ -214,7 +214,7 @@ func _set_buffs(tower_buff: TowerBuff) -> void:
 	_apply_stats_changes()
 	
 func _apply_stats_changes() -> void:
-	attack_timer.wait_time = attack_speed / Settings.time_speed
+	attack_timer.wait_time = attack_speed
 	range_preview.radius = attack_range
 	(range_collision.shape as CircleShape2D).radius = attack_range
 	stats = TowerStats.new(self)

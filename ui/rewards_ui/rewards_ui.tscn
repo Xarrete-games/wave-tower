@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://h554m5slo5ti" path="res://ui/rewards_ui/rewards_ui.gd" id="1_003n2"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/shared/gold_price/gold_price.tscn" id="3_aheq8"]
-[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/xarreta_action_button/xarrete_action_button.tscn" id="3_kdqtn"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="3_kdqtn"]
 
 [node name="RewardsUi" type="Control" node_paths=PackedStringArray("cards_container", "reroll_priece")]
 layout_mode = 3

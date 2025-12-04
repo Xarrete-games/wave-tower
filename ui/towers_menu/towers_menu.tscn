@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/shared/gold_price/gold_price.tscn" id="8_s4otn"]
 [ext_resource type="Texture2D" uid="uid://dlix83276rvep" path="res://assets/sprites/icons/relic_icon_40px.png" id="9_m2keh"]
 [ext_resource type="Resource" uid="uid://by0giydu700gy" path="res://towers/stats/stats_base/blue_tower_stats_base.tres" id="10_1p1l7"]
-[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/xarreta_action_button/xarrete_action_button.tscn" id="14_ffkn8"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="14_ffkn8"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7564t"]
 load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
