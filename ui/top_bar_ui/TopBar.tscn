@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhdmj77ytfxwb"]
+[gd_scene load_steps=10 format=3 uid="uid://bhdmj77ytfxwb"]
 
 [ext_resource type="Script" uid="uid://cg40tjdw5e2lu" path="res://ui/top_bar_ui/top_bar.gd" id="1_8bief"]
 [ext_resource type="PackedScene" uid="uid://bvafh0bf674y7" path="res://ui/top_bar_ui/relics/bar_relics_ui.tscn" id="1_hcmpt"]
@@ -6,18 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/top_bar_ui/lives_counter/LivesCounter.tscn" id="3_x151f"]
 [ext_resource type="PackedScene" uid="uid://bsbslu7gvbl5b" path="res://ui/top_bar_ui/waves_ui/waves_counter_ui.tscn" id="4_r3wen"]
 [ext_resource type="PackedScene" uid="uid://bo3eo6rb8fwjd" path="res://ui/pause_ui/config_button.tscn" id="5_3wuxx"]
+[ext_resource type="PackedScene" uid="uid://deyqjxbpqlfc4" path="res://ui/level_progress_ui/level_progress_ui.tscn" id="7_r3wen"]
 [ext_resource type="PackedScene" uid="uid://bj0kwv4dsl0i1" path="res://ui/components/buttons/xarreta_text_button.tscn" id="7_x151f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hcmpt"]
-bg_color = Color(0.13682574, 0.13682574, 0.13682568, 1)
+bg_color = Color(0.09803922, 0.1254902, 0.09411765, 1)
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 expand_margin_left = 20.0
-expand_margin_top = 5.0
+expand_margin_top = 10.0
 expand_margin_right = 20.0
-expand_margin_bottom = 5.0
+expand_margin_bottom = 10.0
 
 [node name="TopBar" type="MarginContainer" node_paths=PackedStringArray("speed_button")]
 anchors_preset = 10
@@ -26,61 +27,72 @@ offset_bottom = 60.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 24
 script = ExtResource("1_8bief")
-speed_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/SpeedButton")
+speed_button = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/SpeedButton")
 
 [node name="RelicsContainer" parent="." instance=ExtResource("1_hcmpt")]
 layout_mode = 2
 size_flags_horizontal = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hcmpt")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 80
+theme_override_constants/separation = 40
 
-[node name="Gold" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_8bief")]
+[node name="Gold" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_8bief")]
 layout_mode = 2
 
-[node name="LivesCounter" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_x151f")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="WavesCounter" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_r3wen")]
+[node name="LivesCounter" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_x151f")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Config" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_3wuxx")]
-custom_minimum_size = Vector2(50, 50)
+[node name="WavesCounter" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_r3wen")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-mouse_filter = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Config" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_3wuxx")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="SpeedButton" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("7_x151f")]
+[node name="LevelProgressUi" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("7_r3wen")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="SpeedButton" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("7_x151f")]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Speed: x1"
 
-[connection signal="config_pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Config" to="." method="_on_config_config_pressed"]
-[connection signal="xarreta_pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/SpeedButton" to="." method="_on_xarreta_text_button_xarreta_pressed"]
+[connection signal="config_pressed" from="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/Config" to="." method="_on_config_config_pressed"]
+[connection signal="xarreta_pressed" from="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/SpeedButton" to="." method="_on_xarreta_text_button_xarreta_pressed"]

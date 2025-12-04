@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dddlo6uv4ct15"]
+
+[ext_resource type="Script" uid="uid://mp0w5w82mlxs" path="res://ui/level_progress_ui/level_progress_slot_ui/level_progress_slot.gd" id="1_c7pmh"]
+[ext_resource type="StyleBox" uid="uid://ca11cx2n7wajo" path="res://ui/styles/box_style/progress_slot/level_progress_slot_fill.tres" id="1_joda4"]
+
+[node name="LevelProgressSlot" type="PanelContainer" node_paths=PackedStringArray("texture_rec")]
+custom_minimum_size = Vector2(30, 30)
+anchors_preset = -1
+anchor_right = 0.521
+anchor_bottom = 0.92600006
+offset_right = -970.32007
+offset_bottom = -970.0801
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_joda4")
+script = ExtResource("1_c7pmh")
+texture_rec = NodePath("CenterContainer/TextureRect")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+expand_mode = 2

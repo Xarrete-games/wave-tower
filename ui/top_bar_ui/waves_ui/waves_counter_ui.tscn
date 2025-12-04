@@ -13,34 +13,10 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer2"]
 layout_mode = 2
-text = "Level:"
+text = "Map"
 label_settings = ExtResource("3_ufrpf")
 
 [node name="LevelLabel" type="Label" parent="HBoxContainer2"]
 layout_mode = 2
 text = "1"
-label_settings = ExtResource("3_ufrpf")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="WavesCounterDescription" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-text = "Wave:"
-label_settings = ExtResource("3_ufrpf")
-vertical_alignment = 1
-
-[node name="WavesCounterCurrent" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-text = "0"
-label_settings = ExtResource("3_ufrpf")
-
-[node name="WavesCounterSlash" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-text = "/"
-label_settings = ExtResource("3_ufrpf")
-
-[node name="WavesCounterTotal" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-text = "2"
 label_settings = ExtResource("3_ufrpf")

@@ -56,7 +56,6 @@ func _load_level_data(level: Level) -> void:
 	current_wave_number = 1
 	# inital wave data
 	EnemyManager.new_level_loaded.emit(total_waves)
-	EnemyManager.wave_init.emit(0)
 	
 func _handle_ememy_group(
 	ememy_group: EnemyGroup) -> void:

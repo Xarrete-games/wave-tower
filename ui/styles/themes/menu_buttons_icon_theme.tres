@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=4 format=3 uid="uid://bfml0mq4yid2"]
 
 [ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="1_epwc4"]
-[ext_resource type="StyleBox" uid="uid://cx7iwmjvxh4am" path="res://ui/styles/box_style/icon_button_hover.tres" id="4_6ppqj"]
-[ext_resource type="StyleBox" uid="uid://cqyryt7txp31c" path="res://ui/styles/box_style/icon_button.tres" id="4_g8i5v"]
+[ext_resource type="StyleBox" uid="uid://cx7iwmjvxh4am" path="res://ui/styles/box_style/buttons/icon_button_hover.tres" id="4_6ppqj"]
+[ext_resource type="StyleBox" uid="uid://cqyryt7txp31c" path="res://ui/styles/box_style/buttons/icon_button.tres" id="4_g8i5v"]
 
 [resource]
 Button/colors/font_color = Color(0.78431374, 0.9019608, 0.7882353, 1)
