@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://crastw7xnqgvl"]
 
-[ext_resource type="Script" uid="uid://bapepoqni3ebq" path="res://ui/next_level_menu/next_level_menu.gd" id="1_bqcem"]
+[ext_resource type="Script" uid="uid://bapepoqni3ebq" path="res://ui/screens/next_level_screen/next_level_screen.gd" id="1_bqcem"]
 [ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="2_ak2q7"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="4_4xb6o"]
 
-[node name="NextLevelMenu" type="Control"]
+[node name="NextLevelScreen" type="Control"]
 texture_filter = 2
 layout_mode = 3
 anchors_preset = 15

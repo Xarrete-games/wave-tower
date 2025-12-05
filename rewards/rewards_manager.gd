@@ -2,7 +2,7 @@
 extends Node
 
 signal reroll_priece_change(price: int)
-signal show_rewards_price_change(price: int)
+signal rewards_ui_closed()
 
 const REWARDS_UI = preload("uid://bcxsfb0ox3gmq")
 
@@ -30,17 +30,11 @@ var reroll_price: int = REROLL_PRICE:
 var show_rewards_price: int = 50:
 	set(value):
 		show_rewards_price = value
-		show_rewards_price_change.emit(value)
 
 var open_another_ui: bool = false
 
 func _ready() -> void:
 	RelicsManager.relics_change.connect(_on_relics_change)
-	EnemyManager.wave_finished.connect(
-		func (_wave: EnemyWave): 
-			if not GameState.is_on_main_menu():
-				show_rewards_ui()
-	)
 	reset_rewards()
 
 func add_random_relics(amount: int) -> void:
@@ -70,7 +64,7 @@ func reroll() -> void:
 	var rewards = _get_rewards()
 	rewards_ui.set_relics(rewards)
 
-func show_rewards_ui() -> void:
+func show_rewards_ui(event_layer: CanvasLayer) -> void:
 	if rewards_ui:
 		open_another_ui = true
 		await rewards_ui.tree_exited
@@ -80,12 +74,12 @@ func show_rewards_ui() -> void:
 	
 	rewards_ui = REWARDS_UI.instantiate()
 	var rewards = _get_rewards()
-	var canvas = get_tree().root.get_node("Game").get_node("RewardsLayer")
-	canvas.add_child(rewards_ui)
+	event_layer.add_child(rewards_ui)
 	rewards_ui.set_relics(rewards)
 	rewards_ui.reliq_selected.connect(_on_relidc_selected)
 	rewards_ui.tree_exited.connect(func ():
 		rewards_ui = null
+		rewards_ui_closed.emit()
 		)
 
 func apply_discount_to_all_relics(discount: int) -> void:

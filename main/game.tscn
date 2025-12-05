@@ -1,14 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://6vgrx5dct8h8"]
+[gd_scene load_steps=12 format=3 uid="uid://6vgrx5dct8h8"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="2_2c7eb"]
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/towers_menu/towers_menu.tscn" id="3_4u4fy"]
 [ext_resource type="PackedScene" uid="uid://b1rsi54eynysa" path="res://ui/pause_ui/pause_menu.tscn" id="4_f7m14"]
-[ext_resource type="PackedScene" uid="uid://b7ttkk4pasgin" path="res://ui/top_bar_ui/waves_ui/waves_ui.tscn" id="5_hlcqn"]
 [ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="6_v3ojx"]
-[ext_resource type="PackedScene" uid="uid://crastw7xnqgvl" path="res://ui/next_level_menu/next_level_menu.tscn" id="7_j015t"]
 [ext_resource type="PackedScene" uid="uid://bhdmj77ytfxwb" path="res://ui/top_bar_ui/TopBar.tscn" id="9_p6qvs"]
 [ext_resource type="PackedScene" uid="uid://wd57nqjd0s2f" path="res://main/music_handler/music_handler.tscn" id="12_v3ojx"]
+[ext_resource type="Script" uid="uid://mse5syvk8x0l" path="res://main/progress_handler.gd" id="13_f7m14"]
 [ext_resource type="PackedScene" uid="uid://c3qi4qp0ko3iq" path="res://ui/tower_stats_panel/tower_stats_panel.tscn" id="14_514y6"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="16_514y6"]
 [ext_resource type="Script" uid="uid://bkk5aa6qbmbke" path="res://main/hint_label.gd" id="17_5prg3"]
@@ -24,18 +23,13 @@ script = ExtResource("2_2c7eb")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="NextLevelMenu" parent="UILayer" instance=ExtResource("7_j015t")]
-
 [node name="TopBar" parent="UILayer" instance=ExtResource("9_p6qvs")]
 offset_bottom = 84.0
-
-[node name="WavesUI" parent="UILayer" instance=ExtResource("5_hlcqn")]
-visible = false
 
 [node name="TowerStatsPanel" parent="UILayer" instance=ExtResource("14_514y6")]
 visible = false
 
-[node name="MarginContainer" type="MarginContainer" parent="UILayer"]
+[node name="HintContainer" type="MarginContainer" parent="UILayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -50,7 +44,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/margin_bottom = 700
 
-[node name="HintLabel" type="Label" parent="UILayer/MarginContainer"]
+[node name="HintLabel" type="Label" parent="UILayer/HintContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "press ESC to cancel"
@@ -60,7 +54,7 @@ script = ExtResource("17_5prg3")
 
 [node name="TowersMenu" parent="UILayer" instance=ExtResource("3_4u4fy")]
 
-[node name="RewardsLayer" type="CanvasLayer" parent="."]
+[node name="EventLayer" type="CanvasLayer" parent="."]
 
 [node name="ConfigLayer" type="CanvasLayer" parent="."]
 
@@ -71,5 +65,9 @@ towers_menu = NodePath("../UILayer/TowersMenu")
 
 [node name="MusicHandler" parent="." instance=ExtResource("12_v3ojx")]
 
-[connection signal="next_leve_button_pressed" from="UILayer/NextLevelMenu" to="." method="_on_next_level_menu_next_leve_button_pressed"]
+[node name="ProgressHandler" type="Node" parent="." node_paths=PackedStringArray("event_layer")]
+script = ExtResource("13_f7m14")
+event_layer = NodePath("../EventLayer")
+
+[connection signal="new_level_loaded" from="." to="ProgressHandler" method="_on_game_new_level_loaded"]
 [connection signal="config_pressed" from="UILayer/TopBar" to="." method="_on_top_bar_config_pressed"]

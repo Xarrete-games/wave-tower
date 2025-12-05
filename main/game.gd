@@ -1,5 +1,7 @@
 class_name Game extends Node2D
 
+signal new_level_loaded(level_num: int)
+
 @export var levels_paths: Array[String]
 @export var pause : PackedScene
 @export var current_level_number: int = 1
@@ -11,7 +13,6 @@ const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 #current level parent
 @onready var level_container: Node2D = $LevelContainer
 @onready var tower_placer: TowerPlacer = $TowerPlacer
-@onready var next_level_menu: NextLevelMenu = $UILayer/NextLevelMenu
 @onready var music_handler: MusicHandler = $MusicHandler
 @onready var ui_layer: CanvasLayer = $UILayer
 @onready var main_camera: MainCamera = $MainCamera
@@ -20,9 +21,8 @@ const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 func _ready():
 	GameState.reset_run()
 	GameState.state = GameState.STATE.IN_GAME
-	_hide_next_level_menu()
 	_load_level(current_level_number)
-	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _show_next_level_menu())
+	
 	await get_tree().create_timer(0.1).timeout
 	RewardsManager.add_random_relics(initial_random_relics)
 
@@ -38,6 +38,7 @@ func reset_current_level() -> void:
 	_load_level(1)
 
 func _load_level(level_number: int) -> void:
+	new_level_loaded.emit(level_number)
 	music_handler.stop_music()
 	Settings.new_level_loaded.emit(level_number)
 	_current_level = load(levels_paths[level_number - 1]).instantiate()
@@ -51,30 +52,19 @@ func _load_level(level_number: int) -> void:
 	TowerPlacementManager.reset_towers()
 	music_handler.play_music()
 
-func _hide_next_level_menu() -> void:
-	next_level_menu.visible = false
-	next_level_menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	next_level_menu.set_process(false)
+
 	
-func _show_next_level_menu() -> void:
-	if current_level_number == levels_paths.size():
-		await  get_tree().create_timer(5).timeout
-		get_tree().change_scene_to_packed(END_GAME_SCENE)
-	else:
-		next_level_menu.visible = true
-		next_level_menu.mouse_filter = Control.MOUSE_FILTER_STOP
-		next_level_menu.set_process(true)
+
 
 func _update_camera_post() -> void:
 	var new_pos = _current_level.get_camera_init_pos()
 	main_camera.global_position = new_pos
 
-func _on_next_level_menu_next_leve_button_pressed() -> void:
-	_hide_next_level_menu()
+func go_next_level() -> void:
 	current_level_number += 1
 	_current_level.queue_free()
 	if current_level_number  > levels_paths.size():
-		print("END GAME")
+		push_error('[Game]: invalid go next level call')
 	else: 
 		_load_level(current_level_number)
 		

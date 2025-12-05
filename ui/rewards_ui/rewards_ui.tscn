@@ -50,6 +50,7 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 100
 
 [node name="ExitButton" parent="VBoxContainer/ButtonsContainer" instance=ExtResource("3_kdqtn")]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 0
 text = "Exit"
@@ -59,6 +60,7 @@ layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="RerollButton" parent="VBoxContainer/ButtonsContainer/VBoxContainer" instance=ExtResource("3_kdqtn")]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Reroll"
 
