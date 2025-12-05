@@ -2,7 +2,6 @@ extends MarginContainer
 
 signal config_pressed()
 
-
 @export var speed_button: XarretaButton
 
 func _ready() -> void:
@@ -20,4 +19,4 @@ func _on_xarreta_text_button_xarreta_pressed() -> void:
 	speed_button.text = _build_speed_button_text(int(Engine.time_scale))
 	
 func _build_speed_button_text(value: int) -> String:
-	return "Speed: x" + str(value)
+	return "x" + str(value)
