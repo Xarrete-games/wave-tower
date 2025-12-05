@@ -9,5 +9,4 @@ id = "Safety helmet"
 description = "Restores 1 life."
 texture = ExtResource("2_e3tvx")
 max_stack = 99
-price = 0
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

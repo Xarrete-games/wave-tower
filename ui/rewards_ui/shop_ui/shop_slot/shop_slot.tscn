@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://f428sxnliflm"]
+
+[ext_resource type="Texture2D" uid="uid://bmog50xiu4wle" path="res://assets/sprites/relics/boniato_relic.png" id="1_6hbqj"]
+[ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/shared/gold_price/gold_price.tscn" id="2_r6lm4"]
+
+[node name="ShopSlot" type="Control"]
+custom_minimum_size = Vector2(110, 170)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+
+[node name="VisualNodes" type="CenterContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 2
+
+[node name="HexagonBorder" type="Polygon2D" parent="VBoxContainer/VisualNodes"]
+texture_filter = 2
+color = Color(0.87, 0.5945, 0, 1)
+polygon = PackedVector2Array(0, 0, 110, 0, 110, 110, 0, 110)
+
+[node name="Hexagon" type="Polygon2D" parent="VBoxContainer/VisualNodes"]
+texture_filter = 2
+color = Color(0, 0, 0, 0.7058824)
+polygon = PackedVector2Array(5, 5, 105, 5, 105, 105, 5, 105)
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VisualNodes"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("1_6hbqj")
+expand_mode = 2
+
+[node name="GoldPrice" parent="VBoxContainer" instance=ExtResource("2_r6lm4")]
+layout_mode = 2
+alignment = 1

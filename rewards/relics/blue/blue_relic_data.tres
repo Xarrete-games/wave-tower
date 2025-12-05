@@ -11,5 +11,5 @@ description = "Increases the attack range of all towers by 10%.
 texture = ExtResource("2_lymds")
 type = 3
 max_stack = 5
-price = 0
+price = 60
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

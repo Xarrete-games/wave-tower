@@ -11,7 +11,7 @@ func reset_relics() -> void:
 	relics = {}
 	relics_change.emit([] as Array[Relic])
 
-func add_relic(relic: Relic, is_free = false) -> void:
+func add_relic(relic: Relic, is_free: bool = false) -> void:
 	relic.apply_effect()
 	# increase priece in 20%
 	if not is_free:

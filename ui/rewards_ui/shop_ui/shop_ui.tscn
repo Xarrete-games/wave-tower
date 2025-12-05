@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpf44acq183yv"]
+
+[ext_resource type="Script" uid="uid://h6gp6drqlqg6" path="res://ui/rewards_ui/shop_ui/shop_ui.gd" id="1_dvqfl"]
+[ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="1_pjpxm"]
+[ext_resource type="PackedScene" uid="uid://f428sxnliflm" path="res://ui/rewards_ui/shop_ui/shop_slot/shop_slot.tscn" id="1_yh4tb"]
+[ext_resource type="StyleBox" uid="uid://cu0b10p3y57qo" path="res://ui/styles/box_style/shop/section_tittle_box.tres" id="2_nisgj"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="3_2qpep"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nisgj"]
+bg_color = Color(0.09803922, 0.1254902, 0.09411765, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+expand_margin_left = 50.0
+expand_margin_top = 50.0
+expand_margin_right = 50.0
+expand_margin_bottom = 50.0
+
+[node name="ShopUi" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dvqfl")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nisgj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="RelicSection" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="RelicsTittle" type="PanelContainer" parent="PanelContainer/VBoxContainer/RelicSection"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("2_nisgj")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/RelicSection/RelicsTittle"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RELICS"
+label_settings = ExtResource("1_pjpxm")
+
+[node name="Relics" type="HBoxContainer" parent="PanelContainer/VBoxContainer/RelicSection"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="ShopSlot" parent="PanelContainer/VBoxContainer/RelicSection/Relics" instance=ExtResource("1_yh4tb")]
+layout_mode = 2
+
+[node name="ShopSlot2" parent="PanelContainer/VBoxContainer/RelicSection/Relics" instance=ExtResource("1_yh4tb")]
+layout_mode = 2
+
+[node name="ShopSlot3" parent="PanelContainer/VBoxContainer/RelicSection/Relics" instance=ExtResource("1_yh4tb")]
+layout_mode = 2
+
+[node name="ShopSlot4" parent="PanelContainer/VBoxContainer/RelicSection/Relics" instance=ExtResource("1_yh4tb")]
+layout_mode = 2
+
+[node name="ItemsSection" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="RelicsTittle" type="PanelContainer" parent="PanelContainer/VBoxContainer/ItemsSection"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("2_nisgj")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/ItemsSection/RelicsTittle"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "ITEMS"
+label_settings = ExtResource("1_pjpxm")
+
+[node name="Relics" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ItemsSection"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="ShopSlot" parent="PanelContainer/VBoxContainer/ItemsSection/Relics" instance=ExtResource("1_yh4tb")]
+layout_mode = 2
+
+[node name="ShopSlot2" parent="PanelContainer/VBoxContainer/ItemsSection/Relics" instance=ExtResource("1_yh4tb")]
+layout_mode = 2
+
+[node name="ShopSlot3" parent="PanelContainer/VBoxContainer/ItemsSection/Relics" instance=ExtResource("1_yh4tb")]
+layout_mode = 2
+
+[node name="ShopSlot4" parent="PanelContainer/VBoxContainer/ItemsSection/Relics" instance=ExtResource("1_yh4tb")]
+layout_mode = 2
+
+[node name="ButtonsSection" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="XarreteActionButton" parent="PanelContainer/VBoxContainer/ButtonsSection" instance=ExtResource("3_2qpep")]
+layout_mode = 2
+text = "EXIT"

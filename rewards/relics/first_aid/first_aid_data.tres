@@ -10,5 +10,4 @@ description = "Regain 10 lives."
 texture = ExtResource("2_irxpj")
 type = 3
 max_stack = 99
-price = 0
 metadata/_custom_type_script = "uid://u8jtn52xm88d"

@@ -10,5 +10,5 @@ description = "Adds burn to red towers (their damage increases for each copy)."
 texture = ExtResource("2_hd1tk")
 rarity = 1
 max_stack = 99
-price = 0
+price = 40
 metadata/_custom_type_script = "uid://u8jtn52xm88d"
