@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://cupq5fkss800q"]
+
+[ext_resource type="Script" uid="uid://c372xl48dnak7" path="res://ui/hud/towers_menu/tower_count/tower_count.gd" id="1_sxpkl"]
+[ext_resource type="StyleBox" uid="uid://de1oid76vx20r" path="res://assets/shaders/panel_black_box.tres" id="2_j0jdr"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="2_sxpkl"]
+
+[node name="TowerCount" type="Control"]
+layout_mode = 3
+anchor_right = 0.068
+anchor_bottom = 0.052
+offset_right = 14.439987
+offset_bottom = 8.84
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sxpkl")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 145.0
+offset_bottom = 65.0
+theme_override_styles/panel = ExtResource("2_j0jdr")
+
+[node name="RedCount" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 5.0
+offset_right = 117.0
+offset_bottom = 58.0
+theme_override_constants/separation = 15
+
+[node name="TextureRect" type="TextureRect" parent="RedCount"]
+layout_mode = 2
+
+[node name="Value" type="HBoxContainer" parent="RedCount"]
+layout_mode = 2
+
+[node name="CurrentLabel" type="Label" parent="RedCount/Value"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_sxpkl")
+
+[node name="Slash" type="Label" parent="RedCount/Value"]
+layout_mode = 2
+text = "/"
+label_settings = ExtResource("2_sxpkl")
+
+[node name="MaxLabel" type="Label" parent="RedCount/Value"]
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("2_sxpkl")

@@ -14,7 +14,6 @@ const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 @onready var level_container: Node2D = $LevelContainer
 @onready var tower_placer: TowerPlacer = $TowerPlacer
 @onready var music_handler: MusicHandler = $MusicHandler
-@onready var ui_layer: CanvasLayer = $UILayer
 @onready var main_camera: MainCamera = $MainCamera
 @onready var config_layer: CanvasLayer = $ConfigLayer
 

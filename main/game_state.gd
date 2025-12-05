@@ -20,3 +20,4 @@ func reset_run() -> void:
 	TowerUpgrades.reset_buffs()
 	LiveManager.lives = 5
 	Score.extra_gold_dropped = 0
+	Engine.time_scale = 1.0

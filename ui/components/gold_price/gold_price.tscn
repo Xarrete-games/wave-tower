@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://edi2t1ojyywt"]
+
+[ext_resource type="Script" uid="uid://d02i23bjo7k56" path="res://ui/components/gold_price/gold_price.gd" id="1_san1j"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="2_san1j"]
+[ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/sprites/icons/wcoin.png" id="3_san1j"]
+
+[node name="GoldPrice" type="HBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -17.5
+offset_right = 25.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_san1j")
+
+[node name="PriceLabel" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_san1j")
+
+[node name="wavecoin" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("3_san1j")
+expand_mode = 1

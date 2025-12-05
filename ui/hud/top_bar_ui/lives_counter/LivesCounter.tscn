@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c46d7j3yoj5p7"]
+
+[ext_resource type="Script" uid="uid://c0g7v5jjs5lls" path="res://ui/hud/top_bar_ui/lives_counter/lives_counter.gd" id="1_jul41"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="1_riguy"]
+[ext_resource type="Texture2D" uid="uid://t0orxc251is3" path="res://assets/sprites/icons/corazon.png" id="2_2hn1l"]
+
+[node name="LivesCounter" type="HBoxContainer"]
+offset_right = 116.0
+offset_bottom = 33.0
+theme_override_constants/separation = 8
+script = ExtResource("1_jul41")
+
+[node name="LiveIcon" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_2hn1l")
+expand_mode = 3
+
+[node name="CounterLabel" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("1_riguy")
+horizontal_alignment = 1

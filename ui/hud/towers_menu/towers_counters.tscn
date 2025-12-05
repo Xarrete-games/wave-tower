@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcpjh37iqj67m"]
+
+[ext_resource type="Script" uid="uid://tfxr4t2e8i7h" path="res://ui/hud/towers_menu/towers_counters.gd" id="1_demjo"]
+[ext_resource type="PackedScene" uid="uid://cupq5fkss800q" path="res://ui/hud/towers_menu/tower_count/tower_count.tscn" id="2_h4svb"]
+[ext_resource type="Texture2D" uid="uid://kt17qx3lclba" path="res://assets/sprites/towers/gemas_RGB.png" id="3_ckase"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3634"]
+atlas = ExtResource("3_ckase")
+region = Rect2(20, 25, 59, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xki8s"]
+atlas = ExtResource("3_ckase")
+region = Rect2(121, 25, 59, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvg7m"]
+atlas = ExtResource("3_ckase")
+region = Rect2(220, 25, 60, 49)
+
+[node name="TowersCounters" type="VBoxContainer"]
+offset_right = 140.0
+offset_bottom = 225.0
+theme_override_constants/separation = 80
+script = ExtResource("1_demjo")
+
+[node name="RedTowerCount" parent="." instance=ExtResource("2_h4svb")]
+layout_mode = 2
+icon = SubResource("AtlasTexture_g3634")
+
+[node name="GreenTowerCount" parent="." instance=ExtResource("2_h4svb")]
+layout_mode = 2
+icon = SubResource("AtlasTexture_xki8s")
+
+[node name="BlueTowerCount" parent="." instance=ExtResource("2_h4svb")]
+layout_mode = 2
+icon = SubResource("AtlasTexture_xvg7m")

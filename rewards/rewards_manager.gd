@@ -4,7 +4,7 @@ extends Node
 signal reroll_priece_change(price: int)
 signal rewards_ui_closed()
 
-const REWARDS_UI = preload("uid://bcxsfb0ox3gmq")
+const REWARDS_SCREEN = preload("uid://bcxsfb0ox3gmq")
 
 const AMOUNT_TO_REWARD_1 = 2 
 const AMOUNT_TO_REWARD_2 = 4
@@ -21,7 +21,7 @@ var relics_list: Array[Object] = [
 ]
 
 var all_rewards: Array[Relic] = []
-var rewards_ui: RewardsUI
+var rewards_ui: RewardsScreen
 var towers_buffs: Dictionary[Tower.TowerType, TowerBuff]
 var reroll_price: int = REROLL_PRICE:
 	set(value):
@@ -72,7 +72,7 @@ func show_rewards_ui(event_layer: CanvasLayer) -> void:
 		if not open_another_ui:
 			return
 	
-	rewards_ui = REWARDS_UI.instantiate()
+	rewards_ui = REWARDS_SCREEN.instantiate()
 	var rewards = _get_rewards()
 	event_layer.add_child(rewards_ui)
 	rewards_ui.set_relics(rewards)

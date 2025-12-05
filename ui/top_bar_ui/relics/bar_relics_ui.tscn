@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvafh0bf674y7"]
-
-[ext_resource type="Script" uid="uid://tbrrl7rtro83" path="res://ui/top_bar_ui/relics/bar_relics_ui.gd" id="1_ekh0d"]
-
-[node name="RelicsBar" type="HBoxContainer"]
-theme_override_constants/separation = 10
-script = ExtResource("1_ekh0d")

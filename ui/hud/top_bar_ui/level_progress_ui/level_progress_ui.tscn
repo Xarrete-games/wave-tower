@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://deyqjxbpqlfc4"]
+
+[ext_resource type="Script" uid="uid://ds783qqi72xq1" path="res://ui/hud/top_bar_ui/level_progress_ui/level_progress_ui.gd" id="1_ga602"]
+[ext_resource type="PackedScene" uid="uid://dddlo6uv4ct15" path="res://ui/hud/top_bar_ui/level_progress_ui/level_progress_slot_ui/level_progress_slot.tscn" id="1_i6lgd"]
+
+[node name="LevelProgressUi" type="HBoxContainer"]
+offset_right = 500.0
+offset_bottom = 30.0
+theme_override_constants/separation = 5
+script = ExtResource("1_ga602")
+
+[node name="LevelProgressSlot" parent="." instance=ExtResource("1_i6lgd")]
+layout_mode = 2
+
+[node name="LevelProgressSlot2" parent="." instance=ExtResource("1_i6lgd")]
+layout_mode = 2
+
+[node name="LevelProgressSlot3" parent="." instance=ExtResource("1_i6lgd")]
+layout_mode = 2
+
+[node name="LevelProgressSlot4" parent="." instance=ExtResource("1_i6lgd")]
+layout_mode = 2
+
+[node name="LevelProgressSlot5" parent="." instance=ExtResource("1_i6lgd")]
+layout_mode = 2
+
+[node name="LevelProgressSlot6" parent="." instance=ExtResource("1_i6lgd")]
+layout_mode = 2
+
+[node name="LevelProgressSlot7" parent="." instance=ExtResource("1_i6lgd")]
+layout_mode = 2
+
+[node name="LevelProgressSlot8" parent="." instance=ExtResource("1_i6lgd")]
+layout_mode = 2
+
+[node name="LevelProgressSlot9" parent="." instance=ExtResource("1_i6lgd")]
+layout_mode = 2
+
+[node name="LevelProgressSlot10" parent="." instance=ExtResource("1_i6lgd")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2

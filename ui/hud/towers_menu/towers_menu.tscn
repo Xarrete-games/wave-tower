@@ -1,0 +1,89 @@
+[gd_scene load_steps=19 format=3 uid="uid://bfym6wmesrxxa"]
+
+[ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/hud/towers_menu/towers_menu.gd" id="1_d3tgk"]
+[ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="2_d3tgk"]
+[ext_resource type="PackedScene" uid="uid://o248nju46k2n" path="res://ui/hud/towers_menu/tower_button/tower_button.tscn" id="3_1xlmg"]
+[ext_resource type="PackedScene" uid="uid://d36t7geqp1sh" path="res://towers/red/red_tower.tscn" id="3_lxxr0"]
+[ext_resource type="PackedScene" uid="uid://oj5ilwusjvuo" path="res://towers/green/green_tower.tscn" id="4_lxxr0"]
+[ext_resource type="PackedScene" uid="uid://cwyyp2r266blt" path="res://towers/blue/blue_tower.tscn" id="5_61shu"]
+[ext_resource type="Resource" uid="uid://bndxfmba1ltf8" path="res://towers/stats/stats_base/red_tower_stats_base.tres" id="5_whndq"]
+[ext_resource type="Texture2D" uid="uid://dheamk0vu60q6" path="res://assets/sprites/towers/torreticas_hover.png" id="6_7564t"]
+[ext_resource type="Resource" uid="uid://c1d3qqqdi2oxp" path="res://towers/stats/stats_base/green_tower_stats_base.tres" id="7_ffkn8"]
+[ext_resource type="Resource" uid="uid://by0giydu700gy" path="res://towers/stats/stats_base/blue_tower_stats_base.tres" id="10_1p1l7"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7564t"]
+load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61shu"]
+atlas = SubResource("CompressedTexture2D_7564t")
+region = Rect2(0, 0, 131, 181)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4otn"]
+atlas = ExtResource("6_7564t")
+region = Rect2(0, 0, 131, 181)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s4otn"]
+load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7564t"]
+atlas = SubResource("CompressedTexture2D_s4otn")
+region = Rect2(131, 0, 125, 181)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2keh"]
+atlas = ExtResource("6_7564t")
+region = Rect2(131, 0, 125, 181)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qst0h"]
+atlas = ExtResource("2_d3tgk")
+region = Rect2(249, 40, 142, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4t37"]
+atlas = ExtResource("6_7564t")
+region = Rect2(249, 40, 142, 141)
+
+[node name="TowersMenu" type="MarginContainer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_d3tgk")
+
+[node name="TowersButtons" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(340, 150)
+layout_mode = 2
+theme_override_constants/separation = 120
+alignment = 1
+
+[node name="RedTowerButton" parent="TowersButtons" instance=ExtResource("3_1xlmg")]
+layout_mode = 2
+tower_scene = ExtResource("3_lxxr0")
+icon = SubResource("AtlasTexture_61shu")
+icon_hover = SubResource("AtlasTexture_s4otn")
+tower_description = "It fires a laser wave that hits the
+ target 5 times."
+base_stats = ExtResource("5_whndq")
+
+[node name="GreenTowerButton" parent="TowersButtons" instance=ExtResource("3_1xlmg")]
+layout_mode = 2
+tower_scene = ExtResource("4_lxxr0")
+icon = SubResource("AtlasTexture_7564t")
+icon_hover = SubResource("AtlasTexture_m2keh")
+tower_description = "It fires 3 waves that hit the first 
+thing they collide with."
+base_stats = ExtResource("7_ffkn8")
+
+[node name="BlueTowerButton" parent="TowersButtons" instance=ExtResource("3_1xlmg")]
+layout_mode = 2
+tower_scene = ExtResource("5_61shu")
+icon = SubResource("AtlasTexture_qst0h")
+icon_hover = SubResource("AtlasTexture_f4t37")
+tower_description = "It creates a shockwave that 
+hits all enemies around."
+base_stats = ExtResource("10_1p1l7")
+
+[connection signal="pressed" from="TowersButtons/RedTowerButton" to="." method="_on_red_tower_button_pressed"]
+[connection signal="pressed" from="TowersButtons/GreenTowerButton" to="." method="_on_green_tower_button_pressed"]
+[connection signal="pressed" from="TowersButtons/BlueTowerButton" to="." method="_on_blue_tower_button_pressed"]
