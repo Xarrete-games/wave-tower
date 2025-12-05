@@ -39,11 +39,20 @@ func _fire_projectil(projectil: GreenProjectile) -> void:
 	
 	cristal_light.play()
 	
-	add_child(projectil)
-	projectil.global_position = projectil_spawn_position.global_position
+	const START_OFFSET_PERCENTAGE: float = 0.4
 	
-	# get enemy direction
-	var dir = (_current_target.global_position - projectil.global_position).normalized()
-	var poison_debuff = EnemyDebuff.new(EnemyDebuff.DebuffType.POISON, poison_damage, 5)
+	var start_pos: Vector2 = projectil_spawn_position.global_position
+	var target_pos: Vector2 = _current_target.global_position
+	
+	# position beetween projectil spawn and enemy
+	var accelerated_start_pos: Vector2 = start_pos.lerp(target_pos, START_OFFSET_PERCENTAGE)
+	
+	add_child(projectil)
+	projectil.global_position = accelerated_start_pos
+	
+	# configure attack
+	var dir: Vector2 = (target_pos - projectil.global_position).normalized()
+	var poison_debuff: EnemyDebuff = EnemyDebuff.new(EnemyDebuff.DebuffType.POISON, poison_damage, 5)
 	var attack = _get_attack([poison_debuff])
+	
 	projectil.set_direction(dir, attack)

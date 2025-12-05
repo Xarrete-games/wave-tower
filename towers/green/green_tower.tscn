@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://oj5ilwusjvuo"]
+[gd_scene load_steps=8 format=3 uid="uid://oj5ilwusjvuo"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower_base.tscn" id="1_wyhsg"]
 [ext_resource type="Script" uid="uid://dpashq3sbs7m7" path="res://towers/green/green_tower.gd" id="2_wdqmo"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="4_f0nw3"]
 [ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/red/passive_light.gd" id="5_xiqao"]
 [ext_resource type="AudioStream" uid="uid://cp4evfqpqhdhy" path="res://assets/sounds/sfx/Green_attack.ogg" id="6_xiqao"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xiqao"]
 
 [node name="GreenTower" instance=ExtResource("1_wyhsg")]
 script = ExtResource("2_wdqmo")
@@ -19,17 +21,20 @@ attack_animation_time = 0.3
 max_scale = 0.8
 max_energy = 1.0
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 position = Vector2(0, -89)
 frame = 1
-
-[node name="RangeArea" parent="." index="2"]
-monitoring = false
 
 [node name="ProjectilSpawnPosition" type="Marker2D" parent="." index="3"]
 position = Vector2(0, -126)
 
-[node name="AttackTimer" parent="." index="4"]
+[node name="RangeArea" parent="." index="4"]
+monitoring = false
+
+[node name="RangeCollision" parent="RangeArea" index="0"]
+shape = SubResource("CircleShape2D_xiqao")
+
+[node name="AttackTimer" parent="." index="5"]
 wait_time = 1.0
 
 [node name="PassiveLight" type="PointLight2D" parent="." index="6"]
