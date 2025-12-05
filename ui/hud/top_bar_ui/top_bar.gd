@@ -1,4 +1,4 @@
-extends MarginContainer
+class_name TopBar extends MarginContainer
 
 signal config_pressed()
 
@@ -9,6 +9,7 @@ func _ready() -> void:
 	
 func _on_config_config_pressed() -> void:
 	config_pressed.emit()
+	
 func _on_xarreta_text_button_xarreta_pressed() -> void:
 	if Engine.time_scale == 1.0:
 		Engine.time_scale = 2.0

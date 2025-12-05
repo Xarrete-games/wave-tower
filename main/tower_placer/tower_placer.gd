@@ -11,11 +11,8 @@ var _is_placing = false:
 var _current_tower_instance: Tower = null
 var _is_valid_placement = false
 
-@export var towers_menu: TowersMenu
-
 func _ready():
 	_is_placing = false
-	towers_menu.tower_selected.connect(_on_tower_selected)
 	EnemyManager.wave_finished.connect(func(_wave: EnemyWave): _cancel_tower())
 	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _cancel_tower())
 
@@ -80,3 +77,7 @@ func _on_tower_selected(tower_scene: PackedScene) -> void:
 	towers_container.add_child(_current_tower_instance)
 	TowerPlacementManager.clear_tower_selected()
 	_is_placing = true
+
+
+func _on_hud_layer_tower_button_pressed(tower_scene: PackedScene) -> void:
+	_on_tower_selected(tower_scene)

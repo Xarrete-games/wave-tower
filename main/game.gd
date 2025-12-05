@@ -51,10 +51,6 @@ func _load_level(level_number: int) -> void:
 	TowerPlacementManager.reset_towers()
 	music_handler.play_music()
 
-
-	
-
-
 func _update_camera_post() -> void:
 	var new_pos = _current_level.get_camera_init_pos()
 	main_camera.global_position = new_pos
@@ -72,5 +68,5 @@ func _open_config_menu() -> void:
 	var pause_instance = pause.instantiate()
 	config_layer.add_child(pause_instance)
 
-func _on_top_bar_config_pressed() -> void:
+func _on_config_pressed() -> void:
 	_open_config_menu()

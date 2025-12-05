@@ -1,16 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://6vgrx5dct8h8"]
+[gd_scene load_steps=8 format=3 uid="uid://6vgrx5dct8h8"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="2_2c7eb"]
-[ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/hud/towers_menu/towers_menu.tscn" id="3_4u4fy"]
 [ext_resource type="PackedScene" uid="uid://b1rsi54eynysa" path="res://ui/screens/pause_screen/pause_menu.tscn" id="4_f7m14"]
+[ext_resource type="PackedScene" uid="uid://drm4bn0pi7ue1" path="res://ui/hud/hud_layer.tscn" id="4_jc0vi"]
 [ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="6_v3ojx"]
-[ext_resource type="PackedScene" uid="uid://bhdmj77ytfxwb" path="res://ui/hud/top_bar_ui/TopBar.tscn" id="9_p6qvs"]
 [ext_resource type="PackedScene" uid="uid://wd57nqjd0s2f" path="res://main/music_handler/music_handler.tscn" id="12_v3ojx"]
 [ext_resource type="Script" uid="uid://mse5syvk8x0l" path="res://main/progress_handler.gd" id="13_f7m14"]
-[ext_resource type="PackedScene" uid="uid://c3qi4qp0ko3iq" path="res://ui/hud/tower_stats_panel/tower_stats_panel.tscn" id="14_514y6"]
-[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="16_514y6"]
-[ext_resource type="Script" uid="uid://bkk5aa6qbmbke" path="res://main/hint_label.gd" id="17_5prg3"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_jc0vi")
@@ -21,45 +17,13 @@ pause = ExtResource("4_f7m14")
 position = Vector2(579, 323)
 script = ExtResource("2_2c7eb")
 
-[node name="HUDLayer" type="CanvasLayer" parent="."]
-
-[node name="TopBar" parent="HUDLayer" instance=ExtResource("9_p6qvs")]
-offset_bottom = 84.0
-
-[node name="TowerStatsPanel" parent="HUDLayer" instance=ExtResource("14_514y6")]
-visible = false
-
-[node name="HintContainer" type="MarginContainer" parent="HUDLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -74.0
-offset_top = -20.0
-offset_right = 74.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_bottom = 700
-
-[node name="HintLabel" type="Label" parent="HUDLayer/HintContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "press ESC to cancel"
-label_settings = ExtResource("16_514y6")
-horizontal_alignment = 1
-script = ExtResource("17_5prg3")
-
-[node name="TowersMenu" parent="HUDLayer" instance=ExtResource("3_4u4fy")]
+[node name="HUDLayer" parent="." instance=ExtResource("4_jc0vi")]
 
 [node name="EventLayer" type="CanvasLayer" parent="."]
 
 [node name="ConfigLayer" type="CanvasLayer" parent="."]
 
-[node name="TowerPlacer" parent="." node_paths=PackedStringArray("towers_menu") instance=ExtResource("6_v3ojx")]
-towers_menu = NodePath("../HUDLayer/TowersMenu")
+[node name="TowerPlacer" parent="." instance=ExtResource("6_v3ojx")]
 
 [node name="LevelContainer" type="Node2D" parent="."]
 
@@ -70,4 +34,5 @@ script = ExtResource("13_f7m14")
 event_layer = NodePath("../EventLayer")
 
 [connection signal="new_level_loaded" from="." to="ProgressHandler" method="_on_game_new_level_loaded"]
-[connection signal="config_pressed" from="HUDLayer/TopBar" to="." method="_on_top_bar_config_pressed"]
+[connection signal="config_pressed" from="HUDLayer" to="." method="_on_config_pressed"]
+[connection signal="tower_button_pressed" from="HUDLayer" to="TowerPlacer" method="_on_hud_layer_tower_button_pressed"]
