@@ -16,7 +16,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("2_w0s13")
 texture_hover = ExtResource("3_cv0sx")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 5
 script = ExtResource("1_qeof5")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

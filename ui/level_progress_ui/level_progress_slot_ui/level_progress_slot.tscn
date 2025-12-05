@@ -21,6 +21,7 @@ texture_rec = NodePath("CenterContainer/TextureRect")
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer"]
-custom_minimum_size = Vector2(15, 15)
+texture_filter = 2
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
-expand_mode = 2
+expand_mode = 5
