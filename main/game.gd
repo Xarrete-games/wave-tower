@@ -1,6 +1,8 @@
 class_name Game extends Node2D
 
 signal new_level_loaded(level_num: int)
+const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
+const LEVELS_PATH = "res://levels/levels/"
 
 @export var levels_paths: Array[String]
 @export var pause : PackedScene
@@ -8,7 +10,6 @@ signal new_level_loaded(level_num: int)
 @export var initial_random_relics: int = 0
 
 var _current_level: Level
-const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 
 #current level parent
 @onready var level_container: Node2D = $LevelContainer
@@ -40,7 +41,7 @@ func _load_level(level_number: int) -> void:
 	new_level_loaded.emit(level_number)
 	music_handler.stop_music()
 	Settings.new_level_loaded.emit(level_number)
-	_current_level = load(levels_paths[level_number - 1]).instantiate()
+	_current_level = _get_level(level_number)
 	current_level_number = level_number
 	level_container.add_child(_current_level)
 	
@@ -70,3 +71,11 @@ func _open_config_menu() -> void:
 
 func _on_config_pressed() -> void:
 	_open_config_menu()
+
+func _get_level(level_number: int) -> Level:
+	var path: String = LEVELS_PATH + str(level_number)
+	var scene = SceneLoader.get_random_scene_from_path(path)
+	return scene.instantiate()
+		
+	
+	

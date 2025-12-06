@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://cpempms31mf5t"]
-
-[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="1_2uf5g"]
-[ext_resource type="Script" uid="uid://dx42a8fkpk6fb" path="res://enemies/enemy_generator/resources_definitions/level_data.gd" id="2_g234b"]
-
-[resource]
-script = ExtResource("2_g234b")
-metadata/_custom_type_script = "uid://dx42a8fkpk6fb"
