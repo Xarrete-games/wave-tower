@@ -54,7 +54,7 @@ script = ExtResource("1_d3tgk")
 [node name="TowersButtons" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(340, 150)
 layout_mode = 2
-theme_override_constants/separation = 120
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="RedTowerButton" parent="TowersButtons" instance=ExtResource("3_1xlmg")]

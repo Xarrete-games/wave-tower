@@ -59,7 +59,7 @@ func _load_level_data(level: Level) -> void:
 	
 func _handle_ememy_group(
 	ememy_group: EnemyGroup) -> void:
-	# wait time
+	# wait tim
 	await get_tree().create_timer(ememy_group.time_to_start).timeout
 	# individual group
 	var paths = []

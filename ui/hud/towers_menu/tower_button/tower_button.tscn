@@ -23,8 +23,10 @@ atlas = ExtResource("1_s7tbd")
 region = Rect2(0, 0, 128, 191)
 
 [node name="TowerButton" type="Control"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 100.0
 script = ExtResource("1_bxa3v")
 
 [node name="HintContainer" type="PanelContainer" parent="."]

@@ -27,13 +27,13 @@ func _ready() -> void:
 func _show_next_wave_screen() -> void:
 	var next_wave_screen = NEXT_WAVE_SCREEN.instantiate()
 	event_layer.add_child(next_wave_screen)
-	next_wave_screen.tree_exited.connect(func(): EnemyManager.next_wave_pressed.emit(), CONNECT_ONE_SHOT)
+	next_wave_screen.button_pressed.connect(func(): EnemyManager.next_wave_pressed.emit(), CONNECT_ONE_SHOT)
 
 # NEXT LEVEL SCREEN
 func _show_next_level_menu() -> void:
 	var next_level_screen = NEXT_LEVEL_SCREEN.instantiate()
 	event_layer.add_child(next_level_screen)
-	next_level_screen.tree_exited.connect(func(): game.go_next_level(), CONNECT_ONE_SHOT)
+	next_level_screen.button_pressed.connect(func(): game.go_next_level(), CONNECT_ONE_SHOT)
 
 # REWARDS SCREEN
 func _on_wave_finished(_wave: EnemyWave) -> void:

@@ -4,7 +4,7 @@
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="2_btstv"]
 [ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/sprites/icons/wcoin.png" id="2_uu5d3"]
 
-[node name="HBoxContainer" type="HBoxContainer"]
+[node name="GoldCounter" type="HBoxContainer"]
 theme_override_constants/separation = 8
 script = ExtResource("1_wrnqc")
 
