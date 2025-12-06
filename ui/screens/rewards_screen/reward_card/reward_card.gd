@@ -7,13 +7,9 @@ const LABEL_SETTINGS_24 = preload("uid://bqa8xh2lpphdf")
 const COMMON_COLOR = Color.GREEN_YELLOW
 const RARE_COLOR = Color.DODGER_BLUE
 const EPIC_COLOR = Color.GOLD
+
 var relic: Relic
 var price: int = 0
-var relic_colors: Dictionary[Relic.RelicRarity, Color] = {
-	Relic.RelicRarity.COMMON: COMMON_COLOR,
-	Relic.RelicRarity.RARE: RARE_COLOR,
-	Relic.RelicRarity.EPIC: EPIC_COLOR,
-}
 
 var _has_enough_live = false
 var _is_boniato = false
@@ -33,7 +29,7 @@ func set_relic(new_relic_value: Relic) -> void:
 	relic_texture.texture = relic.texture
 	title.text = relic.id
 	description.text = relic.description
-	hexagon_border.color =  relic_colors[relic.rarity]
+	hexagon_border.color =  RelicsManager.get_rarity_color(relic.rarity)
 	price = relic.price
 
 	if relic is Boniato:
@@ -45,10 +41,10 @@ func set_relic(new_relic_value: Relic) -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if (_is_boniato and not _has_enough_live):
 		return
-
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and not event.is_pressed():
-			card_pressed.emit(relic)
+	
+	if Utils.is_left_click_event(event):
+		AudioManager.play_button_click()
+		card_pressed.emit(relic)
 
 func _chek_live(curren_live: int) -> void:
 	_has_enough_live = curren_live > 5
@@ -59,6 +55,7 @@ func _chek_live(curren_live: int) -> void:
 	)
 
 func _on_mouse_entered() -> void:
+	AudioManager.play_button_hover()
 	relic_texture.scale = Vector2(0.6, 0.6)
 
 func _on_mouse_exited() -> void:

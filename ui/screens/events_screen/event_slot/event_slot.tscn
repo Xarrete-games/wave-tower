@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://cl23rwbjcvak5"]
+
+[ext_resource type="Script" uid="uid://cky8wbd7mleu0" path="res://ui/screens/events_screen/event_slot/event_slot.gd" id="1_qy0vt"]
+[ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="2_yjsho"]
+[ext_resource type="Texture2D" uid="uid://bmog50xiu4wle" path="res://assets/sprites/relics/boniato_relic.png" id="4_c5f36"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c12jj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qy0vt"]
+font_size = 24
+font_color = Color(0.7137255, 0.77254903, 0.64705884, 1)
+
+[node name="EventSlot" type="Control" node_paths=PackedStringArray("event_texture", "description_label", "title_lable")]
+custom_minimum_size = Vector2(268, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 268.0
+offset_bottom = 400.0
+script = ExtResource("1_qy0vt")
+event_texture = NodePath("Container/IconContainer/EventTexture")
+description_label = NodePath("Container/TextContainer/DescriptionLabel")
+title_lable = NodePath("Container/TextContainer/TitleLabel")
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 268.0
+offset_bottom = 280.0
+theme_override_constants/separation = 20
+
+[node name="IconContainer" type="CenterContainer" parent="Container"]
+custom_minimum_size = Vector2(268, 310)
+layout_mode = 2
+
+[node name="HexagonBorder" type="Polygon2D" parent="Container/IconContainer"]
+texture_filter = 2
+material = SubResource("CanvasItemMaterial_c12jj")
+color = Color(0.7137255, 0.77254903, 0.64705884, 1)
+polygon = PackedVector2Array(134, 310, 268, 232.5, 268, 77.5, 134, 0, 0, 77.5, 0, 232.5)
+
+[node name="TextureRect" type="TextureRect" parent="Container/IconContainer"]
+layout_mode = 2
+texture = ExtResource("2_yjsho")
+
+[node name="EventTexture" type="TextureRect" parent="Container/IconContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("4_c5f36")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="TextContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Container/TextContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.78, 0.95233333, 1, 1)
+text = "Boniatillo"
+label_settings = SubResource("LabelSettings_qy0vt")
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="Container/TextContainer"]
+custom_minimum_size = Vector2(129.9, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 18
+text = "+10% damage on turrets"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

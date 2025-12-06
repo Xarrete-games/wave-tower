@@ -1,0 +1,116 @@
+#Rewarsmanager
+extends Node
+
+signal reroll_priece_change(price: int)
+signal rewards_ui_closed()
+
+const REWARDS_SCREEN = preload("uid://bcxsfb0ox3gmq")
+
+const AMOUNT_TO_REWARD_1 = 2 
+const AMOUNT_TO_REWARD_2 = 4
+const AMOUNT_TO_REWARD_3 = 6
+const AMOUNT_TO_REWARD_4 = 8
+const REROLL_PRICE = 20
+
+var relics_list: Array[Object] = [
+	RedRelic, GreenRelic, BlueRelic,
+	ArticCube, EchoOfVoid, PerseusFury,
+	FirstAid, MagicRing, Boniato,
+	SalmonNigiri, FlowerPot, HeadPhones,
+	IgnitionVoltage, FoundationBreaker, SafetyHelmet
+]
+
+var all_rewards: Array[Relic] = []
+var rewards_ui: RewardsScreen
+var towers_buffs: Dictionary[Tower.TowerType, TowerBuff]
+var reroll_price: int = REROLL_PRICE:
+	set(value):
+		reroll_price = value
+		reroll_priece_change.emit(value)
+var show_rewards_price: int = 50:
+	set(value):
+		show_rewards_price = value
+
+var open_another_ui: bool = false
+
+func _ready() -> void:
+	RelicsManager.relics_change.connect(_on_relics_change)
+	reset_rewards()
+
+func add_random_relics(amount: int) -> void:
+	if amount <= 0:
+		return
+	
+	for i in range(amount):
+		var relic = _get_random_relic()
+		if relic is Boniato or relic is MagicRing or relic is FoundationBreaker:
+			continue
+		RelicsManager.add_relic(relic, true)
+
+func reset_rewards() -> void:
+	all_rewards.clear()
+	for relic_object in relics_list:
+		all_rewards.append(relic_object.new())
+	show_rewards_price = 50
+	open_another_ui = false
+	if rewards_ui:
+		rewards_ui.queue_free()
+	
+	
+func reroll() -> void:
+	Score.gold -= reroll_price
+	var rewards = get_relics()
+	rewards_ui.set_relics(rewards)
+
+func show_rewards_ui(event_layer: CanvasLayer) -> void:
+	if rewards_ui:
+		open_another_ui = true
+		await rewards_ui.tree_exited
+		# for prevent open again when closed by reset
+		if not open_another_ui:
+			return
+	
+	rewards_ui = REWARDS_SCREEN.instantiate()
+	var rewards = get_relics()
+	event_layer.add_child(rewards_ui)
+	rewards_ui.set_relics(rewards)
+	rewards_ui.reliq_selected.connect(_on_relidc_selected)
+	rewards_ui.tree_exited.connect(func ():
+		rewards_ui = null
+		rewards_ui_closed.emit()
+		)
+
+func apply_discount_to_all_relics(discount: int) -> void:
+	for relic: Relic in all_rewards:
+		relic.price = round(relic.price - (relic.price * (discount / 100.0)))
+
+# get amount number of relics
+func get_relics(amount: int = 3) -> Array[Relic]:
+	randomize()
+	var rewars_copy = all_rewards.duplicate()
+	rewars_copy.shuffle()
+	return rewars_copy.slice(0 ,amount)
+
+func _get_random_relic() -> Relic:
+	randomize()
+	var rewars_copy = all_rewards.duplicate()
+	rewars_copy.shuffle()
+	return rewars_copy[0]
+	
+func _on_relidc_selected(relic: Relic) -> void:
+	if rewards_ui:
+		rewards_ui.queue_free()
+		rewards_ui = null
+	RelicsManager.add_relic(relic, true)
+
+func _on_relics_change(relics: Array[Relic]) -> void:
+	for relic in relics:
+		if relic.amount == relic.max_stack:
+			_remove_reward(relic.id)
+
+func _remove_reward(id: String) -> void:
+	for i in range(all_rewards.size()):
+		var current_reward = all_rewards[i]
+		if current_reward.id == id:
+			all_rewards.remove_at(i)
+			return

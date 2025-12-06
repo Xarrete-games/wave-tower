@@ -3,14 +3,19 @@ class_name ProgressHandler extends Node
 const NEXT_WAVE_SCREEN = preload("uid://b7ttkk4pasgin")
 const NEXT_LEVEL_SCREEN = preload("uid://crastw7xnqgvl")
 const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
+const WAVES_WITH_EVENTS = [1,3,6,9]
 
 @export var event_layer: CanvasLayer
+@export var evenet_handler: EventsHandler
 
 var _current_level: int = 0
 var _total_levels: int = 0
+var _current_wave: int = 0
 var game: Game
 
 func _ready() -> void:
+	EnemyManager.wave_init.connect(func(wave_number: int): 
+		_current_wave = wave_number)
 	EnemyManager.wave_finished.connect(_on_wave_finished)
 	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _show_next_level_menu())
 	# TODO do it better
@@ -44,6 +49,8 @@ func _on_last_wave_finished(_wave: EnemyWave) -> void:
 		_show_next_level_menu()
 
 func _on_rewards_ui_closed() -> void:
+	if _current_wave in WAVES_WITH_EVENTS:
+		await evenet_handler.show_events()
 	_show_next_wave_screen()
 
 func _on_game_new_level_loaded(_level_num: int) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6vgrx5dct8h8"]
+[gd_scene load_steps=9 format=3 uid="uid://6vgrx5dct8h8"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="2_2c7eb"]
@@ -6,8 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://drm4bn0pi7ue1" path="res://ui/hud/hud_layer.tscn" id="4_jc0vi"]
 [ext_resource type="PackedScene" uid="uid://dfbkg54rlo421" path="res://main/tower_placer/tower_placer.tscn" id="6_v3ojx"]
 [ext_resource type="Script" uid="uid://bj5t83u2udagj" path="res://main/events_handler.gd" id="8_2c7eb"]
-[ext_resource type="Script" uid="uid://dweoba1f2xgu7" path="res://events/events/event.gd" id="9_j015t"]
-[ext_resource type="Resource" uid="uid://dl7b5mte8rcp2" path="res://events/events/shop_event.tres" id="10_hlcqn"]
 [ext_resource type="PackedScene" uid="uid://wd57nqjd0s2f" path="res://main/music_handler/music_handler.tscn" id="12_v3ojx"]
 [ext_resource type="Script" uid="uid://mse5syvk8x0l" path="res://main/progress_handler.gd" id="13_f7m14"]
 
@@ -37,10 +35,8 @@ script = ExtResource("13_f7m14")
 event_layer = NodePath("../EventLayer")
 evenet_handler = NodePath("../EventsHandler")
 
-[node name="EventsHandler" type="Node" parent="." node_paths=PackedStringArray("event_layer")]
+[node name="EventsHandler" type="Node" parent="."]
 script = ExtResource("8_2c7eb")
-events = Array[ExtResource("9_j015t")]([ExtResource("10_hlcqn")])
-event_layer = NodePath("../EventLayer")
 
 [connection signal="new_level_loaded" from="." to="ProgressHandler" method="_on_game_new_level_loaded"]
 [connection signal="config_pressed" from="HUDLayer" to="." method="_on_config_pressed"]

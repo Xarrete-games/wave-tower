@@ -5,6 +5,7 @@ signal tempo
 @onready var button_hover: AudioStreamPlayer = $ButtonHover
 @onready var coins: AudioStreamPlayer = $Coins
 @onready var main_piano_player: AudioStreamPlayer = $MainPianoPlayer
+@onready var purchase_player: AudioStreamPlayer = $PurchasePlayer
 
 func play_coins():
 	coins.play()
@@ -20,6 +21,9 @@ func play_main_piano():
 		return
 	else:
 		main_piano_player.play()
+
+func play_purchase():
+	purchase_player.play()
 
 func stop_main_piano():
 	main_piano_player.stop()

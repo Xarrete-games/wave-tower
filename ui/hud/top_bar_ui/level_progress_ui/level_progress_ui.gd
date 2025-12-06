@@ -18,7 +18,7 @@ func _build() -> void:
 	for index in range(10):
 		var slot: LevelProgressSlot = LEVEL_PROGRESS_SLOT.instantiate()
 		add_child(slot)
-		if index == 2 or index == 5 or index == 8:
+		if index == 0 or index == 2 or index == 5 or index == 8:
 			slot.set_icon(QUESTION_ICON)	
 		if index == 9:
 			slot.set_icon(SKULL_ICON)
