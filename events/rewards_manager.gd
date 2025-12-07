@@ -13,10 +13,10 @@ const AMOUNT_TO_REWARD_4 = 8
 const REROLL_PRICE = 20
 
 var relics_list: Array[Object] = [
-	#RedRelic, GreenRelic, BlueRelic,EchoOfVoid, PerseusFury,SafetyHelmet
-	ArticCube, 
-	#FirstAid, MagicRing, Boniato,
-	#SalmonNigiri, HeadPhones,
+	RedRelic, GreenRelic, BlueRelic,EchoOfVoid, 
+	ArticCube, PerseusFury,SafetyHelmet,
+	FirstAid, MagicRing, Boniato,
+	SalmonNigiri, HeadPhones,
 	IgnitionVoltage, FoundationBreaker, 
 ]
 
