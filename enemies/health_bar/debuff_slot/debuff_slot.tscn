@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://beixhmpysku3t"]
+
+[ext_resource type="Texture2D" uid="uid://deriu0icenegb" path="res://assets/sprites/icons/debuffs/burn_icon.png" id="1_2muor"]
+[ext_resource type="Script" uid="uid://brkk62c2s8fer" path="res://enemies/health_bar/debuff_slot/debuff_slot.gd" id="1_4ca0j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2muor"]
+font_size = 12
+outline_size = 1
+outline_color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
+
+[node name="Control" type="CenterContainer"]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_4ca0j")
+
+[node name="DebuffSlot" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_2muor")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2muor")
+horizontal_alignment = 1

@@ -52,11 +52,13 @@ func _on_attack_tick_timer_timeout() -> void:
 	_hits_count += 1
 	
 	if _hits_count == TOTAL_HITS:
+		if _current_target:
+			var debuff = EnemyDebuffManager.get_debuff(EnemyDebuff.Type.BURN)
+			_current_target.apply_debuff(debuff)
 		_stop_attack()
 
 func _get_attack_per_hit() -> Attack:
-	var burn_debuff = EnemyDebuff.new(EnemyDebuff.DebuffType.BURN, burn_damage, 5)
-	var attack = _get_attack([burn_debuff])
+	var attack = _get_attack()
 	attack.damage = attack.damage / TOTAL_HITS
 	return attack
 	

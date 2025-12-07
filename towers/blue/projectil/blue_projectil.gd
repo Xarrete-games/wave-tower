@@ -12,6 +12,7 @@ var radius: float = 0.0
 var shape: CircleShape2D
 var _attack: Attack
 var _max_area_range: float
+var _frost_debuff: FrostDebuff
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape
 @onready var blue_attack: AudioStreamPlayer2D = $BlueAttack
@@ -33,9 +34,10 @@ func _process(delta: float) -> void:
 	if radius >= _max_area_range:
 		queue_free()
 
-func set_stats(attack: Attack, area_range: float) -> void:
+func set_stats(attack: Attack, area_range: float, frost_debuff: FrostDebuff) -> void:
 	_attack = attack
 	_max_area_range = area_range
+	_frost_debuff = frost_debuff
 
 func _draw() -> void:
 	var radius_progress: float = clamp(radius / _max_area_range, 0.0, 1.0)
@@ -62,7 +64,9 @@ func _on_body_entered(body: Node2D) -> void:
 	var enemy = body as Enemy
 	var explosion: CPUParticles2D = BLUE_EXPLOSION.instantiate()
 	
-	enemy.get_damage(_attack)
+	enemy.apply_damage(_attack)
+	enemy.apply_debuff(_frost_debuff)
+	
 	add_child(explosion)
 	explosion.global_position = enemy.global_position
 	explosion.emitting = true

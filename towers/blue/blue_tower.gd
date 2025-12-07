@@ -23,18 +23,16 @@ func _fire() -> void:
 	
 	var is_double_hit = _is_doble_hit()
 	
-	var frost_debuff = EnemyDebuff.new(EnemyDebuff.DebuffType.FROST, freezing_power, freezing_duration)
-	var attack = _get_attack([frost_debuff])
-	projectil.set_stats(attack, attack_range)
+	var attack = _get_attack()
+	projectil.set_stats(attack, attack_range, EnemyDebuffManager.get_debuff(EnemyDebuff.Type.FROST))
 	call_deferred("_add_projectil", projectil)
 	
 	if is_double_hit:
 		await get_tree().create_timer(0.5).timeout
 		cristal_light.play()
 		projectil = BLUE_PROJECTIL.instantiate()
-		frost_debuff = EnemyDebuff.new(EnemyDebuff.DebuffType.FROST, freezing_power, freezing_duration)
-		attack = _get_attack([frost_debuff])
-		projectil.set_stats(attack, attack_range)
+		attack = _get_attack()
+		projectil.set_stats(attack, attack_range, EnemyDebuffManager.get_debuff(EnemyDebuff.Type.FROST))
 		call_deferred("_add_projectil", projectil)
 
 func _add_projectil(projectil: BlueProjectil) -> void:

@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	var enemy = body as Enemy
-	enemy.get_damage(_attack)
+	enemy.apply_damage(_attack)
 	queue_free()
 
 func _on_duration_timeout() -> void:

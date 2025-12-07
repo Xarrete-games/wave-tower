@@ -4,11 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://bjdgwe43owpg7" path="res://assets/textures/red.jpg" id="2_olp7g"]
 [ext_resource type="Texture2D" uid="uid://cnpo8o3c3x5hq" path="res://assets/textures/green.jpg" id="3_q54p0"]
 
-[node name="HealthBar" type="Control"]
+[node name="HealthBar" type="Control" node_paths=PackedStringArray("debuffs_conatiner")]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_uke46")
+debuffs_conatiner = NodePath("DebuffsContainer")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 layout_mode = 1
@@ -20,3 +21,11 @@ value = 50.0
 nine_patch_stretch = true
 texture_under = ExtResource("2_olp7g")
 texture_progress = ExtResource("3_q54p0")
+
+[node name="DebuffsContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -25.0
+offset_right = 41.0
+offset_bottom = 15.0
+theme_override_constants/separation = 0

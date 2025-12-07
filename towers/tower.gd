@@ -109,11 +109,10 @@ func sell() -> void:
 # --------------------
 # --- ATTACK ---
 # --------------------
-func _get_attack(new_debuffs: Array[EnemyDebuff] = []) -> Attack:
+func _get_attack() -> Attack:
 	var is_critic = _is_critical_hit()
 	var attack_damege = damage * (1 + (critic_damage/100)) if is_critic else damage
-	
-	return Attack.new(attack_damege, is_critic, new_debuffs)
+	return Attack.new(attack_damege, is_critic)
 	
 func _is_critical_hit() -> bool:
 	var random_value: float = randf()

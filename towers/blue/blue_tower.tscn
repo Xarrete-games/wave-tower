@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwyyp2r266blt"]
+[gd_scene load_steps=7 format=3 uid="uid://cwyyp2r266blt"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower_base.tscn" id="1_orgjy"]
 [ext_resource type="Script" uid="uid://bpvj36tgrsr8g" path="res://towers/blue/blue_tower.gd" id="2_iq8f3"]
@@ -6,22 +6,27 @@
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="4_ukmlm"]
 [ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/red/passive_light.gd" id="5_763pf"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ukmlm"]
+
 [node name="BlueTower" instance=ExtResource("1_orgjy")]
 script = ExtResource("2_iq8f3")
 type = 2
 stats_base = ExtResource("3_711aj")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 position = Vector2(0, -57)
 frame = 2
-
-[node name="RangeArea" parent="." index="2"]
-monitoring = false
 
 [node name="ProjectilSpawnPoint" type="Marker2D" parent="." index="3"]
 position = Vector2(0, 8)
 
-[node name="AttackTimer" parent="." index="4"]
+[node name="RangeArea" parent="." index="4"]
+monitoring = false
+
+[node name="RangeCollision" parent="RangeArea" index="0"]
+shape = SubResource("CircleShape2D_ukmlm")
+
+[node name="AttackTimer" parent="." index="5"]
 wait_time = 3.0
 
 [node name="PassiveLight" type="PointLight2D" parent="." index="6"]

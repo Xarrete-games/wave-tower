@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://diax8n45uy1cu"]
+[gd_scene load_steps=25 format=3 uid="uid://diax8n45uy1cu"]
 
 [ext_resource type="Script" uid="uid://cafqn48q104fs" path="res://enemies/enemy.gd" id="1_fenyl"]
 [ext_resource type="Texture2D" uid="uid://ck7funcss1gra" path="res://assets/sprites/enemies/espectro/sp1.png" id="2_puprq"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://d3o6drjtqx5js" path="res://assets/sprites/enemies/espectro/sp_top5.png" id="13_7dwsf"]
 [ext_resource type="Texture2D" uid="uid://mfcpfm5mu01x" path="res://assets/sprites/enemies/espectro/sp_top6.png" id="14_vi83m"]
 [ext_resource type="Texture2D" uid="uid://jo1s7xj1apmc" path="res://assets/sprites/enemies/espectro/sp_top7.png" id="15_3oxun"]
+[ext_resource type="Script" uid="uid://cewjufpyraonv" path="res://enemies/debuff_handler.gd" id="21_phiiv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mujyd"]
 radius = 23.086792
@@ -131,6 +132,7 @@ frame = 4
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Explosion"]
 
 [node name="HealthBar" parent="." instance=ExtResource("7_puprq")]
+z_index = 1
 offset_left = -20.0
 offset_top = -92.0
 offset_right = -20.0
@@ -142,9 +144,5 @@ position = Vector2(0, -56)
 [node name="GoldDroppedPos" type="Marker2D" parent="."]
 position = Vector2(0, -88)
 
-[node name="PoisonDamageTimer" type="Timer" parent="."]
-
-[node name="BurnDamageTimer" type="Timer" parent="."]
-
-[connection signal="timeout" from="PoisonDamageTimer" to="." method="_on_poison_damage_timer_timeout"]
-[connection signal="timeout" from="BurnDamageTimer" to="." method="_on_burn_damage_timer_timeout"]
+[node name="DebuffHandler" type="Node" parent="."]
+script = ExtResource("21_phiiv")

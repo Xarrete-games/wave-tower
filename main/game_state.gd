@@ -18,6 +18,7 @@ func reset_run() -> void:
 	RewardsManager.reset_rewards()
 	TowerPlacementManager.reset_towers()
 	TowerUpgrades.reset_buffs()
+	EnemyDebuffManager.reset()
 	LiveManager.lives = 5
 	Score.extra_gold_dropped = 0
 	Engine.time_scale = 1.0
