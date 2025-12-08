@@ -81,6 +81,7 @@ func _process(delta: float):
 	var animation = "top right" if previous_global_y > global_position.y else "down right"
 	if animated_sprite_2d.animation != animation:
 		animated_sprite_2d.play(animation)
+	enable()
 	
 func set_path_follow(path_follow: PathFollow2D) -> void:
 	_path_follow = path_follow
@@ -88,10 +89,12 @@ func set_path_follow(path_follow: PathFollow2D) -> void:
 func disable() -> void:
 	animated_sprite_2d.visible = false
 	collision_shape_2d.disabled = true
+	health_bar.visible = false
 
 func enable() -> void:
 	animated_sprite_2d.visible = true
 	collision_shape_2d.disabled = false
+	health_bar.visible = true
 # --------------------
 # --- HEALT ---
 # --------------------
