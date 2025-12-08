@@ -33,7 +33,4 @@ texture = ExtResource("2_7hwsx")
 metadata/_edit_use_anchors_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="SubViewport/Root2D"]
-position = Vector2(41, 91)
-energy = 7.0
 texture = ExtResource("3_bt5ba")
-texture_scale = 0.8

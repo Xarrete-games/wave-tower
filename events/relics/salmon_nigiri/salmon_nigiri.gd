@@ -1,11 +1,11 @@
 class_name SalmonNigiri extends Relic
 
-const SALMON_NIGIRI_DATA = preload("uid://kgici4clfhjq")
+const discount = 10
 
-var discount = 10
+func _init():
+	super(preload("uid://kgici4clfhjq"))
 
 func apply_effect() -> void:
 	RewardsManager.apply_discount_to_all_relics(discount)
 
-func get_data() -> RelicData:
-	return SALMON_NIGIRI_DATA
+

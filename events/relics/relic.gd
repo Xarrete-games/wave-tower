@@ -15,8 +15,7 @@ var base_price: int
 var price: int
 var price_increased: bool
 
-func _init() -> void:
-	var data = get_data()
+func _init(data: RelicData) -> void:
 	id = data.id
 	description = data.description
 	type = data.type
@@ -29,6 +28,3 @@ func _init() -> void:
 
 @abstract
 func apply_effect() -> void
-
-@abstract
-func get_data() -> RelicData
