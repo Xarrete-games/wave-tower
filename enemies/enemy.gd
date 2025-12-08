@@ -33,7 +33,6 @@ var speed_mult: float:
 	set(value):
 		_speed_mult = value
 
-
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var explosion: AnimatedSprite2D = $Explosion
 @onready var health_bar: HealthBar = $HealthBar

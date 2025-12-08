@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://byb1cmo277jos"]
+[gd_scene load_steps=56 format=3 uid="uid://crk2ly48vsxn4"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_8pmpf"]
 [ext_resource type="Texture2D" uid="uid://cbq7dph7jug8h" path="res://assets/sprites/enemies/invoker/invoker-demo_0000_Recurso-59@2x.png.png" id="2_n8sk1"]
@@ -234,3 +234,7 @@ max_healt = 500.0
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_5v0rn")
 frame_progress = 0.7341573
+
+[node name="HealthBar" parent="." index="4"]
+offset_top = -158.0
+offset_bottom = -158.0

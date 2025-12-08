@@ -1,7 +1,7 @@
 class_name DebuffSlot extends Control
 
-@onready var label: Label = $MarginContainer/Label
-@onready var texture_rect: TextureRect = $DebuffSlot
+@export var texture_rect: TextureRect
+@export var label: Label
 
 var amount: int:
 	set(value):

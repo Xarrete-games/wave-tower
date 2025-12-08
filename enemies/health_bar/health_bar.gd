@@ -13,8 +13,9 @@ const MAX_HEALTH: float = 5000.0
 # Rango de Escala Visual
 const MIN_SCALE: float = 1.0
 const MAX_SCALE: float = 4.0
-@export var debuffs_conatiner: Control
 
+@export var debuffs_conatiner: Control
+@export var texture_progress_bar: TextureProgressBar 
 var debuffs_slots: Dictionary[EnemyDebuff.Type, DebuffSlot] = {
 	EnemyDebuff.Type.BURN: null,
 	EnemyDebuff.Type.FROST: null
@@ -25,7 +26,6 @@ var textures: Dictionary[EnemyDebuff.Type, Texture2D] = {
 	EnemyDebuff.Type.FROST: FROST_ICON
 } 
 
-@onready var texture_progress_bar: TextureProgressBar = $TextureProgressBar
 
 func set_max_health(value: float) -> void:
 	var clamped_value = clamp(value, MIN_HEALTH, MAX_HEALTH)

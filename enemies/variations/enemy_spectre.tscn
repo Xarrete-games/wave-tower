@@ -17,5 +17,5 @@ position = Vector2(12, -12.999999)
 scale = Vector2(0.1, 0.1)
 
 [node name="HealthBar" parent="." index="4"]
-offset_top = -69.0
-offset_bottom = -69.0
+offset_top = -110.0
+offset_bottom = -110.0

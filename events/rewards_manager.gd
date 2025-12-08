@@ -56,7 +56,6 @@ func reset_rewards() -> void:
 	if rewards_ui:
 		rewards_ui.queue_free()
 	
-	
 func reroll() -> void:
 	Score.gold -= reroll_price
 	var rewards = get_relics()

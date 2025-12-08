@@ -89,5 +89,5 @@ autoplay = "top right"
 frame_progress = 0.0
 
 [node name="HealthBar" parent="." index="4"]
-offset_top = -77.0
-offset_bottom = -77.0
+offset_top = -117.0
+offset_bottom = -117.0

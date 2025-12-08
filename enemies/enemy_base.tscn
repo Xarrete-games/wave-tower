@@ -134,9 +134,9 @@ frame = 4
 [node name="HealthBar" parent="." instance=ExtResource("7_puprq")]
 z_index = 1
 offset_left = -20.0
-offset_top = -92.0
+offset_top = -149.0
 offset_right = -20.0
-offset_bottom = -92.0
+offset_bottom = -149.0
 
 [node name="NumbersDisplayedPos" type="Marker2D" parent="."]
 position = Vector2(0, -56)

@@ -218,3 +218,7 @@ position = Vector2(0.99999976, 9.000004)
 scale = Vector2(0.2, 0.2)
 blend_mode = 1
 texture = SubResource("GradientTexture2D_6dubi")
+
+[node name="HealthBar" parent="." index="5"]
+offset_top = -148.0
+offset_bottom = -148.0
