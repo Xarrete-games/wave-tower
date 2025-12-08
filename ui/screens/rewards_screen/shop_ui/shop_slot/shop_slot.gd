@@ -2,20 +2,19 @@ class_name ShopSlot extends Control
 
 signal item_purchased(relic: RedRelic, slot: ShopSlot)
 
-@export var texture_rect: TextureRect
 @export var title_label: Label
 @export var description_label: RichTextLabel
 @export var gold_price: GoldPrice
-@export var background: Polygon2D
+@export var shop_slot_icon: ShopSlotIcon
 
 var _relic: Relic
 
 func set_relic(relic: Relic) -> void:
-	texture_rect.texture = relic.texture
 	title_label.text = relic.id
 	description_label.text = relic.description
 	gold_price.price = relic.price
-	background.color = RelicsManager.get_rarity_color(relic.rarity)
+	shop_slot_icon.set_icon(relic.texture)
+	shop_slot_icon.set_background_color(RelicsManager.get_rarity_color(relic.rarity))
 	_relic = relic
 	
 func _on_gui_input(event: InputEvent) -> void:
@@ -25,7 +24,8 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_mouse_entered() -> void:
 	AudioManager.play_button_hover()
-	texture_rect.custom_minimum_size = Vector2(120, 120)
+	shop_slot_icon.increased_icon_size()
+	#texture_rect.custom_minimum_size = Vector2(120, 120)
 
 func _on_mouse_exited() -> void:
-	texture_rect.custom_minimum_size = Vector2(100, 100)
+	shop_slot_icon.icon_normal_size()
