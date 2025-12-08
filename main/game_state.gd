@@ -2,13 +2,25 @@
 extends Node
 
 signal state_change(state: STATE)
+signal speed_change(value: float)
 
 enum STATE { ON_MAIN_MENU, IN_GAME }
+
+var speed: float:
+	get(): return _speed
+	set(value):
+		_speed = value
+		Engine.time_scale = value
+		speed_change.emit(value)
+var _speed: float = 1.0
 
 var state: STATE:
 	set(value):
 		state = value
 		state_change.emit(state)
+
+func _ready() -> void:
+	ButtonsEvents.speed_button_pressed.connect(_button_speed_pressed)
 
 func is_on_main_menu() -> bool:
 	return state == STATE.ON_MAIN_MENU
@@ -21,4 +33,13 @@ func reset_run() -> void:
 	EnemyDebuffManager.reset()
 	LiveManager.lives = 5
 	Score.extra_gold_dropped = 0
-	Engine.time_scale = 1.0
+	speed = 1.0
+
+func _button_speed_pressed() -> void:
+	if speed == 1.0:
+		speed = 2.0
+	elif speed == 2.0:
+		speed = 3.0
+	elif speed == 3.0:
+		speed = 1.0
+
