@@ -4,8 +4,6 @@ const DEBUFF_SLOT = preload("uid://beixhmpysku3t")
 const BURN_ICON = preload("uid://deriu0icenegb")
 const FROST_ICON = preload("uid://jgpoavtm56v2")
 
-
-
 # Rango de Salud
 const MIN_HEALTH: float = 40.0
 const MAX_HEALTH: float = 5000.0

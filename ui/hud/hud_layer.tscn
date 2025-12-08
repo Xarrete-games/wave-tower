@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=3 uid="uid://drm4bn0pi7ue1"]
+[gd_scene load_steps=6 format=3 uid="uid://drm4bn0pi7ue1"]
 
-[ext_resource type="Script" uid="uid://cpnoprvyyakuv" path="res://ui/hud/hud_layer.gd" id="1_tdcwd"]
 [ext_resource type="PackedScene" uid="uid://bhdmj77ytfxwb" path="res://ui/hud/top_bar_ui/top_bar.tscn" id="1_vci3o"]
 [ext_resource type="PackedScene" uid="uid://c3qi4qp0ko3iq" path="res://ui/hud/tower_stats_panel/tower_stats_panel.tscn" id="2_tdcwd"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="3_vwkow"]
@@ -8,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/hud/towers_menu/towers_menu.tscn" id="5_fgqev"]
 
 [node name="HUDLayer" type="CanvasLayer"]
-script = ExtResource("1_tdcwd")
 
 [node name="TopBar" parent="." instance=ExtResource("1_vci3o")]
 offset_bottom = 84.0
@@ -40,6 +38,3 @@ horizontal_alignment = 1
 script = ExtResource("4_xxs7w")
 
 [node name="TowersMenu" parent="." instance=ExtResource("5_fgqev")]
-
-[connection signal="config_pressed" from="TopBar" to="." method="_on_top_bar_config_pressed"]
-[connection signal="tower_button_pressed" from="TowersMenu" to="." method="_on_towers_menu_tower_button_pressed"]

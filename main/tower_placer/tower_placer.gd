@@ -1,6 +1,8 @@
 class_name TowerPlacer extends Node2D
 
-var level_tile_map: LevelTileMap
+@onready var level_tile_map: LevelTileMap = $'../LevelTileMap'
+@onready var visual: Node2D = $'../Visual'
+
 # parent for all towers
 var towers_container: Node2D
 var _is_placing = false:
@@ -13,6 +15,7 @@ var _is_valid_placement = false
 
 func _ready():
 	_is_placing = false
+	ButtonsEvents.tower_button_pressed.connect(_on_tower_button_pressed)
 	EnemyManager.wave_finished.connect(func(_wave: EnemyWave): _cancel_tower())
 	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _cancel_tower())
 
@@ -41,11 +44,6 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action("exit"):
 		_cancel_tower()
 		
-# should be called each time a level is created
-func update_nodes_from_current_level(current_level: Level) -> void:
-	level_tile_map = current_level.get_node("LevelTileMap")
-	towers_container = current_level.get_node("Visual")
-
 func _place_tower() -> void:
 	if not _current_tower_instance:
 		return
@@ -69,15 +67,11 @@ func _cancel_tower() -> void:
 		await get_tree().process_frame
 		_is_placing = false
 
-func _on_tower_selected(tower_scene: PackedScene) -> void:
+func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
 	if _is_placing:
 		return
 	
 	_current_tower_instance = tower_scene.instantiate()
-	towers_container.add_child(_current_tower_instance)
+	visual.add_child(_current_tower_instance)
 	TowerPlacementManager.clear_tower_selected()
 	_is_placing = true
-
-
-func _on_hud_layer_tower_button_pressed(tower_scene: PackedScene) -> void:
-	_on_tower_selected(tower_scene)

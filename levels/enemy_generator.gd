@@ -18,7 +18,7 @@ var _enemies_left: int
 func _ready() -> void:
 	_level = get_parent()
 	_load_level_data(_level)
-	EnemyManager.next_wave_pressed.connect(init_next_wave)
+	ButtonsEvents.next_wave_pressed.connect(init_next_wave)
 	group_handled.connect(_on_group_handled)
 
 func init_next_wave() -> void:

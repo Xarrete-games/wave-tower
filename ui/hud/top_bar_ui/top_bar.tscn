@@ -124,5 +124,4 @@ size_flags_horizontal = 8
 theme = SubResource("Theme_6uylq")
 text = "x1"
 
-[connection signal="config_pressed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Config" to="." method="_on_config_config_pressed"]
 [connection signal="xarreta_pressed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/SpeedButton" to="." method="_on_xarreta_text_button_xarreta_pressed"]

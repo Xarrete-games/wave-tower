@@ -35,6 +35,7 @@ GameState="*res://main/game_state.gd"
 Progress="*res://main/progress.gd"
 Utils="*res://utils/utils.gd"
 EventsManager="*res://events/events_manager.gd"
+ButtonsEvents="*res://buttons_events.gd"
 
 [display]
 

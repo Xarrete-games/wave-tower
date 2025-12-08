@@ -6,8 +6,6 @@ signal enemy_die(enemy: Enemy)
 @warning_ignore("unused_signal")
 signal new_level_loaded(total_waves: int)
 @warning_ignore("unused_signal")
-signal next_wave_pressed()
-@warning_ignore("unused_signal")
 signal last_wave_finished(wave: EnemyWave)
 @warning_ignore("unused_signal")
 signal wave_finished(wave: EnemyWave)
@@ -22,7 +20,7 @@ const ENEMY_SKELETON = preload("uid://bnpwdbi54cn00")
 const BOSS_BLACK_GOLEM = preload("uid://bbwwsea7icfed")
 const ENEMY_BLACK_SKELETON = preload("uid://d1p6gdwregh7v")
 const BOSS_GOLD_SKELETON = preload("uid://qsxiwo0d27dq")
-const ENEMY_INVOKER = preload("uid://byb1cmo277jos")
+const ENEMY_INVOKER = preload("uid://crk2ly48vsxn4")
 
 
 const ENEMIES_SCENES: Dictionary[Enemy.EnemyType, PackedScene] = {

@@ -27,7 +27,6 @@ func _ready() -> void:
 func _show_next_wave_screen() -> void:
 	var next_wave_screen = NEXT_WAVE_SCREEN.instantiate()
 	event_layer.add_child(next_wave_screen)
-	next_wave_screen.button_pressed.connect(func(): EnemyManager.next_wave_pressed.emit(), CONNECT_ONE_SHOT)
 
 # NEXT LEVEL SCREEN
 func _show_next_level_menu() -> void:

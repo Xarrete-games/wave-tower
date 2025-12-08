@@ -13,12 +13,12 @@ var _current_level: Level
 
 #current level parent
 @onready var level_container: Node2D = $LevelContainer
-@onready var tower_placer: TowerPlacer = $TowerPlacer
 @onready var music_handler: MusicHandler = $MusicHandler
 @onready var main_camera: MainCamera = $MainCamera
 @onready var config_layer: CanvasLayer = $ConfigLayer
 
 func _ready():
+	ButtonsEvents.config_button_pressed.connect(_open_config_menu)
 	GameState.reset_run()
 	GameState.state = GameState.STATE.IN_GAME
 	_load_level(current_level_number)
@@ -47,9 +47,7 @@ func _load_level(level_number: int) -> void:
 	
 	# on new level init
 	_update_camera_post()
-	tower_placer.update_nodes_from_current_level(_current_level)
 	# RESET DATA
-	TowerPlacementManager.reset_towers()
 	music_handler.play_music()
 
 func _update_camera_post() -> void:
@@ -68,9 +66,6 @@ func _open_config_menu() -> void:
 	get_tree().paused = not get_tree().paused
 	var pause_instance = pause.instantiate()
 	config_layer.add_child(pause_instance)
-
-func _on_config_pressed() -> void:
-	_open_config_menu()
 
 func _get_level(level_number: int) -> Level:
 	var path: String = LEVELS_PATH + str(level_number)

@@ -1,16 +1,17 @@
-[gd_scene load_steps=6 format=4 uid="uid://b3rjk0365pn1t"]
+[gd_scene load_steps=7 format=4 uid="uid://b3rjk0365pn1t"]
 
 [ext_resource type="Script" uid="uid://db7frkuuam42r" path="res://levels/level.gd" id="1_gmgay"]
 [ext_resource type="PackedScene" uid="uid://cat7x3rq7b56p" path="res://levels/level_tile_map/level_tile_map.tscn" id="2_x25rp"]
 [ext_resource type="TileSet" uid="uid://o7pvkiagionv" path="res://assets/sprites/tilesheet/base_tile_set.tres" id="3_ep22m"]
 [ext_resource type="Script" uid="uid://bvftccm02j4ej" path="res://levels/enemy_paths.gd" id="3_gmgay"]
 [ext_resource type="Script" uid="uid://dbitkklsrrm3w" path="res://levels/enemy_generator.gd" id="4_da5si"]
+[ext_resource type="Script" uid="uid://dpnilgqn044xp" path="res://main/tower_placer/tower_placer.gd" id="6_ts4ud"]
 
 [node name="LevelBase" type="Node2D" node_paths=PackedStringArray("enemy_paths", "ememies_container")]
 y_sort_enabled = true
 script = ExtResource("1_gmgay")
 enemy_paths = NodePath("EnemyPaths")
-ememies_container = NodePath("EnemiesContainer")
+ememies_container = NodePath("")
 
 [node name="LevelTileMap" parent="." instance=ExtResource("2_x25rp")]
 z_index = -1
@@ -23,19 +24,11 @@ y_sort_enabled = true
 [node name="EnemyPaths" type="Node2D" parent="."]
 script = ExtResource("3_gmgay")
 
-[node name="TowersContainer" type="Node2D" parent="."]
-y_sort_enabled = true
-position = Vector2(809, -717)
-
-[node name="EnemiesContainer" type="Node2D" parent="."]
-y_sort_enabled = true
-position = Vector2(533, -681)
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.8175215, 0.8175211, 0.8175215, 1)
-
 [node name="CameraInitPos" type="Marker2D" parent="."]
 
 [node name="EnemyGenerator" type="Node" parent="."]
 script = ExtResource("4_da5si")
+
+[node name="TowerPlacer" type="Node2D" parent="."]
+script = ExtResource("6_ts4ud")
+metadata/_custom_type_script = "uid://dpnilgqn044xp"
