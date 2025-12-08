@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpf44acq183yv"]
+[gd_scene load_steps=6 format=3 uid="uid://bpf44acq183yv"]
 
 [ext_resource type="Script" uid="uid://h6gp6drqlqg6" path="res://ui/screens/rewards_screen/shop_ui/shop_screen.gd" id="1_g4y81"]
 [ext_resource type="StyleBox" uid="uid://cu0b10p3y57qo" path="res://ui/styles/box_style/shop/section_tittle_box.tres" id="2_6ciuw"]
 [ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="3_53ik5"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="5_g5vmd"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vfa4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nisgj"]
 bg_color = Color(0.09803922, 0.1254902, 0.09411765, 1)
@@ -14,87 +12,81 @@ corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 
-[node name="ShopScreen" type="PanelContainer" node_paths=PackedStringArray("relics_container", "items_container")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_0vfa4")
-script = ExtResource("1_g4y81")
-relics_container = NodePath("ShopMarginContainer/ShopContainer/VBoxContainer/RelicSection/Relics")
-items_container = NodePath("ShopMarginContainer/ShopContainer/VBoxContainer/ItemsSection/Items")
-
-[node name="ShopMarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
+[node name="ShopScreen" type="MarginContainer" node_paths=PackedStringArray("relics_container", "items_container")]
+offset_right = 1920.0
+offset_bottom = 1080.0
 theme_override_constants/margin_left = 200
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 100
+script = ExtResource("1_g4y81")
+relics_container = NodePath("ShopContainer/VBoxContainer/RelicSection/Relics")
+items_container = NodePath("ShopContainer/VBoxContainer/ItemsSection/Items")
 
-[node name="ShopContainer" type="PanelContainer" parent="ShopMarginContainer"]
+[node name="ShopContainer" type="PanelContainer" parent="."]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nisgj")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ShopMarginContainer/ShopContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopContainer"]
 layout_mode = 2
 theme_override_constants/separation = 100
 
-[node name="RelicSection" type="VBoxContainer" parent="ShopMarginContainer/ShopContainer/VBoxContainer"]
+[node name="RelicSection" type="VBoxContainer" parent="ShopContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="ShopMarginContainer/ShopContainer/VBoxContainer/RelicSection"]
+[node name="MarginContainer" type="MarginContainer" parent="ShopContainer/VBoxContainer/RelicSection"]
 layout_mode = 2
 theme_override_constants/margin_top = 50
 
-[node name="RelicsTittle" type="PanelContainer" parent="ShopMarginContainer/ShopContainer/VBoxContainer/RelicSection/MarginContainer"]
+[node name="RelicsTittle" type="PanelContainer" parent="ShopContainer/VBoxContainer/RelicSection/MarginContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("2_6ciuw")
 
-[node name="Label" type="Label" parent="ShopMarginContainer/ShopContainer/VBoxContainer/RelicSection/MarginContainer/RelicsTittle"]
+[node name="Label" type="Label" parent="ShopContainer/VBoxContainer/RelicSection/MarginContainer/RelicsTittle"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "RELICS"
 label_settings = ExtResource("3_53ik5")
 
-[node name="Relics" type="HBoxContainer" parent="ShopMarginContainer/ShopContainer/VBoxContainer/RelicSection"]
+[node name="Relics" type="HBoxContainer" parent="ShopContainer/VBoxContainer/RelicSection"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="ItemsSection" type="VBoxContainer" parent="ShopMarginContainer/ShopContainer/VBoxContainer"]
+[node name="ItemsSection" type="VBoxContainer" parent="ShopContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 50
 
-[node name="RelicsTittle" type="PanelContainer" parent="ShopMarginContainer/ShopContainer/VBoxContainer/ItemsSection"]
+[node name="RelicsTittle" type="PanelContainer" parent="ShopContainer/VBoxContainer/ItemsSection"]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("2_6ciuw")
 
-[node name="Label" type="Label" parent="ShopMarginContainer/ShopContainer/VBoxContainer/ItemsSection/RelicsTittle"]
+[node name="Label" type="Label" parent="ShopContainer/VBoxContainer/ItemsSection/RelicsTittle"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "ITEMS"
 label_settings = ExtResource("3_53ik5")
 
-[node name="Items" type="HBoxContainer" parent="ShopMarginContainer/ShopContainer/VBoxContainer/ItemsSection"]
+[node name="Items" type="HBoxContainer" parent="ShopContainer/VBoxContainer/ItemsSection"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="ButtonsSection" type="HBoxContainer" parent="ShopMarginContainer/ShopContainer/VBoxContainer"]
+[node name="ButtonsSection" type="HBoxContainer" parent="ShopContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="XarreteActionButton" parent="ShopMarginContainer/ShopContainer/VBoxContainer/ButtonsSection" instance=ExtResource("5_g5vmd")]
+[node name="XarreteActionButton" parent="ShopContainer/VBoxContainer/ButtonsSection" instance=ExtResource("5_g5vmd")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "EXIT"
 
-[connection signal="xarreta_pressed" from="ShopMarginContainer/ShopContainer/VBoxContainer/ButtonsSection/XarreteActionButton" to="." method="_on_xarrete_action_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="ShopContainer/VBoxContainer/ButtonsSection/XarreteActionButton" to="." method="_on_xarrete_action_button_xarreta_pressed"]
