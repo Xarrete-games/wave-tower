@@ -7,7 +7,7 @@ const SHOP_SLOT = preload("uid://f428sxnliflm")
 @export var relics_container: Control
 @export var items_container: Control
 
-func set_relics(relics: Array[Relic]) -> void:
+func set_relics(relics: Array[ItemOffer]) -> void:
 	for relic in relics:
 		var slot: ShopSlot = SHOP_SLOT.instantiate()
 		relics_container.add_child(slot)

@@ -20,11 +20,13 @@ var _current_level: Level
 func _ready():
 	ButtonsEvents.config_button_pressed.connect(_open_config_menu)
 	GameState.reset_run()
+	RunContext.reset_run()
 	GameState.state = GameState.STATE.IN_GAME
 	_load_level(current_level_number)
 	
 	await get_tree().create_timer(0.1).timeout
-	RewardsManager.add_random_relics(initial_random_relics)
+	# TODO implement new way
+	#RewardsManager.add_random_relics(initial_random_relics)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
@@ -35,6 +37,7 @@ func reset_current_level() -> void:
 	if _current_level:
 		_current_level.queue_free()
 	GameState.reset_run()
+	RunContext.reset_run()
 	_load_level(1)
 
 func _load_level(level_number: int) -> void:

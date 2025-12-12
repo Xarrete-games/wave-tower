@@ -8,10 +8,6 @@ const AMOUNT_TO_REWARD_2 = 4
 const AMOUNT_TO_REWARD_3 = 6
 const AMOUNT_TO_REWARD_4 = 8
 
-var rewards_red: Array[Relic] = [RedRelic.new(), GreenRelic.new(), BlueRelic.new()]
-var rewards_green: Array[Relic] = [RedRelic.new(), GreenRelic.new(), BlueRelic.new()]
-var rewards_blue: Array[Relic] = [ArticCube.new(), ArticCube.new(), ArticCube.new()]
-
 # current stats
 var towers_buffs: Dictionary[Tower.TowerType, TowerBuff] = {
 	Tower.TowerType.RED: RedTowerBuff.new(),

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://kgici4clfhjq"]
+
+[ext_resource type="Script" uid="uid://c5oabmdbl54ih" path="res://items/relics/implementations/salmon_nigiri.gd" id="1_t7spr"]
+[ext_resource type="Script" uid="uid://deynngi6ga5we" path="res://items/item_data.gd" id="2_dqifl"]
+[ext_resource type="Texture2D" uid="uid://52cx2ohdvnun" path="res://assets/sprites/relics/salmon_nigiris_relic.png" id="3_0w3py"]
+
+[resource]
+script = ExtResource("2_dqifl")
+id = "Salmon Nigiri"
+description = "Reduces the cost of relics by 10%."
+texture = ExtResource("3_0w3py")
+rarity = 2
+max_stack = 5
+runtime_script = ExtResource("1_t7spr")
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

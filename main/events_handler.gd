@@ -22,9 +22,15 @@ func _on_event_selected(event: Event) -> void:
 		push_error("[EVENT HANDLER] Invalid event")
 
 func _open_shop() -> void:
-	var relics = RewardsManager.get_relics(5)
+	pass
+	var relics: Array[ItemOffer] = RunContext.offers_manager.create_relic_offers(5)
 	var shop_screen: ShopScreen = SHOP_SCREEN.instantiate()
 	event_layer.add_child(shop_screen)
 	shop_screen.set_relics(relics)
-	shop_screen.item_purchase.connect(func(relic: Relic): RelicsManager.add_relic(relic))
+	shop_screen.item_purchase.connect(func(relic: Relic):
+		 RelicsManager.add_relic(relic)
+
+	)
+
+	
 	shop_screen.tree_exited.connect(event_finished.emit)

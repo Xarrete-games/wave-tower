@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dqupr6bw5e16g"]
+
+[ext_resource type="Script" uid="uid://radim547g2ow" path="res://items/relics/implementations/green_relic.gd" id="1_5ndgw"]
+[ext_resource type="Script" uid="uid://deynngi6ga5we" path="res://items/item_data.gd" id="2_3aovw"]
+[ext_resource type="Texture2D" uid="uid://bedv81wbj4j7e" path="res://assets/sprites/relics/metronome.png" id="3_kvmc3"]
+
+[resource]
+script = ExtResource("2_3aovw")
+id = "Metronome"
+description = "Increases the attack speed of all towers by 5%.
+(+5% for each one)."
+texture = ExtResource("3_kvmc3")
+rarity = 1
+max_stack = 5
+price = 90
+runtime_script = ExtResource("1_5ndgw")
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

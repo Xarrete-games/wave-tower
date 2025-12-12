@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cj2bl454ksc7e"]
+
+[ext_resource type="Script" uid="uid://c377r6cagp0c0" path="res://items/relics/implementations/red_relic.gd" id="1_s1n3f"]
+[ext_resource type="Script" uid="uid://deynngi6ga5we" path="res://items/item_data.gd" id="2_kspxr"]
+[ext_resource type="Texture2D" uid="uid://ddc3y4ouv4tm6" path="res://assets/sprites/relics/paganinis_bow.png" id="3_8rgck"]
+
+[resource]
+script = ExtResource("2_kspxr")
+id = "Paganini's Bow"
+description = "Increases the attack damage of all towers by 10%.
+(+10% for each one)."
+texture = ExtResource("3_8rgck")
+max_stack = 5
+price = 70
+runtime_script = ExtResource("1_s1n3f")
+metadata/_custom_type_script = "uid://u8jtn52xm88d"

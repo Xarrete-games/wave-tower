@@ -27,7 +27,7 @@ func is_on_main_menu() -> bool:
 
 func reset_run() -> void:
 	RelicsManager.reset_relics()
-	RewardsManager.reset_rewards()
+	#RewardsManager.reset_rewards()
 	TowerPlacementManager.reset_towers()
 	TowerUpgrades.reset_buffs()
 	EnemyDebuffManager.reset()
@@ -42,4 +42,3 @@ func _button_speed_pressed() -> void:
 		speed = 3.0
 	elif speed == 3.0:
 		speed = 1.0
-
