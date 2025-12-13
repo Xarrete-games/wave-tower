@@ -10,6 +10,7 @@ const GREEN_TOWER = preload("uid://oj5ilwusjvuo")
 @onready var blue_tower_button: TowerButton = $TowersButtons/BlueTowerButton
 
 func _ready():	
+	await RunContext.initialized
 	Price.tower_price_change.connect(_on_tower_price_change)
 	red_tower_button.price = Price.get_price(Tower.TowerType.RED)
 	green_tower_button.price = Price.get_price(Tower.TowerType.GREEN)

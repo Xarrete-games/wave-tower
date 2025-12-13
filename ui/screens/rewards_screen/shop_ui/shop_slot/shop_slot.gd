@@ -23,7 +23,7 @@ func set_item(item_offer: ItemOffer) -> void:
 	_item = item_offer
 	
 func _on_gui_input(event: InputEvent) -> void:
-	if Utils.is_left_click_event(event) and Score.gold >= _price:
+	if Utils.is_left_click_event(event) and RunContext.economy.gold >= _price:
 		AudioManager.play_button_click()
 		item_purchased.emit(_item, self)
 

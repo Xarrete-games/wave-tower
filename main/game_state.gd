@@ -31,8 +31,6 @@ func reset_run() -> void:
 	TowerPlacementManager.reset_towers()
 	TowerUpgrades.reset_buffs()
 	EnemyDebuffManager.reset()
-	LiveManager.lives = 5
-	Score.extra_gold_dropped = 0
 	speed = 1.0
 
 func _button_speed_pressed() -> void:

@@ -6,7 +6,7 @@ const QUESTION_ICON = preload("uid://ew6iu1r5ngoe")
 
 func _ready() -> void:
 	_clear()
-	await RunContext.run_reset
+	await RunContext.initialized
 	RunContext.progress.current_wave_changed.connect(_on_wave_init)
 	RunContext.progress.current_level_changed.connect(_on_new_level)
 	ButtonsEvents.reset_game_button_pressed.connect(func () -> void:

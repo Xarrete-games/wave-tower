@@ -48,8 +48,8 @@ func _ready() -> void:
 	speed = base_speed
 	health_bar.set_max_health(max_healt)
 	_set_health(max_healt)
-	gold_value = base_gold_value + Score.extra_gold_dropped
-	Score.extra_gold_dropped_change.connect(
+	gold_value = base_gold_value + RunContext.economy.extra_gold_dropped
+	RunContext.economy.extra_gold_dropped_change.connect(
 		func(value): gold_value = base_gold_value + value)
 
 func _process(delta: float):
@@ -137,7 +137,7 @@ func _play_hit_animation() -> void:
 func _die() -> void:
 	die.emit(self)
 	_show_gold_dropped()
-	Score.gold += gold_value
+	RunContext.economy.gold += gold_value
 	_path_follow.queue_free()
 	queue_free()
 

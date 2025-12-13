@@ -1,5 +1,5 @@
 class_name FirstAid extends Relic
 
 func apply_effect() -> void:
-	LiveManager.lives += 10
+	RunContext.status.health += 10
 

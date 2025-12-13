@@ -33,7 +33,7 @@ func _on_card_pressed(item_offer: ItemOffer) -> void:
 	item_selected.emit(item_offer)
 	
 func _on_reroll_button_xarreta_pressed() -> void:
-	if _reroll_priece <= Score.gold:
+	if _reroll_priece <= RunContext.economy.gold:
 		reroll_pressed.emit()
 
 func _on_exit_button_xarreta_pressed() -> void:

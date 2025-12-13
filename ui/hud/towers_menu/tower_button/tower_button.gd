@@ -58,7 +58,7 @@ func _set_stats(tower_stats: TowerStatsBase) -> void:
 
 func _on_tower_button_pressed() -> void:
 	AudioManager.play_button_click()
-	if Score.gold < price:
+	if RunContext.economy.gold < price:
 		return
 	pressed.emit(tower_scene)
 	

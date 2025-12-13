@@ -50,7 +50,7 @@ func _place_tower() -> void:
 	var tile_pos = level_tile_map.get_mouse_tile_pos()
 	level_tile_map.set_tile_occupied(tile_pos)
 	var tower_price = Price.get_price(_current_tower_instance.type)
-	Score.gold -= tower_price
+	RunContext.economy.gold -= tower_price
 	_is_placing = false
 	
 	TowerPlacementManager.tower_added(_current_tower_instance)

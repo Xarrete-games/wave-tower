@@ -20,14 +20,12 @@ config/icon="uid://du6pcr3fpo4su"
 
 [autoload]
 
-Score="*res://main/score/score.gd"
 Price="*res://main/score/price.gd"
 AudioManager="*res://main/audio_manager/audio_manager.tscn"
 TowerUpgrades="*res://towers/tower_upgrades/tower_upgrades.gd"
 RelicsManager="*res://items/relics/relics_manager.gd"
 EnemyDebuffManager="*res://enemies/enemy_debuff/enemy_debuff_manager.gd"
 TowerPlacementManager="*res://towers/tower_placement_manager.gd"
-LiveManager="*res://main/live_manager.gd"
 EnemyManager="*res://enemies/enemy_generator/enemy_manager.gd"
 GameState="*res://main/game_state.gd"
 Utils="*res://utils/utils.gd"

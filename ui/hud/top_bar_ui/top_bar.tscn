@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cg40tjdw5e2lu" path="res://ui/hud/top_bar_ui/top_bar.gd" id="1_b2kx5"]
 [ext_resource type="PackedScene" uid="uid://bvafh0bf674y7" path="res://ui/hud/top_bar_ui/relics/bar_relics_ui.tscn" id="2_fdcnu"]
-[ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/hud/top_bar_ui/lives_counter/LivesCounter.tscn" id="3_5yg88"]
+[ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/hud/top_bar_ui/lives_counter/health_counter.tscn" id="3_5yg88"]
 [ext_resource type="PackedScene" uid="uid://bjj2sav3lh0or" path="res://ui/hud/top_bar_ui/gold_ui/gold_counter.tscn" id="4_tksin"]
 [ext_resource type="PackedScene" uid="uid://bsbslu7gvbl5b" path="res://ui/hud/top_bar_ui/waves_ui/waves_counter_ui.tscn" id="5_tns2n"]
 [ext_resource type="PackedScene" uid="uid://bo3eo6rb8fwjd" path="res://ui/screens/pause_screen/config_button.tscn" id="6_2407u"]
@@ -89,10 +89,8 @@ size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 40
 
-[node name="LivesCounter" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_5yg88")]
+[node name="HealthCounter" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_5yg88")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="Gold" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_tksin")]
 layout_mode = 2

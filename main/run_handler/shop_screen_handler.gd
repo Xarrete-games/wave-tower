@@ -15,7 +15,7 @@ func open_shop(event_layer: CanvasLayer) -> void:
 	shop_screen.tree_exited.connect(shop_closed.emit)
 
 func _on_item_purchased(item_offer: ItemOffer) -> void:
-	Score.gold -= item_offer.price
+	RunContext.economy.gold -= item_offer.price
 	RunContext.offers_manager.increase_offer_price(item_offer)
 
 	var item = item_offer.create_item()

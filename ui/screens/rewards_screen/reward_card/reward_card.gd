@@ -37,8 +37,8 @@ func set_relic(new_relic_value: ItemOffer) -> void:
 	if item_offer.health_price > 0:
 		live_price_container.visible = true
 		_it_cost_health = true
-		_chek_live(LiveManager.lives)
-		LiveManager.lives_change.connect(_chek_live)
+		_chek_live(RunContext.status.health)
+		RunContext.status.health_change.connect(_chek_live)
 	
 func _on_gui_input(event: InputEvent) -> void:
 	if (_it_cost_health and not _has_enough_live):

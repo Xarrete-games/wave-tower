@@ -63,7 +63,7 @@ func _on_tower_selected(tower: Tower) -> void:
 func _on_tower_sold(tower: Tower) -> void:
 	var type = tower.type
 	var last_price = Price.get_sell_price(type)
-	Score.gold += last_price
+	RunContext.economy.gold += last_price
 	_update_tower_count(tower.type, towers_placed[tower.type] - 1, TowerEvent.SOLD)
 	tower_sold.emit(tower)
 	tower.queue_free()

@@ -11,7 +11,7 @@ const WAVES_WITH_EVENTS = [1,3,6,9]
 
 
 func _ready() -> void:
-	await RunContext.run_reset
+	await RunContext.initialized
 	RunContext.progress.current_wave_finished.connect(_on_wave_finished)
 	RunContext.progress.last_wave_finished.connect(_on_last_wave_finished)
 	RunContext.progress.current_level_changed.connect(_on_new_level_loaded)
@@ -28,13 +28,13 @@ func _show_next_level_menu() -> void:
 
 # REWARDS SCREEN
 func _on_wave_finished() -> void:
-	Score.gold += 50
+	RunContext.economy.gold += 50
 	if not GameState.is_on_main_menu():
 		rewards_screen_handler.show_rewards_screen(event_layer)
 		rewards_screen_handler.rewards_screen_close.connect(_on_rewards_screen_closed, CONNECT_ONE_SHOT)
 
 func _on_last_wave_finished() -> void:
-	Score.gold += 50
+	RunContext.economy.gold += 50
 	if RunContext.is_last_level():
 		await  get_tree().create_timer(5).timeout
 		get_tree().change_scene_to_packed(END_GAME_SCENE)

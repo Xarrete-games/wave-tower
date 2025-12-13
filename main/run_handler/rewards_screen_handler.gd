@@ -27,6 +27,6 @@ func _on_item_selected(item_offer: ItemOffer) -> void:
 		RelicsManager.add_relic(item)
 
 func _on_reroll_pressed() -> void:
-	Score.gold -= REROLL_PRICE
+	RunContext.economy.gold -= REROLL_PRICE
 	var relic_offers = RunContext.offers_manager.create_relic_offers(3)
 	rewards_screen.set_items_offer(relic_offers)
