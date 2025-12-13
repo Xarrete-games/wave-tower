@@ -2,7 +2,7 @@
 extends Node
 
 signal tower_price_change(tower_type: Tower.Type, price: int)
-const price_increase_percent: float = 0.25
+const PRICE_INCREASE_PERCENT: float = 0.25
 
 enum TowerBuild {
 	RED = 50,
@@ -28,20 +28,10 @@ var sell_prices: Dictionary[Tower.Type, int] = {
 	Tower.Type.BLUE: TowerBuild.BLUE,
 }
 
-
-# free towers
-var _free_towers_available = 0
-
 func _ready() -> void:
 	TowerPlacementManager.tower_count_change.connect(_on_tower_count_change)
 
-func add_free_tower(amount: int = 1) -> void:
-	_free_towers_available += amount
-	_emit_all_towers_change()
-
 func get_price(tower_type: Tower.Type) -> int:
-	if _next_tower_is_free():
-		return 0	
 	return build_prices[tower_type]
 
 func get_sell_price(tower_type: Tower.Type) -> int:
@@ -51,7 +41,7 @@ func get_base_price(tower_type: Tower.Type) -> int:
 	return base_prices[tower_type]
 
 func get_next_price(base_price: int, amount: int) -> int:
-	var increase_amount = float(base_price) * price_increase_percent * float(amount)
+	var increase_amount = float(base_price) * PRICE_INCREASE_PERCENT * float(amount)
 	return base_price + roundi(increase_amount)
 
 func _on_tower_count_change(
@@ -83,27 +73,8 @@ func _on_tower_placed(tower_type: Tower.Type, amount: int) -> void:
 	
 	sell_prices[tower_type] = build_prices[tower_type]
 	build_prices[tower_type] = new_price
-	if _next_tower_is_free():
-		_free_towers_available -= 1
-		if _free_towers_available == 0:
-			_emit_all_towers_change()
-	else:
-		_emit_tower_price(tower_type)
+	_emit_tower_price(tower_type)
 	
-func _next_tower_is_free() -> bool:
-	return _free_towers_available >= 1
 
 func _emit_tower_price(tower_type: Tower.Type) -> void:
-	if _next_tower_is_free():
-		tower_price_change.emit(tower_type, 0)
-	else:
-		tower_price_change.emit(tower_type, build_prices[tower_type])
-
-func _emit_all_towers_change() -> void:
-	# when towers are free
-	if _next_tower_is_free():
-		for tower_type in Tower.Type.values():
-			tower_price_change.emit(tower_type, 0)
-	else:
-		for tower_type in Tower.Type.values():
-			tower_price_change.emit(tower_type, build_prices[tower_type])
+	tower_price_change.emit(tower_type, build_prices[tower_type])

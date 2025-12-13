@@ -20,7 +20,6 @@ func get_relic_offer_by_id(relic_ids: Array[String]) -> Array[ItemOffer]:
 		offers.append(offer)
 	return offers		
 	
-
 func create_relic_offers(amount: int) -> Array[ItemOffer]:
 	var filter_relics = all_relic_data.filter(func(data: ItemData):
 		return not RelicsManager.is_maxed(data.id)

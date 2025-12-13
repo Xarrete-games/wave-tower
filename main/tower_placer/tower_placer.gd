@@ -58,15 +58,21 @@ func _place_tower() -> void:
 	var tile_pos = level_tile_map.get_mouse_tile_pos()
 	level_tile_map.set_tile_occupied(tile_pos)
 	
-	RunContext.economy.gold -= tower_price
+	_handle_costs(tower_price)
+	
 	_is_placing = false
 	
-	TowerEvents.towers_placed.emit(_current_tower_instance)
 	TowerPlacementManager.tower_added(_current_tower_instance)
 	
 	_current_tower_instance.enable()
 	_current_tower_instance.tile_pos = tile_pos
 	_current_tower_instance = null
+
+func _handle_costs(tower_price: int) -> void:
+	if RunContext.economy.available_free_towers > 0:
+		RunContext.economy.available_free_towers -= 1
+	else:
+		RunContext.economy.gold -= tower_price
 
 func _cancel_tower() -> void:
 	if _current_tower_instance:
