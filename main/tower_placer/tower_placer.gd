@@ -51,7 +51,7 @@ func _place_tower() -> void:
 		return
 	# check gold
 	var tower_price = Price.get_price(_current_tower_instance.type)
-	if RunContext.economy.gold < tower_price:
+	if not _has_enought_gold(tower_price):
 		_cancel_tower()
 		return
 	# place tower
@@ -67,6 +67,14 @@ func _place_tower() -> void:
 	_current_tower_instance.enable()
 	_current_tower_instance.tile_pos = tile_pos
 	_current_tower_instance = null
+
+func _has_enought_gold(tower_price: int) -> bool:
+	if RunContext.economy.available_free_towers > 0:
+		return true
+	elif RunContext.economy.gold >= tower_price:
+		return true
+	return false
+
 
 func _handle_costs(tower_price: int) -> void:
 	if RunContext.economy.available_free_towers > 0:

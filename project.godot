@@ -31,7 +31,6 @@ GameState="*res://main/game_state.gd"
 Utils="*res://utils/utils.gd"
 DataLoader="*res://items/data_loader.gd"
 RunContext="*res://run_context/run_context.gd"
-TowerEvents="*res://global_signals/tower_events.gd"
 ClickEvents="*res://global_signals/click_events.gd"
 
 [debug]

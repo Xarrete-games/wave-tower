@@ -38,10 +38,7 @@ func _stop_players(node: Node) -> void:
 	for player: AudioStreamPlayer in node.get_children():
 		_stop_player(player)
 		
-func _on_tower_count_change(
-	tower_type: Tower.Type, 
-	amount: int, 
-	_event: TowerPlacementManager.TowerEvent) -> void:
+func _on_tower_count_change(tower_type: Tower.Type, amount: int,) -> void:
 	if amount > MAX_PLAYERS or amount == 0:
 		return
 
