@@ -1,4 +1,4 @@
-extends HBoxContainer
+class_name LevelProgressUI extends HBoxContainer
 
 const LEVEL_PROGRESS_SLOT = preload("uid://dddlo6uv4ct15")
 const SKULL_ICON = preload("uid://35i1uisepolx")
@@ -6,8 +6,12 @@ const QUESTION_ICON = preload("uid://ew6iu1r5ngoe")
 
 func _ready() -> void:
 	_clear()
-	EnemyManager.wave_init.connect(_on_wave_init)
-	EnemyManager.new_level_loaded.connect(_on_new_level)
+	await RunContext.run_reset
+	RunContext.progress.current_wave_changed.connect(_on_wave_init)
+	RunContext.progress.current_level_changed.connect(_on_new_level)
+	ButtonsEvents.reset_game_button_pressed.connect(func () -> void:
+		_clear()
+	)
 
 func _clear() -> void:
 	for child in get_children():

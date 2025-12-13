@@ -23,7 +23,7 @@ func _ready() -> void:
 
 func init_next_wave() -> void:
 	# get next wave
-	EnemyManager.wave_init.emit(current_wave_number)
+	RunContext.progress.current_wave =  current_wave_number
 	current_wave = level_waves[current_wave_number - 1]
 	# reset groups counter
 	total_groups = current_wave.groups.size()
@@ -54,8 +54,6 @@ func _load_level_data(level: Level) -> void:
 	level_waves = level.get_waves()
 	total_waves = level_waves.size()
 	current_wave_number = 1
-	# inital wave data
-	EnemyManager.new_level_loaded.emit(total_waves)
 	
 func _handle_ememy_group(
 	ememy_group: EnemyGroup) -> void:
@@ -104,7 +102,7 @@ func _on_enemy_left(node: Node) -> void:
 	if node.is_in_group("enemy"):
 		_enemies_left -= 1
 	if _enemies_left == 0:
-		call_deferred("_check_enemies_left")
+		_check_enemies_left()
 
 func _check_enemies_left() -> void:	
 		_report_finished()
@@ -113,14 +111,15 @@ func _check_enemies_left() -> void:
 		
 # init the next wave or end the level if it's the last wave
 func _report_finished() -> void:
-	if LiveManager.lives <= 0:
+	if RunContext.is_on_restarting:
 		return
 		
 	if current_wave_number == total_waves:
-		EnemyManager.last_wave_finished.emit(current_wave)
+		RunContext.progress.last_wave_finished.emit()
 	else:
 		current_wave_number += 1
-		EnemyManager.wave_finished.emit(current_wave)
+		RunContext.progress.current_wave_finished.emit()
+		
 		
 func _on_enemy_target_reached(enemy: Enemy) -> void:
 	LiveManager.lives -= enemy.damage

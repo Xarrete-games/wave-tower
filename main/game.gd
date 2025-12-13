@@ -1,8 +1,7 @@
 class_name Game extends Node2D
 
-signal new_level_loaded(level_num: int)
-const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 const LEVELS_PATH = "res://levels/levels/"
+const GAME = preload("uid://6vgrx5dct8h8")
 
 @export var levels_paths: Array[String]
 @export var pause : PackedScene
@@ -19,31 +18,26 @@ var _current_level: Level
 
 func _ready():
 	ButtonsEvents.config_button_pressed.connect(_open_config_menu)
+	ButtonsEvents.next_level_pressed.connect(go_next_level)
+	ButtonsEvents.reset_game_button_pressed.connect(reset_game)
 	GameState.reset_run()
 	RunContext.reset_run()
+	RunContext.progress.total_levels = levels_paths.size()
 	GameState.state = GameState.STATE.IN_GAME
 	_load_level(current_level_number)
-	
-	await get_tree().create_timer(0.1).timeout
-	# TODO implement new way
-	#RewardsManager.add_random_relics(initial_random_relics)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
 		if not TowerPlacementManager.is_placing:
 			_open_config_menu()
 
-func reset_current_level() -> void:
-	if _current_level:
-		_current_level.queue_free()
-	GameState.reset_run()
-	RunContext.reset_run()
-	_load_level(1)
+func reset_game() -> void:
+	RunContext.is_on_restarting = true
+	get_tree().change_scene_to_packed(GAME)
 
 func _load_level(level_number: int) -> void:
-	new_level_loaded.emit(level_number)
+	RunContext.progress.current_level = level_number
 	music_handler.stop_music()
-	Settings.new_level_loaded.emit(level_number)
 	_current_level = _get_level(level_number)
 	current_level_number = level_number
 	level_container.add_child(_current_level)

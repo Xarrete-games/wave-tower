@@ -29,13 +29,15 @@ EnemyDebuffManager="*res://enemies/enemy_debuff/enemy_debuff_manager.gd"
 TowerPlacementManager="*res://towers/tower_placement_manager.gd"
 LiveManager="*res://main/live_manager.gd"
 EnemyManager="*res://enemies/enemy_generator/enemy_manager.gd"
-Settings="*res://main/settings.gd"
 GameState="*res://main/game_state.gd"
 Utils="*res://utils/utils.gd"
-EventsManager="*res://events/events_manager.gd"
 ButtonsEvents="*res://buttons_events.gd"
-RelicCatalog="*res://items/relics/relic_catalog.gd"
 RunContext="*res://run_context/run_context.gd"
+DataLoader="*res://items/data_loader.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
 
 [display]
 

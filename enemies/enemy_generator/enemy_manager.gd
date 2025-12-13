@@ -1,16 +1,7 @@
 #EnemyGenerator 
 extends Node
 
-@warning_ignore("unused_signal")
 signal enemy_die(enemy: Enemy)
-@warning_ignore("unused_signal")
-signal new_level_loaded(total_waves: int)
-@warning_ignore("unused_signal")
-signal last_wave_finished(wave: EnemyWave)
-@warning_ignore("unused_signal")
-signal wave_finished(wave: EnemyWave)
-@warning_ignore("unused_signal")
-signal wave_init(num: int)
 
 const ENEMY_NORMAL = preload("uid://dmqbn2q5splor")
 const ENEMY_BUBA = preload("uid://xk0wj86s8ddb")

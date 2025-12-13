@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="EventData" load_steps=3 format=3 uid="uid://dl7b5mte8rcp2"]
 
 [ext_resource type="Texture2D" uid="uid://0jpdo5boqutp" path="res://assets/sprites/icons/shop.png" id="1_jftsn"]
-[ext_resource type="Script" uid="uid://dweoba1f2xgu7" path="res://events/events/event.gd" id="1_mllo2"]
+[ext_resource type="Script" uid="uid://bj6frpye8hpbn" path="res://events/event_data.gd" id="2_bsg6w"]
 
 [resource]
-script = ExtResource("1_mllo2")
+script = ExtResource("2_bsg6w")
 id = "Shop"
 description = "Open a shop"
 icon = ExtResource("1_jftsn")

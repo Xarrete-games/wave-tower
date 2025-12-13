@@ -137,7 +137,7 @@ func _play_hit_animation() -> void:
 func _die() -> void:
 	die.emit(self)
 	_show_gold_dropped()
-	Score.add_gold(gold_value)
+	Score.gold += gold_value
 	_path_follow.queue_free()
 	queue_free()
 

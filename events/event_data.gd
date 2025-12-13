@@ -1,4 +1,4 @@
-class_name Event extends Resource
+class_name EventData extends Resource
 
 enum Type { SHOP }
 

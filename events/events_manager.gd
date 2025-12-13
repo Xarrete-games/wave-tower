@@ -1,2 +1,0 @@
-# EventsManager
-extends Node

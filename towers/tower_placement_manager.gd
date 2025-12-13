@@ -20,6 +20,10 @@ var is_placing: bool = false:
 		is_placing = value
 		tower_placing.emit(value)
 
+
+func _ready() -> void:
+	ButtonsEvents.reset_game_button_pressed.connect(reset_towers)
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed:

@@ -1,14 +1,14 @@
 class_name EventSlot extends Control
 
-signal event_pressed(event: Event)
+signal event_pressed(event: EventData)
 
 @export var event_texture: TextureRect
 @export var description_label: RichTextLabel
 @export var title_lable: Label
 
-var _event: Event
+var _event: EventData
 
-func set_event(event: Event) -> void:
+func set_event(event: EventData) -> void:
 	event_texture.texture = event.icon
 	description_label.text = event.description
 	title_lable.text = event.id

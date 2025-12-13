@@ -1,6 +1,6 @@
 class_name ShopScreen extends Control
 
-signal item_purchase(relic: Relic)
+signal item_purchase(item: ItemOffer)
 
 const SHOP_SLOT = preload("uid://f428sxnliflm")
 
@@ -14,7 +14,7 @@ func set_relics(relics: Array[ItemOffer]) -> void:
 		slot.set_relic(relic)
 		slot.item_purchased.connect(_on_item_purchase)
 
-func _on_item_purchase(relic: Relic, slot_purchased: ShopSlot) -> void:
+func _on_item_purchase(relic: ItemOffer, slot_purchased: ShopSlot) -> void:
 	item_purchase.emit(relic)
 	AudioManager.play_purchase()
 	for slot: ShopSlot in relics_container.get_children():

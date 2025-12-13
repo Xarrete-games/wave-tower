@@ -16,8 +16,8 @@ var _is_valid_placement = false
 func _ready():
 	_is_placing = false
 	ButtonsEvents.tower_button_pressed.connect(_on_tower_button_pressed)
-	EnemyManager.wave_finished.connect(func(_wave: EnemyWave): _cancel_tower())
-	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _cancel_tower())
+	RunContext.progress.current_wave_changed.connect(func(_wave_num: int): _cancel_tower())
+	RunContext.progress.last_wave_finished.connect(func(): _cancel_tower())
 
 func _process(_delta: float) -> void:
 	if not _is_placing or not is_instance_valid(_current_tower_instance):
@@ -50,7 +50,7 @@ func _place_tower() -> void:
 	var tile_pos = level_tile_map.get_mouse_tile_pos()
 	level_tile_map.set_tile_occupied(tile_pos)
 	var tower_price = Price.get_price(_current_tower_instance.type)
-	Score.substract_gold(tower_price)
+	Score.gold -= tower_price
 	_is_placing = false
 	
 	TowerPlacementManager.tower_added(_current_tower_instance)

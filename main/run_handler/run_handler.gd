@@ -1,4 +1,4 @@
-class_name ProgressHandler extends Node
+class_name RunHandler extends Node
 
 const NEXT_WAVE_SCREEN = preload("uid://b7ttkk4pasgin")
 const NEXT_LEVEL_SCREEN = preload("uid://crastw7xnqgvl")
@@ -6,23 +6,15 @@ const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 const WAVES_WITH_EVENTS = [1,3,6,9]
 
 @export var event_layer: CanvasLayer
-@export var events_handler: EventsHandler
+@export var events_screen_hander: EventsScreenHandler
 @export var rewards_screen_handler: RewardsScreenHandler 
 
-var _current_level: int = 0
-var _total_levels: int = 0
-var _current_wave: int = 0
-var game: Game
 
 func _ready() -> void:
-	EnemyManager.wave_init.connect(func(wave_number: int): 
-		_current_wave = wave_number)
-	EnemyManager.wave_finished.connect(_on_wave_finished)
-	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _show_next_level_menu())
-	# TODO do it better
-	await get_tree().create_timer(0.1).timeout
-	game = get_parent()
-	_total_levels = game.levels_paths.size()
+	await RunContext.run_reset
+	RunContext.progress.current_wave_finished.connect(_on_wave_finished)
+	RunContext.progress.last_wave_finished.connect(_on_last_wave_finished)
+	RunContext.progress.current_level_changed.connect(_on_new_level_loaded)
 
 # NEXT WAVE SCREEN
 func _show_next_wave_screen() -> void:
@@ -33,25 +25,26 @@ func _show_next_wave_screen() -> void:
 func _show_next_level_menu() -> void:
 	var next_level_screen = NEXT_LEVEL_SCREEN.instantiate()
 	event_layer.add_child(next_level_screen)
-	next_level_screen.button_pressed.connect(func(): game.go_next_level(), CONNECT_ONE_SHOT)
 
 # REWARDS SCREEN
-func _on_wave_finished(_wave: EnemyWave) -> void:
+func _on_wave_finished() -> void:
+	Score.gold += 50
 	if not GameState.is_on_main_menu():
 		rewards_screen_handler.show_rewards_screen(event_layer)
 		rewards_screen_handler.rewards_screen_close.connect(_on_rewards_screen_closed, CONNECT_ONE_SHOT)
 
-func _on_last_wave_finished(_wave: EnemyWave) -> void:
-	if _current_level == _total_levels:
+func _on_last_wave_finished() -> void:
+	Score.gold += 50
+	if RunContext.is_last_level():
 		await  get_tree().create_timer(5).timeout
 		get_tree().change_scene_to_packed(END_GAME_SCENE)
 	else:
 		_show_next_level_menu()
 
 func _on_rewards_screen_closed() -> void:
-	if _current_wave in WAVES_WITH_EVENTS:
-		await events_handler.show_events()
+	if RunContext.progress.current_wave in WAVES_WITH_EVENTS:
+		await events_screen_hander.show_events(event_layer)
 	_show_next_wave_screen()
 
-func _on_game_new_level_loaded(_level_num: int) -> void:
+func _on_new_level_loaded(_level_num: int) -> void:
 	_show_next_wave_screen()

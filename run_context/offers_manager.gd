@@ -5,7 +5,7 @@ var all_rewards: Array[Relic] = []
 
 
 func create_relic_offers(amount: int) -> Array[ItemOffer]:
-	var candidates: Array[ItemData] = RelicCatalog.get_all().duplicate()
+	var candidates: Array[ItemData] = DataLoader.get_all_relics()
 
 	# remove max stack relics
 	candidates = candidates.filter(func(data: ItemData):
