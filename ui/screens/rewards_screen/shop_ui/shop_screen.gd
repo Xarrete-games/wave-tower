@@ -11,7 +11,7 @@ func set_relics(relics: Array[ItemOffer]) -> void:
 	for relic in relics:
 		var slot: ShopSlot = SHOP_SLOT.instantiate()
 		relics_container.add_child(slot)
-		slot.set_relic(relic)
+		slot.set_item(relic)
 		slot.item_purchased.connect(_on_item_purchase)
 
 func _on_item_purchase(relic: ItemOffer, slot_purchased: ShopSlot) -> void:

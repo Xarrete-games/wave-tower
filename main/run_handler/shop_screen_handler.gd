@@ -10,12 +10,14 @@ func open_shop(event_layer: CanvasLayer) -> void:
 	var shop_screen: ShopScreen = SHOP_SCREEN.instantiate()
 	event_layer.add_child(shop_screen)
 	shop_screen.set_relics(relics)
-	shop_screen.item_purchase.connect(_on_Item_purchased)
+	shop_screen.item_purchase.connect(_on_item_purchased)
 
 	shop_screen.tree_exited.connect(shop_closed.emit)
 
-func _on_Item_purchased(item_offer: ItemOffer) -> void:
+func _on_item_purchased(item_offer: ItemOffer) -> void:
 	Score.gold -= item_offer.price
+	RunContext.offers_manager.increase_offer_price(item_offer)
+
 	var item = item_offer.create_item()
 	if item is Relic:
 		RelicsManager.add_relic(item)
