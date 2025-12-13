@@ -1,7 +1,7 @@
 #price.gd
 extends Node
 
-signal tower_price_change(tower_type: Tower.TowerType, price: int)
+signal tower_price_change(tower_type: Tower.Type, price: int)
 const price_increase_percent: float = 0.25
 
 enum TowerBuild {
@@ -10,22 +10,22 @@ enum TowerBuild {
 	BLUE = 70,
 }
 
-var base_prices: Dictionary[Tower.TowerType, int] = {
-	Tower.TowerType.RED: TowerBuild.RED,
-	Tower.TowerType.GREEN: TowerBuild.GREEN,
-	Tower.TowerType.BLUE: TowerBuild.BLUE,
+var base_prices: Dictionary[Tower.Type, int] = {
+	Tower.Type.RED: TowerBuild.RED,
+	Tower.Type.GREEN: TowerBuild.GREEN,
+	Tower.Type.BLUE: TowerBuild.BLUE,
 }
 
-var build_prices: Dictionary[Tower.TowerType, int] = {
-	Tower.TowerType.RED: TowerBuild.RED,
-	Tower.TowerType.GREEN: TowerBuild.GREEN,
-	Tower.TowerType.BLUE: TowerBuild.BLUE,
+var build_prices: Dictionary[Tower.Type, int] = {
+	Tower.Type.RED: TowerBuild.RED,
+	Tower.Type.GREEN: TowerBuild.GREEN,
+	Tower.Type.BLUE: TowerBuild.BLUE,
 }
 
-var sell_prices: Dictionary[Tower.TowerType, int] = {
-	Tower.TowerType.RED: TowerBuild.RED,
-	Tower.TowerType.GREEN: TowerBuild.GREEN,
-	Tower.TowerType.BLUE: TowerBuild.BLUE,
+var sell_prices: Dictionary[Tower.Type, int] = {
+	Tower.Type.RED: TowerBuild.RED,
+	Tower.Type.GREEN: TowerBuild.GREEN,
+	Tower.Type.BLUE: TowerBuild.BLUE,
 }
 
 
@@ -39,15 +39,15 @@ func add_free_tower(amount: int = 1) -> void:
 	_free_towers_available += amount
 	_emit_all_towers_change()
 
-func get_price(tower_type: Tower.TowerType) -> int:
+func get_price(tower_type: Tower.Type) -> int:
 	if _next_tower_is_free():
 		return 0	
 	return build_prices[tower_type]
 
-func get_sell_price(tower_type: Tower.TowerType) -> int:
+func get_sell_price(tower_type: Tower.Type) -> int:
 	return int(round(sell_prices[tower_type] / 2.0))
 
-func get_base_price(tower_type: Tower.TowerType) -> int:
+func get_base_price(tower_type: Tower.Type) -> int:
 	return base_prices[tower_type]
 
 func get_next_price(base_price: int, amount: int) -> int:
@@ -55,7 +55,7 @@ func get_next_price(base_price: int, amount: int) -> int:
 	return base_price + roundi(increase_amount)
 
 func _on_tower_count_change(
-	tower_type: Tower.TowerType, 
+	tower_type: Tower.Type, 
 	amount: int, 
 	event: TowerPlacementManager.TowerEvent) -> void:
 		if event == TowerPlacementManager.TowerEvent.SOLD:
@@ -63,7 +63,7 @@ func _on_tower_count_change(
 		else:
 			_on_tower_placed(tower_type, amount)
 
-func _on_tower_sold(tower_type: Tower.TowerType, amount: int) -> void:
+func _on_tower_sold(tower_type: Tower.Type, amount: int) -> void:
 	var base_price = get_base_price(tower_type)
 	var new_price = get_next_price(base_price, amount)
 	
@@ -76,7 +76,7 @@ func _on_tower_sold(tower_type: Tower.TowerType, amount: int) -> void:
 	
 	_emit_tower_price(tower_type)
 
-func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
+func _on_tower_placed(tower_type: Tower.Type, amount: int) -> void:
 	# update build price and sell price
 	var base_price = get_base_price(tower_type)
 	var new_price = get_next_price(base_price, amount)
@@ -93,7 +93,7 @@ func _on_tower_placed(tower_type: Tower.TowerType, amount: int) -> void:
 func _next_tower_is_free() -> bool:
 	return _free_towers_available >= 1
 
-func _emit_tower_price(tower_type: Tower.TowerType) -> void:
+func _emit_tower_price(tower_type: Tower.Type) -> void:
 	if _next_tower_is_free():
 		tower_price_change.emit(tower_type, 0)
 	else:
@@ -102,8 +102,8 @@ func _emit_tower_price(tower_type: Tower.TowerType) -> void:
 func _emit_all_towers_change() -> void:
 	# when towers are free
 	if _next_tower_is_free():
-		for tower_type in Tower.TowerType.values():
+		for tower_type in Tower.Type.values():
 			tower_price_change.emit(tower_type, 0)
 	else:
-		for tower_type in Tower.TowerType.values():
+		for tower_type in Tower.Type.values():
 			tower_price_change.emit(tower_type, build_prices[tower_type])

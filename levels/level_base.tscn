@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://b3rjk0365pn1t"]
+[gd_scene load_steps=8 format=4 uid="uid://b3rjk0365pn1t"]
 
 [ext_resource type="Script" uid="uid://db7frkuuam42r" path="res://levels/level.gd" id="1_gmgay"]
 [ext_resource type="PackedScene" uid="uid://cat7x3rq7b56p" path="res://levels/level_tile_map/level_tile_map.tscn" id="2_x25rp"]
@@ -6,12 +6,12 @@
 [ext_resource type="Script" uid="uid://bvftccm02j4ej" path="res://levels/enemy_paths.gd" id="3_gmgay"]
 [ext_resource type="Script" uid="uid://dbitkklsrrm3w" path="res://levels/enemy_generator.gd" id="4_da5si"]
 [ext_resource type="Script" uid="uid://dpnilgqn044xp" path="res://main/tower_placer/tower_placer.gd" id="6_ts4ud"]
+[ext_resource type="Script" uid="uid://c6gmmo43gd544" path="res://levels/tower_selector.gd" id="7_jd1fy"]
 
-[node name="LevelBase" type="Node2D" node_paths=PackedStringArray("enemy_paths", "ememies_container")]
+[node name="LevelBase" type="Node2D" node_paths=PackedStringArray("enemy_paths")]
 y_sort_enabled = true
 script = ExtResource("1_gmgay")
 enemy_paths = NodePath("EnemyPaths")
-ememies_container = NodePath("")
 
 [node name="LevelTileMap" parent="." instance=ExtResource("2_x25rp")]
 z_index = -1
@@ -32,3 +32,6 @@ script = ExtResource("4_da5si")
 [node name="TowerPlacer" type="Node2D" parent="."]
 script = ExtResource("6_ts4ud")
 metadata/_custom_type_script = "uid://dpnilgqn044xp"
+
+[node name="TowerSelector" type="Node" parent="."]
+script = ExtResource("7_jd1fy")

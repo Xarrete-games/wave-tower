@@ -18,7 +18,7 @@ func _on_resume_button_xarreta_pressed() -> void:
 
 func _on_restart_button_xarreta_pressed() -> void:
 	resume()
-	ButtonsEvents.reset_game_button_pressed.emit()
+	ClickEvents.reset_game_button_pressed.emit()
 
 func _on_exit_button_xarreta_pressed() -> void:
 	resume()

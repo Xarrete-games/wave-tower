@@ -20,7 +20,7 @@ var state: STATE:
 		state_change.emit(state)
 
 func _ready() -> void:
-	ButtonsEvents.speed_button_pressed.connect(_button_speed_pressed)
+	ClickEvents.speed_button_pressed.connect(_button_speed_pressed)
 
 func is_on_main_menu() -> bool:
 	return state == STATE.ON_MAIN_MENU

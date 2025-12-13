@@ -29,9 +29,10 @@ TowerPlacementManager="*res://towers/tower_placement_manager.gd"
 EnemyManager="*res://enemies/enemy_generator/enemy_manager.gd"
 GameState="*res://main/game_state.gd"
 Utils="*res://utils/utils.gd"
-ButtonsEvents="*res://buttons_events.gd"
-RunContext="*res://run_context/run_context.gd"
 DataLoader="*res://items/data_loader.gd"
+RunContext="*res://run_context/run_context.gd"
+TowerEvents="*res://global_signals/tower_events.gd"
+ClickEvents="*res://global_signals/click_events.gd"
 
 [debug]
 

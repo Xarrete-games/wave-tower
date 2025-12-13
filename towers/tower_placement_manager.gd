@@ -1,75 +1,41 @@
 #TowerCounterManager
 extends Node
 
-signal tower_count_change(tower_type: Tower.TowerType, amount: int, event: TowerEvent)
-signal tower_sold(tower: Tower)
-signal tower_selected(tower: Tower)
+signal tower_count_change(tower_type: Tower.Type, amount: int, event: TowerEvent)
 signal tower_placing(value: bool)
 
 enum TowerEvent { PLACEMENT, SOLD, RESET }
 
-var towers_placed: Dictionary[Tower.TowerType, int] = {
-	Tower.TowerType.RED: 0,
-	Tower.TowerType.BLUE: 0,
-	Tower.TowerType.GREEN: 0
+var towers_placed: Dictionary[Tower.Type, int] = {
+	Tower.Type.RED: 0,
+	Tower.Type.BLUE: 0,
+	Tower.Type.GREEN: 0
 }
 
-var current_tower_selected: Tower
 var is_placing: bool = false:
 	set(value):
 		is_placing = value
 		tower_placing.emit(value)
 
-
 func _ready() -> void:
-	ButtonsEvents.reset_game_button_pressed.connect(reset_towers)
+	ClickEvents.tower_sold_pressed.connect(_on_tower_sold)
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
-		if event.pressed:
-			clear_tower_selected()
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and not event.is_pressed():
-			clear_tower_selected()
-			get_viewport().set_input_as_handled()
-		
 func reset_towers() -> void:
-	_update_tower_count(Tower.TowerType.RED, 0,TowerEvent.RESET)
-	_update_tower_count(Tower.TowerType.GREEN, 0,TowerEvent.RESET)
-	_update_tower_count(Tower.TowerType.BLUE, 0,TowerEvent.RESET)
-	tower_selected.emit(null)
-
-func clear_tower_selected() -> void:
-	current_tower_selected = null
-	tower_selected.emit(current_tower_selected)
+	_update_tower_count(Tower.Type.RED, 0,TowerEvent.RESET)
+	_update_tower_count(Tower.Type.GREEN, 0,TowerEvent.RESET)
+	_update_tower_count(Tower.Type.BLUE, 0,TowerEvent.RESET)
 
 # called from tower_placer to inform
 func tower_added(tower: Tower) -> void:
 	_update_tower_count(tower.type, towers_placed[tower.type] + 1, TowerEvent.PLACEMENT)
-	tower.selected.connect(_on_tower_selected)
-	tower.stats_change.connect(_on_tower_stats_change)
-	tower.sold.connect(_on_tower_sold)
 	
-func _update_tower_count(tower_type: Tower.TowerType, value: int, event: TowerEvent) -> void:
+func _update_tower_count(tower_type: Tower.Type, value: int, event: TowerEvent) -> void:
 	towers_placed[tower_type] = value
 	tower_count_change.emit(tower_type, value, event)
 	
-func _on_tower_selected(tower: Tower) -> void:
-	current_tower_selected = tower
-	tower_selected.emit(tower)
-
 func _on_tower_sold(tower: Tower) -> void:
 	var type = tower.type
 	var last_price = Price.get_sell_price(type)
 	RunContext.economy.gold += last_price
 	_update_tower_count(tower.type, towers_placed[tower.type] - 1, TowerEvent.SOLD)
-	tower_sold.emit(tower)
 	tower.queue_free()
-	tower.selected.emit(null)
-
-func _on_tower_stats_change(tower: Tower) -> void:
-	if tower == current_tower_selected:
-		tower_selected.emit(tower)
-	

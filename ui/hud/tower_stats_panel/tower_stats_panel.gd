@@ -15,11 +15,11 @@ class_name TowerStatsPanel extends Control
 # sell price
 @export var price_label: Label
 
-var curre_tower: Tower
+var current_tower: Tower
 
 func _ready() -> void:
 	visible = false
-	TowerPlacementManager.tower_selected.connect(_on_tower_selected)
+	ClickEvents.tower_selected.connect(_on_tower_selected)
 
 func _on_tower_selected(tower: Tower) -> void:
 	if tower == null:
@@ -27,7 +27,7 @@ func _on_tower_selected(tower: Tower) -> void:
 		return
 	
 	visible = true
-	curre_tower = tower
+	current_tower = tower
 	var stats = tower.stats
 	var exp_data = tower.exp_data	
 	update_stats(stats)
@@ -45,8 +45,8 @@ func update_exp_data(exp_data: TowerExpData) -> void:
 	current_exp_label.text = str(exp_data.current_exp)
 	required_exp_label.text = str(exp_data.exp_for_next_level)
 
-func _update_sell_price(tower_type: Tower.TowerType) -> void:
+func _update_sell_price(tower_type: Tower.Type) -> void:
 	price_label.text = str(Price.get_sell_price(tower_type))
 
 func _on_sell_button_xarreta_pressed() -> void:
-	curre_tower.sell()
+	ClickEvents.tower_sold_pressed.emit(current_tower)

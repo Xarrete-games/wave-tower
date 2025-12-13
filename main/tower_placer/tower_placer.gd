@@ -15,7 +15,7 @@ var _is_valid_placement = false
 
 func _ready():
 	_is_placing = false
-	ButtonsEvents.tower_button_pressed.connect(_on_tower_button_pressed)
+	ClickEvents.tower_button_pressed.connect(_on_tower_button_pressed)
 	RunContext.progress.current_wave_changed.connect(func(_wave_num: int): _cancel_tower())
 	RunContext.progress.last_wave_finished.connect(func(): _cancel_tower())
 
@@ -47,12 +47,19 @@ func _input(event: InputEvent) -> void:
 func _place_tower() -> void:
 	if not _current_tower_instance:
 		return
+	# check gold
+	var tower_price = Price.get_price(_current_tower_instance.type)
+	if RunContext.economy.gold < tower_price:
+		_cancel_tower()
+		return
+	# place tower
 	var tile_pos = level_tile_map.get_mouse_tile_pos()
 	level_tile_map.set_tile_occupied(tile_pos)
-	var tower_price = Price.get_price(_current_tower_instance.type)
+	
 	RunContext.economy.gold -= tower_price
 	_is_placing = false
 	
+	TowerEvents.towers_placed.emit(_current_tower_instance)
 	TowerPlacementManager.tower_added(_current_tower_instance)
 	
 	_current_tower_instance.enable()
@@ -73,5 +80,4 @@ func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
 	
 	_current_tower_instance = tower_scene.instantiate()
 	visual.add_child(_current_tower_instance)
-	TowerPlacementManager.clear_tower_selected()
 	_is_placing = true

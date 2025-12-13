@@ -9,7 +9,7 @@ func _ready() -> void:
 	await RunContext.initialized
 	RunContext.progress.current_wave_changed.connect(_on_wave_init)
 	RunContext.progress.current_level_changed.connect(_on_new_level)
-	ButtonsEvents.reset_game_button_pressed.connect(func () -> void:
+	ClickEvents.reset_game_button_pressed.connect(func () -> void:
 		_clear()
 	)
 

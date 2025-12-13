@@ -17,9 +17,9 @@ var _current_level: Level
 @onready var config_layer: CanvasLayer = $ConfigLayer
 
 func _ready():
-	ButtonsEvents.config_button_pressed.connect(_open_config_menu)
-	ButtonsEvents.next_level_pressed.connect(go_next_level)
-	ButtonsEvents.reset_game_button_pressed.connect(reset_game)
+	ClickEvents.config_button_pressed.connect(_open_config_menu)
+	ClickEvents.next_level_pressed.connect(go_next_level)
+	ClickEvents.reset_game_button_pressed.connect(reset_game)
 	GameState.reset_run()
 	RunContext.reset_run()
 	RunContext.progress.total_levels = levels_paths.size()

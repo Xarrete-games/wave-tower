@@ -14,7 +14,9 @@ var price: int = 0:
 		_check_label_color(RunContext.economy.gold)
 
 func _ready() -> void:
-	await RunContext.initialized
+	if not RunContext.is_initialized:
+		await RunContext.initialized
+	
 	RunContext.economy.gold_change.connect(_check_label_color)
 	
 func _check_label_color(gold: int) -> void:

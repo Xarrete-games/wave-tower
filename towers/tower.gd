@@ -4,16 +4,14 @@ class_name Tower extends Node2D
 
 signal target_change(enemy: Enemy)
 signal stats_change(tower: Tower)
-signal selected(tower: Tower)
 signal attack_fired()
-signal sold(tower: Tower)
 signal attack_speed_change(value: float)
 
-enum TowerType { RED, GREEN, BLUE }
+enum Type { RED, GREEN, BLUE }
 
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
-@export var type: TowerType = TowerType.RED
+@export var type: Type = Type.RED
 @export var stats_base: TowerStatsBase
 
 var _targets_in_range: Array[Enemy] = [] 
@@ -98,14 +96,8 @@ func enable() -> void:
 
 	await get_tree().create_timer(0.1).timeout
 	
-	TowerPlacementManager.tower_selected.connect(_on_tower_selected)
+	ClickEvents.tower_selected.connect(_on_tower_selected)
 	mouse_detector.gui_input.connect(_on_gui_input)
-# --------------------
-# --- SELL ---
-# --------------------
-func sell() -> void:
-	sold.emit(self)
-
 # --------------------
 # --- ATTACK ---
 # --------------------
@@ -219,7 +211,7 @@ func _apply_stats_changes() -> void:
 	stats = TowerStats.new(self)
 	#tower_stats_panel.update_stats(stats, exp_data)
 
-func _on_tower_buffs_change(tower_type: Tower.TowerType, tower_buffs: TowerBuff) -> void:
+func _on_tower_buffs_change(tower_type: Tower.Type, tower_buffs: TowerBuff) -> void:
 	if tower_type == type:
 		_set_buffs(tower_buffs)
 		
@@ -240,9 +232,11 @@ func _on_level_up(_new_level: int) -> void:
 func _on_tower_selected(tower: Tower) -> void:
 	if tower != self:
 		range_preview.visible = false
+	else:
+		range_preview.visible = true
 
 func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and not event.is_pressed():
-			selected.emit(self)
-			range_preview.visible = true
+	if not _enabled:
+		return
+	if Utils.is_left_click_event(event):
+		ClickEvents.tower_selected.emit(self)

@@ -18,7 +18,7 @@ var _enemies_left: int
 func _ready() -> void:
 	_level = get_parent()
 	_load_level_data(_level)
-	ButtonsEvents.next_wave_pressed.connect(init_next_wave)
+	ClickEvents.next_wave_pressed.connect(init_next_wave)
 	group_handled.connect(_on_group_handled)
 
 func init_next_wave() -> void:
@@ -119,7 +119,6 @@ func _report_finished() -> void:
 	else:
 		current_wave_number += 1
 		RunContext.progress.current_wave_finished.emit()
-		
 		
 func _on_enemy_target_reached(enemy: Enemy) -> void:
 	RunContext.status.health -= enemy.damage
