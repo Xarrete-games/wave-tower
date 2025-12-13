@@ -3,12 +3,14 @@ class_name TowerPlacer extends Node2D
 @onready var level_tile_map: LevelTileMap = $'../LevelTileMap'
 @onready var visual: Node2D = $'../Visual'
 
-# parent for all towers
-var towers_container: Node2D
 var _is_placing = false:
 	set(value):
 		_is_placing = value
-		TowerPlacementManager.is_placing = value
+		if _is_placing:
+			GameState.state = GameState.STATE.PLACING_TOWER
+		else:
+			if GameState.is_placing_tower():
+				GameState.state = GameState.STATE.IN_GAME
 
 var _current_tower_instance: Tower = null
 var _is_valid_placement = false

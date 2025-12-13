@@ -2,7 +2,6 @@
 extends Node
 
 signal tower_count_change(tower_type: Tower.Type, amount: int, event: TowerEvent)
-signal tower_placing(value: bool)
 
 enum TowerEvent { PLACEMENT, SOLD, RESET }
 
@@ -11,11 +10,6 @@ var towers_placed: Dictionary[Tower.Type, int] = {
 	Tower.Type.BLUE: 0,
 	Tower.Type.GREEN: 0
 }
-
-var is_placing: bool = false:
-	set(value):
-		is_placing = value
-		tower_placing.emit(value)
 
 func _ready() -> void:
 	ClickEvents.tower_sold_pressed.connect(_on_tower_sold)

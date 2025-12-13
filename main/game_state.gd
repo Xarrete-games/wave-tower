@@ -4,7 +4,7 @@ extends Node
 signal state_change(state: STATE)
 signal speed_change(value: float)
 
-enum STATE { ON_MAIN_MENU, IN_GAME }
+enum STATE { ON_MAIN_MENU, IN_GAME, PLACING_TOWER }
 
 var speed: float:
 	get(): return _speed
@@ -24,6 +24,12 @@ func _ready() -> void:
 
 func is_on_main_menu() -> bool:
 	return state == STATE.ON_MAIN_MENU
+
+func is_is_in_game() -> bool:
+	return state == STATE.IN_GAME
+
+func is_placing_tower() -> bool:
+	return state == STATE.PLACING_TOWER
 
 func reset_run() -> void:
 	RelicsManager.reset_relics()
