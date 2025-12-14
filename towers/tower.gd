@@ -2,7 +2,6 @@
 @tool
 class_name Tower extends Node2D
 
-signal target_change(enemy: Enemy)
 signal stats_change(tower: Tower)
 signal attack_fired()
 signal attack_speed_change(value: float)
@@ -14,7 +13,6 @@ const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 @export var type: Type = Type.RED
 @export var stats_base: TowerStatsBase
 
-var _targets_in_range: Array[Enemy] = [] 
 var _current_target: Enemy
 var _enabled: bool = false
 # when true, the tower fires instantly upon detecting an enemy
@@ -50,9 +48,9 @@ var exp_data: TowerExpData:
 		exp_data = value
 		stats_change.emit(self)
 
-@onready var range_area: Area2D = $RangeArea
+@onready var area_detector: AreaDetector = $AreaDetector
 @onready var range_preview: RangePreview = $RangePreview
-@onready var range_collision: CollisionShape2D = $RangeArea/RangeCollision
+@onready var range_collision: CollisionShape2D = $AreaDetector/RangeCollision
 @onready var mouse_detector: Control = $MouseDetector
 @onready var attack_timer: Timer = $AttackTimer
 @onready var cristal_light: CristalLight = $CristalLight
@@ -68,6 +66,7 @@ func _ready():
 	_set_base_stats()
 	_set_buffs(RunContext.towers_upgrades.get_buffs(type))
 	RunContext.towers_upgrades.tower_buffs_change.connect(_on_tower_buffs_change)
+	area_detector.target_change.connect(_on_target_change)
 	
 # --------------------
 # --- MODES ---
@@ -84,14 +83,14 @@ func normal_color() -> void:
 # sets the tower's state while it is being placed
 func placement_mode() -> void:
 	_enabled = false
-	range_area.monitoring = false
+	area_detector.monitoring = false
 	
 # Enables the tower after its construction/placement.
 # It is initially disabled to prevent actions while the player is placing it.
 func enable() -> void:
 	sprite_2d.modulate = Color.WHITE
 	_enabled = true
-	range_area.monitoring = true
+	area_detector.monitoring = true
 	range_preview.visible = false
 
 	await get_tree().create_timer(0.1).timeout
@@ -113,45 +112,13 @@ func _is_critical_hit() -> bool:
 # --------------------
 # --- TARGETING ---
 # --------------------
-func _on_range_area_body_entered(body: Node2D) -> void:
-	if not _enabled:
-		return
-	var enemy = body as Enemy
-	enemy.die.connect(_on_enemy_die)
-	
-	_targets_in_range.append(enemy)
-	# when no target
-	if _current_target == null:
+func _on_target_change(enemy: Enemy) -> void:
 		_current_target = enemy
 		if _first_shot:
 			_fire()
 			attack_fired.emit()
 			attack_timer.start()
 			_first_shot = false
-		
-func _on_range_area_body_exited(body: Node2D) -> void:
-	var enemy = body as Enemy
-	_remove_target_and_get_next(enemy)
-
-func _on_enemy_die(enemy: Enemy) -> void:
-	_remove_target_and_get_next(enemy)
-
-func _remove_target_and_get_next(enemy: Enemy) -> void:
-	# disconnect signal
-	if enemy.die.is_connected(_on_enemy_die):
-		enemy.die.disconnect(_on_enemy_die)
-	# remove enemy
-	_targets_in_range.erase(enemy)
-	#exit when enemy is not the target
-	if enemy != _current_target:
-		return
-	if _targets_in_range.is_empty():
-		_current_target = null
-		target_change.emit(_current_target)
-	else:
-		#logic to select next target
-		_current_target = _targets_in_range[0]
-		target_change.emit(_current_target)
 
 func _on_attack_timer_timeout() -> void:
 	if _current_target == null or not _enabled:

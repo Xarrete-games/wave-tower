@@ -15,7 +15,7 @@ var _hits_count = 0
 func _ready():
 	super._ready()
 	attack_tick_timer.wait_time = 0.1
-	target_change.connect(_on_target_change)
+	area_detector.target_change.connect(_on_target_change)
 	
 func _process(_delta: float) -> void:
 	if not _current_target:	
@@ -36,6 +36,7 @@ func _fire() -> void:
 	_hits_count = 0
 
 func _on_target_change(_target: Enemy) -> void:
+	super._on_target_change(_target)
 	_stop_attack()
 	#if not attack_tick_timer.is_stopped():
 		#if target == null:

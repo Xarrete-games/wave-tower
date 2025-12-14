@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d36t7geqp1sh"]
+[gd_scene load_steps=9 format=3 uid="uid://d36t7geqp1sh"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower_base.tscn" id="1_d57o0"]
 [ext_resource type="Script" uid="uid://buj7pdefu7r4s" path="res://towers/red/red_tower.gd" id="2_hvay6"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="6_i2402"]
 [ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/red/passive_light.gd" id="7_0cvpj"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_i2402"]
+
 [node name="RedTower" instance=ExtResource("1_d57o0")]
 script = ExtResource("2_hvay6")
 stats_base = ExtResource("3_i2402")
@@ -16,21 +18,21 @@ stats_base = ExtResource("3_i2402")
 color = Color(0.6117647, 0, 0, 1)
 attack_animation_time = 0.2
 
-[node name="Sprite2D" parent="." index="1"]
-region_rect = Rect2(-1, 0, 65, 97)
+[node name="RangePreview" parent="." index="1"]
+visible = false
 
-[node name="RangeArea" parent="." index="2"]
-monitoring = false
+[node name="Sprite2D" parent="." index="2"]
+region_rect = Rect2(-1, 0, 65, 97)
 
 [node name="RedProjectil" parent="." index="3" instance=ExtResource("3_cxl1f")]
 z_index = 2
 position = Vector2(0, -133)
 
-[node name="AttackTimer" parent="." index="4"]
-wait_time = 1.0
+[node name="RangeCollision" parent="AreaDetector" index="0"]
+shape = SubResource("CircleShape2D_i2402")
 
-[node name="RangePreview" parent="." index="5"]
-visible = false
+[node name="AttackTimer" parent="." index="5"]
+wait_time = 1.0
 
 [node name="AttackTickTimer" type="Timer" parent="." index="6"]
 wait_time = 0.1
