@@ -16,6 +16,7 @@ var economy: Economy
 var status: Status
 var towers_count: TowersCount
 var towers_upgrades: TowersUpgrades
+var towers_price: TowersPrice
 var relics: RelicsManager
 var enemy_debuff: EnemyDebuffManager
 var enemy_manager: EnemyManager
@@ -29,6 +30,7 @@ func reset_run() -> void:
 	status.player_died.connect(_on_die, CONNECT_ONE_SHOT)
 	towers_count = TowersCount.new()
 	towers_upgrades = TowersUpgrades.new()
+	towers_price = TowersPrice.new()
 	relics = RelicsManager.new()
 	enemy_debuff = EnemyDebuffManager.new()
 	enemy_manager = EnemyManager.new()

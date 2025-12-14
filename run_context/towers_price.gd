@@ -1,4 +1,4 @@
-extends Node
+class_name TowersPrice extends RefCounted
 
 signal tower_price_change(tower_type: Tower.Type, price: int)
 
@@ -19,8 +19,7 @@ var base_prices: Dictionary[Tower.Type, int]= {
 var build_prices: Dictionary[Tower.Type, int]= base_prices.duplicate()
 var sell_prices: Dictionary[Tower.Type, int]= base_prices.duplicate()
 
-func _ready() -> void:
-	await RunContext.initialized
+func _init() -> void:
 	RunContext.towers_count.tower_count_change.connect(_on_tower_count_change)
 
 func get_price(tower_type: Tower.Type) -> int:

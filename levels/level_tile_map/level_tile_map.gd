@@ -18,7 +18,6 @@ var _occupied_tiles: Dictionary[Vector2i, bool] = {}
 var _blocked_tiles: Dictionary[Vector2i, bool] = {}
 
 func _ready() -> void:
-	await RunContext.initialized
 	ClickEvents.tower_sold_pressed.connect(_on_tower_sold)
 	RunContext.relics.relic_added.connect(_on_relic_added)
 	_fill_blocked_dic()

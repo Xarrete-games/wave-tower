@@ -11,11 +11,11 @@ const GREEN_TOWER = preload("uid://oj5ilwusjvuo")
 
 func _ready():	
 	await RunContext.initialized
-	Price.tower_price_change.connect(_on_tower_price_change)
+	RunContext.towers_price.tower_price_change.connect(_on_tower_price_change)
 	RunContext.economy.available_free_towers_change.connect(_on_available_free_towers_change)
-	red_tower_button.price = Price.get_price(Tower.Type.RED)
-	green_tower_button.price = Price.get_price(Tower.Type.GREEN)
-	blue_tower_button.price = Price.get_price(Tower.Type.BLUE)
+	red_tower_button.price = RunContext.towers_price.get_price(Tower.Type.RED)
+	green_tower_button.price = RunContext.towers_price.get_price(Tower.Type.GREEN)
+	blue_tower_button.price = RunContext.towers_price.get_price(Tower.Type.BLUE)
 
 func _on_red_tower_button_pressed(tower_scene: PackedScene) -> void:
 	ClickEvents.tower_button_pressed.emit(tower_scene)
@@ -40,6 +40,6 @@ func _on_available_free_towers_change(available_free_towers: int) -> void:
 		green_tower_button.price = 0
 		blue_tower_button.price = 0
 	else:
-		red_tower_button.price = Price.get_price(Tower.Type.RED)
-		green_tower_button.price = Price.get_price(Tower.Type.GREEN)
-		blue_tower_button.price = Price.get_price(Tower.Type.BLUE)
+		red_tower_button.price = RunContext.towers_price.get_price(Tower.Type.RED)
+		green_tower_button.price = RunContext.towers_price.get_price(Tower.Type.GREEN)
+		blue_tower_button.price = RunContext.towers_price.get_price(Tower.Type.BLUE)

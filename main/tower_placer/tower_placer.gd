@@ -50,7 +50,7 @@ func _place_tower() -> void:
 	if not _current_tower_instance:
 		return
 	# check gold
-	var tower_price = Price.get_price(_current_tower_instance.type)
+	var tower_price = RunContext.towers_price.get_price(_current_tower_instance.type)
 	if not _has_enought_gold(tower_price):
 		_cancel_tower()
 		return

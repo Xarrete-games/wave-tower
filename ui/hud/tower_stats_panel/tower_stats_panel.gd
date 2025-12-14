@@ -46,7 +46,7 @@ func update_exp_data(exp_data: TowerExpData) -> void:
 	required_exp_label.text = str(exp_data.exp_for_next_level)
 
 func _update_sell_price(tower_type: Tower.Type) -> void:
-	price_label.text = str(Price.get_sell_price(tower_type))
+	price_label.text = str(RunContext.towers_price.get_sell_price(tower_type))
 
 func _on_sell_button_xarreta_pressed() -> void:
 	ClickEvents.tower_sold_pressed.emit(current_tower)

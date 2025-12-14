@@ -20,7 +20,6 @@ config/icon="uid://du6pcr3fpo4su"
 
 [autoload]
 
-Price="*res://main/score/price.gd"
 AudioManager="*res://main/audio_manager/audio_manager.tscn"
 GameState="*res://main/game_state.gd"
 DataLoader="*res://global/data_loader.gd"
