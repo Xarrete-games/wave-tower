@@ -24,7 +24,7 @@ func _fire() -> void:
 	var is_double_hit = _is_doble_hit()
 	
 	var attack = _get_attack()
-	projectil.set_stats(attack, attack_range, EnemyDebuffManager.get_debuff(EnemyDebuff.Type.FROST))
+	projectil.set_stats(attack, attack_range, RunContext.enemy_debuff.get_debuff(EnemyDebuff.Type.FROST))
 	call_deferred("_add_projectil", projectil)
 	
 	if is_double_hit:
@@ -32,7 +32,7 @@ func _fire() -> void:
 		cristal_light.play()
 		projectil = BLUE_PROJECTIL.instantiate()
 		attack = _get_attack()
-		projectil.set_stats(attack, attack_range, EnemyDebuffManager.get_debuff(EnemyDebuff.Type.FROST))
+		projectil.set_stats(attack, attack_range, RunContext.enemy_debuff.get_debuff(EnemyDebuff.Type.FROST))
 		call_deferred("_add_projectil", projectil)
 
 func _add_projectil(projectil: BlueProjectil) -> void:

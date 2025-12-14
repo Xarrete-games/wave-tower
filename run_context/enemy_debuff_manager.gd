@@ -1,14 +1,12 @@
 # EnemyDebuffManager
-extends Node
+class_name EnemyDebuffManager extends RefCounted
 
 signal debuff_change(enemy_debuff: EnemyDebuff)
 
+var burn_debuff: BurnDebuff = BurnDebuff.new()
+var frost_debuff: FrostDebuff = FrostDebuff.new()
 
-var burn_debuff: BurnDebuff
-var frost_debuff: FrostDebuff
-
-func _ready() -> void:
-	reset()
+func _init() -> void:
 	_bind_signals()
 
 func get_debuff(type: EnemyDebuff.Type) -> EnemyDebuff:
@@ -21,10 +19,6 @@ func get_debuff(type: EnemyDebuff.Type) -> EnemyDebuff:
 	push_error("[EnemyDebuffManager] invalid get debuff")
 	return null
 
-func reset() -> void:
-	frost_debuff = FrostDebuff.new()
-	burn_debuff = BurnDebuff.new()
-	
 func _bind_signals():
 	burn_debuff.changed.connect(
 		func(): 

@@ -33,7 +33,6 @@ func is_placing_tower() -> bool:
 
 func reset_run() -> void:
 
-	EnemyDebuffManager.reset()
 	speed = 1.0
 
 func _button_speed_pressed() -> void:

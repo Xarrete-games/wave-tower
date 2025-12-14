@@ -17,6 +17,7 @@ var status: Status
 var towers_count: TowersCount
 var towers_upgrades: TowersUpgrades
 var relics: RelicsManager
+var enemy_debuff: EnemyDebuffManager
 
 func reset_run() -> void:
 	is_initialized = false
@@ -28,6 +29,7 @@ func reset_run() -> void:
 	towers_count = TowersCount.new()
 	towers_upgrades = TowersUpgrades.new()
 	relics = RelicsManager.new()
+	enemy_debuff = EnemyDebuffManager.new()
 	is_on_restarting = false
 	initialized.emit()
 	is_initialized = true

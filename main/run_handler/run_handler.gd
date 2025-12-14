@@ -35,7 +35,7 @@ func _on_wave_finished() -> void:
 
 func _on_last_wave_finished() -> void:
 	RunContext.economy.gold += 50
-	if RunContext.is_last_level():
+	if RunContext.progress.is_last_level():
 		await  get_tree().create_timer(5).timeout
 		get_tree().change_scene_to_packed(END_GAME_SCENE)
 	else:

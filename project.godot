@@ -22,7 +22,6 @@ config/icon="uid://du6pcr3fpo4su"
 
 Price="*res://main/score/price.gd"
 AudioManager="*res://main/audio_manager/audio_manager.tscn"
-EnemyDebuffManager="*res://enemies/enemy_debuff/enemy_debuff_manager.gd"
 EnemyManager="*res://enemies/enemy_generator/enemy_manager.gd"
 GameState="*res://main/game_state.gd"
 Utils="*res://utils/utils.gd"
