@@ -4,8 +4,7 @@ enum Type {
     CONSUMABLE,
     RELIC,
 }
-
-@export var id: String
+@export_multiline var id: String
 @export_multiline var description: String
 @export var texture: Texture2D
 @export var rarity: Relic.Rarity

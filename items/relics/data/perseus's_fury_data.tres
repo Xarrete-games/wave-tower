@@ -11,5 +11,5 @@ description = "Red towers execute enemies below 5% health (execution threshold i
 texture = ExtResource("3_5vyg6")
 rarity = 1
 max_stack = 5
+type = 1
 runtime_script = ExtResource("1_ic5cl")
-metadata/_custom_type_script = "uid://u8jtn52xm88d"

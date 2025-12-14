@@ -20,4 +20,3 @@ func _init(
 
 func create_item() -> Variant:
 	return item_data.runtime_script.new(item_data)
-

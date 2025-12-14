@@ -42,5 +42,6 @@ func _add_relic(relic: Relic) -> void:
 		(relics[relic.id] as Relic).amount += 1
 	else:
 		relics[relic.id] = relic
+	relics_count[relic.id] = relics_count.get(relic.id, 0) + 1
 	relics_change.emit(relics.values())
 	relic_added.emit(relic)

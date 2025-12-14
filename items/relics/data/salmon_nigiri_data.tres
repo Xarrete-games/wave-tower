@@ -11,5 +11,5 @@ description = "Reduces the cost of relics by 10%."
 texture = ExtResource("3_0w3py")
 rarity = 2
 max_stack = 5
+type = 1
 runtime_script = ExtResource("1_t7spr")
-metadata/_custom_type_script = "uid://u8jtn52xm88d"

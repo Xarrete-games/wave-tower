@@ -12,5 +12,5 @@ texture = ExtResource("3_muhnu")
 rarity = 1
 max_stack = 99
 price = 40
+type = 1
 runtime_script = ExtResource("1_qkdx3")
-metadata/_custom_type_script = "uid://u8jtn52xm88d"

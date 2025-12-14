@@ -24,17 +24,19 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="TowerStatsPanel" type="Control" node_paths=PackedStringArray("damage_label", "attack_speed_label", "range_label", "critic_label", "level_label", "current_exp_label", "required_exp_label", "price_label")]
+[node name="TowerStatsPanel" type="MarginContainer" node_paths=PackedStringArray("damage_label", "attack_speed_label", "range_label", "critic_label", "level_label", "current_exp_label", "required_exp_label", "price_label", "targeting_mode_selector")]
 texture_filter = 4
-layout_mode = 3
-anchor_left = 0.88100004
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.82600003
-offset_left = 203.16016
-offset_bottom = -352.08002
+anchor_bottom = 0.5
+offset_left = -145.0
+offset_top = -212.5
+offset_bottom = 212.5
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_constants/margin_right = 50
 script = ExtResource("1_vyalh")
 damage_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/DamageLabel")
 attack_speed_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer/AttackSpeedLabel")
@@ -44,17 +46,10 @@ level_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/ExpDataContai
 current_exp_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer/CurrentExpLabel")
 required_exp_label = NodePath("VBoxContainer/PanelContainer/VBoxContainer/ExpDataContainer/ExpContainer/RequiredExpLabel")
 price_label = NodePath("VBoxContainer/HBoxContainer/PriceLabel")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+targeting_mode_selector = NodePath("VBoxContainer/VBoxContainer/TargetingModeSelector")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = -174.0
-offset_right = -12.0
-offset_bottom = 327.0
+layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
@@ -240,4 +235,21 @@ layout_mode = 2
 texture = ExtResource("9_8m5ds")
 stretch_mode = 3
 
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "Targeting"
+label_settings = ExtResource("8_gs8y8")
+horizontal_alignment = 1
+
+[node name="TargetingModeSelector" type="OptionButton" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
 [connection signal="xarreta_pressed" from="VBoxContainer/ButtonsContainer/SellButton" to="." method="_on_sell_button_xarreta_pressed"]
+[connection signal="item_selected" from="VBoxContainer/VBoxContainer/TargetingModeSelector" to="." method="_on_targeting_mode_selector_item_selected"]

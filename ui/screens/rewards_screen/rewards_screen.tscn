@@ -36,13 +36,13 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 300
+theme_override_constants/separation = 100
 
 [node name="CardsContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 350
+theme_override_constants/separation = 50
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

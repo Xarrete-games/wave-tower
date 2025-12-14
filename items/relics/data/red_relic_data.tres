@@ -12,5 +12,5 @@ description = "Increases the attack damage of all towers by 10%.
 texture = ExtResource("3_8rgck")
 max_stack = 5
 price = 70
+type = 1
 runtime_script = ExtResource("1_s1n3f")
-metadata/_custom_type_script = "uid://u8jtn52xm88d"

@@ -8,6 +8,7 @@ var execute_threshold: float = 0.0
 var local_execute_threshold: float = 0.0
 var burn_damage: float = 0
 var _hits_count = 0
+var _target_in_progress: Enemy = null
 
 @onready var red_projectil: RedProjectil = $RedProjectil
 @onready var attack_tick_timer: Timer = $AttackTickTimer
@@ -15,6 +16,7 @@ var _hits_count = 0
 func _ready():
 	super._ready()
 	attack_tick_timer.wait_time = 0.1
+	area_detector.enemy_die.connect(_on_enemy_die)
 	
 func _process(_delta: float) -> void:
 	if not _current_target:	
@@ -28,15 +30,17 @@ func _set_buffs(tower_buffs: TowerBuff) -> void:
 	burn_damage = red_tower_buffs.burn_damage
 	
 func _fire() -> void:
+	_target_in_progress = _current_target
 	red_projectil.set_attack(_get_attack_per_hit())
-	red_projectil.set_target(_current_target)
+	red_projectil.set_target(_target_in_progress)
 	attack_tick_timer.start()
 	cristal_light.turn_on()
 	_hits_count = 0
 
 func _on_target_change(_target: Enemy) -> void:
 	super._on_target_change(_target)
-	_stop_attack()
+	if _target == null:
+		_stop_attack()
 	#if not attack_tick_timer.is_stopped():
 		#if target == null:
 			#_stop_attack()
@@ -74,3 +78,7 @@ func _stop_attack() -> void:
 	red_projectil.stop()
 	cristal_light.turn_off()
 	_hits_count = 0
+
+func _on_enemy_die(enemy: Enemy) -> void:
+	if enemy == _target_in_progress:
+		_stop_attack()

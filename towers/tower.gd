@@ -7,7 +7,7 @@ signal attack_fired()
 signal attack_speed_change(value: float)
 
 enum Type { RED, GREEN, BLUE }
-enum TargetingMode { FIRST_IN_PROGRESS }
+enum TargetingMode { FIRST_IN_PROGRESS, HIGHT_HP, LOW_HP }
 
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
@@ -42,6 +42,10 @@ var local_critic_chance: float = 0
 var local_critic_damage: float = 0
 # tile_pos
 var tile_pos: Vector2i
+var targeting_mode: TargetingMode = TargetingMode.FIRST_IN_PROGRESS:
+	set(value):
+		targeting_mode = value
+		area_detector.targeting_type = value
 
 # level
 var exp_data: TowerExpData:
@@ -115,7 +119,7 @@ func _is_critical_hit() -> bool:
 # --------------------
 func _on_target_change(enemy: Enemy) -> void:
 		_current_target = enemy
-		if _first_shot:
+		if _first_shot and _current_target != null:
 			_fire()
 			attack_fired.emit()
 			attack_timer.start()

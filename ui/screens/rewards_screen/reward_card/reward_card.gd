@@ -16,11 +16,11 @@ var _has_enough_live = false
 var _it_cost_health = false
 
 @onready var description: RichTextLabel = $VBoxContainer/Description
-@onready var title: Label = $Title
-@onready var relic_texture: TextureRect = $RelicTexture
-@onready var hexagon_border: Polygon2D = $Control/HexagonBorder
+@onready var title: Label = $VBoxContainer/Title
+@onready var relic_texture: TextureRect = $RelicIcon/RelicTexture
 @onready var amount_live_label: Label = $VBoxContainer/LivePriceContainer/AmountLiveLabel
 @onready var live_price_container: HBoxContainer = $VBoxContainer/LivePriceContainer
+@onready var hexagon_border: Polygon2D = $RelicIcon/Hexagon/Control/Root2d/HexagonBorder
 
 func _ready() -> void:
 	live_price_container.visible = false
@@ -58,7 +58,7 @@ func _chek_live(curren_live: int) -> void:
 
 func _on_mouse_entered() -> void:
 	AudioManager.play_button_hover()
-	relic_texture.scale = Vector2(0.6, 0.6)
+	relic_texture.custom_minimum_size = Vector2(160, 160)
 
 func _on_mouse_exited() -> void:
-	relic_texture.scale = Vector2(0.5, 0.5)
+	relic_texture.custom_minimum_size = Vector2(130, 130)

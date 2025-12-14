@@ -36,6 +36,10 @@ script = ExtResource("4_d3ac3")
 scale = Vector2(1, 0.5)
 shape = SubResource("CircleShape2D_wmotl")
 
+[node name="TimerToCheckTarget" type="Timer" parent="AreaDetector"]
+wait_time = 0.1
+autostart = true
+
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
 
