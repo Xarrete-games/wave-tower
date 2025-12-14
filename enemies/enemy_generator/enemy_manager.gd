@@ -21,6 +21,7 @@ const BOSS_BLACK_GOLEM = preload("uid://bbwwsea7icfed")
 const ENEMY_BLACK_SKELETON = preload("uid://d1p6gdwregh7v")
 const BOSS_GOLD_SKELETON = preload("uid://qsxiwo0d27dq")
 const ENEMY_INVOKER = preload("uid://crk2ly48vsxn4")
+const ENEMY_SKULL = preload("uid://daxk1aepm2gdi")
 
 
 const ENEMIES_SCENES: Dictionary[Enemy.EnemyType, PackedScene] = {
@@ -32,7 +33,8 @@ const ENEMIES_SCENES: Dictionary[Enemy.EnemyType, PackedScene] = {
 	Enemy.EnemyType.BLACK_GOLEM: BOSS_BLACK_GOLEM,
 	Enemy.EnemyType.BLACK_SKELETON: ENEMY_BLACK_SKELETON,
 	Enemy.EnemyType.GOLD_SKELETON: BOSS_GOLD_SKELETON,
-	Enemy.EnemyType.INVOKER: ENEMY_INVOKER
+	Enemy.EnemyType.INVOKER: ENEMY_INVOKER,
+	Enemy.EnemyType.SKULL: ENEMY_SKULL
 }
 
 func get_enemy_scene(enemy_type: Enemy.EnemyType) -> PackedScene:
