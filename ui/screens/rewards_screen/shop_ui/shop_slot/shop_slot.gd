@@ -19,7 +19,7 @@ func set_item(item_offer: ItemOffer) -> void:
 	description_label.text = item_offer.item_data.description
 	gold_price.price = _price
 	shop_slot_icon.set_icon(item_offer.item_data.texture)
-	shop_slot_icon.set_background_color(RelicsManager.get_rarity_color(item_offer.item_data.rarity))
+	shop_slot_icon.set_background_color(RunContext.relics.get_rarity_color(item_offer.item_data.rarity))
 	_item = item_offer
 	
 func _on_gui_input(event: InputEvent) -> void:

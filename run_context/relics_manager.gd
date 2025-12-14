@@ -1,5 +1,4 @@
-#Reliocs Manager
-extends Node
+class_name RelicsManager extends RefCounted
 
 signal relics_change(relics: Array[Relic])
 signal relic_added(relic: Relic)
@@ -19,9 +18,14 @@ var relics_count: Dictionary[String, int] = {}
 var relics: Dictionary[String, Relic] = {
 }
 
-func is_maxed(_relic_id: String) -> bool:
-	return false
-
+func is_maxed(relic_id: String) -> bool:
+	var count = relics_count.get(relic_id, 0)
+	var relic = relics.get(relic_id, null)
+	
+	if relic == null:
+		return false
+	return count >= relic.max_stack
+	
 func get_rarity_color(rarity: Relic.Rarity) -> Color:
 	return relic_colors[rarity]
 

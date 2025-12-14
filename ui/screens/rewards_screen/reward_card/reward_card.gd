@@ -31,7 +31,7 @@ func set_relic(new_relic_value: ItemOffer) -> void:
 	relic_texture.texture = data.texture
 	title.text = data.id
 	description.text = data.description
-	hexagon_border.color =  RelicsManager.get_rarity_color(data.rarity)
+	hexagon_border.color =  RunContext.relics.get_rarity_color(data.rarity)
 	price = item_offer.price
 
 	if item_offer.health_price > 0:

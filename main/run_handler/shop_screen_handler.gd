@@ -20,4 +20,4 @@ func _on_item_purchased(item_offer: ItemOffer) -> void:
 
 	var item = item_offer.create_item()
 	if item is Relic:
-		RelicsManager.add_relic(item)
+		RunContext.relics.add_relic(item)

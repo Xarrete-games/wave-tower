@@ -10,11 +10,12 @@ var is_initialized: bool = false
 var is_on_restarting: bool = false
 
 # subsystems
-var offers_manager: OffersManager
+var offers_manager: OffersManager = OffersManager.new()
 var progress: RunProgress
 var economy: Economy
 var status: Status
 var tower_count: TowerCount
+var relics: RelicsManager
 
 func reset_run() -> void:
 	is_initialized = false
@@ -24,6 +25,7 @@ func reset_run() -> void:
 	status = Status.new()
 	status.player_died.connect(_on_die, CONNECT_ONE_SHOT)
 	tower_count = TowerCount.new()
+	relics = RelicsManager.new()
 	is_on_restarting = false
 	initialized.emit()
 	is_initialized = true
