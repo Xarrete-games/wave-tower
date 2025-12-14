@@ -54,15 +54,14 @@ func _place_tower() -> void:
 	if not _has_enought_gold(tower_price):
 		_cancel_tower()
 		return
+	_handle_costs(tower_price)
 	# place tower
 	var tile_pos = level_tile_map.get_mouse_tile_pos()
 	level_tile_map.set_tile_occupied(tile_pos)
 	
-	_handle_costs(tower_price)
-	
 	_is_placing = false
 	
-	TowerPlacementManager.tower_added(_current_tower_instance)
+	RunContext.tower_count.tower_added(_current_tower_instance)
 	
 	_current_tower_instance.enable()
 	_current_tower_instance.tile_pos = tile_pos
@@ -74,7 +73,6 @@ func _has_enought_gold(tower_price: int) -> bool:
 	elif RunContext.economy.gold >= tower_price:
 		return true
 	return false
-
 
 func _handle_costs(tower_price: int) -> void:
 	if RunContext.economy.available_free_towers > 0:

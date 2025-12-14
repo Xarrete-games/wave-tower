@@ -33,8 +33,6 @@ func is_placing_tower() -> bool:
 
 func reset_run() -> void:
 	RelicsManager.reset_relics()
-	#RewardsManager.reset_rewards()
-	TowerPlacementManager.reset_towers()
 	TowerUpgrades.reset_buffs()
 	EnemyDebuffManager.reset()
 	speed = 1.0

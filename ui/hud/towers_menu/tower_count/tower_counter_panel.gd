@@ -1,5 +1,5 @@
 @tool
-class_name TowerCount extends Control
+class_name TowerCounterPanel extends Control
 
 const TIER_1_COUNT = 2
 const TIER_2_COUNT = 4
