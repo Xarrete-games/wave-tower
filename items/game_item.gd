@@ -11,6 +11,7 @@ var texture: Texture2D
 var base_price: int
 var price: int
 var price_increased: bool
+var type: ItemData.Type
 
 func _init(data: ItemData) -> void:
 	id = data.id

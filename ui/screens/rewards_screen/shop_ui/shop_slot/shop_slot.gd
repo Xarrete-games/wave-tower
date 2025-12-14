@@ -37,4 +37,4 @@ func _on_mouse_exited() -> void:
 
 func _on_relics_discount_changed(_relics_discount_mult: float) -> void:
 	if _item.create_item() is Relic:
-		set_item(RunContext.offers_manager.create_offer_from_data(_item.item_data))
+		set_item(RunContext.offers_manager.create_relic_offer_from_data(_item.item_data))

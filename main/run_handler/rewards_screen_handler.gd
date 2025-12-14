@@ -21,7 +21,7 @@ func show_rewards_screen(event_layer: CanvasLayer) -> void:
 	
 func _on_item_selected(item_offer: ItemOffer) -> void:
 	rewards_screen.queue_free()
-	RunContext.offers_manager.increase_offer_price(item_offer)
+	RunContext.offers_manager.increase_relic_offer_price(item_offer)
 	var item = item_offer.create_item()
 	if item is Relic:
 		RunContext.relics.add_relic(item)

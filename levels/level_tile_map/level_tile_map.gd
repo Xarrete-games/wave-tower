@@ -19,7 +19,7 @@ var _blocked_tiles: Dictionary[Vector2i, bool] = {}
 
 func _ready() -> void:
 	ClickEvents.tower_sold_pressed.connect(_on_tower_sold)
-	RunContext.relics.relic_added.connect(_on_relic_added)
+	RunContext.consumables.consumable_used.connect(_on_consumable_used)
 	_fill_blocked_dic()
 	
 func get_mouse_tile_pos() -> Vector2i:
@@ -76,6 +76,6 @@ func _on_tower_sold(tower: Tower) -> void:
 	var tile = tower.tile_pos
 	set_tile_free(tile)
 	
-func _on_relic_added(relic: Relic) -> void:
-	if relic is FoundationBreaker:
+func _on_consumable_used(consumable: Consumable) -> void:
+	if consumable is FoundationBreaker:
 		unblock_tile()

@@ -18,6 +18,7 @@ var towers_count: TowersCount
 var towers_upgrades: TowersUpgrades
 var towers_price: TowersPrice
 var relics: RelicsManager
+var consumables: Consumables
 var enemy_debuff: EnemyDebuffManager
 var enemy_manager: EnemyManager
 
@@ -32,6 +33,7 @@ func reset_run() -> void:
 	towers_upgrades = TowersUpgrades.new()
 	towers_price = TowersPrice.new()
 	relics = RelicsManager.new()
+	consumables = Consumables.new()
 	enemy_debuff = EnemyDebuffManager.new()
 	enemy_manager = EnemyManager.new()
 	is_on_restarting = false

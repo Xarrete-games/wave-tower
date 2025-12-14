@@ -12,7 +12,7 @@ corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 
-[node name="ShopScreen" type="MarginContainer" node_paths=PackedStringArray("relics_container", "items_container")]
+[node name="ShopScreen" type="MarginContainer" node_paths=PackedStringArray("relics_container", "consumables_container")]
 offset_right = 1920.0
 offset_bottom = 1080.0
 theme_override_constants/margin_left = 200
@@ -21,7 +21,7 @@ theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 100
 script = ExtResource("1_g4y81")
 relics_container = NodePath("ShopContainer/VBoxContainer/RelicSection/Relics")
-items_container = NodePath("ShopContainer/VBoxContainer/ItemsSection/Items")
+consumables_container = NodePath("ShopContainer/VBoxContainer/ItemsSection/Items")
 
 [node name="ShopContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -29,7 +29,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_nisgj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ShopContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
 
 [node name="RelicSection" type="VBoxContainer" parent="ShopContainer/VBoxContainer"]
 layout_mode = 2
@@ -62,9 +61,9 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 50
+alignment = 1
 
 [node name="RelicsTittle" type="PanelContainer" parent="ShopContainer/VBoxContainer/ItemsSection"]
-visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -79,6 +78,7 @@ label_settings = ExtResource("3_53ik5")
 [node name="Items" type="HBoxContainer" parent="ShopContainer/VBoxContainer/ItemsSection"]
 layout_mode = 2
 theme_override_constants/separation = 30
+alignment = 1
 
 [node name="ButtonsSection" type="HBoxContainer" parent="ShopContainer/VBoxContainer"]
 layout_mode = 2
