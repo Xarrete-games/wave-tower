@@ -6,6 +6,7 @@ const EVENTS_DATA_PATH: String = "res://events/data/"
 
 var relics: Array[ItemData] = []
 var events: Array[EventData] = []
+var enemy_data: EnemyDataLoader = EnemyDataLoader.new()
 
 func _ready() -> void:
 	_load_relics()

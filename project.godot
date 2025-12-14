@@ -22,12 +22,11 @@ config/icon="uid://du6pcr3fpo4su"
 
 Price="*res://main/score/price.gd"
 AudioManager="*res://main/audio_manager/audio_manager.tscn"
-EnemyManager="*res://enemies/enemy_generator/enemy_manager.gd"
 GameState="*res://main/game_state.gd"
-Utils="*res://utils/utils.gd"
-DataLoader="*res://items/data_loader.gd"
+DataLoader="*res://global/data_loader.gd"
 RunContext="*res://run_context/run_context.gd"
-ClickEvents="*res://global_signals/click_events.gd"
+ClickEvents="*res://global/click_events.gd"
+Utils="*res://utils/utils.gd"
 
 [debug]
 
