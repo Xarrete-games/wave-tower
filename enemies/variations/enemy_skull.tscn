@@ -1,0 +1,259 @@
+[gd_scene load_steps=36 format=3 uid="uid://daxk1aepm2gdi"]
+
+[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_k4uph"]
+[ext_resource type="Texture2D" uid="uid://dlj7ftheuaudj" path="res://assets/sprites/enemies/skull/Calavera__0000_Recurso-1.png.png" id="2_ik0g2"]
+[ext_resource type="Texture2D" uid="uid://b4k6jkf1iqe0m" path="res://assets/sprites/enemies/skull/Calavera__0001_Recurso-2.png.png" id="3_sasr1"]
+[ext_resource type="Texture2D" uid="uid://o3ukflueqsak" path="res://assets/sprites/enemies/skull/Calavera__0002_Recurso-3.png.png" id="4_bbwde"]
+[ext_resource type="Texture2D" uid="uid://cx6s6sag7n7y4" path="res://assets/sprites/enemies/skull/Calavera__0003_Recurso-4.png.png" id="5_oke2k"]
+[ext_resource type="Texture2D" uid="uid://bo6bdgkjtktuu" path="res://assets/sprites/enemies/skull/Calavera__0004_Recurso-5.png.png" id="6_hdsmw"]
+[ext_resource type="Texture2D" uid="uid://c2er0p052r7yt" path="res://assets/sprites/enemies/skull/Calavera__0005_Recurso-6.png.png" id="7_rh5lc"]
+[ext_resource type="Texture2D" uid="uid://c4jjr3u5s3xjb" path="res://assets/sprites/enemies/skull/Calavera__0006_Recurso-7.png.png" id="8_ey0w6"]
+[ext_resource type="Texture2D" uid="uid://dluy5jkv7yfby" path="res://assets/sprites/enemies/skull/Calavera__0007_Recurso-8.png.png" id="9_r51ba"]
+[ext_resource type="Texture2D" uid="uid://dnbiqs2klxb06" path="res://assets/sprites/enemies/skull/Calavera__0008_Recurso-9.png.png" id="10_h1658"]
+[ext_resource type="Texture2D" uid="uid://bb47rivsax6os" path="res://assets/sprites/enemies/skull/Calavera__0009_Recurso-10.png.png" id="11_iav76"]
+[ext_resource type="Texture2D" uid="uid://cjj4rptyvgfwg" path="res://assets/sprites/enemies/skull/Calavera__0010_Recurso-11.png.png" id="12_y36si"]
+[ext_resource type="Texture2D" uid="uid://ckh6ylclgi0ey" path="res://assets/sprites/enemies/skull/Calavera__0011_Recurso-12.png.png" id="13_vscqf"]
+[ext_resource type="Texture2D" uid="uid://bgyml7b270b1h" path="res://assets/sprites/enemies/skull/Calavera__0012_Recurso-13.png.png" id="14_lr4hp"]
+[ext_resource type="Texture2D" uid="uid://b8lj2gb80fxkc" path="res://assets/sprites/enemies/skull/Calavera__0013_Recurso-14.png.png" id="15_wqgxn"]
+[ext_resource type="Texture2D" uid="uid://c338bghjkhv3y" path="res://assets/sprites/enemies/skull/Calavera__0014_Recurso-15.png.png" id="16_c8ts8"]
+[ext_resource type="Texture2D" uid="uid://6lactj6aclfg" path="res://assets/sprites/enemies/skull/Calavera__0015_Recurso-16.png.png" id="17_36ygl"]
+[ext_resource type="Texture2D" uid="uid://dvn0s031u5362" path="res://assets/sprites/enemies/skull/Calavera__0016_Recurso-17.png.png" id="18_chwyc"]
+[ext_resource type="Texture2D" uid="uid://qqasgca0qp8s" path="res://assets/sprites/enemies/skull/Calavera__0017_Recurso-18.png.png" id="19_ouf6a"]
+[ext_resource type="Texture2D" uid="uid://c8uli6dowwgwc" path="res://assets/sprites/enemies/skull/Calavera__0018_Recurso-19.png.png" id="20_ah2yk"]
+[ext_resource type="Texture2D" uid="uid://b2vfnkkie4ee1" path="res://assets/sprites/enemies/skull/Calavera__0019_Recurso-20.png.png" id="21_e8i0u"]
+[ext_resource type="Texture2D" uid="uid://b5oy7h3cblwuu" path="res://assets/sprites/enemies/skull/Calavera__0020_Recurso-21.png.png" id="22_extg1"]
+[ext_resource type="Texture2D" uid="uid://cavobg6imkuj0" path="res://assets/sprites/enemies/skull/Calavera__0021_Recurso-22.png.png" id="23_4unnn"]
+[ext_resource type="Texture2D" uid="uid://jvq4847k87f1" path="res://assets/sprites/enemies/skull/Calavera__0022_Recurso-23.png.png" id="24_5e4em"]
+[ext_resource type="Texture2D" uid="uid://dvmgppgiq7j0e" path="res://assets/sprites/enemies/skull/Calavera__0023_Recurso-24.png.png" id="25_jf252"]
+[ext_resource type="Texture2D" uid="uid://d3gxy3sjeutyh" path="res://assets/sprites/enemies/skull/Calavera__0024_Recurso-25.png.png" id="26_yer34"]
+[ext_resource type="Texture2D" uid="uid://bj8ypgbkq8ata" path="res://assets/sprites/enemies/skull/Calavera__0025_Recurso-26.png.png" id="27_ysmwr"]
+[ext_resource type="Texture2D" uid="uid://hjjth1kd8yq0" path="res://assets/sprites/enemies/skull/Calavera__0026_Recurso-27.png.png" id="28_1mknv"]
+[ext_resource type="Texture2D" uid="uid://sajmjq8cgdpj" path="res://assets/sprites/enemies/skull/Calavera__0027_Recurso-28.png.png" id="29_q453c"]
+[ext_resource type="Texture2D" uid="uid://x64bwx3x8wpi" path="res://assets/sprites/enemies/skull/Calavera__0028_Recurso-29.png.png" id="30_73ivs"]
+[ext_resource type="Texture2D" uid="uid://dgwobg134s2sb" path="res://assets/sprites/enemies/skull/Calavera__0029_Recurso-30.png.png" id="31_2dbnu"]
+[ext_resource type="Texture2D" uid="uid://c12stfulek80j" path="res://assets/sprites/enemies/skull/Calavera__0030_Recurso-31.png.png" id="32_mbyp1"]
+[ext_resource type="Texture2D" uid="uid://cvwfhesxk6q04" path="res://assets/sprites/enemies/skull/Calavera__0031_Recurso-32.png.png" id="33_w6i6w"]
+[ext_resource type="Texture2D" uid="uid://po226ixr0dy2" path="res://assets/sprites/enemies/skull/Calavera__0032_Recurso-33.png.png" id="34_6i67h"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kkdne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ik0g2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sasr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bbwde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_oke2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hdsmw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rh5lc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ey0w6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_r51ba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_h1658")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_iav76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_y36si")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_vscqf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_lr4hp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wqgxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_c8ts8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_36ygl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_chwyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ouf6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ah2yk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_e8i0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_extg1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_4unnn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_5e4em")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_jf252")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_yer34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_ysmwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_1mknv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_q453c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_73ivs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_2dbnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_mbyp1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_w6i6w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_6i67h")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ik0g2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sasr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bbwde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_oke2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hdsmw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rh5lc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ey0w6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_r51ba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_h1658")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_iav76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_y36si")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_vscqf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_lr4hp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wqgxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_c8ts8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_36ygl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_chwyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ouf6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ah2yk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_e8i0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_extg1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_4unnn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_5e4em")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_jf252")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_yer34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_ysmwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_1mknv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_q453c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_73ivs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_2dbnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_mbyp1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_w6i6w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_6i67h")
+}],
+"loop": true,
+"name": &"top right",
+"speed": 30.0
+}]
+
+[node name="Skull" instance=ExtResource("1_k4uph")]
+base_speed = 90.0
+max_healt = 500.0
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_kkdne")
+frame_progress = 0.2534993
+
+[node name="HealthBar" parent="." index="4"]
+offset_top = -158.0
+offset_bottom = -158.0
