@@ -18,8 +18,8 @@ var _is_valid_placement = false
 func _ready():
 	_is_placing = false
 	ClickEvents.tower_button_pressed.connect(_on_tower_button_pressed)
-	RunContext.progress.current_wave_changed.connect(func(_wave_num: int): _cancel_tower())
-	RunContext.progress.last_wave_finished.connect(func(): _cancel_tower())
+	RunContext.progress.current_wave_finished.connect(_cancel_tower)
+	RunContext.progress.last_wave_finished.connect(_cancel_tower)
 
 func _process(_delta: float) -> void:
 	if not _is_placing or not is_instance_valid(_current_tower_instance):
