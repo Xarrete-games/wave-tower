@@ -4,7 +4,7 @@ extends Node
 signal state_change(state: STATE)
 signal speed_change(value: float)
 
-enum STATE { ON_MAIN_MENU, IN_GAME }
+enum STATE { ON_MAIN_MENU, IN_GAME, PLACING_TOWER }
 
 var speed: float:
 	get(): return _speed
@@ -20,19 +20,19 @@ var state: STATE:
 		state_change.emit(state)
 
 func _ready() -> void:
-	ButtonsEvents.speed_button_pressed.connect(_button_speed_pressed)
+	ClickEvents.speed_button_pressed.connect(_button_speed_pressed)
 
 func is_on_main_menu() -> bool:
 	return state == STATE.ON_MAIN_MENU
 
+func is_is_in_game() -> bool:
+	return state == STATE.IN_GAME
+
+func is_placing_tower() -> bool:
+	return state == STATE.PLACING_TOWER
+
 func reset_run() -> void:
-	RelicsManager.reset_relics()
-	RewardsManager.reset_rewards()
-	TowerPlacementManager.reset_towers()
-	TowerUpgrades.reset_buffs()
-	EnemyDebuffManager.reset()
-	LiveManager.lives = 5
-	Score.extra_gold_dropped = 0
+
 	speed = 1.0
 
 func _button_speed_pressed() -> void:
@@ -42,4 +42,3 @@ func _button_speed_pressed() -> void:
 		speed = 3.0
 	elif speed == 3.0:
 		speed = 1.0
-

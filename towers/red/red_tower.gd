@@ -15,7 +15,6 @@ var _hits_count = 0
 func _ready():
 	super._ready()
 	attack_tick_timer.wait_time = 0.1
-	target_change.connect(_on_target_change)
 	
 func _process(_delta: float) -> void:
 	if not _current_target:	
@@ -36,6 +35,7 @@ func _fire() -> void:
 	_hits_count = 0
 
 func _on_target_change(_target: Enemy) -> void:
+	super._on_target_change(_target)
 	_stop_attack()
 	#if not attack_tick_timer.is_stopped():
 		#if target == null:
@@ -53,7 +53,7 @@ func _on_attack_tick_timer_timeout() -> void:
 	
 	if _hits_count == TOTAL_HITS:
 		if _current_target:
-			var debuff = EnemyDebuffManager.get_debuff(EnemyDebuff.Type.BURN)
+			var debuff = RunContext.enemy_debuff.get_debuff(EnemyDebuff.Type.BURN)
 			_current_target.apply_debuff(debuff)
 		_stop_attack()
 

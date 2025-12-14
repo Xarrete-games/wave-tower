@@ -11,7 +11,6 @@ var _fog_scene: PackedScene = null
 @onready var camera_init_pos: Marker2D = $CameraInitPos
 
 func _ready():
-	Score.gold = data.initial_gold
 	if add_fog:
 		if _fog_scene == null:
 			_fog_scene = load(fog_path)

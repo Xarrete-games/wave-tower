@@ -28,10 +28,7 @@ frame = 1
 [node name="ProjectilSpawnPosition" type="Marker2D" parent="." index="3"]
 position = Vector2(0, -126)
 
-[node name="RangeArea" parent="." index="4"]
-monitoring = false
-
-[node name="RangeCollision" parent="RangeArea" index="0"]
+[node name="RangeCollision" parent="AreaDetector" index="0"]
 shape = SubResource("CircleShape2D_xiqao")
 
 [node name="AttackTimer" parent="." index="5"]

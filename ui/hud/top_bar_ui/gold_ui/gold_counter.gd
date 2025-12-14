@@ -9,10 +9,11 @@ var target_gold: int = 0
 const COUNTING_SPEED: float = 0.1 
 
 func _ready():
-	target_gold = Score.gold
-	current_displayed_gold = float(Score.gold)
+	await RunContext.initialized
+	target_gold = RunContext.economy.gold
+	current_displayed_gold = float(RunContext.economy.gold)
 	
-	Score.gold_change.connect(_on_gold_change)
+	RunContext.economy.gold_change.connect(_on_gold_change)
 	_update_label()
 
 

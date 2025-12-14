@@ -11,12 +11,13 @@ var tower_players: Dictionary
 
 func _ready() -> void:
 	tower_players = {
-		Tower.TowerType.RED: red_players,
-		Tower.TowerType.BLUE: blue_players,
-		Tower.TowerType.GREEN: green_players
+		Tower.Type.RED: red_players,
+		Tower.Type.BLUE: blue_players,
+		Tower.Type.GREEN: green_players
 	}
 	stop_music()
-	TowerPlacementManager.tower_count_change.connect(_on_tower_count_change)
+	await RunContext.initialized
+	RunContext.towers_count.tower_count_change.connect(_on_tower_count_change)
 
 func play_music() -> void:
 	base_player.play()
@@ -38,10 +39,7 @@ func _stop_players(node: Node) -> void:
 	for player: AudioStreamPlayer in node.get_children():
 		_stop_player(player)
 		
-func _on_tower_count_change(
-	tower_type: Tower.TowerType, 
-	amount: int, 
-	_event: TowerPlacementManager.TowerEvent) -> void:
+func _on_tower_count_change(tower_type: Tower.Type, amount: int,) -> void:
 	if amount > MAX_PLAYERS or amount == 0:
 		return
 

@@ -19,4 +19,3 @@ func on_update(_enemy: Enemy, _delta: float):
 
 func on_expire(_enemy: Enemy):
 	pass
-	

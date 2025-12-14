@@ -3,7 +3,7 @@ class_name EnemyGroup extends Resource
 enum PATH { PATH1, PATH2, BOTH }
 
 
-@export var enemy_type: Enemy.EnemyType =  Enemy.EnemyType.NORMAL
+@export var enemy_type: Enemy.Type =  Enemy.Type.NORMAL
 @export var amount: int = 5
 @export var interval_spawn: float = 0.5
 @export var time_to_start: float = 0

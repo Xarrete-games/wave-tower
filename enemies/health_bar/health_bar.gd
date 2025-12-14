@@ -28,7 +28,7 @@ var textures: Dictionary[EnemyDebuff.Type, Texture2D] = {
 func set_max_health(value: float) -> void:
 	var clamped_value = clamp(value, MIN_HEALTH, MAX_HEALTH)
 	var new_scale = remap(clamped_value, MIN_HEALTH, MAX_HEALTH, MIN_SCALE, MAX_SCALE)
-	self.scale = Vector2(new_scale, 1)
+	texture_progress_bar.scale = Vector2(new_scale, 1)
 	
 	texture_progress_bar.max_value = value
 	

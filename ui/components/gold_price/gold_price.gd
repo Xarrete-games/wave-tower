@@ -11,10 +11,13 @@ var price: int = 0:
 	set(value):
 		price = value
 		price_label.text = str(value)
-		_check_label_color(Score.gold)
+		_check_label_color(RunContext.economy.gold)
 
 func _ready() -> void:
-	Score.gold_change.connect(_check_label_color)
+	if not RunContext.is_initialized:
+		await RunContext.initialized
+	
+	RunContext.economy.gold_change.connect(_check_label_color)
 	
 func _check_label_color(gold: int) -> void:
 	_has_enough_gold = gold >= price

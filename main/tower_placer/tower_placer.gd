@@ -3,21 +3,23 @@ class_name TowerPlacer extends Node2D
 @onready var level_tile_map: LevelTileMap = $'../LevelTileMap'
 @onready var visual: Node2D = $'../Visual'
 
-# parent for all towers
-var towers_container: Node2D
 var _is_placing = false:
 	set(value):
 		_is_placing = value
-		TowerPlacementManager.is_placing = value
+		if _is_placing:
+			GameState.state = GameState.STATE.PLACING_TOWER
+		else:
+			if GameState.is_placing_tower():
+				GameState.state = GameState.STATE.IN_GAME
 
 var _current_tower_instance: Tower = null
 var _is_valid_placement = false
 
 func _ready():
 	_is_placing = false
-	ButtonsEvents.tower_button_pressed.connect(_on_tower_button_pressed)
-	EnemyManager.wave_finished.connect(func(_wave: EnemyWave): _cancel_tower())
-	EnemyManager.last_wave_finished.connect(func(_wave: EnemyWave): _cancel_tower())
+	ClickEvents.tower_button_pressed.connect(_on_tower_button_pressed)
+	RunContext.progress.current_wave_finished.connect(_cancel_tower)
+	RunContext.progress.last_wave_finished.connect(_cancel_tower)
 
 func _process(_delta: float) -> void:
 	if not _is_placing or not is_instance_valid(_current_tower_instance):
@@ -47,17 +49,36 @@ func _input(event: InputEvent) -> void:
 func _place_tower() -> void:
 	if not _current_tower_instance:
 		return
+	# check gold
+	var tower_price = RunContext.towers_price.get_price(_current_tower_instance.type)
+	if not _has_enought_gold(tower_price):
+		_cancel_tower()
+		return
+	_handle_costs(tower_price)
+	# place tower
 	var tile_pos = level_tile_map.get_mouse_tile_pos()
 	level_tile_map.set_tile_occupied(tile_pos)
-	var tower_price = Price.get_price(_current_tower_instance.type)
-	Score.substract_gold(tower_price)
+	
 	_is_placing = false
 	
-	TowerPlacementManager.tower_added(_current_tower_instance)
+	RunContext.towers_count.tower_added(_current_tower_instance)
 	
 	_current_tower_instance.enable()
 	_current_tower_instance.tile_pos = tile_pos
 	_current_tower_instance = null
+
+func _has_enought_gold(tower_price: int) -> bool:
+	if RunContext.economy.available_free_towers > 0:
+		return true
+	elif RunContext.economy.gold >= tower_price:
+		return true
+	return false
+
+func _handle_costs(tower_price: int) -> void:
+	if RunContext.economy.available_free_towers > 0:
+		RunContext.economy.available_free_towers -= 1
+	else:
+		RunContext.economy.gold -= tower_price
 
 func _cancel_tower() -> void:
 	if _current_tower_instance:
@@ -73,5 +94,4 @@ func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
 	
 	_current_tower_instance = tower_scene.instantiate()
 	visual.add_child(_current_tower_instance)
-	TowerPlacementManager.clear_tower_selected()
 	_is_placing = true

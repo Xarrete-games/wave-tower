@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://4fkas61wyppq"]
+[gd_scene load_steps=7 format=3 uid="uid://4fkas61wyppq"]
 
 [ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/cristal_light/cristal_light.tscn" id="1_7fffe"]
 [ext_resource type="Texture2D" uid="uid://6rwht4l7x5rc" path="res://assets/sprites/towers/Towers.png" id="1_crlvv"]
 [ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="2_uyl23"]
+[ext_resource type="Script" uid="uid://3vv1ts11asqk" path="res://towers/area_detector.gd" id="4_d3ac3"]
 [ext_resource type="Script" uid="uid://c5e13qdjmxcua" path="res://towers/experience_handler.gd" id="5_d3ac3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wmotl"]
@@ -26,11 +27,12 @@ texture = ExtResource("1_crlvv")
 hframes = 3
 region_rect = Rect2(128, 0, 64, 128)
 
-[node name="RangeArea" type="Area2D" parent="."]
+[node name="AreaDetector" type="Area2D" parent="."]
 collision_layer = 0
 input_pickable = false
+script = ExtResource("4_d3ac3")
 
-[node name="RangeCollision" type="CollisionShape2D" parent="RangeArea"]
+[node name="RangeCollision" type="CollisionShape2D" parent="AreaDetector"]
 scale = Vector2(1, 0.5)
 shape = SubResource("CircleShape2D_wmotl")
 
@@ -52,6 +54,6 @@ level_up_postion = Vector2(0, -150)
 [node name="LevelUpPos" type="Marker2D" parent="."]
 position = Vector2(0, -152)
 
-[connection signal="body_entered" from="RangeArea" to="." method="_on_range_area_body_entered"]
-[connection signal="body_exited" from="RangeArea" to="." method="_on_range_area_body_exited"]
+[connection signal="body_entered" from="AreaDetector" to="AreaDetector" method="_on_body_entered"]
+[connection signal="body_exited" from="AreaDetector" to="AreaDetector" method="_on_body_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

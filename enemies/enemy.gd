@@ -3,7 +3,7 @@ class_name Enemy extends CharacterBody2D
 signal die(ememy: Enemy)
 signal target_reached(enemy: Enemy)
 
-enum  EnemyType { NORMAL, BUBA, TANK, GOLEM, SKELETON, BLACK_GOLEM, BLACK_SKELETON, GOLD_SKELETON, INVOKER, SKULL }
+enum  Type { NORMAL, BUBA, TANK, GOLEM, SKELETON, BLACK_GOLEM, BLACK_SKELETON, GOLD_SKELETON, INVOKER }
 
 const GOLD_DROPPED = preload("uid://cxs4ar5enx4mn")
 const DAMAGE_NUMBERS = preload("uid://bkiu4qgh3ug1m")
@@ -33,6 +33,12 @@ var speed_mult: float:
 	set(value):
 		_speed_mult = value
 
+var progress_ratio: float:
+	get:
+		if _path_follow == null:
+			return 0.0
+		return _path_follow.progress_ratio
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var explosion: AnimatedSprite2D = $Explosion
 @onready var health_bar: HealthBar = $HealthBar
@@ -48,8 +54,8 @@ func _ready() -> void:
 	speed = base_speed
 	health_bar.set_max_health(max_healt)
 	_set_health(max_healt)
-	gold_value = base_gold_value + Score.extra_gold_dropped
-	Score.extra_gold_dropped_change.connect(
+	gold_value = base_gold_value + RunContext.economy.extra_gold_dropped
+	RunContext.economy.extra_gold_dropped_change.connect(
 		func(value): gold_value = base_gold_value + value)
 
 func _process(delta: float):
@@ -137,7 +143,7 @@ func _play_hit_animation() -> void:
 func _die() -> void:
 	die.emit(self)
 	_show_gold_dropped()
-	Score.add_gold(gold_value)
+	RunContext.economy.gold += gold_value
 	_path_follow.queue_free()
 	queue_free()
 

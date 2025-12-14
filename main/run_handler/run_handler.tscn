@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7y7a8hvmviqo"]
+
+[ext_resource type="Script" uid="uid://mse5syvk8x0l" path="res://main/run_handler/run_handler.gd" id="1_6aer8"]
+[ext_resource type="Script" uid="uid://gjwx3b24w4x1" path="res://main/run_handler/rewards_screen_handler.gd" id="2_m1orh"]
+[ext_resource type="Script" uid="uid://bj5t83u2udagj" path="res://main/run_handler/events_screen_handler.gd" id="3_m1orh"]
+[ext_resource type="Script" uid="uid://cmma1dvmm1d61" path="res://main/run_handler/shop_screen_handler.gd" id="4_3cngx"]
+
+[node name="RunHandler" type="Node" node_paths=PackedStringArray("events_screen_hander", "rewards_screen_handler")]
+script = ExtResource("1_6aer8")
+events_screen_hander = NodePath("EventsScreenHandler")
+rewards_screen_handler = NodePath("RewardsScreenHander")
+
+[node name="RewardsScreenHander" type="Node" parent="."]
+script = ExtResource("2_m1orh")
+
+[node name="EventsScreenHandler" type="Node" parent="."]
+script = ExtResource("3_m1orh")
+
+[node name="ShopScreenHandler" type="Node" parent="EventsScreenHandler"]
+script = ExtResource("4_3cngx")
