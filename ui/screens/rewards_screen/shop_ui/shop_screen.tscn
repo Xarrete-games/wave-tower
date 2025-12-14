@@ -19,6 +19,7 @@ consumables_container = NodePath("ShopContainer/VBoxContainer/ItemsSection/Items
 [node name="ShopContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ShopContainer"]
 layout_mode = 2
@@ -74,13 +75,14 @@ layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="ButtonsSection" type="HBoxContainer" parent="ShopContainer/VBoxContainer"]
+[node name="ButtonsSection" type="HBoxContainer" parent="ShopContainer"]
 layout_mode = 2
+size_flags_vertical = 8
 alignment = 1
 
-[node name="XarreteActionButton" parent="ShopContainer/VBoxContainer/ButtonsSection" instance=ExtResource("5_g5vmd")]
+[node name="XarreteActionButton" parent="ShopContainer/ButtonsSection" instance=ExtResource("5_g5vmd")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "EXIT"
 
-[connection signal="xarreta_pressed" from="ShopContainer/VBoxContainer/ButtonsSection/XarreteActionButton" to="." method="_on_xarrete_action_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="ShopContainer/ButtonsSection/XarreteActionButton" to="." method="_on_xarrete_action_button_xarreta_pressed"]
