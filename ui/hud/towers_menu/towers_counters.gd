@@ -10,7 +10,7 @@ const GREEN_TOWER = preload("uid://oj5ilwusjvuo")
 @onready var blue_tower_count: TowerCounterPanel = $BlueTowerCount
 
 func _ready():
-	RunContext.tower_count.tower_count_change.connect(_on_tower_count_change)
+	RunContext.towers_count.tower_count_change.connect(_on_tower_count_change)
 	
 func _on_tower_count_change(tower_type: Tower.Type, amount: int) -> void:
 	match tower_type:

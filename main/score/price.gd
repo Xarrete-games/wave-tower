@@ -21,7 +21,7 @@ var sell_prices: Dictionary[Tower.Type, int]= base_prices.duplicate()
 
 func _ready() -> void:
 	await RunContext.initialized
-	RunContext.tower_count.tower_count_change.connect(_on_tower_count_change)
+	RunContext.towers_count.tower_count_change.connect(_on_tower_count_change)
 
 func get_price(tower_type: Tower.Type) -> int:
 	return build_prices[tower_type]

@@ -1,12 +1,7 @@
-#TowerUpgrades
-extends Node
+
+class_name TowersUpgrades extends RefCounted
 
 signal tower_buffs_change(tower_type: Tower.Type, new_stats: TowerBuff)
-
-const AMOUNT_TO_REWARD_1 = 2
-const AMOUNT_TO_REWARD_2 = 4
-const AMOUNT_TO_REWARD_3 = 6
-const AMOUNT_TO_REWARD_4 = 8
 
 # current stats
 var towers_buffs: Dictionary[Tower.Type, TowerBuff] = {
@@ -14,9 +9,6 @@ var towers_buffs: Dictionary[Tower.Type, TowerBuff] = {
 	Tower.Type.GREEN: GreenTowerBuff.new(),
 	Tower.Type.BLUE: BlueTowerBuff.new(),
 }
-
-func _ready() -> void:
-	pass
 
 func reset_buffs() -> void:
 	towers_buffs = {

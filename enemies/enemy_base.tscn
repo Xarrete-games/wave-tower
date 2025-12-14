@@ -132,7 +132,6 @@ frame = 4
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Explosion"]
 
 [node name="HealthBar" parent="." instance=ExtResource("7_puprq")]
-z_index = 1
 offset_left = -20.0
 offset_top = -149.0
 offset_right = -20.0

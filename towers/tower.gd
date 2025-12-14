@@ -66,8 +66,8 @@ func _ready():
 	experience_handler.level_up.connect(_on_level_up)
 	placement_mode()
 	_set_base_stats()
-	_set_buffs(TowerUpgrades.get_buffs(type))
-	TowerUpgrades.tower_buffs_change.connect(_on_tower_buffs_change)
+	_set_buffs(RunContext.towers_upgrades.get_buffs(type))
+	RunContext.towers_upgrades.tower_buffs_change.connect(_on_tower_buffs_change)
 	
 # --------------------
 # --- MODES ---

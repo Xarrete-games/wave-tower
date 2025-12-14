@@ -32,7 +32,7 @@ func is_placing_tower() -> bool:
 	return state == STATE.PLACING_TOWER
 
 func reset_run() -> void:
-	TowerUpgrades.reset_buffs()
+
 	EnemyDebuffManager.reset()
 	speed = 1.0
 

@@ -17,7 +17,7 @@ func _ready() -> void:
 	}
 	stop_music()
 	await RunContext.initialized
-	RunContext.tower_count.tower_count_change.connect(_on_tower_count_change)
+	RunContext.towers_count.tower_count_change.connect(_on_tower_count_change)
 
 func play_music() -> void:
 	base_player.play()
