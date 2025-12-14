@@ -8,6 +8,8 @@ var current_target: Enemy:
 		current_target = value
 		target_change.emit(value)
 
+var targeting_type: Tower.TargetingMode = Tower.TargetingMode.FIRST_IN_PROGRESS
+
 func _on_body_entered(body: Node2D) -> void:
 	var enemy = body as Enemy
 	enemy.die.connect(_on_enemy_die)
@@ -33,8 +35,18 @@ func _remove_target_and_get_next(enemy: Enemy) -> void:
 	if _targets_in_range.is_empty():
 		current_target = null
 	else:
-		#logic to select next target
-		current_target = _targets_in_range[0]
+		_select_next_target()
 
 func _on_enemy_die(enemy: Enemy) -> void:
 	_remove_target_and_get_next(enemy)
+
+func _select_next_target() -> void:
+	if targeting_type == Tower.TargetingMode.FIRST_IN_PROGRESS:
+		var enemy_with_highest_progress: Enemy = null
+		var highest_progress: float = -1.0
+		for enemy in _targets_in_range:
+			if enemy.progress_ratio > highest_progress:
+				highest_progress = enemy.progress_ratio
+				enemy_with_highest_progress = enemy
+		current_target = enemy_with_highest_progress
+	

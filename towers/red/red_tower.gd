@@ -15,7 +15,6 @@ var _hits_count = 0
 func _ready():
 	super._ready()
 	attack_tick_timer.wait_time = 0.1
-	area_detector.target_change.connect(_on_target_change)
 	
 func _process(_delta: float) -> void:
 	if not _current_target:	

@@ -33,6 +33,12 @@ var speed_mult: float:
 	set(value):
 		_speed_mult = value
 
+var progress_ratio: float:
+	get:
+		if _path_follow == null:
+			return 0.0
+		return _path_follow.progress_ratio
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var explosion: AnimatedSprite2D = $Explosion
 @onready var health_bar: HealthBar = $HealthBar

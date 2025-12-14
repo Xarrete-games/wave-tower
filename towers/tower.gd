@@ -7,6 +7,7 @@ signal attack_fired()
 signal attack_speed_change(value: float)
 
 enum Type { RED, GREEN, BLUE }
+enum TargetingMode { FIRST_IN_PROGRESS }
 
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
