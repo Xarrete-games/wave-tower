@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://6vgrx5dct8h8"]
+[gd_scene load_steps=8 format=3 uid="uid://6vgrx5dct8h8"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="2_2c7eb"]
 [ext_resource type="PackedScene" uid="uid://b7y7a8hvmviqo" path="res://main/run_handler/run_handler.tscn" id="3_3qcir"]
 [ext_resource type="PackedScene" uid="uid://b1rsi54eynysa" path="res://ui/screens/pause_screen/pause_menu.tscn" id="4_f7m14"]
 [ext_resource type="PackedScene" uid="uid://drm4bn0pi7ue1" path="res://ui/hud/hud_layer.tscn" id="4_jc0vi"]
+[ext_resource type="PackedScene" uid="uid://bhdmj77ytfxwb" path="res://ui/hud/top_bar_ui/top_bar.tscn" id="6_jc0vi"]
 [ext_resource type="PackedScene" uid="uid://wd57nqjd0s2f" path="res://main/music_handler/music_handler.tscn" id="12_v3ojx"]
 
 [node name="Game" type="Node2D"]
@@ -22,6 +23,10 @@ script = ExtResource("2_2c7eb")
 [node name="HUDLayer" parent="." instance=ExtResource("4_jc0vi")]
 
 [node name="EventLayer" type="CanvasLayer" parent="."]
+
+[node name="TopBarLayer" type="CanvasLayer" parent="."]
+
+[node name="TopBar" parent="TopBarLayer" instance=ExtResource("6_jc0vi")]
 
 [node name="ConfigLayer" type="CanvasLayer" parent="."]
 
