@@ -18,12 +18,11 @@ var _it_cost_health = false
 @onready var description: RichTextLabel = $VBoxContainer/Description
 @onready var title: Label = $VBoxContainer/Title
 @onready var relic_texture: TextureRect = $RelicIcon/RelicTexture
-@onready var amount_live_label: Label = $VBoxContainer/LivePriceContainer/AmountLiveLabel
-@onready var live_price_container: HBoxContainer = $VBoxContainer/LivePriceContainer
 @onready var hexagon_border: Polygon2D = $RelicIcon/Hexagon/Control/Root2d/HexagonBorder
+@onready var health_price: HealthPrice = $VBoxContainer/HealthPrice
 
 func _ready() -> void:
-	live_price_container.visible = false
+	health_price.visible = false
 
 func set_relic(new_relic_value: ItemOffer) -> void:
 	item_offer = new_relic_value
@@ -35,10 +34,13 @@ func set_relic(new_relic_value: ItemOffer) -> void:
 	price = item_offer.price
 
 	if item_offer.health_price > 0:
-		live_price_container.visible = true
+		health_price.visible = true
 		_it_cost_health = true
-		_chek_live(RunContext.status.health)
-		RunContext.status.health_change.connect(_chek_live)
+		health_price.price = item_offer.health_price
+		_chek_health(RunContext.status.health, item_offer.health_price)
+		RunContext.status.health_change.connect(func (current_health: int) -> void:
+			_chek_health(current_health, item_offer.health_price)
+		)
 	
 func _on_gui_input(event: InputEvent) -> void:
 	if (_it_cost_health and not _has_enough_live):
@@ -48,14 +50,9 @@ func _on_gui_input(event: InputEvent) -> void:
 		AudioManager.play_button_click()
 		card_pressed.emit(item_offer)
 
-func _chek_live(curren_live: int) -> void:
-	_has_enough_live = curren_live > 5
-	amount_live_label.label_settings = (
-		LABEL_SETTINGS_24 
-		if _has_enough_live
-		else LABEL_SETTINGS_24_INVALID
-	)
-
+func _chek_health(curren_health: int, health_cost: int) -> void:
+	_has_enough_live = curren_health > health_cost
+	
 func _on_mouse_entered() -> void:
 	AudioManager.play_button_hover()
 	relic_texture.custom_minimum_size = Vector2(160, 160)

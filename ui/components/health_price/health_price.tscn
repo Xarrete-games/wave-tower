@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://di132c8on6fw"]
+
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="1_j6c4j"]
+[ext_resource type="Script" uid="uid://k3ptlqkuj1cj" path="res://ui/components/health_price/health_price.gd" id="1_rc7h7"]
+[ext_resource type="Texture2D" uid="uid://t0orxc251is3" path="res://assets/sprites/icons/corazon.png" id="2_j6c4j"]
+
+[node name="HealthPrice" type="HBoxContainer"]
+offset_right = 74.0
+offset_bottom = 35.0
+alignment = 1
+script = ExtResource("1_rc7h7")
+
+[node name="PriceLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "1"
+label_settings = ExtResource("1_j6c4j")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_right = 30
+
+[node name="health_icon" type="TextureRect" parent="MarginContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("2_j6c4j")
+expand_mode = 1
+stretch_mode = 5

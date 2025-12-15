@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://f428sxnliflm"]
+[gd_scene load_steps=5 format=3 uid="uid://f428sxnliflm"]
 
 [ext_resource type="Script" uid="uid://ca2u5lva3ss8p" path="res://ui/screens/rewards_screen/shop_ui/shop_slot/shop_slot.gd" id="1_yea32"]
 [ext_resource type="PackedScene" uid="uid://w5v1o84mc2gb" path="res://ui/screens/rewards_screen/shop_ui/shop_slot/shop_slot_icon.tscn" id="2_d3qw0"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="2_r6lm4"]
+[ext_resource type="PackedScene" uid="uid://di132c8on6fw" path="res://ui/components/health_price/health_price.tscn" id="4_eyx8o"]
 
 [node name="ShopSlot" type="VBoxContainer" node_paths=PackedStringArray("title_label", "description_label", "gold_price", "shop_slot_icon")]
 offset_right = 250.0
@@ -45,6 +46,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
+
+[node name="HealthPrice" parent="." instance=ExtResource("4_eyx8o")]
+layout_mode = 2
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

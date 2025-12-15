@@ -6,11 +6,14 @@ signal item_purchased(item_offer: ItemOffer, slot: ShopSlot)
 @export var description_label: RichTextLabel
 @export var gold_price: GoldPrice
 @export var shop_slot_icon: ShopSlotIcon
+@onready var health_price: HealthPrice = $HealthPrice
 
 var _item: ItemOffer
 var _price: int = 0
+var has_enough_health: bool = false
 
 func _ready() -> void:
+	health_price.visible = false
 	RunContext.economy.relics_discount_changed.connect(_on_relics_discount_changed)
 
 func set_item(item_offer: ItemOffer) -> void:
@@ -20,10 +23,19 @@ func set_item(item_offer: ItemOffer) -> void:
 	gold_price.price = _price
 	shop_slot_icon.set_icon(item_offer.item_data.texture)
 	shop_slot_icon.set_background_color(RunContext.relics.get_rarity_color(item_offer.item_data.rarity))
+	# health price
+	_chek_health(RunContext.status.health, item_offer.health_price)
+	if item_offer.health_price > 0:
+		health_price.visible = true
+		health_price.price = item_offer.health_price
+	
+	RunContext.status.health_change.connect(func (current_health: int) -> void:
+		_chek_health(current_health, item_offer.health_price))
+	
 	_item = item_offer
 	
 func _on_gui_input(event: InputEvent) -> void:
-	if Utils.is_left_click_event(event) and RunContext.economy.gold >= _price:
+	if Utils.is_left_click_event(event) and RunContext.economy.gold >= _price and has_enough_health:
 		AudioManager.play_button_click()
 		item_purchased.emit(_item, self)
 
@@ -38,3 +50,6 @@ func _on_mouse_exited() -> void:
 func _on_relics_discount_changed(_relics_discount_mult: float) -> void:
 	if _item.create_item() is Relic:
 		set_item(RunContext.offers_manager.create_relic_offer_from_data(_item.item_data))
+
+func _chek_health(current_health: int, health_cost: int) -> void:
+	has_enough_health = current_health > health_cost

@@ -2,4 +2,3 @@ class_name Boniato extends Relic
 
 func apply_effect() -> void:
 	RunContext.economy.extra_gold_dropped += 1
-	RunContext.lives -= 5

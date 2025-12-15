@@ -11,5 +11,6 @@ description = "Increases the gold dropped by enemies by 1 at the cost of 5 lives
 Be careful!"
 texture = ExtResource("3_g7kpf")
 rarity = 2
+health_price = 5
 type = 1
 runtime_script = ExtResource("1_ijull")
