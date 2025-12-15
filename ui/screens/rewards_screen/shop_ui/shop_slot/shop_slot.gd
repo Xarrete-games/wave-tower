@@ -35,6 +35,9 @@ func set_item(item_offer: ItemOffer) -> void:
 	_item = item_offer
 	
 func _on_gui_input(event: InputEvent) -> void:
+	if _item.item_data.type == ItemData.Type.CONSUMABLE and RunContext.consumables.is_full():
+		return
+
 	if Utils.is_left_click_event(event) and RunContext.economy.gold >= _price and has_enough_health:
 		AudioManager.play_button_click()
 		item_purchased.emit(_item, self)

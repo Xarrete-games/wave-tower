@@ -7,6 +7,9 @@ signal consumable_clicked(consumable: Consumable)
 
 var consumables: Array[Consumable] = []
 
+func is_full() -> bool:
+    return consumables.size() == 5
+
 func add_consumable(consumable: Consumable) -> void:
     consumables.append(consumable)
     consumable.clicked.connect(_on_consumable_clicked)
