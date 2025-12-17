@@ -19,12 +19,12 @@ func _ready() -> void:
 # NEXT WAVE SCREEN
 func _show_next_wave_screen() -> void:
 	var next_wave_screen = NEXT_WAVE_SCREEN.instantiate()
-	event_layer.add_child(next_wave_screen)
+	event_layer.call_deferred("add_child", next_wave_screen)
 
 # NEXT LEVEL SCREEN
 func _show_next_level_menu() -> void:
 	var next_level_screen = NEXT_LEVEL_SCREEN.instantiate()
-	event_layer.add_child(next_level_screen)
+	event_layer.call_deferred("add_child", next_level_screen)
 
 # REWARDS SCREEN
 func _on_wave_finished() -> void:

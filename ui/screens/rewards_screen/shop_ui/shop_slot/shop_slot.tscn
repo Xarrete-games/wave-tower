@@ -8,7 +8,6 @@
 [node name="ShopSlot" type="VBoxContainer" node_paths=PackedStringArray("title_label", "description_label", "gold_price", "shop_slot_icon")]
 offset_right = 250.0
 offset_bottom = 240.0
-alignment = 1
 script = ExtResource("1_yea32")
 title_label = NodePath("Title")
 description_label = NodePath("Description")
