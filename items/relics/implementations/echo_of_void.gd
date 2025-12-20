@@ -1,6 +1,5 @@
 class_name EchoOfVoid extends Relic
 
 func apply_effect() -> void:
-	var green_tower_buffs = RunContext.towers_upgrades.get_buffs(Tower.Type.GREEN) as GreenTowerBuff
-	green_tower_buffs.extra_waves += 1
-	RunContext.towers_upgrades.emit_buffs_change(Tower.Type.GREEN)
+	var tower_buff = TowerBuff.new(TowerBuff.SourceType.RELIC, "echo_of_void", NumWavesModifier.new(1))
+	RunContext.towers_upgrades.add_buff(Tower.Type.GREEN, tower_buff)

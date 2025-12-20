@@ -1,6 +1,5 @@
 class_name HeadPhones extends Relic
 
 func apply_effect() -> void:
-	var blue_tower_buffs = RunContext.towers_upgrades.get_buffs(Tower.Type.BLUE) as BlueTowerBuff
-	blue_tower_buffs.double_hit_chance += 10
-	RunContext.towers_upgrades.emit_buffs_change(Tower.Type.BLUE)
+	var tower_buff = TowerBuff.new(TowerBuff.SourceType.RELIC, "headphones", DoubleShotModifier.new(0.1))
+	RunContext.towers_upgrades.add_buff(Tower.Type.GREEN, tower_buff)

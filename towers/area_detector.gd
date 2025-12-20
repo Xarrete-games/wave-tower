@@ -57,7 +57,7 @@ func _select_next_target() -> void:
 					highest_progress = enemy.progress_ratio
 					enemy_with_highest_progress = enemy
 			current_target = enemy_with_highest_progress
-		Tower.TargetingMode.HIGHT_HP:
+		Tower.TargetingMode.HIGH_HP:
 			if _targets_in_range.is_empty():
 				current_target = null
 				return

@@ -1,15 +1,15 @@
 class_name TowerBuff extends RefCounted
 
-# flat stats
-var extra_damage: float = 0
-var extra_attack_range: float = 0
-var extra_attack_speed: float = 0
-var extra_tower_critic_chance: float = 0
-var extra_critic_damage: float = 0
+enum SourceType {
+    RELIC,
+    LEVEL_UP,
+}
 
-# mult stats
-var damage_mult: float = 1.0       
-var attack_range_mult: float = 1.0
-var attack_speed_mult: float = 1.0
-var critic_chance_mult: float = 1.0
-var critic_damage_mult: float = 1.0
+var source_type: SourceType
+var source_id: String
+var modifier: TowerBuffModifier
+
+func _init(p_source_type: SourceType = SourceType.LEVEL_UP, p_source_id: String = "", p_modifier: TowerBuffModifier = null) -> void:
+    source_type = p_source_type
+    source_id = p_source_id
+    modifier = p_modifier

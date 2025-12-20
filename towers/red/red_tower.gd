@@ -22,13 +22,9 @@ func _process(_delta: float) -> void:
 	if not _current_target:	
 		return
 
-func _set_buffs(tower_buffs: TowerBuff) -> void:
-	super._set_buffs(tower_buffs)
-	#green tower stats
-	var red_tower_buffs = tower_buffs as RedTowerBuff
-	execute_threshold = local_execute_threshold + red_tower_buffs.extra_execute_threshold
-	burn_damage = red_tower_buffs.burn_damage
-	
+func _on_extra_stats_change(extra_stats: TowerExtraStats) -> void:
+	execute_threshold = extra_stats.execute_threshold
+
 func _fire() -> void:
 	_target_in_progress = _current_target
 	red_projectil.set_attack(_get_attack_per_hit())

@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://d36t7geqp1sh" path="res://towers/red/red_tower.tscn" id="3_lxxr0"]
 [ext_resource type="PackedScene" uid="uid://oj5ilwusjvuo" path="res://towers/green/green_tower.tscn" id="4_lxxr0"]
 [ext_resource type="PackedScene" uid="uid://cwyyp2r266blt" path="res://towers/blue/blue_tower.tscn" id="5_61shu"]
-[ext_resource type="Resource" uid="uid://bndxfmba1ltf8" path="res://towers/stats/stats_base/red_tower_stats_base.tres" id="5_whndq"]
+[ext_resource type="Resource" uid="uid://bndxfmba1ltf8" path="res://towers/stats/stats_base/data/red_tower_configuration.tres" id="5_whndq"]
 [ext_resource type="Texture2D" uid="uid://dheamk0vu60q6" path="res://assets/sprites/towers/torreticas_hover.png" id="6_7564t"]
-[ext_resource type="Resource" uid="uid://c1d3qqqdi2oxp" path="res://towers/stats/stats_base/green_tower_stats_base.tres" id="7_ffkn8"]
-[ext_resource type="Resource" uid="uid://by0giydu700gy" path="res://towers/stats/stats_base/blue_tower_stats_base.tres" id="10_1p1l7"]
+[ext_resource type="Resource" uid="uid://c1d3qqqdi2oxp" path="res://towers/stats/stats_base/data/green_tower_configuration.tres" id="7_ffkn8"]
+[ext_resource type="Resource" uid="uid://by0giydu700gy" path="res://towers/stats/stats_base/data/blue_tower_configuration.tres" id="10_1p1l7"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7564t"]
 load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"

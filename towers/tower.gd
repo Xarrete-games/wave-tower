@@ -7,12 +7,12 @@ signal attack_fired()
 signal attack_speed_change(value: float)
 
 enum Type { RED, GREEN, BLUE }
-enum TargetingMode { FIRST_IN_PROGRESS, HIGHT_HP, LOW_HP }
+enum TargetingMode { FIRST_IN_PROGRESS, HIGH_HP, LOW_HP }
 
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
 @export var type: Type = Type.RED
-@export var stats_base: TowerStatsBase
+@export var stats_base: TowerStatsConfiguration
 
 var _current_target: Enemy
 var _enabled: bool = false
@@ -23,23 +23,7 @@ var stats = TowerStats:
 	set(value):
 		stats = value
 		stats_change.emit(self)
-var last_buffs: TowerBuff
-# total stats
-var damage: float = 0
-var attack_range: float = 0
-var attack_speed: float = 0:
-	set(value):
-		attack_speed = value
-		attack_speed_change.emit(value)
-		
-var critic_chance: float = 0
-var critic_damage: float = 0
-# local stats
-var local_damage: float = 0
-var local_attack_range: float = 0
-var local_attack_speed: float = 0
-var local_critic_chance: float = 0
-var local_critic_damage: float = 0
+
 # tile_pos
 var tile_pos: Vector2i
 var targeting_mode: TargetingMode = TargetingMode.FIRST_IN_PROGRESS:
@@ -61,16 +45,17 @@ var exp_data: TowerExpData:
 @onready var cristal_light: CristalLight = $CristalLight
 @onready var experience_handler: ExprienceHandler = $ExperienceHandler
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var tower_stats_handler: TowerStatsHandler = $TowerStatsHandler
 
 func _ready():
+	stats_base.build()
 	range_collision.shape = CircleShape2D.new()
 	exp_data = experience_handler.exp_data
 	experience_handler.exp_data_change.connect(_on_exp_data_change)
-	experience_handler.level_up.connect(_on_level_up)
 	placement_mode()
-	_set_base_stats()
-	_set_buffs(RunContext.towers_upgrades.get_buffs(type))
-	RunContext.towers_upgrades.tower_buffs_change.connect(_on_tower_buffs_change)
+	tower_stats_handler.stats_change.connect(_on_stats_change)
+	tower_stats_handler.extra_stats_change.connect(_on_extra_stats_change)
+	tower_stats_handler.set_data(stats_base, type, experience_handler)
 	area_detector.target_change.connect(_on_target_change)
 	
 # --------------------
@@ -107,12 +92,12 @@ func enable() -> void:
 # --------------------
 func _get_attack() -> Attack:
 	var is_critic = _is_critical_hit()
-	var attack_damege = damage * (1 + (critic_damage/100)) if is_critic else damage
+	var attack_damege = stats.damage * (1 + (stats.critic_damage/100)) if is_critic else stats.damage
 	return Attack.new(attack_damege, is_critic)
 	
 func _is_critical_hit() -> bool:
 	var random_value: float = randf()
-	return random_value < (critic_chance / 100.0)
+	return random_value < (stats.critic_chance / 100.0)
 	
 # --------------------
 # --- TARGETING ---
@@ -136,68 +121,25 @@ func _on_attack_timer_timeout() -> void:
 @abstract
 func _fire() -> void
 
+@abstract
+func _on_extra_stats_change(tower_extra_stats: TowerExtraStats) -> void
+
 # --------------------
 # --- STATS ---
 # --------------------
 
-func _set_base_stats() -> void:
-	if not stats_base:
-		push_error("[Tower] stats base not set")
-	
-	damage = stats_base.base_damage
-	attack_range = stats_base.base_attack_range
-	attack_speed = stats_base.base_attack_speed
-	critic_chance = stats_base.base_critic_chance
-	critic_damage = stats_base.base_critic_damage
-	#local status
-	local_damage = stats_base.base_damage
-	local_attack_range = stats_base.base_attack_range
-	local_attack_speed = stats_base.base_attack_speed
-	local_critic_chance = stats_base.base_critic_chance
-	local_critic_damage = stats_base.base_critic_damage
+func _on_stats_change(new_stats: TowerStats) -> void:
+	stats = new_stats   
+	attack_speed_change.emit(stats.attack_speed)
 	_apply_stats_changes()
 
-# read stats from tower_stats and assigns the values ​​to the corresponding nodes
-func _set_buffs(tower_buff: TowerBuff) -> void:
-	if not tower_buff:
-		return
-	
-	# damage
-	damage = (local_damage + tower_buff.extra_damage) * tower_buff.damage_mult
-	# range
-	attack_range = (local_attack_range + tower_buff.extra_attack_range) * tower_buff.attack_range_mult
-	# attck speed
-	attack_speed = (local_attack_speed - tower_buff.extra_attack_speed) * tower_buff.attack_speed_mult
-	# critic change
-	critic_chance = (local_critic_chance + tower_buff.extra_tower_critic_chance) * tower_buff.critic_chance_mult
-	# critic damage
-	critic_damage = (local_critic_damage + tower_buff.extra_critic_damage) * tower_buff.critic_damage_mult
-	
-	last_buffs = tower_buff
-	_apply_stats_changes()
-	
 func _apply_stats_changes() -> void:
-	attack_timer.wait_time = attack_speed
-	range_preview.radius = attack_range
-	(range_collision.shape as CircleShape2D).radius = attack_range
-	stats = TowerStats.new(self)
-	#tower_stats_panel.update_stats(stats, exp_data)
-
-func _on_tower_buffs_change(tower_type: Tower.Type, tower_buffs: TowerBuff) -> void:
-	if tower_type == type:
-		_set_buffs(tower_buffs)
+	attack_timer.wait_time = stats.attack_speed
+	range_preview.radius = stats.attack_range
+	(range_collision.shape as CircleShape2D).radius = stats.attack_range
 		
 func _on_exp_data_change(new_exp_data: TowerExpData) -> void:
 	exp_data = new_exp_data
-	
-func _on_level_up(_new_level: int) -> void:
-	local_damage += stats_base.damage_per_level
-	local_attack_range += stats_base.attack_range_level
-	local_attack_speed += stats_base.attack_speed_per_level
-	local_critic_chance += stats_base.critic_chance_per_level
-	local_critic_damage += stats_base.critic_damage_per_level
-	
-	_set_buffs(last_buffs)
 # --------------------
 # --- MOUSE INTERACTION ---
 # --------------------

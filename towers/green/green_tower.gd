@@ -9,17 +9,8 @@ var local_num_waves = 3
 @onready var projectil_spawn_position: Marker2D = $ProjectilSpawnPosition
 @onready var attack_player: AudioStreamPlayer2D = $AttackPlayer
 
-func _ready():
-	super._ready()
-	
-func _process(_delta: float) -> void:
-	pass
-
-func _set_buffs(tower_buffs: TowerBuff) -> void:
-	super._set_buffs(tower_buffs)
-	#green tower stats
-	var green_tower_buffs = tower_buffs as GreenTowerBuff
-	num_waves = local_num_waves + green_tower_buffs.extra_waves
+func _on_extra_stats_change(tower_extra_stats: TowerExtraStats) -> void:
+	num_waves = local_num_waves + tower_extra_stats.extra_waves
 	
 func _fire() -> void:
 	#attack_player.play()

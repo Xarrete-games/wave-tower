@@ -18,7 +18,7 @@ signal pressed(tower_scene: PackedScene)
 		tower_description = value
 		if hint_label:
 			hint_label.text = value
-@export var base_stats: TowerStatsBase
+@export var base_stats: TowerStatsConfiguration
 
 var price: int = 0:
 	set(value):
@@ -51,7 +51,7 @@ func _update_texture_hover():
 		tower_button.texture_hover = icon_hover
 
 
-func _set_stats(tower_stats: TowerStatsBase) -> void:
+func _set_stats(tower_stats: TowerStatsConfiguration) -> void:
 	damage_label.text = str(tower_stats.base_damage)
 	attack_speed_label.text = str(tower_stats.base_attack_speed)
 	range_label.text = str(tower_stats.base_attack_range)

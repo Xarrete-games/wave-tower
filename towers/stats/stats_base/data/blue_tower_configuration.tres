@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TowerStatsConfiguration" load_steps=2 format=3 uid="uid://by0giydu700gy"]
+
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/stats/stats_base/tower_stats_configuration.gd" id="1_4kqxn"]
+
+[resource]
+script = ExtResource("1_4kqxn")
+base_damage = 18.0
+base_attack_range = 280.0
+base_attack_speed = 6.0
+damage_per_level = 2.0
+attack_range_level = 10.0
