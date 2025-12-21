@@ -105,13 +105,16 @@ func enable() -> void:
 # --- HEALT ---
 # --------------------
 # percentage of remaining heal
-func get_remaining_heal() -> float:
+func get_percentage_remaining_health() -> float:
 	if max_healt <= 0:
 		return 0.0
 	var health_ratio: float = health / max_healt
 	var percentage: float = health_ratio * 100.0
 	
 	return min(100.0, percentage)
+
+func get_remaining_health() -> float:
+	return health
 
 func apply_debuff(debuff: EnemyDebuff) -> void:
 	debuff_handler.add_debuff(debuff, self)

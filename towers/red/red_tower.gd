@@ -46,7 +46,7 @@ func _on_target_change(_target: Enemy) -> void:
 			#red_projectil.set_target(target)
 
 func _on_attack_tick_timer_timeout() -> void:
-	var next_attack = _get_attack_per_hit() if _current_target.get_remaining_heal() > execute_threshold else _get_letal_attack()
+	var next_attack = _get_attack_per_hit() if _current_target.get_percentage_remaining_health() > execute_threshold else _get_letal_attack()
 	red_projectil.set_attack(next_attack)
 	red_projectil.hit_target()
 	_hits_count += 1

@@ -64,8 +64,8 @@ func _select_next_target() -> void:
 			var enemy_with_highest_hp: Enemy = null
 			var highest_hp: float = -1.0
 			for enemy in _targets_in_range:
-				if enemy.get_remaining_heal() > highest_hp:
-					highest_hp = enemy.get_remaining_heal()
+				if enemy.get_remainig_health() > highest_hp:
+					highest_hp = enemy.get_remainig_health()
 					enemy_with_highest_hp = enemy
 			current_target = enemy_with_highest_hp
 		Tower.TargetingMode.LOW_HP:
@@ -75,7 +75,7 @@ func _select_next_target() -> void:
 			var enemy_with_lowest_hp: Enemy = null
 			var lowest_hp: float = INF
 			for enemy in _targets_in_range:
-				if enemy.get_remaining_heal() < lowest_hp:
-					lowest_hp = enemy.get_remaining_heal()
+				if enemy.get_remainig_health() < lowest_hp:
+					lowest_hp = enemy.get_remainig_health()
 					enemy_with_lowest_hp = enemy
 			current_target = enemy_with_lowest_hp
