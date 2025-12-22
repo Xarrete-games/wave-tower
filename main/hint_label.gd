@@ -17,7 +17,7 @@ func _ready() -> void:
 		text = ""
 
 func _on_state_change(state: GameState.STATE) -> void:
-	if state != GameState.STATE.PLACING_TOWER:
+	if state != GameState.STATE.PLACING_TOWER and state != GameState.STATE.USING_ITEM:
 		if not wait_first_hint:
 			text = ""
 	else:

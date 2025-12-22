@@ -32,7 +32,7 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
-		if not GameState.is_placing_tower():
+		if not GameState.is_placing_tower() and not GameState.is_using_item():
 			_open_config_menu()
 
 func reset_game() -> void:

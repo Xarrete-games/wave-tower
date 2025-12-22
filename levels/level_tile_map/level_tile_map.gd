@@ -19,12 +19,23 @@ var _blocked_tiles: Dictionary[Vector2i, bool] = {}
 
 func _ready() -> void:
 	ClickEvents.tower_sold_pressed.connect(_on_tower_sold)
-	RunContext.consumables.consumable_used.connect(_on_consumable_used)
 	_fill_blocked_dic()
 	
 func get_mouse_tile_pos() -> Vector2i:
 	var mouse_pos = get_global_mouse_position()
 	return local_to_map(to_local(mouse_pos))
+
+func is_mouse_on_block_tile() -> bool:
+	var map_coords: Vector2i = get_mouse_tile_pos()
+	var tile_data = get_cell_tile_data(map_coords)
+	
+	if tile_data == null:
+		return false
+	
+	if tile_data.get_custom_data(BLOCKED) == true:
+		return true
+		
+	return false
 
 func is_mouse_on_buildeable_tile() -> bool:
 	var map_coords: Vector2i = get_mouse_tile_pos()
@@ -53,16 +64,13 @@ func set_tile_free(map_coords: Vector2i):
 	if _occupied_tiles.has(map_coords):
 		_occupied_tiles.erase(map_coords)
 
-func unblock_tile() -> void:
+func unblock_tile(map_coords: Vector2i) -> void:
 	# remove first
 	var blocked_tiles_array = _blocked_tiles.keys()
 	if blocked_tiles_array.is_empty():
 		return
-	var array_size = blocked_tiles_array.size()
-	var random_index = randi() % array_size
-	var coords: Vector2i = blocked_tiles_array[random_index]
-	_blocked_tiles.erase(coords)
-	set_cell(coords, ATLAS_ID, unlocked_tiles[level])
+	_blocked_tiles.erase(map_coords)
+	set_cell(map_coords, ATLAS_ID, unlocked_tiles[level])
 		
 func _fill_blocked_dic() -> void:
 	var used_cells: Array[Vector2i] = get_used_cells()
@@ -76,6 +84,3 @@ func _on_tower_sold(tower: Tower) -> void:
 	var tile = tower.tile_pos
 	set_tile_free(tile)
 	
-func _on_consumable_used(consumable: Consumable) -> void:
-	if consumable is FoundationBreaker:
-		unblock_tile()

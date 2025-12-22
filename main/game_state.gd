@@ -4,7 +4,7 @@ extends Node
 signal state_change(state: STATE)
 signal speed_change(value: float)
 
-enum STATE { ON_MAIN_MENU, IN_GAME, PLACING_TOWER }
+enum STATE { ON_MAIN_MENU, IN_GAME, PLACING_TOWER, USING_ITEM }
 
 var speed: float:
 	get(): return _speed
@@ -30,6 +30,9 @@ func is_is_in_game() -> bool:
 
 func is_placing_tower() -> bool:
 	return state == STATE.PLACING_TOWER
+
+func is_using_item() -> bool:
+	return state == STATE.USING_ITEM
 
 func reset_run() -> void:
 

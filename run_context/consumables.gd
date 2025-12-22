@@ -27,7 +27,8 @@ func _on_consumable_clicked(consumable: Consumable) -> void:
         consumable.use()
         consumable.used.emit(consumable)
     elif consumable is FoundationBreaker:
-        consumable.used.emit(consumable)
+        pass
+        #consumable.used.emit(consumable)
     
     consumable_clicked.emit(consumable)
 
