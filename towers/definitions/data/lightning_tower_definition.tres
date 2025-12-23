@@ -13,3 +13,4 @@ id = "lightning_tower"
 display_name = "Lightning Tower"
 description = "Basic Lightning tower"
 icon = SubResource("AtlasTexture_i5pku")
+type = 1

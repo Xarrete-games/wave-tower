@@ -14,10 +14,13 @@ class_name TowerConfiguration extends Resource
 @export var critic_chance_per_level: float = 0
 @export var critic_damage_per_level: float = 0
 
+@export_group("Tower Definition")
+@export var definition: TowerDefinition
 @export var upgraded_towers: Array[TowerDefinitionWithInstance] = []
 
 var stats: TowerStats = TowerStats.new()
 var stats_on_level: TowerStats = TowerStats.new()
+
 
 func build() -> void:
     stats.damage = base_damage

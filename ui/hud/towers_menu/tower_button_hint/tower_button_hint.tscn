@@ -1,0 +1,153 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxk1x30qq1f7p"]
+
+[ext_resource type="Script" uid="uid://idfo47x20kr4" path="res://ui/hud/towers_menu/tower_button_hint/tower_button_hint.gd" id="1_j4uly"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="1_r8gbm"]
+[ext_resource type="Texture2D" uid="uid://dv68a541qeosv" path="res://assets/sprites/icons/icons_sword.png" id="2_j4uly"]
+[ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="2_lx7fx"]
+[ext_resource type="Texture2D" uid="uid://bvev5rktov31p" path="res://assets/sprites/icons/icons_timer.png" id="3_lx7fx"]
+[ext_resource type="Texture2D" uid="uid://dio1imbeyg458" path="res://assets/sprites/icons/icons_tower_range.png" id="4_3s3ui"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wylug"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.49803922)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+corner_detail = 1
+
+[node name="TowerButtonHint" type="PanelContainer" node_paths=PackedStringArray("name_label", "description_label", "damage_label", "attack_speed_label", "range_label")]
+offset_right = 343.0
+offset_bottom = 149.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wylug")
+script = ExtResource("1_j4uly")
+name_label = NodePath("VBoxContainer/DescriptionContainer/NameLabel")
+description_label = NodePath("VBoxContainer/DescriptionContainer/DescriptionLabel")
+damage_label = NodePath("VBoxContainer/StatsContainer/HBoxContainer/VBoxContainer/DamageLabel")
+attack_speed_label = NodePath("VBoxContainer/StatsContainer/HBoxContainer2/VBoxContainer/AttackSpeedLabel")
+range_label = NodePath("VBoxContainer/StatsContainer/HBoxContainer3/VBoxContainer/RangeLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="DescriptionContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="RichTextLabel" parent="VBoxContainer/DescriptionContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_lx7fx")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[u]Fire Tower[/u]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer/DescriptionContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Su mucho damage"
+label_settings = ExtResource("1_r8gbm")
+
+[node name="StatsContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/StatsContainer/HBoxContainer"]
+texture_filter = 2
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_j4uly")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/StatsContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="damage" type="Label" parent="VBoxContainer/StatsContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5794276, 0.76647013, 0.79482156, 1)
+theme_override_font_sizes/font_size = 14
+text = "Damage:"
+
+[node name="DamageLabel" type="Label" parent="VBoxContainer/StatsContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "50"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/StatsContainer/HBoxContainer2"]
+texture_filter = 2
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_lx7fx")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/StatsContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Label" type="Label" parent="VBoxContainer/StatsContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5803922, 0.7647059, 0.79607844, 1)
+theme_override_font_sizes/font_size = 14
+text = "At. speed:"
+
+[node name="AttackSpeedLabel" type="Label" parent="VBoxContainer/StatsContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "50"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/StatsContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/StatsContainer/HBoxContainer3"]
+texture_filter = 4
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_3s3ui")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/StatsContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Label" type="Label" parent="VBoxContainer/StatsContainer/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5803922, 0.7647059, 0.79607844, 1)
+theme_override_font_sizes/font_size = 14
+text = "Range:"
+
+[node name="RangeLabel" type="Label" parent="VBoxContainer/StatsContainer/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "50"

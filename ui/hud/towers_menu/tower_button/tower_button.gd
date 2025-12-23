@@ -1,46 +1,53 @@
 class_name TowerButton extends Control
 
-signal pressed(tower_scene: PackedScene)
+signal tower_button_pressed(tower_scene: PackedScene)
+signal hover(tower_button: TowerButton)
+signal unhover(tower_button: TowerButton)
 
-@export var tower_scene: PackedScene
-@export var icon: Texture2D:
-	set(value):
-		icon = value
-		_update_texture()
+const NORMAL_PANEL = preload("uid://dcjn1y7ofuii7")
+const HOVER_PANEL = preload("uid://5m3jkdualcb3")
 
-@export var icon_hover: AtlasTexture:
+@export var tower_definition: TowerDefinitionWithInstance:
 	set(value):
-		icon_hover = value
-		_update_texture_hover()
-
-@export_multiline var tower_description: String:
-	set(value):
-		tower_description = value
-		if hint_label:
-			hint_label.text = value
+		tower_definition = value
+		tower_scene = tower_definition.scene
+		icon = tower_definition.definition.icon
+		tower_description = tower_definition.definition.description
+		type = tower_definition.definition.type
+		
 @export var base_stats: TowerConfiguration
+@export var panel: Panel	
+@export var tower_button: TextureButton
+@export var gold_price: GoldPrice
+
 
 var price: int = 0:
 	set(value):
 		price = value
 		gold_price.price = value
+var icon: Texture2D:
+	set(value):
+		icon = value
+		_update_texture()
 
-@onready var tower_button: TextureButton = $VBoxContainer/CenterContainer/TowerButton
-@onready var gold_price: GoldPrice = $VBoxContainer/GoldPrice
-@onready var hint_container: PanelContainer = $HintContainer
-@onready var hint_label: Label = $HintContainer/VBoxContainer/ExpDataContainer/HintLabel
-# stats
-@onready var damage_label: Label = $HintContainer/VBoxContainer/MarginContainer/HBoxContainer4/HBoxContainer/VBoxContainer/DamageLabel
-@onready var attack_speed_label: Label = $HintContainer/VBoxContainer/MarginContainer/HBoxContainer4/HBoxContainer2/VBoxContainer/AttackSpeedLabel
-@onready var range_label: Label = $HintContainer/VBoxContainer/MarginContainer/HBoxContainer4/HBoxContainer3/VBoxContainer/RangeLabel
+var icon_hover: AtlasTexture:
+	set(value):
+		icon_hover = value
+		_update_texture_hover()
 
+var tower_description: String:
+	set(value):
+		tower_description = value
+var tower_scene: PackedScene
+var type: Tower.Type
 
 func _ready() -> void:
+	await RunContext.initialized
+	price = RunContext.towers_price.get_price(type)
+	RunContext.towers_price.tower_price_change.connect(_on_tower_price_change)
+	RunContext.economy.available_free_towers_change.connect(_on_available_free_towers_change)
+	add_theme_stylebox_override("panel", NORMAL_PANEL)
 	_update_texture()
-	_set_stats(base_stats)
-	hint_container.visible = false
-	if hint_label:
-		hint_label.text = tower_description
 	
 func _update_texture():
 	if tower_button:
@@ -50,22 +57,30 @@ func _update_texture_hover():
 	if tower_button:
 		tower_button.texture_hover = icon_hover
 
+func _on_mouse_exited() -> void:
+	unhover.emit(self )
+	panel.add_theme_stylebox_override("panel", NORMAL_PANEL)
 
-func _set_stats(tower_stats: TowerConfiguration) -> void:
-	damage_label.text = str(tower_stats.base_damage)
-	attack_speed_label.text = str(tower_stats.base_attack_speed)
-	range_label.text = str(tower_stats.base_attack_range)
+func _on_mouse_entered() -> void:
+	panel.add_theme_stylebox_override("panel", HOVER_PANEL)
+	hover.emit(self)
+	AudioManager.play_button_hover()
+
+func _on_tower_price_change(tower_type: Tower.Type, new_price: int) -> void:
+	if RunContext.economy.available_free_towers > 0:
+		return
+	if tower_type == type:
+		price = new_price
+
+func _on_available_free_towers_change(available_free_towers: int) -> void:
+	if available_free_towers > 0:
+		price = 0
+	else:
+		price = RunContext.towers_price.get_price(type)
+
 
 func _on_tower_button_pressed() -> void:
 	AudioManager.play_button_click()
 	if RunContext.economy.gold < price:
 		return
-	pressed.emit(tower_scene)
-	
-
-func _on_tower_button_mouse_entered() -> void:
-	hint_container.visible = true
-	AudioManager.play_button_hover()
-
-func _on_tower_button_mouse_exited() -> void:
-	hint_container.visible = false
+	tower_button_pressed.emit(tower_scene)

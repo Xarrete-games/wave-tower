@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=5 format=3 uid="uid://cg62x3fyuhj52"]
+[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=6 format=3 uid="uid://cg62x3fyuhj52"]
 
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="1_cbqn0"]
+[ext_resource type="Resource" uid="uid://cqkdrqkyjojfu" path="res://towers/definitions/data/fire_tower_definition.tres" id="1_y1o0l"]
 [ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/definitions/tower_definition_with_instance.gd" id="2_esicr"]
 [ext_resource type="Resource" uid="uid://5apq3w6n8f53" path="res://towers/definitions/data/frost_tower_definition_instance.tres" id="3_y1o0l"]
 [ext_resource type="Resource" uid="uid://cb8v2oeues41k" path="res://towers/definitions/data/lightning_tower_definition_instance.tres" id="4_wv6in"]
@@ -11,5 +12,6 @@ base_damage = 25.0
 base_attack_range = 300.0
 damage_per_level = 4.0
 attack_range_level = 10.0
+definition = ExtResource("1_y1o0l")
 upgraded_towers = Array[ExtResource("2_esicr")]([ExtResource("3_y1o0l"), ExtResource("4_wv6in")])
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"

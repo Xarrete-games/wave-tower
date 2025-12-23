@@ -13,4 +13,5 @@ id = "frost_tower"
 display_name = "Frost Tower"
 description = "Basic frost tower"
 icon = SubResource("AtlasTexture_ncsk7")
+type = 2
 metadata/_custom_type_script = "uid://vqg2x7qa2n1x"
