@@ -42,6 +42,6 @@ func _button_speed_pressed() -> void:
 	if speed == 1.0:
 		speed = 2.0
 	elif speed == 2.0:
-		speed = 3.0
-	elif speed == 3.0:
+		speed = 4.0
+	elif speed == 4.0:
 		speed = 1.0
