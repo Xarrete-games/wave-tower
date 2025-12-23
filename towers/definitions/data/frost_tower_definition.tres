@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TowerDefinition" load_steps=4 format=3 uid="uid://b71vkoang61w3"]
+
+[ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="2_4bhfo"]
+[ext_resource type="Script" uid="uid://vqg2x7qa2n1x" path="res://towers/definitions/tower_definition.gd" id="3_1ryfx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
+atlas = ExtResource("2_4bhfo")
+region = Rect2(281, 57, 79, 117)
+
+[resource]
+script = ExtResource("3_1ryfx")
+id = "frost_tower"
+display_name = "Frost Tower"
+description = "Basic frost tower"
+icon = SubResource("AtlasTexture_ncsk7")
+metadata/_custom_type_script = "uid://vqg2x7qa2n1x"

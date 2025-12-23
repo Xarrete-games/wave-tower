@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=3 format=3 uid="uid://cd7881byrb8se"]
+
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="1_auyq4"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/definitions/tower_definition_with_instance.gd" id="2_fpoxy"]
+
+[resource]
+script = ExtResource("1_auyq4")
+base_damage = 18.0
+base_attack_range = 280.0
+base_attack_speed = 6.0
+damage_per_level = 2.0
+attack_range_level = 10.0
+metadata/_custom_type_script = "uid://ddvtkyy0nswgw"

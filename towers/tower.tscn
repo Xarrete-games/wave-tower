@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://4fkas61wyppq"]
+
+[ext_resource type="Script" uid="uid://pmu46mvlw67" path="res://towers/tower_stats_handler.gd" id="1_7jtxt"]
+[ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/components/cristal_light/cristal_light.tscn" id="2_2233p"]
+[ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="3_nbqd2"]
+[ext_resource type="Texture2D" uid="uid://6rwht4l7x5rc" path="res://assets/sprites/towers/Towers.png" id="4_6bi2k"]
+[ext_resource type="Script" uid="uid://3vv1ts11asqk" path="res://towers/area_detector.gd" id="5_5e1e6"]
+[ext_resource type="Script" uid="uid://c5e13qdjmxcua" path="res://towers/experience_handler.gd" id="6_ju35e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wmotl"]
+radius = 200.0
+
+[node name="Tower" type="Node2D" groups=["tower"]]
+
+[node name="TowerStatsHandler" type="Node" parent="."]
+script = ExtResource("1_7jtxt")
+
+[node name="CristalLight" parent="." instance=ExtResource("2_2233p")]
+position = Vector2(0, -136)
+
+[node name="RangePreview" type="Node2D" parent="."]
+z_index = -1
+script = ExtResource("3_nbqd2")
+radius = 200.0
+color_fill = Color(0, 0.69803923, 1, 0.5568628)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -70)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_6bi2k")
+hframes = 3
+region_rect = Rect2(128, 0, 64, 128)
+
+[node name="AreaDetector" type="Area2D" parent="."]
+collision_layer = 0
+input_pickable = false
+script = ExtResource("5_5e1e6")
+
+[node name="RangeCollision" type="CollisionShape2D" parent="AreaDetector"]
+scale = Vector2(1, 0.5)
+shape = SubResource("CircleShape2D_wmotl")
+
+[node name="TimerToCheckTarget" type="Timer" parent="AreaDetector"]
+wait_time = 0.1
+autostart = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="MouseDetector" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -25.0
+offset_top = -143.0
+offset_right = 25.0
+offset_bottom = 17.0
+
+[node name="ExperienceHandler" type="Node" parent="."]
+script = ExtResource("6_ju35e")
+level_up_postion = Vector2(0, -150)
+
+[node name="LevelUpPos" type="Marker2D" parent="."]
+position = Vector2(0, -152)
+
+[connection signal="body_entered" from="AreaDetector" to="AreaDetector" method="_on_body_entered"]
+[connection signal="body_exited" from="AreaDetector" to="AreaDetector" method="_on_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TowerDefinition" load_steps=4 format=3 uid="uid://cxjkx6ktsfbrj"]
+
+[ext_resource type="Script" uid="uid://vqg2x7qa2n1x" path="res://towers/definitions/tower_definition.gd" id="1_50pq4"]
+[ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="2_tdpsd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5pku"]
+atlas = ExtResource("2_tdpsd")
+region = Rect2(165, 5, 54, 153)
+
+[resource]
+script = ExtResource("1_50pq4")
+id = "lightning_tower"
+display_name = "Lightning Tower"
+description = "Basic Lightning tower"
+icon = SubResource("AtlasTexture_i5pku")

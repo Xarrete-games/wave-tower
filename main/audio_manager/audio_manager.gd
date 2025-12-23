@@ -1,6 +1,5 @@
 extends Node2D
 
-signal tempo
 @onready var button_click: AudioStreamPlayer = $ButtonClick
 @onready var button_hover: AudioStreamPlayer = $ButtonHover
 @onready var coins: AudioStreamPlayer = $Coins
@@ -27,6 +26,3 @@ func play_purchase():
 
 func stop_main_piano():
 	main_piano_player.stop()
-
-func _on_tempo_timeout() -> void:
-	tempo.emit()

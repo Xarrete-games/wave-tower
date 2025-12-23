@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://cg62x3fyuhj52" path="res://towers/configuration/data/fire_tower_configuration.tres" id="5_whndq"]
 [ext_resource type="Texture2D" uid="uid://dheamk0vu60q6" path="res://assets/sprites/towers/torreticas_hover.png" id="6_7564t"]
 [ext_resource type="Resource" uid="uid://c1d3qqqdi2oxp" path="res://towers/configuration/data/green_tower_configuration.tres" id="7_ffkn8"]
-[ext_resource type="Resource" uid="uid://cd7881byrb8se" path="res://towers/configuration/data/frost_tower_configuration.tres" id="10_7tyqd"]
+[ext_resource type="Resource" uid="uid://by0giydu700gy" path="res://towers/configuration/data/blue_tower_configuration.tres" id="10_1p1l7"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7564t"]
 load_path = "res://.godot/imported/torreticas.png-17515f9f954911ae56e1723a7291f4d2.ctex"
@@ -82,7 +82,7 @@ icon = SubResource("AtlasTexture_qst0h")
 icon_hover = SubResource("AtlasTexture_f4t37")
 tower_description = "It creates a shockwave that 
 hits all enemies around."
-base_stats = ExtResource("10_7tyqd")
+base_stats = ExtResource("10_1p1l7")
 
 [connection signal="pressed" from="TowersButtons/RedTowerButton" to="." method="_on_red_tower_button_pressed"]
 [connection signal="pressed" from="TowersButtons/GreenTowerButton" to="." method="_on_green_tower_button_pressed"]

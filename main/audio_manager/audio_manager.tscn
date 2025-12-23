@@ -15,9 +15,6 @@ stream = ExtResource("2_53i8p")
 volume_db = -9.0
 bus = &"SFX"
 
-[node name="Tempo" type="Timer" parent="."]
-autostart = true
-
 [node name="ButtonHover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_o8e8i")
 bus = &"SFX"
@@ -32,5 +29,3 @@ stream = ExtResource("5_s3r24")
 [node name="PurchasePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_seqmh")
 bus = &"SFX"
-
-[connection signal="timeout" from="Tempo" to="." method="_on_tempo_timeout"]
