@@ -64,10 +64,10 @@ func emit_buffs_change(tower_type: Tower.Type) -> void:
 func targeting_mode_to_string(mode: Tower.TargetingMode) -> String:
 	match mode:
 		Tower.TargetingMode.FIRST_IN_PROGRESS:
-			return "First In Progress"
+			return "Progress"
 		Tower.TargetingMode.HIGH_HP:
-			return "High Health Priority"
+			return "High Health"
 		Tower.TargetingMode.LOW_HP:
-			return "Low Health Priority"
+			return "Low Health"
 		_:
 			return "Unknown"
