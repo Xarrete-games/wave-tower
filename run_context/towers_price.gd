@@ -10,10 +10,22 @@ enum TowerBuild {
 	BLUE = 70,
 }
 
+enum TowerUpdate {
+	RED = 40,
+	GREEN = 50,
+	BLUE = 60,
+}
+
 var base_prices: Dictionary[Tower.Type, int]= {
 	Tower.Type.RED: TowerBuild.RED,
 	Tower.Type.GREEN: TowerBuild.GREEN,
 	Tower.Type.BLUE: TowerBuild.BLUE,
+}
+
+var update_prices: Dictionary[Tower.Type, int]= {
+	Tower.Type.RED: TowerUpdate.RED,
+	Tower.Type.GREEN: TowerUpdate.GREEN,
+	Tower.Type.BLUE: TowerUpdate.BLUE,
 }
 
 var build_prices: Dictionary[Tower.Type, int]= base_prices.duplicate()
@@ -24,6 +36,9 @@ func _init() -> void:
 
 func get_price(tower_type: Tower.Type) -> int:
 	return build_prices[tower_type]
+
+func get_update_price(tower_type: Tower.Type) -> int:
+	return update_prices[tower_type]
 
 func get_sell_price(tower_type: Tower.Type) -> int:
 	return int(round(sell_prices[tower_type] / 2.0))

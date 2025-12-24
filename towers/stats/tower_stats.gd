@@ -12,7 +12,7 @@ func duplicate() -> TowerStats:
 	new_stats.damage = damage
 	new_stats.attack_range = attack_range
 	new_stats.attack_speed = attack_speed
-	new_stats.critic_chance = critic_chance
+	new_stats.critic_chance = critic_chance	
 	new_stats.critic_damage = critic_damage
 	return new_stats
 

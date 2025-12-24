@@ -25,6 +25,7 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [node name="TowerStatsPanel" type="MarginContainer" node_paths=PackedStringArray("damage_stat", "attack_speed_stat", "range_stat", "level_label", "current_exp_label", "required_exp_label", "upgrade_button_container", "targeting_mode_selector")]
+visible = false
 texture_filter = 4
 anchors_preset = -1
 anchor_left = 0.17600001
@@ -117,7 +118,6 @@ stat_icon = ExtResource("4_725y3")
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 60
 
 [node name="UpgradeButtonContainer" type="VBoxContainer" parent="VBoxContainer/ButtonsContainer"]

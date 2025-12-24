@@ -1,5 +1,4 @@
 @abstract
-@tool
 class_name Tower extends Node2D
 
 signal stats_change(tower: Tower)
@@ -19,7 +18,7 @@ var _enabled: bool = false
 # when true, the tower fires instantly upon detecting an enemy
 var _first_shot = true
 # global stats
-var stats = TowerStats:
+var stats: TowerStats:
 	set(value):
 		stats = value
 		stats_change.emit(self)

@@ -8,7 +8,6 @@
 [node name="HUDLayer" type="CanvasLayer"]
 
 [node name="TowerStatsPanel" parent="." instance=ExtResource("2_tdcwd")]
-visible = false
 
 [node name="HintContainer" type="MarginContainer" parent="."]
 anchors_preset = 8
