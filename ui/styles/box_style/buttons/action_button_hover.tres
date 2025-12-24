@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cb4cmo24t0c27"]
+
+[ext_resource type="Texture2D" uid="uid://bvmvp1en2v8lk" path="res://assets/sprites/ui/main_menu_box_selected2.png" id="1_rjcvn"]
+
+[resource]
+texture = ExtResource("1_rjcvn")
+texture_margin_bottom = 5.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+region_rect = Rect2(12, 22, 356, 80)

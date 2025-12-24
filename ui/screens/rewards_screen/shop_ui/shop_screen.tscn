@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://h6gp6drqlqg6" path="res://ui/screens/rewards_screen/shop_ui/shop_screen.gd" id="1_g4y81"]
 [ext_resource type="StyleBox" uid="uid://cu0b10p3y57qo" path="res://ui/styles/box_style/shop/section_tittle_box.tres" id="2_6ciuw"]
 [ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="3_53ik5"]
-[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="5_g5vmd"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="5_g5vmd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nisgj"]
 bg_color = Color(0.09803922, 0.1254902, 0.09411765, 1)

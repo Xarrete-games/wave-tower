@@ -1,5 +1,4 @@
-@tool
-class_name RedTower extends Tower
+class_name RedTower extends BasicTower
 # this tower hit 5 times
 const TOTAL_HITS = 5
 const EXECUTE_DAMAGE: float = 9999

@@ -11,7 +11,7 @@ enum TargetingMode { FIRST_IN_PROGRESS, HIGH_HP, LOW_HP }
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
 @export var type: Type = Type.RED
-@export var stats_base: TowerConfiguration
+@export var configuration: TowerConfiguration
 
 var _current_target: Enemy
 var _enabled: bool = false
@@ -47,14 +47,14 @@ var exp_data: TowerExpData:
 @onready var tower_stats_handler: TowerStatsHandler = $TowerStatsHandler
 
 func _ready():
-	stats_base.build()
+	configuration.build()
 	range_collision.shape = CircleShape2D.new()
 	exp_data = experience_handler.exp_data
 	experience_handler.exp_data_change.connect(_on_exp_data_change)
 	placement_mode()
 	tower_stats_handler.stats_change.connect(_on_stats_change)
 	tower_stats_handler.extra_stats_change.connect(_on_extra_stats_change)
-	tower_stats_handler.set_data(stats_base, type, experience_handler)
+	tower_stats_handler.set_data(configuration, type, experience_handler)
 	area_detector.target_change.connect(_on_target_change)
 	
 # --------------------

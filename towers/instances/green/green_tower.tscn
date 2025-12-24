@@ -12,7 +12,7 @@
 [node name="GreenTower" instance=ExtResource("1_wyhsg")]
 script = ExtResource("2_wdqmo")
 type = 1
-stats_base = ExtResource("3_xiqao")
+configuration = ExtResource("3_xiqao")
 
 [node name="CristalLight" parent="." index="1"]
 position = Vector2(2, -161)

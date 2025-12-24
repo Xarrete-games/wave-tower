@@ -11,7 +11,7 @@
 [node name="BlueTower" instance=ExtResource("1_orgjy")]
 script = ExtResource("2_iq8f3")
 type = 2
-stats_base = ExtResource("3_a0ejt")
+configuration = ExtResource("3_a0ejt")
 
 [node name="ProjectilSpawnPoint" type="Marker2D" parent="." index="3"]
 position = Vector2(0, 8)

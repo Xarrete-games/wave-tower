@@ -12,7 +12,7 @@
 
 [node name="RedTower" instance=ExtResource("1_d57o0")]
 script = ExtResource("2_hvay6")
-stats_base = ExtResource("3_r56e6")
+configuration = ExtResource("3_r56e6")
 
 [node name="CristalLight" parent="." index="1"]
 color = Color(0.6117647, 0, 0, 1)

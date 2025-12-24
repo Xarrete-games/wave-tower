@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bcxsfb0ox3gmq"]
 
 [ext_resource type="Script" uid="uid://h554m5slo5ti" path="res://ui/screens/rewards_screen/rewards_screen.gd" id="1_phl5k"]
-[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="2_ureby"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="2_ureby"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="3_71sm1"]
 
 [node name="RewardsScreen" type="Control" node_paths=PackedStringArray("cards_container", "reroll_priece")]

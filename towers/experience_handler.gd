@@ -45,10 +45,12 @@ var attack_speed
 
 
 func _ready() -> void:
-	tower = get_parent()
-	tower.attack_speed_change.connect(_on_attack_speed_change)
-	tower.attack_fired.connect(_on_attack_fired)
-	_update_requited_exp()
+	pass
+	# DISABLED FOR NOW
+	#tower = get_parent()
+	#tower.attack_speed_change.connect(_on_attack_speed_change)
+	#tower.attack_fired.connect(_on_attack_fired)
+	#_update_requited_exp()
 
 func _on_attack_fired() -> void:
 	current_exp += (EXP_BY_HIT * attack_speed)

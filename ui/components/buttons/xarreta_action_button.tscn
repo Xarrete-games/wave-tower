@@ -1,16 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0qrluaokqdpj"]
 
-[ext_resource type="Theme" uid="uid://bfml0mq4yid2" path="res://ui/styles/themes/menu_buttons_icon_theme.tres" id="1_alcwj"]
-[ext_resource type="Script" uid="uid://bucqbucrgu1eb" path="res://ui/components/buttons/xarreta_button.gd" id="2_m8dqt"]
+[ext_resource type="Theme" uid="uid://b21vyg4n4iq" path="res://ui/styles/themes/action_buttons_theme.tres" id="1_myxe3"]
+[ext_resource type="Script" uid="uid://bucqbucrgu1eb" path="res://ui/components/buttons/xarreta_button.gd" id="2_nsq7y"]
 
 [node name="XarreteActionButton" type="Button"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1761.0
+offset_bottom = -1027.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_alcwj")
-script = ExtResource("2_m8dqt")
+theme = ExtResource("1_myxe3")
+text = "Remove"
+script = ExtResource("2_nsq7y")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

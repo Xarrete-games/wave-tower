@@ -1,12 +1,15 @@
 @tool
 class_name TowerStatsPanel extends Control
 
+
+@export var name_label: Label
 # stats
 @export var damage_stat: TowerStatUi
 @export var attack_speed_stat: TowerStatUi
 @export var range_stat: TowerStatUi
 
 # exp
+@export var level_container: Control
 @export var level_label: Label
 @export var current_exp_label: Label
 @export var required_exp_label: Label
@@ -19,7 +22,7 @@ class_name TowerStatsPanel extends Control
 var current_tower: Tower
 
 func _ready() -> void:
-	visible = false
+	visible = true
 	upgrade_button_container.visible = false
 	ClickEvents.tower_selected.connect(_on_tower_selected)
 	await RunContext.initialized
@@ -39,10 +42,15 @@ func _on_tower_selected(tower: Tower) -> void:
 	update_stats(stats)
 	update_exp_data(exp_data)
 
+	name_label.text = tower.configuration.definition.display_name
+
 	if tower is BasicTower:
 		upgrade_button_container.visible = true
+		level_container.visible = true
+		level_label.text = str((tower as BasicTower).level)
 	else:
 		upgrade_button_container.visible = false
+		level_container.visible = false
 
 func update_stats(tower_stats: TowerStats) -> void:
 	damage_stat.set_value(tower_stats.damage)
@@ -65,3 +73,8 @@ func _on_targeting_mode_selector_item_selected(index: Tower.TargetingMode) -> vo
 
 func _on_remove_button_pressed() -> void:
 	ClickEvents.tower_sold_pressed.emit(current_tower)
+
+
+func _on_upgrade_button_pressed() -> void:
+	if current_tower is BasicTower:
+		(current_tower as BasicTower).upgrade()

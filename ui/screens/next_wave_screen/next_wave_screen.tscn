@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7ttkk4pasgin"]
 
 [ext_resource type="Script" uid="uid://b5fdnmk8kjh0g" path="res://ui/screens/next_wave_screen/next_wave_screen.gd" id="1_s7bum"]
-[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarrete_action_button.tscn" id="2_r4m63"]
+[ext_resource type="PackedScene" uid="uid://c7oa0k10y8jb1" path="res://ui/components/buttons/xarreta_icon_action_button.tscn" id="2_xjot1"]
 [ext_resource type="Texture2D" uid="uid://35i1uisepolx" path="res://assets/sprites/icons/skull_icon.png" id="3_35lo6"]
 
 [node name="NextWaveScreen" type="CenterContainer"]
@@ -17,9 +17,9 @@ script = ExtResource("1_s7bum")
 layout_mode = 2
 mouse_filter = 2
 
-[node name="NextWaveButton" parent="MarginContainer" instance=ExtResource("2_r4m63")]
+[node name="NextWaveButton" parent="MarginContainer" instance=ExtResource("2_xjot1")]
 layout_mode = 2
 text = "Next Wave"
 icon = ExtResource("3_35lo6")
 
-[connection signal="xarreta_pressed" from="MarginContainer/NextWaveButton" to="." method="_on_next_wave_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="MarginContainer/NextWaveButton" to="." method="_on_next_wave_button_pressed"]
