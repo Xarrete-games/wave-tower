@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c87kjybjulaxq"]
+
+[ext_resource type="Script" uid="uid://crwe5y8vyq4t5" path="res://towers/instances/fire/fire_tower/fire_ball_projectile.gd" id="1_4f0f1"]
+[ext_resource type="Texture2D" uid="uid://ce8foi407dq78" path="res://assets/sprites/proyectiles/fire_ball .png" id="2_0wp0u"]
+
+[node name="FireBallProjectile" type="Node2D"]
+script = ExtResource("1_4f0f1")
+
+[node name="FireBallSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_0wp0u")

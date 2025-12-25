@@ -58,6 +58,9 @@ curve = SubResource("Curve2D_ct1ur")
 [node name="Path2D4" type="Path2D" parent="EnemyPaths" index="3"]
 curve = SubResource("Curve2D_ct1ur")
 
+[node name="CameraInitPos" parent="." index="3"]
+position = Vector2(760, 234)
+
 [node name="OrangePortal" parent="." index="5" instance=ExtResource("5_didll")]
 position = Vector2(-310, -33.00003)
 
@@ -71,9 +74,6 @@ position = Vector2(1902, 63.99991)
 
 [node name="BluePortal2" parent="." index="8" instance=ExtResource("6_oxkye")]
 position = Vector2(886.99994, -452)
-
-[node name="CameraInitPos" parent="." index="10"]
-position = Vector2(760, 234)
 
 [node name="Node2D" type="Node2D" parent="." index="11"]
 
