@@ -1,7 +1,7 @@
 class_name MainCamera extends Camera2D
 
 @export var move_speed := 400.0 
-@export var zoom_speed := 0.1
+@export var zoom_speed := 0.25
 @export var min_zoom := Vector2(0.5, 0.5)
 @export var max_zoom := Vector2(2.0, 2.0)
 
