@@ -82,7 +82,7 @@ size_flags_vertical = 8
 alignment = 1
 
 [node name="XarreteActionButton" parent="ShopContainer/ButtonsSection" instance=ExtResource("5_g5vmd")]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "EXIT"
 
