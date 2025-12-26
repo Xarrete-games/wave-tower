@@ -4,8 +4,8 @@ extends Node2D
 const SPEED: float = 400.0
 const HIT_RADIUS: float = 12.0
 
-const COLOR_1: Color = Color("#ff7900")
-const COLOR_2: Color = Color("#ffff00")
+const COLOR_1: Color = Color("#ff00ff")
+const COLOR_2: Color = Color("#0000ff")
 
 var enemy: Enemy
 var attack: Attack

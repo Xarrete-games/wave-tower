@@ -10,7 +10,8 @@ script = ExtResource("2_t2lsm")
 configuration = ExtResource("3_1o222")
 
 [node name="Sprite2D" parent="." index="3"]
-scale = Vector2(0.7, 0.7)
+position = Vector2(0, -56)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_ksjyl")
 hframes = 1
 
