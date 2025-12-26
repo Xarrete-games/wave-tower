@@ -1,4 +1,4 @@
-class_name FireTower extends BasicTower
+class_name FireTower extends UpgradeableTower
 
 const FIRE_BALL_SCENE: PackedScene = preload("uid://c87kjybjulaxq")
 

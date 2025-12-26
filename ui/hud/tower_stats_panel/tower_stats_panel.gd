@@ -44,10 +44,10 @@ func _on_tower_selected(tower: Tower) -> void:
 
 	name_label.text = tower.configuration.definition.display_name
 
-	if tower is BasicTower:
+	if tower is UpgradeableTower:
 		upgrade_button_container.visible = true
 		level_container.visible = true
-		level_label.text = str((tower as BasicTower).level)
+		level_label.text = str((tower as UpgradeableTower).level)
 	else:
 		upgrade_button_container.visible = false
 		level_container.visible = false
@@ -76,5 +76,5 @@ func _on_remove_button_pressed() -> void:
 
 
 func _on_upgrade_button_pressed() -> void:
-	if current_tower is BasicTower:
-		(current_tower as BasicTower).upgrade()
+	if current_tower is UpgradeableTower:
+		(current_tower as UpgradeableTower).upgrade()
