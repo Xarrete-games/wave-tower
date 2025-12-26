@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://e2332bmer7r0" path="res://towers/instances/fire/fire_tower/fire_tower.gd" id="2_t2lsm"]
 [ext_resource type="Resource" uid="uid://cg62x3fyuhj52" path="res://towers/configuration/data/fire_tower_configuration.tres" id="3_1o222"]
 
-[node name="Tower" instance=ExtResource("1_f8b8m")]
+[node name="FireTower" instance=ExtResource("1_f8b8m")]
 script = ExtResource("2_t2lsm")
 configuration = ExtResource("3_1o222")
 

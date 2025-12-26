@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_wyhsg"]
 [ext_resource type="Script" uid="uid://dpashq3sbs7m7" path="res://towers/instances/green/green_tower.gd" id="2_wdqmo"]
-[ext_resource type="Resource" uid="uid://c1d3qqqdi2oxp" path="res://towers/configuration/data/green_tower_configuration.tres" id="3_xiqao"]
+[ext_resource type="Resource" uid="uid://c1d3qqqdi2oxp" path="res://towers/configuration/data/lightning_tower_configuration.tres" id="3_xiqao"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="4_f0nw3"]
 [ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/instances/red/passive_light.gd" id="5_xiqao"]
 [ext_resource type="AudioStream" uid="uid://cp4evfqpqhdhy" path="res://assets/sounds/sfx/Green_attack.ogg" id="6_xiqao"]

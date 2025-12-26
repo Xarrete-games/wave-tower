@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=5 format=3 uid="uid://c1d3qqqdi2oxp"]
+
+[ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_k1iq5"]
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_nxs5s"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="3_wraeo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5pku"]
+atlas = ExtResource("1_k1iq5")
+region = Rect2(165, 5, 54, 153)
+
+[resource]
+script = ExtResource("2_nxs5s")
+id = "lightning_tower"
+display_name = "Lightning Tower"
+icon = SubResource("AtlasTexture_i5pku")
+type = 1
+base_damage = 10.0
+base_attack_range = 280.0
+base_attack_speed = 2.1
+damage_per_level = 2.0
+attack_range_level = 12.0
+attack_speed_per_level = -0.2

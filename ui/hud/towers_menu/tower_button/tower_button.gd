@@ -7,19 +7,19 @@ signal unhover(tower_button: TowerButton)
 const NORMAL_PANEL = preload("uid://dcjn1y7ofuii7")
 const HOVER_PANEL = preload("uid://5m3jkdualcb3")
 
-@export var tower_definition: TowerDefinitionWithInstance:
+@export var tower_configuration: TowerConfigurationWithInstance:
 	set(value):
-		tower_definition = value
-		tower_scene = tower_definition.scene
-		icon = tower_definition.definition.icon
-		tower_description = tower_definition.definition.description
-		type = tower_definition.definition.type
+		tower_configuration = value
+		configuration = tower_configuration.configuration
+		tower_scene = tower_configuration.scene
+		icon = configuration.icon
+		type = configuration.type
 		
-@export var base_stats: TowerConfiguration
 @export var panel: Panel	
 @export var tower_button: TextureButton
 @export var gold_price: GoldPrice
 
+var configuration: TowerConfiguration
 
 var price: int = 0:
 	set(value):
@@ -35,9 +35,6 @@ var icon_hover: AtlasTexture:
 		icon_hover = value
 		_update_texture_hover()
 
-var tower_description: String:
-	set(value):
-		tower_description = value
 var tower_scene: PackedScene
 var type: Tower.Type
 

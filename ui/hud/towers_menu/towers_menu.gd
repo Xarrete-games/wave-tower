@@ -22,7 +22,7 @@ func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	button_in_hover = tower_button
-	tower_hint.set_stats(button_in_hover.base_stats)
+	tower_hint.set_stats(button_in_hover.configuration)
 	# Position the hint above the button
 	var rect: Rect2 = tower_button.get_global_rect()	
 	tower_hint.global_position = Vector2(

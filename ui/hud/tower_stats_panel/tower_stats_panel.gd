@@ -42,7 +42,7 @@ func _on_tower_selected(tower: Tower) -> void:
 	update_stats(stats)
 	update_exp_data(exp_data)
 
-	name_label.text = tower.configuration.definition.display_name
+	name_label.text = tower.configuration.display_name
 
 	if tower is UpgradeableTower:
 		upgrade_button_container.visible = true

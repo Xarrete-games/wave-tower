@@ -1,15 +1,23 @@
-[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=4 format=3 uid="uid://cd7881byrb8se"]
+[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=5 format=3 uid="uid://cd7881byrb8se"]
 
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="1_auyq4"]
-[ext_resource type="Resource" uid="uid://b71vkoang61w3" path="res://towers/definitions/data/frost_tower_definition.tres" id="1_fpoxy"]
-[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/definitions/tower_definition_with_instance.gd" id="2_fpoxy"]
+[ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_fpoxy"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="2_fpoxy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
+atlas = ExtResource("1_fpoxy")
+region = Rect2(281, 57, 79, 117)
 
 [resource]
 script = ExtResource("1_auyq4")
+id = "frost_tower"
+display_name = "Frost Tower"
+description = "Basic frost tower"
+icon = SubResource("AtlasTexture_ncsk7")
+type = 2
 base_damage = 18.0
 base_attack_range = 280.0
 base_attack_speed = 6.0
 damage_per_level = 2.0
 attack_range_level = 10.0
-definition = ExtResource("1_fpoxy")
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"

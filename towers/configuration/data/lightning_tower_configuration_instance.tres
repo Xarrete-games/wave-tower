@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" load_steps=4 format=3 uid="uid://cb8v2oeues41k"]
+
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="1_3r7p0"]
+[ext_resource type="Resource" uid="uid://c1d3qqqdi2oxp" path="res://towers/configuration/data/lightning_tower_configuration.tres" id="1_fwqkt"]
+[ext_resource type="PackedScene" uid="uid://oj5ilwusjvuo" path="res://towers/instances/green/green_tower.tscn" id="2_4kpee"]
+
+[resource]
+script = ExtResource("1_3r7p0")
+configuration = ExtResource("1_fwqkt")
+scene = ExtResource("2_4kpee")
+metadata/_custom_type_script = "uid://byiw835k16yc6"

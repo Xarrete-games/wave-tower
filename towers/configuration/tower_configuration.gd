@@ -1,5 +1,12 @@
 class_name TowerConfiguration extends Resource
 
+@export_group("Definition")
+@export var id: String
+@export var display_name: String
+@export_multiline var description: String
+@export var icon: Texture2D
+@export var type: Tower.Type
+
 @export_group("Initial Stats")
 @export var base_damage: float = 5
 @export var base_attack_range: float = 200
@@ -14,9 +21,8 @@ class_name TowerConfiguration extends Resource
 @export var critic_chance_per_level: float = 0
 @export var critic_damage_per_level: float = 0
 
-@export_group("Tower Definition")
-@export var definition: TowerDefinition
-@export var upgraded_towers: Array[TowerDefinitionWithInstance] = []
+@export_group("Upgrades")
+@export var upgradeable_towers: Array[TowerConfigurationWithInstance] = []
 
 var stats: TowerStats = TowerStats.new()
 var stats_on_level: TowerStats = TowerStats.new()
