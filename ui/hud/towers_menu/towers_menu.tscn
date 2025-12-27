@@ -24,8 +24,8 @@ tower_hint = NodePath("TowerButtonHint")
 layout_mode = 0
 offset_left = 751.0
 offset_top = -215.0
-offset_right = 1155.0
-offset_bottom = -28.0
+offset_right = 1151.0
+offset_bottom = -53.0
 
 [node name="TowersButtons" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(340, 150)
