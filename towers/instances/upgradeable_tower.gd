@@ -16,9 +16,10 @@ func upgrade() -> void:
 	experience_handler.level_up.emit(level)
 
 func is_max_level() -> bool:
+	print("Checking if max level: ", level, " / ", MAX_LEVEL)
 	return level >= MAX_LEVEL
 
-func get_upgraded_towers() -> Array[TowerConfigurationWithInstance]:
+func get_upgradeable_towers() -> Array[TowerConfigurationWithInstance]:
 	return configuration.upgradeable_towers
 
 
