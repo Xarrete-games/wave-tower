@@ -7,6 +7,9 @@ class_name TowerConfiguration extends Resource
 @export var icon: Texture2D
 @export var type: Tower.Type
 
+@export_group("Price")
+@export var base_price: int = 50
+
 @export_group("Initial Stats")
 @export var base_damage: float = 5
 @export var base_attack_range: float = 200

@@ -69,7 +69,7 @@ func _on_tower_selected(tower: Tower) -> void:
 				var tower_button = TOWER_BUTTON.instantiate() as TowerButton
 				upgrades_container.add_child(tower_button)
 				tower_button.tower_configuration = tower_config
-				tower_button.price = RunContext.towers_price.get_price(tower_config.configuration.type)
+				tower_button.price = tower_config.configuration.base_price
 				tower_button.tower_button_pressed.connect(_on_tower_button_pressed)
 				tower_button.hover.connect(_on_tower_button_hover)
 				tower_button.unhover.connect(_on_tower_button_unhover)
