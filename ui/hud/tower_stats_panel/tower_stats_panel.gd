@@ -4,6 +4,10 @@ class_name TowerStatsPanel extends Control
 
 const TOWER_BUTTON = preload("uid://o248nju46k2n")
 
+var current_tower: Tower
+var button_in_hover: TowerButton = null
+
+
 # definition
 @onready var name_label: Label = %NameLabel
 # stats
@@ -22,7 +26,7 @@ const TOWER_BUTTON = preload("uid://o248nju46k2n")
 
 @onready var tower_hint_panel: TowerButtonHint = %TowerHintPanel
 
-var current_tower: Tower
+
 
 func _ready() -> void:
 	visible = true
@@ -112,10 +116,18 @@ func _hide_upgrade_options() -> void:
 func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
 	print("Upgrading to tower scene: ", tower_scene)
 
-func _on_tower_button_hover(_tower_button: TowerButton) -> void:
-	# You can implement hover behavior here if needed
-	pass
+func _on_tower_button_hover(tower_button: TowerButton) -> void:
+	button_in_hover = tower_button
+	tower_hint_panel.set_stats(button_in_hover.configuration)
+	# Position the hint above the button
+	var rect: Rect2 = tower_button.get_global_rect()	
+	tower_hint_panel.global_position = Vector2(
+		rect.position.x + rect.size.x * 0.5 - tower_hint_panel.size.x * 0.5,
+		rect.position.y - tower_hint_panel.size.y - 30
+	)
+	tower_hint_panel.visible = true
 
-func _on_tower_button_unhover(_tower_button: TowerButton) -> void:
-	# You can implement unhover behavior here if needed
-	pass
+func _on_tower_button_unhover(tower_button: TowerButton) -> void:
+	if button_in_hover == tower_button:
+		button_in_hover = null
+		tower_hint_panel.visible = false

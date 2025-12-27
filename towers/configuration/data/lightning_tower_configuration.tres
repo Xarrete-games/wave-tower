@@ -12,6 +12,7 @@ region = Rect2(165, 5, 54, 153)
 script = ExtResource("2_nxs5s")
 id = "lightning_tower"
 display_name = "Lightning Tower"
+description = "Basic lightning tower"
 icon = SubResource("AtlasTexture_i5pku")
 type = 1
 base_damage = 10.0
