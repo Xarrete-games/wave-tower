@@ -1,14 +1,14 @@
 class_name TowerButtonHint extends Control
 
-@export var name_label: RichTextLabel
-@export var description_label: Label
-@export var damage_label: Label
-@export var attack_speed_label: Label
-@export var range_label: Label
+@onready var name_label: RichTextLabel = %NameLabel
+@onready var description_label: Label = %DescriptionLabel
+@onready var damage_stat: TowerStatUi = %DamageStatUi
+@onready var attack_speed_stat: TowerStatUi = %AttkSpeedStatUi
+@onready var range_stat: TowerStatUi = %RangeStatUi
 
 func set_stats(configuration: TowerConfiguration) -> void:
 	name_label.text = "[u]" + configuration.display_name + "[/u]"
 	description_label.text = configuration.description
-	damage_label.text = str(configuration.base_damage)
-	attack_speed_label.text = str(configuration.base_attack_speed)
-	range_label.text = str(configuration.base_attack_range)
+	damage_stat.set_value(configuration.base_damage)
+	attack_speed_stat.set_value(configuration.base_attack_speed)
+	range_stat.set_value(configuration.base_attack_range)
