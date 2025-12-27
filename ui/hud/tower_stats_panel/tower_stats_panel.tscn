@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://mlvqjhawbttl" path="res://ui/hud/tower_stats_panel/tower_stats_panel.gd" id="1_vyalh"]
 [ext_resource type="Texture2D" uid="uid://c15gu8gh1w0d5" path="res://assets/sprites/ui/main_menu_box.png" id="2_c0pf6"]
+[ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="2_g3isl"]
 [ext_resource type="PackedScene" uid="uid://damv0wm6yljhs" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.tscn" id="2_jlxp2"]
 [ext_resource type="Texture2D" uid="uid://dv68a541qeosv" path="res://assets/sprites/icons/icons_sword.png" id="2_vyalh"]
 [ext_resource type="FontFile" uid="uid://vddtrqs6twmn" path="res://assets/fonts/NotoSerif-VariableFont_wdth,wght.ttf" id="3_c0pf6"]
@@ -12,21 +13,6 @@
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="8_ynx3u"]
 [ext_resource type="PackedScene" uid="uid://o248nju46k2n" path="res://ui/hud/towers_menu/tower_button/tower_button.tscn" id="10_n3kwt"]
 [ext_resource type="PackedScene" uid="uid://cxk1x30qq1f7p" path="res://ui/hud/towers_menu/tower_button_hint/tower_button_hint.tscn" id="12_p50vg"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynx3u"]
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.09803922, 0.23529412, 0.1882353, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-expand_margin_left = 30.0
-expand_margin_right = 30.0
-expand_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n3kwt"]
 texture = ExtResource("2_c0pf6")
@@ -61,139 +47,147 @@ layout_mode = 0
 offset_right = 174.0
 offset_bottom = 513.0
 size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_ynx3u")
+theme_override_styles/panel = ExtResource("2_g3isl")
 
-[node name="MainContainer" type="VBoxContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 0
+
+[node name="MainContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
-[node name="NameContainer" type="PanelContainer" parent="Panel/MainContainer"]
+[node name="NameContainer" type="PanelContainer" parent="Panel/MarginContainer/MainContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_n3kwt")
 
-[node name="NameLabel" type="Label" parent="Panel/MainContainer/NameContainer"]
+[node name="NameLabel" type="Label" parent="Panel/MarginContainer/MainContainer/NameContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Fire Towe"
 label_settings = SubResource("LabelSettings_n3kwt")
 horizontal_alignment = 1
 
-[node name="DataContainer" type="VBoxContainer" parent="Panel/MainContainer"]
+[node name="DataContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 6
 
-[node name="ExpDataContainer" type="VBoxContainer" parent="Panel/MainContainer/DataContainer"]
+[node name="ExpDataContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer/DataContainer"]
 layout_mode = 2
 
-[node name="LevelContainer" type="HBoxContainer" parent="Panel/MainContainer/DataContainer/ExpDataContainer"]
+[node name="LevelContainer" type="HBoxContainer" parent="Panel/MarginContainer/MainContainer/DataContainer/ExpDataContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MainContainer/DataContainer/ExpDataContainer/LevelContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/MainContainer/DataContainer/ExpDataContainer/LevelContainer"]
 layout_mode = 2
 text = "Level:"
 
-[node name="LevelLabel" type="Label" parent="Panel/MainContainer/DataContainer/ExpDataContainer/LevelContainer"]
+[node name="LevelLabel" type="Label" parent="Panel/MarginContainer/MainContainer/DataContainer/ExpDataContainer/LevelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1"
 
-[node name="ExpContainer" type="HBoxContainer" parent="Panel/MainContainer/DataContainer/ExpDataContainer"]
+[node name="ExpContainer" type="HBoxContainer" parent="Panel/MarginContainer/MainContainer/DataContainer/ExpDataContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MainContainer/DataContainer/ExpDataContainer/ExpContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/MainContainer/DataContainer/ExpDataContainer/ExpContainer"]
 layout_mode = 2
 text = "EXP"
 
-[node name="CurrentExpLabel" type="Label" parent="Panel/MainContainer/DataContainer/ExpDataContainer/ExpContainer"]
+[node name="CurrentExpLabel" type="Label" parent="Panel/MarginContainer/MainContainer/DataContainer/ExpDataContainer/ExpContainer"]
 layout_mode = 2
 text = "0"
 
-[node name="Label3" type="Label" parent="Panel/MainContainer/DataContainer/ExpDataContainer/ExpContainer"]
+[node name="Label3" type="Label" parent="Panel/MarginContainer/MainContainer/DataContainer/ExpDataContainer/ExpContainer"]
 layout_mode = 2
 text = "/"
 
-[node name="RequiredExpLabel" type="Label" parent="Panel/MainContainer/DataContainer/ExpDataContainer/ExpContainer"]
+[node name="RequiredExpLabel" type="Label" parent="Panel/MarginContainer/MainContainer/DataContainer/ExpDataContainer/ExpContainer"]
 layout_mode = 2
 text = "50"
 
-[node name="DamageStatUi" parent="Panel/MainContainer/DataContainer" instance=ExtResource("2_jlxp2")]
+[node name="DamageStatUi" parent="Panel/MarginContainer/MainContainer/DataContainer" instance=ExtResource("2_jlxp2")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Damage"
 stat_icon = ExtResource("2_vyalh")
 
-[node name="AttkSpeedStatUi" parent="Panel/MainContainer/DataContainer" instance=ExtResource("2_jlxp2")]
+[node name="AttkSpeedStatUi" parent="Panel/MarginContainer/MainContainer/DataContainer" instance=ExtResource("2_jlxp2")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Damage"
 stat_icon = ExtResource("3_dw57d")
 
-[node name="RangeStatUi" parent="Panel/MainContainer/DataContainer" instance=ExtResource("2_jlxp2")]
+[node name="RangeStatUi" parent="Panel/MarginContainer/MainContainer/DataContainer" instance=ExtResource("2_jlxp2")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Range"
 stat_icon = ExtResource("4_725y3")
 
-[node name="UpgradeButtonContainer" type="VBoxContainer" parent="Panel/MainContainer"]
+[node name="UpgradeButtonContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="UpgradeButton" parent="Panel/MainContainer/UpgradeButtonContainer" instance=ExtResource("7_gs8y8")]
+[node name="UpgradeButton" parent="Panel/MarginContainer/MainContainer/UpgradeButtonContainer" instance=ExtResource("7_gs8y8")]
 layout_mode = 2
 text = "Upgrade"
 
-[node name="GoldPrice" parent="Panel/MainContainer/UpgradeButtonContainer" instance=ExtResource("7_ynx3u")]
+[node name="GoldPrice" parent="Panel/MarginContainer/MainContainer/UpgradeButtonContainer" instance=ExtResource("7_ynx3u")]
 layout_mode = 2
 alignment = 1
 
-[node name="UpgradesContainer" type="HBoxContainer" parent="Panel/MainContainer"]
+[node name="UpgradesContainer" type="HBoxContainer" parent="Panel/MarginContainer/MainContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 30
 
-[node name="TowerButton" parent="Panel/MainContainer/UpgradesContainer" instance=ExtResource("10_n3kwt")]
+[node name="TowerButton" parent="Panel/MarginContainer/MainContainer/UpgradesContainer" instance=ExtResource("10_n3kwt")]
 layout_mode = 2
 
-[node name="TowerButton2" parent="Panel/MainContainer/UpgradesContainer" instance=ExtResource("10_n3kwt")]
+[node name="TowerButton2" parent="Panel/MarginContainer/MainContainer/UpgradesContainer" instance=ExtResource("10_n3kwt")]
 layout_mode = 2
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="Panel/MainContainer"]
+[node name="ButtonsContainer" type="HBoxContainer" parent="Panel/MarginContainer/MainContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 60
 
-[node name="RemoveButton" parent="Panel/MainContainer/ButtonsContainer" instance=ExtResource("7_gs8y8")]
+[node name="RemoveButton" parent="Panel/MarginContainer/MainContainer/ButtonsContainer" instance=ExtResource("7_gs8y8")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="TargetingContainer" type="VBoxContainer" parent="Panel/MainContainer"]
+[node name="TargetingContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Panel/MainContainer/TargetingContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/MainContainer/TargetingContainer"]
 layout_mode = 2
 text = "Priority"
 label_settings = ExtResource("8_ynx3u")
 horizontal_alignment = 1
 
-[node name="TargetingModeSelector" type="OptionButton" parent="Panel/MainContainer/TargetingContainer"]
+[node name="TargetingModeSelector" type="OptionButton" parent="Panel/MarginContainer/MainContainer/TargetingContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
 [node name="TowerHintPanel" parent="." instance=ExtResource("12_p50vg")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -205,6 +199,6 @@ offset_top = 89.328995
 offset_right = 93.62402
 offset_bottom = -48.26303
 
-[connection signal="xarreta_pressed" from="Panel/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
-[connection signal="xarreta_pressed" from="Panel/MainContainer/ButtonsContainer/RemoveButton" to="." method="_on_remove_button_pressed"]
-[connection signal="item_selected" from="Panel/MainContainer/TargetingContainer/TargetingModeSelector" to="Panel" method="_on_targeting_mode_selector_item_selected"]
+[connection signal="xarreta_pressed" from="Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
+[connection signal="xarreta_pressed" from="Panel/MarginContainer/MainContainer/ButtonsContainer/RemoveButton" to="." method="_on_remove_button_pressed"]
+[connection signal="item_selected" from="Panel/MarginContainer/MainContainer/TargetingContainer/TargetingModeSelector" to="Panel" method="_on_targeting_mode_selector_item_selected"]

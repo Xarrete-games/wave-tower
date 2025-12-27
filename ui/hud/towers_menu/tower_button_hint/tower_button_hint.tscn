@@ -2,35 +2,19 @@
 
 [ext_resource type="Script" uid="uid://idfo47x20kr4" path="res://ui/hud/towers_menu/tower_button_hint/tower_button_hint.gd" id="1_j4uly"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="1_r8gbm"]
+[ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="1_wylug"]
 [ext_resource type="Texture2D" uid="uid://dv68a541qeosv" path="res://assets/sprites/icons/icons_sword.png" id="2_j4uly"]
 [ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="2_lx7fx"]
 [ext_resource type="Texture2D" uid="uid://bvev5rktov31p" path="res://assets/sprites/icons/icons_timer.png" id="3_lx7fx"]
 [ext_resource type="Texture2D" uid="uid://dio1imbeyg458" path="res://assets/sprites/icons/icons_tower_range.png" id="4_3s3ui"]
 [ext_resource type="PackedScene" uid="uid://damv0wm6yljhs" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.tscn" id="4_wylug"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wylug"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 10.0
-bg_color = Color(0.09803922, 0.23529412, 0.1882353, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.7137255, 0.77254903, 0.64705884, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-corner_detail = 1
-
 [node name="TowerButtonHint" type="PanelContainer"]
 offset_right = 343.0
 offset_bottom = 149.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_wylug")
+theme_override_styles/panel = ExtResource("1_wylug")
 script = ExtResource("1_j4uly")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
