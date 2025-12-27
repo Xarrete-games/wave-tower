@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cg40tjdw5e2lu" path="res://ui/hud/top_bar_ui/top_bar.gd" id="1_b2kx5"]
 [ext_resource type="PackedScene" uid="uid://bvafh0bf674y7" path="res://ui/hud/top_bar_ui/relics/bar_relics_ui.tscn" id="2_fdcnu"]
 [ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/hud/top_bar_ui/lives_counter/health_counter.tscn" id="3_5yg88"]
+[ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="3_tksin"]
 [ext_resource type="PackedScene" uid="uid://bjj2sav3lh0or" path="res://ui/hud/top_bar_ui/gold_ui/gold_counter.tscn" id="4_tksin"]
 [ext_resource type="PackedScene" uid="uid://bsbslu7gvbl5b" path="res://ui/hud/top_bar_ui/waves_ui/waves_counter_ui.tscn" id="5_tns2n"]
 [ext_resource type="PackedScene" uid="uid://bo3eo6rb8fwjd" path="res://ui/screens/pause_screen/config_button.tscn" id="6_2407u"]
@@ -10,18 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bj0kwv4dsl0i1" path="res://ui/components/buttons/xarreta_text_button.tscn" id="8_o3scy"]
 [ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="9_vy74y"]
 [ext_resource type="PackedScene" uid="uid://epd2ddueq6ho" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui.tscn" id="10_fdcnu"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hcmpt"]
-bg_color = Color(0.09803922, 0.1254902, 0.09411765, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.09803922, 0.23529412, 0.1882353, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5yg88"]
 
@@ -68,7 +57,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_hcmpt")
+theme_override_styles/panel = ExtResource("3_tksin")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/StatutsContainer"]
 layout_mode = 2
