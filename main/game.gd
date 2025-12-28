@@ -1,7 +1,7 @@
 class_name Game extends Node2D
 
 const LEVELS_PATH = "res://levels/levels/"
-const GAME = preload("uid://6vgrx5dct8h8")
+const BOOT = preload("uid://bfm0i7ehshgsf")
 
 @export var levels_paths: Array[String]
 @export var pause : PackedScene
@@ -20,8 +20,7 @@ func _ready():
 	ClickEvents.config_button_pressed.connect(_open_config_menu)
 	ClickEvents.next_level_pressed.connect(go_next_level)
 	ClickEvents.reset_game_button_pressed.connect(reset_game)
-	GameState.reset_run()
-	RunContext.reset_run()
+	
 	var items = RunContext.offers_manager.create_relic_offers(initial_random_relics)
 	for item in items:
 		var relic = item.create_item() as Relic
@@ -36,8 +35,8 @@ func _process(_delta: float) -> void:
 			_open_config_menu()
 
 func reset_game() -> void:
-	RunContext.is_on_restarting = true
-	get_tree().change_scene_to_packed(GAME)
+	#RunContext.is_on_restarting = true
+	get_tree().change_scene_to_packed(BOOT)
 
 func _load_level(level_number: int) -> void:
 	RunContext.progress.current_level = level_number

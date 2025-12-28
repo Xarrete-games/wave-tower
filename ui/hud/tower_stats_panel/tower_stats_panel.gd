@@ -33,7 +33,6 @@ func _ready() -> void:
 	tower_hint_panel.visible = false
 	_hide_upgrade_options()
 	ClickEvents.tower_selected.connect(_on_tower_selected)
-	await RunContext.initialized
 	RunContext.towers_upgrades.targeting_modes_change.connect(_update_targeting_modes)
 	_update_targeting_modes(RunContext.towers_upgrades.targeting_modes)
 

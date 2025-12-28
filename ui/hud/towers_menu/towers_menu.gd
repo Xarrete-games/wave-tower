@@ -11,7 +11,6 @@ var button_in_hover: TowerButton = null
 
 func _ready() -> void:
 	tower_hint.visible = false
-	await RunContext.initialized
 	for button in buttons_container.get_children():
 		button.tower_button_pressed.connect(_on_tower_button_pressed)
 		button.hover.connect(_on_tower_button_hover)

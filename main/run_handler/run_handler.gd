@@ -11,7 +11,6 @@ const WAVES_WITH_EVENTS = [1,3,6,9]
 
 
 func _ready() -> void:
-	await RunContext.initialized
 	RunContext.progress.current_wave_finished.connect(_on_wave_finished)
 	RunContext.progress.last_wave_finished.connect(_on_last_wave_finished)
 	RunContext.progress.current_level_changed.connect(_on_new_level_loaded)

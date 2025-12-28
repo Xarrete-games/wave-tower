@@ -40,7 +40,6 @@ var tower_scene: PackedScene
 var type: Tower.Type
 
 func _ready() -> void:
-	await RunContext.initialized
 	RunContext.economy.available_free_towers_change.connect(_on_available_free_towers_change)
 	add_theme_stylebox_override("panel", NORMAL_PANEL)
 	_update_texture()

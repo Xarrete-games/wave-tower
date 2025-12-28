@@ -14,8 +14,6 @@ var price: int = 0:
 @onready var price_label: Label = $PriceLabel
 
 func _ready() -> void:
-	if not RunContext.is_initialized:
-		await RunContext.initialized
 	RunContext.status.health_change.connect(_check_label_color)
 
 func _check_label_color(health: int) -> void:

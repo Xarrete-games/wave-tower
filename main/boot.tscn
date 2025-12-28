@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfm0i7ehshgsf"]
+
+[ext_resource type="Script" uid="uid://b40ow2be4efp1" path="res://main/boot.gd" id="1_jo8xd"]
+
+[node name="Boot" type="Node"]
+script = ExtResource("1_jo8xd")
