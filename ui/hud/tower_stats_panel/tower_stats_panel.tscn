@@ -43,9 +43,18 @@ script = ExtResource("1_vyalh")
 
 [node name="Panel" type="PanelContainer" parent="."]
 texture_filter = 4
-layout_mode = 0
-offset_right = 174.0
-offset_bottom = 513.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -162.5
+offset_right = -428.0
+offset_bottom = 162.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("2_g3isl")
 
