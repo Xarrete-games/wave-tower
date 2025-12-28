@@ -35,7 +35,7 @@ region_rect = Rect2(1054, 0, 434, 544)
 shape = SubResource("CircleShape2D_cmxm1")
 
 [node name="PassiveLight" type="PointLight2D" parent="." index="6"]
-position = Vector2(2, -161)
+position = Vector2(0, -113)
 color = Color(0.5019608, 1, 0.5019608, 1)
 energy = 0.5
 texture = ExtResource("4_yogkd")
