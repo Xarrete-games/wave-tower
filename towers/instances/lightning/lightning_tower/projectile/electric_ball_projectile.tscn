@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://boewdbtx7u2f7"]
+
+[ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_lrs7w"]
+[ext_resource type="Texture2D" uid="uid://cw3n7tsif8w3m" path="res://assets/sprites/proyectiles/electric_ball.png" id="1_ntmix"]
+
+[node name="ElectricBallProjectile" type="Node2D"]
+script = ExtResource("1_lrs7w")
+
+[node name="ElectricBall" type="Sprite2D" parent="."]
+texture = ExtResource("1_ntmix")

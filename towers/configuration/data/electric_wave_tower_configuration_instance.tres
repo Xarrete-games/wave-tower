@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" load_steps=4 format=3 uid="uid://b62s2yksyqvsf"]
+
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="1_idqq3"]
+[ext_resource type="Resource" uid="uid://de5dvgltvp25o" path="res://towers/configuration/data/electric_wave_tower_configuration.tres" id="1_jc4kh"]
+[ext_resource type="PackedScene" uid="uid://oj5ilwusjvuo" path="res://towers/instances/lightning/electric_wave_tower/electric_wave_tower.tscn" id="2_c2jw0"]
+
+[resource]
+script = ExtResource("1_idqq3")
+configuration = ExtResource("1_jc4kh")
+scene = ExtResource("2_c2jw0")
+metadata/_custom_type_script = "uid://byiw835k16yc6"

@@ -11,8 +11,8 @@ enum TargetingMode { FIRST_IN_PROGRESS, HIGH_HP, LOW_HP }
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
 @export var type: Type = Type.RED
-@export var configuration: TowerConfiguration
 
+var configuration: TowerConfiguration
 var _current_target: Enemy
 var _enabled: bool = false
 # when true, the tower fires instantly upon detecting an enemy

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://7hfxyb5g3ku"]
+
+[ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_y64o4"]
+[ext_resource type="Texture2D" uid="uid://3besa6t55dro" path="res://assets/sprites/towers/lightning_towers.png" id="2_dpotd"]
+[ext_resource type="Script" uid="uid://cl5pxh8r8evhq" path="res://towers/instances/lightning/lightning_tower/lightning_tower.gd" id="2_epe63"]
+
+[node name="LightningTower" instance=ExtResource("1_y64o4")]
+script = ExtResource("2_epe63")
+
+[node name="Sprite2D" parent="." index="3"]
+position = Vector2(0, -57)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_dpotd")
+hframes = 1
+region_enabled = true
+region_rect = Rect2(0, -7.115967, 328.66125, 551.11597)
+
+[node name="ProjectileSpawnPos" type="Marker2D" parent="." index="9"]
+position = Vector2(0, -69)

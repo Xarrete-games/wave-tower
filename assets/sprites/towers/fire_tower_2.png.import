@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3besa6t55dro"
-path="res://.godot/imported/green_towers.png-ccf3ec799ecb52ff018b9fe4e62a1573.ctex"
+uid="uid://d4bsqc1n40vaj"
+path="res://.godot/imported/fire_tower_2.png-5ffb4c215f288dd0a38b2732b0233726.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/towers/green_towers.png"
-dest_files=["res://.godot/imported/green_towers.png-ccf3ec799ecb52ff018b9fe4e62a1573.ctex"]
+source_file="res://assets/sprites/towers/fire_tower_2.png"
+dest_files=["res://.godot/imported/fire_tower_2.png-5ffb4c215f288dd0a38b2732b0233726.ctex"]
 
 [params]
 

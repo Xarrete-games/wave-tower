@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2p3kiv745w0i"]
+[gd_scene load_steps=4 format=3 uid="uid://cb3h13lspbed5"]
 
 [sub_resource type="GDScript" id="GDScript_h738x"]
 script/source = "class_name Projectil extends Area2D
@@ -27,7 +27,6 @@ func _on_body_entered(body: Node2D) -> void:
 "
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_al5vr"]
-load_path = "res://.godot/imported/red_tower_icon.png-8b358f6e79b2a1666c18b7adcae17ff7.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3ci8"]
 size = Vector2(21, 22)
@@ -40,6 +39,7 @@ script = SubResource("GDScript_h738x")
 rotation = -1.5707964
 scale = Vector2(0.05, 0.05)
 texture = SubResource("CompressedTexture2D_al5vr")
+region_enabled = true
 region_rect = Rect2(1240, 786, 17, 28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

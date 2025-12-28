@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://oj5ilwusjvuo"]
+
+[ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_b1ajy"]
+[ext_resource type="Script" uid="uid://dpashq3sbs7m7" path="res://towers/instances/lightning/electric_wave_tower/electric_wave_tower.gd" id="2_gxgv5"]
+[ext_resource type="Texture2D" uid="uid://3besa6t55dro" path="res://assets/sprites/towers/lightning_towers.png" id="4_gxgv5"]
+[ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="4_yogkd"]
+[ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/instances/red/passive_light.gd" id="5_iuceq"]
+[ext_resource type="AudioStream" uid="uid://cp4evfqpqhdhy" path="res://assets/sounds/sfx/Green_attack.ogg" id="6_gq66r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cmxm1"]
+
+[node name="ElectricWaveTower" instance=ExtResource("1_b1ajy")]
+script = ExtResource("2_gxgv5")
+type = 1
+
+[node name="CristalLight" parent="." index="1"]
+position = Vector2(1, -121)
+color = Color(0.5019608, 0.8156863, 0.5019608, 1)
+attack_animation_time = 0.3
+max_scale = 0.8
+max_energy = 1.0
+
+[node name="ProjectilSpawnPosition" type="Marker2D" parent="." index="3"]
+position = Vector2(0, -79)
+
+[node name="Sprite2D" parent="." index="4"]
+position = Vector2(0, -56)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_gxgv5")
+hframes = 1
+region_enabled = true
+region_rect = Rect2(1054, 0, 434, 544)
+
+[node name="RangeCollision" parent="AreaDetector" index="0"]
+shape = SubResource("CircleShape2D_cmxm1")
+
+[node name="PassiveLight" type="PointLight2D" parent="." index="6"]
+position = Vector2(2, -161)
+color = Color(0.5019608, 1, 0.5019608, 1)
+energy = 0.5
+texture = ExtResource("4_yogkd")
+texture_scale = 3.0
+script = ExtResource("5_iuceq")
+
+[node name="AttackTimer" parent="." index="7"]
+wait_time = 1.0
+
+[node name="MouseDetector" parent="." index="8"]
+offset_left = -33.0
+offset_top = -183.0
+offset_right = 31.0
+
+[node name="AttackPlayer" type="AudioStreamPlayer2D" parent="." index="9"]
+stream = ExtResource("6_gq66r")
+volume_db = -12.0
+bus = &"SFX"

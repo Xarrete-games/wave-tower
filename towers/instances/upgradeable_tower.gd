@@ -10,6 +10,7 @@ func _ready():
 
 func upgrade() -> void:
 	RunContext.economy.gold -= configuration.upgrade_price
+	sprite_2d.texture = configuration.upgrade_sprite
 	level += 1
 	experience_handler.level_up.emit(level)
 
@@ -18,7 +19,3 @@ func is_max_level() -> bool:
 
 func get_upgradeable_towers() -> Array[TowerConfigurationWithInstance]:
 	return configuration.upgradeable_towers
-
-
-
-
