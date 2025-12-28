@@ -8,12 +8,12 @@
 script = ExtResource("2_epe63")
 
 [node name="Sprite2D" parent="." index="3"]
-position = Vector2(0, -57)
+position = Vector2(0, -50)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_dpotd")
 hframes = 1
 region_enabled = true
-region_rect = Rect2(0, -7.115967, 328.66125, 551.11597)
+region_rect = Rect2(0, 0, 298, 545)
 
 [node name="ProjectileSpawnPos" type="Marker2D" parent="." index="9"]
 position = Vector2(0, -69)
