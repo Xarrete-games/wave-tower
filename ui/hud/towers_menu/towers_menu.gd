@@ -16,8 +16,8 @@ func _ready() -> void:
 		button.hover.connect(_on_tower_button_hover)
 		button.unhover.connect(_on_tower_button_unhover)
 
-func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
-	ClickEvents.tower_button_pressed.emit(tower_scene)
+func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance) -> void:
+	ClickEvents.tower_button_pressed.emit(tower_configuration)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	button_in_hover = tower_button

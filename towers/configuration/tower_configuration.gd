@@ -9,6 +9,7 @@ class_name TowerConfiguration extends Resource
 
 @export_group("Price")
 @export var base_price: int = 50
+@export var upgrade_price: int = 30
 
 @export_group("Initial Stats")
 @export var base_damage: float = 5

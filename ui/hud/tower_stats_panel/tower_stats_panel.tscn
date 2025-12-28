@@ -137,7 +137,6 @@ stat_icon = ExtResource("4_725y3")
 
 [node name="UpgradeButtonContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -145,7 +144,8 @@ size_flags_horizontal = 4
 layout_mode = 2
 text = "Upgrade"
 
-[node name="GoldPrice" parent="Panel/MarginContainer/MainContainer/UpgradeButtonContainer" instance=ExtResource("7_ynx3u")]
+[node name="UpgradeTowerPrice" parent="Panel/MarginContainer/MainContainer/UpgradeButtonContainer" instance=ExtResource("7_ynx3u")]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
@@ -196,8 +196,8 @@ anchor_right = 1.176
 anchor_bottom = 0.75100005
 offset_left = -1.5
 offset_top = 89.328995
-offset_right = 93.62402
-offset_bottom = -48.26303
+offset_right = -52.375977
+offset_bottom = -75.26303
 
 [connection signal="xarreta_pressed" from="Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
 [connection signal="xarreta_pressed" from="Panel/MarginContainer/MainContainer/ButtonsContainer/RemoveButton" to="." method="_on_remove_button_pressed"]

@@ -1,6 +1,6 @@
 class_name TowerButton extends Control
 
-signal tower_button_pressed(tower_scene: PackedScene)
+signal tower_button_pressed(tower_configuration: TowerConfigurationWithInstance)
 signal hover(tower_button: TowerButton)
 signal unhover(tower_button: TowerButton)
 
@@ -71,4 +71,4 @@ func _on_tower_button_pressed() -> void:
 	AudioManager.play_button_click()
 	if RunContext.economy.gold < price:
 		return
-	tower_button_pressed.emit(tower_scene)
+	tower_button_pressed.emit(tower_configuration)

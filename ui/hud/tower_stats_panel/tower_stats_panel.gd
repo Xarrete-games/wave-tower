@@ -21,6 +21,7 @@ var button_in_hover: TowerButton = null
 # upgrades
 @onready var upgrade_button_container: Control = %UpgradeButtonContainer
 @onready var upgrades_container: Control = %UpgradesContainer
+@onready var upgrade_tower_price: GoldPrice = %UpgradeTowerPrice
 # tageting
 @onready var targeting_mode_selector: OptionButton = %TargetingModeSelector
 
@@ -74,6 +75,7 @@ func _on_tower_selected(tower: Tower) -> void:
 				tower_button.unhover.connect(_on_tower_button_unhover)
 
 		else:
+			upgrade_tower_price.price = upgradeable_tower.configuration.upgrade_price
 			upgrade_button_container.visible = true
 			upgrades_container.visible = false
 			
@@ -102,6 +104,9 @@ func _on_remove_button_pressed() -> void:
 	ClickEvents.tower_sold_pressed.emit(current_tower)
 
 func _on_upgrade_button_pressed() -> void:
+	if RunContext.economy.gold < current_tower.configuration.upgrade_price:
+		return
+
 	if current_tower is UpgradeableTower:
 		(current_tower as UpgradeableTower).upgrade()
 
@@ -110,9 +115,8 @@ func _hide_upgrade_options() -> void:
 	upgrades_container.visible = false
 	level_container.visible = false
 
-func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
-	print("Tower upgrade pressed for scene: ", tower_scene)
-	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_scene)
+func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance) -> void:
+	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_configuration)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	button_in_hover = tower_button
