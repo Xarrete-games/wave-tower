@@ -80,7 +80,6 @@ func _on_tower_selected(tower: Tower) -> void:
 			upgrades_container.visible = false
 			
 	else:
-		print("Tower is not upgradeable, hiding upgrade options")
 		_hide_upgrade_options()
 	
 func update_stats(tower_stats: TowerStats) -> void:
