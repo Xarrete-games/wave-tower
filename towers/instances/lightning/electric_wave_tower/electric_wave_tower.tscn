@@ -24,7 +24,7 @@ max_energy = 1.0
 position = Vector2(0, -79)
 
 [node name="Sprite2D" parent="." index="4"]
-position = Vector2(0, -56)
+position = Vector2(0, -50)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_gxgv5")
 hframes = 1
