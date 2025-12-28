@@ -88,9 +88,7 @@ func update_stats(tower_stats: TowerStats) -> void:
 	
 func update_exp_data(exp_data: TowerExpData) -> void:
 	level_label.text = str(exp_data.level)
-	#current_exp_label.text = str(exp_data.current_exp)
-	#required_exp_label.text = str(exp_data.exp_for_next_level)
-
+	
 func _update_targeting_modes(modes: Array[Tower.TargetingMode]) -> void:
 	targeting_mode_selector.clear()
 	for mode in modes:
@@ -113,7 +111,8 @@ func _hide_upgrade_options() -> void:
 	level_container.visible = false
 
 func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
-	print("Upgrading to tower scene: ", tower_scene)
+	print("Tower upgrade pressed for scene: ", tower_scene)
+	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_scene)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	button_in_hover = tower_button

@@ -34,9 +34,11 @@ func _process(_delta: float) -> void:
 		if not GameState.is_placing_tower() and not GameState.is_using_item():
 			_open_config_menu()
 
+
 func reset_game() -> void:
-	#RunContext.is_on_restarting = true
-	get_tree().change_scene_to_packed(BOOT)
+	RunContext.is_on_restarting = true
+	var boot = load("uid://bfm0i7ehshgsf")
+	get_tree().change_scene_to_packed(boot)
 
 func _load_level(level_number: int) -> void:
 	RunContext.progress.current_level = level_number
