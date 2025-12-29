@@ -22,8 +22,4 @@ layout_mode = 2
 text = "Next Wave"
 icon = ExtResource("3_35lo6")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-mouse_filter = 2
-
 [connection signal="xarreta_pressed" from="NextWaveButton" to="." method="_on_next_wave_button_pressed"]

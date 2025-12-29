@@ -18,36 +18,40 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 script = ExtResource("1_d3tgk")
-buttons_container = NodePath("TowersButtons")
+buttons_container = NodePath("CenterContainer/TowersButtons")
 tower_hint = NodePath("TowerButtonHint")
 
 [node name="TowerButtonHint" parent="." instance=ExtResource("2_57b1o")]
 layout_mode = 0
-offset_left = 751.0
-offset_top = -215.0
-offset_right = 1005.0
-offset_bottom = -80.0
+offset_left = 823.0
+offset_top = -184.0
+offset_right = 1097.0
+offset_bottom = -49.0
 
-[node name="TowersButtons" type="HBoxContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.41300002
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 0.049999237
+offset_top = -88.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="TowersButtons" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="RedTowerButton" parent="TowersButtons" instance=ExtResource("3_1xlmg")]
+[node name="RedTowerButton" parent="CenterContainer/TowersButtons" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
 tower_configuration = ExtResource("4_sgd18")
 
-[node name="GreenTowerButton" parent="TowersButtons" instance=ExtResource("3_1xlmg")]
+[node name="GreenTowerButton" parent="CenterContainer/TowersButtons" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
 tower_configuration = ExtResource("6_7tyqd")
 
-[node name="BlueTowerButton" parent="TowersButtons" instance=ExtResource("3_1xlmg")]
+[node name="BlueTowerButton" parent="CenterContainer/TowersButtons" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
 tower_configuration = ExtResource("8_sobya")
