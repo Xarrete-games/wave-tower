@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://boinmjkgpsi1q"]
 
 [ext_resource type="Script" uid="uid://d1d5wjifctnq2" path="res://ui/screens/events_screen/event_screen.gd" id="1_13c3w"]
-[ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="2_13c3w"]
 [ext_resource type="StyleBox" uid="uid://cu0b10p3y57qo" path="res://ui/styles/box_style/shop/section_tittle_box.tres" id="2_l4pag"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="3_ybmhx"]
 
 [node name="EventScreen" type="PanelContainer" node_paths=PackedStringArray("events_container")]
 anchors_preset = 15
@@ -16,14 +16,13 @@ events_container = NodePath("MarginContainer/VBoxContainer/EventsContainer")
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/margin_top = 250
+size_flags_vertical = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 80
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
@@ -33,10 +32,10 @@ theme_override_styles/panel = ExtResource("2_l4pag")
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 text = "Choose an event"
-label_settings = ExtResource("2_13c3w")
+label_settings = ExtResource("3_ybmhx")
 horizontal_alignment = 1
 
 [node name="EventsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 20
 alignment = 1

@@ -7,52 +7,46 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c12jj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qy0vt"]
-font_size = 24
+font_size = 22
 font_color = Color(0.7137255, 0.77254903, 0.64705884, 1)
 
-[node name="EventSlot" type="Control" node_paths=PackedStringArray("event_texture", "description_label", "title_lable")]
-custom_minimum_size = Vector2(268, 0)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 268.0
-offset_bottom = 400.0
+[node name="EventSlot" type="VBoxContainer" node_paths=PackedStringArray("event_texture", "description_label", "title_lable")]
+offset_right = 120.0
+offset_bottom = 271.0
 script = ExtResource("1_qy0vt")
-event_texture = NodePath("Container/IconContainer/EventTexture")
-description_label = NodePath("Container/TextContainer/DescriptionLabel")
-title_lable = NodePath("Container/TextContainer/TitleLabel")
+event_texture = NodePath("IconContainer/EventTexture")
+description_label = NodePath("TextContainer/DescriptionLabel")
+title_lable = NodePath("TextContainer/TitleLabel")
 
-[node name="Container" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 268.0
-offset_bottom = 280.0
-theme_override_constants/separation = 20
-
-[node name="IconContainer" type="CenterContainer" parent="Container"]
-custom_minimum_size = Vector2(268, 310)
+[node name="IconContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(200, 186)
 layout_mode = 2
 
-[node name="HexagonBorder" type="Polygon2D" parent="Container/IconContainer"]
+[node name="Node2D" type="Node2D" parent="IconContainer"]
+position = Vector2(20, 0)
+
+[node name="HexagonBorder" type="Polygon2D" parent="IconContainer/Node2D"]
 texture_filter = 2
 material = SubResource("CanvasItemMaterial_c12jj")
 color = Color(0.7137255, 0.77254903, 0.64705884, 1)
-polygon = PackedVector2Array(134, 310, 268, 232.5, 268, 77.5, 134, 0, 0, 77.5, 0, 232.5)
+polygon = PackedVector2Array(80.4, 186, 160.8, 139.5, 160.8, 46.5, 80.4, 0, 0, 46.5, 0, 139.5)
 
-[node name="TextureRect" type="TextureRect" parent="Container/IconContainer"]
+[node name="TextureRect" type="TextureRect" parent="IconContainer"]
 layout_mode = 2
 texture = ExtResource("2_yjsho")
 
-[node name="EventTexture" type="TextureRect" parent="Container/IconContainer"]
-custom_minimum_size = Vector2(200, 200)
+[node name="EventTexture" type="TextureRect" parent="IconContainer"]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("4_c5f36")
 expand_mode = 3
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="TextContainer" type="VBoxContainer" parent="Container"]
+[node name="TextContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="Container/TextContainer"]
+[node name="TitleLabel" type="Label" parent="TextContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 1
@@ -61,14 +55,14 @@ text = "Boniatillo"
 label_settings = SubResource("LabelSettings_qy0vt")
 horizontal_alignment = 1
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="Container/TextContainer"]
-custom_minimum_size = Vector2(129.9, 0)
+[node name="DescriptionLabel" type="RichTextLabel" parent="TextContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/normal_font_size = 16
 text = "+10% damage on turrets"
 fit_content = true
 scroll_active = false
