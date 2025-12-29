@@ -1,15 +1,19 @@
-[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=8 format=3 uid="uid://cg62x3fyuhj52"]
+[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=9 format=3 uid="uid://cg62x3fyuhj52"]
 
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="1_cbqn0"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_leiec"]
 [ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="2_esicr"]
-[ext_resource type="Texture2D" uid="uid://d4bsqc1n40vaj" path="res://assets/sprites/towers/fire_tower_2.png" id="3_wv6in"]
+[ext_resource type="Texture2D" uid="uid://ctiu5adwk5hw0" path="res://assets/sprites/towers/fire_towers.png" id="3_wv6in"]
 [ext_resource type="Resource" uid="uid://5apq3w6n8f53" path="res://towers/configuration/data/frost_tower_configuration_instance.tres" id="4_y1o0l"]
 [ext_resource type="Resource" uid="uid://cb8v2oeues41k" path="res://towers/configuration/data/lightning_tower_configuration_instance.tres" id="5_wv6in"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
 atlas = ExtResource("1_leiec")
 region = Rect2(17, 1, 95, 174)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yn1l8"]
+atlas = ExtResource("3_wv6in")
+region = Rect2(548, -1.5068665, 325, 552.50684)
 
 [resource]
 script = ExtResource("1_cbqn0")
@@ -21,6 +25,6 @@ base_damage = 25.0
 base_attack_range = 300.0
 damage_per_level = 4.0
 attack_range_level = 10.0
-upgrade_sprite = ExtResource("3_wv6in")
+upgrade_sprite = SubResource("AtlasTexture_yn1l8")
 upgradeable_towers = Array[ExtResource("2_esicr")]([ExtResource("4_y1o0l"), ExtResource("5_wv6in")])
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
