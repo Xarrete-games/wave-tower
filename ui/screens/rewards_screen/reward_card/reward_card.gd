@@ -55,7 +55,7 @@ func _chek_health(curren_health: int, health_cost: int) -> void:
 	
 func _on_mouse_entered() -> void:
 	AudioManager.play_button_hover()
-	relic_texture.custom_minimum_size = Vector2(160, 160)
+	relic_texture.custom_minimum_size = Vector2(130, 130)
 
 func _on_mouse_exited() -> void:
-	relic_texture.custom_minimum_size = Vector2(130, 130)
+	relic_texture.custom_minimum_size = Vector2(80, 80)

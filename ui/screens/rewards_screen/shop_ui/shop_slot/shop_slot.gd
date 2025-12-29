@@ -20,6 +20,7 @@ func set_item(item_offer: ItemOffer) -> void:
 	_price = item_offer.price
 	title_label.text = item_offer.item_data.id
 	description_label.text = item_offer.item_data.description
+	tooltip_text = item_offer.item_data.description
 	gold_price.price = _price
 	shop_slot_icon.set_icon(item_offer.item_data.texture)
 	shop_slot_icon.set_background_color(RunContext.relics.get_rarity_color(item_offer.item_data.rarity))
