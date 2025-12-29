@@ -15,15 +15,15 @@
 
 [sub_resource type="Curve2D" id="Curve2D_hdwwr"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 857, -322, 0, 0, 0, 0, 599, -182, 0, 0, 0, 0, 834, -56, 0, 0, 0, 0, 534, 105, 0, 0, 0, 0, 721, 213, 0, 0, 0, 0, 696, 293, 0, 0, 0, 0, 720, 411, 0, 0, 0, 0, 799, 453, 0, 0, 0, 0, 962, 464, 0, 0, 0, 0, 1103, 450, 0, 0, 0, 0, 1194, 438, 0, 0, 0, 0, 1356, 526, 0, 0, 0, 0, 1617, 526, 0, 0, 0, 0, 1673, 556, 0, 0, 0, 0, 1667, 684, 0, 0, 0, 0, 1193, 940, 0, 0, 0, 0, 1392, 1060)
+"points": PackedVector2Array(0, 0, 0, 0, 916, -340, 0, 0, 0, 0, 628, -195, 0, 0, 0, 0, 626, -145, 0, 0, 0, 0, 768, -66, 0, 0, 0, 0, 781, -14, 0, 0, 0, 0, 575, 86, 0, 0, 0, 0, 573, 145, 0, 0, 0, 0, 740, 244, 0, 0, 0, 0, 691, 339, 0, 0, 0, 0, 720, 411, 0, 0, 0, 0, 799, 453, 0, 0, 0, 0, 952, 501, 0, 0, 0, 0, 940, 569, 0, 0, 0, 0, 1113, 675, 0, 0, 0, 0, 1209, 669, 0, 0, 0, 0, 1471, 536, 0, 0, 0, 0, 1555, 528, 0, 0, 0, 0, 1661, 566, 0, 0, 0, 0, 1749, 628, 0, 0, 0, 0, 1713, 676, 0, 0, 0, 0, 1238.3042, 913.4909, 0, 0, 0, 0, 1203, 964, 0, 0, 0, 0, 1379, 1075)
 }
-point_count = 17
+point_count = 23
 
 [sub_resource type="Curve2D" id="Curve2D_ct1ur"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1880, 187, 0, 0, 0, 0, 1799, 231, 0, 0, 0, 0, 1482, 77, 0, 0, 0, 0, 1164, 235, 0, 0, 0, 0, 1213, 265, 0, 0, 0, 0, 1232, 328, 0, 0, 0, 0, 1183, 431, 0, 0, 0, 0, 974, 471, 0, 0, 0, 0, 803, 456, 0, 0, 0, 0, 749, 437, 0, 0, 0, 0, 448, 581, 0, 0, 0, 0, 17, 360, 0, 0, 0, 0, 123, 301, 0, 0, 0, 0, -282, 94)
+"points": PackedVector2Array(0, 0, 0, 0, 1942, 172, 0, 0, 0, 0, 1838, 227, 0, 0, 0, 0, 1749, 227, 0, 0, 0, 0, 1542, 120, 0, 0, 0, 0, 1419, 116, 0, 0, 0, 0, 1200, 232, 0, 0, 0, 0, 1199, 270, 0, 0, 0, 0, 1241, 348, 0, 0, 0, 0, 1183, 431, 0, 0, 0, 0, 1041, 495, 0, 0, 0, 0, 921, 506, 0, 0, 0, 0, 749, 453, 0, 0, 0, 0, 515, 570, 0, 0, 0, 0, 448, 581, 0, 0, 0, 0, 392, 574, 0, 0, 0, 0, 48, 397, 0, 0, 0, 0, 29, 269, 0, 0, 0, 0, -284, 106)
 }
-point_count = 14
+point_count = 18
 
 [node name="Level2a" instance=ExtResource("1_aspf4")]
 data = ExtResource("2_obaol")
@@ -64,13 +64,14 @@ curve = SubResource("Curve2D_hdwwr")
 curve = SubResource("Curve2D_ct1ur")
 
 [node name="Path2D4" type="Path2D" parent="EnemyPaths" index="3"]
+visible = false
 curve = SubResource("Curve2D_ct1ur")
 
 [node name="CameraInitPos" parent="." index="3"]
 position = Vector2(760, 234)
 
 [node name="OrangePortal" parent="." index="5" instance=ExtResource("5_didll")]
-position = Vector2(-310, -33.00003)
+position = Vector2(-304, -8.000036)
 
 [node name="OrangePortal2" parent="." index="6" instance=ExtResource("5_didll")]
 position = Vector2(1366, 981.99994)
@@ -78,10 +79,10 @@ flip_h = true
 flip_v = true
 
 [node name="BluePortal" parent="." index="7" instance=ExtResource("6_oxkye")]
-position = Vector2(1902, 63.99991)
+position = Vector2(1967, 55.999847)
 
 [node name="BluePortal2" parent="." index="8" instance=ExtResource("6_oxkye")]
-position = Vector2(886.99994, -452)
+position = Vector2(955, -447.99997)
 
 [node name="Node2D" type="Node2D" parent="." index="11"]
 
