@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do1b4oomw0kiu"
-path="res://.godot/imported/flame_particle.png-0ddb5e2fd2551ed26ccea9f84c513e42.ctex"
+uid="uid://cl2hcj4e2ns2y"
+path="res://.godot/imported/electric_particle.png-f2c32c9625f15bef7ca4ed05633d27de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/particles/flame_particle.png"
-dest_files=["res://.godot/imported/flame_particle.png-0ddb5e2fd2551ed26ccea9f84c513e42.ctex"]
+source_file="res://assets/sprites/particles/electric_particle.png"
+dest_files=["res://.godot/imported/electric_particle.png-f2c32c9625f15bef7ca4ed05633d27de.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_4f0f1"]
 [ext_resource type="Texture2D" uid="uid://cynps0c68hhi7" path="res://assets/sprites/proyectiles/fire_ball.png" id="2_4f0f1"]
 [ext_resource type="Script" uid="uid://sh4p7t1fghmw" path="res://towers/instances/fire/fire_tower/fire_ball_sprite.gd" id="3_0wp0u"]
-[ext_resource type="Texture2D" uid="uid://bm886kp7xjn40" path="res://assets/sprites/particles/flame_particle.png" id="4_w0m2y"]
+[ext_resource type="Texture2D" uid="uid://do1b4oomw0kiu" path="res://assets/sprites/particles/flame_particle.png" id="4_w0m2y"]
 
 [sub_resource type="Curve" id="Curve_0wp0u"]
 _data = [Vector2(0.0026881695, 1), 0.0, 0.0, 0, 0, Vector2(0.9596774, 0.44869107), 0.0, 0.0, 0, 0]
@@ -22,12 +22,12 @@ script = ExtResource("3_0wp0u")
 
 [node name="FireParticles" type="CPUParticles2D" parent="."]
 scale = Vector2(0.5, 0.5)
-amount = 1000
+amount = 300
 texture = ExtResource("4_w0m2y")
 lifetime = 0.3
 preprocess = 0.39
 emission_shape = 1
-emission_sphere_radius = 50.0
+emission_sphere_radius = 30.0
 spread = 0.0
 gravity = Vector2(0, 0)
 radial_accel_min = -50.0
