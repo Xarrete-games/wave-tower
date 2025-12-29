@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://c87kjybjulaxq"]
+[gd_scene load_steps=6 format=3 uid="uid://c87kjybjulaxq"]
 
 [ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_4f0f1"]
 [ext_resource type="Texture2D" uid="uid://cynps0c68hhi7" path="res://assets/sprites/proyectiles/fire_ball.png" id="2_4f0f1"]
 [ext_resource type="Script" uid="uid://sh4p7t1fghmw" path="res://towers/instances/fire/fire_tower/fire_ball_sprite.gd" id="3_0wp0u"]
+
+[sub_resource type="Curve" id="Curve_0wp0u"]
+_data = [Vector2(0.0026881695, 1), 0.0, 0.0, 0, 0, Vector2(0.9596774, 0.44869107), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_w0m2y"]
+colors = PackedColorArray(0.9254902, 0, 0, 1, 1, 0.7529412, 0.17254902, 1)
 
 [node name="FireBallProjectile" type="Node2D"]
 script = ExtResource("1_4f0f1")
@@ -10,3 +17,17 @@ script = ExtResource("1_4f0f1")
 [node name="FireBallSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_4f0f1")
 script = ExtResource("3_0wp0u")
+
+[node name="FireParticles" type="CPUParticles2D" parent="."]
+scale = Vector2(0.5, 0.5)
+amount = 2000
+lifetime = 0.3
+preprocess = 0.39
+emission_shape = 1
+emission_sphere_radius = 50.0
+spread = 0.0
+gravity = Vector2(0, 0)
+radial_accel_min = -50.0
+radial_accel_max = 14.62
+scale_amount_curve = SubResource("Curve_0wp0u")
+color_ramp = SubResource("Gradient_w0m2y")
