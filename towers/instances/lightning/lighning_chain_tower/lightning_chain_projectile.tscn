@@ -91,9 +91,8 @@ lifetime = 0.15000000000000002
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_4jxr5")
 
-[node name="Flare" type="GPUParticles2D" parent="."]
+[node name="Flare" type="GPUParticles2D" parent="VFX_thunder"]
 material = SubResource("CanvasItemMaterial_f78pc")
-position = Vector2(0, 800)
 amount = 1
 texture = ExtResource("3_g80n3")
 lifetime = 0.15000000000000002
