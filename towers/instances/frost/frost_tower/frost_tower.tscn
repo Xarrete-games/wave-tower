@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpmgxjjnk8kxe"]
+
+[ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_jbg6q"]
+[ext_resource type="Script" uid="uid://cvgwrv3uj7gss" path="res://towers/instances/frost/frost_tower/frost_tower.gd" id="2_iw8lg"]
+[ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="2_q3wv5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw8lg"]
+atlas = ExtResource("2_q3wv5")
+region = Rect2(475, 0, 475, 636)
+
+[node name="FrostTower" instance=ExtResource("1_jbg6q")]
+script = ExtResource("2_iw8lg")
+upgrade_sprite = SubResource("AtlasTexture_iw8lg")
+
+[node name="Sprite2D" parent="." index="3"]
+position = Vector2(0, -65)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_q3wv5")
+hframes = 1
+region_enabled = true
+region_rect = Rect2(0, 0, 475, 636)
+
+[node name="ProjectileSpawnPos" parent="." index="9"]
+position = Vector2(0, -99)

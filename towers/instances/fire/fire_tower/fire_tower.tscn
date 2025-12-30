@@ -13,7 +13,7 @@ script = ExtResource("2_t2lsm")
 upgrade_sprite = SubResource("AtlasTexture_t2lsm")
 
 [node name="Sprite2D" parent="." index="3"]
-position = Vector2(0, -54)
+position = Vector2(0, -51)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_t2lsm")
 hframes = 1
@@ -25,5 +25,5 @@ offset_left = -41.0
 offset_top = -117.0
 offset_right = 44.0
 
-[node name="ProjectileSpawnPos" type="Marker2D" parent="." index="9"]
-position = Vector2(0, -90)
+[node name="ProjectileSpawnPos" parent="." index="9"]
+position = Vector2(1, -103)

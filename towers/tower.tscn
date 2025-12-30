@@ -63,6 +63,9 @@ level_up_postion = Vector2(0, -150)
 [node name="LevelUpPos" type="Marker2D" parent="."]
 position = Vector2(0, -152)
 
+[node name="ProjectileSpawnPos" type="Marker2D" parent="."]
+position = Vector2(0, -90)
+
 [connection signal="body_entered" from="AreaDetector" to="AreaDetector" method="_on_body_entered"]
 [connection signal="body_exited" from="AreaDetector" to="AreaDetector" method="_on_body_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
