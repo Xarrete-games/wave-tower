@@ -15,5 +15,4 @@ shader_parameter/Texture2DParameter = ExtResource("2_xl0gl")
 material = SubResource("ShaderMaterial_xl0gl")
 points = PackedVector2Array(100, 3, 107, 874)
 width = 150.0
-default_color = Color(0.80784315, 0, 0.39215687, 1)
 texture_mode = 2

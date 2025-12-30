@@ -4,6 +4,8 @@
 input_name = "color"
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_kw2nj"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
 operator = 2
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_rc4t6"]
@@ -60,6 +62,10 @@ void vertex() {
 }
 
 void fragment() {
+// Input:10
+	vec4 n_out10p0 = COLOR;
+
+
 // FloatParameter:8
 	float n_out8p0 = VanishingValue;
 
@@ -92,8 +98,12 @@ void fragment() {
 	float n_out9p0 = smoothstep(n_out8p0, n_in9p1, n_out3p1);
 
 
+// VectorOp:11
+	vec4 n_out11p0 = n_out10p0 * vec4(n_out9p0);
+
+
 // Output:0
-	COLOR.rgb = vec3(n_out9p0);
+	COLOR.rgb = vec3(n_out11p0.xyz);
 
 
 }
@@ -126,4 +136,4 @@ nodes/fragment/10/node = SubResource("VisualShaderNodeInput_rc4t6")
 nodes/fragment/10/position = Vector2(1040, -260)
 nodes/fragment/11/node = SubResource("VisualShaderNodeVectorOp_kw2nj")
 nodes/fragment/11/position = Vector2(1560, -260)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 3, 0, 5, 0, 4, 2, 6, 0, 5, 0, 7, 0, 5, 1, 8, 0, 9, 0, 3, 1, 9, 2, 10, 0, 11, 0, 9, 0, 11, 1, 9, 0, 0, 0)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 3, 0, 5, 0, 4, 2, 6, 0, 5, 0, 7, 0, 5, 1, 8, 0, 9, 0, 3, 1, 9, 2, 10, 0, 11, 0, 9, 0, 11, 1, 11, 0, 0, 0)
