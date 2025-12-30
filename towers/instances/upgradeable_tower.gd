@@ -1,6 +1,8 @@
 @abstract
 class_name UpgradeableTower extends Tower
 
+@export var upgrade_sprite: Texture2D
+
 const MAX_LEVEL: int = 2
 
 var level: int = 1
@@ -10,7 +12,7 @@ func _ready():
 
 func upgrade() -> void:
 	RunContext.economy.gold -= configuration.upgrade_price
-	sprite_2d.texture = configuration.upgrade_sprite
+	sprite_2d.texture = upgrade_sprite
 	level += 1
 	experience_handler.level_up.emit(level)
 
