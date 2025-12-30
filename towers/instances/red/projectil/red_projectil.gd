@@ -1,4 +1,3 @@
-@tool
 class_name RedProjectil extends Node2D
 
 @export var cast_speed: int = 7000

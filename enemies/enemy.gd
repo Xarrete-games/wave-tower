@@ -40,7 +40,6 @@ var progress_ratio: float:
 		return _path_follow.progress_ratio
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var explosion: AnimatedSprite2D = $Explosion
 @onready var health_bar: HealthBar = $HealthBar
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var numbers_displayed_pos: Marker2D = $NumbersDisplayedPos
