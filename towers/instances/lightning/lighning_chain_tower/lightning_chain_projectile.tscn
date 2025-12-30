@@ -5,6 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xl0gl"]
 shader = ExtResource("1_k0y13")
+shader_parameter/ColorParameter = Color(0.72538966, 1, 0.012920001, 1)
 shader_parameter/VanishingValue = 0.0
 shader_parameter/Speed = Vector2(-1, 0)
 shader_parameter/Texture2DParameter = ExtResource("2_xl0gl")
@@ -15,4 +16,5 @@ shader_parameter/Texture2DParameter = ExtResource("2_xl0gl")
 material = SubResource("ShaderMaterial_xl0gl")
 points = PackedVector2Array(100, 3, 107, 874)
 width = 150.0
+default_color = Color(1, 0.61055017, 0, 1)
 texture_mode = 2
