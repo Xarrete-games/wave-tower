@@ -7,7 +7,7 @@
 shader = ExtResource("1_k0y13")
 shader_parameter/ColorParameter = Color(0.72538966, 1, 0.012920001, 1)
 shader_parameter/VanishingValue = 0.0
-shader_parameter/Speed = Vector2(-1, 0)
+shader_parameter/Speed = Vector2(-2, 0)
 shader_parameter/Texture2DParameter = ExtResource("2_xl0gl")
 
 [node name="LightningChainProjectile" type="Node2D"]
