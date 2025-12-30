@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_lrs7w"]
 [ext_resource type="Texture2D" uid="uid://cw3n7tsif8w3m" path="res://assets/sprites/proyectiles/electric_ball.png" id="1_ntmix"]
-[ext_resource type="Texture2D" uid="uid://cl2hcj4e2ns2y" path="res://assets/sprites/particles/electric_particle.png" id="3_k63b4"]
+[ext_resource type="Texture2D" uid="uid://cl2hcj4e2ns2y" path="res://assets/textures/particles/electric_particle.png" id="3_k63b4"]
 
 [sub_resource type="Curve" id="Curve_bbjbl"]
 _data = [Vector2(0.0026881695, 1), 0.0, 0.0, 0, 0, Vector2(0.9596774, 0.44869107), 0.0, 0.0, 0, 0]

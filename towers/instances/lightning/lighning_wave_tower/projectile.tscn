@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cb3h13lspbed5"]
+[gd_scene load_steps=4 format=3 uid="uid://1dfye5taueiw"]
 
 [sub_resource type="GDScript" id="GDScript_h738x"]
 script/source = "class_name Projectil extends Area2D

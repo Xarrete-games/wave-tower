@@ -39,6 +39,7 @@ offset_right = 178.64996
 offset_bottom = -137.70007
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_vyalh")
 
 [node name="Panel" type="PanelContainer" parent="."]
@@ -197,6 +198,7 @@ layout_mode = 2
 
 [node name="TowerHintPanel" parent="." instance=ExtResource("12_p50vg")]
 unique_name_in_owner = true
+process_mode = 4
 visible = false
 layout_mode = 1
 anchors_preset = -1

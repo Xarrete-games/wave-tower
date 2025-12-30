@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/hud/towers_menu/towers_menu.gd" id="1_d3tgk"]
 [ext_resource type="PackedScene" uid="uid://cxk1x30qq1f7p" path="res://ui/hud/towers_menu/tower_button_hint/tower_button_hint.tscn" id="2_57b1o"]
 [ext_resource type="PackedScene" uid="uid://o248nju46k2n" path="res://ui/hud/towers_menu/tower_button/tower_button.tscn" id="3_1xlmg"]
-[ext_resource type="Resource" uid="uid://c1r5ty1n47m32" path="res://towers/configuration/data/fire_tower_configuration_instance.tres" id="4_sgd18"]
+[ext_resource type="Resource" uid="uid://c1r5ty1n47m32" path="res://towers/configuration/data/fire_tower_configuration_instance.tres" id="4_57b1o"]
 [ext_resource type="Resource" uid="uid://cb8v2oeues41k" path="res://towers/configuration/data/lightning_tower_configuration_instance.tres" id="6_7tyqd"]
 [ext_resource type="Resource" uid="uid://5apq3w6n8f53" path="res://towers/configuration/data/frost_tower_configuration_instance.tres" id="8_sobya"]
 
@@ -47,7 +47,7 @@ alignment = 1
 
 [node name="RedTowerButton" parent="CenterContainer/TowersButtons" instance=ExtResource("3_1xlmg")]
 layout_mode = 2
-tower_configuration = ExtResource("4_sgd18")
+tower_configuration = ExtResource("4_57b1o")
 
 [node name="GreenTowerButton" parent="CenterContainer/TowersButtons" instance=ExtResource("3_1xlmg")]
 layout_mode = 2

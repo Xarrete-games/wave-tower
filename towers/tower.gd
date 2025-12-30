@@ -4,6 +4,7 @@ class_name Tower extends Node2D
 signal stats_change(tower: Tower)
 signal attack_fired()
 signal attack_speed_change(value: float)
+signal on_target_change(enemy: Enemy)
 
 enum Type { RED, GREEN, BLUE }
 enum TargetingMode { FIRST_IN_PROGRESS, HIGH_HP, LOW_HP }
@@ -49,9 +50,7 @@ var exp_data: TowerExpData:
 func _ready():
 	configuration.build()
 	range_collision.shape = CircleShape2D.new()
-	exp_data = experience_handler.exp_data
 	experience_handler.exp_data_change.connect(_on_exp_data_change)
-	placement_mode()
 	tower_stats_handler.stats_change.connect(_on_stats_change)
 	tower_stats_handler.extra_stats_change.connect(_on_extra_stats_change)
 	tower_stats_handler.set_data(configuration, type, experience_handler)
@@ -103,6 +102,7 @@ func _is_critical_hit() -> bool:
 # --------------------
 func _on_target_change(enemy: Enemy) -> void:
 		_current_target = enemy
+		on_target_change.emit(enemy)
 		if _first_shot and _current_target != null:
 			_fire()
 			attack_fired.emit()
