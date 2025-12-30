@@ -2,20 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_f8b8m"]
 [ext_resource type="Script" uid="uid://e2332bmer7r0" path="res://towers/instances/fire/fire_tower/fire_tower.gd" id="2_t2lsm"]
-[ext_resource type="Texture2D" uid="uid://ctiu5adwk5hw0" path="res://assets/sprites/towers/fire_towers.png" id="3_t2lsm"]
+[ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="3_t2lsm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1o222"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2lsm"]
 atlas = ExtResource("3_t2lsm")
-region = Rect2(-29.55011, -2.7948456, 362.36493, 553.79486)
+region = Rect2(475, 0, 475, 551)
 
 [node name="FireTower" instance=ExtResource("1_f8b8m")]
 script = ExtResource("2_t2lsm")
+upgrade_sprite = SubResource("AtlasTexture_t2lsm")
 
 [node name="Sprite2D" parent="." index="3"]
 position = Vector2(0, -54)
 scale = Vector2(0.3, 0.3)
-texture = SubResource("AtlasTexture_1o222")
+texture = ExtResource("3_t2lsm")
 hframes = 1
+region_enabled = true
+region_rect = Rect2(0, 0, 475, 550)
 
 [node name="MouseDetector" parent="." index="6"]
 offset_left = -41.0
