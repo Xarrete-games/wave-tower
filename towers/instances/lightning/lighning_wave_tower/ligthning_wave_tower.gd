@@ -1,4 +1,3 @@
-@tool
 class_name ElectricWaveTower extends Tower
 
 const GREEN_PROJECTILE = preload("uid://ck6mf6m73ergh")
