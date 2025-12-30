@@ -31,3 +31,4 @@ func _process(delta: float) -> void:
 func set_target(p_enemy: Enemy, p_attack: Attack, p_debuff: EnemyDebuff = null) -> void:
 	enemy = p_enemy
 	attack = p_attack
+	debuff = p_debuff
