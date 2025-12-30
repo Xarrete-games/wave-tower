@@ -39,6 +39,7 @@ offset_right = 178.64996
 offset_bottom = -137.70007
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_vyalh")
 
 [node name="Panel" type="PanelContainer" parent="."]
@@ -61,9 +62,9 @@ theme_override_styles/panel = ExtResource("2_g3isl")
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_bottom = 20
 
 [node name="MainContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
@@ -197,6 +198,7 @@ layout_mode = 2
 
 [node name="TowerHintPanel" parent="." instance=ExtResource("12_p50vg")]
 unique_name_in_owner = true
+process_mode = 4
 visible = false
 layout_mode = 1
 anchors_preset = -1

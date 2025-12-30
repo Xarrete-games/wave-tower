@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://cg2db7mx3pcxb"]
+
+[ext_resource type="Texture2D" uid="uid://do1b4oomw0kiu" path="res://assets/textures/particles/flame_particle.png" id="1_4pbvb"]
+[ext_resource type="Script" uid="uid://dskm3n0d1gpe6" path="res://towers/instances/fire/fire_flamethrower_tower/fire_flamethrower_projectile.gd" id="1_snxe1"]
+
+[sub_resource type="Curve" id="Curve_snxe1"]
+_data = [Vector2(0.0026881695, 1), 0.0, 0.0, 0, 0, Vector2(0.9596774, 0.44869107), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_p8dhc"]
+colors = PackedColorArray(0.9254902, 0, 0, 1, 1, 0.7529412, 0.17254902, 1)
+
+[sub_resource type="Curve" id="Curve_p8dhc"]
+_data = [Vector2(0.0026881695, 1), 0.0, 0.0, 0, 0, Vector2(0.9596774, 0.44869107), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_o6rqx"]
+colors = PackedColorArray(0.9254902, 0, 0, 1, 1, 0.7529412, 0.17254902, 1)
+
+[node name="FireFlamethrowerProjectile" type="Node2D"]
+script = ExtResource("1_snxe1")
+
+[node name="DamageTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="Flamethrower" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="FireParticles" type="CPUParticles2D" parent="Flamethrower"]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+amount = 15000
+texture = ExtResource("1_4pbvb")
+lifetime = 0.6
+spread = 27.12
+gravity = Vector2(0, 0)
+initial_velocity_min = 197.08
+initial_velocity_max = 1000.0
+radial_accel_min = -50.0
+radial_accel_max = 14.62
+damping_max = 1.095
+scale_amount_curve = SubResource("Curve_snxe1")
+color_ramp = SubResource("Gradient_p8dhc")
+
+[node name="Area2D" type="Area2D" parent="Flamethrower"]
+unique_name_in_owner = true
+collision_layer = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flamethrower/Area2D"]
+polygon = PackedVector2Array(-1, -10, 294, -152, 296, 153, -1, 13)
+
+[node name="FireParticles" type="CPUParticles2D" parent="."]
+scale = Vector2(0.5, 0.5)
+amount = 300
+texture = ExtResource("1_4pbvb")
+preprocess = 0.39
+emission_shape = 1
+emission_sphere_radius = 30.0
+spread = 0.0
+gravity = Vector2(0, 0)
+radial_accel_min = -50.0
+radial_accel_max = 14.62
+scale_amount_curve = SubResource("Curve_p8dhc")
+color_ramp = SubResource("Gradient_o6rqx")
+
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
+[connection signal="body_entered" from="Flamethrower/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Flamethrower/Area2D" to="." method="_on_area_2d_body_exited"]

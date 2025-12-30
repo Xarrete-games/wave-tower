@@ -83,11 +83,15 @@ func _on_tower_selected(tower: Tower) -> void:
 		_hide_upgrade_options()
 	
 func update_stats(tower_stats: TowerStats) -> void:
+	if tower_stats == null:
+		return
 	damage_stat.set_value(tower_stats.damage)
 	attack_speed_stat.set_value(tower_stats.attack_speed)
 	range_stat.set_value(tower_stats.attack_range)
 	
 func update_exp_data(exp_data: TowerExpData) -> void:
+	if exp_data == null:
+		return
 	level_label.text = str(exp_data.level)
 	
 func _update_targeting_modes(modes: Array[Tower.TargetingMode]) -> void:

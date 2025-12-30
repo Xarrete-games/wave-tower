@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://oj5ilwusjvuo"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_b1ajy"]
-[ext_resource type="Script" uid="uid://dpashq3sbs7m7" path="res://towers/instances/lightning/electric_wave_tower/electric_wave_tower.gd" id="2_gxgv5"]
+[ext_resource type="Script" uid="uid://dpashq3sbs7m7" path="res://towers/instances/lightning/lighning_wave_tower/ligthning_wave_tower.gd" id="2_gxgv5"]
 [ext_resource type="Texture2D" uid="uid://3besa6t55dro" path="res://assets/sprites/towers/lightning_towers.png" id="4_gxgv5"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="4_yogkd"]
 [ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/instances/red/passive_light.gd" id="5_iuceq"]

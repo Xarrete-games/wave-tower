@@ -2,7 +2,7 @@ class_name BurnDebuff extends EnemyDebuff
 
 func _init() -> void:
 	type = Type.BURN
-	#value = 1
+	value = 1
 	duration = 5
 	tick_duration = 1
 	max_stacks = 99
