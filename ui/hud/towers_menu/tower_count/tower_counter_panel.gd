@@ -1,4 +1,3 @@
-@tool
 class_name TowerCounterPanel extends Control
 
 const TIER_1_COUNT = 2

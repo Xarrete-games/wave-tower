@@ -20,8 +20,8 @@ func _on_gui_input(event: InputEvent) -> void:
 		AudioManager.play_button_click()
 
 func _on_mouse_entered() -> void:
-	event_texture.custom_minimum_size = Vector2(230, 230)
+	event_texture.custom_minimum_size = Vector2(150, 150)
 	AudioManager.play_button_hover()
 
 func _on_mouse_exited() -> void:
-	event_texture.custom_minimum_size = Vector2(200, 200)
+	event_texture.custom_minimum_size = Vector2(100, 100)

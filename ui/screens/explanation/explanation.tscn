@@ -3,74 +3,63 @@
 [ext_resource type="Script" uid="uid://78rjwke2ur88" path="res://ui/screens/explanation/explanation.gd" id="1_gk24h"]
 [ext_resource type="Texture2D" uid="uid://bq6lt7tlxw0te" path="res://assets/sprites/ui/main_menu_background.png" id="2_05xss"]
 [ext_resource type="Texture2D" uid="uid://deipjkusxh5iy" path="res://assets/sprites/ui/explanation/place_towers.png" id="2_rxyxh"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="2_xtdxm"]
 [ext_resource type="Texture2D" uid="uid://fij53t05un2" path="res://assets/sprites/ui/explanation/relic_example.png" id="3_6gcom"]
-[ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="3_xtdxm"]
 [ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="4_gk24h"]
 [ext_resource type="Texture2D" uid="uid://cuf3ct4sm367w" path="res://assets/sprites/ui/explanation/Subida de lvl torres.png" id="7_gk24h"]
 [ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/buttons/xarreta_menu_button.tscn" id="8_gk24h"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3c04x"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gk24h"]
 texture = ExtResource("2_05xss")
 
-[node name="Explanation" type="Control"]
-layout_mode = 3
+[node name="Explanation" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_gk24h")
 script = ExtResource("1_gk24h")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_3c04x")
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 200
-theme_override_constants/margin_bottom = 100
+size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 20
 
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "The Empire of Silence seeks to destroy every wave in the universe.
 Build your rhythm and save the waves."
-label_settings = ExtResource("3_xtdxm")
+label_settings = ExtResource("2_xtdxm")
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 80.01)
 layout_mode = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 80
 alignment = 1
 
-[node name="VBox1" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBox1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="PlaceTower" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBox1"]
-custom_minimum_size = Vector2(300, 0)
+[node name="PlaceTower" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBox1"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 texture = ExtResource("2_rxyxh")
 expand_mode = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBox1"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBox1"]
 layout_mode = 2
 text = "Place towers"
-label_settings = ExtResource("3_xtdxm")
+label_settings = ExtResource("2_xtdxm")
 horizontal_alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBox1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBox1"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("4_gk24h")
 theme_override_fonts/bold_font = ExtResource("4_gk24h")
@@ -81,26 +70,23 @@ text = "Place towers to stop enemies; each type fires waves with different effec
 fit_content = true
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBox1"]
-layout_mode = 2
-
-[node name="VBox2" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBox2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="BuyRelics" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBox2"]
-custom_minimum_size = Vector2(300, 0)
+[node name="BuyRelics" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBox2"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 texture = ExtResource("3_6gcom")
 expand_mode = 5
 
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBox2"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBox2"]
 layout_mode = 2
 text = "Buy relics"
-label_settings = ExtResource("3_xtdxm")
+label_settings = ExtResource("2_xtdxm")
 horizontal_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBox2"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBox2"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("4_gk24h")
 theme_override_fonts/bold_font = ExtResource("4_gk24h")
@@ -111,23 +97,23 @@ text = "Collect relics between waves to boost your build and scale beyond the li
 fit_content = true
 horizontal_alignment = 1
 
-[node name="VBox3" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBox3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="LevelUpTowers" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBox3"]
-custom_minimum_size = Vector2(300, 0)
+[node name="LevelUpTowers" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBox3"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 texture = ExtResource("7_gk24h")
 expand_mode = 5
 
-[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBox3"]
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBox3"]
 layout_mode = 2
 text = "Level up"
-label_settings = ExtResource("3_xtdxm")
+label_settings = ExtResource("2_xtdxm")
 horizontal_alignment = 1
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBox3"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBox3"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("4_gk24h")
 theme_override_fonts/bold_font = ExtResource("4_gk24h")
@@ -138,10 +124,10 @@ text = "Towers level up by attacking; click them to monitor their growth adjust 
 fit_content = true
 horizontal_alignment = 1
 
-[node name="XarretaMenuButton" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("8_gk24h")]
+[node name="XarretaMenuButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("8_gk24h")]
 custom_minimum_size = Vector2(800, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "¡Defend the Kingdom of the Waves!"
 
-[connection signal="xarreta_pressed" from="PanelContainer/MarginContainer/VBoxContainer/XarretaMenuButton" to="." method="_on_xarreta_menu_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="MarginContainer/VBoxContainer/XarretaMenuButton" to="." method="_on_xarreta_menu_button_xarreta_pressed"]

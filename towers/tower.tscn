@@ -34,6 +34,7 @@ region_rect = Rect2(128, 0, 64, 128)
 [node name="AreaDetector" type="Area2D" parent="."]
 collision_layer = 0
 input_pickable = false
+monitoring = false
 script = ExtResource("5_5e1e6")
 
 [node name="RangeCollision" type="CollisionShape2D" parent="AreaDetector"]

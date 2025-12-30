@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://di132c8on6fw" path="res://ui/components/health_price/health_price.tscn" id="4_eyx8o"]
 
 [node name="ShopSlot" type="VBoxContainer" node_paths=PackedStringArray("title_label", "description_label", "gold_price", "shop_slot_icon")]
-offset_right = 250.0
-offset_bottom = 240.0
+offset_right = 104.0
+offset_bottom = 188.0
+tooltip_text = "Estamos testings"
 script = ExtResource("1_yea32")
 title_label = NodePath("Title")
 description_label = NodePath("Description")
@@ -19,14 +20,16 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Title" type="Label" parent="."]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 1
 theme_override_colors/font_color = Color(0.78, 0.95233333, 1, 1)
-text = "Boniatillo"
+text = "Boniatillo dafdafff"
 horizontal_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="."]
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 4

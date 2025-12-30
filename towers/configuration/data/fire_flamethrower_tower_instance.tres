@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" load_steps=4 format=3 uid="uid://cyyykn8st6mo8"]
+
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="1_csooe"]
+[ext_resource type="Resource" uid="uid://c85ehe3lacxch" path="res://towers/configuration/data/fire_flamethrower_tower.tres" id="1_jf4jh"]
+[ext_resource type="PackedScene" uid="uid://bn8v52iirwk75" path="res://towers/instances/fire/fire_flamethrower_tower/fire_flamethrower_tower.tscn" id="2_nlvh3"]
+
+[resource]
+script = ExtResource("1_csooe")
+configuration = ExtResource("1_jf4jh")
+scene = ExtResource("2_nlvh3")
+metadata/_custom_type_script = "uid://byiw835k16yc6"

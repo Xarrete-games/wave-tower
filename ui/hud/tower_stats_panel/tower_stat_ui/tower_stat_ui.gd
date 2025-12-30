@@ -1,4 +1,3 @@
-@tool
 class_name TowerStatUi extends Control
 
 @export var stat_name: String

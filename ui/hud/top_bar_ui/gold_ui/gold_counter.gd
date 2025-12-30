@@ -9,7 +9,6 @@ var target_gold: int = 0
 const COUNTING_SPEED: float = 0.1 
 
 func _ready():
-	await RunContext.initialized
 	target_gold = RunContext.economy.gold
 	current_displayed_gold = float(RunContext.economy.gold)
 	

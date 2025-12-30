@@ -1,4 +1,3 @@
-@tool
 class_name TowerStatsPanel extends Control
 
 
@@ -21,6 +20,7 @@ var button_in_hover: TowerButton = null
 # upgrades
 @onready var upgrade_button_container: Control = %UpgradeButtonContainer
 @onready var upgrades_container: Control = %UpgradesContainer
+@onready var upgrade_tower_price: GoldPrice = %UpgradeTowerPrice
 # tageting
 @onready var targeting_mode_selector: OptionButton = %TargetingModeSelector
 
@@ -33,7 +33,6 @@ func _ready() -> void:
 	tower_hint_panel.visible = false
 	_hide_upgrade_options()
 	ClickEvents.tower_selected.connect(_on_tower_selected)
-	await RunContext.initialized
 	RunContext.towers_upgrades.targeting_modes_change.connect(_update_targeting_modes)
 	_update_targeting_modes(RunContext.towers_upgrades.targeting_modes)
 
@@ -75,23 +74,25 @@ func _on_tower_selected(tower: Tower) -> void:
 				tower_button.unhover.connect(_on_tower_button_unhover)
 
 		else:
+			upgrade_tower_price.price = upgradeable_tower.configuration.upgrade_price
 			upgrade_button_container.visible = true
 			upgrades_container.visible = false
 			
 	else:
-		print("Tower is not upgradeable, hiding upgrade options")
 		_hide_upgrade_options()
 	
 func update_stats(tower_stats: TowerStats) -> void:
+	if tower_stats == null:
+		return
 	damage_stat.set_value(tower_stats.damage)
 	attack_speed_stat.set_value(tower_stats.attack_speed)
 	range_stat.set_value(tower_stats.attack_range)
 	
 func update_exp_data(exp_data: TowerExpData) -> void:
+	if exp_data == null:
+		return
 	level_label.text = str(exp_data.level)
-	#current_exp_label.text = str(exp_data.current_exp)
-	#required_exp_label.text = str(exp_data.exp_for_next_level)
-
+	
 func _update_targeting_modes(modes: Array[Tower.TargetingMode]) -> void:
 	targeting_mode_selector.clear()
 	for mode in modes:
@@ -105,6 +106,9 @@ func _on_remove_button_pressed() -> void:
 	ClickEvents.tower_sold_pressed.emit(current_tower)
 
 func _on_upgrade_button_pressed() -> void:
+	if RunContext.economy.gold < current_tower.configuration.upgrade_price:
+		return
+
 	if current_tower is UpgradeableTower:
 		(current_tower as UpgradeableTower).upgrade()
 
@@ -113,8 +117,8 @@ func _hide_upgrade_options() -> void:
 	upgrades_container.visible = false
 	level_container.visible = false
 
-func _on_tower_button_pressed(tower_scene: PackedScene) -> void:
-	print("Upgrading to tower scene: ", tower_scene)
+func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance) -> void:
+	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_configuration)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	button_in_hover = tower_button

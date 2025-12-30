@@ -1,6 +1,6 @@
 class_name MainMenu extends Control
 
-const GAME = preload("uid://6vgrx5dct8h8")
+const BOOT = preload("uid://bfm0i7ehshgsf")
 const CREDITS = preload("uid://bayb10jsajj4a")
 
 @export var direct_init: bool = true
@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func _on_new_run_button_xarreta_pressed() -> void:
 	AudioManager.stop_main_piano()
-	get_tree().change_scene_to_packed(GAME)
+	get_tree().change_scene_to_packed(BOOT)
 
 func _on_credits_button_xarreta_pressed() -> void:
 	get_tree().root.add_child(CREDITS.instantiate())

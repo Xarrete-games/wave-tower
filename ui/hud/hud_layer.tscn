@@ -8,6 +8,7 @@
 [node name="HUDLayer" type="CanvasLayer"]
 
 [node name="TowerStatsPanel" parent="." instance=ExtResource("2_tdcwd")]
+mouse_filter = 2
 
 [node name="HintContainer" type="MarginContainer" parent="."]
 anchors_preset = 8
@@ -33,3 +34,6 @@ horizontal_alignment = 1
 script = ExtResource("4_xxs7w")
 
 [node name="TowersMenu" parent="." instance=ExtResource("5_fgqev")]
+anchors_preset = -1
+anchor_top = 0.76900005
+offset_top = -0.31204224

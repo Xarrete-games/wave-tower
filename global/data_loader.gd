@@ -78,5 +78,5 @@ func _load_resources_from_dir(path: String) -> Array[Resource]:
 
 	dir.list_dir_end()
 
-	print("[DataLoader] Loaded ", result.size(), " items from: ", path)
+	#print("[DataLoader] Loaded ", result.size(), " items from: ", path)
 	return result

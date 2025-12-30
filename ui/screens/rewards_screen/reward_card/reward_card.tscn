@@ -10,9 +10,10 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sdsj4"]
 
 [node name="RewardCard" type="VBoxContainer"]
-offset_right = 512.0
-offset_bottom = 420.0
+offset_right = 300.0
+offset_bottom = 341.0
 theme = ExtResource("1_vqiry")
+theme_override_constants/separation = 0
 script = ExtResource("1_eji2h")
 
 [node name="RelicIcon" type="CenterContainer" parent="."]
@@ -20,30 +21,29 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Hexagon" type="SubViewportContainer" parent="RelicIcon"]
-custom_minimum_size = Vector2(264, 310)
 layout_mode = 2
 
 [node name="Control" type="SubViewport" parent="RelicIcon/Hexagon"]
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(264, 310)
+size = Vector2i(208, 220)
 render_target_update_mode = 4
 
 [node name="Root2d" type="Node2D" parent="RelicIcon/Hexagon/Control"]
-position = Vector2(134, 155)
+position = Vector2(104, 110)
 
 [node name="HexagonBorder" type="Polygon2D" parent="RelicIcon/Hexagon/Control/Root2d"]
 texture_filter = 2
 material = SubResource("CanvasItemMaterial_sdsj4")
 scale = Vector2(0.88, 0.88)
 color = Color(0.87, 0.5945, 0, 1)
-polygon = PackedVector2Array(0, 155, 134, 78, 134, -78, 0, -155, -134, -78, -134, 78)
+polygon = PackedVector2Array(0, 121, 104, 61, 104, -61, 0, -121, -104, -61, -104, 61)
 
 [node name="Hexagon" type="Polygon2D" parent="RelicIcon/Hexagon/Control/Root2d"]
 texture_filter = 2
 color = Color(0, 0, 0, 0.7058824)
-polygon = PackedVector2Array(0, 125, 107.5, 62.5, 107.5, -62.5, 0, -125, -107.5, -62.5, -107.5, 62.5)
+polygon = PackedVector2Array(0, 93, 80, 47, 80, -47, 0, -93, -80, -47, -80, 47)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="RelicIcon/Hexagon/Control/Root2d"]
 amount = 20
@@ -65,7 +65,7 @@ texture = ExtResource("4_ibm82")
 
 [node name="RelicTexture" type="TextureRect" parent="RelicIcon"]
 texture_filter = 2
-custom_minimum_size = Vector2(130, 130)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 expand_mode = 2
 stretch_mode = 4
@@ -73,14 +73,16 @@ metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Title" type="Label" parent="VBoxContainer"]
-custom_minimum_size = Vector2(300, 40)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 1
 theme_override_colors/font_color = Color(0.78, 0.95233333, 1, 1)
+theme_override_font_sizes/font_size = 22
 text = "Boniato"
 horizontal_alignment = 1
 
@@ -99,6 +101,7 @@ horizontal_alignment = 1
 
 [node name="HealthPrice" parent="VBoxContainer" instance=ExtResource("6_ujsvo")]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

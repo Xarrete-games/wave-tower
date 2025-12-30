@@ -16,17 +16,17 @@ disable_3d = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(130, 150)
+size = Vector2i(91, 105)
 render_target_update_mode = 4
 
 [node name="Root2D" type="Node2D" parent="SubViewport"]
-position = Vector2(65, 75)
+position = Vector2(45.5, 52.5)
 
 [node name="Hexagon" type="Polygon2D" parent="SubViewport/Root2D"]
 texture_filter = 2
 material = SubResource("CanvasItemMaterial_jclnm")
 color = Color(0.87, 0.5945, 0, 1)
-polygon = PackedVector2Array(0, -75, 65, -37.5, 65, 37.5, 0, 75, -65, 37.5, -65, -37.5)
+polygon = PackedVector2Array(0, -52.5, 45.5, -26.25, 45.5, 26.25, 0, 52.5, -45.5, 26.25, -45.5, -26.25)
 
 [node name="RelicTexture" type="Sprite2D" parent="SubViewport/Root2D"]
 texture = ExtResource("2_7hwsx")

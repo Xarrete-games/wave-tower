@@ -4,7 +4,6 @@ class_name InventoryUI extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	await RunContext.initialized
 	RunContext.consumables.consumable_added.connect(_on_consumable_added)
 
 func _on_consumable_added(consumable: Consumable) -> void:

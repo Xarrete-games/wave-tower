@@ -7,7 +7,7 @@
 [resource]
 Button/colors/font_color = Color(0.78431374, 0.9019608, 0.7882353, 1)
 Button/constants/icon_max_width = 30
-Button/font_sizes/font_size = 32
+Button/font_sizes/font_size = 16
 Button/fonts/font = ExtResource("1_p5s8h")
 Button/styles/disabled = ExtResource("1_xo2d8")
 Button/styles/focus = ExtResource("2_p5s8h")

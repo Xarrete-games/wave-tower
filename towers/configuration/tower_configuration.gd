@@ -9,6 +9,7 @@ class_name TowerConfiguration extends Resource
 
 @export_group("Price")
 @export var base_price: int = 50
+@export var upgrade_price: int = 30
 
 @export_group("Initial Stats")
 @export var base_damage: float = 5
@@ -25,6 +26,7 @@ class_name TowerConfiguration extends Resource
 @export var critic_damage_per_level: float = 0
 
 @export_group("Upgrades")
+@export var upgrade_sprite: Texture2D
 @export var upgradeable_towers: Array[TowerConfigurationWithInstance] = []
 
 var stats: TowerStats = TowerStats.new()

@@ -39,22 +39,32 @@ offset_right = 178.64996
 offset_bottom = -137.70007
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_vyalh")
 
 [node name="Panel" type="PanelContainer" parent="."]
 texture_filter = 4
-layout_mode = 0
-offset_right = 174.0
-offset_bottom = 513.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -162.5
+offset_right = -428.0
+offset_bottom = 162.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("2_g3isl")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_bottom = 20
 
 [node name="MainContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
@@ -145,7 +155,8 @@ size_flags_horizontal = 4
 layout_mode = 2
 text = "Upgrade"
 
-[node name="GoldPrice" parent="Panel/MarginContainer/MainContainer/UpgradeButtonContainer" instance=ExtResource("7_ynx3u")]
+[node name="UpgradeTowerPrice" parent="Panel/MarginContainer/MainContainer/UpgradeButtonContainer" instance=ExtResource("7_ynx3u")]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
@@ -187,6 +198,7 @@ layout_mode = 2
 
 [node name="TowerHintPanel" parent="." instance=ExtResource("12_p50vg")]
 unique_name_in_owner = true
+process_mode = 4
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -196,9 +208,9 @@ anchor_right = 1.176
 anchor_bottom = 0.75100005
 offset_left = -1.5
 offset_top = 89.328995
-offset_right = 93.62402
-offset_bottom = -48.26303
+offset_right = -52.375977
+offset_bottom = -75.26303
 
 [connection signal="xarreta_pressed" from="Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
 [connection signal="xarreta_pressed" from="Panel/MarginContainer/MainContainer/ButtonsContainer/RemoveButton" to="." method="_on_remove_button_pressed"]
-[connection signal="item_selected" from="Panel/MarginContainer/MainContainer/TargetingContainer/TargetingModeSelector" to="Panel" method="_on_targeting_mode_selector_item_selected"]
+[connection signal="item_selected" from="Panel/MarginContainer/MainContainer/TargetingContainer/TargetingModeSelector" to="." method="_on_targeting_mode_selector_item_selected"]
