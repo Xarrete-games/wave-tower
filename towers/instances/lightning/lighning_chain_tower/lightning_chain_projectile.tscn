@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://b4p7ki22j70mo"]
+[gd_scene load_steps=17 format=3 uid="uid://b4p7ki22j70mo"]
 
+[ext_resource type="Script" uid="uid://crf0kpsqov0e2" path="res://towers/instances/lightning/lighning_chain_tower/lightning_chain_projectile.gd" id="1_3hj8a"]
 [ext_resource type="Shader" uid="uid://4b3dn4m3y02t" path="res://assets/shaders/lightning_chain.tres" id="1_k0y13"]
 [ext_resource type="Texture2D" uid="uid://bftfwbmu0hfql" path="res://assets/textures/thunder_shader_texture.jpg" id="2_xl0gl"]
 [ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="3_g80n3"]
@@ -10,6 +11,28 @@ shader_parameter/ColorParameter = Color(0.72538966, 1, 0.012920001, 1)
 shader_parameter/VanishingValue = 0.0
 shader_parameter/Speed = Vector2(-2, 0)
 shader_parameter/Texture2DParameter = ExtResource("2_xl0gl")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3hj8a"]
+radius = 498.65
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f78pc"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_3syi2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.18600002, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_m77wn"]
+curve = SubResource("Curve_3syi2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_phgs5"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 3.5
+scale_curve = SubResource("CurveTexture_m77wn")
+color = Color(0.9184321, 1.083257, 0, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3hj8a"]
 blend_mode = 1
@@ -51,26 +74,8 @@ scale_min = 0.19999999
 scale_curve = SubResource("CurveXYZTexture_suwr0")
 color = Color(1.1638972, 1.1638972, 0.7348413, 1)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f78pc"]
-blend_mode = 1
-light_mode = 1
-
-[sub_resource type="Curve" id="Curve_3syi2"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.18600002, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_m77wn"]
-curve = SubResource("Curve_3syi2")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_phgs5"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 3.5
-scale_curve = SubResource("CurveTexture_m77wn")
-color = Color(0.9184321, 1.083257, 0, 1)
-
 [node name="LightningChainProjectile" type="Node2D"]
+script = ExtResource("1_3hj8a")
 
 [node name="VFX_thunder" type="Node2D" parent="."]
 position = Vector2(0, 800)
@@ -80,10 +85,22 @@ material = SubResource("ShaderMaterial_xl0gl")
 position = Vector2(0, -800)
 points = PackedVector2Array(0, 0, 0, 800)
 width = 150.0
-default_color = Color(1, 0.61055017, 0, 1)
 texture_mode = 2
 
-[node name="Sparks" type="GPUParticles2D" parent="VFX_thunder"]
+[node name="Area2D" type="Area2D" parent="VFX_thunder"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VFX_thunder/Area2D"]
+shape = SubResource("CircleShape2D_3hj8a")
+
+[node name="Flare" type="GPUParticles2D" parent="VFX_thunder/Area2D"]
+material = SubResource("CanvasItemMaterial_f78pc")
+amount = 1
+texture = ExtResource("3_g80n3")
+lifetime = 0.15000000000000002
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_phgs5")
+
+[node name="Sparks" type="GPUParticles2D" parent="VFX_thunder/Area2D"]
 material = SubResource("CanvasItemMaterial_3hj8a")
 amount = 15
 texture = ExtResource("3_g80n3")
@@ -91,10 +108,8 @@ lifetime = 0.15000000000000002
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_4jxr5")
 
-[node name="Flare" type="GPUParticles2D" parent="VFX_thunder"]
-material = SubResource("CanvasItemMaterial_f78pc")
-amount = 1
-texture = ExtResource("3_g80n3")
-lifetime = 0.15000000000000002
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_phgs5")
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(1026, 379)
+
+[connection signal="body_entered" from="VFX_thunder/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="VFX_thunder/Area2D" to="." method="_on_area_2d_body_exited"]
