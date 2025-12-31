@@ -57,7 +57,7 @@ scale_amount_max = 0.1
 [node name="PointLight2D" type="PointLight2D" parent="RelicIcon/Hexagon/Control/Root2d"]
 energy = 7.0
 texture = ExtResource("3_68l61")
-texture_scale = 0.8
+texture_scale = 0.64
 
 [node name="TextureRect" type="TextureRect" parent="RelicIcon"]
 layout_mode = 2
