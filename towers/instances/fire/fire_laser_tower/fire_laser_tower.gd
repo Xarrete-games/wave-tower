@@ -1,4 +1,4 @@
-class_name RedTower extends Tower
+class_name FireLaserTower extends Tower
 # this tower hit 5 times
 const TOTAL_HITS = 5
 const EXECUTE_DAMAGE: float = 9999
@@ -9,7 +9,7 @@ var burn_damage: float = 0
 var _hits_count = 0
 var _target_in_progress: Enemy = null
 
-@onready var red_projectil: RedProjectil = $RedProjectil
+@onready var red_projectil: FireLaserProjectil = $FireLaserProjectil
 @onready var attack_tick_timer: Timer = $AttackTickTimer
 
 func _ready():

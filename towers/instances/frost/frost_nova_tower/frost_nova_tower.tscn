@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bpvj36tgrsr8g" path="res://towers/instances/frost/frost_nova_tower/frost_nova_tower.gd" id="2_7kg10"]
 [ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="3_lemm1"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="3_nvigb"]
-[ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/instances/red/passive_light.gd" id="4_y361t"]
+[ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/components/cristal_light/passive_light.gd" id="4_y361t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_763pf"]
 
@@ -17,10 +17,7 @@ position = Vector2(0, 8)
 
 [node name="Sprite2D" parent="." index="4"]
 position = Vector2(0, -51.000004)
-scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_lemm1")
-hframes = 1
-region_enabled = true
 region_rect = Rect2(1005, 83, 367, 553)
 
 [node name="RangeCollision" parent="AreaDetector" index="0"]

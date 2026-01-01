@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dpashq3sbs7m7" path="res://towers/instances/lightning/lighning_wave_tower/ligthning_wave_tower.gd" id="2_gxgv5"]
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="3_nn0gm"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="4_yogkd"]
-[ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/instances/red/passive_light.gd" id="5_iuceq"]
+[ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/components/cristal_light/passive_light.gd" id="5_iuceq"]
 [ext_resource type="AudioStream" uid="uid://cp4evfqpqhdhy" path="res://assets/sounds/sfx/Green_attack.ogg" id="6_gq66r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmxm1"]
@@ -25,10 +25,7 @@ position = Vector2(0, -79)
 
 [node name="Sprite2D" parent="." index="4"]
 position = Vector2(0, -50)
-scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_nn0gm")
-hframes = 1
-region_enabled = true
 region_rect = Rect2(950, 0, 475, 544)
 
 [node name="RangeCollision" parent="AreaDetector" index="0"]

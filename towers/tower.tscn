@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://pmu46mvlw67" path="res://towers/tower_stats_handler.gd" id="1_7jtxt"]
 [ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/components/cristal_light/cristal_light.tscn" id="2_2233p"]
 [ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="3_nbqd2"]
-[ext_resource type="Texture2D" uid="uid://6rwht4l7x5rc" path="res://assets/sprites/towers/Towers.png" id="4_6bi2k"]
+[ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="4_7jtxt"]
 [ext_resource type="Script" uid="uid://3vv1ts11asqk" path="res://towers/area_detector.gd" id="5_5e1e6"]
 [ext_resource type="Script" uid="uid://c5e13qdjmxcua" path="res://towers/experience_handler.gd" id="6_ju35e"]
 
@@ -25,11 +25,11 @@ radius = 200.0
 color_fill = Color(0, 0.69803923, 1, 0.5568628)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -70)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("4_6bi2k")
-hframes = 3
-region_rect = Rect2(128, 0, 64, 128)
+position = Vector2(0, -42)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_7jtxt")
+region_enabled = true
+region_rect = Rect2(89, 80, 299, 471)
 
 [node name="AreaDetector" type="Area2D" parent="."]
 collision_layer = 0

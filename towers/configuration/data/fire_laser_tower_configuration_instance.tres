@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" load_steps=4 format=3 uid="uid://brdcadnrqivh8"]
+
+[ext_resource type="Resource" uid="uid://ca5nnmhy7g4aq" path="res://towers/configuration/data/fire_laser_tower_configuration.tres" id="1_ulxf4"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="2_7f661"]
+[ext_resource type="PackedScene" uid="uid://d36t7geqp1sh" path="res://towers/instances/fire/fire_laser_tower/fire_laser_tower.tscn" id="2_j5gfa"]
+
+[resource]
+script = ExtResource("2_7f661")
+configuration = ExtResource("1_ulxf4")
+scene = ExtResource("2_j5gfa")
+metadata/_custom_type_script = "uid://byiw835k16yc6"
