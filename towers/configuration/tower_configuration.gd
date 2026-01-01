@@ -26,7 +26,6 @@ class_name TowerConfiguration extends Resource
 @export var critic_damage_per_level: float = 0
 
 @export_group("Upgrades")
-@export var upgrade_sprite: Texture2D
 @export var upgradeable_towers: Array[TowerConfigurationWithInstance] = []
 
 var stats: TowerStats = TowerStats.new()

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" load_steps=4 format=3 uid="uid://nb64k6dawho"]
+
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="1_idf33"]
+[ext_resource type="Resource" uid="uid://dxldssmvicfwp" path="res://towers/configuration/data/frost_nova_tower_configuration.tres" id="1_m4m0l"]
+[ext_resource type="PackedScene" uid="uid://cwyyp2r266blt" path="res://towers/instances/frost/frost_nova_tower/frost_nova_tower.tscn" id="2_tq48f"]
+
+[resource]
+script = ExtResource("1_idf33")
+configuration = ExtResource("1_m4m0l")
+scene = ExtResource("2_tq48f")
+metadata/_custom_type_script = "uid://byiw835k16yc6"

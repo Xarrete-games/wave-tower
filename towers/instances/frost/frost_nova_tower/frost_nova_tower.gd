@@ -1,6 +1,6 @@
-class_name BlueTower extends Tower
+class_name FrostNovaTower extends Tower
 
-const BLUE_PROJECTIL = preload("uid://csif0nju31dcs")
+const FROST_NOVA_PROJECTILE = preload("uid://csif0nju31dcs")
 
 var double_shot_chance = 0
 
@@ -12,7 +12,7 @@ func _on_extra_stats_change(tower_extra_stats: TowerExtraStats) -> void:
 
 func _fire() -> void:
 	cristal_light.play()
-	var projectil: BlueProjectil = BLUE_PROJECTIL.instantiate()
+	var projectil: BlueProjectil = FROST_NOVA_PROJECTILE.instantiate()
 	
 	var is_double_hit = _is_doble_hit()
 	
@@ -23,7 +23,7 @@ func _fire() -> void:
 	if is_double_hit:
 		await get_tree().create_timer(0.5).timeout
 		cristal_light.play()
-		projectil = BLUE_PROJECTIL.instantiate()
+		projectil = FROST_NOVA_PROJECTILE.instantiate()
 		attack = _get_attack()
 		projectil.set_stats(attack, stats.attack_range, RunContext.enemy_debuff.get_debuff(EnemyDebuff.Type.FROST))
 		call_deferred("_add_projectil", projectil)
