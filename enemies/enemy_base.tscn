@@ -102,11 +102,11 @@ offset_top = -149.0
 offset_right = -20.0
 offset_bottom = -149.0
 
-[node name="NumbersDisplayedPos" type="Marker2D" parent="."]
-position = Vector2(0, -56)
-
-[node name="GoldDroppedPos" type="Marker2D" parent="."]
-position = Vector2(0, -88)
-
 [node name="DebuffHandler" type="Node" parent="."]
 script = ExtResource("21_phiiv")
+
+[node name="TargetPosition1" type="Marker2D" parent="."]
+unique_name_in_owner = true
+
+[node name="TargetPosition2" type="Marker2D" parent="."]
+unique_name_in_owner = true

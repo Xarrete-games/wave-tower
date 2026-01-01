@@ -22,6 +22,7 @@ var default_modulate_color: Color = Color.WHITE
 # speed
 var _base_speed: float = 100.0
 var _speed_mult: float = 1.0
+var is_right_direction: bool = true	
 
 var speed: float:
 	get: return _base_speed * _speed_mult
@@ -39,14 +40,22 @@ var progress_ratio: float:
 			return 0.0
 		return _path_follow.progress_ratio
 
+var target_position: Vector2:
+	get:
+		if is_right_direction:
+			return target_position_1.global_position
+		else:
+			return target_position_2.global_position
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: HealthBar = $HealthBar
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var numbers_displayed_pos: Marker2D = $NumbersDisplayedPos
-@onready var gold_dropped_pos: Marker2D = $GoldDroppedPos
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 # debuff
 @onready var debuff_handler: DebuffHandler = $DebuffHandler
+# target positions
+@onready var target_position_1: Marker2D = $TargetPosition1
+@onready var target_position_2: Marker2D = $TargetPosition2
 
 func _ready() -> void:
 	disable()
@@ -77,7 +86,7 @@ func _process(delta: float):
 	global_position = path_global_pos
 	
 	# FLIP SPRITE
-	var is_right_direction = global_position.x > previous_global_x
+	is_right_direction = global_position.x > previous_global_x
 	if is_right_direction != _last_is_right_direction:
 		animated_sprite_2d.flip_h = !animated_sprite_2d.flip_h
 		_last_is_right_direction = is_right_direction
@@ -152,7 +161,7 @@ func _die() -> void:
 func _show_damage(attack: Attack) -> void:
 	const MAX_OFFSET: int = 30
 	var damage_numbers: DamageNumbers = DAMAGE_NUMBERS.instantiate()
-	var base_position: Vector2 = numbers_displayed_pos.global_position
+	var base_position: Vector2 = target_position
 	
 	var random_offset_x: int = randi_range(-MAX_OFFSET, MAX_OFFSET)
 	var random_offset_y: int = randi_range(-MAX_OFFSET, MAX_OFFSET)
@@ -166,7 +175,7 @@ func _show_gold_dropped() -> void:
 	var gold_droped: GoldDropped = GOLD_DROPPED.instantiate()
 	get_tree().root.add_child(gold_droped)
 	gold_droped.set_gold(gold_value)
-	gold_droped.global_position = gold_dropped_pos.global_position
+	gold_droped.global_position = target_position
 
 func _on_target_reached() -> void:
 	target_reached.emit(self)

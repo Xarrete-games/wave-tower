@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 	if _hit:
 		return
 
-	_end_global = _target.global_position
+	_end_global = _target.target_position
 	_max_length = _start_global.distance_to(_end_global)
 
 	_current_length += extend_speed * delta

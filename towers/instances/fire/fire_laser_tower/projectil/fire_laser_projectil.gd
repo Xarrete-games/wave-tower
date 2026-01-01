@@ -31,12 +31,12 @@ func _physics_process(delta: float) -> void:
 	if not is_casting or not _target:
 		return
 	# --- STEP 1: rotate the laser beam towards the target ---
-	look_at(_target.global_position)
+	look_at(_target.target_position)
 	# --- STEP 2: The laser's length is modified depending on the enemy's position; 
 	# --- the speed at which the laser changes length depends on cast_speed. ---
-	var distance_to_target = global_position.distance_to(_target.global_position)
+	var distance_to_target = global_position.distance_to(_target.target_position)
 	#update fire partivles position
-	fire_particles.global_position = _target.global_position
+	fire_particles.global_position = _target.target_position
 	
 	current_laser_length = move_toward(
 		current_laser_length,

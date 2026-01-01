@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 		queue_free()
 		return
 	
-	var target_position: Vector2 = enemy.global_position
+	var target_position: Vector2 = enemy.target_position
 
 	var direction: Vector2 = (target_position - global_position)
 	var distance: float = direction.length()

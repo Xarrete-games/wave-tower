@@ -16,6 +16,12 @@ shape = SubResource("CircleShape2D_skkk3")
 position = Vector2(12, -12.999999)
 scale = Vector2(0.1, 0.1)
 
-[node name="HealthBar" parent="." index="4"]
+[node name="HealthBar" parent="." index="3"]
 offset_top = -110.0
 offset_bottom = -110.0
+
+[node name="TargetPosition1" parent="." index="5"]
+position = Vector2(37, -11)
+
+[node name="TargetPosition2" parent="." index="6"]
+position = Vector2(0, -10)

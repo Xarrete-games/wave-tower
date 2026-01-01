@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 	if _target == null or not is_instance_valid(_target):
 		return
 
-	var dir: Vector2 = _target.global_position - global_position
+	var dir: Vector2 = _target.target_position - global_position
 
 	# Rotamos el emisor
 	flamethrower.rotation = dir.angle()
