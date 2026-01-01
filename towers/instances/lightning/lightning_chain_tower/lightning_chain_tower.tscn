@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cedwmb3dpm4xn"]
+
+[ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ua04a"]
+[ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="2_qqqk1"]
+[ext_resource type="Script" uid="uid://dver2n58kr6e7" path="res://towers/instances/lightning/lightning_chain_tower/lightning_chain_tower.gd" id="2_tgeyy"]
+[ext_resource type="PackedScene" uid="uid://b4p7ki22j70mo" path="res://towers/instances/lightning/lightning_chain_tower/lightning_chain_projectile.tscn" id="3_fuhyt"]
+
+[node name="LightningChainTower" instance=ExtResource("1_ua04a")]
+script = ExtResource("2_tgeyy")
+lightning_chain_projectile_scene = ExtResource("3_fuhyt")
+
+[node name="Sprite2D" parent="." index="3"]
+position = Vector2(0, -46)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_qqqk1")
+hframes = 1
+region_enabled = true
+region_rect = Rect2(1453, 7, 419, 543)

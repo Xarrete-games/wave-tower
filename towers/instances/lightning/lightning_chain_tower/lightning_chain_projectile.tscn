@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://b4p7ki22j70mo"]
 
-[ext_resource type="Script" uid="uid://crf0kpsqov0e2" path="res://towers/instances/lightning/lighning_chain_tower/lightning_chain_projectile.gd" id="1_3hj8a"]
+[ext_resource type="Script" uid="uid://crf0kpsqov0e2" path="res://towers/instances/lightning/lightning_chain_tower/lightning_chain_projectile.gd" id="1_3hj8a"]
 [ext_resource type="Shader" uid="uid://4b3dn4m3y02t" path="res://assets/shaders/lightning_chain.tres" id="1_k0y13"]
 [ext_resource type="Texture2D" uid="uid://bftfwbmu0hfql" path="res://assets/textures/thunder_shader_texture.jpg" id="2_xl0gl"]
 [ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="3_g80n3"]
@@ -76,40 +76,40 @@ color = Color(1.1638972, 1.1638972, 0.7348413, 1)
 
 [node name="LightningChainProjectile" type="Node2D"]
 script = ExtResource("1_3hj8a")
+max_bounces = 6
 
-[node name="VFX_thunder" type="Node2D" parent="."]
-position = Vector2(0, 800)
-
-[node name="Thunder" type="Line2D" parent="VFX_thunder"]
+[node name="Line" type="Line2D" parent="."]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_xl0gl")
-position = Vector2(0, -800)
 points = PackedVector2Array(0, 0, 0, 800)
-width = 150.0
+width = 30.0
 texture_mode = 2
 
-[node name="Area2D" type="Area2D" parent="VFX_thunder"]
+[node name="Area" type="Area2D" parent="."]
+unique_name_in_owner = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VFX_thunder/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
 shape = SubResource("CircleShape2D_3hj8a")
 
-[node name="Flare" type="GPUParticles2D" parent="VFX_thunder/Area2D"]
+[node name="Flare" type="GPUParticles2D" parent="Area"]
+unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_f78pc")
+scale = Vector2(0.01, 0.01)
 amount = 1
 texture = ExtResource("3_g80n3")
 lifetime = 0.15000000000000002
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_phgs5")
 
-[node name="Sparks" type="GPUParticles2D" parent="VFX_thunder/Area2D"]
+[node name="Sparks" type="GPUParticles2D" parent="Area"]
+unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_3hj8a")
+scale = Vector2(0.01, 0.01)
 amount = 15
 texture = ExtResource("3_g80n3")
 lifetime = 0.15000000000000002
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_4jxr5")
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(1026, 379)
-
-[connection signal="body_entered" from="VFX_thunder/Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="VFX_thunder/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Area" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_area_2d_body_exited"]

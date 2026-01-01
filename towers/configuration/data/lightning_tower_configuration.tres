@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=6 format=3 uid="uid://c1d3qqqdi2oxp"]
+[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=7 format=3 uid="uid://c1d3qqqdi2oxp"]
 
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_k1iq5"]
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_nxs5s"]
 [ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="3_wraeo"]
+[ext_resource type="Resource" uid="uid://dux7i7iqac1qm" path="res://towers/configuration/data/lightning_chain_tower_configuration_instance.tres" id="5_obg2s"]
 [ext_resource type="Resource" uid="uid://b62s2yksyqvsf" path="res://towers/configuration/data/lightning_wave_tower_configuration_instance.tres" id="5_wraeo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i5pku"]
@@ -22,4 +23,4 @@ base_attack_speed = 0.6
 damage_per_level = 4.0
 attack_range_level = 12.0
 attack_speed_per_level = -0.2
-upgradeable_towers = Array[ExtResource("3_wraeo")]([ExtResource("5_wraeo")])
+upgradeable_towers = Array[ExtResource("3_wraeo")]([ExtResource("5_wraeo"), ExtResource("5_obg2s")])

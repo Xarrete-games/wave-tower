@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp6q00xuor86x"]
+
+[ext_resource type="Shader" uid="uid://4b3dn4m3y02t" path="res://assets/shaders/lightning_chain.tres" id="1_157ek"]
+[ext_resource type="Texture2D" uid="uid://bftfwbmu0hfql" path="res://assets/textures/thunder_shader_texture.jpg" id="2_vl5uy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_taot6"]
+shader = ExtResource("1_157ek")
+shader_parameter/ColorParameter = Color(0.72538966, 1, 0.012920001, 1)
+shader_parameter/VanishingValue = 0.0
+shader_parameter/Speed = Vector2(-2, 0)
+shader_parameter/Texture2DParameter = ExtResource("2_vl5uy")
+
+[node name="LightningLine" type="Line2D"]
+material = SubResource("ShaderMaterial_taot6")
+points = PackedVector2Array(0, 0, 0, 800)
+width = 52.0
+texture_mode = 2
