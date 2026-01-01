@@ -7,10 +7,12 @@ class_name LightningChainTower extends Tower
 
 func _fire() -> void:
 	var projectile = lightning_chain_projectile_scene.instantiate() as LightningChainProjectile
-	add_child(projectile)
-	projectile.global_position = projectile_spawn_point.global_position
-	projectile.set_target(_current_target, _get_attack())
-	
+	call_deferred("_fire_chain", projectile)
 
 func _on_extra_stats_change(_tower_extra_stats: TowerExtraStats) -> void:
 	pass
+
+func _fire_chain(projectile: LightningChainProjectile) -> void:
+	add_child(projectile)
+	projectile.global_position = projectile_spawn_point.global_position
+	projectile.set_target(_current_target, _get_attack())

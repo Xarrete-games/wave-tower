@@ -1,13 +1,11 @@
 class_name LightningChainProjectile extends Node2D
 
-@export var extend_speed: float = 1200.0 
+@export var extend_speed: float = 1500.0
 @export var max_bounces: int = 3
 @export var bounce_delay: float = 0.1
 
-
 var enemies_in_range: Array[Enemy] = []
 var _target: Enemy
-var _end_pos: Vector2
 var _current_length: float = 0.0
 var _max_length: float = 0.0
 var _hit: bool = false
@@ -28,11 +26,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if not is_instance_valid(_target):
-		queue_free()
+		if not _hit:
+			queue_free()
 		return
 
 	if _hit:
 		return
+
+	_end_global = _target.global_position
+	_max_length = _start_global.distance_to(_end_global)
 
 	_current_length += extend_speed * delta
 	_current_length = min(_current_length, _max_length)
@@ -73,7 +75,7 @@ func _on_hit() -> void:
 	_hit_enemies.append(_target)
 	_bounces_done += 1
 
-	# Esperar un poco para que se vea el impacto
+	# wait before trying to bounce
 	await get_tree().create_timer(bounce_delay).timeout
 
 	_try_bounce()
@@ -94,13 +96,15 @@ func _get_closest_valid_enemy() -> Enemy:
 	var closest: Enemy = null
 	var min_dist: float = INF
 
-	for enemy in enemies_in_range:
+	for enemy: Enemy in enemies_in_range:
 		if not is_instance_valid(enemy):
+			continue
+		if not enemy.is_inside_tree():
 			continue
 		if enemy in _hit_enemies:
 			continue
 
-		var d := enemy.global_position.distance_squared_to(_end_pos)
+		var d := enemy.global_position.distance_squared_to(_end_global)
 		if d < min_dist:
 			min_dist = d
 			closest = enemy
