@@ -105,8 +105,8 @@ offset_bottom = -149.0
 [node name="DebuffHandler" type="Node" parent="."]
 script = ExtResource("21_phiiv")
 
-[node name="TargetPosition1" type="Marker2D" parent="."]
+[node name="TargetPositionLeft" type="Marker2D" parent="."]
 unique_name_in_owner = true
 
-[node name="TargetPosition2" type="Marker2D" parent="."]
+[node name="TargetPositionRight" type="Marker2D" parent="."]
 unique_name_in_owner = true

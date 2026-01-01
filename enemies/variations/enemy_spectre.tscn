@@ -20,8 +20,8 @@ scale = Vector2(0.1, 0.1)
 offset_top = -110.0
 offset_bottom = -110.0
 
-[node name="TargetPosition1" parent="." index="5"]
-position = Vector2(37, -11)
+[node name="TargetPositionLeft" parent="." index="5"]
+position = Vector2(-4, -12)
 
-[node name="TargetPosition2" parent="." index="6"]
-position = Vector2(0, -10)
+[node name="TargetPositionRight" parent="." index="6"]
+position = Vector2(26, -12)

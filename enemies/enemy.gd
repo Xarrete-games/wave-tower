@@ -43,9 +43,9 @@ var progress_ratio: float:
 var target_position: Vector2:
 	get:
 		if is_right_direction:
-			return target_position_1.global_position
+			return target_position_right.global_position
 		else:
-			return target_position_2.global_position
+			return target_position_left.global_position
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: HealthBar = $HealthBar
@@ -54,8 +54,8 @@ var target_position: Vector2:
 # debuff
 @onready var debuff_handler: DebuffHandler = $DebuffHandler
 # target positions
-@onready var target_position_1: Marker2D = $TargetPosition1
-@onready var target_position_2: Marker2D = $TargetPosition2
+@onready var target_position_left: Marker2D = $TargetPositionLeft
+@onready var target_position_right: Marker2D = $TargetPositionRight
 
 func _ready() -> void:
 	disable()
