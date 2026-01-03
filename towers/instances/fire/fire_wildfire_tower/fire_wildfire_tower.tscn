@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckw22jf820ehi"]
+
+[ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_j8mcx"]
+[ext_resource type="Script" uid="uid://cr3iiwr6uj488" path="res://towers/instances/fire/fire_wildfire_tower/fire_wildfire_tower.gd" id="2_sym80"]
+[ext_resource type="PackedScene" uid="uid://bs7g64mcrms08" path="res://towers/instances/fire/fire_wildfire_tower/fire_wildfire_projectile.tscn" id="3_8u8ke"]
+[ext_resource type="Texture2D" uid="uid://do1b4oomw0kiu" path="res://assets/textures/particles/flame_particle.png" id="4_15mxp"]
+
+[sub_resource type="Curve" id="Curve_jbga3"]
+_data = [Vector2(0.0026881695, 1), 0.0, 0.0, 0, 0, Vector2(0.9596774, 0.44869107), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_rrd06"]
+colors = PackedColorArray(0.9254902, 0, 0, 1, 1, 0.7529412, 0.17254902, 1)
+
+[node name="WildFireTower" instance=ExtResource("1_j8mcx")]
+script = ExtResource("2_sym80")
+projectile_scene = ExtResource("3_8u8ke")
+
+[node name="CristalLight" parent="." index="1"]
+position = Vector2(1, -76)
+color = Color(0.6117647, 0, 0, 1)
+
+[node name="Sprite2D" parent="." index="3"]
+position = Vector2(0, -49)
+region_rect = Rect2(950, 0, 475, 550)
+
+[node name="ProjectileSpawnPos" parent="." index="9"]
+position = Vector2(0, -120)
+
+[node name="FireParticles" type="CPUParticles2D" parent="." index="10"]
+position = Vector2(1, -120)
+scale = Vector2(0.5, 0.5)
+amount = 300
+texture = ExtResource("4_15mxp")
+preprocess = 0.39
+emission_shape = 1
+emission_sphere_radius = 30.0
+spread = 0.0
+gravity = Vector2(0, 0)
+radial_accel_min = -50.0
+radial_accel_max = 14.62
+scale_amount_curve = SubResource("Curve_jbga3")
+color_ramp = SubResource("Gradient_rrd06")

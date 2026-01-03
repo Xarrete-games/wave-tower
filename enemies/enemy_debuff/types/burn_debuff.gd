@@ -11,7 +11,7 @@ func on_apply(_enemy: Enemy):
 	pass
 
 func on_tick(enemy: Enemy):
-	var attack = Attack.new(value, false)
+	var attack = Attack.new(value, DamageNumbers.Type.SKILL, self)
 	enemy.apply_damage(attack)
 	
 func on_update(_enemy: Enemy, _delta: float):

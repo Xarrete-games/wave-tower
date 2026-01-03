@@ -90,8 +90,9 @@ func enable() -> void:
 # --------------------
 func _get_attack() -> Attack:
 	var is_critic = _is_critical_hit()
-	var attack_damege = stats.damage * (1 + (stats.critic_damage/100)) if is_critic else stats.damage
-	return Attack.new(attack_damege, is_critic)
+	var attack_damage = stats.damage * (1 + (stats.critic_damage/100)) if is_critic else stats.damage
+	var damage_type = DamageNumbers.Type.CRITIAL if is_critic else DamageNumbers.Type.NORMAL
+	return Attack.new(attack_damage, damage_type, self)
 	
 func _is_critical_hit() -> bool:
 	var random_value: float = randf()
