@@ -18,6 +18,5 @@ func _on_body_entered(body: Node2D) -> void:
 	enemy.apply_debuff(RunContext.enemy_debuff.get_debuff(EnemyDebuff.Type.BURN))
 	enemies_burned.append(enemy)
 
-
 func _on_duration_timer_timeout() -> void:
 	queue_free()
