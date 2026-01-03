@@ -1,9 +1,55 @@
-[gd_scene load_steps=3 format=3 uid="uid://oesepsa8dbuy"]
+[gd_scene load_steps=14 format=3 uid="uid://oesepsa8dbuy"]
 
-[ext_resource type="Script" uid="uid://c6rmh2ljgrwkf" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.gd" id="1_t1vgp"]
+[ext_resource type="Script" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.gd" id="1_t1vgp"]
+[ext_resource type="Shader" uid="uid://cj3oop3kolpsy" path="res://assets/shaders/burn_explosion_shader.tres" id="2_kian5"]
+[ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="2_uxlko"]
+[ext_resource type="Texture2D" uid="uid://c382dpfsxj5hx" path="res://assets/textures/impacts/T_flare12.png" id="3_c16l1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0cvt0"]
 radius = 178.10109
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c16l1"]
+shader = ExtResource("2_kian5")
+shader_parameter/Dissolver_texture = ExtResource("3_c16l1")
+shader_parameter/Flame_texture = ExtResource("3_c16l1")
+
+[sub_resource type="Curve" id="Curve_ni4x8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0od4w"]
+curve = SubResource("Curve_ni4x8")
+
+[sub_resource type="Gradient" id="Gradient_87c56"]
+colors = PackedColorArray(1, 0, 0, 1, 0.99999994, 0.70224124, 0.43691865, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i38rs"]
+gradient = SubResource("Gradient_87c56")
+
+[sub_resource type="Curve" id="Curve_mw8va"]
+_data = [Vector2(0, 0), 0.0, 3.176268, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uy25q"]
+curve = SubResource("Curve_mw8va")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4mmrw"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+scale_min = 50.0
+scale_max = 50.0
+scale_curve = SubResource("CurveTexture_uy25q")
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 100.0
+color_ramp = SubResource("GradientTexture1D_i38rs")
+alpha_curve = SubResource("CurveTexture_0od4w")
+anim_speed_min = 5.02
+anim_speed_max = 5.02
+turbulence_noise_strength = 14.3
 
 [node name="BurnArea" type="Area2D"]
 collision_layer = 0
@@ -11,12 +57,20 @@ input_pickable = false
 script = ExtResource("1_t1vgp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 scale = Vector2(1, 0.5)
 shape = SubResource("CircleShape2D_0cvt0")
 
 [node name="DurationTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="GPUburn_explosion" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_c16l1")
+amount = 1
+texture = ExtResource("2_uxlko")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_4mmrw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]
