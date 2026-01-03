@@ -1,15 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsvjcu86kc8oj"]
+[gd_scene load_steps=13 format=3 uid="uid://bsvjcu86kc8oj"]
 
 [ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_iwpk0"]
 [ext_resource type="Shader" uid="uid://b68mh1vot8qw7" path="res://assets/shaders/fire_shader.tres" id="2_8dgq6"]
-[ext_resource type="Texture2D" uid="uid://ge6vf7u1jhri" path="res://assets/textures/noises/T_VFX_Noise_465.png" id="3_splws"]
-[ext_resource type="Texture2D" uid="uid://y45wula8wh0m" path="res://assets/textures/flame4.jpg" id="4_2iq5u"]
+[ext_resource type="Texture2D" uid="uid://b522y4oy5hi75" path="res://assets/textures/flame5.jpg" id="3_lwi6b"]
 [ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="5_uqeit"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nhhll"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b8dxj"]
+noise_type = 3
+frequency = 0.0087
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gqb23"]
+noise = SubResource("FastNoiseLite_b8dxj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ndj6"]
 shader = ExtResource("2_8dgq6")
-shader_parameter/Dissolver_texture = ExtResource("3_splws")
-shader_parameter/Flame_texture = ExtResource("4_2iq5u")
+shader_parameter/Dissolver_texture = SubResource("NoiseTexture2D_gqb23")
+shader_parameter/Flame_texture = ExtResource("3_lwi6b")
 
 [sub_resource type="Curve" id="Curve_hgb6j"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -26,7 +32,7 @@ colors = PackedColorArray(1, 0.78418523, 0.46191412, 1, 1, 0.44297108, 0, 1, 0.7
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_wgdfs"]
 gradient = SubResource("Gradient_8rwps")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6pi4g"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8dgq6"]
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
 angle_min = -89.99999
@@ -46,8 +52,8 @@ alpha_curve = SubResource("CurveTexture_yg6b3")
 script = ExtResource("1_iwpk0")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-material = SubResource("ShaderMaterial_nhhll")
+material = SubResource("ShaderMaterial_3ndj6")
 amount = 150
 texture = ExtResource("5_uqeit")
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_6pi4g")
+process_material = SubResource("ParticleProcessMaterial_8dgq6")

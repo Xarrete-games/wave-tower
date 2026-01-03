@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://daqi7i1vflaq5"]
+
+[ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_tivwp"]
+[ext_resource type="Shader" uid="uid://b68mh1vot8qw7" path="res://assets/shaders/fire_shader.tres" id="2_3dg1p"]
+[ext_resource type="Texture2D" uid="uid://boajxbopenov6" path="res://assets/textures/sparks1.jpg" id="3_tivwp"]
+[ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="4_8reg1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dg1p"]
+shader = ExtResource("2_3dg1p")
+shader_parameter/Dissolver_texture = ExtResource("3_tivwp")
+shader_parameter/Flame_texture = ExtResource("3_tivwp")
+
+[sub_resource type="Curve" id="Curve_51x8o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.994, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yg6b3"]
+texture_mode = 1
+curve = SubResource("Curve_51x8o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8reg1"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 30.0
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 60.0
+color = Color(0.988483, 1, 0.8249593, 1)
+alpha_curve = SubResource("CurveTexture_yg6b3")
+
+[node name="LightingBallProjectile" type="Node2D"]
+script = ExtResource("1_tivwp")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_3dg1p")
+amount = 150
+texture = ExtResource("4_8reg1")
+lifetime = 0.09999999999999999
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_8reg1")
