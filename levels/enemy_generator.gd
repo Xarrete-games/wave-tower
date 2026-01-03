@@ -23,7 +23,7 @@ func _ready() -> void:
 
 func init_next_wave() -> void:
 	# get next wave
-	RunContext.progress.current_wave =  current_wave_number
+	RunContext.progress.current_wave = current_wave_number
 	current_wave = level_waves[current_wave_number - 1]
 	# reset groups counter
 	total_groups = current_wave.groups.size()
@@ -40,8 +40,8 @@ func init_next_wave() -> void:
 			push_error("[EnemyGenerator]: enemy group data is null")
 			continue
 		groups_init_count += 1
-		_handle_ememy_group(
-			enemy_group		
+		_handle_enemy_group(
+			enemy_group
 		)
 	
 	if groups_init_count == 0:
@@ -55,22 +55,22 @@ func _load_level_data(level: Level) -> void:
 	total_waves = level_waves.size()
 	current_wave_number = 1
 	
-func _handle_ememy_group(
-	ememy_group: EnemyGroup) -> void:
-	# wait tim
-	await get_tree().create_timer(ememy_group.time_to_start).timeout
+func _handle_enemy_group(
+	enemy_group: EnemyGroup) -> void:
+	# wait time
+	await get_tree().create_timer(enemy_group.time_to_start).timeout
 	# individual group
 	var paths = []
 
-	for path in ememy_group.paths:
-		_hand_enemy_group(
-			ememy_group.enemy_type,
-			ememy_group.amount,
-			ememy_group.interval_spawn,
+	for path in enemy_group.paths:
+		_handle_enemy_group_type(
+			enemy_group.enemy_type,
+			enemy_group.amount,
+			enemy_group.interval_spawn,
 			path
 		)
 			
-func _hand_enemy_group(
+func _handle_enemy_group_type(
 	enemy_type: Enemy.Type,
 	amount: int,
 	interval_spawn: float,
@@ -94,7 +94,7 @@ func _on_group_handled() -> void:
 	# all groups handled
 	if groups_handled_count == total_groups:
 		_enemies_left = get_tree().get_nodes_in_group("enemy").size()
-		visual.child_exiting_tree.connect(_on_enemy_left)	
+		visual.child_exiting_tree.connect(_on_enemy_left)
 
 # When an enemy is eliminated (either by death or by reaching the end), 
 # it is checked if there are more enemies left to finish the wave.
@@ -104,7 +104,7 @@ func _on_enemy_left(node: Node) -> void:
 	if _enemies_left == 0:
 		_check_enemies_left()
 
-func _check_enemies_left() -> void:	
+func _check_enemies_left() -> void:
 		_report_finished()
 		if visual.child_exiting_tree.is_connected(_on_enemy_left):
 			visual.child_exiting_tree.disconnect(_on_enemy_left)
@@ -123,6 +123,5 @@ func _report_finished() -> void:
 func _on_enemy_target_reached(enemy: Enemy) -> void:
 	RunContext.status.health -= enemy.damage
 
-func _on_enemy_die(enemy: Enemy) -> void:
-	RunContext.enemy_manager.enemy_die.emit(enemy)
-	
+func _on_enemy_die(enemy: Enemy, attack: Attack) -> void:
+	RunContext.enemy_manager.enemy_die.emit(enemy, attack)

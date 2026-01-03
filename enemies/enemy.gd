@@ -1,15 +1,15 @@
 class_name Enemy extends CharacterBody2D
 
-signal die(ememy: Enemy, attack: Attack)
+signal die(enemy: Enemy, attack: Attack)
 signal target_reached(enemy: Enemy)
 
-enum  Type { NORMAL, BUBA, TANK, GOLEM, SKELETON, BLACK_GOLEM, BLACK_SKELETON, GOLD_SKELETON, INVOKER }
+enum Type {NORMAL, BUBA, TANK, GOLEM, SKELETON, BLACK_GOLEM, BLACK_SKELETON, GOLD_SKELETON, INVOKER}
 
 const GOLD_DROPPED = preload("uid://cxs4ar5enx4mn")
 const DAMAGE_NUMBERS = preload("uid://bkiu4qgh3ug1m")
 
 @export var base_speed: float = 80
-@export var max_healt: float = 20
+@export var max_health: float = 20
 @export var base_gold_value: int = 1
 @export var damage: int = 1
 
@@ -62,8 +62,8 @@ var target_position: Vector2:
 func _ready() -> void:
 	disable()
 	speed = base_speed
-	health_bar.set_max_health(max_healt)
-	_set_health(max_healt)
+	health_bar.set_max_health(max_health)
+	_set_health(max_health)
 	gold_value = base_gold_value + RunContext.economy.extra_gold_dropped
 	RunContext.economy.extra_gold_dropped_change.connect(
 		func(value): gold_value = base_gold_value + value)
@@ -116,9 +116,9 @@ func enable() -> void:
 # --------------------
 # percentage of remaining heal
 func get_percentage_remaining_health() -> float:
-	if max_healt <= 0:
+	if max_health <= 0:
 		return 0.0
-	var health_ratio: float = health / max_healt
+	var health_ratio: float = health / max_health
 	var percentage: float = health_ratio * 100.0
 	
 	return min(100.0, percentage)
@@ -130,11 +130,15 @@ func apply_debuff(debuff: EnemyDebuff) -> void:
 	debuff_handler.add_debuff(debuff, self)
 
 func apply_damage(attack: Attack) -> void:
+	if _is_dead:
+		return
+
 	_set_health(health - attack.damage)
 	_play_hit_animation()
 	_show_damage(attack)
 
-	if health <= 0:
+	if health <= 0 and not _is_dead:
+		_is_dead = true
 		_die(attack)
 
 func update_visual_color():

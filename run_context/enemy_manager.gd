@@ -1,5 +1,4 @@
 #EnemyGenerator 
 class_name EnemyManager extends RefCounted
 
-signal enemy_die(enemy: Enemy)
-
+signal enemy_die(enemy: Enemy, attack: Attack)
