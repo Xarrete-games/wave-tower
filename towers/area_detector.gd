@@ -18,8 +18,8 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	var enemy = body as Enemy
-	enemy.die.connect(_on_enemy_die)
-	enemy.target_reached.connect(_on_enemy_die)
+	enemy.tree_exited.connect(func() -> void:
+		_on_enemy_die(enemy))
 	_targets_in_range.append(enemy)
 
 	if current_target == null:
@@ -30,11 +30,6 @@ func _on_body_exited(body: Node2D) -> void:
 	_remove_target_and_get_next(enemy)
 	
 func _remove_target_and_get_next(enemy: Enemy) -> void:
-	# disconnect signal
-	if enemy.die.is_connected(_on_enemy_die):
-		enemy.die.disconnect(_on_enemy_die)
-	if enemy.target_reached.is_connected(_on_enemy_die):
-		enemy.target_reached.disconnect(_on_enemy_die)
 	# remove enemy
 	_targets_in_range.erase(enemy)
 	#exit when enemy is not the target
@@ -66,7 +61,6 @@ func _select_next_target() -> void:
 			var enemy_with_highest_hp: Enemy = null
 			var highest_hp: float = -1.0
 			for enemy in _targets_in_range:
-				
 				if enemy.get_remaining_health() > highest_hp:
 					highest_hp = enemy.get_remaining_health()
 					enemy_with_highest_hp = enemy
@@ -82,3 +76,7 @@ func _select_next_target() -> void:
 					lowest_hp = enemy.get_remainig_health()
 					enemy_with_lowest_hp = enemy
 			current_target = enemy_with_lowest_hp
+
+func clear_targets() -> void:
+	_targets_in_range.clear()
+	current_target = null
