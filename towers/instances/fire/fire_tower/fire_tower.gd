@@ -1,6 +1,6 @@
 class_name FireTower extends UpgradeableTower
 
-const FIRE_BALL_SCENE: PackedScene = preload("uid://c87kjybjulaxq")
+@export var fire_ball_scene: PackedScene
 
 @onready var projectile_spawn_pos: Marker2D = $ProjectileSpawnPos
 
@@ -8,7 +8,7 @@ func _fire() -> void:
 	if _current_target == null:
 		return
 
-	var fire_ball: SingleTargetProjectile = FIRE_BALL_SCENE.instantiate()
+	var fire_ball: SingleTargetProjectile = fire_ball_scene.instantiate()
 	add_child(fire_ball)
 	fire_ball.global_position = projectile_spawn_pos.global_position
 	var attack: Attack = _get_attack()
