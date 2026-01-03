@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://b3rjk0365pn1t"]
+[gd_scene load_steps=10 format=4 uid="uid://b3rjk0365pn1t"]
 
 [ext_resource type="Script" uid="uid://db7frkuuam42r" path="res://levels/level.gd" id="1_gmgay"]
 [ext_resource type="PackedScene" uid="uid://cat7x3rq7b56p" path="res://levels/level_tile_map/level_tile_map.tscn" id="2_x25rp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://c6gmmo43gd544" path="res://levels/tower_selector.gd" id="7_jd1fy"]
 [ext_resource type="Script" uid="uid://yhjdvpv621gf" path="res://levels/consumables_handler.gd" id="8_cnvg6"]
 [ext_resource type="Script" uid="uid://ky15h85r6dhk" path="res://levels/kill_event_handler.gd" id="8_p3adb"]
+[ext_resource type="PackedScene" uid="uid://oesepsa8dbuy" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.tscn" id="9_p3adb"]
 
 [node name="LevelBase" type="Node2D" node_paths=PackedStringArray("enemy_paths")]
 y_sort_enabled = true
@@ -44,3 +45,4 @@ script = ExtResource("8_cnvg6")
 
 [node name="KillEventHandler" type="Node" parent="."]
 script = ExtResource("8_p3adb")
+burn_area_scene = ExtResource("9_p3adb")

@@ -21,6 +21,6 @@ func get_debuff(type: EnemyDebuff.Type) -> EnemyDebuff:
 
 func _bind_signals():
 	burn_debuff.changed.connect(
-		func(): 
+		func():
 			debuff_change.emit(burn_debuff))
 	frost_debuff.changed.connect(func(): debuff_change.emit(frost_debuff))
