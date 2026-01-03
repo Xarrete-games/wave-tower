@@ -6,8 +6,8 @@ signal attack_fired()
 signal attack_speed_change(value: float)
 signal on_target_change(enemy: Enemy)
 
-enum Type { RED, GREEN, BLUE }
-enum TargetingMode { FIRST_IN_PROGRESS, HIGH_HP, LOW_HP }
+enum Type {RED, GREEN, BLUE}
+enum TargetingMode {FIRST_IN_PROGRESS, HIGH_HP, LOW_HP}
 
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
@@ -90,8 +90,8 @@ func enable() -> void:
 # --------------------
 func _get_attack() -> Attack:
 	var is_critic = _is_critical_hit()
-	var attack_damage = stats.damage * (1 + (stats.critic_damage/100)) if is_critic else stats.damage
-	var damage_type = DamageNumbers.Type.CRITIAL if is_critic else DamageNumbers.Type.NORMAL
+	var attack_damage = stats.damage * (1 + (stats.critic_damage / 100)) if is_critic else stats.damage
+	var damage_type = DamageNumbers.Type.CRITICAL if is_critic else DamageNumbers.Type.NORMAL
 	return Attack.new(attack_damage, damage_type, self)
 	
 func _is_critical_hit() -> bool:
@@ -129,7 +129,7 @@ func _on_extra_stats_change(tower_extra_stats: TowerExtraStats) -> void
 # --------------------
 
 func _on_stats_change(new_stats: TowerStats) -> void:
-	stats = new_stats   
+	stats = new_stats
 	attack_speed_change.emit(stats.attack_speed)
 	_apply_stats_changes()
 

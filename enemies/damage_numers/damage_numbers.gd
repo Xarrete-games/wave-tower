@@ -1,6 +1,6 @@
 class_name DamageNumbers extends Control
 
-enum Type { NORMAL, SKILL, CRITIAL }
+enum Type {NORMAL, SKILL, CRITICAL, EXECUTE}
 
 @export var time_to_vanish: float = 2
 
@@ -12,12 +12,12 @@ func _ready():
 	tween1.tween_property(damage_label, "position", Vector2(random_number, -30), time_to_vanish / 2)
 	var tween2 = create_tween()
 	tween2.tween_property(damage_label, "modulate:a", 0.0, time_to_vanish / 2)
-	await  tween2.finished
+	await tween2.finished
 	queue_free()
 	
 func set_attack(attack: Attack) -> void:
 	damage_label.text = str(int(round(attack.damage)))
-	if attack.damage_type == Type.CRITIAL:
+	if attack.damage_type == Type.CRITICAL or attack.damage_type == Type.EXECUTE:
 		var critical_settings = damage_label.label_settings.duplicate()
 		critical_settings.font_color = Color.RED
 		damage_label.label_settings = critical_settings
