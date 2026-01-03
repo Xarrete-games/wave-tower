@@ -1,12 +1,80 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwyyp2r266blt"]
+[gd_scene load_steps=16 format=3 uid="uid://cwyyp2r266blt"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ucjx1"]
 [ext_resource type="Script" uid="uid://bpvj36tgrsr8g" path="res://towers/instances/frost/frost_nova_tower/frost_nova_tower.gd" id="2_7kg10"]
 [ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="3_lemm1"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="3_nvigb"]
-[ext_resource type="Script" uid="uid://bd1hqew8ca8xq" path="res://towers/components/cristal_light/passive_light.gd" id="4_y361t"]
+[ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="6_3yhk2"]
+[ext_resource type="Texture2D" uid="uid://d05fe6tu5vtac" path="res://assets/textures/snow_texture.jpg" id="7_ufikm"]
+[ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="8_qfpti"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_763pf"]
+
+[sub_resource type="Animation" id="Animation_l042b"]
+resource_name = "pulsing_light"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 2.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_3h2aw"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.5, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p1ede"]
+_data = {
+&"RESET": SubResource("Animation_3h2aw"),
+&"pulsing_light": SubResource("Animation_l042b")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ie71e"]
+shader = ExtResource("6_3yhk2")
+shader_parameter/Dissolver_texture = ExtResource("7_ufikm")
+shader_parameter/Flame_texture = ExtResource("7_ufikm")
+
+[sub_resource type="Curve" id="Curve_5an2a"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3kuch"]
+texture_mode = 1
+curve = SubResource("Curve_5an2a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n8vnu"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(75, 90, 1)
+angle_min = -89.99999
+angle_max = 90.000015
+inherit_velocity_ratio = 20.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 9.8, 0)
+scale_max = 8.0
+alpha_curve = SubResource("CurveTexture_3kuch")
 
 [node name="FrostNovaTower" instance=ExtResource("1_ucjx1")]
 script = ExtResource("2_7kg10")
@@ -16,26 +84,40 @@ type = 2
 position = Vector2(0, 8)
 
 [node name="Sprite2D" parent="." index="4"]
-position = Vector2(0, -51.000004)
+position = Vector2(0, -46)
 texture = ExtResource("3_lemm1")
-region_rect = Rect2(1005, 83, 367, 553)
+region_rect = Rect2(998, 83, 367, 553)
 
 [node name="RangeCollision" parent="AreaDetector" index="0"]
 shape = SubResource("CircleShape2D_763pf")
 
-[node name="PassiveLight" type="PointLight2D" parent="." index="6"]
-position = Vector2(0, -66)
-color = Color(0.5019608, 1, 1, 1)
-energy = 0.5
-texture = ExtResource("3_nvigb")
-texture_scale = 3.0
-script = ExtResource("4_y361t")
-
-[node name="AttackTimer" parent="." index="7"]
+[node name="AttackTimer" parent="." index="6"]
 wait_time = 3.0
 
-[node name="MouseDetector" parent="." index="8"]
+[node name="MouseDetector" parent="." index="7"]
 offset_left = -44.0
 offset_top = -100.0
 offset_right = 46.0
 offset_bottom = 25.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11"]
+root_node = NodePath("../PointLight2D")
+libraries = {
+&"": SubResource("AnimationLibrary_p1ede")
+}
+autoplay = "RESET"
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="12"]
+position = Vector2(0, -120)
+color = Color(0, 1, 0.7741893, 1)
+energy = 0.2
+texture = ExtResource("3_nvigb")
+
+[node name="GPUParticlesFireAll" type="GPUParticles2D" parent="." index="13"]
+material = SubResource("ShaderMaterial_ie71e")
+position = Vector2(0, -120)
+amount = 30
+texture = ExtResource("8_qfpti")
+lifetime = 5.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_n8vnu")
