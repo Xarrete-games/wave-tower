@@ -1,6 +1,6 @@
 class_name Enemy extends CharacterBody2D
 
-signal die(ememy: Enemy)
+signal die(ememy: Enemy, attack: Attack)
 signal target_reached(enemy: Enemy)
 
 enum  Type { NORMAL, BUBA, TANK, GOLEM, SKELETON, BLACK_GOLEM, BLACK_SKELETON, GOLD_SKELETON, INVOKER }
@@ -133,7 +133,7 @@ func apply_damage(attack: Attack) -> void:
 	_show_damage(attack)
 
 	if health <= 0:
-		_die()
+		_die(attack)
 
 func update_visual_color():
 	animated_sprite_2d.modulate = default_modulate_color
@@ -151,8 +151,8 @@ func _play_hit_animation() -> void:
 	)
 	hit_tween.tween_interval(0.2)
 
-func _die() -> void:
-	die.emit(self)
+func _die(attack: Attack) -> void:
+	die.emit(self, attack)
 	_show_gold_dropped()
 	RunContext.economy.gold += gold_value
 	_path_follow.queue_free()
