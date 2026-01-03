@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=3 format=3 uid="uid://dhkj2m7ver13i"]
+
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="1_twtbw"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="2_mbpjr"]
+
+[resource]
+script = ExtResource("1_twtbw")
+metadata/_custom_type_script = "uid://ddvtkyy0nswgw"

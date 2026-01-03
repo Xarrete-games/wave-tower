@@ -10,6 +10,22 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_763pf"]
 
+[sub_resource type="Animation" id="Animation_3h2aw"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.5, 1.0]
+}
+
 [sub_resource type="Animation" id="Animation_l042b"]
 resource_name = "pulsing_light"
 length = 2.0
@@ -25,22 +41,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [1.0, 2.0, 1.0]
-}
-
-[sub_resource type="Animation" id="Animation_3h2aw"]
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.0, 1.5, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p1ede"]

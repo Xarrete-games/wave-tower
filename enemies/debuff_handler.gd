@@ -10,12 +10,16 @@ var debuffs_stacks: Dictionary[EnemyDebuff.Type, int] = {
 	EnemyDebuff.Type.FROST: 0,
 }
 
-func add_debuff(debuff: EnemyDebuff, enemy: Enemy):
+func add_debuff(debuff: EnemyDebuff, amount: int, enemy: Enemy):
 	if debuff.value == 0:
 		return
-	debuffs.append(debuff)
-	_on_add_debuff(debuff.type, enemy)
-	# on apply
+	for i in range(amount):
+		if debuffs_stacks[debuff.type] >= debuff.max_stacks:
+			return
+
+		debuffs.append(debuff)
+		_on_add_debuff(debuff.type, enemy)
+		# on apply
 	debuff.on_apply(enemy)
 
 func update_all(enemy: Enemy, delta: float): 
@@ -38,6 +42,9 @@ func update_all(enemy: Enemy, delta: float):
 			debuff.on_expire(enemy)
 			debuffs.remove_at(i)
 			_on_remove_debuff(debuff.type, enemy)
+
+func get_stacks(debuff_type: EnemyDebuff.Type) -> int:
+	return debuffs_stacks[debuff_type]
 
 func _on_add_debuff(type: EnemyDebuff.Type, enemy: Enemy) -> void:
 	debuffs_stacks[type] += 1

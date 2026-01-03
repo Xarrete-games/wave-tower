@@ -126,8 +126,11 @@ func get_percentage_remaining_health() -> float:
 func get_remaining_health() -> float:
 	return health
 
-func apply_debuff(debuff: EnemyDebuff) -> void:
-	debuff_handler.add_debuff(debuff, self)
+func get_debuff_stacks(debuff_type: EnemyDebuff.Type) -> int:
+	return debuff_handler.get_stacks(debuff_type)
+
+func apply_debuff(debuff: EnemyDebuff, amount: int = 1) -> void:
+	debuff_handler.add_debuff(debuff, amount, self)
 
 func apply_damage(attack: Attack) -> void:
 	if _is_dead:
