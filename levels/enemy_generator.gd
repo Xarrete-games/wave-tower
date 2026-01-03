@@ -1,6 +1,7 @@
 class_name EnemyGenerator extends Node
 
 signal group_handled()
+signal enemy_killed(enemy: Enemy, attack: Attack)
 
 var _level: Level
 var level_waves: Array[EnemyWave]
@@ -125,3 +126,4 @@ func _on_enemy_target_reached(enemy: Enemy) -> void:
 
 func _on_enemy_die(enemy: Enemy, attack: Attack) -> void:
 	RunContext.enemy_manager.enemy_die.emit(enemy, attack)
+	enemy_killed.emit(enemy, attack)
