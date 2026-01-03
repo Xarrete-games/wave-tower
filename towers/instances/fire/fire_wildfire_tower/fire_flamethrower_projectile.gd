@@ -1,3 +1,5 @@
+
+
 class_name FireFlamethrowerProjectile extends Node2D
 
 

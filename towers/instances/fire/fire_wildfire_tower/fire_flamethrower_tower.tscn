@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bn8v52iirwk75"]
+[gd_scene load_steps=4 format=3 uid="uid://bn8v52iirwk75"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_iilqd"]
-[ext_resource type="Script" uid="uid://bqrq8c3btvh1q" path="res://towers/instances/fire/fire_flamethrower_tower/fire_flamethrower_tower.gd" id="2_g6y21"]
-[ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="3_18ykh"]
-[ext_resource type="PackedScene" uid="uid://cg2db7mx3pcxb" path="res://towers/instances/fire/fire_flamethrower_tower/fire_flamethrower_projectile.tscn" id="3_sgmw8"]
+[ext_resource type="Script" uid="uid://bqrq8c3btvh1q" path="res://towers/instances/fire/fire_wildfire_tower/fire_flamethrower_tower.gd" id="2_g6y21"]
+[ext_resource type="PackedScene" uid="uid://cg2db7mx3pcxb" path="res://towers/instances/fire/fire_wildfire_tower/fire_flamethrower_projectile.tscn" id="3_sgmw8"]
 
 [node name="FireFlameThrowerTower" instance=ExtResource("1_iilqd")]
 script = ExtResource("2_g6y21")
@@ -14,10 +13,6 @@ color = Color(0.6117647, 0, 0, 1)
 
 [node name="Sprite2D" parent="." index="3"]
 position = Vector2(0, -49)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("3_18ykh")
-hframes = 1
-region_enabled = true
 region_rect = Rect2(950, 0, 475, 550)
 
 [node name="FireFlamethrowerProjectile" parent="." index="9" instance=ExtResource("3_sgmw8")]

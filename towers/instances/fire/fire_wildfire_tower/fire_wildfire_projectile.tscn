@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bs7g64mcrms08"]
+
+[ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_tw43f"]
+[ext_resource type="Texture2D" uid="uid://do1b4oomw0kiu" path="res://assets/textures/particles/flame_particle.png" id="2_k5uor"]
+
+[sub_resource type="Curve" id="Curve_p8dhc"]
+_data = [Vector2(0.0026881695, 1), 0.0, 0.0, 0, 0, Vector2(0.9596774, 0.44869107), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_o6rqx"]
+colors = PackedColorArray(0.9254902, 0, 0, 1, 1, 0.7529412, 0.17254902, 1)
+
+[node name="FireFlamethrowerProjectile" type="Node2D"]
+script = ExtResource("1_tw43f")
+
+[node name="FireParticles" type="CPUParticles2D" parent="."]
+scale = Vector2(0.5, 0.5)
+amount = 300
+texture = ExtResource("2_k5uor")
+preprocess = 0.39
+emission_shape = 1
+emission_sphere_radius = 30.0
+spread = 0.0
+gravity = Vector2(0, 0)
+radial_accel_min = -50.0
+radial_accel_max = 14.62
+scale_amount_curve = SubResource("Curve_p8dhc")
+color_ramp = SubResource("Gradient_o6rqx")
