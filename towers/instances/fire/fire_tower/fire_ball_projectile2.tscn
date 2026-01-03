@@ -1,0 +1,53 @@
+[gd_scene load_steps=12 format=3 uid="uid://bsvjcu86kc8oj"]
+
+[ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_iwpk0"]
+[ext_resource type="Shader" uid="uid://b68mh1vot8qw7" path="res://assets/shaders/fire_shader.tres" id="2_8dgq6"]
+[ext_resource type="Texture2D" uid="uid://ge6vf7u1jhri" path="res://assets/textures/noises/T_VFX_Noise_465.png" id="3_splws"]
+[ext_resource type="Texture2D" uid="uid://y45wula8wh0m" path="res://assets/textures/flame4.jpg" id="4_2iq5u"]
+[ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="5_uqeit"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nhhll"]
+shader = ExtResource("2_8dgq6")
+shader_parameter/Dissolver_texture = ExtResource("3_splws")
+shader_parameter/Flame_texture = ExtResource("4_2iq5u")
+
+[sub_resource type="Curve" id="Curve_hgb6j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yg6b3"]
+texture_mode = 1
+curve = SubResource("Curve_hgb6j")
+
+[sub_resource type="Gradient" id="Gradient_8rwps"]
+offsets = PackedFloat32Array(0, 0.09090909, 0.3181818, 0.6017316, 1)
+colors = PackedColorArray(1, 0.78418523, 0.46191412, 1, 1, 0.44297108, 0, 1, 0.7586618, 0, 0.1322492, 1, 0.8921665, 0, 0.012920001, 1, 0.94531196, 0.62702364, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wgdfs"]
+gradient = SubResource("Gradient_8rwps")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6pi4g"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_min = -89.99999
+angle_max = 90.000015
+inherit_velocity_ratio = 0.2
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+scale_min = 20.0
+scale_max = 50.0
+color_ramp = SubResource("GradientTexture1D_wgdfs")
+alpha_curve = SubResource("CurveTexture_yg6b3")
+
+[node name="FireBallProjectile2" type="Node2D"]
+script = ExtResource("1_iwpk0")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_nhhll")
+amount = 150
+texture = ExtResource("5_uqeit")
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_6pi4g")
