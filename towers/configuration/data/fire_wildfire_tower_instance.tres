@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" load_steps=4 format=3 uid="uid://cyyykn8st6mo8"]
+[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" load_steps=4 format=3 uid="uid://c87ypetdh5cks"]
 
 [ext_resource type="Resource" uid="uid://c85ehe3lacxch" path="res://towers/configuration/data/fire_wildfire_tower.tres" id="1_q7f00"]
 [ext_resource type="PackedScene" uid="uid://ckw22jf820ehi" path="res://towers/instances/fire/fire_wildfire_tower/fire_wildfire_tower.tscn" id="2_clbp5"]
