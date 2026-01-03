@@ -15,5 +15,5 @@ display_name = "Wildfire tower"
 description = "Fire a flamethrower to burn several enemies"
 icon = SubResource("AtlasTexture_ncsk7")
 base_damage = 30.0
-base_attack_range = 300.0
+base_attack_range = 280.0
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
