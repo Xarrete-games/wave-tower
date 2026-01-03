@@ -22,7 +22,9 @@ var default_modulate_color: Color = Color.WHITE
 # speed
 var _base_speed: float = 100.0
 var _speed_mult: float = 1.0
-var is_right_direction: bool = true	
+var is_right_direction: bool = true
+
+var _is_dead: bool = false
 
 var speed: float:
 	get: return _base_speed * _speed_mult

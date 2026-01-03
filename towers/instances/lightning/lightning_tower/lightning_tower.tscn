@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://7hfxyb5g3ku"]
+[gd_scene load_steps=6 format=3 uid="uid://7hfxyb5g3ku"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_y64o4"]
 [ext_resource type="Script" uid="uid://cl5pxh8r8evhq" path="res://towers/instances/lightning/lightning_tower/lightning_tower.gd" id="2_epe63"]
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="3_epe63"]
+[ext_resource type="PackedScene" uid="uid://daqi7i1vflaq5" path="res://towers/instances/lightning/lightning_tower/projectile/lighting_ball_projectile.tscn" id="3_vgy5y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_epe63"]
 atlas = ExtResource("3_epe63")
@@ -10,15 +11,13 @@ region = Rect2(476, 0, 474, 550)
 
 [node name="LightningTower" instance=ExtResource("1_y64o4")]
 script = ExtResource("2_epe63")
+electric_ball_scene = ExtResource("3_vgy5y")
 upgrade_sprite = SubResource("AtlasTexture_epe63")
 type = 1
 
 [node name="Sprite2D" parent="." index="3"]
 position = Vector2(0, -51)
-scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_epe63")
-hframes = 1
-region_enabled = true
 region_rect = Rect2(0, 0, 475, 550)
 
 [node name="ProjectileSpawnPos" parent="." index="9"]
