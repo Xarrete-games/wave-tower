@@ -22,7 +22,7 @@ curve = SubResource("Curve_51x8o")
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
 emission_shape = 1
-emission_sphere_radius = 10.0
+emission_sphere_radius = 15.0
 angle_min = -89.99999
 angle_max = 90.000015
 direction = Vector3(0, -1, 0)
@@ -30,9 +30,9 @@ spread = 0.0
 initial_velocity_min = 10.0
 initial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
-scale_min = 10.0
-scale_max = 60.0
-color = Color(0.988483, 1, 0.8249593, 1)
+scale_min = 5.0
+scale_max = 40.0
+color = Color(0.8455873, 1, 0.8232569, 1)
 alpha_curve = SubResource("CurveTexture_yg6b3")
 
 [node name="LightingBallProjectile" type="Node2D"]
@@ -40,8 +40,8 @@ script = ExtResource("1_tivwp")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_3dg1p")
-amount = 50
+amount = 150
 texture = ExtResource("4_8reg1")
-lifetime = 0.1
+lifetime = 0.02
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_8reg1")
