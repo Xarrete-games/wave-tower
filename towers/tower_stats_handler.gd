@@ -12,19 +12,12 @@ var local_buffs: Array[TowerBuff]
 var local_stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new():
 	set(new_local_stats_acc):
 		local_stats_acc = new_local_stats_acc
-		total_stats_acc =  global_stats_acc.merge(local_stats_acc)
-		
 		_update_stats()
 # global
 var global_stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new():
 	set(new_global_stats_acc):
 		global_stats_acc = new_global_stats_acc
-		total_stats_acc =  global_stats_acc.merge(local_stats_acc)
-		
 		_update_stats()
-
-# total
-var total_stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new()
 
 # current stats
 var stats: TowerStats = TowerStats.new()
@@ -52,6 +45,21 @@ func set_data(
 	_set_global_buffs(tower_type, RunContext.towers_upgrades.get_stats_accumulator(tower_type))
 	RunContext.towers_upgrades.tower_buffs_change.connect(_set_global_buffs)
 
+func add_local_buff(tower_buff: TowerBuff) -> void:
+	local_buffs.append(tower_buff)
+	_rebuild_local_stats_acc()
+
+func remove_local_buff(tower_buff: TowerBuff) -> void:
+	if tower_buff in local_buffs:
+		local_buffs.erase(tower_buff)
+		_rebuild_local_stats_acc()
+
+func _rebuild_local_stats_acc() -> void:
+	var acc = TowerStatsAccumulator.new()
+	
+	for buff in local_buffs:
+		buff.modifier.contribute(acc)
+	local_stats_acc = acc
 
 func _on_level_up(_new_level: int) -> void:
 	base_stats.add_stats(stats_on_level)
@@ -61,11 +69,12 @@ func _set_global_buffs(p_tower_type: Tower.Type,new_global_stats_acc: TowerStats
 	if p_tower_type != self.tower_type:
 		return
 	global_stats_acc = new_global_stats_acc
-	_update_stats()
 
 
 # recalculate total stats
 func _update_stats() -> void:
+	var total_stats_acc: TowerStatsAccumulator = global_stats_acc.merge(local_stats_acc)
+
 	# damage
 	stats.damage = (base_stats.damage + total_stats_acc.flat_damage) * (1 + total_stats_acc.damage_mult)
 	# range

@@ -7,7 +7,7 @@ func _ready() -> void:
 	clear_tower_selected()
 	ClickEvents.tower_selected.connect(_on_tower_selected)
 	ClickEvents.tower_button_pressed.connect(_on_tower_button_pressed)
-	ClickEvents.tower_sold_pressed.connect(_on_tower_sold_pressed)
+	ClickEvents.tower_remove_pressed.connect(_on_tower_remove_pressed)
 	RunContext.progress.current_wave_finished.connect(clear_tower_selected)
 
 func _input(event: InputEvent) -> void:
@@ -41,7 +41,7 @@ func _on_tower_selected(tower: Tower) -> void:
 func _on_tower_button_pressed(_tower_configuration: TowerConfigurationWithInstance) -> void:
 	clear_tower_selected()
 
-func _on_tower_sold_pressed(_tower: Tower) -> void:
+func _on_tower_remove_pressed(_tower: Tower) -> void:
 	clear_tower_selected()
 
 func _on_stats_change(tower: Tower) -> void:

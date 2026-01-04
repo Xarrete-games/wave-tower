@@ -103,7 +103,7 @@ func _on_targeting_mode_selector_item_selected(index: Tower.TargetingMode) -> vo
 	current_tower.targeting_mode = index
 
 func _on_remove_button_pressed() -> void:
-	ClickEvents.tower_sold_pressed.emit(current_tower)
+	ClickEvents.tower_remove_pressed.emit(current_tower)
 
 func _on_upgrade_button_pressed() -> void:
 	if RunContext.economy.gold < current_tower.configuration.upgrade_price:

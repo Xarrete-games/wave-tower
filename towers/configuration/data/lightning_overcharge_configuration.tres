@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=5 format=3 uid="uid://de5dvgltvp25o"]
+
+[ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_kwhho"]
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_ysf27"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="3_y3v2x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5pku"]
+atlas = ExtResource("1_kwhho")
+region = Rect2(165, 5, 54, 153)
+
+[resource]
+script = ExtResource("2_ysf27")
+id = "overcharge_wave_tower"
+display_name = "Overcharge Tower"
+description = "Increase the damage off all towers in this range in 10%"
+icon = SubResource("AtlasTexture_i5pku")
+type = 1
+base_damage = 15.0
+base_attack_range = 600.0
+metadata/_custom_type_script = "uid://ddvtkyy0nswgw"

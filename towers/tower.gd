@@ -46,6 +46,7 @@ var exp_data: TowerExpData:
 @onready var experience_handler: ExprienceHandler = $ExperienceHandler
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var tower_stats_handler: TowerStatsHandler = $TowerStatsHandler
+@onready var tower_area: Area2D = $TowerArea
 
 func _ready():
 	configuration.build()
@@ -72,6 +73,7 @@ func normal_color() -> void:
 func placement_mode() -> void:
 	_enabled = false
 	area_detector.monitoring = false
+	tower_area.monitorable = false
 	
 # Enables the tower after its construction/placement.
 # It is initially disabled to prevent actions while the player is placing it.
@@ -80,11 +82,21 @@ func enable() -> void:
 	_enabled = true
 	area_detector.monitoring = true
 	range_preview.visible = false
+	tower_area.monitorable = true
 
 	await get_tree().create_timer(0.1).timeout
 	
 	ClickEvents.tower_selected.connect(_on_tower_selected)
 	mouse_detector.gui_input.connect(_on_gui_input)
+
+# --------------------
+# --- BUFFS ---
+# --------------------
+func add_local_buff(tower_buff: TowerBuff) -> void:
+	tower_stats_handler.add_local_buff(tower_buff)
+
+func remove_local_buff(tower_buff: TowerBuff) -> void:
+	tower_stats_handler.remove_local_buff(tower_buff)
 # --------------------
 # --- ATTACK ---
 # --------------------

@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://byypsvgtaww3g"]
+
+[ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_5hrp4"]
+[ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="2_1wh8q"]
+[ext_resource type="Script" uid="uid://lnq5muxx3pkc" path="res://towers/instances/lightning/lightning_overcharger_tower/lightning_overcharge_tower.gd" id="2_u5ijc"]
+[ext_resource type="PackedScene" uid="uid://betmeynpmbdyk" path="res://towers/instances/lightning/particles/electric_particles.tscn" id="3_i6te2"]
+[ext_resource type="PackedScene" uid="uid://daqi7i1vflaq5" path="res://towers/instances/lightning/lightning_tower/projectile/lighting_ball_projectile.tscn" id="3_kngkr"]
+[ext_resource type="PackedScene" uid="uid://bfwixconktk0c" path="res://towers/instances/lightning/particles/electric_buff_particles.tscn" id="4_3bx21"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kngkr"]
+radius = 78.40918
+
+[node name="LightningOverchargeTower" instance=ExtResource("1_5hrp4")]
+script = ExtResource("2_u5ijc")
+projectile_scene = ExtResource("3_kngkr")
+overcharge_particle_scene = ExtResource("4_3bx21")
+
+[node name="Sprite2D" parent="." index="3"]
+position = Vector2(0, -49)
+texture = ExtResource("2_1wh8q")
+region_rect = Rect2(971, 7, 433, 543)
+
+[node name="CollisionShape2D" parent="TowerArea" index="0"]
+position = Vector2(0, -1)
+
+[node name="ElectricParticles" parent="." index="11" instance=ExtResource("3_i6te2")]
+
+[node name="ElectricParticles2" parent="." index="12" instance=ExtResource("3_i6te2")]
+position = Vector2(0, -118)
+
+[node name="ElectricParticles3" parent="." index="13" instance=ExtResource("3_i6te2")]
+position = Vector2(2, -48)
+
+[node name="BuffArea" type="Area2D" parent="." index="14"]
+collision_layer = 8
+collision_mask = 4
+
+[node name="BuffAreaShape" type="CollisionShape2D" parent="BuffArea" index="0"]
+scale = Vector2(1, 0.5)
+shape = SubResource("CircleShape2D_kngkr")
+
+[connection signal="area_entered" from="BuffArea" to="." method="_on_buff_area_area_entered"]
+[connection signal="area_exited" from="BuffArea" to="." method="_on_buff_area_area_exited"]

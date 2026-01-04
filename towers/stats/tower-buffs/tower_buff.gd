@@ -2,6 +2,7 @@ class_name TowerBuff extends RefCounted
 
 enum SourceType {
     RELIC,
+    TOWER,
     LEVEL_UP,
 }
 

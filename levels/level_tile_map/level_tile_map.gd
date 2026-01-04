@@ -18,7 +18,7 @@ var _occupied_tiles: Dictionary[Vector2i, bool] = {}
 var _blocked_tiles: Dictionary[Vector2i, bool] = {}
 
 func _ready() -> void:
-	ClickEvents.tower_sold_pressed.connect(_on_tower_sold)
+	ClickEvents.tower_remove_pressed.connect(_on_tower_removed)
 	_fill_blocked_dic()
 	
 func get_mouse_tile_pos() -> Vector2i:
@@ -80,7 +80,7 @@ func _fill_blocked_dic() -> void:
 		if tile_data != null and tile_data.get_custom_data(BLOCKED) == true:
 			_blocked_tiles[map_coords] = true
 
-func _on_tower_sold(tower: Tower) -> void:
+func _on_tower_removed(tower: Tower) -> void:
 	var tile = tower.tile_pos
 	set_tile_free(tile)
 	

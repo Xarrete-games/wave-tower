@@ -5,7 +5,7 @@ signal extra_gold_dropped_change(amount: int)
 signal available_free_towers_change(amount: int)
 signal gold_change(amount: int)
 
-var gold: int = 150:
+var gold: int = 1000:
 	set(value):
 		if value >= gold:
 			AudioManager.play_coins()
