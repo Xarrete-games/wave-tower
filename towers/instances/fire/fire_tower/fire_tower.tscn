@@ -1,13 +1,94 @@
-[gd_scene load_steps=6 format=3 uid="uid://djdpfy88ujkfb"]
+[gd_scene load_steps=20 format=3 uid="uid://djdpfy88ujkfb"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_f8b8m"]
 [ext_resource type="Script" uid="uid://e2332bmer7r0" path="res://towers/instances/fire/fire_tower/fire_tower.gd" id="2_t2lsm"]
 [ext_resource type="PackedScene" uid="uid://bsvjcu86kc8oj" path="res://towers/instances/fire/fire_tower/fire_ball_projectile2.tscn" id="3_1o222"]
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="3_t2lsm"]
+[ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="5_e0k2h"]
+[ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="6_y4tlv"]
+[ext_resource type="Texture2D" uid="uid://dy7n3hsts6mxa" path="res://assets/textures/noises/T_VFX_PerlinNoise_Tiled.png" id="7_15re0"]
+[ext_resource type="Texture2D" uid="uid://b522y4oy5hi75" path="res://assets/textures/flame5.jpg" id="8_iohts"]
+[ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="9_ucoog"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t2lsm"]
 atlas = ExtResource("3_t2lsm")
 region = Rect2(475, 0, 475, 551)
+
+[sub_resource type="Animation" id="Animation_3h2aw"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.5, 1.0, 0.5]
+}
+
+[sub_resource type="Animation" id="Animation_l042b"]
+resource_name = "pulsing_light"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 2.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p1ede"]
+_data = {
+&"RESET": SubResource("Animation_3h2aw"),
+&"pulsing_light": SubResource("Animation_l042b")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5rkhv"]
+shader = ExtResource("6_y4tlv")
+shader_parameter/Dissolver_texture = ExtResource("7_15re0")
+shader_parameter/Flame_texture = ExtResource("8_iohts")
+
+[sub_resource type="Curve" id="Curve_j8cf8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3crl6"]
+texture_mode = 1
+curve = SubResource("Curve_j8cf8")
+
+[sub_resource type="Gradient" id="Gradient_d5cva"]
+offsets = PackedFloat32Array(0, 0.04112554, 0.22943723, 0.5887446)
+colors = PackedColorArray(1, 0.78418523, 0.46191412, 1, 1, 0.44297108, 0, 1, 0.8921665, 0.32272613, 0.012920001, 1, 0.94531196, 0.62702364, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y736y"]
+gradient = SubResource("Gradient_d5cva")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pa58j"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 10, 1)
+angle_min = -89.99999
+angle_max = 90.000015
+inherit_velocity_ratio = 20.0
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 20.0
+color_ramp = SubResource("GradientTexture1D_y736y")
+alpha_curve = SubResource("CurveTexture_3crl6")
 
 [node name="FireTower" instance=ExtResource("1_f8b8m")]
 script = ExtResource("2_t2lsm")
@@ -28,3 +109,26 @@ offset_right = 44.0
 
 [node name="ProjectileSpawnPos" parent="." index="10"]
 position = Vector2(1, -103)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+root_node = NodePath("../PointLight2D")
+libraries = {
+&"": SubResource("AnimationLibrary_p1ede")
+}
+autoplay = "RESET"
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="11"]
+position = Vector2(0, -93)
+color = Color(1, 0, 0, 1)
+energy = 0.5
+texture = ExtResource("5_e0k2h")
+texture_scale = 0.5
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="12"]
+material = SubResource("ShaderMaterial_5rkhv")
+position = Vector2(-1, -92)
+amount = 10
+texture = ExtResource("9_ucoog")
+lifetime = 2.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_pa58j")
