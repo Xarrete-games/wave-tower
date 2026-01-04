@@ -75,7 +75,7 @@ animations = [{
 
 [node name="EnemyBuba" instance=ExtResource("1_8wyci")]
 base_speed = 85.0
-max_healt = 320.0
+max_health = 200.0
 base_gold_value = 5
 
 [node name="CollisionShape2D" parent="." index="0"]
@@ -88,6 +88,6 @@ animation = &"down right"
 autoplay = "top right"
 frame_progress = 0.0
 
-[node name="HealthBar" parent="." index="4"]
+[node name="HealthBar" parent="." index="3"]
 offset_top = -117.0
 offset_bottom = -117.0

@@ -9,7 +9,7 @@ const GOLD_DROPPED = preload("uid://cxs4ar5enx4mn")
 const DAMAGE_NUMBERS = preload("uid://bkiu4qgh3ug1m")
 
 @export var base_speed: float = 80
-@export var max_health: float = 20
+@export var max_health: float = 50
 @export var base_gold_value: int = 1
 @export var damage: int = 1
 
@@ -24,7 +24,9 @@ var _base_speed: float = 100.0
 var _speed_mult: float = 1.0
 var is_right_direction: bool = true
 
+var _enabled: bool = false
 var _is_dead: bool = false
+var _is_freeze: bool = false
 
 var speed: float:
 	get: return _base_speed * _speed_mult
@@ -76,16 +78,24 @@ func _process(delta: float):
 	var previous_global_x = global_position.x
 	var previous_global_y = global_position.y
 	#increse progress
-	_path_follow.progress += speed * delta
 	
-	# target reached
-	if _path_follow.progress_ratio >= 0.99:
-		_on_target_reached()
+	if _is_freeze:
+		animated_sprite_2d.modulate = Color.AQUA
+		animated_sprite_2d.stop()
 		return
+	else:
+		animated_sprite_2d.modulate = Color.WHITE
+
+	_path_follow.progress += speed * delta
 	
 	var path_global_pos = _path_follow.global_position
 	
 	global_position = path_global_pos
+
+	# target reached
+	if _path_follow.progress_ratio >= 0.99:
+		_on_target_reached()
+		return
 	
 	# FLIP SPRITE
 	is_right_direction = global_position.x > previous_global_x
@@ -95,9 +105,11 @@ func _process(delta: float):
 	
 	# handle animation
 	var animation = "top right" if previous_global_y > global_position.y else "down right"
-	if animated_sprite_2d.animation != animation:
+	if animated_sprite_2d.animation != animation or not animated_sprite_2d.is_playing():
 		animated_sprite_2d.play(animation)
-	enable()
+	
+	if not _enabled:
+		enable()
 	
 func set_path_follow(path_follow: PathFollow2D) -> void:
 	_path_follow = path_follow
@@ -108,6 +120,7 @@ func disable() -> void:
 	health_bar.visible = false
 
 func enable() -> void:
+	_enabled = true
 	animated_sprite_2d.visible = true
 	collision_shape_2d.disabled = false
 	health_bar.visible = true
@@ -130,6 +143,7 @@ func get_debuff_stacks(debuff_type: EnemyDebuff.Type) -> int:
 	return debuff_handler.get_stacks(debuff_type)
 
 func apply_debuff(debuff: EnemyDebuff, amount: int = 1) -> void:
+	print("Applying debuff: %s, amount: %d" % [debuff.type, amount])
 	debuff_handler.add_debuff(debuff, amount, self)
 
 func apply_damage(attack: Attack) -> void:

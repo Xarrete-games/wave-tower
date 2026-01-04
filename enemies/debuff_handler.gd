@@ -18,9 +18,9 @@ func add_debuff(debuff: EnemyDebuff, amount: int, enemy: Enemy):
 			return
 
 		debuffs.append(debuff)
-		_on_add_debuff(debuff.type, enemy)
+		_on_add_debuff(debuff, enemy)
 		# on apply
-	debuff.on_apply(enemy)
+		debuff.on_apply(enemy)
 
 func update_all(enemy: Enemy, delta: float): 
 	for i in range(debuffs.size() - 1, -1, -1):
@@ -46,23 +46,26 @@ func update_all(enemy: Enemy, delta: float):
 func get_stacks(debuff_type: EnemyDebuff.Type) -> int:
 	return debuffs_stacks[debuff_type]
 
-func _on_add_debuff(type: EnemyDebuff.Type, enemy: Enemy) -> void:
+func _on_add_debuff(debuff: EnemyDebuff, enemy: Enemy) -> void:
+	var type = debuff.type
 	debuffs_stacks[type] += 1
 	enemy.health_bar.set_debuffs(debuffs_stacks)
 	match (type):
 		EnemyDebuff.Type.FROST:
-			enemy.default_modulate_color = FROST_COLOR
+			if debuffs_stacks[EnemyDebuff.Type.FROST] == debuff.max_stacks:
+				enemy._is_freeze = true
+			else:
+				enemy._is_freeze = false
+
 		EnemyDebuff.Type.BURN:
-			enemy.default_modulate_color = BURN_COLOR
+			pass
 	enemy.update_visual_color()
-			
+
 func _on_remove_debuff(type: EnemyDebuff.Type, enemy: Enemy) -> void:
 	debuffs_stacks[type] -= 1
 	enemy.health_bar.set_debuffs(debuffs_stacks)
-	if debuffs_stacks[EnemyDebuff.Type.FROST] > 0:
-		enemy.default_modulate_color = FROST_COLOR
+	if debuffs_stacks[EnemyDebuff.Type.FROST] > 0:	
+		enemy._is_freeze = false
 	elif debuffs_stacks[EnemyDebuff.Type.BURN] > 0:
-		enemy.default_modulate_color = BURN_COLOR
-	else:
-		enemy.default_modulate_color = DEFAULT_COLOR
+		pass
 	enemy.update_visual_color()

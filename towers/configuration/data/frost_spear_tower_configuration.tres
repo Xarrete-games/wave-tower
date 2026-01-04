@@ -1,8 +1,19 @@
-[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=3 format=3 uid="uid://dhkj2m7ver13i"]
+[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=5 format=3 uid="uid://dhkj2m7ver13i"]
 
+[ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_mbpjr"]
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="1_twtbw"]
 [ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="2_mbpjr"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cq3yl"]
+atlas = ExtResource("1_mbpjr")
+region = Rect2(281, 57, 79, 117)
+
 [resource]
 script = ExtResource("1_twtbw")
+id = "frost_spear_tower"
+display_name = "Icebreaker"
+description = "Throws a glacial lance that deeply freezes its target, dealing more damage based on the number of Frost stacks they have."
+icon = SubResource("AtlasTexture_cq3yl")
+base_damage = 25.0
+base_attack_range = 300.0
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
