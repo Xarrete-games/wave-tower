@@ -4,68 +4,60 @@ const BURN_COLOR =  Color.DARK_ORANGE
 const FROST_COLOR = Color.AQUA
 const DEFAULT_COLOR = Color.WHITE
 
-var debuffs: Array[EnemyDebuff] = []
-var debuffs_stacks: Dictionary[EnemyDebuff.Type, int] = {
-	EnemyDebuff.Type.BURN: 0,
-	EnemyDebuff.Type.FROST: 0,
-}
+var debuffs: Array[EnemyDebuffInstance] = []
 
 func add_debuff(debuff: EnemyDebuff, amount: int, enemy: Enemy):
-	if debuff.value == 0:
-		return
 	for i in range(amount):
-		if debuffs_stacks[debuff.type] >= debuff.max_stacks:
-			return
-
-		debuffs.append(debuff)
-		_on_add_debuff(debuff, enemy)
+		if get_stacks(debuff.type) >= debuff.max_stacks:
+			break
+		var instance: EnemyDebuffInstance = EnemyDebuffInstance.new(debuff)
+		debuffs.append(instance)
+		_on_add_debuff(instance, enemy)
 		# on apply
 		debuff.on_apply(enemy)
 
-func update_all(enemy: Enemy, delta: float): 
+func update_all(enemy: Enemy):
+	var now: float = Time.get_ticks_msec() / 1000.0
+
 	for i in range(debuffs.size() - 1, -1, -1):
-		var debuff = debuffs[i]
-		debuff.duration = max(0, debuff.duration - delta)
-		# on tick
-		if debuff.tick_duration > 0:
-			debuff.time_to_tick -= delta
-			
-			if debuff.time_to_tick <= 0:
-				debuff.on_tick(enemy)
-				debuff.time_to_tick += debuff.tick_duration
+		var inst: EnemyDebuffInstance = debuffs[i]
+		var debuff: EnemyDebuff = inst.debuff
 
-		# on update
-		debuff.on_update(enemy, delta)
+		# tick
+		if debuff.tick_interval > 0 and now >= inst.next_tick_time:
+			debuff.on_tick(enemy)
+			inst.next_tick_time += debuff.tick_interval
 
-		# expiration
-		if debuff.duration <= 0:
+		# expire
+		if now >= inst.expire_time:
 			debuff.on_expire(enemy)
 			debuffs.remove_at(i)
 			_on_remove_debuff(debuff.type, enemy)
 
 func get_stacks(debuff_type: EnemyDebuff.Type) -> int:
-	return debuffs_stacks[debuff_type]
+	var count: int = 0
+	for inst in debuffs:
+		if inst.debuff.type == debuff_type:
+			count += 1
+	return count	
 
-func _on_add_debuff(debuff: EnemyDebuff, enemy: Enemy) -> void:
-	var type = debuff.type
-	debuffs_stacks[type] += 1
-	enemy.health_bar.set_debuffs(debuffs_stacks)
+func _on_add_debuff(instance: EnemyDebuffInstance, enemy: Enemy) -> void:
+	var type = instance.debuff.type
+	enemy.health_bar.set_debuffs(debuffs)
 	match (type):
 		EnemyDebuff.Type.FROST:
-			if debuffs_stacks[EnemyDebuff.Type.FROST] == debuff.max_stacks:
+			if get_stacks(type) == instance.debuff.max_stacks:
 				enemy._is_freeze = true
 			else:
 				enemy._is_freeze = false
 
 		EnemyDebuff.Type.BURN:
 			pass
-	enemy.update_visual_color()
 
 func _on_remove_debuff(type: EnemyDebuff.Type, enemy: Enemy) -> void:
-	debuffs_stacks[type] -= 1
-	enemy.health_bar.set_debuffs(debuffs_stacks)
-	if debuffs_stacks[EnemyDebuff.Type.FROST] > 0:	
-		enemy._is_freeze = false
-	elif debuffs_stacks[EnemyDebuff.Type.BURN] > 0:
-		pass
-	enemy.update_visual_color()
+	enemy.health_bar.set_debuffs(debuffs)
+	match (type):
+		EnemyDebuff.Type.FROST:
+			enemy._is_freeze = false
+		EnemyDebuff.Type.BURN:
+			pass

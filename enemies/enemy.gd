@@ -71,7 +71,7 @@ func _ready() -> void:
 		func(value): gold_value = base_gold_value + value)
 
 func _process(delta: float):
-	debuff_handler.update_all(self, delta)
+	debuff_handler.update_all(self)
 	if _path_follow == null:
 		return
 	# save previous position	

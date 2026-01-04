@@ -4,7 +4,7 @@ func _init() -> void:
 	type = Type.BURN
 	value = 1
 	duration = 5
-	tick_duration = 1
+	tick_interval = 1
 	max_stacks = 99
 	
 func on_apply(_enemy: Enemy):

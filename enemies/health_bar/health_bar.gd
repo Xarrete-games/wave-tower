@@ -14,6 +14,7 @@ const MAX_SCALE: float = 4.0
 
 @export var debuffs_conatiner: Control
 @export var texture_progress_bar: TextureProgressBar 
+
 var debuffs_slots: Dictionary[EnemyDebuff.Type, DebuffSlot] = {
 	EnemyDebuff.Type.BURN: null,
 	EnemyDebuff.Type.FROST: null
@@ -22,7 +23,12 @@ var debuffs_slots: Dictionary[EnemyDebuff.Type, DebuffSlot] = {
 var textures: Dictionary[EnemyDebuff.Type, Texture2D] = {
 	EnemyDebuff.Type.BURN: BURN_ICON,
 	EnemyDebuff.Type.FROST: FROST_ICON
-} 
+}
+
+var debuffs_count: Dictionary[EnemyDebuff.Type, int] = {
+	EnemyDebuff.Type.BURN: 0,
+	EnemyDebuff.Type.FROST: 0
+}
 
 
 func set_max_health(value: float) -> void:
@@ -36,13 +42,24 @@ func update_health(new_value: float) -> void:
 	texture_progress_bar.value = new_value
 	
 
-func set_debuffs(debuffs: Dictionary[EnemyDebuff.Type, int]) -> void:
-	for type in EnemyDebuff.Type.values():
-		var value = debuffs[type]
+func set_debuffs(debuffs: Array[EnemyDebuffInstance]) -> void:
+	_reset_debuffs()
+	for debuff_instance: EnemyDebuffInstance in debuffs:
+		debuffs_count[debuff_instance.debuff.type] += 1
+
+	for type in debuffs_count.keys():
+		var value = debuffs_count[type]
 		if value == 0:
 			_remove_debuff(type)
 		else:
 			_update_value(type, value)
+
+
+func _reset_debuffs() -> void:
+	debuffs_count = {
+		EnemyDebuff.Type.BURN: 0,
+		EnemyDebuff.Type.FROST: 0
+	}
 
 func _update_value(type: EnemyDebuff.Type, value: int) -> void:
 	var slot = debuffs_slots[type]
