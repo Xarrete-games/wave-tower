@@ -143,7 +143,6 @@ func get_debuff_stacks(debuff_type: EnemyDebuff.Type) -> int:
 	return debuff_handler.get_stacks(debuff_type)
 
 func apply_debuff(debuff: EnemyDebuff, amount: int = 1) -> void:
-	print("Applying debuff: %s, amount: %d" % [debuff.type, amount])
 	debuff_handler.add_debuff(debuff, amount, self)
 
 func apply_damage(attack: Attack) -> void:
