@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=5 format=3 uid="uid://dhkj2m7ver13i"]
+[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=5 format=3 uid="uid://c0blyemm5y7qm"]
 
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_mbpjr"]
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="1_twtbw"]

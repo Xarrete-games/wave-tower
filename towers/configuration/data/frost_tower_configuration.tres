@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_fpoxy"]
 [ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="2_fpoxy"]
 [ext_resource type="Resource" uid="uid://nb64k6dawho" path="res://towers/configuration/data/frost_nova_tower_configuration_instance.tres" id="4_54jmn"]
-[ext_resource type="Resource" uid="uid://bkag7llhiwwvc" path="res://towers/configuration/data/frost_spear_tower_configuration_instance.tres" id="5_gjie1"]
+[ext_resource type="Resource" path="res://towers/configuration/data/frost_spear_tower_configuration_instance.tres" id="5_gjie1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
 atlas = ExtResource("1_fpoxy")
