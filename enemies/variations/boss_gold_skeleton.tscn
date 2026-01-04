@@ -163,7 +163,6 @@ fill_from = Vector2(0.5071225, 0.48433048)
 
 [node name="GoldSkeleton" instance=ExtResource("1_wsiet")]
 base_speed = 35.0
-max_healt = 10000.0
 base_gold_value = 50
 damage = 999
 
@@ -186,7 +185,7 @@ energy = 1.2
 blend_mode = 1
 texture = SubResource("GradientTexture2D_6dubi")
 
-[node name="HealthBar" parent="." index="5"]
+[node name="HealthBar" parent="." index="4"]
 offset_left = -52.0
 offset_top = -240.0
 offset_right = -52.0

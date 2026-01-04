@@ -199,7 +199,6 @@ fill_from = Vector2(0.5071225, 0.48433048)
 
 [node name="BlackGolem" instance=ExtResource("1_d4lxy")]
 base_speed = 60.0
-max_healt = 50000.0
 base_gold_value = 100
 damage = 999
 
@@ -222,7 +221,7 @@ energy = 1.2
 blend_mode = 1
 texture = SubResource("GradientTexture2D_6dubi")
 
-[node name="HealthBar" parent="." index="5"]
+[node name="HealthBar" parent="." index="4"]
 offset_left = -99.99999
 offset_top = -247.00002
 offset_right = -99.99999
