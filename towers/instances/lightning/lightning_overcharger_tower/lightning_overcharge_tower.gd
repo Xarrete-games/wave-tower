@@ -15,7 +15,7 @@ var particles_dict: Dictionary[String, Node] = {}
 
 func _fire() -> void:
 	var projectile = projectile_scene.instantiate() as SingleTargetProjectile
-	get_parent().aadd_child(projectile)
+	get_parent().add_child(projectile)
 
 	projectile.global_position = projectile_spawn_pos.global_position
 	projectile.set_target(_current_target, _get_attack())
@@ -52,7 +52,7 @@ func _on_buff_area_area_exited(area: Area2D) -> void:
 	_remove_buff(tower)
 	
 func _apply_buff(tower: Tower) -> void:
-	if tower in towers_in_range:
+	if tower in towers_in_range or tower == self:
 		return
 	
 	var buff_particle = overcharge_particle_scene.instantiate()
