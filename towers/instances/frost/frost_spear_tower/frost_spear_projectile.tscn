@@ -15,7 +15,7 @@ script = ExtResource("1_7gi64")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 light_mask = 32
 visibility_layer = 32
-position = Vector2(-1, 23)
+position = Vector2(0, -50)
 color = Color(0.7611122, 1, 1, 1)
 range_item_cull_mask = 32
 texture = ExtResource("3_vf7mk")
