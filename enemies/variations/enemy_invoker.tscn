@@ -1,35 +1,36 @@
-[gd_scene load_steps=56 format=3 uid="uid://crk2ly48vsxn4"]
+[gd_scene load_steps=57 format=3 uid="uid://crk2ly48vsxn4"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_8pmpf"]
-[ext_resource type="Texture2D" uid="uid://cbq7dph7jug8h" path="res://assets/sprites/enemies/invoker/invoker-demo_0000_Recurso-59@2x.png.png" id="2_n8sk1"]
-[ext_resource type="Texture2D" uid="uid://bc0b6d71ymp45" path="res://assets/sprites/enemies/invoker/invoker-demo_0001_Recurso-60@2x.png.png" id="3_qrk1i"]
-[ext_resource type="Texture2D" uid="uid://cbqnkjuxi3hlg" path="res://assets/sprites/enemies/invoker/invoker-demo_0002_Recurso-61@2x.png.png" id="4_y7hl5"]
-[ext_resource type="Texture2D" uid="uid://c5jy0kfx7gf3w" path="res://assets/sprites/enemies/invoker/invoker-demo_0003_Recurso-62@2x.png.png" id="5_f560p"]
-[ext_resource type="Texture2D" uid="uid://b2mtkfxy04ftu" path="res://assets/sprites/enemies/invoker/invoker-demo_0004_Recurso-63@2x.png.png" id="6_8emgc"]
-[ext_resource type="Texture2D" uid="uid://b8csewuhbfoli" path="res://assets/sprites/enemies/invoker/invoker-demo_0005_Recurso-64@2x.png.png" id="7_6p6uk"]
-[ext_resource type="Texture2D" uid="uid://cmtgu7pxdxwr5" path="res://assets/sprites/enemies/invoker/invoker-demo_0006_Recurso-65@2x.png.png" id="8_m3ul2"]
-[ext_resource type="Texture2D" uid="uid://ch7db8tog0vkp" path="res://assets/sprites/enemies/invoker/invoker-demo_0007_Recurso-66@2x.png.png" id="9_0agm4"]
-[ext_resource type="Texture2D" uid="uid://d7sowbgtvpec" path="res://assets/sprites/enemies/invoker/invoker-demo_0008_Recurso-67@2x.png.png" id="10_x7a2p"]
-[ext_resource type="Texture2D" uid="uid://c8oyut8omt6y6" path="res://assets/sprites/enemies/invoker/invoker-demo_0009_Recurso-68@2x.png.png" id="11_2hwcm"]
-[ext_resource type="Texture2D" uid="uid://cdea56t8i8wgd" path="res://assets/sprites/enemies/invoker/invoker-demo_0010_Recurso-69@2x.png.png" id="12_sghpl"]
-[ext_resource type="Texture2D" uid="uid://3fljbgovm3hh" path="res://assets/sprites/enemies/invoker/invoker-demo_0011_Recurso-70@2x.png.png" id="13_8gupm"]
-[ext_resource type="Texture2D" uid="uid://8kx0ahnm5qaj" path="res://assets/sprites/enemies/invoker/invoker-demo_0012_Recurso-71@2x.png.png" id="14_ypiq4"]
-[ext_resource type="Texture2D" uid="uid://q5wicwy6fnv6" path="res://assets/sprites/enemies/invoker/invoker-demo_0013_Recurso-72@2x.png.png" id="15_nwa5y"]
-[ext_resource type="Texture2D" uid="uid://bu4pnhmoveb5e" path="res://assets/sprites/enemies/invoker/invoker-demo_0014_Recurso-73@2x.png.png" id="16_0pdo8"]
-[ext_resource type="Texture2D" uid="uid://ds66ht80l1o10" path="res://assets/sprites/enemies/invoker/invoker-demo_0015_Recurso-74@2x.png.png" id="17_e8jx3"]
-[ext_resource type="Texture2D" uid="uid://dgv53rsy7p3k0" path="res://assets/sprites/enemies/invoker/invoker-demo_0016_Recurso-75@2x.png.png" id="18_icq5o"]
-[ext_resource type="Texture2D" uid="uid://be0hm8uq6qtn8" path="res://assets/sprites/enemies/invoker/invoker-demo_0017_Recurso-76@2x.png.png" id="19_hed8w"]
-[ext_resource type="Texture2D" uid="uid://c1c4x6e4ky3a8" path="res://assets/sprites/enemies/invoker/invoker-demo_0018_Recurso-77@2x.png.png" id="20_nwvyi"]
-[ext_resource type="Texture2D" uid="uid://daganj6emstes" path="res://assets/sprites/enemies/invoker/invoker-demo_0019_Recurso-78@2x.png.png" id="21_5mldy"]
-[ext_resource type="Texture2D" uid="uid://d21px0t7a2xv5" path="res://assets/sprites/enemies/invoker/invoker-demo_0020_Recurso-79@2x.png.png" id="22_f3oa0"]
-[ext_resource type="Texture2D" uid="uid://cvc83tja5c07g" path="res://assets/sprites/enemies/invoker/invoker-demo_0021_Recurso-80@2x.png.png" id="23_dbuup"]
-[ext_resource type="Texture2D" uid="uid://8ad7k2nkkdl8" path="res://assets/sprites/enemies/invoker/invoker-demo_0022_Recurso-81@2x.png.png" id="24_xqfrx"]
-[ext_resource type="Texture2D" uid="uid://b0x60obmcyp3h" path="res://assets/sprites/enemies/invoker/invoker-demo_0023_Recurso-82@2x.png.png" id="25_oqxux"]
-[ext_resource type="Texture2D" uid="uid://b286tfgp3xq4g" path="res://assets/sprites/enemies/invoker/invoker-demo_0024_Recurso-83@2x.png.png" id="26_y4bex"]
-[ext_resource type="Texture2D" uid="uid://c4cndd5g3a2et" path="res://assets/sprites/enemies/invoker/invoker-demo_0025_Recurso-84@2x.png.png" id="27_me5nu"]
-[ext_resource type="Texture2D" uid="uid://cwrofr5n8sgnf" path="res://assets/sprites/enemies/invoker/invoker-demo_0026_Recurso-85@2x.png.png" id="28_ok8w8"]
-[ext_resource type="Texture2D" uid="uid://yx03417sow6l" path="res://assets/sprites/enemies/invoker/invoker-demo_0027_Recurso-86@2x.png.png" id="29_tpmxn"]
+[ext_resource type="Texture2D" uid="uid://bp6hoepjfxoo" path="res://assets/sprites/enemies/invoker/invoker_front_0000_invoker1.png.png" id="2_qrk1i"]
+[ext_resource type="Texture2D" uid="uid://cfffim5x4515l" path="res://assets/sprites/enemies/invoker/invoker_front_0001_invoker2.png.png" id="3_y7hl5"]
+[ext_resource type="Texture2D" uid="uid://ts13xvxm1ms5" path="res://assets/sprites/enemies/invoker/invoker_front_0002_invoker3.png.png" id="4_f560p"]
+[ext_resource type="Texture2D" uid="uid://cu2y8jjxbk62e" path="res://assets/sprites/enemies/invoker/invoker_front_0003_invoker4.png.png" id="5_8emgc"]
+[ext_resource type="Texture2D" uid="uid://y6xbbtih6wa8" path="res://assets/sprites/enemies/invoker/invoker_front_0004_invoker5.png.png" id="6_6p6uk"]
+[ext_resource type="Texture2D" uid="uid://6awht6vu31b" path="res://assets/sprites/enemies/invoker/invoker_front_0005_invoker6.png.png" id="7_m3ul2"]
+[ext_resource type="Texture2D" uid="uid://b1ik352tib23" path="res://assets/sprites/enemies/invoker/invoker_front_0006_invoker7.png.png" id="8_0agm4"]
+[ext_resource type="Texture2D" uid="uid://c7og6k47ck514" path="res://assets/sprites/enemies/invoker/invoker_front_0007_invoker8.png.png" id="9_x7a2p"]
+[ext_resource type="Texture2D" uid="uid://dfae5u0dasax3" path="res://assets/sprites/enemies/invoker/invoker_front_0008_invoker9.png.png" id="10_2hwcm"]
+[ext_resource type="Texture2D" uid="uid://bf78d33bqlyov" path="res://assets/sprites/enemies/invoker/invoker_front_0009_invoker10.png.png" id="11_sghpl"]
+[ext_resource type="Texture2D" uid="uid://drag1lxoi0s1j" path="res://assets/sprites/enemies/invoker/invoker_front_0010_invoker11.png.png" id="12_8gupm"]
+[ext_resource type="Texture2D" uid="uid://c031b3w8e0c2c" path="res://assets/sprites/enemies/invoker/invoker_front_0011_invoker12.png.png" id="13_ypiq4"]
+[ext_resource type="Texture2D" uid="uid://bendgqixqh2yo" path="res://assets/sprites/enemies/invoker/invoker_front_0012_invoker13.png.png" id="14_nwa5y"]
+[ext_resource type="Texture2D" uid="uid://dj4ikis31spnh" path="res://assets/sprites/enemies/invoker/invoker_front_0013_invoker14.png.png" id="15_0pdo8"]
+[ext_resource type="Texture2D" uid="uid://c0ha37crvsfoe" path="res://assets/sprites/enemies/invoker/invoker_front_0014_invoker15.png.png" id="16_e8jx3"]
+[ext_resource type="Texture2D" uid="uid://0bffbbt68un5" path="res://assets/sprites/enemies/invoker/invoker_front_0015_invoker16.png.png" id="17_icq5o"]
+[ext_resource type="Texture2D" uid="uid://dkhrfre85gq6t" path="res://assets/sprites/enemies/invoker/invoker_front_0016_invoker17.png.png" id="18_hed8w"]
+[ext_resource type="Texture2D" uid="uid://ds4v87t311vlq" path="res://assets/sprites/enemies/invoker/invoker_front_0017_invoker18.png.png" id="19_nwvyi"]
+[ext_resource type="Texture2D" uid="uid://c4imqbdkx24gs" path="res://assets/sprites/enemies/invoker/invoker_front_0018_invoker19.png.png" id="20_5mldy"]
+[ext_resource type="Texture2D" uid="uid://bbsda88js2urx" path="res://assets/sprites/enemies/invoker/invoker_front_0019_invoker20.png.png" id="21_f3oa0"]
+[ext_resource type="Texture2D" uid="uid://duquqpytvvh1q" path="res://assets/sprites/enemies/invoker/invoker_front_0020_invoker21.png.png" id="22_dbuup"]
+[ext_resource type="Texture2D" uid="uid://cb51c8uf6aoyl" path="res://assets/sprites/enemies/invoker/invoker_front_0021_invoker22.png.png" id="23_xqfrx"]
+[ext_resource type="Texture2D" uid="uid://n3dsd8q2oai5" path="res://assets/sprites/enemies/invoker/invoker_front_0022_invoker23.png.png" id="24_oqxux"]
+[ext_resource type="Texture2D" uid="uid://cpb47mfl2rmb2" path="res://assets/sprites/enemies/invoker/invoker_front_0023_invoker24.png.png" id="25_y4bex"]
+[ext_resource type="Texture2D" uid="uid://8r8unk4ylhlb" path="res://assets/sprites/enemies/invoker/invoker_front_0024_invoker25.png.png" id="26_me5nu"]
+[ext_resource type="Texture2D" uid="uid://dm4115awi5wo6" path="res://assets/sprites/enemies/invoker/invoker_front_0025_invoker26.png.png" id="27_ok8w8"]
+[ext_resource type="Texture2D" uid="uid://du8lud35r62mo" path="res://assets/sprites/enemies/invoker/invoker_front_0026_invoker27.png.png" id="28_tpmxn"]
+[ext_resource type="Texture2D" uid="uid://ge1wt2abnsjm" path="res://assets/sprites/enemies/invoker/invoker_front_0027_invoker28.png.png" id="29_8iu0l"]
 [ext_resource type="Texture2D" uid="uid://cksa4j3o8x63b" path="res://assets/sprites/enemies/invoker/invoker_back_0000_Recurso-89@2x.png.png" id="30_8iu0l"]
+[ext_resource type="Texture2D" uid="uid://brvq00y2n0c35" path="res://assets/sprites/enemies/invoker/invoker_front_0028_invoker29.png.png" id="30_f2k7d"]
 [ext_resource type="Texture2D" uid="uid://bpbqkeyo2vkob" path="res://assets/sprites/enemies/invoker/invoker_back_0001_Recurso-90@2x.png.png" id="31_f2k7d"]
 [ext_resource type="Texture2D" uid="uid://ddtwqqfy5edh5" path="res://assets/sprites/enemies/invoker/invoker_back_0002_Recurso-91@2x.png.png" id="32_arbtt"]
 [ext_resource type="Texture2D" uid="uid://exh1vi1p5kqv" path="res://assets/sprites/enemies/invoker/invoker_back_0003_Recurso-92@2x.png.png" id="33_g2rgl"]
@@ -55,92 +56,95 @@
 [ext_resource type="Texture2D" uid="uid://bsqhr8vwn0xxc" path="res://assets/sprites/enemies/invoker/invoker_back_0023_Recurso-112@2x.png.png" id="53_ss7j4"]
 [ext_resource type="Texture2D" uid="uid://1086x4ofij7i" path="res://assets/sprites/enemies/invoker/invoker_back_0024_Recurso-113@2x.png.png" id="54_ek71y"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_5v0rn"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_n8sk1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_n8sk1")
+"texture": ExtResource("2_qrk1i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_qrk1i")
+"texture": ExtResource("3_y7hl5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_y7hl5")
+"texture": ExtResource("4_f560p")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_f560p")
+"texture": ExtResource("5_8emgc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_8emgc")
+"texture": ExtResource("6_6p6uk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_6p6uk")
+"texture": ExtResource("7_m3ul2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_m3ul2")
+"texture": ExtResource("8_0agm4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_0agm4")
+"texture": ExtResource("9_x7a2p")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_x7a2p")
+"texture": ExtResource("10_2hwcm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_2hwcm")
+"texture": ExtResource("11_sghpl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_sghpl")
+"texture": ExtResource("12_8gupm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_8gupm")
+"texture": ExtResource("13_ypiq4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_ypiq4")
+"texture": ExtResource("14_nwa5y")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_nwa5y")
+"texture": ExtResource("15_0pdo8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_0pdo8")
+"texture": ExtResource("16_e8jx3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_e8jx3")
+"texture": ExtResource("17_icq5o")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_icq5o")
+"texture": ExtResource("18_hed8w")
 }, {
 "duration": 1.0,
-"texture": ExtResource("19_hed8w")
+"texture": ExtResource("19_nwvyi")
 }, {
 "duration": 1.0,
-"texture": ExtResource("20_nwvyi")
+"texture": ExtResource("20_5mldy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("21_5mldy")
+"texture": ExtResource("21_f3oa0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("22_f3oa0")
+"texture": ExtResource("22_dbuup")
 }, {
 "duration": 1.0,
-"texture": ExtResource("23_dbuup")
+"texture": ExtResource("23_xqfrx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("24_xqfrx")
+"texture": ExtResource("24_oqxux")
 }, {
 "duration": 1.0,
-"texture": ExtResource("25_oqxux")
+"texture": ExtResource("25_y4bex")
 }, {
 "duration": 1.0,
-"texture": ExtResource("26_y4bex")
+"texture": ExtResource("26_me5nu")
 }, {
 "duration": 1.0,
-"texture": ExtResource("27_me5nu")
+"texture": ExtResource("27_ok8w8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("28_ok8w8")
+"texture": ExtResource("28_tpmxn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("29_tpmxn")
+"texture": ExtResource("29_8iu0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_f2k7d")
 }],
 "loop": true,
 "name": &"down right",
@@ -229,12 +233,13 @@ animations = [{
 
 [node name="Invoker" instance=ExtResource("1_8pmpf")]
 base_speed = 90.0
-max_healt = 500.0
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-sprite_frames = SubResource("SpriteFrames_5v0rn")
-frame_progress = 0.7341573
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_n8sk1")
+animation = &"down right"
+frame_progress = 0.18466122
 
-[node name="HealthBar" parent="." index="4"]
+[node name="HealthBar" parent="." index="3"]
 offset_top = -158.0
 offset_bottom = -158.0
