@@ -1,13 +1,85 @@
-[gd_scene load_steps=6 format=3 uid="uid://7hfxyb5g3ku"]
+[gd_scene load_steps=17 format=3 uid="uid://7hfxyb5g3ku"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_y64o4"]
 [ext_resource type="Script" uid="uid://cl5pxh8r8evhq" path="res://towers/instances/lightning/lightning_tower/lightning_tower.gd" id="2_epe63"]
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="3_epe63"]
 [ext_resource type="PackedScene" uid="uid://daqi7i1vflaq5" path="res://towers/instances/lightning/lightning_tower/projectile/lighting_ball_projectile.tscn" id="3_vgy5y"]
+[ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="5_vln4f"]
+[ext_resource type="Texture2D" uid="uid://boajxbopenov6" path="res://assets/textures/sparks1.jpg" id="6_we86v"]
+[ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="7_fcay0"]
+[ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="8_cktgl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_epe63"]
 atlas = ExtResource("3_epe63")
 region = Rect2(476, 0, 474, 550)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vfc8l"]
+shader = ExtResource("5_vln4f")
+shader_parameter/Dissolver_texture = ExtResource("6_we86v")
+shader_parameter/Flame_texture = ExtResource("6_we86v")
+
+[sub_resource type="Curve" id="Curve_45grq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.994, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yg6b3"]
+texture_mode = 1
+curve = SubResource("Curve_45grq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q28s5"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 20.0
+scale_max = 50.0
+color = Color(0.8455873, 1, 0.8232569, 1)
+alpha_curve = SubResource("CurveTexture_yg6b3")
+
+[sub_resource type="Animation" id="Animation_3h2aw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5]
+}
+
+[sub_resource type="Animation" id="Animation_l042b"]
+resource_name = "pulsing_light"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 2.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p1ede"]
+_data = {
+&"RESET": SubResource("Animation_3h2aw"),
+&"pulsing_light": SubResource("Animation_l042b")
+}
 
 [node name="LightningTower" instance=ExtResource("1_y64o4")]
 script = ExtResource("2_epe63")
@@ -22,3 +94,26 @@ region_rect = Rect2(0, 0, 475, 550)
 
 [node name="ProjectileSpawnPos" parent="." index="9"]
 position = Vector2(0, -100)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="10"]
+material = SubResource("ShaderMaterial_vfc8l")
+position = Vector2(0, -87)
+amount = 1
+texture = ExtResource("7_fcay0")
+lifetime = 0.3
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_q28s5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11"]
+root_node = NodePath("../PointLight2D")
+libraries = {
+&"": SubResource("AnimationLibrary_p1ede")
+}
+autoplay = "pulsing_light"
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="12"]
+position = Vector2(0, -86)
+color = Color(0.62295496, 1, 0.4661066, 1)
+energy = 0.3
+texture = ExtResource("8_cktgl")
+texture_scale = 1.5
