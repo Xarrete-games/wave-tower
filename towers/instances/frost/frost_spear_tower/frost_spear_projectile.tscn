@@ -23,6 +23,5 @@ texture_scale = 17.18
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 33
-rotation = -1.5707964
-scale = Vector2(0.025, 0.025)
+scale = Vector2(0.2, 0.2)
 texture = SubResource("CanvasTexture_uweaj")

@@ -27,6 +27,9 @@ func _process(delta: float) -> void:
 		return
 
 	global_position += direction.normalized() * SPEED * delta
+	
+
+	look_at(target_position)
 
 func set_target(p_enemy: Enemy, p_attack: Attack, p_debuff: EnemyDebuff = null, p_debuff_stacks: int = 1) -> void:
 	enemy = p_enemy
