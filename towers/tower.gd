@@ -37,6 +37,8 @@ var exp_data: TowerExpData:
 		exp_data = value
 		stats_change.emit(self)
 
+var modifiers: Array[AttackModifier] = []
+
 @onready var area_detector: AreaDetector = $AreaDetector
 @onready var range_preview: RangePreview = $RangePreview
 @onready var range_collision: CollisionShape2D = $AreaDetector/RangeCollision
@@ -51,6 +53,12 @@ var exp_data: TowerExpData:
 func _ready():
 	configuration.build()
 	range_collision.shape = CircleShape2D.new()
+	# modifiers
+	modifiers = RunContext.towers_upgrades.get_modifiers()
+	RunContext.towers_upgrades.attack_modifiers_added.connect(func(new_modifier: AttackModifier) -> void:
+		modifiers.append(new_modifier)
+	)
+	# handlers
 	experience_handler.exp_data_change.connect(_on_exp_data_change)
 	tower_stats_handler.stats_change.connect(_on_stats_change)
 	tower_stats_handler.extra_stats_change.connect(_on_extra_stats_change)
@@ -104,7 +112,15 @@ func _get_attack() -> Attack:
 	var is_critic = _is_critical_hit()
 	var attack_damage = stats.damage * (1 + (stats.critic_damage / 100)) if is_critic else stats.damage
 	var damage_type = DamageNumbers.Type.CRITICAL if is_critic else DamageNumbers.Type.NORMAL
-	return Attack.new(attack_damage, damage_type, self)
+	var attack = Attack.new(attack_damage, damage_type, self)
+
+	var attack_context = AttackContext.new(_current_target, attack)
+	for modifier in modifiers:
+		modifier.on_before_hit(attack_context)
+	
+	# apply final mult
+	attack_context.attack.damage = attack_context.attack.damage * attack_context.mult
+	return attack_context.attack
 	
 func _is_critical_hit() -> bool:
 	var random_value: float = randf()

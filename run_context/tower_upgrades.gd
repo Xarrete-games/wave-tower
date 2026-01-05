@@ -3,6 +3,9 @@ class_name TowersUpgrades extends RefCounted
 
 signal tower_buffs_change(tower_type: Tower.Type, new_stats: TowerStatsAccumulator)
 signal targeting_modes_change(new_modes: Array[Tower.TargetingMode])
+signal attack_modifiers_added(new_modifier: AttackModifier)
+
+var attack_modifiers: Array[AttackModifier] = []
 
 # current buffs
 var towers_buffs: Dictionary[Tower.Type, Array] = {
@@ -39,6 +42,13 @@ func add_buff(tower_type: Tower.Type, new_buff: TowerBuff) -> void:
 		buff.modifier.contribute(acc)
 	towers_stats_accumulator[tower_type] = acc
 	emit_buffs_change(tower_type)
+
+func get_modifiers() -> Array[AttackModifier]:
+	return attack_modifiers.duplicate()
+
+func add_attack_modifier(modifier: AttackModifier) -> void:
+	attack_modifiers.append(modifier)
+	attack_modifiers_added.emit(modifier)
 
 func reset_buffs() -> void:
 	towers_buffs = {
