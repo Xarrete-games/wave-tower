@@ -114,10 +114,10 @@ func _get_attack() -> Attack:
 	var damage_type = DamageNumbers.Type.CRITICAL if is_critic else DamageNumbers.Type.NORMAL
 	var attack = Attack.new(attack_damage, damage_type, self)
 
-	var attack_context = AttackContext.new(_current_target, attack)
+	var attack_context = AttackContext.new(_current_target, attack, is_critic)
 	for modifier in modifiers:
 		modifier.on_before_hit(attack_context)
-	
+	 
 	# apply final mult
 	attack_context.attack.damage = attack_context.attack.damage * attack_context.mult
 	return attack_context.attack

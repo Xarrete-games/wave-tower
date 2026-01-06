@@ -122,7 +122,7 @@ func _report_finished() -> void:
 		RunContext.progress.current_wave_finished.emit()
 		
 func _on_enemy_target_reached(enemy: Enemy) -> void:
-	RunContext.status.health -= enemy.damage
+	RunContext.status.apply_damage(enemy.damage)
 	RunContext.enemy_manager.enemy_target_reached.emit(enemy)
 
 func _on_enemy_die(enemy: Enemy, attack: Attack) -> void:
