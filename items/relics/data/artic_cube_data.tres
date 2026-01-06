@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://br0igrelenl0f"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://m0eooi2vbxej"]
 
 [ext_resource type="Script" uid="uid://b5xsodpue1fwi" path="res://items/relics/implementations/artic_cube.gd" id="1_olt0t"]
 [ext_resource type="Script" uid="uid://deynngi6ga5we" path="res://items/item_data.gd" id="2_fw1on"]
@@ -10,6 +10,6 @@ id = "Artic Cube"
 description = "Increase the duration of Freeze in 1 sec."
 texture = ExtResource("3_d3rf5")
 rarity = 1
-max_stack = 9
+max_stack = 1
 type = 1
 runtime_script = ExtResource("1_olt0t")

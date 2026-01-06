@@ -10,7 +10,6 @@ id = "Paganini's Bow"
 description = "Increases the attack damage of all towers by 10%.
 (+10% for each one)."
 texture = ExtResource("3_8rgck")
-max_stack = 5
 price = 70
 type = 1
 runtime_script = ExtResource("1_3ru7g")

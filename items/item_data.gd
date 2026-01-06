@@ -13,7 +13,7 @@ enum Type {
 @export var icon_48_used: Texture2D
 @export_group("Stats")
 @export var rarity: Relic.Rarity
-@export var max_stack: int = 10
+@export var max_stack: int = 1
 @export var price: int = 50
 @export var health_price: int = 0
 @export var price_increased: bool = true

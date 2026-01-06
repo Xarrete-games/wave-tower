@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c8jagadtxyslp"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c3sjeglgjsgiv"]
 
 [ext_resource type="Script" uid="uid://y4bjwh5pifnu" path="res://items/relics/implementations/headphones.gd" id="1_us575"]
 [ext_resource type="Script" uid="uid://deynngi6ga5we" path="res://items/item_data.gd" id="2_wie6b"]

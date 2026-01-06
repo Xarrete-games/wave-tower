@@ -10,7 +10,6 @@ id = "Strategy Tome:
 High Health Priority"
 description = "Allows towers to prioritize enemies with the highest health."
 texture = ExtResource("2_oymg8")
-max_stack = 1
 type = 1
 runtime_script = ExtResource("1_tsjtp")
 metadata/_custom_type_script = "uid://deynngi6ga5we"

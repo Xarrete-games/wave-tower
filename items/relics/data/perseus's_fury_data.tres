@@ -10,6 +10,5 @@ id = "Perseus's Fury"
 description = "Red towers execute enemies below 5% health (execution threshold increases by 5% for each copy)."
 texture = ExtResource("3_5vyg6")
 rarity = 1
-max_stack = 5
 type = 1
 runtime_script = ExtResource("1_ic5cl")

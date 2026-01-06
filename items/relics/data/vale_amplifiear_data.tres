@@ -10,7 +10,6 @@ id = "Valve Amplifier 100W"
 description = "Increases the attack range of all towers by 10%.
 (+10% for each artic cube one)."
 texture = ExtResource("3_q0l0n")
-max_stack = 5
 price = 60
 type = 1
 runtime_script = ExtResource("1_3dm1a")

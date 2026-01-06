@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://crf1ar2lgywhk"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bxsu3xl2jk2ro"]
 
 [ext_resource type="Script" uid="uid://b1ldf8eracfin" path="res://items/relics/implementations/flower_pot.gd" id="1_3isox"]
 [ext_resource type="Script" uid="uid://deynngi6ga5we" path="res://items/item_data.gd" id="2_4mrmq"]
@@ -10,6 +10,5 @@ id = "Flower pot"
 description = "If the wave ends without any enemy having reached the portal, recover 1 health."
 texture = ExtResource("3_guxeq")
 rarity = 1
-max_stack = 99
 price = 40
 runtime_script = ExtResource("1_3isox")
