@@ -6,8 +6,7 @@ var execute_threshold: float = 0.0
 var base_execute_threshold: float = 10.0
 var burn_damage: float = 0
 
-
-@onready var red_projectil: FireLaserProjectil = $FireLaserProjectil
+@onready var red_projectile: FireLaserProjectile = $FireLaserProjectile
 
 func _ready():
 	super._ready()
@@ -22,15 +21,14 @@ func _on_extra_stats_change(extra_stats: TowerExtraStats) -> void:
 
 func _fire() -> void:
 	var next_attack = _get_attack() if _current_target.get_percentage_remaining_health() > execute_threshold else _get_letal_attack()
-	red_projectil.set_target(_current_target)
-	red_projectil.set_attack(next_attack)
-	red_projectil.hit_target()
+	red_projectile.set_target(_current_target)
+	red_projectile.set_attack(next_attack)
+	red_projectile.hit_target()
 	cristal_light.turn_on()
 
 	await get_tree().create_timer(0.1).timeout
-	red_projectil.stop()
+	red_projectile.stop()
 	cristal_light.turn_off()
-
 
 func _get_letal_attack() -> Attack:
 	var attack = _get_attack()

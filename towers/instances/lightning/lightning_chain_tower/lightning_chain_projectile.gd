@@ -48,8 +48,8 @@ func _process(delta: float) -> void:
 	if _current_length >= _max_length and not _hit:
 		_on_hit()
 
-
-func set_target(target: Enemy, attack: Attack) -> void:
+func set_target(target: Enemy, attack: Attack, bounces: int) -> void:
+	max_bounces = bounces
 	_target = target
 	_attack = attack
 	_start_global = _end_global if _end_global != Vector2.ZERO else global_position
@@ -90,7 +90,7 @@ func _try_bounce() -> void:
 		queue_free()
 		return
 
-	set_target(next_enemy, _attack)
+	set_target(next_enemy, _attack, max_bounces)
 
 func _get_closest_valid_enemy() -> Enemy:
 	var closest: Enemy = null

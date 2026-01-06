@@ -89,7 +89,7 @@ func _update_stats() -> void:
 	# extra stats
 	var new_extra_stats: TowerExtraStats = TowerExtraStats.new()
 	new_extra_stats.execute_threshold = total_stats_acc.flat_execute_threshold
-	new_extra_stats.extra_waves = int(total_stats_acc.flat_extra_waves)
+	new_extra_stats.extra_waves = int(total_stats_acc.flat_extra_hits)
 	new_extra_stats.double_shot_chance = total_stats_acc.flat_double_shot_chance
 
 	extra_stats = new_extra_stats

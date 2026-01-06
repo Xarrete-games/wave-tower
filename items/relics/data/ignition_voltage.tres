@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_pahw4")
 id = "Ignition Voltage"
-description = "Adds burn to red towers (their damage increases for each copy)."
+description = "Increase the duration of Burn in 1 sec."
 texture = ExtResource("3_muhnu")
 rarity = 1
 max_stack = 99

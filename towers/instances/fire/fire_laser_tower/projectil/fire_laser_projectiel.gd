@@ -1,4 +1,4 @@
-class_name FireLaserProjectil extends Node2D
+class_name FireLaserProjectile extends Node2D
 
 @export var cast_speed: int = 7000
 @export var color: Color = Color.RED: set = set_color

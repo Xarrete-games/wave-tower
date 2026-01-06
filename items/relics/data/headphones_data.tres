@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_wie6b")
 id = "Headphones"
-description = "Blue turrets have a 10% chance to perform a double attack."
+description = "Nova tower have a 20% chance to perform a double attack."
 texture = ExtResource("3_xt11d")
 type = 1
 runtime_script = ExtResource("1_us575")

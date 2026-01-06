@@ -18,4 +18,5 @@ enum Type {
 @export var health_price: int = 0
 @export var price_increased: bool = true
 @export var type: Type
+@export_group("Script")
 @export var runtime_script: Script

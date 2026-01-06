@@ -16,13 +16,13 @@ var critic_chance_mult: float = 0.0
 var flat_critic_damage: float = 0.0
 var critic_damage_mult: float = 0.0
 
-# red tower
+# laser tower
 var flat_execute_threshold: float = 0.0
 
-# green tower
-var flat_extra_waves: int = 0
+# chain tower
+var flat_extra_hits: int = 0
 
-# blue tower
+# nova tower
 var flat_double_shot_chance: float = 0.0
 
 func merge(other: TowerStatsAccumulator) -> TowerStatsAccumulator:
@@ -45,7 +45,7 @@ func merge(other: TowerStatsAccumulator) -> TowerStatsAccumulator:
 
     result.flat_execute_threshold = flat_execute_threshold + other.flat_execute_threshold
 
-    result.flat_extra_waves = flat_extra_waves + other.flat_extra_waves
+    result.flat_extra_hits = flat_extra_hits + other.flat_extra_hits
 
     result.flat_double_shot_chance = flat_double_shot_chance + other.flat_double_shot_chance
 
