@@ -25,7 +25,7 @@ func _fire_projectil(projectil: GreenProjectile) -> void:
 	if not _current_target:
 		return
 	
-	crystal_light.play()
+	cristal_light.play()
 	
 	const START_OFFSET_PERCENTAGE: float = 0.4
 	
