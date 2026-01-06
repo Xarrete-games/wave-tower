@@ -9,7 +9,7 @@ var local_num_waves = 3
 @onready var attack_player: AudioStreamPlayer2D = $AttackPlayer
 
 func _on_extra_stats_change(tower_extra_stats: TowerExtraStats) -> void:
-	num_waves = local_num_waves + tower_extra_stats.extra_waves
+	num_waves = local_num_waves + tower_extra_stats.extra_hits
 	
 func _fire() -> void:
 	#attack_player.play()

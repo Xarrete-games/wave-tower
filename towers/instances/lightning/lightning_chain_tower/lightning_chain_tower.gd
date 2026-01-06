@@ -12,7 +12,7 @@ func _fire() -> void:
 	call_deferred("_fire_chain", projectile)
 
 func _on_extra_stats_change(_tower_extra_stats: TowerExtraStats) -> void:
-	current_bounces = base_bounces + _tower_extra_stats.flat_extra_hits
+	current_bounces = base_bounces + _tower_extra_stats.extra_hits
 
 func _fire_chain(projectile: LightningChainProjectile) -> void:
 	add_child(projectile)

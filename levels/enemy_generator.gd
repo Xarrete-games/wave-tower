@@ -123,6 +123,7 @@ func _report_finished() -> void:
 		
 func _on_enemy_target_reached(enemy: Enemy) -> void:
 	RunContext.status.health -= enemy.damage
+	RunContext.enemy_manager.enemy_target_reached.emit(enemy)
 
 func _on_enemy_die(enemy: Enemy, attack: Attack) -> void:
 	RunContext.enemy_manager.enemy_die.emit(enemy, attack)

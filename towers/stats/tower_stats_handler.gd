@@ -79,7 +79,7 @@ func _update_stats() -> void:
 	stats.damage = (base_stats.damage + total_stats_acc.flat_damage) * (1 + total_stats_acc.damage_mult)
 	# range
 	stats.attack_range = (base_stats.attack_range + total_stats_acc.flat_attack_range) * (1 + total_stats_acc.attack_range_mult)
-	# attck speed
+	# attack speed
 	stats.attack_speed = (base_stats.attack_speed + total_stats_acc.flat_attack_speed) * (1 + total_stats_acc.attack_speed_mult)	
 	# critic change
 	stats.critic_chance = (base_stats.critic_chance + total_stats_acc.flat_critic_chance) * (1 + total_stats_acc.critic_chance_mult)
@@ -89,7 +89,7 @@ func _update_stats() -> void:
 	# extra stats
 	var new_extra_stats: TowerExtraStats = TowerExtraStats.new()
 	new_extra_stats.execute_threshold = total_stats_acc.flat_execute_threshold
-	new_extra_stats.extra_waves = int(total_stats_acc.flat_extra_hits)
+	new_extra_stats.extra_hits = int(total_stats_acc.flat_extra_hits)
 	new_extra_stats.double_shot_chance = total_stats_acc.flat_double_shot_chance
 
 	extra_stats = new_extra_stats

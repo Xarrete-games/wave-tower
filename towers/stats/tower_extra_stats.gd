@@ -7,4 +7,4 @@ var execute_threshold: float = 0.0
 var double_shot_chance: float = 0.0
 
 # green
-var extra_waves: int = 0
+var extra_hits: int = 0

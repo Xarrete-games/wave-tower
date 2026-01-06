@@ -7,10 +7,9 @@
 [resource]
 script = ExtResource("2_4mrmq")
 id = "Flower pot"
-description = "Adds poison to green towers (their damage increases for each copy)"
+description = "If the wave ends without any enemy having reached the portal, recover 1 health."
 texture = ExtResource("3_guxeq")
 rarity = 1
 max_stack = 99
 price = 40
 runtime_script = ExtResource("1_3isox")
-metadata/_custom_type_script = "uid://u8jtn52xm88d"
