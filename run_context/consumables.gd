@@ -23,12 +23,11 @@ func _on_consumable_used(consumable: Consumable) -> void:
     consumables_change.emit(consumables)
 
 func _on_consumable_clicked(consumable: Consumable) -> void:
-    if consumable is MagicRing:
+    if consumable is ConsumableUsable:
         consumable.use()
         consumable.used.emit(consumable)
-    elif consumable is FoundationBreaker:
-        pass
-        #consumable.used.emit(consumable)
+    else:
+        consumable_clicked.emit(consumable)
     
-    consumable_clicked.emit(consumable)
+    
 

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dmu2tjsh03m2f"]
 
-[ext_resource type="Script" uid="uid://bha7bhsnh6pbs" path="res://items/relics/implementations/first_aid.gd" id="1_365ip"]
+[ext_resource type="Script" uid="uid://bha7bhsnh6pbs" path="res://items/consumables/implementation/first_aid.gd" id="1_365ip"]
 [ext_resource type="Script" uid="uid://deynngi6ga5we" path="res://items/item_data.gd" id="2_xfgh2"]
 [ext_resource type="Texture2D" uid="uid://brrhmpps2pyg5" path="res://assets/sprites/relics/medical_kit_relic.png" id="3_jjmfo"]
 

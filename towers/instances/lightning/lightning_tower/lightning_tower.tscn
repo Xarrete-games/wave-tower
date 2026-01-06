@@ -92,9 +92,6 @@ position = Vector2(0, -51)
 texture = ExtResource("3_epe63")
 region_rect = Rect2(0, 0, 475, 550)
 
-[node name="ProjectileSpawnPos" parent="." index="9"]
-position = Vector2(0, -100)
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="10"]
 material = SubResource("ShaderMaterial_vfc8l")
 position = Vector2(0, -87)
@@ -117,3 +114,6 @@ color = Color(0.62295496, 1, 0.4661066, 1)
 energy = 0.3
 texture = ExtResource("8_cktgl")
 texture_scale = 1.5
+
+[node name="ProjectileSpawnPos" parent="." index="13"]
+position = Vector2(0, -100)
