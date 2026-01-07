@@ -6,6 +6,12 @@ signal extra_gold_dropped_change(amount: int)
 signal available_free_towers_change(amount: int)
 signal gold_change(amount: int)
 
+var is_soya_sauce_active: bool = false:
+	set(value):
+		is_soya_sauce_active = value
+		relics_discount_mult = _relics_discount_mult
+		towers_discount_mult = _towers_discount_mult
+
 var gold: int = 1000:
 	set(value):
 		if value >= gold:
@@ -15,13 +21,18 @@ var gold: int = 1000:
 		gold_change.emit(value)
 
 var relics_discount_mult: float = 0.0:
+	get:
+		return _relics_discount_mult
 	set(value):
-		relics_discount_mult = value
+		_relics_discount_mult = value * 2 if is_soya_sauce_active else value
 		relics_discount_changed.emit(value)
 
 var towers_discount_mult: float = 0.0:
+	get:
+		return _towers_discount_mult
 	set(value):
-		towers_discount_mult = value
+		_towers_discount_mult = value * 2 if is_soya_sauce_active else value
+		towers_discount_changed.emit(value)
 
 var extra_gold_dropped: int = 0:
 	set(value):
@@ -34,3 +45,5 @@ var available_free_towers: int = 0:
 		available_free_towers_change.emit(available_free_towers)
 
 	
+var _relics_discount_mult: float = 0.0
+var _towers_discount_mult: float = 0.0
