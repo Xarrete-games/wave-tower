@@ -6,6 +6,7 @@ enum Type {
 }
 @export_group("General")
 @export_multiline var id: String
+@export_multiline var display_name: String
 @export_multiline var description: String
 @export var texture: Texture2D
 

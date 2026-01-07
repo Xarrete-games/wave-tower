@@ -44,7 +44,7 @@ func set_relic(new_relic_value: ItemOffer) -> void:
 
 	if data is RelicItemData:
 		var relic_data: RelicItemData = data as RelicItemData
-		hexagon_border.color =  RunContext.relics.get_rarity_color(relic_data.rarity)
+		hexagon_border.color =  RunContext.relics_manager.get_rarity_color(relic_data.rarity)
 	
 func _on_gui_input(event: InputEvent) -> void:
 	if (_it_cost_health and not _has_enough_live):

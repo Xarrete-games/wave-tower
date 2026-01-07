@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RelicItemData" load_steps=4 format=3 uid="uid://c3mv8uluphqor"]
+
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://items/relics/relic_item_data.gd" id="1_8nn0f"]
+[ext_resource type="Script" uid="uid://dvb5eb47w5fqt" path="res://items/relics/implementations/cursed_buda.gd" id="1_dmgvm"]
+[ext_resource type="Texture2D" uid="uid://c1d3shjwwyw7y" path="res://assets/sprites/relics/cursed_buda.png" id="2_vhu5r"]
+
+[resource]
+script = ExtResource("1_8nn0f")
+is_cursed = true
+id = "Cursed buda"
+description = "Reduces max health  by 1 for each tower you place"
+texture = ExtResource("2_vhu5r")
+runtime_script = ExtResource("1_dmgvm")
+metadata/_custom_type_script = "uid://blk23o0i7vnyj"

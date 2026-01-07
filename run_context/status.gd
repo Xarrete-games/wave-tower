@@ -9,6 +9,8 @@ signal player_died()
 var max_health: int = 20:
 	set(value):
 		max_health = value
+		if health > max_health:
+			health = max_health
 		max_health_change.emit(max_health)
 
 var health: int = max_health:

@@ -24,7 +24,7 @@ func _ready():
 	var items = RunContext.offers_manager.create_relic_offers(initial_random_relics)
 	for item in items:
 		var relic = item.create_item() as Relic
-		RunContext.relics.add_relic(relic)
+		RunContext.relics_manager.add_relic(relic)
 	RunContext.progress.total_levels = levels_paths.size()
 	GameState.state = GameState.STATE.IN_GAME
 	_load_level(current_level_number)

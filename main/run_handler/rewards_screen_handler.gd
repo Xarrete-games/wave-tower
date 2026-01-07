@@ -27,7 +27,7 @@ func _on_item_selected(item_offer: ItemOffer) -> void:
 	
 	var item = item_offer.create_item()
 	if item is Relic:
-		RunContext.relics.add_relic(item)
+		RunContext.relics_manager.add_relic(item)
 
 func _on_reroll_pressed() -> void:
 	RunContext.economy.gold -= REROLL_PRICE

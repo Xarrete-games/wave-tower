@@ -28,7 +28,7 @@ func set_item(item_offer: ItemOffer) -> void:
 
 	if item_data is RelicItemData:
 		var relic_data: RelicItemData = item_data as RelicItemData
-		shop_slot_icon.set_background_color(RunContext.relics.get_rarity_color(relic_data.rarity))
+		shop_slot_icon.set_background_color(RunContext.relics_manager.get_rarity_color(relic_data.rarity))
 	# health price
 	_chek_health(RunContext.status.health, item_offer.health_price)
 	if item_offer.health_price > 0:

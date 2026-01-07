@@ -18,6 +18,7 @@ var relics_count: Dictionary[String, int] = {}
 var relics: Dictionary[String, Relic] = {
 }
 
+
 func is_maxed(relic_id: String) -> bool:
 	var count = relics_count.get(relic_id, 0)
 	var relic = relics.get(relic_id, null)
@@ -36,6 +37,17 @@ func reset_relics() -> void:
 func add_relic(relic: Relic) -> void:
 	relic.apply_effect()
 	_add_relic(relic)
+
+func remove_relic(relic_id: String) -> void:
+	if relics.has(relic_id):
+		relics.erase(relic_id)
+		relics_count[relic_id] = relics_count.get(relic_id, 0) - 1
+		relics_change.emit(relics.values())
+
+func disable_relic(relic_id: String) -> void:
+	if relics.has(relic_id):
+		(relics[relic_id] as Relic).disabled = true
+		relics_change.emit(relics.values())
 
 func _add_relic(relic: Relic) -> void:
 	if relics.has(relic.id):

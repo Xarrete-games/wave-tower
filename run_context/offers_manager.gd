@@ -29,7 +29,7 @@ func get_relic_offer_by_id(relic_ids: Array[String]) -> Array[ItemOffer]:
 	
 func create_relic_offers(amount: int) -> Array[ItemOffer]:
 	var filter_relics = all_relic_data.filter(func(data: ItemData):
-		return not RunContext.relics.is_maxed(data.id)
+		return not RunContext.relics_manager.is_maxed(data.id)
 	)
 	filter_relics.shuffle()
 

@@ -3,7 +3,7 @@ class_name RelicsBar extends Control
 const TOP_BAR_RELIC = preload("uid://f34dinc60kaa")
 
 func _ready():
-	RunContext.relics.relics_change.connect(_update_relics)
+	RunContext.relics_manager.relics_change.connect(_update_relics)
 
 func _update_relics(relics: Array):
 	clear_relics_container()
