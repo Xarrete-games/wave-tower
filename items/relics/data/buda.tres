@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicItemData" load_steps=4 format=3 uid="uid://di1k1stuu5jxq"]
+
+[ext_resource type="Script" uid="uid://dhd3f6hv0412c" path="res://items/relics/implementations/buda.gd" id="1_nvw2t"]
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://items/relics/relic_item_data.gd" id="1_t1y8r"]
+[ext_resource type="Texture2D" uid="uid://dafhdspl8xnqx" path="res://assets/sprites/relics/buda_statue.png" id="2_s2dvm"]
+
+[resource]
+script = ExtResource("1_t1y8r")
+id = "Buda"
+description = "Buda Statue"
+texture = ExtResource("2_s2dvm")
+runtime_script = ExtResource("1_nvw2t")
+metadata/_custom_type_script = "uid://blk23o0i7vnyj"
