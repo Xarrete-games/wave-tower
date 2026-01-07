@@ -1,4 +1,4 @@
-class_name TowersCount extends RefCounted
+class_name TowersManager extends RefCounted
 
 signal tower_count_change(tower_type: Tower.Type, amount: int)
 signal tower_placed(tower: Tower)

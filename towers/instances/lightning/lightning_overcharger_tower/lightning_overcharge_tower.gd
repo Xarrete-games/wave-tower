@@ -27,7 +27,7 @@ func placement_mode() -> void:
 func enable() -> void:
 	super.enable()
 	buff_area.monitoring = true
-	RunContext.towers_count.tower_placed.connect(_on_tower_placed)
+	RunContext.towers_manager.tower_placed.connect(_on_tower_placed)
 	
 func _on_tower_placed(tower: Tower) -> void:
 	if tower == self:

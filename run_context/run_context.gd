@@ -13,7 +13,7 @@ var offers_manager: OffersManager
 var progress: RunProgress
 var economy: Economy
 var status: Status
-var towers_count: TowersCount
+var towers_manager: TowersManager
 var towers_upgrades: TowersUpgrades
 var towers_price: TowersPrice
 var relics: RelicsManager
@@ -27,7 +27,7 @@ func reset_run() -> void:
 	economy = Economy.new()
 	status = Status.new()
 	status.player_died.connect(_on_die, CONNECT_ONE_SHOT)
-	towers_count = TowersCount.new()
+	towers_manager = TowersManager.new()
 	towers_upgrades = TowersUpgrades.new()
 	towers_price = TowersPrice.new()
 	relics = RelicsManager.new()

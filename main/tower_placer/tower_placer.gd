@@ -65,7 +65,7 @@ func _place_tower() -> void:
 	_current_tower_instance.enable()
 	_current_tower_instance.tile_pos = tile_pos
 
-	RunContext.towers_count.tower_added(_current_tower_instance)
+	RunContext.towers_manager.tower_added(_current_tower_instance)
 
 	_current_tower_instance = null
 

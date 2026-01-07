@@ -16,7 +16,7 @@ func _ready() -> void:
 		Tower.Type.GREEN: green_players
 	}
 	stop_music()
-	RunContext.towers_count.tower_count_change.connect(_on_tower_count_change)
+	RunContext.towers_manager.tower_count_change.connect(_on_tower_count_change)
 
 func play_music() -> void:
 	base_player.play()
