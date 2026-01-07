@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://brrhmpps2pyg5"
-path="res://.godot/imported/medical_kit_relic.png-e3b308d5d200fdff7b1b4b7a936b6efe.ctex"
+path="res://.godot/imported/medical_kit_relic.png-06c4baad1c43a5dac15a42ed88b3f05f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/medical_kit_relic.png"
-dest_files=["res://.godot/imported/medical_kit_relic.png-e3b308d5d200fdff7b1b4b7a936b6efe.ctex"]
+source_file="res://assets/sprites/consumables/medical_kit_relic.png"
+dest_files=["res://.godot/imported/medical_kit_relic.png-06c4baad1c43a5dac15a42ed88b3f05f.ctex"]
 
 [params]
 

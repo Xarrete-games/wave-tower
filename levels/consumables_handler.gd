@@ -1,7 +1,11 @@
 class_name ConsumablesHandler extends Node
 
-var _current_consumable: Consumable = null
-var _is_valid_placement: bool = false
+# for 48x48 cursor icons
+const CENTER_CURSOR_OFFSET: Vector2 = Vector2(24, 24)
+
+var _current_consumable: ConsumableTargeteable = null
+var _is_valid_target: bool = false
+var _current_target: Variant
 
 @onready var level_tile_map: LevelTileMap = %'LevelTileMap'
 # Called when the node enters the scene tree for the first time.
@@ -14,19 +18,32 @@ func _process(_delta: float) -> void:
 	if not _current_consumable:
 		return
 	
+	match _current_consumable.targeting_type:
+		ConsumableTargeteable.TargetType.BLOCKED_TILE:
+			_handle_blocked_tile_placement()
+		_:
+			_invalidate_target()
+	
+
+func _handle_blocked_tile_placement() -> void:
 	if level_tile_map.is_mouse_on_block_tile():
-		Input.set_custom_mouse_cursor(_current_consumable.cursor_icon_used, Input.CURSOR_ARROW, Vector2(24, 24))
-		_is_valid_placement = true
+		Input.set_custom_mouse_cursor(_current_consumable.cursor_icon_used, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
+		_is_valid_target = true
+		_current_target = level_tile_map
 	else:
-		Input.set_custom_mouse_cursor(_current_consumable.cursor_icon, Input.CURSOR_ARROW, Vector2(24, 24))
-		_is_valid_placement = false
+		Input.set_custom_mouse_cursor(_current_consumable.cursor_icon, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
+		_invalidate_target()
+
+func _invalidate_target() -> void:
+	_is_valid_target = false
+	_current_target = null
 
 
 func _input(event: InputEvent) -> void:
 	if not _current_consumable:
 		return
 	# place tower
-	if Utils.is_left_click_event(event) and _is_valid_placement:
+	if Utils.is_left_click_event(event) and _is_valid_target:
 		_use_consumable()
 	elif event.is_action("exit"):
 		cancel_current_consumable()
@@ -34,7 +51,7 @@ func _input(event: InputEvent) -> void:
 func _use_consumable() -> void:
 	if not _current_consumable:
 		return
-	_current_consumable.use(level_tile_map)
+	_current_consumable.use(_current_target)
 	_current_consumable = null
 	GameState.state = GameState.STATE.IN_GAME
 	Input.set_custom_mouse_cursor(null)

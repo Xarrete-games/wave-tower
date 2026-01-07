@@ -8,9 +8,7 @@ enum Type {
 @export_multiline var id: String
 @export_multiline var description: String
 @export var texture: Texture2D
-@export_group("Images")
-@export var icon_48: Texture2D
-@export var icon_48_used: Texture2D
+
 @export_group("Price")
 @export var price: int = 50
 @export var health_price: int = 0

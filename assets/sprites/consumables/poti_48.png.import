@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpm61ubby4nf5"
-path="res://.godot/imported/pickaxe.png-d9e5c452c7d340d8dda8b7d438de60e5.ctex"
+uid="uid://bmx20l33acc4i"
+path="res://.godot/imported/poti_48.png-25ad53be7f8a6eb18ef1a72b5af6ab01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/pickaxe.png"
-dest_files=["res://.godot/imported/pickaxe.png-d9e5c452c7d340d8dda8b7d438de60e5.ctex"]
+source_file="res://assets/sprites/consumables/poti_48.png"
+dest_files=["res://.godot/imported/poti_48.png-25ad53be7f8a6eb18ef1a72b5af6ab01.ctex"]
 
 [params]
 
