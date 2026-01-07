@@ -117,8 +117,8 @@ func _hide_upgrade_options() -> void:
 	upgrades_container.visible = false
 	level_container.visible = false
 
-func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance) -> void:
-	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_configuration)
+func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance, price: int) -> void:
+	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_configuration, price)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	button_in_hover = tower_button

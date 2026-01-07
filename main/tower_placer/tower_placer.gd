@@ -99,9 +99,10 @@ func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstanc
 	visual.add_child(_current_tower_instance)
 	_is_placing = true
 
-func _on_tower_upgrade_pressed(current_tower: Tower, new_tower_conf: TowerConfigurationWithInstance) -> void:
+func _on_tower_upgrade_pressed(current_tower: Tower, new_tower_conf: TowerConfigurationWithInstance, price: int) -> void:
 	var new_tower = new_tower_conf.get_instance()
-	RunContext.economy.gold -= new_tower.configuration.base_price
+	new_tower.build_price = price
+	RunContext.economy.gold -= price
 	visual.add_child(new_tower)
 	new_tower.global_position = current_tower.global_position
 	new_tower.tile_pos = current_tower.tile_pos
