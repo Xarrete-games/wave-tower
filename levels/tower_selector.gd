@@ -6,7 +6,7 @@ func _ready() -> void:
 	# initialize to no tower selected
 	clear_tower_selected()
 	ClickEvents.tower_selected.connect(_on_tower_selected)
-	ClickEvents.tower_button_pressed.connect(_on_tower_button_pressed)
+	ClickEvents.tower_build_button_pressed.connect(_on_tower_button_pressed)
 	ClickEvents.tower_remove_pressed.connect(_on_tower_remove_pressed)
 	RunContext.progress.current_wave_finished.connect(clear_tower_selected)
 

@@ -1,7 +1,7 @@
 #ClickEvents
 extends Node
 
-signal tower_button_pressed(tower_configuration: TowerConfigurationWithInstance)
+signal tower_build_button_pressed(tower_configuration: TowerConfigurationWithInstance, price: int)
 signal next_wave_pressed()
 signal next_level_pressed()
 signal config_button_pressed()

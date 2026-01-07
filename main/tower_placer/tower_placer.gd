@@ -17,7 +17,7 @@ var _is_valid_placement = false
 
 func _ready():
 	_is_placing = false
-	ClickEvents.tower_button_pressed.connect(_on_tower_button_pressed)
+	ClickEvents.tower_build_button_pressed.connect(_on_tower_button_pressed)
 	ClickEvents.tower_upgrade_pressed.connect(_on_tower_upgrade_pressed)
 	RunContext.progress.current_wave_finished.connect(_cancel_tower)
 	RunContext.progress.last_wave_finished.connect(_cancel_tower)
@@ -51,7 +51,7 @@ func _place_tower() -> void:
 	if not _current_tower_instance:
 		return
 	# check gold
-	var tower_price = _current_tower_instance.configuration.base_price
+	var tower_price = _current_tower_instance.build_price
 	if not _has_enought_gold(tower_price):
 		_cancel_tower()
 		return
@@ -90,11 +90,12 @@ func _cancel_tower() -> void:
 		await get_tree().process_frame
 		_is_placing = false
 
-func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance) -> void:
+func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance, price: int) -> void:
 	if _is_placing:
 		return
 	
-	_current_tower_instance = tower_configuration.get_instance() 
+	_current_tower_instance = tower_configuration.get_instance()
+	_current_tower_instance.build_price = price
 	visual.add_child(_current_tower_instance)
 	_is_placing = true
 
