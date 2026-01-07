@@ -11,6 +11,7 @@ signal item_purchased(item_offer: ItemOffer, slot: ShopSlot)
 var _item: ItemOffer
 var _price: int = 0
 var has_enough_health: bool = false
+var item_data: ItemData
 
 func _ready() -> void:
 	health_price.visible = false
@@ -18,12 +19,16 @@ func _ready() -> void:
 
 func set_item(item_offer: ItemOffer) -> void:
 	_price = item_offer.price
-	title_label.text = item_offer.item_data.id
-	description_label.text = item_offer.item_data.description
-	tooltip_text = item_offer.item_data.description
+	item_data = item_offer.item_data
+	title_label.text = item_data.id
+	description_label.text = item_data.description
+	tooltip_text = item_data.description
 	gold_price.price = _price
-	shop_slot_icon.set_icon(item_offer.item_data.texture)
-	shop_slot_icon.set_background_color(RunContext.relics.get_rarity_color(item_offer.item_data.rarity))
+	shop_slot_icon.set_icon(item_data.texture)
+
+	if item_data is RelicItemData:
+		var relic_data: RelicItemData = item_data as RelicItemData
+		shop_slot_icon.set_background_color(RunContext.relics.get_rarity_color(relic_data.rarity))
 	# health price
 	_chek_health(RunContext.status.health, item_offer.health_price)
 	if item_offer.health_price > 0:

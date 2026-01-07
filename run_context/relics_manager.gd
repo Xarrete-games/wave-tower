@@ -24,7 +24,7 @@ func is_maxed(relic_id: String) -> bool:
 	
 	if relic == null:
 		return false
-	return count >= relic.max_stack
+	return count >= relic.max_stacks
 	
 func get_rarity_color(rarity: Relic.Rarity) -> Color:
 	return relic_colors[rarity]

@@ -30,7 +30,7 @@ func set_relic(new_relic_value: ItemOffer) -> void:
 	relic_texture.texture = data.texture
 	title.text = data.id
 	description.text = data.description
-	hexagon_border.color =  RunContext.relics.get_rarity_color(data.rarity)
+	
 	price = item_offer.price
 
 	if item_offer.health_price > 0:
@@ -41,6 +41,10 @@ func set_relic(new_relic_value: ItemOffer) -> void:
 		RunContext.status.health_change.connect(func (current_health: int) -> void:
 			_chek_health(current_health, item_offer.health_price)
 		)
+
+	if data is RelicItemData:
+		var relic_data: RelicItemData = data as RelicItemData
+		hexagon_border.color =  RunContext.relics.get_rarity_color(relic_data.rarity)
 	
 func _on_gui_input(event: InputEvent) -> void:
 	if (_it_cost_health and not _has_enough_live):

@@ -25,7 +25,7 @@ position = Vector2(45.5, 52.5)
 [node name="Hexagon" type="Polygon2D" parent="SubViewport/Root2D"]
 texture_filter = 2
 material = SubResource("CanvasItemMaterial_jclnm")
-color = Color(0.87, 0.5945, 0, 1)
+color = Color(0.38051456, 0.75108886, 0.47531497, 1)
 polygon = PackedVector2Array(0, -52.5, 45.5, -26.25, 45.5, 26.25, 0, 52.5, -45.5, 26.25, -45.5, -26.25)
 
 [node name="RelicTexture" type="Sprite2D" parent="SubViewport/Root2D"]

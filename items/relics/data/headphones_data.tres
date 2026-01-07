@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c3sjeglgjsgiv"]
+[gd_resource type="Resource" script_class="RelicItemData" load_steps=4 format=3 uid="uid://qjuqt0cynntf"]
 
 [ext_resource type="Script" uid="uid://y4bjwh5pifnu" path="res://items/relics/implementations/headphones.gd" id="1_us575"]
-[ext_resource type="Script" uid="uid://deynngi6ga5we" path="res://items/item_data.gd" id="2_wie6b"]
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://items/relics/relic_item_data.gd" id="1_yb56j"]
 [ext_resource type="Texture2D" uid="uid://ddjpv1d0r7tcg" path="res://assets/sprites/relics/headphones_relic.png" id="3_xt11d"]
 
 [resource]
-script = ExtResource("2_wie6b")
+script = ExtResource("1_yb56j")
+rarity = 1
 id = "Headphones"
 description = "Nova tower have a 20% chance to perform a double attack."
 texture = ExtResource("3_xt11d")
-type = 1
 runtime_script = ExtResource("1_us575")
+metadata/_custom_type_script = "uid://blk23o0i7vnyj"
