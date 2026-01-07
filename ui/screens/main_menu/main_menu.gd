@@ -13,10 +13,13 @@ func _ready() -> void:
 
 func _on_new_run_button_xarreta_pressed() -> void:
 	AudioManager.stop_main_piano()
-	get_tree().change_scene_to_packed(BOOT)
-
+	call_deferred("_init_game")
+	
 func _on_credits_button_xarreta_pressed() -> void:
 	get_tree().root.add_child(CREDITS.instantiate())
 
 func _on_exit_button_xarreta_pressed() -> void:
 	get_tree().quit()
+
+func _init_game() -> void:
+	get_tree().change_scene_to_packed(BOOT)

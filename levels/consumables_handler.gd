@@ -8,22 +8,28 @@ var _is_valid_target: bool = false
 var _current_target: Variant
 
 @onready var level_tile_map: LevelTileMap = %'LevelTileMap'
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	RunContext.consumables.consumable_clicked.connect(_on_consumable_clicked)
 	GameState.state_change.connect(_on_game_state_changed)
-
+	ClickEvents.tower_hovered.connect(_on_tower_hovered)
+	ClickEvents.tower_unhovered.connect(_on_tower_unhovered)
 
 func _process(_delta: float) -> void:
 	if not _current_consumable:
 		return
 	
-	match _current_consumable.targeting_type:
-		ConsumableTargeteable.TargetType.BLOCKED_TILE:
-			_handle_blocked_tile_placement()
-		_:
-			_invalidate_target()
-	
+	if _current_consumable.targeting_type == ConsumableTargeteable.TargetType.BLOCKED_TILE:
+		_handle_blocked_tile_placement()
+		
+func _input(event: InputEvent) -> void:
+	if not _current_consumable:
+		return
+
+	if Utils.is_left_click_event(event) and _is_valid_target:
+		_use_consumable()
+	elif event.is_action("exit"):
+		cancel_current_consumable()
 
 func _handle_blocked_tile_placement() -> void:
 	if level_tile_map.is_mouse_on_block_tile():
@@ -38,15 +44,21 @@ func _invalidate_target() -> void:
 	_is_valid_target = false
 	_current_target = null
 
-
-func _input(event: InputEvent) -> void:
-	if not _current_consumable:
+func _on_tower_hovered(tower: Tower) -> void:
+	if not _current_consumable or _current_consumable.targeting_type != ConsumableTargeteable.TargetType.TOWER:
 		return
-	# place tower
-	if Utils.is_left_click_event(event) and _is_valid_target:
-		_use_consumable()
-	elif event.is_action("exit"):
-		cancel_current_consumable()
+	
+	Input.set_custom_mouse_cursor(_current_consumable.cursor_icon_used, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
+	_is_valid_target = true
+	_current_target = tower
+
+func _on_tower_unhovered(tower: Tower) -> void:
+	if not _current_consumable or _current_consumable.targeting_type != ConsumableTargeteable.TargetType.TOWER:
+		return
+	
+	if tower == _current_target:
+		Input.set_custom_mouse_cursor(_current_consumable.cursor_icon, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
+		_invalidate_target()
 
 func _use_consumable() -> void:
 	if not _current_consumable:
@@ -68,6 +80,7 @@ func cancel_current_consumable() -> void:
 func _on_consumable_clicked(consumable: Consumable) -> void:
 	_current_consumable = consumable
 	GameState.state = GameState.STATE.USING_ITEM
+	Input.set_custom_mouse_cursor(_current_consumable.cursor_icon, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
 
 func _on_game_state_changed(new_state: GameState.STATE) -> void:
 	if new_state != GameState.STATE.USING_ITEM and _current_consumable:

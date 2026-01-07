@@ -2,6 +2,8 @@ class_name TowersManager extends RefCounted
 
 signal tower_count_change(tower_type: Tower.Type, amount: int)
 signal tower_placed(tower: Tower)
+signal tower_hovered(tower: Tower)
+signal tower_unhovered(tower: Tower)
 
 var towers_placed: Dictionary[Tower.Type, int] = {
 	Tower.Type.RED: 0,

@@ -26,6 +26,8 @@ var extra_stats: TowerExtraStats = null
 var tower_type: Tower.Type
 var experience_handler: ExprienceHandler
 
+func _ready() -> void:
+	RunContext.progress.current_wave_finished.connect(_on_current_wave_finished)
 
 # initialize the stats handler with base stats, tower type and experience handler
 func set_data(
@@ -96,3 +98,11 @@ func _update_stats() -> void:
 
 	extra_stats_change.emit(extra_stats)
 	stats_change.emit(stats)
+
+func _on_current_wave_finished() -> void:
+	var buffs_to_remove: Array[TowerBuff] = []
+	for buff in local_buffs:
+		if buff.source_type == TowerBuff.SourceType.CONSUMABLE_TEMPORAL:
+			buffs_to_remove.append(buff)
+	for buff in buffs_to_remove:
+			remove_local_buff(buff)

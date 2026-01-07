@@ -97,6 +97,12 @@ func enable() -> void:
 	
 	ClickEvents.tower_selected.connect(_on_tower_selected)
 	mouse_detector.gui_input.connect(_on_gui_input)
+	mouse_detector.mouse_entered.connect(func () -> void:
+		ClickEvents.tower_hovered.emit(self)
+	)
+	mouse_detector.mouse_exited.connect(func () -> void:
+		ClickEvents.tower_unhovered.emit(self)
+	)
 
 # --------------------
 # --- BUFFS ---

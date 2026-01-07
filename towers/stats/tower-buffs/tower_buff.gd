@@ -4,6 +4,7 @@ enum SourceType {
     RELIC,
     TOWER,
     LEVEL_UP,
+    CONSUMABLE_TEMPORAL
 }
 
 var source_type: SourceType

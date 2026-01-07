@@ -16,7 +16,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_3c04x")
 script = ExtResource("1_omy8q")
-direct_init = false
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
