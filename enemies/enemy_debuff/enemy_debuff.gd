@@ -17,6 +17,10 @@ var tick_interval: float = 0.0:
 	set(v):
 		tick_interval = v
 		changed.emit()
+var extra_stacks: int = 0:
+	set(v):
+		extra_stacks = v
+		changed.emit()
 
 var max_stacks: int = 99
 

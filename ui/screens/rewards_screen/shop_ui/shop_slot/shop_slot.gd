@@ -16,6 +16,7 @@ var item_data: ItemData
 func _ready() -> void:
 	health_price.visible = false
 	RunContext.economy.relics_discount_changed.connect(_on_relics_discount_changed)
+	RunContext.economy.consumable_discount_changed.connect(_on_consumable_discount_changed)
 
 func set_item(item_offer: ItemOffer) -> void:
 	_price = item_offer.price
@@ -51,14 +52,17 @@ func _on_gui_input(event: InputEvent) -> void:
 func _on_mouse_entered() -> void:
 	AudioManager.play_button_hover()
 	shop_slot_icon.increased_icon_size()
-	#texture_rect.custom_minimum_size = Vector2(120, 120)
 
 func _on_mouse_exited() -> void:
 	shop_slot_icon.icon_normal_size()
 
 func _on_relics_discount_changed(_relics_discount_mult: float) -> void:
-	if _item.create_item() is Relic:
+	if _item.item_data.type == ItemData.Type.RELIC:
 		set_item(RunContext.offers_manager.create_relic_offer_from_data(_item.item_data))
+
+func _on_consumable_discount_changed(_consumables_discount_mult: float) -> void:
+	if _item.item_data.type == ItemData.Type.CONSUMABLE:
+		set_item(RunContext.offers_manager.create_consumable_offer_from_data(_item.item_data))
 
 func _chek_health(current_health: int, health_cost: int) -> void:
 	has_enough_health = current_health > health_cost

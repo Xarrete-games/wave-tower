@@ -88,7 +88,7 @@ func create_consumables_offers(amount: int) -> Array[ItemOffer]:
 	return offers
 
 func create_consumable_offer_from_data(data: ItemData) -> ItemOffer:
-	var price = data.price
+	var price = data.price * (1.0 - RunContext.economy.consumables_discount_mult)
 
 	return ItemOffer.new(
 		data,
