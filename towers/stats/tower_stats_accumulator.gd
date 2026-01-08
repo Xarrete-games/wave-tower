@@ -18,6 +18,8 @@ var critic_damage_mult: float = 0.0
 
 # laser tower
 var flat_execute_threshold: float = 0.0
+# fire tower
+var all_fire_apply_burn: bool = false
 
 # chain tower
 var flat_extra_hits: int = 0
@@ -43,10 +45,15 @@ func merge(other: TowerStatsAccumulator) -> TowerStatsAccumulator:
     result.flat_critic_damage = flat_critic_damage + other.flat_critic_damage
     result.critic_damage_mult = critic_damage_mult + other.critic_damage_mult
 
+    # fire
     result.flat_execute_threshold = flat_execute_threshold + other.flat_execute_threshold
+    result.all_fire_apply_burn = all_fire_apply_burn or other.all_fire_apply_burn
 
+    # lightning
     result.flat_extra_hits = flat_extra_hits + other.flat_extra_hits
 
+    # frost
     result.flat_double_shot_chance = flat_double_shot_chance + other.flat_double_shot_chance
+    
 
     return result

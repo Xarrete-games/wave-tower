@@ -4,7 +4,7 @@ const EXECUTE_DAMAGE: float = 9999
 
 var execute_threshold: float = 0.0
 var base_execute_threshold: float = 10.0
-var burn_damage: float = 0
+var apply_burn: bool = false
 
 @onready var red_projectile: FireLaserProjectile = $FireLaserProjectile
 
@@ -18,10 +18,13 @@ func _process(_delta: float) -> void:
 
 func _on_extra_stats_change(extra_stats: TowerExtraStats) -> void:
 	execute_threshold = base_execute_threshold + extra_stats.execute_threshold
+	apply_burn = extra_stats.all_fire_apply_burn
 
 func _fire() -> void:
 	var next_attack = _get_attack() if _current_target.get_percentage_remaining_health() > execute_threshold else _get_letal_attack()
-	red_projectile.set_target(_current_target)
+	var debuff = RunContext.enemy_debuff.get_debuff(EnemyDebuff.Type.BURN) if apply_burn else null
+	red_projectile.set_target(_current_target, next_attack, debuff)
+	
 	red_projectile.set_attack(next_attack)
 	red_projectile.hit_target()
 	cristal_light.turn_on()

@@ -44,7 +44,7 @@ func set_data(
 	# tower type
 	tower_type = p_tower_type
 	# global buffs
-	_set_global_buffs(tower_type, RunContext.towers_upgrades.get_stats_accumulator(tower_type))
+	_set_global_buffs(RunContext.towers_upgrades.towers_stats_accumulator)
 	RunContext.towers_upgrades.tower_buffs_change.connect(_set_global_buffs)
 
 func add_local_buff(tower_buff: TowerBuff) -> void:
@@ -67,9 +67,7 @@ func _on_level_up(_new_level: int) -> void:
 	base_stats.add_stats(stats_on_level)
 	_update_stats()
 
-func _set_global_buffs(p_tower_type: Tower.Type,new_global_stats_acc: TowerStatsAccumulator) -> void:
-	if p_tower_type != self.tower_type:
-		return
+func _set_global_buffs(new_global_stats_acc: TowerStatsAccumulator) -> void:
 	global_stats_acc = new_global_stats_acc
 
 
@@ -93,6 +91,7 @@ func _update_stats() -> void:
 	new_extra_stats.execute_threshold = total_stats_acc.flat_execute_threshold
 	new_extra_stats.extra_hits = int(total_stats_acc.flat_extra_hits)
 	new_extra_stats.double_shot_chance = total_stats_acc.flat_double_shot_chance
+	new_extra_stats.all_fire_apply_burn = total_stats_acc.all_fire_apply_burn
 
 	extra_stats = new_extra_stats
 

@@ -6,6 +6,8 @@ class_name FireLaserProjectile extends Node2D
 
 var _target: Enemy 
 var _attack: Attack
+var _debuff: EnemyDebuff = null
+var _amount_debuff: int = 1
 var tween: Tween = null
 var current_laser_length: float = 0.0
 var is_casting: bool = false
@@ -58,16 +60,16 @@ func stop() -> void:
 	_target = null
 	_set_is_casting(false)
 
-func set_attack(new_attack: Attack) -> void:
-	_attack = new_attack
 
 #set the target to follow
-func set_target(target: Enemy) -> void:
+func set_target(target: Enemy, attack: Attack, debuff: EnemyDebuff = null, amount: int = 1) -> void:
 	if target == _target:
 		return	
 	
 	_target = target
-	
+	_attack = attack
+	_debuff = debuff
+	_amount_debuff = amount
 	if not is_casting:
 		_set_is_casting(true)
 
@@ -76,6 +78,8 @@ func hit_target() -> void:
 	if not _target:
 		return
 	_target.apply_damage(_attack)
+	if _debuff:
+		_target.apply_debuff(_debuff, _amount_debuff)
 
 func set_color(new_color: Color) -> void:
 	color = new_color

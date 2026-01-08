@@ -66,14 +66,15 @@ func _on_available_free_towers_change(available_free_towers: int) -> void:
 	if available_free_towers > 0:
 		price = 0
 	else:
-		_set_new_price(configuration.base_price)
-
+		if configuration:
+			_set_new_price(configuration.base_price)
 
 func _on_economy_towers_discount_changed(_towers_discount_mult: float) -> void:
 	if RunContext.economy.available_free_towers > 0:
 		price = 0
 	else:
-		_set_new_price(configuration.base_price)
+		if configuration:
+			_set_new_price(configuration.base_price)
 
 func _set_new_price(new_price: int) -> void:
 	price = int(new_price * (1.0 - RunContext.economy.towers_discount_mult))

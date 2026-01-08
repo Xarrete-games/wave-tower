@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b3rjk0365pn1t" path="res://levels/level_base.tscn" id="1_qh52v"]
 [ext_resource type="Resource" uid="uid://q8qhurbqsark" path="res://levels/levels/waves/lv3_waves.tres" id="2_36syi"]
 [ext_resource type="PackedScene" uid="uid://c7u5mnwief1gw" path="res://main/fog/fog_sky_dark.tscn" id="3_tex77"]
-[ext_resource type="TileSet" uid="uid://b0cuv52usf85i" path="res://assets/sprites/tilesheet/TileSet_Purple.tres" id="3_xdt3c"]
+[ext_resource type="TileSet" uid="uid://bj5spmqms7uhf" path="res://assets/sprites/tilesheet/TileSet_Purple.tres" id="3_xdt3c"]
 [ext_resource type="PackedScene" uid="uid://b8g0wp8j02vu4" path="res://levels/portal/orange_portal.tscn" id="4_1bgls"]
 [ext_resource type="PackedScene" uid="uid://gb8anbp5v7hc" path="res://levels/portal/blue_portal.tscn" id="5_7yhna"]
 [ext_resource type="PackedScene" uid="uid://cehei4f2fjq5d" path="res://main/fog/fog.tscn" id="13_bxyko"]
