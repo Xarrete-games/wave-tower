@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjk45cyvsgik0"
-path="res://.godot/imported/armor.png-cf3087b845eec71528677e2fdba9bc1a.ctex"
+path="res://.godot/imported/armor.png-d946b5189e4cadb9f0f27813b851a0a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/armor.png"
-dest_files=["res://.godot/imported/armor.png-cf3087b845eec71528677e2fdba9bc1a.ctex"]
+source_file="res://assets/sprites/consumables/armor.png"
+dest_files=["res://.godot/imported/armor.png-d946b5189e4cadb9f0f27813b851a0a8.ctex"]
 
 [params]
 

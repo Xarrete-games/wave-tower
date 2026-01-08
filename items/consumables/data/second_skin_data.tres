@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://items/consumables/consumable_item_data.gd" id="1_lha01"]
 [ext_resource type="Script" uid="uid://bugq4ltrt5nrn" path="res://items/consumables/implementation/second_skin.gd" id="1_oftu8"]
-[ext_resource type="Texture2D" uid="uid://bjk45cyvsgik0" path="res://assets/sprites/relics/armor.png" id="3_3vg22"]
+[ext_resource type="Texture2D" uid="uid://bjk45cyvsgik0" path="res://assets/sprites/consumables/armor.png" id="3_3vg22"]
 
 [resource]
 script = ExtResource("1_lha01")
