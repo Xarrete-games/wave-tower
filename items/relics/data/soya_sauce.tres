@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_xi3p0")
 id = "Soya Sauce"
+display_name = "Soya Sauce"
 description = "Doubles the effects of nigiris"
 texture = ExtResource("2_jb44x")
 runtime_script = ExtResource("1_vl8cw")

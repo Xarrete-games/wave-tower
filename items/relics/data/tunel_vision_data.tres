@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_wvpyy")
 id = "Tunel Vision"
+display_name = "Tunel Vision"
 description = "Increases damage by 10% for each consecutive hit on the same enemy"
 texture = ExtResource("2_7utw2")
 runtime_script = ExtResource("1_6hj3t")

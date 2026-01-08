@@ -10,7 +10,8 @@
 script = ExtResource("1_tvi2s")
 cursor_icon = ExtResource("1_apyb0")
 cursor_icon_used = ExtResource("2_qfll5")
-id = "Foundation Breaker"
+id = "foundation_breaker"
+display_name = "Foundation Breaker"
 description = "Clears a random blocked build slot."
 texture = ExtResource("3_4so7f")
 price = 30

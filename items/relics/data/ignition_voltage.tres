@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_4y5rc")
 id = "Ignition Voltage"
+display_name = "Ignition Voltage"
 description = "Increase the duration of Burn in 1 sec."
 texture = ExtResource("3_muhnu")
 runtime_script = ExtResource("1_qkdx3")

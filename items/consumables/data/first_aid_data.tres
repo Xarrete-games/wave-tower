@@ -6,7 +6,8 @@
 
 [resource]
 script = ExtResource("2_fmtq1")
-id = "First Aid"
+id = "first_aid"
+display_name = "First Aid"
 description = "Regain 10 lives."
 texture = ExtResource("3_sd7pa")
 runtime_script = ExtResource("1_365ip")

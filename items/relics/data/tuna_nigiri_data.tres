@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_52mwh")
 id = "Tuna nigiri"
+display_name = "Tuna nigiri"
 description = "Reduce the cost of towers by 10%"
 texture = ExtResource("2_yojsk")
 runtime_script = ExtResource("1_08uru")

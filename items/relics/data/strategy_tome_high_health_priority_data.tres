@@ -8,6 +8,8 @@
 script = ExtResource("1_1cvfv")
 id = "Strategy Tome: 
 High Health Priority"
+display_name = "Strategy Tome: 
+High Health Priority"
 description = "Allows towers to prioritize enemies with the highest health."
 texture = ExtResource("2_oymg8")
 runtime_script = ExtResource("1_tsjtp")

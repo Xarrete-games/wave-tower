@@ -28,7 +28,7 @@ func set_relic(new_relic_value: ItemOffer) -> void:
 	item_offer = new_relic_value
 	var data: ItemData = new_relic_value.item_data
 	relic_texture.texture = data.texture
-	title.text = data.id
+	title.text = data.display_name
 	description.text = data.description
 	
 	price = item_offer.price

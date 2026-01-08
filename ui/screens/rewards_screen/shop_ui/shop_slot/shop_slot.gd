@@ -20,7 +20,7 @@ func _ready() -> void:
 func set_item(item_offer: ItemOffer) -> void:
 	_price = item_offer.price
 	item_data = item_offer.item_data
-	title_label.text = item_data.id
+	title_label.text = item_data.display_name
 	description_label.text = item_data.description
 	tooltip_text = item_data.description
 	gold_price.price = _price

@@ -1,7 +1,5 @@
 class_name GameItem extends RefCounted
 
-
-
 var amount = 1
 var id: String
 var display_name: String

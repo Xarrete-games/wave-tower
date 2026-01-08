@@ -6,7 +6,8 @@
 
 [resource]
 script = ExtResource("1_ygegg")
-id = "Magic Ring"
+id = "magic_ring"
+display_name = "Magic Ring"
 description = "The next tower is free."
 texture = ExtResource("3_x7xo8")
 runtime_script = ExtResource("1_32wu6")

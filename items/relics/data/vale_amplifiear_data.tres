@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_hkgcx")
 id = "Valve Amplifier 100W"
+display_name = "Valve Amplifier 100W"
 description = "Increases the attack range of all towers by 10%.
 (+10% for each artic cube one)."
 texture = ExtResource("3_q0l0n")

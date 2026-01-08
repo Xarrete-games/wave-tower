@@ -8,6 +8,7 @@
 script = ExtResource("1_ly321")
 rarity = 1
 id = "Paganini's Bow"
+display_name = "Paganini's Bow"
 description = "Increases the attack damage of all towers by 10%."
 texture = ExtResource("3_8rgck")
 runtime_script = ExtResource("1_3ru7g")
