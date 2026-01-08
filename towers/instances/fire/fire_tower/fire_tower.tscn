@@ -107,9 +107,6 @@ offset_left = -41.0
 offset_top = -117.0
 offset_right = 44.0
 
-[node name="ProjectileSpawnPos" parent="." index="10"]
-position = Vector2(1, -103)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
 root_node = NodePath("../PointLight2D")
 libraries = {
@@ -132,3 +129,6 @@ texture = ExtResource("9_ucoog")
 lifetime = 2.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_pa58j")
+
+[node name="ProjectileSpawnPos" parent="." index="13"]
+position = Vector2(1, -103)
