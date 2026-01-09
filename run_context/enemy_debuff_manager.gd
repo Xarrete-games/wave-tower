@@ -14,12 +14,12 @@ var damage_taken_modifiers: Array[DamageTakenModifier] = []
 func _init() -> void:
 	_bind_signals()
 
-func get_debuff(type: EnemyDebuff.Type) -> EnemyDebuff:
+func get_debuff(type: EnemyDebuff.Type, source: Object) -> EnemyDebuff:
 	match type:
 		EnemyDebuff.Type.BURN:
-			return burn_debuff.clone()
+			return burn_debuff.clone(source)
 		EnemyDebuff.Type.FROST:
-			return frost_debuff.clone()
+			return frost_debuff.clone(source)
 	
 	push_error("[EnemyDebuffManager] invalid get debuff")
 	return null

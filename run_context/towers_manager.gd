@@ -25,6 +25,9 @@ func tower_added(tower: Tower) -> void:
     _update_tower_count(tower.type, towers_placed[tower.type] + 1)
     tower_placed.emit(tower)
 
+func get_tower_count(tower_type: Tower.Type) -> int:
+    return towers_placed[tower_type]
+
 func _on_level_changed(_new_level: int) -> void:
     reset_towers()
 

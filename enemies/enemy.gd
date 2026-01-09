@@ -163,11 +163,11 @@ func apply_damage(attack: Attack) -> void:
 	if _is_dead:
 		return
 
-	var acc: DamageModifierAcc = DamageModifierAcc.new()
+	var acc: DamageModifierAcc = DamageModifierAcc.new(attack.source, attack.origin)
 	for modifier in damage_taken_modifiers:
 		modifier.modify_damage(self, acc)
 
-	var modified_damage: float = attack.damage + acc.flat_damage * acc.damage_mult
+	var modified_damage: float = (attack.damage + acc.flat_damage) * acc.damage_mult
 	attack.damage = modified_damage
 	_set_health(health - attack.damage)
 	_play_hit_animation()
