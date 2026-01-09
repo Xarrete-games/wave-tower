@@ -49,7 +49,7 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 20
 script = ExtResource("1_b2kx5")
-speed_button = NodePath("VBoxContainer/HBoxContainer/SpeedButton")
+speed_button = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/SpeedButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -81,22 +81,31 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="WavesCounter" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_tns2n")]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WavesCounter" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_tns2n")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="LevelProgressUi" parent="VBoxContainer/HBoxContainer" instance=ExtResource("7_fccpc")]
+[node name="LevelProgressUi" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("7_fccpc")]
 layout_mode = 2
 mouse_filter = 2
+alignment = 1
 
-[node name="SpeedButton" parent="VBoxContainer/HBoxContainer" instance=ExtResource("8_o3scy")]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="SpeedButton" parent="VBoxContainer/HBoxContainer/HBoxContainer" instance=ExtResource("8_o3scy")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = SubResource("Theme_6uylq")
 text = "x1"
 
-[node name="Config" parent="VBoxContainer/HBoxContainer" instance=ExtResource("6_2407u")]
+[node name="Config" parent="VBoxContainer/HBoxContainer/HBoxContainer" instance=ExtResource("6_2407u")]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 1
@@ -113,4 +122,4 @@ theme_override_styles/panel = ExtResource("3_tksin")
 layout_mode = 2
 size_flags_horizontal = 2
 
-[connection signal="xarreta_pressed" from="VBoxContainer/HBoxContainer/SpeedButton" to="." method="_on_xarreta_text_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/SpeedButton" to="." method="_on_xarreta_text_button_xarreta_pressed"]
