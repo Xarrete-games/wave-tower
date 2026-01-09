@@ -20,32 +20,33 @@ size_flags_horizontal = 8
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3fmy8")
 script = ExtResource("1_3fmy8")
-slots_container = NodePath("MarginContainer/SlotsConainer")
+slots_container = NodePath("SlotsConainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 18
-theme_override_constants/margin_top = 12
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 18
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_bottom = 8
 
-[node name="SlotsConainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="SlotsConainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 12
 alignment = 1
 
-[node name="InventoryUiSlot" parent="MarginContainer/SlotsConainer" instance=ExtResource("1_y3m8t")]
+[node name="InventoryUiSlot" parent="SlotsConainer" instance=ExtResource("1_y3m8t")]
 layout_mode = 2
 
-[node name="InventoryUiSlot2" parent="MarginContainer/SlotsConainer" instance=ExtResource("1_y3m8t")]
+[node name="InventoryUiSlot2" parent="SlotsConainer" instance=ExtResource("1_y3m8t")]
 layout_mode = 2
 
-[node name="InventoryUiSlot3" parent="MarginContainer/SlotsConainer" instance=ExtResource("1_y3m8t")]
+[node name="InventoryUiSlot3" parent="SlotsConainer" instance=ExtResource("1_y3m8t")]
 layout_mode = 2
 
-[node name="InventoryUiSlot4" parent="MarginContainer/SlotsConainer" instance=ExtResource("1_y3m8t")]
+[node name="InventoryUiSlot4" parent="SlotsConainer" instance=ExtResource("1_y3m8t")]
 layout_mode = 2
 
-[node name="InventoryUiSlot5" parent="MarginContainer/SlotsConainer" instance=ExtResource("1_y3m8t")]
+[node name="InventoryUiSlot5" parent="SlotsConainer" instance=ExtResource("1_y3m8t")]
 layout_mode = 2

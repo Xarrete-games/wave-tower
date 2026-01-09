@@ -32,7 +32,7 @@ func _on_mouse_entered() -> void:
 	if _consumable == null:
 		return
 	AudioManager.play_button_hover()
-	texture_rect.custom_minimum_size = Vector2(40, 40)
+	texture_rect.custom_minimum_size = Vector2(50, 50)
 
 func _on_mouse_exited() -> void:
-	texture_rect.custom_minimum_size = Vector2(30, 30)
+	texture_rect.custom_minimum_size = Vector2(40, 40)

@@ -1,30 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck6egv1gqhi50"]
+[gd_scene load_steps=3 format=3 uid="uid://ck6egv1gqhi50"]
 
 [ext_resource type="Texture2D" uid="uid://crnte3lkyvqks" path="res://assets/sprites/icons/armor.png" id="1_oyqww"]
 [ext_resource type="Script" uid="uid://c8i2a3lre5262" path="res://ui/hud/top_bar_ui/armor_counter/armor_counter.gd" id="1_qf3wk"]
-[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="3_qf3wk"]
 
 [node name="ArmorCounter" type="CenterContainer"]
-custom_minimum_size = Vector2(40, 35)
-anchors_preset = -1
-anchor_right = 0.018000001
-anchor_bottom = 0.032
-offset_right = 5.4399986
-offset_bottom = 0.43999863
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 22.0
+offset_bottom = 24.0
 script = ExtResource("1_qf3wk")
 
 [node name="Armor" type="TextureRect" parent="."]
-modulate = Color(0, 0.15686275, 1, 1)
-custom_minimum_size = Vector2(40, 35)
+custom_minimum_size = Vector2(37, 46)
 layout_mode = 2
 texture = ExtResource("1_oyqww")
 expand_mode = 3
+stretch_mode = 3
 
 [node name="CounterLabel" type="Label" parent="."]
 layout_mode = 2
 text = "00"
-label_settings = ExtResource("3_qf3wk")
 horizontal_alignment = 1
 vertical_alignment = 1

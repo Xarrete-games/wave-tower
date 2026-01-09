@@ -12,8 +12,8 @@ var max_health: int:
 
 @onready var counter_max_label: Label = $CounterMaxLabel
 @onready var counter_label: Label = $CounterLabel
-@onready var live_icon: TextureRect = $LiveIcon
-@onready var armor_counter: ArmorCounter = $ArmorCounter
+@onready var live_icon: TextureRect = $HBoxContainer/LiveIcon
+@onready var armor_counter: ArmorCounter = $HBoxContainer/ArmorCounter
 
 
 func _ready() -> void:

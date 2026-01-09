@@ -10,4 +10,3 @@ var armor: int:
 func _ready() -> void:
 	RunContext.status.armor_change.connect(func(value): armor = value)
 	armor = RunContext.status.armor
-

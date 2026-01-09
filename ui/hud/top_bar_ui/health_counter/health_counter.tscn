@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c46d7j3yoj5p7"]
+[gd_scene load_steps=4 format=3 uid="uid://c46d7j3yoj5p7"]
 
 [ext_resource type="Script" uid="uid://vecgf2vtyo4" path="res://ui/hud/top_bar_ui/health_counter/health_counter.gd" id="1_6aibt"]
 [ext_resource type="Texture2D" uid="uid://t0orxc251is3" path="res://assets/sprites/icons/corazon.png" id="2_63sef"]
 [ext_resource type="PackedScene" uid="uid://ck6egv1gqhi50" path="res://ui/hud/top_bar_ui/armor_counter/armor_counter.tscn" id="3_2ap6e"]
-[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="3_o7xpr"]
 
 [node name="HealthCounter" type="HBoxContainer"]
 custom_minimum_size = Vector2(143, 0)
@@ -15,29 +14,34 @@ offset_bottom = -1.5600014
 theme_override_constants/separation = 8
 script = ExtResource("1_6aibt")
 
-[node name="LiveIcon" type="TextureRect" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = -25
+alignment = 1
+
+[node name="ArmorCounter" parent="HBoxContainer" instance=ExtResource("3_2ap6e")]
+visible = false
+z_index = 1
+layout_mode = 2
+
+[node name="LiveIcon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(51, 45)
 layout_mode = 2
 texture = ExtResource("2_63sef")
 expand_mode = 3
-
-[node name="ArmorCounter" parent="." instance=ExtResource("3_2ap6e")]
-visible = false
-layout_mode = 2
+stretch_mode = 3
 
 [node name="CounterLabel" type="Label" parent="."]
 layout_mode = 2
 text = "20"
-label_settings = ExtResource("3_o7xpr")
 horizontal_alignment = 1
 
 [node name="SlashLabel" type="Label" parent="."]
 layout_mode = 2
 text = "/"
-label_settings = ExtResource("3_o7xpr")
 horizontal_alignment = 1
 
 [node name="CounterMaxLabel" type="Label" parent="."]
 layout_mode = 2
 text = "20"
-label_settings = ExtResource("3_o7xpr")
 horizontal_alignment = 1
