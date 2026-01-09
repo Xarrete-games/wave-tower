@@ -56,8 +56,17 @@ func _ready():
 	range_collision.shape = CircleShape2D.new()
 	# modifiers
 	modifiers = RunContext.towers_upgrades.get_modifiers()
+	RunContext.towers_upgrades.targeting_modes_change.connect(func(new_modes: Array[Tower.TargetingMode]) -> void:
+		if targeting_mode not in new_modes:
+			targeting_mode = TargetingMode.FIRST_IN_PROGRESS
+	)
 	RunContext.towers_upgrades.attack_modifiers_added.connect(func(new_modifier: AttackModifier) -> void:
 		modifiers.append(new_modifier)
+	)
+	RunContext.towers_upgrades.attack_modifiers_removed.connect(func(source_id: String) -> void:
+		modifiers = modifiers.filter(func(mod: AttackModifier) -> bool:
+			return mod.source_id != source_id
+		)
 	)
 	# handlers
 	experience_handler.exp_data_change.connect(_on_exp_data_change)

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://kc5jsm0e1veg"
-path="res://.godot/imported/witch_hat_relic.png-4f7add27873ba7d04fb56f238b1a37b1.ctex"
+path="res://.godot/imported/witch_hat_relic.png-579476e9903829d4f697465e05d77517.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/unused/witch_hat_relic.png"
-dest_files=["res://.godot/imported/witch_hat_relic.png-4f7add27873ba7d04fb56f238b1a37b1.ctex"]
+source_file="res://assets/sprites/relics/witch_hat_relic.png"
+dest_files=["res://.godot/imported/witch_hat_relic.png-579476e9903829d4f697465e05d77517.ctex"]
 
 [params]
 

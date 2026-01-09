@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dtqaaw1eky4hf" path="res://items/relics/implementations/black_witch_hat.gd" id="1_8gi6i"]
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://items/relics/relic_item_data.gd" id="1_ti2tw"]
-[ext_resource type="Texture2D" uid="uid://kc5jsm0e1veg" path="res://assets/sprites/relics/unused/witch_hat_relic.png" id="2_2nnme"]
+[ext_resource type="Texture2D" uid="uid://kc5jsm0e1veg" path="res://assets/sprites/relics/witch_hat_relic.png" id="2_2nnme"]
 
 [resource]
 script = ExtResource("1_ti2tw")

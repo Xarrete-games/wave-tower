@@ -17,3 +17,6 @@ func _init(data: RelicItemData) -> void:
 
 @abstract
 func apply_effect() -> void
+
+@abstract
+func remove_effect() -> void

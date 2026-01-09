@@ -31,6 +31,13 @@ func add_modifier(modifier: DamageTakenModifier) -> void:
 	damage_taken_modifiers.append(modifier)
 	modifier_change.emit(get_modifiers())
 
+func remove_modifier(source_id: String) -> void:
+	for modifier in damage_taken_modifiers:
+		if modifier.source_id == source_id:
+			damage_taken_modifiers.erase(modifier)
+			modifier_change.emit(get_modifiers())
+			break
+
 func _bind_signals():
 	burn_debuff.changed.connect(
 		func():
