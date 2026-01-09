@@ -41,6 +41,9 @@ func get_stacks(debuff_type: EnemyDebuff.Type) -> int:
 			count += 1
 	return count	
 
+func has_any_defbuff() -> bool:
+	return debuffs.size() > 0
+
 func _on_add_debuff(instance: EnemyDebuffInstance, enemy: Enemy) -> void:
 	var type = instance.debuff.type
 	enemy.health_bar.set_debuffs(debuffs)

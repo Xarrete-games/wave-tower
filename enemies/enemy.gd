@@ -51,6 +51,8 @@ var target_position: Vector2:
 		else:
 			return target_position_left.global_position
 
+var damage_taken_modifiers: Array[DamageTakenModifier]
+	
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: HealthBar = $HealthBar
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -66,6 +68,14 @@ func _ready() -> void:
 	speed = base_speed
 	health_bar.set_max_health(max_health)
 	_set_health(max_health)
+	
+	#damage taken modifiers
+	damage_taken_modifiers = RunContext.enemy_debuff.get_modifiers()
+	RunContext.enemy_debuff.modifier_change.connect(
+		func(modifiers: Array[DamageTakenModifier]):
+			damage_taken_modifiers = modifiers
+	)
+	# extra gold dropped
 	gold_value = base_gold_value + RunContext.economy.extra_gold_dropped
 	RunContext.economy.extra_gold_dropped_change.connect(
 		func(value): gold_value = base_gold_value + value)
@@ -127,6 +137,7 @@ func enable() -> void:
 # --------------------
 # --- HEALT ---
 # --------------------
+
 # percentage of remaining heal
 func get_percentage_remaining_health() -> float:
 	if max_health <= 0:
@@ -142,6 +153,9 @@ func get_remaining_health() -> float:
 func get_debuff_stacks(debuff_type: EnemyDebuff.Type) -> int:
 	return debuff_handler.get_stacks(debuff_type)
 
+func has_any_debuff() -> bool:
+	return debuff_handler.has_any_defbuff()
+
 func apply_debuff(debuff: EnemyDebuff, amount: int = 1) -> void:
 	debuff_handler.add_debuff(debuff, amount, self)
 
@@ -149,6 +163,12 @@ func apply_damage(attack: Attack) -> void:
 	if _is_dead:
 		return
 
+	var acc: DamageModifierAcc = DamageModifierAcc.new()
+	for modifier in damage_taken_modifiers:
+		modifier.modify_damage(self, acc)
+
+	var modified_damage: float = attack.damage + acc.flat_damage * acc.damage_mult
+	attack.damage = modified_damage
 	_set_health(health - attack.damage)
 	_play_hit_animation()
 	_show_damage(attack)

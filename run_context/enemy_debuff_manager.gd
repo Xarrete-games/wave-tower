@@ -2,9 +2,14 @@
 class_name EnemyDebuffManager extends RefCounted
 
 signal debuff_change(enemy_debuff: EnemyDebuff)
+signal modifier_change(damage_taken_modifiers: Array[DamageTakenModifier])
 
+# debuffs
 var burn_debuff: BurnDebuff = BurnDebuff.new()
 var frost_debuff: FrostDebuff = FrostDebuff.new()
+
+# modifiers
+var damage_taken_modifiers: Array[DamageTakenModifier] = []
 
 func _init() -> void:
 	_bind_signals()
@@ -18,6 +23,13 @@ func get_debuff(type: EnemyDebuff.Type) -> EnemyDebuff:
 	
 	push_error("[EnemyDebuffManager] invalid get debuff")
 	return null
+
+func get_modifiers() -> Array[DamageTakenModifier]:
+	return damage_taken_modifiers.duplicate()
+
+func add_modifier(modifier: DamageTakenModifier) -> void:
+	damage_taken_modifiers.append(modifier)
+	modifier_change.emit(get_modifiers())
 
 func _bind_signals():
 	burn_debuff.changed.connect(
