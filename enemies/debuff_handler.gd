@@ -7,7 +7,8 @@ const DEFAULT_COLOR = Color.WHITE
 var debuffs: Array[EnemyDebuffInstance] = []
 
 func add_debuff(debuff: EnemyDebuff, amount: int, enemy: Enemy):
-	for i in range(amount):
+	var total_stacks = amount + debuff.extra_stacks
+	for i in range(total_stacks):
 		if get_stacks(debuff.type) >= debuff.max_stacks:
 			break
 		var instance: EnemyDebuffInstance = EnemyDebuffInstance.new(debuff)

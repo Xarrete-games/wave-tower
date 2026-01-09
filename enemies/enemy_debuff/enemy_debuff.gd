@@ -38,6 +38,7 @@ func clone(p_source: Object) -> EnemyDebuff:
 	new_enemy_debuff.duration = duration
 	new_enemy_debuff.tick_interval = tick_interval
 	new_enemy_debuff.max_stacks = max_stacks
+	new_enemy_debuff.extra_stacks = extra_stacks
 	new_enemy_debuff.source = p_source
 	return new_enemy_debuff
 
