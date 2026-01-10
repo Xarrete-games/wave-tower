@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bex288qqrmfs1"
-path="res://.godot/imported/relic_phoenix's_feather_relic.png-0a21b4829ec1bc23ef5a0f7f95c2bd7a.ctex"
+uid="uid://dowhe81rikfhj"
+path="res://.godot/imported/mic_relic.png-2557318dc44b5f216b5d583c43d2e0f3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/relic_phoenix's_feather_relic.png"
-dest_files=["res://.godot/imported/relic_phoenix's_feather_relic.png-0a21b4829ec1bc23ef5a0f7f95c2bd7a.ctex"]
+source_file="res://assets/sprites/relics/mic_relic.png"
+dest_files=["res://.godot/imported/mic_relic.png-2557318dc44b5f216b5d583c43d2e0f3.ctex"]
 
 [params]
 

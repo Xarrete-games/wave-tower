@@ -78,7 +78,10 @@ func _update_stats() -> void:
 	# damage
 	stats.damage = (base_stats.damage + total_stats_acc.flat_damage) * (1 + total_stats_acc.damage_mult)
 	# range
-	stats.attack_range = (base_stats.attack_range + total_stats_acc.flat_attack_range) * (1 + total_stats_acc.attack_range_mult)
+	var attack_range_multiplier: float = 1.0 + total_stats_acc.attack_range_mult
+	if tower_type == Tower.Type.FROST:
+		attack_range_multiplier += total_stats_acc.attack_range_mult_frost
+	stats.attack_range = (base_stats.attack_range + total_stats_acc.flat_attack_range) * attack_range_multiplier
 	# attack speed
 	var attack_speed_multiplier: float = 1.0 + total_stats_acc.attack_speed_mult
 	if tower_type == Tower.Type.LIGHTNING:
