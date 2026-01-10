@@ -9,6 +9,7 @@ signal on_target_change(enemy: Enemy)
 enum Type {RED, GREEN, BLUE}
 enum TargetingMode {FIRST_IN_PROGRESS, HIGH_HP, LOW_HP}
 
+const uuid_util = preload('res://addons/uuid/uuid.gd')
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
 @export var type: Type = Type.RED
@@ -39,9 +40,10 @@ var exp_data: TowerExpData:
 		stats_change.emit(self)
 
 var modifiers: Array[AttackModifier] = []
+var uid: String = uuid_util.v4()
 var damage_source: DamageSource:
 	get:
-		return DamageSource.new(DamageSource.Type.TOWER, name, get_script().get_global_name())
+		return DamageSource.new(DamageSource.Type.TOWER, uid, get_script().get_global_name())
 
 @onready var area_detector: AreaDetector = $AreaDetector
 @onready var range_preview: RangePreview = $RangePreview
