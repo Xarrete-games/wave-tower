@@ -1,7 +1,8 @@
 class_name IgnitionVoltage extends Relic
 
 func apply_effect() -> void:
-	RunContext.enemy_debuff_manager.burn_debuff.duration += 1
+	var tower_buff = TowerBuff.new(TowerBuff.SourceType.RELIC, id, AttackSpeedMultLightningModifier.new(0.15))
+	RunContext.towers_buffs.add_buff(tower_buff)
 
 func remove_effect() -> void:
-	RunContext.enemy_debuff_manager.burn_debuff.duration -= 1
+	RunContext.towers_buffs.remove_buff(id)

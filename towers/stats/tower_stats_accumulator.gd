@@ -9,6 +9,7 @@ var attack_range_mult: float = 0.0
 
 var flat_attack_speed: float = 0.0
 var attack_speed_mult: float = 0.0
+var attack_speed_mult_lightning: float = 0.0
 
 var flat_critic_chance: float = 0.0
 var critic_chance_mult: float = 0.0
@@ -38,6 +39,7 @@ func merge(other: TowerStatsAccumulator) -> TowerStatsAccumulator:
 
     result.flat_attack_speed = flat_attack_speed + other.flat_attack_speed
     result.attack_speed_mult = attack_speed_mult + other.attack_speed_mult
+    result.attack_speed_mult_lightning = attack_speed_mult_lightning + other.attack_speed_mult_lightning
 
     result.flat_critic_chance = flat_critic_chance + other.flat_critic_chance
     result.critic_chance_mult = critic_chance_mult + other.critic_chance_mult
