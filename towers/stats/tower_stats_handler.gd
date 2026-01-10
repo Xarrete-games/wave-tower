@@ -80,7 +80,10 @@ func _update_stats() -> void:
 	# range
 	stats.attack_range = (base_stats.attack_range + total_stats_acc.flat_attack_range) * (1 + total_stats_acc.attack_range_mult)
 	# attack speed
-	stats.attack_speed = (base_stats.attack_speed + total_stats_acc.flat_attack_speed) * (1 + total_stats_acc.attack_speed_mult)	
+	var attack_speed_multiplier: float = 1.0 + total_stats_acc.attack_speed_mult
+	if tower_type == Tower.Type.LIGHTNING:
+		attack_speed_multiplier += total_stats_acc.attack_speed_mult_lightning
+	stats.attack_speed = (base_stats.attack_speed + total_stats_acc.flat_attack_speed) * attack_speed_multiplier	
 	# critic change
 	stats.critic_chance = (base_stats.critic_chance + total_stats_acc.flat_critic_chance) * (1 + total_stats_acc.critic_chance_mult)
 	# critic damage
