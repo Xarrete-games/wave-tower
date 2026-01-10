@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxaqj2prnjstf"
-path="res://.godot/imported/relic_foxtail.png-5622170f09974db3a7e2b183992dfa88.ctex"
+uid="uid://chwkr01r8vyi5"
+path="res://.godot/imported/relic_foxtail.png-084e614b42efbe7584a2c47820a6ca9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/relic_foxtail.png"
-dest_files=["res://.godot/imported/relic_foxtail.png-5622170f09974db3a7e2b183992dfa88.ctex"]
+source_file="res://assets/sprites/relics/unused/relic_foxtail.png"
+dest_files=["res://.godot/imported/relic_foxtail.png-084e614b42efbe7584a2c47820a6ca9b.ctex"]
 
 [params]
 

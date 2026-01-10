@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbnvlr8ksrbpy"
-path="res://.godot/imported/relics_economy_manual_relic.png-bea12021bb9899f76efac6d750d8b985.ctex"
+uid="uid://irqjwkvb8yq3"
+path="res://.godot/imported/relics_economy_manual_relic.png-275f68cbb2065004be12a93d7e0e603c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/relics_economy_manual_relic.png"
-dest_files=["res://.godot/imported/relics_economy_manual_relic.png-bea12021bb9899f76efac6d750d8b985.ctex"]
+source_file="res://assets/sprites/relics/unused/relics_economy_manual_relic.png"
+dest_files=["res://.godot/imported/relics_economy_manual_relic.png-275f68cbb2065004be12a93d7e0e603c.ctex"]
 
 [params]
 
