@@ -27,7 +27,5 @@ func _ready() -> void:
 func _on_armor_change(amount: int) -> void:
 	if amount > 0:
 		armor_counter.visible = true
-		live_icon.visible = false
 	else:
 		armor_counter.visible = false
-		live_icon.visible = true

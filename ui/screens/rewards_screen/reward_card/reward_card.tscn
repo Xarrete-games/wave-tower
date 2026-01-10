@@ -34,14 +34,12 @@ render_target_update_mode = 4
 position = Vector2(104, 110)
 
 [node name="HexagonBorder" type="Polygon2D" parent="RelicIcon/Hexagon/Control/Root2d"]
-texture_filter = 2
 material = SubResource("CanvasItemMaterial_sdsj4")
 scale = Vector2(0.88, 0.88)
 color = Color(0.87, 0.5945, 0, 1)
 polygon = PackedVector2Array(0, 121, 104, 61, 104, -61, 0, -121, -104, -61, -104, 61)
 
 [node name="Hexagon" type="Polygon2D" parent="RelicIcon/Hexagon/Control/Root2d"]
-texture_filter = 2
 color = Color(0, 0, 0, 0.7058824)
 polygon = PackedVector2Array(0, 93, 80, 47, 80, -47, 0, -93, -80, -47, -80, 47)
 

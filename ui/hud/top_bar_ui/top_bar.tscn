@@ -70,13 +70,18 @@ size_flags_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 60
 
-[node name="HealthCounter" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_5yg88")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="HealthCounter" parent="VBoxContainer/HBoxContainer/HBoxContainer2" instance=ExtResource("3_5yg88")]
 layout_mode = 2
 
-[node name="Gold" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_tksin")]
+[node name="Gold" parent="VBoxContainer/HBoxContainer/HBoxContainer2" instance=ExtResource("4_tksin")]
 layout_mode = 2
+theme_override_constants/separation = 6
 
-[node name="InventoryUi" parent="VBoxContainer/HBoxContainer" instance=ExtResource("10_fdcnu")]
+[node name="InventoryUi" parent="VBoxContainer/HBoxContainer/HBoxContainer2" instance=ExtResource("10_fdcnu")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

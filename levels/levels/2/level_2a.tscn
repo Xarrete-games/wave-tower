@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b3rjk0365pn1t" path="res://levels/level_base.tscn" id="1_aspf4"]
 [ext_resource type="Resource" uid="uid://bm4xxhvoj4sle" path="res://levels/levels/waves/lv2_waves.tres" id="2_obaol"]
-[ext_resource type="TileSet" uid="uid://bd1ljp0k2isph" path="res://assets/sprites/tilesheet/TileSet_Cyan.tres" id="3_yaqfc"]
+[ext_resource type="TileSet" uid="uid://ck3nxmixydtbw" path="res://assets/sprites/tilesheet/TileSet_Cyan.tres" id="3_yaqfc"]
 [ext_resource type="PackedScene" uid="uid://b8g0wp8j02vu4" path="res://levels/portal/orange_portal.tscn" id="5_didll"]
 [ext_resource type="PackedScene" uid="uid://gb8anbp5v7hc" path="res://levels/portal/blue_portal.tscn" id="6_oxkye"]
 [ext_resource type="Texture2D" uid="uid://f4mk2v0vvh6c" path="res://assets/sprites/decoration/Tree3.png" id="7_7mqg3"]
@@ -37,9 +37,6 @@ level = 2
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD//wEAAAAIAAYAAAABAAEAAAAFAAcAAAAAAAEAAAAIAAYAAAD///7/AAAIAAcAAAAAAP7/AAAGAAcAAAABAP7/AAAFAAcAAAD///v/AAAFAAcAAAAAAPv/AAAHAAYAAAABAPv/AAAHAAYAAAAGAPT/AAAHAAcAAAAGAPX/AAAHAAYAAAAHAPT/AAAFAAcAAAAHAPX/AAAFAAcAAAAIAPT/AAAHAAYAAAAIAPX/AAAIAAcAAAAJAPT/AAAIAAcAAAAFAPT/AAAFAAcAAAAXAPT/AAAFAAcAAAAXAPX/AAAIAAcAAAAXAPb/AAAIAAYAAAAXAPf/AAAHAAcAAAAYAPT/AAAHAAcAAAAYAPX/AAAHAAYAAAAYAPb/AAAHAAYAAAAYAPf/AAAGAAcAAAAWAPT/AAAGAAcAAAAWAPX/AAAHAAYAAAAWAPb/AAAHAAYAAAAWAPf/AAAFAAcAAAAYAPj/AAAHAAcAAAAZAPn/AAAGAAcAAAAQAAcAAAAIAAcAAAAQAAgAAAAIAAYAAAARAAcAAAAIAAcAAAARAAgAAAAIAAYAAAASAAcAAAAFAAcAAAASAAgAAAAIAAcAAAAFAAkAAAAGAAcAAAAGAAkAAAAIAAcAAAAHAAkAAAAHAAcAAAAIAAkAAAAGAAcAAAAJAAkAAAAHAAYAAAAKAAkAAAAGAAcAAAALAAkAAAAGAAcAAAAMAAkAAAAIAAcAAAA=")
 tile_set = ExtResource("3_yaqfc")
-
-[node name="Visual" parent="." index="1"]
-visible = false
 
 [node name="Path2D1" type="Path2D" parent="EnemyPaths" index="0"]
 curve = SubResource("Curve2D_hdwwr")
