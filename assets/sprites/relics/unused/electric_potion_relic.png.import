@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2bvi6bwcc03l"
-path="res://.godot/imported/poison_relic.png-7fcf889ac52e6e0bfab566382e26facb.ctex"
+uid="uid://blew01gtockv7"
+path="res://.godot/imported/electric_potion_relic.png-fff2940855f40d1cc9875bac7d0ad44b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/unused/poison_relic.png"
-dest_files=["res://.godot/imported/poison_relic.png-7fcf889ac52e6e0bfab566382e26facb.ctex"]
+source_file="res://assets/sprites/relics/unused/electric_potion_relic.png"
+dest_files=["res://.godot/imported/electric_potion_relic.png-fff2940855f40d1cc9875bac7d0ad44b.ctex"]
 
 [params]
 

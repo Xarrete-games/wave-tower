@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5005y3cy88ya"
-path="res://.godot/imported/caffeine_potion_relic.png-327fb1885df952f8629dcb2eff52d699.ctex"
+uid="uid://xi06661ecnnh"
+path="res://.godot/imported/ice_potion_relic.png-79cd2669eaedc26546e457c3f220bab4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/unused/caffeine_potion_relic.png"
-dest_files=["res://.godot/imported/caffeine_potion_relic.png-327fb1885df952f8629dcb2eff52d699.ctex"]
+source_file="res://assets/sprites/relics/unused/ice_potion_relic.png"
+dest_files=["res://.godot/imported/ice_potion_relic.png-79cd2669eaedc26546e457c3f220bab4.ctex"]
 
 [params]
 
