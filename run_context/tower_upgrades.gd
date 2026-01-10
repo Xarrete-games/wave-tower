@@ -33,6 +33,9 @@ func remove_targeting_mode(mode: Tower.TargetingMode) -> void:
 		targeting_modes_change.emit(targeting_modes)
 
 func add_buff(new_buff: TowerBuff) -> void:
+	if new_buff.duration > 0:
+		RunContext.buff_scheduler.schedule(new_buff)
+
 	towers_buffs.append(new_buff)
 	var acc = TowerStatsAccumulator.new()
 	

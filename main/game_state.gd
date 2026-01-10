@@ -35,8 +35,10 @@ func is_using_item() -> bool:
 	return state == STATE.USING_ITEM
 
 func reset_run() -> void:
-
 	speed = 1.0
+
+func delay(seconds: float) -> void:
+	await get_tree().create_timer(seconds).timeout
 
 func _button_speed_pressed() -> void:
 	if speed == 1.0:

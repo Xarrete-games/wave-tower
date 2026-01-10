@@ -1,8 +1,6 @@
 # Run Context
 extends Node
 
-
-
 const DEATH_SCENE = preload("uid://dcq16u6g6ahsp")
 
 # flags
@@ -15,6 +13,7 @@ var economy: Economy
 var status: Status
 var towers_manager: TowersManager
 var towers_upgrades: TowersUpgrades
+var buff_scheduler: BuffScheduler
 var towers_price: TowersPrice
 var relics_manager: RelicsManager
 var consumables: Consumables
@@ -29,6 +28,7 @@ func reset_run() -> void:
 	status.player_died.connect(_on_die, CONNECT_ONE_SHOT)
 	towers_manager = TowersManager.new()
 	towers_upgrades = TowersUpgrades.new()
+	buff_scheduler = BuffScheduler.new()
 	towers_price = TowersPrice.new()
 	relics_manager = RelicsManager.new()
 	consumables = Consumables.new()

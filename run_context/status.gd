@@ -28,6 +28,11 @@ var armor: int = 0:
 func _init() -> void:
 	RunContext.progress.current_wave_finished.connect(_on_wave_finished)
 
+func heal(amount: int) -> void:
+	if amount <= 0:
+		return
+
+	health += amount
 
 func apply_damage(amount: int) -> void:
 	if amount <= 0:

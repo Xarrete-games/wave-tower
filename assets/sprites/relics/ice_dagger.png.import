@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boakyvejew8qv"
-path="res://.godot/imported/relic_runic_lighter_relic.png-999873da0e9b0e6ce37954faa3040911.ctex"
+uid="uid://bjbkhtpbkynvt"
+path="res://.godot/imported/ice_dagger.png-2d6df26e5f52f990f1ee1e42b6e005ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/unused/relic_runic_lighter_relic.png"
-dest_files=["res://.godot/imported/relic_runic_lighter_relic.png-999873da0e9b0e6ce37954faa3040911.ctex"]
+source_file="res://assets/sprites/relics/ice_dagger.png"
+dest_files=["res://.godot/imported/ice_dagger.png-2d6df26e5f52f990f1ee1e42b6e005ea.ctex"]
 
 [params]
 

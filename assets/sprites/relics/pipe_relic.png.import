@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2okx84bv0ekn"
-path="res://.godot/imported/boxing_gloves_relic.png-a2d74702615b5b25d0e06d794977efd8.ctex"
+uid="uid://boe6t6oolbxcm"
+path="res://.godot/imported/pipe_relic.png-ef1b0b913b43f5d4dacc034f4fce74e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/unused/boxing_gloves_relic.png"
-dest_files=["res://.godot/imported/boxing_gloves_relic.png-a2d74702615b5b25d0e06d794977efd8.ctex"]
+source_file="res://assets/sprites/relics/pipe_relic.png"
+dest_files=["res://.godot/imported/pipe_relic.png-ef1b0b913b43f5d4dacc034f4fce74e8.ctex"]
 
 [params]
 

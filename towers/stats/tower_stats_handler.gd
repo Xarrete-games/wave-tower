@@ -101,7 +101,7 @@ func _update_stats() -> void:
 func _on_current_wave_finished() -> void:
 	var buffs_to_remove: Array[TowerBuff] = []
 	for buff in local_buffs:
-		if buff.source_type == TowerBuff.SourceType.CONSUMABLE_TEMPORAL:
+		if buff.source_type == TowerBuff.SourceType.TEMPORAL_WAVE:
 			buffs_to_remove.append(buff)
 	for buff in buffs_to_remove:
 			remove_local_buff(buff)
