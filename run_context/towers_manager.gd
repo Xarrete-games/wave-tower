@@ -6,9 +6,9 @@ signal tower_hovered(tower: Tower)
 signal tower_unhovered(tower: Tower)
 
 var towers_placed: Dictionary[Tower.Type, int] = {
-	Tower.Type.RED: 0,
-	Tower.Type.BLUE: 0,
-	Tower.Type.GREEN: 0
+	Tower.Type.FIRE: 0,
+	Tower.Type.FROST: 0,
+	Tower.Type.LIGHTNING: 0
 }
 
 func _init() -> void:
@@ -16,9 +16,9 @@ func _init() -> void:
     RunContext.progress.current_level_changed.connect(_on_level_changed)
 
 func reset_towers() -> void:
-    _update_tower_count(Tower.Type.RED, 0)
-    _update_tower_count(Tower.Type.GREEN, 0)
-    _update_tower_count(Tower.Type.BLUE, 0)
+    _update_tower_count(Tower.Type.FIRE, 0)
+    _update_tower_count(Tower.Type.LIGHTNING, 0)
+    _update_tower_count(Tower.Type.FROST, 0)
 
 # called from tower_placer to inform
 func tower_added(tower: Tower) -> void:

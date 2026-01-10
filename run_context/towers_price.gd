@@ -17,15 +17,15 @@ enum TowerUpdate {
 }
 
 var base_prices: Dictionary[Tower.Type, int]= {
-	Tower.Type.RED: TowerBuild.RED,
-	Tower.Type.GREEN: TowerBuild.GREEN,
-	Tower.Type.BLUE: TowerBuild.BLUE,
+	Tower.Type.FIRE: TowerBuild.RED,
+	Tower.Type.LIGHTNING: TowerBuild.GREEN,
+	Tower.Type.FROST: TowerBuild.BLUE,
 }
 
 var update_prices: Dictionary[Tower.Type, int]= {
-	Tower.Type.RED: TowerUpdate.RED,
-	Tower.Type.GREEN: TowerUpdate.GREEN,
-	Tower.Type.BLUE: TowerUpdate.BLUE,
+	Tower.Type.FIRE: TowerUpdate.RED,
+	Tower.Type.LIGHTNING: TowerUpdate.GREEN,
+	Tower.Type.FROST: TowerUpdate.BLUE,
 }
 
 var build_prices: Dictionary[Tower.Type, int]= base_prices.duplicate()

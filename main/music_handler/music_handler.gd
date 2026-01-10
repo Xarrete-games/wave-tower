@@ -11,9 +11,9 @@ var tower_players: Dictionary
 
 func _ready() -> void:
 	tower_players = {
-		Tower.Type.RED: red_players,
-		Tower.Type.BLUE: blue_players,
-		Tower.Type.GREEN: green_players
+		Tower.Type.FIRE: red_players,
+		Tower.Type.FROST: blue_players,
+		Tower.Type.LIGHTNING: green_players
 	}
 	stop_music()
 	RunContext.towers_manager.tower_count_change.connect(_on_tower_count_change)

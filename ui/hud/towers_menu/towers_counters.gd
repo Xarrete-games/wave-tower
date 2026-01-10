@@ -14,6 +14,6 @@ func _ready():
 	
 func _on_tower_count_change(tower_type: Tower.Type, amount: int) -> void:
 	match tower_type:
-		Tower.Type.RED: red_tower_count.count = amount
-		Tower.Type.GREEN: green_tower_count.count = amount
-		Tower.Type.BLUE: blue_tower_count.count = amount
+		Tower.Type.FIRE: red_tower_count.count = amount
+		Tower.Type.LIGHTNING: green_tower_count.count = amount
+		Tower.Type.FROST: blue_tower_count.count = amount

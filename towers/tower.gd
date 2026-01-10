@@ -6,13 +6,13 @@ signal attack_fired()
 signal attack_speed_change(value: float)
 signal on_target_change(enemy: Enemy)
 
-enum Type {RED, GREEN, BLUE}
+enum Type {FIRE, LIGHTNING, FROST}
 enum TargetingMode {FIRST_IN_PROGRESS, HIGH_HP, LOW_HP}
 
 const uuid_util = preload('res://addons/uuid/uuid.gd')
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
-@export var type: Type = Type.RED
+@export var type: Type = Type.FIRE
 
 var configuration: TowerConfiguration
 var build_price: int = 0
