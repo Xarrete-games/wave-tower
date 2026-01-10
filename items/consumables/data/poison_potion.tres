@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8vi12c2nftkt" path="res://items/consumables/implementation/poison_potion.gd" id="1_htjlu"]
 [ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://items/consumables/consumable_item_data.gd" id="1_thdiu"]
-[ext_resource type="Texture2D" uid="uid://c2bvi6bwcc03l" path="res://assets/sprites/relics/unused/poison_relic.png" id="2_sgqh5"]
+[ext_resource type="Texture2D" uid="uid://bsq8n0trc4cop" path="res://assets/sprites/relics/purple_potion_relic.png" id="2_sgqh5"]
 
 [resource]
 script = ExtResource("1_thdiu")

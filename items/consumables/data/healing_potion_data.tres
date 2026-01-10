@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://by1han713lxt4" path="res://items/consumables/implementation/healing_potion.gd" id="1_mwose"]
 [ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://items/consumables/consumable_item_data.gd" id="1_rnvvc"]
-[ext_resource type="Texture2D" uid="uid://cfsnyq6pyfm2i" path="res://assets/sprites/relics/unused/healing_potion_relic.png" id="3_hvlx6"]
+[ext_resource type="Texture2D" uid="uid://0h4rqowhgg8m" path="res://assets/sprites/relics/heal_potions_relic.png" id="3_hvlx6"]
 
 [resource]
 script = ExtResource("1_rnvvc")
