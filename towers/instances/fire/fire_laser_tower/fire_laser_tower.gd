@@ -23,7 +23,7 @@ func _on_extra_stats_change(extra_stats: TowerExtraStats) -> void:
 func _fire() -> void:
 	var next_attack = _get_attack() if _current_target.get_percentage_remaining_health() > execute_threshold else _get_letal_attack()
 
-	var debuff = RunContext.enemy_debuff.get_debuff(EnemyDebuff.Type.BURN, self) if apply_burn else null
+	var debuff = RunContext.enemy_debuff_manager.get_debuff(EnemyDebuff.Type.BURN, damage_source) if apply_burn else null
 	red_projectile.set_target(_current_target, next_attack, debuff)
 	red_projectile.hit_target()
 	cristal_light.turn_on()

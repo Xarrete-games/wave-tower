@@ -1,5 +1,5 @@
 
-class_name TowersUpgrades extends RefCounted
+class_name TowersBuffs extends RefCounted
 
 signal tower_buffs_change(new_stats: TowerStatsAccumulator)
 signal targeting_modes_change(new_modes: Array[Tower.TargetingMode])

@@ -5,7 +5,7 @@ signal changed
 enum Type { FROST, BURN }
 
 var type: Type
-var source: Object
+var source: DamageSource
 var value: float = 0.0:
 	set(v):
 		value = v
@@ -25,8 +25,7 @@ var extra_stacks: int = 0:
 
 var max_stacks: int = 99
 
-
-func clone(p_source: Object) -> EnemyDebuff:
+func clone(p_source: DamageSource) -> EnemyDebuff:
 	var new_enemy_debuff: EnemyDebuff
 	if self is BurnDebuff:
 		new_enemy_debuff = BurnDebuff.new()

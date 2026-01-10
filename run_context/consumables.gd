@@ -1,4 +1,4 @@
-class_name Consumables extends RefCounted
+class_name ConsumablesManager extends RefCounted
 
 signal consumables_change(consumables: Array[Consumable])
 signal consumable_added(consumable: Consumable)

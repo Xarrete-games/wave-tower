@@ -17,4 +17,4 @@ func _init(p_source_type: SourceType, p_source_id: String, p_value: float = 0.0)
 	value = p_value
 
 @abstract
-func modify_damage(enemy: Enemy, acc: DamageModifierAcc) -> void
+func modify_damage(enemy: Enemy, acc: DamageTakenModifierAcc) -> void

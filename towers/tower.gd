@@ -39,6 +39,9 @@ var exp_data: TowerExpData:
 		stats_change.emit(self)
 
 var modifiers: Array[AttackModifier] = []
+var damage_source: DamageSource:
+	get:
+		return DamageSource.new(DamageSource.Type.TOWER, name, get_script().get_global_name())
 
 @onready var area_detector: AreaDetector = $AreaDetector
 @onready var range_preview: RangePreview = $RangePreview
@@ -55,15 +58,15 @@ func _ready():
 	configuration.build()
 	range_collision.shape = CircleShape2D.new()
 	# modifiers
-	modifiers = RunContext.towers_upgrades.get_modifiers()
-	RunContext.towers_upgrades.targeting_modes_change.connect(func(new_modes: Array[Tower.TargetingMode]) -> void:
+	modifiers = RunContext.towers_buffs.get_modifiers()
+	RunContext.towers_buffs.targeting_modes_change.connect(func(new_modes: Array[Tower.TargetingMode]) -> void:
 		if targeting_mode not in new_modes:
 			targeting_mode = TargetingMode.FIRST_IN_PROGRESS
 	)
-	RunContext.towers_upgrades.attack_modifiers_added.connect(func(new_modifier: AttackModifier) -> void:
+	RunContext.towers_buffs.attack_modifiers_added.connect(func(new_modifier: AttackModifier) -> void:
 		modifiers.append(new_modifier)
 	)
-	RunContext.towers_upgrades.attack_modifiers_removed.connect(func(source_id: String) -> void:
+	RunContext.towers_buffs.attack_modifiers_removed.connect(func(source_id: String) -> void:
 		modifiers = modifiers.filter(func(mod: AttackModifier) -> bool:
 			return mod.source_id != source_id
 		)
@@ -128,7 +131,7 @@ func _get_attack() -> Attack:
 	var is_critic = _is_critical_hit()
 	var attack_damage = stats.damage * (1 + (stats.critic_damage / 100)) if is_critic else stats.damage
 	var damage_type = DamageNumbers.Type.CRITICAL if is_critic else DamageNumbers.Type.NORMAL
-	var attack = Attack.new(attack_damage, damage_type, self)
+	var attack = Attack.new(attack_damage, damage_type, damage_source)
 
 	var attack_context = AttackContext.new(_current_target, attack, is_critic)
 	for modifier in modifiers:

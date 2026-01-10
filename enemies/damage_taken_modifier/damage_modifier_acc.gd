@@ -1,10 +1,10 @@
-class_name DamageModifierAcc extends RefCounted
+class_name DamageTakenModifierAcc extends RefCounted
 
-var source: Object
-var origin: Object
+var damage_source: DamageSource
+var damage_origin_source: DamageSource
 var damage_mult: float = 1.0
 var flat_damage: float = 0.0
 
-func _init(p_source: Object, p_origin: Object) -> void:
-    source = p_source
-    origin = p_origin
+func _init(p_source: DamageSource, p_origin: DamageSource) -> void:
+    damage_source = p_source
+    damage_origin_source = p_origin

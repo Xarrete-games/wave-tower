@@ -7,7 +7,7 @@ func _fire() -> void:
 	var projectile: SingleTargetProjectile = projectile_scene.instantiate()
 	add_child(projectile)
 	projectile.global_position = projectile_spawn_pos.global_position
-	projectile.set_target(_current_target,  _get_attack(), RunContext.enemy_debuff.get_debuff(EnemyDebuff.Type.BURN, self))
+	projectile.set_target(_current_target,  _get_attack(), RunContext.enemy_debuff_manager.get_debuff(EnemyDebuff.Type.BURN, damage_source))
 	
 func _on_extra_stats_change(_tower_extra_stats: TowerExtraStats) -> void:
 	pass

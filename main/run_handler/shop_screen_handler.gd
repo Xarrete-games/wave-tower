@@ -26,4 +26,4 @@ func _on_item_purchased(item_offer: ItemOffer) -> void:
 		RunContext.offers_manager.increase_relic_offer_price(item_offer)
 		RunContext.relics_manager.add_relic(item)
 	elif item is Consumable:
-		RunContext.consumables.add_consumable(item)
+		RunContext.consumables_manager.add_consumable(item)

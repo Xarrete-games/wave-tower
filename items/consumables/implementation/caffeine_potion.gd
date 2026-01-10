@@ -7,4 +7,4 @@ func use() -> void:
 	var debuff = TowerBuff.new(TowerBuff.SourceType.CONSUMABLE, bad_buff_id, AttackSpeedMultModifier.new(-0.2), 5)
 	var buff = TowerBuff.new(TowerBuff.SourceType.CONSUMABLE, good_buff_id, AttackSpeedMultModifier.new(0.2), 5)
 	buff.residual_buff = debuff
-	RunContext.towers_upgrades.add_buff(buff)
+	RunContext.towers_buffs.add_buff(buff)

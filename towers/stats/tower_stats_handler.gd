@@ -44,8 +44,8 @@ func set_data(
 	# tower type
 	tower_type = p_tower_type
 	# global buffs
-	_set_global_buffs(RunContext.towers_upgrades.towers_stats_accumulator)
-	RunContext.towers_upgrades.tower_buffs_change.connect(_set_global_buffs)
+	_set_global_buffs(RunContext.towers_buffs.towers_stats_accumulator)
+	RunContext.towers_buffs.tower_buffs_change.connect(_set_global_buffs)
 
 func add_local_buff(tower_buff: TowerBuff) -> void:
 	local_buffs.append(tower_buff)

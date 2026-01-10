@@ -14,7 +14,7 @@ var damage_taken_modifiers: Array[DamageTakenModifier] = []
 func _init() -> void:
 	_bind_signals()
 
-func get_debuff(type: EnemyDebuff.Type, source: Object) -> EnemyDebuff:
+func get_debuff(type: EnemyDebuff.Type, source: DamageSource) -> EnemyDebuff:
 	match type:
 		EnemyDebuff.Type.BURN:
 			return burn_debuff.clone(source)

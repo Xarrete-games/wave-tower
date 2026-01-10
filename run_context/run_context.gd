@@ -12,12 +12,12 @@ var progress: RunProgress
 var economy: Economy
 var status: Status
 var towers_manager: TowersManager
-var towers_upgrades: TowersUpgrades
+var towers_buffs: TowersBuffs
 var buff_scheduler: BuffScheduler
 var towers_price: TowersPrice
 var relics_manager: RelicsManager
-var consumables: Consumables
-var enemy_debuff: EnemyDebuffManager
+var consumables_manager: ConsumablesManager
+var enemy_debuff_manager: EnemyDebuffManager
 var enemy_manager: EnemyManager
 
 func reset_run() -> void:
@@ -27,12 +27,12 @@ func reset_run() -> void:
 	status = Status.new()
 	status.player_died.connect(_on_die, CONNECT_ONE_SHOT)
 	towers_manager = TowersManager.new()
-	towers_upgrades = TowersUpgrades.new()
+	towers_buffs = TowersBuffs.new()
 	buff_scheduler = BuffScheduler.new()
 	towers_price = TowersPrice.new()
 	relics_manager = RelicsManager.new()
-	consumables = Consumables.new()
-	enemy_debuff = EnemyDebuffManager.new()
+	consumables_manager = ConsumablesManager.new()
+	enemy_debuff_manager = EnemyDebuffManager.new()
 	enemy_manager = EnemyManager.new()
 	is_on_restarting = false
 

@@ -10,7 +10,7 @@ var _current_target: Variant
 @onready var level_tile_map: LevelTileMap = %'LevelTileMap'
 
 func _ready() -> void:
-	RunContext.consumables.consumable_clicked.connect(_on_consumable_clicked)
+	RunContext.consumables_manager.consumable_clicked.connect(_on_consumable_clicked)
 	GameState.state_change.connect(_on_game_state_changed)
 	ClickEvents.tower_hovered.connect(_on_tower_hovered)
 	ClickEvents.tower_unhovered.connect(_on_tower_unhovered)

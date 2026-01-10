@@ -70,8 +70,8 @@ func _ready() -> void:
 	_set_health(max_health)
 	
 	#damage taken modifiers
-	damage_taken_modifiers = RunContext.enemy_debuff.get_modifiers()
-	RunContext.enemy_debuff.modifier_change.connect(
+	damage_taken_modifiers = RunContext.enemy_debuff_manager.get_modifiers()
+	RunContext.enemy_debuff_manager.modifier_change.connect(
 		func(modifiers: Array[DamageTakenModifier]):
 			damage_taken_modifiers = modifiers
 	)
@@ -163,7 +163,7 @@ func apply_damage(attack: Attack) -> void:
 	if _is_dead:
 		return
 
-	var acc: DamageModifierAcc = DamageModifierAcc.new(attack.source, attack.origin)
+	var acc: DamageTakenModifierAcc = DamageTakenModifierAcc.new(attack.source, attack.origin_source)
 	for modifier in damage_taken_modifiers:
 		modifier.modify_damage(self, acc)
 

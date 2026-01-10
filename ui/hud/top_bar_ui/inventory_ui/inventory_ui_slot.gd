@@ -6,7 +6,7 @@ class_name InventoryUISlot extends Control
 var _consumable: Consumable = null
 
 func _ready() -> void:
-	RunContext.consumables.consumable_used.connect(_on_consumable_used)
+	RunContext.consumables_manager.consumable_used.connect(_on_consumable_used)
 
 func is_empty() -> bool:
 	return _consumable == null
