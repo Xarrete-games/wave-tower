@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsq8n0trc4cop"
-path="res://.godot/imported/purple_potion_relic.png-ea8cd52a87ab310b641053b5d0cd3b56.ctex"
+uid="uid://fs42dhxyqix8"
+path="res://.godot/imported/magic_ring_relic.png-9ab986d1089e3166341159e4a74a6965.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/purple_potion_relic.png"
-dest_files=["res://.godot/imported/purple_potion_relic.png-ea8cd52a87ab310b641053b5d0cd3b56.ctex"]
+source_file="res://assets/sprites/consumables/magic_ring_relic.png"
+dest_files=["res://.godot/imported/magic_ring_relic.png-9ab986d1089e3166341159e4a74a6965.ctex"]
 
 [params]
 

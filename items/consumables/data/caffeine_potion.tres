@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bvndav3x5pajy" path="res://items/consumables/implementation/caffeine_potion.gd" id="1_bm5oe"]
 [ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://items/consumables/consumable_item_data.gd" id="1_nuh8w"]
-[ext_resource type="Texture2D" uid="uid://dsjkf3g2vpu4y" path="res://assets/sprites/relics/caffeine_potion_relic.png" id="3_bqxjs"]
+[ext_resource type="Texture2D" uid="uid://dsjkf3g2vpu4y" path="res://assets/sprites/consumables/caffeine_potion_relic.png" id="3_bqxjs"]
 
 [resource]
 script = ExtResource("1_nuh8w")
