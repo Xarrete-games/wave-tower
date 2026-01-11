@@ -46,7 +46,10 @@ func is_mouse_on_buildeable_tile() -> bool:
 	return true
 
 func destroy_random_buildeable_tile() -> void:
-	var buildeable_tiles_array = _buildeable_tiles.keys()
+	var buildeable_tiles_array = _buildeable_tiles.keys().filter(func(tile_pos: Vector2i):
+		return not _blocked_tiles.has(tile_pos)
+	)
+	
 	if buildeable_tiles_array.is_empty():
 		return
 	var rand_index = randi() % buildeable_tiles_array.size()
