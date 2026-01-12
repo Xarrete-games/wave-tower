@@ -34,6 +34,13 @@ func heal(amount: int) -> void:
 
 	health += amount
 
+func add_max_health(amount: int) -> void:
+	if amount <= 0:
+		return
+
+	max_health += amount
+	health += amount
+
 func apply_damage(amount: int) -> void:
 	if amount <= 0:
 		return

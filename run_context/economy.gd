@@ -57,3 +57,6 @@ var available_free_towers: int = 0:
 var _relics_discount_mult: float = 0.0
 var _towers_discount_mult: float = 0.0
 var _consumables_discount_mult: float = 0.0
+
+func add_gold(amount: int) -> void:
+	gold += amount
