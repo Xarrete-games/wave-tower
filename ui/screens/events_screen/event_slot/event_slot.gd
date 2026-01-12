@@ -11,7 +11,7 @@ var _event: EventData
 func set_event(event: EventData) -> void:
 	event_texture.texture = event.icon
 	description_label.text = event.description
-	title_lable.text = event.id
+	title_lable.text = event.title
 	_event = event
 	
 func _on_gui_input(event: InputEvent) -> void:

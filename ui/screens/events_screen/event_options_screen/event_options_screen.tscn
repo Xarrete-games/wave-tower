@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://booaj13prrqkb"]
+
+[ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="1_0pqbo"]
+[ext_resource type="Texture2D" uid="uid://hdde3gfutbf5" path="res://assets/images/events/buda_event.png" id="2_3iddy"]
+[ext_resource type="Script" uid="uid://bbdtqbsv17hei" path="res://ui/screens/events_screen/event_options_screen/event_options_screen.gd" id="2_o48s5"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="2_oi3iw"]
+[ext_resource type="PackedScene" uid="uid://etr820jx2t64" path="res://ui/screens/events_screen/event_options_screen/event_option_button.tscn" id="3_u6cdb"]
+[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="4_gu0n2"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="5_cpdtn"]
+
+[node name="EventOptionsScreen" type="PanelContainer" node_paths=PackedStringArray("buttons_container", "texture_rect", "title_label", "description_label")]
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_0pqbo")
+script = ExtResource("2_o48s5")
+button_option_scene = ExtResource("3_u6cdb")
+buttons_container = NodePath("MarginContainer/VBoxContainer/OptionsContainer")
+texture_rect = NodePath("MarginContainer/VBoxContainer/DataContainer/TextureRect")
+title_label = NodePath("MarginContainer/VBoxContainer/DataContainer/TitleLabel")
+description_label = NodePath("MarginContainer/VBoxContainer/DataContainer/DescriptionLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="DataContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/DataContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+texture = ExtResource("2_3iddy")
+expand_mode = 1
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/DataContainer"]
+layout_mode = 2
+text = "Buda temple"
+label_settings = ExtResource("2_oi3iw")
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer/DataContainer"]
+layout_mode = 2
+text = "A strange Budha temple appears"
+label_settings = ExtResource("4_gu0n2")
+horizontal_alignment = 1
+
+[node name="OptionsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="XarreteActionButton" parent="MarginContainer/VBoxContainer/OptionsContainer" instance=ExtResource("5_cpdtn")]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Enter the temple"
+
+[node name="XarreteActionButton2" parent="MarginContainer/VBoxContainer/OptionsContainer" instance=ExtResource("5_cpdtn")]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Go out"

@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_bsg6w")
 id = "Shop"
+title = "Shop"
 description = "Open a shop"
 icon = ExtResource("1_jftsn")
-metadata/_custom_type_script = "uid://dweoba1f2xgu7"

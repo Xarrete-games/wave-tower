@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_t1y8r")
-id = "Buda"
+id = "buda"
 display_name = "Buda"
 description = "Increases max health by 1 for each tower you place"
 texture = ExtResource("2_s2dvm")

@@ -18,3 +18,6 @@ enum Type {
 @export var runtime_script: Script
 
 var type: Type
+
+func create_item() -> Object:
+	return runtime_script.new(self)

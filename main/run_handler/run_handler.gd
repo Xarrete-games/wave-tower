@@ -5,12 +5,15 @@ const NEXT_LEVEL_SCREEN = preload("uid://crastw7xnqgvl")
 const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 const WAVES_WITH_EVENTS = [1,3,6,9]
 
+var events: Array[EventData]
+
 @export var event_layer: CanvasLayer
 @export var events_screen_hander: EventsScreenHandler
 @export var rewards_screen_handler: RewardsScreenHandler 
 
 
 func _ready() -> void:
+	events = DataLoader.get_all_events()
 	RunContext.progress.current_wave_finished.connect(_on_wave_finished)
 	RunContext.progress.last_wave_finished.connect(_on_last_wave_finished)
 	RunContext.progress.current_level_changed.connect(_on_new_level_loaded)

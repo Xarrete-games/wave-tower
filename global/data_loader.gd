@@ -18,6 +18,12 @@ func _ready() -> void:
 # ---------------------------------------------------------
 # PUBLIC API
 # ---------------------------------------------------------
+func get_relic_by_id(relic_id: String) -> ItemData:
+	for relic in relics:
+		if relic.id == relic_id:
+			return relic
+	return null
+
 func get_all_relics() -> Array[ItemData]:
 	return relics.duplicate()
 

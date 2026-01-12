@@ -8,6 +8,7 @@ var events: Array[EventData]
 var event_layer: CanvasLayer
 
 @onready var shop_screen_handler: ShopScreenHandler = $ShopScreenHandler
+@onready var events_options_screen_handler: EventsOptionsScreenHandler = $EventsOptionsScreenHandler
 
 func _ready() -> void:
 	events = DataLoader.get_all_events()
@@ -28,5 +29,5 @@ func _on_event_selected(event: EventData) -> void:
 	if event.type == EventData.Type.SHOP:
 		shop_screen_handler.open_shop(event_layer)
 		shop_screen_handler.shop_closed.connect(func(): event_finished.emit(), CONNECT_ONE_SHOT)
-	else:
-		push_error("[EVENT HANDLER] Invalid event")
+	elif event.type == EventData.Type.OPTIONS:
+		await events_options_screen_handler.show_options_event(event, event_layer)
