@@ -1,6 +1,6 @@
 class_name RelicOffersManager extends RefCounted
 
-var all_relic_data: Array[ItemData] = []
+var all_relic_data: Array[RelicItemData] = []
 
 func _init() -> void:
 	all_relic_data = DataLoader.get_all_relics()
