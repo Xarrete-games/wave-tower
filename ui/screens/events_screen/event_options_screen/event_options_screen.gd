@@ -22,19 +22,24 @@ func set_event(event_data: EventData) -> void:
 
 	# Create option buttons
 	var index: int = 0
-	for option_text in event_data.options:
+
+	if not event_data.runtime_script:
+		push_error("Event data %s has no runtime script assigned." % event_data.id)
+		return
+	event_script_instance = event_data.runtime_script.new()
+
+	for option_data in event_script_instance.get_options():
 		var button_option: EventOptionButton = button_option_scene.instantiate()
 		buttons_container.add_child(button_option)
-		button_option.text = option_text
-		button_option.option_index = index
+		button_option.text = option_data.text
+		button_option.option_data = option_data.data
+		button_option.name = "OptionButton_%d" % index
 		index += 1
 		button_option.option_selected.connect(_on_option_selected
 		)
-	if event_data.runtime_script:
-		event_script_instance = event_data.runtime_script.new()
-
-func _on_option_selected(option_index: int) -> void:
+	
+func _on_option_selected(data: Variant) -> void:
 	if event_script_instance:
-		event_script_instance.handle_response(option_index)
+		event_script_instance.handle_response(data)
 	event_completed.emit()
 	queue_free()

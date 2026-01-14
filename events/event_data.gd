@@ -8,7 +8,6 @@ enum Role { FRIENDLY, RANDOM, HOSTILE }
 @export var role: Role
 @export var title: String
 @export_multiline var description: String
-@export var options: Array[String]
 @export var icon: Texture2D
 @export var texture_background: Texture2D
 @export_group("Script")
