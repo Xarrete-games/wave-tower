@@ -6,7 +6,6 @@
 
 [resource]
 script = ExtResource("1_ygegg")
-consumable_type = 1
 id = "magic_ring"
 display_name = "Magic Ring"
 description = "The next tower is free."

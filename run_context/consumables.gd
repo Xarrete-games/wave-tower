@@ -11,6 +11,9 @@ func is_full() -> bool:
     return consumables.size() == 5
 
 func add_consumable(consumable: Consumable) -> void:
+    if is_full():
+        return
+
     consumables.append(consumable)
     consumable.clicked.connect(_on_consumable_clicked)
     consumable.used.connect(_on_consumable_used)

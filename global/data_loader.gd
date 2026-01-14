@@ -42,6 +42,11 @@ func get_all_events() -> Array[EventData]:
 func get_all_consumables() -> Array[ConsumableItemData]:
 	return consumables.duplicate()
 
+func get_all_consumables_of_type(consumable_type: Consumable.Type) -> Array[ConsumableItemData]:
+	return consumables.filter(func(data: ConsumableItemData):
+		return data.consumable_type == consumable_type
+	)
+
 # ---------------------------------------------------------
 # INTERNAL LOADING HELPERS
 # ---------------------------------------------------------
