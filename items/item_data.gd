@@ -1,9 +1,6 @@
 class_name ItemData extends Resource
 
-enum Type {
-    CONSUMABLE,
-    RELIC,
-}
+
 @export_group("General")
 @export var id: String
 @export_multiline var display_name: String
@@ -16,8 +13,6 @@ enum Type {
 @export var price_increased: bool = true
 @export_group("Script")
 @export var runtime_script: Script
-
-var type: Type
 
 func create_item() -> Object:
 	return runtime_script.new(self)

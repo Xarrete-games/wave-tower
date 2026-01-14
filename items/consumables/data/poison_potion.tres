@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_thdiu")
+consumable_type = 1
 id = "poison_potion"
 display_name = "Poison potion"
 description = "Lose 10 points of health by drinking it"

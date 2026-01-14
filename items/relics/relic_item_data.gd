@@ -5,6 +5,3 @@ class_name RelicItemData extends ItemData
 @export var is_cursed: bool = false
 @export var only_for_events: bool = false
 @export var max_stacks: int = 1
-
-func _init():
-    type = ItemData.Type.RELIC

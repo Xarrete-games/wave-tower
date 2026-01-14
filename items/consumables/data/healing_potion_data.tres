@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_rnvvc")
+consumable_type = 1
 id = "healing_potion"
 display_name = "Healing Potion
 "

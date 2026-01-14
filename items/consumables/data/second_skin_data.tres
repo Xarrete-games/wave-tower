@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_lha01")
+consumable_type = 1
 id = "second_skin"
 display_name = "Second skin"
 description = "Adds 10 armor"

@@ -10,7 +10,6 @@ var disabled: bool = false
 
 func _init(data: RelicItemData) -> void:
 	super(data)
-	type = ItemData.Type.RELIC
 	rarity = data.rarity
 	max_stacks = data.max_stacks
 	is_cursed = data.is_cursed

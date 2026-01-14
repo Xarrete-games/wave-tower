@@ -8,6 +8,7 @@
 
 [resource]
 script = ExtResource("1_o6u08")
+consumable_type = 1
 targeting_type = 1
 cursor_icon = ExtResource("1_2q3p8")
 cursor_icon_used = ExtResource("2_531ys")

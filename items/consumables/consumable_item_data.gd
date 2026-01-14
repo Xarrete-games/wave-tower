@@ -1,6 +1,7 @@
 class_name ConsumableItemData extends ItemData
 
 @export_group("Consumable")
+@export var consumable_type: Consumable.Type
 @export var targeting_type: ConsumableTargeteable.TargetType
 @export var cursor_icon: Texture2D
 @export var cursor_icon_used: Texture2D

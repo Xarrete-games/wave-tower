@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_nuh8w")
+consumable_type = 1
 id = "caffeine_potion"
 display_name = "Caffeine potion"
 description = "Increases the attack speed of all towers by 20% for 10 seconds. Then reduces the attack speed of all towers by 20% for 5 seconds."

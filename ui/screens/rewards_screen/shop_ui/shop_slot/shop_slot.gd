@@ -42,7 +42,7 @@ func set_item(item_offer: ItemOffer) -> void:
 	_item = item_offer
 	
 func _on_gui_input(event: InputEvent) -> void:
-	if _item.item_data.type == ItemData.Type.CONSUMABLE and RunContext.consumables_manager.is_full():
+	if _item.item_data is ConsumableItemData and RunContext.consumables_manager.is_full():
 		return
 
 	if Utils.is_left_click_event(event) and RunContext.economy.gold >= _price and has_enough_health:
@@ -57,11 +57,11 @@ func _on_mouse_exited() -> void:
 	shop_slot_icon.icon_normal_size()
 
 func _on_relics_discount_changed(_relics_discount_mult: float) -> void:
-	if _item.item_data.type == ItemData.Type.RELIC:
+	if _item.item_data is RelicItemData:
 		set_item(RunContext.offers_manager.create_relic_offer_from_data(_item.item_data))
 
 func _on_consumable_discount_changed(_consumables_discount_mult: float) -> void:
-	if _item.item_data.type == ItemData.Type.CONSUMABLE:
+	if _item.item_data is ConsumableItemData:
 		set_item(RunContext.offers_manager.create_consumable_offer_from_data(_item.item_data))
 
 func _chek_health(current_health: int, health_cost: int) -> void:
