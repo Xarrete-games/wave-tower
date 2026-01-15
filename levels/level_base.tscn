@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://oesepsa8dbuy" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.tscn" id="9_p3adb"]
 
 [node name="LevelBase" type="Node2D" node_paths=PackedStringArray("enemy_paths")]
-y_sort_enabled = true
 script = ExtResource("1_gmgay")
 enemy_paths = NodePath("EnemyPaths")
 

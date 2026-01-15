@@ -28,6 +28,10 @@ func get_relic_by_id(relic_id: String) -> ItemData:
 func get_all_relics() -> Array[RelicItemData]:
 	return relics.duplicate()
 
+func get_not_used_relics() -> Array[RelicItemData]:
+	return relics.filter(func(relic_data: RelicItemData):
+		return not RunContext.relics_manager.is_maxed(relic_data.id)
+	)
 # ---------------------------------------------------------
 # EVENTS API
 # ---------------------------------------------------------
