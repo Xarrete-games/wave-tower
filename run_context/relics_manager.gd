@@ -18,6 +18,8 @@ var relics_count: Dictionary[String, int] = {}
 var relics: Dictionary[String, Relic] = {
 }
 
+func get_all_relics() -> Array[Relic]:
+	return relics.values()
 
 func is_maxed(relic_id: String) -> bool:
 	var count = relics_count.get(relic_id, 0)
