@@ -1,7 +1,7 @@
 @abstract
 class_name Relic extends GameItem
 
-enum Rarity { COMMON, RARE, EPIC}
+enum Rarity { COMMON, RARE, EPIC, ALL }
 
 var rarity: Rarity
 var max_stacks: int = 1

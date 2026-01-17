@@ -11,6 +11,7 @@ var relic_colors: Dictionary[Relic.Rarity, Color] = {
 	Relic.Rarity.COMMON: COMMON_COLOR,
 	Relic.Rarity.RARE: RARE_COLOR,
 	Relic.Rarity.EPIC: EPIC_COLOR,
+	Relic.Rarity.ALL: COMMON_COLOR,
 }
 
 var relics_count: Dictionary[String, int] = {} 

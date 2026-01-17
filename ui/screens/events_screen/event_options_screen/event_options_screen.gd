@@ -35,6 +35,9 @@ func set_event(event_data: EventData) -> void:
 		button_option.option_data = option_data.data
 		button_option.name = "OptionButton_%d" % index
 		index += 1
+		if option_data.disabled:
+			button_option.disable_option()
+
 		button_option.option_selected.connect(_on_option_selected
 		)
 	
