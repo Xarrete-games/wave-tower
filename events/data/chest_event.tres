@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=5 format=3 uid="uid://d3sc0y68wuink"]
+
+[ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/sprites/icons/wcoin.png" id="1_6hylt"]
+[ext_resource type="Script" uid="uid://bj6frpye8hpbn" path="res://events/event_data.gd" id="1_44kid"]
+[ext_resource type="Script" uid="uid://cwhohvrkyys10" path="res://events/scripts/chest_event_script.gd" id="2_2sy50"]
+[ext_resource type="Texture2D" uid="uid://dufq6mbrugsc6" path="res://assets/images/events/chest_event.png" id="3_2sy50"]
+
+[resource]
+script = ExtResource("1_44kid")
+id = "chest_event"
+type = 1
+role = 1
+title = "The Chest"
+description = "An old chest sits quietly in your path.
+It could hold something valuable… or something cursed.
+Do you open it, or leave it untouched?"
+icon = ExtResource("1_6hylt")
+texture_background = ExtResource("3_2sy50")
+runtime_script = ExtResource("2_2sy50")
+metadata/_custom_type_script = "uid://bj6frpye8hpbn"

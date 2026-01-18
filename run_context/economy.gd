@@ -14,6 +14,8 @@ var is_soya_sauce_active: bool = false:
 		towers_discount_mult = _towers_discount_mult
 		consumables_discount_mult = _consumables_discount_mult
 
+var is_lemon_active: bool = false
+
 var gold: int = 1000:
 	set(value):
 		if value >= gold:

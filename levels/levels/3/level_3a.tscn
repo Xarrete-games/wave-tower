@@ -53,8 +53,5 @@ position = Vector2(454.99994, -942)
 [node name="BluePortal2" parent="." index="8" instance=ExtResource("5_7yhna")]
 position = Vector2(1698, 51.99994)
 
-[node name="Decoration" type="Node2D" parent="." index="11"]
-visible = false
-
-[node name="fog" parent="." index="12" instance=ExtResource("13_bxyko")]
+[node name="fog" parent="." index="11" instance=ExtResource("13_bxyko")]
 visible = false

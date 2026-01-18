@@ -7,6 +7,8 @@ const BOOT = preload("uid://bfm0i7ehshgsf")
 @export var pause : PackedScene
 @export var current_level_number: int = 1
 @export var initial_random_relics: int = 0
+@export var initial_relics_ids: Array[String] = []
+@export var trigger_finish_wave: bool = false
 
 var _current_level: Level
 
@@ -20,14 +22,12 @@ func _ready():
 	ClickEvents.config_button_pressed.connect(_open_config_menu)
 	ClickEvents.next_level_pressed.connect(go_next_level)
 	ClickEvents.reset_game_button_pressed.connect(reset_game)
-	
-	var items = RunContext.offers_manager.create_relic_offers(initial_random_relics)
-	for item in items:
-		var relic = item.create_item() as Relic
-		RunContext.relics_manager.add_relic(relic)
 	RunContext.progress.total_levels = levels_paths.size()
 	GameState.state = GameState.STATE.IN_GAME
 	_load_level(current_level_number)
+	_handle_initial_relics()
+	if trigger_finish_wave:
+		RunContext.progress.current_wave_finished.emit()
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
@@ -39,6 +39,22 @@ func reset_game() -> void:
 	RunContext.is_on_restarting = true
 	var boot = load("uid://bfm0i7ehshgsf")
 	get_tree().change_scene_to_packed(boot)
+
+
+func _handle_initial_relics() -> void:
+	if initial_relics_ids.size() > 0:
+		for relic_id in initial_relics_ids:
+			var relic_data = DataLoader.get_relic_by_id(relic_id)
+			if relic_data:
+				var relic_instance = relic_data.create_item() as Relic
+				RunContext.relics_manager.add_relic(relic_instance)
+			else:
+				push_error("[Game]: initial relic id %s not found" % relic_id)
+	if initial_random_relics > 0:
+		var items = RunContext.offers_manager.create_relic_offers(initial_random_relics)
+		for item in items:
+			var relic = item.create_item() as Relic
+			RunContext.relics_manager.add_relic(relic)
 
 func _load_level(level_number: int) -> void:
 	RunContext.progress.current_level = level_number
