@@ -1,16 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://bl4h4se14p5iy"]
+[gd_scene load_steps=4 format=3 uid="uid://bl4h4se14p5iy"]
 
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="1_r7ldv"]
 [ext_resource type="Script" uid="uid://dy7llmx5dx5dg" path="res://ui/hud/top_bar_ui/enemy_waves_panel/enemy_waves_panel.gd" id="2_bdcgq"]
+[ext_resource type="PackedScene" uid="uid://bng82hug8o2cd" path="res://ui/hud/top_bar_ui/enemy_waves_panel/enemy_wave_data_ui.tscn" id="3_7dhob"]
 
-[node name="EnemyWavesPanel" type="PanelContainer"]
+[node name="EnemyWavesPanel" type="PanelContainer" node_paths=PackedStringArray("info_container")]
 anchors_preset = -1
-anchor_left = 0.2
+anchor_left = 0.18
 anchor_top = 0.2
-anchor_right = 0.8
-anchor_bottom = 0.8
+anchor_right = 0.82
+anchor_bottom = 0.4
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_r7ldv")
 script = ExtResource("2_bdcgq")
+enemy_wave_data_ui_scene = ExtResource("3_7dhob")
+info_container = NodePath("InfoContainer")
+
+[node name="InfoContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 40

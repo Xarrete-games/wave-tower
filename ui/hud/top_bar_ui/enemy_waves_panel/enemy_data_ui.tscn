@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://idqe2u3todbs"]
+[gd_scene load_steps=4 format=3 uid="uid://idqe2u3todbs"]
 
 [ext_resource type="Script" uid="uid://c2l81swhjscbg" path="res://ui/hud/top_bar_ui/enemy_waves_panel/enemy_data_ui.gd" id="1_4xoem"]
 [ext_resource type="Texture2D" uid="uid://keav2e8je8b6" path="res://assets/sprites/enemies/esqueleton/esqueleto1.png" id="2_ggiuh"]
+[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="3_6qxrw"]
 
 [node name="EnemyDataUi" type="HBoxContainer"]
 anchors_preset = -1
@@ -19,7 +20,9 @@ expand_mode = 2
 [node name="XLabel" type="Label" parent="."]
 layout_mode = 2
 text = "x"
+label_settings = ExtResource("3_6qxrw")
 
 [node name="AmountLabel" type="Label" parent="."]
 layout_mode = 2
 text = "5"
+label_settings = ExtResource("3_6qxrw")
