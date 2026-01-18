@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://emud8v00fehu"]
+
+[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_csa40"]
+[ext_resource type="Texture2D" uid="uid://ck7funcss1gra" path="res://assets/sprites/enemies/espectro/sp1.png" id="1_mykse"]
+[ext_resource type="PackedScene" uid="uid://dmqbn2q5splor" path="res://enemies/variations/enemy_spectre.tscn" id="2_8e3or"]
+
+[resource]
+script = ExtResource("1_csa40")
+id = "Spectre"
+name = "Spectre"
+icon = ExtResource("1_mykse")
+scene = ExtResource("2_8e3or")
+max_health = 80
+metadata/_custom_type_script = "uid://cvnj0agbswaym"

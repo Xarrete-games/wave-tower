@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://daxk1aepm2gdi"]
+[gd_scene load_steps=36 format=3 uid="uid://220jhs08twxf"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_k4uph"]
 [ext_resource type="Texture2D" uid="uid://dlj7ftheuaudj" path="res://assets/sprites/enemies/skull/Calavera__0000_Recurso-1.png.png" id="2_ik0g2"]

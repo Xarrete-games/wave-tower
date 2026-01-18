@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://dvri0e4k4qwho"]
 
-[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_s7s5g"]
+[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_25a7e"]
 
-[node name="EnemyTank" instance=ExtResource("1_s7s5g")]
+[node name="BigSpectre" instance=ExtResource("1_25a7e")]
 base_speed = 55.0
 max_health = 15000.0
 base_gold_value = 30

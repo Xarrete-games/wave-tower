@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://dn77v42ue3bir"]
+
+[ext_resource type="Texture2D" uid="uid://c28n2sqf74boy" path="res://assets/sprites/enemies/black_golem/golem0.png" id="1_bge6u"]
+[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_lgdw7"]
+[ext_resource type="PackedScene" uid="uid://bbwwsea7icfed" path="res://enemies/variations/boss_black_golem.tscn" id="2_270cg"]
+
+[resource]
+script = ExtResource("1_lgdw7")
+id = "boss_black_golem"
+name = "Boss Black Golem"
+icon = ExtResource("1_bge6u")
+scene = ExtResource("2_270cg")
+max_health = 50000
+base_speed = 60.0
+damage = 999
+base_gold_value = 100
+metadata/_custom_type_script = "uid://cvnj0agbswaym"

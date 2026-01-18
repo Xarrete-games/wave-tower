@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://cyi8rskr0j7qg"]
+
+[ext_resource type="Texture2D" uid="uid://pm1x4qqkbop2" path="res://assets/sprites/enemies/black_skeleton/esqueleto1.png" id="1_s0d6s"]
+[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_ucfcj"]
+[ext_resource type="PackedScene" uid="uid://d1p6gdwregh7v" path="res://enemies/variations/enemy_black_skeleton.tscn" id="2_68qhb"]
+
+[resource]
+script = ExtResource("1_ucfcj")
+id = "black_skeleton"
+name = "Black skeleton"
+icon = ExtResource("1_s0d6s")
+scene = ExtResource("2_68qhb")
+max_health = 50
+base_speed = 200.0
+base_gold_value = 2
+metadata/_custom_type_script = "uid://cvnj0agbswaym"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://ikoftq8e85jd"]
+
+[ext_resource type="Texture2D" uid="uid://c1uttjsrd1iaj" path="res://assets/sprites/enemies/buba/buba_front_02.png" id="1_a3f8k"]
+[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_fsua3"]
+[ext_resource type="PackedScene" uid="uid://xk0wj86s8ddb" path="res://enemies/variations/enemy_buba.tscn" id="2_d1pjp"]
+
+[resource]
+script = ExtResource("1_fsua3")
+id = "buba"
+type = 1
+name = "Buba"
+icon = ExtResource("1_a3f8k")
+scene = ExtResource("2_d1pjp")
+max_health = 200
+base_speed = 85.0
+base_gold_value = 5
+metadata/_custom_type_script = "uid://cvnj0agbswaym"

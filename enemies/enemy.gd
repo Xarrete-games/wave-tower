@@ -3,7 +3,7 @@ class_name Enemy extends CharacterBody2D
 signal die(enemy: Enemy, attack: Attack)
 signal target_reached(enemy: Enemy)
 
-enum Type {NORMAL, BUBA, TANK, GOLEM, SKELETON, BLACK_GOLEM, BLACK_SKELETON, GOLD_SKELETON, INVOKER}
+enum Type {NORMAL, BUBA, BIG_SPECTRE, GOLEM, SKELETON, BLACK_GOLEM, BLACK_SKELETON, GOLD_SKELETON, INVOKER, SKULL}
 
 const GOLD_DROPPED = preload("uid://cxs4ar5enx4mn")
 const DAMAGE_NUMBERS = preload("uid://bkiu4qgh3ug1m")

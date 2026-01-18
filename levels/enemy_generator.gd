@@ -83,7 +83,7 @@ func _handle_enemy_group_type(
 	group_handled.emit()
 		
 func _generate_enemy(enemy_type: Enemy.Type, path: int) -> void:
-	var enemy: Enemy = DataLoader.enemy_data.get_enemy_scene(enemy_type).instantiate()
+	var enemy: Enemy = DataLoader.enemy_data.get_enemy_instance(enemy_type)
 	enemy.die.connect(_on_enemy_die)
 	enemy.target_reached.connect(_on_enemy_target_reached)
 	visual.add_child(enemy)

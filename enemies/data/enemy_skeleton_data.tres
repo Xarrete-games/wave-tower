@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://clmegfpvdkkol"]
+
+[ext_resource type="Texture2D" uid="uid://keav2e8je8b6" path="res://assets/sprites/enemies/esqueleton/esqueleto1.png" id="1_1ym8y"]
+[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_k6741"]
+[ext_resource type="PackedScene" uid="uid://bnpwdbi54cn00" path="res://enemies/variations/enemy_skeleton.tscn" id="2_uorlk"]
+
+[resource]
+script = ExtResource("1_k6741")
+id = "skeleton"
+type = 4
+name = "Skeleton"
+icon = ExtResource("1_1ym8y")
+scene = ExtResource("2_uorlk")
+base_speed = 185.0
+metadata/_custom_type_script = "uid://cvnj0agbswaym"

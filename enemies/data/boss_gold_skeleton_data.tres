@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://cvid14g5uo5i7"]
+
+[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_2btab"]
+[ext_resource type="Texture2D" uid="uid://7ateg31sl8mh" path="res://assets/sprites/enemies/gold_skeleton/gold_skeleton1.png" id="1_h7ptv"]
+[ext_resource type="PackedScene" uid="uid://qsxiwo0d27dq" path="res://enemies/variations/boss_gold_skeleton.tscn" id="2_44687"]
+
+[resource]
+script = ExtResource("1_2btab")
+id = "gold_skeleton"
+type = 7
+name = "Gold Skeleton"
+icon = ExtResource("1_h7ptv")
+scene = ExtResource("2_44687")
+max_health = 30000
+base_speed = 35.0
+damage = 999
+base_gold_value = 50
+metadata/_custom_type_script = "uid://cvnj0agbswaym"

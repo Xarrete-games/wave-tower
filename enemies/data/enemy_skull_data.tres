@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://cg7te8elp7e0e"]
+
+[ext_resource type="Texture2D" uid="uid://dlj7ftheuaudj" path="res://assets/sprites/enemies/skull/Calavera__0000_Recurso-1.png.png" id="1_d5n7i"]
+[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_oeswe"]
+[ext_resource type="PackedScene" uid="uid://220jhs08twxf" path="res://enemies/variations/enemy_skull.tscn" id="2_054sy"]
+
+[resource]
+script = ExtResource("1_oeswe")
+id = "skull"
+type = 9
+name = "Skull"
+icon = ExtResource("1_d5n7i")
+scene = ExtResource("2_054sy")
+base_speed = 90.0
+metadata/_custom_type_script = "uid://cvnj0agbswaym"

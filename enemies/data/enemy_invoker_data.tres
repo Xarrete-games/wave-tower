@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://b71yn4rv5rs5l"]
+
+[ext_resource type="Texture2D" uid="uid://bp6hoepjfxoo" path="res://assets/sprites/enemies/invoker/invoker_front_0000_invoker1.png.png" id="1_s0iql"]
+[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_svv2o"]
+[ext_resource type="PackedScene" uid="uid://crk2ly48vsxn4" path="res://enemies/variations/enemy_invoker.tscn" id="2_b23po"]
+
+[resource]
+script = ExtResource("1_svv2o")
+id = "invoker"
+type = 8
+name = "Invoker"
+icon = ExtResource("1_s0iql")
+scene = ExtResource("2_b23po")
+max_health = 200
+base_speed = 90.0
+metadata/_custom_type_script = "uid://cvnj0agbswaym"

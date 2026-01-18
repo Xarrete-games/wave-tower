@@ -1,27 +1,52 @@
 class_name EnemyDataLoader extends RefCounted
 
+const DATA_PATH = "res://enemies/data/"
 
-const ENEMY_NORMAL = preload("uid://dmqbn2q5splor")
-const ENEMY_BUBA = preload("uid://xk0wj86s8ddb")
-const ENEMY_TANK = preload("uid://dvri0e4k4qwho")
-const ENEMY_GOLEM = preload("uid://cdb5n1d4ubx72")
-const ENEMY_SKELETON = preload("uid://bnpwdbi54cn00")
-const BOSS_BLACK_GOLEM = preload("uid://bbwwsea7icfed")
-const ENEMY_BLACK_SKELETON = preload("uid://d1p6gdwregh7v")
-const BOSS_GOLD_SKELETON = preload("uid://qsxiwo0d27dq")
-const ENEMY_INVOKER = preload("uid://crk2ly48vsxn4")
-
-const ENEMIES_SCENES: Dictionary[Enemy.Type, PackedScene] = {
-	Enemy.Type.NORMAL: ENEMY_NORMAL,
-	Enemy.Type.BUBA: ENEMY_BUBA,
-	Enemy.Type.TANK: ENEMY_TANK,
-	Enemy.Type.GOLEM: ENEMY_GOLEM,
-	Enemy.Type.SKELETON: ENEMY_SKELETON,
-	Enemy.Type.BLACK_GOLEM: BOSS_BLACK_GOLEM,
-	Enemy.Type.BLACK_SKELETON: ENEMY_BLACK_SKELETON,
-	Enemy.Type.GOLD_SKELETON: BOSS_GOLD_SKELETON,
-	Enemy.Type.INVOKER: ENEMY_INVOKER
+var enemies_data_dic: Dictionary[Enemy.Type, EnemyData] = {
 }
 
-func get_enemy_scene(enemy_type: Enemy.Type) -> PackedScene:
-	return ENEMIES_SCENES[enemy_type]
+var enemies_data: Array[EnemyData] = []
+
+func _init() -> void:
+	var resources = _load_resources_from_dir(DATA_PATH)
+	for data in resources:
+		if not data is EnemyData:
+			push_error("[EnemyDataLoader] Resource is not of type EnemyData: %s" % [data])
+			return
+		enemies_data.append(data as EnemyData)
+	
+	for enemy_data in enemies_data:
+		enemies_data_dic[enemy_data.type] = enemy_data
+
+func get_enemy_instance(enemy_type: Enemy.Type) -> Enemy:
+
+	var data = enemies_data_dic[enemy_type]
+	var enemy_instance: Enemy = data.scene.instantiate() as Enemy
+	enemy_instance.max_health = data.max_health
+	enemy_instance.base_speed = data.base_speed
+	enemy_instance.damage = data.damage
+	enemy_instance.base_gold_value = data.base_gold_value
+
+	return enemy_instance
+
+func _load_resources_from_dir(path: String) -> Array[Resource]:
+	var result: Array[Resource] = []
+
+	var dir: DirAccess = DirAccess.open(path)
+	if dir == null:
+		push_error("[DataLoader] Directory not found: " + path)
+		return result
+
+	dir.list_dir_begin()
+	var file: String = dir.get_next()
+
+	while file != "":
+		if file.ends_with(".tres"):
+			var resource: Resource = load(path + file)
+			if resource:
+				result.append(resource)
+		file = dir.get_next()
+
+	dir.list_dir_end()
+
+	return result
