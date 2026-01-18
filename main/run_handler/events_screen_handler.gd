@@ -31,3 +31,4 @@ func _on_event_selected(event: EventData) -> void:
 		shop_screen_handler.shop_closed.connect(func(): event_finished.emit(), CONNECT_ONE_SHOT)
 	elif event.type == EventData.Type.OPTIONS:
 		await events_options_screen_handler.show_options_event(event, event_layer)
+		event_finished.emit()

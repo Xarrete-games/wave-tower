@@ -6,11 +6,10 @@
 
 [resource]
 script = ExtResource("1_ucfcj")
-id = "black_skeleton"
+type = 6
 name = "Black skeleton"
 icon = ExtResource("1_s0d6s")
 scene = ExtResource("2_68qhb")
-max_health = 50
 base_speed = 200.0
 base_gold_value = 2
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

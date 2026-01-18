@@ -15,6 +15,7 @@ func _ready():
 		if _fog_scene == null:
 			_fog_scene = load(fog_path)
 		add_child(_fog_scene.instantiate())
+	RunContext.level_data = data
 
 func get_camera_init_pos() -> Vector2:
 	return camera_init_pos.global_position

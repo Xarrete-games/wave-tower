@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_lgdw7")
-id = "boss_black_golem"
+type = 5
 name = "Boss Black Golem"
 icon = ExtResource("1_bge6u")
 scene = ExtResource("2_270cg")

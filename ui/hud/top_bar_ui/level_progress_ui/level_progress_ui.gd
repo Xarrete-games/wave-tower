@@ -32,3 +32,9 @@ func _on_wave_init(new_value: int) -> void:
 
 func _on_new_level(_total_waves: int) -> void:
 	_clear()
+
+func _on_mouse_entered() -> void:
+	ClickEvents.level_progess_hovered.emit()
+
+func _on_mouse_exited() -> void:
+	ClickEvents.level_progess_unhovered.emit()

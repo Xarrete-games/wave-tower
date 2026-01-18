@@ -6,6 +6,7 @@
 [node name="LevelProgressUi" type="HBoxContainer"]
 offset_right = 500.0
 offset_bottom = 30.0
+mouse_filter = 0
 theme_override_constants/separation = 5
 script = ExtResource("1_ga602")
 
@@ -39,3 +40,6 @@ layout_mode = 2
 [node name="LevelProgressSlot10" parent="." instance=ExtResource("1_i6lgd")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

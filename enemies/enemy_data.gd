@@ -1,7 +1,6 @@
 class_name EnemyData extends Resource
 
 @export_group("General")
-@export var id: String
 @export var type: Enemy.Type
 @export var name: String
 @export_multiline var description: String
