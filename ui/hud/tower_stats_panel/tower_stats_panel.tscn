@@ -83,6 +83,13 @@ text = "Fire Towe"
 label_settings = SubResource("LabelSettings_n3kwt")
 horizontal_alignment = 1
 
+[node name="IdLabel" type="Label" parent="Panel/MarginContainer/MainContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "FireTower1"
+label_settings = ExtResource("8_ynx3u")
+horizontal_alignment = 1
+
 [node name="DataContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer"]
 layout_mode = 2
 size_flags_horizontal = 4

@@ -91,10 +91,10 @@ region_rect = Rect2(998, 83, 367, 553)
 [node name="RangeCollision" parent="AreaDetector" index="0"]
 shape = SubResource("CircleShape2D_763pf")
 
-[node name="AttackTimer" parent="." index="6"]
+[node name="AttackTimer" parent="." index="7"]
 wait_time = 3.0
 
-[node name="MouseDetector" parent="." index="7"]
+[node name="MouseDetector" parent="." index="8"]
 offset_left = -44.0
 offset_top = -100.0
 offset_right = 46.0

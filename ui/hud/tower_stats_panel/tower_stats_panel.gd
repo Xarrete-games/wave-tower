@@ -9,6 +9,7 @@ var button_in_hover: TowerButton = null
 
 # definition
 @onready var name_label: Label = %NameLabel
+@onready var id_label: Label = %IdLabel
 # stats
 @onready var damage_stat: TowerStatUi = %DamageStatUi
 @onready var attack_speed_stat: TowerStatUi = %AttkSpeedStatUi
@@ -50,6 +51,7 @@ func _on_tower_selected(tower: Tower) -> void:
 	update_exp_data(exp_data)
 
 	name_label.text = tower.configuration.display_name
+	id_label.text = tower.id
 	current_tower = tower
 	
 	if tower is UpgradeableTower:

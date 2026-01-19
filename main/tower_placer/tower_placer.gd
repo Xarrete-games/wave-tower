@@ -107,5 +107,7 @@ func _on_tower_upgrade_pressed(current_tower: Tower, new_tower_conf: TowerConfig
 	new_tower.global_position = current_tower.global_position
 	new_tower.tile_pos = current_tower.tile_pos
 	new_tower.enable()
-	current_tower.queue_free()
+	
+	RunContext.towers_manager.tower_added(new_tower)
+	RunContext.towers_manager.tower_removed(current_tower)
 	ClickEvents.tower_selected.emit(new_tower)
