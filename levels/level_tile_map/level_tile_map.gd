@@ -37,10 +37,12 @@ func is_mouse_on_buildeable_tile() -> bool:
 
 	#chekc if is buildeable
 	if not _buildeable_tiles.has(map_coords):
+		print("not buildeable")
 		return false
 	
 	#check if tile is occupied or bloqued
 	if _occupied_tiles.has(map_coords) or _blocked_tiles.has(map_coords):
+		print("not buildeable")
 		return false
 		
 	return true
@@ -71,6 +73,7 @@ func set_tile_occupied(map_coords: Vector2i):
 func set_tile_free(map_coords: Vector2i):
 	if _occupied_tiles.has(map_coords):
 		_occupied_tiles.erase(map_coords)
+		_buildeable_tiles[map_coords] = true
 
 func unblock_tile(map_coords: Vector2i) -> void:
 	# remove first
