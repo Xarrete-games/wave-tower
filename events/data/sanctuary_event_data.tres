@@ -8,10 +8,8 @@
 [resource]
 script = ExtResource("1_h5dls")
 id = "sactuary_event"
-type = 1
 title = "Sanctuary"
 description = "A shrine appears, what do you decide to do?"
-options = Array[String](["Take offering (+50 gold)", "Pray (+10 health and 10 maximum health)"])
 icon = ExtResource("1_cjont")
 texture_background = ExtResource("3_owmpu")
 runtime_script = ExtResource("2_owmpu")

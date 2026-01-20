@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_pcle8")
+rarity = 2
 id = "ice_veins"
 display_name = "Ice Veins"
 description = "Applying frost adds an extra stack of frost."

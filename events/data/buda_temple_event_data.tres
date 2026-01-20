@@ -8,10 +8,8 @@
 [resource]
 script = ExtResource("1_yxnsr")
 id = "buda_temple"
-type = 1
 title = "Buda"
 description = "A strange Buda temple appears"
-options = Array[String](["Enter the temple", "Go out"])
 icon = ExtResource("1_0p6f3")
 texture_background = ExtResource("3_wpwtl")
 runtime_script = ExtResource("2_wpwtl")

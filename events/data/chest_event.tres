@@ -8,7 +8,6 @@
 [resource]
 script = ExtResource("1_44kid")
 id = "chest_event"
-type = 1
 role = 1
 title = "The Chest"
 description = "An old chest sits quietly in your path.

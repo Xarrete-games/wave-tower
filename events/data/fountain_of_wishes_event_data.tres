@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("1_1w58q")
-type = 1
+id = "fountain_of_wishing"
 title = "Wishing Fountain"
 description = "A peaceful fountain shimmers with ancient magic.
 The more gold you offer, the greater the favor it may grant.

@@ -1,6 +1,6 @@
 class_name EventData extends Resource
 
-enum Type { SHOP, OPTIONS }
+enum Type { OPTIONS, SHOP, CHOOSE_RELIC }
 enum Role { FRIENDLY, RANDOM, HOSTILE }
 
 @export var id: String

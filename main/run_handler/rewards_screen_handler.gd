@@ -1,4 +1,4 @@
-class_name RewardsScreenHandler extends Node
+class_name ChooseRelicScreenHandler extends Node
 
 signal rewards_screen_close()
 
@@ -7,17 +7,16 @@ const REROLL_PRICE = 20
 
 var rewards_screen: ChooseRelicScreen
 
-func show_rewards_screen(event_layer: CanvasLayer) -> void:
+func show_choose_relic_event(event_layer: CanvasLayer) -> void:
 	rewards_screen = REWARDS_SCREEN.instantiate()
 	var relic_offers = RunContext.offers_manager.create_relic_offers(3)
 	event_layer.add_child(rewards_screen)
 	rewards_screen.set_items_offer(relic_offers)
 	rewards_screen.item_selected.connect(_on_item_selected)
-	rewards_screen.tree_exited.connect(func ():
-		rewards_screen = null
-		rewards_screen_close.emit()
-		)
+	
 	rewards_screen.reroll_pressed.connect(_on_reroll_pressed)
+	await  rewards_screen.tree_exited
+	rewards_screen = null
 	
 func _on_item_selected(item_offer: ItemOffer) -> void:
 	rewards_screen.queue_free()

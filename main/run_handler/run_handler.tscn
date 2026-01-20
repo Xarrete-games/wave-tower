@@ -7,13 +7,9 @@
 [ext_resource type="Script" uid="uid://dvu6fvqfm5qye" path="res://main/run_handler/events_options_screen_handler.gd" id="5_ihxdi"]
 [ext_resource type="PackedScene" uid="uid://booaj13prrqkb" path="res://ui/screens/events_screen/event_options_screen/event_options_screen.tscn" id="6_f8xag"]
 
-[node name="RunHandler" type="Node" node_paths=PackedStringArray("events_screen_hander", "rewards_screen_handler")]
+[node name="RunHandler" type="Node" node_paths=PackedStringArray("events_screen_hander")]
 script = ExtResource("1_6aer8")
 events_screen_hander = NodePath("EventsScreenHandler")
-rewards_screen_handler = NodePath("RewardsScreenHander")
-
-[node name="RewardsScreenHander" type="Node" parent="."]
-script = ExtResource("2_m1orh")
 
 [node name="EventsScreenHandler" type="Node" parent="."]
 script = ExtResource("3_m1orh")
@@ -24,3 +20,6 @@ script = ExtResource("4_3cngx")
 [node name="EventsOptionsScreenHandler" type="Node" parent="EventsScreenHandler"]
 script = ExtResource("5_ihxdi")
 events_options_screen = ExtResource("6_f8xag")
+
+[node name="ChooseRelicScreenHandler" type="Node" parent="EventsScreenHandler"]
+script = ExtResource("2_m1orh")

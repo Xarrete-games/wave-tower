@@ -8,7 +8,6 @@
 [resource]
 script = ExtResource("1_6hjr0")
 id = "blood_pact"
-type = 1
 title = "The Blood Pact"
 description = "The sorcerer watches you silently as the relic pulses on the altar.
 \"Nothing is free,\" he whispers.

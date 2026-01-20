@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_bsg6w")
 id = "Shop"
+type = 1
 title = "Shop"
 description = "Open a shop"
 icon = ExtResource("1_jftsn")

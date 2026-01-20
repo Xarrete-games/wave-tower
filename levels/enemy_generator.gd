@@ -112,7 +112,7 @@ func _check_enemies_left() -> void:
 		
 # init the next wave or end the level if it's the last wave
 func _report_finished() -> void:
-	if RunContext.is_on_restarting or RunContext.status.health <= 0:
+	if RunContext.is_on_restarting or RunContext.status.health <= 0 or GameState.is_on_main_menu():
 		return
 		
 	if current_wave_number == total_waves:

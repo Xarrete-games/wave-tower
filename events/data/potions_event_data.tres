@@ -8,7 +8,6 @@
 [resource]
 script = ExtResource("1_iomn8")
 id = "potions_event"
-type = 1
 title = "The hooded man"
 description = "A shadow appears that gives you a choice between 3 potions:"
 icon = ExtResource("1_gywyq")
