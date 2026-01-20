@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://drm4bn0pi7ue1"]
+[gd_scene load_steps=8 format=3 uid="uid://drm4bn0pi7ue1"]
 
 [ext_resource type="Script" uid="uid://cpnoprvyyakuv" path="res://ui/hud/hud_layer.gd" id="1_tdcwd"]
 [ext_resource type="PackedScene" uid="uid://c3qi4qp0ko3iq" path="res://ui/hud/tower_stats_panel/tower_stats_panel.tscn" id="2_tdcwd"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="3_vwkow"]
+[ext_resource type="PackedScene" uid="uid://cwwemgw7mnwji" path="res://ui/hud/damage_recount_panel/damage_recount_panel.tscn" id="3_xxs7w"]
 [ext_resource type="Script" uid="uid://bkk5aa6qbmbke" path="res://main/hint_label.gd" id="4_xxs7w"]
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/hud/towers_menu/towers_menu.tscn" id="5_fgqev"]
 [ext_resource type="PackedScene" uid="uid://bl4h4se14p5iy" path="res://ui/hud/top_bar_ui/enemy_waves_panel/enemy_waves_panel.tscn" id="5_vci3o"]
@@ -10,6 +11,7 @@
 [node name="HUDLayer" type="CanvasLayer"]
 script = ExtResource("1_tdcwd")
 level_waves_panel_scene = ExtResource("5_vci3o")
+damage_recount_panel_scene = ExtResource("3_xxs7w")
 
 [node name="TowerStatsPanel" parent="." instance=ExtResource("2_tdcwd")]
 
@@ -40,3 +42,6 @@ script = ExtResource("4_xxs7w")
 anchors_preset = -1
 anchor_top = 0.76900005
 offset_top = -0.31204224
+
+[node name="DamageRecountPanel" parent="." instance=ExtResource("3_xxs7w")]
+visible = false

@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddbvyg0ckvif6"]
+
+[ext_resource type="Script" uid="uid://c2bgrsqq0v13e" path="res://ui/hud/damage_recount_panel/damage_recount_row.gd" id="1_x56dy"]
+[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="2_kf7kp"]
+
+[node name="DamageRecountRow" type="HBoxContainer"]
+offset_right = 19.0
+offset_bottom = 30.0
+theme_override_constants/separation = 25
+script = ExtResource("1_x56dy")
+
+[node name="IdLabel" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "LIGHTNING_20"
+label_settings = ExtResource("2_kf7kp")
+
+[node name="WaveLabel1" type="Label" parent="."]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_kf7kp")
+horizontal_alignment = 1
+
+[node name="WaveLabel2" type="Label" parent="."]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_kf7kp")
+horizontal_alignment = 1
+
+[node name="WaveLabel3" type="Label" parent="."]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_kf7kp")
+horizontal_alignment = 1
+
+[node name="WaveLabel4" type="Label" parent="."]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_kf7kp")
+horizontal_alignment = 1
+
+[node name="WaveLabel5" type="Label" parent="."]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_kf7kp")
+horizontal_alignment = 1
+
+[node name="WaveLabel6" type="Label" parent="."]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_kf7kp")
+horizontal_alignment = 1
+
+[node name="WaveLabel7" type="Label" parent="."]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_kf7kp")
+horizontal_alignment = 1
+
+[node name="WaveLabel8" type="Label" parent="."]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_kf7kp")
+horizontal_alignment = 1
+
+[node name="WaveLabel9" type="Label" parent="."]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_kf7kp")
+horizontal_alignment = 1
+
+[node name="WaveLabel10" type="Label" parent="."]
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_kf7kp")
+horizontal_alignment = 1

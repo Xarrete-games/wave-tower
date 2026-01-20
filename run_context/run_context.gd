@@ -22,6 +22,7 @@ var relics_manager: RelicsManager
 var consumables_manager: ConsumablesManager
 var enemy_debuff_manager: EnemyDebuffManager
 var enemy_manager: EnemyManager
+var damage_recount: DamageRecount
 
 func reset_run() -> void:
 	offers_manager = OffersManager.new()
@@ -37,6 +38,7 @@ func reset_run() -> void:
 	consumables_manager = ConsumablesManager.new()
 	enemy_debuff_manager = EnemyDebuffManager.new()
 	enemy_manager = EnemyManager.new()
+	damage_recount = DamageRecount.new()
 	is_on_restarting = false
 
 func _on_die() -> void:
