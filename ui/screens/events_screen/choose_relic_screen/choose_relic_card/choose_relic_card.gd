@@ -1,4 +1,4 @@
-class_name Rewardard extends Control
+class_name ChooseRelicCard extends Control
 
 signal card_pressed(item_offer: ItemOffer)
 

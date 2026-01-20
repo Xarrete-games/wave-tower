@@ -5,7 +5,7 @@ signal rewards_screen_close()
 const REWARDS_SCREEN = preload("uid://bcxsfb0ox3gmq")
 const REROLL_PRICE = 20
 
-var rewards_screen: RewardsScreen
+var rewards_screen: ChooseRelicScreen
 
 func show_rewards_screen(event_layer: CanvasLayer) -> void:
 	rewards_screen = REWARDS_SCREEN.instantiate()

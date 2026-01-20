@@ -1,20 +1,20 @@
 [gd_scene load_steps=8 format=3 uid="uid://dgcv5fdqvfext"]
 
-[ext_resource type="Script" uid="uid://becnb17nd1vj1" path="res://ui/screens/rewards_screen/reward_card/reward_card.gd" id="1_eji2h"]
-[ext_resource type="Theme" uid="uid://bansa1f47pkw0" path="res://ui/styles/themes/reward_card.tres" id="1_vqiry"]
-[ext_resource type="Texture2D" uid="uid://b2yl75fehdgdj" path="res://assets/textures/hexagon light.png" id="3_68l61"]
-[ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="4_ibm82"]
-[ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="5_sdsj4"]
-[ext_resource type="PackedScene" uid="uid://di132c8on6fw" path="res://ui/components/health_price/health_price.tscn" id="6_ujsvo"]
+[ext_resource type="Theme" uid="uid://bansa1f47pkw0" path="res://ui/styles/themes/reward_card.tres" id="1_kt1bf"]
+[ext_resource type="Script" uid="uid://becnb17nd1vj1" path="res://ui/screens/events_screen/choose_relic_screen/choose_relic_card/choose_relic_card.gd" id="2_txuuf"]
+[ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="3_v3ltv"]
+[ext_resource type="Texture2D" uid="uid://b2yl75fehdgdj" path="res://assets/textures/hexagon light.png" id="4_jemtg"]
+[ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="5_077cq"]
+[ext_resource type="PackedScene" uid="uid://di132c8on6fw" path="res://ui/components/health_price/health_price.tscn" id="6_ilhn2"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sdsj4"]
 
-[node name="RewardCard" type="VBoxContainer"]
+[node name="ChooseRelicCard" type="VBoxContainer"]
 offset_right = 300.0
 offset_bottom = 341.0
-theme = ExtResource("1_vqiry")
+theme = ExtResource("1_kt1bf")
 theme_override_constants/separation = 0
-script = ExtResource("1_eji2h")
+script = ExtResource("2_txuuf")
 
 [node name="RelicIcon" type="CenterContainer" parent="."]
 layout_mode = 2
@@ -45,7 +45,7 @@ polygon = PackedVector2Array(0, 93, 80, 47, 80, -47, 0, -93, -80, -47, -80, 47)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="RelicIcon/Hexagon/Control/Root2d"]
 amount = 20
-texture = ExtResource("5_sdsj4")
+texture = ExtResource("3_v3ltv")
 emission_shape = 1
 emission_sphere_radius = 128.0
 gravity = Vector2(0, -100)
@@ -54,12 +54,12 @@ scale_amount_max = 0.1
 
 [node name="PointLight2D" type="PointLight2D" parent="RelicIcon/Hexagon/Control/Root2d"]
 energy = 7.0
-texture = ExtResource("3_68l61")
+texture = ExtResource("4_jemtg")
 texture_scale = 0.64
 
 [node name="TextureRect" type="TextureRect" parent="RelicIcon"]
 layout_mode = 2
-texture = ExtResource("4_ibm82")
+texture = ExtResource("5_077cq")
 
 [node name="RelicTexture" type="TextureRect" parent="RelicIcon"]
 texture_filter = 2
@@ -97,7 +97,7 @@ scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
 
-[node name="HealthPrice" parent="VBoxContainer" instance=ExtResource("6_ujsvo")]
+[node name="HealthPrice" parent="VBoxContainer" instance=ExtResource("6_ilhn2")]
 layout_mode = 2
 size_flags_horizontal = 4
 

@@ -1,9 +1,9 @@
-class_name RewardsScreen extends Control
+class_name ChooseRelicScreen extends Control
 
 signal item_selected(item: ItemOffer)
 signal reroll_pressed()
 
-const REWARD_CARD = preload("uid://dgcv5fdqvfext")
+const CHOOSE_RELIC_CARD = preload("uid://dgcv5fdqvfext")
 
 @export var cards_container: Control
 @export var reroll_priece: GoldPrice
@@ -20,7 +20,7 @@ func set_items_offer(offer_list: Array[ItemOffer]) -> void:
 		child.queue_free()
 	
 	for item_offer in offer_list:
-		var card: Rewardard = REWARD_CARD.instantiate()
+		var card: ChooseRelicCard = CHOOSE_RELIC_CARD.instantiate()
 		cards_container.add_child(card)
 		card.set_relic(item_offer)
 		card.card_pressed.connect(_on_card_pressed)
