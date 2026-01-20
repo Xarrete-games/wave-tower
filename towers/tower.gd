@@ -40,10 +40,11 @@ var exp_data: TowerExpData:
 		stats_change.emit(self)
 
 var modifiers: Array[AttackModifier] = []
-var id: String	
+var id: String
+var type_id: String = get_script().get_global_name()
 var damage_source: DamageSource:
 	get:
-		return DamageSource.new(DamageSource.Type.TOWER, id, get_script().get_global_name())
+		return DamageSource.new(DamageSource.Type.TOWER, id, type_id)
 
 @onready var area_detector: AreaDetector = $AreaDetector
 @onready var range_preview: RangePreview = $RangePreview

@@ -24,66 +24,85 @@ layout_mode = 2
 theme_override_constants/separation = 25
 
 [node name="Label" type="Label" parent="Header"]
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 text = "                              "
 
 [node name="Label2" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 text = "Wave 1
 "
 label_settings = ExtResource("1_v6nj1")
+horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 text = "Wave 2
 "
 label_settings = ExtResource("1_v6nj1")
 
 [node name="Label4" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 text = "Wave 3
 "
 label_settings = ExtResource("1_v6nj1")
 
 [node name="Label5" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 text = "Wave 4
 "
 label_settings = ExtResource("1_v6nj1")
 
 [node name="Label6" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 text = "Wave 5
 "
 label_settings = ExtResource("1_v6nj1")
 
 [node name="Label7" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 text = "Wave 6
 "
 label_settings = ExtResource("1_v6nj1")
 
 [node name="Label8" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 text = "Wave 7
 "
 label_settings = ExtResource("1_v6nj1")
 
 [node name="Label9" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 text = "Wave 8
 "
 label_settings = ExtResource("1_v6nj1")
 
 [node name="Label10" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 text = "Wave 9
 "
 label_settings = ExtResource("1_v6nj1")
 
 [node name="Label11" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 text = "Wave 10
 "
 label_settings = ExtResource("1_v6nj1")
+
+[node name="Label12" type="Label" parent="Header"]
+custom_minimum_size = Vector2(81, 0)
+layout_mode = 2
+text = "Total
+"
+label_settings = ExtResource("1_v6nj1")
+horizontal_alignment = 1

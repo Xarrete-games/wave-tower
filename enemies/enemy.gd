@@ -169,10 +169,12 @@ func apply_damage(attack: Attack) -> void:
 
 	var modified_damage: float = (attack.damage + acc.flat_damage) * acc.damage_mult
 	attack.damage = modified_damage
+	var damage_done: float = min(attack.damage, health)
 	_set_health(health - attack.damage)
 	_play_hit_animation()
 	_show_damage(attack)
-	RunContext.damage_recount.record_damage(RunContext.progress.current_wave, attack.source.id, attack.damage)
+
+	RunContext.damage_recount.record_damage(RunContext.progress.current_wave, attack.origin_source.id, damage_done)
 	if health <= 0 and not _is_dead:
 		_is_dead = true
 		_die(attack)

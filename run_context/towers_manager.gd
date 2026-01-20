@@ -11,6 +11,10 @@ var towers_placed: Dictionary[Tower.Type, int] = {
 	Tower.Type.LIGHTNING: 0
 }
 
+var last_tower_ids: Dictionary[String, int] = {
+    
+}
+
 var towers_ids: Array[String] = []
 
 func _init() -> void:
@@ -47,11 +51,15 @@ func _update_tower_count(tower_type: Tower.Type, value: int) -> void:
 
 
 func _generate_tower_id(tower: Tower) -> String:
-    var base_id = Tower.Type.keys()[tower.type]
-    var count = towers_placed[tower.type]
+    var base_id = tower.type_id
+    if not last_tower_ids.has(base_id):
+        last_tower_ids[base_id] = 0
+
+    var count = last_tower_ids[base_id] + 1
     var new_id = base_id + "_" + str(count)
     while new_id in towers_ids:
         count += 1
         new_id = base_id + "_" + str(count)
     towers_ids.append(new_id)
+    last_tower_ids[base_id] = count
     return new_id
