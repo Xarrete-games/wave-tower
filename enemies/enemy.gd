@@ -180,21 +180,19 @@ func apply_damage(attack: Attack) -> void:
 		_is_dead = true
 		_die(attack)
 
-func update_visual_color():
-	animated_sprite_2d.modulate = default_modulate_color
-
 func _play_hit_animation() -> void:
 	if hit_tween and hit_tween.is_running():
 		hit_tween.kill()
-	animated_sprite_2d.modulate = Color.RED
 	
 	hit_tween = create_tween()
-	hit_tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-
-	hit_tween.tween_callback(func():
-		animated_sprite_2d.modulate = default_modulate_color
+	hit_tween.tween_property(
+		animated_sprite_2d,
+		"modulate",
+		Color.RED,
+		0.2
 	)
-	hit_tween.tween_interval(0.2)
+	await hit_tween.finished
+	animated_sprite_2d.modulate = default_modulate_color
 
 func _die(attack: Attack) -> void:
 	die.emit(self, attack)
