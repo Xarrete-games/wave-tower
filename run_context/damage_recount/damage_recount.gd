@@ -3,6 +3,16 @@ class_name DamageRecount extends RefCounted
 signal damage_recount_change(data: DamageRecountData)
 
 var damage_per_wave: Dictionary[int, Dictionary] = {}
+var tower_manager: TowersManager
+
+func _init(p_tower_manager: TowersManager) -> void:
+	tower_manager = p_tower_manager
+	tower_manager.tower_placed.connect(func(tower: Tower) -> void:
+		record_damage(
+			RunContext.progress.current_wave,
+			tower.id,
+			0.0)
+	)
 
 func record_damage(wave: int, id: String, damage: float) -> void:
 	if not damage_per_wave.has(wave):
