@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="TowerConfiguration" load_steps=5 format=3 uid="uid://c85ehe3lacxch"]
 
-[ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_c2cf6"]
+[ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_c2cf6"]
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_whh4e"]
 [ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="3_q81qh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
 atlas = ExtResource("1_c2cf6")
-region = Rect2(17, 1, 95, 174)
+region = Rect2(1011, 1, 355, 550)
 
 [resource]
 script = ExtResource("2_whh4e")

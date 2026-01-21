@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddy1cspred10e"
-path="res://.godot/imported/attack_speed_icon.png-98c782f7170f3e53321298a35bffdb29.ctex"
+uid="uid://d35n60aerp72h"
+path="res://.godot/imported/ChatGPT Image Jan 21, 2026, 10_46_44 PM.png-634afa46328a10ec60598305c4d894f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/icons/attack_speed_icon.png"
-dest_files=["res://.godot/imported/attack_speed_icon.png-98c782f7170f3e53321298a35bffdb29.ctex"]
+source_file="res://assets/images/icons/stats/ChatGPT Image Jan 21, 2026, 10_46_44 PM.png"
+dest_files=["res://.godot/imported/ChatGPT Image Jan 21, 2026, 10_46_44 PM.png-634afa46328a10ec60598305c4d894f7.ctex"]
 
 [params]
 

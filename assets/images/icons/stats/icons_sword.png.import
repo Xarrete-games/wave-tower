@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oo8eixhckl2q"
-path="res://.godot/imported/critic_icon.png-8fbeb4806f9563981a220dd16ad0ea4b.ctex"
+uid="uid://dv68a541qeosv"
+path="res://.godot/imported/icons_sword.png-87ac28d0e1653f624f6bab2a8f4c9435.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/icons/critic_icon.png"
-dest_files=["res://.godot/imported/critic_icon.png-8fbeb4806f9563981a220dd16ad0ea4b.ctex"]
+source_file="res://assets/images/icons/stats/icons_sword.png"
+dest_files=["res://.godot/imported/icons_sword.png-87ac28d0e1653f624f6bab2a8f4c9435.ctex"]
 
 [params]
 

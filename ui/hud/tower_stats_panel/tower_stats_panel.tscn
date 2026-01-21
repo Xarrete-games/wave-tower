@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://c15gu8gh1w0d5" path="res://assets/sprites/ui/main_menu_box.png" id="2_c0pf6"]
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="2_g3isl"]
 [ext_resource type="PackedScene" uid="uid://damv0wm6yljhs" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.tscn" id="2_jlxp2"]
-[ext_resource type="Texture2D" uid="uid://dv68a541qeosv" path="res://assets/images/icons/icons_sword.png" id="2_vyalh"]
 [ext_resource type="FontFile" uid="uid://vddtrqs6twmn" path="res://assets/fonts/NotoSerif-VariableFont_wdth,wght.ttf" id="3_c0pf6"]
-[ext_resource type="Texture2D" uid="uid://bvev5rktov31p" path="res://assets/images/icons/icons_timer.png" id="3_dw57d"]
-[ext_resource type="Texture2D" uid="uid://dio1imbeyg458" path="res://assets/images/icons/icons_tower_range.png" id="4_725y3"]
+[ext_resource type="Texture2D" uid="uid://bus5y7ash7vve" path="res://assets/images/icons/stats/attack_icon_flat.png" id="7_g3isl"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="7_gs8y8"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="7_ynx3u"]
+[ext_resource type="Texture2D" uid="uid://b0aufhy41nftl" path="res://assets/images/icons/stats/attack_speed_icon_flat.png" id="8_g3isl"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="8_ynx3u"]
+[ext_resource type="Texture2D" uid="uid://dh4xdb1wo3q44" path="res://assets/images/icons/stats/range_icon_flat.png" id="9_g3isl"]
 [ext_resource type="PackedScene" uid="uid://o248nju46k2n" path="res://ui/hud/towers_menu/tower_button/tower_button.tscn" id="10_n3kwt"]
 [ext_resource type="PackedScene" uid="uid://cxk1x30qq1f7p" path="res://ui/hud/towers_menu/tower_button_hint/tower_button_hint.tscn" id="12_p50vg"]
 
@@ -138,19 +138,19 @@ text = "50"
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Damage"
-stat_icon = ExtResource("2_vyalh")
+stat_icon = ExtResource("7_g3isl")
 
 [node name="AttkSpeedStatUi" parent="Panel/MarginContainer/MainContainer/DataContainer" instance=ExtResource("2_jlxp2")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Damage"
-stat_icon = ExtResource("3_dw57d")
+stat_icon = ExtResource("8_g3isl")
 
 [node name="RangeStatUi" parent="Panel/MarginContainer/MainContainer/DataContainer" instance=ExtResource("2_jlxp2")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Range"
-stat_icon = ExtResource("4_725y3")
+stat_icon = ExtResource("9_g3isl")
 
 [node name="UpgradeButtonContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer"]
 unique_name_in_owner = true
