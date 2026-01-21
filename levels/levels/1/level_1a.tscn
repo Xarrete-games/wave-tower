@@ -19,7 +19,6 @@ _data = {
 point_count = 22
 
 [node name="Level1a" instance=ExtResource("1_k3ws0")]
-y_sort_enabled = false
 data = ExtResource("2_qhwti")
 
 [node name="LevelTileMap" parent="." index="0"]

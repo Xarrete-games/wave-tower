@@ -88,6 +88,7 @@ func _generate_enemy(enemy_type: Enemy.Type, path: int) -> void:
 	enemy.target_reached.connect(_on_enemy_target_reached)
 	visual.add_child(enemy)
 	enemy.set_path_follow(enemy_paths.get_new_path_follow(path))
+	enemy.enable()
 	
 
 func _on_group_handled() -> void:

@@ -118,11 +118,10 @@ func _process(delta: float):
 	if animated_sprite_2d.animation != animation or not animated_sprite_2d.is_playing():
 		animated_sprite_2d.play(animation)
 	
-	if not _enabled:
-		enable()
-	
 func set_path_follow(path_follow: PathFollow2D) -> void:
 	_path_follow = path_follow
+	_path_follow.progress = 0.0
+	global_position = _path_follow.global_position
 
 func disable() -> void:
 	animated_sprite_2d.visible = false
@@ -132,8 +131,10 @@ func disable() -> void:
 func enable() -> void:
 	_enabled = true
 	animated_sprite_2d.visible = true
-	collision_shape_2d.disabled = false
 	health_bar.visible = true
+	#wait a frame to avoid immediate collision
+	await get_tree().process_frame
+	collision_shape_2d.disabled = false
 # --------------------
 # --- HEALT ---
 # --------------------
