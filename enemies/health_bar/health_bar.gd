@@ -1,16 +1,19 @@
 class_name HealthBar extends Control
 
 const DEBUFF_SLOT = preload("uid://beixhmpysku3t")
-const BURN_ICON = preload("uid://deriu0icenegb")
-const FROST_ICON = preload("uid://jgpoavtm56v2")
+
+@export var burn_icon: Texture2D
+@export var frost_icon: Texture2D
+
 
 # Rango de Salud
 const MIN_HEALTH: float = 40.0
 const MAX_HEALTH: float = 5000.0
 
 # Rango de Escala Visual
-const MIN_SCALE: float = 1.0
-const MAX_SCALE: float = 4.0
+const MIN_X_SIZE: float = 40.0
+const MAX_X_SIZE: float = 160.0
+var base_x_position: float
 
 @export var debuffs_conatiner: Control
 @export var texture_progress_bar: TextureProgressBar 
@@ -21,8 +24,8 @@ var debuffs_slots: Dictionary[EnemyDebuff.Type, DebuffSlot] = {
 }
 
 var textures: Dictionary[EnemyDebuff.Type, Texture2D] = {
-	EnemyDebuff.Type.BURN: BURN_ICON,
-	EnemyDebuff.Type.FROST: FROST_ICON
+	EnemyDebuff.Type.BURN: burn_icon,
+	EnemyDebuff.Type.FROST: frost_icon
 }
 
 var debuffs_count: Dictionary[EnemyDebuff.Type, int] = {
@@ -30,13 +33,29 @@ var debuffs_count: Dictionary[EnemyDebuff.Type, int] = {
 	EnemyDebuff.Type.FROST: 0
 }
 
+func _ready() -> void:
+	textures = {
+		EnemyDebuff.Type.BURN: burn_icon,
+		EnemyDebuff.Type.FROST: frost_icon
+	}
+	base_x_position = position.x
 
 func set_max_health(value: float) -> void:
 	var clamped_value = clamp(value, MIN_HEALTH, MAX_HEALTH)
-	var new_scale = remap(clamped_value, MIN_HEALTH, MAX_HEALTH, MIN_SCALE, MAX_SCALE)
-	texture_progress_bar.scale = Vector2(new_scale, 1)
-	
+	var new_x_size = remap(
+		clamped_value,
+		MIN_HEALTH,
+		MAX_HEALTH,
+		MIN_X_SIZE,
+		MAX_X_SIZE
+	)
+
+	texture_progress_bar.custom_minimum_size.x = new_x_size
 	texture_progress_bar.max_value = value
+
+	# Compensar solo el crecimiento desde el tamaño mínimo
+	var extra_width: float = new_x_size - MIN_X_SIZE
+	position.x = base_x_position - extra_width * 0.5
 	
 func update_health(new_value: float) -> void:
 	texture_progress_bar.value = new_value

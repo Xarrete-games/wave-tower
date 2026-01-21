@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bme2x52a33nre"
-path="res://.godot/imported/icons_explosion.png-e4d1c887d458662ff2681dfdc49ebc89.ctex"
+uid="uid://dlix83276rvep"
+path="res://.godot/imported/relic_icon_40px.png-fabbc0e53538338add73d2a7dfc5e1d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/icons_explosion.png"
-dest_files=["res://.godot/imported/icons_explosion.png-e4d1c887d458662ff2681dfdc49ebc89.ctex"]
+source_file="res://assets/images/icons/relic_icon_40px.png"
+dest_files=["res://.godot/imported/relic_icon_40px.png-fabbc0e53538338add73d2a7dfc5e1d1.ctex"]
 
 [params]
 

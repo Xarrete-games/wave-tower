@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddy1cspred10e"
-path="res://.godot/imported/attack_speed_icon.png-03c69e1102c56c5a57815b9447c8a357.ctex"
+uid="uid://bvev5rktov31p"
+path="res://.godot/imported/icons_timer.png-82759be3560796fd249e28d4e70220ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/attack_speed_icon.png"
-dest_files=["res://.godot/imported/attack_speed_icon.png-03c69e1102c56c5a57815b9447c8a357.ctex"]
+source_file="res://assets/images/icons/icons_timer.png"
+dest_files=["res://.godot/imported/icons_timer.png-82759be3560796fd249e28d4e70220ce.ctex"]
 
 [params]
 

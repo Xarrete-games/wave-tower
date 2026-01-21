@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crnte3lkyvqks"
-path="res://.godot/imported/armor.png-c4ed706c0a778c121c3824d15470860f.ctex"
+uid="uid://ddy1cspred10e"
+path="res://.godot/imported/attack_speed_icon.png-98c782f7170f3e53321298a35bffdb29.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/armor.png"
-dest_files=["res://.godot/imported/armor.png-c4ed706c0a778c121c3824d15470860f.ctex"]
+source_file="res://assets/images/icons/attack_speed_icon.png"
+dest_files=["res://.godot/imported/attack_speed_icon.png-98c782f7170f3e53321298a35bffdb29.ctex"]
 
 [params]
 

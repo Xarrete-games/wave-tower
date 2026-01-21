@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EventData" load_steps=5 format=3 uid="uid://dmjpcvwnfjw85"]
 
-[ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/sprites/icons/wcoin.png" id="1_cjont"]
+[ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/images/icons/wcoin.png" id="1_cjont"]
 [ext_resource type="Script" uid="uid://bj6frpye8hpbn" path="res://events/event_data.gd" id="1_h5dls"]
 [ext_resource type="Script" uid="uid://y0qutb7nrjp3" path="res://events/scripts/sanctuary_event_script.gd" id="2_owmpu"]
 [ext_resource type="Texture2D" uid="uid://dytragda2630b" path="res://assets/images/events/santuary_event.png" id="3_owmpu"]

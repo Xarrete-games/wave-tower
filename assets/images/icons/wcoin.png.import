@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deriu0icenegb"
-path="res://.godot/imported/burn_icon.png-93d0147e54a508ff69987cd5a715eb8e.ctex"
+uid="uid://c8vemelotevey"
+path="res://.godot/imported/wcoin.png-c96b363514fa9060559bb69e6be085fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/debuffs/burn_icon.png"
-dest_files=["res://.godot/imported/burn_icon.png-93d0147e54a508ff69987cd5a715eb8e.ctex"]
+source_file="res://assets/images/icons/wcoin.png"
+dest_files=["res://.godot/imported/wcoin.png-c96b363514fa9060559bb69e6be085fb.ctex"]
 
 [params]
 

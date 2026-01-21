@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0jpdo5boqutp"
-path="res://.godot/imported/shop.png-5149fbd3031e5107c730f71034ec361b.ctex"
+uid="uid://bwjrff7slnl1"
+path="res://.godot/imported/frost_icon.png-fa2b83415ea5f42e70f4de5c7bd8d504.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/shop.png"
-dest_files=["res://.godot/imported/shop.png-5149fbd3031e5107c730f71034ec361b.ctex"]
+source_file="res://assets/images/icons/debuffs/frost_icon.png"
+dest_files=["res://.godot/imported/frost_icon.png-fa2b83415ea5f42e70f4de5c7bd8d504.ctex"]
 
 [params]
 

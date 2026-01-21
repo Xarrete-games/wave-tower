@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvev5rktov31p"
-path="res://.godot/imported/icons_timer.png-0dbcb879ca1458957cec3edeeffa0f30.ctex"
+uid="uid://ew6iu1r5ngoe"
+path="res://.godot/imported/question-icon.png-bba60b8b6a6443bc1b7be9cba5ff9ae7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/icons_timer.png"
-dest_files=["res://.godot/imported/icons_timer.png-0dbcb879ca1458957cec3edeeffa0f30.ctex"]
+source_file="res://assets/images/icons/question-icon.png"
+dest_files=["res://.godot/imported/question-icon.png-bba60b8b6a6443bc1b7be9cba5ff9ae7.ctex"]
 
 [params]
 

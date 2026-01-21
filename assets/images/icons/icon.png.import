@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jgpoavtm56v2"
-path="res://.godot/imported/frost_icon.png-01e76ed245d3e16b2b9802f42a940f01.ctex"
+uid="uid://du6pcr3fpo4su"
+path="res://.godot/imported/icon.png-2e589b63db70c818291254f4ac8e781c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/debuffs/frost_icon.png"
-dest_files=["res://.godot/imported/frost_icon.png-01e76ed245d3e16b2b9802f42a940f01.ctex"]
+source_file="res://assets/images/icons/icon.png"
+dest_files=["res://.godot/imported/icon.png-2e589b63db70c818291254f4ac8e781c.ctex"]
 
 [params]
 

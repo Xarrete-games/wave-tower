@@ -6,7 +6,6 @@
 
 [resource]
 script = ExtResource("1_fsua3")
-id = "buba"
 type = 1
 name = "Buba"
 icon = ExtResource("1_a3f8k")

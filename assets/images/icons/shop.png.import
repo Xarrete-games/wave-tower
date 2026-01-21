@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://35i1uisepolx"
-path="res://.godot/imported/skull_icon.png-7d6638aa44b3db76aeb6769b3fcfd61d.ctex"
+uid="uid://0jpdo5boqutp"
+path="res://.godot/imported/shop.png-e13b4276cf18061c7c854f71f0516323.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icons/skull_icon.png"
-dest_files=["res://.godot/imported/skull_icon.png-7d6638aa44b3db76aeb6769b3fcfd61d.ctex"]
+source_file="res://assets/images/icons/shop.png"
+dest_files=["res://.godot/imported/shop.png-e13b4276cf18061c7c854f71f0516323.ctex"]
 
 [params]
 

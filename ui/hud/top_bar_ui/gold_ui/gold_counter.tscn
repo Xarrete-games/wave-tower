@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjj2sav3lh0or"]
 
 [ext_resource type="Script" uid="uid://bkbamp1u3wa1u" path="res://ui/hud/top_bar_ui/gold_ui/gold_counter.gd" id="1_wrnqc"]
-[ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/sprites/icons/wcoin.png" id="2_uu5d3"]
+[ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/images/icons/wcoin.png" id="2_uu5d3"]
 
 [node name="GoldCounter" type="HBoxContainer"]
 theme_override_constants/separation = 8
