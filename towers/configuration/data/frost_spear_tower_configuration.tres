@@ -12,7 +12,9 @@ region = Rect2(1456, 3, 415, 633)
 script = ExtResource("1_twtbw")
 id = "frost_spear_tower"
 display_name = "Icebreaker"
-description = "Throws a glacial lance that deeply freezes its target, dealing more damage based on the number of Frost stacks they have."
+description = "Throws a glacial lance that deeply freezes its target, 
+dealing more damage based on the number of Frost
+stacks they have."
 icon = SubResource("AtlasTexture_cq3yl")
 base_damage = 25.0
 base_attack_range = 300.0

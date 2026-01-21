@@ -12,7 +12,8 @@ region = Rect2(1005, 83, 367, 553)
 script = ExtResource("1_6q0vf")
 id = "frost_nova_tower"
 display_name = "Frost Nova Tower"
-description = "Creates an frost nova around itself, hitting all enemies"
+description = "Creates an frost nova around itself, 
+hitting all enemies"
 icon = SubResource("AtlasTexture_cq3yl")
 type = 2
 base_damage = 15.0
