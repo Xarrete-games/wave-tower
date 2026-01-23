@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bnereur0ds0hf" path="res://ui/screens/events_screen/event_options_screen/event_option_button.gd" id="2_4tgh2"]
 
 [node name="EventOptionButton" type="Button"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(600, 50)
 offset_bottom = 5.0
 size_flags_horizontal = 4
 theme = ExtResource("1_e3pa8")

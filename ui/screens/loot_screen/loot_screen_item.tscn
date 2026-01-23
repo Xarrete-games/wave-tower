@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjdiwjtvkbeb5"]
+[gd_scene load_steps=6 format=3 uid="uid://bjdiwjtvkbeb5"]
 
 [ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/images/icons/wcoin.png" id="1_cne1v"]
 [ext_resource type="Script" uid="uid://dnsxyviefc8h6" path="res://ui/screens/loot_screen/loot_screen_item.gd" id="1_supgx"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="3_fwaqb"]
+[ext_resource type="Texture2D" uid="uid://bsq8n0trc4cop" path="res://assets/sprites/consumables/purple_potion_relic.png" id="3_pvu0a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cne1v"]
 bg_color = Color(0.09803922, 0.23529412, 0.1882353, 1)
@@ -12,7 +13,9 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [node name="LootScreenItem" type="PanelContainer" node_paths=PackedStringArray("texture_rect", "label")]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(300, 0)
+offset_right = 240.0
+offset_bottom = 55.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_cne1v")
 script = ExtResource("1_supgx")
 gold_icon = ExtResource("1_cne1v")
@@ -33,8 +36,9 @@ theme_override_constants/separation = 10
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
-texture = ExtResource("1_cne1v")
+texture = ExtResource("3_pvu0a")
 expand_mode = 2
+stretch_mode = 4
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
