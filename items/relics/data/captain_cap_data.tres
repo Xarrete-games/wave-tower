@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RelicItemData" load_steps=4 format=3 uid="uid://bhn3b6gcij38a"]
+
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://items/relics/relic_item_data.gd" id="1_f5i6s"]
+[ext_resource type="Script" uid="uid://dcunnqn4wgg01" path="res://items/relics/implementations/captain_cap.gd" id="1_x7kdt"]
+[ext_resource type="Texture2D" uid="uid://bnbsg2ywf1wot" path="res://assets/sprites/relics/unused/relic_captain's_cap_relic.png" id="2_x7kdt"]
+
+[resource]
+script = ExtResource("1_f5i6s")
+rarity = 2
+id = "captain_cap"
+display_name = "Captain Cap"
+description = "4 relics appear to choose from instead of 3 as a reward"
+texture = ExtResource("2_x7kdt")
+runtime_script = ExtResource("1_x7kdt")
+metadata/_custom_type_script = "uid://blk23o0i7vnyj"

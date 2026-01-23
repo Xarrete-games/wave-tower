@@ -9,7 +9,10 @@ var rewards_screen: ChooseRelicScreen
 
 func show_choose_relic_event(event_layer: CanvasLayer) -> void:
 	rewards_screen = REWARDS_SCREEN.instantiate()
-	var relic_offers = RunContext.offers_manager.create_relic_offers(3)
+
+	var number_of_offers = 4 if RunContext.relics_manager.has_relic("captain_cap") else 3
+
+	var relic_offers = RunContext.offers_manager.create_relic_offers(number_of_offers)
 	event_layer.add_child(rewards_screen)
 	rewards_screen.set_items_offer(relic_offers)
 	rewards_screen.item_selected.connect(_on_item_selected)

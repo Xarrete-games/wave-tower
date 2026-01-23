@@ -19,6 +19,9 @@ var relics_count: Dictionary[String, int] = {}
 var relics: Dictionary[String, Relic] = {
 }
 
+func has_relic(relic_id: String) -> bool:
+	return relics.has(relic_id)
+
 func get_all_relics() -> Array[Relic]:
 	return relics.values()
 
