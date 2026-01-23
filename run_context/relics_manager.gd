@@ -20,7 +20,7 @@ var relics: Dictionary[String, Relic] = {
 }
 
 func has_relic(relic_id: String) -> bool:
-	return relics.has(relic_id)
+	return relics.has(relic_id) and not (relics[relic_id]).disabled
 
 func get_all_relics() -> Array[Relic]:
 	return relics.values()

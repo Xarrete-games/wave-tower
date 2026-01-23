@@ -29,19 +29,20 @@ func reset_run() -> void:
 	offers_manager = OffersManager.new()
 	progress = RunProgress.new()
 	economy = Economy.new()
-	status = Status.new()
-	status.player_died.connect(_on_die, CONNECT_ONE_SHOT)
+	relics_manager = RelicsManager.new()
+	status = Status.new(progress, relics_manager)
 	towers_manager = TowersManager.new()
 	towers_buffs = TowersBuffs.new()
 	buff_scheduler = BuffScheduler.new()
 	towers_price = TowersPrice.new()
-	relics_manager = RelicsManager.new()
 	consumables_manager = ConsumablesManager.new()
 	enemy_debuff_manager = EnemyDebuffManager.new()
 	enemy_manager = EnemyManager.new()
 	damage_recount = DamageRecount.new(towers_manager)
 	loot_manager = LootManager.new()
 	is_on_restarting = false
+
+	status.player_died.connect(_on_die, CONNECT_ONE_SHOT)
 
 func _on_die() -> void:
 	var death_scene = DEATH_SCENE.instantiate()

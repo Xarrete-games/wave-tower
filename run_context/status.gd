@@ -5,7 +5,6 @@ signal armor_change(amount: int)
 signal max_health_change(amount: int)
 signal player_died()
 
-
 var max_health: int = 20:
 	set(value):
 		max_health = value
@@ -18,6 +17,14 @@ var health: int = max_health:
 		health = min(value, max_health)
 		health_change.emit(health)
 		if health <= 0:
+
+			# phonix feather relic check
+			if relics_manager.has_relic("phoenix_feather"):
+				health = 10
+				health_change.emit(health)
+				relics_manager.disable_relic("phoenix_feather")
+				return
+
 			player_died.emit()
 
 var armor: int = 0:
@@ -25,8 +32,13 @@ var armor: int = 0:
 		armor = value
 		armor_change.emit(armor)
 
-func _init() -> void:
-	RunContext.progress.current_wave_finished.connect(_on_wave_finished)
+var progress: RunProgress
+var relics_manager: RelicsManager
+
+func _init(p_progress: RunProgress, p_relics_manager: RelicsManager) -> void:
+	progress = p_progress
+	relics_manager = p_relics_manager
+	progress.current_wave_finished.connect(_on_wave_finished)
 
 func heal(amount: int) -> void:
 	if amount <= 0:
