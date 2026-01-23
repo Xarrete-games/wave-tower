@@ -50,7 +50,7 @@ func _on_gui_input(event: InputEvent) -> void:
 	if (_it_cost_health and not _has_enough_live):
 		return
 	
-	if Utils.is_left_click_event(event):
+	if UIUtils.is_left_click_event(event):
 		AudioManager.play_button_click()
 		card_pressed.emit(item_offer)
 

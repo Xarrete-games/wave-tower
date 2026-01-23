@@ -202,5 +202,5 @@ func _on_tower_selected(tower: Tower) -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if not _enabled:
 		return
-	if Utils.is_left_click_event(event):
+	if UIUtils.is_left_click_event(event):
 		ClickEvents.tower_selected.emit(self)

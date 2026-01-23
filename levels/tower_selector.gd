@@ -11,11 +11,11 @@ func _ready() -> void:
 	RunContext.progress.current_wave_finished.connect(clear_tower_selected)
 
 func _input(event: InputEvent) -> void:
-	if Utils.is_right_click_event(event):
+	if UIUtils.is_right_click_event(event):
 		clear_tower_selected()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Utils.is_left_click_event(event):
+	if UIUtils.is_left_click_event(event):
 		clear_tower_selected()
 		get_viewport().set_input_as_handled()
 

@@ -15,7 +15,7 @@ func set_event(event: EventData) -> void:
 	_event = event
 	
 func _on_gui_input(event: InputEvent) -> void:
-	if Utils.is_left_click_event(event):
+	if UIUtils.is_left_click_event(event):
 		event_pressed.emit(_event)
 		AudioManager.play_button_click()
 

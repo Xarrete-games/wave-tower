@@ -12,8 +12,6 @@ func handle_response(data: Variant) -> void:
 			var relic: Relic = DataLoader.get_not_used_relics(Relic.Rarity.COMMON, false).pick_random().create_item() as Relic
 			RunContext.relics_manager.add_relic(relic)
 		1:
-			print("Player chose option 1 in Chest event.")
-		_:
-			print("Invalid option chosen in Chest event.")
+			pass
 
 

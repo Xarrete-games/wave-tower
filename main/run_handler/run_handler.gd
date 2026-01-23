@@ -14,6 +14,7 @@ var options_events: Array[EventData]
 
 @export var event_layer: CanvasLayer
 @export var events_screen_hander: EventsScreenHandler
+@export var loot_screen_handler: LootScreenHandler
 
 
 
@@ -48,9 +49,12 @@ func _show_next_level_menu() -> void:
 	var next_level_screen = NEXT_LEVEL_SCREEN.instantiate()
 	event_layer.call_deferred("add_child", next_level_screen)
 
-# REWARDS SCREEN
+# EVERY WAVE FINISHED
 func _on_wave_finished() -> void:
-	RunContext.economy.gold += 50
+	# LOOT SCREEN
+	await loot_screen_handler.show_loot_screen(event_layer)
+
+	# EVENT SCREEN
 	var event = _get_next_event(RunContext.progress.current_wave)
 	if event == null:
 		_show_next_wave_screen()

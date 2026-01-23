@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 	if not _current_consumable:
 		return
 
-	if Utils.is_left_click_event(event) and _is_valid_target:
+	if UIUtils.is_left_click_event(event) and _is_valid_target:
 		_use_consumable()
 	elif event.is_action("exit"):
 		cancel_current_consumable()

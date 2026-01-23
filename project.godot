@@ -25,7 +25,7 @@ GameState="*res://main/game_state.gd"
 DataLoader="*res://global/data_loader.gd"
 RunContext="*res://run_context/run_context.gd"
 ClickEvents="*res://global/click_events.gd"
-Utils="*res://utils/utils.gd"
+UIUtils="*res://utils/ui_utils.gd"
 
 [debug]
 

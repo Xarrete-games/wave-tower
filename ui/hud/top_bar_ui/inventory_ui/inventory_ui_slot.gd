@@ -19,7 +19,7 @@ func _on_gui_input(event: InputEvent) -> void:
 	if _consumable == null:
 		return
 
-	if Utils.is_left_click_event(event):
+	if UIUtils.is_left_click_event(event):
 		AudioManager.play_button_click()
 		_consumable.clicked.emit(_consumable)
 

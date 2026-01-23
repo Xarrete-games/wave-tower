@@ -16,6 +16,4 @@ func handle_response(data: Variant) -> void:
 				buda = DataLoader.get_relic_by_id("cursed_buda").create_item()
 			RunContext.relics_manager.add_relic(buda)
 		1:
-			print("Player chose option 1 in Buda Temple event.")
-		_:
-			print("Invalid option chosen in Buda Temple event.")
+			pass

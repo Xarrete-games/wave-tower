@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://djbvtmp6wnbyj"]
+
+[ext_resource type="Texture2D" uid="uid://ek3ujhrnwtca" path="res://assets/images/containers/ribbon_label (1).png" id="1_d5b34"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="2_d5b34"]
+
+[node name="RibbonLabel" type="MarginContainer"]
+offset_right = 321.0
+offset_bottom = 94.0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(320, 80)
+layout_mode = 2
+texture = ExtResource("1_d5b34")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 35
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+text = "Loot!"
+label_settings = ExtResource("2_d5b34")
