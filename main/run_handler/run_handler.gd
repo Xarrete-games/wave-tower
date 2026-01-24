@@ -24,6 +24,9 @@ func _ready() -> void:
 	RunContext.progress.last_wave_finished.connect(_on_last_wave_finished)
 	RunContext.progress.current_level_changed.connect(_on_new_level_loaded)
 
+func show_events_screen(event_data: EventData) -> void:
+	await events_screen_hander.show_event_selected(event_data, event_layer)
+
 func _set_events_by_type() -> void:
 	events = DataLoader.get_all_events()
 	shop_event = null
@@ -59,8 +62,7 @@ func _on_wave_finished() -> void:
 	if event == null:
 		_show_next_wave_screen()
 		return
-	events_screen_hander.show_event_selected(event, event_layer)
-	await events_screen_hander.event_finished
+	await show_events_screen(event)
 	_show_next_wave_screen()
 
 func _on_last_wave_finished() -> void:
@@ -71,10 +73,6 @@ func _on_last_wave_finished() -> void:
 	else:
 		_show_next_level_menu()
 
-func _on_rewards_screen_closed() -> void:
-	if RunContext.progress.current_wave in WAVES_WITH_EVENTS:
-		await events_screen_hander.show_events(event_layer)
-	
 func _on_new_level_loaded(_level_num: int) -> void:
 	_show_next_wave_screen()
 

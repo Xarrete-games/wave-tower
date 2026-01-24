@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://6vgrx5dct8h8"]
+[gd_scene load_steps=9 format=3 uid="uid://6vgrx5dct8h8"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_jc0vi"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="2_2c7eb"]
+[ext_resource type="Script" uid="uid://bfbh2lc6ejw1i" path="res://main/test_data.gd" id="3_2c7eb"]
 [ext_resource type="PackedScene" uid="uid://b7y7a8hvmviqo" path="res://main/run_handler/run_handler.tscn" id="3_3qcir"]
 [ext_resource type="PackedScene" uid="uid://b1rsi54eynysa" path="res://ui/screens/pause_screen/pause_menu.tscn" id="4_f7m14"]
 [ext_resource type="PackedScene" uid="uid://drm4bn0pi7ue1" path="res://ui/hud/hud_layer.tscn" id="4_jc0vi"]
@@ -12,6 +13,9 @@
 script = ExtResource("1_jc0vi")
 levels_paths = Array[String](["res://levels/levels/level1b/level_1b.tscn", "res://levels/levels/level2a/level_2a.tscn", "res://levels/levels/level3a/level_3a.tscn"])
 pause = ExtResource("4_f7m14")
+
+[node name="TestData" type="Node" parent="."]
+script = ExtResource("3_2c7eb")
 
 [node name="RunHandler" parent="." node_paths=PackedStringArray("event_layer") instance=ExtResource("3_3qcir")]
 event_layer = NodePath("../EventLayer")
