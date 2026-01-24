@@ -1,10 +1,12 @@
 class_name LootManager extends RefCounted
 
+var extra_gold: int = 0
+
 func generate_loot_items() -> Array[LootItemData]:
 	var loot_items: Array[LootItemData] = []
 	
 	var gold_item: LootItemData = LootItemData.new()
-	gold_item.gold_amount = 50
+	gold_item.gold_amount = 50 + extra_gold
 
 	loot_items.append(gold_item)
 

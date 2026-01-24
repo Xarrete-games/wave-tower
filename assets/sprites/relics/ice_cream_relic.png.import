@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqfc7s36geim6"
-path="res://.godot/imported/ice_cream_relic.png-bcdd464b2c0264a85246eb3a652833f4.ctex"
+path="res://.godot/imported/ice_cream_relic.png-4b5dafbff91a64f2712883ef02bc42f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/unused/ice_cream_relic.png"
-dest_files=["res://.godot/imported/ice_cream_relic.png-bcdd464b2c0264a85246eb3a652833f4.ctex"]
+source_file="res://assets/sprites/relics/ice_cream_relic.png"
+dest_files=["res://.godot/imported/ice_cream_relic.png-4b5dafbff91a64f2712883ef02bc42f1.ctex"]
 
 [params]
 
