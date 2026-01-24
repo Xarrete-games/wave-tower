@@ -21,6 +21,8 @@ func add_consumable(consumable: Consumable) -> void:
     consumable_added.emit(consumable)
 
 func _on_consumable_used(consumable: Consumable) -> void:
+    consumable.clicked.disconnect(_on_consumable_clicked)
+    consumable.used.disconnect(_on_consumable_used)
     consumable_used.emit(consumable)
     consumables.erase(consumable)
     consumables_change.emit(consumables)
