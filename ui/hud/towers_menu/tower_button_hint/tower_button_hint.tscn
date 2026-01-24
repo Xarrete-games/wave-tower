@@ -70,6 +70,7 @@ unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Damage"
 stat_icon = ExtResource("7_3svv1")
+is_float = true
 
 [node name="RangeStatUi" parent="MarginContainer/VBoxContainer/StatsContainer" instance=ExtResource("4_wylug")]
 unique_name_in_owner = true

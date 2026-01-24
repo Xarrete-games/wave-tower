@@ -145,6 +145,7 @@ unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Damage"
 stat_icon = ExtResource("8_g3isl")
+is_float = true
 
 [node name="RangeStatUi" parent="Panel/MarginContainer/MainContainer/DataContainer" instance=ExtResource("2_jlxp2")]
 unique_name_in_owner = true
