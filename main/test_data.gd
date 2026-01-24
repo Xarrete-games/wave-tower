@@ -3,10 +3,15 @@ class_name TestData extends Node
 @export var initial_random_relics: int = 0
 @export var initial_relics_ids: Array[String] = []
 @export var run_handler: RunHandler
+@export var initial_event: EventData = null
 
 
 func _ready() -> void:
+	await get_tree().create_timer(0.1).timeout
 	_handle_initial_relics()
+	
+	if initial_event:
+		await run_handler.show_events_screen(initial_event)
 
 func _handle_initial_relics() -> void:
 	if initial_relics_ids.size() > 0:

@@ -89,7 +89,6 @@ alignment = 1
 [node name="SellSection" type="VBoxContainer" parent="ShopContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 30
 alignment = 1
 
 [node name="RelicsTittle" type="PanelContainer" parent="ShopContainer/VBoxContainer/SellSection"]
@@ -104,11 +103,10 @@ size_flags_horizontal = 4
 text = "Choose one relic to sell"
 label_settings = ExtResource("3_g4y81")
 
-[node name="RelicsToSell" type="GridContainer" parent="ShopContainer/VBoxContainer/SellSection"]
+[node name="RelicsToSell" type="HBoxContainer" parent="ShopContainer/VBoxContainer/SellSection"]
 layout_mode = 2
-theme_override_constants/h_separation = 25
-theme_override_constants/v_separation = 25
-columns = 6
+theme_override_constants/separation = 30
+alignment = 1
 
 [node name="ButtonsSection" type="VBoxContainer" parent="ShopContainer"]
 layout_mode = 2

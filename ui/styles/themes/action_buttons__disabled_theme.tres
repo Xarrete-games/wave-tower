@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://df6bsofi72kid"]
+
+[ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="1_h8fbf"]
+[ext_resource type="StyleBox" uid="uid://c4ur0hd13rv3h" path="res://ui/styles/box_style/buttons/action_button.tres" id="2_yaxp7"]
+
+[resource]
+Button/colors/font_color = Color(0.78431374, 0.9019608, 0.7882353, 1)
+Button/constants/icon_max_width = 30
+Button/font_sizes/font_size = 22
+Button/fonts/font = ExtResource("1_h8fbf")
+Button/styles/disabled = ExtResource("2_yaxp7")
+Button/styles/focus = ExtResource("2_yaxp7")
+Button/styles/hover = ExtResource("2_yaxp7")
+Button/styles/normal = ExtResource("2_yaxp7")
+Button/styles/pressed = ExtResource("2_yaxp7")
