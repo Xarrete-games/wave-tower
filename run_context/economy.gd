@@ -15,6 +15,7 @@ var is_soya_sauce_active: bool = false:
 		consumables_discount_mult = _consumables_discount_mult
 
 var is_lemon_active: bool = false
+var is_sell_active: bool = false
 
 var gold: int = 1000:
 	set(value):

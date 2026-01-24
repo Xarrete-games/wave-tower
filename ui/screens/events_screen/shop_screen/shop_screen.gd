@@ -20,6 +20,8 @@ var is_on_sell_mode: bool = false
 
 func _ready() -> void:
 	_change_to_buy_mode()
+	if not RunContext.economy.is_sell_active:
+		sell_button.visible = false
 	_build_relics_for_sale()
 
 func set_relics(relics: Array[ItemOffer]) -> void:
@@ -41,6 +43,8 @@ func _on_item_purchase(relic: ItemOffer, slot_purchased: ShopSlot) -> void:
 	AudioManager.play_purchase()
 	for slot: ShopSlot in relics_container.get_children():
 		if slot == slot_purchased:
+			if relic.item_data.id == "strategy_tome_economy":
+				sell_button.visible = true
 			slot.queue_free()
 			return
 	for slot: ShopSlot in consumables_container.get_children():
@@ -55,7 +59,7 @@ func _on_item_sold(item_offer: ItemOffer, slot_sold: ShopSlot) -> void:
 			RunContext.relics_manager.remove_relic(item_offer.item_data.id)
 			RunContext.economy.add_gold(item_offer.price)
 			AudioManager.play_purchase()
-			sell_button.disable_button()
+			sell_button.disable()
 			_on_exit_button_pressed()
 			return
 

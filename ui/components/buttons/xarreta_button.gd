@@ -18,12 +18,12 @@ func _on_pressed() -> void:
 	AudioManager.play_button_click()
 	xarreta_pressed.emit()
 
-func disable_button() -> void:
+func disable() -> void:
 	disabled = true
 	if disabled_theme_override:
 		theme = disabled_theme_override
 
-func enable_button() -> void:
+func enable() -> void:
 	disabled = false
 	if theme_override:
 		theme = theme_override
