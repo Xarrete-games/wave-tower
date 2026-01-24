@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct25no5y4bpwf"
-path="res://.godot/imported/Blackbeard's_trusted_blunderbuss_relic.png-4916f952369a0d6a7c912d1315417dbe.ctex"
+uid="uid://cslcqpgy6202k"
+path="res://.godot/imported/Blackbeard's_hat_relic.png-570803ef68046e7cafdb303357c895d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/relics/unused/Blackbeard's_trusted_blunderbuss_relic.png"
-dest_files=["res://.godot/imported/Blackbeard's_trusted_blunderbuss_relic.png-4916f952369a0d6a7c912d1315417dbe.ctex"]
+source_file="res://assets/sprites/relics/Blackbeard's_hat_relic.png"
+dest_files=["res://.godot/imported/Blackbeard's_hat_relic.png-570803ef68046e7cafdb303357c895d4.ctex"]
 
 [params]
 
