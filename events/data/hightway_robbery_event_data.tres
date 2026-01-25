@@ -11,7 +11,7 @@ id = "hightway_robbery_event"
 title = "Highway Robbery"
 description = "Two masked robbers block your way.
 With swords drawn, they demand a relic.
-Pick one to give…you have no choice."
+Pick one ..., you have no choice."
 icon = ExtResource("1_7h2fc")
 texture_background = ExtResource("3_xjape")
 runtime_script = ExtResource("2_xjape")

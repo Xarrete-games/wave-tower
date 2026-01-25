@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicItemData" load_steps=4 format=3 uid="uid://b0ajotxjv5fbr"]
+[gd_resource type="Resource" script_class="RelicItemData" load_steps=4 format=3 uid="uid://cxojswmt0kad5"]
 
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://items/relics/relic_item_data.gd" id="1_md2yd"]
 [ext_resource type="Script" uid="uid://cljq48r6gs27q" path="res://items/relics/implementations/strategy_tome_low_health_priority.gd" id="1_pgd5w"]
@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_md2yd")
+is_tome = true
 id = "Strategy Tome: 
 Low Health Priority"
 display_name = "Strategy Tome: 

@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_xvjca")
+is_tome = true
 id = "strategy_tome_economy"
 display_name = "Strategy Tome: 
 Economy"
