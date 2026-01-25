@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://doun1k6w4e04m"]
+
+[ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/procedural_test/map_piece/map_piece.tscn" id="1_crvxy"]
+[ext_resource type="Script" uid="uid://bvftccm02j4ej" path="res://levels/enemy_paths.gd" id="1_vv3de"]
+[ext_resource type="Script" uid="uid://dbitkklsrrm3w" path="res://levels/enemy_generator.gd" id="2_crvxy"]
+[ext_resource type="Script" uid="uid://dpnilgqn044xp" path="res://main/tower_placer/tower_placer.gd" id="3_bebo1"]
+[ext_resource type="Script" uid="uid://c6gmmo43gd544" path="res://levels/tower_selector.gd" id="4_ldccm"]
+[ext_resource type="Script" uid="uid://yhjdvpv621gf" path="res://levels/consumables_handler.gd" id="5_pb4yr"]
+[ext_resource type="Script" uid="uid://ky15h85r6dhk" path="res://levels/kill_event_handler.gd" id="6_j1bfp"]
+[ext_resource type="PackedScene" uid="uid://oesepsa8dbuy" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.tscn" id="7_eelf1"]
+[ext_resource type="PackedScene" uid="uid://gb8anbp5v7hc" path="res://levels/portal/blue_portal.tscn" id="9_bebo1"]
+
+[node name="ProceduralLevel" type="Node2D"]
+
+[node name="ProceduraTileMap" parent="." instance=ExtResource("1_crvxy")]
+scale = Vector2(0.25, 0.25)
+
+[node name="Visual" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="EnemyPaths" type="Node2D" parent="."]
+script = ExtResource("1_vv3de")
+
+[node name="CameraInitPos" type="Marker2D" parent="."]
+
+[node name="EnemyGenerator" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_crvxy")
+
+[node name="TowerPlacer" type="Node2D" parent="."]
+script = ExtResource("3_bebo1")
+metadata/_custom_type_script = "uid://dpnilgqn044xp"
+
+[node name="TowerSelector" type="Node" parent="."]
+script = ExtResource("4_ldccm")
+
+[node name="ConsumablesHandler" type="Node" parent="."]
+script = ExtResource("5_pb4yr")
+
+[node name="KillEventHandler" type="Node" parent="."]
+script = ExtResource("6_j1bfp")
+burn_area_scene = ExtResource("7_eelf1")
+
+[node name="BluePortalPortal" parent="." instance=ExtResource("9_bebo1")]
+position = Vector2(-150.99995, -247.00003)
+frame_progress = 0.48736614
+flip_h = true
