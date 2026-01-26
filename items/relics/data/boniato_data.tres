@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_25sa2")
 rarity = 2
-id = "Sweet Potato"
+id = "boniato"
 display_name = "Sweet Potato"
 description = "Increases the gold dropped by enemies by 1 at the cost of 5 lives.
 Be careful!"

@@ -4,9 +4,13 @@ class_name FountainsOfWishesScript extends EventScript
 func get_options() -> Array[EventOptionData]:
 	var gold = RunContext.economy.gold
 
-	var options1 = EventOptionData.new("Offer 50 coins (Receive a Common Relic)", Relic.Rarity.COMMON, gold < 50)
-	var options2 = EventOptionData.new("Offer 80 coins (Receive a Rare Relic)", Relic.Rarity.RARE, gold < 80)
-	var options3 = EventOptionData.new("Offer 120 coins (Receive a Epic Relic)", Relic.Rarity.EPIC, gold < 120)
+	var epic_available = DataLoader.get_not_used_relics(Relic.Rarity.EPIC, false).size() > 0
+	var rare_available = DataLoader.get_not_used_relics(Relic.Rarity.RARE, false).size() > 0
+	var common_available = DataLoader.get_not_used_relics(Relic.Rarity.COMMON, false).size() > 0
+
+	var options1 = EventOptionData.new("Offer 50 coins (Receive a Common Relic)", Relic.Rarity.COMMON, gold < 50 or not common_available)
+	var options2 = EventOptionData.new("Offer 80 coins (Receive a Rare Relic)", Relic.Rarity.RARE, gold < 80 or  not rare_available)
+	var options3 = EventOptionData.new("Offer 120 coins (Receive a Epic Relic)", Relic.Rarity.EPIC, gold < 120 or not epic_available)
 
 	return [options1, options2, options3]
 
