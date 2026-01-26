@@ -55,6 +55,12 @@ func get_all_events() -> Array[EventData]:
 # CONSUMABLES API
 # ---------------------------------------------------------
 
+func get_consumable_by_id(consumable_id: String) -> ItemData:
+	for consumable in consumables:
+		if consumable.id == consumable_id:
+			return consumable
+	return null
+
 func get_all_consumables() -> Array[ConsumableItemData]:
 	return consumables.duplicate()
 

@@ -80,6 +80,7 @@ func unblock_tile(map_coords: Vector2i) -> void:
 		return
 	_blocked_tiles.erase(map_coords)
 	set_cell(map_coords, ATLAS_ID, UNLOCK_TILE_POS)
+	_buildeable_tiles[map_coords] = true
 		
 func _fill_data() -> void:
 	var used_cells: Array[Vector2i] = get_used_cells()

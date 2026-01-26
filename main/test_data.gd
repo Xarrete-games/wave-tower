@@ -2,6 +2,7 @@ class_name TestData extends Node
 
 @export var initial_random_relics: int = 0
 @export var initial_relics_ids: Array[String] = []
+@export var initial_consumables_ids: Array[String] = []
 @export var run_handler: RunHandler
 @export var initial_event: EventData = null
 
@@ -27,3 +28,13 @@ func _handle_initial_relics() -> void:
 		for item in items:
 			var relic = item.create_item() as Relic
 			RunContext.relics_manager.add_relic(relic)
+
+
+	if initial_consumables_ids.size() > 0:
+		for consumable_id in initial_consumables_ids:
+			var consumable_data = DataLoader.get_consumable_by_id(consumable_id)
+			if consumable_data:
+				var consumable_instance = consumable_data.create_item() as Consumable
+				RunContext.consumables_manager.add_consumable(consumable_instance)
+			else:
+				push_error("[Game]: initial consumable id %s not found" % consumable_id)
