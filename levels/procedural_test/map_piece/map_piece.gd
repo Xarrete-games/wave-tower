@@ -1,15 +1,22 @@
 class_name MapPiece extends TileMapLayer
 
 enum Dir { NE, SE, SW, NW }
+const DIR_TO_OFFSET: Dictionary= {
+	Dir.NE: Vector2i( 1, -1),
+	Dir.SE: Vector2i( 1,  1),
+	Dir.SW: Vector2i(-1,  1),
+	Dir.NW: Vector2i(-1, -1),
+}	
 
-@export var edges_directions: Array[Dir] = []
+@export var size: Vector2i = Vector2i(11, 11)
+@export var entrey_dir: Dir
+@export var exit_dir: Dir
+@export var paths: Array[PiecePath] = []
 
-var edges_tiles: Array[Vector2i] = []	
+var edges_tiles: Array[Vector2i] = []
 
 func _ready() -> void:
-	for edge in edges_directions:
-		var edge_center = get_edge_center(edge)
-		edges_tiles.append(edge_center)
+	pass
 
 func get_edge_center(dir: Dir) -> Vector2i:
 	var used: Array[Vector2i] = get_used_cells()
@@ -38,3 +45,10 @@ func get_edge_center(dir: Dir) -> Vector2i:
 		sum += c
 
 	return sum / edge.size()
+
+func get_map_center() -> Vector2i:
+	var used: Array[Vector2i] = get_used_cells()
+	var sum: Vector2i = Vector2i.ZERO
+	for c in used:
+		sum += c
+	return sum / used.size()
