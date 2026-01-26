@@ -57,6 +57,9 @@ func _on_wave_finished() -> void:
 	# LOOT SCREEN
 	await loot_screen_handler.show_loot_screen(event_layer)
 
+	if RunContext.is_on_restarting:
+		return
+
 	# EVENT SCREEN
 	var event = _get_next_event(RunContext.progress.current_wave)
 	if event == null:
