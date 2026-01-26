@@ -13,7 +13,6 @@
 script = ExtResource("1_jc0vi")
 levels_paths = Array[String](["res://levels/levels/level1b/level_1b.tscn", "res://levels/levels/level2a/level_2a.tscn", "res://levels/levels/level3a/level_3a.tscn"])
 pause = ExtResource("4_f7m14")
-current_level_number = 3
 
 [node name="TestData" type="Node" parent="." node_paths=PackedStringArray("run_handler")]
 script = ExtResource("3_2c7eb")

@@ -3,6 +3,13 @@ class_name LevelProgressUI extends HBoxContainer
 const LEVEL_PROGRESS_SLOT = preload("uid://dddlo6uv4ct15")
 const SKULL_ICON = preload("uid://35i1uisepolx")
 const QUESTION_ICON = preload("uid://ew6iu1r5ngoe")
+const RELIC_ICON = preload("uid://dlix83276rvep")
+const SHOP_ICON = preload("uid://0jpdo5boqutp")
+
+const WAVES_WITH_EVENTS = [8]
+const WAVES_WITH_SHOPS = [4]
+const WAVES_WITH_RELICS = [2,6]
+const WAVES_WITH_BOSS = [10]
 
 func _ready() -> void:
 	_clear()
@@ -21,10 +28,19 @@ func _build() -> void:
 	for index in range(10):
 		var slot: LevelProgressSlot = LEVEL_PROGRESS_SLOT.instantiate()
 		add_child(slot)
-		if index == 0 or index == 2 or index == 5 or index == 8:
-			slot.set_icon(QUESTION_ICON)	
-		if index == 9:
+		
+		var wave_number = index + 1
+
+		if	wave_number in WAVES_WITH_EVENTS:
+			slot.set_icon(QUESTION_ICON)
+		elif wave_number in WAVES_WITH_SHOPS:
+			slot.set_icon(SHOP_ICON)
+		elif wave_number in WAVES_WITH_RELICS:
+			slot.set_icon(RELIC_ICON)
+		elif wave_number in WAVES_WITH_BOSS:
 			slot.set_icon(SKULL_ICON)
+		else:
+			slot.set_icon(null)
 
 func _on_wave_init(new_value: int) -> void:
 	var slot: LevelProgressSlot = get_child(new_value - 1)
