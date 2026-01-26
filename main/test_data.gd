@@ -5,12 +5,16 @@ class_name TestData extends Node
 @export var initial_consumables_ids: Array[String] = []
 @export var run_handler: RunHandler
 @export var initial_event: EventData = null
+@export var open_loot_screen: bool = false
 
 
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
 	_handle_initial_relics()
 	
+	if open_loot_screen:
+		await run_handler.show_loot_screen()
+
 	if initial_event:
 		await run_handler.show_events_screen(initial_event)
 

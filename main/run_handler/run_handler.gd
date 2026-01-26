@@ -24,6 +24,9 @@ func _ready() -> void:
 	RunContext.progress.last_wave_finished.connect(_on_last_wave_finished)
 	RunContext.progress.current_level_changed.connect(_on_new_level_loaded)
 
+func show_loot_screen() -> void:
+	await loot_screen_handler.show_loot_screen(event_layer)
+
 func show_events_screen(event_data: EventData) -> void:
 	await events_screen_hander.show_event_selected(event_data, event_layer)
 
@@ -55,7 +58,7 @@ func _show_next_level_menu() -> void:
 # EVERY WAVE FINISHED
 func _on_wave_finished() -> void:
 	# LOOT SCREEN
-	await loot_screen_handler.show_loot_screen(event_layer)
+	await show_loot_screen()
 
 	if RunContext.is_on_restarting:
 		return
