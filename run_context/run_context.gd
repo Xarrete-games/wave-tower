@@ -38,7 +38,7 @@ func reset_run() -> void:
 	consumables_manager = ConsumablesManager.new()
 	enemy_debuff_manager = EnemyDebuffManager.new()
 	enemy_manager = EnemyManager.new()
-	damage_recount = DamageRecount.new(towers_manager)
+	damage_recount = DamageRecount.new(towers_manager, progress)
 	loot_manager = LootManager.new()
 	is_on_restarting = false
 
