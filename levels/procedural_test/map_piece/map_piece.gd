@@ -1,25 +1,23 @@
-class_name MapPiece extends TileMapLayer
+class_name MapPiece extends Node2D
 
 enum Dir { NE, SE, SW, NW }
-const DIR_TO_OFFSET: Dictionary= {
-	Dir.NE: Vector2i( 1, -1),
-	Dir.SE: Vector2i( 1,  1),
-	Dir.SW: Vector2i(-1,  1),
-	Dir.NW: Vector2i(-1, -1),
-}	
+
 
 @export var size: Vector2i = Vector2i(11, 11)
-@export var entrey_dir: Dir
+@export var entry_dir: Dir
 @export var exit_dir: Dir
-@export var paths: Array[PiecePath] = []
 
+@onready var tile_map: TileMapLayer = $MapPieceTileMap
 var edges_tiles: Array[Vector2i] = []
 
 func _ready() -> void:
 	pass
 
-func get_edge_center(dir: Dir) -> Vector2i:
-	var used: Array[Vector2i] = get_used_cells()
+func map_to_local(tile_pos: Vector2i) -> Vector2:
+	return tile_map.map_to_local(tile_pos)
+
+func get_edge_tile(dir: Dir) -> Vector2i:
+	var used: Array[Vector2i] = tile_map.get_used_cells()
 	var edge: Array[Vector2i] = []
 
 	match dir:
@@ -47,7 +45,7 @@ func get_edge_center(dir: Dir) -> Vector2i:
 	return sum / edge.size()
 
 func get_map_center() -> Vector2i:
-	var used: Array[Vector2i] = get_used_cells()
+	var used: Array[Vector2i] = tile_map.get_used_cells()
 	var sum: Vector2i = Vector2i.ZERO
 	for c in used:
 		sum += c
