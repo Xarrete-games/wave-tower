@@ -16,7 +16,7 @@ description = "Creates an frost nova around itself,
 hitting all enemies"
 icon = SubResource("AtlasTexture_cq3yl")
 type = 2
-base_damage = 15.0
-base_attack_range = 300.0
-base_attack_speed = 2.0
+base_damage = 32.0
+base_attack_range = 330.0
+base_attack_speed = 4.0
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
