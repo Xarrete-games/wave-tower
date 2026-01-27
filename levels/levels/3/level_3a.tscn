@@ -39,7 +39,7 @@ scale = Vector2(1.0262941, 0.47811994)
 curve = SubResource("Curve2D_c5jwf")
 
 [node name="CameraInitPos" parent="." index="3"]
-position = Vector2(260, -14)
+position = Vector2(955, -90)
 
 [node name="fog_dark_sky" parent="." index="5" instance=ExtResource("3_tex77")]
 visible = false

@@ -1,27 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://doun1k6w4e04m"]
+[gd_scene load_steps=5 format=3 uid="uid://doun1k6w4e04m"]
 
-[ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/procedural_test/map_piece/map_piece.tscn" id="1_crvxy"]
-[ext_resource type="Script" uid="uid://bvftccm02j4ej" path="res://levels/enemy_paths.gd" id="1_vv3de"]
-[ext_resource type="PackedScene" uid="uid://bvqv60mgu1pwg" path="res://levels/procedural_test/map_piece/piece_curce_NE_NW.tscn" id="2_bebo1"]
-[ext_resource type="Script" uid="uid://dbitkklsrrm3w" path="res://levels/enemy_generator.gd" id="2_crvxy"]
-[ext_resource type="Script" uid="uid://dpnilgqn044xp" path="res://main/tower_placer/tower_placer.gd" id="3_bebo1"]
-[ext_resource type="Script" uid="uid://c6gmmo43gd544" path="res://levels/tower_selector.gd" id="4_ldccm"]
-[ext_resource type="Script" uid="uid://yhjdvpv621gf" path="res://levels/consumables_handler.gd" id="5_pb4yr"]
-[ext_resource type="Script" uid="uid://ky15h85r6dhk" path="res://levels/kill_event_handler.gd" id="6_j1bfp"]
-[ext_resource type="PackedScene" uid="uid://oesepsa8dbuy" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.tscn" id="7_eelf1"]
+[ext_resource type="Script" uid="uid://pc6bc1xl4g58" path="res://levels/procedural_test/world_map.gd" id="1_ldccm"]
+[ext_resource type="PackedScene" uid="uid://ieq8m0rsxdgt" path="res://levels/procedural_test/map_piece/piece_straight_NE_SW.tscn" id="2_8f3b7"]
+[ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="4_8f3b7"]
 [ext_resource type="PackedScene" uid="uid://gb8anbp5v7hc" path="res://levels/portal/blue_portal.tscn" id="9_bebo1"]
 
 [node name="ProceduralLevel" type="Node2D"]
 
-[node name="Map" type="Node2D" parent="."]
+[node name="WorldMap" type="Node2D" parent="." node_paths=PackedStringArray("piece_a", "piece_b")]
+script = ExtResource("1_ldccm")
+piece_a = NodePath("PieceStraightNeSw")
+piece_b = NodePath("PieceStraightNeSw2")
 
-[node name="MapPiece" parent="Map" instance=ExtResource("1_crvxy")]
+[node name="PieceStraightNeSw" parent="WorldMap" instance=ExtResource("2_8f3b7")]
+position = Vector2(-3, 341)
 
-[node name="MapPiece2" parent="Map" instance=ExtResource("1_crvxy")]
-position = Vector2(-814, 2177)
-
-[node name="PieceCurceNeNw" parent="Map" instance=ExtResource("2_bebo1")]
-position = Vector2(1399, 702)
+[node name="PieceStraightNeSw2" parent="WorldMap" instance=ExtResource("2_8f3b7")]
+position = Vector2(2191, -273)
 
 [node name="Visual" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -31,25 +26,8 @@ position = Vector2(-647, -561)
 frame_progress = 0.48736614
 flip_h = true
 
-[node name="EnemyPaths" type="Node2D" parent="."]
-script = ExtResource("1_vv3de")
-
 [node name="CameraInitPos" type="Marker2D" parent="."]
 
-[node name="EnemyGenerator" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("2_crvxy")
-
-[node name="TowerPlacer" type="Node2D" parent="."]
-script = ExtResource("3_bebo1")
-metadata/_custom_type_script = "uid://dpnilgqn044xp"
-
-[node name="TowerSelector" type="Node" parent="."]
-script = ExtResource("4_ldccm")
-
-[node name="ConsumablesHandler" type="Node" parent="."]
-script = ExtResource("5_pb4yr")
-
-[node name="KillEventHandler" type="Node" parent="."]
-script = ExtResource("6_j1bfp")
-burn_area_scene = ExtResource("7_eelf1")
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(579, 323)
+script = ExtResource("4_8f3b7")

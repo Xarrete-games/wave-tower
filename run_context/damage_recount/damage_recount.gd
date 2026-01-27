@@ -4,9 +4,15 @@ signal damage_recount_change(data: DamageRecountData)
 
 var damage_per_wave: Dictionary[int, Dictionary] = {}
 var tower_manager: TowersManager
+var progress: RunProgress
 
-func _init(p_tower_manager: TowersManager) -> void:
+func _init(p_tower_manager: TowersManager, p_progress: RunProgress) -> void:
 	tower_manager = p_tower_manager
+	progress = p_progress
+	progress.current_level_changed.connect(func(_level_num: int) -> void:
+		# Initialize damage recount for the new wave
+		damage_per_wave.clear()
+	)
 	tower_manager.tower_placed.connect(func(tower: Tower) -> void:
 		record_damage(
 			RunContext.progress.current_wave,
