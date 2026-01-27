@@ -2,16 +2,19 @@ class_name MapPiece extends Node2D
 
 enum Dir { NE, SE, SW, NW }
 
-
 @export var size: Vector2i = Vector2i(11, 11)
 @export var entry_dir: Dir
 @export var exit_dir: Dir
 
 @onready var tile_map: TileMapLayer = $MapPieceTileMap
-var edges_tiles: Array[Vector2i] = []
+@onready var path_piece: PiecePath = $PiecePath
 
 func _ready() -> void:
 	pass
+
+
+func get_path_piece() -> PiecePath:
+	return path_piece
 
 func map_to_local(tile_pos: Vector2i) -> Vector2:
 	return tile_map.map_to_local(tile_pos)
@@ -43,10 +46,3 @@ func get_edge_tile(dir: Dir) -> Vector2i:
 		sum += c
 
 	return sum / edge.size()
-
-func get_map_center() -> Vector2i:
-	var used: Array[Vector2i] = tile_map.get_used_cells()
-	var sum: Vector2i = Vector2i.ZERO
-	for c in used:
-		sum += c
-	return sum / used.size()

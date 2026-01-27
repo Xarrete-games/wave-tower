@@ -1,0 +1,110 @@
+[gd_scene load_steps=20 format=3 uid="uid://b4grxp1f6om7o"]
+
+[ext_resource type="Texture2D" uid="uid://ck7funcss1gra" path="res://assets/sprites/enemies/espectro/sp1.png" id="1_3ltal"]
+[ext_resource type="Script" uid="uid://bvb2o1tinj2nu" path="res://levels/procedural_test/enemy_procedural/enemy_procedural.gd" id="1_06na1"]
+[ext_resource type="Texture2D" uid="uid://bsa7fc1up16d" path="res://assets/sprites/enemies/espectro/sp2.png" id="2_06na1"]
+[ext_resource type="Texture2D" uid="uid://0rsd0baw40eo" path="res://assets/sprites/enemies/espectro/sp3.png" id="3_p3q35"]
+[ext_resource type="Texture2D" uid="uid://1imqmrl2xvda" path="res://assets/sprites/enemies/espectro/sp4.png" id="4_hvavn"]
+[ext_resource type="Texture2D" uid="uid://ccli0iefh4ahb" path="res://assets/sprites/enemies/espectro/sp5.png" id="5_nbmy3"]
+[ext_resource type="Texture2D" uid="uid://dn0hbubu2qaji" path="res://assets/sprites/enemies/espectro/sp7.png" id="6_upcjj"]
+[ext_resource type="Texture2D" uid="uid://hyvfjgflr8oj" path="res://assets/sprites/enemies/espectro/sp8.png" id="7_3wrua"]
+[ext_resource type="Texture2D" uid="uid://dnondrwyo7ono" path="res://assets/sprites/enemies/espectro/sp_top1.png" id="8_ypeps"]
+[ext_resource type="Texture2D" uid="uid://f8p02gkhqkuy" path="res://assets/sprites/enemies/espectro/sp_top2.png" id="9_1rffa"]
+[ext_resource type="Texture2D" uid="uid://bn6xycpfwgyrn" path="res://assets/sprites/enemies/espectro/sp_top3.png" id="10_nc7wy"]
+[ext_resource type="Texture2D" uid="uid://bohdrxc7cxxb8" path="res://assets/sprites/enemies/espectro/sp_top4.png" id="11_ml0vf"]
+[ext_resource type="Texture2D" uid="uid://d3o6drjtqx5js" path="res://assets/sprites/enemies/espectro/sp_top5.png" id="12_ghe01"]
+[ext_resource type="Texture2D" uid="uid://mfcpfm5mu01x" path="res://assets/sprites/enemies/espectro/sp_top6.png" id="13_4yn2t"]
+[ext_resource type="Texture2D" uid="uid://jo1s7xj1apmc" path="res://assets/sprites/enemies/espectro/sp_top7.png" id="14_gwhb6"]
+[ext_resource type="PackedScene" uid="uid://bko3pruxq8viw" path="res://enemies/health_bar/health_bar.tscn" id="15_713gc"]
+[ext_resource type="Script" uid="uid://cewjufpyraonv" path="res://enemies/debuff_handler.gd" id="16_ede1q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sv3m4"]
+radius = 23.086792
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5pqco"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3ltal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_06na1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_p3q35")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hvavn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nbmy3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_p3q35")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_upcjj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3wrua")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ypeps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1rffa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nc7wy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ml0vf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ghe01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4yn2t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_gwhb6")
+}],
+"loop": true,
+"name": &"top right",
+"speed": 12.0
+}]
+
+[node name="EnemyProcedural" type="CharacterBody2D"]
+script = ExtResource("1_06na1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sv3m4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -0.9999981)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_5pqco")
+animation = &"top right"
+autoplay = "down right"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="HealthBar" parent="." instance=ExtResource("15_713gc")]
+offset_left = -20.0
+offset_top = -149.0
+offset_right = -20.0
+offset_bottom = -149.0
+
+[node name="DebuffHandler" type="Node" parent="."]
+script = ExtResource("16_ede1q")
+
+[node name="TargetPositionLeft" type="Marker2D" parent="."]
+unique_name_in_owner = true
+
+[node name="TargetPositionRight" type="Marker2D" parent="."]
+unique_name_in_owner = true

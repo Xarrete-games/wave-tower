@@ -1,19 +1,18 @@
 class_name WorldMap extends Node2D
 
-const DIR_TO_OFFSET: Dictionary= {
-	MapPiece.Dir.NE: Vector2i( 1, -1),
-	MapPiece.Dir.SE: Vector2i( 1,  1),
-	MapPiece.Dir.SW: Vector2i(-1,  1),
-	MapPiece.Dir.NW: Vector2i(-1, -1),
-}	
-
 @export var piece_a: MapPiece
 @export var piece_b: MapPiece
+@export var enemy: EnemyProcedural
 
+
+var paths: Array[PiecePath] = []
 
 func _ready() -> void:
+	paths.append(piece_a.get_path_piece())
+	paths.append(piece_b.get_path_piece())
 	attach_piece(piece_a, piece_b)
-
+	enemy.path_queue = paths
+	enemy.advance_to_next_path()
 
 func attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece) -> void:
 	var a_tile := p_piece_a.get_edge_tile(p_piece_a.exit_dir)
