@@ -6,7 +6,7 @@ var damage_source: DamageSource:
 
 func _init() -> void:
 	type = Type.BURN
-	value = 1
+	value = 10
 	duration = 5
 	tick_interval = 1
 	max_stacks = 99
