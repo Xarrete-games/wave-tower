@@ -21,6 +21,7 @@ func _on_gui_input(event: InputEvent) -> void:
 
 	if UIUtils.is_left_click_event(event):
 		AudioManager.play_button_click()
+		HintManager.remove_hint(self)
 		_consumable.clicked.emit(_consumable)
 
 func _on_consumable_used(consumable: Consumable) -> void:
@@ -33,6 +34,9 @@ func _on_mouse_entered() -> void:
 		return
 	AudioManager.play_button_hover()
 	texture_rect.custom_minimum_size = Vector2(50, 50)
+	if _consumable.description != "":
+		HintManager.show_hint(self, _consumable.description)
 
 func _on_mouse_exited() -> void:
 	texture_rect.custom_minimum_size = Vector2(40, 40)
+	HintManager.remove_hint(self)

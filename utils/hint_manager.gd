@@ -1,21 +1,25 @@
 extends Node
 
+enum PositionHint {
+	RIGHT,
+	BOTTOM,
+}
 
 const HINT = preload("uid://dfcxnivp7sm3h")
 const offsett = Vector2(0, 0)
 
 var hints: Dictionary[Control, Hint] = {}
 
-func show_hint(parent: Control, text: String) -> void:
+func show_hint(parent: Control, text: String, pos: PositionHint = PositionHint.BOTTOM) -> void:
 	var hint: Hint = HINT.instantiate()
 	get_tree().get_root().add_child(hint)
 	hint.set_text(text)
 	# position relative to the parent by default
-	var base_pos = parent.global_position + get_offset(parent)
+	var base_pos = parent.global_position + get_offset(parent, pos)
 	hint.set_position(base_pos)
 	hints[parent] = hint
-	# if mouse is on the right half, position the hint to the left of the parent (deterministic)
-	if not is_on_left_side(parent):
+	# if node is on the right half, position the hint to the left of the parent
+	if not is_on_left_side(parent) and pos == PositionHint.BOTTOM:
 		var vp = get_viewport()
 		var hint_w = hint.get_size().x
 		var new_pos = hint.get_position()
@@ -31,9 +35,12 @@ func remove_hint(parent: Control) -> void:
 		hints[parent].queue_free()
 		hints.erase(parent)
 
+func get_offset(parent: Control, pos: PositionHint) -> Vector2:
 
-func get_offset(parent: Control) -> Vector2:
-	return offsett + Vector2(0, parent.size.y)
+	if pos == PositionHint.RIGHT:
+		return offsett + Vector2(parent.size.x, 0)
+	else:
+		return offsett + Vector2(0, parent.size.y)
 
 func is_on_left_side(parent: Control) -> bool:
 	var half_x = get_viewport().size.x * 0.5

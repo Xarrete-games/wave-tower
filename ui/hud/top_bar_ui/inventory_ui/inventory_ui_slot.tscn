@@ -19,6 +19,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_xt7kx")
 script = ExtResource("2_xt7kx")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
 [node name="Panel" type="Panel" parent="CenterContainer"]

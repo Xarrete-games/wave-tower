@@ -3,10 +3,10 @@ class_name TestData extends Node
 @export var initial_random_relics: int = 0
 @export var initial_relics_ids: Array[String] = []
 @export var initial_consumables_ids: Array[String] = []
-@export var run_handler: RunHandler
 @export var initial_event: EventData = null
 @export var open_loot_screen: bool = false
 
+@onready var run_handler: RunHandler = $"../RunHandler"
 
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout

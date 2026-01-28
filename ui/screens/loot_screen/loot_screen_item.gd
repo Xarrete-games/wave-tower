@@ -28,8 +28,12 @@ func _on_mouse_exited() -> void:
 	var stylebox: StyleBox = get_theme_stylebox("panel").duplicate()
 	stylebox.bg_color = UIUtils.accent_color
 	add_theme_stylebox_override("panel", stylebox)
+	if loot_item_data.consumable != null and loot_item_data.consumable.description != "":
+		HintManager.remove_hint(self)
 
 func _on_mouse_entered() -> void:
 	var stylebox: StyleBox = get_theme_stylebox("panel").duplicate()
 	stylebox.bg_color = UIUtils.primary_color
 	add_theme_stylebox_override("panel", stylebox)
+	if loot_item_data.consumable != null and loot_item_data.consumable.description != "":
+		HintManager.show_hint(self, loot_item_data.consumable.description, HintManager.PositionHint.RIGHT)
