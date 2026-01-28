@@ -17,6 +17,7 @@ display_name = "Frost Tower"
 description = "Basic frost tower"
 icon = SubResource("AtlasTexture_ncsk7")
 type = 2
+upgrade_price = 70
 base_damage = 30.0
 base_attack_range = 280.0
 base_attack_speed = 3.0

@@ -17,6 +17,7 @@ display_name = "Lightning Tower"
 description = "Basic lightning tower"
 icon = SubResource("AtlasTexture_i5pku")
 type = 1
+upgrade_price = 70
 base_damage = 10.0
 base_attack_range = 300.0
 base_attack_speed = 0.6

@@ -16,6 +16,7 @@ id = "fire_tower"
 display_name = "Fire Tower"
 description = "Basic fire tower"
 icon = SubResource("AtlasTexture_wv6in")
+upgrade_price = 70
 base_damage = 18.0
 base_attack_range = 300.0
 base_attack_speed = 1.5
