@@ -1,4 +1,4 @@
-class_name ExprienceHandler extends Node
+class_name ExperienceHandler extends Node
 
 signal exp_data_change(new_exp_data: TowerExpData)
 signal level_up(new_level: int)

@@ -24,7 +24,7 @@ var stats: TowerStats = TowerStats.new()
 var extra_stats: TowerExtraStats = null
 
 var tower_type: Tower.Type
-var experience_handler: ExprienceHandler
+var experience_handler: ExperienceHandler
 
 func _ready() -> void:
 	RunContext.progress.current_wave_finished.connect(_on_current_wave_finished)
@@ -33,7 +33,7 @@ func _ready() -> void:
 func set_data(
 	stats_configuration: TowerConfiguration,
 	p_tower_type: Tower.Type, 
-	p_experience_handler: ExprienceHandler) -> void:
+	p_experience_handler: ExperienceHandler) -> void:
 	#base stats
 	base_stats = stats_configuration.stats.duplicate()
 	# stats on level

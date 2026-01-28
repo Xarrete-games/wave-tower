@@ -3,7 +3,7 @@ class_name AreaDetector extends Area2D
 signal target_change(enemy: Enemy)
 signal enemy_die(enemy: Enemy)
 
-var _targets_in_range: Array[Enemy] = []
+var targets_in_range: Array[Enemy] = []
 var current_target: Enemy:
 	set(value):
 		current_target = value
@@ -20,7 +20,7 @@ func _on_body_entered(body: Node2D) -> void:
 	var enemy = body as Enemy
 	enemy.tree_exited.connect(func() -> void:
 		_on_enemy_die(enemy))
-	_targets_in_range.append(enemy)
+	targets_in_range.append(enemy)
 
 	if current_target == null:
 		current_target = enemy
@@ -31,7 +31,7 @@ func _on_body_exited(body: Node2D) -> void:
 	
 func _remove_target_and_get_next(enemy: Enemy) -> void:
 	# remove enemy
-	_targets_in_range.erase(enemy)
+	targets_in_range.erase(enemy)
 	#exit when enemy is not the target
 	if enemy != current_target:
 		return
@@ -42,41 +42,41 @@ func _on_enemy_die(enemy: Enemy) -> void:
 	_remove_target_and_get_next(enemy)
 
 func _select_next_target() -> void:
-	if _targets_in_range.is_empty() or not monitoring:
+	if targets_in_range.is_empty() or not monitoring:
 		current_target = null
 		return
 	match targeting_type:
 		Tower.TargetingMode.FIRST_IN_PROGRESS:
 			var enemy_with_highest_progress: Enemy = null
 			var highest_progress: float = -1.0
-			for enemy in _targets_in_range:
+			for enemy in targets_in_range:
 				if enemy.progress_ratio > highest_progress:
 					highest_progress = enemy.progress_ratio
 					enemy_with_highest_progress = enemy
 			current_target = enemy_with_highest_progress
 		Tower.TargetingMode.HIGH_HP:
-			if _targets_in_range.is_empty():
+			if targets_in_range.is_empty():
 				current_target = null
 				return
 			var enemy_with_highest_hp: Enemy = null
 			var highest_hp: float = -1.0
-			for enemy in _targets_in_range:
+			for enemy in targets_in_range:
 				if enemy.get_remaining_health() > highest_hp:
 					highest_hp = enemy.get_remaining_health()
 					enemy_with_highest_hp = enemy
 			current_target = enemy_with_highest_hp
 		Tower.TargetingMode.LOW_HP:
-			if _targets_in_range.is_empty():
+			if targets_in_range.is_empty():
 				current_target = null
 				return
 			var enemy_with_lowest_hp: Enemy = null
 			var lowest_hp: float = INF
-			for enemy in _targets_in_range:
+			for enemy in targets_in_range:
 				if enemy.get_remainig_health() < lowest_hp:
 					lowest_hp = enemy.get_remainig_health()
 					enemy_with_lowest_hp = enemy
 			current_target = enemy_with_lowest_hp
 
 func clear_targets() -> void:
-	_targets_in_range.clear()
+	targets_in_range.clear()
 	current_target = null

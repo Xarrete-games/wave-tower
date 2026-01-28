@@ -106,6 +106,7 @@ func _on_tower_upgrade_pressed(current_tower: Tower, new_tower_conf: TowerConfig
 	visual.add_child(new_tower)
 	new_tower.global_position = current_tower.global_position
 	new_tower.tile_pos = current_tower.tile_pos
+	new_tower.copy_tower_data(current_tower)
 	new_tower.enable()
 	
 	RunContext.towers_manager.tower_added(new_tower)

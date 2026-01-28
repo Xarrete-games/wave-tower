@@ -52,7 +52,7 @@ var damage_source: DamageSource:
 @onready var mouse_detector: Control = $MouseDetector
 @onready var attack_timer: Timer = $AttackTimer
 @onready var cristal_light: CristalLight = $CristalLight
-@onready var experience_handler: ExprienceHandler = $ExperienceHandler
+@onready var experience_handler: ExperienceHandler = $ExperienceHandler
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var tower_stats_handler: TowerStatsHandler = $TowerStatsHandler
 @onready var tower_area: Area2D = $TowerArea
@@ -127,6 +127,16 @@ func add_local_buff(tower_buff: TowerBuff) -> void:
 
 func remove_local_buff(tower_buff: TowerBuff) -> void:
 	tower_stats_handler.remove_local_buff(tower_buff)
+
+# --------------------
+# --- COPY TOWER DATA---
+# --------------------
+func copy_tower_data(from_tower: Tower) -> void:
+	# only copy relevant data
+	area_detector.targets_in_range = from_tower.area_detector.targets_in_range.duplicate()
+	area_detector.current_target = from_tower.area_detector.current_target
+	targeting_mode = from_tower.targeting_mode
+
 # --------------------
 # --- ATTACK ---
 # --------------------
