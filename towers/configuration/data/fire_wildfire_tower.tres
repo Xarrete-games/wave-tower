@@ -16,5 +16,5 @@ description = "Fire a flamethrower to burn several enemies"
 icon = SubResource("AtlasTexture_ncsk7")
 base_damage = 90.0
 base_attack_range = 340.0
-base_attack_speed = 2.0
+base_attack_speed = 1.5
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
