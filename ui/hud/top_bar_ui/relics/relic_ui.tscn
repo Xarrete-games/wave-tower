@@ -42,6 +42,7 @@ size_flags_vertical = 8
 label_settings = SubResource("LabelSettings_ye6dh")
 
 [node name="TopBarRelicDescription" parent="VBoxContainer" instance=ExtResource("3_iv7bk")]
+visible = false
 layout_mode = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

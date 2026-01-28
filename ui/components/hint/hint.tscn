@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfcxnivp7sm3h"]
+
+[ext_resource type="StyleBox" uid="uid://de1oid76vx20r" path="res://assets/shaders/panel_black_box.tres" id="1_74gsb"]
+[ext_resource type="Script" uid="uid://065vw8xvnu1o" path="res://ui/components/hint/hint.gd" id="2_nt2fy"]
+
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("label", "container")]
+script = ExtResource("2_nt2fy")
+label = NodePath("Hint/Label")
+container = NodePath("Hint")
+
+[node name="Hint" type="PanelContainer" parent="."]
+offset_right = 1.0
+offset_bottom = 23.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_74gsb")
+
+[node name="Label" type="Label" parent="Hint"]
+layout_mode = 2
+text = "Increase the damage"

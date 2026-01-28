@@ -7,23 +7,28 @@ const opaque_color: Color = Color(1, 1, 1, 1)
 @onready var texture: TextureRect = $VBoxContainer/MarginContainer/texture
 @onready var amount: Label = $VBoxContainer/MarginContainer/amount
 
+
+var relic: Relic
+
 func _ready() -> void:
 	relic_description.visible = false
 
-func set_relic(relic: Relic) -> void:
-	texture.texture = relic.texture
-
-	if relic.disabled:
+func set_relic(p_relic: Relic) -> void:
+	texture.texture = p_relic.texture
+	self.relic = p_relic
+	if p_relic.disabled:
 		texture.modulate = semi_transparent_color
 	else:
 		texture.modulate = opaque_color
 
-	if relic.amount > 1:
-		amount.text = str(relic.amount)
-	relic_description.set_description(relic.description) 
+	if p_relic.amount > 1:
+		amount.text = str(p_relic.amount)
+	relic_description.set_description(p_relic.description) 
 
 func _on_mouse_entered() -> void:
-	relic_description.visible = true
+	HintManager.show_hint(self, relic.description)
+	#relic_description.visible = true
 
 func _on_mouse_exited() -> void:
-	relic_description.visible = false
+	HintManager.remove_hint(self)
+	#relic_description.visible = false
