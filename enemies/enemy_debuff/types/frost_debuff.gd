@@ -3,7 +3,7 @@ class_name FrostDebuff extends EnemyDebuff
 func _init() -> void:
 	type = Type.FROST
 	# percentage of slowdown
-	value = 10
+	value = 5
 	duration = 2
 	max_stacks = 10
 

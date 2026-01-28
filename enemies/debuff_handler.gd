@@ -50,10 +50,12 @@ func _on_add_debuff(instance: EnemyDebuffInstance, enemy: Enemy) -> void:
 	enemy.health_bar.set_debuffs(debuffs)
 	match (type):
 		EnemyDebuff.Type.FROST:
-			if get_stacks(type) == instance.debuff.max_stacks:
-				enemy._is_freeze = true
-			else:
-				enemy._is_freeze = false
+			pass
+			# dont frost
+			# if get_stacks(type) == instance.debuff.max_stacks:
+			# 	enemy._is_freeze = true
+			# else:
+			# 	enemy._is_freeze = false
 
 		EnemyDebuff.Type.BURN:
 			pass
