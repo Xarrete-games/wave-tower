@@ -31,8 +31,8 @@ func get_relics_offers_by_ids(relic_ids: Array[String]) -> Array[ItemOffer]:
 	return offers		
 	
 func create_relic_offers(amount: int) -> Array[ItemOffer]:
-	var filter_relics = all_relic_data.filter(func(data: ItemData):
-		return not RunContext.relics_manager.is_maxed(data.id) and not data.is_cursed
+	var filter_relics = all_relic_data.filter(func(data: RelicItemData):
+		return not RunContext.relics_manager.is_maxed(data.id) and not data.is_cursed and not data.only_for_events
 	)
 	filter_relics.shuffle()
 
@@ -45,7 +45,7 @@ func create_relic_offers(amount: int) -> Array[ItemOffer]:
 
 	return offers
 
-func create_relic_offer_from_data(data: ItemData) -> ItemOffer:
+func create_relic_offer_from_data(data: RelicItemData) -> ItemOffer:
 	var price = data.price * (1.0 - RunContext.economy.relics_discount_mult)
 
 	return ItemOffer.new(

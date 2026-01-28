@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_t1y8r")
+only_for_events = true
 id = "buda"
 display_name = "Buda"
 description = "Increases max health by 1 for each tower you place"

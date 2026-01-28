@@ -33,5 +33,6 @@ func _on_item_selected(item_offer: ItemOffer) -> void:
 
 func _on_reroll_pressed() -> void:
 	RunContext.economy.gold -= REROLL_PRICE
-	var relic_offers = RunContext.offers_manager.create_relic_offers(3)
+	var number_of_offers = 4 if RunContext.relics_manager.has_relic("captain_cap") else 3
+	var relic_offers = RunContext.offers_manager.create_relic_offers(number_of_offers)
 	rewards_screen.set_items_offer(relic_offers)
