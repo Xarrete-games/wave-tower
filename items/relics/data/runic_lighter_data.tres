@@ -6,8 +6,9 @@
 
 [resource]
 script = ExtResource("2_nbds4")
+rarity = 1
 id = "runic_lighter"
 display_name = "Runic Lighter"
-description = "Burn damage does +20% more damage for each fire tower you have"
+description = "Burn damage does +10% more damage for each fire tower you have"
 texture = ExtResource("3_ewqmy")
 runtime_script = ExtResource("1_swg4m")

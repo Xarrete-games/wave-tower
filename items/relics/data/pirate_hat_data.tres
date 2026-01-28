@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_r8ywf")
+rarity = 1
 id = "pirate_hat"
 display_name = "Pirate hat"
 description = "When you use an item, you have a 50% chance of getting it back."
