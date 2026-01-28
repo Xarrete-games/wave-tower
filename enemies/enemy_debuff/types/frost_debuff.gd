@@ -4,7 +4,7 @@ func _init() -> void:
 	type = Type.FROST
 	# percentage of slowdown
 	value = 10
-	duration = 3
+	duration = 2
 	max_stacks = 10
 
 func on_apply(enemy: Enemy):
