@@ -17,7 +17,7 @@ var is_soya_sauce_active: bool = false:
 var is_lemon_active: bool = false
 var is_sell_active: bool = false
 
-var gold: int = 1000:
+var gold: int = 100:
 	set(value):
 		if value >= gold:
 			AudioManager.play_coins()
