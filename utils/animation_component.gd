@@ -12,6 +12,7 @@ class_name AnimationComponent extends Node
 ]
 @export_group("Hover Settings")
 @export var hover_time: float = 0.2
+@export var hover_delay: float = 0.0
 @export var hover_transition: Tween.TransitionType
 @export var hover_easing: Tween.EaseType = Tween.EaseType.EASE_IN_OUT
 @export var hover_scale: Vector2 = Vector2(1, 1)
@@ -35,6 +36,7 @@ func connect_signals() -> void:
 		hover_values,
 		parallel_animations,
 		hover_time,
+		hover_delay,
 		hover_transition,
 		hover_easing,
 	))
@@ -43,6 +45,7 @@ func connect_signals() -> void:
 		default_values,
 		parallel_animations,
 		hover_time,
+		hover_delay,
 		hover_transition,
 		hover_easing,
 	))
@@ -70,10 +73,15 @@ func setup() -> void:
 func add_tween(
 	values: Dictionary, 
 	parallel: bool, 
-	seconds: float, 
+	seconds: float,
+	delay: float,
 	transition: Tween.TransitionType, 
 	easing: Tween.EaseType) -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.set_parallel(parallel)
+
+	tween.pause()
 	for property in properties:
 		tween.tween_property(target, str(property), values[property], seconds).set_trans(transition).set_ease(easing)
+	await get_tree().create_timer(delay).timeout
+	tween.play()
