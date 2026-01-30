@@ -1,50 +1,63 @@
-[gd_scene load_steps=6 format=3 uid="uid://ltio37ylr0pp"]
+[gd_scene load_steps=7 format=3 uid="uid://ltio37ylr0pp"]
 
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="1_fllr0"]
 [ext_resource type="Script" uid="uid://bejivf4w288he" path="res://ui/screens/loot_screen/loot_screen.gd" id="1_gxqxu"]
 [ext_resource type="PackedScene" uid="uid://djbvtmp6wnbyj" path="res://ui/components/ribbon_label/ribbon_label.tscn" id="1_tx302"]
 [ext_resource type="PackedScene" uid="uid://bjdiwjtvkbeb5" path="res://ui/screens/loot_screen/loot_screen_item.tscn" id="2_dr51t"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="5_6vran"]
+[ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="6_fnoye"]
 
 [node name="LootScreen" type="PanelContainer" node_paths=PackedStringArray("items_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gxqxu")
 loot_screen_item_scene = ExtResource("2_dr51t")
-items_container = NodePath("Center/VBoxContainer2/VBoxContainer/PanelContainer/MarginContainer/ItemsContainer")
+items_container = NodePath("Center/VBoxContainer2/Wrapper/VBoxContainer/PanelContainer/MarginContainer/ItemsContainer")
 
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Center"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 60
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Center/VBoxContainer2"]
+[node name="Wrapper" type="Control" parent="Center/VBoxContainer2"]
+custom_minimum_size = Vector2(450, 256)
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Center/VBoxContainer2/Wrapper"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.5000001
+offset_top = 40.0
+offset_right = -225.00006
+offset_bottom = 296.0
 theme_override_constants/separation = -40
 
-[node name="RibbonLabel" parent="Center/VBoxContainer2/VBoxContainer" instance=ExtResource("1_tx302")]
+[node name="RibbonLabel" parent="Center/VBoxContainer2/Wrapper/VBoxContainer" instance=ExtResource("1_tx302")]
 z_index = 1
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Center/VBoxContainer2/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Center/VBoxContainer2/Wrapper/VBoxContainer"]
 custom_minimum_size = Vector2(224, 172)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("1_fllr0")
 
-[node name="MarginContainer" type="MarginContainer" parent="Center/VBoxContainer2/VBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Center/VBoxContainer2/Wrapper/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="ItemsContainer" type="VBoxContainer" parent="Center/VBoxContainer2/VBoxContainer/PanelContainer/MarginContainer"]
+[node name="ItemsContainer" type="VBoxContainer" parent="Center/VBoxContainer2/Wrapper/VBoxContainer/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(300, 122)
 layout_mode = 2
 theme_override_constants/separation = 12
@@ -54,5 +67,9 @@ custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Exit"
+
+[node name="AnimationComponent" type="Node" parent="Center/VBoxContainer2/XarreteActionButton"]
+script = ExtResource("6_fnoye")
+metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [connection signal="xarreta_pressed" from="Center/VBoxContainer2/XarreteActionButton" to="." method="_on_xarrete_action_button_xarreta_pressed"]
