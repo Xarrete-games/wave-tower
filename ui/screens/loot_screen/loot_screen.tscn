@@ -62,16 +62,25 @@ custom_minimum_size = Vector2(300, 122)
 layout_mode = 2
 theme_override_constants/separation = 12
 
+[node name="AnimationComponent" type="Node" parent="Center/VBoxContainer2/Wrapper/VBoxContainer"]
+script = ExtResource("6_fnoye")
+enter_anamitaion = true
+enter_time = 0.5
+enter_scale = Vector2(0, 0)
+metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
+
 [node name="XarreteActionButton" parent="Center/VBoxContainer2" instance=ExtResource("5_6vran")]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Exit"
 
-[node name="AnimationComponent" type="Node" parent="Center/VBoxContainer2/XarreteActionButton"]
+[node name="AnimationComponent" type="Node" parent="Center/VBoxContainer2/XarreteActionButton" node_paths=PackedStringArray("wait_for")]
 script = ExtResource("6_fnoye")
+enter_anamitaion = true
 hover_scale = Vector2(1.1, 1.1)
-hover_position = Vector2(10, 0)
+wait_for = NodePath("../../Wrapper/VBoxContainer/AnimationComponent")
+enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [connection signal="xarreta_pressed" from="Center/VBoxContainer2/XarreteActionButton" to="." method="_on_xarrete_action_button_xarreta_pressed"]

@@ -1,8 +1,13 @@
 class_name AnimationComponent extends Node
 
+signal entered()
+
+const IMMEDIATE_TRANSITION: Tween.TransitionType = Tween.TRANS_LINEAR
+
 @export_group("Options")
 @export var from_center: bool = true
 @export var parallel_animations: bool = true
+@export var enter_anamitaion: bool = false
 @export var properties: Array[String] = [
 	"scale",
 	"position",
@@ -21,11 +26,23 @@ class_name AnimationComponent extends Node
 @export var hover_size: Vector2
 @export var hover_modulate: Color = Color.WHITE
 
+@export_group("Enter Settings")
+@export var wait_for: AnimationComponent
+@export var enter_time: float = 0.2
+@export var enter_delay: float = 0.0
+@export var enter_transition: Tween.TransitionType
+@export var enter_easing: Tween.EaseType = Tween.EaseType.EASE_IN_OUT
+@export var enter_scale: Vector2 = Vector2(1, 1)
+@export var enter_position: Vector2
+@export var enter_rotation: float
+@export var enter_size: Vector2
+@export var enter_modulate: Color = Color.WHITE
+
 var target: Control
 var default_scale: Vector2
 var hover_values: Dictionary
+var enter_values: Dictionary
 var default_values: Dictionary
-
 
 func _ready() -> void:
 	target = get_parent() as Control
@@ -49,6 +66,18 @@ func connect_signals() -> void:
 		hover_transition,
 		hover_easing,
 	))
+	if wait_for:
+		wait_for.entered.connect(func() -> void:
+			add_tween(
+				default_values,
+				parallel_animations,
+				enter_time,
+				enter_delay,
+				enter_transition,
+				enter_easing,
+				true
+			)
+		)
 
 func setup() -> void:
 	if from_center:
@@ -68,7 +97,39 @@ func setup() -> void:
 		"size": target.size * hover_size,
 		"self_modulate": hover_modulate,
 	}
+	enter_values = {
+		"scale": enter_scale,
+		"position": target.position + enter_position,
+		"rotation": target.rotation + deg_to_rad(enter_rotation),
+		"size": target.size * enter_size,
+		"self_modulate": enter_modulate,
+	}
 	connect_signals()
+	if enter_anamitaion:
+		on_enter()
+	else:
+		entered.emit()
+
+func on_enter() -> void:
+	add_tween(
+		enter_values,
+		true,
+		0.0,
+		0.0,
+		IMMEDIATE_TRANSITION,
+		Tween.EaseType.EASE_IN,
+	)
+
+	if not wait_for:
+		add_tween(
+			default_values,
+			parallel_animations,
+			enter_time,
+			enter_delay,
+			enter_transition,
+			enter_easing,
+			true
+		)
 
 func add_tween(
 	values: Dictionary, 
@@ -76,7 +137,13 @@ func add_tween(
 	seconds: float,
 	delay: float,
 	transition: Tween.TransitionType, 
-	easing: Tween.EaseType) -> void:
+	easing: Tween.EaseType,
+	entering: bool = false
+	) -> void:
+	
+	# proteect if a hover remove the component
+	if not is_inside_tree():
+		return
 	var tween: Tween = get_tree().create_tween()
 	tween.set_parallel(parallel)
 
@@ -85,3 +152,6 @@ func add_tween(
 		tween.tween_property(target, str(property), values[property], seconds).set_trans(transition).set_ease(easing)
 	await get_tree().create_timer(delay).timeout
 	tween.play()
+	if entering:
+		await tween.finished
+		entered.emit()
