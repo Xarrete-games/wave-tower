@@ -70,6 +70,8 @@ text = "Exit"
 
 [node name="AnimationComponent" type="Node" parent="Center/VBoxContainer2/XarreteActionButton"]
 script = ExtResource("6_fnoye")
+hover_scale = Vector2(1.1, 1.1)
+hover_position = Vector2(10, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [connection signal="xarreta_pressed" from="Center/VBoxContainer2/XarreteActionButton" to="." method="_on_xarrete_action_button_xarreta_pressed"]
