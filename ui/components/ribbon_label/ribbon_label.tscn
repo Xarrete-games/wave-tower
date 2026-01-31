@@ -29,7 +29,7 @@ label_settings = ExtResource("2_d5b34")
 
 [node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/Label"]
 script = ExtResource("3_3c13r")
-enter_anamitaion = true
+enter_animation = true
 enter_delay = 0.2
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"

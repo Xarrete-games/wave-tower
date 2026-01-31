@@ -55,7 +55,7 @@ theme_override_constants/separation = 12
 
 [node name="AnimationComponent" type="Node" parent="Center/VBoxContainer2/VBoxContainer"]
 script = ExtResource("6_fnoye")
-enter_anamitaion = true
+enter_animation = true
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
@@ -67,7 +67,7 @@ text = "Exit"
 
 [node name="AnimationComponent" type="Node" parent="Center/VBoxContainer2/XarreteActionButton" node_paths=PackedStringArray("wait_for")]
 script = ExtResource("6_fnoye")
-enter_anamitaion = true
+enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 wait_for = NodePath("../../VBoxContainer/AnimationComponent")
 enter_scale = Vector2(0, 0)

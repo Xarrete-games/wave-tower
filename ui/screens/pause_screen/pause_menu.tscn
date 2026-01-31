@@ -25,7 +25,7 @@ theme_override_styles/panel = ExtResource("2_5l847")
 [node name="AnimationComponent" type="Node" parent="CenterContainer"]
 process_mode = 3
 script = ExtResource("2_s48xr")
-enter_anamitaion = true
+enter_animation = true
 enter_scale = Vector2(0, 0)
 enter_position = Vector2(0, -1000)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
@@ -49,7 +49,6 @@ layout_mode = 2
 
 [node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/VBoxContainer/Volume" node_paths=PackedStringArray("wait_for")]
 script = ExtResource("2_s48xr")
-enter_anamitaion = true
 wait_for = NodePath("../../../../AnimationComponent")
 enter_time = 0.1
 enter_scale = Vector2(0, 0)
@@ -68,7 +67,7 @@ text = "Resume"
 [node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/VBoxContainer/Buttons/ResumeButton" node_paths=PackedStringArray("wait_for")]
 process_mode = 3
 script = ExtResource("2_s48xr")
-enter_anamitaion = true
+enter_animation = true
 wait_for = NodePath("../../../Volume/AnimationComponent")
 enter_time = 0.1
 enter_scale = Vector2(0, 0)
@@ -83,7 +82,7 @@ text = "Restart"
 [node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/VBoxContainer/Buttons/RestartButton" node_paths=PackedStringArray("wait_for")]
 process_mode = 3
 script = ExtResource("2_s48xr")
-enter_anamitaion = true
+enter_animation = true
 wait_for = NodePath("../../ResumeButton/AnimationComponent")
 enter_time = 0.1
 enter_scale = Vector2(0, 0)
@@ -98,7 +97,7 @@ text = "Exit"
 [node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/VBoxContainer/Buttons/ExitButton" node_paths=PackedStringArray("wait_for")]
 process_mode = 3
 script = ExtResource("2_s48xr")
-enter_anamitaion = true
+enter_animation = true
 wait_for = NodePath("../../RestartButton/AnimationComponent")
 enter_time = 0.1
 enter_scale = Vector2(0, 0)

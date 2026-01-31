@@ -7,7 +7,7 @@ const IMMEDIATE_TRANSITION: Tween.TransitionType = Tween.TRANS_LINEAR
 @export_group("Options")
 @export var from_center: bool = true
 @export var parallel_animations: bool = true
-@export var enter_anamitaion: bool = false
+@export var enter_animation: bool = false
 @export var properties: Array[String] = [
 	"scale",
 	"position",
@@ -15,6 +15,7 @@ const IMMEDIATE_TRANSITION: Tween.TransitionType = Tween.TRANS_LINEAR
 	"size",
 	"self_modulate"
 ]
+@export var flicked: bool = false
 @export_group("Hover Settings")
 @export var hover_time: float = 0.2
 @export var hover_delay: float = 0.0
@@ -105,7 +106,7 @@ func setup() -> void:
 		"self_modulate": enter_modulate,
 	}
 	connect_signals()
-	if enter_anamitaion:
+	if enter_animation:
 		on_enter()
 	else:
 		entered.emit()

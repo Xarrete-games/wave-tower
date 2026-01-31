@@ -25,7 +25,7 @@ label = NodePath("MarginContainer/HBoxContainer/Label")
 
 [node name="AnimationComponent" type="Node" parent="."]
 script = ExtResource("3_66g07")
-enter_anamitaion = true
+enter_animation = true
 enter_delay = 0.2
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
