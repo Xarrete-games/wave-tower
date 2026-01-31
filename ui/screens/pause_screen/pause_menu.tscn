@@ -49,8 +49,9 @@ layout_mode = 2
 
 [node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/VBoxContainer/Volume" node_paths=PackedStringArray("wait_for")]
 script = ExtResource("2_s48xr")
+enter_animation = true
 wait_for = NodePath("../../../../AnimationComponent")
-enter_time = 0.1
+enter_time = 0.05
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
@@ -69,7 +70,7 @@ process_mode = 3
 script = ExtResource("2_s48xr")
 enter_animation = true
 wait_for = NodePath("../../../Volume/AnimationComponent")
-enter_time = 0.1
+enter_time = 0.05
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
@@ -84,7 +85,7 @@ process_mode = 3
 script = ExtResource("2_s48xr")
 enter_animation = true
 wait_for = NodePath("../../ResumeButton/AnimationComponent")
-enter_time = 0.1
+enter_time = 0.05
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
@@ -99,7 +100,7 @@ process_mode = 3
 script = ExtResource("2_s48xr")
 enter_animation = true
 wait_for = NodePath("../../RestartButton/AnimationComponent")
-enter_time = 0.1
+enter_time = 0.05
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
