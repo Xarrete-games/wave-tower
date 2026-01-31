@@ -33,10 +33,10 @@ func _on_mouse_entered() -> void:
 	if _consumable == null:
 		return
 	AudioManager.play_button_hover()
-	texture_rect.custom_minimum_size = Vector2(50, 50)
+	#texture_rect.custom_minimum_size = Vector2(50, 50)
 	if _consumable.description != "":
 		HintManager.show_hint(self, _consumable.description)
 
 func _on_mouse_exited() -> void:
-	texture_rect.custom_minimum_size = Vector2(40, 40)
+	#texture_rect.custom_minimum_size = Vector2(40, 40)
 	HintManager.remove_hint(self)

@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmihqlkojvphp"]
+[gd_scene load_steps=5 format=3 uid="uid://bmihqlkojvphp"]
 
+[ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="2_cjd5i"]
 [ext_resource type="Script" uid="uid://dtookpcol40xx" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui_slot.gd" id="2_xt7kx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xt7kx"]
@@ -31,6 +32,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xt7kx")
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 expand_mode = 3
+
+[node name="AnimationComponent" type="Node" parent="CenterContainer/TextureRect"]
+script = ExtResource("2_cjd5i")
+hover_time = 0.1
+hover_scale = Vector2(1.1, 1.1)
+metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

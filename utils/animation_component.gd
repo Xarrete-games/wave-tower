@@ -146,7 +146,7 @@ func add_tween(
 		return
 	var tween: Tween = get_tree().create_tween()
 	tween.set_parallel(parallel)
-
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.pause()
 	for property in properties:
 		tween.tween_property(target, str(property), values[property], seconds).set_trans(transition).set_ease(easing)
