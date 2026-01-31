@@ -39,46 +39,62 @@ const IMMEDIATE_TRANSITION: Tween.TransitionType = Tween.TRANS_LINEAR
 @export var enter_size: Vector2
 @export var enter_modulate: Color = Color.WHITE
 
+@export_group("Flicked Settings")
+@export var flicked_time: float = 0.1
+@export var flicked_color: Color = Color(1, 1, 1, 0.5)
+
 var target: Control
 var default_scale: Vector2
 var hover_values: Dictionary
 var enter_values: Dictionary
 var default_values: Dictionary
+var on_hover: bool = false
 
 func _ready() -> void:
 	target = get_parent() as Control
 	call_deferred("setup")
 
-func connect_signals() -> void:
-	target.mouse_entered.connect(add_tween.bind(
+
+func on_hover_entered() -> void:
+	on_hover = true
+	add_tween(
 		hover_values,
 		parallel_animations,
 		hover_time,
 		hover_delay,
 		hover_transition,
 		hover_easing,
-	))
+	)
 
-	target.mouse_exited.connect(add_tween.bind(
+func on_hover_exited() -> void:
+	on_hover = false
+	add_tween(
 		default_values,
 		parallel_animations,
 		hover_time,
 		hover_delay,
 		hover_transition,
 		hover_easing,
-	))
-	if wait_for:
-		wait_for.entered.connect(func() -> void:
-			add_tween(
-				default_values,
-				parallel_animations,
-				enter_time,
-				enter_delay,
-				enter_transition,
-				enter_easing,
-				true
-			)
+	)
+
+func on_entered_action() -> void:
+	add_tween(
+			default_values,
+			parallel_animations,
+			enter_time,
+			enter_delay,
+			enter_transition,
+			enter_easing,
+			true
 		)
+
+func connect_signals() -> void:
+	target.mouse_entered.connect(on_hover_entered)
+
+	target.mouse_exited.connect(on_hover_exited)	
+	
+	if wait_for:
+		wait_for.entered.connect(on_entered_action)
 
 func setup() -> void:
 	if from_center:
@@ -106,12 +122,16 @@ func setup() -> void:
 		"self_modulate": enter_modulate,
 	}
 	connect_signals()
+	# start flicking if enabled
+	if flicked:
+		flick_loop()
 	if enter_animation:
 		on_enter()
 	else:
 		entered.emit()
 
 func on_enter() -> void:
+	# set intial values
 	add_tween(
 		enter_values,
 		true,
@@ -122,15 +142,8 @@ func on_enter() -> void:
 	)
 
 	if not wait_for:
-		add_tween(
-			default_values,
-			parallel_animations,
-			enter_time,
-			enter_delay,
-			enter_transition,
-			enter_easing,
-			true
-		)
+		on_entered_action()
+		
 
 func add_tween(
 	values: Dictionary, 
@@ -156,3 +169,26 @@ func add_tween(
 	if entering:
 		await tween.finished
 		entered.emit()
+
+
+func flick_loop() -> void:
+	# alternates `target.self_modulate` between the default modulate and `flicked_color`
+	if not default_values:
+		return
+	var default_modulate: Color = default_values.get("self_modulate", target.self_modulate)
+	var use_flick: bool = true
+	while flicked and is_inside_tree():
+		if on_hover:
+			target.self_modulate = default_modulate
+			await get_tree().create_timer(0.05).timeout
+			continue
+
+		if use_flick:
+			target.self_modulate = flicked_color
+		else:
+			target.self_modulate = default_modulate
+		use_flick = not use_flick
+		await get_tree().create_timer(flicked_time).timeout
+	# restore default when stopping
+	if is_inside_tree():
+		target.self_modulate = default_modulate

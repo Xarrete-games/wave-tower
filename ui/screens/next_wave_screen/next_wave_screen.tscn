@@ -25,6 +25,9 @@ icon = ExtResource("3_35lo6")
 
 [node name="AnimationComponent" type="Node" parent="NextWaveButton"]
 script = ExtResource("4_b0t1q")
+flicked = true
+flicked_time = 0.3
+flicked_color = Color(0.7137255, 0.77254903, 0.64705884, 1)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [connection signal="xarreta_pressed" from="NextWaveButton" to="." method="_on_next_wave_button_pressed"]
