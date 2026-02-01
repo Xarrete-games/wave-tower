@@ -9,7 +9,7 @@
 
 [node name="PauseMenu" type="PanelContainer"]
 process_mode = 3
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

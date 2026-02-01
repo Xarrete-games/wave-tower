@@ -1,5 +1,8 @@
 class_name ResolutionMenu extends Control
 
+@export var resolution_option_button: OptionButton
+@export var mode_option_button: OptionButton
+
 var resolutions: Dictionary[String, Vector2] = {
 	"3840x2160": Vector2(3840, 2160),
 	"2560x1440": Vector2(2560, 1440),
@@ -9,34 +12,36 @@ var resolutions: Dictionary[String, Vector2] = {
 	"1280x720": Vector2(1280, 720),
 	"800x600": Vector2(800, 600)
 }
-
-@onready var option_button: OptionButton = $OptionButton
+var visible_resolutions: Array[String] = []
 
 func _ready() -> void:
 	_populate_resolutions()
 	update_button_values()
 
 func update_button_values() -> void:
-	var windows_size: String = str(get_window().size.x) + "x" + str(get_window().size.y)
-	print("Current window size: ", windows_size)
-	var resolution_index: int = resolutions.keys().find(windows_size)
-	option_button.selected = resolution_index
+	var window_size := get_window().size
+	var current := "%dx%d" % [window_size.x, window_size.y]
+
+	var index := visible_resolutions.find(current)
+	if index != -1:
+		resolution_option_button.selected = index
 
 func _populate_resolutions() -> void:
-	option_button.clear()
+	resolution_option_button.clear()
+	visible_resolutions.clear()
 
 	var screen_size := DisplayServer.screen_get_size()
 
 	for res_name in resolutions.keys():
 		var res := resolutions[res_name]
 		if res.x <= screen_size.x and res.y <= screen_size.y:
-			option_button.add_item(res_name)
+			visible_resolutions.append(res_name)
+			resolution_option_button.add_item(res_name)
 
 func _on_option_button_item_selected(index: int) -> void:
-	var key = option_button.get_item_text(index)
+	var key: String = visible_resolutions[index]
 	get_window().size = resolutions[key]
 	center_window()
-
 
 func center_window() -> void:
 	var screen_center = DisplayServer.screen_get_position() + DisplayServer.screen_get_size() / 2

@@ -128,6 +128,7 @@ func setup() -> void:
 	if enter_animation:
 		on_enter()
 	else:
+		await get_tree().process_frame
 		entered.emit()
 
 func on_enter() -> void:

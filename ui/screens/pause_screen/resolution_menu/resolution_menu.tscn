@@ -2,16 +2,20 @@
 
 [ext_resource type="Script" uid="uid://byl0ha6842ni4" path="res://ui/screens/pause_screen/resolution_menu/resolution_menu.gd" id="1_rjtgo"]
 
-[node name="ResolutionMenu" type="HBoxContainer"]
-offset_right = 1.0
+[node name="ResolutionMenu" type="VBoxContainer" node_paths=PackedStringArray("resolution_option_button")]
+offset_right = 119.0
 offset_bottom = 23.0
 script = ExtResource("1_rjtgo")
+resolution_option_button = NodePath("VBoxContainer/ResolutionButton")
 
-[node name="Label" type="Label" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Resolution"
 
-[node name="OptionButton" type="OptionButton" parent="."]
+[node name="ResolutionButton" type="OptionButton" parent="VBoxContainer"]
 layout_mode = 2
 
-[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/ResolutionButton" to="." method="_on_option_button_item_selected"]
