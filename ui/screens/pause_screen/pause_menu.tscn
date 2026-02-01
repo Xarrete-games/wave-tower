@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1rsi54eynysa"]
+[gd_scene load_steps=7 format=3 uid="uid://b1rsi54eynysa"]
 
 [ext_resource type="Script" uid="uid://b2qbndgwbh6n5" path="res://ui/screens/pause_screen/pause_menu.gd" id="1_bgnto"]
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="2_5l847"]
 [ext_resource type="PackedScene" uid="uid://dj1vromg52jei" path="res://ui/screens/pause_screen/volume_control/volume.tscn" id="2_s7qyn"]
 [ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="2_s48xr"]
 [ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/buttons/xarreta_menu_button.tscn" id="4_snj08"]
+[ext_resource type="PackedScene" uid="uid://bsmhbhd7nv78e" path="res://ui/screens/pause_screen/resolution_menu/resolution_menu.tscn" id="5_s34hw"]
 
 [node name="PauseMenu" type="PanelContainer"]
 process_mode = 3
@@ -26,8 +27,8 @@ theme_override_styles/panel = ExtResource("2_5l847")
 process_mode = 3
 script = ExtResource("2_s48xr")
 enter_animation = true
-enter_scale = Vector2(0, 0)
 enter_position = Vector2(0, -1000)
+enter_modulate = Color(1, 1, 1, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
@@ -54,6 +55,9 @@ wait_for = NodePath("../../../../AnimationComponent")
 enter_time = 0.05
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
+
+[node name="ResolutionMenu" parent="CenterContainer/MarginContainer/VBoxContainer" instance=ExtResource("5_s34hw")]
+layout_mode = 2
 
 [node name="Buttons" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
