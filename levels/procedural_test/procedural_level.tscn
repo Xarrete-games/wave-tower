@@ -8,6 +8,7 @@
 [node name="ProceduralLevel" type="Node2D"]
 
 [node name="WorldMap" type="Node2D" parent="." node_paths=PackedStringArray("enemy")]
+y_sort_enabled = true
 script = ExtResource("1_ldccm")
 init_map_piece_data = ExtResource("2_8f3b7")
 enemy = NodePath("../EnemyProcedural")
