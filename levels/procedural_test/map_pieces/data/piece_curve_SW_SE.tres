@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapPieceData" load_steps=3 format=3 uid="uid://bmfp0kk4kd1m1"]
+
+[ext_resource type="PackedScene" uid="uid://ctympoe3douaa" path="res://levels/procedural_test/map_pieces/instances/piece_curve_SW_SE.tscn" id="1_cy4mm"]
+[ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/procedural_test/map_pieces/map_piece_data.gd" id="1_qxpdw"]
+
+[resource]
+script = ExtResource("1_qxpdw")
+edges = Array[int]([2, 1])
+scene = ExtResource("1_cy4mm")
+metadata/_custom_type_script = "uid://ndxexeof5w0k"

@@ -20,7 +20,6 @@ y_sort_enabled = true
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(579, 323)
 script = ExtResource("4_8f3b7")
-move_speed = 2000.0
 
 [node name="EnemyProcedural" parent="." instance=ExtResource("5_t5t77")]
 position = Vector2(377, -404)

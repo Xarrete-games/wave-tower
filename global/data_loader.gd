@@ -4,16 +4,19 @@ extends Node
 const RELICS_DATA_PATH: String = "res://items/relics/data/"
 const EVENTS_DATA_PATH: String = "res://events/data/"
 const CONSUMABLES_DATA_PATH: String = "res://items/consumables/data/"
+const MAP_PIECES_DATA_PATH: String = "res://levels/procedural_test/map_pieces/data/"
 
 var relics: Array[RelicItemData] = []
 var events: Array[EventData] = []
 var consumables: Array[ConsumableItemData] = []
+var map_pieces: Array[MapPieceData] = []
 var enemy_data: EnemyDataLoader = EnemyDataLoader.new()
 
 func _ready() -> void:
 	_load_relics()
 	_load_events()
 	_load_consumables()
+	_load_map_pieces()
 
 # ---------------------------------------------------------
 # RELICS API
@@ -70,6 +73,13 @@ func get_all_consumables_of_type(consumable_type: Consumable.Type) -> Array[Cons
 	)
 
 # ---------------------------------------------------------
+# MAP PIECES API
+# ---------------------------------------------------------
+
+func get_all_map_pieces() -> Array[MapPieceData]:
+	return map_pieces.duplicate()
+
+# ---------------------------------------------------------
 # INTERNAL LOADING HELPERS
 # ---------------------------------------------------------
 func _load_relics() -> void:
@@ -95,6 +105,14 @@ func _load_consumables() -> void:
 			consumables.append(data)
 		else:
 			push_error("[DataLoader] Loaded consumables data has invalid type: %s" % [data])
+
+func _load_map_pieces() -> void:
+	var loaded_array = _load_resources_from_dir(MAP_PIECES_DATA_PATH)
+	for data in loaded_array:
+		if data is MapPieceData:
+			map_pieces.append(data)
+		else:
+			push_error("[DataLoader] Loaded map piece data has invalid type: %s" % [data])
 
 
 # ---------------------------------------------------------

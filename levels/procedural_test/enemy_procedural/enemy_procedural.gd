@@ -179,7 +179,7 @@ func get_debuff_stacks(debuff_type: EnemyDebuff.Type) -> int:
 func has_any_debuff() -> bool:
 	return debuff_handler.has_any_defbuff()
 
-func apply_debuff(debuff: EnemyDebuff, amount: int = 1) -> void:
+func apply_debuff(_debuff: EnemyDebuff, _amount: int = 1) -> void:
 	pass
 	#debuff_handler.add_debuff(debuff, amount, self)
 
