@@ -46,8 +46,11 @@ func attach_next_piece() -> void:
 func attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: MapPiece.Dir, exit_dir: MapPiece.Dir) -> void:
 	var a_world = p_piece_a.get_edge_tile_pos(entry_dir)
 	var b_world = p_piece_b.get_edge_tile_pos(exit_dir)
-	
-	p_piece_b.global_position = p_piece_a.global_position + a_world - b_world
+	# compute tile-based offset so edges are adjacent (works for isometric)
+	var delta: Vector2i = p_piece_a.get_edge_tile_delta(entry_dir)
+	var shift: Vector2 = p_piece_a.get_tile_local_offset(delta)
+
+	p_piece_b.global_position = p_piece_a.global_position + a_world - b_world + shift
 
 func get_dir_to_connect(dir: MapPiece.Dir) -> MapPiece.Dir:
 	match dir:
