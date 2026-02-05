@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="MapPieceData" load_steps=3 format=3 uid="uid://cihvbw4dk6i0e"]
 
-[ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/procedural_test/map_pieces/map_piece_data.gd" id="1_lqitq"]
-[ext_resource type="PackedScene" uid="uid://rqa3ay8q8cpg" path="res://levels/procedural_test/map_pieces/instances/piece_straight_NW_SE.tscn" id="1_n7val"]
+[ext_resource type="PackedScene" uid="uid://rqa3ay8q8cpg" path="res://levels/procedural_test/map_pieces/instances/piece_straight_NW_SE.tscn" id="1_tn1yr"]
+[ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/procedural_test/map_pieces/map_piece_data.gd" id="2_ov80c"]
 
 [resource]
-script = ExtResource("1_lqitq")
-edges = Array[int]([3, 2])
-scene = ExtResource("1_n7val")
+script = ExtResource("2_ov80c")
+edges = Array[int]([3, 1])
+scene = ExtResource("1_tn1yr")
 metadata/_custom_type_script = "uid://ndxexeof5w0k"
