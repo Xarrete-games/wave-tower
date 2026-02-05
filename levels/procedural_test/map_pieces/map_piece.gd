@@ -5,7 +5,6 @@ enum Dir { NE, SE, SW, NW }
 const size: Vector2i = Vector2i(11, 11)
 
 var edges: Array[Dir] = []
-var debug_edge_pos: bool = true
 
 @onready var tile_map: TileMapLayer = $MapPieceTileMap
 
@@ -45,9 +44,6 @@ func get_edge_tile_pos(dir: Dir) -> Vector2:
 		sum += c
 
 	var tile = sum / edge.size()
-
-	if debug_edge_pos:
-		push_warning("get_edge_tile_pos %s used=%s edge=%s tile=%s local=%s" % [dir, used, edge, tile, _map_to_local(tile)])
 
 	return _map_to_local(tile)
 
