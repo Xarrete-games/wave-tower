@@ -16,7 +16,7 @@ func _init() -> void:
 func get_instance() -> MapPiece:
 	var instance = scene.instantiate()
 	if not instance is MapPiece:
-		push_error("Scene %s does not contain a MapPiece as root node" % [scene])
+		push_error("Scene %s does not contain a MapPiece as root node" % [instance.name])
 		return null
 	instance.edges = edges.duplicate()
 	return instance
