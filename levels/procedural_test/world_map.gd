@@ -86,6 +86,19 @@ func get_dir_to_connect(dir: MapPiece.Dir) -> MapPiece.Dir:
 			push_error("Invalid direction: %s" % [dir])
 			return MapPiece.Dir.NE
 
+func get_opostite_dir(dir: MapPiece.Dir) -> MapPiece.Dir:
+	match dir:
+		MapPiece.Dir.NE:
+			return MapPiece.Dir.SW
+		MapPiece.Dir.SE:
+			return MapPiece.Dir.NW
+		MapPiece.Dir.SW:
+			return MapPiece.Dir.NE
+		MapPiece.Dir.NW:
+			return MapPiece.Dir.SE
+		_:
+			push_error("Invalid direction: %s" % [dir])
+			return MapPiece.Dir.NE
 
 func _calculate_next_tile_pos(next_dir: MapPiece.Dir) -> Vector2i:
 	current_tile += gird_offsets[next_dir]
@@ -96,10 +109,26 @@ func get_invalid_edges(dir_to_connect: MapPiece.Dir) -> Array[MapPiece.Dir]:
 	var dirs_check = all_dirs.duplicate().filter(func(d): return d != dir_to_connect)
 	var invalid_dirs: Array[MapPiece.Dir] = []
 	
-
+	# check if there are pieces in the grid in the other directions, which would make them invalid to connect to
 	for dir in dirs_check:
 		var check_tile = current_tile + gird_offsets[dir]
 		if grid.has(check_tile):
 			invalid_dirs.append(dir)
+
+	var valid_dirs = dirs_check.filter(func(d): return not invalid_dirs.has(d))
+
+	# check tunnerling: if there are pieces in the grid in the valid dirs, then the opposite dir becomes invalid because it would create a tunnel that cannot be filled
+	for dir in valid_dirs:
+		var check_tile = current_tile + gird_offsets[dir]
+		var oposite_dir = get_opostite_dir(dir)
+		var dirs_to_check_for_tunneling = all_dirs.duplicate().filter(func(d): return d != oposite_dir)
+		# must be at leat 2 free piece to avoid tunneling, otherwise it would create a tunnel that cannot be filled
+		var free_spaces = 0
+		for d in dirs_to_check_for_tunneling:
+			var check_tile_tunnel = check_tile + gird_offsets[d]
+			if not grid.has(check_tile_tunnel):
+				free_spaces += 1
+		if free_spaces < 2:
+			invalid_dirs.append(oposite_dir)
 	
 	return invalid_dirs
