@@ -7,7 +7,7 @@ class_name WorldMap extends Node2D
 var map_pieces: Array[MapPieceData] = []
 var last_piece_attached: MapPiece = null
 #grid
-var gird_offsets: Dictionary[MapPiece.Dir, Vector2i] = {
+var grid_offsets: Dictionary[MapPiece.Dir, Vector2i] = {
 	MapPiece.Dir.NE: Vector2i(1, -1),
 	MapPiece.Dir.SE: Vector2i(1, 0),
 	MapPiece.Dir.SW: Vector2i(-1, 1),
@@ -101,34 +101,27 @@ func get_opostite_dir(dir: MapPiece.Dir) -> MapPiece.Dir:
 			return MapPiece.Dir.NE
 
 func _calculate_next_tile_pos(next_dir: MapPiece.Dir) -> Vector2i:
-	current_tile += gird_offsets[next_dir]
+	current_tile += grid_offsets[next_dir]
 	return current_tile
 
 func get_invalid_edges(dir_to_connect: MapPiece.Dir) -> Array[MapPiece.Dir]:
 
-	var dirs_check = all_dirs.duplicate().filter(func(d): return d != dir_to_connect)
+	var dirs_check = all_dirs.filter(func(d): return d != dir_to_connect)
 	var invalid_dirs: Array[MapPiece.Dir] = []
-	
-	# check if there are pieces in the grid in the other directions, which would make them invalid to connect to
+
+	# check if any of the adjacent tiles in other directions are occupied,
+	# which would block placement of pieces with those edges
 	for dir in dirs_check:
-		var check_tile = current_tile + gird_offsets[dir]
-		if grid.has(check_tile):
+		var new_tile := current_tile + grid_offsets[dir]
+
+		if grid.has(new_tile):
+			invalid_dirs.append(dir)
+			continue
+
+		var simulated := grid.duplicate()
+		simulated[new_tile] = true
+
+		if not FloodFill.can_escape_from(new_tile, simulated, grid_offsets):
 			invalid_dirs.append(dir)
 
-	var valid_dirs = dirs_check.filter(func(d): return not invalid_dirs.has(d))
-
-	# check tunnerling: if there are pieces in the grid in the valid dirs, then the opposite dir becomes invalid because it would create a tunnel that cannot be filled
-	for dir in valid_dirs:
-		var check_tile = current_tile + gird_offsets[dir]
-		var oposite_dir = get_opostite_dir(dir)
-		var dirs_to_check_for_tunneling = all_dirs.duplicate().filter(func(d): return d != oposite_dir)
-		# must be at leat 2 free piece to avoid tunneling, otherwise it would create a tunnel that cannot be filled
-		var free_spaces = 0
-		for d in dirs_to_check_for_tunneling:
-			var check_tile_tunnel = check_tile + gird_offsets[d]
-			if not grid.has(check_tile_tunnel):
-				free_spaces += 1
-		if free_spaces < 2:
-			invalid_dirs.append(oposite_dir)
-	
 	return invalid_dirs
