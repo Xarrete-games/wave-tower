@@ -1,7 +1,11 @@
 class_name WorldMap extends Node2D
 
+const ORANGE_PORTAL: PackedScene = preload("uid://b8g0wp8j02vu4")
+const PORTAL_OFFSET: Vector2 = Vector2(0, -80)
+
 @export var init_map_piece_data: MapPieceData
 @export var enemy: EnemyProcedural
+@export var visual: Node2D
 
 
 var map_pieces: Array[MapPieceData] = []
@@ -17,6 +21,10 @@ var all_dirs: Array[MapPiece.Dir] = [MapPiece.Dir.NE, MapPiece.Dir.SE, MapPiece.
 var grid: Dictionary[Vector2i, bool] = {}
 var current_tile: Vector2i = Vector2i.ZERO
 var frontiers: Array[MapPiece] = []
+var portal_spawn_positions: Array[Vector2] = []
+# entries keep both position and direction so we can flip sprites correctly
+var portal_entries: Array = []
+var finalized_portal_entries: Array = []
 
 
 func _ready() -> void:
@@ -31,6 +39,9 @@ func _ready() -> void:
 		frontiers.append(init_piece)
 
 	last_piece_attached = init_piece
+
+	# crear portales para los edges actuales
+	update_portals()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):
@@ -53,6 +64,7 @@ func attach_next_piece() -> void:
 	# si la frontier no tiene edges, elimínala y sal
 	if frontier.edges.size() == 0:
 		frontiers.erase(frontier)
+		update_portals()
 		return
 
 	var next_dir = _pick_random_edge(frontier)
@@ -62,17 +74,23 @@ func attach_next_piece() -> void:
 	if not validation.valid:
 		# elimina el edge inválido de la frontier (y la frontier si queda vacía)
 		push_warning(validation.reason)
+		# guardar punto de spawn definitivo antes de quitar el edge
+		finalize_spawn_pos(frontier, next_dir)
 		frontier.edges.erase(next_dir)
 		if frontier.edges.size() == 0:
 			frontiers.erase(frontier)
+		update_portals()
 		return
 
 	var placed = _try_place_on_edge(frontier, next_dir, candidate_tile, validation.valid_pieces, validation.dir_to_connect)
 	if not placed:
 		push_warning("frontier=%s dir=%s tile=%s no fitting piece -> removing edge" % [frontier, next_dir, candidate_tile])
+		# guardar punto de spawn definitivo antes de quitar el edge
+		finalize_spawn_pos(frontier, next_dir)
 		frontier.edges.erase(next_dir)
 		if frontier.edges.size() == 0:
 			frontiers.erase(frontier)
+		update_portals()
 		return
 
 	# Si se colocó, poda los edges bloqueados de todas las frontiers
@@ -181,6 +199,8 @@ func _try_place_on_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_ti
 		attach_piece(frontier, new_piece, next_dir, dir_to_connect)
 		new_piece.set_edge_has_connected(dir_to_connect)
 		last_piece_attached = new_piece
+		# actualizar portales y puntos de spawn tras colocar una pieza
+		update_portals()
 		return true
 
 	return false
@@ -205,11 +225,16 @@ func _prune_all_frontiers_after_placement() -> void:
 				remove_edges.append(d)
 				continue
 		for re in remove_edges:
+			# guardar punto de spawn definitivo antes de quitar el edge
+			finalize_spawn_pos(f, re)
 			f.edges.erase(re)
 		if f.edges.size() == 0:
 			remove_frontiers.append(f)
 	for rf in remove_frontiers:
 		frontiers.erase(rf)
+
+	# actualizar portales tras la poda de frontiers
+	update_portals()
 
 func attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: MapPiece.Dir, exit_dir: MapPiece.Dir) -> void:
 	var a_world = p_piece_a.get_edge_tile_pos(entry_dir)
@@ -219,6 +244,53 @@ func attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: MapPiece.
 	var shift: Vector2 = p_piece_a.get_tile_local_offset(delta)
 
 	p_piece_b.global_position = p_piece_a.global_position + a_world - b_world + shift
+
+
+func finalize_spawn_pos(piece: MapPiece, dir: MapPiece.Dir) -> void:
+	# compute global spawn position for the given edge and add to finalized list
+	var pos: Vector2 = piece.global_position + piece.get_edge_tile_pos(dir) + PORTAL_OFFSET
+	# avoid duplicates by position
+	for e in finalized_portal_entries:
+		if e["pos"].distance_to(pos) < 1e-3:
+			return
+	finalized_portal_entries.append({"pos": pos, "dir": dir})
+
+
+func update_portals() -> void:
+	# remove existing portal instances
+	for p in get_tree().get_nodes_in_group("orange_portal"):
+		if is_instance_valid(p):
+			p.queue_free()
+	# rebuild entries from finalized ones and current frontiers
+	portal_entries = finalized_portal_entries.duplicate()
+
+	for f in frontiers:
+		for d in f.edges:
+			var pos: Vector2 = f.global_position + f.get_edge_tile_pos(d) + PORTAL_OFFSET 
+			portal_entries.append({"pos": pos, "dir": d})
+
+	# update simple positions list for external use
+	portal_spawn_positions.clear()
+	for e in portal_entries:
+		portal_spawn_positions.append(e["pos"])
+
+	# instantiate portals for all entries
+	for e in portal_entries:
+		var portal = ORANGE_PORTAL.instantiate()
+		visual.add_child(portal)
+		portal.global_position = e["pos"]
+		portal.add_to_group("orange_portal")
+
+		# flip horizontally if the edge points east (NE or SE)
+		if e["dir"] == MapPiece.Dir.NE or e["dir"] == MapPiece.Dir.SE:
+			var sprite_node = portal.get_node_or_null("AnimatedSprite2D")
+			if sprite_node and sprite_node is AnimatedSprite2D:
+				sprite_node.flip_h = true
+			else:
+				for c in portal.get_children():
+					if c is AnimatedSprite2D:
+						c.flip_h = true
+						break
 
 func get_dir_to_connect(dir: MapPiece.Dir) -> MapPiece.Dir:
 	match dir:
