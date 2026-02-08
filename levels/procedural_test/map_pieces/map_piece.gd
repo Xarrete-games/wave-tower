@@ -5,6 +5,8 @@ enum Dir { NE, SE, SW, NW }
 const size: Vector2i = Vector2i(11, 11)
 
 var edges: Array[Dir] = []
+var logical_pos: Vector2i = Vector2i.ZERO
+
 
 @onready var tile_map: TileMapLayer = $MapPieceTileMap
 
