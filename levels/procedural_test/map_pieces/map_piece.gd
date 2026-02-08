@@ -1,5 +1,8 @@
 class_name MapPiece extends Node2D
 
+# only for target portal
+@export var target_portal: Node2D = null
+
 enum Dir { NE, SE, SW, NW }
 
 const size: Vector2i = Vector2i(11, 11)
@@ -9,6 +12,12 @@ var logical_pos: Vector2i = Vector2i.ZERO
 
 
 @onready var tile_map: TileMapLayer = $MapPieceTileMap
+
+func get_target()  -> Vector2:
+	if target_portal:
+		return target_portal.global_position
+	else:
+		return global_position
 
 # Get the tile position of the edge in the given direction
 func get_edge_tile_pos(dir: Dir) -> Vector2:

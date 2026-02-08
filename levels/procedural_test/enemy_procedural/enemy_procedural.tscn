@@ -108,3 +108,5 @@ unique_name_in_owner = true
 
 [node name="TargetPositionRight" type="Marker2D" parent="."]
 unique_name_in_owner = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
