@@ -249,20 +249,17 @@ func attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: MapPiece.
 
 
 func finalize_spawn_pos(piece: MapPiece, dir: MapPiece.Dir) -> void:
-	# compute global spawn position for the given edge and add to finalized list
+	# compute logical tile and global spawn position for the given edge
+	var tile: Vector2i = piece.logical_pos + grid_offsets[dir]
 	var pos: Vector2 = piece.global_position + piece.get_edge_tile_pos(dir) + PORTAL_OFFSET
-	# avoid duplicates by position
+	# avoid duplicates by logical tile
 	for e in finalized_portal_entries:
-		if e["pos"].distance_to(pos) < 1e-3:
+		if e.has("tile") and e["tile"] == tile:
 			return
-	finalized_portal_entries.append({"pos": pos, "dir": dir})
+	finalized_portal_entries.append({"tile": tile, "pos": pos, "dir": dir})
 
 
 func update_portals() -> void:
-	# remove existing portal instances
-	for p in get_tree().get_nodes_in_group("orange_portal"):
-		if is_instance_valid(p):
-			p.queue_free()
 	# rebuild entries from finalized ones and current frontiers
 	portal_entries.clear()
 	for e in finalized_portal_entries:
@@ -270,8 +267,9 @@ func update_portals() -> void:
 
 	for f in frontiers:
 		for d in f.edges:
+			var tile: Vector2i = f.logical_pos + grid_offsets[d]
 			var pos: Vector2 = f.global_position + f.get_edge_tile_pos(d) + PORTAL_OFFSET
-			portal_entries.append({"pos": pos, "dir": d})
+			portal_entries.append({"tile": tile, "pos": pos, "dir": d})
 
 	# update simple positions list for external use
 	portal_spawn_positions.clear()
