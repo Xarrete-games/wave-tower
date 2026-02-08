@@ -22,12 +22,14 @@ var grid: Dictionary[Vector2i, bool] = {}
 var current_tile: Vector2i = Vector2i.ZERO
 var frontiers: Array[MapPiece] = []
 var portal_spawn_positions: Array[Vector2] = []
+var spawn_handler: SpawnPositionsHandler = null
 # entries keep both position and direction so we can flip sprites correctly
-var portal_entries: Array = []
-var finalized_portal_entries: Array = []
+var portal_entries: Array[Dictionary] = []
+var finalized_portal_entries: Array[Dictionary] = []
 
 
 func _ready() -> void:
+	spawn_handler = SpawnPositionsHandler.new(visual)
 	var init_piece: MapPiece = init_map_piece_data.get_instance()
 	map_pieces = DataLoader.get_all_map_pieces()
 	grid[Vector2i.ZERO] = true
@@ -262,11 +264,13 @@ func update_portals() -> void:
 		if is_instance_valid(p):
 			p.queue_free()
 	# rebuild entries from finalized ones and current frontiers
-	portal_entries = finalized_portal_entries.duplicate()
+	portal_entries.clear()
+	for e in finalized_portal_entries:
+		portal_entries.append(e)
 
 	for f in frontiers:
 		for d in f.edges:
-			var pos: Vector2 = f.global_position + f.get_edge_tile_pos(d) + PORTAL_OFFSET 
+			var pos: Vector2 = f.global_position + f.get_edge_tile_pos(d) + PORTAL_OFFSET
 			portal_entries.append({"pos": pos, "dir": d})
 
 	# update simple positions list for external use
@@ -274,23 +278,10 @@ func update_portals() -> void:
 	for e in portal_entries:
 		portal_spawn_positions.append(e["pos"])
 
-	# instantiate portals for all entries
-	for e in portal_entries:
-		var portal = ORANGE_PORTAL.instantiate()
-		visual.add_child(portal)
-		portal.global_position = e["pos"]
-		portal.add_to_group("orange_portal")
-
-		# flip horizontally if the edge points east (NE or SE)
-		if e["dir"] == MapPiece.Dir.NE or e["dir"] == MapPiece.Dir.SE:
-			var sprite_node = portal.get_node_or_null("AnimatedSprite2D")
-			if sprite_node and sprite_node is AnimatedSprite2D:
-				sprite_node.flip_h = true
-			else:
-				for c in portal.get_children():
-					if c is AnimatedSprite2D:
-						c.flip_h = true
-						break
+	# delegate visual handling to SpawnPositionsHandler
+	if spawn_handler != null:
+		spawn_handler.update(portal_entries)
+		portal_spawn_positions = spawn_handler.get_positions()
 
 func get_dir_to_connect(dir: MapPiece.Dir) -> MapPiece.Dir:
 	match dir:
