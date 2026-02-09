@@ -27,16 +27,29 @@ var spawn_handler: SpawnPositionsHandler = null
 var portal_entries: Array[Dictionary] = []
 var finalized_portal_entries: Array[Dictionary] = []
 
+# --- Conexiones entre piezas (grafo dirigido) ---
+# Estructura: { MapPiece: { Dir: MapPiece } }
+# Ejemplo: piece_connections[pieceA][Dir.NE] = pieceB significa que pieceA conecta con pieceB por su borde NE
+var piece_connections: Dictionary = {}
+
+# Referencia a la pieza inicial (objetivo/target de los enemigos)
+var init_piece: MapPiece = null
+
 
 func _ready() -> void:
 	spawn_handler = SpawnPositionsHandler.new(visual)
-	var init_piece: MapPiece = init_map_piece_data.get_instance()
+	# Instanciar la pieza inicial y guardar referencia (es el target de los enemigos)
+	init_piece = init_map_piece_data.get_instance()
 	map_pieces = DataLoader.get_all_map_pieces()
 	grid[Vector2i.ZERO] = true
 	current_tile = Vector2i.ZERO
 	add_child(init_piece)
 	# logical coord for initial piece
 	init_piece.logical_pos = Vector2i.ZERO
+	
+	# Inicializar entrada en el grafo de conexiones para la pieza inicial
+	piece_connections[init_piece] = {}
+	
 	if init_piece.edges.size() > 0:
 		frontiers.append(init_piece)
 
@@ -48,6 +61,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):
 		attach_next_piece()
+	# TEST: Pulsar "ui_accept" (Enter/Space) para probar waypoints con el enemy
+	if event.is_action_pressed("ui_accept"):
+		_test_spawn_enemy_with_waypoints()
 
 func attach_next_piece() -> void:
 	# Función principal: coordina un solo paso de crecimiento.
@@ -239,24 +255,43 @@ func _prune_all_frontiers_after_placement() -> void:
 	update_portals()
 
 func attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: MapPiece.Dir, exit_dir: MapPiece.Dir) -> void:
+	# --- Posicionamiento espacial ---
 	var a_world = p_piece_a.get_edge_tile_pos(entry_dir)
 	var b_world = p_piece_b.get_edge_tile_pos(exit_dir)
 	# compute tile-based offset so edges are adjacent (works for isometric)
 	var delta: Vector2i = p_piece_a.get_edge_tile_delta(entry_dir)
 	var shift: Vector2 = p_piece_a.get_tile_local_offset(delta)
-
 	p_piece_b.global_position = p_piece_a.global_position + a_world - b_world + shift
+	
+	# --- Registro de conexiones en el grafo ---
+	# Aseguramos que ambas piezas tengan entrada en el diccionario
+	if not piece_connections.has(p_piece_a):
+		piece_connections[p_piece_a] = {}
+	if not piece_connections.has(p_piece_b):
+		piece_connections[p_piece_b] = {}
+	
+	# Conexión bidireccional:
+	# - piece_a conecta con piece_b por el borde entry_dir
+	# - piece_b conecta con piece_a por el borde exit_dir
+	piece_connections[p_piece_a][entry_dir] = p_piece_b
+	piece_connections[p_piece_b][exit_dir] = p_piece_a
 
 
 func finalize_spawn_pos(piece: MapPiece, dir: MapPiece.Dir) -> void:
-	# compute logical tile and global spawn position for the given edge
+	# Guarda el punto de spawn definitivo para un edge que ya no crecerá.
+	# Incluye la referencia a la pieza para poder reconstruir la ruta hacia el target.
 	var tile: Vector2i = piece.logical_pos + grid_offsets[dir]
 	var pos: Vector2 = piece.global_position + piece.get_edge_tile_pos(dir) + PORTAL_OFFSET
 	# avoid duplicates by logical tile
 	for e in finalized_portal_entries:
 		if e.has("tile") and e["tile"] == tile:
 			return
-	finalized_portal_entries.append({"tile": tile, "pos": pos, "dir": dir})
+	finalized_portal_entries.append({
+		"tile": tile,
+		"pos": pos,
+		"dir": dir,
+		"piece": piece  # Referencia a la pieza para reconstruir la ruta
+	})
 
 
 func update_portals() -> void:
@@ -269,7 +304,7 @@ func update_portals() -> void:
 		for d in f.edges:
 			var tile: Vector2i = f.logical_pos + grid_offsets[d]
 			var pos: Vector2 = f.global_position + f.get_edge_tile_pos(d) + PORTAL_OFFSET
-			portal_entries.append({"tile": tile, "pos": pos, "dir": d})
+			portal_entries.append({"tile": tile, "pos": pos, "dir": d, "piece": f})
 
 	# update simple positions list for external use
 	portal_spawn_positions.clear()
@@ -432,3 +467,209 @@ func _reachable_to_boundary(start: Vector2i, occ: Dictionary, lookahead: int = 8
 			q.append(n)
 
 	return false
+
+
+# =============================================================================
+# SISTEMA DE RUTAS (waypoints)
+# =============================================================================
+
+## Construye la ruta de piezas desde un spawn point hasta la pieza inicial (target).
+## Retorna un Array[MapPiece] ordenado: [spawn_piece, ..., init_piece]
+## Si no encuentra ruta, retorna array vacío.
+func build_route_to_target(spawn_entry: Dictionary) -> Array[MapPiece]:
+	if not spawn_entry.has("piece"):
+		push_error("[WorldMap] spawn_entry no tiene 'piece'")
+		return []
+	
+	var start_piece: MapPiece = spawn_entry["piece"]
+	if start_piece == null or not is_instance_valid(start_piece):
+		push_error("[WorldMap] spawn_entry.piece no es válido")
+		return []
+	
+	# Caso trivial: el spawn está en la pieza inicial
+	if start_piece == init_piece:
+		return [init_piece]
+	
+	# BFS para encontrar el camino desde start_piece hasta init_piece
+	return _find_path_bfs(start_piece, init_piece)
+
+
+## BFS en el grafo de conexiones para encontrar el camino entre dos piezas.
+## Retorna Array[MapPiece] ordenado desde 'from_piece' hasta 'to_piece'.
+## Si no hay camino, retorna array vacío.
+func _find_path_bfs(from_piece: MapPiece, to_piece: MapPiece) -> Array[MapPiece]:
+	if from_piece == to_piece:
+		return [from_piece]
+	
+	# Cola de BFS: cada elemento es la pieza actual
+	var queue: Array[MapPiece] = [from_piece]
+	# Mapa de "came_from" para reconstruir el camino: piece -> piece_anterior
+	var came_from: Dictionary = {}
+	came_from[from_piece] = null
+	
+	while queue.size() > 0:
+		var current: MapPiece = queue.pop_front()
+		
+		# Obtener todas las piezas conectadas a current
+		if not piece_connections.has(current):
+			continue
+		
+		var connections: Dictionary = piece_connections[current]
+		for dir in connections.keys():
+			var neighbor: MapPiece = connections[dir]
+			if neighbor == null or not is_instance_valid(neighbor):
+				continue
+			if came_from.has(neighbor):
+				continue  # Ya visitada
+			
+			came_from[neighbor] = current
+			
+			# ¿Llegamos al destino?
+			if neighbor == to_piece:
+				return _reconstruct_path(came_from, from_piece, to_piece)
+			
+			queue.append(neighbor)
+	
+	# No se encontró camino
+	push_warning("[WorldMap] No se encontró ruta desde %s hasta %s" % [from_piece, to_piece])
+	return []
+
+
+## Reconstruye el camino desde came_from map.
+## Retorna Array[MapPiece] ordenado desde 'start' hasta 'end'.
+func _reconstruct_path(came_from: Dictionary, start: MapPiece, end: MapPiece) -> Array[MapPiece]:
+	var path: Array[MapPiece] = []
+	var current: MapPiece = end
+	
+	while current != null:
+		path.append(current)
+		if came_from.has(current):
+			current = came_from[current]
+		else:
+			break
+	
+	# El path está en orden inverso (end -> start), lo invertimos
+	path.reverse()
+	return path
+
+
+## Genera un array de waypoints (Vector2 global) para una ruta de piezas.
+## spawn_entry: el diccionario del spawn point (con "pos", "dir", "piece")
+## route: Array[MapPiece] desde la pieza del spawn hasta init_piece
+## 
+## Retorna Array[Vector2] con los puntos en orden:
+## [spawn_pos, entrada_pieza1, centro_pieza1, salida_pieza1, ..., target]
+func build_waypoints_from_route(spawn_entry: Dictionary, route: Array[MapPiece]) -> Array[Vector2]:
+	var waypoints: Array[Vector2] = []
+	
+	if route.size() == 0:
+		push_warning("[WorldMap] Ruta vacía, no se pueden generar waypoints")
+		return waypoints
+	
+	# 1. Añadir el punto de spawn como primer waypoint
+	if spawn_entry.has("pos"):
+		waypoints.append(spawn_entry["pos"])
+	
+	# 2. Para cada pieza de la ruta, generar: entrada, centro, [salida]
+	for i in range(route.size()):
+		var piece: MapPiece = route[i]
+		var entry_dir: MapPiece.Dir = MapPiece.Dir.NE  # default
+		var exit_dir: MapPiece.Dir = MapPiece.Dir.NE   # default
+		var has_exit: bool = (i < route.size() - 1)
+		
+		# Determinar dirección de entrada:
+		# - Si es la primera pieza, entrada desde spawn_entry["dir"] (invertida, porque spawn está "fuera")
+		# - Si no, entrada desde la pieza anterior
+		if i == 0:
+			# El enemigo entra por el borde donde está el spawn (dir del spawn_entry)
+			if spawn_entry.has("dir"):
+				entry_dir = spawn_entry["dir"]
+		else:
+			# Buscar qué dirección de la pieza anterior conecta con esta
+			var prev_piece: MapPiece = route[i - 1]
+			entry_dir = _find_connection_dir(prev_piece, piece)
+			# La entrada de piece es el lado opuesto
+			entry_dir = get_opostite_dir(entry_dir)
+		
+		# Determinar dirección de salida (si hay siguiente pieza)
+		if has_exit:
+			var next_piece: MapPiece = route[i + 1]
+			exit_dir = _find_connection_dir(piece, next_piece)
+		
+		# Generar waypoints para esta pieza
+		# Entrada: posición global del borde de entrada
+		var entry_local: Vector2 = piece.get_edge_tile_pos(entry_dir)
+		var entry_global: Vector2 = piece.global_position + entry_local
+		waypoints.append(entry_global)
+		
+		# Centro: posición global de la pieza
+		waypoints.append(piece.global_position)
+		
+		# Salida: solo si hay siguiente pieza
+		if has_exit:
+			var exit_local: Vector2 = piece.get_edge_tile_pos(exit_dir)
+			var exit_global: Vector2 = piece.global_position + exit_local
+			waypoints.append(exit_global)
+	
+	# 3. Añadir el target final (puede ser un portal específico o el centro de init_piece)
+	if init_piece != null:
+		waypoints.append(init_piece.get_target())
+	
+	return waypoints
+
+
+## Encuentra la dirección en 'from_piece' que conecta con 'to_piece'.
+## Retorna la dirección o NE como fallback.
+func _find_connection_dir(from_piece: MapPiece, to_piece: MapPiece) -> MapPiece.Dir:
+	if not piece_connections.has(from_piece):
+		push_warning("[WorldMap] from_piece no tiene conexiones registradas")
+		return MapPiece.Dir.NE
+	
+	var connections: Dictionary = piece_connections[from_piece]
+	for dir in connections.keys():
+		if connections[dir] == to_piece:
+			return dir
+	
+	push_warning("[WorldMap] No se encontró conexión de %s a %s" % [from_piece, to_piece])
+	return MapPiece.Dir.NE
+
+
+## Función de conveniencia: dado un spawn_entry, retorna los waypoints completos.
+func get_waypoints_for_spawn(spawn_entry: Dictionary) -> Array[Vector2]:
+	var route: Array[MapPiece] = build_route_to_target(spawn_entry)
+	return build_waypoints_from_route(spawn_entry, route)
+
+
+# =============================================================================
+# TEST: Spawn de enemigo con waypoints
+# =============================================================================
+
+## TEST: Posiciona el enemy exportado en un spawn aleatorio y le asigna waypoints.
+## Llamar con "ui_accept" (Enter/Space).
+func _test_spawn_enemy_with_waypoints() -> void:
+	if enemy == null:
+		push_warning("[WorldMap][TEST] No hay enemy asignado en el export")
+		return
+	
+	if portal_entries.size() == 0:
+		push_warning("[WorldMap][TEST] No hay spawn points disponibles")
+		return
+	
+	# Elegir un spawn aleatorio
+	var spawn_entry: Dictionary = portal_entries[randi() % portal_entries.size()]
+	
+	# Generar waypoints para esa ruta
+	var waypoints: Array[Vector2] = get_waypoints_for_spawn(spawn_entry)
+	
+	if waypoints.size() == 0:
+		push_warning("[WorldMap][TEST] No se pudieron generar waypoints")
+		return
+	
+	# Posicionar el enemy en el primer waypoint (spawn)
+	enemy.global_position = waypoints[0]
+	enemy.visible = true
+	
+	# Asignar los waypoints
+	enemy.set_waypoints(waypoints)
+	
+	print("[WorldMap][TEST] Enemy spawned at ", waypoints[0], " with ", waypoints.size(), " waypoints")
