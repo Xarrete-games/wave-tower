@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://doun1k6w4e04m"]
+[gd_scene load_steps=6 format=3 uid="uid://doun1k6w4e04m"]
 
 [ext_resource type="Script" uid="uid://pc6bc1xl4g58" path="res://levels/procedural_test/world_map.gd" id="1_ldccm"]
 [ext_resource type="Resource" uid="uid://phl5ghle7qif" path="res://levels/procedural_test/map_pieces/init/init_map_piece_SE.tres" id="2_8f3b7"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="4_8f3b7"]
+[ext_resource type="Script" uid="uid://bv0s1qattp6jq" path="res://levels/procedural_test/enemy_generator_procedural.gd" id="5_s03ma"]
 [ext_resource type="PackedScene" uid="uid://b4grxp1f6om7o" path="res://levels/procedural_test/enemy_procedural/enemy_procedural.tscn" id="5_t5t77"]
 
 [node name="ProceduralLevel" type="Node2D"]
@@ -27,3 +28,7 @@ min_zoom = Vector2(0.1, 0.1)
 
 [node name="EnemyProcedural" parent="." instance=ExtResource("5_t5t77")]
 position = Vector2(377, -404)
+
+[node name="EnemyGeneratorProcedural" type="Node" parent="." node_paths=PackedStringArray("world_map")]
+script = ExtResource("5_s03ma")
+world_map = NodePath("../WorldMap")

@@ -30,11 +30,10 @@ var finalized_portal_entries: Array[Dictionary] = []
 # --- Conexiones entre piezas (grafo dirigido) ---
 # Estructura: { MapPiece: { Dir: MapPiece } }
 # Ejemplo: piece_connections[pieceA][Dir.NE] = pieceB significa que pieceA conecta con pieceB por su borde NE
-var piece_connections: Dictionary = {}
+var piece_connections: Dictionary[MapPiece, Dictionary] = {}
 
 # Referencia a la pieza inicial (objetivo/target de los enemigos)
 var init_piece: MapPiece = null
-
 
 func _ready() -> void:
 	spawn_handler = SpawnPositionsHandler.new(visual)
