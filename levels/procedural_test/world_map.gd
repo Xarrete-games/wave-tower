@@ -207,14 +207,18 @@ func _try_place_on_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_ti
 		# commit placement: actualizar datos lógicos y conectar edges
 		new_piece.logical_pos = candidate_tile
 		grid[candidate_tile] = true
+		
+		# Eliminar edges de conexión ANTES de modificar frontiers
 		frontier.set_edge_has_connected(next_dir)
+		new_piece.set_edge_has_connected(dir_to_connect)
+		
+		# Ahora actualizar frontiers con el estado correcto de edges
 		if new_piece.edges.size() > 0:
 			frontiers.append(new_piece)
 		if frontier.edges.size() == 0:
 			frontiers.erase(frontier)
 
 		attach_piece(frontier, new_piece, next_dir, dir_to_connect)
-		new_piece.set_edge_has_connected(dir_to_connect)
 		last_piece_attached = new_piece
 		# actualizar portales y puntos de spawn tras colocar una pieza
 		update_portals()
@@ -281,11 +285,14 @@ func finalize_spawn_pos(piece: MapPiece, dir: MapPiece.Dir) -> void:
 	# Incluye la referencia a la pieza para poder reconstruir la ruta hacia el target.
 	var tile: Vector2i = piece.logical_pos + grid_offsets[dir]
 	var pos: Vector2 = piece.global_position + piece.get_edge_tile_pos(dir) + PORTAL_OFFSET
-	# avoid duplicates by logical tile
+	# key única: pieza origen (logical_pos) + dirección
+	var key: String = "%d,%d_%d" % [piece.logical_pos.x, piece.logical_pos.y, dir]
+	# avoid duplicates by key
 	for e in finalized_portal_entries:
-		if e.has("tile") and e["tile"] == tile:
+		if e.has("key") and e["key"] == key:
 			return
 	finalized_portal_entries.append({
+		"key": key,
 		"tile": tile,
 		"pos": pos,
 		"dir": dir,
@@ -303,8 +310,11 @@ func update_portals() -> void:
 		for d in f.edges:
 			var tile: Vector2i = f.logical_pos + grid_offsets[d]
 			var pos: Vector2 = f.global_position + f.get_edge_tile_pos(d) + PORTAL_OFFSET
-			portal_entries.append({"tile": tile, "pos": pos, "dir": d, "piece": f})
-
+			# key única: pieza origen (logical_pos) + dirección
+			var key: String = "%d,%d_%d" % [f.logical_pos.x, f.logical_pos.y, d]
+			portal_entries.append({"key": key, "tile": tile, "pos": pos, "dir": d, "piece": f})
+	
+	
 	# update simple positions list for external use
 	portal_spawn_positions.clear()
 	for e in portal_entries:
@@ -670,5 +680,3 @@ func _test_spawn_enemy_with_waypoints() -> void:
 	
 	# Asignar los waypoints
 	enemy.set_waypoints(waypoints)
-	
-	print("[WorldMap][TEST] Enemy spawned at ", waypoints[0], " with ", waypoints.size(), " waypoints")

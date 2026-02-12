@@ -27,7 +27,7 @@ var is_right_direction: bool = true
 
 var _enabled: bool = true
 var _is_dead: bool = false
-var _is_freeze: bool = false
+#var _is_freeze: bool = false
 
 var speed: float:
 	get: return _base_speed * _speed_mult

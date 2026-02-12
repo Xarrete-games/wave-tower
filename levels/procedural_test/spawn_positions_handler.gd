@@ -30,7 +30,7 @@ func update(entries: Array[Dictionary]) -> void:
                 continue
             key = _pos_key(pos)
         new_map[key] = e
-
+    
     # purge any invalid nodes left in the map (in case they were freed externally)
     var to_purge: Array = []
     for key in portal_nodes.keys():
@@ -41,14 +41,17 @@ func update(entries: Array[Dictionary]) -> void:
         portal_nodes.erase(k)
 
     # Free visuals that are no longer present
+    var keys_to_remove: Array = []
     for key in portal_nodes.keys():
         if not new_map.has(key):
-            var node = portal_nodes[key]
-            if is_instance_valid(node):
-                node.queue_free()
-            portal_nodes.erase(key)
-
+            keys_to_remove.append(key)
+    for key in keys_to_remove:
+        var node = portal_nodes[key]
+        if is_instance_valid(node):
+            node.queue_free()
+        portal_nodes.erase(key)
     # Create visuals for new entries
+    var keys_created: Array = []
     for key in new_map.keys():
         var needs_create = true
         if portal_nodes.has(key):
@@ -58,6 +61,7 @@ func update(entries: Array[Dictionary]) -> void:
             else:
                 portal_nodes.erase(key)
         if needs_create:
+            keys_created.append(key)
             var e = new_map[key]
             var portal = ORANGE_PORTAL.instantiate()
             if portals_container:
@@ -78,7 +82,7 @@ func update(entries: Array[Dictionary]) -> void:
                             break
 
             portal_nodes[key] = portal
-
+    
     # Replace entries map and rebuild positions list
     portal_entries_map = new_map
     portal_positions.clear()
