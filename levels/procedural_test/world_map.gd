@@ -535,7 +535,7 @@ func _find_path_bfs(from_piece: MapPiece, to_piece: MapPiece) -> Array[MapPiece]
 			
 			# ¿Llegamos al destino?
 			if neighbor == to_piece:
-				return _reconstruct_path(came_from, from_piece, to_piece)
+				return _reconstruct_path(came_from, to_piece)
 			
 			queue.append(neighbor)
 	
@@ -545,8 +545,8 @@ func _find_path_bfs(from_piece: MapPiece, to_piece: MapPiece) -> Array[MapPiece]
 
 
 ## Reconstruye el camino desde came_from map.
-## Retorna Array[MapPiece] ordenado desde 'start' hasta 'end'.
-func _reconstruct_path(came_from: Dictionary, start: MapPiece, end: MapPiece) -> Array[MapPiece]:
+## Retorna Array[MapPiece] ordenado desde el inicio hasta 'end'.
+func _reconstruct_path(came_from: Dictionary, end: MapPiece) -> Array[MapPiece]:
 	var path: Array[MapPiece] = []
 	var current: MapPiece = end
 	
