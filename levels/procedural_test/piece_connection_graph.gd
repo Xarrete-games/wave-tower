@@ -5,18 +5,15 @@ extends RefCounted
 ## Allows registering bidirectional connections and finding paths between pieces.
 
 # Structure: { MapPiece: { Dir: MapPiece } }
-var connections: Dictionary = {}
-
+var connections: Dictionary[MapPiece, Dictionary] = {}
 
 func _init() -> void:
 	connections = {}
-
 
 ## Initializes an entry for a piece (no connections yet).
 func register_piece(piece: MapPiece) -> void:
 	if not connections.has(piece):
 		connections[piece] = {}
-
 
 ## Registers a bidirectional connection between two pieces.
 func connect_pieces(piece_a: MapPiece, piece_b: MapPiece, dir_a: MapPiece.Dir, dir_b: MapPiece.Dir) -> void:
@@ -28,13 +25,11 @@ func connect_pieces(piece_a: MapPiece, piece_b: MapPiece, dir_a: MapPiece.Dir, d
 	connections[piece_a][dir_a] = piece_b
 	connections[piece_b][dir_b] = piece_a
 
-
 ## Gets all connections of a piece.
-func get_connections(piece: MapPiece) -> Dictionary:
+func get_connections(piece: MapPiece) -> Dictionary[MapPiece.Dir, MapPiece]:
 	if connections.has(piece):
 		return connections[piece]
 	return {}
-
 
 ## Finds the direction in from_piece that connects to to_piece.
 func find_connection_dir(from_piece: MapPiece, to_piece: MapPiece) -> MapPiece.Dir:
@@ -42,7 +37,7 @@ func find_connection_dir(from_piece: MapPiece, to_piece: MapPiece) -> MapPiece.D
 		push_warning("[PieceConnectionGraph] from_piece has no registered connections")
 		return MapPiece.Dir.NE
 	
-	var piece_connections: Dictionary = connections[from_piece]
+	var piece_connections: Dictionary[MapPiece.Dir, MapPiece] = connections[from_piece]
 	for dir in piece_connections.keys():
 		if piece_connections[dir] == to_piece:
 			return dir
@@ -58,7 +53,7 @@ func find_path(from_piece: MapPiece, to_piece: MapPiece) -> Array[MapPiece]:
 		return [from_piece]
 	
 	var queue: Array[MapPiece] = [from_piece]
-	var came_from: Dictionary = {}
+	var came_from: Dictionary[MapPiece, MapPiece] = {}
 	came_from[from_piece] = null
 	
 	while queue.size() > 0:
@@ -67,7 +62,7 @@ func find_path(from_piece: MapPiece, to_piece: MapPiece) -> Array[MapPiece]:
 		if not connections.has(current):
 			continue
 		
-		var piece_connections: Dictionary = connections[current]
+		var piece_connections: Dictionary[MapPiece.Dir, MapPiece] = connections[current]
 		for dir in piece_connections.keys():
 			var neighbor: MapPiece = piece_connections[dir]
 			if neighbor == null or not is_instance_valid(neighbor):
@@ -86,7 +81,7 @@ func find_path(from_piece: MapPiece, to_piece: MapPiece) -> Array[MapPiece]:
 	return []
 
 
-func _reconstruct_path(came_from: Dictionary, end: MapPiece) -> Array[MapPiece]:
+func _reconstruct_path(came_from: Dictionary[MapPiece, MapPiece], end: MapPiece) -> Array[MapPiece]:
 	var path: Array[MapPiece] = []
 	var current: MapPiece = end
 	

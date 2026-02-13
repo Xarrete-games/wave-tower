@@ -12,28 +12,22 @@ const GRID_OFFSETS: Dictionary[MapPiece.Dir, Vector2i] = {
 
 const ALL_DIRS: Array[MapPiece.Dir] = [MapPiece.Dir.NE, MapPiece.Dir.SE, MapPiece.Dir.SW, MapPiece.Dir.NW]
 
-var grid: Dictionary = {}  # Vector2i -> bool
-
+var grid: Dictionary[Vector2i, bool] = {}
 
 func _init() -> void:
 	grid = {}
 
-
 func occupy(tile: Vector2i) -> void:
 	grid[tile] = true
-
 
 func is_occupied(tile: Vector2i) -> bool:
 	return grid.has(tile)
 
-
 func get_neighbor_tile(tile: Vector2i, dir: MapPiece.Dir) -> Vector2i:
 	return tile + GRID_OFFSETS[dir]
 
-
 func get_offset(dir: MapPiece.Dir) -> Vector2i:
 	return GRID_OFFSETS[dir]
-
 
 ## Returns the opposite direction (for connections)
 static func get_opposite_dir(dir: MapPiece.Dir) -> MapPiece.Dir:
