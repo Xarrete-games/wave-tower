@@ -1,7 +1,7 @@
 class_name GridManager
 extends RefCounted
 
-## Maneja el grid lógico del mapa: ocupación de tiles, direcciones y validación espacial.
+## Manages the logical map grid: tile occupation, directions and spatial validation.
 
 const GRID_OFFSETS: Dictionary[MapPiece.Dir, Vector2i] = {
 	MapPiece.Dir.NE: Vector2i(1, -1),
@@ -35,7 +35,7 @@ func get_offset(dir: MapPiece.Dir) -> Vector2i:
 	return GRID_OFFSETS[dir]
 
 
-## Retorna la dirección opuesta (para conexiones)
+## Returns the opposite direction (for connections)
 static func get_opposite_dir(dir: MapPiece.Dir) -> MapPiece.Dir:
 	match dir:
 		MapPiece.Dir.NE:
@@ -51,7 +51,7 @@ static func get_opposite_dir(dir: MapPiece.Dir) -> MapPiece.Dir:
 			return MapPiece.Dir.NE
 
 
-## Verifica si colocar una pieza en candidate causaría un encierro.
+## Checks if placing a piece at candidate would cause an enclosure.
 func would_cause_enclosure_at(candidate: Vector2i) -> bool:
 	var simulated := grid.duplicate()
 	simulated[candidate] = true
@@ -65,7 +65,7 @@ func would_cause_enclosure_at(candidate: Vector2i) -> bool:
 	return true
 
 
-## Obtiene las direcciones inválidas para colocar una pieza en tile.
+## Gets invalid directions for placing a piece at tile.
 func get_invalid_edges_at(tile: Vector2i, dir_to_connect: MapPiece.Dir) -> Array[MapPiece.Dir]:
 	var dirs_check = ALL_DIRS.filter(func(d): return d != dir_to_connect)
 	var invalid_dirs: Array[MapPiece.Dir] = []
@@ -86,7 +86,7 @@ func get_invalid_edges_at(tile: Vector2i, dir_to_connect: MapPiece.Dir) -> Array
 	return invalid_dirs
 
 
-## Verifica si desde start se puede llegar al límite del mapa.
+## Checks if from start you can reach the map boundary.
 func reachable_to_boundary(start: Vector2i, occ: Dictionary, lookahead: int = 8) -> bool:
 	var xs: Array = []
 	var ys: Array = []
@@ -127,7 +127,7 @@ func reachable_to_boundary(start: Vector2i, occ: Dictionary, lookahead: int = 8)
 	return false
 
 
-## Crea un diccionario de ocupación simulada (para validaciones).
+## Creates a simulated occupation dictionary (for validations).
 func create_simulated_occupation(extra_tile: Vector2i = Vector2i(-99999, -99999)) -> Dictionary:
 	var occ: Dictionary = {}
 	for k in grid.keys():

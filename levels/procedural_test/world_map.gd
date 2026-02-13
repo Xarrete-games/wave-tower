@@ -6,7 +6,7 @@ const PORTAL_OFFSET: Vector2 = Vector2(0, -80)
 @export var enemy: EnemyProcedural
 @export var visual: Node2D
 
-# Managers (inyectados/creados en _ready)
+# Managers (injected/created in _ready)
 var grid_manager: GridManager = null
 var connection_graph: PieceConnectionGraph = null
 var frontier_manager: FrontierManager = null
@@ -25,29 +25,29 @@ var portal_spawn_positions: Array[Vector2] = []
 
 
 func _ready() -> void:
-	# Cargar datos
+	# Load data
 	map_pieces = DataLoader.get_all_map_pieces()
 	
-	# Crear managers
+	# Create managers
 	grid_manager = GridManager.new()
 	connection_graph = PieceConnectionGraph.new()
 	frontier_manager = FrontierManager.new(grid_manager, map_pieces)
 	spawn_handler = SpawnPositionsHandler.new(visual)
 	
-	# Conectar señal de frontier_manager para finalizar spawn positions
+	# Connect frontier_manager signal to finalize spawn positions
 	frontier_manager.edge_finalized.connect(_on_edge_finalized)
 	
-	# Instanciar la pieza inicial
+	# Instantiate initial piece
 	init_piece = init_map_piece_data.get_instance()
 	add_child(init_piece)
 	init_piece.logical_pos = Vector2i.ZERO
 	
-	# Registrar en managers
+	# Register in managers
 	grid_manager.occupy(Vector2i.ZERO)
 	connection_graph.register_piece(init_piece)
 	frontier_manager.add_frontier(init_piece)
 	
-	# Crear route_builder después de tener init_piece
+	# Create route_builder after having init_piece
 	route_builder = RouteBuilder.new(connection_graph, init_piece)
 	
 	last_piece_attached = init_piece
@@ -111,10 +111,10 @@ func _try_place_on_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_ti
 		var new_piece: MapPiece = piece_data.get_instance()
 		add_child(new_piece)
 
-		# simular ocupación incluyendo candidate_tile
+		# simulate occupation including candidate_tile
 		var occ_sim: Dictionary = grid_manager.create_simulated_occupation(candidate_tile)
 
-		# comprobar si la nueva pieza deja al menos un camino abierto
+		# check if new piece leaves at least one open path
 		var remaining_dirs: Array = new_piece.edges.duplicate()
 		if remaining_dirs.has(dir_to_connect):
 			remaining_dirs.erase(dir_to_connect)
@@ -135,11 +135,11 @@ func _try_place_on_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_ti
 		new_piece.logical_pos = candidate_tile
 		grid_manager.occupy(candidate_tile)
 		
-		# Eliminar edges de conexión ANTES de modificar frontiers
+		# Remove connection edges BEFORE modifying frontiers
 		frontier.set_edge_has_connected(next_dir)
 		new_piece.set_edge_has_connected(dir_to_connect)
 		
-		# Actualizar frontiers
+		# Update frontiers
 		frontier_manager.update_after_placement(frontier, new_piece)
 
 		_attach_piece(frontier, new_piece, next_dir, dir_to_connect)
@@ -150,14 +150,14 @@ func _try_place_on_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_ti
 
 
 func _attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: MapPiece.Dir, exit_dir: MapPiece.Dir) -> void:
-	# Posicionamiento espacial
+	# Spatial positioning
 	var a_world = p_piece_a.get_edge_tile_pos(entry_dir)
 	var b_world = p_piece_b.get_edge_tile_pos(exit_dir)
 	var delta: Vector2i = p_piece_a.get_edge_tile_delta(entry_dir)
 	var shift: Vector2 = p_piece_a.get_tile_local_offset(delta)
 	p_piece_b.global_position = p_piece_a.global_position + a_world - b_world + shift
 	
-	# Registrar conexión en el grafo
+	# Register connection in graph
 	connection_graph.connect_pieces(p_piece_a, p_piece_b, entry_dir, exit_dir)
 
 
@@ -166,7 +166,7 @@ func _finalize_spawn_pos(piece: MapPiece, dir: MapPiece.Dir) -> void:
 	var pos: Vector2 = piece.global_position + piece.get_edge_tile_pos(dir) + PORTAL_OFFSET
 	var key: String = "%d,%d_%d" % [piece.logical_pos.x, piece.logical_pos.y, dir]
 	
-	# Evitar duplicados
+	# Avoid duplicates
 	for e in finalized_portal_entries:
 		if e.has("key") and e["key"] == key:
 			return
@@ -183,11 +183,11 @@ func _finalize_spawn_pos(piece: MapPiece, dir: MapPiece.Dir) -> void:
 func update_portals() -> void:
 	portal_entries.clear()
 	
-	# Añadir entries finalizados
+	# Add finalized entries
 	for e in finalized_portal_entries:
 		portal_entries.append(e)
 
-	# Añadir entries de frontiers actuales
+	# Add current frontier entries
 	for f in frontier_manager.get_all_frontiers():
 		for d in f.edges:
 			var tile: Vector2i = grid_manager.get_neighbor_tile(f.logical_pos, d)
@@ -195,19 +195,19 @@ func update_portals() -> void:
 			var key: String = "%d,%d_%d" % [f.logical_pos.x, f.logical_pos.y, d]
 			portal_entries.append({"key": key, "tile": tile, "pos": pos, "dir": d, "piece": f})
 	
-	# Actualizar lista de posiciones
+	# Update positions list
 	portal_spawn_positions.clear()
 	for e in portal_entries:
 		portal_spawn_positions.append(e["pos"])
 
-	# Delegar visuales al handler
+	# Delegate visuals to handler
 	if spawn_handler != null:
 		spawn_handler.update(portal_entries)
 		portal_spawn_positions = spawn_handler.get_positions()
 
 
 # =============================================================================
-# SISTEMA DE RUTAS (waypoints) - delega a RouteBuilder
+# ROUTE SYSTEM (waypoints) - delegates to RouteBuilder
 # =============================================================================
 
 func get_waypoints_for_spawn(spawn_entry: Dictionary) -> Array[Vector2]:
@@ -218,30 +218,30 @@ func get_waypoints_for_spawn(spawn_entry: Dictionary) -> Array[Vector2]:
 # TEST: Spawn de enemigo con waypoints
 # =============================================================================
 
-## TEST: Posiciona el enemy exportado en un spawn aleatorio y le asigna waypoints.
-## Llamar con "ui_accept" (Enter/Space).
+## TEST: Positions the exported enemy at a random spawn and assigns waypoints.
+## Call with "ui_accept" (Enter/Space).
 func _test_spawn_enemy_with_waypoints() -> void:
 	if enemy == null:
-		push_warning("[WorldMap][TEST] No hay enemy asignado en el export")
+		push_warning("[WorldMap][TEST] No enemy assigned in export")
 		return
 	
 	if portal_entries.size() == 0:
-		push_warning("[WorldMap][TEST] No hay spawn points disponibles")
+		push_warning("[WorldMap][TEST] No spawn points available")
 		return
 	
-	# Elegir un spawn aleatorio
+	# Choose random spawn
 	var spawn_entry: Dictionary = portal_entries[randi() % portal_entries.size()]
 	
-	# Generar waypoints para esa ruta
+	# Generate waypoints for that route
 	var waypoints: Array[Vector2] = get_waypoints_for_spawn(spawn_entry)
 	
 	if waypoints.size() == 0:
-		push_warning("[WorldMap][TEST] No se pudieron generar waypoints")
+		push_warning("[WorldMap][TEST] Could not generate waypoints")
 		return
 	
-	# Posicionar el enemy en el primer waypoint (spawn)
+	# Position enemy at first waypoint (spawn)
 	enemy.global_position = waypoints[0]
 	enemy.visible = true
 	
-	# Asignar los waypoints
+	# Assign waypoints
 	enemy.set_waypoints(waypoints)

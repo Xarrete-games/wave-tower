@@ -1,10 +1,10 @@
 class_name PieceConnectionGraph
 extends RefCounted
 
-## Grafo de conexiones entre piezas del mapa.
-## Permite registrar conexiones bidireccionales y buscar caminos entre piezas.
+## Map piece connection graph.
+## Allows registering bidirectional connections and finding paths between pieces.
 
-# Estructura: { MapPiece: { Dir: MapPiece } }
+# Structure: { MapPiece: { Dir: MapPiece } }
 var connections: Dictionary = {}
 
 
@@ -12,13 +12,13 @@ func _init() -> void:
 	connections = {}
 
 
-## Inicializa una entrada para una pieza (sin conexiones aún).
+## Initializes an entry for a piece (no connections yet).
 func register_piece(piece: MapPiece) -> void:
 	if not connections.has(piece):
 		connections[piece] = {}
 
 
-## Registra una conexión bidireccional entre dos piezas.
+## Registers a bidirectional connection between two pieces.
 func connect_pieces(piece_a: MapPiece, piece_b: MapPiece, dir_a: MapPiece.Dir, dir_b: MapPiece.Dir) -> void:
 	if not connections.has(piece_a):
 		connections[piece_a] = {}
@@ -29,17 +29,17 @@ func connect_pieces(piece_a: MapPiece, piece_b: MapPiece, dir_a: MapPiece.Dir, d
 	connections[piece_b][dir_b] = piece_a
 
 
-## Obtiene todas las conexiones de una pieza.
+## Gets all connections of a piece.
 func get_connections(piece: MapPiece) -> Dictionary:
 	if connections.has(piece):
 		return connections[piece]
 	return {}
 
 
-## Encuentra la dirección en from_piece que conecta con to_piece.
+## Finds the direction in from_piece that connects to to_piece.
 func find_connection_dir(from_piece: MapPiece, to_piece: MapPiece) -> MapPiece.Dir:
 	if not connections.has(from_piece):
-		push_warning("[PieceConnectionGraph] from_piece no tiene conexiones registradas")
+		push_warning("[PieceConnectionGraph] from_piece has no registered connections")
 		return MapPiece.Dir.NE
 	
 	var piece_connections: Dictionary = connections[from_piece]
@@ -47,12 +47,12 @@ func find_connection_dir(from_piece: MapPiece, to_piece: MapPiece) -> MapPiece.D
 		if piece_connections[dir] == to_piece:
 			return dir
 	
-	push_warning("[PieceConnectionGraph] No se encontró conexión de %s a %s" % [from_piece, to_piece])
+	push_warning("[PieceConnectionGraph] No connection found from %s to %s" % [from_piece, to_piece])
 	return MapPiece.Dir.NE
 
 
-## BFS para encontrar el camino entre dos piezas.
-## Retorna Array[MapPiece] ordenado desde from_piece hasta to_piece.
+## BFS to find path between two pieces.
+## Returns Array[MapPiece] ordered from from_piece to to_piece.
 func find_path(from_piece: MapPiece, to_piece: MapPiece) -> Array[MapPiece]:
 	if from_piece == to_piece:
 		return [from_piece]
@@ -82,7 +82,7 @@ func find_path(from_piece: MapPiece, to_piece: MapPiece) -> Array[MapPiece]:
 			
 			queue.append(neighbor)
 	
-	push_warning("[PieceConnectionGraph] No se encontró ruta desde %s hasta %s" % [from_piece, to_piece])
+	push_warning("[PieceConnectionGraph] No route found from %s to %s" % [from_piece, to_piece])
 	return []
 
 

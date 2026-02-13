@@ -1,10 +1,10 @@
 class_name RouteBuilder
 extends RefCounted
 
-## Construye rutas y waypoints para enemigos usando el grafo de conexiones.
+## Builds routes and waypoints for enemies using the connection graph.
 
 var connection_graph: PieceConnectionGraph
-var target_piece: MapPiece  # La pieza objetivo (init_piece)
+var target_piece: MapPiece  # Target piece (init_piece)
 
 
 func _init(graph: PieceConnectionGraph, target: MapPiece) -> void:
@@ -12,16 +12,16 @@ func _init(graph: PieceConnectionGraph, target: MapPiece) -> void:
 	target_piece = target
 
 
-## Construye la ruta de piezas desde un spawn point hasta el target.
-## Retorna Array[MapPiece] ordenado: [spawn_piece, ..., target_piece]
+## Builds the piece route from a spawn point to the target.
+## Returns Array[MapPiece] ordered: [spawn_piece, ..., target_piece]
 func build_route_to_target(spawn_entry: Dictionary) -> Array[MapPiece]:
 	if not spawn_entry.has("piece"):
-		push_error("[RouteBuilder] spawn_entry no tiene 'piece'")
+		push_error("[RouteBuilder] spawn_entry has no 'piece'")
 		return []
 	
 	var start_piece: MapPiece = spawn_entry["piece"]
 	if start_piece == null or not is_instance_valid(start_piece):
-		push_error("[RouteBuilder] spawn_entry.piece no es válido")
+		push_error("[RouteBuilder] spawn_entry.piece is not valid")
 		return []
 	
 	if start_piece == target_piece:
@@ -30,28 +30,28 @@ func build_route_to_target(spawn_entry: Dictionary) -> Array[MapPiece]:
 	return connection_graph.find_path(start_piece, target_piece)
 
 
-## Genera waypoints (Vector2 global) para una ruta de piezas.
-## Retorna Array[Vector2] con los puntos en orden:
-## [spawn_pos, entrada_pieza1, centro_pieza1, salida_pieza1, ..., target]
+## Generates waypoints (global Vector2) for a piece route.
+## Returns Array[Vector2] with points in order:
+## [spawn_pos, piece1_entry, piece1_center, piece1_exit, ..., target]
 func build_waypoints_from_route(spawn_entry: Dictionary, route: Array[MapPiece]) -> Array[Vector2]:
 	var waypoints: Array[Vector2] = []
 	
 	if route.size() == 0:
-		push_warning("[RouteBuilder] Ruta vacía, no se pueden generar waypoints")
+		push_warning("[RouteBuilder] Empty route, cannot generate waypoints")
 		return waypoints
 	
-	# 1. Añadir el punto de spawn como primer waypoint
+	# 1. Add spawn point as first waypoint
 	if spawn_entry.has("pos"):
 		waypoints.append(spawn_entry["pos"])
 	
-	# 2. Para cada pieza de la ruta, generar: entrada, centro, [salida]
+	# 2. For each piece in route, generate: entry, center, [exit]
 	for i in range(route.size()):
 		var piece: MapPiece = route[i]
 		var entry_dir: MapPiece.Dir = MapPiece.Dir.NE
 		var exit_dir: MapPiece.Dir = MapPiece.Dir.NE
 		var has_exit: bool = (i < route.size() - 1)
 		
-		# Determinar dirección de entrada
+		# Determine entry direction
 		if i == 0:
 			if spawn_entry.has("dir"):
 				entry_dir = spawn_entry["dir"]
@@ -60,12 +60,12 @@ func build_waypoints_from_route(spawn_entry: Dictionary, route: Array[MapPiece])
 			entry_dir = connection_graph.find_connection_dir(prev_piece, piece)
 			entry_dir = GridManager.get_opposite_dir(entry_dir)
 		
-		# Determinar dirección de salida (si hay siguiente pieza)
+		# Determine exit direction (if there's a next piece)
 		if has_exit:
 			var next_piece: MapPiece = route[i + 1]
 			exit_dir = connection_graph.find_connection_dir(piece, next_piece)
 		
-		# Generar waypoints para esta pieza
+		# Generate waypoints for this piece
 		var entry_local: Vector2 = piece.get_edge_tile_pos(entry_dir)
 		var entry_global: Vector2 = piece.global_position + entry_local
 		waypoints.append(entry_global)
@@ -77,14 +77,14 @@ func build_waypoints_from_route(spawn_entry: Dictionary, route: Array[MapPiece])
 			var exit_global: Vector2 = piece.global_position + exit_local
 			waypoints.append(exit_global)
 	
-	# 3. Añadir el target final
+	# 3. Add final target
 	if target_piece != null:
 		waypoints.append(target_piece.get_target())
 	
 	return waypoints
 
 
-## Función de conveniencia: dado un spawn_entry, retorna los waypoints completos.
+## Convenience function: given a spawn_entry, returns complete waypoints.
 func get_waypoints_for_spawn(spawn_entry: Dictionary) -> Array[Vector2]:
 	var route: Array[MapPiece] = build_route_to_target(spawn_entry)
 	return build_waypoints_from_route(spawn_entry, route)

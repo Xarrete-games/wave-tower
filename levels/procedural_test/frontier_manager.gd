@@ -1,7 +1,7 @@
 class_name FrontierManager
 extends RefCounted
 
-## Maneja las frontiers (piezas con edges disponibles para expandir) y su poda.
+## Manages frontiers (pieces with available edges to expand) and their pruning.
 
 signal edge_finalized(piece: MapPiece, dir: MapPiece.Dir)
 
@@ -27,21 +27,21 @@ func remove_frontier(piece: MapPiece) -> void:
 func has_frontiers() -> bool:
 	return frontiers.size() > 0
 
-## Selecciona una frontier al azar.
+## Selects a random frontier.
 func select_random_frontier() -> MapPiece:
 	if frontiers.size() == 0:
 		return null
 	return frontiers[randi() % frontiers.size()]
 
 
-## Selecciona un edge aleatorio de una frontier.
+## Selects a random edge from a frontier.
 static func pick_random_edge(frontier: MapPiece) -> MapPiece.Dir:
 	var edge_list: Array = frontier.edges.duplicate()
 	return edge_list[randi() % edge_list.size()]
 
 
-## Valida un edge y su tile candidato.
-## Retorna Dictionary con: valid, reason, invalid_edges, valid_pieces, dir_to_connect
+## Validates an edge and its candidate tile.
+## Returns Dictionary with: valid, reason, invalid_edges, valid_pieces, dir_to_connect
 func validate_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_tile: Vector2i) -> Dictionary:
 	var result: Dictionary = {
 		"valid": false,
@@ -75,7 +75,7 @@ func validate_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_tile: V
 	return result
 
 
-## Elimina un edge de una frontier y emite señal si se finaliza.
+## Removes an edge from a frontier and emits signal when finalized.
 func remove_edge_from_frontier(frontier: MapPiece, dir: MapPiece.Dir) -> void:
 	edge_finalized.emit(frontier, dir)
 	frontier.edges.erase(dir)
@@ -83,16 +83,16 @@ func remove_edge_from_frontier(frontier: MapPiece, dir: MapPiece.Dir) -> void:
 		frontiers.erase(frontier)
 
 
-## Actualiza frontiers después de colocar una pieza.
+## Updates frontiers after placing a piece.
 func update_after_placement(old_frontier: MapPiece, new_piece: MapPiece) -> void:
-	# Los edges de conexión ya deben estar eliminados antes de llamar esto
+	# Connection edges must already be removed before calling this
 	if new_piece.edges.size() > 0:
 		frontiers.append(new_piece)
 	if old_frontier.edges.size() == 0:
 		frontiers.erase(old_frontier)
 
 
-## Poda edges bloqueados de todas las frontiers.
+## Prunes blocked edges from all frontiers.
 func prune_all_frontiers() -> void:
 	var remove_frontiers: Array = []
 	
@@ -129,7 +129,7 @@ func prune_all_frontiers() -> void:
 		frontiers.erase(rf)
 
 
-## Verifica si una pieza tiene edges válidos para expandir.
+## Checks if a piece has valid edges to expand.
 func frontier_has_valid_edges(piece: MapPiece) -> bool:
 	for d in piece.edges:
 		var cand = grid_manager.get_neighbor_tile(piece.logical_pos, d)
