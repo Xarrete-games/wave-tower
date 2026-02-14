@@ -17,8 +17,8 @@ func get_target()  -> Vector2:
 	else:
 		return global_position
 
-# Get the tile position of the edge in the given direction
-func get_edge_tile_pos(dir: Edge.Dir) -> Vector2:
+# Get the tile position of the edge in the given direction and position
+func get_edge_tile_pos(dir: Edge.Dir, pos: Edge.DirPos = Edge.DirPos.MIDDLE) -> Vector2:
 	var used: Array[Vector2i] = tile_map.get_used_cells()
 	if used.size() == 0:
 		push_error("TileMap has no used cells")
@@ -30,29 +30,43 @@ func get_edge_tile_pos(dir: Edge.Dir) -> Vector2:
 		Edge.Dir.NE:
 			var min_y = used.map(func(c): return c.y).min()
 			edge = used.filter(func(c): return c.y == min_y)
+			edge.sort_custom(func(a, b): return a.x < b.x)
 
 		Edge.Dir.SW:
 			var max_y = used.map(func(c): return c.y).max()
 			edge = used.filter(func(c): return c.y == max_y)
+			edge.sort_custom(func(a, b): return a.x < b.x)
 
 		Edge.Dir.NW:
 			var min_x = used.map(func(c): return c.x).min()
 			edge = used.filter(func(c): return c.x == min_x)
+			edge.sort_custom(func(a, b): return a.y < b.y)
 
 		Edge.Dir.SE:
 			var max_x = used.map(func(c): return c.x).max()
 			edge = used.filter(func(c): return c.x == max_x)
+			edge.sort_custom(func(a, b): return a.y < b.y)
 
-	# get center of edge
 	if edge.size() == 0:
 		push_error("Edge has no tiles for dir %s" % [dir])
 		return Vector2.ZERO
 
-	var sum: Vector2i = Vector2i.ZERO
-	for c in edge:
-		sum += c
-
-	var tile = sum / edge.size()
+	# Calculate tile index based on DirPos
+	# For 11 tiles: TOP=2 (1/4), MIDDLE=5 (center), BOTTOM=8 (3/4)
+	var edge_size: int = edge.size()
+	var tile_index: int
+	match pos:
+		Edge.DirPos.TOP:
+			tile_index = int(edge_size * 0.25)
+		Edge.DirPos.MIDDLE:
+			tile_index = int(edge_size / 2.0)
+		Edge.DirPos.BOTTOM:
+			tile_index = int(edge_size * 0.75)
+		_:
+			tile_index = int(edge_size / 2.0)
+	
+	tile_index = clampi(tile_index, 0, edge_size - 1)
+	var tile: Vector2i = edge[tile_index]
 
 	return _map_to_local(tile)
 

@@ -166,7 +166,7 @@ func _attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: Edge.Dir
 
 func _finalize_spawn_pos(piece: MapPiece, edge: Edge) -> void:
 	var tile: Vector2i = grid_manager.get_neighbor_tile(piece.logical_pos, edge.dir)
-	var pos: Vector2 = piece.global_position + piece.get_edge_tile_pos(edge.dir) + PORTAL_OFFSET
+	var pos: Vector2 = piece.global_position + piece.get_edge_tile_pos(edge.dir, edge.pos) + PORTAL_OFFSET
 	var key: String = "%d,%d_%d_%d" % [piece.logical_pos.x, piece.logical_pos.y, edge.dir, edge.pos]
 	
 	# Avoid duplicates
@@ -194,7 +194,7 @@ func update_portals() -> void:
 	for f in frontier_manager.get_all_frontiers():
 		for edge in f.edges:
 			var tile: Vector2i = grid_manager.get_neighbor_tile(f.logical_pos, edge.dir)
-			var pos: Vector2 = f.global_position + f.get_edge_tile_pos(edge.dir) + PORTAL_OFFSET
+			var pos: Vector2 = f.global_position + f.get_edge_tile_pos(edge.dir, edge.pos) + PORTAL_OFFSET
 			var key: String = "%d,%d_%d_%d" % [f.logical_pos.x, f.logical_pos.y, edge.dir, edge.pos]
 			portal_entries.append({"key": key, "tile": tile, "pos": pos, "edge": edge, "piece": f})
 	
