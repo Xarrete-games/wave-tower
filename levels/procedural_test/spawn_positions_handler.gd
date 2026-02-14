@@ -5,7 +5,7 @@ const ORANGE_PORTAL: PackedScene = preload("uid://b8g0wp8j02vu4")
 const PORTAL_GROUP: String = "orange_portal"
 
 var portals_container: Node2D = null
-var portal_entries_map: Dictionary = {} # key -> {"pos": Vector2, "dir": MapPiece.Dir}
+var portal_entries_map: Dictionary = {} # key -> {"pos": Vector2, "dir": Edge.Dir}
 var portal_positions: Array[Vector2] = []
 var portal_nodes: Dictionary = {} # key -> Node2D
 
@@ -71,7 +71,7 @@ func update(entries: Array[Dictionary]) -> void:
             portal.global_position = e["pos"]
             portal.add_to_group(PORTAL_GROUP)
 
-            if e.has("dir") and (e["dir"] == MapPiece.Dir.NE or e["dir"] == MapPiece.Dir.SE):
+            if e.has("dir") and (e["dir"] == Edge.Dir.NE or e["dir"] == Edge.Dir.SE):
                 var sprite_node = portal.get_node_or_null("AnimatedSprite2D")
                 if sprite_node and sprite_node is AnimatedSprite2D:
                     sprite_node.flip_h = true

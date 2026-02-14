@@ -47,18 +47,18 @@ func build_waypoints_from_route(spawn_entry: Dictionary, route: Array[MapPiece])
 	# 2. For each piece in route, generate: entry, center, [exit]
 	for i in range(route.size()):
 		var piece: MapPiece = route[i]
-		var entry_dir: MapPiece.Dir = MapPiece.Dir.NE
-		var exit_dir: MapPiece.Dir = MapPiece.Dir.NE
+		var entry_dir: Edge.Dir = Edge.Dir.NE
+		var exit_dir: Edge.Dir = Edge.Dir.NE
 		var has_exit: bool = (i < route.size() - 1)
 		
 		# Determine entry direction
 		if i == 0:
-			if spawn_entry.has("dir"):
-				entry_dir = spawn_entry["dir"]
+			if spawn_entry.has("edge"):
+				entry_dir = spawn_entry["edge"].dir
 		else:
 			var prev_piece: MapPiece = route[i - 1]
 			entry_dir = connection_graph.find_connection_dir(prev_piece, piece)
-			entry_dir = GridManager.get_opposite_dir(entry_dir)
+			entry_dir = Edge.get_opposite_dir(entry_dir)
 		
 		# Determine exit direction (if there's a next piece)
 		if has_exit:

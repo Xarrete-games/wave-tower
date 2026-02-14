@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="MapPieceData" load_steps=3 format=3 uid="uid://phl5ghle7qif"]
+[gd_resource type="Resource" script_class="MapPieceData" load_steps=5 format=3 uid="uid://phl5ghle7qif"]
 
 [ext_resource type="PackedScene" uid="uid://0pqfb1idy2yw" path="res://levels/procedural_test/map_pieces/init_map_piece.tscn" id="1_ehxk6"]
 [ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/procedural_test/map_pieces/map_piece_data.gd" id="1_kf6mx"]
+[ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/procedural_test/map_pieces/edge.gd" id="2_edge"]
+
+[sub_resource type="Resource" id="edge_SE"]
+script = ExtResource("2_edge")
+dir = 1
 
 [resource]
 script = ExtResource("1_kf6mx")
-edges = Array[int]([1])
+edges = Array[ExtResource("2_edge")]([SubResource("edge_SE")])
 scene = ExtResource("1_ehxk6")
 metadata/_custom_type_script = "uid://ndxexeof5w0k"

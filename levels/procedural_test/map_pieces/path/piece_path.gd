@@ -1,7 +1,7 @@
 class_name PiecePath extends Path2D
 
-@export var start_endpoint: MapPiece.Dir
-@export var end_endpoint: MapPiece.Dir
+@export var start_endpoint: Edge.Dir
+@export var end_endpoint: Edge.Dir
 
 
 func get_start_position() -> Vector2:

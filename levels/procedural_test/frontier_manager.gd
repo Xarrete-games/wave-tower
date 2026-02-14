@@ -3,7 +3,7 @@ extends RefCounted
 
 ## Manages frontiers (pieces with available edges to expand) and their pruning.
 
-signal edge_finalized(piece: MapPiece, dir: MapPiece.Dir)
+signal edge_finalized(piece: MapPiece, edge: Edge)
 
 var frontiers: Array[MapPiece] = []
 var grid_manager: GridManager
@@ -35,37 +35,39 @@ func select_random_frontier() -> MapPiece:
 
 
 ## Selects a random edge from a frontier.
-static func pick_random_edge(frontier: MapPiece) -> MapPiece.Dir:
+static func pick_random_edge(frontier: MapPiece) -> Edge:
 	var edge_list: Array = frontier.edges.duplicate()
 	return edge_list[randi() % edge_list.size()]
 
 
 ## Validates an edge and its candidate tile.
-## Returns Dictionary with: valid, reason, invalid_edges, valid_pieces, dir_to_connect
-func validate_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_tile: Vector2i) -> Dictionary:
+## Returns Dictionary with: valid, reason, invalid_edges, valid_pieces, edge_to_connect
+func validate_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vector2i) -> Dictionary:
+	var edge_to_connect: Edge = next_edge.get_opposite()
 	var result: Dictionary = {
 		"valid": false,
 		"reason": "",
 		"invalid_edges": [],
 		"valid_pieces": [],
-		"dir_to_connect": GridManager.get_opposite_dir(next_dir)
+		"edge_to_connect": edge_to_connect
 	}
 
 	if grid_manager.is_occupied(candidate_tile):
-		result.reason = "frontier=%s dir=%s tile=%s reason=occupied" % [frontier, next_dir, candidate_tile]
+		result.reason = "frontier=%s edge=%s tile=%s reason=occupied" % [frontier, next_edge, candidate_tile]
 		return result
 	
 	if grid_manager.would_cause_enclosure_at(candidate_tile):
-		result.reason = "frontier=%s dir=%s tile=%s reason=enclose" % [frontier, next_dir, candidate_tile]
+		result.reason = "frontier=%s edge=%s tile=%s reason=enclose" % [frontier, next_edge, candidate_tile]
 		return result
 
-	var invalid_edges = grid_manager.get_invalid_edges_at(candidate_tile, result.dir_to_connect)
+	var invalid_edges = grid_manager.get_invalid_edges_at(candidate_tile, edge_to_connect.dir)
+	# Find pieces that have a matching edge (dir + pos) and don't have blocked edges
 	var valid_pieces = available_pieces.filter(func(p: MapPieceData):
-		return p.edges.has(result.dir_to_connect) and not invalid_edges.any(func(e): return p.edges.has(e))
+		return p.has_connecting_edge(next_edge) and not invalid_edges.any(func(e): return p.has_edge_dir(e))
 	)
 
 	if valid_pieces.size() == 0:
-		result.reason = "frontier=%s dir=%s tile=%s reason=invalid_edges %s" % [frontier, next_dir, candidate_tile, invalid_edges]
+		result.reason = "frontier=%s edge=%s tile=%s reason=invalid_edges %s" % [frontier, next_edge, candidate_tile, invalid_edges]
 		result.invalid_edges = invalid_edges
 		return result
 
@@ -76,9 +78,13 @@ func validate_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_tile: V
 
 
 ## Removes an edge from a frontier and emits signal when finalized.
-func remove_edge_from_frontier(frontier: MapPiece, dir: MapPiece.Dir) -> void:
-	edge_finalized.emit(frontier, dir)
-	frontier.edges.erase(dir)
+func remove_edge_from_frontier(frontier: MapPiece, edge: Edge) -> void:
+	edge_finalized.emit(frontier, edge)
+	# Find and erase the matching edge by dir and pos
+	for i in range(frontier.edges.size() - 1, -1, -1):
+		if frontier.edges[i].matches(edge):
+			frontier.edges.remove_at(i)
+			break
 	if frontier.edges.size() == 0:
 		frontiers.erase(frontier)
 
@@ -97,30 +103,35 @@ func prune_all_frontiers() -> void:
 	var remove_frontiers: Array = []
 	
 	for f in frontiers:
-		var remove_edges: Array = []
-		for d in f.edges.duplicate():
-			var cand = grid_manager.get_neighbor_tile(f.logical_pos, d)
+		var remove_edges: Array[Edge] = []
+		for edge in f.edges.duplicate():
+			var cand = grid_manager.get_neighbor_tile(f.logical_pos, edge.dir)
 			
 			if grid_manager.is_occupied(cand):
-				remove_edges.append(d)
+				remove_edges.append(edge)
 				continue
 			
 			if grid_manager.would_cause_enclosure_at(cand):
-				remove_edges.append(d)
+				remove_edges.append(edge)
 				continue
 			
-			var dir_to_connect = GridManager.get_opposite_dir(d)
-			var inv = grid_manager.get_invalid_edges_at(cand, dir_to_connect)
+			var edge_to_connect = edge.get_opposite()
+			var inv = grid_manager.get_invalid_edges_at(cand, edge_to_connect.dir)
+			# Find pieces with matching edge (dir + pos) that don't have blocked edges
 			var poss = available_pieces.filter(func(p: MapPieceData): 
-				return p.edges.has(dir_to_connect) and not inv.any(func(e): return p.edges.has(e))
+				return p.has_connecting_edge(edge) and not inv.any(func(e): return p.has_edge_dir(e))
 			)
 			if poss.size() == 0:
-				remove_edges.append(d)
+				remove_edges.append(edge)
 				continue
 		
 		for re in remove_edges:
 			edge_finalized.emit(f, re)
-			f.edges.erase(re)
+			# Find and erase the matching edge
+			for i in range(f.edges.size() - 1, -1, -1):
+				if f.edges[i].matches(re):
+					f.edges.remove_at(i)
+					break
 		
 		if f.edges.size() == 0:
 			remove_frontiers.append(f)
@@ -131,18 +142,19 @@ func prune_all_frontiers() -> void:
 
 ## Checks if a piece has valid edges to expand.
 func frontier_has_valid_edges(piece: MapPiece) -> bool:
-	for d in piece.edges:
-		var cand = grid_manager.get_neighbor_tile(piece.logical_pos, d)
+	for edge in piece.edges:
+		var cand = grid_manager.get_neighbor_tile(piece.logical_pos, edge.dir)
 		
 		if grid_manager.is_occupied(cand):
 			continue
 		if grid_manager.would_cause_enclosure_at(cand):
 			continue
 		
-		var dir_to_connect = GridManager.get_opposite_dir(d)
-		var invalid = grid_manager.get_invalid_edges_at(cand, dir_to_connect)
+		var edge_to_connect = edge.get_opposite()
+		var invalid = grid_manager.get_invalid_edges_at(cand, edge_to_connect.dir)
+		# Find pieces with matching edge (dir + pos) that don't have blocked edges
 		var possible = available_pieces.filter(func(p: MapPieceData): 
-			return p.edges.has(dir_to_connect) and not invalid.any(func(e): return p.edges.has(e))
+			return p.has_connecting_edge(edge) and not invalid.any(func(e): return p.has_edge_dir(e))
 		)
 		if possible.size() > 0:
 			return true

@@ -3,14 +3,14 @@ extends RefCounted
 
 ## Manages the logical map grid: tile occupation, directions and spatial validation.
 
-const GRID_OFFSETS: Dictionary[MapPiece.Dir, Vector2i] = {
-	MapPiece.Dir.NE: Vector2i(1, -1),
-	MapPiece.Dir.SE: Vector2i(1, 0),
-	MapPiece.Dir.SW: Vector2i(-1, 1),
-	MapPiece.Dir.NW: Vector2i(-1, 0)
+const GRID_OFFSETS: Dictionary[Edge.Dir, Vector2i] = {
+	Edge.Dir.NE: Vector2i(1, -1),
+	Edge.Dir.SE: Vector2i(1, 0),
+	Edge.Dir.SW: Vector2i(-1, 1),
+	Edge.Dir.NW: Vector2i(-1, 0)
 }
 
-const ALL_DIRS: Array[MapPiece.Dir] = [MapPiece.Dir.NE, MapPiece.Dir.SE, MapPiece.Dir.SW, MapPiece.Dir.NW]
+const ALL_DIRS: Array[Edge.Dir] = [Edge.Dir.NE, Edge.Dir.SE, Edge.Dir.SW, Edge.Dir.NW]
 
 var grid: Dictionary[Vector2i, bool] = {}
 
@@ -23,26 +23,11 @@ func occupy(tile: Vector2i) -> void:
 func is_occupied(tile: Vector2i) -> bool:
 	return grid.has(tile)
 
-func get_neighbor_tile(tile: Vector2i, dir: MapPiece.Dir) -> Vector2i:
+func get_neighbor_tile(tile: Vector2i, dir: Edge.Dir) -> Vector2i:
 	return tile + GRID_OFFSETS[dir]
 
-func get_offset(dir: MapPiece.Dir) -> Vector2i:
+func get_offset(dir: Edge.Dir) -> Vector2i:
 	return GRID_OFFSETS[dir]
-
-## Returns the opposite direction (for connections)
-static func get_opposite_dir(dir: MapPiece.Dir) -> MapPiece.Dir:
-	match dir:
-		MapPiece.Dir.NE:
-			return MapPiece.Dir.SW
-		MapPiece.Dir.SE:
-			return MapPiece.Dir.NW
-		MapPiece.Dir.SW:
-			return MapPiece.Dir.NE
-		MapPiece.Dir.NW:
-			return MapPiece.Dir.SE
-		_:
-			push_error("Invalid direction: %s" % [dir])
-			return MapPiece.Dir.NE
 
 
 ## Checks if placing a piece at candidate would cause an enclosure.
@@ -60,9 +45,9 @@ func would_cause_enclosure_at(candidate: Vector2i) -> bool:
 
 
 ## Gets invalid directions for placing a piece at tile.
-func get_invalid_edges_at(tile: Vector2i, dir_to_connect: MapPiece.Dir) -> Array[MapPiece.Dir]:
+func get_invalid_edges_at(tile: Vector2i, dir_to_connect: Edge.Dir) -> Array[Edge.Dir]:
 	var dirs_check = ALL_DIRS.filter(func(d): return d != dir_to_connect)
-	var invalid_dirs: Array[MapPiece.Dir] = []
+	var invalid_dirs: Array[Edge.Dir] = []
 
 	for dir in dirs_check:
 		var new_tile := tile + GRID_OFFSETS[dir]
@@ -102,7 +87,7 @@ func reachable_to_boundary(start: Vector2i, occ: Dictionary, lookahead: int = 8)
 	q.append(start)
 	seen[vec_key(start)] = true
 
-	var neighs: Array = [GRID_OFFSETS[MapPiece.Dir.NE], GRID_OFFSETS[MapPiece.Dir.SE], GRID_OFFSETS[MapPiece.Dir.SW], GRID_OFFSETS[MapPiece.Dir.NW]]
+	var neighs: Array = [GRID_OFFSETS[Edge.Dir.NE], GRID_OFFSETS[Edge.Dir.SE], GRID_OFFSETS[Edge.Dir.SW], GRID_OFFSETS[Edge.Dir.NW]]
 
 	while q.size() > 0:
 		var cur: Vector2i = q.pop_front()

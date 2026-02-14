@@ -75,20 +75,20 @@ func attach_next_piece() -> void:
 		update_portals()
 		return
 
-	var next_dir = FrontierManager.pick_random_edge(frontier)
-	var candidate_tile = grid_manager.get_neighbor_tile(frontier.logical_pos, next_dir)
+	var next_edge: Edge = FrontierManager.pick_random_edge(frontier)
+	var candidate_tile = grid_manager.get_neighbor_tile(frontier.logical_pos, next_edge.dir)
 
-	var validation = frontier_manager.validate_edge(frontier, next_dir, candidate_tile)
+	var validation = frontier_manager.validate_edge(frontier, next_edge, candidate_tile)
 	if not validation.valid:
 		push_warning(validation.reason)
-		frontier_manager.remove_edge_from_frontier(frontier, next_dir)
+		frontier_manager.remove_edge_from_frontier(frontier, next_edge)
 		update_portals()
 		return
 
-	var placed = _try_place_on_edge(frontier, next_dir, candidate_tile, validation.valid_pieces, validation.dir_to_connect)
+	var placed = _try_place_on_edge(frontier, next_edge, candidate_tile, validation.valid_pieces, validation.edge_to_connect)
 	if not placed:
-		push_warning("frontier=%s dir=%s tile=%s no fitting piece -> removing edge" % [frontier, next_dir, candidate_tile])
-		frontier_manager.remove_edge_from_frontier(frontier, next_dir)
+		push_warning("frontier=%s edge=%s tile=%s no fitting piece -> removing edge" % [frontier, next_edge, candidate_tile])
+		frontier_manager.remove_edge_from_frontier(frontier, next_edge)
 		update_portals()
 		return
 
@@ -96,11 +96,11 @@ func attach_next_piece() -> void:
 	update_portals()
 
 
-func _on_edge_finalized(piece: MapPiece, dir: MapPiece.Dir) -> void:
-	_finalize_spawn_pos(piece, dir)
+func _on_edge_finalized(piece: MapPiece, edge: Edge) -> void:
+	_finalize_spawn_pos(piece, edge)
 
 
-func _try_place_on_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_tile: Vector2i, valid_pieces: Array, dir_to_connect: MapPiece.Dir) -> bool:
+func _try_place_on_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vector2i, valid_pieces: Array, edge_to_connect: Edge) -> bool:
 	var piece_indices: Array = []
 	for i in range(valid_pieces.size()):
 		piece_indices.append(i)
@@ -115,13 +115,16 @@ func _try_place_on_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_ti
 		var occ_sim: Dictionary = grid_manager.create_simulated_occupation(candidate_tile)
 
 		# check if new piece leaves at least one open path
-		var remaining_dirs: Array = new_piece.edges.duplicate()
-		if remaining_dirs.has(dir_to_connect):
-			remaining_dirs.erase(dir_to_connect)
+		var remaining_edges: Array = new_piece.edges.duplicate()
+		# Remove the connecting edge from remaining
+		for i in range(remaining_edges.size() - 1, -1, -1):
+			if remaining_edges[i].matches(edge_to_connect):
+				remaining_edges.remove_at(i)
+				break
 
 		var has_open_path = false
-		for rd in remaining_dirs:
-			var neigh = candidate_tile + grid_manager.get_offset(rd)
+		for re in remaining_edges:
+			var neigh = candidate_tile + grid_manager.get_offset(re.dir)
 			if occ_sim.has(GridManager.vec_key(neigh)):
 				continue
 			if grid_manager.reachable_to_boundary(neigh, occ_sim):
@@ -136,20 +139,20 @@ func _try_place_on_edge(frontier: MapPiece, next_dir: MapPiece.Dir, candidate_ti
 		grid_manager.occupy(candidate_tile)
 		
 		# Remove connection edges BEFORE modifying frontiers
-		frontier.set_edge_has_connected(next_dir)
-		new_piece.set_edge_has_connected(dir_to_connect)
+		frontier.set_edge_has_connected(next_edge)
+		new_piece.set_edge_has_connected(edge_to_connect)
 		
 		# Update frontiers
 		frontier_manager.update_after_placement(frontier, new_piece)
 
-		_attach_piece(frontier, new_piece, next_dir, dir_to_connect)
+		_attach_piece(frontier, new_piece, next_edge.dir, edge_to_connect.dir)
 		last_piece_attached = new_piece
 		return true
 
 	return false
 
 
-func _attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: MapPiece.Dir, exit_dir: MapPiece.Dir) -> void:
+func _attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: Edge.Dir, exit_dir: Edge.Dir) -> void:
 	# Spatial positioning
 	var a_world = p_piece_a.get_edge_tile_pos(entry_dir)
 	var b_world = p_piece_b.get_edge_tile_pos(exit_dir)
@@ -161,10 +164,10 @@ func _attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: MapPiece
 	connection_graph.connect_pieces(p_piece_a, p_piece_b, entry_dir, exit_dir)
 
 
-func _finalize_spawn_pos(piece: MapPiece, dir: MapPiece.Dir) -> void:
-	var tile: Vector2i = grid_manager.get_neighbor_tile(piece.logical_pos, dir)
-	var pos: Vector2 = piece.global_position + piece.get_edge_tile_pos(dir) + PORTAL_OFFSET
-	var key: String = "%d,%d_%d" % [piece.logical_pos.x, piece.logical_pos.y, dir]
+func _finalize_spawn_pos(piece: MapPiece, edge: Edge) -> void:
+	var tile: Vector2i = grid_manager.get_neighbor_tile(piece.logical_pos, edge.dir)
+	var pos: Vector2 = piece.global_position + piece.get_edge_tile_pos(edge.dir) + PORTAL_OFFSET
+	var key: String = "%d,%d_%d_%d" % [piece.logical_pos.x, piece.logical_pos.y, edge.dir, edge.pos]
 	
 	# Avoid duplicates
 	for e in finalized_portal_entries:
@@ -175,7 +178,7 @@ func _finalize_spawn_pos(piece: MapPiece, dir: MapPiece.Dir) -> void:
 		"key": key,
 		"tile": tile,
 		"pos": pos,
-		"dir": dir,
+		"edge": edge,
 		"piece": piece
 	})
 
@@ -189,11 +192,11 @@ func update_portals() -> void:
 
 	# Add current frontier entries
 	for f in frontier_manager.get_all_frontiers():
-		for d in f.edges:
-			var tile: Vector2i = grid_manager.get_neighbor_tile(f.logical_pos, d)
-			var pos: Vector2 = f.global_position + f.get_edge_tile_pos(d) + PORTAL_OFFSET
-			var key: String = "%d,%d_%d" % [f.logical_pos.x, f.logical_pos.y, d]
-			portal_entries.append({"key": key, "tile": tile, "pos": pos, "dir": d, "piece": f})
+		for edge in f.edges:
+			var tile: Vector2i = grid_manager.get_neighbor_tile(f.logical_pos, edge.dir)
+			var pos: Vector2 = f.global_position + f.get_edge_tile_pos(edge.dir) + PORTAL_OFFSET
+			var key: String = "%d,%d_%d_%d" % [f.logical_pos.x, f.logical_pos.y, edge.dir, edge.pos]
+			portal_entries.append({"key": key, "tile": tile, "pos": pos, "edge": edge, "piece": f})
 	
 	# Update positions list
 	portal_spawn_positions.clear()
