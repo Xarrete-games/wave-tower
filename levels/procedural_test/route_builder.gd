@@ -32,7 +32,7 @@ func build_route_to_target(spawn_entry: Dictionary) -> Array[MapPiece]:
 
 ## Generates waypoints (global Vector2) for a piece route.
 ## Returns Array[Vector2] with points in order:
-## [spawn_pos, piece1_entry, piece1_center, piece1_exit, ..., target]
+## [spawn_pos, path_waypoints..., target]
 func build_waypoints_from_route(spawn_entry: Dictionary, route: Array[MapPiece]) -> Array[Vector2]:
 	var waypoints: Array[Vector2] = []
 	
@@ -44,7 +44,7 @@ func build_waypoints_from_route(spawn_entry: Dictionary, route: Array[MapPiece])
 	if spawn_entry.has("pos"):
 		waypoints.append(spawn_entry["pos"])
 	
-	# 2. For each piece in route, generate: entry, center, [exit]
+	# 2. For each piece in route, add intermediate waypoints from Path2D
 	for i in range(route.size()):
 		var piece: MapPiece = route[i]
 		var entry_dir: Edge.Dir = Edge.Dir.NE
@@ -65,17 +65,18 @@ func build_waypoints_from_route(spawn_entry: Dictionary, route: Array[MapPiece])
 			var next_piece: MapPiece = route[i + 1]
 			exit_dir = connection_graph.find_connection_dir(piece, next_piece)
 		
-		# Generate waypoints for this piece
-		var entry_local: Vector2 = piece.get_edge_tile_pos(entry_dir)
-		var entry_global: Vector2 = piece.global_position + entry_local
-		waypoints.append(entry_global)
-		
-		waypoints.append(piece.global_position)
-		
+		# Add intermediate waypoints from Path2D
 		if has_exit:
-			var exit_local: Vector2 = piece.get_edge_tile_pos(exit_dir)
-			var exit_global: Vector2 = piece.global_position + exit_local
-			waypoints.append(exit_global)
+			var intermediate: Array[Vector2] = piece.get_route_waypoints(entry_dir, exit_dir)
+			if intermediate.size() > 0:
+				for pt in intermediate:
+					waypoints.append(piece.global_position + pt)
+			else:
+				# Fallback: use piece center if no path defined
+				waypoints.append(piece.global_position)
+		else:
+			# Last piece: go to center
+			waypoints.append(piece.global_position)
 	
 	# 3. Add final target
 	if target_piece != null:
