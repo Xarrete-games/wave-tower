@@ -3,7 +3,7 @@ class_name MapPiece extends Node2D
 # only for target portal
 @export var target_portal: Node2D = null
 
-const size: Vector2i = Vector2i(11, 11)
+const size: Vector2i = Vector2i(15, 15)
 
 # Maps Edge.Dir enum to string for path naming
 const DIR_NAMES: Dictionary = {
