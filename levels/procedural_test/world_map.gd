@@ -3,7 +3,6 @@ class_name WorldMap extends Node2D
 const PORTAL_OFFSET: Vector2 = Vector2(0, -80)
 
 @export var init_map_piece_data: MapPieceData
-@export var enemy: EnemyProcedural
 @export var visual: Node2D
 
 # Managers (injected/created in _ready)
@@ -57,8 +56,6 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):
 		attach_next_piece()
-	if event.is_action_pressed("ui_accept"):
-		_test_spawn_enemy_with_waypoints()
 
 func attach_next_piece() -> void:
 	if not frontier_manager.has_frontiers():
@@ -215,36 +212,3 @@ func update_portals() -> void:
 
 func get_waypoints_for_spawn(spawn_entry: Dictionary) -> Array[Vector2]:
 	return route_builder.get_waypoints_for_spawn(spawn_entry)
-
-
-# =============================================================================
-# TEST: Spawn de enemigo con waypoints
-# =============================================================================
-
-## TEST: Positions the exported enemy at a random spawn and assigns waypoints.
-## Call with "ui_accept" (Enter/Space).
-func _test_spawn_enemy_with_waypoints() -> void:
-	if enemy == null:
-		push_warning("[WorldMap][TEST] No enemy assigned in export")
-		return
-	
-	if portal_entries.size() == 0:
-		push_warning("[WorldMap][TEST] No spawn points available")
-		return
-	
-	# Choose random spawn
-	var spawn_entry: Dictionary = portal_entries[randi() % portal_entries.size()]
-	
-	# Generate waypoints for that route
-	var waypoints: Array[Vector2] = get_waypoints_for_spawn(spawn_entry)
-	
-	if waypoints.size() == 0:
-		push_warning("[WorldMap][TEST] Could not generate waypoints")
-		return
-	
-	# Position enemy at first waypoint (spawn)
-	enemy.global_position = waypoints[0]
-	enemy.visible = true
-	
-	# Assign waypoints
-	enemy.set_waypoints(waypoints)

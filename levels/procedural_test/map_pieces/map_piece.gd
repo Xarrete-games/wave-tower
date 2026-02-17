@@ -1,8 +1,5 @@
 class_name MapPiece extends Node2D
 
-# only for target portal
-@export var target_portal: Node2D = null
-
 const size: Vector2i = Vector2i(15, 15)
 
 # Maps Edge.Dir enum to string for path naming
@@ -26,11 +23,6 @@ var _route_cache: Dictionary[String, Array] = {}
 func _ready() -> void:
 	_precalculate_routes()
 
-func get_target()  -> Vector2:
-	if target_portal:
-		return target_portal.global_position
-	else:
-		return global_position
 
 # Get the tile position of the edge in the given direction and position
 func get_edge_tile_pos(dir: Edge.Dir, pos: Edge.DirPos = Edge.DirPos.MIDDLE) -> Vector2:
@@ -226,3 +218,18 @@ func _get_route_cache_key(dir_a: Edge.Dir, dir_b: Edge.Dir) -> String:
 	var first: Edge.Dir = mini(dir_a, dir_b) as Edge.Dir
 	var second: Edge.Dir = maxi(dir_a, dir_b) as Edge.Dir
 	return "route_%s_%s" % [DIR_NAMES[first], DIR_NAMES[second]]
+
+
+## Gets waypoints for the final route (last piece to end).
+## Path naming: "route_{DIR}_END"
+func get_final_route_waypoints(entry_dir: Edge.Dir) -> Array[Vector2]:
+	var cache_key: String = "route_%s_END" % DIR_NAMES[entry_dir]
+	
+	if _route_cache.has(cache_key):
+		var cached: Array = _route_cache[cache_key]
+		var result: Array[Vector2] = []
+		for pt in cached:
+			result.append(pt)
+		return result
+	
+	return []

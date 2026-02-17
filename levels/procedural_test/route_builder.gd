@@ -75,12 +75,14 @@ func build_waypoints_from_route(spawn_entry: Dictionary, route: Array[MapPiece])
 				# Fallback: use piece center if no path defined
 				waypoints.append(piece.global_position)
 		else:
-			# Last piece: go to center
-			waypoints.append(piece.global_position)
-	
-	# 3. Add final target
-	if target_piece != null:
-		waypoints.append(target_piece.get_target())
+			# Last piece: use route to end
+			var to_end: Array[Vector2] = piece.get_final_route_waypoints(entry_dir)
+			if to_end.size() > 0:
+				for pt in to_end:
+					waypoints.append(piece.global_position + pt)
+			else:
+				# Fallback: go to center
+				waypoints.append(piece.global_position)
 	
 	return waypoints
 

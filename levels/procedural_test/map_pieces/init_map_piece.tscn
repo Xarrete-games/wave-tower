@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=4 uid="uid://0pqfb1idy2yw"]
+[gd_scene load_steps=5 format=4 uid="uid://0pqfb1idy2yw"]
 
 [ext_resource type="Script" uid="uid://chj3cku30pmp1" path="res://levels/procedural_test/map_pieces/map_piece.gd" id="1_bh0ny"]
 [ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/procedural_test/map_pieces/map_piece_tile_map.tscn" id="1_c576c"]
 [ext_resource type="PackedScene" uid="uid://gb8anbp5v7hc" path="res://levels/portal/blue_portal.tscn" id="3_wuffw"]
+
+[sub_resource type="Curve2D" id="Curve2D_qfyrc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 904, 432, 0, 0, 0, 0, -384, -208)
+}
+point_count = 2
 
 [node name="InitMapPiece" type="Node2D"]
 script = ExtResource("1_bh0ny")
@@ -16,3 +22,6 @@ frame_progress = 0.48736614
 flip_h = true
 
 [node name="Routes" type="Node2D" parent="."]
+
+[node name="route_SE_END" type="Path2D" parent="Routes"]
+curve = SubResource("Curve2D_qfyrc")
