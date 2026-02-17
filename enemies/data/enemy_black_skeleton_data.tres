@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_ucfcj")
-type = 6
+type_legacy = 6
 name = "Black skeleton"
 icon = ExtResource("1_s0d6s")
 scene = ExtResource("2_68qhb")

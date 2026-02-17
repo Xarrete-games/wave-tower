@@ -72,7 +72,7 @@ func _handle_enemy_group(
 		)
 			
 func _handle_enemy_group_type(
-	enemy_type: Enemy.Type,
+	enemy_type: Enemy.TypeLegacy,
 	amount: int,
 	interval_spawn: float,
 	path: int
@@ -82,7 +82,7 @@ func _handle_enemy_group_type(
 		_generate_enemy(enemy_type, path)
 	group_handled.emit()
 		
-func _generate_enemy(enemy_type: Enemy.Type, path: int) -> void:
+func _generate_enemy(enemy_type: Enemy.TypeLegacy, path: int) -> void:
 	var enemy: Enemy = DataLoader.enemy_data.get_enemy_instance(enemy_type)
 	enemy.die.connect(_on_enemy_die)
 	enemy.target_reached.connect(_on_enemy_target_reached)

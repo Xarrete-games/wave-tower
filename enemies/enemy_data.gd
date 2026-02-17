@@ -1,7 +1,7 @@
 class_name EnemyData extends Resource
 
 @export_group("General")
-@export var type: Enemy.Type
+@export var type_legacy: Enemy.TypeLegacy
 @export var name: String
 @export_multiline var description: String
 @export var icon: Texture2D

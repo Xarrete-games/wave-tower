@@ -2,7 +2,7 @@ class_name EnemyDataLoader extends RefCounted
 
 const DATA_PATH = "res://enemies/data/"
 
-var enemies_data_dic: Dictionary[Enemy.Type, EnemyData] = {
+var enemies_data_dic: Dictionary[Enemy.TypeLegacy, EnemyData] = {
 }
 
 var enemies_data: Array[EnemyData] = []
@@ -16,9 +16,9 @@ func _init() -> void:
 		enemies_data.append(data as EnemyData)
 	
 	for enemy_data in enemies_data:
-		enemies_data_dic[enemy_data.type] = enemy_data
+		enemies_data_dic[enemy_data.type_legacy] = enemy_data
 
-func get_enemy_instance(enemy_type: Enemy.Type) -> Enemy:
+func get_enemy_instance(enemy_type: Enemy.TypeLegacy) -> Enemy:
 
 	var data = enemies_data_dic[enemy_type]
 	var enemy_instance: Enemy = data.scene.instantiate() as Enemy
@@ -29,7 +29,7 @@ func get_enemy_instance(enemy_type: Enemy.Type) -> Enemy:
 
 	return enemy_instance
 
-func get_enemy_wave_info(enemy_type: Enemy.Type) -> EnemyWaveInfo:
+func get_enemy_wave_info(enemy_type: Enemy.TypeLegacy) -> EnemyWaveInfo:
 	var data = enemies_data_dic[enemy_type]
 	var enemy_wave_info: EnemyWaveInfo = EnemyWaveInfo.new()
 	enemy_wave_info.icon = data.icon

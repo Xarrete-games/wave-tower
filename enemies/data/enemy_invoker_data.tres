@@ -6,8 +6,7 @@
 
 [resource]
 script = ExtResource("1_svv2o")
-id = "invoker"
-type = 8
+type_legacy = 8
 name = "Invoker"
 icon = ExtResource("1_s0iql")
 scene = ExtResource("2_b23po")

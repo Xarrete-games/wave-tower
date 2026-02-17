@@ -6,8 +6,7 @@
 
 [resource]
 script = ExtResource("3_d6nks")
-id = "big_spectre"
-type = 2
+type_legacy = 2
 name = "Big Spectre"
 icon = ExtResource("1_chpqd")
 scene = ExtResource("2_hj6cg")

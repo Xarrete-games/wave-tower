@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_fsua3")
-type = 1
+type_legacy = 1
 name = "Buba"
 icon = ExtResource("1_a3f8k")
 scene = ExtResource("2_d1pjp")

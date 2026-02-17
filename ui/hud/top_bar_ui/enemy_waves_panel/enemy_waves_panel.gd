@@ -16,7 +16,7 @@ func _ready() -> void:
 		info_container.add_child(enemy_wave_data_ui)
 		
 		var info_list: Array[EnemyWaveInfo] = []
-		var used_enemy_types: Array[Enemy.Type] = []
+		var used_enemy_types: Array[Enemy.TypeLegacy] = []
 		for enemy_group in wave.groups:
 			if enemy_group.enemy_type in used_enemy_types:
 				for info in info_list:

@@ -6,8 +6,7 @@
 
 [resource]
 script = ExtResource("1_2btab")
-id = "gold_skeleton"
-type = 7
+type_legacy = 7
 name = "Gold Skeleton"
 icon = ExtResource("1_h7ptv")
 scene = ExtResource("2_44687")

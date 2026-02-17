@@ -6,8 +6,7 @@
 
 [resource]
 script = ExtResource("1_jk6xb")
-id = "golem"
-type = 3
+type_legacy = 3
 name = "Golem"
 icon = ExtResource("1_051ul")
 scene = ExtResource("2_ca804")
