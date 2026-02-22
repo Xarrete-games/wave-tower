@@ -29,6 +29,18 @@ func get_enemy_instance(enemy_type: Enemy.TypeLegacy) -> Enemy:
 
 	return enemy_instance
 
+## Returns all loaded enemy data resources.
+func get_all_enemies() -> Array[EnemyData]:
+	return enemies_data.duplicate()
+
+## Returns enemies filtered by their pressure type (SWARM, FAST, NORMAL, TANK, BOSS).
+func get_enemies_by_type(type: EnemyData.Type) -> Array[EnemyData]:
+	return enemies_data.filter(func(data: EnemyData): return data.type == type)
+
+## Returns all non-boss enemies (suitable for regular wave composition).
+func get_spawnable_enemies() -> Array[EnemyData]:
+	return enemies_data.filter(func(data: EnemyData): return data.type != EnemyData.Type.BOSS)
+
 func get_enemy_wave_info(enemy_type: Enemy.TypeLegacy) -> EnemyWaveInfo:
 	var data = enemies_data_dic[enemy_type]
 	var enemy_wave_info: EnemyWaveInfo = EnemyWaveInfo.new()

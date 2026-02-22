@@ -24,6 +24,5 @@ script = ExtResource("4_8f3b7")
 move_speed = 10000.0
 min_zoom = Vector2(0.1, 0.1)
 
-[node name="EnemyGeneratorProcedural" type="Node" parent="." node_paths=PackedStringArray("world_map")]
+[node name="EnemyGeneratorProcedural" type="Node" parent="."]
 script = ExtResource("5_s03ma")
-world_map = NodePath("../WorldMap")

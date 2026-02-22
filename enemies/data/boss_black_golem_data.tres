@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_lgdw7")
 type_legacy = 5
+type = 4
 name = "Boss Black Golem"
 icon = ExtResource("1_bge6u")
 scene = ExtResource("2_270cg")
@@ -14,4 +15,5 @@ max_health = 50000
 base_speed = 60.0
 damage = 999
 base_gold_value = 100
+weight = 50
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_2btab")
 type_legacy = 7
+type = 4
 name = "Gold Skeleton"
 icon = ExtResource("1_h7ptv")
 scene = ExtResource("2_44687")
@@ -14,4 +15,5 @@ max_health = 30000
 base_speed = 35.0
 damage = 999
 base_gold_value = 50
+weight = 35
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

@@ -80,6 +80,22 @@ func get_all_map_pieces() -> Array[MapPieceData]:
 	return map_pieces.duplicate()
 
 # ---------------------------------------------------------
+# ENEMIES API
+# ---------------------------------------------------------
+
+## Returns all loaded enemy data resources.
+func get_all_enemies() -> Array[EnemyData]:
+	return enemy_data.get_all_enemies()
+
+## Returns enemies filtered by their pressure type.
+func get_enemies_by_type(type: EnemyData.Type) -> Array[EnemyData]:
+	return enemy_data.get_enemies_by_type(type)
+
+## Returns all non-boss enemies (for regular wave composition).
+func get_spawnable_enemies() -> Array[EnemyData]:
+	return enemy_data.get_spawnable_enemies()
+
+# ---------------------------------------------------------
 # INTERNAL LOADING HELPERS
 # ---------------------------------------------------------
 func _load_relics() -> void:
