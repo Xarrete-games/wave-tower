@@ -18,7 +18,6 @@ var hit_tween: Tween
 var gold_value: int
 var _last_is_right_direction: bool = false
 
-# PathFollow2D removed: movement handled exclusively via NavigationAgent2D
 var default_modulate_color: Color = Color.WHITE
 # speed
 var _base_speed: float = 100.0
@@ -59,10 +58,6 @@ var damage_taken_modifiers: Array[DamageTakenModifier]
 # target positions
 @onready var target_position_left: Marker2D = $TargetPositionLeft
 @onready var target_position_right: Marker2D = $TargetPositionRight
-# new navigation agent
-@onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
-var _nav_target: Vector2 = Vector2.ZERO
-var _use_navigation_agent: bool = false  # Desactivado: usamos waypoints
 
 # --- Sistema de waypoints ---
 # Array de puntos globales que el enemigo debe seguir en orden
@@ -95,11 +90,8 @@ func _ready() -> void:
 func _process(delta: float):
 	#debuff_handler.update_all(self as Enemy)
 	
-	# Prioridad: waypoints > NavigationAgent
 	if _waypoints.size() > 0:
 		_process_waypoints(delta)
-	elif navigation_agent_2d and _use_navigation_agent:
-		_process_navigation_agent(delta)
 
 
 ## Procesa el movimiento siguiendo el sistema de waypoints.
@@ -159,73 +151,6 @@ func _update_animation(previous_y: float) -> void:
 	if animated_sprite_2d.animation != animation or not animated_sprite_2d.is_playing():
 		animated_sprite_2d.play(animation)
 
-func _process_navigation_agent(delta: float) -> void:
-	# get next position from the agent using known method names dynamically
-	var next_pos: Vector2
-	var method_candidates: Array = ["get_next_path_position", "get_next_location", "get_next_position", "get_next_point"]
-	for m in method_candidates:
-		if navigation_agent_2d.has_method(m):
-			next_pos = navigation_agent_2d.call(m)
-			break
-
-	# fallback: try property access for next path position
-	if next_pos == null:
-		if navigation_agent_2d.has_method("get_next_path_position"):
-			next_pos = navigation_agent_2d.call("get_next_path_position")
-
-	if next_pos == null:
-		# nothing we can do this frame
-		return
-
-	# move towards next_pos
-	var previous_global_x = global_position.x
-	var previous_global_y = global_position.y
-
-	var step = speed * delta
-	global_position = global_position.move_toward(next_pos, step)
-
-	# if agent reports target reached, emit and stop
-	var finished: bool = false
-	if navigation_agent_2d.has_method("is_navigation_finished"):
-		finished = navigation_agent_2d.call("is_navigation_finished")
-	elif navigation_agent_2d.has_method("is_target_reached"):
-		finished = navigation_agent_2d.call("is_target_reached")
-	else:
-		# heuristic: close enough to target
-		if global_position.distance_to(_nav_target) <= max(4.0, step * 0.5):
-			finished = true
-
-	if finished:
-		_on_target_reached()
-		return
-
-	# FLIP SPRITE
-	is_right_direction = global_position.x > previous_global_x
-	if is_right_direction != _last_is_right_direction:
-		animated_sprite_2d.flip_h = !animated_sprite_2d.flip_h
-		_last_is_right_direction = is_right_direction
-
-	# handle animation
-	var animation = "top right" if previous_global_y > global_position.y else "down right"
-	if animated_sprite_2d.animation != animation or not animated_sprite_2d.is_playing():
-		animated_sprite_2d.play(animation)
-
-func set_navigation_target(pos: Vector2) -> void:
-	_nav_target = pos
-	if navigation_agent_2d:
-		# try known setter methods/properties
-		if navigation_agent_2d.has_method("set_target_position"):
-			navigation_agent_2d.call("set_target_position", pos)
-			return
-		if navigation_agent_2d.has_method("set_target_location"):
-			navigation_agent_2d.call("set_target_location", pos)
-			return
-		# fallback: try to set a property
-		if navigation_agent_2d.has_property("target_position"):
-			navigation_agent_2d.target_position = pos
-			return
-
-
 ## Establece la ruta de waypoints que el enemigo debe seguir.
 ## waypoints: Array de posiciones globales en orden [spawn, ..., target]
 ## Resetea el índice actual a 0 y la velocidad a cero.
@@ -246,8 +171,6 @@ func get_current_waypoint() -> Vector2:
 		return _waypoints[_current_waypoint_index]
 	return Vector2.ZERO
 
-
-# PathFollow-based path plumbing removed; movement handled by waypoints.
 
 func disable() -> void:
 	animated_sprite_2d.visible = false
