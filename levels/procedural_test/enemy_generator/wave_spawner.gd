@@ -17,7 +17,7 @@ class_name WaveSpawner extends Node
 signal wave_started(wave_number: int)
 
 ## Emitted every time a single enemy is placed on the map.
-signal enemy_spawned(enemy: EnemyProcedural)
+signal enemy_spawned(enemy: Enemy)
 
 ## Emitted when a group finishes spawning (useful for UI / debug).
 signal group_finished(group_index: int, pressure: WaveComposer.PressureType)
@@ -33,7 +33,7 @@ signal wave_finished(wave_number: int)
 @export var world_map: WorldMap = null
 
 ## Fallback scene used when an EnemyData has no scene assigned.
-## Point this to the default EnemyProcedural scene in the inspector.
+## Point this to a default Enemy scene in the inspector.
 @export var fallback_enemy_scene: PackedScene = null
 
 # ---------------------------------------------------------
@@ -108,9 +108,9 @@ func _spawn_single(data: EnemyData) -> void:
 		push_error("[WaveSpawner] No scene for enemy '%s' and no fallback set" % data.name)
 		return
 
-	var enemy: EnemyProcedural = scene.instantiate() as EnemyProcedural
+	var enemy: Enemy = scene.instantiate() as Enemy
 	if enemy == null:
-		push_error("[WaveSpawner] Scene for '%s' did not produce an EnemyProcedural" % data.name)
+		push_error("[WaveSpawner] Scene for '%s' did not produce an Enemy" % data.name)
 		return
 
 	_apply_stats(enemy, data)
@@ -121,8 +121,8 @@ func _spawn_single(data: EnemyData) -> void:
 
 	enemy_spawned.emit(enemy)
 
-## Transfers EnemyData stats onto an EnemyProcedural instance.
-func _apply_stats(enemy: EnemyProcedural, data: EnemyData) -> void:
+## Transfers EnemyData stats onto an Enemy instance.
+func _apply_stats(enemy: Enemy, data: EnemyData) -> void:
 	enemy.max_health = data.max_health
 	enemy.base_speed = data.base_speed
 	enemy.damage = data.damage

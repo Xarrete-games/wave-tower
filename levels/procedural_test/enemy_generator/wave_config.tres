@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="WaveConfig" load_steps=2 format=3 uid="uid://cfghmpixlnrpd"]
+
+[ext_resource type="Script" uid="uid://dexxwroucvcgq" path="res://levels/procedural_test/wave_config.gd" id="1_e3ixg"]
+
+[resource]
+script = ExtResource("1_e3ixg")
+metadata/_custom_type_script = "uid://dexxwroucvcgq"

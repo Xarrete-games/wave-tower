@@ -25,6 +25,10 @@ var enemy_manager: EnemyManager
 var damage_recount: DamageRecount
 var loot_manager: LootManager
 
+func _ready() -> void:
+	# remove wheen full structure is ready
+	reset_run()
+
 func reset_run() -> void:
 	offers_manager = OffersManager.new()
 	progress = RunProgress.new()

@@ -1,4 +1,4 @@
-class_name Enemy extends CharacterBody2D
+class_name Enemy  extends CharacterBody2D
 
 signal die(enemy: Enemy, attack: Attack)
 signal target_reached(enemy: Enemy)
@@ -17,16 +17,16 @@ var health: float
 var hit_tween: Tween
 var gold_value: int
 var _last_is_right_direction: bool = false
-var _path_follow: PathFollow2D
+
 var default_modulate_color: Color = Color.WHITE
 # speed
 var _base_speed: float = 100.0
 var _speed_mult: float = 1.0
 var is_right_direction: bool = true
 
-var _enabled: bool = false
+var _enabled: bool = true
 var _is_dead: bool = false
-var _is_freeze: bool = false
+#var _is_freeze: bool = false
 
 var speed: float:
 	get: return _base_speed * _speed_mult
@@ -38,11 +38,7 @@ var speed_mult: float:
 	set(value):
 		_speed_mult = value
 
-var progress_ratio: float:
-	get:
-		if _path_follow == null:
-			return 0.0
-		return _path_follow.progress_ratio
+# progress_ratio removed (was tied to PathFollow2D)
 
 var target_position: Vector2:
 	get:
@@ -63,13 +59,24 @@ var damage_taken_modifiers: Array[DamageTakenModifier]
 @onready var target_position_left: Marker2D = $TargetPositionLeft
 @onready var target_position_right: Marker2D = $TargetPositionRight
 
+# --- Sistema de waypoints ---
+# Array de puntos globales que el enemigo debe seguir en orden
+var _waypoints: Array[Vector2] = []
+# Índice del waypoint actual al que nos dirigimos
+var _current_waypoint_index: int = 0
+# Velocidad suavizada para steering
+var _velocity: Vector2 = Vector2.ZERO
+# Distancia mínima para considerar que llegamos a un waypoint
+const WAYPOINT_ARRIVAL_THRESHOLD: float = 8.0
+# Factor de suavizado del steering (mayor = giros más bruscos)
+const STEERING_FACTOR: float = 8.0
 func _ready() -> void:
-	disable()
+	#disable()
 	speed = base_speed
 	health_bar.set_max_health(max_health)
 	_set_health(max_health)
 	
-	#damage taken modifiers
+	#amage taken modifiers
 	damage_taken_modifiers = RunContext.enemy_debuff_manager.get_modifiers()
 	RunContext.enemy_debuff_manager.modifier_change.connect(
 		func(modifiers: Array[DamageTakenModifier]):
@@ -81,47 +88,89 @@ func _ready() -> void:
 		func(value): gold_value = base_gold_value + value)
 
 func _process(delta: float):
-	debuff_handler.update_all(self)
-	if _path_follow == null:
-		return
-	# save previous position	
-	var previous_global_x = global_position.x
-	var previous_global_y = global_position.y
-	#increse progress
+	#debuff_handler.update_all(self as Enemy)
 	
-	if _is_freeze:
-		animated_sprite_2d.modulate = Color.AQUA
-		animated_sprite_2d.stop()
-		return
-	else:
-		animated_sprite_2d.modulate = Color.WHITE
+	if _waypoints.size() > 0:
+		_process_waypoints(delta)
 
-	_path_follow.progress += speed * delta
-	
-	var path_global_pos = _path_follow.global_position
-	
-	global_position = path_global_pos
 
-	# target reached
-	if _path_follow.progress_ratio >= 0.99:
+## Procesa el movimiento siguiendo el sistema de waypoints.
+## Usa steering para suavizar los giros entre puntos.
+func _process_waypoints(delta: float) -> void:
+	# ¿Hemos llegado al final de la ruta?
+	if _current_waypoint_index >= _waypoints.size():
 		_on_target_reached()
 		return
 	
-	# FLIP SPRITE
-	is_right_direction = global_position.x > previous_global_x
+	var target_point: Vector2 = _waypoints[_current_waypoint_index]
+	var distance: float = global_position.distance_to(target_point)
+	
+	# ¿Hemos llegado al waypoint actual?
+	if distance <= WAYPOINT_ARRIVAL_THRESHOLD:
+		_current_waypoint_index += 1
+		# Resetear velocidad para el siguiente segmento (opcional: quitar para transiciones más suaves)
+		# _velocity = Vector2.ZERO
+		return
+	
+	# Guardar posición anterior para animación
+	var previous_global_x: float = global_position.x
+	var previous_global_y: float = global_position.y
+	
+	# Steering: calcular velocidad deseada y suavizar
+	var direction: Vector2 = (target_point - global_position).normalized()
+	var desired_velocity: Vector2 = direction * speed
+	_velocity = _velocity.move_toward(desired_velocity, STEERING_FACTOR * speed * delta)
+	
+	# Aplicar movimiento
+	var displacement: Vector2 = _velocity * delta
+	
+	# Evitar overshoot: si el paso es mayor que la distancia, ir directo al punto
+	if displacement.length() >= distance:
+		global_position = target_point
+	else:
+		global_position += displacement
+	
+	# Flip del sprite según dirección horizontal
+	_update_sprite_direction(previous_global_x)
+	
+	# Animación según dirección vertical
+	_update_animation(previous_global_y)
+
+
+## Actualiza el flip del sprite según la dirección de movimiento horizontal.
+func _update_sprite_direction(previous_x: float) -> void:
+	is_right_direction = global_position.x > previous_x
 	if is_right_direction != _last_is_right_direction:
 		animated_sprite_2d.flip_h = !animated_sprite_2d.flip_h
 		_last_is_right_direction = is_right_direction
-	
-	# handle animation
-	var animation = "top right" if previous_global_y > global_position.y else "down right"
+
+
+## Actualiza la animación según la dirección de movimiento vertical.
+func _update_animation(previous_y: float) -> void:
+	var animation: String = "top right" if previous_y > global_position.y else "down right"
 	if animated_sprite_2d.animation != animation or not animated_sprite_2d.is_playing():
 		animated_sprite_2d.play(animation)
-	
-func set_path_follow(path_follow: PathFollow2D) -> void:
-	_path_follow = path_follow
-	_path_follow.progress = 0.0
-	global_position = _path_follow.global_position
+
+## Establece la ruta de waypoints que el enemigo debe seguir.
+## waypoints: Array de posiciones globales en orden [spawn, ..., target]
+## Resetea el índice actual a 0 y la velocidad a cero.
+func set_waypoints(waypoints: Array[Vector2]) -> void:
+	_waypoints = waypoints.duplicate()
+	_current_waypoint_index = 0
+	_velocity = Vector2.ZERO
+
+
+## Retorna true si el enemigo tiene waypoints pendientes.
+func has_waypoints() -> bool:
+	return _waypoints.size() > 0 and _current_waypoint_index < _waypoints.size()
+
+
+## Retorna el waypoint actual al que se dirige (o Vector2.ZERO si no hay).
+func get_current_waypoint() -> Vector2:
+	if _current_waypoint_index < _waypoints.size():
+		return _waypoints[_current_waypoint_index]
+	return Vector2.ZERO
+
 
 func disable() -> void:
 	animated_sprite_2d.visible = false
@@ -157,8 +206,9 @@ func get_debuff_stacks(debuff_type: EnemyDebuff.Type) -> int:
 func has_any_debuff() -> bool:
 	return debuff_handler.has_any_defbuff()
 
-func apply_debuff(debuff: EnemyDebuff, amount: int = 1) -> void:
-	debuff_handler.add_debuff(debuff, amount, self)
+func apply_debuff(_debuff: EnemyDebuff, _amount: int = 1) -> void:
+	pass
+	#debuff_handler.add_debuff(debuff, amount, self)
 
 func apply_damage(attack: Attack) -> void:
 	if _is_dead:
@@ -198,7 +248,6 @@ func _die(attack: Attack) -> void:
 	die.emit(self, attack)
 	_show_gold_dropped()
 	RunContext.economy.gold += gold_value
-	_path_follow.queue_free()
 	queue_free()
 
 func _show_damage(attack: Attack) -> void:
@@ -227,3 +276,4 @@ func _on_target_reached() -> void:
 func _set_health(new_value: float) -> void:
 	health = new_value
 	health_bar.update_health(health)
+ 
