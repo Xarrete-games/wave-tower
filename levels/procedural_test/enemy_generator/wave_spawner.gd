@@ -116,7 +116,8 @@ func _spawn_single(data: EnemyData) -> void:
 	_apply_stats(enemy, data)
 	add_child(enemy)
 
-	enemy.global_position = spawn_entry["pos"]
+	# Spawn directly at the first waypoint to avoid awkward transition from portal
+	enemy.global_position = waypoints[0]
 	enemy.set_waypoints(waypoints)
 
 	enemy_spawned.emit(enemy)
