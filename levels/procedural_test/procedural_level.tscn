@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://doun1k6w4e04m"]
+[gd_scene load_steps=10 format=3 uid="uid://doun1k6w4e04m"]
 
 [ext_resource type="Script" uid="uid://pc6bc1xl4g58" path="res://levels/procedural_test/world_map.gd" id="1_ldccm"]
 [ext_resource type="Resource" uid="uid://phl5ghle7qif" path="res://levels/procedural_test/map_pieces/init/init_map_piece_SE.tres" id="2_8f3b7"]
@@ -7,8 +7,20 @@
 [ext_resource type="Resource" uid="uid://cfghmpixlnrpd" path="res://levels/procedural_test/enemy_generator/wave_config.tres" id="5_t5t77"]
 [ext_resource type="Script" uid="uid://d081ug0lnpy8d" path="res://levels/procedural_test/enemy_generator/wave_spawner.gd" id="6_pp7gv"]
 [ext_resource type="PackedScene" uid="uid://dmqbn2q5splor" path="res://enemies/variations/enemy_spectre.tscn" id="7_vv3de"]
+[ext_resource type="PackedScene" uid="uid://drm4bn0pi7ue1" path="res://ui/hud/hud_layer.tscn" id="8_crvxy"]
+[ext_resource type="PackedScene" uid="uid://bhdmj77ytfxwb" path="res://ui/hud/top_bar_ui/top_bar.tscn" id="9_bebo1"]
 
 [node name="ProceduralLevel" type="Node2D"]
+
+[node name="HUDLayer" parent="." instance=ExtResource("8_crvxy")]
+
+[node name="EventLayer" type="CanvasLayer" parent="."]
+
+[node name="TopBarLayer" type="CanvasLayer" parent="."]
+
+[node name="TopBar" parent="TopBarLayer" instance=ExtResource("9_bebo1")]
+
+[node name="ConfigLayer" type="CanvasLayer" parent="."]
 
 [node name="WorldMap" type="Node2D" parent="." node_paths=PackedStringArray("visual")]
 y_sort_enabled = true
