@@ -11,9 +11,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_kwid0"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 392, -208, 0, 0, 0, 0, -8, -8, 0, 0, 0, 0, 392, 192)
+"points": PackedVector2Array(0, 0, 0, 0, 399, -204, 0, 0, 0, 0, 57, -29, 0, 0, 0, 0, 53, 25, 0, 0, 0, 0, 392, 192)
 }
-point_count = 3
+point_count = 4
 
 [node name="PieceCurveNeSe" type="Node2D"]
 script = ExtResource("1_kwid0")
@@ -24,7 +24,7 @@ tile_map_data = PackedByteArray("AAD6/wAAAAAFAAYAAAD6////AAAFAAYAAAD6/wEAAAAFAAY
 
 [node name="LevelTileMap" type="TileMapLayer" parent="MapPieceTileMap"]
 position = Vector2(0, -64)
-tile_map_data = PackedByteArray("AAD6//v/AAAFAAYAAAD6//z/AAAFAAcAAAD6//3/AAAGAAYAAAD6//7/AAAIAAYAAAD6////AAAHAAYAAAD6/wAAAAAFAAYAAAD6/wMAAAAHAAcAAAD6/wQAAAAFAAYAAAD6/wUAAAAFAAYAAAD6/wYAAAAFAAcAAAD6//r/AAAIAAYAAAD7//r/AAAHAAcAAAD7//v/AAAIAAYAAAD8//r/AAAIAAYAAAD8//v/AAAIAAYAAAD7//z/AAAFAAcAAAD8//z/AAAGAAcAAAA=")
+tile_map_data = PackedByteArray("AAD6//v/AAAFAAYAAAD6//z/AAAFAAcAAAD6//3/AAAGAAYAAAD6//7/AAAIAAYAAAD6////AAAHAAYAAAD6/wAAAAAFAAYAAAD6/wMAAAAHAAcAAAD6/wQAAAAFAAYAAAD6/wUAAAAFAAYAAAD6/wYAAAAFAAcAAAD6//r/AAAIAAYAAAD7//r/AAAHAAcAAAD7//v/AAAIAAYAAAD8//r/AAAIAAYAAAD8//v/AAAIAAYAAAD7//z/AAAFAAcAAAD8//z/AAAGAAcAAAD6/wcAAAAFAAcAAAA=")
 tile_set = ExtResource("3_qvuev")
 script = ExtResource("4_3xh71")
 metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
@@ -37,11 +37,6 @@ curve = SubResource("Curve2D_kwid0")
 [node name="Decoration" type="Node2D" parent="."]
 position = Vector2(0, -32)
 scale = Vector2(0.5, 0.5)
-
-[node name="Tree1" type="Sprite2D" parent="Decoration"]
-position = Vector2(-1384, -60)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_5e44q")
 
 [node name="Tree2" type="Sprite2D" parent="Decoration"]
 position = Vector2(122, -790)
@@ -59,32 +54,32 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_5e44q")
 
 [node name="Tree5" type="Sprite2D" parent="Decoration"]
-position = Vector2(-164, -666)
+position = Vector2(-152, -666)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_5e44q")
 
 [node name="Tree6" type="Sprite2D" parent="Decoration"]
-position = Vector2(-264, -614)
+position = Vector2(-246, -622)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_otub2")
 
 [node name="Tree7" type="Sprite2D" parent="Decoration"]
-position = Vector2(-368, -568)
+position = Vector2(-344, -572)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_otub2")
 
 [node name="Tree8" type="Sprite2D" parent="Decoration"]
-position = Vector2(-466, -530)
+position = Vector2(-440, -522)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_otub2")
 
 [node name="Tree9" type="Sprite2D" parent="Decoration"]
-position = Vector2(-564, -490)
+position = Vector2(-538, -480)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_otub2")
 
 [node name="Tree10" type="Sprite2D" parent="Decoration"]
-position = Vector2(-652, -450)
+position = Vector2(-642, -426)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_5e44q")
 
@@ -94,19 +89,29 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_otub2")
 
 [node name="Tree16" type="Sprite2D" parent="Decoration"]
-position = Vector2(-1190, -172)
+position = Vector2(-1164, -168)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_otub2")
 
 [node name="Tree12" type="Sprite2D" parent="Decoration"]
-position = Vector2(-1290, -112)
+position = Vector2(-1268, -110)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_otub2")
+
+[node name="Tree1" type="Sprite2D" parent="Decoration"]
+position = Vector2(-1374, -68)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_5e44q")
 
 [node name="Plant3" type="Sprite2D" parent="Decoration"]
 position = Vector2(198, -692)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("7_8fvbk")
+
+[node name="Tree11" type="Sprite2D" parent="Decoration"]
+position = Vector2(-1468, -14)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_5e44q")
 
 [node name="Plant4" type="Sprite2D" parent="Decoration"]
 position = Vector2(276, -652)
@@ -167,6 +172,11 @@ texture = ExtResource("7_8fvbk")
 position = Vector2(134, -480)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("7_8fvbk")
+
+[node name="Tree13" type="Sprite2D" parent="Decoration"]
+position = Vector2(-1564, 42)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_5e44q")
 
 [node name="Stone2" type="Sprite2D" parent="Decoration"]
 position = Vector2(-158, -446)
