@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ajf0sqc0tsw"]
+
+[ext_resource type="Script" uid="uid://chj3cku30pmp1" path="res://levels/procedural_test/map_pieces/map_piece.gd" id="1_3orts"]
+[ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/procedural_test/map_pieces/map_piece_tile_map.tscn" id="2_34bjq"]
+
+[node name="MapPieceBase" type="Node2D"]
+script = ExtResource("1_3orts")
+
+[node name="MapPieceTileMap" parent="." instance=ExtResource("2_34bjq")]
+
+[node name="Routes" type="Node2D" parent="."]
