@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="MapPieceData" load_steps=6 format=3 uid="uid://rsptiojla5gu"]
+
+[ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/procedural_test/map_pieces/edge.gd" id="1_uji32"]
+[ext_resource type="PackedScene" uid="uid://d25osyowoixh3" path="res://levels/procedural_test/map_pieces/instances/piece_curve_SE_SW_03.tscn" id="2_uji32"]
+[ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/procedural_test/map_pieces/map_piece_data.gd" id="3_ir4r2"]
+
+[sub_resource type="Resource" id="Resource_be84u"]
+script = ExtResource("1_uji32")
+dir = 2
+pos = 2
+
+[sub_resource type="Resource" id="Resource_ir4r2"]
+script = ExtResource("1_uji32")
+dir = 1
+pos = 0
+
+[resource]
+script = ExtResource("3_ir4r2")
+edges = Array[ExtResource("1_uji32")]([SubResource("Resource_be84u"), SubResource("Resource_ir4r2")])
+scene = ExtResource("2_uji32")
+metadata/_custom_type_script = "uid://ndxexeof5w0k"
