@@ -22,7 +22,8 @@
 script = ExtResource("1_j1bfp")
 pause = ExtResource("2_oysny")
 
-[node name="RunHandler" parent="." instance=ExtResource("2_4cdkm")]
+[node name="RunHandler" parent="." node_paths=PackedStringArray("event_layer") instance=ExtResource("2_4cdkm")]
+event_layer = NodePath("../EventLayer")
 
 [node name="TestData" type="Node" parent="."]
 script = ExtResource("3_oysny")

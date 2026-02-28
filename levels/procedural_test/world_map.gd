@@ -54,7 +54,8 @@ func _ready() -> void:
 	
 	last_piece_attached = init_piece
 	update_portals()
-
+	#init with one piece
+	attach_next_piece()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):

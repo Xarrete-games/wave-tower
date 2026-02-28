@@ -23,6 +23,8 @@ func _ready() -> void:
 	RunContext.progress.current_wave_finished.connect(_on_wave_finished)
 	RunContext.progress.last_wave_finished.connect(_on_last_wave_finished)
 	RunContext.progress.current_level_changed.connect(_on_new_level_loaded)
+	# for procedural level testing
+	_on_new_level_loaded(0)
 
 func show_loot_screen() -> void:
 	await loot_screen_handler.show_loot_screen(event_layer)
