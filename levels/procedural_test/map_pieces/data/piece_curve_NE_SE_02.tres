@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_oija6"]
 script = ExtResource("1_oija6")
+pos = 2
 
 [sub_resource type="Resource" id="Resource_0b22e"]
 script = ExtResource("1_oija6")
