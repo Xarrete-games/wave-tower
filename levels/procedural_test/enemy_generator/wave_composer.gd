@@ -81,7 +81,7 @@ func compose_wave(wave_number: int) -> Array[WaveGroup]:
 	var pressures: Array[PressureType] = _pick_unique_pressures(wave_number, num_groups)
 
 	# Distribute remaining budget across groups (roughly even, remainder to first)
-
+	@warning_ignore("integer_division")
 	var budget_per_group: int = total_budget / maxi(num_groups, 1)
 	var remainder: int = total_budget - budget_per_group * maxi(num_groups, 1)
 

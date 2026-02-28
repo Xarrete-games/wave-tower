@@ -40,6 +40,7 @@ signal wave_finished(wave_number: int)
 # INTERNAL STATE
 # ---------------------------------------------------------
 
+var enemies_container: Node2D
 var _is_spawning: bool = false
 
 # ---------------------------------------------------------
@@ -114,7 +115,7 @@ func _spawn_single(data: EnemyData) -> void:
 		return
 
 	_apply_stats(enemy, data)
-	add_child(enemy)
+	enemies_container.add_child(enemy)
 
 	# Spawn directly at the first waypoint to avoid awkward transition from portal
 	enemy.global_position = waypoints[0]

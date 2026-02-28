@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://doun1k6w4e04m"]
+[gd_scene load_steps=12 format=3 uid="uid://doun1k6w4e04m"]
 
 [ext_resource type="Script" uid="uid://pc6bc1xl4g58" path="res://levels/procedural_test/world_map.gd" id="1_ldccm"]
 [ext_resource type="Resource" uid="uid://phl5ghle7qif" path="res://levels/procedural_test/map_pieces/init/init_map_piece_SE.tres" id="2_8f3b7"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://drm4bn0pi7ue1" path="res://ui/hud/hud_layer.tscn" id="8_crvxy"]
 [ext_resource type="PackedScene" uid="uid://bhdmj77ytfxwb" path="res://ui/hud/top_bar_ui/top_bar.tscn" id="9_bebo1"]
 [ext_resource type="Script" uid="uid://dpnilgqn044xp" path="res://main/tower_placer/tower_placer.gd" id="10_bebo1"]
+[ext_resource type="Script" uid="uid://bl4psouhduuh5" path="res://levels/procedural_test/composite_tile_map.gd" id="11_ctm01"]
 
 [node name="ProceduralLevel" type="Node2D"]
 
@@ -23,11 +24,16 @@
 
 [node name="ConfigLayer" type="CanvasLayer" parent="."]
 
-[node name="WorldMap" type="Node2D" parent="." node_paths=PackedStringArray("visual")]
+[node name="CompositeTileMap" type="Node" parent="."]
+script = ExtResource("11_ctm01")
+
+[node name="WorldMap" type="Node2D" parent="." node_paths=PackedStringArray("visual", "composite_tile_map")]
+z_index = -1
 y_sort_enabled = true
 script = ExtResource("1_ldccm")
 init_map_piece_data = ExtResource("2_8f3b7")
 visual = NodePath("../Visual")
+composite_tile_map = NodePath("../CompositeTileMap")
 
 [node name="Visual" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -38,10 +44,11 @@ script = ExtResource("4_8f3b7")
 move_speed = 10000.0
 min_zoom = Vector2(0.1, 0.1)
 
-[node name="EnemyGeneratorProcedural" type="Node" parent="." node_paths=PackedStringArray("wave_spawner")]
+[node name="EnemyGeneratorProcedural" type="Node" parent="." node_paths=PackedStringArray("wave_spawner", "enemies_container")]
 script = ExtResource("5_s03ma")
 wave_spawner = NodePath("WaveSpawner")
 wave_config = ExtResource("5_t5t77")
+enemies_container = NodePath("../Visual")
 
 [node name="WaveSpawner" type="Node" parent="EnemyGeneratorProcedural" node_paths=PackedStringArray("world_map")]
 script = ExtResource("6_pp7gv")
@@ -49,5 +56,6 @@ world_map = NodePath("../../WorldMap")
 fallback_enemy_scene = ExtResource("7_vv3de")
 metadata/_custom_type_script = "uid://d081ug0lnpy8d"
 
-[node name="TowerPlacer" type="Node2D" parent="."]
+[node name="TowerPlacer" type="Node2D" parent="." node_paths=PackedStringArray("composite_tile_map")]
 script = ExtResource("10_bebo1")
+composite_tile_map = NodePath("../CompositeTileMap")

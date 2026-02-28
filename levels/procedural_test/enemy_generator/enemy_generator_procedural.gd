@@ -19,6 +19,8 @@ class_name EnemyGeneratorProcedural extends Node
 ## Optional: override the default wave scaling parameters.
 @export var wave_config: WaveConfig = null
 
+@export var enemies_container: Node2D
+
 # ---------------------------------------------------------
 # INTERNAL STATE
 # ---------------------------------------------------------
@@ -42,6 +44,7 @@ func _ready() -> void:
 
 	# Forward spawner signals for debugging / future UI hooks
 	if wave_spawner:
+		wave_spawner.enemies_container = enemies_container
 		wave_spawner.wave_started.connect(_on_wave_started)
 		wave_spawner.wave_finished.connect(_on_wave_finished)
 

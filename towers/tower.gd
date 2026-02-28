@@ -28,6 +28,8 @@ var stats: TowerStats:
 
 # tile_pos
 var tile_pos: Vector2i
+## Key used by CompositeTileMap to identify the occupied tile.
+var composite_tile_key: String = ""
 var targeting_mode: TargetingMode = TargetingMode.FIRST_IN_PROGRESS:
 	set(value):
 		targeting_mode = value

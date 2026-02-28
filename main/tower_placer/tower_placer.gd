@@ -1,6 +1,6 @@
 class_name TowerPlacer extends Node2D
 
-@onready var level_tile_map: LevelTileMap = $'../LevelTileMap'
+@export var composite_tile_map: CompositeTileMap = null
 @onready var visual: Node2D = $'../Visual'
 
 var _is_placing = false:
@@ -26,10 +26,10 @@ func _process(_delta: float) -> void:
 	if not _is_placing or not is_instance_valid(_current_tower_instance):
 		return
 	
-	if level_tile_map.is_mouse_on_buildeable_tile():
+	if composite_tile_map.is_mouse_on_buildeable_tile():
 		_is_valid_placement = true
 		_current_tower_instance.normal_color()
-		_current_tower_instance.global_position = level_tile_map.get_current_tile_pos()
+		_current_tower_instance.global_position = composite_tile_map.get_current_tile_pos()
 	else:
 		_is_valid_placement = false
 		_current_tower_instance.phantom_mode()
@@ -43,7 +43,7 @@ func _input(event: InputEvent) -> void:
 		event.button_index == MOUSE_BUTTON_LEFT and 
 		event.pressed and _is_valid_placement):
 			_place_tower()
-	# calcel
+	# cancel
 	elif event.is_action("exit"):
 		_cancel_tower()
 		
@@ -56,14 +56,13 @@ func _place_tower() -> void:
 		_cancel_tower()
 		return
 	_handle_costs(tower_price)
-	# place tower
-	var tile_pos = level_tile_map.get_mouse_tile_pos()
-	level_tile_map.set_tile_occupied(tile_pos)
+	# place tower — mark tile as occupied
+	var key: String = composite_tile_map.set_tile_occupied_at_mouse()
+	_current_tower_instance.composite_tile_key = key
 	
 	_is_placing = false
 	
 	_current_tower_instance.enable()
-	_current_tower_instance.tile_pos = tile_pos
 
 	RunContext.towers_manager.tower_added(_current_tower_instance)
 
@@ -105,7 +104,7 @@ func _on_tower_upgrade_pressed(current_tower: Tower, new_tower_conf: TowerConfig
 	RunContext.economy.gold -= price
 	visual.add_child(new_tower)
 	new_tower.global_position = current_tower.global_position
-	new_tower.tile_pos = current_tower.tile_pos
+	new_tower.composite_tile_key = current_tower.composite_tile_key
 	new_tower.copy_tower_data(current_tower)
 	new_tower.enable()
 	

@@ -4,6 +4,7 @@ const PORTAL_OFFSET: Vector2 = Vector2(0, -80)
 
 @export var init_map_piece_data: MapPieceData
 @export var visual: Node2D
+@export var composite_tile_map: CompositeTileMap
 
 # Managers (injected/created in _ready)
 var grid_manager: GridManager = null
@@ -44,6 +45,8 @@ func _ready() -> void:
 	# Register in managers
 	grid_manager.occupy(Vector2i.ZERO)
 	connection_graph.register_piece(init_piece)
+	if composite_tile_map:
+		composite_tile_map.register_piece(init_piece)
 	frontier_manager.add_frontier(init_piece)
 	
 	# Create route_builder after having init_piece
@@ -134,6 +137,8 @@ func _try_place_on_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vec
 		# commit placement
 		new_piece.logical_pos = candidate_tile
 		grid_manager.occupy(candidate_tile)
+		if composite_tile_map:
+			composite_tile_map.register_piece(new_piece)
 		
 		# Remove connection edges BEFORE modifying frontiers
 		frontier.set_edge_has_connected(next_edge)

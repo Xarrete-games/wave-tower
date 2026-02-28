@@ -50,8 +50,9 @@ func _select_next_target() -> void:
 			var enemy_with_highest_progress: Enemy = null
 			var highest_progress: float = -1.0
 			for enemy in targets_in_range:
-				if enemy.progress_ratio > highest_progress:
-					highest_progress = enemy.progress_ratio
+				var ratio: float = enemy.get_progress_ratio()
+				if ratio > highest_progress:
+					highest_progress = ratio
 					enemy_with_highest_progress = enemy
 			current_target = enemy_with_highest_progress
 		Tower.TargetingMode.HIGH_HP:

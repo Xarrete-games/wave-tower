@@ -64,6 +64,8 @@ var damage_taken_modifiers: Array[DamageTakenModifier]
 var _waypoints: Array[Vector2] = []
 # Índice del waypoint actual al que nos dirigimos
 var _current_waypoint_index: int = 0
+# Longitud total de la ruta (cacheada al asignar waypoints)
+var _total_path_length: float = 0.0
 # Velocidad suavizada para steering
 var _velocity: Vector2 = Vector2.ZERO
 # Distancia mínima para considerar que llegamos a un waypoint
@@ -158,6 +160,31 @@ func set_waypoints(waypoints: Array[Vector2]) -> void:
 	_waypoints = waypoints.duplicate()
 	_current_waypoint_index = 0
 	_velocity = Vector2.ZERO
+	_total_path_length = _compute_path_length(_waypoints)
+
+
+## Calcula la longitud total de un array de puntos.
+func _compute_path_length(points: Array[Vector2]) -> float:
+	var length: float = 0.0
+	for i in range(1, points.size()):
+		length += points[i - 1].distance_to(points[i])
+	return length
+
+
+## Retorna el progreso del enemigo a lo largo de su ruta como ratio 0.0 → 1.0.
+## 0.0 = recién spawneado, 1.0 = llegó al final.
+func get_progress_ratio() -> float:
+	if _waypoints.is_empty() or _total_path_length <= 0.0:
+		return 0.0
+	# Sumar segmentos completados
+	var covered: float = 0.0
+	for i in range(1, _current_waypoint_index + 1):
+		covered += _waypoints[i - 1].distance_to(_waypoints[i])
+	# Sumar distancia parcial del segmento actual
+	if _current_waypoint_index < _waypoints.size():
+		var seg_start: Vector2 = _waypoints[_current_waypoint_index - 1] if _current_waypoint_index > 0 else _waypoints[0]
+		covered += seg_start.distance_to(global_position)
+	return clampf(covered / _total_path_length, 0.0, 1.0)
 
 
 ## Retorna true si el enemigo tiene waypoints pendientes.
