@@ -176,14 +176,15 @@ func _compute_path_length(points: Array[Vector2]) -> float:
 func get_progress_ratio() -> float:
 	if _waypoints.is_empty() or _total_path_length <= 0.0:
 		return 0.0
+	if _current_waypoint_index >= _waypoints.size():
+		return 1.0
 	# Sumar segmentos completados
 	var covered: float = 0.0
-	for i in range(1, _current_waypoint_index + 1):
+	for i in range(1, _current_waypoint_index):
 		covered += _waypoints[i - 1].distance_to(_waypoints[i])
 	# Sumar distancia parcial del segmento actual
-	if _current_waypoint_index < _waypoints.size():
-		var seg_start: Vector2 = _waypoints[_current_waypoint_index - 1] if _current_waypoint_index > 0 else _waypoints[0]
-		covered += seg_start.distance_to(global_position)
+	var seg_start: Vector2 = _waypoints[_current_waypoint_index - 1] if _current_waypoint_index > 0 else _waypoints[0]
+	covered += seg_start.distance_to(global_position)
 	return clampf(covered / _total_path_length, 0.0, 1.0)
 
 
