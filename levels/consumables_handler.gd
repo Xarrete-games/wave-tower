@@ -7,7 +7,7 @@ var _current_consumable: ConsumableTargeteable = null
 var _is_valid_target: bool = false
 var _current_target: Variant
 
-@onready var level_tile_map: LevelTileMap = %'LevelTileMap'
+@export var composite_tile_map: CompositeTileMap
 
 func _ready() -> void:
 	RunContext.consumables_manager.consumable_clicked.connect(_on_consumable_clicked)
@@ -32,10 +32,10 @@ func _input(event: InputEvent) -> void:
 		cancel_current_consumable()
 
 func _handle_blocked_tile_placement() -> void:
-	if level_tile_map.is_mouse_on_block_tile():
+	if composite_tile_map.is_mouse_on_block_tile():
 		Input.set_custom_mouse_cursor(_current_consumable.cursor_icon_used, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
 		_is_valid_target = true
-		_current_target = level_tile_map
+		_current_target = composite_tile_map
 	else:
 		Input.set_custom_mouse_cursor(_current_consumable.cursor_icon, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
 		_invalidate_target()

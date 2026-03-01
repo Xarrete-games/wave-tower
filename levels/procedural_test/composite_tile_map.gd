@@ -182,6 +182,17 @@ func unblock_tile(key: String) -> void:
 		tile.piece.tile_map.set_cell(tile.coords, ATLAS_ID, UNLOCK_TILE_POS)
 	_buildeable_tiles[key] = true
 
+## Unblocks the blocked tile under the mouse. Returns true on success.
+func unblock_tile_at_mouse() -> bool:
+	var info: TileKey = get_mouse_tile_info()
+	if info == null:
+		return false
+	var key: String = _make_key(info.piece, info.coords)
+	if not _blocked_tiles.has(key):
+		return false
+	unblock_tile(key)
+	return true
+
 ## Destroys a random buildeable tile (for relic effects etc.).
 func destroy_random_buildeable_tile() -> void:
 	var candidates: Array = _buildeable_tiles.keys().filter(func(k: String):
