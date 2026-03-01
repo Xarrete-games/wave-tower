@@ -43,7 +43,7 @@ func _build() -> void:
 			slot.set_icon(null)
 
 func _on_wave_init(new_value: int) -> void:
-	if new_value % 10 == 0:
+	if new_value % 10 == 1:
 		_clear()
 	var value = new_value
 	while value > 10:
