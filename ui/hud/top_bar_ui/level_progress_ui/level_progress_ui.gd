@@ -43,7 +43,13 @@ func _build() -> void:
 			slot.set_icon(null)
 
 func _on_wave_init(new_value: int) -> void:
-	var slot: LevelProgressSlot = get_child(new_value - 1)
+	if new_value % 10 == 0:
+		_clear()
+	var value = new_value
+	while value > 10:
+		value -= 10
+
+	var slot: LevelProgressSlot = get_child(value - 1)
 	slot.fill()
 
 func _on_new_level(_total_waves: int) -> void:

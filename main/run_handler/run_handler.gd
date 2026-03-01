@@ -16,8 +16,6 @@ var options_events: Array[EventData]
 @export var events_screen_hander: EventsScreenHandler
 @export var loot_screen_handler: LootScreenHandler
 
-
-
 func _ready() -> void:
 	_set_events_by_type()
 	RunContext.progress.current_wave_finished.connect(_on_wave_finished)
@@ -85,12 +83,16 @@ func _on_new_level_loaded(_level_num: int) -> void:
 	_show_next_wave_screen()
 
 func _get_next_event(current_wave: int) -> EventData:
+	# Repeat schedule every 10 waves:
+	# 1..10, 11..20, 21..30, ...
+	var wave_in_cycle: int = ((current_wave - 1) % 10) + 1
+
 	var event_data: EventData = null
-	if current_wave in WAVES_WITH_SHOPS and shop_event:
+	if wave_in_cycle in WAVES_WITH_SHOPS and shop_event:
 		event_data = shop_event
-	elif current_wave in WAVES_WITH_RELICS and choose_relic_event:
+	elif wave_in_cycle in WAVES_WITH_RELICS and choose_relic_event:
 		event_data = choose_relic_event
-	elif current_wave in WAVES_WITH_EVENTS and options_events.size() > 0:
+	elif wave_in_cycle in WAVES_WITH_EVENTS and options_events.size() > 0:
 		options_events.shuffle()
 		event_data = options_events.pop_back()
 		

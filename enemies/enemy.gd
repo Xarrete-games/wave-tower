@@ -96,7 +96,7 @@ func _ready() -> void:
 	enabled = true
 
 func _process(delta: float):
-	#debuff_handler.update_all(self as Enemy)
+	debuff_handler.update_all(self)
 	
 	if _waypoints.size() > 0:
 		_process_waypoints(delta)
@@ -241,9 +241,8 @@ func get_debuff_stacks(debuff_type: EnemyDebuff.Type) -> int:
 func has_any_debuff() -> bool:
 	return debuff_handler.has_any_defbuff()
 
-func apply_debuff(_debuff: EnemyDebuff, _amount: int = 1) -> void:
-	pass
-	#debuff_handler.add_debuff(debuff, amount, self)
+func apply_debuff(debuff: EnemyDebuff, amount: int = 1) -> void:
+	debuff_handler.add_debuff(debuff, amount, self)
 
 func apply_damage(attack: Attack) -> void:
 	if _is_dead:

@@ -64,6 +64,7 @@ func _on_remove_debuff(type: EnemyDebuff.Type, enemy: Enemy) -> void:
 	enemy.health_bar.set_debuffs(debuffs)
 	match (type):
 		EnemyDebuff.Type.FROST:
-			enemy._is_freeze = false
+			pass
+			#enemy._is_freeze = false
 		EnemyDebuff.Type.BURN:
 			pass
