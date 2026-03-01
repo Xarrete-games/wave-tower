@@ -8,6 +8,11 @@ enum TypeLegacy {SPECTRE, BUBA, BIG_SPECTRE, GOLEM, SKELETON, BLACK_GOLEM, BLACK
 const GOLD_DROPPED = preload("uid://cxs4ar5enx4mn")
 const DAMAGE_NUMBERS = preload("uid://bkiu4qgh3ug1m")
 
+# Distancia mínima para considerar que llegamos a un waypoint
+const WAYPOINT_ARRIVAL_THRESHOLD: float = 8.0
+# Factor de suavizado del steering (mayor = giros más bruscos)
+const STEERING_FACTOR: float = 8.0
+
 @export var base_speed: float = 80
 @export var max_health: float = 50
 @export var base_gold_value: int = 1
@@ -24,7 +29,7 @@ var _base_speed: float = 100.0
 var _speed_mult: float = 1.0
 var is_right_direction: bool = true
 
-var _enabled: bool = true
+var enabled: bool = true
 var _is_dead: bool = false
 #var _is_freeze: bool = false
 
@@ -48,6 +53,17 @@ var target_position: Vector2:
 			return target_position_left.global_position
 
 var damage_taken_modifiers: Array[DamageTakenModifier]
+
+
+# --- Sistema de waypoints ---
+# Array de puntos globales que el enemigo debe seguir en orden
+var _waypoints: Array[Vector2] = []
+# Índice del waypoint actual al que nos dirigimos
+var _current_waypoint_index: int = 0
+# Longitud total de la ruta (cacheada al asignar waypoints)
+var _total_path_length: float = 0.0
+# Velocidad suavizada para steering
+var _velocity: Vector2 = Vector2.ZERO
 	
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: HealthBar = $HealthBar
@@ -59,19 +75,6 @@ var damage_taken_modifiers: Array[DamageTakenModifier]
 @onready var target_position_left: Marker2D = $TargetPositionLeft
 @onready var target_position_right: Marker2D = $TargetPositionRight
 
-# --- Sistema de waypoints ---
-# Array de puntos globales que el enemigo debe seguir en orden
-var _waypoints: Array[Vector2] = []
-# Índice del waypoint actual al que nos dirigimos
-var _current_waypoint_index: int = 0
-# Longitud total de la ruta (cacheada al asignar waypoints)
-var _total_path_length: float = 0.0
-# Velocidad suavizada para steering
-var _velocity: Vector2 = Vector2.ZERO
-# Distancia mínima para considerar que llegamos a un waypoint
-const WAYPOINT_ARRIVAL_THRESHOLD: float = 8.0
-# Factor de suavizado del steering (mayor = giros más bruscos)
-const STEERING_FACTOR: float = 8.0
 func _ready() -> void:
 	#disable()
 	speed = base_speed
@@ -88,6 +91,9 @@ func _ready() -> void:
 	gold_value = base_gold_value + RunContext.economy.extra_gold_dropped
 	RunContext.economy.extra_gold_dropped_change.connect(
 		func(value): gold_value = base_gold_value + value)
+	
+	await get_tree().create_timer(0.1).timeout
+	enabled = true
 
 func _process(delta: float):
 	#debuff_handler.update_all(self as Enemy)
@@ -201,12 +207,13 @@ func get_current_waypoint() -> Vector2:
 
 
 func disable() -> void:
+	enabled = false
 	animated_sprite_2d.visible = false
 	collision_shape_2d.disabled = true
 	health_bar.visible = false
 
 func enable() -> void:
-	_enabled = true
+	enabled = true
 	animated_sprite_2d.visible = true
 	health_bar.visible = true
 	#wait a frame to avoid immediate collision

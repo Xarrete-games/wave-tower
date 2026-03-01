@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	var enemy = body as Enemy
-	if enemy == null:
+	if enemy == null or not enemy.enabled:
 		return
 	enemy.tree_exited.connect(func() -> void:
 		_on_enemy_die(enemy))

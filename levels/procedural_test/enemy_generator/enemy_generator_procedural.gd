@@ -14,7 +14,7 @@ class_name EnemyGeneratorProcedural extends Node
 # ---------------------------------------------------------
 
 ## Placeholder — will be replaced by dynamic logic later.
-const TOTAL_WAVES: int = 10
+const TOTAL_WAVES: int = 30
 
 # ---------------------------------------------------------
 # DEPENDENCIES (assign in the editor)
