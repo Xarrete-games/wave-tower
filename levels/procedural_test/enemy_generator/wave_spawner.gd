@@ -115,6 +115,7 @@ func _spawn_single(data: EnemyData) -> void:
 		return
 
 	_apply_stats(enemy, data)
+	enemy.add_to_group("enemy")
 	enemies_container.add_child(enemy)
 
 	# Spawn directly at the first waypoint to avoid awkward transition from portal
