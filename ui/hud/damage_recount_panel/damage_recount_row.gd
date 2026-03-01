@@ -11,13 +11,13 @@ var total_damage: float = 0.0
 
 @onready var id_label: Label = $IdLabel
 
-func set_damage(wave: int, damage: float) -> void:
+func set_damage(_wave: int, _damage: float) -> void:
 	return
 	# var label = get_children()[wave] as Label
 	# label.text = str(int(damage))
 	# update_total_damage(wave, damage)
 	
-func update_total_damage(wave: int, damage: float) -> void:
+func update_total_damage(_wave: int, _damage: float) -> void:
 	return
 	# total_damage -= damage_per_wave[wave - 1]
 	# damage_per_wave[wave - 1] = damage
