@@ -28,11 +28,11 @@ event_layer = NodePath("../EventLayer")
 [node name="TestData" type="Node" parent="."]
 script = ExtResource("3_oysny")
 
-[node name="MainCamera" type="Camera2D" parent="."]
+[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("level")]
 position = Vector2(579, 323)
 script = ExtResource("4_8f3b7")
-move_speed = 10000.0
 min_zoom = Vector2(0.1, 0.1)
+level = NodePath("../LevelContainer")
 
 [node name="HUDLayer" parent="." instance=ExtResource("8_crvxy")]
 

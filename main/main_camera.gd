@@ -4,6 +4,7 @@ class_name MainCamera extends Camera2D
 @export var zoom_speed := 0.25
 @export var min_zoom := Vector2(0.5, 0.5)
 @export var max_zoom := Vector2(2.0, 2.0)
+@export var level: Node2D
 
 func _process(delta: float) -> void:
 	var input_vector = Vector2.ZERO
@@ -15,6 +16,11 @@ func _process(delta: float) -> void:
 		input_vector = input_vector.normalized()
 
 	global_position += input_vector * move_speed * delta
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("test"):
+		global_position = level.global_position
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
