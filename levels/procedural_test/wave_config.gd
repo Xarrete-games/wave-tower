@@ -34,10 +34,10 @@ class_name WaveConfig extends Resource
 @export var tank_unlock_wave: int = 3
 
 ## Minimum wave number at which BOSS enemies may appear.
-@export var boss_unlock_wave: int = 5
+@export var boss_unlock_wave: int = 10
 
 ## A boss is guaranteed every N waves (starting from boss_unlock_wave).
-@export var boss_wave_every: int = 5
+@export var boss_wave_every: int = 10
 
 # ---------------------------------------------------------
 # PRESSURE PROFILE

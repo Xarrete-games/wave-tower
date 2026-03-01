@@ -56,6 +56,7 @@ func _ready() -> void:
 	update_portals()
 	#init with one piece
 	attach_next_piece()
+	RunContext.progress.current_wave_finished.connect(_on_wave_finished)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):
@@ -218,3 +219,9 @@ func update_portals() -> void:
 
 func get_waypoints_for_spawn(spawn_entry: Dictionary) -> Array[Vector2]:
 	return route_builder.get_waypoints_for_spawn(spawn_entry)
+
+func _on_wave_finished() -> void:
+	var current_wave = RunContext.progress.current_wave
+
+	if current_wave % 2 == 0:
+		attach_next_piece()

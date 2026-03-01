@@ -124,9 +124,10 @@ func _on_enemy_left(node: Node) -> void:
 	if node.is_in_group("enemy"):
 		_enemies_left -= 1
 	if _enemies_left <= 0:
-		_report_finished()
 		if enemies_container.child_exiting_tree.is_connected(_on_enemy_left):
 			enemies_container.child_exiting_tree.disconnect(_on_enemy_left)
+		# Defer to avoid tree-lock: child_exiting_tree fires while the tree is busy
+		_report_finished.call_deferred()
 
 
 ## Init the next wave or end the level if it's the last wave.

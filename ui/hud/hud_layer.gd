@@ -19,8 +19,10 @@ func _input(event: InputEvent) -> void:
 		damage_recount_panel.visible = true
 
 func _show_level_waves_panel() -> void:
-	level_waves_panel = level_waves_panel_scene.instantiate()
-	add_child(level_waves_panel)
+	pass
+	# TODO : romove unused code
+	#level_waves_panel = level_waves_panel_scene.instantiate()
+	#add_child(level_waves_panel)
 
 func _hide_level_waves_panel() -> void:
 	if level_waves_panel:
