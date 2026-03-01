@@ -16,4 +16,5 @@ base_speed = 35.0
 damage = 999
 base_gold_value = 50
 weight = 35
+wave_to_unlock = 20
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

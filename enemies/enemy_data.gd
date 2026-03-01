@@ -22,3 +22,4 @@ enum Type { SWARM, FAST, NORMAL, TANK, BOSS }
 @export_group("Wave")
 ## Budget cost for wave composition. Higher weight = stronger/more expensive enemy.
 @export var weight: int = 1
+@export var wave_to_unlock: int = 0

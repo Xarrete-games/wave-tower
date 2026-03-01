@@ -210,13 +210,13 @@ func _fill_group(pressure: PressureType, group_budget: int, wave_number: int) ->
 ## Returns enemies of [param type] that are unlocked for [param wave_number].
 func _get_available(type: EnemyData.Type, wave_number: int) -> Array[EnemyData]:
 	return _enemy_catalog.filter(func(data: EnemyData) -> bool:
-		return data.type == type and _is_type_unlocked(data.type, wave_number)
+		return data.type == type and _is_unlocked(data, wave_number)
 	)
 
 ## Returns every non-boss enemy unlocked for [param wave_number].
 func _get_all_available(wave_number: int) -> Array[EnemyData]:
 	return _enemy_catalog.filter(func(data: EnemyData) -> bool:
-		return data.type != EnemyData.Type.BOSS and _is_type_unlocked(data.type, wave_number)
+		return data.type != EnemyData.Type.BOSS and _is_unlocked(data, wave_number)
 	)
 
 ## Whether a given enemy type is available at [param wave_number].
@@ -231,6 +231,12 @@ func _is_type_unlocked(type: EnemyData.Type, wave_number: int) -> bool:
 		_:
 			# SWARM and NORMAL are always available
 			return true
+
+## Whether a specific enemy is available at [param wave_number].
+## Checks both the type-level unlock (from WaveConfig) and the
+## per-enemy unlock (from EnemyData.wave_to_unlock).
+func _is_unlocked(data: EnemyData, wave_number: int) -> bool:
+	return _is_type_unlocked(data.type, wave_number) and wave_number >= data.wave_to_unlock
 
 # ---------------------------------------------------------
 # BUDGET FILLING

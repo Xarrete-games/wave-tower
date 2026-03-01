@@ -13,5 +13,6 @@ icon = ExtResource("1_s0d6s")
 scene = ExtResource("2_68qhb")
 base_speed = 200.0
 base_gold_value = 2
-weight = 3
+weight = 2
+wave_to_unlock = 11
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

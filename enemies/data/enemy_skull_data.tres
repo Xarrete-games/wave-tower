@@ -12,5 +12,5 @@ name = "Skull"
 icon = ExtResource("1_d5n7i")
 scene = ExtResource("2_054sy")
 base_speed = 90.0
-weight = 1
+wave_to_unlock = 10
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

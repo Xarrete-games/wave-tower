@@ -6,11 +6,9 @@
 
 [resource]
 script = ExtResource("1_csa40")
-id = "Spectre"
-type = 2
 name = "Spectre"
 icon = ExtResource("1_mykse")
 scene = ExtResource("2_8e3or")
 max_health = 80
-weight = 2
+weight = 3
 metadata/_custom_type_script = "uid://cvnj0agbswaym"
