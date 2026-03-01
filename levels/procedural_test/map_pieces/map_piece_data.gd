@@ -3,6 +3,7 @@ class_name MapPieceData extends Resource
 @export var edges: Array[Edge] = []
 @export var scene: PackedScene
 
+var is_fork: bool = false
 
 func _init() -> void:
 	# validate duplicate edges
@@ -13,7 +14,9 @@ func _init() -> void:
 				push_error("MapPieceData has duplicate edge: %s" % [e])
 				break
 		edges_checked.append(e)
-
+	
+	if edges.size() > 2:
+		is_fork = true
 
 ## Checks if this piece has an edge with the given direction and position
 func has_edge(edge: Edge) -> bool:
@@ -58,3 +61,4 @@ func get_instance() -> MapPiece:
 		new_edges.append(Edge.new(e.dir, e.pos))
 	instance.edges = new_edges
 	return instance
+

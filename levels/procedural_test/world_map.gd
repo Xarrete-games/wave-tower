@@ -1,6 +1,7 @@
 class_name WorldMap extends Node2D
 
 const PORTAL_OFFSET: Vector2 = Vector2(0, -80)
+const WAVES_BETWEEN_FORKS: int = 5
 
 @export var init_map_piece_data: MapPieceData
 @export var visual: Node2D
@@ -22,6 +23,10 @@ var init_piece: MapPiece = null
 var portal_entries: Array[Dictionary] = []
 var finalized_portal_entries: Array[Dictionary] = []
 var portal_spawn_positions: Array[Vector2] = []
+
+# Fork cooldown — counts waves since the last fork was placed.
+# Starts at 0; forks are only allowed when this reaches WAVES_BETWEEN_FORKS.
+var _waves_since_last_fork: int = 0
 
 
 func _ready() -> void:
@@ -102,7 +107,17 @@ func _on_edge_finalized(piece: MapPiece, edge: Edge) -> void:
 	_finalize_spawn_pos(piece, edge)
 
 
+func _is_fork_allowed() -> bool:
+	return _waves_since_last_fork >= WAVES_BETWEEN_FORKS
+
+
 func _try_place_on_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vector2i, valid_pieces: Array, edge_to_connect: Edge) -> bool:
+	# Filter out fork pieces when not enough waves have passed
+	if not _is_fork_allowed():
+		valid_pieces = valid_pieces.filter(func(p: MapPieceData): return not p.is_fork)
+		if valid_pieces.size() == 0:
+			return false
+
 	var piece_indices: Array = []
 	for i in range(valid_pieces.size()):
 		piece_indices.append(i)
@@ -151,6 +166,11 @@ func _try_place_on_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vec
 
 		_attach_piece(frontier, new_piece, next_edge.dir, edge_to_connect.dir)
 		last_piece_attached = new_piece
+
+		# Reset fork cooldown if we just placed a fork
+		if piece_data.is_fork:
+			_waves_since_last_fork = 0
+
 		return true
 
 	return false
@@ -221,6 +241,7 @@ func get_waypoints_for_spawn(spawn_entry: Dictionary) -> Array[Vector2]:
 	return route_builder.get_waypoints_for_spawn(spawn_entry)
 
 func _on_wave_finished() -> void:
+	_waves_since_last_fork += 1
 	var current_wave = RunContext.progress.current_wave
 
 	if current_wave % 2 == 0:
