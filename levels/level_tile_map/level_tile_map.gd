@@ -13,7 +13,7 @@ var _buildeable_tiles: Dictionary[Vector2i, bool] = {}
 
 func _ready() -> void:
 	ClickEvents.tower_remove_pressed.connect(_on_tower_removed)
-	RunContext.level_tile_map = self
+	#RunContext.level_tile_map = self
 	_fill_data()
 	
 func get_mouse_tile_pos() -> Vector2i:
