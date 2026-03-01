@@ -1,7 +1,7 @@
 class_name WorldMap extends Node2D
 
 const PORTAL_OFFSET: Vector2 = Vector2(0, -80)
-const WAVES_BETWEEN_FORKS: int = 5
+const WAVES_PER_BOSS: int = 10
 
 @export var init_map_piece_data: MapPieceData
 @export var visual: Node2D
@@ -24,9 +24,10 @@ var portal_entries: Array[Dictionary] = []
 var finalized_portal_entries: Array[Dictionary] = []
 var portal_spawn_positions: Array[Vector2] = []
 
-# Fork cooldown — counts waves since the last fork was placed.
-# Starts at 0; forks are only allowed when this reaches WAVES_BETWEEN_FORKS.
-var _waves_since_last_fork: int = 0
+# Fork injection flow:
+# after each boss cycle, keep trying to place a fork (with priority)
+# until one is successfully placed.
+var _pending_fork_after_boss: bool = false
 
 
 func _ready() -> void:
@@ -107,24 +108,20 @@ func _on_edge_finalized(piece: MapPiece, edge: Edge) -> void:
 	_finalize_spawn_pos(piece, edge)
 
 
-func _is_fork_allowed() -> bool:
-	return _waves_since_last_fork >= WAVES_BETWEEN_FORKS
-
-
 func _try_place_on_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vector2i, valid_pieces: Array, edge_to_connect: Edge) -> bool:
-	# Filter out fork pieces when not enough waves have passed
-	if not _is_fork_allowed():
-		valid_pieces = valid_pieces.filter(func(p: MapPieceData): return not p.is_fork)
-		if valid_pieces.size() == 0:
-			return false
+	var candidate_pieces: Array = []
 
-	var piece_indices: Array = []
-	for i in range(valid_pieces.size()):
-		piece_indices.append(i)
-	piece_indices.shuffle()
+	if _pending_fork_after_boss:
+		var fork_pieces: Array = valid_pieces.filter(func(p: MapPieceData): return p.is_fork)
+		var other_pieces: Array = valid_pieces.filter(func(p: MapPieceData): return not p.is_fork)
+		fork_pieces.shuffle()
+		other_pieces.shuffle()
+		candidate_pieces = fork_pieces + other_pieces
+	else:
+		candidate_pieces = valid_pieces.filter(func(p: MapPieceData): return not p.is_fork)
+		candidate_pieces.shuffle()
 
-	for pi in piece_indices:
-		var piece_data: MapPieceData = valid_pieces[pi]
+	for piece_data in candidate_pieces:
 		var new_piece: MapPiece = piece_data.get_instance()
 		add_child(new_piece)
 
@@ -167,9 +164,9 @@ func _try_place_on_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vec
 		_attach_piece(frontier, new_piece, next_edge.dir, edge_to_connect.dir)
 		last_piece_attached = new_piece
 
-		# Reset fork cooldown if we just placed a fork
-		if piece_data.is_fork:
-			_waves_since_last_fork = 0
+		# If we were waiting for a post-boss fork and we placed one, clear pending state.
+		if _pending_fork_after_boss and piece_data.is_fork:
+			_pending_fork_after_boss = false
 
 		return true
 
@@ -241,8 +238,14 @@ func get_waypoints_for_spawn(spawn_entry: Dictionary) -> Array[Vector2]:
 	return route_builder.get_waypoints_for_spawn(spawn_entry)
 
 func _on_wave_finished() -> void:
-	_waves_since_last_fork += 1
 	var current_wave = RunContext.progress.current_wave
 
-	if current_wave % 2 == 0:
+	# Boss cycles are every 10 waves: after each boss, start forcing fork priority
+	# until one fork is successfully placed.
+	if current_wave % WAVES_PER_BOSS == 0:
+		_pending_fork_after_boss = true
+
+	# Normal growth cadence is every 2 waves, but while a post-boss fork is pending,
+	# retry placement every wave until a fork enters the map.
+	if current_wave % 2 == 0 or _pending_fork_after_boss:
 		attach_next_piece()

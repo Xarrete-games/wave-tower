@@ -165,9 +165,26 @@ func _create_boss_group(available_budget: int, wave_number: int) -> WaveGroup:
 	var bosses: Array[EnemyData] = _get_available(EnemyData.Type.BOSS, wave_number)
 	if bosses.size() == 0:
 		return null
-	var boss: EnemyData = bosses[randi() % bosses.size()]
-	if boss.weight > available_budget:
+
+	# Keep boss progression deterministic:
+	# always pick the highest unlocked boss tier that is affordable.
+	var affordable_bosses: Array[EnemyData] = bosses.filter(func(data: EnemyData) -> bool:
+		return data.weight <= available_budget
+	)
+	if affordable_bosses.size() == 0:
 		return null
+
+	# Highest unlocked boss tier available for this wave (10, 20, 30, ...).
+	var best_tier: int = -1
+	for data in affordable_bosses:
+		if data.wave_to_unlock > best_tier:
+			best_tier = data.wave_to_unlock
+
+	# If multiple bosses share the same tier, pick one at random.
+	var tier_bosses: Array[EnemyData] = affordable_bosses.filter(func(data: EnemyData) -> bool:
+		return data.wave_to_unlock == best_tier
+	)
+	var boss: EnemyData = tier_bosses[randi() % tier_bosses.size()]
 
 	var group: WaveGroup = WaveGroup.new()
 	group.pressure = PressureType.TANK

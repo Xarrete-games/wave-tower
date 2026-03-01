@@ -21,6 +21,7 @@ func _ready() -> void:
 
 func _clear() -> void:
 	for child in get_children():
+		remove_child(child)
 		child.queue_free()
 	_build()
 
@@ -45,9 +46,8 @@ func _build() -> void:
 func _on_wave_init(new_value: int) -> void:
 	if new_value % 10 == 1:
 		_clear()
-	var value = new_value
-	while value > 10:
-		value -= 10
+
+	var value: int = ((new_value - 1) % 10) + 1
 
 	var slot: LevelProgressSlot = get_child(value - 1)
 	slot.fill()
