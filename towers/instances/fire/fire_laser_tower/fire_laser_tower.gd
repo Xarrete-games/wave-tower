@@ -25,10 +25,10 @@ func _fire() -> void:
 
 	var debuff = RunContext.enemy_debuff_manager.get_debuff(EnemyDebuff.Type.BURN, damage_source) if apply_burn else null
 	red_projectile.set_target(_current_target, next_attack, debuff)
-	red_projectile.hit_target()
 	cristal_light.turn_on()
 
 	await get_tree().create_timer(0.1).timeout
+	red_projectile.hit_target()
 	red_projectile.stop()
 	cristal_light.turn_off()
 
