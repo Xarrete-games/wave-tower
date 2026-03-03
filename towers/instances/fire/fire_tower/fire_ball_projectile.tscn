@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c87kjybjulaxq"]
+[gd_scene format=3 uid="uid://c87kjybjulaxq"]
 
 [ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_4f0f1"]
 [ext_resource type="Texture2D" uid="uid://do1b4oomw0kiu" path="res://assets/textures/particles/flame_particle.png" id="4_w0m2y"]
@@ -10,10 +10,10 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_w0m2y"]
 colors = PackedColorArray(0.9254902, 0, 0, 1, 1, 0.7529412, 0.17254902, 1)
 
-[node name="FireBallProjectile" type="Node2D"]
+[node name="FireBallProjectile" type="Node2D" unique_id=1762275770]
 script = ExtResource("1_4f0f1")
 
-[node name="FireParticles" type="CPUParticles2D" parent="."]
+[node name="FireParticles" type="CPUParticles2D" parent="." unique_id=553436540]
 scale = Vector2(0.5, 0.5)
 amount = 300
 texture = ExtResource("4_w0m2y")

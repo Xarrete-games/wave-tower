@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=5 format=3 uid="uid://bivp0pg4lm7n"]
+[gd_resource type="Resource" script_class="TowerConfiguration" format=3 uid="uid://bivp0pg4lm7n"]
 
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="1_bl7cx"]
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="1_mbtie"]

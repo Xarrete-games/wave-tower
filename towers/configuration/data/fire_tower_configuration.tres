@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerConfiguration" load_steps=7 format=3 uid="uid://cg62x3fyuhj52"]
+[gd_resource type="Resource" script_class="TowerConfiguration" format=3 uid="uid://cg62x3fyuhj52"]
 
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="1_cbqn0"]
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_y1o0l"]

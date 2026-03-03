@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=16 format=3 uid="uid://0mt2a5aix72q"]
+[gd_resource type="TileSet" format=3 uid="uid://0mt2a5aix72q"]
 
 [ext_resource type="Texture2D" uid="uid://btgk0xvf35sso" path="res://assets/sprites/tilesheet/PASTO@2x.png" id="1_iqsnt"]
 [ext_resource type="Texture2D" uid="uid://d2ikyumhcrje6" path="res://assets/sprites/tilesheet/PASTO_BLUE@2x.png" id="2_iqsnt"]

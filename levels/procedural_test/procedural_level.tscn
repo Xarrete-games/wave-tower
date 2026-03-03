@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://doun1k6w4e04m"]
+[gd_scene format=3 uid="uid://doun1k6w4e04m"]
 
 [ext_resource type="Script" uid="uid://cbwutvcywfhsw" path="res://main/game.gd" id="1_j1bfp"]
 [ext_resource type="Script" uid="uid://pc6bc1xl4g58" path="res://levels/procedural_test/world_map.gd" id="1_ldccm"]
@@ -19,41 +19,41 @@
 [ext_resource type="Script" uid="uid://c6gmmo43gd544" path="res://levels/tower_selector.gd" id="12_pb4yr"]
 [ext_resource type="Script" uid="uid://yhjdvpv621gf" path="res://levels/consumables_handler.gd" id="18_dx4vj"]
 
-[node name="ProceduralLevel" type="Node2D"]
+[node name="ProceduralLevel" type="Node2D" unique_id=1437931111]
 script = ExtResource("1_j1bfp")
 pause = ExtResource("2_oysny")
 
-[node name="RunHandler" parent="." node_paths=PackedStringArray("event_layer") instance=ExtResource("2_4cdkm")]
+[node name="RunHandler" parent="." unique_id=283953083 node_paths=PackedStringArray("event_layer") instance=ExtResource("2_4cdkm")]
 event_layer = NodePath("../EventLayer")
 
-[node name="TestData" type="Node" parent="."]
+[node name="TestData" type="Node" parent="." unique_id=825568227]
 script = ExtResource("3_oysny")
 
-[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("level")]
+[node name="MainCamera" type="Camera2D" parent="." unique_id=917078807 node_paths=PackedStringArray("level")]
 position = Vector2(579, 323)
 script = ExtResource("4_8f3b7")
 zoom_speed = 0.05
 min_zoom = Vector2(0.1, 0.1)
 level = NodePath("../LevelContainer")
 
-[node name="HUDLayer" parent="." instance=ExtResource("8_crvxy")]
+[node name="HUDLayer" parent="." unique_id=1155857538 instance=ExtResource("8_crvxy")]
 
-[node name="EventLayer" type="CanvasLayer" parent="."]
+[node name="EventLayer" type="CanvasLayer" parent="." unique_id=1281830585]
 
-[node name="TopBarLayer" type="CanvasLayer" parent="."]
+[node name="TopBarLayer" type="CanvasLayer" parent="." unique_id=90905328]
 
-[node name="TopBar" parent="TopBarLayer" instance=ExtResource("9_bebo1")]
+[node name="TopBar" parent="TopBarLayer" unique_id=877606976 instance=ExtResource("9_bebo1")]
 
-[node name="ConfigLayer" type="CanvasLayer" parent="."]
+[node name="ConfigLayer" type="CanvasLayer" parent="." unique_id=1543540386]
 
-[node name="MusicHandler" parent="." instance=ExtResource("7_dx4vj")]
+[node name="MusicHandler" parent="." unique_id=124332172 instance=ExtResource("7_dx4vj")]
 
-[node name="LevelContainer" type="Node2D" parent="."]
+[node name="LevelContainer" type="Node2D" parent="." unique_id=707260628]
 
-[node name="CompositeTileMap" type="Node" parent="LevelContainer"]
+[node name="CompositeTileMap" type="Node" parent="LevelContainer" unique_id=56426098]
 script = ExtResource("11_ctm01")
 
-[node name="WorldMap" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("visual", "composite_tile_map")]
+[node name="WorldMap" type="Node2D" parent="LevelContainer" unique_id=841588024 node_paths=PackedStringArray("visual", "composite_tile_map")]
 z_index = -1
 y_sort_enabled = true
 script = ExtResource("1_ldccm")
@@ -61,28 +61,28 @@ init_map_piece_data = ExtResource("2_8f3b7")
 visual = NodePath("../Visual")
 composite_tile_map = NodePath("../CompositeTileMap")
 
-[node name="Visual" type="Node2D" parent="LevelContainer"]
+[node name="Visual" type="Node2D" parent="LevelContainer" unique_id=1918036028]
 y_sort_enabled = true
 
-[node name="EnemyGeneratorProcedural" type="Node" parent="LevelContainer" node_paths=PackedStringArray("wave_spawner", "enemies_container")]
+[node name="EnemyGeneratorProcedural" type="Node" parent="LevelContainer" unique_id=316350539 node_paths=PackedStringArray("wave_spawner", "enemies_container")]
 script = ExtResource("5_s03ma")
 wave_spawner = NodePath("WaveSpawner")
 wave_config = ExtResource("5_t5t77")
 enemies_container = NodePath("../Visual")
 
-[node name="WaveSpawner" type="Node" parent="LevelContainer/EnemyGeneratorProcedural" node_paths=PackedStringArray("world_map")]
+[node name="WaveSpawner" type="Node" parent="LevelContainer/EnemyGeneratorProcedural" unique_id=668843349 node_paths=PackedStringArray("world_map")]
 script = ExtResource("6_pp7gv")
 world_map = NodePath("../../WorldMap")
 fallback_enemy_scene = ExtResource("7_vv3de")
 metadata/_custom_type_script = "uid://d081ug0lnpy8d"
 
-[node name="TowerPlacer" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("composite_tile_map")]
+[node name="TowerPlacer" type="Node2D" parent="LevelContainer" unique_id=1890177127 node_paths=PackedStringArray("composite_tile_map")]
 script = ExtResource("10_bebo1")
 composite_tile_map = NodePath("../CompositeTileMap")
 
-[node name="TowerSelector" type="Node" parent="LevelContainer"]
+[node name="TowerSelector" type="Node" parent="LevelContainer" unique_id=685062433]
 script = ExtResource("12_pb4yr")
 
-[node name="ConsumablesHandler" type="Node" parent="LevelContainer" node_paths=PackedStringArray("composite_tile_map")]
+[node name="ConsumablesHandler" type="Node" parent="LevelContainer" unique_id=941246025 node_paths=PackedStringArray("composite_tile_map")]
 script = ExtResource("18_dx4vj")
 composite_tile_map = NodePath("../CompositeTileMap")

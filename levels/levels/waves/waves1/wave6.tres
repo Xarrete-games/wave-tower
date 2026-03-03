@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyWave" load_steps=6 format=3 uid="uid://cjwvf0va2fy0k"]
+[gd_resource type="Resource" script_class="EnemyWave" format=3 uid="uid://cjwvf0va2fy0k"]
 
 [ext_resource type="Script" uid="uid://dxrvobswk6in5" path="res://enemies/enemy_generator/resources_definitions/enemy_group.gd" id="1_2x6ei"]
 [ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="2_txxnb"]

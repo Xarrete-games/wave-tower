@@ -8,13 +8,17 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Wave Tower"
 run/main_scene="uid://bfm0i7ehshgsf"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0.03529412, 0.06666667, 0.06666667, 1)
-boot_splash/fullsize=false
+boot_splash/stretch_mode=0
 boot_splash/image="uid://csyaj47g8er2i"
 config/icon="uid://du6pcr3fpo4su"
 
