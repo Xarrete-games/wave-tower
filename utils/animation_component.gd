@@ -97,6 +97,10 @@ func connect_signals() -> void:
 		wait_for.entered.connect(on_entered_action)
 
 func setup() -> void:
+	# Don't tween position when no position offset is configured,
+	# so layout containers (VBox, HBox, etc.) stay in control.
+	if hover_position == Vector2.ZERO and enter_position == Vector2.ZERO:
+		properties = properties.filter(func(p): return p != "position")
 	if from_center:
 		target.pivot_offset = target.size / 2
 	default_scale = target.scale
