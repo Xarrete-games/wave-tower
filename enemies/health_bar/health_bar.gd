@@ -13,7 +13,6 @@ const MAX_HEALTH: float = 5000.0
 # Rango de Escala Visual
 const MIN_X_SIZE: float = 40.0
 const MAX_X_SIZE: float = 160.0
-var base_x_position: float
 
 @export var debuffs_conatiner: Control
 @export var texture_progress_bar: TextureProgressBar 
@@ -38,7 +37,6 @@ func _ready() -> void:
 		EnemyDebuff.Type.BURN: burn_icon,
 		EnemyDebuff.Type.FROST: frost_icon
 	}
-	base_x_position = position.x
 
 func set_max_health(value: float) -> void:
 	var clamped_value = clamp(value, MIN_HEALTH, MAX_HEALTH)
@@ -52,10 +50,7 @@ func set_max_health(value: float) -> void:
 
 	texture_progress_bar.custom_minimum_size.x = new_x_size
 	texture_progress_bar.max_value = value
-
-	# Compensar solo el crecimiento desde el tamaño mínimo
-	var extra_width: float = new_x_size - MIN_X_SIZE
-	position.x = base_x_position - extra_width * 0.5
+	custom_minimum_size.x = new_x_size
 	
 func update_health(new_value: float) -> void:
 	texture_progress_bar.value = new_value

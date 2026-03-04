@@ -118,9 +118,11 @@ func _spawn_single(data: EnemyData) -> void:
 	enemy.add_to_group("enemy")
 	enemy.enabled = false
 	enemies_container.add_child(enemy)
+	enemy.disable() # disable until positioned to avoid unwanted behavior (e.g. flying in from origin)
 
 	# Spawn directly at the first waypoint to avoid awkward transition from portal
 	enemy.global_position = waypoints[0]
+	enemy.enable()
 	enemy.set_waypoints(waypoints)
 
 	enemy_spawned.emit(enemy)

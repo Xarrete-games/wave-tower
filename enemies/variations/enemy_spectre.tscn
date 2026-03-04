@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmqbn2q5splor"]
+[gd_scene format=3 uid="uid://dmqbn2q5splor"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_skkk3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_skkk3"]
 radius = 20.0
 
-[node name="EnemySpectre" instance=ExtResource("1_skkk3")]
+[node name="EnemySpectre" unique_id=82686911 instance=ExtResource("1_skkk3")]
 max_health = 80.0
 base_gold_value = 3
 

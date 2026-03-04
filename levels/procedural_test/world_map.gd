@@ -247,5 +247,5 @@ func _on_wave_finished() -> void:
 
 	# Normal growth cadence is every 2 waves, but while a post-boss fork is pending,
 	# retry placement every wave until a fork enters the map.
-	if current_wave % 2 == 0 or _pending_fork_after_boss:
+	if current_wave % 3 == 0:
 		attach_next_piece()
