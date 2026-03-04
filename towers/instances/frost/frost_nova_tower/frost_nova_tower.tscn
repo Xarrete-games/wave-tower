@@ -103,10 +103,10 @@ shape = SubResource("CircleShape2D_763pf")
 wait_time = 3.0
 
 [node name="MouseDetector" parent="." index="8"]
-offset_left = -44.0
-offset_top = -100.0
-offset_right = 46.0
-offset_bottom = 25.0
+offset_left = -64.0
+offset_top = -120.0
+offset_right = 66.0
+offset_bottom = 50.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11" unique_id=2096719486]
 root_node = NodePath("../PointLight2D")
