@@ -20,6 +20,9 @@ const ATLAS_ID = 0
 const UNLOCK_TILE_POS = Vector2i(6, 0)
 const NORMAL_TILE_POS = Vector2i(2, 0)
 
+## Maximum buildeable tiles each map piece is allowed to keep.
+const MAX_BUILDEABLE_PER_PIECE: int = 3
+
 # ---------------------------------------------------------
 # INTERNAL TILE KEY
 # ---------------------------------------------------------
@@ -65,6 +68,8 @@ func register_piece(piece: MapPiece) -> void:
 	if piece in _pieces:
 		return
 	_pieces.append(piece)
+	# Reduce buildeable tiles BEFORE scanning so dictionaries stay aligned
+	piece.limit_buildeable_tiles(MAX_BUILDEABLE_PER_PIECE)
 	_scan_piece(piece)
 
 ## Removes a piece and all its tracked tiles.

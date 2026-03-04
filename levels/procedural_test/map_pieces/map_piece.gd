@@ -1,6 +1,10 @@
 class_name MapPiece extends Node2D
 
 const size: Vector2i = Vector2i(15, 15)
+const BUILDEABLE_CUSTOM_DATA: String = "buildeable"
+const BLOCKED_CUSTOM_DATA: String = "blocked"
+const ATLAS_ID: int = 0
+const NORMAL_TILE_POS: Vector2i = Vector2i(2, 0)
 
 # Maps Edge.Dir enum to string for path naming
 const DIR_NAMES: Dictionary = {
@@ -218,6 +222,32 @@ func _get_route_cache_key(dir_a: Edge.Dir, dir_b: Edge.Dir) -> String:
 	var first: Edge.Dir = mini(dir_a, dir_b) as Edge.Dir
 	var second: Edge.Dir = maxi(dir_a, dir_b) as Edge.Dir
 	return "route_%s_%s" % [DIR_NAMES[first], DIR_NAMES[second]]
+
+
+## Reduces buildeable tiles to [param max_count] random ones.
+## Excess buildeable tiles are converted to normal (non-buildeable) tiles visually.
+## Must be called AFTER the piece is in the tree (tile_map ready).
+func limit_buildeable_tiles(max_count: int) -> void:
+	var tm: TileMapLayer = tile_map
+	var buildeable_coords: Array[Vector2i] = []
+
+	for coords in tm.get_used_cells():
+		var td: TileData = tm.get_cell_tile_data(coords)
+		if td == null:
+			continue
+		if td.get_custom_data(BLOCKED_CUSTOM_DATA) == true:
+			continue
+		if td.get_custom_data(BUILDEABLE_CUSTOM_DATA) == true:
+			buildeable_coords.append(coords)
+
+	if buildeable_coords.size() <= max_count:
+		return
+
+	# Keep max_count random tiles, convert the rest
+	buildeable_coords.shuffle()
+	var to_remove: Array[Vector2i] = buildeable_coords.slice(max_count)
+	for coords in to_remove:
+		tm.set_cell(coords, ATLAS_ID, NORMAL_TILE_POS)
 
 
 ## Gets waypoints for the final route (last piece to end).
