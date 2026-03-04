@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://dn77v42ue3bir"]
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://dn77v42ue3bir"]
 
 [ext_resource type="Texture2D" uid="uid://c28n2sqf74boy" path="res://assets/sprites/enemies/black_golem/golem0.png" id="1_bge6u"]
 [ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_lgdw7"]
@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_lgdw7")
 type_legacy = 5
-type = 4
+type = 3
 name = "Boss Black Golem"
 icon = ExtResource("1_bge6u")
 scene = ExtResource("2_270cg")
