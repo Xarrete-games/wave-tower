@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://qsxiwo0d27dq"]
+[gd_scene format=3 uid="uid://qsxiwo0d27dq"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_wsiet"]
 [ext_resource type="Texture2D" uid="uid://dwpjsh6o8631m" path="res://assets/sprites/enemies/gold_skeleton/gold_skeleton34.png" id="2_28t7e"]
@@ -161,7 +161,7 @@ height = 400
 fill = 1
 fill_from = Vector2(0.5071225, 0.48433048)
 
-[node name="GoldSkeleton" instance=ExtResource("1_wsiet")]
+[node name="GoldSkeleton" unique_id=1701366230 instance=ExtResource("1_wsiet")]
 base_speed = 35.0
 max_health = 30000.0
 base_gold_value = 50
@@ -179,7 +179,7 @@ sprite_frames = SubResource("SpriteFrames_3cemo")
 animation = &"down right"
 frame_progress = 0.0
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="2"]
+[node name="PointLight2D" type="PointLight2D" parent="." index="2" unique_id=254710138]
 position = Vector2(0, 18)
 scale = Vector2(0.26, 0.2)
 energy = 1.2
@@ -187,8 +187,13 @@ blend_mode = 1
 texture = SubResource("GradientTexture2D_6dubi")
 
 [node name="HealthBar" parent="." index="4"]
-offset_left = -52.0
-offset_top = -240.0
-offset_right = -52.0
-offset_bottom = -240.0
-scale = Vector2(2.5600014, 1)
+offset_left = -19.0
+offset_top = -229.0
+offset_right = 21.0
+offset_bottom = -175.0
+
+[node name="TargetPositionLeft" parent="." index="6"]
+position = Vector2(0, -82)
+
+[node name="TargetPositionRight" parent="." index="7"]
+position = Vector2(-2, -81)

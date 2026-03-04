@@ -23,6 +23,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(20, 40)
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 8
 theme_override_constants/separation = 0
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer" unique_id=897163497]

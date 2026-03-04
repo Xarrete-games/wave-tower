@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bbwwsea7icfed"]
+[gd_scene format=3 uid="uid://bbwwsea7icfed"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_d4lxy"]
 [ext_resource type="Texture2D" uid="uid://c28n2sqf74boy" path="res://assets/sprites/enemies/black_golem/golem0.png" id="2_5ongo"]
@@ -197,7 +197,7 @@ height = 400
 fill = 1
 fill_from = Vector2(0.5071225, 0.48433048)
 
-[node name="BlackGolem" instance=ExtResource("1_d4lxy")]
+[node name="BlackGolem" unique_id=1274580640 instance=ExtResource("1_d4lxy")]
 base_speed = 60.0
 max_health = 50000.0
 base_gold_value = 100
@@ -215,7 +215,7 @@ sprite_frames = SubResource("SpriteFrames_q27h3")
 frame_progress = 0.0
 flip_h = true
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="2"]
+[node name="PointLight2D" type="PointLight2D" parent="." index="2" unique_id=389805364]
 position = Vector2(-1, 2)
 scale = Vector2(0.26, 0.2)
 energy = 1.2
@@ -223,8 +223,8 @@ blend_mode = 1
 texture = SubResource("GradientTexture2D_6dubi")
 
 [node name="HealthBar" parent="." index="4"]
-offset_left = -99.99999
-offset_top = -247.00002
-offset_right = -99.99999
-offset_bottom = -247.00002
-scale = Vector2(5, 1.5)
+offset_left = -66.00001
+offset_top = -221.0
+offset_right = -26.000008
+offset_bottom = -167.0
+scale = Vector2(3.333, 1)
