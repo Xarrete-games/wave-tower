@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvri0e4k4qwho"]
+[gd_scene format=3 uid="uid://dvri0e4k4qwho"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_25a7e"]
 
-[node name="BigSpectre" instance=ExtResource("1_25a7e")]
+[node name="BigSpectre" unique_id=2103555316 instance=ExtResource("1_25a7e")]
 base_speed = 55.0
 max_health = 15000.0
 base_gold_value = 30
@@ -14,6 +14,8 @@ position = Vector2(-0.5, 4.5)
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(19, -19)
 scale = Vector2(0.18, 0.18)
+animation = &"down right"
+frame_progress = 0.0
 
 [node name="HealthBar" parent="." index="3"]
 offset_left = -35.0
@@ -21,3 +23,9 @@ offset_top = -145.0
 offset_right = -35.0
 offset_bottom = -145.0
 scale = Vector2(1.7600012, 1)
+
+[node name="TargetPositionLeft" parent="." index="5"]
+position = Vector2(-8, 0)
+
+[node name="TargetPositionRight" parent="." index="6"]
+position = Vector2(45, 0)

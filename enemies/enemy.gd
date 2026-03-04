@@ -52,6 +52,13 @@ var target_position: Vector2:
 		else:
 			return target_position_left.global_position
 
+var inversed_target_position: Vector2:
+	get:
+		if is_right_direction:
+			return target_position_left.global_position
+		else:
+			return target_position_right.global_position
+
 var damage_taken_modifiers: Array[DamageTakenModifier]
 
 
@@ -148,7 +155,10 @@ func _process_waypoints(delta: float) -> void:
 ## Actualiza el flip del sprite según la dirección de movimiento horizontal.
 func _update_sprite_direction(previous_x: float) -> void:
 	is_right_direction = global_position.x > previous_x
+	var marker: Marker2D = target_position_right if is_right_direction else target_position_left
+	health_bar.position.x = marker.position.x - health_bar.size.x * health_bar.scale.x * 0.5
 	if is_right_direction != _last_is_right_direction:
+		
 		animated_sprite_2d.flip_h = !animated_sprite_2d.flip_h
 		_last_is_right_direction = is_right_direction
 
