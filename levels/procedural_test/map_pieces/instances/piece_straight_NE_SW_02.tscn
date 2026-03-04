@@ -32,7 +32,7 @@ tile_map_data = PackedByteArray("AAAFAPn/AAACAAIAAAAFAPr/AAABAAMAAAAGAPn/AAADAAM
 [node name="route_NE_SW" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="0" unique_id=168604676]
 curve = SubResource("Curve2D_10fiu")
 
-[node name="route_NE_SW2" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="1" unique_id=1475272619]
+[node name="route_NE_SW_2" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="1" unique_id=1475272619]
 curve = SubResource("Curve2D_64ru6")
 
 [node name="Tree3" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="0" unique_id=446759813]

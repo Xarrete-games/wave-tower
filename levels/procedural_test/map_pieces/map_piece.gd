@@ -17,7 +17,8 @@ const DIR_NAMES: Dictionary = {
 var edges: Array[Edge] = []
 var logical_pos: Vector2i = Vector2i.ZERO
 
-# Cache for snapped route waypoints: { "route_NE_SW": Array[Vector2] }
+# Cache for snapped route waypoints: { "route_NE_SW": Array[Array[Vector2]] }
+# Each key maps to an array of route variants (1 or more paths)
 var _route_cache: Dictionary[String, Array] = {}
 
 
@@ -155,7 +156,8 @@ func get_route_waypoints(entry_dir: Edge.Dir, exit_dir: Edge.Dir) -> Array[Vecto
 	var cache_key: String = _get_route_cache_key(entry_dir, exit_dir)
 	
 	if _route_cache.has(cache_key):
-		var cached: Array = _route_cache[cache_key]
+		var variants: Array = _route_cache[cache_key]
+		var cached: Array = variants[randi() % variants.size()]
 		# Check if we need to reverse based on entry direction
 		var canonical_first: Edge.Dir = mini(entry_dir, exit_dir) as Edge.Dir
 		if entry_dir != canonical_first:
@@ -204,7 +206,11 @@ func _precalculate_routes() -> void:
 			if snapped_points.size() == 0 or snapped_points[-1] != tile_center:
 				snapped_points.append(tile_center)
 		
-		_route_cache[path2d.name] = snapped_points
+		# Strip variant suffix to get base key (e.g. "route_NE_SW_2" -> "route_NE_SW")
+		var base_key: String = _get_route_base_key(path2d.name)
+		if not _route_cache.has(base_key):
+			_route_cache[base_key] = []
+		_route_cache[base_key].append(snapped_points)
 
 
 ## Snaps a local position to the center of the nearest tile.
@@ -222,6 +228,17 @@ func _get_route_cache_key(dir_a: Edge.Dir, dir_b: Edge.Dir) -> String:
 	var first: Edge.Dir = mini(dir_a, dir_b) as Edge.Dir
 	var second: Edge.Dir = maxi(dir_a, dir_b) as Edge.Dir
 	return "route_%s_%s" % [DIR_NAMES[first], DIR_NAMES[second]]
+
+
+## Strips variant suffix from path name to get the base route key.
+## e.g. "route_NE_SW_2" -> "route_NE_SW", "route_NE_END_3" -> "route_NE_END"
+func _get_route_base_key(path_name: String) -> String:
+	var regex := RegEx.new()
+	regex.compile("^(route_[A-Z]+_[A-Z]+)(?:_\\d+)?$")
+	var result := regex.search(path_name)
+	if result:
+		return result.get_string(1)
+	return path_name
 
 
 ## Reduces buildeable tiles to [param max_count] random ones.
@@ -256,7 +273,8 @@ func get_final_route_waypoints(entry_dir: Edge.Dir) -> Array[Vector2]:
 	var cache_key: String = "route_%s_END" % DIR_NAMES[entry_dir]
 	
 	if _route_cache.has(cache_key):
-		var cached: Array = _route_cache[cache_key]
+		var variants: Array = _route_cache[cache_key]
+		var cached: Array = variants[randi() % variants.size()]
 		var result: Array[Vector2] = []
 		for pt in cached:
 			result.append(pt)
