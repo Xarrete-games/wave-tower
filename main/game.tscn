@@ -9,31 +9,31 @@
 [ext_resource type="PackedScene" uid="uid://bhdmj77ytfxwb" path="res://ui/hud/top_bar_ui/top_bar.tscn" id="6_jc0vi"]
 [ext_resource type="PackedScene" uid="uid://wd57nqjd0s2f" path="res://main/music_handler/music_handler.tscn" id="12_v3ojx"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=2020377401]
 script = ExtResource("1_jc0vi")
 levels_paths = Array[String](["res://levels/levels/level1b/level_1b.tscn", "res://levels/levels/level2a/level_2a.tscn", "res://levels/levels/level3a/level_3a.tscn"])
 pause = ExtResource("4_f7m14")
 
-[node name="TestData" type="Node" parent="."]
+[node name="TestData" type="Node" parent="." unique_id=1452994315]
 script = ExtResource("3_2c7eb")
 
-[node name="RunHandler" parent="." node_paths=PackedStringArray("event_layer") instance=ExtResource("3_3qcir")]
+[node name="RunHandler" parent="." unique_id=181150192 node_paths=PackedStringArray("event_layer") instance=ExtResource("3_3qcir")]
 event_layer = NodePath("../EventLayer")
 
-[node name="MainCamera" type="Camera2D" parent="."]
+[node name="MainCamera" type="Camera2D" parent="." unique_id=564851877]
 position = Vector2(579, 323)
 script = ExtResource("2_2c7eb")
 
-[node name="HUDLayer" parent="." instance=ExtResource("4_jc0vi")]
+[node name="HUDLayer" parent="." unique_id=1951096669 instance=ExtResource("4_jc0vi")]
 
-[node name="EventLayer" type="CanvasLayer" parent="."]
+[node name="EventLayer" type="CanvasLayer" parent="." unique_id=201763469]
 
-[node name="TopBarLayer" type="CanvasLayer" parent="."]
+[node name="TopBarLayer" type="CanvasLayer" parent="." unique_id=635288413]
 
-[node name="TopBar" parent="TopBarLayer" instance=ExtResource("6_jc0vi")]
+[node name="TopBar" parent="TopBarLayer" unique_id=1154660953 instance=ExtResource("6_jc0vi")]
 
-[node name="ConfigLayer" type="CanvasLayer" parent="."]
+[node name="ConfigLayer" type="CanvasLayer" parent="." unique_id=1118899627]
 
-[node name="LevelContainer" type="Node2D" parent="."]
+[node name="LevelContainer" type="Node2D" parent="." unique_id=735504321]
 
-[node name="MusicHandler" parent="." instance=ExtResource("12_v3ojx")]
+[node name="MusicHandler" parent="." unique_id=1878741778 instance=ExtResource("12_v3ojx")]
