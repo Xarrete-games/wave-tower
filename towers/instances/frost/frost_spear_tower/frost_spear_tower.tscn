@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bx8cw8ahrfd21"]
+[gd_scene format=3 uid="uid://bx8cw8ahrfd21"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ue0bx"]
 [ext_resource type="Script" uid="uid://yt3fjce5gso4" path="res://towers/instances/frost/frost_spear_tower/frost_spear_tower.gd" id="2_dwnik"]
@@ -64,44 +64,50 @@ curve = SubResource("Curve_m0sqp")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1wvvr"]
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(75, 90, 1)
+emission_shape_offset = Vector3(0, -60, 0)
+emission_shape = 2
+emission_sphere_radius = 140.0
 angle_min = -89.99999
 angle_max = 90.000015
 inherit_velocity_ratio = 20.0
 direction = Vector3(0, 0, 0)
 spread = 0.0
 gravity = Vector3(0, 9.8, 0)
-scale_max = 8.0
+scale_max = 12.0
 alpha_curve = SubResource("CurveTexture_3kuch")
 
-[node name="FrostSpearTower" instance=ExtResource("1_ue0bx")]
+[node name="FrostSpearTower" unique_id=870709759 instance=ExtResource("1_ue0bx")]
 script = ExtResource("2_dwnik")
 frost_spear_projectile_scene = ExtResource("3_dwnik")
 
+[node name="CristalLight" parent="." index="1"]
+color = Color(0.79607844, 1, 1, 1)
+
 [node name="Sprite2D" parent="." index="3"]
-position = Vector2(0, -54.000004)
+position = Vector2(0, -60)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_47it7")
 region_rect = Rect2(1456, 3, 415, 633)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
-root_node = NodePath("../PointLight2D")
-libraries = {
-&"": SubResource("AnimationLibrary_p1ede")
-}
-autoplay = "RESET"
+[node name="RangeCollision" parent="AreaDetector" index="0"]
+visible = false
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="11"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10" unique_id=670357422]
+root_node = NodePath("../PointLight2D")
+libraries/ = SubResource("AnimationLibrary_p1ede")
+autoplay = &"RESET"
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="11" unique_id=2744780]
 position = Vector2(0, -108)
 color = Color(0, 1, 0.7741893, 1)
 energy = 0.2
 texture = ExtResource("5_4ns80")
 
-[node name="GPUParticlesFireAll" type="GPUParticles2D" parent="." index="12"]
+[node name="GPUParticlesFireAll" type="GPUParticles2D" parent="." index="12" unique_id=1077980593]
 material = SubResource("ShaderMaterial_155kv")
 position = Vector2(0, -120)
-amount = 30
+amount = 130
 texture = ExtResource("8_p0ute")
-lifetime = 5.0
+lifetime = 6.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_1wvvr")

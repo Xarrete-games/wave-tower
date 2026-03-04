@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cedwmb3dpm4xn"]
+[gd_scene format=3 uid="uid://cedwmb3dpm4xn"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ua04a"]
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="2_qqqk1"]
@@ -45,28 +45,28 @@ _data = {
 &"pulsing_light": SubResource("Animation_l042b")
 }
 
-[node name="LightningChainTower" instance=ExtResource("1_ua04a")]
+[node name="LightningChainTower" unique_id=381897565 instance=ExtResource("1_ua04a")]
 script = ExtResource("2_tgeyy")
 lightning_chain_projectile_scene = ExtResource("3_fuhyt")
 
 [node name="Sprite2D" parent="." index="3"]
-position = Vector2(0, -46)
+position = Vector2(0, -60)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_qqqk1")
 region_rect = Rect2(1453, 7, 419, 543)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10" unique_id=1038272139]
 root_node = NodePath("../PointLight2D")
-libraries = {
-&"": SubResource("AnimationLibrary_p1ede")
-}
-autoplay = "pulsing_light"
+libraries/ = SubResource("AnimationLibrary_p1ede")
+autoplay = &"pulsing_light"
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="11"]
+[node name="PointLight2D" type="PointLight2D" parent="." index="11" unique_id=347411147]
 position = Vector2(0, -106)
 color = Color(0.62295496, 1, 0.4661066, 1)
 energy = 0.5
 texture = ExtResource("8_3h2aw")
+offset = Vector2(0, -20)
 texture_scale = 1.5
 
-[node name="ElectricParticles" parent="." index="13" instance=ExtResource("6_rk1kn")]
-position = Vector2(1, -106)
+[node name="ElectricParticles" parent="." index="13" unique_id=264814021 instance=ExtResource("6_rk1kn")]
+position = Vector2(1, -140)

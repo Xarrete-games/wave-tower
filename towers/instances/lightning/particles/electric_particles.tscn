@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://betmeynpmbdyk"]
+[gd_scene format=3 uid="uid://betmeynpmbdyk"]
 
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="1_cb8b3"]
 [ext_resource type="Texture2D" uid="uid://boajxbopenov6" path="res://assets/textures/sparks1.jpg" id="2_f5iqk"]
@@ -21,7 +21,7 @@ curve = SubResource("Curve_px42t")
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
 emission_shape = 1
-emission_sphere_radius = 43.14
+emission_sphere_radius = 50.0
 angle_min = -89.99999
 angle_max = 90.000015
 direction = Vector3(0, -1, 0)
@@ -30,11 +30,12 @@ initial_velocity_min = 5.0
 initial_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
 scale_min = 20.0
-scale_max = 50.0
+scale_max = 70.0
 color = Color(0.8455873, 1, 0.8232569, 1)
 alpha_curve = SubResource("CurveTexture_yg6b3")
+turbulence_influence_max = 1.0
 
-[node name="ElectricParticles" type="GPUParticles2D"]
+[node name="ElectricParticles" type="GPUParticles2D" unique_id=1394460305]
 material = SubResource("ShaderMaterial_j2q1h")
 amount = 6
 texture = ExtResource("3_rgpod")

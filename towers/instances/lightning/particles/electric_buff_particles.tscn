@@ -1,43 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfwixconktk0c"]
+[gd_scene format=3 uid="uid://bfwixconktk0c"]
 
-[ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="1_othw7"]
-[ext_resource type="Texture2D" uid="uid://boajxbopenov6" path="res://assets/textures/sparks1.jpg" id="2_dmftr"]
 [ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="3_ytjjn"]
+[ext_resource type="Material" uid="uid://nw0soqj4jlmh" path="res://assets/shaders/buff_shader_material.tres" id="4_ytjjn"]
+[ext_resource type="Material" uid="uid://cp7jt43s0uktn" path="res://assets/particles/buff_particle_proccess_material.tres" id="5_0biyk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2q1h"]
-shader = ExtResource("1_othw7")
-shader_parameter/Dissolver_texture = ExtResource("2_dmftr")
-shader_parameter/Flame_texture = ExtResource("2_dmftr")
-
-[sub_resource type="Curve" id="Curve_px42t"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.994, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_yg6b3"]
-texture_mode = 1
-curve = SubResource("Curve_px42t")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_megvr"]
-particle_flag_rotate_y = true
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 43.14
-angle_min = -89.99999
-angle_max = 90.000015
-direction = Vector3(0, -1, 0)
-spread = 0.0
-initial_velocity_min = 5.0
-initial_velocity_max = 10.0
-gravity = Vector3(0, 0, 0)
-scale_min = 20.0
-scale_max = 50.0
-color = Color(0.6403528, 0.76133174, 0.9820785, 1)
-alpha_curve = SubResource("CurveTexture_yg6b3")
-
-[node name="ElectricBuffParticles" type="GPUParticles2D"]
-material = SubResource("ShaderMaterial_j2q1h")
-amount = 6
+[node name="ElectricBuffParticles" type="GPUParticles2D" unique_id=335697442]
+material = ExtResource("4_ytjjn")
+amount = 20
 texture = ExtResource("3_ytjjn")
-lifetime = 0.14
+lifetime = 2.0
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_megvr")
+process_material = ExtResource("5_0biyk")

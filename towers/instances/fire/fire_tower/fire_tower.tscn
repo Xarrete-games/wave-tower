@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://djdpfy88ujkfb"]
+[gd_scene format=3 uid="uid://djdpfy88ujkfb"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_f8b8m"]
 [ext_resource type="Script" uid="uid://e2332bmer7r0" path="res://towers/instances/fire/fire_tower/fire_tower.gd" id="2_t2lsm"]
@@ -90,13 +90,14 @@ scale_max = 20.0
 color_ramp = SubResource("GradientTexture1D_y736y")
 alpha_curve = SubResource("CurveTexture_3crl6")
 
-[node name="FireTower" instance=ExtResource("1_f8b8m")]
+[node name="FireTower" unique_id=801244625 instance=ExtResource("1_f8b8m")]
 script = ExtResource("2_t2lsm")
 fire_ball_scene = ExtResource("3_1o222")
 upgrade_sprite = SubResource("AtlasTexture_t2lsm")
 
 [node name="Sprite2D" parent="." index="3"]
-position = Vector2(0, -51)
+position = Vector2(0, -55)
+scale = Vector2(0.34, 0.34)
 region_rect = Rect2(0, 0, 475, 550)
 
 [node name="TowerArea" parent="." index="5"]
@@ -107,21 +108,19 @@ offset_left = -41.0
 offset_top = -117.0
 offset_right = 44.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10" unique_id=935438336]
 root_node = NodePath("../PointLight2D")
-libraries = {
-&"": SubResource("AnimationLibrary_p1ede")
-}
-autoplay = "RESET"
+libraries/ = SubResource("AnimationLibrary_p1ede")
+autoplay = &"RESET"
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="11"]
+[node name="PointLight2D" type="PointLight2D" parent="." index="11" unique_id=1621357233]
 position = Vector2(0, -93)
 color = Color(1, 0, 0, 1)
 energy = 0.5
 texture = ExtResource("5_e0k2h")
 texture_scale = 0.5
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="12"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="12" unique_id=1140648024]
 material = SubResource("ShaderMaterial_5rkhv")
 position = Vector2(-1, -92)
 amount = 10

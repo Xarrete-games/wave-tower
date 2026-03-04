@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cwyyp2r266blt"]
+[gd_scene format=3 uid="uid://cwyyp2r266blt"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ucjx1"]
 [ext_resource type="Script" uid="uid://bpvj36tgrsr8g" path="res://towers/instances/frost/frost_nova_tower/frost_nova_tower.gd" id="2_7kg10"]
@@ -65,26 +65,28 @@ curve = SubResource("Curve_5an2a")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n8vnu"]
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(75, 90, 1)
+emission_shape_offset = Vector3(0, -60, 0)
+emission_shape = 2
+emission_sphere_radius = 140.0
 angle_min = -89.99999
 angle_max = 90.000015
 inherit_velocity_ratio = 20.0
 direction = Vector3(0, 0, 0)
 spread = 0.0
 gravity = Vector3(0, 9.8, 0)
-scale_max = 8.0
+scale_max = 12.0
 alpha_curve = SubResource("CurveTexture_3kuch")
 
-[node name="FrostNovaTower" instance=ExtResource("1_ucjx1")]
+[node name="FrostNovaTower" unique_id=1436811178 instance=ExtResource("1_ucjx1")]
 script = ExtResource("2_7kg10")
 type = 2
 
-[node name="ProjectilSpawnPoint" type="Marker2D" parent="." index="3"]
+[node name="ProjectilSpawnPoint" type="Marker2D" parent="." index="3" unique_id=65424420]
 position = Vector2(0, 8)
 
 [node name="Sprite2D" parent="." index="4"]
-position = Vector2(0, -46)
+position = Vector2(0, -60)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_lemm1")
 region_rect = Rect2(998, 83, 367, 553)
 
@@ -100,24 +102,22 @@ offset_top = -100.0
 offset_right = 46.0
 offset_bottom = 25.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11" unique_id=2096719486]
 root_node = NodePath("../PointLight2D")
-libraries = {
-&"": SubResource("AnimationLibrary_p1ede")
-}
-autoplay = "RESET"
+libraries/ = SubResource("AnimationLibrary_p1ede")
+autoplay = &"RESET"
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="12"]
+[node name="PointLight2D" type="PointLight2D" parent="." index="12" unique_id=2059508590]
 position = Vector2(0, -120)
 color = Color(0, 1, 0.7741893, 1)
 energy = 0.2
 texture = ExtResource("3_nvigb")
 
-[node name="GPUParticlesFireAll" type="GPUParticles2D" parent="." index="13"]
+[node name="GPUParticlesSnowAll" type="GPUParticles2D" parent="." index="13" unique_id=1925168788]
 material = SubResource("ShaderMaterial_ie71e")
 position = Vector2(0, -120)
-amount = 30
+amount = 130
 texture = ExtResource("8_qfpti")
-lifetime = 5.0
+lifetime = 6.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_n8vnu")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bpmgxjjnk8kxe"]
+[gd_scene format=3 uid="uid://bpmgxjjnk8kxe"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_jbg6q"]
 [ext_resource type="Script" uid="uid://cvgwrv3uj7gss" path="res://towers/instances/frost/frost_tower/frost_tower.gd" id="2_iw8lg"]
@@ -78,32 +78,28 @@ gravity = Vector3(0, 9.8, 0)
 scale_max = 8.0
 alpha_curve = SubResource("CurveTexture_3kuch")
 
-[node name="FrostTower" instance=ExtResource("1_jbg6q")]
+[node name="FrostTower" unique_id=1290950096 instance=ExtResource("1_jbg6q")]
 script = ExtResource("2_iw8lg")
 upgrade_sprite = SubResource("AtlasTexture_iw8lg")
 
 [node name="Sprite2D" parent="." index="3"]
-position = Vector2(0, -65)
+position = Vector2(0, -75)
+scale = Vector2(0.34, 0.34)
 texture = ExtResource("2_q3wv5")
 region_rect = Rect2(0, 0, 475, 636)
 
-[node name="ProjectileSpawnPos" parent="." index="9"]
-position = Vector2(0, -99)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10" unique_id=1491257047]
 root_node = NodePath("../PointLight2D")
-libraries = {
-&"": SubResource("AnimationLibrary_p1ede")
-}
-autoplay = "RESET"
+libraries/ = SubResource("AnimationLibrary_p1ede")
+autoplay = &"RESET"
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="11"]
+[node name="PointLight2D" type="PointLight2D" parent="." index="11" unique_id=1821694666]
 position = Vector2(0, -88)
 color = Color(0, 1, 0.7741893, 1)
 energy = 0.2
 texture = ExtResource("4_y3lsx")
 
-[node name="GPUParticlesFireAll" type="GPUParticles2D" parent="." index="12"]
+[node name="GPUParticlesFireAll" type="GPUParticles2D" parent="." index="12" unique_id=970651994]
 material = SubResource("ShaderMaterial_v3f0e")
 position = Vector2(0, -100)
 amount = 10
@@ -111,3 +107,6 @@ texture = ExtResource("7_rkg42")
 lifetime = 5.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_su727")
+
+[node name="ProjectileSpawnPos" parent="." index="13"]
+position = Vector2(0, -99)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://byypsvgtaww3g"]
+[gd_scene format=3 uid="uid://byypsvgtaww3g"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_5hrp4"]
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="2_1wh8q"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://betmeynpmbdyk" path="res://towers/instances/lightning/particles/electric_particles.tscn" id="3_i6te2"]
 [ext_resource type="PackedScene" uid="uid://daqi7i1vflaq5" path="res://towers/instances/lightning/lightning_tower/projectile/lighting_ball_projectile.tscn" id="3_kngkr"]
 [ext_resource type="PackedScene" uid="uid://bfwixconktk0c" path="res://towers/instances/lightning/particles/electric_buff_particles.tscn" id="4_3bx21"]
+[ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="6_v3ab0"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="7_5h5yc"]
 [ext_resource type="Texture2D" uid="uid://d0aubaescaof5" path="res://assets/textures/buff_texture.png" id="8_v3ab0"]
 [ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="9_j0gjm"]
@@ -22,7 +23,7 @@ shader_parameter/Flame_texture = ExtResource("8_v3ab0")
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_3crl6"]
+[sub_resource type="CurveTexture" id="CurveTexture_5h5yc"]
 texture_mode = 1
 curve = SubResource("Curve_x5tnx")
 
@@ -30,14 +31,14 @@ curve = SubResource("Curve_x5tnx")
 offsets = PackedFloat32Array(0, 0.26839826, 0.48701298, 0.6991342, 1)
 colors = PackedColorArray(0.7980953, 0.81191105, 0.97023314, 1, 0.13380432, 0.80896187, 0.6326286, 1, 0.6037999, 0.76612836, 0.31711304, 1, 0.8210549, 0.9443838, 0.8516074, 1, 0.5189479, 0.7723388, 0.59261936, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_y736y"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v3ab0"]
 gradient = SubResource("Gradient_wjpmy")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c1yp4"]
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
 emission_shape = 1
-emission_sphere_radius = 200.0
+emission_sphere_radius = 250.0
 angle_min = 1.0728835e-05
 angle_max = 1.0728835e-05
 inherit_velocity_ratio = 20.0
@@ -46,42 +47,51 @@ spread = 5.0
 initial_velocity_max = 60.0
 gravity = Vector3(0, 0, 0)
 scale_min = 10.0
-scale_max = 50.0
-color_ramp = SubResource("GradientTexture1D_y736y")
-alpha_curve = SubResource("CurveTexture_3crl6")
+scale_max = 85.0
+color_ramp = SubResource("GradientTexture1D_v3ab0")
+alpha_curve = SubResource("CurveTexture_5h5yc")
 
-[node name="LightningOverchargeTower" instance=ExtResource("1_5hrp4")]
+[node name="LightningOverchargeTower" unique_id=1682269334 instance=ExtResource("1_5hrp4")]
 script = ExtResource("2_u5ijc")
 projectile_scene = ExtResource("3_kngkr")
 overcharge_particle_scene = ExtResource("4_3bx21")
 
 [node name="Sprite2D" parent="." index="3"]
-position = Vector2(0, -49)
+position = Vector2(0, -60)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_1wh8q")
 region_rect = Rect2(971, 7, 433, 543)
 
 [node name="CollisionShape2D" parent="TowerArea" index="0"]
 position = Vector2(0, -1)
 
-[node name="ElectricParticles" parent="." index="11" instance=ExtResource("3_i6te2")]
+[node name="PointLight2D" type="PointLight2D" parent="." index="11" unique_id=1320767301]
+position = Vector2(0, -106)
+color = Color(0.62295496, 1, 0.4661066, 1)
+energy = 0.5
+texture = ExtResource("6_v3ab0")
+offset = Vector2(0, -25)
+texture_scale = 1.5
+
+[node name="ElectricParticles" parent="." index="12" unique_id=314600749 instance=ExtResource("3_i6te2")]
 visible = false
 
-[node name="ElectricParticles2" parent="." index="12" instance=ExtResource("3_i6te2")]
-position = Vector2(0, -118)
+[node name="ElectricParticles2" parent="." index="13" unique_id=1163187168 instance=ExtResource("3_i6te2")]
+position = Vector2(0, -140)
 
-[node name="ElectricParticles3" parent="." index="13" instance=ExtResource("3_i6te2")]
+[node name="ElectricParticles3" parent="." index="14" unique_id=579444066 instance=ExtResource("3_i6te2")]
 visible = false
 position = Vector2(2, -48)
 
-[node name="BuffArea" type="Area2D" parent="." index="14"]
+[node name="BuffArea" type="Area2D" parent="." index="15" unique_id=973944440]
 collision_layer = 8
 collision_mask = 4
 
-[node name="BuffAreaShape" type="CollisionShape2D" parent="BuffArea" index="0"]
+[node name="BuffAreaShape" type="CollisionShape2D" parent="BuffArea" index="0" unique_id=1140894700]
 scale = Vector2(1, 0.5)
 shape = SubResource("CircleShape2D_kngkr")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="15"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="16" unique_id=1193016126]
 material = SubResource("ShaderMaterial_bvw1w")
 position = Vector2(3, -34)
 amount = 150

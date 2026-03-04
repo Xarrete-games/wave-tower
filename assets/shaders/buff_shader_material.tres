@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://nw0soqj4jlmh"]
+
+[ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="1_qsgt2"]
+[ext_resource type="Texture2D" uid="uid://d0aubaescaof5" path="res://assets/textures/buff_texture.png" id="2_0ugrd"]
+
+[resource]
+shader = ExtResource("1_qsgt2")
+shader_parameter/Dissolver_texture = ExtResource("2_0ugrd")
+shader_parameter/Flame_texture = ExtResource("2_0ugrd")

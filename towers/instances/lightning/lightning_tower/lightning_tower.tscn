@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://7hfxyb5g3ku"]
+[gd_scene format=3 uid="uid://7hfxyb5g3ku"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_y64o4"]
 [ext_resource type="Script" uid="uid://cl5pxh8r8evhq" path="res://towers/instances/lightning/lightning_tower/lightning_tower.gd" id="2_epe63"]
@@ -81,18 +81,19 @@ _data = {
 &"pulsing_light": SubResource("Animation_l042b")
 }
 
-[node name="LightningTower" instance=ExtResource("1_y64o4")]
+[node name="LightningTower" unique_id=262289933 instance=ExtResource("1_y64o4")]
 script = ExtResource("2_epe63")
 electric_ball_scene = ExtResource("3_vgy5y")
 upgrade_sprite = SubResource("AtlasTexture_epe63")
 type = 1
 
 [node name="Sprite2D" parent="." index="3"]
-position = Vector2(0, -51)
+position = Vector2(0, -55)
+scale = Vector2(0.34, 0.34)
 texture = ExtResource("3_epe63")
 region_rect = Rect2(0, 0, 475, 550)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="10"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="10" unique_id=1647855462]
 material = SubResource("ShaderMaterial_vfc8l")
 position = Vector2(0, -87)
 amount = 1
@@ -101,14 +102,12 @@ lifetime = 0.3
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_q28s5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11" unique_id=1333952057]
 root_node = NodePath("../PointLight2D")
-libraries = {
-&"": SubResource("AnimationLibrary_p1ede")
-}
-autoplay = "pulsing_light"
+libraries/ = SubResource("AnimationLibrary_p1ede")
+autoplay = &"pulsing_light"
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="12"]
+[node name="PointLight2D" type="PointLight2D" parent="." index="12" unique_id=929461338]
 position = Vector2(0, -86)
 color = Color(0.62295496, 1, 0.4661066, 1)
 energy = 0.3
