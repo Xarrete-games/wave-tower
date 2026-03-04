@@ -81,6 +81,12 @@ alpha_curve = SubResource("CurveTexture_3kuch")
 script = ExtResource("2_7kg10")
 type = 2
 
+[node name="CristalLight" parent="." index="1"]
+color = Color(0.3372549, 1, 1, 1)
+attack_animation_time = 0.3
+max_scale = 3.0
+max_energy = 0.3
+
 [node name="ProjectilSpawnPoint" type="Marker2D" parent="." index="3" unique_id=65424420]
 position = Vector2(0, 8)
 
