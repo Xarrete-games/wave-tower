@@ -44,6 +44,7 @@ window/size/mode=2
 window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="uid://c5nyfchuotiov"
 
 [global_group]
 
