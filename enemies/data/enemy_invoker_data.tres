@@ -1,8 +1,15 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://b71yn4rv5rs5l"]
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://b71yn4rv5rs5l"]
 
+[ext_resource type="Script" uid="uid://d4kyl7723aunc" path="res://enemies/enemy_wave_range.gd" id="1_b23po"]
 [ext_resource type="Texture2D" uid="uid://bp6hoepjfxoo" path="res://assets/sprites/enemies/invoker/invoker_front_0000_invoker1.png.png" id="1_s0iql"]
 [ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_svv2o"]
 [ext_resource type="PackedScene" uid="uid://crk2ly48vsxn4" path="res://enemies/variations/enemy_invoker.tscn" id="2_b23po"]
+
+[sub_resource type="Resource" id="Resource_p0tox"]
+script = ExtResource("1_b23po")
+initial_wave = 11
+final_wave = 30
+metadata/_custom_type_script = "uid://d4kyl7723aunc"
 
 [resource]
 script = ExtResource("1_svv2o")
@@ -13,5 +20,5 @@ scene = ExtResource("2_b23po")
 max_health = 200
 base_speed = 90.0
 weight = 6
-wave_to_unlock = 11
+available_waves = Array[ExtResource("1_b23po")]([SubResource("Resource_p0tox")])
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

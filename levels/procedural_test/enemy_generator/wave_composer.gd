@@ -174,17 +174,9 @@ func _create_boss_group(available_budget: int, wave_number: int) -> WaveGroup:
 	if affordable_bosses.size() == 0:
 		return null
 
-	# Highest unlocked boss tier available for this wave (10, 20, 30, ...).
-	var best_tier: int = -1
-	for data in affordable_bosses:
-		if data.wave_to_unlock > best_tier:
-			best_tier = data.wave_to_unlock
-
-	# If multiple bosses share the same tier, pick one at random.
-	var tier_bosses: Array[EnemyData] = affordable_bosses.filter(func(data: EnemyData) -> bool:
-		return data.wave_to_unlock == best_tier
-	)
-	var boss: EnemyData = tier_bosses[randi() % tier_bosses.size()]
+	# Boss progression is defined by available_waves ranges.
+	# Pick any currently available and affordable boss.
+	var boss: EnemyData = affordable_bosses[randi() % affordable_bosses.size()]
 
 	var group: WaveGroup = WaveGroup.new()
 	group.pressure = PressureType.TANK
@@ -251,9 +243,31 @@ func _is_type_unlocked(type: EnemyData.Type, wave_number: int) -> bool:
 
 ## Whether a specific enemy is available at [param wave_number].
 ## Checks both the type-level unlock (from WaveConfig) and the
-## per-enemy unlock (from EnemyData.wave_to_unlock).
+## per-enemy ranges (from EnemyData.available_waves).
 func _is_unlocked(data: EnemyData, wave_number: int) -> bool:
-	return _is_type_unlocked(data.type, wave_number) and wave_number >= data.wave_to_unlock
+	return _is_type_unlocked(data.type, wave_number) and _is_wave_available_for_enemy(data, wave_number)
+
+## True when [param wave_number] falls inside one of [param data]'s ranges.
+## Empty ranges are treated as always available (legacy-compatible fallback).
+func _is_wave_available_for_enemy(data: EnemyData, wave_number: int) -> bool:
+	if data.available_waves.is_empty():
+		return true
+
+	for wave_range in data.available_waves:
+		if wave_range == null:
+			continue
+		if _is_wave_in_range(wave_number, wave_range):
+			return true
+
+	return false
+
+## Inclusive range check. A final wave <= 0 means "no upper bound".
+func _is_wave_in_range(wave_number: int, wave_range: EnemyWaveRange) -> bool:
+	if wave_number < wave_range.initial_wave:
+		return false
+	if wave_range.final_wave <= 0:
+		return true
+	return wave_number <= wave_range.final_wave
 
 # ---------------------------------------------------------
 # BUDGET FILLING

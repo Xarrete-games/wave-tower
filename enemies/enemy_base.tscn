@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://diax8n45uy1cu"]
+[gd_scene format=3 uid="uid://diax8n45uy1cu"]
 
 [ext_resource type="Script" uid="uid://cafqn48q104fs" path="res://enemies/enemy.gd" id="1_fenyl"]
 [ext_resource type="Texture2D" uid="uid://ck7funcss1gra" path="res://assets/sprites/enemies/espectro/sp1.png" id="2_puprq"]
@@ -79,14 +79,14 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=90748266 groups=["enemy"]]
 collision_mask = 2
 script = ExtResource("1_fenyl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=972753897]
 shape = SubResource("CircleShape2D_mujyd")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1853220279]
 position = Vector2(0, -0.9999981)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_mujyd")
@@ -94,19 +94,19 @@ animation = &"top right"
 autoplay = "down right"
 frame_progress = 0.43861625
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1289354515]
 
-[node name="HealthBar" parent="." instance=ExtResource("7_puprq")]
+[node name="HealthBar" parent="." unique_id=937412680 instance=ExtResource("7_puprq")]
 offset_left = -20.0
 offset_top = -149.0
 offset_right = -20.0
 offset_bottom = -149.0
 
-[node name="DebuffHandler" type="Node" parent="."]
+[node name="DebuffHandler" type="Node" parent="." unique_id=636989417]
 script = ExtResource("21_phiiv")
 
-[node name="TargetPositionLeft" type="Marker2D" parent="."]
+[node name="TargetPositionLeft" type="Marker2D" parent="." unique_id=171294548]
 unique_name_in_owner = true
 
-[node name="TargetPositionRight" type="Marker2D" parent="."]
+[node name="TargetPositionRight" type="Marker2D" parent="." unique_id=429096716]
 unique_name_in_owner = true
