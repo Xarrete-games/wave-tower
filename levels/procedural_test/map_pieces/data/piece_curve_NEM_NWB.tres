@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://djp73bol5hvl8"]
+
+[ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/procedural_test/map_pieces/edge.gd" id="1_v1jka"]
+[ext_resource type="PackedScene" uid="uid://gptfdhech7il" path="res://levels/procedural_test/map_pieces/instances/piece_curve_NEM_NWB.tscn" id="2_v1jka"]
+[ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/procedural_test/map_pieces/map_piece_data.gd" id="3_h6fe5"]
+
+[sub_resource type="Resource" id="Resource_v1jka"]
+script = ExtResource("1_v1jka")
+
+[sub_resource type="Resource" id="Resource_ycytc"]
+script = ExtResource("1_v1jka")
+dir = 3
+pos = 2
+
+[resource]
+script = ExtResource("3_h6fe5")
+edges = Array[ExtResource("1_v1jka")]([SubResource("Resource_v1jka"), SubResource("Resource_ycytc")])
+scene = ExtResource("2_v1jka")
+metadata/_custom_type_script = "uid://ndxexeof5w0k"

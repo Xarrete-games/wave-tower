@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="MapPieceData" load_steps=6 format=3 uid="uid://rsptiojla5gu"]
+[gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://rsptiojla5gu"]
 
 [ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/procedural_test/map_pieces/edge.gd" id="1_uji32"]
-[ext_resource type="PackedScene" uid="uid://d25osyowoixh3" path="res://levels/procedural_test/map_pieces/instances/piece_curve_SE_SW_03.tscn" id="2_uji32"]
+[ext_resource type="PackedScene" uid="uid://d25osyowoixh3" path="res://levels/procedural_test/map_pieces/instances/piece_curve_SET_SWB_03.tscn" id="2_uji32"]
 [ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/procedural_test/map_pieces/map_piece_data.gd" id="3_ir4r2"]
 
 [sub_resource type="Resource" id="Resource_be84u"]

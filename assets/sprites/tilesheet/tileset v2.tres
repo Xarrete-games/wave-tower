@@ -11,6 +11,9 @@ tile_data = PackedInt32Array(0, 131072, 2, 65536, 65536, 3, 1, 196608, 3, 65537,
 [sub_resource type="TileMapPattern" id="TileMapPattern_iqsnt"]
 tile_data = PackedInt32Array(0, 393216, 7, 65536, 65536, 1, 131072, 65536, 2, 1, 196608, 1, 65537, 196608, 7, 131073, 65536, 7, 2, 196608, 2, 65538, 65536, 7, 131074, 458752, 2)
 
+[sub_resource type="TileMapPattern" id="TileMapPattern_igasj"]
+tile_data = PackedInt32Array(65536, 196608, 6, 131072, 524288, 3, 1, 262144, 2, 65537, 0, 6, 131073, 262144, 7, 65538, 262144, 4)
+
 [sub_resource type="TileMapPattern" id="TileMapPattern_315d3"]
 tile_data = PackedInt32Array(0, 65536, 2, 65536, 0, 2, 131072, 589824, 0, 1, 65536, 6, 65537, 262144, 7, 131073, 0, 4, 2, 393216, 3, 65538, 196608, 7, 131074, 65536, 4)
 
@@ -25,6 +28,15 @@ tile_data = PackedInt32Array(0, 393216, 6, 65536, 65536, 1, 131072, 0, 2, 196608
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_vuf8p"]
 tile_data = PackedInt32Array(0, 196608, 2, 65536, 327680, 0, 131072, 65536, 4, 1, 196608, 2, 65537, 131072, 6, 131073, 65536, 4, 2, 196608, 2, 65538, 0, 6, 131074, 65536, 4)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_fkhku"]
+tile_data = PackedInt32Array(0, 458752, 4, 65536, 0, 6, 1, 131072, 6, 65537, 131072, 7, 131073, 65536, 5, 65538, 196608, 5)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_p6bcf"]
+tile_data = PackedInt32Array(65536, 65536, 1, 1, 196608, 1, 65537, 196608, 7, 131073, 65536, 7, 65538, 65536, 7, 131074, 458752, 2)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_ufuke"]
+tile_data = PackedInt32Array(65536, 0, 2, 1, 65536, 6, 65537, 262144, 7, 131073, 0, 4, 2, 393216, 3, 65538, 196608, 7)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a14cg"]
 texture = ExtResource("1_iqsnt")
@@ -707,3 +719,7 @@ pattern_3 = SubResource("TileMapPattern_54266")
 pattern_4 = SubResource("TileMapPattern_ekfql")
 pattern_5 = SubResource("TileMapPattern_8c8kp")
 pattern_6 = SubResource("TileMapPattern_vuf8p")
+pattern_7 = SubResource("TileMapPattern_fkhku")
+pattern_8 = SubResource("TileMapPattern_p6bcf")
+pattern_9 = SubResource("TileMapPattern_ufuke")
+pattern_10 = SubResource("TileMapPattern_igasj")
