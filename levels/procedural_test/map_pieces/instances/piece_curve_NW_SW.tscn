@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bxxphpxqsh7c8" path="res://levels/level_tile_map/level_tile_map.gd" id="4_n56kp"]
 [ext_resource type="Texture2D" uid="uid://8k5oyrulleh2" path="res://assets/sprites/decoration/Tree1.png" id="5_5mjkx"]
 [ext_resource type="Texture2D" uid="uid://bhmn4g1282vrt" path="res://assets/sprites/decoration/Tree2.png" id="6_au2ck"]
+[ext_resource type="Texture2D" uid="uid://c22o1eieco5r3" path="res://assets/sprites/decoration/Plant1.png" id="7_au2ck"]
 
 [sub_resource type="Curve2D" id="Curve2D_7ccwn"]
 _data = {
@@ -85,3 +86,38 @@ texture = ExtResource("5_5mjkx")
 position = Vector2(62, 123)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("6_au2ck")
+
+[node name="Plant1" type="Sprite2D" parent="Decoration" unique_id=1280469730]
+position = Vector2(-132, 186)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_au2ck")
+
+[node name="Plant2" type="Sprite2D" parent="Decoration" unique_id=2009483690]
+position = Vector2(-91, 206)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_au2ck")
+
+[node name="Plant3" type="Sprite2D" parent="Decoration" unique_id=1650261049]
+position = Vector2(-44.000004, 226)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_au2ck")
+
+[node name="Plant4" type="Sprite2D" parent="Decoration" unique_id=1307330971]
+position = Vector2(2.9999962, 254)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_au2ck")
+
+[node name="Plant5" type="Sprite2D" parent="Decoration" unique_id=269016529]
+position = Vector2(49.999996, 274)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_au2ck")
+
+[node name="Plant6" type="Sprite2D" parent="Decoration" unique_id=502561627]
+position = Vector2(99, 297)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_au2ck")
+
+[node name="Plant7" type="Sprite2D" parent="Decoration" unique_id=665760666]
+position = Vector2(144, 319)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_au2ck")
