@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapPieceData" load_steps=6 format=3 uid="uid://cgllu1xbmgpa8"]
+[gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://cgllu1xbmgpa8"]
 
 [ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/procedural_test/map_pieces/edge.gd" id="1_88qd7"]
 [ext_resource type="PackedScene" uid="uid://bvqv60mgu1pwg" path="res://levels/procedural_test/map_pieces/instances/piece_curve_NEM_NWM.tscn" id="2_e11j0"]

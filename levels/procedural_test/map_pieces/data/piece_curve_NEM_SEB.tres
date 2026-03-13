@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://cqpuyhftnm606"]
 
 [ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/procedural_test/map_pieces/edge.gd" id="1_xswny"]
-[ext_resource type="PackedScene" uid="uid://dru1g2ll6q7av" path="res://levels/procedural_test/map_pieces/instances/piece_straight_NEM_SEB.tscn" id="2_1s56k"]
+[ext_resource type="PackedScene" uid="uid://dru1g2ll6q7av" path="res://levels/procedural_test/map_pieces/instances/piece_curve_NEM_SEB.tscn" id="2_1s56k"]
 [ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/procedural_test/map_pieces/map_piece_data.gd" id="2_hlguo"]
 
 [sub_resource type="Resource" id="Resource_v1aig"]
