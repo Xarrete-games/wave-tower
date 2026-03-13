@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapPieceData" load_steps=6 format=3 uid="uid://burgoo8d8yajr"]
+[gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://burgoo8d8yajr"]
 
 [ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/procedural_test/map_pieces/edge.gd" id="1_d67vw"]
 [ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/procedural_test/map_pieces/map_piece_data.gd" id="2_2ah5g"]
