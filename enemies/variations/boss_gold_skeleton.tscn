@@ -167,11 +167,11 @@ max_health = 30000.0
 base_gold_value = 50
 damage = 999
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="CollisionShape2D" parent="." index="0" unique_id=972753897]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_5ongo")
 
-[node name="AnimatedSprite2D" parent="." index="1"]
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
 light_mask = 0
 position = Vector2(0, -58)
 scale = Vector2(0.25, 0.25)
@@ -186,14 +186,14 @@ energy = 1.2
 blend_mode = 1
 texture = SubResource("GradientTexture2D_6dubi")
 
-[node name="HealthBar" parent="." index="4"]
+[node name="HealthBar" parent="." index="4" unique_id=937412680]
 offset_left = -19.0
 offset_top = -229.0
 offset_right = 21.0
 offset_bottom = -175.0
 
-[node name="TargetPositionLeft" parent="." index="6"]
+[node name="TargetPositionLeft" parent="." index="6" unique_id=171294548]
 position = Vector2(0, -82)
 
-[node name="TargetPositionRight" parent="." index="7"]
+[node name="TargetPositionRight" parent="." index="7" unique_id=429096716]
 position = Vector2(-2, -81)
