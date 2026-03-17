@@ -9,6 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://b522y4oy5hi75" path="res://assets/textures/flame5.jpg" id="5_oxloy"]
 [ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="6_nw4eg"]
 
+[sub_resource type="Curve2D" id="Curve2D_iasse"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -699, 98, 0, 0, 0, 0, -632, 52, 0, 0, 0, 0, -656.9857, -8.037781, 0, 0, 0, 0, -628, -54, 0, 0, 0, 0, -707, -99)
+}
+point_count = 5
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vbacx"]
 shader = ExtResource("3_0i8ll")
 shader_parameter/Dissolver_texture = ExtResource("4_iasse")
@@ -68,6 +74,9 @@ texture = ExtResource("2_iasse")
 [node name="LevelTileMap3" parent="MapPieceTileMap/LevelTileMap/LevelTileMap2" index="1" unique_id=422287724]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD7//z/AAAFAAYAAAD7//3/AAAFAAcAAAD8//z/AAAGAAYAAAD8//3/AAAGAAcAAAD9//z/AAAHAAYAAAD9//3/AAAHAAcAAAD+//z/AAAIAAYAAAD+//3/AAAIAAcAAAD7//7/AAAFAAYAAAD8//7/AAAGAAYAAAD9//7/AAAHAAYAAAD+//7/AAAIAAYAAAD///z/AAAFAAYAAAD///3/AAAFAAcAAAAAAPz/AAAGAAYAAAAAAP3/AAAGAAcAAAABAPz/AAAHAAYAAAABAP3/AAAHAAcAAAACAPz/AAAFAAYAAAACAP3/AAAIAAcAAAD///7/AAAFAAYAAAAAAP7/AAAGAAYAAAABAP7/AAAHAAYAAAACAP7/AAAFAAcAAAD8////AAAFAAYAAAD9////AAAGAAYAAAD+////AAAFAAYAAAD/////AAAGAAYAAAAAAP//AAAHAAYAAAABAP//AAAIAAYAAAD+/wAAAAAFAAYAAAD//wAAAAAGAAYAAAAAAAAAAAAHAAYAAAABAAAAAAAIAAYAAAD+/wEAAAAFAAcAAAD//wEAAAAGAAcAAAAAAAEAAAAHAAcAAAABAAEAAAAIAAcAAAD+//v/AAAIAAYAAAD///v/AAAFAAcAAAAAAPv/AAAGAAcAAAABAPv/AAAHAAcAAAD///r/AAAGAAcAAAAAAPr/AAAHAAcAAAABAPr/AAAIAAcAAAD///n/AAAGAAYAAAAAAPn/AAAHAAYAAAABAPn/AAAIAAYAAAD9//r/AAAHAAYAAAD+//r/AAAIAAYAAAD8//v/AAAGAAYAAAD9//v/AAAHAAYAAAD7//v/AAAFAAYAAAD8//r/AAAFAAYAAAACAP//AAAFAAYAAAACAAAAAAAFAAcAAAACAPr/AAAFAAYAAAACAPv/AAAFAAcAAAADAPz/AAAFAAcAAAADAP3/AAAFAAYAAAADAP7/AAAFAAYAAAADAP//AAAFAAcAAAADAPv/AAAFAAYAAAAEAP//AAAFAAYAAAADAAAAAAAFAAYAAAAEAP7/AAAFAAYAAAAEAP3/AAAFAAYAAAA=")
+
+[node name="route_SW_NW" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="0" unique_id=406205623]
+curve = SubResource("Curve2D_iasse")
 
 [node name="PointLight2D" type="PointLight2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="0" unique_id=1442990622]
 position = Vector2(183, -76)
