@@ -86,7 +86,7 @@ texture = ExtResource("2_0i8ll")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="1" unique_id=806647280]
 light_mask = 3
-position = Vector2(184, -535)
+position = Vector2(191, -507)
 color = Color(1, 0, 0, 1)
 texture = ExtResource("2_0i8ll")
 
