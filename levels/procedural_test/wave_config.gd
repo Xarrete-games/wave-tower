@@ -46,3 +46,5 @@ class_name WaveConfig extends Resource
 ## Ratio [0.0–1.0] of the budget reserved for the primary pressure type.
 ## The remainder is filled with a random mix of unlocked enemy types.
 @export_range(0.0, 1.0) var primary_pressure_ratio: float = 0.7
+
+@export var wave_chances: Array[WaveTypeChance] = []
