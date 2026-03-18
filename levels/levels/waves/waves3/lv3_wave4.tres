@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyWave" format=3 uid="uid://cvs4hedilby7y"]
 
-[ext_resource type="Script" uid="uid://dxrvobswk6in5" path="res://enemies/enemy_generator/resources_definitions/enemy_group.gd" id="1_s7cxe"]
-[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator/resources_definitions/enemy_wave.gd" id="4_3w1n2"]
+[ext_resource type="Script" uid="uid://dxrvobswk6in5" path="res://enemies/enemy_generator_legacy/resources_definitions/enemy_group.gd" id="1_s7cxe"]
+[ext_resource type="Script" uid="uid://civj4pbtbhl5o" path="res://enemies/enemy_generator_legacy/resources_definitions/enemy_wave.gd" id="4_3w1n2"]
 
 [sub_resource type="Resource" id="Resource_1tieh"]
 script = ExtResource("1_s7cxe")
