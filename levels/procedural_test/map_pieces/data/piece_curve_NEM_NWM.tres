@@ -6,7 +6,6 @@
 
 [sub_resource type="Resource" id="edge_NE"]
 script = ExtResource("1_88qd7")
-pos = 2
 
 [sub_resource type="Resource" id="edge_NW"]
 script = ExtResource("1_88qd7")

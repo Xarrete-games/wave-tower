@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://c2dhmerw1xbnp"]
+[gd_scene format=4 uid="uid://c2dhmerw1xbnp"]
 
 [ext_resource type="PackedScene" uid="uid://2ajf0sqc0tsw" path="res://levels/procedural_test/map_pieces/map_piece_base.tscn" id="1_817sk"]
 [ext_resource type="Texture2D" uid="uid://bgc2lrnpc4gpv" path="res://assets/sprites/decoration/Bush1.png" id="2_ke1jl"]
@@ -7,69 +7,69 @@
 
 [sub_resource type="Curve2D" id="Curve2D_817sk"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 169, -341, 0, 0, 0, 0, 185, -294, 0, 0, 0, 0, 502, -134, 0, 0, 0, 0, 539, -71, 0, 0, 0, 0, 364, 202, 0, 0, 0, 0, 66, 356, 0, 0, 0, 0, -55, 353, 0, 0, 0, 0, -498, 126, 0, 0, 0, 0, -210, -36, 0, 0, 0, 0, -428, -164, 0, 0, 0, 0, -177, -297, 0, 0, 0, 0, -166, -343)
+"points": PackedVector2Array(0, 0, 0, 0, 160, -320, 0, 0, 0, 0, 185, -294, 0, 0, 0, 0, 502, -134, 0, 0, 0, 0, 539, -71, 0, 0, 0, 0, 364, 202, 0, 0, 0, 0, 66, 356, 0, 0, 0, 0, -55, 353, 0, 0, 0, 0, -498, 126, 0, 0, 0, 0, -210, -36, 0, 0, 0, 0, -428, -164, 0, 0, 0, 0, -177, -297, 0, 0, 0, 0, -144, -328)
 }
 point_count = 12
 
-[node name="MapPieceBase" instance=ExtResource("1_817sk")]
+[node name="MapPieceBase2" unique_id=1991031857 instance=ExtResource("1_817sk")]
 
-[node name="MapPieceTileMap" parent="." index="0"]
+[node name="MapPieceTileMap" parent="." index="0" unique_id=1193041349]
 tile_map_data = PackedByteArray("AAD6/wAAAAAGAAMAAAD6////AAADAAQAAAD6/wEAAAABAAcAAAD6/wIAAAABAAQAAAD6/wMAAAAIAAcAAAD6/wQAAAAIAAYAAAD7////AAAGAAAAAAD7/wAAAAADAAIAAAD7/wEAAAABAAYAAAD7/wIAAAABAAQAAAD7/wMAAAAGAAAAAAD7/wQAAAAIAAcAAAD8/wAAAAADAAIAAAD9/wAAAAAEAAIAAAD+/wAAAAAIAAcAAAD//wAAAAAFAAcAAAD/////AAAGAAYAAAD///7/AAAIAAcAAAD///3/AAAFAAcAAAD///z/AAAIAAYAAAD///v/AAABAAQAAAD//wEAAAAGAAcAAAD//wIAAAAIAAYAAAD//wMAAAAIAAYAAAD//wQAAAAGAAAAAAD//wUAAAADAAIAAAAAAAAAAAAGAAcAAAABAAAAAAAGAAYAAAACAAAAAAAIAAcAAAADAAAAAAAFAAYAAAAEAAAAAAAJAAQAAAD6//3/AAADAAQAAAD6//7/AAADAAQAAAD7//3/AAAFAAYAAAD7//7/AAAGAAcAAAD8//3/AAAGAAYAAAD8//7/AAAIAAcAAAD8////AAAHAAcAAAD8/wEAAAADAAcAAAD8/wIAAAAIAAMAAAD8/wMAAAABAAIAAAD8/wQAAAABAAIAAAD9//3/AAAIAAcAAAD9//7/AAAIAAYAAAD9////AAAGAAYAAAD9/wEAAAAAAAYAAAD9/wIAAAADAAYAAAD9/wMAAAAEAAcAAAD9/wQAAAAEAAYAAAD+//3/AAAIAAYAAAD+//7/AAAIAAYAAAD+////AAAHAAYAAAD+/wEAAAAEAAQAAAD+/wIAAAADAAQAAAD+/wMAAAADAAQAAAD+/wQAAAADAAQAAAAAAP3/AAAGAAcAAAAAAP7/AAAIAAYAAAAAAP//AAAIAAcAAAAAAAEAAAAGAAYAAAAAAAIAAAAHAAcAAAAAAAMAAAAIAAYAAAAAAAQAAAAFAAYAAAABAP3/AAAHAAYAAAABAP7/AAAHAAcAAAABAP//AAAHAAcAAAABAAEAAAAIAAcAAAABAAIAAAAIAAcAAAABAAMAAAAHAAcAAAABAAQAAAAGAAYAAAACAP3/AAAAAAIAAAACAP7/AAAFAAYAAAACAP//AAAHAAYAAAACAAEAAAAIAAYAAAACAAIAAAAIAAcAAAACAAMAAAAHAAYAAAACAAQAAAAGAAcAAAADAP3/AAADAAcAAAADAP7/AAAJAAQAAAADAP//AAAAAAIAAAADAAEAAAAGAAcAAAADAAIAAAAIAAYAAAADAAMAAAAFAAcAAAADAAQAAAAGAAYAAAAEAP3/AAAFAAIAAAAEAP7/AAADAAYAAAAEAP//AAADAAYAAAAEAAEAAAAIAAQAAAAEAAIAAAAIAAQAAAAEAAMAAAAIAAQAAAAEAAQAAAAIAAQAAAD6//v/AAAHAAYAAAD6//z/AAAEAAQAAAD7//v/AAAAAAQAAAD7//z/AAAGAAYAAAD8//v/AAABAAQAAAD8//z/AAAIAAYAAAD9//v/AAABAAQAAAD9//z/AAAGAAcAAAD+//v/AAABAAQAAAD+//z/AAAFAAcAAAAAAPv/AAABAAQAAAAAAPz/AAAGAAcAAAABAPv/AAAJAAIAAAABAPz/AAAFAAcAAAACAPv/AAACAAcAAAACAPz/AAAJAAQAAAADAPv/AAAFAAIAAAADAPz/AAAAAAcAAAAEAPv/AAAHAAcAAAAEAPz/AAAEAAQAAAD6/wUAAAABAAAAAAD7/wUAAAABAAAAAAD8/wUAAAABAAIAAAD9/wUAAAABAAYAAAD+/wUAAAAGAAMAAAAAAAUAAAADAAIAAAABAAUAAAADAAIAAAACAAUAAAADAAIAAAADAAUAAAADAAIAAAAEAAUAAAAHAAQAAAD4/wYAAAAGAAYAAAD5/wYAAAAGAAYAAAD5/wUAAAAIAAcAAAD5/wQAAAAFAAYAAAD5/wMAAAAIAAYAAAD5/wIAAAAAAAQAAAD5/wEAAAACAAcAAAD4//n/AAAIAAcAAAD4//r/AAAIAAcAAAD4//v/AAADAAIAAAD4//z/AAAAAAYAAAD4//3/AAAIAAMAAAD4//7/AAABAAIAAAD4////AAABAAIAAAD4/wAAAAABAAIAAAD4/wEAAAAAAAIAAAD4/wIAAAAGAAAAAAD4/wMAAAAGAAYAAAD4/wQAAAAHAAYAAAD4/wUAAAAHAAcAAAD4/wcAAAAFAAcAAAD5//n/AAAIAAYAAAD5//r/AAAHAAAAAAD5//v/AAAEAAIAAAD5//z/AAABAAcAAAD5//3/AAAAAAYAAAD5//7/AAAAAAYAAAD5////AAAAAAcAAAD5/wAAAAAAAAcAAAD5/wcAAAAFAAYAAAD6//n/AAABAAIAAAD6//r/AAAAAAIAAAD6/wYAAAAFAAYAAAD6/wcAAAAGAAYAAAD7//n/AAABAAYAAAD7//r/AAACAAYAAAD7/wYAAAAHAAcAAAD7/wcAAAAGAAcAAAD8//n/AAAGAAMAAAD8//r/AAABAAcAAAD8/wYAAAAAAAIAAAD8/wcAAAAFAAYAAAD9//n/AAAGAAQAAAD9//r/AAABAAcAAAD9/wYAAAACAAYAAAD9/wcAAAAAAAQAAAD+//n/AAAGAAQAAAD+//r/AAACAAYAAAD+/wYAAAAEAAYAAAD+/wcAAAABAAQAAAD///n/AAADAAIAAAD///r/AAADAAcAAAD//wYAAAABAAYAAAD//wcAAAABAAQAAAAAAPn/AAADAAIAAAAAAPr/AAAEAAYAAAAAAAYAAAAAAAcAAAAAAAcAAAABAAQAAAABAPn/AAADAAIAAAABAPr/AAAAAAcAAAABAAYAAAADAAYAAAABAAcAAAABAAQAAAACAPn/AAAEAAIAAAACAPr/AAACAAYAAAACAAYAAAABAAYAAAACAAcAAAABAAQAAAADAPn/AAAGAAAAAAADAPr/AAAEAAQAAAADAAYAAAABAAYAAAADAAcAAAABAAQAAAAEAPn/AAAFAAYAAAAEAPr/AAAHAAcAAAAEAAYAAAABAAYAAAAEAAcAAAABAAQAAAAFAPn/AAAFAAcAAAAFAPr/AAAFAAYAAAAFAPv/AAAHAAYAAAAFAPz/AAAIAAcAAAAFAP3/AAAHAAcAAAAFAP7/AAAEAAQAAAAFAP//AAAFAAIAAAAFAAAAAAAAAAYAAAAFAAEAAAABAAcAAAAFAAIAAAAAAAYAAAAFAAMAAAAAAAYAAAAFAAQAAAAEAAcAAAAFAAUAAAAEAAcAAAAFAAYAAAADAAYAAAAFAAcAAAABAAUAAAAGAPn/AAAGAAAAAAAGAPr/AAAIAAcAAAAGAPv/AAAHAAcAAAAGAPz/AAAFAAcAAAAGAP3/AAAGAAcAAAAGAP7/AAAGAAcAAAAGAP//AAAHAAcAAAAGAAAAAAAEAAQAAAAGAAEAAAADAAQAAAAGAAIAAAADAAQAAAAGAAMAAAADAAQAAAAGAAQAAAADAAQAAAAGAAUAAAADAAQAAAAGAAYAAAADAAUAAAAGAAcAAAAHAAYAAAA=")
 
-[node name="LevelTileMap" parent="MapPieceTileMap" index="0"]
+[node name="LevelTileMap" parent="MapPieceTileMap" index="0" unique_id=378720069]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD4/wYAAAAFAAYAAAD4/wcAAAAHAAcAAAD5/wYAAAAHAAYAAAD5/wcAAAAGAAcAAAD6/wcAAAAHAAcAAAD5/wUAAAAFAAYAAAD4/wUAAAAGAAcAAAD4//n/AAAFAAcAAAA=")
 
-[node name="LevelTileMap2" parent="MapPieceTileMap/LevelTileMap" index="0"]
+[node name="LevelTileMap2" parent="MapPieceTileMap/LevelTileMap" index="0" unique_id=399761272]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD4/wYAAAAGAAcAAAA=")
 
-[node name="route_NE_NW" type="Path2D" parent="Routes" index="0"]
+[node name="route_NE_NW" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="0" unique_id=1941589532]
 curve = SubResource("Curve2D_817sk")
 
-[node name="Decoration" parent="." index="2"]
+[node name="Decoration" parent="." index="2" unique_id=1880309883]
 scale = Vector2(0.2, 0.2)
 
-[node name="Bush1" type="Sprite2D" parent="Decoration" index="0"]
+[node name="Bush1" type="Sprite2D" parent="Decoration" index="0" unique_id=364779102]
 position = Vector2(1350.0001, 555)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_ke1jl")
 
-[node name="Bush2" type="Sprite2D" parent="Decoration" index="1"]
+[node name="Bush2" type="Sprite2D" parent="Decoration" index="1" unique_id=1039378832]
 position = Vector2(1625.0001, 100.00001)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_ke1jl")
 
-[node name="Bush3" type="Sprite2D" parent="Decoration" index="2"]
+[node name="Bush3" type="Sprite2D" parent="Decoration" index="2" unique_id=667188286]
 position = Vector2(1925.0001, -330.00003)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_ke1jl")
 
-[node name="Bush4" type="Sprite2D" parent="Decoration" index="3"]
+[node name="Bush4" type="Sprite2D" parent="Decoration" index="3" unique_id=1603208700]
 position = Vector2(2534.8, 844.80005)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_ke1jl")
 
-[node name="Bush5" type="Sprite2D" parent="Decoration" index="4"]
+[node name="Bush5" type="Sprite2D" parent="Decoration" index="4" unique_id=1401059774]
 position = Vector2(2809.8, 389.80005)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_ke1jl")
 
-[node name="Bush6" type="Sprite2D" parent="Decoration" index="5"]
+[node name="Bush6" type="Sprite2D" parent="Decoration" index="5" unique_id=335644929]
 position = Vector2(3109.8, -40.19998)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_ke1jl")
 
-[node name="Plant2" type="Sprite2D" parent="Decoration" index="6"]
+[node name="Plant2" type="Sprite2D" parent="Decoration" index="6" unique_id=351752325]
 position = Vector2(-129.99998, 1034.9999)
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("3_j77ux")
 
-[node name="Tree3" type="Sprite2D" parent="Decoration" index="7"]
+[node name="Tree3" type="Sprite2D" parent="Decoration" index="7" unique_id=1604892856]
 position = Vector2(-65, 84.99999)
 scale = Vector2(4.9999995, 4.9999995)
 texture = ExtResource("4_hnp0q")
 
-[node name="Plant1" type="Sprite2D" parent="Decoration" index="8"]
+[node name="Plant1" type="Sprite2D" parent="Decoration" index="8" unique_id=402211829]
 position = Vector2(150, 1125)
 texture = ExtResource("3_j77ux")
