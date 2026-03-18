@@ -360,21 +360,11 @@ func _get_all_available(wave_number: int) -> Array[EnemyData]:
 		return data.type != EnemyData.Type.BOSS and _is_unlocked(data, wave_number)
 	)
 
-## Whether a given enemy type is available at [param wave_number].
-func _is_type_unlocked(type: EnemyData.Type, wave_number: int) -> bool:
-	match type:
-		EnemyData.Type.BOSS:
-			return wave_number >= _config.boss_unlock_wave
-		_:
-			# SWARM, FAST, NORMAL and TANK are always available.
-			# Per-wave availability is controlled by EnemyData.available_waves.
-			return true
-
 ## Whether a specific enemy is available at [param wave_number].
 ## Checks both the type-level unlock (from WaveConfig) and the
 ## per-enemy ranges (from EnemyData.available_waves).
 func _is_unlocked(data: EnemyData, wave_number: int) -> bool:
-	return _is_type_unlocked(data.type, wave_number) and _is_wave_available_for_enemy(data, wave_number)
+	return _is_wave_available_for_enemy(data, wave_number)
 
 ## True when [param wave_number] falls inside one of [param data]'s ranges.
 ## Empty ranges are treated as always available (legacy-compatible fallback).

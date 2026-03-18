@@ -23,11 +23,13 @@ var _route_cache: Dictionary[String, Array] = {}
 
 
 @onready var tile_map: TileMapLayer = $MapPieceTileMap
-
+@onready var decoration: Node2D = $Decoration
 
 func _ready() -> void:
 	_precalculate_routes()
 
+func get_decoration() -> Node2D:
+	return decoration
 
 # Get the tile position of the edge in the given direction and position
 func get_edge_tile_pos(dir: Edge.Dir, pos: Edge.DirPos = Edge.DirPos.MIDDLE) -> Vector2:

@@ -47,6 +47,7 @@ func _ready() -> void:
 	init_piece = init_map_piece_data.get_instance()
 	add_child(init_piece)
 	init_piece.logical_pos = Vector2i.ZERO
+	_move_piece_decoration_to_visuals(init_piece)
 	
 	# Register in managers
 	grid_manager.occupy(Vector2i.ZERO)
@@ -162,6 +163,7 @@ func _try_place_on_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vec
 		frontier_manager.update_after_placement(frontier, new_piece)
 
 		_attach_piece(frontier, new_piece, next_edge.dir, edge_to_connect.dir)
+		_move_piece_decoration_to_visuals(new_piece)
 		last_piece_attached = new_piece
 
 		# If we were waiting for a post-boss fork and we placed one, clear pending state.
@@ -183,6 +185,26 @@ func _attach_piece(p_piece_a: MapPiece, p_piece_b: MapPiece, entry_dir: Edge.Dir
 	
 	# Register connection in graph
 	connection_graph.connect_pieces(p_piece_a, p_piece_b, entry_dir, exit_dir)
+
+
+func _move_piece_decoration_to_visuals(piece: MapPiece) -> void:
+	if piece == null:
+		return
+	if visual == null:
+		push_warning("[WorldMap] visual container is null; cannot move decoration for piece %s" % piece.name)
+		return
+
+	var decoration: Node2D = piece.get_decoration()
+	if decoration == null:
+		return
+
+	var deco_children: Array[Node] = decoration.get_children()
+	for child in deco_children:
+		if not (child is Node2D):
+			continue
+		if child.get_parent() == visual:
+			continue
+		child.reparent(visual, true)
 
 
 func _finalize_spawn_pos(piece: MapPiece, edge: Edge) -> void:
