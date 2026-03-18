@@ -19,11 +19,15 @@ func set_loot_item(p_loot_item_data: LootItemData) -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if UIUtils.is_left_click_event(event):
 		if loot_item_data.consumable:
+			if RunContext.consumables_manager.is_full():
+				# TODO error SFX
+				return
 			RunContext.consumables_manager.add_consumable(loot_item_data.consumable.create_item())
+			
 		else:
 			RunContext.economy.add_gold(loot_item_data.gold_amount)
 		queue_free()
-
+		
 func _on_mouse_exited() -> void:
 	var stylebox: StyleBox = get_theme_stylebox("panel").duplicate()
 	stylebox.bg_color = UIUtils.accent_color
