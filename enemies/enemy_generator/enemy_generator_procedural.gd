@@ -89,8 +89,7 @@ func start_next_wave() -> void:
 	wave_spawner.start_wave(
 		_wave_number,
 		groups,
-		wave_config.spawn_interval,
-		wave_config.group_delay
+		wave_config
 	)
 
 # ---------------------------------------------------------

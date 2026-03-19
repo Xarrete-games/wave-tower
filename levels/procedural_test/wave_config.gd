@@ -24,8 +24,32 @@ class_name WaveConfig extends Resource
 # SPAWN TIMING
 # ---------------------------------------------------------
 
-## Seconds between individual enemy spawns within a group.
-@export var spawn_interval: float = 0.8
+## Spawn interval range for SWARM pressure groups.
+## SWARM should usually feel dense, so defaults are tighter.
+@export_range(0.01, 10.0, 0.01) var spawn_interval_swarm_min: float = 0.35
+@export_range(0.01, 10.0, 0.01) var spawn_interval_swarm_max: float = 0.8
+
+## Spawn interval range for SPEED pressure groups.
+## SPEED enemies should feel aggressive and chained.
+@export_range(0.01, 10.0, 0.01) var spawn_interval_speed_min: float = 0.55
+@export_range(0.01, 10.0, 0.01) var spawn_interval_speed_max: float = 0.8
+
+## Spawn interval range for MIXED groups (includes NORMAL style pacing).
+@export_range(0.01, 10.0, 0.01) var spawn_interval_mixed_min: float = 0.7
+@export_range(0.01, 10.0, 0.01) var spawn_interval_mixed_max: float = 0.9
+
+## Spawn interval range for TANK pressure groups.
+## TANK tends to be more deliberate by default.
+@export_range(0.01, 10.0, 0.01) var spawn_interval_tank_min: float = 1.0
+@export_range(0.01, 10.0, 0.01) var spawn_interval_tank_max: float = 1.2
+
+## Every N waves, reduce both min and max values of all spawn interval ranges.
+## This makes enemies spawn closer together as the run advances.
+@export var spawn_interval_max_decay_every_waves: int = 5
+
+## Amount subtracted from each pressure interval bound per decay step.
+## Example: if every_waves=5 and amount=0.02, at wave 11 both min and max are reduced by 0.04.
+@export_range(0.0, 1.0, 0.01) var spawn_interval_max_decay_amount: float = 0.02
 
 ## Seconds of pause between consecutive groups within the same wave.
 ## Gives the player a moment to notice the pressure shift.

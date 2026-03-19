@@ -3,7 +3,8 @@ class_name WaveSpawner extends Node
 ##
 ## Receives an Array[WaveComposer.WaveGroup] from the composer.
 ## Each group is spawned sequentially — enemies within a group are
-## separated by spawn_interval, and a longer group_delay sits between
+## separated by a pressure-specific random interval range, and a longer
+## group_delay sits between
 ## groups so the player can feel the shift in pressure.
 ##
 ## Enemy scenes come from each EnemyData.scene (loaded via DataLoader),
@@ -48,19 +49,20 @@ var _is_spawning: bool = false
 # ---------------------------------------------------------
 
 ## Spawns all groups sequentially.
-## [param spawn_interval] — seconds between enemies within a group.
-## [param group_delay]    — seconds between the end of one group and the start of the next.
+## [param config] — wave pacing config (spawn ranges + group delay).
 func start_wave(
 	wave_number: int,
 	groups: Array[WaveComposer.WaveGroup],
-	spawn_interval: float,
-	group_delay: float
+	config: WaveConfig
 ) -> void:
 	if _is_spawning:
 		push_warning("[WaveSpawner] Already spawning a wave — ignoring request")
 		return
 	if world_map == null:
 		push_warning("[WaveSpawner] No world_map assigned")
+		return
+	if config == null:
+		push_warning("[WaveSpawner] No WaveConfig provided")
 		return
 
 	_is_spawning = true
@@ -73,16 +75,67 @@ func start_wave(
 			_spawn_single(group.enemies[enemy_idx])
 			# Delay between individual enemies (skip after last in group)
 			if enemy_idx < group.enemies.size() - 1:
+				var spawn_interval: float = _pick_spawn_interval(group.pressure, wave_number, config)
 				await get_tree().create_timer(spawn_interval).timeout
 
 		group_finished.emit(group_idx, group.pressure)
 
 		# Delay between groups (skip after last group)
 		if group_idx < groups.size() - 1:
-			await get_tree().create_timer(group_delay).timeout
+			await get_tree().create_timer(config.group_delay).timeout
 
 	_is_spawning = false
 	wave_finished.emit(wave_number)
+
+func _pick_spawn_interval(
+	pressure: WaveComposer.PressureType,
+	wave_number: int,
+	config: WaveConfig
+) -> float:
+	var interval_range: Vector2 = _get_spawn_interval_range(pressure, config)
+	var decayed_range: Vector2 = _get_decayed_spawn_interval_range(interval_range, wave_number, config)
+	var min_interval: float = maxf(decayed_range.x, 0.01)
+	var max_interval: float = maxf(decayed_range.y, min_interval)
+	max_interval = maxf(max_interval, min_interval)
+
+	if is_equal_approx(min_interval, max_interval):
+		return min_interval
+
+	return randf_range(min_interval, max_interval)
+
+func _get_spawn_interval_range(
+	pressure: WaveComposer.PressureType,
+	config: WaveConfig
+) -> Vector2:
+	match pressure:
+		WaveComposer.PressureType.SWARM:
+			return Vector2(config.spawn_interval_swarm_min, config.spawn_interval_swarm_max)
+		WaveComposer.PressureType.SPEED:
+			return Vector2(config.spawn_interval_speed_min, config.spawn_interval_speed_max)
+		WaveComposer.PressureType.TANK:
+			return Vector2(config.spawn_interval_tank_min, config.spawn_interval_tank_max)
+		_:
+			# MIXED includes NORMAL-like pacing.
+			return Vector2(config.spawn_interval_mixed_min, config.spawn_interval_mixed_max)
+
+func _get_decayed_spawn_interval_range(
+	base_range: Vector2,
+	wave_number: int,
+	config: WaveConfig
+) -> Vector2:
+	var every_waves: int = maxi(config.spawn_interval_max_decay_every_waves, 1)
+	@warning_ignore("integer_division")
+	var decay_steps: int = maxi((wave_number - 1) / every_waves, 0)
+	var decay_amount: float = float(decay_steps) * config.spawn_interval_max_decay_amount
+
+	var decayed_min: float = maxf(base_range.x - decay_amount, 0.01)
+	var decayed_max: float = maxf(base_range.y - decay_amount, 0.01)
+
+	# Keep a valid range even after many decay steps.
+	if decayed_max < decayed_min:
+		decayed_max = decayed_min
+
+	return Vector2(decayed_min, decayed_max)
 
 # ---------------------------------------------------------
 # INTERNAL HELPERS

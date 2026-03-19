@@ -80,9 +80,21 @@ func compose_wave(wave_number: int) -> Array[WaveGroup]:
 
 	# --- Regular pressure groups ---
 	if full_pressure != PressureType.MIXED:
-		var full_group: WaveGroup = _fill_group(full_pressure, total_budget, wave_number, true)
-		if full_group.enemies.size() > 0:
-			groups.append(full_group)
+		var num_full_groups: int = _calculate_group_count(wave_number)
+
+		# Distribute remaining budget across groups (roughly even, remainder to first)
+		@warning_ignore("integer_division")
+		var budget_per_full_group: int = total_budget / maxi(num_full_groups, 1)
+		var full_remainder: int = total_budget - budget_per_full_group * maxi(num_full_groups, 1)
+
+		for i in range(num_full_groups):
+			var group_budget: int = budget_per_full_group + (1 if i < full_remainder else 0)
+			if group_budget <= 0:
+				continue
+			var full_group: WaveGroup = _fill_group(full_pressure, group_budget, wave_number, true)
+			if full_group.enemies.size() > 0:
+				groups.append(full_group)
+
 		print("[WaveComposer] Wave %d groups: %s" % [wave_number, _groups_to_log(groups)])
 		return groups
 
