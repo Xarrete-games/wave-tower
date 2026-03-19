@@ -3,7 +3,6 @@ class_name WorldMap extends Node2D
 const PORTAL_OFFSET: Vector2 = Vector2(0, -80)
 const WAVES_PER_BOSS: int = 10
 
-@export var init_map_piece_data: MapPieceData
 @export var visual: Node2D
 @export var composite_tile_map: CompositeTileMap
 
@@ -17,7 +16,6 @@ var spawn_handler: SpawnPositionsHandler = null
 # Data
 var map_pieces: Array[MapPieceData] = []
 var last_piece_attached: MapPiece = null
-var init_piece: MapPiece = null
 
 # Portal entries
 var portal_entries: Array[Dictionary] = []
@@ -44,7 +42,7 @@ func _ready() -> void:
 	frontier_manager.edge_finalized.connect(_on_edge_finalized)
 	
 	# Instantiate initial piece
-	init_piece = init_map_piece_data.get_instance()
+	var init_piece = DataLoader.get_all_initial_map_pieces().pick_random().get_instance()
 	add_child(init_piece)
 	init_piece.logical_pos = Vector2i.ZERO
 	_move_piece_decoration_to_visuals(init_piece)
