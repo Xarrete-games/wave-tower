@@ -7,17 +7,22 @@
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="5_6vran"]
 [ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="6_fnoye"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnoye"]
+bg_color = Color(0.7137255, 0.77254903, 0.64705884, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
 [node name="LootScreen" type="PanelContainer" unique_id=39602821 node_paths=PackedStringArray("items_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 2.0
-offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gxqxu")
 loot_screen_item_scene = ExtResource("2_dr51t")
-items_container = NodePath("Center/VBoxContainer2/VBoxContainer/PanelContainer/MarginContainer/ItemsContainer")
+items_container = NodePath("Center/VBoxContainer2/VBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/ItemsContainer")
 
 [node name="Center" type="CenterContainer" parent="." unique_id=2918588]
 layout_mode = 2
@@ -36,7 +41,7 @@ z_index = 1
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="Center/VBoxContainer2/VBoxContainer" unique_id=1513451928]
-custom_minimum_size = Vector2(224, 172)
+custom_minimum_size = Vector2(224, 250)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("1_fllr0")
@@ -48,7 +53,17 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="ItemsContainer" type="VBoxContainer" parent="Center/VBoxContainer2/VBoxContainer/PanelContainer/MarginContainer" unique_id=1011025510]
+[node name="PanelContainer" type="PanelContainer" parent="Center/VBoxContainer2/VBoxContainer/PanelContainer/MarginContainer" unique_id=427410788]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fnoye")
+
+[node name="MarginContainer" type="MarginContainer" parent="Center/VBoxContainer2/VBoxContainer/PanelContainer/MarginContainer/PanelContainer" unique_id=805039889]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 5
+
+[node name="ItemsContainer" type="VBoxContainer" parent="Center/VBoxContainer2/VBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer" unique_id=1011025510]
 custom_minimum_size = Vector2(300, 122)
 layout_mode = 2
 theme_override_constants/separation = 12

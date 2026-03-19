@@ -58,6 +58,7 @@ func _show_next_level_menu() -> void:
 # EVERY WAVE FINISHED
 func _on_wave_finished() -> void:
 	# LOOT SCREEN
+	AudioManager.play_wave_clear()
 	await show_loot_screen()
 
 	if RunContext.is_on_restarting:

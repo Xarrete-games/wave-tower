@@ -23,6 +23,7 @@ func _ready():
 	ClickEvents.reset_game_button_pressed.connect(reset_game)
 	RunContext.progress.total_levels = levels_paths.size()
 	GameState.state = GameState.STATE.IN_GAME
+	music_handler.play_music()
 	if trigger_finish_wave:
 		RunContext.progress.current_wave_finished.emit()
 

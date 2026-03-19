@@ -5,6 +5,7 @@ extends Node2D
 @onready var coins: AudioStreamPlayer = $Coins
 @onready var main_piano_player: AudioStreamPlayer = $MainPianoPlayer
 @onready var purchase_player: AudioStreamPlayer = $PurchasePlayer
+@onready var music_player: AudioStreamPlayer = $WaveClear
 
 func play_coins():
 	coins.play()
@@ -26,3 +27,6 @@ func play_purchase():
 
 func stop_main_piano():
 	main_piano_player.stop()
+
+func play_wave_clear():
+	music_player.play()

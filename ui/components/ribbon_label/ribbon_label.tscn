@@ -1,33 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://djbvtmp6wnbyj"]
+[gd_scene format=3 uid="uid://djbvtmp6wnbyj"]
 
 [ext_resource type="Texture2D" uid="uid://ek3ujhrnwtca" path="res://assets/images/containers/ribbon_label (1).png" id="1_d5b34"]
-[ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="2_d5b34"]
+[ext_resource type="FontFile" uid="uid://biwgs5vif6nm6" path="res://assets/fonts/Kreon-VariableFont_wght.ttf" id="2_3c13r"]
 [ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="3_3c13r"]
 
-[node name="RibbonLabel" type="MarginContainer"]
+[node name="RibbonLabel" type="MarginContainer" unique_id=437308297]
 offset_right = 400.0
 offset_bottom = 80.0
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1677106682]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+[node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=473873985]
 custom_minimum_size = Vector2(450, 100)
 layout_mode = 2
 texture = ExtResource("1_d5b34")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 35
-
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="CenterContainer/TextureRect" unique_id=567528036]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 4.0
+offset_right = 269.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1254902)
+theme_override_colors/font_outline_color = Color(0.2901961, 0.23529412, 0.16470589, 0.7529412)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("2_3c13r")
+theme_override_font_sizes/font_size = 44
 text = "Loot!"
-label_settings = ExtResource("2_d5b34")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/Label"]
+[node name="AnimationComponent" type="Node" parent="CenterContainer/TextureRect/Label" unique_id=873351278]
 script = ExtResource("3_3c13r")
 enter_animation = true
 enter_delay = 0.2
