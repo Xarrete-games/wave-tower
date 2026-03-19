@@ -81,7 +81,7 @@ func start_next_wave() -> void:
 	var total_enemies: int = 0
 	for g in groups:
 		total_enemies += g.enemies.size()
-	var budget: int = wave_config.base_budget + (_wave_number - 1) * wave_config.budget_per_wave
+	var budget: int = _composer.get_budget_for_wave(_wave_number)
 	print("[Wave %d] Budget: %d | Groups: %d | Total enemies: %d" % [
 		_wave_number, budget, groups.size(), total_enemies
 	])

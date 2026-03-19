@@ -105,13 +105,34 @@ func compose_wave(wave_number: int) -> Array[WaveGroup]:
 	print("[WaveComposer] Wave %d groups: %s" % [wave_number, _groups_to_log(groups)])
 	return groups
 
+## Public helper so external systems (debug UI, logs) can use the exact
+## same budget curve that wave composition uses internally.
+func get_budget_for_wave(wave_number: int) -> int:
+	return _calculate_budget(wave_number)
+
 # ---------------------------------------------------------
 # BUDGET HELPERS
 # ---------------------------------------------------------
 
 ## Total budget available for the given wave.
 func _calculate_budget(wave_number: int) -> int:
-	return _config.base_budget + (wave_number - 1) * _config.budget_per_wave
+	# 1) Base linear growth keeps early-game pacing stable.
+	var linear_budget: int = _config.base_budget + (wave_number - 1) * _config.budget_per_wave
+
+	# 2) Exponential growth starts at exponential_start_wave.
+	# This only scales budget UP (never down), matching roguelite pressure goals.
+	var start_wave: int = maxi(_config.exponential_start_wave, 1)
+	if wave_number <= start_wave:
+		return linear_budget
+
+	if _config.exponential_growth <= 0.0:
+		return linear_budget
+
+	var growth_steps: int = wave_number - start_wave
+	var multiplier: float = pow(1.0 + _config.exponential_growth, growth_steps)
+
+	var scaled_budget: int = int(round(linear_budget * multiplier))
+	return maxi(scaled_budget, linear_budget)
 
 ## Whether [param wave_number] should include a boss enemy.
 func _is_boss_wave(wave_number: int) -> bool:

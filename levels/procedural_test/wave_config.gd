@@ -12,6 +12,14 @@ class_name WaveConfig extends Resource
 ## Additional budget added for every wave after the first.
 @export var budget_per_wave: int = 5
 
+## Wave where exponential scaling starts.
+## Up to this wave, budget uses only linear growth.
+@export var exponential_start_wave: int = 8
+
+## Exponential growth factor applied after exponential_start_wave.
+## Example: 0.08 means +8% multiplicative growth per extra wave.
+@export_range(0.0, 1.0, 0.01) var exponential_growth: float = 0.08
+
 # ---------------------------------------------------------
 # SPAWN TIMING
 # ---------------------------------------------------------
