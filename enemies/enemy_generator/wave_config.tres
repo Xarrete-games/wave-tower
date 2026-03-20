@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WaveConfig" format=3 uid="uid://cfghmpixlnrpd"]
 
-[ext_resource type="Script" uid="uid://dexxwroucvcgq" path="res://levels/procedural_test/wave_config.gd" id="1_brb0q"]
+[ext_resource type="Script" uid="uid://dexxwroucvcgq" path="res://enemies/enemy_generator/wave_config.gd" id="1_brb0q"]
 [ext_resource type="Script" uid="uid://dahgj827tn2xa" path="res://enemies/enemy_generator/wave_type_change.gd" id="2_qsa3f"]
 
 [sub_resource type="Resource" id="Resource_3wjkb"]

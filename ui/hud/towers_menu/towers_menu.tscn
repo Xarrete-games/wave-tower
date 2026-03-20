@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfym6wmesrxxa"]
+[gd_scene format=3 uid="uid://bfym6wmesrxxa"]
 
 [ext_resource type="Script" uid="uid://dw48sv6soymjx" path="res://ui/hud/towers_menu/towers_menu.gd" id="1_d3tgk"]
 [ext_resource type="PackedScene" uid="uid://cxk1x30qq1f7p" path="res://ui/hud/towers_menu/tower_button_hint/tower_button_hint.tscn" id="2_57b1o"]

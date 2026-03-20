@@ -4,8 +4,8 @@ extends Node
 const RELICS_DATA_PATH: String = "res://items/relics/data/"
 const EVENTS_DATA_PATH: String = "res://events/data/"
 const CONSUMABLES_DATA_PATH: String = "res://items/consumables/data/"
-const INITIAL_MAP_PIECES_DATA_PATH: String = "res://levels/procedural_test/map_pieces/init/"
-const MAP_PIECES_DATA_PATH: String = "res://levels/procedural_test/map_pieces/data/"
+const INITIAL_MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/init/"
+const MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/data/"
 
 var relics: Array[RelicItemData] = []
 var events: Array[EventData] = []

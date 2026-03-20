@@ -39,6 +39,7 @@ HintManager="*res://utils/hint_manager.gd"
 [debug]
 
 gdscript/warnings/unused_signal=0
+gdscript/warnings/integer_division=0
 
 [display]
 

@@ -1,0 +1,175 @@
+[gd_scene format=4 uid="uid://ctympoe3douaa"]
+
+[ext_resource type="Script" uid="uid://chj3cku30pmp1" path="res://levels/map_pieces/map_piece.gd" id="1_4cayg"]
+[ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/map_pieces/map_piece_tile_map.tscn" id="2_eqi0q"]
+[ext_resource type="TileSet" uid="uid://0mt2a5aix72q" path="res://assets/sprites/tilesheet/tileset v2.tres" id="3_nne4h"]
+[ext_resource type="Script" uid="uid://bxxphpxqsh7c8" path="res://levels/level_tile_map/level_tile_map.gd" id="4_vo7d0"]
+[ext_resource type="Texture2D" uid="uid://c22o1eieco5r3" path="res://assets/sprites/decoration/Plant1.png" id="5_0k2kp"]
+[ext_resource type="Texture2D" uid="uid://b22mju44j5tf0" path="res://assets/sprites/decoration/Bush4.png" id="6_2vn0w"]
+[ext_resource type="Texture2D" uid="uid://f4mk2v0vvh6c" path="res://assets/sprites/decoration/Tree3.png" id="7_jpu3h"]
+[ext_resource type="Texture2D" uid="uid://dygg2e7b7f887" path="res://assets/sprites/decoration/Stone3.png" id="8_yd11c"]
+
+[sub_resource type="Curve2D" id="Curve2D_6ooeg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 417, 215, 0, 0, 0, 0, -402, 217)
+}
+point_count = 2
+
+[node name="PieceCurveSwSe" type="Node2D"]
+script = ExtResource("1_4cayg")
+
+[node name="MapPieceTileMap" parent="." instance=ExtResource("2_eqi0q")]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD6/wAAAAABAAAAAAD6////AAABAAAAAAD6/wEAAAABAAAAAAD6/wIAAAAFAAcAAAD6/wMAAAAHAAcAAAD6/wQAAAAFAAcAAAD7////AAAGAAcAAAD7/wAAAAACAAAAAAD7/wEAAAAIAAYAAAD7/wIAAAAFAAcAAAD7/wMAAAACAAAAAAD7/wQAAAACAAAAAAD8/wAAAAAGAAYAAAD9/wAAAAAFAAcAAAD/////AAAHAAYAAAD///7/AAABAAAAAAD///3/AAAGAAYAAAD///z/AAAHAAcAAAD///v/AAAHAAYAAAD6//3/AAAIAAcAAAD6//7/AAAHAAYAAAD7//3/AAAGAAcAAAD7//7/AAAFAAYAAAD8//3/AAAIAAYAAAD8//7/AAABAAAAAAD8////AAAGAAcAAAD8/wEAAAABAAAAAAD8/wIAAAABAAAAAAD8/wMAAAABAAAAAAD8/wQAAAABAAAAAAD9//3/AAAGAAcAAAD9//7/AAABAAAAAAD9////AAAFAAYAAAD9/wEAAAABAAAAAAD9/wIAAAABAAAAAAD9/wMAAAABAAAAAAD9/wQAAAABAAAAAAD+//3/AAAFAAYAAAD+//7/AAABAAAAAAD+////AAAGAAYAAAAAAP3/AAABAAAAAAAAAP7/AAABAAAAAAAAAP//AAAIAAYAAAABAP3/AAABAAAAAAABAP7/AAABAAAAAAABAP//AAAGAAYAAAACAP3/AAABAAAAAAACAP7/AAABAAAAAAACAP//AAAHAAYAAAADAP3/AAABAAAAAAADAP7/AAABAAAAAAADAP//AAAIAAYAAAAEAP3/AAABAAAAAAAEAP7/AAABAAAAAAAEAP//AAAHAAcAAAD6//v/AAACAAAAAAD6//z/AAAIAAYAAAD7//v/AAAFAAcAAAD7//z/AAAIAAcAAAD8//v/AAAHAAcAAAD8//z/AAABAAAAAAD9//v/AAAGAAcAAAD9//z/AAABAAAAAAD+//v/AAAIAAcAAAD+//z/AAAHAAcAAAAAAPv/AAAHAAcAAAAAAPz/AAAFAAcAAAABAPv/AAAHAAYAAAABAPz/AAAHAAYAAAACAPv/AAABAAAAAAACAPz/AAABAAAAAAADAPv/AAABAAAAAAADAPz/AAABAAAAAAAEAPv/AAACAAAAAAAEAPz/AAABAAAAAAD6/wUAAAAFAAYAAAD7/wUAAAACAAAAAAD8/wUAAAABAAAAAAD9/wUAAAABAAAAAAAFAAAAAAADAAcAAAAGAAAAAAABAAcAAAD///r/AAACAAAAAAD///n/AAACAAAAAAD5/wAAAAACAAAAAAD4/wAAAAACAAAAAAAFAAcAAAACAAAAAAAGAAcAAAACAAAAAAAGAAEAAAAHAAIAAAAGAAIAAAADAAUAAAAGAAMAAAADAAAAAAAGAAQAAAACAAAAAAAGAAUAAAACAAAAAAAGAAYAAAACAAAAAAAGAP//AAADAAIAAAAGAP7/AAACAAAAAAAGAP3/AAACAAAAAAAGAPz/AAACAAAAAAAGAPv/AAACAAAAAAAAAPn/AAACAAAAAAABAPn/AAACAAAAAAACAPn/AAACAAAAAAADAPn/AAACAAAAAAAEAPn/AAACAAAAAAAFAPn/AAACAAAAAAAGAPn/AAACAAAAAAAGAPr/AAACAAAAAAD+//n/AAACAAAAAAD9//n/AAACAAAAAAD8//n/AAACAAAAAAD7//n/AAACAAAAAAD6//n/AAACAAAAAAD5//n/AAACAAAAAAD4////AAACAAAAAAD4//7/AAACAAAAAAD4//3/AAAHAAYAAAD4//z/AAAFAAcAAAD4//v/AAACAAAAAAD4//r/AAACAAAAAAD4//n/AAACAAAAAAD9/wcAAAACAAAAAAD8/wcAAAACAAAAAAD7/wcAAAACAAAAAAD6/wcAAAACAAAAAAD4/wEAAAACAAAAAAD4/wIAAAACAAAAAAD4/wMAAAACAAAAAAD4/wQAAAACAAAAAAD4/wUAAAACAAAAAAD4/wYAAAACAAAAAAD5/wYAAAACAAAAAAD4/wcAAAACAAAAAAD5/wcAAAACAAAAAAD6/wYAAAACAAAAAAD7/wYAAAACAAAAAAD8/wYAAAACAAAAAAD9/wYAAAACAAAAAAD5/wUAAAACAAAAAAD5/wQAAAACAAAAAAD5/wIAAAACAAAAAAD5/wEAAAACAAAAAAD5////AAACAAAAAAD5//7/AAACAAAAAAD5//3/AAAFAAYAAAD5//z/AAAFAAYAAAD5//v/AAAIAAYAAAD5//r/AAACAAAAAAD6//r/AAACAAAAAAD7//r/AAACAAAAAAD5/wMAAAACAAAAAAD8//r/AAAIAAcAAAD9//r/AAACAAAAAAD+//r/AAACAAAAAAAAAPr/AAACAAAAAAABAPr/AAACAAAAAAACAPr/AAACAAAAAAADAPr/AAACAAAAAAAEAPr/AAACAAAAAAAFAPr/AAACAAAAAAAFAPv/AAACAAAAAAAFAPz/AAACAAAAAAAFAP3/AAACAAAAAAAFAP7/AAACAAAAAAAFAAIAAAACAAcAAAAFAAMAAAABAAUAAAAFAAQAAAAGAAAAAAAFAAUAAAACAAAAAAAFAAYAAAACAAAAAAAFAAEAAAABAAcAAAAFAP//AAADAAEAAAD+/wEAAAAFAAYAAAD+/wIAAAAFAAcAAAD+/wMAAAAFAAYAAAD+/wQAAAAFAAcAAAD+/wUAAAAGAAcAAAD+/wYAAAABAAEAAAD+/wcAAAABAAIAAAD//wEAAAAGAAYAAAD//wIAAAAGAAcAAAD//wMAAAAGAAYAAAD//wQAAAAGAAAAAAD//wUAAAADAAEAAAD//wYAAAADAAcAAAD//wcAAAABAAcAAAAAAAEAAAAFAAYAAAAAAAIAAAAFAAcAAAAAAAMAAAAGAAcAAAAAAAQAAAABAAEAAAAAAAUAAAAHAAQAAAAAAAYAAAAAAAYAAAAAAAcAAAAHAAIAAAABAAEAAAAFAAYAAAABAAIAAAAGAAAAAAABAAMAAAADAAEAAAABAAQAAAADAAcAAAABAAUAAAABAAcAAAABAAYAAAACAAcAAAABAAcAAAABAAUAAAACAAEAAAAGAAcAAAACAAIAAAABAAEAAAACAAMAAAAHAAQAAAACAAQAAAAAAAYAAAACAAUAAAAHAAIAAAACAAYAAAADAAUAAAACAAcAAAADAAAAAAADAAEAAAADAAEAAAADAAIAAAADAAcAAAADAAMAAAABAAcAAAADAAQAAAACAAcAAAADAAUAAAABAAUAAAADAAYAAAAGAAAAAAADAAcAAAACAAAAAAAEAAEAAAAHAAQAAAAEAAIAAAABAAcAAAAEAAMAAAAHAAIAAAAEAAQAAAADAAUAAAAEAAUAAAADAAAAAAAEAAYAAAACAAAAAAAEAAcAAAACAAAAAAAEAAAAAAABAAEAAAAAAAAAAAAIAAcAAAABAAAAAAAGAAcAAAACAAAAAAAHAAcAAAADAAAAAAAGAAAAAAD+/wAAAAAGAAcAAAD//wAAAAAHAAcAAAA=")
+
+[node name="LevelTileMap" type="TileMapLayer" parent="MapPieceTileMap"]
+position = Vector2(0, -64)
+tile_map_data = PackedByteArray("AAD4/wcAAAAHAAYAAAD5/wcAAAAGAAcAAAD5/wYAAAAGAAcAAAD4/wUAAAAFAAcAAAD4/wYAAAAIAAcAAAD6/wcAAAAHAAYAAAD6/wYAAAAIAAcAAAAGAPr/AAAFAAYAAAAGAPn/AAAHAAcAAAAFAPn/AAAGAAcAAAAEAPn/AAAGAAYAAAAFAPr/AAAGAAcAAAADAPn/AAAIAAcAAAACAPn/AAAGAAcAAAABAPn/AAAHAAYAAAAEAPr/AAAGAAcAAAD4//n/AAAHAAcAAAD4//r/AAAGAAcAAAD5//r/AAAHAAYAAAD5//n/AAAHAAYAAAA=")
+tile_set = ExtResource("3_nne4h")
+script = ExtResource("4_vo7d0")
+metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+
+[node name="LevelTileMap2" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap"]
+position = Vector2(0, -64)
+tile_map_data = PackedByteArray("AAD5/wcAAAAFAAcAAAD4/wcAAAAGAAYAAAAGAPn/AAAFAAYAAAAFAPn/AAAHAAcAAAA=")
+tile_set = ExtResource("3_nne4h")
+script = ExtResource("4_vo7d0")
+metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+
+[node name="Routes" type="Node2D" parent="."]
+
+[node name="route_SE_SW" type="Path2D" parent="Routes"]
+curve = SubResource("Curve2D_6ooeg")
+
+[node name="Decoration" type="Node2D" parent="."]
+
+[node name="Plantas" type="Node2D" parent="Decoration"]
+
+[node name="Plant1" type="Sprite2D" parent="Decoration/Plantas"]
+position = Vector2(-76.80005, -469.8)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_0k2kp")
+
+[node name="Plant2" type="Sprite2D" parent="Decoration/Plantas"]
+position = Vector2(-38.80005, -491.79996)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_0k2kp")
+
+[node name="Plant3" type="Sprite2D" parent="Decoration/Plantas"]
+position = Vector2(-6.800049, -483.79996)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_0k2kp")
+
+[node name="Plant4" type="Sprite2D" parent="Decoration/Plantas"]
+position = Vector2(78.19995, -483.79996)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_0k2kp")
+
+[node name="Plant5" type="Sprite2D" parent="Decoration/Plantas"]
+position = Vector2(-25.800049, -459.79996)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_0k2kp")
+
+[node name="Plant6" type="Sprite2D" parent="Decoration/Plantas"]
+position = Vector2(26.199951, -459.79996)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_0k2kp")
+
+[node name="Plant7" type="Sprite2D" parent="Decoration/Plantas"]
+position = Vector2(737.19995, -141.79997)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_0k2kp")
+
+[node name="Plant8" type="Sprite2D" parent="Decoration/Plantas"]
+position = Vector2(759.19995, -128.79996)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_0k2kp")
+
+[node name="Plant9" type="Sprite2D" parent="Decoration/Plantas"]
+position = Vector2(728.19995, -101.79996)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_0k2kp")
+
+[node name="Plant10" type="Sprite2D" parent="Decoration/Plantas"]
+position = Vector2(754.19995, -69.79996)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_0k2kp")
+
+[node name="Bushes2" type="Node2D" parent="Decoration"]
+
+[node name="Bush7" type="Sprite2D" parent="Decoration/Bushes2"]
+position = Vector2(-659, 57)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("6_2vn0w")
+
+[node name="Bush8" type="Sprite2D" parent="Decoration/Bushes2"]
+position = Vector2(-698, 81)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("6_2vn0w")
+
+[node name="Bush9" type="Sprite2D" parent="Decoration/Bushes2"]
+position = Vector2(403, -254)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("6_2vn0w")
+
+[node name="Arboles" type="Node2D" parent="Decoration"]
+
+[node name="Tree3" type="Sprite2D" parent="Decoration/Arboles"]
+position = Vector2(-345, -346)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_jpu3h")
+
+[node name="Tree5" type="Sprite2D" parent="Decoration/Arboles"]
+position = Vector2(-205, -409)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_jpu3h")
+
+[node name="Tree6" type="Sprite2D" parent="Decoration/Arboles"]
+position = Vector2(-506, -273)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_jpu3h")
+
+[node name="Tree7" type="Sprite2D" parent="Decoration/Arboles"]
+position = Vector2(654.9999, -54.000015)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_jpu3h")
+
+[node name="Bushes" type="Node2D" parent="Decoration"]
+
+[node name="Bush4" type="Sprite2D" parent="Decoration/Bushes"]
+position = Vector2(-700, -68.99999)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("6_2vn0w")
+
+[node name="Bush5" type="Sprite2D" parent="Decoration/Bushes"]
+position = Vector2(473, -225)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("6_2vn0w")
+
+[node name="Bush8" type="Sprite2D" parent="Decoration/Bushes"]
+position = Vector2(261, -327)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("6_2vn0w")
+
+[node name="Bush9" type="Sprite2D" parent="Decoration/Bushes"]
+position = Vector2(330, -292)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("6_2vn0w")
+
+[node name="Bush10" type="Sprite2D" parent="Decoration/Bushes"]
+position = Vector2(184, -366)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("6_2vn0w")
+
+[node name="Stone" type="Node2D" parent="Decoration"]
+position = Vector2(-146, -283)
+
+[node name="Stone3" type="Sprite2D" parent="Decoration/Stone"]
+position = Vector2(22.000011, -132.99998)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("8_yd11c")
+
+[node name="Stone4" type="Sprite2D" parent="Decoration/Stone"]
+position = Vector2(86.000015, -104.999985)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("8_yd11c")

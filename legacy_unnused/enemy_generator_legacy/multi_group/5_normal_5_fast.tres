@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyMultiGroups" format=3 uid="uid://dcdu1ge2xx6d6"]
+
+[ext_resource type="Script" uid="uid://bgcq2ktq3w7dq" path="res://legacy_unnused/enemy_generator_legacy/resources_definitions/enemy_individual_group.gd" id="1_56a3s"]
+[ext_resource type="Resource" uid="uid://dqt57t6iuai6u" path="res://legacy_unnused/enemy_generator_legacy/individual_group/group_5_normal.tres" id="2_hsdvw"]
+[ext_resource type="Script" uid="uid://cue0wwsk5fvhg" path="res://legacy_unnused/enemy_generator_legacy/resources_definitions/enemy_multi_group.gd" id="2_ukim8"]
+
+[resource]
+script = ExtResource("2_ukim8")
+groups = Array[ExtResource("1_56a3s")]([ExtResource("2_hsdvw")])
+metadata/_custom_type_script = "uid://cue0wwsk5fvhg"
