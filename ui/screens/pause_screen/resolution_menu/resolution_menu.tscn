@@ -1,21 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsmhbhd7nv78e"]
+[gd_scene format=3 uid="uid://bsmhbhd7nv78e"]
 
 [ext_resource type="Script" uid="uid://byl0ha6842ni4" path="res://ui/screens/pause_screen/resolution_menu/resolution_menu.gd" id="1_rjtgo"]
+[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="2_umlkh"]
+[ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="3_5bay8"]
 
-[node name="ResolutionMenu" type="VBoxContainer" node_paths=PackedStringArray("resolution_option_button")]
+[node name="ResolutionMenu" type="VBoxContainer" unique_id=864623530 node_paths=PackedStringArray("resolution_option_button")]
 offset_right = 119.0
 offset_bottom = 23.0
 script = ExtResource("1_rjtgo")
 resolution_option_button = NodePath("VBoxContainer/ResolutionButton")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="." unique_id=573951614]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1092198811]
 layout_mode = 2
 text = "Resolution"
+label_settings = ExtResource("2_umlkh")
 
-[node name="ResolutionButton" type="OptionButton" parent="VBoxContainer"]
+[node name="ResolutionButton" type="OptionButton" parent="VBoxContainer" unique_id=2109441995]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_5bay8")
+theme_override_font_sizes/font_size = 32
+item_count = 1
+popup/item_0/text = "1920 x 1080"
+popup/item_0/id = 0
 
 [connection signal="item_selected" from="VBoxContainer/ResolutionButton" to="." method="_on_option_button_item_selected"]

@@ -1,59 +1,59 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj1vromg52jei"]
+[gd_scene format=3 uid="uid://dj1vromg52jei"]
 
 [ext_resource type="PackedScene" uid="uid://bk5qffk5er2tl" path="res://ui/screens/pause_screen/volume_control/slider_volumen/slider_volumen.tscn" id="1_1s6gx"]
 [ext_resource type="Theme" uid="uid://br31q0n6y25o7" path="res://ui/styles/themes/menu_buttons_theme.tres" id="3_fkdrh"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="4_1ru07"]
 
-[node name="Volume" type="VBoxContainer"]
+[node name="Volume" type="VBoxContainer" unique_id=885108872]
 theme_override_constants/separation = 20
 
-[node name="HBoxMaster" type="HBoxContainer" parent="."]
+[node name="HBoxMaster" type="HBoxContainer" parent="." unique_id=665089866]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Master" type="Label" parent="HBoxMaster"]
+[node name="Master" type="Label" parent="HBoxMaster" unique_id=2097676736]
 layout_mode = 2
 text = "Master"
 label_settings = ExtResource("4_1ru07")
 horizontal_alignment = 2
 
-[node name="Master2" parent="HBoxMaster" instance=ExtResource("1_1s6gx")]
+[node name="Master2" parent="HBoxMaster" unique_id=493121318 instance=ExtResource("1_1s6gx")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("3_fkdrh")
 bus_name = "Master"
 
-[node name="HBoxMusic" type="HBoxContainer" parent="."]
+[node name="HBoxMusic" type="HBoxContainer" parent="." unique_id=874607880]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Music" type="Label" parent="HBoxMusic"]
+[node name="Music" type="Label" parent="HBoxMusic" unique_id=2096384671]
 layout_mode = 2
 text = "Music"
 label_settings = ExtResource("4_1ru07")
 horizontal_alignment = 2
 
-[node name="Music2" parent="HBoxMusic" instance=ExtResource("1_1s6gx")]
+[node name="Music2" parent="HBoxMusic" unique_id=1238443837 instance=ExtResource("1_1s6gx")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 1
 bus_name = "Music"
 
-[node name="HBoxSFX" type="HBoxContainer" parent="."]
+[node name="HBoxSFX" type="HBoxContainer" parent="." unique_id=473729622]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="SFX" type="Label" parent="HBoxSFX"]
+[node name="SFX" type="Label" parent="HBoxSFX" unique_id=369269492]
 layout_mode = 2
 text = "SFX"
 label_settings = ExtResource("4_1ru07")
 horizontal_alignment = 2
 
-[node name="SFX2" parent="HBoxSFX" instance=ExtResource("1_1s6gx")]
+[node name="SFX2" parent="HBoxSFX" unique_id=1588780569 instance=ExtResource("1_1s6gx")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 1

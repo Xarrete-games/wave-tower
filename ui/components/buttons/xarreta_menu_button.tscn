@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://huthfefiu18l"]
+[gd_scene format=3 uid="uid://huthfefiu18l"]
 
 [ext_resource type="Theme" uid="uid://br31q0n6y25o7" path="res://ui/styles/themes/menu_buttons_theme.tres" id="1_aa6f7"]
 [ext_resource type="Script" uid="uid://bucqbucrgu1eb" path="res://ui/components/buttons/xarreta_button.gd" id="2_mj05m"]
 
-[node name="XarretaMenuButton" type="Button"]
+[node name="XarretaMenuButton" type="Button" unique_id=1145869808]
 anchors_preset = -1
 anchor_right = 0.12900001
 anchor_bottom = 0.054

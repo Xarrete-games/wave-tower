@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1rsi54eynysa"]
+[gd_scene format=3 uid="uid://b1rsi54eynysa"]
 
 [ext_resource type="Script" uid="uid://b2qbndgwbh6n5" path="res://ui/screens/pause_screen/pause_menu.gd" id="1_bgnto"]
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="2_5l847"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/buttons/xarreta_menu_button.tscn" id="4_snj08"]
 [ext_resource type="PackedScene" uid="uid://bsmhbhd7nv78e" path="res://ui/screens/pause_screen/resolution_menu/resolution_menu.tscn" id="5_s34hw"]
 
-[node name="PauseMenu" type="PanelContainer"]
+[node name="PauseMenu" type="PanelContainer" unique_id=974378324 node_paths=PackedStringArray("settings_section", "menu_section")]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,14 +16,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_bgnto")
+settings_section = NodePath("CenterContainer/MarginContainer/MainContainer/SettingsSections")
+menu_section = NodePath("CenterContainer/MarginContainer/MainContainer/ButtonsSecitons")
 
-[node name="CenterContainer" type="PanelContainer" parent="."]
+[node name="CenterContainer" type="PanelContainer" parent="." unique_id=1710609385]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("2_5l847")
 
-[node name="AnimationComponent" type="Node" parent="CenterContainer"]
+[node name="AnimationComponent" type="Node" parent="CenterContainer" unique_id=44155825]
 process_mode = 3
 script = ExtResource("2_s48xr")
 enter_animation = true
@@ -31,60 +33,77 @@ enter_position = Vector2(0, -1000)
 enter_modulate = Color(1, 1, 1, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer" unique_id=443300225]
+custom_minimum_size = Vector2(405, 425)
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+[node name="MainContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer" unique_id=2120241446]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 30
 
-[node name="Volume" parent="CenterContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_s7qyn")]
+[node name="SettingsSections" type="VBoxContainer" parent="CenterContainer/MarginContainer/MainContainer" unique_id=800524087]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Volume" parent="CenterContainer/MarginContainer/MainContainer/SettingsSections" unique_id=2105059071 instance=ExtResource("2_s7qyn")]
 layout_mode = 2
 
-[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/VBoxContainer/Volume" node_paths=PackedStringArray("wait_for")]
-script = ExtResource("2_s48xr")
-enter_animation = true
-wait_for = NodePath("../../../../AnimationComponent")
-enter_time = 0.05
-enter_scale = Vector2(0, 0)
-metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
-
-[node name="ResolutionMenu" parent="CenterContainer/MarginContainer/VBoxContainer" instance=ExtResource("5_s34hw")]
+[node name="ResolutionMenu" parent="CenterContainer/MarginContainer/MainContainer/SettingsSections" unique_id=1120416133 instance=ExtResource("5_s34hw")]
 layout_mode = 2
 
-[node name="Buttons" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="BackButton" parent="CenterContainer/MarginContainer/MainContainer/SettingsSections" unique_id=1145869808 instance=ExtResource("4_snj08")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[node name="ButtonsSecitons" type="VBoxContainer" parent="CenterContainer/MarginContainer/MainContainer" unique_id=1090320248]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="ResumeButton" parent="CenterContainer/MarginContainer/VBoxContainer/Buttons" instance=ExtResource("4_snj08")]
+[node name="ResumeButton" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons" unique_id=1682630797 instance=ExtResource("4_snj08")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Resume"
 
-[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/VBoxContainer/Buttons/ResumeButton" node_paths=PackedStringArray("wait_for")]
+[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ResumeButton" unique_id=797789922]
 process_mode = 3
 script = ExtResource("2_s48xr")
 enter_animation = true
-wait_for = NodePath("../../../Volume/AnimationComponent")
 enter_time = 0.05
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
-[node name="RestartButton" parent="CenterContainer/MarginContainer/VBoxContainer/Buttons" instance=ExtResource("4_snj08")]
+[node name="SettingsButton" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons" unique_id=95046184 instance=ExtResource("4_snj08")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+
+[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/SettingsButton" unique_id=1100506625]
+process_mode = 3
+script = ExtResource("2_s48xr")
+enter_animation = true
+enter_time = 0.05
+enter_scale = Vector2(0, 0)
+metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
+
+[node name="RestartButton" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons" unique_id=252323432 instance=ExtResource("4_snj08")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Restart"
 
-[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/VBoxContainer/Buttons/RestartButton" node_paths=PackedStringArray("wait_for")]
+[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/RestartButton" unique_id=982796959 node_paths=PackedStringArray("wait_for")]
 process_mode = 3
 script = ExtResource("2_s48xr")
 enter_animation = true
@@ -93,13 +112,13 @@ enter_time = 0.05
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
-[node name="ExitButton" parent="CenterContainer/MarginContainer/VBoxContainer/Buttons" instance=ExtResource("4_snj08")]
+[node name="ExitButton" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons" unique_id=671778560 instance=ExtResource("4_snj08")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Exit"
 
-[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/VBoxContainer/Buttons/ExitButton" node_paths=PackedStringArray("wait_for")]
+[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ExitButton" unique_id=726396231 node_paths=PackedStringArray("wait_for")]
 process_mode = 3
 script = ExtResource("2_s48xr")
 enter_animation = true
@@ -108,6 +127,8 @@ enter_time = 0.05
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
-[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/VBoxContainer/Buttons/ResumeButton" to="." method="_on_resume_button_xarreta_pressed"]
-[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/VBoxContainer/Buttons/RestartButton" to="." method="_on_restart_button_xarreta_pressed"]
-[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/VBoxContainer/Buttons/ExitButton" to="." method="_on_exit_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/MainContainer/SettingsSections/BackButton" to="." method="_on_back_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ResumeButton" to="." method="_on_resume_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/SettingsButton" to="." method="_on_settings_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/RestartButton" to="." method="_on_restart_button_xarreta_pressed"]
+[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ExitButton" to="." method="_on_exit_button_xarreta_pressed"]
