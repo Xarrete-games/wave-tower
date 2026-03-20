@@ -21,6 +21,12 @@ var all_tower_data: Array[TowerConfigurationWithInstance] = []
 func _init() -> void:
 	ClickEvents.tower_remove_pressed.connect(tower_removed)
 	RunContext.progress.current_level_changed.connect(_on_level_changed)
+	all_tower_data = DataLoader.get_all_tower_data()
+
+func get_random_towers(amount: int) -> Array[TowerConfigurationWithInstance]:
+	var available_towers = all_tower_data.duplicate()
+	available_towers.shuffle()
+	return available_towers.slice(0, amount)
 
 func reset_towers() -> void:
 	_update_tower_count(Tower.Type.FIRE, 0)
