@@ -16,6 +16,7 @@ var last_tower_ids: Dictionary[String, int] = {
 }
 
 var towers_ids: Array[String] = []
+var all_tower_data: Array[TowerConfigurationWithInstance] = []
 
 func _init() -> void:
 	ClickEvents.tower_remove_pressed.connect(tower_removed)

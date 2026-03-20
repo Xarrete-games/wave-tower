@@ -6,12 +6,14 @@ const EVENTS_DATA_PATH: String = "res://events/data/"
 const CONSUMABLES_DATA_PATH: String = "res://items/consumables/data/"
 const INITIAL_MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/init/"
 const MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/data/"
+const TOWER_DATA_PATH: String = "res://towers/data/"
 
 var relics: Array[RelicItemData] = []
 var events: Array[EventData] = []
 var consumables: Array[ConsumableItemData] = []
 var initial_map_pieces: Array[MapPieceData] = []
 var map_pieces: Array[MapPieceData] = []
+var tower_data: Array[TowerConfigurationWithInstance] = []
 var enemy_data: EnemyDataLoader = EnemyDataLoader.new()
 
 func _ready() -> void:
@@ -20,6 +22,7 @@ func _ready() -> void:
 	_load_consumables()
 	_load_map_pieces()
 	_load__initial_map_pieces()
+	_load_tower_data()
 
 # ---------------------------------------------------------
 # RELICS API
@@ -102,6 +105,13 @@ func get_spawnable_enemies() -> Array[EnemyData]:
 	return enemy_data.get_spawnable_enemies()
 
 # ---------------------------------------------------------
+# TOWERS API
+# ---------------------------------------------------------
+
+func get_all_tower_data() -> Array[TowerConfigurationWithInstance]:
+	return tower_data.duplicate()
+	
+# ---------------------------------------------------------
 # INTERNAL LOADING HELPERS
 # ---------------------------------------------------------
 func _load_relics() -> void:
@@ -143,6 +153,14 @@ func _load__initial_map_pieces() -> void:
 			initial_map_pieces.append(data)
 		else:
 			push_error("[DataLoader] Loaded initial map piece data has invalid type: %s" % [data])
+
+func _load_tower_data() -> void:
+	var loaded_array = _load_resources_from_dir(TOWER_DATA_PATH)
+	for data in loaded_array:
+		if data is TowerConfigurationWithInstance:
+			tower_data.append(data)
+		else:
+			push_error("[DataLoader] Loaded tower data has invalid type: %s" % [data])
 
 
 # ---------------------------------------------------------

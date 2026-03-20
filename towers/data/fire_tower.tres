@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://djdpfy88ujkfb" path="res://towers/instances/fire/fire_tower/fire_tower.tscn" id="2_5kvwn"]
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_qew35"]
 [ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="3_0sd75"]
-[ext_resource type="Resource" uid="uid://c87ypetdh5cks" path="res://towers/configuration/data/fire_wildfire_tower.tres" id="4_x0cjo"]
-[ext_resource type="Resource" uid="uid://brdcadnrqivh8" path="res://towers/configuration/data/fire_laser_tower.tres" id="5_kustc"]
+[ext_resource type="Resource" uid="uid://c87ypetdh5cks" path="res://towers/data/fire_wildfire_tower.tres" id="4_x0cjo"]
+[ext_resource type="Resource" uid="uid://brdcadnrqivh8" path="res://towers/data/fire_laser_tower.tres" id="5_kustc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wv6in"]
 atlas = ExtResource("1_l66o3")
