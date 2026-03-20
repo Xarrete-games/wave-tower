@@ -13,7 +13,7 @@ _data = {
 }
 point_count = 16
 
-[node name="PieceCurceNeNw" type="Node2D" unique_id=1321534579]
+[node name="PieceCurceNeNw2" type="Node2D" unique_id=1321534579]
 script = ExtResource("1_ga0un")
 
 [node name="MapPieceTileMap" parent="." unique_id=953949979 instance=ExtResource("2_lfwmg")]

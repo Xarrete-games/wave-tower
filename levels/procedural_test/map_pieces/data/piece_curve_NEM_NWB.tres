@@ -6,11 +6,11 @@
 
 [sub_resource type="Resource" id="Resource_v1jka"]
 script = ExtResource("1_v1jka")
+pos = 2
 
 [sub_resource type="Resource" id="Resource_ycytc"]
 script = ExtResource("1_v1jka")
 dir = 3
-pos = 2
 
 [resource]
 script = ExtResource("3_h6fe5")
