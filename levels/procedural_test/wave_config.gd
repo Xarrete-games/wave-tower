@@ -26,22 +26,23 @@ class_name WaveConfig extends Resource
 
 ## Spawn interval range for SWARM pressure groups.
 ## SWARM should usually feel dense, so defaults are tighter.
-@export_range(0.01, 10.0, 0.01) var spawn_interval_swarm_min: float = 0.35
+@export_range(0.01, 10.0, 0.01) var spawn_interval_swarm_min: float = 0.5
 @export_range(0.01, 10.0, 0.01) var spawn_interval_swarm_max: float = 0.8
 
 ## Spawn interval range for SPEED pressure groups.
 ## SPEED enemies should feel aggressive and chained.
-@export_range(0.01, 10.0, 0.01) var spawn_interval_speed_min: float = 0.55
-@export_range(0.01, 10.0, 0.01) var spawn_interval_speed_max: float = 0.8
+@export_range(0.01, 10.0, 0.01) var spawn_interval_speed_min: float = 0.7
+@export_range(0.01, 10.0, 0.01) var spawn_interval_speed_max: float = 1.0
 
-## Spawn interval range for MIXED groups (includes NORMAL style pacing).
-@export_range(0.01, 10.0, 0.01) var spawn_interval_mixed_min: float = 0.7
-@export_range(0.01, 10.0, 0.01) var spawn_interval_mixed_max: float = 0.9
+## Spawn interval range for NORMAL groups.
+## Used as fallback when a group is not SWARM/SPEED/TANK.
+@export_range(0.01, 10.0, 0.01) var spawn_interval_normal_min: float = 2.0
+@export_range(0.01, 10.0, 0.01) var spawn_interval_normal_max: float = 3.0
 
 ## Spawn interval range for TANK pressure groups.
 ## TANK tends to be more deliberate by default.
-@export_range(0.01, 10.0, 0.01) var spawn_interval_tank_min: float = 1.0
-@export_range(0.01, 10.0, 0.01) var spawn_interval_tank_max: float = 1.2
+@export_range(0.01, 10.0, 0.01) var spawn_interval_tank_min: float = 2.0
+@export_range(0.01, 10.0, 0.01) var spawn_interval_tank_max: float = 3.0
 
 ## Every N waves, reduce both min and max values of all spawn interval ranges.
 ## This makes enemies spawn closer together as the run advances.

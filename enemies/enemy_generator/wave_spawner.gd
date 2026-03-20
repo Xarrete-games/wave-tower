@@ -115,8 +115,8 @@ func _get_spawn_interval_range(
 		WaveComposer.PressureType.TANK:
 			return Vector2(config.spawn_interval_tank_min, config.spawn_interval_tank_max)
 		_:
-			# MIXED includes NORMAL-like pacing.
-			return Vector2(config.spawn_interval_mixed_min, config.spawn_interval_mixed_max)
+			# Fallback pacing uses NORMAL interval values.
+			return Vector2(config.spawn_interval_normal_min, config.spawn_interval_normal_max)
 
 func _get_decayed_spawn_interval_range(
 	base_range: Vector2,
