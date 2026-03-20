@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c46d7j3yoj5p7"]
+[gd_scene format=3 uid="uid://c46d7j3yoj5p7"]
 
 [ext_resource type="Script" uid="uid://vecgf2vtyo4" path="res://ui/hud/top_bar_ui/health_counter/health_counter.gd" id="1_6aibt"]
 [ext_resource type="Texture2D" uid="uid://t0orxc251is3" path="res://assets/images/icons/corazon.png" id="2_63sef"]
 [ext_resource type="PackedScene" uid="uid://ck6egv1gqhi50" path="res://ui/hud/top_bar_ui/armor_counter/armor_counter.tscn" id="3_2ap6e"]
 
-[node name="HealthCounter" type="HBoxContainer"]
+[node name="HealthCounter" type="HBoxContainer" unique_id=1416425711]
 custom_minimum_size = Vector2(140, 0)
 anchors_preset = -1
 anchor_right = 0.074
@@ -14,33 +14,36 @@ offset_bottom = 11.439999
 theme_override_constants/separation = 6
 script = ExtResource("1_6aibt")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1241580577]
 layout_mode = 2
 theme_override_constants/separation = -35
 alignment = 1
 
-[node name="ArmorCounter" parent="HBoxContainer" instance=ExtResource("3_2ap6e")]
+[node name="ArmorCounter" parent="HBoxContainer" unique_id=1278805541 instance=ExtResource("3_2ap6e")]
 z_index = 1
 layout_mode = 2
 
-[node name="LiveIcon" type="TextureRect" parent="HBoxContainer"]
+[node name="LiveIcon" type="TextureRect" parent="HBoxContainer" unique_id=1143421740]
 custom_minimum_size = Vector2(51, 45)
 layout_mode = 2
 texture = ExtResource("2_63sef")
 expand_mode = 3
 stretch_mode = 3
 
-[node name="CounterLabel" type="Label" parent="."]
+[node name="CounterLabel" type="Label" parent="." unique_id=1377241555]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.33333334, 0.33333334, 1)
 text = "20"
 horizontal_alignment = 1
 
-[node name="SlashLabel" type="Label" parent="."]
+[node name="SlashLabel" type="Label" parent="." unique_id=1083867407]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.33333334, 0.33333334, 1)
 text = "/"
 horizontal_alignment = 1
 
-[node name="CounterMaxLabel" type="Label" parent="."]
+[node name="CounterMaxLabel" type="Label" parent="." unique_id=386687253]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.33333334, 0.33333334, 1)
 text = "20"
 horizontal_alignment = 1

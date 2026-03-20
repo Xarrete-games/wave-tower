@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://djbvtmp6wnbyj"]
 
 [ext_resource type="Texture2D" uid="uid://ek3ujhrnwtca" path="res://assets/images/containers/ribbon_label (1).png" id="1_d5b34"]
-[ext_resource type="FontFile" uid="uid://biwgs5vif6nm6" path="res://assets/fonts/Kreon-VariableFont_wght.ttf" id="2_3c13r"]
+[ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="2_3c13r"]
 [ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="3_3c13r"]
 
 [node name="RibbonLabel" type="MarginContainer" unique_id=437308297]

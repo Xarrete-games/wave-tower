@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhdmj77ytfxwb"]
+[gd_scene format=3 uid="uid://bhdmj77ytfxwb"]
 
 [ext_resource type="Script" uid="uid://cg40tjdw5e2lu" path="res://ui/hud/top_bar_ui/top_bar.gd" id="1_b2kx5"]
+[ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="1_tksin"]
 [ext_resource type="PackedScene" uid="uid://bvafh0bf674y7" path="res://ui/hud/top_bar_ui/relics/bar_relics_ui.tscn" id="2_fdcnu"]
 [ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/hud/top_bar_ui/health_counter/health_counter.tscn" id="3_5yg88"]
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="3_tksin"]
@@ -13,10 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://epd2ddueq6ho" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui.tscn" id="10_fdcnu"]
 
 [sub_resource type="Theme" id="Theme_5yg88"]
-Label/colors/font_outline_color = Color(0, 0, 0, 0.6)
-Label/constants/outline_size = 8
-Label/font_sizes/font_size = 26
-Label/fonts/font = ExtResource("9_vy74y")
+Label/colors/font_outline_color = Color(0.09803922, 0.1254902, 0.09411765, 1)
+Label/constants/outline_size = 12
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_tksin")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5yg88"]
 
@@ -38,7 +39,7 @@ Button/styles/hover = SubResource("StyleBoxEmpty_tns2n")
 Button/styles/normal = SubResource("StyleBoxEmpty_2407u")
 Button/styles/pressed = SubResource("StyleBoxEmpty_fccpc")
 
-[node name="TopBar" type="MarginContainer" node_paths=PackedStringArray("speed_button")]
+[node name="TopBar" type="MarginContainer" unique_id=1440994670 node_paths=PackedStringArray("speed_button")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 130.0
@@ -51,12 +52,12 @@ theme_override_constants/margin_right = 20
 script = ExtResource("1_b2kx5")
 speed_button = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/SpeedButton")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1817111365]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1545796045]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 18
@@ -64,65 +65,74 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1061821977]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 60
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=913205956]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="HealthCounter" parent="VBoxContainer/HBoxContainer/HBoxContainer2" instance=ExtResource("3_5yg88")]
+[node name="HealthCounter" parent="VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=29397019 instance=ExtResource("3_5yg88")]
+clip_contents = true
+custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
 
-[node name="Gold" parent="VBoxContainer/HBoxContainer/HBoxContainer2" instance=ExtResource("4_tksin")]
+[node name="Gold" parent="VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=997383728 instance=ExtResource("4_tksin")]
+custom_minimum_size = Vector2(156, 0)
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="InventoryUi" parent="VBoxContainer/HBoxContainer/HBoxContainer2" instance=ExtResource("10_fdcnu")]
+[node name="InventoryUi" parent="VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=429276050 instance=ExtResource("10_fdcnu")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1555556625]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
+theme_override_constants/separation = 250
 
-[node name="WavesCounter" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_tns2n")]
+[node name="WavesCounter" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1543469044 instance=ExtResource("5_tns2n")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="LevelProgressUi" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("7_fccpc")]
+[node name="LevelProgressUi" parent="VBoxContainer/HBoxContainer" unique_id=980166538 instance=ExtResource("7_fccpc")]
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=128027653]
 layout_mode = 2
+size_flags_horizontal = 10
 theme_override_constants/separation = 50
 
-[node name="SpeedButton" parent="VBoxContainer/HBoxContainer/HBoxContainer" instance=ExtResource("8_o3scy")]
+[node name="SpeedButton" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1470288040 instance=ExtResource("8_o3scy")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = SubResource("Theme_6uylq")
+theme_override_colors/font_outline_color = Color(0.09803922, 0.1254902, 0.09411765, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("1_tksin")
+theme_override_font_sizes/font_size = 32
 text = "x1"
 
-[node name="Config" parent="VBoxContainer/HBoxContainer/HBoxContainer" instance=ExtResource("6_2407u")]
+[node name="Config" parent="VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1634526839 instance=ExtResource("6_2407u")]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="StatutsContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="StatutsContainer" type="PanelContainer" parent="VBoxContainer" unique_id=437708437]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("3_tksin")
 
-[node name="RelicsContainer" parent="VBoxContainer" instance=ExtResource("2_fdcnu")]
+[node name="RelicsContainer" parent="VBoxContainer" unique_id=383532155 instance=ExtResource("2_fdcnu")]
 layout_mode = 2
 size_flags_horizontal = 2
 

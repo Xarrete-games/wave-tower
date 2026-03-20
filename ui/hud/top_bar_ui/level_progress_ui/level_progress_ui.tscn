@@ -1,45 +1,68 @@
-[gd_scene load_steps=3 format=3 uid="uid://deyqjxbpqlfc4"]
+[gd_scene format=3 uid="uid://deyqjxbpqlfc4"]
 
 [ext_resource type="Script" uid="uid://ds783qqi72xq1" path="res://ui/hud/top_bar_ui/level_progress_ui/level_progress_ui.gd" id="1_ga602"]
 [ext_resource type="PackedScene" uid="uid://dddlo6uv4ct15" path="res://ui/hud/top_bar_ui/level_progress_ui/level_progress_slot_ui/level_progress_slot.tscn" id="1_i6lgd"]
 
-[node name="LevelProgressUi" type="HBoxContainer"]
-offset_right = 500.0
-offset_bottom = 30.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iei1m"]
+bg_color = Color(0.09803922, 0.1254902, 0.09411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.09803922, 0.23529412, 0.1882353, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1870016146 node_paths=PackedStringArray("slots_container")]
+offset_right = 449.0
+offset_bottom = 44.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_iei1m")
+script = ExtResource("1_ga602")
+slots_container = NodePath("MarginContainer/SlotsContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=29183108]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SlotsContainer" type="HBoxContainer" parent="MarginContainer" unique_id=2091498327]
+layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
-script = ExtResource("1_ga602")
 
-[node name="LevelProgressSlot" parent="." instance=ExtResource("1_i6lgd")]
+[node name="LevelProgressSlot" parent="MarginContainer/SlotsContainer" unique_id=43609121 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[node name="LevelProgressSlot2" parent="." instance=ExtResource("1_i6lgd")]
+[node name="LevelProgressSlot2" parent="MarginContainer/SlotsContainer" unique_id=81471666 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[node name="LevelProgressSlot3" parent="." instance=ExtResource("1_i6lgd")]
+[node name="LevelProgressSlot3" parent="MarginContainer/SlotsContainer" unique_id=98851278 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[node name="LevelProgressSlot4" parent="." instance=ExtResource("1_i6lgd")]
+[node name="LevelProgressSlot4" parent="MarginContainer/SlotsContainer" unique_id=147455456 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[node name="LevelProgressSlot5" parent="." instance=ExtResource("1_i6lgd")]
+[node name="LevelProgressSlot5" parent="MarginContainer/SlotsContainer" unique_id=1927029834 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[node name="LevelProgressSlot6" parent="." instance=ExtResource("1_i6lgd")]
+[node name="LevelProgressSlot6" parent="MarginContainer/SlotsContainer" unique_id=119822236 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[node name="LevelProgressSlot7" parent="." instance=ExtResource("1_i6lgd")]
+[node name="LevelProgressSlot7" parent="MarginContainer/SlotsContainer" unique_id=1925848054 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[node name="LevelProgressSlot8" parent="." instance=ExtResource("1_i6lgd")]
+[node name="LevelProgressSlot8" parent="MarginContainer/SlotsContainer" unique_id=861851171 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[node name="LevelProgressSlot9" parent="." instance=ExtResource("1_i6lgd")]
+[node name="LevelProgressSlot9" parent="MarginContainer/SlotsContainer" unique_id=724114021 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[node name="LevelProgressSlot10" parent="." instance=ExtResource("1_i6lgd")]
-custom_minimum_size = Vector2(40, 40)
+[node name="LevelProgressSlot10" parent="MarginContainer/SlotsContainer" unique_id=857360567 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/SlotsContainer" to="MarginContainer/SlotsContainer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/SlotsContainer" to="MarginContainer/SlotsContainer" method="_on_mouse_exited"]
