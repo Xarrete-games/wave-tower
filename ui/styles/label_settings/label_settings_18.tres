@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://d4g1vsd3mdf1g"]
+
+[ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="1_hvb5m"]
+
+[resource]
+font = ExtResource("1_hvb5m")
+font_size = 18
+outline_size = 6
+outline_color = Color(0.09803922, 0.23529412, 0.1882353, 1)

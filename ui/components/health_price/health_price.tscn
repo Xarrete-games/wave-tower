@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://di132c8on6fw"]
+[gd_scene format=3 uid="uid://di132c8on6fw"]
 
 [ext_resource type="Script" uid="uid://k3ptlqkuj1cj" path="res://ui/components/health_price/health_price.gd" id="1_rc7h7"]
 [ext_resource type="Texture2D" uid="uid://t0orxc251is3" path="res://assets/images/icons/corazon.png" id="2_j6c4j"]
-[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="2_rc7h7"]
+[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="2_rc7h7"]
 
 [node name="HealthPrice" type="HBoxContainer"]
 offset_right = 74.0

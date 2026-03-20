@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxcvghkrce26w"]
+[gd_scene format=3 uid="uid://dxcvghkrce26w"]
 
-[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="1_v6nj1"]
+[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="1_v6nj1"]
 [ext_resource type="Script" uid="uid://c4wun5ggmwbai" path="res://ui/hud/damage_recount_panel/tower_damage_recount_ui.gd" id="1_w8cxg"]
 [ext_resource type="PackedScene" uid="uid://ddbvyg0ckvif6" path="res://ui/hud/damage_recount_panel/damage_recount_row.tscn" id="3_f35h6"]
 

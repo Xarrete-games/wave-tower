@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 @onready var button_click: AudioStreamPlayer = $ButtonClick
 @onready var button_hover: AudioStreamPlayer = $ButtonHover
@@ -6,6 +6,7 @@ extends Node2D
 @onready var main_piano_player: AudioStreamPlayer = $MainPianoPlayer
 @onready var purchase_player: AudioStreamPlayer = $PurchasePlayer
 @onready var music_player: AudioStreamPlayer = $WaveClear
+@onready var defeated_sound: AudioStreamPlayer = $DefeatedSound
 
 func play_coins():
 	coins.play()
@@ -30,3 +31,7 @@ func stop_main_piano():
 
 func play_wave_clear():
 	music_player.play()
+
+func play_defeated_sound():
+	defeated_sound.play()
+

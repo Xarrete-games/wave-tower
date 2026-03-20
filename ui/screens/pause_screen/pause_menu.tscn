@@ -65,7 +65,6 @@ size_flags_horizontal = 4
 text = "Back"
 
 [node name="ButtonsSecitons" type="VBoxContainer" parent="CenterContainer/MarginContainer/MainContainer" unique_id=1090320248]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 40
 

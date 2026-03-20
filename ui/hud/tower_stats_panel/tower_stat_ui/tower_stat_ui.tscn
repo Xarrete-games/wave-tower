@@ -1,17 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://damv0wm6yljhs"]
+[gd_scene format=3 uid="uid://damv0wm6yljhs"]
 
 [ext_resource type="Script" uid="uid://lieiuhts3c0d" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.gd" id="1_c8a0f"]
+[ext_resource type="LabelSettings" uid="uid://d4g1vsd3mdf1g" path="res://ui/styles/label_settings/label_settings_18.tres" id="2_c8a0f"]
 
-[node name="TowerStatUi" type="HBoxContainer"]
+[node name="TowerStatUi" type="HBoxContainer" unique_id=1410745448]
 offset_right = 104.0
 offset_bottom = 42.0
 script = ExtResource("1_c8a0f")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=504753154]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="StatTexture" type="TextureRect" parent="MarginContainer"]
+[node name="StatTexture" type="TextureRect" parent="MarginContainer" unique_id=191922153]
 unique_name_in_owner = true
 texture_filter = 2
 custom_minimum_size = Vector2(40, 40)
@@ -20,21 +21,23 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=269917647]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/separation = -6
 
-[node name="AttributeLabel" type="Label" parent="VBoxContainer"]
+[node name="AttributeLabel" type="Label" parent="VBoxContainer" unique_id=1986001717]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5794276, 0.76647013, 0.79482156, 1)
 theme_override_font_sizes/font_size = 20
+label_settings = ExtResource("2_c8a0f")
 
-[node name="ValueLabel" type="Label" parent="VBoxContainer"]
+[node name="ValueLabel" type="Label" parent="VBoxContainer" unique_id=1420098934]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "0"
+label_settings = ExtResource("2_c8a0f")

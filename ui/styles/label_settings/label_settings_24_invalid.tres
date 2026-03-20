@@ -1,9 +1,10 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c0seek6x1jue3"]
+[gd_resource type="LabelSettings" format=3 uid="uid://c0seek6x1jue3"]
 
-[ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="1_cfgay"]
+[ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="1_cfgay"]
 
 [resource]
 font = ExtResource("1_cfgay")
 font_size = 24
 font_color = Color(0.87734634, 3.8745256e-06, 1.2513996e-06, 1)
-outline_color = Color(0, 0, 0, 1)
+outline_size = 10
+outline_color = Color(0.09803922, 0.23529412, 0.1882353, 1)

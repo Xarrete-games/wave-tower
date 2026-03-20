@@ -10,6 +10,7 @@ const BOOT = preload("uid://bfm0i7ehshgsf")
 @export var trigger_finish_wave: bool = false
 
 var _current_level: Level
+var _pause_instance: Control
 
 #current level parent
 @onready var level_container: Node2D = $LevelContainer
@@ -62,9 +63,17 @@ func go_next_level() -> void:
 		_load_level(current_level_number)
 		
 func _open_config_menu() -> void:
+	if _pause_instance and _pause_instance.is_visible_in_tree():
+		return
 	get_tree().paused = not get_tree().paused
-	var pause_instance = pause.instantiate()
-	config_layer.add_child(pause_instance)
+	_pause_instance = pause.instantiate()
+	_pause_instance.resume_game.connect(_close_config_menu)
+	config_layer.add_child(_pause_instance)
+
+func _close_config_menu() -> void:
+	if _pause_instance and _pause_instance.is_visible_in_tree():
+		_pause_instance.queue_free()
+		_pause_instance = null
 
 func _get_level(level_number: int) -> Level:
 	var path: String = LEVELS_PATH + str(level_number)

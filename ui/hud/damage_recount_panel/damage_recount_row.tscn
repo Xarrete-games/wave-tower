@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddbvyg0ckvif6"]
+[gd_scene format=3 uid="uid://ddbvyg0ckvif6"]
 
 [ext_resource type="Script" uid="uid://c2bgrsqq0v13e" path="res://ui/hud/damage_recount_panel/damage_recount_row.gd" id="1_x56dy"]
-[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="2_kf7kp"]
+[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="2_kf7kp"]
 
 [node name="DamageRecountRow" type="HBoxContainer"]
 offset_right = 19.0

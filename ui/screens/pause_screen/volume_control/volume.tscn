@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bk5qffk5er2tl" path="res://ui/screens/pause_screen/volume_control/slider_volumen/slider_volumen.tscn" id="1_1s6gx"]
 [ext_resource type="Theme" uid="uid://br31q0n6y25o7" path="res://ui/styles/themes/menu_buttons_theme.tres" id="3_fkdrh"]
-[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="4_1ru07"]
+[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="4_1ru07"]
 
 [node name="Volume" type="VBoxContainer" unique_id=885108872]
 theme_override_constants/separation = 20

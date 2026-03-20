@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0qrluaokqdpj"]
+[gd_scene format=3 uid="uid://d0qrluaokqdpj"]
 
 [ext_resource type="Theme" uid="uid://b21vyg4n4iq" path="res://ui/styles/themes/action_buttons_theme.tres" id="1_myxe3"]
 [ext_resource type="Script" uid="uid://bucqbucrgu1eb" path="res://ui/components/buttons/xarreta_button.gd" id="2_nsq7y"]
 [ext_resource type="Theme" uid="uid://df6bsofi72kid" path="res://ui/styles/themes/action_buttons__disabled_theme.tres" id="3_nsq7y"]
 
-[node name="XarreteActionButton" type="Button"]
+[node name="XarreteActionButton" type="Button" unique_id=2063405682]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

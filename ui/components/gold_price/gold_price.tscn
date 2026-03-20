@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://edi2t1ojyywt"]
+[gd_scene format=3 uid="uid://edi2t1ojyywt"]
 
 [ext_resource type="Script" uid="uid://d02i23bjo7k56" path="res://ui/components/gold_price/gold_price.gd" id="1_san1j"]
-[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_16.tres" id="2_4g4k5"]
+[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="2_4g4k5"]
 [ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/images/icons/wcoin.png" id="3_san1j"]
 
 [node name="GoldPrice" type="HBoxContainer"]

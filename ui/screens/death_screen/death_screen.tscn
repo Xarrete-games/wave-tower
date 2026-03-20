@@ -1,39 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcq16u6g6ahsp"]
+[gd_scene format=3 uid="uid://dcq16u6g6ahsp"]
 
 [ext_resource type="Script" uid="uid://emvdt530upjb" path="res://ui/screens/death_screen/death_screen.gd" id="1_4klge"]
-[ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="2_iyktl"]
+[ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="2_fqko3"]
+[ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="3_5mn61"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="3_iyktl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lg0me"]
-font = ExtResource("2_iyktl")
-font_size = 50
+font = ExtResource("2_fqko3")
+font_size = 64
 outline_color = Color(0.0253638, 0.0253638, 0.025363795, 1)
 
-[node name="DeathScreen" type="CanvasLayer"]
+[node name="DeathScreen" type="CanvasLayer" unique_id=845446723]
 process_mode = 3
 script = ExtResource("1_4klge")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2108421398]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=914627446]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer" unique_id=1037134291]
 layout_mode = 2
 theme_override_constants/separation = 60
 
-[node name="Label" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer" unique_id=1210592047]
 layout_mode = 2
-text = "YOU DIE :("
+text = "DEFEATED"
 label_settings = SubResource("LabelSettings_lg0me")
 
-[node name="TryAgainButton" parent="PanelContainer/CenterContainer/VBoxContainer" instance=ExtResource("3_iyktl")]
+[node name="AnimationComponent" type="Node" parent="PanelContainer/CenterContainer/VBoxContainer/Label" unique_id=585701245]
+script = ExtResource("3_5mn61")
+enter_animation = true
+enter_time = 5.0
+enter_modulate = Color(1, 1, 1, 0)
+metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
+
+[node name="TryAgainButton" parent="PanelContainer/CenterContainer/VBoxContainer" unique_id=2081541098 instance=ExtResource("3_iyktl")]
+custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Try Again"
+
+[node name="AnimationComponent" type="Node" parent="PanelContainer/CenterContainer/VBoxContainer/TryAgainButton" unique_id=1237211827]
+script = ExtResource("3_5mn61")
+enter_animation = true
+enter_time = 2.0
+enter_delay = 4.0
+enter_modulate = Color(1, 1, 1, 0)
+metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [connection signal="xarreta_pressed" from="PanelContainer/CenterContainer/VBoxContainer/TryAgainButton" to="." method="_on_try_again_button_xarreta_pressed"]

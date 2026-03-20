@@ -7,8 +7,10 @@
 [ext_resource type="AudioStream" uid="uid://508wsv4ddbba" path="res://assets/sounds/music/00_Base_piano.ogg" id="5_s3r24"]
 [ext_resource type="AudioStream" uid="uid://708fqgiqj5xt" path="res://assets/sounds/sfx/purchase.mp3" id="6_seqmh"]
 [ext_resource type="AudioStream" uid="uid://dd30420p7euab" path="res://assets/sounds/sfx/wave_clear.wav" id="7_o00yt"]
+[ext_resource type="AudioStream" uid="uid://bjd7mrqdxsdwa" path="res://assets/sounds/sfx/defeated_sound.wav" id="8_j710w"]
 
-[node name="AudioManager" type="Node2D" unique_id=407345839]
+[node name="AudioManager" type="Node" unique_id=1769070765]
+process_mode = 3
 script = ExtResource("1_8qypr")
 
 [node name="Coins" type="AudioStreamPlayer" parent="." unique_id=2038888355]
@@ -33,3 +35,6 @@ bus = &"SFX"
 
 [node name="WaveClear" type="AudioStreamPlayer" parent="." unique_id=1204044153]
 stream = ExtResource("7_o00yt")
+
+[node name="DefeatedSound" type="AudioStreamPlayer" parent="." unique_id=322434600]
+stream = ExtResource("8_j710w")

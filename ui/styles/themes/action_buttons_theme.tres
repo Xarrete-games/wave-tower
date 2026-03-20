@@ -1,13 +1,15 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://b21vyg4n4iq"]
+[gd_resource type="Theme" format=3 uid="uid://b21vyg4n4iq"]
 
-[ext_resource type="FontFile" uid="uid://bflrptlda1ab2" path="res://assets/fonts/YujiSyuku-Regular.ttf" id="1_6g7v3"]
+[ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="1_6g7v3"]
 [ext_resource type="StyleBox" uid="uid://c4ur0hd13rv3h" path="res://ui/styles/box_style/buttons/action_button.tres" id="2_vyi2d"]
 [ext_resource type="StyleBox" uid="uid://cb4cmo24t0c27" path="res://ui/styles/box_style/buttons/action_button_hover.tres" id="3_khh4e"]
 
 [resource]
 Button/colors/font_color = Color(0.78431374, 0.9019608, 0.7882353, 1)
+Button/colors/font_outline_color = Color(0.09803922, 0.23529412, 0.1882353, 1)
 Button/constants/icon_max_width = 30
-Button/font_sizes/font_size = 22
+Button/constants/outline_size = 12
+Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_6g7v3")
 Button/styles/disabled = ExtResource("2_vyi2d")
 Button/styles/focus = ExtResource("3_khh4e")
