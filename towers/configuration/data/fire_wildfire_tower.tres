@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="TowerConfiguration" format=3 uid="uid://c85ehe3lacxch"]
+[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" format=3 uid="uid://c87ypetdh5cks"]
 
-[ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_c2cf6"]
-[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_whh4e"]
-[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="3_q81qh"]
+[ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_clbp5"]
+[ext_resource type="PackedScene" uid="uid://ckw22jf820ehi" path="res://towers/instances/fire/fire_wildfire_tower/fire_wildfire_tower.tscn" id="2_clbp5"]
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_ctmpg"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="3_ctmpg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
-atlas = ExtResource("1_c2cf6")
+atlas = ExtResource("1_clbp5")
 region = Rect2(1011, 1, 355, 550)
 
-[resource]
-script = ExtResource("2_whh4e")
+[sub_resource type="Resource" id="Resource_4q8u3"]
+script = ExtResource("2_ctmpg")
 id = "wild_fire"
 display_name = "Wildfire tower"
 description = "Fire a flamethrower to burn several enemies"
@@ -20,3 +21,9 @@ base_damage = 90.0
 base_attack_range = 340.0
 base_attack_speed = 1.5
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
+
+[resource]
+script = ExtResource("3_ctmpg")
+configuration = SubResource("Resource_4q8u3")
+scene = ExtResource("2_clbp5")
+metadata/_custom_type_script = "uid://byiw835k16yc6"
