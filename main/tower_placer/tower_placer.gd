@@ -64,7 +64,7 @@ func _place_tower() -> void:
 	
 	_current_tower_instance.enable()
 
-	RunContext.towers_manager.tower_added(_current_tower_instance)
+	RunContext.towers_manager.add_tower_placed(_current_tower_instance)
 
 	_current_tower_instance = null
 
@@ -108,6 +108,6 @@ func _on_tower_upgrade_pressed(current_tower: Tower, new_tower_conf: TowerConfig
 	new_tower.copy_tower_data(current_tower)
 	new_tower.enable()
 	
-	RunContext.towers_manager.tower_added(new_tower)
+	RunContext.towers_manager.add_tower_placed(new_tower)
 	RunContext.towers_manager.tower_removed(current_tower)
 	ClickEvents.tower_selected.emit(new_tower)

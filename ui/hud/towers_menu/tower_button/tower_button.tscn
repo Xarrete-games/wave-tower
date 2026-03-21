@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://o248nju46k2n"]
+[gd_scene format=3 uid="uid://o248nju46k2n"]
 
 [ext_resource type="Script" uid="uid://n67chfk5ae8t" path="res://ui/hud/towers_menu/tower_button/tower_button.gd" id="1_bxa3v"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_s7tbd"]
 [ext_resource type="StyleBox" uid="uid://dcjn1y7ofuii7" path="res://ui/styles/box_style/buttons/button_panel.tres" id="2_3ku3x"]
+[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_274r1"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="5_dfgrm"]
 
 [sub_resource type="Theme" id="Theme_3ku3x"]
@@ -13,26 +14,31 @@
 atlas = ExtResource("1_s7tbd")
 region = Rect2(0, 0, 128, 191)
 
-[node name="TowerButton" type="VBoxContainer" node_paths=PackedStringArray("panel", "tower_button", "gold_price")]
-offset_right = 60.0
-offset_bottom = 99.0
+[node name="TowerButton" type="HBoxContainer" unique_id=1780577747 node_paths=PackedStringArray("panel", "tower_button", "gold_price", "amount_label")]
+offset_right = 144.0
+offset_bottom = 141.0
 size_flags_vertical = 10
+theme_override_constants/separation = 20
 script = ExtResource("1_bxa3v")
-panel = NodePath("CenterContainer/Panel")
-tower_button = NodePath("CenterContainer/TowerButton")
-gold_price = NodePath("GoldPrice")
+panel = NodePath("VBoxContainer/CenterContainer/Panel")
+tower_button = NodePath("VBoxContainer/CenterContainer/TowerButton")
+gold_price = NodePath("VBoxContainer/GoldPrice")
+amount_label = NodePath("HBoxContainer/MarginContainer/AmountLabel")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1900875026]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1232477087]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Panel" type="Panel" parent="CenterContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer/CenterContainer" unique_id=649256619]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme = SubResource("Theme_3ku3x")
 theme_override_styles/panel = ExtResource("2_3ku3x")
 
-[node name="TowerButton" type="TextureButton" parent="CenterContainer"]
+[node name="TowerButton" type="TextureButton" parent="VBoxContainer/CenterContainer" unique_id=264373138]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 focus_mode = 0
@@ -42,12 +48,25 @@ texture_normal = SubResource("AtlasTexture_c656n")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="GoldPrice" parent="." instance=ExtResource("5_dfgrm")]
+[node name="GoldPrice" parent="VBoxContainer" unique_id=792671145 instance=ExtResource("5_dfgrm")]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1622601273]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1119503830]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+
+[node name="AmountLabel" type="Label" parent="HBoxContainer/MarginContainer" unique_id=1094475366]
+layout_mode = 2
+text = "x 1"
+label_settings = ExtResource("5_274r1")
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="pressed" from="CenterContainer/TowerButton" to="." method="_on_tower_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/TowerButton" to="." method="_on_tower_button_pressed"]

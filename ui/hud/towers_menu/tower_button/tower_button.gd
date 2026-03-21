@@ -19,6 +19,7 @@ const HOVER_PANEL = preload("uid://5m3jkdualcb3")
 @export var panel: Panel	
 @export var tower_button: TextureButton
 @export var gold_price: GoldPrice
+@export var amount_label: Label
 
 var configuration: TowerConfiguration
 
@@ -35,6 +36,11 @@ var icon_hover: AtlasTexture:
 	set(value):
 		icon_hover = value
 		_update_texture_hover()
+
+var amount: int = 0:
+	set(value):
+		amount = value
+		amount_label.text = "x " + str(value)
 
 var tower_scene: PackedScene
 var type: Tower.Type

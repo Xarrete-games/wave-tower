@@ -6,16 +6,45 @@ const GREEN_TOWER = preload("uid://oj5ilwusjvuo")
 
 @export var buttons_container: Control
 @export var tower_hint: TowerButtonHint
+@export var tower_button_scene: PackedScene
 
 var button_in_hover: TowerButton = null
+# dicotionary of tower id/amount
+var buttons: Dictionary[String, TowerButton] = {}
 
 func _ready() -> void:
 	tower_hint.visible = false
-	for button in buttons_container.get_children():
-		button.tower_button_pressed.connect(_on_tower_button_pressed)
-		button.hover.connect(_on_tower_button_hover)
-		button.unhover.connect(_on_tower_button_unhover)
+	RunContext.towers_manager.tower_card_amount_change.connect(_on_tower_card_added)
+	ClickEvents.add_tower_card.connect(_on_tower_card_added)
+	_init_button_cards()
+	
 
+func _init_button_cards() -> void:
+	var towers_cards_amount = RunContext.towers_manager.tower_cards_amount
+	for tower_configuration_id in towers_cards_amount.keys():
+		var amount = towers_cards_amount[tower_configuration_id]
+		var tower_configuration = RunContext.towers_manager.get_tower_configuration_by_id(tower_configuration_id)
+		_on_tower_card_added(tower_configuration, amount)
+
+func _on_tower_card_added(tower_configuration: TowerConfigurationWithInstance, amount: int) -> void:
+	if amount == 0:
+		if tower_configuration.configuration.id in buttons:
+			buttons[tower_configuration.configuration.id].queue_free()
+			buttons.erase(tower_configuration.configuration.id)
+		return
+	elif amount == 1:
+		var new_button = tower_button_scene.instantiate() as TowerButton
+		buttons_container.add_child(new_button)
+		new_button.tower_configuration = tower_configuration
+		buttons[tower_configuration.configuration.id] = new_button
+		# connect signals
+		new_button.tower_button_pressed.connect(_on_tower_button_pressed)
+		new_button.hover.connect(_on_tower_button_hover)
+		new_button.unhover.connect(_on_tower_button_unhover)
+	else:
+		if tower_configuration.configuration.id in buttons:
+			buttons[tower_configuration.configuration.id].amount = amount
+	 
 func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance, price: int) -> void:
 	ClickEvents.tower_build_button_pressed.emit(tower_configuration, price)
 
