@@ -55,8 +55,8 @@ func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	# Position the hint above the button
 	var rect: Rect2 = tower_button.get_global_rect()	
 	tower_hint.global_position = Vector2(
-		rect.position.x + rect.size.x * 0.5 - tower_hint.size.x * 0.5,
-		rect.position.y - tower_hint.size.y - 30
+		rect.position.x + rect.size.x * 0.25 - tower_hint.size.x * 0.5,
+		tower_hint.global_position.y
 	)
 	tower_hint.visible = true
 

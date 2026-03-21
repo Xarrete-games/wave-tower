@@ -3,15 +3,16 @@
 [ext_resource type="Script" uid="uid://idfo47x20kr4" path="res://ui/hud/towers_menu/tower_button_hint/tower_button_hint.gd" id="1_j4uly"]
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="1_wylug"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="3_wylug"]
-[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="4_3svv1"]
+[ext_resource type="LabelSettings" uid="uid://d4g1vsd3mdf1g" path="res://ui/styles/label_settings/label_settings_18.tres" id="4_3svv1"]
 [ext_resource type="PackedScene" uid="uid://damv0wm6yljhs" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.tscn" id="4_wylug"]
 [ext_resource type="Texture2D" uid="uid://bus5y7ash7vve" path="res://assets/images/icons/stats/attack_icon_flat.png" id="6_wylug"]
 [ext_resource type="Texture2D" uid="uid://b0aufhy41nftl" path="res://assets/images/icons/stats/attack_speed_icon_flat.png" id="7_3svv1"]
 [ext_resource type="Texture2D" uid="uid://dh4xdb1wo3q44" path="res://assets/images/icons/stats/range_icon_flat.png" id="8_wylug"]
 
 [node name="TowerButtonHint" type="PanelContainer" unique_id=1320597170]
-offset_right = 254.0
-offset_bottom = 125.0
+custom_minimum_size = Vector2(350, 350)
+offset_right = 350.0
+offset_bottom = 350.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
@@ -21,8 +22,8 @@ script = ExtResource("1_j4uly")
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=721000396]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=499394039]
@@ -52,10 +53,15 @@ horizontal_alignment = 1
 
 [node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer/DescriptionContainer" unique_id=567744012]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 160)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Su mucho damage"
+text = "Throws a glacial lance that deeply freezes its target, 
+dealing more damage based on the number of Frost
+stacks they have."
 label_settings = ExtResource("4_3svv1")
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="StatsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2123324127]
 layout_mode = 2
