@@ -6,6 +6,8 @@ signal tower_placed(tower: Tower)
 signal tower_hovered(tower: Tower)
 signal tower_unhovered(tower: Tower)
 
+const INITIAL_TOWERS_IDS = ["fire_tower", "frost_tower", "lightning_tower"]
+
 var towers_placed: Dictionary[Tower.Type, int] = {
 	Tower.Type.FIRE: 0,
 	Tower.Type.FROST: 0,
@@ -69,7 +71,13 @@ func _update_tower_count(tower_type: Tower.Type, value: int) -> void:
 	tower_count_change.emit(tower_type, value)
 
 func _init_inital_towers_data() -> void:
-	var inital_cards = get_random_towers(2)
+	var inital_cards = []
+
+	for tower_id in INITIAL_TOWERS_IDS:
+		var tower_configuration = get_tower_configuration_by_id(tower_id)
+		if tower_configuration != null:
+			inital_cards.append(tower_configuration)
+
 	for tower_configuration in inital_cards:
 		_on_tower_card_added(tower_configuration)
 

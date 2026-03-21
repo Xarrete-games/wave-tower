@@ -12,9 +12,11 @@ func _ready():
 
 func upgrade() -> void:
 	RunContext.economy.gold -= configuration.upgrade_price
-	sprite_2d.texture = upgrade_sprite
 	level += 1
 	experience_handler.level_up.emit(level)
+
+	if upgrade_sprite:
+		sprite_2d.texture = upgrade_sprite
 
 func is_max_level() -> bool:
 	return level >= MAX_LEVEL

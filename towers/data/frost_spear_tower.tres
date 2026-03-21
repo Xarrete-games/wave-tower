@@ -17,7 +17,7 @@ description = "Throws a glacial lance that deeply freezes its target,
 dealing more damage based on the number of Frost
 stacks they have."
 icon = SubResource("AtlasTexture_cq3yl")
-base_price = 100
+base_price = 250
 upgrade_price = 100
 base_damage = 110.0
 base_attack_range = 330.0

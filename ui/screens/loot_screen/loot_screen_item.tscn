@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dnsxyviefc8h6" path="res://ui/screens/loot_screen/loot_screen_item.gd" id="1_supgx"]
 [ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="3_66g07"]
 [ext_resource type="Texture2D" uid="uid://bsq8n0trc4cop" path="res://assets/sprites/consumables/purple_potion_relic.png" id="3_pvu0a"]
-[ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_66g07"]
+[ext_resource type="LabelSettings" uid="uid://d4g1vsd3mdf1g" path="res://ui/styles/label_settings/label_settings_18.tres" id="5_66g07"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cne1v"]
 bg_color = Color(0.09803922, 0.23529412, 0.1882353, 1)
@@ -14,7 +14,7 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [node name="LootScreenItem" type="PanelContainer" unique_id=329821247 node_paths=PackedStringArray("texture_rect", "label")]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(360, 0)
 offset_right = 240.0
 offset_bottom = 55.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_cne1v")
@@ -51,7 +51,7 @@ stretch_mode = 4
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1606027976]
 layout_mode = 2
 mouse_filter = 1
-text = "48 gold"
+text = "Big bowl of milk and cookies"
 label_settings = ExtResource("5_66g07")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
