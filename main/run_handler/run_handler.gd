@@ -27,6 +27,10 @@ func _ready() -> void:
 func show_loot_screen() -> void:
 	await loot_screen_handler.show_loot_screen(event_layer)
 
+func show_choose_card_screen() -> void:
+	var cards = RunContext.towers_manager.get_random_towers(2)
+	await ChooseTowerScreen.show_screen(cards, event_layer)
+
 func show_events_screen(event_data: EventData) -> void:
 	await events_screen_hander.show_event_selected(event_data, event_layer)
 
@@ -60,6 +64,9 @@ func _on_wave_finished() -> void:
 	# LOOT SCREEN
 	AudioManager.play_wave_clear()
 	await show_loot_screen()
+	# 2 CARD CHOICES
+	await show_choose_card_screen()
+	await show_choose_card_screen()
 
 	if RunContext.is_on_restarting:
 		return

@@ -9,13 +9,12 @@ const GREEN_TOWER = preload("uid://oj5ilwusjvuo")
 @export var tower_button_scene: PackedScene
 
 var button_in_hover: TowerButton = null
-# dicotionary of tower id/amount
+# dictionary of tower id/amount
 var buttons: Dictionary[String, TowerButton] = {}
 
 func _ready() -> void:
 	tower_hint.visible = false
 	RunContext.towers_manager.tower_card_amount_change.connect(_on_tower_card_added)
-	ClickEvents.add_tower_card.connect(_on_tower_card_added)
 	_init_button_cards()
 	
 
@@ -31,12 +30,14 @@ func _on_tower_card_added(tower_configuration: TowerConfigurationWithInstance, a
 		if tower_configuration.configuration.id in buttons:
 			buttons[tower_configuration.configuration.id].queue_free()
 			buttons.erase(tower_configuration.configuration.id)
-		return
-	elif amount == 1:
+			return
+
+	if tower_configuration.configuration.id not in buttons:
 		var new_button = tower_button_scene.instantiate() as TowerButton
 		buttons_container.add_child(new_button)
 		new_button.tower_configuration = tower_configuration
 		buttons[tower_configuration.configuration.id] = new_button
+		new_button.amount = amount
 		# connect signals
 		new_button.tower_button_pressed.connect(_on_tower_button_pressed)
 		new_button.hover.connect(_on_tower_button_hover)

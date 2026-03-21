@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bxw2isn60dlre"]
+
+[ext_resource type="Script" uid="uid://cgu8nbk0okp77" path="res://ui/screens/choose_tower_screen/choose_tower_screen.gd" id="1_4ckdq"]
+[ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="1_sybfm"]
+
+[node name="ChooseTowerScreen" type="PanelContainer" unique_id=817166298 node_paths=PackedStringArray("cards_container", "ok_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4ckdq")
+cards_container = NodePath("MainContainer/CardsContainer")
+ok_button = NodePath("MainContainer/XarreteActionButton")
+
+[node name="MainContainer" type="VBoxContainer" parent="." unique_id=1340733910]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CardsContainer" type="HBoxContainer" parent="MainContainer" unique_id=1704785942]
+layout_mode = 2
+
+[node name="XarreteActionButton" parent="MainContainer" unique_id=2063405682 instance=ExtResource("1_sybfm")]
+visible = false
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Ok"

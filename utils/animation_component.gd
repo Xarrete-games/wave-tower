@@ -26,6 +26,7 @@ const IMMEDIATE_TRANSITION: Tween.TransitionType = Tween.TRANS_LINEAR
 @export var hover_rotation: float
 @export var hover_size: Vector2
 @export var hover_modulate: Color = Color.WHITE
+@export var play_hover_sound: bool = false
 
 @export_group("Enter Settings")
 @export var wait_for: AnimationComponent
@@ -65,6 +66,8 @@ func on_hover_entered() -> void:
 		hover_transition,
 		hover_easing,
 	)
+	if play_hover_sound:
+		AudioManager.play_button_hover()
 
 func on_hover_exited() -> void:
 	on_hover = false
