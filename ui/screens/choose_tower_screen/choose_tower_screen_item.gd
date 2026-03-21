@@ -35,4 +35,5 @@ func _apply_configuration() -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if UIUtils.is_left_click_event(event):
 		ChooseTowerScreen.instance.selected_tower_configuration = tower_configuration
+		AudioManager.play_button_click()
 		selected.emit(self)
