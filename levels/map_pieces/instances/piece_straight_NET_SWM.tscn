@@ -9,9 +9,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_fauw3"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 128, -328, 0, 0, 0, 0, -248, -136, 0, 0, 0, 0, -8, 0, 0, 0, 0, 0, -368, 184)
+"points": PackedVector2Array(0, 0, 0, 0, 150, -338, 0, 0, 0, 0, -211, -153, 0, 0, 0, 0, -211, -110, 0, 0, 0, 0, -43, -21, 0, 0, 0, 0, -45.72284, 20.877808, 0, 0, 0, 0, -174, 85, 0, 0, 0, 0, -194, 151, 0, 0, 0, 0, -249, 176, 0, 0, 0, 0, -412, 206)
 }
-point_count = 4
+point_count = 9
 
 [node name="PieceStraightNetSwm" type="Node2D" unique_id=1880175309]
 script = ExtResource("1_fauw3")

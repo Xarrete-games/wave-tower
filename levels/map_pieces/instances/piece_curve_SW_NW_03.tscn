@@ -48,41 +48,49 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_14qpp")
 
 [node name="Tree1" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="4" unique_id=1070615409]
-position = Vector2(449, -320)
+position = Vector2(448, -264)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_05m4g")
+offset = Vector2(0, -200)
 
-[node name="Tree2" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="5" unique_id=972941270]
-position = Vector2(498, -293)
+[node name="Tree2" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="5" unique_id=173184820]
+position = Vector2(503, -242)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_05m4g")
+offset = Vector2(0, -200)
 
-[node name="Tree3" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="6" unique_id=717262491]
-position = Vector2(552, -268)
+[node name="Tree3" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="6" unique_id=772879178]
+position = Vector2(558, -215)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_05m4g")
+offset = Vector2(0, -200)
 
-[node name="Tree4" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="7" unique_id=2082514193]
-position = Vector2(654, -249)
+[node name="Tree4" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="7" unique_id=1193220371]
+position = Vector2(657, -186)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_05m4g")
+offset = Vector2(0, -200)
 
-[node name="Tree5" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="8" unique_id=2017525865]
-position = Vector2(703, -222)
+[node name="Tree5" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="8" unique_id=983698363]
+position = Vector2(712, -164)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_05m4g")
+offset = Vector2(0, -200)
 
-[node name="Tree6" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="9" unique_id=1861167863]
-position = Vector2(759, -198)
+[node name="Tree6" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="9" unique_id=1087741312]
+position = Vector2(767, -137)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_05m4g")
+offset = Vector2(0, -200)
 
 [node name="Stone4" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="10" unique_id=1698423786]
-position = Vector2(-829, -103)
+position = Vector2(-832, -62.000004)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_14qpp")
+offset = Vector2(0, -230)
 
 [node name="Stone5" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="11" unique_id=1938283677]
-position = Vector2(835.9999, -106)
+position = Vector2(836, -52.000004)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_14qpp")
+offset = Vector2(0, -250)

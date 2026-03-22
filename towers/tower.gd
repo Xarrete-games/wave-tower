@@ -95,7 +95,7 @@ func phantom_mode() -> void:
 
 func normal_color() -> void:
 	sprite_2d.modulate = Color.WHITE
-	range_preview.visible = true
+	_show_range()
 
 # sets the tower's state while it is being placed
 func placement_mode() -> void:
@@ -109,7 +109,6 @@ func enable() -> void:
 	sprite_2d.modulate = Color.WHITE
 	_enabled = true
 	area_detector.monitoring = true
-	range_preview.visible = false
 	tower_area.monitorable = true
 
 	await get_tree().create_timer(0.1).timeout
@@ -218,16 +217,21 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_mouse_entered():
 	ClickEvents.tower_hovered.emit(self)
-	if range_tween: range_tween.kill()
-	range_tween = create_tween()
-	range_preview.visible = true
-	range_tween.tween_property(range_preview, "self_modulate:a", 1.0, 0.1).set_trans(Tween.TRANS_SINE)
-	
+	_show_range()
 
 func _on_mouse_exit():
 	ClickEvents.tower_unhovered.emit(self)
 	if current_tower_selected != self:
-		if range_tween: range_tween.kill()
-		range_tween = create_tween()
-		range_tween.tween_property(range_preview, "self_modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
-		range_tween.tween_callback(func(): range_preview.visible = false)
+		_hide_range()
+
+func _show_range():
+	if range_tween: range_tween.kill()
+	range_tween = create_tween()
+	range_preview.visible = true
+	range_tween.tween_property(range_preview, "self_modulate:a", 1.0, 0.1).set_trans(Tween.TRANS_SINE)
+
+func _hide_range():
+	if range_tween: range_tween.kill()
+	range_tween = create_tween()
+	range_tween.tween_property(range_preview, "self_modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
+	range_tween.tween_callback(func(): range_preview.visible = false)

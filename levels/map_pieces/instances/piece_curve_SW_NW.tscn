@@ -76,9 +76,10 @@ texture = ExtResource("5_ienjm")
 [node name="Arboles" type="Node2D" parent="Decoration" unique_id=1482282257]
 
 [node name="Tree3" type="Sprite2D" parent="Decoration/Arboles" unique_id=453981350]
-position = Vector2(392, -206)
+position = Vector2(388, -88)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_13sh6")
+offset = Vector2(0, -240)
 
 [node name="Tree4" type="Sprite2D" parent="Decoration/Arboles" unique_id=328847348]
 position = Vector2(567, -103.000015)
@@ -92,11 +93,13 @@ offset = Vector2(0, -220)
 position = Vector2(-146, -283)
 
 [node name="Stone3" type="Sprite2D" parent="Decoration/Stone" unique_id=135660964]
-position = Vector2(555.99994, 231)
+position = Vector2(552.00006, 254.00002)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("7_qfrnx")
+offset = Vector2(0, -200)
 
 [node name="Stone4" type="Sprite2D" parent="Decoration/Stone" unique_id=1443649697]
-position = Vector2(507, 301)
+position = Vector2(510, 338)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("7_qfrnx")
+offset = Vector2(0, -200)
