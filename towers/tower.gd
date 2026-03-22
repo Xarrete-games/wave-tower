@@ -127,8 +127,8 @@ func enable() -> void:
 func add_local_buff(tower_buff: TowerBuff) -> void:
 	tower_stats_handler.add_local_buff(tower_buff)
 
-func remove_local_buff(tower_buff: TowerBuff) -> void:
-	tower_stats_handler.remove_local_buff(tower_buff)
+func remove_local_buff(source_id: String) -> void:
+	tower_stats_handler.remove_local_buff(source_id)
 
 # --------------------
 # --- COPY TOWER DATA---

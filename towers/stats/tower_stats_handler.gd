@@ -27,7 +27,8 @@ var tower_type: Tower.Type
 var experience_handler: ExperienceHandler
 
 func _ready() -> void:
-	RunContext.progress.current_wave_finished.connect(_on_current_wave_finished)
+	RunContext.buff_scheduler.buff_expired.connect(remove_local_buff)
+	RunContext.buff_scheduler.buff_applied.connect(add_local_buff)
 
 # initialize the stats handler with base stats, tower type and experience handler
 func set_data(
@@ -38,7 +39,7 @@ func set_data(
 	base_stats = stats_configuration.stats.duplicate()
 	# stats on level
 	stats_on_level = stats_configuration.stats_on_level.duplicate()
-	# exprience hander
+	# experience hander
 	experience_handler = p_experience_handler
 	experience_handler.level_up.connect(_on_level_up)
 	# tower type
@@ -49,12 +50,16 @@ func set_data(
 
 func add_local_buff(tower_buff: TowerBuff) -> void:
 	local_buffs.append(tower_buff)
+	if tower_buff.duration != null:
+		RunContext.buff_scheduler.schedule(tower_buff)
 	_rebuild_local_stats_acc()
 
-func remove_local_buff(tower_buff: TowerBuff) -> void:
-	if tower_buff in local_buffs:
-		local_buffs.erase(tower_buff)
-		_rebuild_local_stats_acc()
+func remove_local_buff(source_id: String) -> void:
+	for buff in local_buffs:
+		if buff.source_id == source_id:
+			local_buffs.erase(buff)
+			_rebuild_local_stats_acc()
+			break
 
 func _rebuild_local_stats_acc() -> void:
 	var acc = TowerStatsAccumulator.new()
@@ -103,11 +108,3 @@ func _update_stats() -> void:
 
 	extra_stats_change.emit(extra_stats)
 	stats_change.emit(stats)
-
-func _on_current_wave_finished() -> void:
-	var buffs_to_remove: Array[TowerBuff] = []
-	for buff in local_buffs:
-		if buff.source_type == TowerBuff.SourceType.TEMPORAL_WAVE:
-			buffs_to_remove.append(buff)
-	for buff in buffs_to_remove:
-			remove_local_buff(buff)

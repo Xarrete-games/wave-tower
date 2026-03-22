@@ -65,7 +65,7 @@ func _remove_buff(tower: Tower) -> void:
 	if tower not in towers_in_range:
 		return
 	
-	tower.remove_local_buff(buff)
+	tower.remove_local_buff(buff.source_id)
 	towers_in_range.erase(tower)
 	
 	var particle = particles_dict.get(tower.name, null)

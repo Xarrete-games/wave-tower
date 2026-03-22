@@ -1,5 +1,5 @@
 
-class_name TowersBuffs extends RefCounted
+class_name TowersBuffsManager extends RefCounted
 
 signal tower_buffs_change(new_stats: TowerStatsAccumulator)
 signal targeting_modes_change(new_modes: Array[Tower.TargetingMode])
@@ -22,6 +22,13 @@ var targeting_modes: Array[Tower.TargetingMode] = [
 	Tower.TargetingMode.FIRST_IN_PROGRESS
 ]
 
+var buff_scheduler: BuffScheduler
+
+func _init(buff_scheduler_p: BuffScheduler) -> void:
+	buff_scheduler = buff_scheduler_p
+	buff_scheduler.buff_expired.connect(remove_buff)
+	buff_scheduler.buff_applied.connect(add_buff)
+
 func add_targeting_mode(mode: Tower.TargetingMode) -> void:
 	if mode not in targeting_modes:
 		targeting_modes.append(mode)
@@ -33,8 +40,8 @@ func remove_targeting_mode(mode: Tower.TargetingMode) -> void:
 		targeting_modes_change.emit(targeting_modes)
 
 func add_buff(new_buff: TowerBuff) -> void:
-	if new_buff.duration > 0:
-		RunContext.buff_scheduler.schedule(new_buff)
+	if new_buff.duration != null:
+		buff_scheduler.schedule(new_buff)
 
 	towers_buffs.append(new_buff)
 	var acc = TowerStatsAccumulator.new()
