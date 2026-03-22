@@ -1,4 +1,4 @@
-class_name SourceBuff extends RefCounted
+class_name BuffSource extends RefCounted
 
 enum SourceType {
 	RELIC,

@@ -7,10 +7,10 @@ enum SourceType {
 }
 
 var source_type: SourceType
-var source_id: String
+var source: TowerB
 var modifier: TowerStatsModifier
 # duration
-var duration: BuffDuration
+var duration: TowerBuffDuration
 # if this buff is removed or expired, apply the residual buff
 var residual_buff: TowerBuff
 
@@ -18,7 +18,7 @@ func _init(
 	p_source_type: SourceType, 
 	p_source_id: String, 
 	p_modifier: TowerStatsModifier, 
-	p_duration: BuffDuration = null,
+	p_duration: TowerBuffDuration = null,
 	p_residual_buff: TowerBuff = null) -> void:
 	source_type = p_source_type
 	source_id = p_source_id

@@ -1,4 +1,4 @@
-class_name BuffDuration extends RefCounted
+class_name TowerBuffDuration extends RefCounted
 
 # duration in seconds, 0 for permanent
 var seconds_duration: float = 0.0

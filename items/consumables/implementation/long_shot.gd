@@ -2,7 +2,7 @@ class_name LongShot extends ConsumableTargeteable
 
 func action(target: Variant) -> void:
 	var tower: Tower = target as Tower
-	var duration = BuffDuration.new(0, 1)
+	var duration = TowerBuffDuration.new(0, 1)
 	var buff_modifier : AttackRangeMultModifier = AttackRangeMultModifier.new(1)
 	var tower_buff: TowerBuff = TowerBuff.new(
 		TowerBuff.SourceType.CONSUMABLE,
