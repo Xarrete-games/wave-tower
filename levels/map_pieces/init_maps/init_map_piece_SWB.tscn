@@ -1,0 +1,140 @@
+[gd_scene format=4 uid="uid://bryncxgusa4g7"]
+
+[ext_resource type="Script" uid="uid://chj3cku30pmp1" path="res://levels/map_pieces/map_piece.gd" id="1_ch6qp"]
+[ext_resource type="TileSet" uid="uid://0mt2a5aix72q" path="res://assets/sprites/tilesheet/tileset v2.tres" id="2_snbgg"]
+[ext_resource type="Script" uid="uid://bxxphpxqsh7c8" path="res://levels/level_tile_map/level_tile_map.gd" id="3_7f2iw"]
+[ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/map_pieces/map_piece_tile_map.tscn" id="4_1n0u1"]
+[ext_resource type="Texture2D" uid="uid://dpq3114n1y0jr" path="res://assets/sprites/decoration/Stone2.png" id="5_hmhpx"]
+[ext_resource type="Texture2D" uid="uid://dygg2e7b7f887" path="res://assets/sprites/decoration/Stone3.png" id="6_i08ab"]
+[ext_resource type="PackedScene" uid="uid://gb8anbp5v7hc" path="res://levels/portal/blue_portal.tscn" id="7_ke65q"]
+[ext_resource type="Texture2D" uid="uid://8k5oyrulleh2" path="res://assets/sprites/decoration/Tree1.png" id="8_wu5uu"]
+
+[sub_resource type="Curve2D" id="Curve2D_qfyrc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -175, 342, 0, 0, 0, 0, -168, 308, 0, 0, 0, 0, -206, 249, 0, 0, 0, 0, -159, 183, 0, 0, 0, 0, -204, 126, 0, 0, 0, 0, -171, 66, 0, 0, 0, 0, -196, 24, 0, 0, 0, 0, -259, -10, 0, 0, 0, 0, -261, -57, 0, 0, 0, 0, -111, -145, 0, 0, 0, 0, -8, -138, 0, 0, 0, 0, 122, -69)
+}
+point_count = 12
+
+[sub_resource type="Gradient" id="Gradient_e5w81"]
+offsets = PackedFloat32Array(0, 0.6951673)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5n5jw"]
+gradient = SubResource("Gradient_e5w81")
+width = 500
+height = 500
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="InitMapPiece" type="Node2D" unique_id=667942961]
+script = ExtResource("1_ch6qp")
+
+[node name="LevelTileMap2" type="TileMapLayer" parent="." unique_id=952429535]
+position = Vector2(0, 32)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD6//z/AAACAAAAAAAEAAEAAAACAAAAAAAEAAIAAAACAAAAAAAFAAIAAAACAAAAAAAFAAEAAAACAAAAAAA=")
+tile_set = ExtResource("2_snbgg")
+script = ExtResource("3_7f2iw")
+metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+
+[node name="MapPieceTileMap" parent="." unique_id=980340614 instance=ExtResource("4_1n0u1")]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD6/wAAAAABAAAAAAD6////AAABAAAAAAD6/wEAAAAFAAYAAAD6/wIAAAAHAAYAAAD6/wMAAAAHAAcAAAD6/wQAAAAGAAcAAAD7////AAABAAIAAAD7/wAAAAABAAIAAAD7/wEAAAABAAIAAAD7/wIAAAAAAAIAAAD7/wMAAAAJAAAAAAD7/wQAAAAIAAcAAAD8/wAAAAACAAMAAAD9/wAAAAADAAQAAAD+/wAAAAAHAAAAAAD//wAAAAAFAAYAAAD/////AAABAAQAAAD///7/AAACAAYAAAD///3/AAADAAIAAAD///z/AAABAAAAAAD///v/AAABAAAAAAD//wEAAAAEAAIAAAD//wIAAAAAAAYAAAD//wMAAAAEAAcAAAD//wQAAAAEAAcAAAD//wUAAAAAAAQAAAAAAAAAAAAGAAcAAAABAAAAAAAHAAcAAAACAAAAAAAIAAcAAAADAAAAAAAGAAcAAAAEAAAAAAAGAAYAAAD6//3/AAABAAAAAAD6//7/AAABAAAAAAD7//3/AAAGAAcAAAD7//7/AAABAAEAAAD8//3/AAADAAEAAAD8//7/AAADAAcAAAD8////AAABAAcAAAD8/wEAAAABAAYAAAD8/wIAAAAEAAcAAAD8/wMAAAAAAAQAAAD8/wQAAAAGAAYAAAD9//3/AAADAAIAAAD9//7/AAABAAcAAAD9////AAAHAAIAAAD9/wEAAAAGAAMAAAD9/wIAAAADAAcAAAD9/wMAAAABAAQAAAD9/wQAAAAGAAAAAAD+//3/AAADAAIAAAD+//7/AAAFAAAAAAD+////AAABAAQAAAD+/wEAAAADAAIAAAD+/wIAAAADAAYAAAD+/wMAAAAIAAMAAAD+/wQAAAAAAAIAAAAAAP3/AAADAAMAAAAAAP7/AAADAAQAAAAAAP//AAACAAQAAAAAAAEAAAAHAAYAAAAAAAIAAAAEAAQAAAAAAAMAAAAGAAMAAAAAAAQAAAADAAcAAAABAP3/AAAHAAcAAAABAP7/AAAFAAYAAAABAP//AAAHAAcAAAABAAEAAAAGAAYAAAABAAIAAAAGAAAAAAABAAMAAAAEAAIAAAABAAQAAAAAAAYAAAACAP3/AAAHAAYAAAACAP7/AAAHAAYAAAACAP//AAAGAAcAAAACAAEAAAAHAAcAAAACAAIAAAAFAAYAAAACAAMAAAAFAAYAAAACAAQAAAAEAAQAAAADAP3/AAAHAAYAAAADAP7/AAAIAAYAAAADAP//AAAHAAcAAAADAAEAAAAGAAYAAAADAAIAAAAFAAYAAAADAAMAAAAIAAYAAAADAAQAAAAGAAAAAAAEAP3/AAABAAAAAAAEAP7/AAAFAAcAAAAEAP//AAAHAAYAAAAEAAMAAAAFAAcAAAAEAAQAAAAGAAcAAAD6//v/AAABAAAAAAD6//z/AAABAAAAAAD7//v/AAABAAAAAAD7//z/AAABAAAAAAD8//v/AAABAAAAAAD8//z/AAABAAAAAAD9//v/AAABAAAAAAD9//z/AAABAAAAAAD+//v/AAABAAAAAAD+//z/AAABAAAAAAAAAPv/AAABAAAAAAAAAPz/AAABAAAAAAABAPv/AAABAAAAAAABAPz/AAABAAAAAAACAPv/AAABAAAAAAACAPz/AAABAAAAAAADAPv/AAABAAAAAAADAPz/AAABAAAAAAAEAPv/AAABAAAAAAAEAPz/AAABAAAAAAD6/wUAAAAIAAYAAAD7/wUAAAAFAAcAAAD8/wUAAAAHAAYAAAD9/wUAAAAHAAYAAAD+/wUAAAAHAAYAAAAAAAUAAAAIAAMAAAABAAUAAAAEAAcAAAACAAUAAAAGAAMAAAADAAUAAAAEAAIAAAAEAAUAAAAGAAcAAAAFAAAAAAAGAAcAAAAGAAAAAAAIAAYAAAD//wYAAAAGAAAAAAD//wcAAAAGAAYAAAD///r/AAABAAAAAAD///n/AAABAAAAAAD5/wAAAAABAAAAAAD4/wAAAAABAAAAAAD+/wcAAAAGAAYAAAD+/wYAAAAFAAYAAAD9/wYAAAAHAAcAAAD8/wYAAAAIAAcAAAD8/wcAAAAIAAcAAAD7/wYAAAAHAAcAAAD4/wEAAAAGAAcAAAD4/wIAAAAIAAcAAAD4/wYAAAAGAAYAAAD4/wUAAAAGAAYAAAD4/wQAAAAFAAcAAAD4/wMAAAAHAAYAAAD7/wcAAAAFAAcAAAD6/wcAAAAHAAcAAAD5/wcAAAAFAAYAAAD4/wcAAAAGAAAAAAD5/wUAAAAFAAcAAAD5/wQAAAAHAAcAAAD5/wMAAAAFAAYAAAD5/wIAAAAHAAYAAAD5/wEAAAAHAAcAAAD5/wYAAAAFAAYAAAD6/wYAAAAHAAYAAAD9/wcAAAAGAAcAAAAGAAcAAAABAAAAAAAGAAYAAAABAAAAAAAGAAUAAAABAAAAAAAGAAQAAAABAAAAAAAGAAMAAAABAAAAAAAGAAIAAAAIAAcAAAAGAAEAAAAFAAcAAAAFAAMAAAAHAAYAAAAFAAQAAAABAAAAAAAFAAUAAAABAAAAAAAFAAYAAAABAAAAAAAFAAcAAAAGAAAAAAAEAAcAAAADAAQAAAADAAcAAAAEAAcAAAACAAcAAAAIAAMAAAACAAYAAAADAAcAAAABAAYAAAAEAAcAAAAAAAYAAAAAAAIAAAADAAYAAAAAAAYAAAAEAAYAAAAEAAQAAAABAAcAAAAAAAQAAAAGAP7/AAAIAAcAAAAGAP3/AAABAAAAAAAGAPz/AAABAAAAAAAGAPv/AAABAAAAAAAGAPr/AAABAAAAAAAFAPr/AAABAAAAAAAEAPr/AAABAAAAAAADAPr/AAABAAAAAAACAPr/AAABAAAAAAABAPr/AAABAAAAAAAAAPr/AAABAAAAAAAAAPn/AAABAAAAAAABAPn/AAABAAAAAAACAPn/AAABAAAAAAADAPn/AAABAAAAAAAEAPn/AAABAAAAAAAFAPn/AAABAAAAAAAGAPn/AAABAAAAAAAFAPv/AAABAAAAAAAFAPz/AAABAAAAAAAFAP3/AAABAAAAAAAFAP7/AAAFAAYAAAD+//n/AAABAAAAAAD9//n/AAABAAAAAAD8//n/AAABAAAAAAD7//n/AAABAAAAAAD6//n/AAABAAAAAAD5//n/AAABAAAAAAD4//n/AAABAAAAAAD4//r/AAABAAAAAAD4//v/AAABAAAAAAD4//z/AAABAAAAAAD4//3/AAABAAAAAAD4//7/AAABAAAAAAD4////AAABAAAAAAD5////AAABAAAAAAD5//7/AAABAAAAAAD5//3/AAABAAAAAAD5//v/AAABAAAAAAD5//r/AAABAAAAAAD6//r/AAABAAAAAAD7//r/AAABAAAAAAD8//r/AAABAAAAAAD+//r/AAABAAAAAAD9//r/AAABAAAAAAD5//z/AAABAAAAAAAFAP//AAAIAAcAAAAGAP//AAAIAAcAAAAEAAIAAAAHAAcAAAAEAAEAAAAFAAcAAAAFAAIAAAAFAAcAAAAFAAEAAAAIAAYAAAAAAAcAAAAFAAYAAAA=")
+
+[node name="Stone2" type="Sprite2D" parent="MapPieceTileMap" unique_id=1896442022]
+position = Vector2(1266, -302)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_hmhpx")
+
+[node name="Stone3" type="Sprite2D" parent="MapPieceTileMap" unique_id=2088326907]
+position = Vector2(388, -490)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_i08ab")
+
+[node name="LevelTileMap" type="TileMapLayer" parent="MapPieceTileMap" unique_id=65137436]
+position = Vector2(0, -64)
+tile_map_data = PackedByteArray("AAABAPz/AAAIAAYAAAACAPz/AAAGAAcAAAADAP3/AAAGAAYAAAAEAP3/AAAIAAYAAAAEAP7/AAAFAAcAAAAEAP//AAAIAAcAAAAFAP//AAAFAAYAAAAFAAAAAAAGAAcAAAAFAP7/AAAFAAYAAAAEAPz/AAAIAAYAAAADAPz/AAAHAAYAAAADAPv/AAAGAAcAAAACAPv/AAAIAAYAAAABAPv/AAAIAAYAAAAFAP3/AAAIAAcAAAAFAPz/AAAIAAYAAAACAPr/AAAIAAYAAAABAPr/AAAIAAcAAAAAAPr/AAAHAAcAAAAAAPv/AAAHAAcAAAD6//3/AAAGAAYAAAD6//7/AAAHAAcAAAD5//7/AAAHAAYAAAD7//3/AAAHAAYAAAD7//7/AAAIAAYAAAD6//z/AAAFAAcAAAD7//z/AAAGAAcAAAA=")
+tile_set = ExtResource("2_snbgg")
+script = ExtResource("3_7f2iw")
+metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+
+[node name="LevelTileMap" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap" unique_id=1081419563]
+position = Vector2(0, -64)
+tile_map_data = PackedByteArray("AAD6//3/AAAHAAcAAAD6//z/AAAIAAYAAAD7//z/AAAFAAcAAAABAPv/AAAGAAcAAAACAPv/AAAFAAYAAAACAPz/AAAHAAYAAAAAAPv/AAAIAAcAAAADAPz/AAAGAAYAAAAEAPz/AAAIAAYAAAAEAP3/AAAGAAcAAAAFAP3/AAAHAAYAAAAFAP7/AAAHAAYAAAAFAP//AAAFAAYAAAA=")
+tile_set = ExtResource("2_snbgg")
+script = ExtResource("3_7f2iw")
+metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+
+[node name="LevelTileMap" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap/LevelTileMap" unique_id=1086603521]
+position = Vector2(0, -64)
+tile_map_data = PackedByteArray("AAAEAPz/AAACAAAAAAD6//z/AAACAAAAAAA=")
+tile_set = ExtResource("2_snbgg")
+script = ExtResource("3_7f2iw")
+metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+
+[node name="BluePortalPortal" parent="." unique_id=492732705 instance=ExtResource("7_ke65q")]
+position = Vector2(158, -109.999985)
+frame_progress = 0.48736614
+flip_h = true
+
+[node name="Routes" type="Node2D" parent="." unique_id=1545094464]
+
+[node name="route_SW_END" type="Path2D" parent="Routes" unique_id=1146728192]
+curve = SubResource("Curve2D_qfyrc")
+
+[node name="Decoration" type="Node2D" parent="." unique_id=921328258]
+
+[node name="Stone3" type="Sprite2D" parent="Decoration" unique_id=1917402733]
+position = Vector2(-413.79996, -142.80002)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_hmhpx")
+
+[node name="Stone4" type="Sprite2D" parent="Decoration" unique_id=2106304753]
+position = Vector2(-437.79984, -106.80002)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_hmhpx")
+
+[node name="Tree1" type="Sprite2D" parent="Decoration" unique_id=759679296]
+position = Vector2(-222, -229.00002)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_wu5uu")
+
+[node name="Tree2" type="Sprite2D" parent="Decoration" unique_id=733194264]
+position = Vector2(-304, -193)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_wu5uu")
+
+[node name="Tree3" type="Sprite2D" parent="Decoration" unique_id=462975228]
+position = Vector2(-385.2, -150.20001)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_wu5uu")
+
+[node name="Tree10" type="Sprite2D" parent="Decoration" unique_id=2040644882]
+position = Vector2(381.8, -256.2)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_wu5uu")
+
+[node name="Tree11" type="Sprite2D" parent="Decoration" unique_id=699412596]
+position = Vector2(451.8, -228.20001)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_wu5uu")
+
+[node name="Tree12" type="Sprite2D" parent="Decoration" unique_id=2122109188]
+position = Vector2(523.8, -191.20001)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_wu5uu")
+
+[node name="Tree8" type="Sprite2D" parent="Decoration" unique_id=969942575]
+position = Vector2(387, 101)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_wu5uu")
+
+[node name="Tree9" type="Sprite2D" parent="Decoration" unique_id=1996900219]
+position = Vector2(591, -128)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_wu5uu")
+
+[node name="PointLight2D" type="PointLight2D" parent="Decoration" unique_id=24613214]
+position = Vector2(149, -73)
+color = Color(0.42352942, 0.09019608, 0, 1)
+texture = SubResource("GradientTexture2D_5n5jw")
