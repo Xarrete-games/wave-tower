@@ -36,12 +36,14 @@ curve = SubResource("Curve2D_10fiu")
 curve = SubResource("Curve2D_64ru6")
 
 [node name="Tree3" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="0" unique_id=446759813]
-position = Vector2(-844, -297)
+position = Vector2(-844, -64)
 texture = ExtResource("2_lrvwi")
+offset = Vector2(0, -230)
 
 [node name="Tree4" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="1" unique_id=144293338]
-position = Vector2(816, -294)
+position = Vector2(819, -69)
 texture = ExtResource("2_lrvwi")
+offset = Vector2(0, -220)
 
 [node name="Bush1" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="2" unique_id=1004712057]
 position = Vector2(718, -5.000004)
