@@ -64,7 +64,7 @@ flip_h = true
 
 [node name="Routes" type="Node2D" parent="." unique_id=1545094464]
 
-[node name="route_SW_END" type="Path2D" parent="Routes" unique_id=1146728192]
+[node name="route_SE_END" type="Path2D" parent="Routes" unique_id=1146728192]
 curve = SubResource("Curve2D_qfyrc")
 
 [node name="Decoration" type="Node2D" parent="." unique_id=921328258]

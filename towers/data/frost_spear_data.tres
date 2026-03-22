@@ -11,14 +11,14 @@ region = Rect2(1456, 3, 415, 633)
 
 [sub_resource type="Resource" id="Resource_gyvde"]
 script = ExtResource("2_wysa5")
-id = "frost_spear"
-display_name = "Frost Spear"
-description = "Frost Spean"
-icon = SubResource("AtlasTexture_h8gag")
 type = 2
 build_price = 250
 base_damage = 20.0
 base_attack_range = 500.0
+id = "frost_spear"
+display_name = "Frost Spear"
+description = "Frost Spean"
+icon = SubResource("AtlasTexture_h8gag")
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 
 [resource]
