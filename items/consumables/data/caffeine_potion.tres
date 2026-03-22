@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ConsumableItemData" load_steps=4 format=3 uid="uid://5wfoxhpnd2ly"]
+[gd_resource type="Resource" script_class="ConsumableItemData" format=3 uid="uid://5wfoxhpnd2ly"]
 
 [ext_resource type="Script" uid="uid://bvndav3x5pajy" path="res://items/consumables/implementation/caffeine_potion.gd" id="1_bm5oe"]
 [ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://items/consumables/consumable_item_data.gd" id="1_nuh8w"]

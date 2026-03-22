@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://drm4bn0pi7ue1"]
+[gd_scene format=3 uid="uid://drm4bn0pi7ue1"]
 
 [ext_resource type="Script" uid="uid://cpnoprvyyakuv" path="res://ui/hud/hud_layer.gd" id="1_tdcwd"]
 [ext_resource type="PackedScene" uid="uid://c3qi4qp0ko3iq" path="res://ui/hud/tower_stats_panel/tower_stats_panel.tscn" id="2_tdcwd"]
@@ -8,14 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/hud/towers_menu/towers_menu.tscn" id="5_fgqev"]
 [ext_resource type="PackedScene" uid="uid://bl4h4se14p5iy" path="res://ui/hud/top_bar_ui/enemy_waves_panel/enemy_waves_panel.tscn" id="5_vci3o"]
 
-[node name="HUDLayer" type="CanvasLayer"]
+[node name="HUDLayer" type="CanvasLayer" unique_id=1379728862]
 script = ExtResource("1_tdcwd")
 level_waves_panel_scene = ExtResource("5_vci3o")
 damage_recount_panel_scene = ExtResource("3_xxs7w")
 
-[node name="TowerStatsPanel" parent="." instance=ExtResource("2_tdcwd")]
+[node name="TowerStatsPanel" parent="." unique_id=1421300275 instance=ExtResource("2_tdcwd")]
 
-[node name="HintContainer" type="MarginContainer" parent="."]
+[node name="HintContainer" type="MarginContainer" parent="." unique_id=2107332314]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,7 +30,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/margin_bottom = 700
 
-[node name="HintLabel" type="Label" parent="HintContainer"]
+[node name="HintLabel" type="Label" parent="HintContainer" unique_id=971889128]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "press ESC to cancel"
@@ -38,10 +38,10 @@ label_settings = ExtResource("3_vwkow")
 horizontal_alignment = 1
 script = ExtResource("4_xxs7w")
 
-[node name="TowersMenu" parent="." instance=ExtResource("5_fgqev")]
+[node name="TowersMenu" parent="." unique_id=5458050 instance=ExtResource("5_fgqev")]
 anchors_preset = -1
 anchor_top = 0.76900005
 offset_top = -0.31204224
 
-[node name="DamageRecountPanel" parent="." instance=ExtResource("3_xxs7w")]
+[node name="DamageRecountPanel" parent="." unique_id=175637795 instance=ExtResource("3_xxs7w")]
 visible = false

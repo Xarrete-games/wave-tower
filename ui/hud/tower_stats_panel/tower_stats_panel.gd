@@ -60,21 +60,22 @@ func _on_tower_selected(tower: Tower) -> void:
 		var upgradeable_tower = tower as UpgradeableTower
 		level_label.text = str(upgradeable_tower.level)
 		if upgradeable_tower.is_max_level():
+			# dont show updgrades
+			_hide_upgrade_options()
 			# clear previous upgrades
-			for child in upgrades_container.get_children():
-				child.queue_free()
-			upgrade_button_container.visible = false
-			upgrades_container.visible = true
-			var upgradeable_towers: Array[TowerConfigurationWithInstance] = tower.get_upgradeable_towers()
-			for tower_config in upgradeable_towers:
-				var tower_button = TOWER_BUTTON.instantiate() as TowerButton
-				upgrades_container.add_child(tower_button)
-				tower_button.tower_configuration = tower_config
-				tower_button.price = tower_config.configuration.base_price
-				tower_button.tower_button_pressed.connect(_on_tower_button_pressed)
-				tower_button.hover.connect(_on_tower_button_hover)
-				tower_button.unhover.connect(_on_tower_button_unhover)
-
+			# for child in upgrades_container.get_children():
+			# 	child.queue_free()
+			# upgrade_button_container.visible = false
+			# upgrades_container.visible = true
+			# var upgradeable_towers: Array[TowerConfigurationWithInstance] = tower.get_upgradeable_towers()
+			# for tower_config in upgradeable_towers:
+			# 	var tower_button = TOWER_BUTTON.instantiate() as TowerButton
+			# 	upgrades_container.add_child(tower_button)
+			# 	tower_button.tower_configuration = tower_config
+			# 	tower_button.price = tower_config.configuration.base_price
+			# 	tower_button.tower_button_pressed.connect(_on_tower_button_pressed)
+			# 	tower_button.hover.connect(_on_tower_button_hover)
+			# 	tower_button.unhover.connect(_on_tower_button_unhover)
 		else:
 			upgrade_tower_price.price = upgradeable_tower.configuration.upgrade_price
 			upgrade_button_container.visible = true
@@ -117,7 +118,7 @@ func _on_upgrade_button_pressed() -> void:
 func _hide_upgrade_options() -> void:
 	upgrade_button_container.visible = false
 	upgrades_container.visible = false
-	level_container.visible = false
+	#level_container.visible = false
 
 func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance, price: int) -> void:
 	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_configuration, price)

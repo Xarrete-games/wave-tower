@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://c3qi4qp0ko3iq"]
 
 [ext_resource type="Script" uid="uid://mlvqjhawbttl" path="res://ui/hud/tower_stats_panel/tower_stats_panel.gd" id="1_vyalh"]
-[ext_resource type="Texture2D" uid="uid://c15gu8gh1w0d5" path="res://assets/sprites/ui/main_menu_box.png" id="2_c0pf6"]
-[ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="2_g3isl"]
+[ext_resource type="StyleBox" uid="uid://5r63ppjcfdsy" path="res://ui/styles/box_style/texture_container.tres" id="2_iqbtr"]
 [ext_resource type="PackedScene" uid="uid://damv0wm6yljhs" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.tscn" id="2_jlxp2"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_g3isl"]
 [ext_resource type="Texture2D" uid="uid://bus5y7ash7vve" path="res://assets/images/icons/stats/attack_icon_flat.png" id="7_g3isl"]
@@ -14,15 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://o248nju46k2n" path="res://ui/hud/towers_menu/tower_button/tower_button.tscn" id="10_n3kwt"]
 [ext_resource type="PackedScene" uid="uid://cxk1x30qq1f7p" path="res://ui/hud/towers_menu/tower_button_hint/tower_button_hint.tscn" id="12_p50vg"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="13_iqbtr"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n3kwt"]
-texture = ExtResource("2_c0pf6")
-texture_margin_left = 30.0
-texture_margin_top = 5.0
-texture_margin_right = 30.0
-texture_margin_bottom = 10.0
-expand_margin_top = 10.0
-expand_margin_bottom = 10.0
 
 [node name="TowerStatsPanel" type="Control" unique_id=1739929944]
 layout_mode = 3
@@ -55,14 +45,14 @@ offset_bottom = 162.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_styles/panel = ExtResource("2_g3isl")
+theme_override_styles/panel = ExtResource("2_iqbtr")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=347350394]
 layout_mode = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 5
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_bottom = 40
 
 [node name="MainContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=594727383]
 layout_mode = 2
@@ -70,11 +60,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
-[node name="NameContainer" type="PanelContainer" parent="Panel/MarginContainer/MainContainer" unique_id=675032244]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_n3kwt")
-
-[node name="NameLabel" type="Label" parent="Panel/MarginContainer/MainContainer/NameContainer" unique_id=2060334593]
+[node name="NameLabel" type="Label" parent="Panel/MarginContainer/MainContainer" unique_id=2060334593]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2

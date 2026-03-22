@@ -1,8 +1,8 @@
 class_name BurnDebuff extends EnemyDebuff
 
-var damage_source: DamageSource:
+var damage_source: Source:
 	get:
-		return DamageSource.new(DamageSource.Type.DEBUFF, "burn_debuff", "burn")
+		return Source.new(Source.SourceType.DEBUFF, "burn_debuff")
 
 func _init() -> void:
 	type = Type.BURN
@@ -10,7 +10,12 @@ func _init() -> void:
 	duration = 5
 	tick_interval = 1
 	max_stacks = 99
-	
+
+func clone(p_source: Source) -> EnemyDebuff:
+	var cloned := BurnDebuff.new()
+	_copy_base_to(cloned, p_source)
+	return cloned
+
 func on_apply(_enemy: Enemy):
 	pass
 

@@ -5,25 +5,26 @@
 [ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="3_3c13r"]
 
 [node name="RibbonLabel" type="MarginContainer" unique_id=437308297]
-offset_right = 400.0
-offset_bottom = 80.0
+offset_right = 480.0
+offset_bottom = 100.0
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1677106682]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=473873985]
-custom_minimum_size = Vector2(450, 100)
+custom_minimum_size = Vector2(480, 100)
 layout_mode = 2
 texture = ExtResource("1_d5b34")
 expand_mode = 2
-stretch_mode = 4
 
 [node name="Label" type="Label" parent="CenterContainer/TextureRect" unique_id=567528036]
+custom_minimum_size = Vector2(480, 0)
 layout_mode = 0
-offset_left = 180.0
-offset_top = 4.0
-offset_right = 269.0
-offset_bottom = 60.0
+offset_top = 8.0
+offset_right = 480.0
+offset_bottom = 64.0
 theme_override_colors/font_color = Color(1, 0.9647059, 0.8862745, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1254902)
 theme_override_colors/font_outline_color = Color(0.2901961, 0.23529412, 0.16470589, 0.7529412)

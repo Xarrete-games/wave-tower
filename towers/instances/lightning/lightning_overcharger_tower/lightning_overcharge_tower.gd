@@ -6,7 +6,7 @@ class_name LightningOverchargeTower extends Tower
 
 
 var towers_in_range: Array[Tower] = []
-var buff = TowerBuff.new(TowerBuff.SourceType.TOWER, name, DamageMultModifier.new(0.1))
+var buff_modifier := DamageMultModifier.new(0.1)
 var particles_dict: Dictionary[String, Node] = {}
 
 @onready var projectile_spawn_pos: Marker2D = $ProjectileSpawnPos
@@ -56,7 +56,8 @@ func _apply_buff(tower: Tower) -> void:
 		return
 	
 	var buff_particle = overcharge_particle_scene.instantiate()
-	tower.add_local_buff(buff)
+	var tower_buff = TowerBuff.new(Source.new(Source.SourceType.TOWER, name), buff_modifier)
+	tower.add_local_buff(tower_buff)
 	towers_in_range.append(tower)
 	tower.add_child(buff_particle)
 	particles_dict[tower.name] = buff_particle
@@ -65,7 +66,7 @@ func _remove_buff(tower: Tower) -> void:
 	if tower not in towers_in_range:
 		return
 	
-	tower.remove_local_buff(buff)
+	tower.remove_local_buff(name)
 	towers_in_range.erase(tower)
 	
 	var particle = particles_dict.get(tower.name, null)

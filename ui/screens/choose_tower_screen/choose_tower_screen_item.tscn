@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cw14sfvcipnum"]
 
-[ext_resource type="Texture2D" uid="uid://cb15p4kw88nb" path="res://assets/images/containers/tower_card.png" id="1_63abq"]
+[ext_resource type="StyleBox" uid="uid://5r63ppjcfdsy" path="res://ui/styles/box_style/texture_container.tres" id="1_xj3me"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="2_0dsth"]
 [ext_resource type="Script" uid="uid://blnfa1fvl002n" path="res://ui/screens/choose_tower_screen/choose_tower_screen_item.gd" id="2_l17e5"]
 [ext_resource type="Resource" uid="uid://bkag7llhiwwvc" path="res://towers/data/frost_spear_tower.tres" id="3_xj3me"]
@@ -12,9 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://dh4xdb1wo3q44" path="res://assets/images/icons/stats/range_icon_flat.png" id="8_ojjmy"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="9_a0r7t"]
 [ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="12_xj3me"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_63abq"]
-texture = ExtResource("1_63abq")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kd2t"]
 atlas = ExtResource("4_u2e7x")
@@ -28,7 +25,7 @@ offset_right = -1512.0
 offset_bottom = -161.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_63abq")
+theme_override_styles/panel = ExtResource("1_xj3me")
 script = ExtResource("2_l17e5")
 tower_configuration = ExtResource("3_xj3me")
 title_label = NodePath("MarginContainer/VBoxContainer/TittleLabel")

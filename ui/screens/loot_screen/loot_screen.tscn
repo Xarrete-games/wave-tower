@@ -41,7 +41,7 @@ z_index = 1
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="Center/VBoxContainer2/VBoxContainer" unique_id=1513451928]
-custom_minimum_size = Vector2(224, 250)
+custom_minimum_size = Vector2(420, 250)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("1_fllr0")

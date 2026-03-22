@@ -4,7 +4,7 @@ const SOURCE_ID = "runic_lighter"
 const DAMAGE_INCREASE_PER_TOWER: float = 0.1
 
 func apply_effect() -> void:
-	var modifier = BurnDamageByTowersModifier.new(DamageTakenModifier.SourceType.RELIC, SOURCE_ID, DAMAGE_INCREASE_PER_TOWER)
+	var modifier = BurnDamageByTowersModifier.new(Source.new(Source.SourceType.RELIC, SOURCE_ID), DAMAGE_INCREASE_PER_TOWER)
 	RunContext.enemy_debuff_manager.add_modifier(modifier)
 
 func remove_effect() -> void:

@@ -1,19 +1,11 @@
 @abstract
 class_name DamageTakenModifier extends RefCounted
 
-enum SourceType {
-    RELIC,
-    TOWER,
-    CONSUMABLE_TEMPORAL
-}
-
-var source_type: SourceType
-var source_id: String
+var source: Source
 var value: float
 
-func _init(p_source_type: SourceType, p_source_id: String, p_value: float = 0.0) -> void:
-	source_type = p_source_type
-	source_id = p_source_id
+func _init(p_source: Source, p_value: float = 0.0) -> void:
+	source = p_source
 	value = p_value
 
 @abstract

@@ -44,9 +44,9 @@ var exp_data: TowerExpData:
 var modifiers: Array[AttackModifier] = []
 var id: String
 var type_id: String = get_script().get_global_name()
-var damage_source: DamageSource:
+var damage_source: Source:
 	get:
-		return DamageSource.new(DamageSource.Type.TOWER, id, type_id)
+		return Source.new(Source.SourceType.TOWER, type_id, id)
 
 @onready var area_detector: AreaDetector = $AreaDetector
 @onready var range_preview: RangePreview = $RangePreview
@@ -73,7 +73,7 @@ func _ready():
 	)
 	RunContext.towers_buffs.attack_modifiers_removed.connect(func(source_id: String) -> void:
 		modifiers = modifiers.filter(func(mod: AttackModifier) -> bool:
-			return mod.source_id != source_id
+			return mod.source.type_id != source_id
 		)
 	)
 	# handlers
@@ -127,8 +127,8 @@ func enable() -> void:
 func add_local_buff(tower_buff: TowerBuff) -> void:
 	tower_stats_handler.add_local_buff(tower_buff)
 
-func remove_local_buff(tower_buff: TowerBuff) -> void:
-	tower_stats_handler.remove_local_buff(tower_buff)
+func remove_local_buff(source_id: String) -> void:
+	tower_stats_handler.remove_local_buff(source_id)
 
 # --------------------
 # --- COPY TOWER DATA---

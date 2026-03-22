@@ -5,5 +5,9 @@
         "elif",
         "mult",
         "onready"
-    ]
+    ],
+    "chat.tools.terminal.autoApprove": {
+        "Test-Path": true,
+        "git rm": true
+    }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://4fkas61wyppq"]
+[gd_scene format=3 uid="uid://4fkas61wyppq"]
 
 [ext_resource type="Script" uid="uid://pmu46mvlw67" path="res://towers/stats/tower_stats_handler.gd" id="1_7jtxt"]
 [ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/components/cristal_light/cristal_light.tscn" id="2_2233p"]
@@ -13,55 +13,55 @@ radius = 200.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7jtxt"]
 radius = 47.042534
 
-[node name="Tower" type="Node2D" groups=["tower"]]
+[node name="Tower" type="Node2D" unique_id=1114496997 groups=["tower"]]
 
-[node name="TowerStatsHandler" type="Node" parent="."]
+[node name="TowerStatsHandler" type="Node" parent="." unique_id=249347199]
 script = ExtResource("1_7jtxt")
 
-[node name="CristalLight" parent="." instance=ExtResource("2_2233p")]
+[node name="CristalLight" parent="." unique_id=1008625391 instance=ExtResource("2_2233p")]
 position = Vector2(0, -136)
 
-[node name="RangePreview" type="Node2D" parent="."]
+[node name="RangePreview" type="Node2D" parent="." unique_id=1110296903]
 z_index = -1
 script = ExtResource("3_nbqd2")
 radius = 200.0
 color_fill = Color(0, 0.69803923, 1, 0.5568628)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1563452745]
 position = Vector2(0, -42)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_7jtxt")
 region_enabled = true
 region_rect = Rect2(89, 80, 299, 471)
 
-[node name="AreaDetector" type="Area2D" parent="."]
+[node name="AreaDetector" type="Area2D" parent="." unique_id=366831665]
 collision_layer = 0
 input_pickable = false
 monitoring = false
 script = ExtResource("5_5e1e6")
 
-[node name="RangeCollision" type="CollisionShape2D" parent="AreaDetector"]
+[node name="RangeCollision" type="CollisionShape2D" parent="AreaDetector" unique_id=647791958]
 scale = Vector2(1, 0.5)
 shape = SubResource("CircleShape2D_wmotl")
 
-[node name="TimerToCheckTarget" type="Timer" parent="AreaDetector"]
+[node name="TimerToCheckTarget" type="Timer" parent="AreaDetector" unique_id=553063832]
 wait_time = 0.1
 autostart = true
 
-[node name="TowerArea" type="Area2D" parent="."]
+[node name="TowerArea" type="Area2D" parent="." unique_id=1983938577]
 collision_layer = 4
 collision_mask = 8
 input_pickable = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerArea" unique_id=590428393]
 scale = Vector2(1, 0.5)
 shape = SubResource("CircleShape2D_7jtxt")
 
-[node name="AttackTimer" type="Timer" parent="."]
+[node name="AttackTimer" type="Timer" parent="." unique_id=2037163535]
 wait_time = 2.0
 
-[node name="MouseDetector" type="Control" parent="."]
+[node name="MouseDetector" type="Control" parent="." unique_id=727078477]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -25.0
@@ -69,14 +69,14 @@ offset_top = -143.0
 offset_right = 25.0
 offset_bottom = 17.0
 
-[node name="ExperienceHandler" type="Node" parent="."]
+[node name="ExperienceHandler" type="Node" parent="." unique_id=2067535218]
 script = ExtResource("6_ju35e")
 level_up_postion = Vector2(0, -150)
 
-[node name="LevelUpPos" type="Marker2D" parent="."]
+[node name="LevelUpPos" type="Marker2D" parent="." unique_id=920402675]
 position = Vector2(0, -152)
 
-[node name="ProjectileSpawnPos" type="Marker2D" parent="."]
+[node name="ProjectileSpawnPos" type="Marker2D" parent="." unique_id=937664516]
 position = Vector2(0, -90)
 
 [connection signal="body_entered" from="AreaDetector" to="AreaDetector" method="_on_body_entered"]

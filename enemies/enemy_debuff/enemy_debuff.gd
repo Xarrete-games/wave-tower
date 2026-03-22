@@ -5,7 +5,7 @@ signal changed
 enum Type { FROST, BURN }
 
 var type: Type
-var source: DamageSource
+var source: Source
 var value: float = 0.0:
 	set(v):
 		value = v
@@ -25,21 +25,17 @@ var extra_stacks: int = 0:
 
 var max_stacks: int = 99
 
-func clone(p_source: DamageSource) -> EnemyDebuff:
-	var new_enemy_debuff: EnemyDebuff
-	if self is BurnDebuff:
-		new_enemy_debuff = BurnDebuff.new()
-	elif self is FrostDebuff:
-		new_enemy_debuff = FrostDebuff.new()
-	
-	new_enemy_debuff.type = type
-	new_enemy_debuff.value = value
-	new_enemy_debuff.duration = duration
-	new_enemy_debuff.tick_interval = tick_interval
-	new_enemy_debuff.max_stacks = max_stacks
-	new_enemy_debuff.extra_stacks = extra_stacks
-	new_enemy_debuff.source = p_source
-	return new_enemy_debuff
+@abstract
+func clone(p_source: Source) -> EnemyDebuff
+
+func _copy_base_to(target: EnemyDebuff, p_source: Source) -> void:
+	target.type = type
+	target.value = value
+	target.duration = duration
+	target.tick_interval = tick_interval
+	target.max_stacks = max_stacks
+	target.extra_stacks = extra_stacks
+	target.source = p_source
 
 @abstract
 func on_apply(enemy: Enemy)

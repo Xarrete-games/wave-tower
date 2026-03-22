@@ -37,6 +37,11 @@ signal wave_finished(wave_number: int)
 ## Point this to a default Enemy scene in the inspector.
 @export var fallback_enemy_scene: PackedScene = null
 
+## Vertical lane spread applied to each spawned enemy route.
+## Each enemy gets one random Y offset in this range for all its waypoints.
+@export var path_offset_y_min: float = -50.0
+@export var path_offset_y_max: float = 50.0
+
 # ---------------------------------------------------------
 # INTERNAL STATE
 # ---------------------------------------------------------
@@ -94,7 +99,8 @@ func _pick_spawn_interval(
 ) -> float:
 	var interval_range: Vector2 = _get_spawn_interval_range(pressure, config)
 	var decayed_range: Vector2 = _get_decayed_spawn_interval_range(interval_range, wave_number, config)
-	var min_interval: float = maxf(decayed_range.x, 0.01)
+	var min_spawn_interval: float = _get_min_spawn_interval(config)
+	var min_interval: float = maxf(decayed_range.x, min_spawn_interval)
 	var max_interval: float = maxf(decayed_range.y, min_interval)
 	max_interval = maxf(max_interval, min_interval)
 
@@ -127,15 +133,19 @@ func _get_decayed_spawn_interval_range(
 	@warning_ignore("integer_division")
 	var decay_steps: int = maxi((wave_number - 1) / every_waves, 0)
 	var decay_amount: float = float(decay_steps) * config.spawn_interval_max_decay_amount
+	var min_spawn_interval: float = _get_min_spawn_interval(config)
 
-	var decayed_min: float = maxf(base_range.x - decay_amount, 0.01)
-	var decayed_max: float = maxf(base_range.y - decay_amount, 0.01)
+	var decayed_min: float = maxf(base_range.x - decay_amount, min_spawn_interval)
+	var decayed_max: float = maxf(base_range.y - decay_amount, min_spawn_interval)
 
 	# Keep a valid range even after many decay steps.
 	if decayed_max < decayed_min:
 		decayed_max = decayed_min
 
 	return Vector2(decayed_min, decayed_max)
+
+func _get_min_spawn_interval(config: WaveConfig) -> float:
+	return maxf(config.spawn_interval_min_cap, 0.01)
 
 # ---------------------------------------------------------
 # INTERNAL HELPERS
@@ -155,6 +165,7 @@ func _spawn_single(data: EnemyData) -> void:
 	if waypoints.size() == 0:
 		push_warning("[WaveSpawner] No waypoints for spawn entry")
 		return
+	var enemy_waypoints: Array[Vector2] = _build_enemy_waypoints_with_offset(waypoints)
 
 	# Use the scene defined in the EnemyData; fall back to generic if missing
 	var scene: PackedScene = data.scene if data.scene != null else fallback_enemy_scene
@@ -174,11 +185,27 @@ func _spawn_single(data: EnemyData) -> void:
 	enemy.disable() # disable until positioned to avoid unwanted behavior (e.g. flying in from origin)
 
 	# Spawn directly at the first waypoint to avoid awkward transition from portal
-	enemy.global_position = waypoints[0]
+	enemy.global_position = enemy_waypoints[0]
 	enemy.enable()
-	enemy.set_waypoints(waypoints)
+	enemy.set_waypoints(enemy_waypoints)
 
 	enemy_spawned.emit(enemy)
+
+func _build_enemy_waypoints_with_offset(base_waypoints: Array[Vector2]) -> Array[Vector2]:
+	if base_waypoints.is_empty():
+		return []
+
+	var min_y: float = minf(path_offset_y_min, path_offset_y_max)
+	var max_y: float = maxf(path_offset_y_min, path_offset_y_max)
+	var offset_y: float = randf_range(min_y, max_y)
+	var offset: Vector2 = Vector2(0.0, offset_y)
+
+	var result: Array[Vector2] = []
+	result.resize(base_waypoints.size())
+	for i in range(base_waypoints.size()):
+		result[i] = base_waypoints[i] + offset
+
+	return result
 
 ## Transfers EnemyData stats onto an Enemy instance.
 func _apply_stats(enemy: Enemy, data: EnemyData) -> void:

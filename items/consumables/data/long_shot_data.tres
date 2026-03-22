@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ConsumableItemData" load_steps=6 format=3 uid="uid://cabdmsmic155r"]
+[gd_resource type="Resource" script_class="ConsumableItemData" format=3 uid="uid://cabdmsmic155r"]
 
 [ext_resource type="Texture2D" uid="uid://bmx20l33acc4i" path="res://assets/sprites/consumables/poti_48.png" id="1_2q3p8"]
 [ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://items/consumables/consumable_item_data.gd" id="1_o6u08"]
