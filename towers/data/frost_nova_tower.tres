@@ -26,7 +26,6 @@ metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 
 [resource]
 script = ExtResource("1_idf33")
-configuration = SubResource("Resource_r2o8q")
 data = SubResource("Resource_r2o8q")
 scene = ExtResource("2_tq48f")
 metadata/_custom_type_script = "uid://byiw835k16yc6"

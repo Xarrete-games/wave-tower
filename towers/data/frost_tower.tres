@@ -3,8 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="1_lv5j7"]
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_4xtpd"]
 [ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_data_with_instance.gd" id="3_7u0s0"]
-[ext_resource type="Resource" uid="uid://nb64k6dawho" path="res://towers/data/frost_nova_tower.tres" id="4_u0j7a"]
-[ext_resource type="Resource" uid="uid://bkag7llhiwwvc" path="res://towers/data/frost_spear_tower.tres" id="5_4f0a2"]
 [ext_resource type="PackedScene" uid="uid://bpmgxjjnk8kxe" path="res://towers/instances/frost/frost_tower/frost_tower.tscn" id="6_8vsmr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
@@ -25,12 +23,10 @@ base_attack_speed = 3.0
 damage_per_level = 30.0
 attack_range_level = 20.0
 attack_speed_per_level = -0.5
-upgradeable_towers = Array[ExtResource("3_7u0s0")]([ExtResource("4_u0j7a"), ExtResource("5_4f0a2")])
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 
 [resource]
 script = ExtResource("3_7u0s0")
-configuration = SubResource("Resource_tjead")
 data = SubResource("Resource_tjead")
 scene = ExtResource("6_8vsmr")
 metadata/_custom_type_script = "uid://byiw835k16yc6"
