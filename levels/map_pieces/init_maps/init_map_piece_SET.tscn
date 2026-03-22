@@ -1,0 +1,102 @@
+[gd_scene format=4 uid="uid://1xs8o5raehaf"]
+
+[ext_resource type="Script" uid="uid://chj3cku30pmp1" path="res://levels/map_pieces/map_piece.gd" id="1_6od8a"]
+[ext_resource type="TileSet" uid="uid://0mt2a5aix72q" path="res://assets/sprites/tilesheet/tileset v2.tres" id="2_plf53"]
+[ext_resource type="Script" uid="uid://bxxphpxqsh7c8" path="res://levels/level_tile_map/level_tile_map.gd" id="3_bp3gv"]
+[ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/map_pieces/map_piece_tile_map.tscn" id="4_f5adr"]
+[ext_resource type="Texture2D" uid="uid://dygg2e7b7f887" path="res://assets/sprites/decoration/Stone3.png" id="5_xt0ia"]
+[ext_resource type="PackedScene" uid="uid://gb8anbp5v7hc" path="res://levels/portal/blue_portal.tscn" id="6_ma0ff"]
+[ext_resource type="Texture2D" uid="uid://dpq3114n1y0jr" path="res://assets/sprites/decoration/Stone2.png" id="7_4gvpv"]
+[ext_resource type="Texture2D" uid="uid://8k5oyrulleh2" path="res://assets/sprites/decoration/Tree1.png" id="8_q1qxh"]
+[ext_resource type="Texture2D" uid="uid://bglbnchinexsf" path="res://assets/sprites/decoration/Lago.png" id="9_8k5oe"]
+
+[sub_resource type="Curve2D" id="Curve2D_qfyrc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 745, 66, 0, 0, 0, 0, 607, 38, 0, 0, 0, 0, 581, -21, 0, 0, 0, 0, 524, -72, 0, 0, 0, 0, 502, -139, 0, 0, 0, 0, 317, -176, 0, 0, 0, 0, 130, -206, 0, 0, 0, 0, 21, -239, 0, 0, 0, 0, -72, -229)
+}
+point_count = 9
+
+[node name="InitMapPiece" type="Node2D" unique_id=667942961]
+script = ExtResource("1_6od8a")
+
+[node name="LevelTileMap2" type="TileMapLayer" parent="." unique_id=877142578]
+position = Vector2(0, 32)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD6////AAAIAAYAAAD7////AAAGAAYAAAD8////AAAIAAYAAAD8//7/AAAIAAYAAAD9//7/AAAIAAYAAAD+//7/AAAGAAcAAAD+////AAAHAAcAAAD+/wAAAAAHAAcAAAD9/wAAAAAHAAYAAAD9////AAAGAAcAAAD9/wEAAAAGAAcAAAD8/wAAAAAIAAcAAAD+/wEAAAAGAAcAAAD+/wIAAAAIAAcAAAD//wEAAAAIAAcAAAD//wAAAAAGAAYAAAD/////AAAIAAYAAAD///7/AAAGAAYAAAD///3/AAAIAAYAAAA=")
+tile_set = ExtResource("2_plf53")
+script = ExtResource("3_bp3gv")
+metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+
+[node name="Lago" type="Sprite2D" parent="." unique_id=2030801068]
+position = Vector2(-325, 133)
+rotation = 0.20420352
+scale = Vector2(1.6461838, 1.9625756)
+texture = ExtResource("9_8k5oe")
+offset = Vector2(3.577301, -51.835274)
+
+[node name="MapPieceTileMap" parent="." unique_id=980340614 instance=ExtResource("4_f5adr")]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD6/wEAAAABAAAAAAD6/wIAAAABAAAAAAD6/wMAAAABAAAAAAD6/wQAAAABAAAAAAD7/wQAAAABAAAAAAD///3/AAABAAAAAAD///z/AAABAAUAAAD///v/AAAEAAYAAAD//wUAAAAIAAcAAAAAAAAAAAAFAAYAAAABAAAAAAAFAAYAAAACAAAAAAAGAAYAAAADAAAAAAAGAAYAAAAEAAAAAAAGAAYAAAD6//3/AAABAAIAAAD6//7/AAABAAMAAAD7//3/AAABAAcAAAD7//7/AAABAAQAAAD8//3/AAAHAAIAAAD8/wQAAAABAAAAAAD9//3/AAABAAUAAAD+//3/AAAGAAAAAAAAAP3/AAAGAAYAAAAAAP7/AAAFAAYAAAAAAP//AAAIAAYAAAAAAAEAAAAGAAcAAAAAAAQAAAAIAAYAAAABAP3/AAAFAAcAAAABAP7/AAAHAAcAAAABAP//AAAHAAYAAAABAAEAAAAIAAcAAAABAAIAAAAHAAcAAAABAAMAAAAIAAYAAAABAAQAAAAFAAYAAAACAP3/AAAFAAcAAAACAP7/AAAFAAYAAAACAP//AAAIAAYAAAACAAEAAAAFAAcAAAACAAIAAAAFAAcAAAACAAMAAAAFAAcAAAACAAQAAAAFAAcAAAADAP3/AAAGAAAAAAADAP7/AAAFAAcAAAADAP//AAAGAAcAAAADAAEAAAAFAAYAAAADAAIAAAAIAAYAAAADAAMAAAAGAAcAAAADAAQAAAAIAAcAAAAEAP3/AAAAAAQAAAAEAP7/AAAFAAcAAAAEAP//AAAHAAYAAAAEAAEAAAAGAAcAAAAEAAIAAAAIAAYAAAAEAAMAAAAGAAcAAAAEAAQAAAAGAAcAAAD6//v/AAAGAAcAAAD6//z/AAABAAEAAAD7//v/AAADAAEAAAD7//z/AAADAAcAAAD8//v/AAADAAIAAAD8//z/AAABAAcAAAD9//v/AAAGAAUAAAD9//z/AAAEAAYAAAD+//v/AAACAAcAAAD+//z/AAAIAAEAAAAAAPv/AAAIAAEAAAAAAPz/AAABAAAAAAABAPv/AAAJAAIAAAABAPz/AAAGAAAAAAACAPv/AAABAAcAAAACAPz/AAAAAAQAAAADAPv/AAAEAAcAAAADAPz/AAAJAAIAAAAEAPv/AAAFAAQAAAAEAPz/AAABAAcAAAD6/wUAAAABAAAAAAD7/wUAAAABAAAAAAD8/wUAAAABAAAAAAD9/wUAAAABAAAAAAD+/wUAAAAFAAcAAAAAAAUAAAAGAAYAAAABAAUAAAAGAAYAAAACAAUAAAAHAAYAAAADAAUAAAAFAAcAAAAEAAUAAAAGAAcAAAAFAAAAAAAGAAcAAAAGAAAAAAAIAAYAAAD//wYAAAAFAAcAAAD//wcAAAAFAAYAAAD///r/AAAGAAUAAAD///n/AAABAAAAAAD5/wAAAAABAAAAAAD4/wAAAAABAAAAAAD+/wcAAAAGAAcAAAD+/wYAAAAIAAYAAAD9/wYAAAABAAAAAAD8/wYAAAABAAAAAAD8/wcAAAABAAAAAAD7/wYAAAABAAAAAAD4/wEAAAABAAAAAAD4/wIAAAABAAAAAAD4/wYAAAABAAAAAAD4/wUAAAABAAAAAAD4/wQAAAABAAAAAAD4/wMAAAABAAAAAAD7/wcAAAABAAAAAAD6/wcAAAABAAAAAAD5/wcAAAABAAAAAAD4/wcAAAABAAAAAAD5/wUAAAABAAAAAAD5/wQAAAABAAAAAAD5/wMAAAABAAAAAAD5/wIAAAABAAAAAAD5/wEAAAABAAAAAAD5/wYAAAABAAAAAAD6/wYAAAABAAAAAAD9/wcAAAABAAAAAAAGAAcAAAAHAAcAAAAGAAYAAAAHAAYAAAAGAAUAAAAIAAcAAAAGAAQAAAAFAAcAAAAGAAMAAAAFAAYAAAAGAAIAAAAGAAcAAAAGAAEAAAAIAAcAAAAFAAEAAAAHAAYAAAAFAAIAAAAIAAcAAAAFAAMAAAAHAAYAAAAFAAQAAAAIAAYAAAAFAAUAAAAHAAcAAAAFAAYAAAAFAAYAAAAFAAcAAAAHAAcAAAAEAAcAAAAGAAYAAAADAAcAAAAHAAYAAAACAAcAAAAIAAYAAAACAAYAAAAHAAYAAAABAAYAAAAIAAYAAAAAAAYAAAAHAAcAAAADAAYAAAAIAAcAAAAEAAYAAAAFAAcAAAABAAcAAAAIAAYAAAAAAAcAAAAHAAYAAAAGAP7/AAAIAAcAAAAGAP3/AAAGAAAAAAAGAPz/AAAIAAEAAAAGAPv/AAACAAcAAAAGAPr/AAADAAEAAAAFAPr/AAAHAAAAAAAEAPr/AAABAAAAAAADAPr/AAAEAAIAAAACAPr/AAAFAAQAAAABAPr/AAAEAAcAAAAAAPr/AAACAAcAAAAAAPn/AAADAAEAAAABAPn/AAAEAAIAAAACAPn/AAABAAAAAAADAPn/AAAGAAAAAAAEAPn/AAABAAAAAAAFAPn/AAABAAAAAAAGAPn/AAABAAAAAAAFAPv/AAAGAAUAAAAFAPz/AAAEAAYAAAAFAP3/AAABAAUAAAAFAP7/AAAFAAYAAAD+//n/AAABAAAAAAD9//n/AAABAAAAAAD8//n/AAABAAAAAAD7//n/AAABAAAAAAD6//n/AAABAAAAAAD5//n/AAABAAAAAAD4//n/AAABAAAAAAD4//r/AAABAAAAAAD4//v/AAABAAAAAAD4//z/AAABAAAAAAD4//3/AAABAAAAAAD4//7/AAABAAAAAAD4////AAABAAAAAAD5////AAABAAAAAAD5//7/AAABAAAAAAD5//3/AAABAAAAAAD5//v/AAABAAAAAAD5//r/AAABAAAAAAD6//r/AAABAAAAAAD7//r/AAABAAAAAAD8//r/AAABAAAAAAD+//r/AAADAAEAAAD9//r/AAAGAAAAAAD5//z/AAABAAAAAAAFAP//AAAIAAcAAAAGAP//AAAIAAcAAAD8//7/AAACAAQAAAD9//7/AAAGAAcAAAD+//7/AAAHAAcAAAD+////AAAFAAcAAAD/////AAAHAAcAAAD//wAAAAAHAAYAAAD///7/AAAGAAcAAAD6////AAAFAAcAAAD6/wAAAAAIAAcAAAD7////AAAGAAcAAAD8////AAAIAAYAAAD9////AAAFAAYAAAD7/wAAAAAFAAYAAAD8/wAAAAAGAAcAAAD9/wAAAAAIAAYAAAD+/wAAAAAIAAcAAAD7/wEAAAAFAAcAAAA=")
+
+[node name="Stone3" type="Sprite2D" parent="MapPieceTileMap" unique_id=2088326907]
+position = Vector2(154, -864)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_xt0ia")
+
+[node name="LevelTileMap" type="TileMapLayer" parent="MapPieceTileMap" unique_id=65137436]
+position = Vector2(0, -64)
+tile_map_data = PackedByteArray("AAD5/wIAAAAHAAcAAAD5/wMAAAAIAAYAAAAFAAAAAAAGAAcAAAAGAAAAAAAIAAcAAAAGAP//AAAIAAYAAAD5//7/AAAHAAYAAAAFAAEAAAAIAAcAAAAFAAIAAAAGAAYAAAAGAAIAAAAIAAcAAAAGAAEAAAAIAAYAAAAEAAEAAAAFAAcAAAAEAAIAAAAFAAYAAAAEAAAAAAAGAAYAAAADAAAAAAAIAAYAAAADAAEAAAAIAAcAAAAFAAMAAAAHAAYAAAAGAAMAAAAIAAcAAAAGAAQAAAAFAAYAAAAFAAQAAAAHAAYAAAAGAAUAAAAFAAcAAAA=")
+tile_set = ExtResource("2_plf53")
+script = ExtResource("3_bp3gv")
+metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+
+[node name="LevelTileMap" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap" unique_id=1081419563]
+position = Vector2(0, -64)
+tile_map_data = PackedByteArray("AAAGAAAAAAAIAAYAAAAFAAEAAAAFAAcAAAAGAAEAAAAGAAcAAAAGAAIAAAAGAAcAAAD5/wMAAAAIAAcAAAA=")
+tile_set = ExtResource("2_plf53")
+script = ExtResource("3_bp3gv")
+metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+
+[node name="LevelTileMap" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap/LevelTileMap" unique_id=1086603521]
+position = Vector2(0, -64)
+tile_map_data = PackedByteArray("AAD7/wIAAAAFAAYAAAD5/wMAAAAIAAYAAAD6/wcAAAAFAAcAAAA=")
+tile_set = ExtResource("2_plf53")
+script = ExtResource("3_bp3gv")
+metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+
+[node name="BluePortalPortal" parent="." unique_id=492732705 instance=ExtResource("6_ma0ff")]
+position = Vector2(-122.00001, -294.00003)
+frame_progress = 0.48736614
+flip_h = true
+
+[node name="Routes" type="Node2D" parent="." unique_id=1545094464]
+
+[node name="route_SW_END" type="Path2D" parent="Routes" unique_id=1146728192]
+curve = SubResource("Curve2D_qfyrc")
+
+[node name="Decoration" type="Node2D" parent="." unique_id=921328258]
+
+[node name="Stone2" type="Sprite2D" parent="Decoration" unique_id=1896442022]
+position = Vector2(-482.00003, -22)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_4gvpv")
+
+[node name="Stone3" type="Sprite2D" parent="Decoration" unique_id=1917402733]
+position = Vector2(-456.99997, -1.000061)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_4gvpv")
+
+[node name="Stone4" type="Sprite2D" parent="Decoration" unique_id=2106304753]
+position = Vector2(203.99998, -139.99997)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("7_4gvpv")
+
+[node name="Tree1" type="Sprite2D" parent="Decoration" unique_id=759679296]
+position = Vector2(-184, 90)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_q1qxh")
+
+[node name="Tree2" type="Sprite2D" parent="Decoration" unique_id=733194264]
+position = Vector2(-316, -159)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_q1qxh")
