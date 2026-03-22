@@ -26,7 +26,7 @@ func _ready() -> void:
 func populate_screen(configurations: Array[TowerDataWithInstance]) -> void:
 	for tower_configuration in configurations:
 		var item = TOWER_ITEM_SCENE.instantiate() as ChooseTowerScreenItem
-		item.tower_configuration = tower_configuration
+		item.tower_data = tower_configuration
 		cards_container.add_child(item)
 		item.selected.connect(_on_item_selected)
 
@@ -39,6 +39,6 @@ func _on_ok_pressed() -> void:
 	if not selected_item:
 		return
 
-	ClickEvents.add_tower_card.emit(selected_item.tower_configuration)
+	ClickEvents.add_tower_card.emit(selected_item.tower_data)
 	done.emit()
 	queue_free()

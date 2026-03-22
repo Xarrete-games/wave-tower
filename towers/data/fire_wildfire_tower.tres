@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" format=3 uid="uid://c87ypetdh5cks"]
+[gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://c87ypetdh5cks"]
 
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_clbp5"]
 [ext_resource type="PackedScene" uid="uid://ckw22jf820ehi" path="res://towers/instances/fire/fire_wildfire_tower/fire_wildfire_tower.tscn" id="2_clbp5"]
@@ -25,5 +25,6 @@ metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 [resource]
 script = ExtResource("3_ctmpg")
 configuration = SubResource("Resource_4q8u3")
+data = SubResource("Resource_4q8u3")
 scene = ExtResource("2_clbp5")
 metadata/_custom_type_script = "uid://byiw835k16yc6"

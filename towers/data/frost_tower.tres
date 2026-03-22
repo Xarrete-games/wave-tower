@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" format=3 uid="uid://5apq3w6n8f53"]
+[gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://5apq3w6n8f53"]
 
 [ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="1_lv5j7"]
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_4xtpd"]
@@ -31,5 +31,6 @@ metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 [resource]
 script = ExtResource("3_7u0s0")
 configuration = SubResource("Resource_tjead")
+data = SubResource("Resource_tjead")
 scene = ExtResource("6_8vsmr")
 metadata/_custom_type_script = "uid://byiw835k16yc6"

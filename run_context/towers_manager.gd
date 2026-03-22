@@ -41,16 +41,16 @@ func reset_towers() -> void:
 
 func get_tower_configuration_by_id(id: String) -> TowerDataWithInstance:
 	for tower_configuration in all_tower_data:
-		if tower_configuration.configuration.id == id:
+		if tower_configuration.data.id == id:
 			return tower_configuration
 	return null
 
 # called from tower_placer to inform
 func add_tower_placed(tower: Tower) -> void:
 	_update_tower_count(tower.type, towers_placed[tower.type] + 1)
-	tower_cards_amount[tower.configuration.id] -= 1
-	var tower_configuration = get_tower_configuration_by_id(tower.configuration.id)
-	tower_card_amount_change.emit(tower_configuration, tower_cards_amount[tower.configuration.id])
+	tower_cards_amount[tower.data.id] -= 1
+	var tower_configuration = get_tower_configuration_by_id(tower.data.id)
+	tower_card_amount_change.emit(tower_configuration, tower_cards_amount[tower.data.id])
 	tower.id = _generate_tower_id(tower)
 	tower_placed.emit(tower)
 
@@ -82,12 +82,12 @@ func _init_inital_towers_data() -> void:
 		_on_tower_card_added(tower_configuration)
 
 
-func _on_tower_card_added(tower_configuration: TowerDataWithInstance) -> void:
-	if tower_configuration.configuration.id in tower_cards_amount:
-		tower_cards_amount[tower_configuration.configuration.id] += 1
+func _on_tower_card_added(tower_data: TowerDataWithInstance) -> void:
+	if tower_data.data.id in tower_cards_amount:
+		tower_cards_amount[tower_data.data.id] += 1
 	else:
-		tower_cards_amount[tower_configuration.configuration.id] = 1
-	tower_card_amount_change.emit(tower_configuration, tower_cards_amount[tower_configuration.configuration.id])
+		tower_cards_amount[tower_data.data.id] = 1
+	tower_card_amount_change.emit(tower_data, tower_cards_amount[tower_data.data.id])
 	
 func _generate_tower_id(tower: Tower) -> String:
 	var base_id = tower.type_id

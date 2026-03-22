@@ -50,7 +50,7 @@ func _on_tower_selected(tower: Tower) -> void:
 	update_stats(stats)
 	update_exp_data(exp_data)
 
-	name_label.text = tower.configuration.display_name
+	name_label.text = tower.data.display_name
 	id_label.text = tower.id
 	current_tower = tower
 	
@@ -77,7 +77,7 @@ func _on_tower_selected(tower: Tower) -> void:
 			# 	tower_button.hover.connect(_on_tower_button_hover)
 			# 	tower_button.unhover.connect(_on_tower_button_unhover)
 		else:
-			upgrade_tower_price.price = upgradeable_tower.configuration.upgrade_price
+			upgrade_tower_price.price = upgradeable_tower.data.upgrade_price
 			upgrade_button_container.visible = true
 			upgrades_container.visible = false
 			
@@ -109,7 +109,7 @@ func _on_remove_button_pressed() -> void:
 	ClickEvents.tower_remove_pressed.emit(current_tower)
 
 func _on_upgrade_button_pressed() -> void:
-	if RunContext.economy.gold < current_tower.configuration.upgrade_price:
+	if RunContext.economy.gold < current_tower.data.upgrade_price:
 		return
 
 	if current_tower is UpgradeableTower:
@@ -120,8 +120,8 @@ func _hide_upgrade_options() -> void:
 	upgrades_container.visible = false
 	#level_container.visible = false
 
-func _on_tower_button_pressed(tower_configuration: TowerDataWithInstance, price: int) -> void:
-	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_configuration, price)
+func _on_tower_button_pressed(tower_data: TowerDataWithInstance, price: int) -> void:
+	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_data, price)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	button_in_hover = tower_button
