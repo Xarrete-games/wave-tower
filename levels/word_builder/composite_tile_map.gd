@@ -21,7 +21,7 @@ const UNLOCK_TILE_POS = Vector2i(6, 0)
 const NORMAL_TILE_POS = Vector2i(2, 0)
 
 ## Maximum buildeable tiles each map piece is allowed to keep.
-const MAX_BUILDEABLE_PER_PIECE: int = 3
+const MAX_BUILDEABLE_PER_PIECE: int = 5
 
 # ---------------------------------------------------------
 # INTERNAL TILE KEY
