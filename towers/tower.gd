@@ -19,6 +19,7 @@ var build_price: int = 0
 var _current_target: Enemy
 var _enabled: bool = false
 var current_tower_selected: Tower
+var range_tween: Tween
 # when true, the tower fires instantly upon detecting an enemy
 var _first_shot = true
 # global stats
@@ -217,9 +218,16 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_mouse_entered():
 	ClickEvents.tower_hovered.emit(self)
+	if range_tween: range_tween.kill()
+	range_tween = create_tween()
 	range_preview.visible = true
+	range_tween.tween_property(range_preview, "self_modulate:a", 1.0, 0.1).set_trans(Tween.TRANS_SINE)
+	
 
 func _on_mouse_exit():
 	ClickEvents.tower_unhovered.emit(self)
 	if current_tower_selected != self:
-		range_preview.visible = false
+		if range_tween: range_tween.kill()
+		range_tween = create_tween()
+		range_tween.tween_property(range_preview, "self_modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
+		range_tween.tween_callback(func(): range_preview.visible = false)

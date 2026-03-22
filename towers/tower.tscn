@@ -22,6 +22,7 @@ script = ExtResource("1_7jtxt")
 position = Vector2(0, -136)
 
 [node name="RangePreview" type="Node2D" parent="." unique_id=1110296903]
+self_modulate = Color(1, 1, 1, 0)
 z_index = -1
 script = ExtResource("3_nbqd2")
 radius = 200.0
@@ -63,10 +64,10 @@ wait_time = 2.0
 [node name="MouseDetector" type="Control" parent="." unique_id=727078477]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -30.0
+offset_left = -45.0
 offset_top = -127.0
-offset_right = 30.0
-offset_bottom = 17.0
+offset_right = 45.0
+offset_bottom = 27.0
 
 [node name="ExperienceHandler" type="Node" parent="." unique_id=2067535218]
 script = ExtResource("6_ju35e")
