@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://epd2ddueq6ho"]
+[gd_scene format=3 uid="uid://epd2ddueq6ho"]
 
 [ext_resource type="Script" uid="uid://bb04ujedsxvl6" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui.gd" id="1_3fmy8"]
 [ext_resource type="PackedScene" uid="uid://bmihqlkojvphp" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui_slot.tscn" id="1_y3m8t"]
@@ -15,14 +15,14 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[node name="InventoryUI" type="PanelContainer" node_paths=PackedStringArray("slots_container")]
+[node name="InventoryUI" type="PanelContainer" unique_id=21977613 node_paths=PackedStringArray("slots_container")]
 size_flags_horizontal = 8
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3fmy8")
 script = ExtResource("1_3fmy8")
 slots_container = NodePath("SlotsConainer")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1223872119]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 18
@@ -30,23 +30,23 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 8
 
-[node name="SlotsConainer" type="HBoxContainer" parent="."]
+[node name="SlotsConainer" type="HBoxContainer" parent="." unique_id=926880500]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="InventoryUiSlot" parent="SlotsConainer" instance=ExtResource("1_y3m8t")]
+[node name="InventoryUiSlot" parent="SlotsConainer" unique_id=933456700 instance=ExtResource("1_y3m8t")]
 layout_mode = 2
 
-[node name="InventoryUiSlot2" parent="SlotsConainer" instance=ExtResource("1_y3m8t")]
+[node name="InventoryUiSlot2" parent="SlotsConainer" unique_id=1084466003 instance=ExtResource("1_y3m8t")]
 layout_mode = 2
 
-[node name="InventoryUiSlot3" parent="SlotsConainer" instance=ExtResource("1_y3m8t")]
+[node name="InventoryUiSlot3" parent="SlotsConainer" unique_id=1530359029 instance=ExtResource("1_y3m8t")]
 layout_mode = 2
 
-[node name="InventoryUiSlot4" parent="SlotsConainer" instance=ExtResource("1_y3m8t")]
+[node name="InventoryUiSlot4" parent="SlotsConainer" unique_id=296155396 instance=ExtResource("1_y3m8t")]
 layout_mode = 2
 
-[node name="InventoryUiSlot5" parent="SlotsConainer" instance=ExtResource("1_y3m8t")]
+[node name="InventoryUiSlot5" parent="SlotsConainer" unique_id=1295553559 instance=ExtResource("1_y3m8t")]
 layout_mode = 2
