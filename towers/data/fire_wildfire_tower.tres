@@ -18,13 +18,12 @@ icon = SubResource("AtlasTexture_ncsk7")
 base_price = 300
 upgrade_price = 100
 base_damage = 90.0
-base_attack_range = 340.0
+base_attack_range = 600.0
 base_attack_speed = 1.5
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 
 [resource]
 script = ExtResource("3_ctmpg")
-configuration = SubResource("Resource_4q8u3")
 data = SubResource("Resource_4q8u3")
 scene = ExtResource("2_clbp5")
 metadata/_custom_type_script = "uid://byiw835k16yc6"

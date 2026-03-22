@@ -19,13 +19,12 @@ type = 1
 base_price = 250
 upgrade_price = 100
 base_damage = 18.0
-base_attack_range = 600.0
+base_attack_range = 1200.0
 base_attack_speed = 0.4
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 
 [resource]
 script = ExtResource("3_mq6v3")
-configuration = SubResource("Resource_6h4w4")
 data = SubResource("Resource_6h4w4")
 scene = ExtResource("2_birpd")
 metadata/_custom_type_script = "uid://byiw835k16yc6"

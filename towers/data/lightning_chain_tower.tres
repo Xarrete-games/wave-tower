@@ -19,7 +19,7 @@ type = 1
 base_price = 360
 upgrade_price = 100
 base_damage = 12.0
-base_attack_range = 320.0
+base_attack_range = 580.0
 base_attack_speed = 0.5
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 
