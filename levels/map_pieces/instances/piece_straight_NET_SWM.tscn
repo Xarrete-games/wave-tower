@@ -54,9 +54,10 @@ scale = Vector2(-0.63, 0.63)
 texture = ExtResource("5_td3r4")
 
 [node name="Plant3" type="Sprite2D" parent="Decoration" unique_id=257296509]
-position = Vector2(203.00002, -111.00001)
+position = Vector2(198, -85)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("6_fhorb")
+offset = Vector2(0, -200)
 
 [node name="Plant4" type="Sprite2D" parent="Decoration" unique_id=391746368]
 position = Vector2(326, -73)
@@ -69,19 +70,22 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("6_fhorb")
 
 [node name="Plant6" type="Sprite2D" parent="Decoration" unique_id=1707927417]
-position = Vector2(573, -134)
+position = Vector2(576, -119)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("6_fhorb")
+offset = Vector2(0, -200)
 
 [node name="Plant7" type="Sprite2D" parent="Decoration" unique_id=737616817]
-position = Vector2(515, -232)
+position = Vector2(491, -199)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("6_fhorb")
+offset = Vector2(0, -200)
 
 [node name="Plant8" type="Sprite2D" parent="Decoration" unique_id=738499754]
-position = Vector2(390, -280)
+position = Vector2(376, -241)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("6_fhorb")
+offset = Vector2(0, -200)
 
 [node name="Plant9" type="Sprite2D" parent="Decoration" unique_id=563670648]
 position = Vector2(267.00003, -277.99997)
@@ -90,7 +94,8 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("6_fhorb")
 
 [node name="Plant10" type="Sprite2D" parent="Decoration" unique_id=20472429]
-position = Vector2(151, -225.99997)
+position = Vector2(157, -190)
 rotation = -0.015531587
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("6_fhorb")
+offset = Vector2(0, -200)

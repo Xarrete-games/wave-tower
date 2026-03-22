@@ -2,9 +2,9 @@ class_name RangePreview extends Node2D
 
 @export var radius: float = 100.0
 @export var iso_scale_y: float = 0.5
-@export var color_fill: Color = Color(0, 0.7, 1, 0.8)
-@export var color_border: Color = Color(0, 0.7, 1, 0.8)
-@export var line_width: float = 2.0
+@export var color_fill: Color = Color(1, 1, 1, 0.3)
+@export var color_border: Color = Color(1, 1, 1, 0.7)
+@export var line_width: float = 3.0
 @export var segments: int = 64
 
 func _draw():

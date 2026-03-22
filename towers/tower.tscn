@@ -25,7 +25,6 @@ position = Vector2(0, -136)
 z_index = -1
 script = ExtResource("3_nbqd2")
 radius = 200.0
-color_fill = Color(0, 0.69803923, 1, 0.5568628)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1563452745]
 position = Vector2(0, -42)
