@@ -16,7 +16,6 @@ func schedule(buff: TowerBuff) -> void:
 
 func _schedule_in_seconds(buff: TowerBuff) -> void:
 	await GameState.delay(buff.duration.seconds_duration)
-
 	_remove_buff(buff)
 
 func _schedule_in_waves(buff: TowerBuff) -> void:
@@ -28,12 +27,11 @@ func _schedule_in_waves(buff: TowerBuff) -> void:
 	_remove_buff(buff)
 
 func _remove_buff(buff: TowerBuff) -> void:
-	buff_expired.emit(buff.source_id)
-
+	buff_expired.emit(buff.source.type_id)
 	if buff.residual_buff:
-		add_residual(buff.residual_buff)
+		_add_residual(buff.residual_buff)
 
-func add_residual(buff: TowerBuff) -> void:
+func _add_residual(buff: TowerBuff) -> void:
 	buff_applied.emit(buff)
 	if buff.duration:
 		schedule(buff)

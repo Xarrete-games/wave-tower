@@ -25,10 +25,12 @@ var extra_stats: TowerExtraStats = null
 
 var tower_type: Tower.Type
 var experience_handler: ExperienceHandler
+var local_buff_scheduler: BuffScheduler
 
 func _ready() -> void:
-	RunContext.buff_scheduler.buff_expired.connect(remove_local_buff)
-	RunContext.buff_scheduler.buff_applied.connect(add_local_buff)
+	local_buff_scheduler = BuffScheduler.new(RunContext.progress)
+	local_buff_scheduler.buff_expired.connect(remove_local_buff)
+	local_buff_scheduler.buff_applied.connect(add_local_buff)
 
 # initialize the stats handler with base stats, tower type and experience handler
 func set_data(
@@ -49,14 +51,15 @@ func set_data(
 	RunContext.towers_buffs.tower_buffs_change.connect(_set_global_buffs)
 
 func add_local_buff(tower_buff: TowerBuff) -> void:
+	tower_buff.scope = TowerBuff.Scope.LOCAL
 	local_buffs.append(tower_buff)
 	if tower_buff.duration != null:
-		RunContext.buff_scheduler.schedule(tower_buff)
+		local_buff_scheduler.schedule(tower_buff)
 	_rebuild_local_stats_acc()
 
 func remove_local_buff(source_id: String) -> void:
 	for buff in local_buffs:
-		if buff.source_id == source_id:
+		if buff.source.type_id == source_id:
 			local_buffs.erase(buff)
 			_rebuild_local_stats_acc()
 			break

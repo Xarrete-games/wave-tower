@@ -3,7 +3,7 @@ class_name PowerGloves extends Relic
 const SOURCE_ID = "power_gloves"
 
 func apply_effect() -> void:
-	var modifier = TowerBuff.new(TowerBuff.SourceType.RELIC, SOURCE_ID, FlatDamageModifier.new(3))
+	var modifier = TowerBuff.new(Source.new(Source.SourceType.RELIC, SOURCE_ID), FlatDamageModifier.new(3))
 	RunContext.towers_buffs.add_buff(modifier)
 	
 func remove_effect() -> void:

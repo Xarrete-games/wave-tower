@@ -7,6 +7,11 @@ func _init() -> void:
 	duration = 2
 	max_stacks = 10
 
+func clone(p_source: Source) -> EnemyDebuff:
+	var cloned := FrostDebuff.new()
+	_copy_base_to(cloned, p_source)
+	return cloned
+
 func on_apply(enemy: Enemy):
 	enemy.speed_mult -= value / 100
 

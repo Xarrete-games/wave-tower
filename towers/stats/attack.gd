@@ -2,11 +2,11 @@ class_name Attack extends RefCounted
 
 var damage: float
 var damage_type: DamageNumbers.Type
-var source: DamageSource
-var origin_source: DamageSource
+var source: Source
+var origin_source: Source
 var tags: Dictionary
 
-func _init(p_damage: float, p_damage_type: DamageNumbers.Type, p_source: DamageSource, p_origin: DamageSource = null, p_tags: Dictionary = {}):
+func _init(p_damage: float, p_damage_type: DamageNumbers.Type, p_source: Source, p_origin: Source = null, p_tags: Dictionary = {}):
 	damage = p_damage
 	damage_type = p_damage_type
 	source = p_source

@@ -40,6 +40,7 @@ func remove_targeting_mode(mode: Tower.TargetingMode) -> void:
 		targeting_modes_change.emit(targeting_modes)
 
 func add_buff(new_buff: TowerBuff) -> void:
+	new_buff.scope = TowerBuff.Scope.GLOBAL
 	if new_buff.duration != null:
 		buff_scheduler.schedule(new_buff)
 
@@ -52,7 +53,7 @@ func add_buff(new_buff: TowerBuff) -> void:
 
 func remove_buff(source_id: String) -> void:
 	towers_buffs = towers_buffs.filter(func(buff: TowerBuff) -> bool:
-		return buff.source_id != source_id
+		return buff.source.type_id != source_id
 	)
 	var acc = TowerStatsAccumulator.new()
 	
@@ -69,7 +70,7 @@ func add_attack_modifier(modifier: AttackModifier) -> void:
 
 func remove_attack_modifier(source_id: String) -> void:
 	attack_modifiers = attack_modifiers.filter(func(mod: AttackModifier) -> bool:
-		return mod.source_id != source_id
+		return mod.source.type_id != source_id
 	)
 	attack_modifiers_removed.emit(source_id)
 

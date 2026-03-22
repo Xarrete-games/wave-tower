@@ -1,14 +1,14 @@
 class_name BurnArea extends Area2D
 
 var enemies_burned: Array[Enemy] = []
-var source: DamageSource
+var source: Source
 
 @onready var duration_timer: Timer = $DurationTimer
 
 func _ready() -> void:
 	monitoring = false
 
-func setup(p_source: DamageSource) -> void:
+func setup(p_source: Source) -> void:
 	source = p_source
 	duration_timer.start()
 	monitoring = true

@@ -1,27 +1,29 @@
 class_name TowerBuff extends RefCounted
 
-enum SourceType {
-	RELIC,
-	TOWER,
-	CONSUMABLE
+enum Scope {
+	GLOBAL,
+	LOCAL
 }
 
-var source_type: SourceType
-var source: TowerB
+var source: Source
 var modifier: TowerStatsModifier
+var buff_data: BuffData
+var scope: Scope
 # duration
-var duration: TowerBuffDuration
+var duration: Duration
 # if this buff is removed or expired, apply the residual buff
 var residual_buff: TowerBuff
 
 func _init(
-	p_source_type: SourceType, 
-	p_source_id: String, 
+	p_source: Source, 
 	p_modifier: TowerStatsModifier, 
-	p_duration: TowerBuffDuration = null,
-	p_residual_buff: TowerBuff = null) -> void:
-	source_type = p_source_type
-	source_id = p_source_id
+	p_duration: Duration = null,
+	p_residual_buff: TowerBuff = null,
+	p_buff_data: BuffData = null,
+	p_scope: Scope = Scope.GLOBAL) -> void:
+	source = p_source
 	modifier = p_modifier
 	duration = p_duration
 	residual_buff = p_residual_buff
+	buff_data = p_buff_data
+	scope = p_scope
