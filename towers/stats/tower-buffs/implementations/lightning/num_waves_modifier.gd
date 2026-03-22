@@ -1,4 +1,4 @@
-class_name NumWavesModifier extends TowerBuffModifier
+class_name NumWavesModifier extends TowerStatsModifier
 
 
 func contribute(acc: TowerStatsAccumulator) -> void:

@@ -1,5 +1,5 @@
 @abstract
-class_name TowerBuffModifier extends RefCounted
+class_name TowerStatsModifier extends RefCounted
 
 var value: float = 0.0
 
