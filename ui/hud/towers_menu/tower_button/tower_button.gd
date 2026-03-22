@@ -1,17 +1,17 @@
 class_name TowerButton extends Control
 
-signal tower_button_pressed(tower_configuration: TowerConfigurationWithInstance, price: int)
+signal tower_button_pressed(tower_configuration: TowerDataWithInstance, price: int)
 signal hover(tower_button: TowerButton)
 signal unhover(tower_button: TowerButton)
 
 const NORMAL_PANEL = preload("uid://dcjn1y7ofuii7")
 const HOVER_PANEL = preload("uid://5m3jkdualcb3")
 
-@export var tower_configuration: TowerConfigurationWithInstance:
+@export var tower_data: TowerDataWithInstance:
 	set(value):
-		tower_configuration = value
-		configuration = tower_configuration.configuration
-		tower_scene = tower_configuration.scene
+		tower_data = value
+		configuration = tower_data.data
+		tower_scene = tower_data.scene
 		icon = configuration.icon
 		type = configuration.type
 		_set_new_price(configuration.base_price)
@@ -21,7 +21,7 @@ const HOVER_PANEL = preload("uid://5m3jkdualcb3")
 @export var gold_price: GoldPrice
 @export var amount_label: Label
 
-var configuration: TowerConfiguration
+var configuration: TowerData
 
 var price: int = 0:
 	set(value):
@@ -89,4 +89,4 @@ func _on_tower_button_pressed() -> void:
 	AudioManager.play_button_click()
 	if RunContext.economy.gold < price:
 		return
-	tower_button_pressed.emit(tower_configuration, price)
+	tower_button_pressed.emit(tower_data, price)

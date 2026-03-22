@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" format=3 uid="uid://b62s2yksyqvsf"]
+[gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://b62s2yksyqvsf"]
 
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="1_birpd"]
 [ext_resource type="PackedScene" uid="uid://byypsvgtaww3g" path="res://towers/instances/lightning/lightning_overcharger_tower/lightning_overcharge_tower.tscn" id="2_birpd"]
-[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_mq6v3"]
-[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="3_mq6v3"]
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_mq6v3"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_data_with_instance.gd" id="3_mq6v3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i5pku"]
 atlas = ExtResource("1_birpd")
@@ -26,5 +26,6 @@ metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 [resource]
 script = ExtResource("3_mq6v3")
 configuration = SubResource("Resource_6h4w4")
+data = SubResource("Resource_6h4w4")
 scene = ExtResource("2_birpd")
 metadata/_custom_type_script = "uid://byiw835k16yc6"

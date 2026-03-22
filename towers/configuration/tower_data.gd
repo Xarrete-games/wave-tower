@@ -1,4 +1,4 @@
-class_name TowerConfiguration extends Resource
+class_name TowerData extends Resource
 
 @export_group("Definition")
 @export var id: String
@@ -26,7 +26,7 @@ class_name TowerConfiguration extends Resource
 @export var critic_damage_per_level: float = 0
 
 @export_group("Upgrades")
-@export var upgradeable_towers: Array[TowerConfigurationWithInstance] = []
+@export var upgradeable_towers: Array[TowerDataWithInstance] = []
 
 var stats: TowerStats = TowerStats.new()
 var stats_on_level: TowerStats = TowerStats.new()

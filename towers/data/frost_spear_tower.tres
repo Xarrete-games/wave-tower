@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" format=3 uid="uid://bkag7llhiwwvc"]
+[gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://bkag7llhiwwvc"]
 
 [ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="1_7qldl"]
-[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="1_qvjoa"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_data_with_instance.gd" id="1_qvjoa"]
 [ext_resource type="PackedScene" uid="uid://bx8cw8ahrfd21" path="res://towers/instances/frost/frost_spear_tower/frost_spear_tower.tscn" id="2_7qldl"]
-[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_8ljwe"]
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_8ljwe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cq3yl"]
 atlas = ExtResource("1_7qldl")
@@ -27,5 +27,6 @@ metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 [resource]
 script = ExtResource("1_qvjoa")
 configuration = SubResource("Resource_bjn4t")
+data = SubResource("Resource_bjn4t")
 scene = ExtResource("2_7qldl")
 metadata/_custom_type_script = "uid://byiw835k16yc6"

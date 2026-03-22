@@ -25,33 +25,33 @@ func _init_button_cards() -> void:
 		var tower_configuration = RunContext.towers_manager.get_tower_configuration_by_id(tower_configuration_id)
 		_on_tower_card_added(tower_configuration, amount)
 
-func _on_tower_card_added(tower_configuration: TowerConfigurationWithInstance, amount: int) -> void:
+func _on_tower_card_added(tower_data: TowerDataWithInstance, amount: int) -> void:
 	if amount == 0:
-		if tower_configuration.configuration.id in buttons:
-			buttons[tower_configuration.configuration.id].queue_free()
-			buttons.erase(tower_configuration.configuration.id)
+		if tower_data.data.id in buttons:
+			buttons[tower_data.data.id].queue_free()
+			buttons.erase(tower_data.data.id)
 			return
 
-	if tower_configuration.configuration.id not in buttons:
+	if tower_data.data.id not in buttons:
 		var new_button = tower_button_scene.instantiate() as TowerButton
 		buttons_container.add_child(new_button)
-		new_button.tower_configuration = tower_configuration
-		buttons[tower_configuration.configuration.id] = new_button
+		new_button.tower_data = tower_data
+		buttons[tower_data.data.id] = new_button
 		new_button.amount = amount
 		# connect signals
 		new_button.tower_button_pressed.connect(_on_tower_button_pressed)
 		new_button.hover.connect(_on_tower_button_hover)
 		new_button.unhover.connect(_on_tower_button_unhover)
 	else:
-		if tower_configuration.configuration.id in buttons:
-			buttons[tower_configuration.configuration.id].amount = amount
+		if tower_data.data.id in buttons:
+			buttons[tower_data.data.id].amount = amount
 	 
-func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance, price: int) -> void:
-	ClickEvents.tower_build_button_pressed.emit(tower_configuration, price)
+func _on_tower_button_pressed(tower_data: TowerDataWithInstance, price: int) -> void:
+	ClickEvents.tower_build_button_pressed.emit(tower_data, price)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	button_in_hover = tower_button
-	tower_hint.set_stats(button_in_hover.configuration)
+	tower_hint.set_stats(button_in_hover.tower_data.data)
 	# Position the hint above the button
 	var rect: Rect2 = tower_button.get_global_rect()	
 	tower_hint.global_position = Vector2(

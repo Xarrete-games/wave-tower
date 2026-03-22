@@ -11,7 +11,7 @@ func _ready():
 	super._ready()
 
 func upgrade() -> void:
-	RunContext.economy.gold -= configuration.upgrade_price
+	RunContext.economy.gold -= data.upgrade_price
 	level += 1
 	experience_handler.level_up.emit(level)
 
@@ -21,5 +21,5 @@ func upgrade() -> void:
 func is_max_level() -> bool:
 	return level >= MAX_LEVEL
 
-func get_upgradeable_towers() -> Array[TowerConfigurationWithInstance]:
-	return configuration.upgradeable_towers
+func get_upgradeable_towers() -> Array[TowerDataWithInstance]:
+	return data.upgradeable_towers

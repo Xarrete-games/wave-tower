@@ -13,7 +13,7 @@ var events: Array[EventData] = []
 var consumables: Array[ConsumableItemData] = []
 var initial_map_pieces: Array[MapPieceData] = []
 var map_pieces: Array[MapPieceData] = []
-var tower_data: Array[TowerConfigurationWithInstance] = []
+var tower_data: Array[TowerDataWithInstance] = []
 var enemy_data: EnemyDataLoader = EnemyDataLoader.new()
 
 func _ready() -> void:
@@ -108,7 +108,7 @@ func get_spawnable_enemies() -> Array[EnemyData]:
 # TOWERS API
 # ---------------------------------------------------------
 
-func get_all_tower_data() -> Array[TowerConfigurationWithInstance]:
+func get_all_tower_data() -> Array[TowerDataWithInstance]:
 	return tower_data.duplicate()
 	
 # ---------------------------------------------------------
@@ -157,7 +157,7 @@ func _load__initial_map_pieces() -> void:
 func _load_tower_data() -> void:
 	var loaded_array = _load_resources_from_dir(TOWER_DATA_PATH)
 	for data in loaded_array:
-		if data is TowerConfigurationWithInstance:
+		if data is TowerDataWithInstance:
 			tower_data.append(data)
 		else:
 			push_error("[DataLoader] Loaded tower data has invalid type: %s" % [data])

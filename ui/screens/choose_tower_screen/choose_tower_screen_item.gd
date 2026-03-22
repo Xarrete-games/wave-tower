@@ -2,7 +2,7 @@ class_name ChooseTowerScreenItem extends Control
 
 signal selected(item: ChooseTowerScreenItem)
 
-@export var tower_configuration: TowerConfigurationWithInstance
+@export var tower_data: TowerDataWithInstance
 @export var title_label: Label
 @export var description_label: Label
 @export var texture: TextureRect
@@ -18,11 +18,11 @@ signal selected(item: ChooseTowerScreenItem)
 func _ready() -> void:
 	_apply_configuration()
 
-func set_configuration(tower_configuration_p: TowerConfigurationWithInstance) -> void:
-	self.tower_configuration = tower_configuration_p
+func set_configuration(tower_data_p: TowerDataWithInstance) -> void:
+	tower_data = tower_data_p
 
 func _apply_configuration() -> void:
-	var configuration = tower_configuration.configuration
+	var configuration = tower_data.data
 	title_label.text = configuration.display_name
 	description_label.text = configuration.description
 	texture.texture = configuration.icon
@@ -34,6 +34,6 @@ func _apply_configuration() -> void:
 
 func _on_gui_input(event: InputEvent) -> void:
 	if UIUtils.is_left_click_event(event):
-		ChooseTowerScreen.instance.selected_tower_configuration = tower_configuration
+		ChooseTowerScreen.instance.selected_tower_configuration = tower_data
 		AudioManager.play_button_click()
 		selected.emit(self)

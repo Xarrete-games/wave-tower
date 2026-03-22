@@ -34,7 +34,7 @@ func _ready() -> void:
 
 # initialize the stats handler with base stats, tower type and experience handler
 func set_data(
-	stats_configuration: TowerConfiguration,
+	stats_configuration: TowerData,
 	p_tower_type: Tower.Type, 
 	p_experience_handler: ExperienceHandler) -> void:
 	#base stats

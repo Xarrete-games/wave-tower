@@ -14,7 +14,7 @@ const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
 @export var type: Type = Type.FIRE
 
-var configuration: TowerConfiguration
+var data: TowerData
 var build_price: int = 0
 var _current_target: Enemy
 var _enabled: bool = false
@@ -60,7 +60,7 @@ var damage_source: Source:
 @onready var tower_area: Area2D = $TowerArea
 
 func _ready():
-	configuration.build()
+	data.build()
 	range_collision.shape = CircleShape2D.new()
 	# modifiers
 	modifiers = RunContext.towers_buffs.get_modifiers()
@@ -80,7 +80,7 @@ func _ready():
 	experience_handler.exp_data_change.connect(_on_exp_data_change)
 	tower_stats_handler.stats_change.connect(_on_stats_change)
 	tower_stats_handler.extra_stats_change.connect(_on_extra_stats_change)
-	tower_stats_handler.set_data(configuration, type, experience_handler)
+	tower_stats_handler.set_data(data, type, experience_handler)
 	area_detector.target_change.connect(_on_target_change)
 	
 # --------------------

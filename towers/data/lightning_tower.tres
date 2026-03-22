@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" format=3 uid="uid://cb8v2oeues41k"]
+[gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://cb8v2oeues41k"]
 
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="1_5g0ei"]
-[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_y8ti3"]
-[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="3_b35vm"]
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_y8ti3"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_data_with_instance.gd" id="3_b35vm"]
 [ext_resource type="Resource" uid="uid://b62s2yksyqvsf" path="res://towers/data/lightning_overcharge_tower.tres" id="4_p8d6a"]
 [ext_resource type="Resource" uid="uid://dux7i7iqac1qm" path="res://towers/data/lightning_chain_tower.tres" id="5_622j4"]
 [ext_resource type="PackedScene" uid="uid://7hfxyb5g3ku" path="res://towers/instances/lightning/lightning_tower/lightning_tower.tscn" id="6_p4ogc"]
@@ -30,5 +30,6 @@ upgradeable_towers = Array[ExtResource("3_b35vm")]([ExtResource("4_p8d6a"), ExtR
 [resource]
 script = ExtResource("3_b35vm")
 configuration = SubResource("Resource_rs7co")
+data = SubResource("Resource_rs7co")
 scene = ExtResource("6_p4ogc")
 metadata/_custom_type_script = "uid://byiw835k16yc6"

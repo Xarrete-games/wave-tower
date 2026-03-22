@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="TowerConfigurationWithInstance" format=3 uid="uid://dux7i7iqac1qm"]
+[gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://dux7i7iqac1qm"]
 
-[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="1_r4475"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_data_with_instance.gd" id="1_r4475"]
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="1_rqopi"]
 [ext_resource type="PackedScene" uid="uid://cedwmb3dpm4xn" path="res://towers/instances/lightning/lightning_chain_tower/lightning_chain_tower.tscn" id="2_rqopi"]
-[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_vgq1q"]
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_vgq1q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i5pku"]
 atlas = ExtResource("1_rqopi")
@@ -26,5 +26,6 @@ metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 [resource]
 script = ExtResource("1_r4475")
 configuration = SubResource("Resource_e85he")
+data = SubResource("Resource_e85he")
 scene = ExtResource("2_rqopi")
 metadata/_custom_type_script = "uid://byiw835k16yc6"
