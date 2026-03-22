@@ -1,6 +1,6 @@
 class_name ChooseRelicScreen extends Control
 
-signal item_selected(item: ItemOffer)
+signal item_selected(item: RelicData)
 signal reroll_pressed()
 
 const CHOOSE_RELIC_CARD = preload("uid://dgcv5fdqvfext")
@@ -15,22 +15,22 @@ func _ready() -> void:
 	await get_tree().create_timer(0.3).timeout
 	_enabled = true
 
-func set_items_offer(offer_list: Array[ItemOffer]) -> void:
+func set_relics(relics: Array[RelicData]) -> void:
 	for child in cards_container.get_children():
 		child.queue_free()
 	
-	for item_offer in offer_list:
+	for relic_data in relics:
 		var card: ChooseRelicCard = CHOOSE_RELIC_CARD.instantiate()
 		cards_container.add_child(card)
-		card.set_relic(item_offer)
+		card.set_relic(relic_data)
 		card.card_pressed.connect(_on_card_pressed)
 	reroll_priece.price = _reroll_priece
 
-func _on_card_pressed(item_offer: ItemOffer) -> void:
+func _on_card_pressed(relic_data: RelicData) -> void:
 	if not _enabled:
 		return
 	
-	item_selected.emit(item_offer)
+	item_selected.emit(relic_data)
 	
 func _on_reroll_button_xarreta_pressed() -> void:
 	if _reroll_priece <= RunContext.economy.gold:

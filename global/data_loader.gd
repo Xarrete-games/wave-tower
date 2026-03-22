@@ -53,6 +53,31 @@ func get_not_used_relics(rarity: Relic.Rarity = Relic.Rarity.ALL, is_cursed: Var
 
 		return not RunContext.relics_manager.is_maxed(relic_data.id)
 	)
+
+func get_random_available_relics(
+	amount: int,
+	rarity: Relic.Rarity = Relic.Rarity.ALL,
+	include_cursed: bool = false,
+	include_only_for_events: bool = false
+) -> Array[RelicData]:
+	var candidates = get_not_used_relics(rarity)
+	candidates = candidates.filter(func(relic_data: RelicData):
+		if not include_cursed and relic_data.is_cursed:
+			return false
+		if not include_only_for_events and relic_data.only_for_events:
+			return false
+		return true
+	)
+
+	candidates.shuffle()
+
+	var result: Array[RelicData] = []
+	for relic_data in candidates:
+		if result.size() >= amount:
+			break
+		result.append(relic_data)
+
+	return result
 # ---------------------------------------------------------
 # EVENTS API
 # ---------------------------------------------------------
