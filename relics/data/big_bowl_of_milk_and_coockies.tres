@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://bv5h4bqbu1jqd"]
+
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_item_data.gd" id="1_0upk2"]
+[ext_resource type="Script" uid="uid://brr24dmumfjji" path="res://relics/implementations/big_bowl_of_milk_and_biscuits.gd" id="1_qpufg"]
+[ext_resource type="Texture2D" uid="uid://olta8xw40qgq" path="res://assets/sprites/relics/milk_with_biscuits.png" id="2_13d8s"]
+
+[resource]
+script = ExtResource("1_0upk2")
+rarity = 1
+id = "Big bowl of milk and cookies"
+display_name = "Big bowl of milk and cookies"
+description = "Increases maximum health by 10 and restores full health"
+icon = ExtResource("2_13d8s")
+runtime_script = ExtResource("1_qpufg")
+metadata/_custom_type_script = "uid://blk23o0i7vnyj"

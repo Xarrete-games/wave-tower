@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ConsumableData" format=3 uid="uid://5wfoxhpnd2ly"]
+
+[ext_resource type="Script" uid="uid://bvndav3x5pajy" path="res://consumables/implementation/caffeine_potion.gd" id="1_bm5oe"]
+[ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://consumables/consumable_item_data.gd" id="1_nuh8w"]
+[ext_resource type="Texture2D" uid="uid://dsjkf3g2vpu4y" path="res://assets/sprites/consumables/caffeine_potion_relic.png" id="3_bqxjs"]
+
+[resource]
+script = ExtResource("1_nuh8w")
+consumable_type = 1
+runtime_script = ExtResource("1_bm5oe")
+id = "caffeine_potion"
+display_name = "Caffeine potion"
+description = "Increases the attack speed of all towers by 20% for 10 seconds. Then reduces the attack speed of all towers by 20% for 5 seconds."
+icon = ExtResource("3_bqxjs")
+metadata/_custom_type_script = "uid://xnsjgxjhja5s"

@@ -1,9 +1,9 @@
 # DataLoader.gd
 extends Node
 
-const RELICS_DATA_PATH: String = "res://items/relics/data/"
+const RELICS_DATA_PATH: String = "res://relics/data/"
 const EVENTS_DATA_PATH: String = "res://events/data/"
-const CONSUMABLES_DATA_PATH: String = "res://items/consumables/data/"
+const CONSUMABLES_DATA_PATH: String = "res://consumables/data/"
 const INITIAL_MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/init/"
 const MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/data/"
 const TOWER_DATA_PATH: String = "res://towers/data/"

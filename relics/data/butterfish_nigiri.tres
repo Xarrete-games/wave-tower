@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://dagu22omuhpw4"]
+
+[ext_resource type="Script" uid="uid://0uvyisnj30hy" path="res://relics/implementations/butterfish_nigiri.gd" id="1_6ca8m"]
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_item_data.gd" id="1_fyu7h"]
+[ext_resource type="Texture2D" uid="uid://c0jlyi27x7wdy" path="res://assets/sprites/relics/butterfish_nigiri.png" id="2_nbxfo"]
+
+[resource]
+script = ExtResource("1_fyu7h")
+id = "butterfish_nigiri"
+display_name = "Butterfish nigiri	"
+description = "Reduces the cost of consumible items by 10%."
+icon = ExtResource("2_nbxfo")
+runtime_script = ExtResource("1_6ca8m")
+metadata/_custom_type_script = "uid://blk23o0i7vnyj"

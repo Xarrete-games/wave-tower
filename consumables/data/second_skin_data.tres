@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ConsumableItemData" format=3 uid="uid://bdle2mluhflfw"]
+
+[ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://consumables/consumable_item_data.gd" id="1_lha01"]
+[ext_resource type="Script" uid="uid://bugq4ltrt5nrn" path="res://consumables/implementation/second_skin.gd" id="1_oftu8"]
+[ext_resource type="Texture2D" uid="uid://bjk45cyvsgik0" path="res://assets/sprites/consumables/armor.png" id="3_3vg22"]
+
+[resource]
+script = ExtResource("1_lha01")
+id = "second_skin"
+display_name = "Second skin"
+description = "Adds 10 armor"
+icon = ExtResource("3_3vg22")
+runtime_script = ExtResource("1_oftu8")
+metadata/_custom_type_script = "uid://xnsjgxjhja5s"
