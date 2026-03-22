@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://beixhmpysku3t"]
 
-[ext_resource type="Texture2D" uid="uid://crxeix0v2qrqb" path="res://assets/images/icons/debuffs/burn_icon.png" id="1_2muor"]
 [ext_resource type="Script" uid="uid://brkk62c2s8fer" path="res://enemies/ui/health_bar/debuff_slot/debuff_slot.gd" id="1_4ca0j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2muor"]
@@ -39,4 +38,3 @@ horizontal_alignment = 1
 [node name="DebuffSlot" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("1_2muor")

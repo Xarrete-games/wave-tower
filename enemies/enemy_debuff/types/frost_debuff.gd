@@ -1,11 +1,20 @@
 class_name FrostDebuff extends EnemyDebuff
 
-func _init() -> void:
+func _init(p_data: EnemyDebuffData = null) -> void:
 	type = Type.FROST
-	# percentage of slowdown
-	value = 5
-	duration = 2
-	max_stacks = 10
+	if p_data == null:
+		# percentage of slowdown
+		value = 5
+		duration = 2
+		max_stacks = 10
+		return
+
+	data = p_data
+	type = p_data.debuff_type
+	value = p_data.value
+	duration = p_data.duration
+	tick_interval = p_data.tick_interval
+	max_stacks = p_data.max_stacks
 
 func clone(p_source: Source) -> EnemyDebuff:
 	var cloned := FrostDebuff.new()

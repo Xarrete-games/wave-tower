@@ -5,6 +5,7 @@ signal changed
 enum Type { FROST, BURN }
 
 var type: Type
+var data: EnemyDebuffData
 var source: Source
 var value: float = 0.0:
 	set(v):
@@ -30,6 +31,7 @@ func clone(p_source: Source) -> EnemyDebuff
 
 func _copy_base_to(target: EnemyDebuff, p_source: Source) -> void:
 	target.type = type
+	target.data = data
 	target.value = value
 	target.duration = duration
 	target.tick_interval = tick_interval

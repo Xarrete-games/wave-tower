@@ -4,6 +4,7 @@ extends Node
 const RELICS_DATA_PATH: String = "res://relics/data/"
 const EVENTS_DATA_PATH: String = "res://events/data/"
 const CONSUMABLES_DATA_PATH: String = "res://consumables/data/"
+const ENEMY_DEBUFFS_DATA_PATH: String = "res://enemies/enemy_debuff/data/"
 const INITIAL_MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/init/"
 const MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/data/"
 const TOWER_DATA_PATH: String = "res://towers/data/"
@@ -11,6 +12,7 @@ const TOWER_DATA_PATH: String = "res://towers/data/"
 var relics: Array[RelicData] = []
 var events: Array[EventData] = []
 var consumables: Array[ConsumableData] = []
+var enemy_debuffs: Array[EnemyDebuffData] = []
 var initial_map_pieces: Array[MapPieceData] = []
 var map_pieces: Array[MapPieceData] = []
 var tower_data: Array[TowerDataWithInstance] = []
@@ -20,6 +22,7 @@ func _ready() -> void:
 	_load_relics()
 	_load_events()
 	_load_consumables()
+	_load_enemy_debuffs()
 	_load_map_pieces()
 	_load__initial_map_pieces()
 	_load_tower_data()
@@ -31,14 +34,16 @@ func _ready() -> void:
 func get_relic_by_id(relic_id: String) -> RelicData:
 	for relic in relics:
 		if relic.id == relic_id:
-			return relic
+			return _duplicate_resource(relic) as RelicData
 	return null
 
 func get_all_relics() -> Array[RelicData]:
-	return relics.duplicate()
+	var result: Array[RelicData] = []
+	_append_deep_copies(relics, result)
+	return result
 
 func get_not_used_relics(rarity: Variant = null, is_cursed: Variant = null) -> Array[RelicData]:
-	return relics.filter(func(relic_data: RelicData):
+	var filtered: Array[RelicData] = relics.filter(func(relic_data: RelicData):
 
 		# If we want a specific rarity
 		if rarity != null and relic_data.rarity != rarity:
@@ -53,6 +58,10 @@ func get_not_used_relics(rarity: Variant = null, is_cursed: Variant = null) -> A
 
 		return not RunContext.relics_manager.is_maxed(relic_data.id)
 	)
+
+	var result: Array[RelicData] = []
+	_append_deep_copies(filtered, result)
+	return result
 
 func get_random_available_relics(
 	amount: int,
@@ -83,7 +92,9 @@ func get_random_available_relics(
 # ---------------------------------------------------------
 
 func get_all_events() -> Array[EventData]:
-	return events.duplicate()
+	var result: Array[EventData] = []
+	_append_deep_copies(events, result)
+	return result
 
 # ---------------------------------------------------------
 # CONSUMABLES API
@@ -92,26 +103,45 @@ func get_all_events() -> Array[EventData]:
 func get_consumable_by_id(consumable_id: String) -> ConsumableData:
 	for consumable in consumables:
 		if consumable.id == consumable_id:
-			return consumable
+			return _duplicate_resource(consumable) as ConsumableData
 	return null
 
 func get_all_consumables() -> Array[ConsumableData]:
-	return consumables.duplicate()
+	var result: Array[ConsumableData] = []
+	_append_deep_copies(consumables, result)
+	return result
 
 func get_all_consumables_of_type(consumable_type: Consumable.Type) -> Array[ConsumableData]:
-	return consumables.filter(func(data: ConsumableData):
+	var filtered: Array[ConsumableData] = consumables.filter(func(data: ConsumableData):
 		return data.consumable_type == consumable_type
 	)
+
+	var result: Array[ConsumableData] = []
+	_append_deep_copies(filtered, result)
+	return result
+
+# ---------------------------------------------------------
+# ENEMY DEBUFFS API
+# ---------------------------------------------------------
+
+func get_all_enemy_debuffs() -> Array[EnemyDebuffData]:
+	var result: Array[EnemyDebuffData] = []
+	_append_deep_copies(enemy_debuffs, result)
+	return result
 
 # ---------------------------------------------------------
 # MAP PIECES API
 # ---------------------------------------------------------
 
 func get_all_initial_map_pieces() -> Array[MapPieceData]:
-	return initial_map_pieces.duplicate()
+	var result: Array[MapPieceData] = []
+	_append_deep_copies(initial_map_pieces, result)
+	return result
 
 func get_all_map_pieces() -> Array[MapPieceData]:
-	return map_pieces.duplicate()
+	var result: Array[MapPieceData] = []
+	_append_deep_copies(map_pieces, result)
+	return result
 
 # ---------------------------------------------------------
 # ENEMIES API
@@ -119,22 +149,30 @@ func get_all_map_pieces() -> Array[MapPieceData]:
 
 ## Returns all loaded enemy data resources.
 func get_all_enemies() -> Array[EnemyData]:
-	return enemy_data.get_all_enemies()
+	var result: Array[EnemyData] = []
+	_append_deep_copies(enemy_data.get_all_enemies(), result)
+	return result
 
 ## Returns enemies filtered by their pressure type.
 func get_enemies_by_type(type: EnemyData.Type) -> Array[EnemyData]:
-	return enemy_data.get_enemies_by_type(type)
+	var result: Array[EnemyData] = []
+	_append_deep_copies(enemy_data.get_enemies_by_type(type), result)
+	return result
 
 ## Returns all non-boss enemies (for regular wave composition).
 func get_spawnable_enemies() -> Array[EnemyData]:
-	return enemy_data.get_spawnable_enemies()
+	var result: Array[EnemyData] = []
+	_append_deep_copies(enemy_data.get_spawnable_enemies(), result)
+	return result
 
 # ---------------------------------------------------------
 # TOWERS API
 # ---------------------------------------------------------
 
 func get_all_tower_data() -> Array[TowerDataWithInstance]:
-	return tower_data.duplicate()
+	var result: Array[TowerDataWithInstance] = []
+	_append_deep_copies(tower_data, result)
+	return result
 	
 # ---------------------------------------------------------
 # INTERNAL LOADING HELPERS
@@ -162,6 +200,14 @@ func _load_consumables() -> void:
 			consumables.append(data)
 		else:
 			push_error("[DataLoader] Loaded consumables data has invalid type: %s" % [data])
+
+func _load_enemy_debuffs() -> void:
+	var loaded_array = _load_resources_from_dir(ENEMY_DEBUFFS_DATA_PATH)
+	for data in loaded_array:
+		if data is EnemyDebuffData:
+			enemy_debuffs.append(data)
+		else:
+			push_error("[DataLoader] Loaded enemy debuff data has invalid type: %s" % [data])
 
 func _load_map_pieces() -> void:
 	var loaded_array = _load_resources_from_dir(MAP_PIECES_DATA_PATH)
@@ -212,3 +258,10 @@ func _load_resources_from_dir(path: String) -> Array[Resource]:
 	dir.list_dir_end()
 
 	return result
+
+func _append_deep_copies(source: Array, target: Array) -> void:
+	for item in source:
+		target.append(_duplicate_resource(item))
+
+func _duplicate_resource(resource: Resource) -> Resource:
+	return resource.duplicate(true)
