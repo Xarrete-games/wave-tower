@@ -38,7 +38,7 @@ func _on_tower_selected(tower: Tower) -> void:
 		current_tower_selected = tower
 		current_tower_selected.stats_change.connect(_on_stats_change)
 
-func _on_tower_button_pressed(_tower_configuration: TowerConfigurationWithInstance, _price: int) -> void:
+func _on_tower_button_pressed(_tower_configuration: TowerDataWithInstance, _price: int) -> void:
 	clear_tower_selected()
 
 func _on_tower_remove_pressed(_tower: Tower) -> void:

@@ -67,7 +67,7 @@ func _on_tower_selected(tower: Tower) -> void:
 			# 	child.queue_free()
 			# upgrade_button_container.visible = false
 			# upgrades_container.visible = true
-			# var upgradeable_towers: Array[TowerConfigurationWithInstance] = tower.get_upgradeable_towers()
+			# var upgradeable_towers: Array[TowerDataWithInstance] = tower.get_upgradeable_towers()
 			# for tower_config in upgradeable_towers:
 			# 	var tower_button = TOWER_BUTTON.instantiate() as TowerButton
 			# 	upgrades_container.add_child(tower_button)
@@ -120,7 +120,7 @@ func _hide_upgrade_options() -> void:
 	upgrades_container.visible = false
 	#level_container.visible = false
 
-func _on_tower_button_pressed(tower_configuration: TowerConfigurationWithInstance, price: int) -> void:
+func _on_tower_button_pressed(tower_configuration: TowerDataWithInstance, price: int) -> void:
 	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_configuration, price)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:

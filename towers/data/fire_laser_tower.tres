@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="TowerConfigurationWithInstance" format=3 uid="uid://brdcadnrqivh8"]
 
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_j5gfa"]
-[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="2_7f661"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_data_with_instance.gd" id="2_7f661"]
 [ext_resource type="PackedScene" uid="uid://d36t7geqp1sh" path="res://towers/instances/fire/fire_laser_tower/fire_laser_tower.tscn" id="2_j5gfa"]
-[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_ki8tc"]
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_ki8tc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
 atlas = ExtResource("1_j5gfa")

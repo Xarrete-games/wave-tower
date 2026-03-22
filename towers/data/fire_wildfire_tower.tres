@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_clbp5"]
 [ext_resource type="PackedScene" uid="uid://ckw22jf820ehi" path="res://towers/instances/fire/fire_wildfire_tower/fire_wildfire_tower.tscn" id="2_clbp5"]
-[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_configuration.gd" id="2_ctmpg"]
-[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_configuration_with_instance.gd" id="3_ctmpg"]
+[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_ctmpg"]
+[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_data_with_instance.gd" id="3_ctmpg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
 atlas = ExtResource("1_clbp5")

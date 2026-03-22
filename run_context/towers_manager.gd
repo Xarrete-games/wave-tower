@@ -1,7 +1,7 @@
 class_name TowersManager extends RefCounted
 
 signal tower_count_change(tower_type: Tower.Type, amount: int)
-signal tower_card_amount_change(tower_configuration: TowerConfigurationWithInstance, amount: int)
+signal tower_card_amount_change(tower_configuration: TowerDataWithInstance, amount: int)
 signal tower_placed(tower: Tower)
 signal tower_hovered(tower: Tower)
 signal tower_unhovered(tower: Tower)
@@ -19,7 +19,7 @@ var last_tower_ids: Dictionary[String, int] = {
 }
 
 var towers_ids: Array[String] = []
-var all_tower_data: Array[TowerConfigurationWithInstance] = []
+var all_tower_data: Array[TowerDataWithInstance] = []
 var tower_cards_amount: Dictionary[String, int] = {}
 
 func _init() -> void:
@@ -29,7 +29,7 @@ func _init() -> void:
 	all_tower_data = DataLoader.get_all_tower_data()
 	_init_inital_towers_data()
 
-func get_random_towers(amount: int) -> Array[TowerConfigurationWithInstance]:
+func get_random_towers(amount: int) -> Array[TowerDataWithInstance]:
 	var available_towers = all_tower_data.duplicate()
 	available_towers.shuffle()
 	return available_towers.slice(0, amount)
@@ -39,7 +39,7 @@ func reset_towers() -> void:
 	_update_tower_count(Tower.Type.LIGHTNING, 0)
 	_update_tower_count(Tower.Type.FROST, 0)
 
-func get_tower_configuration_by_id(id: String) -> TowerConfigurationWithInstance:
+func get_tower_configuration_by_id(id: String) -> TowerDataWithInstance:
 	for tower_configuration in all_tower_data:
 		if tower_configuration.configuration.id == id:
 			return tower_configuration
@@ -82,7 +82,7 @@ func _init_inital_towers_data() -> void:
 		_on_tower_card_added(tower_configuration)
 
 
-func _on_tower_card_added(tower_configuration: TowerConfigurationWithInstance) -> void:
+func _on_tower_card_added(tower_configuration: TowerDataWithInstance) -> void:
 	if tower_configuration.configuration.id in tower_cards_amount:
 		tower_cards_amount[tower_configuration.configuration.id] += 1
 	else:

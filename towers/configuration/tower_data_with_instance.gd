@@ -1,6 +1,6 @@
-class_name TowerConfigurationWithInstance extends Resource
+class_name TowerDataWithInstance extends Resource
 
-@export var configuration: TowerConfiguration
+@export var configuration: TowerData
 @export var scene: PackedScene
 
 func get_instance() -> Tower:

@@ -21,5 +21,5 @@ func upgrade() -> void:
 func is_max_level() -> bool:
 	return level >= MAX_LEVEL
 
-func get_upgradeable_towers() -> Array[TowerConfigurationWithInstance]:
+func get_upgradeable_towers() -> Array[TowerDataWithInstance]:
 	return configuration.upgradeable_towers

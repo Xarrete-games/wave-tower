@@ -14,7 +14,7 @@ const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
 @export var type: Type = Type.FIRE
 
-var configuration: TowerConfiguration
+var configuration: TowerData
 var build_price: int = 0
 var _current_target: Enemy
 var _enabled: bool = false
