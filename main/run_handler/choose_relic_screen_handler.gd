@@ -27,7 +27,7 @@ func _on_item_selected(item_offer: ItemOffer) -> void:
 	if item_offer.health_price > 0:
 		RunContext.status.health -= item_offer.health_price
 	
-	var item = item_offer.create_item()
+	var item = item_offer.item_data.create_item()
 	if item is Relic:
 		RunContext.relics_manager.add_relic(item)
 

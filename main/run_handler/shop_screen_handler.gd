@@ -17,13 +17,4 @@ func open_shop(event_layer: CanvasLayer) -> void:
 	shop_screen.tree_exited.connect(shop_closed.emit)
 
 func _on_item_purchased(item_offer: ItemOffer) -> void:
-	RunContext.economy.gold -= item_offer.price
-	if item_offer.health_price > 0:
-		RunContext.status.health -= item_offer.health_price
-
-	var item = item_offer.create_item()
-	if item is Relic:
-		RunContext.offers_manager.increase_relic_offer_price(item_offer)
-		RunContext.relics_manager.add_relic(item)
-	elif item is Consumable:
-		RunContext.consumables_manager.add_consumable(item)
+	RunContext.offers_manager.purchase_offer(item_offer)

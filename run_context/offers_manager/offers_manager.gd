@@ -36,3 +36,17 @@ func create_consumables_offers(amount: int) -> Array[ItemOffer]:
 	
 func create_consumable_offer_from_data(data: ItemData) -> ItemOffer:
 	return consumables_offers_manager.create_consumable_offer_from_data(data)	
+
+func purchase_offer(item_offer: ItemOffer) -> Variant:
+	RunContext.economy.gold -= item_offer.price
+	if item_offer.health_price > 0:
+		RunContext.status.health -= item_offer.health_price
+
+	var item = item_offer.item_data.create_item()
+	if item is Relic:
+		increase_relic_offer_price(item_offer)
+		RunContext.relics_manager.add_relic(item)
+	elif item is Consumable:
+		RunContext.consumables_manager.add_consumable(item)
+
+	return item

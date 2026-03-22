@@ -30,7 +30,7 @@ func _handle_initial_relics() -> void:
 	if initial_random_relics > 0:
 		var items = RunContext.offers_manager.create_relic_offers(initial_random_relics)
 		for item in items:
-			var relic = item.create_item() as Relic
+			var relic = item.item_data.create_item() as Relic
 			RunContext.relics_manager.add_relic(relic)
 
 
