@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ywuvy"]
 [ext_resource type="Script" uid="uid://buj7pdefu7r4s" path="res://towers/instances/fire/fire_laser_tower/fire_laser_tower.gd" id="2_kgd72"]
-[ext_resource type="PackedScene" path="res://towers/instances/fire/fire_laser_tower/projectil/fire_laser_projectile.tscn" id="3_aspyp"]
+[ext_resource type="PackedScene" uid="uid://befy4fve56utf" path="res://towers/instances/fire/fire_laser_tower/projectil/fire_laser_projectile.tscn" id="3_aspyp"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="5_83oqa"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="5_ie052"]
 [ext_resource type="Texture2D" uid="uid://cmddlqwlstsnn" path="res://assets/textures/noises/T_VFX_Noise_2.PNG" id="6_83oqa"]
@@ -107,26 +107,29 @@ alpha_curve = SubResource("CurveTexture_83oqa")
 [node name="FireLaserTower" unique_id=959156155 instance=ExtResource("1_ywuvy")]
 script = ExtResource("2_kgd72")
 
-[node name="CristalLight" parent="." index="1"]
+[node name="CristalLight" parent="." index="1" unique_id=1008625391]
 position = Vector2(0, -113)
 color = Color(0.6117647, 0, 0, 1)
 attack_animation_time = 0.2
 
-[node name="RangePreview" parent="." index="2"]
+[node name="RangePreview" parent="." index="2" unique_id=1110296903]
 visible = false
 
-[node name="Sprite2D" parent="." index="3"]
+[node name="Sprite2D" parent="." index="3" unique_id=1563452745]
 position = Vector2(0, -60)
 scale = Vector2(0.4, 0.4)
 region_rect = Rect2(1490, 1, 349, 550)
 
-[node name="RangeCollision" parent="AreaDetector" index="0"]
+[node name="RangeCollision" parent="AreaDetector" parent_id_path=PackedInt32Array(366831665) index="0" unique_id=647791958]
 shape = SubResource("CircleShape2D_0cvpj")
 
-[node name="AttackTimer" parent="." index="6"]
+[node name="CollisionShape2D" parent="TowerArea" parent_id_path=PackedInt32Array(1983938577) index="0" unique_id=590428393]
+debug_color = Color(1, 1, 1, 0.25882354)
+
+[node name="AttackTimer" parent="." index="6" unique_id=2037163535]
 wait_time = 1.0
 
-[node name="MouseDetector" parent="." index="7"]
+[node name="MouseDetector" parent="." index="7" unique_id=727078477]
 offset_left = -29.0
 offset_top = -153.0
 offset_right = 31.0
@@ -165,5 +168,5 @@ lifetime = 3.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_2p35j")
 
-[node name="ProjectileSpawnPos" parent="." index="15"]
+[node name="ProjectileSpawnPos" parent="." index="15" unique_id=937664516]
 position = Vector2(0, -145)

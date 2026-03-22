@@ -20,7 +20,7 @@ icon = SubResource("AtlasTexture_i5pku")
 type = 1
 upgrade_price = 70
 base_damage = 10.0
-base_attack_range = 300.0
+base_attack_range = 580.0
 base_attack_speed = 0.6
 damage_per_level = 5.0
 attack_range_level = 30.0
@@ -29,7 +29,6 @@ upgradeable_towers = Array[ExtResource("3_b35vm")]([ExtResource("4_p8d6a"), ExtR
 
 [resource]
 script = ExtResource("3_b35vm")
-configuration = SubResource("Resource_rs7co")
 data = SubResource("Resource_rs7co")
 scene = ExtResource("6_p4ogc")
 metadata/_custom_type_script = "uid://byiw835k16yc6"

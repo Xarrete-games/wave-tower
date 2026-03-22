@@ -60,7 +60,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_5y1nq")
 
 [node name="Bush7" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="6" unique_id=937992601]
-position = Vector2(57.000015, 397.99997)
+position = Vector2(58, 392)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_5y1nq")
 

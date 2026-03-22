@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b1rsi54eynysa" path="res://ui/screens/pause_screen/pause_menu.tscn" id="2_oysny"]
 [ext_resource type="Script" uid="uid://bfbh2lc6ejw1i" path="res://main/test_data.gd" id="3_oysny"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="4_8f3b7"]
-[ext_resource type="Script" uid="uid://bv0s1qattp6jq" path="res://enemies/enemy_generator/enemy_generator_procedural.gd" id="5_s03ma"]
+[ext_resource type="Script" path="res://enemies/enemy_generator/enemy_generator_procedural.gd" id="5_s03ma"]
 [ext_resource type="Resource" uid="uid://cfghmpixlnrpd" path="res://enemies/enemy_generator/wave_config.tres" id="5_t5t77"]
 [ext_resource type="Script" uid="uid://d081ug0lnpy8d" path="res://enemies/enemy_generator/wave_spawner.gd" id="6_pp7gv"]
 [ext_resource type="PackedScene" uid="uid://wd57nqjd0s2f" path="res://main/music_handler/music_handler.tscn" id="7_dx4vj"]
