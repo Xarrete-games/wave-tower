@@ -9,6 +9,6 @@ script = ExtResource("2_fo8d3")
 id = "pirate_blunderbuss"
 display_name = "Pirate blunderbuss"
 description = "Increases the probability of receiving an item as loot by 20%"
-texture = ExtResource("3_08fvy")
+icon = ExtResource("3_08fvy")
 runtime_script = ExtResource("1_vgkp7")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

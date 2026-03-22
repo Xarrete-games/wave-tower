@@ -10,6 +10,6 @@ is_cursed = true
 id = "lemon"
 display_name = "Lemon"
 description = "At the beginning of each wave, the first tower costs 50% more."
-texture = ExtResource("3_uhjbw")
+icon = ExtResource("3_uhjbw")
 runtime_script = ExtResource("1_u4cfm")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

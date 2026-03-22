@@ -1,14 +1,10 @@
-class_name TowerData extends Resource
+class_name TowerData extends ItemData
 
-@export_group("Definition")
-@export var id: String
-@export var display_name: String
-@export_multiline var description: String
-@export var icon: Texture2D
+@export_group("Tower")
 @export var type: Tower.Type
 
-@export_group("Price")
-@export var base_price: int = 50
+@export_group("Build")
+@export var build_price: int = 50
 @export var upgrade_price: int = 30
 
 @export_group("Initial Stats")

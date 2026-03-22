@@ -4,19 +4,20 @@ var item_data: ItemData
 
 var price: int
 var health_price: int
-var price_increases: bool = true
 
 
 func _init(
-	p_relic_data: ItemData, 
+	p_item_data: ItemData, 
 	p_price: int, 
-	p_price_increases: bool, 
-	p_health_price: int) -> void:
+	p_health_price: int = 0) -> void:
 
-	item_data = p_relic_data
+	item_data = p_item_data
 	price = p_price
-	price_increases = p_price_increases
 	health_price = p_health_price
 
 func create_item() -> Variant:
-	return item_data.runtime_script.new(item_data)
+	if item_data is RelicData:
+		return (item_data as RelicData).create_item()
+	elif item_data is ConsumableData:
+		return (item_data as ConsumableData).create_item()
+	return null

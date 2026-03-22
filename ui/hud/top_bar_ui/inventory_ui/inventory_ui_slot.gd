@@ -13,7 +13,7 @@ func is_empty() -> bool:
 
 func set_consumable(consumable: Consumable) -> void:
 	_consumable = consumable
-	texture_rect.texture = consumable.texture
+	texture_rect.texture = consumable.data.icon
 
 func _on_gui_input(event: InputEvent) -> void:
 	if _consumable == null:
@@ -34,8 +34,8 @@ func _on_mouse_entered() -> void:
 		return
 	AudioManager.play_button_hover()
 	#texture_rect.custom_minimum_size = Vector2(50, 50)
-	if _consumable.description != "":
-		HintManager.show_hint(self, _consumable.description)
+	if _consumable.data.description != "":
+		HintManager.show_hint(self, _consumable.data.description)
 
 func _on_mouse_exited() -> void:
 	#texture_rect.custom_minimum_size = Vector2(40, 40)

@@ -1,7 +1,9 @@
 class_name CaffeinePotion extends ConsumableUsable
 
-var good_buff_id = id + "_good"
-var bad_buff_id = id + "_bad"
+var good_buff_id: String:
+	get: return data.id + "_good"
+var bad_buff_id: String:
+	get: return data.id + "_bad"
 
 func use() -> void:
 	var duration = Duration.new(5, 0)

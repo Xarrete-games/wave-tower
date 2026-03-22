@@ -9,6 +9,6 @@ script = ExtResource("1_b3u50")
 id = "Artic Cube"
 display_name = "Artic Cube"
 description = "Increase the duration of Freeze in 1 sec."
-texture = ExtResource("3_d3rf5")
+icon = ExtResource("3_d3rf5")
 runtime_script = ExtResource("1_olt0t")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

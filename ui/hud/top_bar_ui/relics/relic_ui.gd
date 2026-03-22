@@ -9,7 +9,7 @@ const opaque_color: Color = Color(1, 1, 1, 1)
 var relic: Relic
 
 func set_relic(p_relic: Relic) -> void:
-	texture.texture = p_relic.texture
+	texture.texture = p_relic.data.icon
 	self.relic = p_relic
 	if p_relic.disabled:
 		texture.modulate = semi_transparent_color
@@ -20,7 +20,7 @@ func set_relic(p_relic: Relic) -> void:
 		amount.text = str(p_relic.amount)
 	
 func _on_mouse_entered() -> void:
-	HintManager.show_hint(self, relic.description)
+	HintManager.show_hint(self, relic.data.description)
 
 func _on_mouse_exited() -> void:
 	HintManager.remove_hint(self)

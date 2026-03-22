@@ -9,6 +9,6 @@ script = ExtResource("1_q7bfa")
 id = "ice_cream"
 display_name = "Ice cream with cherry"
 description = "Increases the gold received at the end of each wave by 10"
-texture = ExtResource("3_hcgnc")
+icon = ExtResource("3_hcgnc")
 runtime_script = ExtResource("1_48u78")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

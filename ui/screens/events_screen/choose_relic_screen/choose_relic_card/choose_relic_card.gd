@@ -27,7 +27,7 @@ func _ready() -> void:
 func set_relic(new_relic_value: ItemOffer) -> void:
 	item_offer = new_relic_value
 	var data: ItemData = new_relic_value.item_data
-	relic_texture.texture = data.texture
+	relic_texture.texture = data.icon
 	title.text = data.display_name
 	description.text = data.description
 	
@@ -42,8 +42,8 @@ func set_relic(new_relic_value: ItemOffer) -> void:
 			_chek_health(current_health, item_offer.health_price)
 		)
 
-	if data is RelicItemData:
-		var relic_data: RelicItemData = data as RelicItemData
+	if data is RelicData:
+		var relic_data: RelicData = data as RelicData
 		hexagon_border.color =  RunContext.relics_manager.get_rarity_color(relic_data.rarity)
 	
 func _on_gui_input(event: InputEvent) -> void:

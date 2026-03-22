@@ -11,6 +11,6 @@ id = "boniato"
 display_name = "Sweet Potato"
 description = "Increases the gold dropped by enemies by 1 at the cost of 5 lives.
 Be careful!"
-texture = ExtResource("3_g7kpf")
+icon = ExtResource("3_g7kpf")
 runtime_script = ExtResource("1_ijull")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

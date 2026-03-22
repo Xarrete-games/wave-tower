@@ -10,6 +10,6 @@ consumable_type = 1
 id = "poison_potion"
 display_name = "Poison potion"
 description = "Lose 10 points of health by drinking it"
-texture = ExtResource("2_sgqh5")
+icon = ExtResource("2_sgqh5")
 runtime_script = ExtResource("1_htjlu")
 metadata/_custom_type_script = "uid://xnsjgxjhja5s"

@@ -14,7 +14,7 @@ const HOVER_PANEL = preload("uid://5m3jkdualcb3")
 		tower_scene = tower_data.scene
 		icon = configuration.icon
 		type = configuration.type
-		_set_new_price(configuration.base_price)
+		_set_new_price(configuration.build_price)
 	
 @export var panel: Panel	
 @export var tower_button: TextureButton
@@ -73,14 +73,14 @@ func _on_available_free_towers_change(available_free_towers: int) -> void:
 		price = 0
 	else:
 		if configuration:
-			_set_new_price(configuration.base_price)
+			_set_new_price(configuration.build_price)
 
 func _on_economy_towers_discount_changed(_towers_discount_mult: float) -> void:
 	if RunContext.economy.available_free_towers > 0:
 		price = 0
 	else:
 		if configuration:
-			_set_new_price(configuration.base_price)
+			_set_new_price(configuration.build_price)
 
 func _set_new_price(new_price: int) -> void:
 	price = int(new_price * (1.0 - RunContext.economy.towers_discount_mult))

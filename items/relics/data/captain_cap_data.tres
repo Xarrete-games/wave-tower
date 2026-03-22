@@ -10,6 +10,6 @@ rarity = 2
 id = "captain_cap"
 display_name = "Captain Cap"
 description = "4 relics appear to choose from instead of 3 as a reward"
-texture = ExtResource("3_x7kdt")
+icon = ExtResource("3_x7kdt")
 runtime_script = ExtResource("1_x7kdt")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

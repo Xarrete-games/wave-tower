@@ -10,6 +10,6 @@ rarity = 1
 id = "Salmon Nigiri"
 display_name = "Salmon Nigiri"
 description = "Reduces the cost of relics by 10%."
-texture = ExtResource("3_0w3py")
+icon = ExtResource("3_0w3py")
 runtime_script = ExtResource("1_t7spr")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

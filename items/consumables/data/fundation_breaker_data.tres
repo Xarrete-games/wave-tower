@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ConsumableItemData" format=3 uid="uid://6wyiwv1lsmdh"]
+[gd_resource type="Resource" script_class="ConsumableData" format=3 uid="uid://6wyiwv1lsmdh"]
 
 [ext_resource type="Texture2D" uid="uid://iylkhr5m2ge7" path="res://assets/sprites/consumables/pickaxe_48.png" id="1_apyb0"]
 [ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://items/consumables/consumable_item_data.gd" id="1_tvi2s"]
@@ -10,10 +10,10 @@
 script = ExtResource("1_tvi2s")
 cursor_icon = ExtResource("1_apyb0")
 cursor_icon_used = ExtResource("2_qfll5")
+runtime_script = ExtResource("1_y3mtm")
+price = 30
 id = "foundation_breaker"
 display_name = "Foundation Breaker"
 description = "Clears a random blocked build slot."
-texture = ExtResource("3_4so7f")
-price = 30
-runtime_script = ExtResource("1_y3mtm")
+icon = ExtResource("3_4so7f")
 metadata/_custom_type_script = "uid://xnsjgxjhja5s"

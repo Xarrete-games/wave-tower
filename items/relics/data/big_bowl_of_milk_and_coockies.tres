@@ -10,6 +10,6 @@ rarity = 1
 id = "Big bowl of milk and cookies"
 display_name = "Big bowl of milk and cookies"
 description = "Increases maximum health by 10 and restores full health"
-texture = ExtResource("2_13d8s")
+icon = ExtResource("2_13d8s")
 runtime_script = ExtResource("1_qpufg")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

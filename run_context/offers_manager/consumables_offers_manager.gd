@@ -1,6 +1,6 @@
 class_name ConsumablesOffersManager extends RefCounted
 
-var all_consumables_data: Array[ConsumableItemData] = []
+var all_consumables_data: Array[ConsumableData] = []
 
 func _init() -> void:
 	all_consumables_data = DataLoader.get_all_consumables()
@@ -38,6 +38,5 @@ func create_consumable_offer_from_data(data: ItemData) -> ItemOffer:
 	return ItemOffer.new(
 		data,
 		price,
-		data.price_increased,
 		data.health_price
-)
+	)

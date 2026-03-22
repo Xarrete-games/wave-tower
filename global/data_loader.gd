@@ -8,9 +8,9 @@ const INITIAL_MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/init/"
 const MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/data/"
 const TOWER_DATA_PATH: String = "res://towers/data/"
 
-var relics: Array[RelicItemData] = []
+var relics: Array[RelicData] = []
 var events: Array[EventData] = []
-var consumables: Array[ConsumableItemData] = []
+var consumables: Array[ConsumableData] = []
 var initial_map_pieces: Array[MapPieceData] = []
 var map_pieces: Array[MapPieceData] = []
 var tower_data: Array[TowerDataWithInstance] = []
@@ -28,17 +28,17 @@ func _ready() -> void:
 # RELICS API
 # ---------------------------------------------------------
 
-func get_relic_by_id(relic_id: String) -> ItemData:
+func get_relic_by_id(relic_id: String) -> RelicData:
 	for relic in relics:
 		if relic.id == relic_id:
 			return relic
 	return null
 
-func get_all_relics() -> Array[RelicItemData]:
+func get_all_relics() -> Array[RelicData]:
 	return relics.duplicate()
 
-func get_not_used_relics(rarity: Relic.Rarity = Relic.Rarity.ALL, is_cursed: Variant = null) -> Array[RelicItemData]:
-	return relics.filter(func(relic_data: RelicItemData):
+func get_not_used_relics(rarity: Relic.Rarity = Relic.Rarity.ALL, is_cursed: Variant = null) -> Array[RelicData]:
+	return relics.filter(func(relic_data: RelicData):
 
 		# If we want a specific rarity
 		if rarity != Relic.Rarity.ALL and relic_data.rarity != rarity:
@@ -64,17 +64,17 @@ func get_all_events() -> Array[EventData]:
 # CONSUMABLES API
 # ---------------------------------------------------------
 
-func get_consumable_by_id(consumable_id: String) -> ItemData:
+func get_consumable_by_id(consumable_id: String) -> ConsumableData:
 	for consumable in consumables:
 		if consumable.id == consumable_id:
 			return consumable
 	return null
 
-func get_all_consumables() -> Array[ConsumableItemData]:
+func get_all_consumables() -> Array[ConsumableData]:
 	return consumables.duplicate()
 
-func get_all_consumables_of_type(consumable_type: Consumable.Type) -> Array[ConsumableItemData]:
-	return consumables.filter(func(data: ConsumableItemData):
+func get_all_consumables_of_type(consumable_type: Consumable.Type) -> Array[ConsumableData]:
+	return consumables.filter(func(data: ConsumableData):
 		return data.consumable_type == consumable_type
 	)
 
@@ -117,7 +117,7 @@ func get_all_tower_data() -> Array[TowerDataWithInstance]:
 func _load_relics() -> void:
 	var loaded_array = _load_resources_from_dir(RELICS_DATA_PATH)
 	for data in loaded_array:
-		if data is RelicItemData:
+		if data is RelicData:
 			relics.append(data)
 		else:
 			push_error("[DataLoader] Loaded relic has invalid type: %s" % [data])
@@ -133,7 +133,7 @@ func _load_events() -> void:
 func _load_consumables() -> void:
 	var loaded_array = _load_resources_from_dir(CONSUMABLES_DATA_PATH)
 	for data in loaded_array:
-		if data is ConsumableItemData:
+		if data is ConsumableData:
 			consumables.append(data)
 		else:
 			push_error("[DataLoader] Loaded consumables data has invalid type: %s" % [data])

@@ -9,6 +9,6 @@ script = ExtResource("1_4x5p8")
 id = "vic_microphone"
 display_name = "Vic's microphone"
 description = "Increase the range of frost towers in 20%"
-texture = ExtResource("2_hjwo6")
+icon = ExtResource("2_hjwo6")
 runtime_script = ExtResource("1_5dvpv")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

@@ -9,6 +9,6 @@ script = ExtResource("1_lha01")
 id = "second_skin"
 display_name = "Second skin"
 description = "Adds 10 armor"
-texture = ExtResource("3_3vg22")
+icon = ExtResource("3_3vg22")
 runtime_script = ExtResource("1_oftu8")
 metadata/_custom_type_script = "uid://xnsjgxjhja5s"

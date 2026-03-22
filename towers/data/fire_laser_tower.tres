@@ -11,15 +11,15 @@ region = Rect2(1489, 1, 349, 550)
 
 [sub_resource type="Resource" id="Resource_cr3hy"]
 script = ExtResource("2_ki8tc")
-id = "fire_laser_tower"
-display_name = "Fire Beam Tower"
-description = "Launch a laser beam at the target, hitting it several times."
-icon = SubResource("AtlasTexture_ncsk7")
-base_price = 300
+build_price = 300
 upgrade_price = 100
 base_damage = 100.0
 base_attack_range = 600.0
 base_attack_speed = 2.0
+id = "fire_laser_tower"
+display_name = "Fire Beam Tower"
+description = "Launch a laser beam at the target, hitting it several times."
+icon = SubResource("AtlasTexture_ncsk7")
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 
 [resource]
