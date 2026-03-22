@@ -7,11 +7,10 @@ const COMMON_COLOR = Color.GREEN_YELLOW
 const RARE_COLOR = Color.DODGER_BLUE
 const EPIC_COLOR = Color.GOLD
 
-var relic_colors: Dictionary[Relic.Rarity, Color] = {
-	Relic.Rarity.COMMON: COMMON_COLOR,
-	Relic.Rarity.RARE: RARE_COLOR,
-	Relic.Rarity.EPIC: EPIC_COLOR,
-	Relic.Rarity.ALL: COMMON_COLOR,
+var relic_colors: Dictionary[BaseData.Rarity, Color] = {
+	BaseData.Rarity.COMMON: COMMON_COLOR,
+	BaseData.Rarity.RARE: RARE_COLOR,
+	BaseData.Rarity.EPIC: EPIC_COLOR,
 }
 
 var relics_count: Dictionary[String, int] = {} 
@@ -33,7 +32,7 @@ func is_maxed(relic_id: String) -> bool:
 		return false
 	return count >= relic.data.max_stacks
 	
-func get_rarity_color(rarity: Relic.Rarity) -> Color:
+func get_rarity_color(rarity: BaseData.Rarity) -> Color:
 	return relic_colors[rarity]
 
 func reset_relics() -> void:

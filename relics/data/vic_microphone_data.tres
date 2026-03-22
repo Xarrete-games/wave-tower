@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://conbc6nnubc6j"]
 
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_item_data.gd" id="1_4x5p8"]
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_4x5p8"]
 [ext_resource type="Script" uid="uid://v6ea55lg48ks" path="res://relics/implementations/vic_microphone.gd" id="1_5dvpv"]
 [ext_resource type="Texture2D" uid="uid://dowhe81rikfhj" path="res://assets/sprites/relics/mic_relic.png" id="2_hjwo6"]
 

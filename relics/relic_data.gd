@@ -1,7 +1,7 @@
-class_name RelicData extends ItemData
+class_name RelicData extends BaseData
 
 @export_group("Relic")
-@export var rarity: Relic.Rarity
+@export var health_price: int = 0
 @export var is_cursed: bool = false
 @export var is_tome: bool = false
 @export var only_for_events: bool = false

@@ -1,8 +1,6 @@
 @abstract
 class_name Relic extends RefCounted
 
-enum Rarity { COMMON, RARE, EPIC, ALL }
-
 var data: RelicData
 var amount: int = 1
 var disabled: bool = false

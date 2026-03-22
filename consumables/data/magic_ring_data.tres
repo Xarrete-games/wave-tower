@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ConsumableItemData" format=3 uid="uid://cr18ngo735dgx"]
 
 [ext_resource type="Script" uid="uid://b5enagxa05lu4" path="res://consumables/implementation/magic_ring.gd" id="1_32wu6"]
-[ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://consumables/consumable_item_data.gd" id="1_ygegg"]
+[ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://consumables/consumable_data.gd" id="1_ygegg"]
 [ext_resource type="Texture2D" uid="uid://fs42dhxyqix8" path="res://assets/sprites/consumables/magic_ring_relic.png" id="3_x7xo8"]
 
 [resource]

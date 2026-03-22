@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://cqg5qgwe84fmp"]
 
 [ext_resource type="Script" uid="uid://d30ffto02o3co" path="res://relics/implementations/lemon.gd" id="1_u4cfm"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_item_data.gd" id="2_cakfj"]
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="2_cakfj"]
 [ext_resource type="Texture2D" uid="uid://dqc5pd4oc1b1" path="res://assets/sprites/relics/lemon_relic.png" id="3_uhjbw"]
 
 [resource]

@@ -37,11 +37,11 @@ func get_relic_by_id(relic_id: String) -> RelicData:
 func get_all_relics() -> Array[RelicData]:
 	return relics.duplicate()
 
-func get_not_used_relics(rarity: Relic.Rarity = Relic.Rarity.ALL, is_cursed: Variant = null) -> Array[RelicData]:
+func get_not_used_relics(rarity: Variant = null, is_cursed: Variant = null) -> Array[RelicData]:
 	return relics.filter(func(relic_data: RelicData):
 
 		# If we want a specific rarity
-		if rarity != Relic.Rarity.ALL and relic_data.rarity != rarity:
+		if rarity != null and relic_data.rarity != rarity:
 			return false
 
 		# If we want only non-cursed relics
@@ -56,7 +56,7 @@ func get_not_used_relics(rarity: Relic.Rarity = Relic.Rarity.ALL, is_cursed: Var
 
 func get_random_available_relics(
 	amount: int,
-	rarity: Relic.Rarity = Relic.Rarity.ALL,
+	rarity: Variant = null,
 	include_cursed: bool = false,
 	include_only_for_events: bool = false
 ) -> Array[RelicData]:

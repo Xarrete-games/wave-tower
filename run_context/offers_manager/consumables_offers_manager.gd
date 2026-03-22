@@ -1,5 +1,11 @@
 class_name ConsumablesOffersManager extends RefCounted
 
+const BASE_PRICE_BY_RARITY: Dictionary[BaseData.Rarity, int] = {
+	BaseData.Rarity.COMMON: 50,
+	BaseData.Rarity.RARE: 80,
+	BaseData.Rarity.EPIC: 120,
+}
+
 var all_consumables_data: Array[ConsumableData] = []
 
 func _init() -> void:
@@ -9,7 +15,7 @@ func get_cosumables_offer_by_id(consumables_ids: Array[String]) -> Array[ItemOff
 	var offers: Array[ItemOffer] = []
 
 	for consumable_id in consumables_ids:
-		var consumable_data = all_consumables_data.filter(func(data: ItemData):
+		var consumable_data = all_consumables_data.filter(func(data: ConsumableData):
 			return data.id == consumable_id
 		)
 
@@ -32,11 +38,12 @@ func create_consumables_offers(amount: int) -> Array[ItemOffer]:
 
 	return offers
 
-func create_consumable_offer_from_data(data: ItemData) -> ItemOffer:
-	var price = data.price * (1.0 - RunContext.economy.consumables_discount_mult)
+func create_consumable_offer_from_data(data: BaseData) -> ItemOffer:
+	var base_price: int = BASE_PRICE_BY_RARITY.get(data.rarity, BASE_PRICE_BY_RARITY[BaseData.Rarity.COMMON])
+	var price = round(base_price * (1.0 - RunContext.economy.consumables_discount_mult))
 
 	return ItemOffer.new(
 		data,
 		price,
-		data.health_price
+		0
 	)

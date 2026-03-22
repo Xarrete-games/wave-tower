@@ -25,7 +25,7 @@ func _ready() -> void:
 
 func set_relic(new_relic_data: RelicData) -> void:
 	relic_data = new_relic_data
-	var data: ItemData = new_relic_data
+	var data: BaseData = new_relic_data
 	relic_texture.texture = data.icon
 	title.text = data.display_name
 	description.text = data.description

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://br066qh37k6am"]
 
 [ext_resource type="Script" uid="uid://b67okroua7dc6" path="res://relics/implementations/pirate_patch.gd" id="1_jj4ya"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_item_data.gd" id="1_nb88y"]
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_nb88y"]
 [ext_resource type="Texture2D" uid="uid://byrx7xp7vakrs" path="res://assets/sprites/relics/Blackbeard's_patch_relic.png" id="2_jj4ya"]
 
 [resource]

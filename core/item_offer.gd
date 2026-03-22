@@ -1,13 +1,13 @@
 class_name ItemOffer extends RefCounted
 
-var item_data: ItemData
+var item_data: BaseData
 
 var price: int
 var health_price: int
 
 
 func _init(
-	p_item_data: ItemData, 
+	p_item_data: BaseData, 
 	p_price: int, 
 	p_health_price: int = 0) -> void:
 

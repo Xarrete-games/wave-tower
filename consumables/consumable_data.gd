@@ -1,4 +1,4 @@
-class_name ConsumableData extends ItemData
+class_name ConsumableData extends BaseData
 
 @export_group("Consumable")
 @export var consumable_type: Consumable.Type

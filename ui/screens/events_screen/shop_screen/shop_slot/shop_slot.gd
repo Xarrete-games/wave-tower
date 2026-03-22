@@ -11,7 +11,7 @@ signal item_purchased(item_offer: ItemOffer, slot: ShopSlot)
 var _item: ItemOffer
 var _price: int = 0
 var has_enough_health: bool = false
-var item_data: ItemData
+var item_data: BaseData
 
 func _ready() -> void:
 	health_price.visible = false

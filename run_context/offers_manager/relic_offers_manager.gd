@@ -1,12 +1,19 @@
 class_name RelicOffersManager extends RefCounted
 
+const BASE_PRICE_BY_RARITY: Dictionary[BaseData.Rarity, int] = {
+	BaseData.Rarity.COMMON: 50,
+	BaseData.Rarity.RARE: 80,
+	BaseData.Rarity.EPIC: 120,
+}
+
 var all_relic_data: Array[RelicData] = []
+var relic_price_multiplier_by_id: Dictionary[String, float] = {}
 
 func _init() -> void:
 	all_relic_data = DataLoader.get_all_relics()
 
 func get_relic_offer_by_id(relic_id: String) -> ItemOffer:
-	var index = all_relic_data.find(func(data: ItemData):
+	var index = all_relic_data.find(func(data: RelicData):
 		return data.id == relic_id
 	)
 
@@ -19,7 +26,7 @@ func get_relics_offers_by_ids(relic_ids: Array[String]) -> Array[ItemOffer]:
 	var offers: Array[ItemOffer] = []
 
 	for relic_id in relic_ids:
-		var relic_data = all_relic_data.filter(func(data: ItemData):
+		var relic_data = all_relic_data.filter(func(data: RelicData):
 			return data.id == relic_id
 		)
 
@@ -46,7 +53,9 @@ func create_relic_offers(amount: int) -> Array[ItemOffer]:
 	return offers
 
 func create_relic_offer_from_data(data: RelicData) -> ItemOffer:
-	var price = data.price * (1.0 - RunContext.economy.relics_discount_mult)
+	var base_price: int = BASE_PRICE_BY_RARITY.get(data.rarity, BASE_PRICE_BY_RARITY[BaseData.Rarity.COMMON])
+	var price_multiplier: float = relic_price_multiplier_by_id.get(data.id, 1.0)
+	var price = round(base_price * price_multiplier * (1.0 - RunContext.economy.relics_discount_mult))
 
 	return ItemOffer.new(
 		data,
@@ -55,7 +64,9 @@ func create_relic_offer_from_data(data: RelicData) -> ItemOffer:
 )
 
 func increase_relic_offer_price(item_offer: ItemOffer) -> void:
-	item_offer.item_data.price = round(item_offer.item_data.price * 1.2)
+	if item_offer.item_data is RelicData:
+		var relic_data := item_offer.item_data as RelicData
+		relic_price_multiplier_by_id[relic_data.id] = relic_price_multiplier_by_id.get(relic_data.id, 1.0) * 1.2
 
 
 	

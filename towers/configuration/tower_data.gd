@@ -1,4 +1,4 @@
-class_name TowerData extends ItemData
+class_name TowerData extends BaseData
 
 @export_group("Tower")
 @export var type: Tower.Type

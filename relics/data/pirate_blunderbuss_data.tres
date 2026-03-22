@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://b3a2lb611jepd"]
 
 [ext_resource type="Script" uid="uid://d3qm3kw2fbew3" path="res://relics/implementations/pirate_blunderbuss.gd" id="1_vgkp7"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_item_data.gd" id="2_fo8d3"]
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="2_fo8d3"]
 [ext_resource type="Texture2D" uid="uid://ct25no5y4bpwf" path="res://assets/sprites/relics/Blackbeard's_trusted_blunderbuss_relic.png" id="3_08fvy"]
 
 [resource]

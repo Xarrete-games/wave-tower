@@ -18,7 +18,7 @@ func get_relic_offer_by_id(relic_ids: Array[String]) -> Array[ItemOffer]:
 func create_relic_offers(amount: int) -> Array[ItemOffer]:
 	return relics_offers_manager.create_relic_offers(amount)
 
-func create_relic_offer_from_data(data: ItemData) -> ItemOffer:
+func create_relic_offer_from_data(data: BaseData) -> ItemOffer:
 	return relics_offers_manager.create_relic_offer_from_data(data)
 
 func increase_relic_offer_price(item_offer: ItemOffer) -> void:
@@ -34,7 +34,7 @@ func get_cosumables_offer_by_id(consumables_ids: Array[String]) -> Array[ItemOff
 func create_consumables_offers(amount: int) -> Array[ItemOffer]:
 	return consumables_offers_manager.create_consumables_offers(amount)
 	
-func create_consumable_offer_from_data(data: ItemData) -> ItemOffer:
+func create_consumable_offer_from_data(data: BaseData) -> ItemOffer:
 	return consumables_offers_manager.create_consumable_offer_from_data(data)	
 
 func purchase_offer(item_offer: ItemOffer) -> Variant:

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://ctmuqgrunl0sa"]
 
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_item_data.gd" id="1_auyjm"]
+[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_auyjm"]
 [ext_resource type="Script" uid="uid://cv5r1sl7y33yi" path="res://relics/implementations/hot_chili_pepper.gd" id="1_c2gx3"]
 [ext_resource type="Texture2D" uid="uid://b1x81btkjfmrx" path="res://assets/sprites/relics/spicy_chilli.png" id="2_p5u2x"]
 
