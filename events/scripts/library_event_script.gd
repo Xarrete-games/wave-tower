@@ -1,7 +1,7 @@
 class_name LLibraryEventScript extends EventScript
 
 func get_options() -> Array[EventOptionData]:
-	var tome_relics = DataLoader.get_not_used_relics().filter(func(relic_data: RelicItemData):
+	var tome_relics = DataLoader.get_not_used_relics().filter(func(relic_data: RelicData):
 		return relic_data.is_tome and not RunContext.relics_manager.is_maxed(relic_data.id)
 	)
 
@@ -13,7 +13,7 @@ func get_options() -> Array[EventOptionData]:
 	return options
 
 func handle_response(data: Variant) -> void:
-	var relic_data: RelicItemData = data as RelicItemData
+	var relic_data: RelicData = data as RelicData
 	if relic_data:
 		var relic: Relic = relic_data.create_item() as Relic
 		RunContext.relics_manager.add_relic(relic)

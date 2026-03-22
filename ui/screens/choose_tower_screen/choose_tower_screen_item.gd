@@ -29,7 +29,7 @@ func _apply_configuration() -> void:
 	damage_stat.set_value(configuration.base_damage)
 	range_stat.set_value(configuration.base_attack_range)
 	attack_speed_stat.set_value(configuration.base_attack_speed)
-	gold_price.price = configuration.base_price
+	gold_price.price = configuration.build_price
 
 
 func _on_gui_input(event: InputEvent) -> void:

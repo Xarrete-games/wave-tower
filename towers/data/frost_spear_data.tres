@@ -16,7 +16,7 @@ display_name = "Frost Spear"
 description = "Frost Spean"
 icon = SubResource("AtlasTexture_h8gag")
 type = 2
-base_price = 250
+build_price = 250
 base_damage = 20.0
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 

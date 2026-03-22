@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ConsumableItemData" load_steps=4 format=3 uid="uid://dcfu7lnok6tdr"]
+[gd_resource type="Resource" script_class="ConsumableData" format=3 uid="uid://dcfu7lnok6tdr"]
 
 [ext_resource type="Script" uid="uid://bha7bhsnh6pbs" path="res://items/consumables/implementation/first_aid.gd" id="1_365ip"]
 [ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://items/consumables/consumable_item_data.gd" id="2_fmtq1"]
@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("2_fmtq1")
+runtime_script = ExtResource("1_365ip")
 id = "first_aid"
 display_name = "First Aid"
 description = "Regain 10 lives."
-texture = ExtResource("3_sd7pa")
-runtime_script = ExtResource("1_365ip")
+icon = ExtResource("3_sd7pa")
 metadata/_custom_type_script = "uid://xnsjgxjhja5s"

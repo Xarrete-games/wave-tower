@@ -10,5 +10,5 @@ rarity = 2
 id = "ice_veins"
 display_name = "Ice Veins"
 description = "Applying frost adds an extra stack of frost."
-texture = ExtResource("2_njqas")
+icon = ExtResource("2_njqas")
 runtime_script = ExtResource("1_xage4")

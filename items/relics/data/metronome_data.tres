@@ -9,6 +9,6 @@ script = ExtResource("1_ld7qn")
 id = "Metronome"
 display_name = "Metronome"
 description = "Increases the attack speed of all towers by 5%."
-texture = ExtResource("3_tm1hr")
+icon = ExtResource("3_tm1hr")
 runtime_script = ExtResource("1_50myw")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

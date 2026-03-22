@@ -1,6 +1,6 @@
 class_name OffersManager extends RefCounted
 
-var all_consumables_data: Array[ConsumableItemData] = []
+var all_consumables_data: Array[ConsumableData] = []
 var relics_offers_manager: RelicOffersManager
 var consumables_offers_manager: ConsumablesOffersManager
 

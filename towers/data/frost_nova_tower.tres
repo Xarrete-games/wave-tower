@@ -17,7 +17,7 @@ description = "Creates an frost nova around itself,
 hitting all enemies"
 icon = SubResource("AtlasTexture_cq3yl")
 type = 2
-base_price = 350
+build_price = 350
 upgrade_price = 100
 base_damage = 15.0
 base_attack_range = 330.0

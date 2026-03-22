@@ -11,6 +11,6 @@ id = "strategy_tome_economy"
 display_name = "Strategy Tome: 
 Economy"
 description = "Allows you to sell one of your relics upon entering the shop"
-texture = ExtResource("2_sjo5h")
+icon = ExtResource("2_sjo5h")
 runtime_script = ExtResource("1_l5ndh")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

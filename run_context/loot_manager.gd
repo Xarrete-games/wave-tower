@@ -14,7 +14,7 @@ func generate_loot_items() -> Array[LootItemData]:
 		return loot_items
 		
 	var consumable_item: LootItemData = LootItemData.new()
-	var consumable_data: ConsumableItemData = DataLoader.get_all_consumables().pick_random()
+	var consumable_data: ConsumableData = DataLoader.get_all_consumables().pick_random()
 	consumable_item.consumable = consumable_data
 
 	loot_items.append(consumable_item)

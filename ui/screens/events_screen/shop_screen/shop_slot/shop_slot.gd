@@ -25,10 +25,10 @@ func set_item(item_offer: ItemOffer) -> void:
 	description_label.text = item_data.description
 	tooltip_text = item_data.description
 	gold_price.price = _price
-	shop_slot_icon.set_icon(item_data.texture)
+	shop_slot_icon.set_icon(item_data.icon)
 
-	if item_data is RelicItemData:
-		var relic_data: RelicItemData = item_data as RelicItemData
+	if item_data is RelicData:
+		var relic_data: RelicData = item_data as RelicData
 		shop_slot_icon.set_background_color(RunContext.relics_manager.get_rarity_color(relic_data.rarity))
 	# health price
 	_chek_health(RunContext.status.health, item_offer.health_price)
@@ -42,7 +42,7 @@ func set_item(item_offer: ItemOffer) -> void:
 	_item = item_offer
 	
 func _on_gui_input(event: InputEvent) -> void:
-	if _item.item_data is ConsumableItemData and RunContext.consumables_manager.is_full():
+	if _item.item_data is ConsumableData and RunContext.consumables_manager.is_full():
 		return
 
 	if UIUtils.is_left_click_event(event) and RunContext.economy.gold >= _price and has_enough_health:
@@ -57,11 +57,11 @@ func _on_mouse_exited() -> void:
 	shop_slot_icon.icon_normal_size()
 
 func _on_relics_discount_changed(_relics_discount_mult: float) -> void:
-	if _item.item_data is RelicItemData:
+	if _item.item_data is RelicData:
 		set_item(RunContext.offers_manager.create_relic_offer_from_data(_item.item_data))
 
 func _on_consumable_discount_changed(_consumables_discount_mult: float) -> void:
-	if _item.item_data is ConsumableItemData:
+	if _item.item_data is ConsumableData:
 		set_item(RunContext.offers_manager.create_consumable_offer_from_data(_item.item_data))
 
 func _chek_health(current_health: int, health_cost: int) -> void:

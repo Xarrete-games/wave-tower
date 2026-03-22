@@ -11,6 +11,6 @@ only_for_events = true
 id = "cursed_buda"
 display_name = "Cursed buda"
 description = "Reduces max health  by 1 for each tower you place"
-texture = ExtResource("2_vhu5r")
+icon = ExtResource("2_vhu5r")
 runtime_script = ExtResource("1_dmgvm")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

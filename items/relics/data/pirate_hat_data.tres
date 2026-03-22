@@ -10,6 +10,6 @@ rarity = 1
 id = "pirate_hat"
 display_name = "Pirate hat"
 description = "When you use an item, you have a 50% chance of getting it back."
-texture = ExtResource("3_sr48w")
+icon = ExtResource("3_sr48w")
 runtime_script = ExtResource("1_sr48w")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

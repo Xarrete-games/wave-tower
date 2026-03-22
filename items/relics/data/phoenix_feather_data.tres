@@ -10,6 +10,6 @@ rarity = 1
 id = "phoenix_feather"
 display_name = "Phoenix feather"
 description = "If you receive a fatal blow, it is consumed to revive you with 10 health."
-texture = ExtResource("3_m0o58")
+icon = ExtResource("3_m0o58")
 runtime_script = ExtResource("1_dhkps")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

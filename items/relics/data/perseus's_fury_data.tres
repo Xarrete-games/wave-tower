@@ -10,6 +10,6 @@ rarity = 1
 id = "Perseus's fury"
 display_name = "Perseus's fury"
 description = "Increase the execute threashold from execution tower in 5%"
-texture = ExtResource("3_5vyg6")
+icon = ExtResource("3_5vyg6")
 runtime_script = ExtResource("1_ic5cl")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

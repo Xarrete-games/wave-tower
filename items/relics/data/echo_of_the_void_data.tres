@@ -9,6 +9,6 @@ script = ExtResource("1_c1yj8")
 id = "Echo of the void"
 display_name = "Echo of the void"
 description = "Increases the number of targets for chain towers by 1."
-texture = ExtResource("3_4ot86")
+icon = ExtResource("3_4ot86")
 runtime_script = ExtResource("1_6veub")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

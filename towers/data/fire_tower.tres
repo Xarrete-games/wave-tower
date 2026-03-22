@@ -13,10 +13,6 @@ region = Rect2(89, 80, 299, 471)
 
 [sub_resource type="Resource" id="Resource_185nb"]
 script = ExtResource("2_n2ugo")
-id = "fire_tower"
-display_name = "Fire Tower"
-description = "Basic fire tower"
-icon = SubResource("AtlasTexture_wv6in")
 upgrade_price = 70
 base_damage = 18.0
 base_attack_range = 300.0
@@ -25,11 +21,14 @@ damage_per_level = 22.0
 attack_range_level = 20.0
 attack_speed_per_level = -0.2
 upgradeable_towers = Array[ExtResource("3_qvqv1")]([ExtResource("4_o5ebs"), ExtResource("5_nkrdn")])
+id = "fire_tower"
+display_name = "Fire Tower"
+description = "Basic fire tower"
+icon = SubResource("AtlasTexture_wv6in")
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 
 [resource]
 script = ExtResource("3_qvqv1")
-configuration = SubResource("Resource_185nb")
 data = SubResource("Resource_185nb")
 scene = ExtResource("6_r0elt")
 metadata/_custom_type_script = "uid://byiw835k16yc6"

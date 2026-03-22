@@ -91,7 +91,7 @@ func _build_relics_for_sale() -> void:
 	var current_relics: Array[Relic] = RunContext.relics_manager.get_all_relics()
 	var current_relics_ids: Array[String] = []
 	for relic_data in current_relics:
-		current_relics_ids.append(relic_data.id)
+		current_relics_ids.append(relic_data.data.id)
 	var relic_offers: Array[ItemOffer] = RunContext.offers_manager.get_relic_offer_by_id(current_relics_ids)
 	
 	for relic_offer in relic_offers:

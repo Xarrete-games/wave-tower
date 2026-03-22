@@ -9,7 +9,7 @@ var loot_item_data: LootItemData
 func set_loot_item(p_loot_item_data: LootItemData) -> void:
 	loot_item_data = p_loot_item_data
 	if p_loot_item_data.consumable:
-		texture_rect.texture = p_loot_item_data.consumable.texture
+		texture_rect.texture = p_loot_item_data.consumable.icon
 		label.text = "%s" % p_loot_item_data.consumable.display_name
 	else:
 		texture_rect.texture = gold_icon

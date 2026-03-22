@@ -31,7 +31,7 @@ func is_maxed(relic_id: String) -> bool:
 	
 	if relic == null:
 		return false
-	return count >= relic.max_stacks
+	return count >= relic.data.max_stacks
 	
 func get_rarity_color(rarity: Relic.Rarity) -> Color:
 	return relic_colors[rarity]
@@ -57,10 +57,10 @@ func disable_relic(relic_id: String) -> void:
 		relics_change.emit(relics.values())
 
 func _add_relic(relic: Relic) -> void:
-	if relics.has(relic.id):
-		(relics[relic.id] as Relic).amount += 1
+	if relics.has(relic.data.id):
+		(relics[relic.data.id] as Relic).amount += 1
 	else:
-		relics[relic.id] = relic
-	relics_count[relic.id] = relics_count.get(relic.id, 0) + 1
+		relics[relic.data.id] = relic
+	relics_count[relic.data.id] = relics_count.get(relic.data.id, 0) + 1
 	relics_change.emit(relics.values())
 	relic_added.emit(relic)
