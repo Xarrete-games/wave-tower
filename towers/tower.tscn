@@ -63,9 +63,9 @@ wait_time = 2.0
 [node name="MouseDetector" type="Control" parent="." unique_id=727078477]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -25.0
-offset_top = -143.0
-offset_right = 25.0
+offset_left = -30.0
+offset_top = -127.0
+offset_right = 30.0
 offset_bottom = 17.0
 
 [node name="ExperienceHandler" type="Node" parent="." unique_id=2067535218]

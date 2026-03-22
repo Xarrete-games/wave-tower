@@ -18,6 +18,7 @@ var data: TowerData
 var build_price: int = 0
 var _current_target: Enemy
 var _enabled: bool = false
+var current_tower_selected: Tower
 # when true, the tower fires instantly upon detecting an enemy
 var _first_shot = true
 # global stats
@@ -114,12 +115,8 @@ func enable() -> void:
 	
 	ClickEvents.tower_selected.connect(_on_tower_selected)
 	mouse_detector.gui_input.connect(_on_gui_input)
-	mouse_detector.mouse_entered.connect(func () -> void:
-		ClickEvents.tower_hovered.emit(self)
-	)
-	mouse_detector.mouse_exited.connect(func () -> void:
-		ClickEvents.tower_unhovered.emit(self)
-	)
+	mouse_detector.mouse_entered.connect(_on_mouse_entered)
+	mouse_detector.mouse_exited.connect(_on_mouse_exit)
 
 # --------------------
 # --- BUFFS ---
@@ -206,6 +203,7 @@ func _on_exp_data_change(new_exp_data: TowerExpData) -> void:
 # --- MOUSE INTERACTION ---
 # --------------------
 func _on_tower_selected(tower: Tower) -> void:
+	current_tower_selected = tower
 	if tower != self:
 		range_preview.visible = false
 	else:
@@ -216,3 +214,12 @@ func _on_gui_input(event: InputEvent) -> void:
 		return
 	if UIUtils.is_left_click_event(event):
 		ClickEvents.tower_selected.emit(self)
+
+func _on_mouse_entered():
+	ClickEvents.tower_hovered.emit(self)
+	range_preview.visible = true
+
+func _on_mouse_exit():
+	ClickEvents.tower_unhovered.emit(self)
+	if current_tower_selected != self:
+		range_preview.visible = false
