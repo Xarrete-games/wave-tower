@@ -158,115 +158,115 @@ flip_h = true
 [node name="route_SE_END" type="Path2D" parent="Routes" unique_id=1146728192]
 curve = SubResource("Curve2D_qfyrc")
 
-[node name="Decoration2" type="Node2D" parent="." unique_id=1384810870]
+[node name="Decoration" type="Node2D" parent="." unique_id=1384810870]
 position = Vector2(-302, -38)
 
-[node name="Plant12" type="Sprite2D" parent="Decoration2" unique_id=563763244]
+[node name="Plant12" type="Sprite2D" parent="Decoration" unique_id=563763244]
 position = Vector2(-153.79999, 27.2)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant17" type="Sprite2D" parent="Decoration2" unique_id=2142652379]
+[node name="Plant17" type="Sprite2D" parent="Decoration" unique_id=2142652379]
 position = Vector2(-78.20001, 132.79997)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant9" type="Sprite2D" parent="Decoration2" unique_id=360136671]
+[node name="Plant9" type="Sprite2D" parent="Decoration" unique_id=360136671]
 position = Vector2(-498.8, -37.800003)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant11" type="Sprite2D" parent="Decoration2" unique_id=1748710707]
+[node name="Plant11" type="Sprite2D" parent="Decoration" unique_id=1748710707]
 position = Vector2(-470.59998, -3.5999908)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant13" type="Sprite2D" parent="Decoration2" unique_id=290194756]
+[node name="Plant13" type="Sprite2D" parent="Decoration" unique_id=290194756]
 position = Vector2(-490.59998, 44.4)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant14" type="Sprite2D" parent="Decoration2" unique_id=433864681]
+[node name="Plant14" type="Sprite2D" parent="Decoration" unique_id=433864681]
 position = Vector2(-447.59998, 11.400009)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant15" type="Sprite2D" parent="Decoration2" unique_id=329564547]
+[node name="Plant15" type="Sprite2D" parent="Decoration" unique_id=329564547]
 position = Vector2(-462.39996, 78.60001)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant16" type="Sprite2D" parent="Decoration2" unique_id=1891781918]
+[node name="Plant16" type="Sprite2D" parent="Decoration" unique_id=1891781918]
 position = Vector2(-423.99994, 52)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant18" type="Sprite2D" parent="Decoration2" unique_id=1485268315]
+[node name="Plant18" type="Sprite2D" parent="Decoration" unique_id=1485268315]
 position = Vector2(399, -91)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant19" type="Sprite2D" parent="Decoration2" unique_id=486648765]
+[node name="Plant19" type="Sprite2D" parent="Decoration" unique_id=486648765]
 position = Vector2(448, -69.99999)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant25" type="Sprite2D" parent="Decoration2" unique_id=582079979]
+[node name="Plant25" type="Sprite2D" parent="Decoration" unique_id=582079979]
 position = Vector2(595.19995, -59.800003)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant26" type="Sprite2D" parent="Decoration2" unique_id=1538413600]
+[node name="Plant26" type="Sprite2D" parent="Decoration" unique_id=1538413600]
 position = Vector2(534, -206)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant30" type="Sprite2D" parent="Decoration2" unique_id=1069442234]
+[node name="Plant30" type="Sprite2D" parent="Decoration" unique_id=1069442234]
 position = Vector2(466, -359)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant27" type="Sprite2D" parent="Decoration2" unique_id=1807904138]
+[node name="Plant27" type="Sprite2D" parent="Decoration" unique_id=1807904138]
 position = Vector2(687, -70.000015)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant28" type="Sprite2D" parent="Decoration2" unique_id=2026446155]
+[node name="Plant28" type="Sprite2D" parent="Decoration" unique_id=2026446155]
 position = Vector2(822, 44)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant29" type="Sprite2D" parent="Decoration2" unique_id=159632792]
+[node name="Plant29" type="Sprite2D" parent="Decoration" unique_id=159632792]
 position = Vector2(880, 27.19999)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant10" type="Sprite2D" parent="Decoration2" unique_id=1960821320]
+[node name="Plant10" type="Sprite2D" parent="Decoration" unique_id=1960821320]
 position = Vector2(74.19995, -172.79999)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant20" type="Sprite2D" parent="Decoration2" unique_id=1134303555]
+[node name="Plant20" type="Sprite2D" parent="Decoration" unique_id=1134303555]
 position = Vector2(102.39996, -138.59998)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant21" type="Sprite2D" parent="Decoration2" unique_id=1673018425]
+[node name="Plant21" type="Sprite2D" parent="Decoration" unique_id=1673018425]
 position = Vector2(82.39996, -90.59998)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant22" type="Sprite2D" parent="Decoration2" unique_id=1077456843]
+[node name="Plant22" type="Sprite2D" parent="Decoration" unique_id=1077456843]
 position = Vector2(125.39996, -123.599976)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant23" type="Sprite2D" parent="Decoration2" unique_id=550270868]
+[node name="Plant23" type="Sprite2D" parent="Decoration" unique_id=550270868]
 position = Vector2(110.599976, -56.39997)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
 
-[node name="Plant24" type="Sprite2D" parent="Decoration2" unique_id=1816975625]
+[node name="Plant24" type="Sprite2D" parent="Decoration" unique_id=1816975625]
 position = Vector2(149, -82.999985)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_dt8n6")
