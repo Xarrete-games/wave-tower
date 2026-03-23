@@ -223,6 +223,10 @@ func _on_mouse_exit():
 	ClickEvents.tower_unhovered.emit(self)
 	if current_tower_selected != self:
 		_hide_range()
+# --------------------
+# --- RANGE PREVIEW ---
+# --------------------
+
 
 func _show_range():
 	if range_tween: range_tween.kill()

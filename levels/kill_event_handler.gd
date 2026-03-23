@@ -2,11 +2,9 @@ class_name KillEventHandler extends Node
 
 @export var burn_area_scene: PackedScene
 
-@onready var enemy_generator: EnemyGenerator = %EnemyGenerator
-
 func _ready() -> void:
-	enemy_generator.enemy_killed.connect(_on_enemy_killed)
-
+	RunContext.enemy_manager.enemy_died.connect(_on_enemy_killed)
+	
 func _on_enemy_killed(enemy: Enemy, attack: Attack) -> void:
 	if attack.source.type_id == "WildFireTower":
 		_spawn_burn_area(enemy.global_position, attack.source)

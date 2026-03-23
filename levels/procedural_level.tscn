@@ -16,7 +16,9 @@
 [ext_resource type="Script" uid="uid://dpnilgqn044xp" path="res://main/tower_placer/tower_placer.gd" id="10_bebo1"]
 [ext_resource type="Script" uid="uid://bl4psouhduuh5" path="res://levels/word_builder/composite_tile_map.gd" id="11_ctm01"]
 [ext_resource type="Script" uid="uid://c6gmmo43gd544" path="res://levels/tower_selector.gd" id="12_pb4yr"]
+[ext_resource type="Script" uid="uid://ky15h85r6dhk" path="res://levels/kill_event_handler.gd" id="18_1spm6"]
 [ext_resource type="Script" uid="uid://yhjdvpv621gf" path="res://levels/consumables_handler.gd" id="18_dx4vj"]
+[ext_resource type="PackedScene" uid="uid://oesepsa8dbuy" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.tscn" id="19_w0qnt"]
 
 [node name="ProceduralLevel" type="Node2D" unique_id=1437931111]
 script = ExtResource("1_j1bfp")
@@ -83,3 +85,7 @@ script = ExtResource("12_pb4yr")
 [node name="ConsumablesHandler" type="Node" parent="LevelContainer" unique_id=941246025 node_paths=PackedStringArray("composite_tile_map")]
 script = ExtResource("18_dx4vj")
 composite_tile_map = NodePath("../CompositeTileMap")
+
+[node name="KillEventHandler" type="Node" parent="LevelContainer" unique_id=983914350]
+script = ExtResource("18_1spm6")
+burn_area_scene = ExtResource("19_w0qnt")
