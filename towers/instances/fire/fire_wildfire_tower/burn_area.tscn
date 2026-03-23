@@ -1,6 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://oesepsa8dbuy"]
+[gd_scene format=3 uid="uid://oesepsa8dbuy"]
 
-[ext_resource type="Script" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.gd" id="1_t1vgp"]
+[ext_resource type="Script" uid="uid://c6rmh2ljgrwkf" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.gd" id="1_t1vgp"]
 [ext_resource type="Shader" uid="uid://cj3oop3kolpsy" path="res://assets/shaders/burn_explosion_shader.tres" id="2_kian5"]
 [ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="2_uxlko"]
 [ext_resource type="Texture2D" uid="uid://c382dpfsxj5hx" path="res://assets/textures/impacts/T_flare12.png" id="3_c16l1"]
@@ -53,33 +53,8 @@ anim_speed_min = 5.02
 anim_speed_max = 5.02
 turbulence_noise_strength = 14.3
 
-[sub_resource type="Animation" id="Animation_i38rs"]
-resource_name = "explosion"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(3, 1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(0.5, 0.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:material:shader_parameter/ColorParameter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
-}
+[sub_resource type="Gradient" id="Gradient_fire"]
+colors = PackedColorArray(1, 0.5, 0, 1, 1, 0.25, 0, 0.8)
 
 [sub_resource type="Animation" id="Animation_mw8va"]
 length = 0.001
@@ -108,6 +83,34 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_i38rs"]
+resource_name = "explosion"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/ColorParameter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uy25q"]
 _data = {
 &"RESET": SubResource("Animation_mw8va"),
@@ -119,21 +122,20 @@ shader = ExtResource("5_0od4w")
 shader_parameter/ColorParameter2 = Color(0.9325352, 0.25733107, 9.62615e-07, 1)
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
-[node name="BurnArea" type="Area2D"]
+[node name="BurnArea" type="Area2D" unique_id=1811492267]
 collision_layer = 0
 input_pickable = false
 script = ExtResource("1_t1vgp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1115307027]
 scale = Vector2(1, 0.5)
 shape = SubResource("CircleShape2D_0cvt0")
 
-[node name="DurationTimer" type="Timer" parent="."]
-wait_time = 0.1
+[node name="DurationTimer" type="Timer" parent="." unique_id=1434321289]
+wait_time = 0.3
 one_shot = true
 
-[node name="GPUburn_explosion" type="GPUParticles2D" parent="."]
+[node name="ExplosionParticles" type="GPUParticles2D" parent="." unique_id=176111831]
 material = SubResource("ShaderMaterial_c16l1")
 emitting = false
 amount = 1
@@ -141,14 +143,29 @@ texture = ExtResource("2_uxlko")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_4mmrw")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_uy25q")
-}
-autoplay = "explosion"
+[node name="CPUExplosion" type="CPUParticles2D" parent="." unique_id=269766599]
+z_index = 3
+emitting = false
+amount = 40
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.95
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, -1)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 300.0
+scale_amount_min = 5.0
+scale_amount_max = 15.0
+color_ramp = SubResource("Gradient_fire")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1623761397]
+root_node = NodePath("../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_uy25q")
+autoplay = &"explosion"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1059084967]
 material = SubResource("ShaderMaterial_4mmrw")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("6_87c56")

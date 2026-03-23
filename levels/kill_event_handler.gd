@@ -3,7 +3,7 @@ class_name KillEventHandler extends Node
 @export var burn_area_scene: PackedScene
 
 func _ready() -> void:
-	RunContext.enemy_manager.enemy_died.connect(_on_enemy_killed)
+	RunContext.enemy_manager.enemy_die.connect(_on_enemy_killed)
 	
 func _on_enemy_killed(enemy: Enemy, attack: Attack) -> void:
 	if attack.source.type_id == "WildFireTower":
