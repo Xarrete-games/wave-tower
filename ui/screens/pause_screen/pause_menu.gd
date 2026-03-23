@@ -48,6 +48,5 @@ func _on_back_button_xarreta_pressed() -> void:
 
 
 func _on_settings_button_xarreta_pressed() -> void:
-	print("Settings button pressed")
 	settings_section.visible = true
 	menu_section.visible = false

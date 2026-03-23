@@ -4,7 +4,8 @@ enum SourceType {
 	RELIC,
 	TOWER,
 	CONSUMABLE,
-	DEBUFF
+	DEBUFF,
+	GLOBAL
 }
 
 ## Source category (relic, tower, consumable, debuff...)

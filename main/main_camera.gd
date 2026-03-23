@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	# for center camera (disabled)
 	if event.is_action_pressed("test"):
-		print("zooming in" + str(zoom))
+		pass
 		#global_position = level.global_position
 
 

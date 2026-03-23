@@ -1,10 +1,7 @@
 class_name BlackWitchHat extends Relic
 
-const SOURCE_ID = "black_witch_hat"
-
 func apply_effect() -> void:
-	var modifier = DebuffDamageTakenModifier.new(Source.new(Source.SourceType.RELIC, SOURCE_ID), 5)
-	RunContext.enemy_debuff_manager.add_modifier(modifier)
+	RunContext.enemy_debuff_manager.add_modifier_from_data("black_witch_hat_modifier")
 
 func remove_effect() -> void:
-	RunContext.enemy_debuff_manager.remove_modifier(SOURCE_ID)
+	RunContext.enemy_debuff_manager.remove_modifier_from_data("black_witch_hat_modifier")

@@ -1,15 +1,12 @@
-# EnemyDebuffManager
 class_name EnemyDebuffManager extends RefCounted
 
 signal debuff_change(enemy_debuff: EnemyDebuff)
-signal modifier_change(damage_taken_modifiers: Array[DamageTakenModifier])
+signal modifier_change(modifiers: Array[DamageTakenModifier])
 
-# debuff templates registry — keyed by EnemyDebuff.Type
 var debuff_templates: Dictionary[EnemyDebuff.Type, EnemyDebuff] = {}
 var debuff_data_by_type: Dictionary[EnemyDebuff.Type, EnemyDebuffData] = {}
 
-# modifiers
-var damage_taken_modifiers: Array[DamageTakenModifier] = []
+var modifier_instances: Array[DamageTakenModifier] = []
 
 func _init() -> void:
 	for data in DataLoader.get_all_enemy_debuffs():
@@ -44,16 +41,37 @@ func get_template(type: EnemyDebuff.Type) -> EnemyDebuff:
 func get_data(type: EnemyDebuff.Type) -> EnemyDebuffData:
 	return debuff_data_by_type.get(type, null)
 
+func add_modifier_from_data(data_id: String) -> void:
+	var data := DataLoader.get_modifier_by_id(data_id)
+	if data == null:
+		push_error("[EnemyDebuffManager] No modifier data found for id: %s" % data_id)
+		return
+
+	if has_modifier_data(data_id):
+		push_warning("[EnemyDebuffManager] Modifier already active: %s" % data_id)
+		return
+
+	var source := Source.new(Source.SourceType.RELIC, data_id)
+	var modifier := data.create_item(source) as DamageTakenModifier
+	if modifier == null:
+		push_error("[EnemyDebuffManager] Failed creating modifier from data id: %s" % data_id)
+		return
+
+	modifier_instances.append(modifier)
+	modifier_change.emit(modifier_instances.duplicate())
+
+func remove_modifier_from_data(data_id: String) -> void:
+	for i in range(modifier_instances.size()):
+		if modifier_instances[i].data.id == data_id:
+			modifier_instances.remove_at(i)
+			modifier_change.emit(modifier_instances.duplicate())
+			return
+
+func has_modifier_data(data_id: String) -> bool:
+	for modifier in modifier_instances:
+		if modifier.data.id == data_id:
+			return true
+	return false
+
 func get_modifiers() -> Array[DamageTakenModifier]:
-	return damage_taken_modifiers.duplicate()
-
-func add_modifier(modifier: DamageTakenModifier) -> void:
-	damage_taken_modifiers.append(modifier)
-	modifier_change.emit(get_modifiers())
-
-func remove_modifier(source_id: String) -> void:
-	for modifier in damage_taken_modifiers:
-		if modifier.source.type_id == source_id:
-			damage_taken_modifiers.erase(modifier)
-			modifier_change.emit(get_modifiers())
-			break
+	return modifier_instances.duplicate()

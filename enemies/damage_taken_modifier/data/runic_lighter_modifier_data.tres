@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DamageTakenModifierData" format=3 uid="uid://ujn5aktpjof6"]
+
+[ext_resource type="Texture2D" uid="uid://deb6b1nlfdsjx" path="res://assets/sprites/relics/relic_runic_lighter_relic.png" id="1_4o0n8"]
+[ext_resource type="Script" uid="uid://buptjepcfl4h1" path="res://enemies/damage_taken_modifier/damage_taken_modifier_data.gd" id="1_rl"]
+[ext_resource type="Script" uid="uid://405hbey5arnu" path="res://enemies/damage_taken_modifier/implementations/burn_damage_by_towers_modifier.gd" id="2_rl_script"]
+
+[resource]
+script = ExtResource("1_rl")
+modifier_condition = 3
+value = 0.1
+runtime_script = ExtResource("2_rl_script")
+id = "runic_lighter_modifier"
+display_name = "Runic Fire"
+description = "Burn damage scales with fire tower count."
+icon = ExtResource("1_4o0n8")

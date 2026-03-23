@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bjdgwe43owpg7" path="res://assets/textures/red.jpg" id="2_olp7g"]
 [ext_resource type="Texture2D" uid="uid://cnpo8o3c3x5hq" path="res://assets/textures/green.jpg" id="3_q54p0"]
 
-[node name="HealthBar" type="CenterContainer" unique_id=1296158026 node_paths=PackedStringArray("debuffs_conatiner", "texture_progress_bar")]
+[node name="HealthBar" type="CenterContainer" unique_id=851635033 node_paths=PackedStringArray("debuffs_conatiner", "texture_progress_bar")]
 offset_right = 40.0
 offset_bottom = 54.0
 mouse_filter = 2
@@ -12,17 +12,17 @@ script = ExtResource("1_uke46")
 debuffs_conatiner = NodePath("VBoxContainer/DebuffsContainer")
 texture_progress_bar = NodePath("VBoxContainer/TextureProgressBar")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=342724976]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1023273090]
 layout_mode = 2
 
-[node name="DebuffsContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=682891799]
+[node name="DebuffsContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1436170683]
 custom_minimum_size = Vector2(20, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer" unique_id=897163497]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer" unique_id=638451887]
 custom_minimum_size = Vector2(40, 10)
 layout_mode = 2
 mouse_filter = 2

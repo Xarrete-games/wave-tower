@@ -90,9 +90,11 @@ func _ready() -> void:
 	
 	#amage taken modifiers
 	damage_taken_modifiers = RunContext.enemy_debuff_manager.get_modifiers()
+	health_bar.update_modifiers(damage_taken_modifiers)
 	RunContext.enemy_debuff_manager.modifier_change.connect(
 		func(modifiers: Array[DamageTakenModifier]):
 			damage_taken_modifiers = modifiers
+			health_bar.update_modifiers(modifiers)
 	)
 	# extra gold dropped
 	gold_value = base_gold_value + RunContext.economy.extra_gold_dropped
@@ -239,7 +241,6 @@ func get_percentage_remaining_health() -> float:
 		return 0.0
 	var health_ratio: float = health / max_health
 	var percentage: float = health_ratio * 100.0
-	
 	return min(100.0, percentage)
 
 func get_remaining_health() -> float:

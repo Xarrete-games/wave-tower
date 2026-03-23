@@ -1,11 +1,7 @@
 class_name RunicLighter extends Relic
 
-const SOURCE_ID = "runic_lighter"
-const DAMAGE_INCREASE_PER_TOWER: float = 0.1
-
 func apply_effect() -> void:
-	var modifier = BurnDamageByTowersModifier.new(Source.new(Source.SourceType.RELIC, SOURCE_ID), DAMAGE_INCREASE_PER_TOWER)
-	RunContext.enemy_debuff_manager.add_modifier(modifier)
+	RunContext.enemy_debuff_manager.add_modifier_from_data("runic_lighter_modifier")
 
 func remove_effect() -> void:
-	RunContext.enemy_debuff_manager.remove_modifier(SOURCE_ID)
+	RunContext.enemy_debuff_manager.remove_modifier_from_data("runic_lighter_modifier")

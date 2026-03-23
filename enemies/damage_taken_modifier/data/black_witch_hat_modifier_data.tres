@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DamageTakenModifierData" format=3 uid="uid://ct5mgwpfx188n"]
+
+[ext_resource type="Texture2D" uid="uid://kc5jsm0e1veg" path="res://assets/sprites/relics/witch_hat_relic.png" id="1_0g5bl"]
+[ext_resource type="Script" uid="uid://buptjepcfl4h1" path="res://enemies/damage_taken_modifier/damage_taken_modifier_data.gd" id="1_bwh"]
+[ext_resource type="Script" uid="uid://cnecn8e2eaibn" path="res://enemies/damage_taken_modifier/implementations/damage_taken_modifier.gd" id="2_0g5bl"]
+
+[resource]
+script = ExtResource("1_bwh")
+modifier_condition = 1
+value = 5.0
+runtime_script = ExtResource("2_0g5bl")
+id = "black_witch_hat_modifier"
+display_name = "Witch Curse"
+description = "Enemies with debuffs take bonus flat damage."
+icon = ExtResource("1_0g5bl")

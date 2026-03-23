@@ -2,6 +2,7 @@
 class_name DamageTakenModifier extends RefCounted
 
 var source: Source
+var data: DamageTakenModifierData
 var value: float
 
 func _init(p_source: Source, p_value: float = 0.0) -> void:
