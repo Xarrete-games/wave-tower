@@ -1,7 +1,8 @@
 class_name BlackWitchHat extends Relic
 
-func apply_effect() -> void:
-	RunContext.enemy_debuff_manager.add_modifier_from_data("black_witch_hat_modifier")
+const BONUS_DAMAGE: float = 5.0
 
-func remove_effect() -> void:
-	RunContext.enemy_debuff_manager.remove_modifier_from_data("black_witch_hat_modifier")
+func on_damage_additive(ctx: DamageContext, amount: float) -> float:
+	if ctx.target.has_any_debuff() and ctx.source.type == Source.SourceType.TOWER:
+		return amount + BONUS_DAMAGE
+	return amount

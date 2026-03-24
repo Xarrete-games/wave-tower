@@ -3,7 +3,6 @@ class_name FrostDebuff extends EnemyDebuff
 func _init(p_data: EnemyDebuffData = null) -> void:
 	type = Type.FROST
 	if p_data == null:
-		# percentage of slowdown
 		value = 5
 		duration = 2
 		max_stacks = 10
@@ -23,12 +22,6 @@ func clone(p_source: Source) -> EnemyDebuff:
 
 func on_apply(enemy: Enemy):
 	enemy.speed_mult -= value / 100
-
-func on_tick(_enemy: Enemy):
-	pass
-	
-func on_update(_enemy: Enemy, _delta: float):
-	pass
 
 func on_expire(enemy: Enemy):
 	enemy.speed_mult += value / 100

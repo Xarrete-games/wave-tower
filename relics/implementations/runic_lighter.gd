@@ -1,7 +1,10 @@
 class_name RunicLighter extends Relic
 
-func apply_effect() -> void:
-	RunContext.enemy_debuff_manager.add_modifier_from_data("runic_lighter_modifier")
+const DAMAGE_PER_FIRE_TOWER: float = 0.1
 
-func remove_effect() -> void:
-	RunContext.enemy_debuff_manager.remove_modifier_from_data("runic_lighter_modifier")
+func on_damage_multiplicative(ctx: DamageContext, amount: float) -> float:
+	if ctx.source.type == Source.SourceType.DEBUFF and ctx.source.type_id == "burn_debuff":
+		var fire_towers = RunContext.towers_manager.get_tower_count(Tower.Type.FIRE)
+		var extra_mult = 1.0 + (DAMAGE_PER_FIRE_TOWER * fire_towers)
+		return amount * extra_mult
+	return amount

@@ -5,7 +5,6 @@ const RELICS_DATA_PATH: String = "res://relics/data/"
 const EVENTS_DATA_PATH: String = "res://events/data/"
 const CONSUMABLES_DATA_PATH: String = "res://consumables/data/"
 const ENEMY_DEBUFFS_DATA_PATH: String = "res://enemies/enemy_debuff/data/"
-const DAMAGE_TAKEN_MODIFIERS_DATA_PATH: String = "res://enemies/damage_taken_modifier/data/"
 const INITIAL_MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/init/"
 const MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/data/"
 const TOWER_DATA_PATH: String = "res://towers/data/"
@@ -14,7 +13,6 @@ var relics: Array[RelicData] = []
 var events: Array[EventData] = []
 var consumables: Array[ConsumableData] = []
 var enemy_debuffs: Array[EnemyDebuffData] = []
-var damage_taken_modifiers: Array[DamageTakenModifierData] = []
 var initial_map_pieces: Array[MapPieceData] = []
 var map_pieces: Array[MapPieceData] = []
 var tower_data: Array[TowerDataWithInstance] = []
@@ -25,7 +23,6 @@ func _ready() -> void:
 	_load_events()
 	_load_consumables()
 	_load_enemy_debuffs()
-	_load_damage_taken_modifiers()
 	_load_map_pieces()
 	_load__initial_map_pieces()
 	_load_tower_data() 
@@ -132,17 +129,6 @@ func get_all_enemy_debuffs() -> Array[EnemyDebuffData]:
 	_append_deep_copies(enemy_debuffs, result)
 	return result
 
-func get_modifier_by_id(modifier_id: String) -> DamageTakenModifierData:
-	for modifier_data in damage_taken_modifiers:
-		if modifier_data.id == modifier_id:
-			return _duplicate_resource(modifier_data) as DamageTakenModifierData
-	return null
-
-func get_all_damage_taken_modifiers() -> Array[DamageTakenModifierData]:
-	var result: Array[DamageTakenModifierData] = []
-	_append_deep_copies(damage_taken_modifiers, result)
-	return result
-
 # ---------------------------------------------------------
 # MAP PIECES API
 # ---------------------------------------------------------
@@ -222,14 +208,6 @@ func _load_enemy_debuffs() -> void:
 			enemy_debuffs.append(data)
 		else:
 			push_error("[DataLoader] Loaded enemy debuff data has invalid type: %s" % [data])
-
-func _load_damage_taken_modifiers() -> void:
-	var loaded_array = _load_resources_from_dir(DAMAGE_TAKEN_MODIFIERS_DATA_PATH)
-	for data in loaded_array:
-		if data is DamageTakenModifierData:
-			damage_taken_modifiers.append(data)
-		else:
-			push_error("[DataLoader] Loaded damage taken modifier data has invalid type: %s" % [data])
 
 func _load_map_pieces() -> void:
 	var loaded_array = _load_resources_from_dir(MAP_PIECES_DATA_PATH)

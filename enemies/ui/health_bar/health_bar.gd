@@ -18,8 +18,6 @@ var debuffs_slots: Dictionary[int, DebuffSlot] = {}
 var debuffs_count: Dictionary[int, int] = {}
 var debuff_data_by_type: Dictionary[int, EnemyDebuffData] = {}
 
-var modifier_slots: Dictionary[String, DebuffSlot] = {}
-
 func set_max_health(value: float) -> void:
 	var clamped_value = clamp(value, MIN_HEALTH, MAX_HEALTH)
 	var new_x_size = remap(
@@ -53,22 +51,6 @@ func set_debuffs(debuffs: Array[EnemyDebuffInstance]) -> void:
 		_update_debuff_value(type, debuffs_count[type], debuff_data_by_type[type])
 
 
-func update_modifiers(modifiers: Array[DamageTakenModifier]) -> void:
-	for modifier in modifiers:
-		if modifier.data != null and modifier.data.icon != null:
-			if not modifier_slots.has(modifier.data.id):
-				var slot = DEBUFF_SLOT.instantiate()
-				debuffs_conatiner.add_child(slot)
-				slot.texture = modifier.data.icon
-				slot.amount = 1
-				modifier_slots[modifier.data.id] = slot
-
-	for slot_id in modifier_slots.keys().duplicate():
-		var found := modifiers.any(func(m): return m.data != null and m.data.id == slot_id)
-		if not found:
-			_remove_modifier(slot_id)
-
-
 func _reset_debuffs() -> void:
 	debuffs_count = {}
 	debuff_data_by_type = {}
@@ -93,11 +75,3 @@ func _remove_debuff(type: int) -> void:
 	
 	slot.queue_free()
 	debuffs_slots[type] = null
-
-func _remove_modifier(modifier_id: String) -> void:
-	var slot = modifier_slots.get(modifier_id, null)
-	if slot == null:
-		return
-	
-	slot.queue_free()
-	modifier_slots[modifier_id] = null

@@ -39,11 +39,21 @@ func _copy_base_to(target: EnemyDebuff, p_source: Source) -> void:
 	target.extra_stacks = extra_stacks
 	target.source = p_source
 
-@abstract
-func on_apply(enemy: Enemy)
 
-@abstract
-func on_tick(enemy: Enemy)
+func on_apply(enemy: Enemy):
+	pass
 
-@abstract
-func on_expire(enemy: Enemy)
+func on_tick(enemy: Enemy):
+	pass
+
+func on_expire(enemy: Enemy):
+	pass
+
+func on_damage_additive(ctx: DamageContext, amount: float) -> float:
+	return amount
+
+func on_damage_multiplicative(ctx: DamageContext, amount: float) -> float:
+	return amount
+
+func on_damage_cap(ctx: DamageContext, current_cap: float) -> float:
+	return current_cap

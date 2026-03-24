@@ -1,7 +1,9 @@
 class_name Salt extends Relic
 
-func apply_effect() -> void:
-	RunContext.enemy_debuff_manager.add_modifier_from_data("salt_damage_modifier")
+const LOW_HEALTH_THRESHOLD: float = 30
+const BONUS_MULTIPLIER: float = 0.3
 
-func remove_effect() -> void:
-	RunContext.enemy_debuff_manager.remove_modifier_from_data("salt_damage_modifier")
+func on_damage_multiplicative(ctx: DamageContext, amount: float) -> float:
+	if ctx.target.get_percentage_remaining_health() <= LOW_HEALTH_THRESHOLD:
+		return amount + BONUS_MULTIPLIER
+	return amount

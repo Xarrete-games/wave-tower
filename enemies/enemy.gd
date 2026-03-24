@@ -59,9 +59,6 @@ var inversed_target_position: Vector2:
 		else:
 			return target_position_right.global_position
 
-var damage_taken_modifiers: Array[DamageTakenModifier]
-
-
 # --- Sistema de waypoints ---
 # Array de puntos globales que el enemigo debe seguir en orden
 var _waypoints: Array[Vector2] = []
@@ -88,14 +85,6 @@ func _ready() -> void:
 	health_bar.set_max_health(max_health)
 	_set_health(max_health)
 	
-	#amage taken modifiers
-	damage_taken_modifiers = RunContext.enemy_debuff_manager.get_modifiers()
-	health_bar.update_modifiers(damage_taken_modifiers)
-	RunContext.enemy_debuff_manager.modifier_change.connect(
-		func(modifiers: Array[DamageTakenModifier]):
-			damage_taken_modifiers = modifiers
-			health_bar.update_modifiers(modifiers)
-	)
 	# extra gold dropped
 	gold_value = base_gold_value + RunContext.economy.extra_gold_dropped
 	RunContext.economy.extra_gold_dropped_change.connect(
@@ -249,6 +238,9 @@ func get_remaining_health() -> float:
 func get_debuff_stacks(debuff_type: EnemyDebuff.Type) -> int:
 	return debuff_handler.get_stacks(debuff_type)
 
+func get_active_debuffs() -> Array[EnemyDebuff]:
+	return debuff_handler.get_active_debuffs()
+
 func has_any_debuff() -> bool:
 	return debuff_handler.has_any_defbuff()
 
@@ -259,12 +251,15 @@ func apply_damage(attack: Attack) -> void:
 	if _is_dead:
 		return
 
-	var acc: DamageTakenModifierAcc = DamageTakenModifierAcc.new(attack.source, attack.origin_source)
-	for modifier in damage_taken_modifiers:
-		modifier.modify_damage(self, acc)
-
-	var modified_damage: float = (attack.damage + acc.flat_damage) * acc.damage_mult
-	attack.damage = modified_damage
+	var ctx := DamageContext.new(attack, self)
+	
+	ctx.flat_damage += DamageHooks.modify_damage_additive(ctx, 0.0)
+	ctx.damage_mult *= DamageHooks.modify_damage_multiplicative(ctx, 1.0)
+	ctx.damage_cap = DamageHooks.modify_damage_cap(ctx, ctx.damage_cap)
+	
+	var final_damage = ctx.calculate_final_damage(attack.damage)
+	attack.damage = final_damage
+	
 	var damage_done: float = min(attack.damage, health)
 	_set_health(health - attack.damage)
 	_play_hit_animation()

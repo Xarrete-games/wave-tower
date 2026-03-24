@@ -11,9 +11,6 @@ func _update_relics(relics: Array):
 		var relic_instance: RelicUI = TOP_BAR_RELIC.instantiate()
 		add_child(relic_instance)
 		relic_instance.set_relic(relic)
-		#relic_instance.get_texture().texture = relic.get_texture()
-		#if relic.amount > 1:
-			#relic_instance.get_amount().text = str(relic.amount)
 
 func clear_relics_container() -> void:
 	for relic in get_children():

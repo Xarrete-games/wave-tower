@@ -57,7 +57,7 @@ func disable_relic(relic_id: String) -> void:
 
 func _add_relic(relic: Relic) -> void:
 	if relics.has(relic.data.id):
-		(relics[relic.data.id] as Relic).amount += 1
+		push_error("Relic with ID '%s' already exists. Cannot add duplicate relics." % relic.data.id)
 	else:
 		relics[relic.data.id] = relic
 	relics_count[relic.data.id] = relics_count.get(relic.data.id, 0) + 1

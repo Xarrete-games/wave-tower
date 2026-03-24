@@ -1,7 +1,7 @@
 class_name IceVeins extends Relic
 
-func apply_effect() -> void:
-	RunContext.enemy_debuff_manager.get_template(EnemyDebuff.Type.FROST).extra_stacks += 1
 
-func remove_effect() -> void:
-	RunContext.enemy_debuff_manager.get_template(EnemyDebuff.Type.FROST).extra_stacks -= 1
+func on_debuff_stack_change(debuff_type: EnemyDebuff.Type, target: Enemy, stacks: int) -> int:
+	if debuff_type == EnemyDebuff.Type.FROST:
+		return stacks + 1  # +1 stack de frost
+	return stacks

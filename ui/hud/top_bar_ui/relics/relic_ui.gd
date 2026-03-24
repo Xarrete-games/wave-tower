@@ -15,9 +15,6 @@ func set_relic(p_relic: Relic) -> void:
 		texture.modulate = semi_transparent_color
 	else:
 		texture.modulate = opaque_color
-
-	if p_relic.amount > 1:
-		amount.text = str(p_relic.amount)
 	
 func _on_mouse_entered() -> void:
 	HintManager.show_hint(self, relic.data.description)
