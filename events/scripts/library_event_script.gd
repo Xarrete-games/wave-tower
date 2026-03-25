@@ -2,7 +2,7 @@ class_name LLibraryEventScript extends EventScript
 
 func get_options() -> Array[EventOptionData]:
 	var tome_relics = DataLoader.get_not_used_relics().filter(func(relic_data: RelicData):
-		return relic_data.is_tome and not RunContext.relics_manager.is_maxed(relic_data.id)
+		return relic_data.is_tome and not RunContext.relics_manager.has_relic(relic_data.id)
 	)
 
 	var options: Array[EventOptionData] = []

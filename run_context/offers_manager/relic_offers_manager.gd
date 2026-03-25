@@ -11,16 +11,6 @@ var all_relic_data: Array[RelicData] = []
 func _init() -> void:
 	all_relic_data = DataLoader.get_all_relics()
 
-func get_relic_offer_by_id(relic_id: String) -> ItemOffer:
-	var index = all_relic_data.find(func(data: RelicData):
-		return data.id == relic_id
-	)
-
-	if index == -1:
-		return null
-
-	return create_relic_offer_from_data(all_relic_data[index])
-
 func get_relics_offers_by_ids(relic_ids: Array[String]) -> Array[ItemOffer]:
 	var offers: Array[ItemOffer] = []
 
@@ -38,7 +28,7 @@ func get_relics_offers_by_ids(relic_ids: Array[String]) -> Array[ItemOffer]:
 	
 func create_relic_offers(amount: int) -> Array[ItemOffer]:
 	var filter_relics = all_relic_data.filter(func(data: RelicData):
-		return not RunContext.relics_manager.is_maxed(data.id) and not data.is_cursed and not data.only_for_events
+		return not RunContext.relics_manager.has_relic(data.id) and not data.is_cursed and not data.only_for_events
 	)
 	filter_relics.shuffle()
 

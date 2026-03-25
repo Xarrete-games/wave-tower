@@ -76,7 +76,7 @@ func get_not_used_relics(rarity: Variant = null, is_cursed: Variant = null) -> A
 			elif is_cursed and not relic_data.is_cursed:
 				return false
 
-		return not RunContext.relics_manager.is_maxed(relic_data.id)
+		return not RunContext.relics_manager.has_relic(relic_data.id)
 	)
 
 	var result: Array[RelicData] = []

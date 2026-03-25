@@ -24,14 +24,6 @@ func has_relic(relic_id: String) -> bool:
 
 func get_all_relics() -> Array[Relic]:
 	return relics.values()
-
-func is_maxed(relic_id: String) -> bool:
-	var count = relics_count.get(relic_id, 0)
-	var relic = relics.get(relic_id, null)
-	
-	if relic == null:
-		return false
-	return count >= relic.data.max_stacks
 	
 func get_rarity_color(rarity: BaseData.Rarity) -> Color:
 	return relic_colors[rarity]
