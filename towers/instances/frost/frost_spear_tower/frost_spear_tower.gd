@@ -18,7 +18,7 @@ func _fire() -> void:
 	var damage_multiplier: float = 1.0 + enemy_frost_stacks * 0.10
 	attack.damage *= damage_multiplier
 
-	var debuff = DebuffBuilder.create_frost(damage_source)
+	var debuff = EnemyDebuff.create_frost(damage_source)
 	frost_spear.set_target(_current_target, attack, debuff, debuff_stacks)
 
 func _on_extra_stats_change(_tower_extra_stats: TowerExtraStats) -> void:

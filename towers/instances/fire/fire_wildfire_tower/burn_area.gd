@@ -25,7 +25,7 @@ func _on_body_entered(body: Node2D) -> void:
 	var enemy = body as Enemy
 	if enemies_burned.has(enemy):
 		return
-	enemy.apply_debuff(DebuffBuilder.create_burn(source))
+	enemy.apply_debuff(EnemyDebuff.create_burn(source))
 	enemies_burned.append(enemy)
 
 func _on_duration_timer_timeout() -> void:

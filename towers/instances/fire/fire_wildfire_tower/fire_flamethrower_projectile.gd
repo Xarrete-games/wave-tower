@@ -60,6 +60,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_damage_timer_timeout() -> void:
 	for target: Enemy in _tagers_in_area:
 		if is_instance_valid(target):
-			var debuff = DebuffBuilder.create_burn(_attack.source)
+			var debuff = EnemyDebuff.create_burn(_attack.source)
 			target.apply_damage(_attack)
 			target.apply_debuff(debuff)
