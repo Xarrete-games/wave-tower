@@ -7,7 +7,6 @@ const BASE_PRICE_BY_RARITY: Dictionary[BaseData.Rarity, int] = {
 }
 
 var all_relic_data: Array[RelicData] = []
-var relic_price_multiplier_by_id: Dictionary[String, float] = {}
 
 func _init() -> void:
 	all_relic_data = DataLoader.get_all_relics()
@@ -54,19 +53,14 @@ func create_relic_offers(amount: int) -> Array[ItemOffer]:
 
 func create_relic_offer_from_data(data: RelicData) -> ItemOffer:
 	var base_price: int = BASE_PRICE_BY_RARITY.get(data.rarity, BASE_PRICE_BY_RARITY[BaseData.Rarity.COMMON])
-	var price_multiplier: float = relic_price_multiplier_by_id.get(data.id, 1.0)
-	var price = round(base_price * price_multiplier * (1.0 - RunContext.economy.relics_discount_mult))
+	var ctx = PriceContext.new(PriceContext.PriceType.RELIC, base_price)
+	EconomyHooks.on_get_price(ctx)
 
 	return ItemOffer.new(
 		data,
-		price,
+		ctx.final_price,
 		data.health_price
-)
-
-func increase_relic_offer_price(item_offer: ItemOffer) -> void:
-	if item_offer.item_data is RelicData:
-		var relic_data := item_offer.item_data as RelicData
-		relic_price_multiplier_by_id[relic_data.id] = relic_price_multiplier_by_id.get(relic_data.id, 1.0) * 1.2
+	)
 
 
 	

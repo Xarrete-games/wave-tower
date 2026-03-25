@@ -2,6 +2,7 @@ class_name RelicsManager extends RefCounted
 
 signal relics_change(relics: Array[Relic])
 signal relic_added(relic: Relic)
+signal relic_removed(relic_id: String)	
 
 const COMMON_COLOR = Color.GREEN_YELLOW
 const RARE_COLOR = Color.DODGER_BLUE
@@ -49,7 +50,8 @@ func remove_relic(relic_id: String) -> void:
 		relics.erase(relic_id)
 		relics_count[relic_id] = relics_count.get(relic_id, 0) - 1
 		relics_change.emit(relics.values())
-
+		relic_removed.emit(relic_id)
+		
 func disable_relic(relic_id: String) -> void:
 	if relics.has(relic_id):
 		(relics[relic_id] as Relic).disabled = true

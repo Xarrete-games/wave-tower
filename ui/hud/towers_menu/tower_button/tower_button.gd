@@ -14,7 +14,7 @@ const HOVER_PANEL = preload("uid://5m3jkdualcb3")
 		tower_scene = tower_data.scene
 		icon = configuration.icon
 		type = configuration.type
-		_set_new_price(configuration.build_price)
+		_update_price()
 	
 @export var panel: Panel	
 @export var tower_button: TextureButton
@@ -47,7 +47,8 @@ var type: Tower.Type
 
 func _ready() -> void:
 	RunContext.economy.available_free_towers_change.connect(_on_available_free_towers_change)
-	RunContext.economy.towers_discount_changed.connect(_on_economy_towers_discount_changed)
+	RunContext.relics_manager.relic_added.connect(_on_relic_added)
+	RunContext.relics_manager.relic_removed.connect(_on_relic_removed)
 	add_theme_stylebox_override("panel", NORMAL_PANEL)
 	_update_texture()
 	
@@ -68,22 +69,24 @@ func _on_mouse_entered() -> void:
 	hover.emit(self)
 	AudioManager.play_button_hover()
 
-func _on_available_free_towers_change(available_free_towers: int) -> void:
-	if available_free_towers > 0:
-		price = 0
-	else:
-		if configuration:
-			_set_new_price(configuration.build_price)
-
-func _on_economy_towers_discount_changed(_towers_discount_mult: float) -> void:
+func _update_price() -> void:
 	if RunContext.economy.available_free_towers > 0:
 		price = 0
-	else:
-		if configuration:
-			_set_new_price(configuration.build_price)
+	elif configuration:
+		var ctx = PriceContext.new(PriceContext.PriceType.TOWER, configuration.build_price)
+		EconomyHooks.on_get_price(ctx)
+		price = ctx.final_price
 
-func _set_new_price(new_price: int) -> void:
-	price = int(new_price * (1.0 - RunContext.economy.towers_discount_mult))
+func _on_available_free_towers_change(available_free_towers: int) -> void:
+	_update_price()
+
+func _on_relic_added(relic: Relic) -> void:
+	if relic.data.id == "soya_sauce" || relic.data.id == "tuna_nigiri":
+		_update_price()
+
+func _on_relic_removed(relic_id: String) -> void:
+	if relic_id == "soya_sauce" || relic_id == "tuna_nigiri":
+		_update_price()
 
 func _on_tower_button_pressed() -> void:
 	AudioManager.play_button_click()

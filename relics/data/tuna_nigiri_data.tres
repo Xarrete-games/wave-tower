@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://drkkl1ex7lt6w"]
+[gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://drkkl1ex7lt6w"]
 
 [ext_resource type="Script" uid="uid://ywpwfx6kluv4" path="res://relics/implementations/tuna_nigiri.gd" id="1_08uru"]
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_52mwh"]
@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("1_52mwh")
-id = "Tuna nigiri"
+runtime_script = ExtResource("1_08uru")
+id = "tuna_nigiri"
 display_name = "Tuna nigiri"
 description = "Reduce the cost of towers by 10%"
 icon = ExtResource("2_yojsk")
-runtime_script = ExtResource("1_08uru")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

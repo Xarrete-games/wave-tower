@@ -3,6 +3,10 @@ class_name Relic extends RefCounted
 var data: RelicData
 var disabled: bool = false
 
+var id: String:
+	get:
+		return data.id
+
 func _init(p_data: RelicData) -> void:
 	data = p_data
 
@@ -11,7 +15,10 @@ func apply_effect() -> void:
 
 func remove_effect() -> void:
 	pass
-
+#########
+# HOOKS
+#########
+# Damage related hooks
 func on_damage_additive(ctx: DamageContext, amount: float) -> float:
 	return amount
 
@@ -22,4 +29,7 @@ func on_damage_cap(ctx: DamageContext, current_cap: float) -> float:
 	return current_cap
 
 func on_debuff_applied(ctx: DebuffContext, target: Enemy) -> void:
+	pass
+# Price related hooks
+func on_get_price(ctx: PriceContext) -> void:
 	pass

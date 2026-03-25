@@ -1,11 +1,7 @@
 class_name SalmonNigiri extends Relic
 
-const discount = 10
-
-func apply_effect() -> void:
-	RunContext.economy.relics_discount_mult += 0.1
-
-func remove_effect() -> void:
-	RunContext.economy.relics_discount_mult -= 0.1
+func on_get_price(ctx: PriceContext) -> void:
+	if ctx.price_type == PriceContext.PriceType.RELIC:
+		ctx.discount += 0.1
 
 
