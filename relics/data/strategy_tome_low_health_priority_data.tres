@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://cxojswmt0kad5"]
+[gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://cxojswmt0kad5"]
 
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_md2yd"]
 [ext_resource type="Script" uid="uid://cljq48r6gs27q" path="res://relics/implementations/strategy_tome_low_health_priority.gd" id="1_pgd5w"]
@@ -7,11 +7,10 @@
 [resource]
 script = ExtResource("1_md2yd")
 is_tome = true
-id = "Strategy Tome: 
-Low Health Priority"
+runtime_script = ExtResource("1_pgd5w")
+id = "strategy_tome_low_health_priority"
 display_name = "Strategy Tome: 
 Low Health Priority"
 description = "Allows towers to prioritize enemies with the lowest health."
 icon = ExtResource("2_8r5q1")
-runtime_script = ExtResource("1_pgd5w")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

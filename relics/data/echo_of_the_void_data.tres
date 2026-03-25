@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://dsh0r0n5g0p7s"]
+[gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://dsh0r0n5g0p7s"]
 
 [ext_resource type="Script" uid="uid://dl8npa5xvyguf" path="res://relics/implementations/echo_of_void.gd" id="1_6veub"]
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_c1yj8"]
@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("1_c1yj8")
-id = "Echo of the void"
+runtime_script = ExtResource("1_6veub")
+id = "echo_of_the_void"
 display_name = "Echo of the void"
 description = "Increases the number of targets for chain towers by 1."
 icon = ExtResource("3_4ot86")
-runtime_script = ExtResource("1_6veub")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

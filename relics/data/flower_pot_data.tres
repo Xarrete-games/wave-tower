@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://ds6e6osoii40p"]
+[gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://ds6e6osoii40p"]
 
 [ext_resource type="Script" uid="uid://b1ldf8eracfin" path="res://relics/implementations/flower_pot.gd" id="1_3isox"]
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_uh30i"]
@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("1_uh30i")
-id = "Flower pot"
+runtime_script = ExtResource("1_3isox")
+id = "flower_pot"
 display_name = "Flower pot"
 description = "If the wave ends without any enemy having reached the portal, recover 1 health."
 icon = ExtResource("3_guxeq")
-runtime_script = ExtResource("1_3isox")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"
