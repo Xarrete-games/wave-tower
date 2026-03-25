@@ -18,6 +18,6 @@ type = 0
 name = "Skull"
 icon = ExtResource("1_d5n7i")
 scene = ExtResource("2_054sy")
-base_speed = 90.0
+base_speed = 220.0
 available_waves = Array[ExtResource("1_054sy")]([SubResource("Resource_iut5q")])
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

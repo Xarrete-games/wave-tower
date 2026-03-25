@@ -1,7 +1,7 @@
 class_name SingleTargetProjectile
 extends Node2D
 
-const SPEED: float = 600.0
+const SPEED: float = 1200.0
 const HIT_RADIUS: float = 12.0
 
 var enemy: Enemy

@@ -19,6 +19,7 @@ name = "Golem"
 icon = ExtResource("1_051ul")
 scene = ExtResource("2_ca804")
 max_health = 300
+base_speed = 190.0
 base_gold_value = 8
 weight = 12
 available_waves = Array[ExtResource("1_ca804")]([SubResource("Resource_srpcy")])
