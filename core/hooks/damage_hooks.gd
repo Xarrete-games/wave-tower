@@ -44,3 +44,8 @@ static func modify_damage_cap(ctx: DamageContext, current_cap: float) -> float:
 static func on_debuff_applied(ctx: DebuffContext, target: Enemy) -> void:
 	for relic in RunContext.relics_manager.get_all_relics():
 		relic.on_debuff_applied(ctx, target)
+
+
+static func on_enemy_die(enemy: Enemy, attack: Attack) -> void:
+	for relic in RunContext.relics_manager.get_all_relics():
+		relic.on_enemy_die(enemy, attack)
