@@ -1,15 +1,14 @@
-[gd_resource type="Resource" script_class="ConsumableItemData" format=3 uid="uid://gdmmevxnxve3"]
+[gd_resource type="Resource" script_class="ConsumableData" format=3 uid="uid://gdmmevxnxve3"]
 
 [ext_resource type="Script" uid="uid://by1han713lxt4" path="res://consumables/implementation/healing_potion.gd" id="1_mwose"]
-[ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://consumables/consumable_data.gd" id="1_rnvvc"]
+[ext_resource type="Script" path="res://consumables/consumable_data.gd" id="1_rnvvc"]
 [ext_resource type="Texture2D" uid="uid://0h4rqowhgg8m" path="res://assets/sprites/consumables/heal_potions_relic.png" id="3_hvlx6"]
 
 [resource]
 script = ExtResource("1_rnvvc")
 consumable_type = 1
+runtime_script = ExtResource("1_mwose")
 id = "healing_potion"
 display_name = "Healing Potion"
-description = "15 health cure"
+description = "15 health cure."
 icon = ExtResource("3_hvlx6")
-runtime_script = ExtResource("1_mwose")
-metadata/_custom_type_script = "uid://xnsjgxjhja5s"

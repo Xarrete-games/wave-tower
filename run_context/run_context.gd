@@ -20,13 +20,11 @@ var buff_scheduler: BuffScheduler
 var towers_price: TowersPrice
 var relics_manager: RelicsManager
 var consumables_manager: ConsumablesManager
-var enemy_debuff_manager: EnemyDebuffManager
 var enemy_manager: EnemyManager
 var damage_recount: DamageRecount
 var loot_manager: LootManager
 
 func _ready() -> void:
-	# remove wheen full structure is ready
 	reset_run()
 
 func reset_run() -> void:
@@ -40,7 +38,6 @@ func reset_run() -> void:
 	towers_buffs = TowersBuffsManager.new(buff_scheduler)
 	towers_price = TowersPrice.new()
 	consumables_manager = ConsumablesManager.new()
-	enemy_debuff_manager = EnemyDebuffManager.new()
 	enemy_manager = EnemyManager.new()
 	damage_recount = DamageRecount.new(towers_manager, progress)
 	loot_manager = LootManager.new()

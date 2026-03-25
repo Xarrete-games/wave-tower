@@ -124,10 +124,11 @@ func get_all_consumables_of_type(consumable_type: Consumable.Type) -> Array[Cons
 # ENEMY DEBUFFS API
 # ---------------------------------------------------------
 
-func get_all_enemy_debuffs() -> Array[EnemyDebuffData]:
-	var result: Array[EnemyDebuffData] = []
-	_append_deep_copies(enemy_debuffs, result)
-	return result
+func get_debuff_data(type: EnemyDebuff.Type) -> EnemyDebuffData:
+	for debuff_data in enemy_debuffs:
+		if debuff_data.debuff_type == type:
+			return _duplicate_resource(debuff_data) as EnemyDebuffData
+	return null
 
 # ---------------------------------------------------------
 # MAP PIECES API

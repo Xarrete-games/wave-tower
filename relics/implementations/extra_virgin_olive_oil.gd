@@ -1,7 +1,7 @@
 class_name ExtraVirginOliveOil extends Relic
 
-func apply_effect() -> void:
-	RunContext.enemy_debuff_manager.get_template(EnemyDebuff.Type.BURN).duration += 1
+const EXTRA_DURATION: float = 1.0
 
-func remove_effect() -> void:
-	RunContext.enemy_debuff_manager.get_template(EnemyDebuff.Type.BURN).duration -= 1
+func on_debuff_applied(ctx: DebuffContext, target: Enemy) -> void:
+	if ctx.debuff.type == EnemyDebuff.Type.BURN:
+		ctx.debuff.duration += EXTRA_DURATION

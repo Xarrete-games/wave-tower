@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="ConsumableItemData" format=3 uid="uid://cabdmsmic155r"]
+[gd_resource type="Resource" script_class="ConsumableData" format=3 uid="uid://cabdmsmic155r"]
 
 [ext_resource type="Texture2D" uid="uid://bmx20l33acc4i" path="res://assets/sprites/consumables/poti_48.png" id="1_2q3p8"]
-[ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://consumables/consumable_data.gd" id="1_o6u08"]
+[ext_resource type="Script" path="res://consumables/consumable_data.gd" id="1_o6u08"]
 [ext_resource type="Texture2D" uid="uid://bncdbwrhna3or" path="res://assets/sprites/consumables/poti_use_48.png" id="2_531ys"]
 [ext_resource type="Script" uid="uid://cdjk3e0v8lr03" path="res://consumables/implementation/long_shot.gd" id="3_531ys"]
 [ext_resource type="Texture2D" uid="uid://bkg3dg5ldktv0" path="res://assets/sprites/consumables/poti.png" id="4_ql0pa"]
@@ -12,9 +12,9 @@ consumable_type = 1
 targeting_type = 1
 cursor_icon = ExtResource("1_2q3p8")
 cursor_icon_used = ExtResource("2_531ys")
+runtime_script = ExtResource("3_531ys")
 id = "long_shot"
 display_name = "Longshot"
-description = "Doubles the range of a tower to the end of a wave"
+description = "Doubles the range of a tower to the end of a wave.
+"
 icon = ExtResource("4_ql0pa")
-runtime_script = ExtResource("3_531ys")
-metadata/_custom_type_script = "uid://xnsjgxjhja5s"

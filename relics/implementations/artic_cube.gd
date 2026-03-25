@@ -1,7 +1,7 @@
 class_name ArticCube extends Relic
 
-func apply_effect() -> void:
-	RunContext.enemy_debuff_manager.get_template(EnemyDebuff.Type.FROST).duration += 1
+const EXTRA_DURATION: float = 1.0
 
-func remove_effect() -> void:
-	RunContext.enemy_debuff_manager.get_template(EnemyDebuff.Type.FROST).duration -= 1
+func on_debuff_applied(ctx: DebuffContext, target: Enemy) -> void:
+	if ctx.debuff.type == EnemyDebuff.Type.FROST:
+		ctx.debuff.duration += EXTRA_DURATION

@@ -1,44 +1,24 @@
 @abstract
 class_name EnemyDebuff extends RefCounted
 
-signal changed
 enum Type { FROST, BURN }
 
 var type: Type
 var data: EnemyDebuffData
 var source: Source
-var value: float = 0.0:
-	set(v):
-		value = v
-		changed.emit()
-var duration: float = 0.0:
-	set(v):
-		duration = v
-		changed.emit()
-var tick_interval: float = 0.0:
-	set(v):
-		tick_interval = v
-		changed.emit()
-var extra_stacks: int = 0:
-	set(v):
-		extra_stacks = v
-		changed.emit()
-
+var value: float = 0.0
+var duration: float = 0.0
+var tick_interval: float = 0.0
 var max_stacks: int = 99
 
-@abstract
-func clone(p_source: Source) -> EnemyDebuff
-
-func _copy_base_to(target: EnemyDebuff, p_source: Source) -> void:
-	target.type = type
-	target.data = data
-	target.value = value
-	target.duration = duration
-	target.tick_interval = tick_interval
-	target.max_stacks = max_stacks
-	target.extra_stacks = extra_stacks
-	target.source = p_source
-
+func _init(p_data: EnemyDebuffData, p_source: Source) -> void:
+	data = p_data
+	source = source
+	type = p_data.debuff_type
+	value = p_data.value
+	duration = p_data.duration
+	tick_interval = p_data.tick_interval
+	max_stacks = p_data.max_stacks
 
 func on_apply(enemy: Enemy):
 	pass

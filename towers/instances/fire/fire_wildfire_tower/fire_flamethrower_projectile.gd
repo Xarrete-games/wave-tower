@@ -18,14 +18,12 @@ func _ready() -> void:
 	damage_timer.wait_time = DAMAGE_TICK_INTERVAL
 	stop()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if _target == null or not is_instance_valid(_target):
 		return
 
 	var dir: Vector2 = _target.target_position - global_position
 
-	# Rotamos el emisor
 	flamethrower.rotation = dir.angle()
 
 
@@ -62,6 +60,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_damage_timer_timeout() -> void:
 	for target: Enemy in _tagers_in_area:
 		if is_instance_valid(target):
-			var debuff = RunContext.enemy_debuff_manager.get_debuff(EnemyDebuff.Type.BURN, _attack.source)
+			var debuff = DebuffBuilder.create_burn(_attack.source)
 			target.apply_damage(_attack)
 			target.apply_debuff(debuff)

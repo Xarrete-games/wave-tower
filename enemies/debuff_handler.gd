@@ -7,16 +7,15 @@ const DEFAULT_COLOR = Color.WHITE
 var debuffs: Array[EnemyDebuffInstance] = []
 
 func add_debuff(debuff: EnemyDebuff, amount: int, enemy: Enemy):
-	var final_stacks = DamageHooks.on_debuff_applied(debuff.type, enemy, amount)
+	var ctx = DebuffContext.new(debuff, amount)
+	DamageHooks.on_debuff_applied(ctx, enemy)
 	
-	var total_stacks = final_stacks + debuff.extra_stacks
-	for i in range(total_stacks):
+	for i in range(ctx.stacks):
 		if get_stacks(debuff.type) >= debuff.max_stacks:
 			break
 		var instance: EnemyDebuffInstance = EnemyDebuffInstance.new(debuff)
 		debuffs.append(instance)
 		enemy.health_bar.set_debuffs(debuffs)
-		# on apply
 		debuff.on_apply(enemy)
 
 func update_all(enemy: Enemy):

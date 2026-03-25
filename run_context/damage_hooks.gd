@@ -41,15 +41,6 @@ static func modify_damage_cap(ctx: DamageContext, current_cap: float) -> float:
 	return result
 
 
-static func on_debuff_applied(debuff_type: EnemyDebuff.Type, target: Enemy, base_stacks: int) -> int:
-	var result = base_stacks
-	
+static func on_debuff_applied(ctx: DebuffContext, target: Enemy) -> void:
 	for relic in RunContext.relics_manager.get_all_relics():
-		result = relic.on_debuff_stack_change(debuff_type, target, result)
-	
-	return result
-
-
-static func modify_dot_damage(base_damage: float, ctx: DamageContext) -> float:
-	var result = base_damage
-	return result
+		relic.on_debuff_applied(ctx, target)
