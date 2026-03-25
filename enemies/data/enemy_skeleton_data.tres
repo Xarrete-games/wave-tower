@@ -18,6 +18,6 @@ type = 1
 name = "Skeleton"
 icon = ExtResource("1_1ym8y")
 scene = ExtResource("2_uorlk")
-base_speed = 185.0
+base_speed = 450.0
 available_waves = Array[ExtResource("1_uorlk")]([SubResource("Resource_806lk")])
 metadata/_custom_type_script = "uid://cvnj0agbswaym"
