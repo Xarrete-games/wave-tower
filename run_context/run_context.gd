@@ -16,8 +16,6 @@ var economy: Economy
 var status: Status
 var towers_manager: TowersManager
 var towers_buffs: TowersBuffsManager
-var buff_scheduler: BuffScheduler
-var towers_price: TowersPrice
 var relics_manager: RelicsManager
 var consumables_manager: ConsumablesManager
 var enemy_manager: EnemyManager
@@ -34,9 +32,8 @@ func reset_run() -> void:
 	relics_manager = RelicsManager.new()
 	status = Status.new(progress, relics_manager)
 	towers_manager = TowersManager.new()
-	buff_scheduler = BuffScheduler.new(progress)
+	var buff_scheduler = BuffScheduler.new(progress)
 	towers_buffs = TowersBuffsManager.new(buff_scheduler)
-	towers_price = TowersPrice.new()
 	consumables_manager = ConsumablesManager.new()
 	enemy_manager = EnemyManager.new()
 	damage_recount = DamageRecount.new(towers_manager, progress)
