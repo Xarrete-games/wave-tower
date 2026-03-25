@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://b42253glovasy"]
+[gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://b42253glovasy"]
 
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_hm7gf"]
 [ext_resource type="Script" uid="uid://c5oabmdbl54ih" path="res://relics/implementations/salmon_nigiri.gd" id="1_t7spr"]
@@ -6,10 +6,10 @@
 
 [resource]
 script = ExtResource("1_hm7gf")
-rarity = 1
-id = "Salmon Nigiri"
+runtime_script = ExtResource("1_t7spr")
+id = "salmon_nigiri"
 display_name = "Salmon Nigiri"
 description = "Reduces the cost of relics by 10%."
 icon = ExtResource("3_0w3py")
-runtime_script = ExtResource("1_t7spr")
+rarity = 1
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

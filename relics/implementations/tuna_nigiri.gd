@@ -1,7 +1,5 @@
 class_name TunaNigiri extends Relic
 
-func apply_effect() -> void:
-	RunContext.economy.towers_discount_mult += 0.1
-
-func remove_effect() -> void:
-	RunContext.economy.towers_discount_mult -= 0.1
+func on_get_price(ctx: PriceContext) -> void:
+	if ctx.price_type == PriceContext.PriceType.TOWER:
+		ctx.discount += 0.1

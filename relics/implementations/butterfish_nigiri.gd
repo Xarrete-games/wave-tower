@@ -1,7 +1,7 @@
 class_name ButterfishNigiri extends Relic
 
-func apply_effect() -> void:
-	RunContext.economy.consumables_discount_mult += 0.1
+const DISCOUNT_AMOUNT: float = 0.1
 
-func remove_effect() -> void:
-	RunContext.economy.consumables_discount_mult -= 0.1
+func on_get_price(ctx: PriceContext) -> void:
+	if ctx.price_type == PriceContext.PriceType.CONSUMABLE:
+		ctx.discount += DISCOUNT_AMOUNT
