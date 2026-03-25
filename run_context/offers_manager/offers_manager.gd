@@ -21,9 +21,6 @@ func create_relic_offers(amount: int) -> Array[ItemOffer]:
 func create_relic_offer_from_data(data: BaseData) -> ItemOffer:
 	return relics_offers_manager.create_relic_offer_from_data(data)
 
-func increase_relic_offer_price(item_offer: ItemOffer) -> void:
-	relics_offers_manager.increase_relic_offer_price(item_offer)
-
 # ---------------------------------------------------------
 # COSUMABLES OFFERS API
 # ---------------------------------------------------------
@@ -44,7 +41,6 @@ func purchase_offer(item_offer: ItemOffer) -> Variant:
 
 	var item = item_offer.item_data.create_item()
 	if item is Relic:
-		increase_relic_offer_price(item_offer)
 		RunContext.relics_manager.add_relic(item)
 	elif item is Consumable:
 		RunContext.consumables_manager.add_consumable(item)

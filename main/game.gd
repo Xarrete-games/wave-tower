@@ -9,7 +9,6 @@ const BOOT = preload("uid://bfm0i7ehshgsf")
 
 @export var trigger_finish_wave: bool = false
 
-var _current_level: Level
 var _pause_instance: Control
 
 #current level parent
@@ -20,7 +19,6 @@ var _pause_instance: Control
 
 func _ready():
 	ClickEvents.config_button_pressed.connect(_open_config_menu)
-	ClickEvents.next_level_pressed.connect(go_next_level)
 	ClickEvents.reset_game_button_pressed.connect(reset_game)
 	RunContext.progress.total_levels = levels_paths.size()
 	GameState.state = GameState.STATE.IN_GAME
@@ -37,30 +35,6 @@ func reset_game() -> void:
 	RunContext.is_on_restarting = true
 	var boot = load("uid://bfm0i7ehshgsf")
 	get_tree().change_scene_to_packed(boot)
-
-func _load_level(level_number: int) -> void:
-	RunContext.progress.current_level = level_number
-	music_handler.stop_music()
-	_current_level = _get_level(level_number)
-	current_level_number = level_number
-	level_container.add_child(_current_level)
-	
-	# on new level init
-	_update_camera_post()
-	# RESET DATA
-	music_handler.play_music()
-
-func _update_camera_post() -> void:
-	var new_pos = _current_level.get_camera_init_pos()
-	main_camera.global_position = new_pos
-
-func go_next_level() -> void:
-	current_level_number += 1
-	_current_level.queue_free()
-	if current_level_number  > levels_paths.size():
-		push_error('[Game]: invalid go next level call')
-	else: 
-		_load_level(current_level_number)
 		
 func _open_config_menu() -> void:
 	if _pause_instance and _pause_instance.is_visible_in_tree():
@@ -75,10 +49,6 @@ func _close_config_menu() -> void:
 		_pause_instance.queue_free()
 		_pause_instance = null
 
-func _get_level(level_number: int) -> Level:
-	var path: String = LEVELS_PATH + str(level_number)
-	var scene = SceneLoader.get_random_scene_from_path(path)
-	return scene.instantiate()
 		
 	
 	

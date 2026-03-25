@@ -7,7 +7,6 @@ const DEATH_SCENE = preload("uid://dcq16u6g6ahsp")
 var is_on_restarting: bool = false
 # level info
 var composite_tile_map: CompositeTileMap
-var level_data: LevelData
 
 # subsystems
 var offers_manager: OffersManager
