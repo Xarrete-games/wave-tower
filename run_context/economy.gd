@@ -5,7 +5,6 @@ signal available_free_towers_change(amount: int)
 signal gold_change(amount: int)
 
 
-var is_lemon_active: bool = false
 var is_sell_active: bool = false
 
 var gold: int = 10000:
@@ -16,11 +15,6 @@ var gold: int = 10000:
 		gold = value
 		gold_change.emit(value)
 
-
-
-
-
-
 var extra_gold_dropped: int = 0:
 	set(value):
 		extra_gold_dropped = value
@@ -30,11 +24,6 @@ var available_free_towers: int = 0:
 	set(value):
 		available_free_towers = value
 		available_free_towers_change.emit(available_free_towers)
-
-	
-var _relics_discount_mult: float = 0.0
-var _towers_discount_mult: float = 0.0
-var _consumables_discount_mult: float = 0.0
 
 func add_gold(amount: int) -> void:
 	gold += amount

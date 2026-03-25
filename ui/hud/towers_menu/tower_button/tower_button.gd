@@ -49,6 +49,7 @@ func _ready() -> void:
 	RunContext.economy.available_free_towers_change.connect(_on_available_free_towers_change)
 	RunContext.relics_manager.relic_added.connect(_on_relic_added)
 	RunContext.relics_manager.relic_removed.connect(_on_relic_removed)
+	RunContext.progress.current_wave_finished.connect(_current_wave_finished)
 	add_theme_stylebox_override("panel", NORMAL_PANEL)
 	_update_texture()
 	
@@ -86,6 +87,10 @@ func _on_relic_added(relic: Relic) -> void:
 
 func _on_relic_removed(relic_id: String) -> void:
 	if relic_id == "soya_sauce" || relic_id == "tuna_nigiri":
+		_update_price()
+
+func _current_wave_finished() -> void:
+	if RunContext.relics_manager.has_relic("lemon"):
 		_update_price()
 
 func _on_tower_button_pressed() -> void:

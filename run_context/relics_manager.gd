@@ -41,6 +41,7 @@ func reset_relics() -> void:
 	relics_change.emit([] as Array[Relic])
 
 func add_relic(relic: Relic) -> void:
+	relic.on_obtain()
 	relic.apply_effect()
 	_add_relic(relic)
 
@@ -51,7 +52,7 @@ func remove_relic(relic_id: String) -> void:
 		relics_count[relic_id] = relics_count.get(relic_id, 0) - 1
 		relics_change.emit(relics.values())
 		relic_removed.emit(relic_id)
-		
+
 func disable_relic(relic_id: String) -> void:
 	if relics.has(relic_id):
 		(relics[relic_id] as Relic).disabled = true

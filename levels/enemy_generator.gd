@@ -120,6 +120,7 @@ func _report_finished() -> void:
 		RunContext.progress.last_wave_finished.emit()
 	else:
 		current_wave_number += 1
+		ProgressHooks.on_wave_finished()
 		RunContext.progress.current_wave_finished.emit()
 		
 func _on_enemy_target_reached(enemy: Enemy) -> void:
