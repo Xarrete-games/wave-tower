@@ -5,6 +5,7 @@ const WAVES_PER_BOSS: int = 10
 
 @export var visual: Node2D
 @export var composite_tile_map: CompositeTileMap
+@export var enable_fork: bool = true
 
 # Managers (injected/created in _ready)
 var grid_manager: GridManager = null
@@ -110,7 +111,10 @@ func _on_edge_finalized(piece: MapPiece, edge: Edge) -> void:
 func _try_place_on_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vector2i, valid_pieces: Array, edge_to_connect: Edge) -> bool:
 	var candidate_pieces: Array = []
 
-	if _pending_fork_after_boss:
+	if enable_fork:
+		candidate_pieces = valid_pieces.duplicate()
+		candidate_pieces.shuffle()
+	elif _pending_fork_after_boss:
 		var fork_pieces: Array = valid_pieces.filter(func(p: MapPieceData): return p.is_fork)
 		var other_pieces: Array = valid_pieces.filter(func(p: MapPieceData): return not p.is_fork)
 		fork_pieces.shuffle()
@@ -262,7 +266,7 @@ func _on_wave_finished() -> void:
 
 	# Boss cycles are every 10 waves: after each boss, start forcing fork priority
 	# until one fork is successfully placed.
-	if current_wave % WAVES_PER_BOSS == 0:
+	if not enable_fork and current_wave % WAVES_PER_BOSS == 0:
 		_pending_fork_after_boss = true
 
 	# Normal growth cadence is every 2 waves, but while a post-boss fork is pending,
