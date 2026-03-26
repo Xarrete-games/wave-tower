@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="EnemyIndividualGroup" format=3 uid="uid://dqt57t6iuai6u"]
-
-[ext_resource type="Script" uid="uid://bgcq2ktq3w7dq" path="res://legacy_unnused/enemy_generator_legacy/resources_definitions/enemy_individual_group.gd" id="1_4nn0j"]
-
-[resource]
-script = ExtResource("1_4nn0j")
-amount = 3
-metadata/_custom_type_script = "uid://bgcq2ktq3w7dq"

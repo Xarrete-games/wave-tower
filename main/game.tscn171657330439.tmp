@@ -16,8 +16,6 @@ pause = ExtResource("4_f7m14")
 
 [node name="TestData" type="Node" parent="." unique_id=1452994315]
 script = ExtResource("3_2c7eb")
-initial_random_relics = 5
-initial_relics_ids = Array[String](["boniato", "salt"])
 
 [node name="RunHandler" parent="." unique_id=181150192 node_paths=PackedStringArray("event_layer") instance=ExtResource("3_3qcir")]
 event_layer = NodePath("../EventLayer")

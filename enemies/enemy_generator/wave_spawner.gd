@@ -212,4 +212,4 @@ func _apply_stats(enemy: Enemy, data: EnemyData) -> void:
 	enemy.max_health = data.max_health
 	enemy.base_speed = data.base_speed
 	enemy.damage = data.damage
-	enemy.base_gold_value = data.base_gold_value
+	enemy.gold_value = data.base_gold_value

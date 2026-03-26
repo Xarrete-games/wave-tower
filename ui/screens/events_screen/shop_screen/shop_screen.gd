@@ -89,10 +89,10 @@ func _change_to_buy_mode() -> void:
 
 func _build_relics_for_sale() -> void:
 	var current_relics: Array[Relic] = RunContext.relics_manager.get_all_relics()
-	var current_relics_ids: Array[String] = []
+	var current_relics_data: Array[BaseData] = []
 	for relic_data in current_relics:
-		current_relics_ids.append(relic_data.data.id)
-	var relic_offers: Array[ItemOffer] = RunContext.offers_manager.get_relic_offer_by_id(current_relics_ids)
+		current_relics_data.append(relic_data.data)
+	var relic_offers: Array[ItemOffer] = RunContext.offers_manager.create_relic_offers_from_data(current_relics_data)
 	
 	for relic_offer in relic_offers:
 		var slot: ShopSlot = SHOP_SLOT.instantiate()

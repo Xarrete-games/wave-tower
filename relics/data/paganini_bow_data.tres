@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://c5cmvdga24n4i"]
+[gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://c5cmvdga24n4i"]
 
 [ext_resource type="Script" uid="uid://ddxyoyr7wrgbp" path="res://relics/implementations/paganini_bow.gd" id="1_3ru7g"]
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_ly321"]
@@ -6,10 +6,10 @@
 
 [resource]
 script = ExtResource("1_ly321")
-rarity = 1
-id = "Paganini's Bow"
+runtime_script = ExtResource("1_3ru7g")
+id = "paganinis_bow"
 display_name = "Paganini's Bow"
 description = "Increases the attack damage of all towers by 10%."
 icon = ExtResource("3_8rgck")
-runtime_script = ExtResource("1_3ru7g")
+rarity = 1
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

@@ -15,12 +15,11 @@ const STEERING_FACTOR: float = 8.0
 
 @export var base_speed: float = 80
 @export var max_health: float = 50
-@export var base_gold_value: int = 1
+@export var gold_value: int = 1
 @export var damage: int = 1
 
 var health: float
 var hit_tween: Tween
-var gold_value: int
 var _last_is_right_direction: bool = false
 
 var default_modulate_color: Color = Color.WHITE
@@ -84,12 +83,6 @@ func _ready() -> void:
 	speed = base_speed
 	health_bar.set_max_health(max_health)
 	_set_health(max_health)
-	
-	# extra gold dropped
-	gold_value = base_gold_value + RunContext.economy.extra_gold_dropped
-	RunContext.economy.extra_gold_dropped_change.connect(
-		func(value): gold_value = base_gold_value + value)
-	
 	await get_tree().create_timer(0.1).timeout
 	enabled = true
 
@@ -286,6 +279,7 @@ func _play_hit_animation() -> void:
 
 func _die(attack: Attack) -> void:
 	die.emit(self, attack)
+	DamageHooks.on_enemy_die(self, attack)
 	_show_gold_dropped()
 	RunContext.economy.gold += gold_value
 	queue_free()

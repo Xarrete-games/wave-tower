@@ -18,17 +18,6 @@ func _init() -> void:
 	for enemy_data in enemies_data:
 		enemies_data_dic[enemy_data.type_legacy] = enemy_data
 
-func get_enemy_instance(enemy_type: Enemy.TypeLegacy) -> Enemy:
-
-	var data = enemies_data_dic[enemy_type]
-	var enemy_instance: Enemy = data.scene.instantiate() as Enemy
-	enemy_instance.max_health = data.max_health
-	enemy_instance.base_speed = data.base_speed
-	enemy_instance.damage = data.damage
-	enemy_instance.base_gold_value = data.base_gold_value
-
-	return enemy_instance
-
 ## Returns all loaded enemy data resources.
 func get_all_enemies() -> Array[EnemyData]:
 	return enemies_data.duplicate()

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://dsl5c6x0c5d1u"]
+[gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://dsl5c6x0c5d1u"]
 
 [ext_resource type="Script" uid="uid://dq28b2o4kysot" path="res://relics/implementations/tinfoil_hat.gd" id="1_4qss5"]
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_6cu4n"]
@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("1_6cu4n")
-id = "Tinfoil Hat"
+runtime_script = ExtResource("1_4qss5")
+id = "tinfoil_hat"
 display_name = "Tinfoil Hat"
 description = "It protects you from the next cursed relic."
 icon = ExtResource("2_jnqg1")
-runtime_script = ExtResource("1_4qss5")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

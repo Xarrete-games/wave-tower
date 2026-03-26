@@ -42,6 +42,26 @@ func get_all_relics() -> Array[RelicData]:
 	_append_deep_copies(relics, result)
 	return result
 
+func get_random_relics(amount: int, rarity: Variant = null, include_cursed: bool = false, include_only_for_events: bool = false) -> Array[RelicData]:
+	var candidates = get_not_used_relics(rarity)
+	candidates = candidates.filter(func(relic_data: RelicData):
+		if not include_cursed and relic_data.is_cursed:
+			return false
+		if not include_only_for_events and relic_data.only_for_events:
+			return false
+		return true
+	)
+
+	candidates.shuffle()
+
+	var result: Array[RelicData] = []
+	for relic_data in candidates:
+		if result.size() >= amount:
+			break
+		result.append(relic_data)
+
+	return result
+
 func get_not_used_relics(rarity: Variant = null, is_cursed: Variant = null) -> Array[RelicData]:
 	var filtered: Array[RelicData] = relics.filter(func(relic_data: RelicData):
 
@@ -56,7 +76,7 @@ func get_not_used_relics(rarity: Variant = null, is_cursed: Variant = null) -> A
 			elif is_cursed and not relic_data.is_cursed:
 				return false
 
-		return not RunContext.relics_manager.is_maxed(relic_data.id)
+		return not RunContext.relics_manager.has_relic(relic_data.id)
 	)
 
 	var result: Array[RelicData] = []

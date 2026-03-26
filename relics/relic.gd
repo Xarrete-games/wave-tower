@@ -18,6 +18,18 @@ func remove_effect() -> void:
 #########
 # HOOKS
 #########
+
+func on_obtain() -> void:
+	pass
+
+# Towers
+func on_tower_placed(tower_instance: Tower) -> void:
+	pass
+
+# Progress
+func on_wave_finished() -> void:
+	pass
+
 # Damage related hooks
 func on_damage_additive(ctx: DamageContext, amount: float) -> float:
 	return amount
@@ -30,6 +42,10 @@ func on_damage_cap(ctx: DamageContext, current_cap: float) -> float:
 
 func on_debuff_applied(ctx: DebuffContext, target: Enemy) -> void:
 	pass
+
+func on_enemy_die(enemy: Enemy, attack: Attack) -> void:
+	pass
+	
 # Price related hooks
 func on_get_price(ctx: PriceContext) -> void:
 	pass

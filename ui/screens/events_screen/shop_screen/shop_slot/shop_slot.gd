@@ -15,8 +15,7 @@ var item_data: BaseData
 
 func _ready() -> void:
 	health_price.visible = false
-	RunContext.economy.relics_discount_changed.connect(_on_relics_discount_changed)
-	RunContext.economy.consumable_discount_changed.connect(_on_consumable_discount_changed)
+	RunContext.relics_manager.relic_added.connect(_on_relic_added)
 
 func set_item(item_offer: ItemOffer) -> void:
 	_price = item_offer.price
@@ -56,13 +55,13 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	shop_slot_icon.icon_normal_size()
 
-func _on_relics_discount_changed(_relics_discount_mult: float) -> void:
-	if _item.item_data is RelicData:
-		set_item(RunContext.offers_manager.create_relic_offer_from_data(_item.item_data))
-
-func _on_consumable_discount_changed(_consumables_discount_mult: float) -> void:
-	if _item.item_data is ConsumableData:
-		set_item(RunContext.offers_manager.create_consumable_offer_from_data(_item.item_data))
+func _on_relic_added(relic: Relic) -> void:
+	var id = relic.data.id
+	if id == "salmon_nigiri" or id == "butterfish_nigiri" or id == "soya_sauce" or id == "tuna_nigiri":
+		if _item.item_data is RelicData:
+			set_item(RunContext.offers_manager.create_relic_offer_from_data(_item.item_data))
+		elif _item.item_data is ConsumableData:
+			set_item(RunContext.offers_manager.create_consumable_offer_from_data(_item.item_data))
 
 func _chek_health(current_health: int, health_cost: int) -> void:
 	has_enough_health = current_health > health_cost

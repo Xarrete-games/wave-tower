@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://ciqr6oegut2n"]
+[gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://ciqr6oegut2n"]
 
 [ext_resource type="Script" uid="uid://it32x66kd23r" path="res://relics/implementations/perseus's_fury.gd" id="1_ic5cl"]
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_v54sv"]
@@ -6,10 +6,10 @@
 
 [resource]
 script = ExtResource("1_v54sv")
-rarity = 1
-id = "Perseus's fury"
+runtime_script = ExtResource("1_ic5cl")
+id = "perseuss_fury"
 display_name = "Perseus's fury"
 description = "Increase the execute threashold from execution tower in 5%"
 icon = ExtResource("3_5vyg6")
-runtime_script = ExtResource("1_ic5cl")
+rarity = 1
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

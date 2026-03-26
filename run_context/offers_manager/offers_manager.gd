@@ -11,9 +11,6 @@ func _init() -> void:
 # ---------------------------------------------------------
 # RELIC OFFERS API
 # ---------------------------------------------------------
-
-func get_relic_offer_by_id(relic_ids: Array[String]) -> Array[ItemOffer]:
-	return relics_offers_manager.get_relics_offers_by_ids(relic_ids)	
 	
 func create_relic_offers(amount: int) -> Array[ItemOffer]:
 	return relics_offers_manager.create_relic_offers(amount)
@@ -21,16 +18,16 @@ func create_relic_offers(amount: int) -> Array[ItemOffer]:
 func create_relic_offer_from_data(data: BaseData) -> ItemOffer:
 	return relics_offers_manager.create_relic_offer_from_data(data)
 
-func increase_relic_offer_price(item_offer: ItemOffer) -> void:
-	relics_offers_manager.increase_relic_offer_price(item_offer)
+func create_relic_offers_from_data(data: Array[BaseData]) -> Array[ItemOffer]:
+	var offers: Array[ItemOffer] = []
+	for datum in data:
+		offers.append(relics_offers_manager.create_relic_offer_from_data(datum))
+	return offers
 
 # ---------------------------------------------------------
 # COSUMABLES OFFERS API
 # ---------------------------------------------------------
 
-func get_cosumables_offer_by_id(consumables_ids: Array[String]) -> Array[ItemOffer]:
-	return consumables_offers_manager.get_cosumables_offer_by_id(consumables_ids)	
-	
 func create_consumables_offers(amount: int) -> Array[ItemOffer]:
 	return consumables_offers_manager.create_consumables_offers(amount)
 	
@@ -44,7 +41,6 @@ func purchase_offer(item_offer: ItemOffer) -> Variant:
 
 	var item = item_offer.item_data.create_item()
 	if item is Relic:
-		increase_relic_offer_price(item_offer)
 		RunContext.relics_manager.add_relic(item)
 	elif item is Consumable:
 		RunContext.consumables_manager.add_consumable(item)
