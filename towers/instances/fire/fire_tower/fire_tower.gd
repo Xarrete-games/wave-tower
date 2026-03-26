@@ -2,7 +2,7 @@ class_name FireTower extends UpgradeableTower
 
 @export var fire_ball_scene: PackedScene
 
-var apply_burn: bool = true
+var apply_burn: bool = false
 
 @onready var projectile_spawn_pos: Marker2D = $ProjectileSpawnPos
 
