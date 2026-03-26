@@ -33,6 +33,10 @@ func reset_relics() -> void:
 	relics_change.emit([] as Array[Relic])
 
 func add_relic(relic: Relic) -> void:
+	if relics.has(relic.data.id):
+		push_error("Relic with ID '%s' already exists. Cannot add duplicate relics." % relic.data.id)
+		return
+
 	relic.on_obtain()
 	relic.apply_effect()
 	_add_relic(relic)
@@ -51,10 +55,7 @@ func disable_relic(relic_id: String) -> void:
 		relics_change.emit(relics.values())
 
 func _add_relic(relic: Relic) -> void:
-	if relics.has(relic.data.id):
-		push_error("Relic with ID '%s' already exists. Cannot add duplicate relics." % relic.data.id)
-	else:
-		relics[relic.data.id] = relic
+	relics[relic.data.id] = relic
 	relics_count[relic.data.id] = relics_count.get(relic.data.id, 0) + 1
 	relics_change.emit(relics.values())
 	relic_added.emit(relic)
