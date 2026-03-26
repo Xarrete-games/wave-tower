@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dbvdh5k2p0jb7"]
 
 [ext_resource type="PackedScene" uid="uid://2ajf0sqc0tsw" path="res://levels/map_pieces/map_piece_base.tscn" id="1_6s1gd"]
-[ext_resource type="Texture2D" uid="uid://cbftl8kabj1km" path="res://assets/textures/radial_circle_texture.tres" id="2_0i8ll"]
+[ext_resource type="Texture2D" uid="uid://bf4pr5pniaq5e" path="res://assets/textures/radial_circle_texture.tres" id="2_0i8ll"]
 [ext_resource type="Texture2D" uid="uid://3b5d4ylngtpl" path="res://assets/sprites/decoration/volcano_01.png" id="2_4msci"]
 [ext_resource type="Texture2D" uid="uid://dvqaayu7gl8m5" path="res://assets/sprites/decoration/Stone1.png" id="2_iasse"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="3_0i8ll"]
