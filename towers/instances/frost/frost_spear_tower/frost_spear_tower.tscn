@@ -83,9 +83,6 @@ frost_spear_projectile_scene = ExtResource("3_dwnik")
 [node name="CristalLight" parent="." index="1" unique_id=1008625391]
 color = Color(0.79607844, 1, 1, 1)
 
-[node name="RangePreview" parent="." index="2" unique_id=1110296903]
-color_fill = Color(1, 1, 1, 0.3)
-
 [node name="Sprite2D" parent="." index="3" unique_id=1563452745]
 position = Vector2(0, -60)
 scale = Vector2(0.4, 0.4)

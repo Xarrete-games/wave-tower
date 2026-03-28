@@ -4,19 +4,9 @@ class_name Hooks
 # --------------------
 # --- DAMAGE ---
 # --------------------
-static func modify_damage(ctx: DamageContext) -> float:
-	var damage = ctx.attack.damage
+static func on_before_damage(ctx: DamageContext) -> void:
 	for relic in RunContext.relics_manager.get_all_relics():
-		damage += relic.modify_damage_additive(damage, ctx.attack, ctx.target)
-
-	for relic in RunContext.relics_manager.get_all_relics():
-		damage *= relic.modify_damage_multiplicative(damage, ctx.attack, ctx.target)
-
-	for relic in RunContext.relics_manager.get_all_relics():
-		damage = relic.modify_damage_cap(damage, ctx.attack, ctx.target)
-
-	return damage
-
+		relic.on_before_damage(ctx)
 
 static func on_debuff_applied(ctx: DebuffContext, target: Enemy) -> void:
 	for relic in RunContext.relics_manager.get_all_relics():

@@ -17,16 +17,8 @@ func on_wave_finished() -> void:
 # --------------------
 # --- DAMAGE ---
 # --------------------
-
-# Damage related hooks
-func modify_damage_additive(amount: float, attack: Attack, target: Enemy) -> float:
-	return amount
-
-func modify_damage_multiplicative(amount: float, attack: Attack, target: Enemy) -> float:
-	return amount
-
-func modify_damage_cap(amount: float, attack: Attack, target: Enemy) -> float:
-	return amount
+func on_before_damage(ctx: DamageContext) -> void:
+	pass
 
 # --------------------
 # --- DEBUFF ---

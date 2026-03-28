@@ -245,7 +245,8 @@ func apply_damage(attack: Attack) -> void:
 		return
 
 	var ctx := DamageContext.new(attack, self)
-	var modified_damage: float = Hooks.modify_damage(ctx)
+	Hooks.on_before_damage(ctx)
+	var modified_damage: float = ctx.get_total_damage()
 	
 	attack.damage = modified_damage
 	
