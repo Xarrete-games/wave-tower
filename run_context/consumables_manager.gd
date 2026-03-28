@@ -30,6 +30,7 @@ func _on_consumable_used(consumable: Consumable) -> void:
 func _on_consumable_clicked(consumable: Consumable) -> void:
     if consumable is ConsumableUsable:
         consumable.use()
+        Hooks.on_consumable_used(consumable)
         consumable.used.emit(consumable)
     else:
         consumable_clicked.emit(consumable)

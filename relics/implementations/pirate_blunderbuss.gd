@@ -1,7 +1,4 @@
 class_name PirateBlunderbuss extends Relic
 
-func apply_effect() -> void:
-	RunContext.loot_manager.chance_drop_consumable += 20
-
-func remove_effect() -> void:
-	RunContext.loot_manager.chance_drop_consumable -= 20
+func on_before_get_loot(ctx: LootContext) -> void:
+	ctx.chance_drop_consumable += 20

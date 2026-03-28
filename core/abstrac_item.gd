@@ -37,10 +37,24 @@ func on_debuff_applied(ctx: DebuffContext, target: Enemy) -> void:
 
 func on_enemy_die(enemy: Enemy, attack: Attack) -> void:
 	pass
-	
+
+# --------------------
+# --- CONSUMABLE ---
+# --------------------
+
+func on_consumable_used(consumable: Consumable) -> void:
+	pass
+
 # --------------------
 # --- PRICE ---
 # --------------------
 
 func on_get_price(ctx: PriceContext) -> void:
+	pass
+
+# --------------------
+# --- LOOT ---
+# --------------------
+
+func on_before_get_loot(ctx: LootContext) -> void:
 	pass

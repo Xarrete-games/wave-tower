@@ -49,3 +49,19 @@ static func on_get_price(ctx: PriceContext) -> void:
 static func on_tower_placed(tower: Tower) -> void:
 	for relic in RunContext.relics_manager.get_all_relics():
 		relic.on_tower_placed(tower)
+
+# --------------------
+# --- CONSUMABLES ---
+# --------------------
+
+static func on_consumable_used(consumable: Consumable) -> void:
+	for relic in RunContext.relics_manager.get_all_relics():
+		relic.on_consumable_used(consumable)
+
+# --------------------
+# --- CONSUMABLES ---
+# --------------------
+
+static func on_before_get_loot(ctx: LootContext) -> void:
+	for relic in RunContext.relics_manager.get_all_relics():
+		relic.on_before_get_loot(ctx)
