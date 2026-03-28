@@ -1,7 +1,4 @@
 class_name CaptainCap extends Relic
 
-func apply_effect() -> void:
-	pass
-
-func remove_effect() -> void:
-	pass
+func on_before_relic_reward(ctx: RelicsRewardsContext) -> void:
+	ctx.number_of_relics += 1

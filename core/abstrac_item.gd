@@ -58,3 +58,6 @@ func on_get_price(ctx: PriceContext) -> void:
 
 func on_before_get_loot(ctx: LootContext) -> void:
 	pass
+
+func on_before_relic_reward(ctx: RelicsRewardsContext) -> void:
+	pass

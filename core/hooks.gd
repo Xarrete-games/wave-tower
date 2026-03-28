@@ -59,9 +59,13 @@ static func on_consumable_used(consumable: Consumable) -> void:
 		relic.on_consumable_used(consumable)
 
 # --------------------
-# --- CONSUMABLES ---
+# --- REWARDS ---
 # --------------------
 
 static func on_before_get_loot(ctx: LootContext) -> void:
 	for relic in RunContext.relics_manager.get_all_relics():
 		relic.on_before_get_loot(ctx)
+
+static func on_before_relic_reward(ctx: RelicsRewardsContext) -> void:
+	for relic in RunContext.relics_manager.get_all_relics():
+		relic.on_before_relic_reward(ctx)
