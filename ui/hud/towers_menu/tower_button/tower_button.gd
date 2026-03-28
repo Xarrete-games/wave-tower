@@ -75,7 +75,7 @@ func _update_price() -> void:
 		price = 0
 	elif configuration:
 		var ctx = PriceContext.new(PriceContext.PriceType.TOWER, configuration.build_price)
-		EconomyHooks.on_get_price(ctx)
+		Hooks.on_get_price(ctx)
 		price = ctx.final_price
 
 func _on_available_free_towers_change(available_free_towers: int) -> void:

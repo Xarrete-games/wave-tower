@@ -47,6 +47,7 @@ func get_tower_configuration_by_id(id: String) -> TowerDataWithInstance:
 
 # called from tower_placer to inform
 func add_tower_placed(tower: Tower) -> void:
+	Hooks.on_tower_placed(tower)
 	_update_tower_count(tower.type, towers_placed[tower.type] + 1)
 	tower_cards_amount[tower.data.id] -= 1
 	var tower_configuration = get_tower_configuration_by_id(tower.data.id)

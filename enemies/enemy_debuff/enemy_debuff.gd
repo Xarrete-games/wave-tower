@@ -1,5 +1,5 @@
 @abstract
-class_name EnemyDebuff extends RefCounted
+class_name EnemyDebuff extends AbstractItem
 
 enum Type { FROST, BURN }
 
@@ -45,12 +45,3 @@ func on_tick(enemy: Enemy):
 
 func on_expire(enemy: Enemy):
 	pass
-
-func on_damage_additive(ctx: DamageContext, amount: float) -> float:
-	return amount
-
-func on_damage_multiplicative(ctx: DamageContext, amount: float) -> float:
-	return amount
-
-func on_damage_cap(ctx: DamageContext, current_cap: float) -> float:
-	return current_cap

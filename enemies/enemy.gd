@@ -245,13 +245,9 @@ func apply_damage(attack: Attack) -> void:
 		return
 
 	var ctx := DamageContext.new(attack, self)
+	var modified_damage: float = Hooks.modify_damage(ctx)
 	
-	ctx.flat_damage += DamageHooks.modify_damage_additive(ctx, 0.0)
-	ctx.damage_mult *= DamageHooks.modify_damage_multiplicative(ctx, 1.0)
-	ctx.damage_cap = DamageHooks.modify_damage_cap(ctx, ctx.damage_cap)
-	
-	var final_damage = ctx.calculate_final_damage(attack.damage)
-	attack.damage = final_damage
+	attack.damage = modified_damage
 	
 	var damage_done: float = min(attack.damage, health)
 	_set_health(health - attack.damage)
@@ -279,7 +275,7 @@ func _play_hit_animation() -> void:
 
 func _die(attack: Attack) -> void:
 	die.emit(self, attack)
-	DamageHooks.on_enemy_die(self, attack)
+	Hooks.on_enemy_die(self, attack)
 	_show_gold_dropped()
 	RunContext.economy.gold += gold_value
 	queue_free()

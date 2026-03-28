@@ -2,7 +2,7 @@ class_name BlackWitchHat extends Relic
 
 const BONUS_DAMAGE: float = 5.0
 
-func on_damage_additive(ctx: DamageContext, amount: float) -> float:
-	if ctx.target.has_any_debuff() and ctx.source.type == Source.SourceType.TOWER:
+func modify_damage_additive(amount: float, attack: Attack, target: Enemy) -> float:
+	if target.has_any_debuff() and attack.source.type == Source.SourceType.TOWER:
 		return amount + BONUS_DAMAGE
 	return amount

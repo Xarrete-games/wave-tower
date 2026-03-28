@@ -44,7 +44,7 @@ func create_relic_offers(amount: int) -> Array[ItemOffer]:
 func create_relic_offer_from_data(data: RelicData) -> ItemOffer:
 	var base_price: int = BASE_PRICE_BY_RARITY.get(data.rarity, BASE_PRICE_BY_RARITY[BaseData.Rarity.COMMON])
 	var ctx = PriceContext.new(PriceContext.PriceType.RELIC, base_price)
-	EconomyHooks.on_get_price(ctx)
+	Hooks.on_get_price(ctx)
 
 	return ItemOffer.new(
 		data,

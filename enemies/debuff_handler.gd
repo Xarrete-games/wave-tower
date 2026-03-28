@@ -8,7 +8,7 @@ var debuffs: Array[EnemyDebuffInstance] = []
 
 func add_debuff(debuff: EnemyDebuff, amount: int, enemy: Enemy):
 	var ctx = DebuffContext.new(debuff, amount)
-	DamageHooks.on_debuff_applied(ctx, enemy)
+	Hooks.on_debuff_applied(ctx, enemy)
 	
 	for i in range(ctx.stacks):
 		if get_stacks(debuff.type) >= debuff.max_stacks:

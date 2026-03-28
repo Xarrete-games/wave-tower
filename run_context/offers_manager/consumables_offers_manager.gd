@@ -26,7 +26,7 @@ func create_consumables_offers(amount: int) -> Array[ItemOffer]:
 func create_consumable_offer_from_data(data: BaseData) -> ItemOffer:
 	var base_price: int = BASE_PRICE_BY_RARITY.get(data.rarity, BASE_PRICE_BY_RARITY[BaseData.Rarity.COMMON])
 	var ctx = PriceContext.new(PriceContext.PriceType.CONSUMABLE, base_price)
-	EconomyHooks.on_get_price(ctx)
+	Hooks.on_get_price(ctx)
 
 	return ItemOffer.new(
 		data,

@@ -137,7 +137,7 @@ func _report_finished() -> void:
 	if _wave_number >= TOTAL_WAVES:
 		RunContext.progress.last_wave_finished.emit()
 	else:
-		ProgressHooks.on_wave_finished()
+		Hooks.on_wave_finished()
 		RunContext.progress.current_wave_finished.emit()
 
 
