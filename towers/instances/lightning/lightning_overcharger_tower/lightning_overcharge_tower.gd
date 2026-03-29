@@ -36,9 +36,6 @@ func _on_tower_placed(tower: Tower) -> void:
 	await get_tree().process_frame
 	buff_area.monitoring = true
 
-func _on_extra_stats_change(_tower_extra_stats: TowerExtraStats) -> void:
-	pass
-
 func _apply_stats_changes() -> void:
 	super._apply_stats_changes()
 	(buff_area_shape.shape as CircleShape2D).radius = stats.attack_range

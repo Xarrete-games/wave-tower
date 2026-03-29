@@ -13,6 +13,3 @@ func _fire() -> void:
 	electric_ball.global_position = projectile_spawn_pos.global_position
 	var attack: Attack = _get_attack()
 	electric_ball.set_target(_current_target, attack)
-
-func _on_extra_stats_change(_tower_extra_stats: TowerExtraStats) -> void:
-	pass

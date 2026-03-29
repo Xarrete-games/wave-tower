@@ -16,6 +16,3 @@ func _fire() -> void:
 	var attack: Attack = _get_attack()
 	var debuff = EnemyDebuff.create_burn(damage_source) if apply_burn else null
 	fire_ball.set_target(_current_target, attack, debuff)
-
-func _on_extra_stats_change(tower_extra_stats: TowerExtraStats) -> void:
-	apply_burn = tower_extra_stats.all_fire_apply_burn

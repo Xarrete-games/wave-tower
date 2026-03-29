@@ -1,8 +1,14 @@
-class_name PerseusFury extends Relic
+class_name PerseusFury extends TowerBuffRelic
 
-func apply_effect() -> void:
-	var tower_buff = TowerBuff.new(Source.new(Source.SourceType.RELIC, data.id), ExecuteThresholdModifier.new(5))
-	RunContext.towers_buffs.add_buff(tower_buff)
+const EXTRA_EXECUTE_THRESHOLD = 5
 
-func remove_effect() -> void:
-	RunContext.towers_buffs.remove_buff(data.id)
+func _add_buff(tower: Tower) -> void:
+	var fire_laser_tower = tower as FireLaserTower
+	fire_laser_tower.execute_threshold += EXTRA_EXECUTE_THRESHOLD
+
+func _remove_buff(tower: Tower) -> void:
+	var fire_laser_tower = tower as FireLaserTower	
+	fire_laser_tower.execute_threshold -= EXTRA_EXECUTE_THRESHOLD
+
+func _is_valid_tower(tower: Tower) -> bool:
+	return tower is FireLaserTower

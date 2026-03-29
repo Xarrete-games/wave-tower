@@ -14,6 +14,3 @@ func _fire() -> void:
 	var attack: Attack = _get_attack()
 	var debuff = EnemyDebuff.create_frost(damage_source)
 	frost_ball.set_target(_current_target, attack, debuff)
-
-func _on_extra_stats_change(_tower_extra_stats: TowerExtraStats) -> void:
-	pass

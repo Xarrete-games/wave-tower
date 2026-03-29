@@ -1,23 +1,12 @@
-class_name EchoOfVoid extends Relic
-
-func on_obtain() -> void:
-	for tower in RunContext.towers_manager.towers:
-		_add_buff(tower)
-
-func on_tower_place(tower: Tower) -> void:
-	_add_buff(tower)
-
-func on_remove() -> void:
-	for tower in RunContext.towers_manager.towers:
-		_remove_buff(tower)
+class_name EchoOfVoid extends TowerBuffRelic
 
 func _add_buff(tower: Tower) -> void:
-	if tower is LightningChainTower:
-		var lightning_chain_tower = tower as LightningChainTower
-		lightning_chain_tower.current_bounces += 1
+	var lightning_chain_tower = tower as LightningChainTower
+	lightning_chain_tower.current_bounces += 1
 
 func _remove_buff(tower: Tower) -> void:
-	if tower is LightningChainTower:
-		var lightning_chain_tower = tower as LightningChainTower
-		lightning_chain_tower.current_bounces -= 1
+	var lightning_chain_tower = tower as LightningChainTower
+	lightning_chain_tower.current_bounces -= 1
 
+func _is_valid_tower(tower: Tower) -> bool:
+	return tower is LightningChainTower

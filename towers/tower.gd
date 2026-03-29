@@ -74,7 +74,6 @@ func _ready():
 	# handlers
 	experience_handler.exp_data_change.connect(_on_exp_data_change)
 	tower_stats_handler.stats_change.connect(_on_stats_change)
-	tower_stats_handler.extra_stats_change.connect(_on_extra_stats_change)
 	tower_stats_handler.set_data(data, type, experience_handler)
 	area_detector.target_change.connect(_on_target_change)
 	
@@ -170,9 +169,6 @@ func _on_attack_timer_timeout() -> void:
 
 @abstract
 func _fire() -> void
-
-@abstract
-func _on_extra_stats_change(tower_extra_stats: TowerExtraStats) -> void
 
 # --------------------
 # --- STATS ---

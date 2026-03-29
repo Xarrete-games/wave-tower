@@ -16,10 +16,6 @@ func _process(_delta: float) -> void:
 	if not _current_target:
 		return
 
-func _on_extra_stats_change(extra_stats: TowerExtraStats) -> void:
-	execute_threshold = base_execute_threshold + extra_stats.execute_threshold
-	apply_burn = extra_stats.all_fire_apply_burn
-
 func _fire() -> void:
 	var next_attack = _get_attack() if _current_target.get_percentage_remaining_health() > execute_threshold else _get_letal_attack()
 

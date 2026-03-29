@@ -1,12 +1,10 @@
 class_name TowerStatsHandler extends Node
 
 signal stats_change(new_stats: TowerStats)
-signal extra_stats_change(new_extra_stats: TowerExtraStats)
 
 # base
 var base_stats: TowerStats
 var stats_on_level: TowerStats
-var base_extra_stats: TowerExtraStats = null
 # local
 var local_buffs: Array[TowerBuff]
 var local_stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new():
@@ -21,7 +19,6 @@ var global_stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new():
 
 # current stats
 var stats: TowerStats = TowerStats.new()
-var extra_stats: TowerExtraStats = null
 
 var tower_type: Tower.Type
 var experience_handler: ExperienceHandler
@@ -82,7 +79,6 @@ func _set_global_buffs(new_global_stats_acc: TowerStatsAccumulator) -> void:
 # recalculate total stats
 func _update_stats() -> void:
 	var total_stats_acc: TowerStatsAccumulator = global_stats_acc.merge(local_stats_acc)
-
 	# damage
 	stats.damage = (base_stats.damage + total_stats_acc.flat_damage) * (1 + total_stats_acc.damage_mult)
 	# range
@@ -100,13 +96,4 @@ func _update_stats() -> void:
 	# critic damage
 	stats.critic_damage = (base_stats.critic_damage + total_stats_acc.flat_critic_damage) * (1 + total_stats_acc.critic_damage_mult)
 
-	# extra stats
-	var new_extra_stats: TowerExtraStats = TowerExtraStats.new()
-	new_extra_stats.execute_threshold = total_stats_acc.flat_execute_threshold
-	new_extra_stats.double_shot_chance = total_stats_acc.flat_double_shot_chance
-	new_extra_stats.all_fire_apply_burn = total_stats_acc.all_fire_apply_burn
-
-	extra_stats = new_extra_stats
-
-	extra_stats_change.emit(extra_stats)
 	stats_change.emit(stats)

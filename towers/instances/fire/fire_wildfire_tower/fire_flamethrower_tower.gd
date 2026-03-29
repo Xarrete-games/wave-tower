@@ -14,9 +14,6 @@ func _fire() -> void:
 	fire_flamethrower_projectile.set_target(_current_target, attack)
 	flame_thrower_duration_timer.start()
 
-func _on_extra_stats_change(_tower_extra_stats: TowerExtraStats) -> void:
-	pass
-
 func _on_new_target_change(enemy: Enemy) -> void:
 	if fire_flamethrower_projectile.is_throwing():
 		if enemy == null:
