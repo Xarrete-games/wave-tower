@@ -30,15 +30,6 @@ func get_enemies_by_type(type: EnemyData.Type) -> Array[EnemyData]:
 func get_spawnable_enemies() -> Array[EnemyData]:
 	return enemies_data.filter(func(data: EnemyData): return data.type != EnemyData.Type.BOSS)
 
-func get_enemy_wave_info(enemy_type: Enemy.TypeLegacy) -> EnemyWaveInfo:
-	var data = enemies_data_dic[enemy_type]
-	var enemy_wave_info: EnemyWaveInfo = EnemyWaveInfo.new()
-	enemy_wave_info.icon = data.icon
-	enemy_wave_info.amount = 0
-	enemy_wave_info.name = data.name
-	enemy_wave_info.type = enemy_type
-	return enemy_wave_info
-
 func _load_resources_from_dir(path: String) -> Array[Resource]:
 	var result: Array[Resource] = []
 
