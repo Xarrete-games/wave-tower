@@ -2,16 +2,14 @@ class_name EchoOfVoid extends Relic
 
 func on_obtain() -> void:
 	for tower in RunContext.towers_manager.towers:
-		if tower is LightningChainTower:
-			_add_buff(tower)
+		_add_buff(tower)
 
 func on_tower_place(tower: Tower) -> void:
 	_add_buff(tower)
 
 func on_remove() -> void:
 	for tower in RunContext.towers_manager.towers:
-		if tower is LightningChainTower:
-			_remove_buff(tower)
+		_remove_buff(tower)
 
 func _add_buff(tower: Tower) -> void:
 	if tower is LightningChainTower:

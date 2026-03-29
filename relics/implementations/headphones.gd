@@ -1,8 +1,24 @@
 class_name HeadPhones extends Relic
 
-func apply_effect() -> void:
-	var tower_buff = TowerBuff.new(Source.new(Source.SourceType.RELIC, data.id), DoubleShotModifier.new(0.2))
-	RunContext.towers_buffs.add_buff(tower_buff)
+const EXTRA_CHANCE = 0.2
 
-func remove_effect() -> void:
-	RunContext.towers_buffs.remove_buff(data.id)
+func on_obtain() -> void:
+	for tower in RunContext.towers_manager.towers:
+		_add_buff(tower)
+
+func on_tower_place(tower: Tower) -> void:
+	_add_buff(tower)
+
+func on_remove() -> void:
+	for tower in RunContext.towers_manager.towers:
+		_remove_buff(tower)
+
+func _add_buff(tower: Tower) -> void:
+	if tower is FrostNovaTower:
+		var frost_nova_tower = tower as FrostNovaTower
+		frost_nova_tower.double_shot_chance += EXTRA_CHANCE
+
+func _remove_buff(tower: Tower) -> void:
+	if tower is FrostNovaTower:
+		var frost_nova_tower = tower as FrostNovaTower
+		frost_nova_tower.double_shot_chance -= EXTRA_CHANCE

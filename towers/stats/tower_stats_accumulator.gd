@@ -24,9 +24,6 @@ var flat_execute_threshold: float = 0.0
 # fire tower
 var all_fire_apply_burn: bool = false
 
-# nova tower
-var flat_double_shot_chance: float = 0.0
-
 func merge(other: TowerStatsAccumulator) -> TowerStatsAccumulator:
     var result :TowerStatsAccumulator = TowerStatsAccumulator.new()
     # commons
@@ -56,8 +53,5 @@ func merge(other: TowerStatsAccumulator) -> TowerStatsAccumulator:
     result.flat_execute_threshold = flat_execute_threshold + other.flat_execute_threshold
     result.all_fire_apply_burn = all_fire_apply_burn or other.all_fire_apply_burn
 
-    # frost
-    result.flat_double_shot_chance = flat_double_shot_chance + other.flat_double_shot_chance
-    
 
     return result

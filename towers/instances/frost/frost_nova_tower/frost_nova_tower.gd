@@ -7,7 +7,7 @@ var double_shot_chance = 0
 @onready var projectil_spawn_point: Marker2D = $ProjectilSpawnPoint
 
 func _on_extra_stats_change(tower_extra_stats: TowerExtraStats) -> void:
-	double_shot_chance = tower_extra_stats.double_shot_chance
+	pass
 
 func _fire() -> void:
 	cristal_light.play()
