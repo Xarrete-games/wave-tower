@@ -24,9 +24,6 @@ var flat_execute_threshold: float = 0.0
 # fire tower
 var all_fire_apply_burn: bool = false
 
-# chain tower
-var flat_extra_hits: int = 0
-
 # nova tower
 var flat_double_shot_chance: float = 0.0
 
@@ -58,9 +55,6 @@ func merge(other: TowerStatsAccumulator) -> TowerStatsAccumulator:
     # fire
     result.flat_execute_threshold = flat_execute_threshold + other.flat_execute_threshold
     result.all_fire_apply_burn = all_fire_apply_burn or other.all_fire_apply_burn
-
-    # lightning
-    result.flat_extra_hits = flat_extra_hits + other.flat_extra_hits
 
     # frost
     result.flat_double_shot_chance = flat_double_shot_chance + other.flat_double_shot_chance

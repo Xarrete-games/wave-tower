@@ -1,7 +1,5 @@
 class_name DamageNumbers extends Control
 
-enum Type {NORMAL, SKILL, CRITICAL, EXECUTE}
-
 @export var time_to_vanish: float = 2
 
 @onready var damage_label: Label = $DamageLabel
@@ -17,7 +15,7 @@ func _ready():
 	
 func set_attack(attack: Attack) -> void:
 	damage_label.text = str(int(round(attack.damage)))
-	if attack.damage_type == Type.CRITICAL or attack.damage_type == Type.EXECUTE:
+	if attack.is_critical or attack.is_execution:
 		var critical_settings = damage_label.label_settings.duplicate()
 		critical_settings.font_color = Color.RED
 		damage_label.label_settings = critical_settings

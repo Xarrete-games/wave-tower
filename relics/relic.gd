@@ -18,3 +18,6 @@ func remove_effect() -> void:
 
 func on_obtain() -> void:
 	pass
+
+func on_remove() -> void:
+	pass

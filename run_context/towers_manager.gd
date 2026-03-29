@@ -8,17 +8,13 @@ signal tower_unhovered(tower: Tower)
 
 const INITIAL_TOWERS_IDS = ["fire_tower", "frost_tower", "lightning_tower"]
 
-var towers_placed: Dictionary[Tower.Type, int] = {
-	Tower.Type.FIRE: 0,
-	Tower.Type.FROST: 0,
-	Tower.Type.LIGHTNING: 0
-}
 
 var last_tower_ids: Dictionary[String, int] = {
 	
 }
 
 var towers_ids: Array[String] = []
+var towers: Array[Tower] = []
 var all_tower_data: Array[TowerDataWithInstance] = []
 var tower_cards_amount: Dictionary[String, int] = {}
 
@@ -35,9 +31,9 @@ func get_random_towers(amount: int) -> Array[TowerDataWithInstance]:
 	return available_towers.slice(0, amount)
 
 func reset_towers() -> void:
-	_update_tower_count(Tower.Type.FIRE, 0)
-	_update_tower_count(Tower.Type.LIGHTNING, 0)
-	_update_tower_count(Tower.Type.FROST, 0)
+	_update_tower_count(Tower.Type.FIRE)
+	_update_tower_count(Tower.Type.LIGHTNING)
+	_update_tower_count(Tower.Type.FROST)
 
 func get_tower_configuration_by_id(id: String) -> TowerDataWithInstance:
 	for tower_configuration in all_tower_data:
@@ -48,7 +44,8 @@ func get_tower_configuration_by_id(id: String) -> TowerDataWithInstance:
 # called from tower_placer to inform
 func add_tower_placed(tower: Tower) -> void:
 	Hooks.on_tower_placed(tower)
-	_update_tower_count(tower.type, towers_placed[tower.type] + 1)
+	towers.append(tower)
+	_update_tower_count(tower.type)
 	tower_cards_amount[tower.data.id] -= 1
 	var tower_configuration = get_tower_configuration_by_id(tower.data.id)
 	tower_card_amount_change.emit(tower_configuration, tower_cards_amount[tower.data.id])
@@ -56,20 +53,24 @@ func add_tower_placed(tower: Tower) -> void:
 	tower_placed.emit(tower)
 
 func tower_removed(tower: Tower) -> void:
-	var type = tower.type
-	_update_tower_count(tower.type, towers_placed[tower.type] - 1)
+	towers.erase(tower)
+	_update_tower_count(tower.type)
 	towers_ids.erase(tower.id)
 	tower.queue_free()
 
 func get_tower_count(tower_type: Tower.Type) -> int:
-	return towers_placed[tower_type]
+	var count = 0
+	for tower in towers:
+		if tower.type == tower_type:
+			count += 1
+	return count
+
 
 func _on_level_changed(_new_level: int) -> void:
 	reset_towers()
 
-func _update_tower_count(tower_type: Tower.Type, value: int) -> void:
-	towers_placed[tower_type] = value
-	tower_count_change.emit(tower_type, value)
+func _update_tower_count(tower_type: Tower.Type) -> void:
+	tower_count_change.emit(tower_type, get_tower_count(tower_type))
 
 func _init_inital_towers_data() -> void:
 	var inital_cards = []

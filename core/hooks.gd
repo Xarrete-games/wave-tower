@@ -4,6 +4,11 @@ class_name Hooks
 # --------------------
 # --- DAMAGE ---
 # --------------------
+static func on_before_attack(ctx: AttackContext) -> void:
+	for relic in RunContext.relics_manager.get_all_relics():
+		relic.on_before_attack(ctx)
+
+
 static func on_before_damage(ctx: DamageContext) -> void:
 	for relic in RunContext.relics_manager.get_all_relics():
 		relic.on_before_damage(ctx)

@@ -1,8 +1,25 @@
 class_name EchoOfVoid extends Relic
 
-func apply_effect() -> void:
-	var tower_buff = TowerBuff.new(Source.new(Source.SourceType.RELIC, data.id), NumWavesModifier.new(1))
-	RunContext.towers_buffs.add_buff(tower_buff)
+func on_obtain() -> void:
+	for tower in RunContext.towers_manager.towers:
+		if tower is LightningChainTower:
+			_add_buff(tower)
 
-func remove_effect() -> void:
-	RunContext.towers_buffs.remove_buff(data.id)
+func on_tower_place(tower: Tower) -> void:
+	_add_buff(tower)
+
+func on_remove() -> void:
+	for tower in RunContext.towers_manager.towers:
+		if tower is LightningChainTower:
+			_remove_buff(tower)
+
+func _add_buff(tower: Tower) -> void:
+	if tower is LightningChainTower:
+		var lightning_chain_tower = tower as LightningChainTower
+		lightning_chain_tower.current_bounces += 1
+
+func _remove_buff(tower: Tower) -> void:
+	if tower is LightningChainTower:
+		var lightning_chain_tower = tower as LightningChainTower
+		lightning_chain_tower.current_bounces -= 1
+

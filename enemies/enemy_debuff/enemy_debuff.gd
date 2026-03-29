@@ -1,5 +1,5 @@
 @abstract
-class_name EnemyDebuff extends AbstractItem
+class_name EnemyDebuff extends EnemyEffect
 
 enum Type { FROST, BURN }
 

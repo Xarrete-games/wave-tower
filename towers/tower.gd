@@ -43,12 +43,11 @@ var exp_data: TowerExpData:
 		exp_data = value
 		stats_change.emit(self)
 
-var modifiers: Array[AttackModifier] = []
 var id: String
 var type_id: String = get_script().get_global_name()
 var damage_source: Source:
 	get:
-		return Source.new(Source.SourceType.TOWER, type_id, id)
+		return Source.new(Source.SourceType.TOWER, type_id, self)
 
 @onready var area_detector: AreaDetector = $AreaDetector
 @onready var range_preview: RangePreview = $RangePreview
@@ -65,19 +64,13 @@ func _ready():
 	data.build()
 	range_collision.shape = CircleShape2D.new()
 	# modifiers
-	modifiers = RunContext.towers_buffs.get_modifiers()
+	
 	RunContext.towers_buffs.targeting_modes_change.connect(func(new_modes: Array[Tower.TargetingMode]) -> void:
 		if targeting_mode not in new_modes:
 			targeting_mode = TargetingMode.FIRST_IN_PROGRESS
 	)
-	RunContext.towers_buffs.attack_modifiers_added.connect(func(new_modifier: AttackModifier) -> void:
-		modifiers.append(new_modifier)
-	)
-	RunContext.towers_buffs.attack_modifiers_removed.connect(func(source_id: String) -> void:
-		modifiers = modifiers.filter(func(mod: AttackModifier) -> bool:
-			return mod.source.type_id != source_id
-		)
-	)
+	
+	
 	# handlers
 	experience_handler.exp_data_change.connect(_on_exp_data_change)
 	tower_stats_handler.stats_change.connect(_on_stats_change)
@@ -142,16 +135,14 @@ func copy_tower_data(from_tower: Tower) -> void:
 func _get_attack() -> Attack:
 	var is_critic = _is_critical_hit()
 	var attack_damage = stats.damage * (1 + (stats.critic_damage / 100)) if is_critic else stats.damage
-	var damage_type = DamageNumbers.Type.CRITICAL if is_critic else DamageNumbers.Type.NORMAL
-	var attack = Attack.new(attack_damage, damage_type, damage_source)
+	var attack = Attack.new(attack_damage,damage_source, is_critic)
 
-	var attack_context = AttackContext.new(_current_target, attack, is_critic)
-	for modifier in modifiers:
-		modifier.on_before_hit(attack_context)
-	 
+	var ctx = AttackContext.new(_current_target, attack, self)
+	
+	Hooks.on_before_attack(ctx)
 	# apply final mult
-	attack_context.attack.damage = attack_context.attack.damage * attack_context.mult
-	return attack_context.attack
+	ctx.attack.damage = ctx.rebuild_attack()
+	return ctx.attack
 	
 func _is_critical_hit() -> bool:
 	var random_value: float = randf()

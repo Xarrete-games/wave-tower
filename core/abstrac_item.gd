@@ -20,6 +20,9 @@ func on_wave_finished() -> void:
 func on_before_damage(ctx: DamageContext) -> void:
 	pass
 
+func on_before_attack(ctx: AttackContext) -> void:
+	pass
+
 # --------------------
 # --- DEBUFF ---
 # --------------------

@@ -18,7 +18,6 @@ var towers_buffs: TowersBuffsManager
 var relics_manager: RelicsManager
 var consumables_manager: ConsumablesManager
 var enemy_manager: EnemyManager
-var damage_recount: DamageRecount
 
 func _ready() -> void:
 	reset_run()
@@ -34,7 +33,6 @@ func reset_run() -> void:
 	towers_buffs = TowersBuffsManager.new(buff_scheduler)
 	consumables_manager = ConsumablesManager.new()
 	enemy_manager = EnemyManager.new()
-	damage_recount = DamageRecount.new(towers_manager, progress)
 	is_on_restarting = false
 
 	status.player_died.connect(_on_die, CONNECT_ONE_SHOT)

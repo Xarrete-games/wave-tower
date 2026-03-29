@@ -1,17 +1,11 @@
-
 class_name TowersBuffsManager extends RefCounted
 
 signal tower_buffs_change(new_stats: TowerStatsAccumulator)
 signal targeting_modes_change(new_modes: Array[Tower.TargetingMode])
-signal attack_modifiers_added(new_modifier: AttackModifier)
-signal attack_modifiers_removed(source_id: String)
-
-var attack_modifiers: Array[AttackModifier] = []
 
 # current buffs
 var towers_buffs: Array[TowerBuff] = []
 	
-
 # current stats accumulators
 var towers_stats_accumulator: TowerStatsAccumulator = TowerStatsAccumulator.new():
 	set(value):
@@ -60,19 +54,6 @@ func remove_buff(source_id: String) -> void:
 	for buff in towers_buffs:
 		buff.modifier.contribute(acc)
 	towers_stats_accumulator = acc
-
-func get_modifiers() -> Array[AttackModifier]:
-	return attack_modifiers.duplicate()
-
-func add_attack_modifier(modifier: AttackModifier) -> void:
-	attack_modifiers.append(modifier)
-	attack_modifiers_added.emit(modifier)
-
-func remove_attack_modifier(source_id: String) -> void:
-	attack_modifiers = attack_modifiers.filter(func(mod: AttackModifier) -> bool:
-		return mod.source.type_id != source_id
-	)
-	attack_modifiers_removed.emit(source_id)
 
 func reset_buffs() -> void:
 	towers_buffs = []

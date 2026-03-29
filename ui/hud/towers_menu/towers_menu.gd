@@ -1,9 +1,5 @@
 class_name TowersMenu extends Control
 
-const RED_TOWER = preload("uid://d36t7geqp1sh")
-const BLUE_TOWER = preload("uid://cwyyp2r266blt")
-const GREEN_TOWER = preload("uid://oj5ilwusjvuo")
-
 @export var buttons_container: Control
 @export var tower_hint: TowerButtonHint
 @export var tower_button_scene: PackedScene

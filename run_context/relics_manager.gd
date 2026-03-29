@@ -44,6 +44,7 @@ func add_relic(relic: Relic) -> void:
 func remove_relic(relic_id: String) -> void:
 	if relics.has(relic_id):
 		relics[relic_id].remove_effect()
+		relics[relic_id].on_remove()
 		relics.erase(relic_id)
 		relics_count[relic_id] = relics_count.get(relic_id, 0) - 1
 		relics_change.emit(relics.values())
