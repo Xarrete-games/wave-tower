@@ -3,7 +3,6 @@ class_name Tower extends Node2D
 
 signal stats_change(tower: Tower)
 signal attack_fired()
-signal attack_speed_change(value: float)
 signal on_target_change(enemy: Enemy)
 
 enum Type {FIRE, LIGHTNING, FROST}
@@ -55,7 +54,6 @@ var damage_source: Source:
 @onready var mouse_detector: Control = $MouseDetector
 @onready var attack_timer: Timer = $AttackTimer
 @onready var cristal_light: CristalLight = $CristalLight
-@onready var experience_handler: ExperienceHandler = $ExperienceHandler
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var tower_stats_handler: TowerStatsHandler = $TowerStatsHandler
 @onready var tower_area: Area2D = $TowerArea
@@ -63,18 +61,14 @@ var damage_source: Source:
 func _ready():
 	data.build()
 	range_collision.shape = CircleShape2D.new()
-	# modifiers
-	
 	RunContext.towers_buffs.targeting_modes_change.connect(func(new_modes: Array[Tower.TargetingMode]) -> void:
 		if targeting_mode not in new_modes:
 			targeting_mode = TargetingMode.FIRST_IN_PROGRESS
 	)
 	
-	
-	# handlers
-	experience_handler.exp_data_change.connect(_on_exp_data_change)
+	# stats_handlers
 	tower_stats_handler.stats_change.connect(_on_stats_change)
-	tower_stats_handler.set_data(data, type, experience_handler)
+	tower_stats_handler.set_data(data, type)
 	area_detector.target_change.connect(_on_target_change)
 	
 # --------------------
@@ -176,7 +170,6 @@ func _fire() -> void
 
 func _on_stats_change(new_stats: TowerStats) -> void:
 	stats = new_stats
-	attack_speed_change.emit(stats.attack_speed)
 	_apply_stats_changes()
 
 func _apply_stats_changes() -> void:
@@ -213,8 +206,6 @@ func _on_mouse_exit():
 # --------------------
 # --- RANGE PREVIEW ---
 # --------------------
-
-
 func _show_range():
 	if range_tween: range_tween.kill()
 	range_tween = create_tween()

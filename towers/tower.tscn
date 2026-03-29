@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="3_nbqd2"]
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="4_7jtxt"]
 [ext_resource type="Script" uid="uid://3vv1ts11asqk" path="res://towers/area_detector.gd" id="5_5e1e6"]
-[ext_resource type="Script" uid="uid://c5e13qdjmxcua" path="res://towers/experience_handler.gd" id="6_ju35e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wmotl"]
 radius = 200.0
@@ -68,10 +67,6 @@ offset_left = -56.0
 offset_top = -138.0
 offset_right = 56.0
 offset_bottom = 38.0
-
-[node name="ExperienceHandler" type="Node" parent="." unique_id=2067535218]
-script = ExtResource("6_ju35e")
-level_up_postion = Vector2(0, -150)
 
 [node name="LevelUpPos" type="Marker2D" parent="." unique_id=920402675]
 position = Vector2(0, -152)

@@ -13,7 +13,7 @@ func _ready():
 func upgrade() -> void:
 	RunContext.economy.gold -= data.upgrade_price
 	level += 1
-	experience_handler.level_up.emit(level)
+	tower_stats_handler.level_up(level)
 
 	if upgrade_sprite:
 		sprite_2d.texture = upgrade_sprite

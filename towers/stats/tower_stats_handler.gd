@@ -21,7 +21,6 @@ var global_stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new():
 var stats: TowerStats = TowerStats.new()
 
 var tower_type: Tower.Type
-var experience_handler: ExperienceHandler
 var local_buff_scheduler: BuffScheduler
 
 func _ready() -> void:
@@ -32,15 +31,13 @@ func _ready() -> void:
 # initialize the stats handler with base stats, tower type and experience handler
 func set_data(
 	stats_configuration: TowerData,
-	p_tower_type: Tower.Type, 
-	p_experience_handler: ExperienceHandler) -> void:
+	p_tower_type: Tower.Type,
+	) -> void:
 	#base stats
 	base_stats = stats_configuration.stats.duplicate()
 	# stats on level
 	stats_on_level = stats_configuration.stats_on_level.duplicate()
-	# experience hander
-	experience_handler = p_experience_handler
-	experience_handler.level_up.connect(_on_level_up)
+	
 	# tower type
 	tower_type = p_tower_type
 	# global buffs
@@ -68,7 +65,7 @@ func _rebuild_local_stats_acc() -> void:
 		buff.modifier.contribute(acc)
 	local_stats_acc = acc
 
-func _on_level_up(_new_level: int) -> void:
+func level_up(_new_level: int) -> void:
 	base_stats.add_stats(stats_on_level)
 	_update_stats()
 
