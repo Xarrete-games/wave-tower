@@ -20,9 +20,8 @@ func _ready() -> void:
 	_set_events_by_type()
 	RunContext.progress.current_wave_finished.connect(_on_wave_finished)
 	RunContext.progress.last_wave_finished.connect(_on_last_wave_finished)
-	RunContext.progress.current_level_changed.connect(_on_new_level_loaded)
-	# for procedural level testing
-	_on_new_level_loaded(0)
+
+	_show_next_wave_screen()
 
 func show_loot_screen() -> void:
 	await loot_screen_handler.show_loot_screen(event_layer)
@@ -86,9 +85,6 @@ func _on_last_wave_finished() -> void:
 		get_tree().change_scene_to_packed(END_GAME_SCENE)
 	else:
 		_show_next_level_menu()
-
-func _on_new_level_loaded(_level_num: int) -> void:
-	_show_next_wave_screen()
 
 func _get_next_event(current_wave: int) -> EventData:
 	# Repeat schedule every 10 waves:

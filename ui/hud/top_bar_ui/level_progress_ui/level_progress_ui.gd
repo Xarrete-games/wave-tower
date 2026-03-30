@@ -16,7 +16,6 @@ const WAVES_WITH_BOSS = [10]
 func _ready() -> void:
 	_clear()
 	RunContext.progress.current_wave_changed.connect(_on_wave_init)
-	RunContext.progress.current_level_changed.connect(_on_new_level)
 	ClickEvents.reset_game_button_pressed.connect(func () -> void:
 		_clear()
 	)
@@ -54,8 +53,6 @@ func _on_wave_init(new_value: int) -> void:
 	var slot: LevelProgressSlot = slots_container.get_child(value - 1)
 	slot.fill()
 
-func _on_new_level(_total_waves: int) -> void:
-	_clear()
 
 func _on_mouse_entered() -> void:
 	ClickEvents.level_progess_hovered.emit()

@@ -21,7 +21,6 @@ var tower_cards_amount: Dictionary[String, int] = {}
 func _init() -> void:
 	ClickEvents.tower_remove_pressed.connect(tower_removed)
 	ClickEvents.add_tower_card.connect(_on_tower_card_added)
-	RunContext.progress.current_level_changed.connect(_on_level_changed)
 	all_tower_data = DataLoader.get_all_tower_data()
 	_init_inital_towers_data()
 
@@ -64,10 +63,6 @@ func get_tower_count(tower_type: Tower.Type) -> int:
 		if tower.type == tower_type:
 			count += 1
 	return count
-
-
-func _on_level_changed(_new_level: int) -> void:
-	reset_towers()
 
 func _update_tower_count(tower_type: Tower.Type) -> void:
 	tower_count_change.emit(tower_type, get_tower_count(tower_type))

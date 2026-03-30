@@ -5,7 +5,6 @@ const BOOT = preload("uid://bfm0i7ehshgsf")
 
 @export var levels_paths: Array[String]
 @export var pause : PackedScene
-@export var current_level_number: int = 1
 
 @export var trigger_finish_wave: bool = false
 
