@@ -9,6 +9,6 @@ script = ExtResource("1_uh30i")
 runtime_script = ExtResource("1_3isox")
 id = "flower_pot"
 display_name = "Flower pot"
-description = "If the wave ends without any enemy having reached the portal, recover 1 health."
+description = "When the wave ends, recover 1 health."
 icon = ExtResource("3_guxeq")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"
