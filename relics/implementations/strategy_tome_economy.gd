@@ -1,10 +1,7 @@
 class_name StrategyTomeEconomy extends Relic
 
-
-func apply_effect() -> void:
+func on_obtain() -> void:
 	RunContext.economy.is_sell_active = true
 
-
-func remove_effect() -> void:
+func on_remove() -> void:
 	RunContext.economy.is_sell_active = false
-

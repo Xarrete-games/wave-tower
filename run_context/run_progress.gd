@@ -8,6 +8,7 @@ signal current_level_changed(level_num: int)
 var current_wave: int = 0:
     set(value):
         current_wave = value
+        Hooks.on_wave_init()
         current_wave_changed.emit(current_wave)
 
 var current_level: int = 0:
@@ -17,12 +18,6 @@ var current_level: int = 0:
 
 var total_levels: int = 0
 var total_waves: int = 0
-
-
-func _init() -> void:
-    current_wave = 0
-    current_level = 0
-    total_levels = 0
 
 func is_last_wave() -> bool:
     return current_wave >= total_waves

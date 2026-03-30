@@ -27,21 +27,18 @@ var button_in_hover: TowerButton = null
 
 @onready var tower_hint_panel: TowerButtonHint = %TowerHintPanel
 
-
-
 func _ready() -> void:
 	visible = true
 	tower_hint_panel.visible = false
 	_hide_upgrade_options()
 	ClickEvents.tower_selected.connect(_on_tower_selected)
-	RunContext.towers_buffs.targeting_modes_change.connect(_update_targeting_modes)
-	_update_targeting_modes(RunContext.towers_buffs.targeting_modes)
 
 func _on_tower_selected(tower: Tower) -> void:
 	if tower == null:
 		visible = false
 		return
 	
+	Hooks.on_get_targeting_modes([Tower.TargetingMode.FIRST_IN_PROGRESS])
 	targeting_mode_selector.select(tower.targeting_mode)
 	visible = true
 
@@ -99,7 +96,7 @@ func update_exp_data(exp_data: TowerExpData) -> void:
 func _update_targeting_modes(modes: Array[Tower.TargetingMode]) -> void:
 	targeting_mode_selector.clear()
 	for mode in modes:
-		var mode_name = RunContext.towers_buffs.targeting_mode_to_string(mode)
+		var mode_name = Tower.targeting_mode_to_string(mode)
 		targeting_mode_selector.add_item(mode_name, mode)
 
 func _on_targeting_mode_selector_item_selected(index: Tower.TargetingMode) -> void:

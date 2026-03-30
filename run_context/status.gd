@@ -17,15 +17,10 @@ var health: int = max_health:
 		health = min(value, max_health)
 		health_change.emit(health)
 		if health <= 0:
+			Hooks.on_before_die(self)
 
-			# phonix feather relic check
-			if relics_manager.has_relic("phoenix_feather"):
-				health = 10
-				health_change.emit(health)
-				relics_manager.disable_relic("phoenix_feather")
-				return
-
-			player_died.emit()
+			if health <= 0:
+				player_died.emit()
 
 var armor: int = 0:
 	set(value):

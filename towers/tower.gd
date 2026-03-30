@@ -61,16 +61,27 @@ var damage_source: Source:
 func _ready():
 	data.build()
 	range_collision.shape = CircleShape2D.new()
-	RunContext.towers_buffs.targeting_modes_change.connect(func(new_modes: Array[Tower.TargetingMode]) -> void:
-		if targeting_mode not in new_modes:
-			targeting_mode = TargetingMode.FIRST_IN_PROGRESS
-	)
-	
 	# stats_handlers
 	tower_stats_handler.stats_change.connect(_on_stats_change)
 	tower_stats_handler.set_data(data, type)
 	area_detector.target_change.connect(_on_target_change)
-	
+
+# --------------------
+# --- HELPER ---
+# --------------------
+
+static func targeting_mode_to_string(mode: Tower.TargetingMode) -> String:
+	match mode:
+		Tower.TargetingMode.FIRST_IN_PROGRESS:
+			return "Progress"
+		Tower.TargetingMode.HIGH_HP:
+			return "High Health"
+		Tower.TargetingMode.LOW_HP:
+			return "Low Health"
+		_:
+			return "Unknown"
+
+
 # --------------------
 # --- MODES ---
 # --------------------

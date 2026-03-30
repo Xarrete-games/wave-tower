@@ -25,6 +25,10 @@ static func on_enemy_die(enemy: Enemy, attack: Attack) -> void:
 # --------------------
 # --- WAVE ---
 # --------------------
+static func on_wave_init() -> void:
+	for relic in RunContext.relics_manager.get_all_relics():
+		relic.on_wave_init()
+
 static func on_wave_finished() -> void:
 	for relic in RunContext.relics_manager.get_all_relics():
 		relic.on_wave_finished()
@@ -45,6 +49,17 @@ static func on_tower_placed(tower: Tower) -> void:
 	for relic in RunContext.relics_manager.get_all_relics():
 		relic.on_tower_placed(tower)
 
+static func on_get_targeting_modes(targeting_modes: Array[Tower.TargetingMode]) -> void:
+	for relic in RunContext.relics_manager.get_all_relics():
+		relic.on_get_targeting_modes(targeting_modes)
+# --------------------
+# --- RELIC ---
+# --------------------
+
+static func on_relic_added(relic_added: Relic) -> void:
+	for relic in RunContext.relics_manager.get_all_relics():
+		relic.on_relic_added(relic_added)
+
 # --------------------
 # --- CONSUMABLES ---
 # --------------------
@@ -64,3 +79,12 @@ static func on_before_get_loot(ctx: LootContext) -> void:
 static func on_before_relic_reward(ctx: RelicsRewardsContext) -> void:
 	for relic in RunContext.relics_manager.get_all_relics():
 		relic.on_before_relic_reward(ctx)
+
+
+# --------------------
+# --- HEALTH ---
+# --------------------
+
+static func on_before_die(status: Status) -> void:
+	for relic in RunContext.relics_manager.get_all_relics():
+		relic.on_before_die(status)
