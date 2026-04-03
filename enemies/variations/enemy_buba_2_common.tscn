@@ -73,7 +73,7 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Buba2" unique_id=90748266 instance=ExtResource("1_64kct")]
+[node name="Buba2_common" unique_id=90748266 instance=ExtResource("1_64kct")]
 
 [node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
 position = Vector2(0, 7)
