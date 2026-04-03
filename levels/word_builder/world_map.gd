@@ -17,6 +17,7 @@ var spawn_handler: SpawnPositionsHandler = null
 # Data
 var map_pieces: Array[MapPieceData] = []
 var last_piece_attached: MapPiece = null
+var _has_placed_first_expansion: bool = false
 
 # Portal entries
 var portal_entries: Array[Dictionary] = []
@@ -111,7 +112,10 @@ func _on_edge_finalized(piece: MapPiece, edge: Edge) -> void:
 func _try_place_on_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vector2i, valid_pieces: Array, edge_to_connect: Edge) -> bool:
 	var candidate_pieces: Array = []
 
-	if enable_fork:
+	if not _has_placed_first_expansion:
+		candidate_pieces = valid_pieces.filter(func(p: MapPieceData): return not p.is_fork)
+		candidate_pieces.shuffle()
+	elif enable_fork:
 		candidate_pieces = valid_pieces.duplicate()
 		candidate_pieces.shuffle()
 	elif _pending_fork_after_boss:
@@ -167,6 +171,8 @@ func _try_place_on_edge(frontier: MapPiece, next_edge: Edge, candidate_tile: Vec
 		_attach_piece(frontier, new_piece, next_edge.dir, edge_to_connect.dir)
 		_move_piece_decoration_to_visuals(new_piece)
 		last_piece_attached = new_piece
+		if not _has_placed_first_expansion:
+			_has_placed_first_expansion = true
 
 		# If we were waiting for a post-boss fork and we placed one, clear pending state.
 		if _pending_fork_after_boss and piece_data.is_fork:
