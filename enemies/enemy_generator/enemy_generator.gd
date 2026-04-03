@@ -1,4 +1,4 @@
-class_name EnemyGeneratorProcedural extends Node
+class_name EnemyGenerator extends Node
 ## Orchestrates procedural wave generation.
 ##
 ## This node is intentionally thin — it delegates:

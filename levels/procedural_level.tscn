@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b1rsi54eynysa" path="res://ui/screens/pause_screen/pause_menu.tscn" id="2_oysny"]
 [ext_resource type="Script" uid="uid://bfbh2lc6ejw1i" path="res://main/test_data.gd" id="3_oysny"]
 [ext_resource type="Script" uid="uid://bh36qhnc06uk" path="res://main/main_camera.gd" id="4_8f3b7"]
-[ext_resource type="Script" uid="uid://bv0s1qattp6jq" path="res://enemies/enemy_generator/enemy_generator_procedural.gd" id="5_s03ma"]
 [ext_resource type="Resource" uid="uid://cfghmpixlnrpd" path="res://enemies/enemy_generator/wave_config.tres" id="5_t5t77"]
 [ext_resource type="Script" uid="uid://d081ug0lnpy8d" path="res://enemies/enemy_generator/wave_spawner.gd" id="6_pp7gv"]
 [ext_resource type="PackedScene" uid="uid://wd57nqjd0s2f" path="res://main/music_handler/music_handler.tscn" id="7_dx4vj"]
@@ -14,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://drm4bn0pi7ue1" path="res://ui/hud/hud_layer.tscn" id="8_crvxy"]
 [ext_resource type="PackedScene" uid="uid://bhdmj77ytfxwb" path="res://ui/hud/top_bar_ui/top_bar.tscn" id="9_bebo1"]
 [ext_resource type="Script" uid="uid://dpnilgqn044xp" path="res://main/tower_placer/tower_placer.gd" id="10_bebo1"]
+[ext_resource type="Script" uid="uid://dpu4sc4b8rl0y" path="res://enemies/enemy_generator/enemy_generator.gd" id="11_1spm6"]
 [ext_resource type="Script" uid="uid://bl4psouhduuh5" path="res://levels/word_builder/composite_tile_map.gd" id="11_ctm01"]
 [ext_resource type="Script" uid="uid://c6gmmo43gd544" path="res://levels/tower_selector.gd" id="12_pb4yr"]
 [ext_resource type="Script" uid="uid://ky15h85r6dhk" path="res://levels/kill_event_handler.gd" id="18_1spm6"]
@@ -63,13 +63,13 @@ composite_tile_map = NodePath("../CompositeTileMap")
 [node name="Visual" type="Node2D" parent="LevelContainer" unique_id=1918036028]
 y_sort_enabled = true
 
-[node name="EnemyGeneratorProcedural" type="Node" parent="LevelContainer" unique_id=316350539 node_paths=PackedStringArray("wave_spawner", "enemies_container")]
-script = ExtResource("5_s03ma")
+[node name="EnemyGenerator" type="Node" parent="LevelContainer" unique_id=316350539 node_paths=PackedStringArray("wave_spawner", "enemies_container")]
+script = ExtResource("11_1spm6")
 wave_spawner = NodePath("WaveSpawner")
 wave_config = ExtResource("5_t5t77")
 enemies_container = NodePath("../Visual")
 
-[node name="WaveSpawner" type="Node" parent="LevelContainer/EnemyGeneratorProcedural" unique_id=668843349 node_paths=PackedStringArray("world_map")]
+[node name="WaveSpawner" type="Node" parent="LevelContainer/EnemyGenerator" unique_id=668843349 node_paths=PackedStringArray("world_map")]
 script = ExtResource("6_pp7gv")
 world_map = NodePath("../../WorldMap")
 fallback_enemy_scene = ExtResource("7_vv3de")
