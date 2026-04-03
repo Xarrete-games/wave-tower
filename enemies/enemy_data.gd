@@ -11,6 +11,7 @@ enum Type { SWARM, FAST, NORMAL, TANK, BOSS }
 @export var name: String
 @export_multiline var description: String
 @export var icon: Texture2D
+@export_group("Scene")
 @export var scene: PackedScene
 
 @export_group("Stats")

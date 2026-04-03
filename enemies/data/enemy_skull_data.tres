@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_iut5q"]
 script = ExtResource("1_054sy")
-initial_wave = 20
+initial_wave = 21
 final_wave = 30
 metadata/_custom_type_script = "uid://d4kyl7723aunc"
 
