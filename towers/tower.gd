@@ -108,7 +108,7 @@ func enable() -> void:
 	area_detector.monitoring = true
 	tower_area.monitorable = true
 
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1, false).timeout
 	
 	ClickEvents.tower_selected.connect(_on_tower_selected)
 	mouse_detector.gui_input.connect(_on_gui_input)

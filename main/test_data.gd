@@ -9,7 +9,7 @@ class_name TestData extends Node
 @onready var run_handler: RunHandler = $"../RunHandler"
 
 func _ready() -> void:
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1, false).timeout
 	_handle_initial_relics()
 	
 	if open_loot_screen:

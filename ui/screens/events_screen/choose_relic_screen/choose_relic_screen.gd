@@ -12,7 +12,7 @@ var _enabled = false
 var _reroll_priece: int = 20
 
 func _ready() -> void:
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.3, false).timeout
 	_enabled = true
 
 func set_relics(relics: Array[RelicData]) -> void:

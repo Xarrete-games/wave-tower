@@ -17,7 +17,7 @@ func _fire() -> void:
 	call_deferred("_add_projectil", projectil)
 	
 	if is_double_hit:
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.5, false).timeout
 		cristal_light.play()
 		projectil = FROST_NOVA_PROJECTILE.instantiate()
 		attack = _get_attack()

@@ -38,7 +38,7 @@ func reset_run() -> void:
 	speed = 1.0
 
 func delay(seconds: float) -> void:
-	await get_tree().create_timer(seconds).timeout
+	await get_tree().create_timer(seconds, false).timeout
 
 func _button_speed_pressed() -> void:
 	if speed == 1.0:

@@ -83,7 +83,7 @@ func _ready() -> void:
 	speed = base_speed
 	health_bar.set_max_health(max_health)
 	_set_health(max_health)
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1, false).timeout
 	enabled = true
 
 func _process(delta: float):

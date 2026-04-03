@@ -76,7 +76,7 @@ func _on_hit() -> void:
 	_bounces_done += 1
 
 	# wait before trying to bounce
-	await get_tree().create_timer(bounce_delay).timeout
+	await get_tree().create_timer(bounce_delay, false).timeout
 
 	_try_bounce()
 

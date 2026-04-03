@@ -11,7 +11,7 @@ var wait_first_hint: bool = true
 func _ready() -> void:
 	text = INITIAL_HINT
 	GameState.state_change.connect(_on_state_change)
-	await get_tree().create_timer(10).timeout
+	await get_tree().create_timer(10, false).timeout
 	if text == INITIAL_HINT:
 		wait_first_hint = false
 		text = ""

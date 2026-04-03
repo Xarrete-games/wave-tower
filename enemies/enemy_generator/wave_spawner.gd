@@ -81,13 +81,13 @@ func start_wave(
 			# Delay between individual enemies (skip after last in group)
 			if enemy_idx < group.enemies.size() - 1:
 				var spawn_interval: float = _pick_spawn_interval(group.pressure, wave_number, config)
-				await get_tree().create_timer(spawn_interval).timeout
+				await get_tree().create_timer(spawn_interval, false).timeout
 
 		group_finished.emit(group_idx, group.pressure)
 
 		# Delay between groups (skip after last group)
 		if group_idx < groups.size() - 1:
-			await get_tree().create_timer(config.group_delay).timeout
+			await get_tree().create_timer(config.group_delay, false).timeout
 
 	_is_spawning = false
 	wave_finished.emit(wave_number)

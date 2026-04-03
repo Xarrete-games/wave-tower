@@ -23,7 +23,7 @@ func _fire() -> void:
 	red_projectile.set_target(_current_target, next_attack, debuff)
 	cristal_light.turn_on()
 
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1, false).timeout
 	red_projectile.hit_target()
 	red_projectile.stop()
 	cristal_light.turn_off()
