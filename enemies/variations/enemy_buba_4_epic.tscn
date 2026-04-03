@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://cohp7jt1lxslx"]
+
+[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_swiwp"]
+[ext_resource type="Texture2D" uid="uid://c4a0rc1fsmrv8" path="res://assets/sprites/enemies/buba_epic/buba_front_01_epic.png" id="2_2ihkh"]
+[ext_resource type="Texture2D" uid="uid://bm1tmi26e2y82" path="res://assets/sprites/enemies/buba_epic/buba_front_02_epic.png" id="3_ky3fc"]
+[ext_resource type="Texture2D" uid="uid://b1783bwpsyol3" path="res://assets/sprites/enemies/buba_epic/buba_front_03_epic.png" id="4_g4p3x"]
+[ext_resource type="Texture2D" uid="uid://dp0yredmahgmj" path="res://assets/sprites/enemies/buba_epic/buba_front_04_epic.png" id="5_8jmnv"]
+[ext_resource type="Texture2D" uid="uid://by1yov5q3m0e8" path="res://assets/sprites/enemies/buba_epic/buba_front_05_epic.png" id="6_f1vdr"]
+[ext_resource type="Texture2D" uid="uid://cs0rkro0ttcwb" path="res://assets/sprites/enemies/buba_epic/buba_back_01_epic.png" id="7_2ihkh"]
+[ext_resource type="Texture2D" uid="uid://bqj1qws8dpq1q" path="res://assets/sprites/enemies/buba_epic/buba_back_02_epic.png" id="8_ky3fc"]
+[ext_resource type="Texture2D" uid="uid://gj5v3dptvb70" path="res://assets/sprites/enemies/buba_epic/buba_back_03_epic.png" id="9_g4p3x"]
+[ext_resource type="Texture2D" uid="uid://dv7thqx5h1t4m" path="res://assets/sprites/enemies/buba_epic/buba_back_04_epic.png" id="10_8jmnv"]
+[ext_resource type="Texture2D" uid="uid://jwpw4q85sh4u" path="res://assets/sprites/enemies/buba_epic/buba_back_05_epic.png" id="11_f1vdr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1wtb6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2ihkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ky3fc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g4p3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8jmnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f1vdr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8jmnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g4p3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ky3fc")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_2ihkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ky3fc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_g4p3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8jmnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f1vdr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8jmnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_g4p3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ky3fc")
+}],
+"loop": true,
+"name": &"top right",
+"speed": 12.0
+}]
+
+[node name="Buba2" unique_id=90748266 instance=ExtResource("1_swiwp")]
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
+position = Vector2(0, 7)
+sprite_frames = SubResource("SpriteFrames_1wtb6")
+animation = &"down right"
+autoplay = ""
+frame_progress = 0.0
