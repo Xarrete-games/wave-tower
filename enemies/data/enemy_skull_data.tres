@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_iut5q"]
 script = ExtResource("1_054sy")
-initial_wave = 10
+initial_wave = 20
 final_wave = 30
 metadata/_custom_type_script = "uid://d4kyl7723aunc"
 
@@ -18,6 +18,8 @@ type = 0
 name = "Skull"
 icon = ExtResource("1_d5n7i")
 scene = ExtResource("2_054sy")
+max_health = 400
 base_speed = 220.0
+weight = 5
 available_waves = Array[ExtResource("1_054sy")]([SubResource("Resource_iut5q")])
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

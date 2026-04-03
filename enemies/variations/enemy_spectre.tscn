@@ -7,21 +7,22 @@ radius = 20.0
 
 [node name="EnemySpectre" unique_id=82686911 instance=ExtResource("1_skkk3")]
 max_health = 80.0
-base_gold_value = 3
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="CollisionShape2D" parent="." index="0" unique_id=972753897]
 shape = SubResource("CircleShape2D_skkk3")
 
-[node name="AnimatedSprite2D" parent="." index="1"]
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
 position = Vector2(12, -12.999999)
 scale = Vector2(0.1, 0.1)
+animation = &"down right"
+frame_progress = 0.0
 
-[node name="HealthBar" parent="." index="3"]
+[node name="HealthBar" parent="." index="3" unique_id=937412680]
 offset_top = -110.0
 offset_bottom = -110.0
 
-[node name="TargetPositionLeft" parent="." index="5"]
+[node name="TargetPositionLeft" parent="." index="5" unique_id=171294548]
 position = Vector2(-4, -12)
 
-[node name="TargetPositionRight" parent="." index="6"]
+[node name="TargetPositionRight" parent="." index="6" unique_id=429096716]
 position = Vector2(26, -12)

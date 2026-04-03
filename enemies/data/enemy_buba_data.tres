@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_6pl50"]
 script = ExtResource("1_d1pjp")
 initial_wave = 5
-final_wave = 30
+final_wave = 12
 metadata/_custom_type_script = "uid://d4kyl7723aunc"
 
 [resource]
@@ -20,7 +20,7 @@ icon = ExtResource("1_a3f8k")
 scene = ExtResource("2_d1pjp")
 max_health = 200
 base_speed = 190.0
-base_gold_value = 5
-weight = 7
+base_gold_value = 3
+weight = 6
 available_waves = Array[ExtResource("1_d1pjp")]([SubResource("Resource_6pl50")])
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_p0tox"]
 script = ExtResource("1_b23po")
-initial_wave = 11
+initial_wave = 20
 final_wave = 30
 metadata/_custom_type_script = "uid://d4kyl7723aunc"
 
@@ -17,7 +17,7 @@ type_legacy = 8
 name = "Invoker"
 icon = ExtResource("1_s0iql")
 scene = ExtResource("2_b23po")
-max_health = 200
+max_health = 800
 base_speed = 180.0
 weight = 6
 available_waves = Array[ExtResource("1_b23po")]([SubResource("Resource_p0tox")])

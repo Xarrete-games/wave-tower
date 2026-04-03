@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://bbaivmxojf17b"]
+
+[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_ohq5j"]
+[ext_resource type="Texture2D" uid="uid://b65g7ydmjtvi2" path="res://assets/sprites/enemies/esqueleton/esqueleto16.png" id="2_yosbp"]
+[ext_resource type="Texture2D" uid="uid://b8f244bhnllsh" path="res://assets/sprites/enemies/esqueleton/esqueleto15.png" id="3_18gxm"]
+[ext_resource type="Texture2D" uid="uid://b5rr3olawxnu" path="res://assets/sprites/enemies/esqueleton/esqueleto14.png" id="4_gjv4f"]
+[ext_resource type="Texture2D" uid="uid://tye1stljqbie" path="res://assets/sprites/enemies/esqueleton/esqueleto13.png" id="5_3drdf"]
+[ext_resource type="Texture2D" uid="uid://d0f3xei6mrrrp" path="res://assets/sprites/enemies/esqueleton/esqueleto12.png" id="6_sgsl3"]
+[ext_resource type="Texture2D" uid="uid://ckxfwa4jo2lls" path="res://assets/sprites/enemies/esqueleton/esqueleto11.png" id="7_bxx82"]
+[ext_resource type="Texture2D" uid="uid://buv68rwhmdgoi" path="res://assets/sprites/enemies/esqueleton/esqueleto10.png" id="8_wtcbs"]
+[ext_resource type="Texture2D" uid="uid://bcecu1lgsyfv2" path="res://assets/sprites/enemies/esqueleton/esqueleto9.png" id="9_e4183"]
+[ext_resource type="Texture2D" uid="uid://dr4wygwriuqx3" path="res://assets/sprites/enemies/esqueleton/esqueleto8.png" id="10_juf8d"]
+[ext_resource type="Texture2D" uid="uid://bjhkeunpvrxts" path="res://assets/sprites/enemies/esqueleton/esqueleto7.png" id="11_1kgvh"]
+[ext_resource type="Texture2D" uid="uid://ba1gfpc0vu8u6" path="res://assets/sprites/enemies/esqueleton/esqueleto6.png" id="12_6nkjq"]
+[ext_resource type="Texture2D" uid="uid://cnamxf3xh4ey6" path="res://assets/sprites/enemies/esqueleton/esqueleto5.png" id="13_5sh2p"]
+[ext_resource type="Texture2D" uid="uid://dtnylc05f2s8g" path="res://assets/sprites/enemies/esqueleton/esqueleto4.png" id="14_vk6n6"]
+[ext_resource type="Texture2D" uid="uid://bk6qxv23182mf" path="res://assets/sprites/enemies/esqueleton/esqueleto3.png" id="15_l7lii"]
+[ext_resource type="Texture2D" uid="uid://b3p4smbf8k4b" path="res://assets/sprites/enemies/esqueleton/esqueleto2.png" id="16_sx6im"]
+[ext_resource type="Texture2D" uid="uid://keav2e8je8b6" path="res://assets/sprites/enemies/esqueleton/esqueleto1.png" id="17_dgidb"]
+[ext_resource type="Texture2D" uid="uid://bk3wo2ot4x816" path="res://assets/sprites/enemies/esqueleton/esqueletoback18.png" id="18_pl73q"]
+[ext_resource type="Texture2D" uid="uid://dd4luy0rrqn23" path="res://assets/sprites/enemies/esqueleton/esqueletoback17.png" id="19_5s74s"]
+[ext_resource type="Texture2D" uid="uid://0tbvvya5bnai" path="res://assets/sprites/enemies/esqueleton/esqueletoback16.png" id="20_ulqjo"]
+[ext_resource type="Texture2D" uid="uid://qbdrsaellewt" path="res://assets/sprites/enemies/esqueleton/esqueletoback15.png" id="21_bv2l0"]
+[ext_resource type="Texture2D" uid="uid://bmfcootj5jtus" path="res://assets/sprites/enemies/esqueleton/esqueletoback14.png" id="22_4ldci"]
+[ext_resource type="Texture2D" uid="uid://ckjc7rvq1s3s0" path="res://assets/sprites/enemies/esqueleton/esqueletoback13.png" id="23_2u44r"]
+[ext_resource type="Texture2D" uid="uid://dn4tymae6p08h" path="res://assets/sprites/enemies/esqueleton/esqueletoback12.png" id="24_liroo"]
+[ext_resource type="Texture2D" uid="uid://c5nedxu3foc0n" path="res://assets/sprites/enemies/esqueleton/esqueletoback11.png" id="25_6jsyc"]
+[ext_resource type="Texture2D" uid="uid://bv1peyxk2qar7" path="res://assets/sprites/enemies/esqueleton/esqueletoback10.png" id="26_o4fms"]
+[ext_resource type="Texture2D" uid="uid://b17ixierc3iob" path="res://assets/sprites/enemies/esqueleton/esqueletoback9.png" id="27_55wxc"]
+[ext_resource type="Texture2D" uid="uid://bqq8gfajgh047" path="res://assets/sprites/enemies/esqueleton/esqueletoback8.png" id="28_vf858"]
+[ext_resource type="Texture2D" uid="uid://bp746d3nnq08c" path="res://assets/sprites/enemies/esqueleton/esqueletoback7.png" id="29_5p25j"]
+[ext_resource type="Texture2D" uid="uid://cfvggt0jgvpgb" path="res://assets/sprites/enemies/esqueleton/esqueletoback6.png" id="30_3jjay"]
+[ext_resource type="Texture2D" uid="uid://cgy06uoo1mtq4" path="res://assets/sprites/enemies/esqueleton/esqueletoback5.png" id="31_vxqjr"]
+[ext_resource type="Texture2D" uid="uid://2ksd48hg016y" path="res://assets/sprites/enemies/esqueleton/esqueletoback4.png" id="32_3twkp"]
+[ext_resource type="Texture2D" uid="uid://ct4vt44jvu6c0" path="res://assets/sprites/enemies/esqueleton/esqueletoback3.png" id="33_8na4l"]
+[ext_resource type="Texture2D" uid="uid://bu7g7iw0uw64g" path="res://assets/sprites/enemies/esqueleton/esqueletoback2.png" id="34_m1jfl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y32tn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yosbp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_18gxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gjv4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3drdf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_sgsl3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bxx82")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wtcbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_e4183")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_juf8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1kgvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6nkjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5sh2p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vk6n6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_l7lii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_sx6im")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_dgidb")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 22.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_pl73q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5s74s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ulqjo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_bv2l0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_4ldci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_2u44r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_liroo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_6jsyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_o4fms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_55wxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_vf858")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_5p25j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_3jjay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_vxqjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_3twkp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_8na4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_m1jfl")
+}],
+"loop": true,
+"name": &"top right",
+"speed": 22.0
+}]
+
+[node name="RedEsqueleton" unique_id=90748266 instance=ExtResource("1_ohq5j")]
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
+self_modulate = Color(0.9411765, 0.09411765, 0.25490198, 1)
+sprite_frames = SubResource("SpriteFrames_y32tn")
+animation = &"down right"
+frame_progress = 0.0

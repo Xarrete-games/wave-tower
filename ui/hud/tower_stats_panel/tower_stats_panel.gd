@@ -38,7 +38,9 @@ func _on_tower_selected(tower: Tower) -> void:
 		visible = false
 		return
 	
-	Hooks.on_get_targeting_modes([Tower.TargetingMode.FIRST_IN_PROGRESS])
+	var tageting_modes: Array[Tower.TargetingMode] = [Tower.TargetingMode.FIRST_IN_PROGRESS]
+	Hooks.on_get_targeting_modes(tageting_modes)
+	_update_targeting_modes(tageting_modes)
 	targeting_mode_selector.select(tower.targeting_mode)
 	visible = true
 

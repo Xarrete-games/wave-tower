@@ -31,5 +31,5 @@ func _fire() -> void:
 func _get_letal_attack() -> Attack:
 	var attack = _get_attack()
 	attack.damage = EXECUTE_DAMAGE
-	attack.is_execute = true
+	attack.is_execution = true
 	return attack
