@@ -6,7 +6,7 @@ func on_obtain() -> void:
 		if _is_valid_tower(tower):
 			_add_buff(tower)
 
-func on_tower_place(tower: Tower) -> void:
+func on_tower_placed(tower: Tower) -> void:
 	if _is_valid_tower(tower):
 		_add_buff(tower)
 
