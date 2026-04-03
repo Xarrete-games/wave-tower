@@ -17,7 +17,6 @@ metadata/_custom_type_script = "uid://dahgj827tn2xa"
 
 [sub_resource type="Resource" id="Resource_1gjt3"]
 script = ExtResource("2_qsa3f")
-chance_full_speed = 100.0
 metadata/_custom_type_script = "uid://dahgj827tn2xa"
 
 [sub_resource type="Resource" id="Resource_30jdw"]

@@ -1,7 +1,7 @@
 class_name HotChiliPepper extends TowerBuffRelic
 
 func _add_buff(tower: Tower) -> void:
-	var fire_tower = tower as FireTower
+	var fire_tower = tower
 	fire_tower.apply_burn = true
 
 func _remove_buff(tower: Tower) -> void:

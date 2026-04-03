@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cetbpwt6ll4gp"]
+[gd_scene format=3 uid="uid://bwbfgbisfyowe"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_ipx7f"]
 [ext_resource type="Texture2D" uid="uid://c25iad24jwrdt" path="res://assets/sprites/enemies/spectre_legendary/sp1_white_gold.png" id="2_a0x8s"]

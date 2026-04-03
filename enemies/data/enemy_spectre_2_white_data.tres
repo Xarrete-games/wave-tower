@@ -6,14 +6,14 @@
 
 [sub_resource type="Resource" id="Resource_s3wbj"]
 script = ExtResource("1_0nips")
-initial_wave = 11
-final_wave = 20
+initial_wave = 15
+final_wave = 22
 metadata/_custom_type_script = "uid://d4kyl7723aunc"
 
 [resource]
 script = ExtResource("2_s3wbj")
 scene = ExtResource("2_3isf3")
-max_health = 200
+max_health = 500
 base_speed = 200.0
 weight = 3
 available_waves = Array[ExtResource("1_0nips")]([SubResource("Resource_s3wbj")])
