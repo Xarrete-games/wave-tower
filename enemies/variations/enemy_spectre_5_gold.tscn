@@ -1,47 +1,47 @@
 [gd_scene format=3 uid="uid://cetbpwt6ll4gp"]
 
-[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_bhv5i"]
-[ext_resource type="Texture2D" uid="uid://c25iad24jwrdt" path="res://assets/sprites/enemies/spectre_legendary/sp1_white_gold.png" id="2_bhv5i"]
-[ext_resource type="Texture2D" uid="uid://b7if8mwy02ff0" path="res://assets/sprites/enemies/spectre_legendary/sp2_white_gold.png" id="3_x3qlx"]
-[ext_resource type="Texture2D" uid="uid://qkhikgmlk2ry" path="res://assets/sprites/enemies/spectre_legendary/sp3_white_gold.png" id="4_pu8je"]
-[ext_resource type="Texture2D" uid="uid://bv6gor3i5iggp" path="res://assets/sprites/enemies/spectre_legendary/sp4_white_gold.png" id="5_wxo6n"]
-[ext_resource type="Texture2D" uid="uid://blw4i7kleb7to" path="res://assets/sprites/enemies/spectre_legendary/sp5_white_gold.png" id="6_k8lls"]
-[ext_resource type="Texture2D" uid="uid://mkbylqi3i65j" path="res://assets/sprites/enemies/spectre_legendary/sp7_white_gold.png" id="7_5560v"]
-[ext_resource type="Texture2D" uid="uid://thwmsan3gduy" path="res://assets/sprites/enemies/spectre_legendary/sp8_white_gold.png" id="8_c82a1"]
-[ext_resource type="Texture2D" uid="uid://bj2vo0n6lrsxd" path="res://assets/sprites/enemies/spectre_legendary/sp_top1_white_gold.png" id="9_mxvmu"]
-[ext_resource type="Texture2D" uid="uid://c7iutdyeq6o2" path="res://assets/sprites/enemies/spectre_legendary/sp_top2_white_gold.png" id="10_ww43k"]
-[ext_resource type="Texture2D" uid="uid://bo0a8xl5uxwua" path="res://assets/sprites/enemies/spectre_legendary/sp_top3_white_gold.png" id="11_xuino"]
-[ext_resource type="Texture2D" uid="uid://hstwlp4iq4wq" path="res://assets/sprites/enemies/spectre_legendary/sp_top4_white_gold.png" id="12_sk16i"]
-[ext_resource type="Texture2D" uid="uid://dxm87amcclgq3" path="res://assets/sprites/enemies/spectre_legendary/sp_top5_white_gold.png" id="13_4m1s5"]
-[ext_resource type="Texture2D" uid="uid://bn36b6nlywx1v" path="res://assets/sprites/enemies/spectre_legendary/sp_top6_white_gold.png" id="14_7rr4a"]
-[ext_resource type="Texture2D" uid="uid://d0kaswvwt1yuk" path="res://assets/sprites/enemies/spectre_legendary/sp_top7_white_gold.png" id="15_le45o"]
+[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_ipx7f"]
+[ext_resource type="Texture2D" uid="uid://c25iad24jwrdt" path="res://assets/sprites/enemies/spectre_legendary/sp1_white_gold.png" id="2_a0x8s"]
+[ext_resource type="Texture2D" uid="uid://b7if8mwy02ff0" path="res://assets/sprites/enemies/spectre_legendary/sp2_white_gold.png" id="3_qtsfy"]
+[ext_resource type="Texture2D" uid="uid://qkhikgmlk2ry" path="res://assets/sprites/enemies/spectre_legendary/sp3_white_gold.png" id="4_3myq0"]
+[ext_resource type="Texture2D" uid="uid://bv6gor3i5iggp" path="res://assets/sprites/enemies/spectre_legendary/sp4_white_gold.png" id="5_eivjt"]
+[ext_resource type="Texture2D" uid="uid://blw4i7kleb7to" path="res://assets/sprites/enemies/spectre_legendary/sp5_white_gold.png" id="6_sowvs"]
+[ext_resource type="Texture2D" uid="uid://mkbylqi3i65j" path="res://assets/sprites/enemies/spectre_legendary/sp7_white_gold.png" id="7_gppes"]
+[ext_resource type="Texture2D" uid="uid://thwmsan3gduy" path="res://assets/sprites/enemies/spectre_legendary/sp8_white_gold.png" id="8_ka5ds"]
+[ext_resource type="Texture2D" uid="uid://bj2vo0n6lrsxd" path="res://assets/sprites/enemies/spectre_legendary/sp_top1_white_gold.png" id="9_6tstb"]
+[ext_resource type="Texture2D" uid="uid://c7iutdyeq6o2" path="res://assets/sprites/enemies/spectre_legendary/sp_top2_white_gold.png" id="10_ufuyr"]
+[ext_resource type="Texture2D" uid="uid://bo0a8xl5uxwua" path="res://assets/sprites/enemies/spectre_legendary/sp_top3_white_gold.png" id="11_ghqhl"]
+[ext_resource type="Texture2D" uid="uid://hstwlp4iq4wq" path="res://assets/sprites/enemies/spectre_legendary/sp_top4_white_gold.png" id="12_uxds4"]
+[ext_resource type="Texture2D" uid="uid://dxm87amcclgq3" path="res://assets/sprites/enemies/spectre_legendary/sp_top5_white_gold.png" id="13_2v5ta"]
+[ext_resource type="Texture2D" uid="uid://bn36b6nlywx1v" path="res://assets/sprites/enemies/spectre_legendary/sp_top6_white_gold.png" id="14_yj1vo"]
+[ext_resource type="Texture2D" uid="uid://d0kaswvwt1yuk" path="res://assets/sprites/enemies/spectre_legendary/sp_top7_white_gold.png" id="15_edjdh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ogvbh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_bhv5i")
+"texture": ExtResource("2_a0x8s")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_x3qlx")
+"texture": ExtResource("3_qtsfy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_pu8je")
+"texture": ExtResource("4_3myq0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_wxo6n")
+"texture": ExtResource("5_eivjt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_k8lls")
+"texture": ExtResource("6_sowvs")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_pu8je")
+"texture": ExtResource("4_3myq0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_5560v")
+"texture": ExtResource("7_gppes")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_c82a1")
+"texture": ExtResource("8_ka5ds")
 }],
 "loop": true,
 "name": &"down right",
@@ -49,25 +49,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_mxvmu")
+"texture": ExtResource("9_6tstb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_ww43k")
+"texture": ExtResource("10_ufuyr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_xuino")
+"texture": ExtResource("11_ghqhl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_sk16i")
+"texture": ExtResource("12_uxds4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_4m1s5")
+"texture": ExtResource("13_2v5ta")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_7rr4a")
+"texture": ExtResource("14_yj1vo")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_le45o")
+"texture": ExtResource("15_edjdh")
 }],
 "loop": true,
 "name": &"top right",
@@ -92,7 +92,7 @@ scale_max = 3.0
 scale_over_velocity_max = 5.0
 color_ramp = SubResource("GradientTexture1D_ih2jc")
 
-[node name="Spectre2_white" unique_id=90748266 instance=ExtResource("1_bhv5i")]
+[node name="Spectre5_gold" unique_id=90748266 instance=ExtResource("1_ipx7f")]
 
 [node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
 scale = Vector2(0.15, 0.15)
