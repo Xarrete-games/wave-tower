@@ -17,6 +17,7 @@ func _ready() -> void:
 	}
 	stop_music()
 	RunContext.towers_manager.tower_count_change.connect(_on_tower_count_change)
+	RunContext.status.player_died.connect(stop_music)
 
 func play_music() -> void:
 	base_player.play()
