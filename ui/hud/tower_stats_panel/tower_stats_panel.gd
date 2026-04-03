@@ -52,36 +52,17 @@ func _on_tower_selected(tower: Tower) -> void:
 	name_label.text = tower.data.display_name
 	id_label.text = tower.id
 	current_tower = tower
-	
-	if tower is UpgradeableTower:
-		
-		level_container.visible = true
-		var upgradeable_tower = tower as UpgradeableTower
-		level_label.text = str(upgradeable_tower.level)
-		if upgradeable_tower.is_max_level():
-			# dont show updgrades
-			_hide_upgrade_options()
-			# clear previous upgrades
-			# for child in upgrades_container.get_children():
-			# 	child.queue_free()
-			# upgrade_button_container.visible = false
-			# upgrades_container.visible = true
-			# var upgradeable_towers: Array[TowerDataWithInstance] = tower.get_upgradeable_towers()
-			# for tower_config in upgradeable_towers:
-			# 	var tower_button = TOWER_BUTTON.instantiate() as TowerButton
-			# 	upgrades_container.add_child(tower_button)
-			# 	tower_button.tower_configuration = tower_config
-			# 	tower_button.price = tower_config.configuration.base_price
-			# 	tower_button.tower_button_pressed.connect(_on_tower_button_pressed)
-			# 	tower_button.hover.connect(_on_tower_button_hover)
-			# 	tower_button.unhover.connect(_on_tower_button_unhover)
-		else:
-			upgrade_tower_price.price = upgradeable_tower.data.upgrade_price
-			upgrade_button_container.visible = true
-			upgrades_container.visible = false
-			
-	else:
+	level_container.visible = true
+
+	level_label.text = str(tower.level)
+	if tower.is_max_level():
+		# dont show updgrades
 		_hide_upgrade_options()
+	else:
+		upgrade_tower_price.price = tower.data.upgrade_price
+		upgrade_button_container.visible = true
+		upgrades_container.visible = false
+
 	
 func update_stats(tower_stats: TowerStats) -> void:
 	if tower_stats == null:
@@ -111,8 +92,7 @@ func _on_upgrade_button_pressed() -> void:
 	if RunContext.economy.gold < current_tower.data.upgrade_price:
 		return
 
-	if current_tower is UpgradeableTower:
-		(current_tower as UpgradeableTower).upgrade()
+	current_tower.upgrade()
 
 func _hide_upgrade_options() -> void:
 	upgrade_button_container.visible = false

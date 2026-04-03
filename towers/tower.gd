@@ -5,9 +5,12 @@ signal stats_change(tower: Tower)
 signal attack_fired()
 signal on_target_change(enemy: Enemy)
 
+
+
+
 enum Type {FIRE, LIGHTNING, FROST}
 enum TargetingMode {FIRST_IN_PROGRESS, HIGH_HP, LOW_HP}
-
+const MAX_LEVEL: int = 2
 const uuid_util = preload('res://addons/uuid/uuid.gd')
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
 
@@ -37,6 +40,7 @@ var targeting_mode: TargetingMode = TargetingMode.FIRST_IN_PROGRESS:
 		area_detector.targeting_type = value
 
 # level
+var level: int = 1
 var exp_data: TowerExpData:
 	set(value):
 		exp_data = value
@@ -123,6 +127,18 @@ func add_local_buff(tower_buff: TowerBuff) -> void:
 
 func remove_local_buff(source_id: String) -> void:
 	tower_stats_handler.remove_local_buff(source_id)
+
+# --------------------
+# --- UPGRADES ---
+# --------------------
+func upgrade() -> void:
+	RunContext.economy.gold -= data.upgrade_price
+	level += 1
+	tower_stats_handler.level_up(level)
+
+func is_max_level() -> bool:
+	return level >= MAX_LEVEL
+
 
 # --------------------
 # --- COPY TOWER DATA---

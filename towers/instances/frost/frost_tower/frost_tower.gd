@@ -1,4 +1,4 @@
-class_name FrostTower extends UpgradeableTower
+class_name FrostTower extends Tower
 
 const FROST_BALL: PackedScene = preload("uid://cibktj8x8j1t8")
 
