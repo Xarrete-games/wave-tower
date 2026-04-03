@@ -1,0 +1,249 @@
+[gd_scene format=3 uid="uid://b7ov3wko2d84y"]
+
+[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_ygbyf"]
+[ext_resource type="Texture2D" uid="uid://bkufbytipbt37" path="res://assets/sprites/enemies/golem_prismarina/golem1_prismarina.png" id="24_ptu7c"]
+[ext_resource type="Texture2D" uid="uid://ciu85g3fmi0u1" path="res://assets/sprites/enemies/golem_prismarina/golem_back20_prismarina.png" id="24_ygbyf"]
+[ext_resource type="Texture2D" uid="uid://djl68hjtd7w41" path="res://assets/sprites/enemies/golem_prismarina/golem3_prismarina.png" id="25_folib"]
+[ext_resource type="Texture2D" uid="uid://c1w3pbhwdnh7u" path="res://assets/sprites/enemies/golem_prismarina/golem_back0_prismarina.png" id="25_gw8os"]
+[ext_resource type="Texture2D" uid="uid://d3a1uk25ldjlr" path="res://assets/sprites/enemies/golem_prismarina/golem_back19_prismarina.png" id="26_mrddy"]
+[ext_resource type="Texture2D" uid="uid://bimcx1gfqyfsf" path="res://assets/sprites/enemies/golem_prismarina/golem4_prismarina.png" id="26_x6hdy"]
+[ext_resource type="Texture2D" uid="uid://cpv3chwyifdnd" path="res://assets/sprites/enemies/golem_prismarina/golem_back18_prismarina.png" id="27_0xk05"]
+[ext_resource type="Texture2D" uid="uid://bs717n17g17rb" path="res://assets/sprites/enemies/golem_prismarina/golem5_prismarina.png" id="27_3nma6"]
+[ext_resource type="Texture2D" uid="uid://kac5q5hbx8rh" path="res://assets/sprites/enemies/golem_prismarina/golem_back17_prismarina.png" id="28_tovl2"]
+[ext_resource type="Texture2D" uid="uid://cqnpddl3p0r5x" path="res://assets/sprites/enemies/golem_prismarina/golem6_prismarina.png" id="28_vreew"]
+[ext_resource type="Texture2D" uid="uid://cw5jjo731qme" path="res://assets/sprites/enemies/golem_prismarina/golem7_prismarina.png" id="29_3q7hp"]
+[ext_resource type="Texture2D" uid="uid://c5ditluuhi1oq" path="res://assets/sprites/enemies/golem_prismarina/golem_back16_prismarina.png" id="29_d7ft3"]
+[ext_resource type="Texture2D" uid="uid://crtr51rc1jwkb" path="res://assets/sprites/enemies/golem_prismarina/golem8_prismarina.png" id="30_2k27r"]
+[ext_resource type="Texture2D" uid="uid://bl6h2s0j3i8nj" path="res://assets/sprites/enemies/golem_prismarina/golem_back15_prismarina.png" id="30_7o4s3"]
+[ext_resource type="Texture2D" uid="uid://sg6io8vsmoxd" path="res://assets/sprites/enemies/golem_prismarina/golem_back14_prismarina.png" id="31_l32ep"]
+[ext_resource type="Texture2D" uid="uid://bl88iudh5s8fs" path="res://assets/sprites/enemies/golem_prismarina/golem9_prismarina.png" id="31_ranun"]
+[ext_resource type="Texture2D" uid="uid://c3xsws4dgdslx" path="res://assets/sprites/enemies/golem_prismarina/golem10_prismarina.png" id="32_3fr31"]
+[ext_resource type="Texture2D" uid="uid://olqosuc1n2db" path="res://assets/sprites/enemies/golem_prismarina/golem_back13_prismarina.png" id="32_gotc8"]
+[ext_resource type="Texture2D" uid="uid://c5c3whrwf7kwa" path="res://assets/sprites/enemies/golem_prismarina/golem_back12_prismarina.png" id="33_1nurh"]
+[ext_resource type="Texture2D" uid="uid://b1teyry2f6rnw" path="res://assets/sprites/enemies/golem_prismarina/golem11_prismarina.png" id="33_fips6"]
+[ext_resource type="Texture2D" uid="uid://m7gefosu8diu" path="res://assets/sprites/enemies/golem_prismarina/golem12_prismarina.png" id="34_k3eqw"]
+[ext_resource type="Texture2D" uid="uid://bbroawv4jiehh" path="res://assets/sprites/enemies/golem_prismarina/golem_back11_prismarina.png" id="34_sltvb"]
+[ext_resource type="Texture2D" uid="uid://cs7s0wjrvsk22" path="res://assets/sprites/enemies/golem_prismarina/golem13_prismarina.png" id="35_hvyyr"]
+[ext_resource type="Texture2D" uid="uid://cejv8urrcthcg" path="res://assets/sprites/enemies/golem_prismarina/golem_back10_prismarina.png" id="35_o3mi6"]
+[ext_resource type="Texture2D" uid="uid://kpf58tlutjm6" path="res://assets/sprites/enemies/golem_prismarina/golem14_prismarina.png" id="36_aytn8"]
+[ext_resource type="Texture2D" uid="uid://bfi0jb8cb18gd" path="res://assets/sprites/enemies/golem_prismarina/golem_back9_prismarina.png" id="36_jtibu"]
+[ext_resource type="Texture2D" uid="uid://dy64ttr34xkuo" path="res://assets/sprites/enemies/golem_prismarina/golem_back8_prismarina.png" id="37_0cqnv"]
+[ext_resource type="Texture2D" uid="uid://hjp1kpyj4qpj" path="res://assets/sprites/enemies/golem_prismarina/golem15_prismarina.png" id="37_0274o"]
+[ext_resource type="Texture2D" uid="uid://cbuowm76xjw8e" path="res://assets/sprites/enemies/golem_prismarina/golem16_prismarina.png" id="38_7taea"]
+[ext_resource type="Texture2D" uid="uid://c3iryiwfqvgwh" path="res://assets/sprites/enemies/golem_prismarina/golem_back7_prismarina.png" id="38_q27oc"]
+[ext_resource type="Texture2D" uid="uid://bwmbkx3jfl042" path="res://assets/sprites/enemies/golem_prismarina/golem17_prismarina.png" id="39_316ir"]
+[ext_resource type="Texture2D" uid="uid://c865jwek2lbsq" path="res://assets/sprites/enemies/golem_prismarina/golem_back6_prismarina.png" id="39_ne8i5"]
+[ext_resource type="Texture2D" uid="uid://b4waga4ks4kgs" path="res://assets/sprites/enemies/golem_prismarina/golem_back5_prismarina.png" id="40_ipn7w"]
+[ext_resource type="Texture2D" uid="uid://boa6qk57jjxan" path="res://assets/sprites/enemies/golem_prismarina/golem18_prismarina.png" id="40_uibvj"]
+[ext_resource type="Texture2D" uid="uid://do7ef5gno2usc" path="res://assets/sprites/enemies/golem_prismarina/golem_back4_prismarina.png" id="41_3f7ve"]
+[ext_resource type="Texture2D" uid="uid://bvuqbwa18qiex" path="res://assets/sprites/enemies/golem_prismarina/golem19_prismarina.png" id="41_dk2ld"]
+[ext_resource type="Texture2D" uid="uid://c2ytsvwd06u8m" path="res://assets/sprites/enemies/golem_prismarina/golem20_prismarina.png" id="42_cxwhm"]
+[ext_resource type="Texture2D" uid="uid://dg3auof17v5nq" path="res://assets/sprites/enemies/golem_prismarina/golem_back3_prismarina.png" id="42_lcgqv"]
+[ext_resource type="Texture2D" uid="uid://d01ef7sasfyx4" path="res://assets/sprites/enemies/golem_prismarina/golem_back2_prismarina.png" id="43_05wrk"]
+[ext_resource type="Texture2D" uid="uid://bfhsleypc1usv" path="res://assets/sprites/enemies/golem_prismarina/golem21_prismarina.png" id="43_lf43a"]
+[ext_resource type="Texture2D" uid="uid://gx5u4x1g5my4" path="res://assets/sprites/enemies/golem_prismarina/golem22_prismarina.png" id="44_h6ket"]
+[ext_resource type="Texture2D" uid="uid://do6qnaxxym21g" path="res://assets/sprites/enemies/golem_prismarina/golem_back1_prismarina.png" id="44_myi7u"]
+[ext_resource type="Texture2D" uid="uid://c3aixptyxcqtm" path="res://assets/sprites/enemies/golem_prismarina/golem_prismarina.png" id="45_3xoxy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pdcow"]
+radius = 31.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cwph5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_ptu7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_folib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_x6hdy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_3nma6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_vreew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_3q7hp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_2k27r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_ranun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_3fr31")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_fips6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_k3eqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_hvyyr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_aytn8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_0274o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_7taea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_316ir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_uibvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_dk2ld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_cxwhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_lf43a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_h6ket")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_3xoxy")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_ygbyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_gw8os")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_mrddy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_0xk05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_tovl2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_d7ft3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_7o4s3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_l32ep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_gotc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_1nurh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_sltvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_o3mi6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_jtibu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_0cqnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_q27oc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_ne8i5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_ipn7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_3f7ve")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_lcgqv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_05wrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_myi7u")
+}],
+"loop": true,
+"name": &"top right",
+"speed": 9.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_pqh0f"]
+offsets = PackedFloat32Array(0, 0.62062615)
+colors = PackedColorArray(0.55828667, 0.55828655, 0.55828655, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6dubi"]
+gradient = SubResource("Gradient_pqh0f")
+width = 600
+height = 400
+fill = 1
+fill_from = Vector2(0.5071225, 0.48433048)
+
+[sub_resource type="Gradient" id="Gradient_o5us4"]
+offsets = PackedFloat32Array(0, 0.22071308, 0.7419355, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_27gdu"]
+gradient = SubResource("Gradient_o5us4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tf72i"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 80.0
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, -20, 0)
+scale_min = 0.0
+scale_max = 3.0
+scale_over_velocity_max = 5.0
+color_ramp = SubResource("GradientTexture1D_27gdu")
+
+[node name="Golem_rainbow" unique_id=1800137185 instance=ExtResource("1_ygbyf")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=972753897]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_pdcow")
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
+light_mask = 0
+position = Vector2(0, -25)
+scale = Vector2(0.14, 0.14)
+sprite_frames = SubResource("SpriteFrames_cwph5")
+frame_progress = 0.92770636
+flip_h = true
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="2" unique_id=273922955]
+position = Vector2(0.99999976, 9.000004)
+scale = Vector2(0.2, 0.2)
+blend_mode = 1
+texture = SubResource("GradientTexture2D_6dubi")
+
+[node name="HealthBar" parent="." index="4" unique_id=937412680]
+offset_top = -148.0
+offset_bottom = -148.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="8" unique_id=837810580]
+position = Vector2(0, -20)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_tf72i")
