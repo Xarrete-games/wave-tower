@@ -5,8 +5,8 @@ var extra_gold: int
 var gold_mult: int = 1
 var chance_drop_consumable: int
 
-func _init(extra_gold_p: int = 0, chance_drop_consumable_p: int = 50):
-	extra_gold = extra_gold_p
+func _init(base_gold_p: int = 0, chance_drop_consumable_p: int = 50):
+	base_gold = base_gold_p
 	chance_drop_consumable = chance_drop_consumable_p
 
 func get_total_gold() -> int:

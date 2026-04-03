@@ -33,7 +33,7 @@ curve = SubResource("Curve2D_clt17")
 
 [node name="Plantas" type="Node2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="0" unique_id=1906667730]
 
-[node name="Plant1" type="Sprite2D" parent="Decoration/Plantas" index="0" unique_id=332715774]
+[node name="Plantt1" type="Sprite2D" parent="Decoration/Plantas" index="0" unique_id=332715774]
 position = Vector2(350.19995, 42.19998)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_ttm3r")

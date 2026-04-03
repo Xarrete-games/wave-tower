@@ -12,7 +12,7 @@ region = Rect2(1005, 83, 367, 553)
 [sub_resource type="Resource" id="Resource_r2o8q"]
 script = ExtResource("2_fd5ad")
 type = 2
-build_price = 350
+build_price = 310
 upgrade_price = 100
 base_damage = 15.0
 base_attack_range = 550.0

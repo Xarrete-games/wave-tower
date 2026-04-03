@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://b44jk2pseuvl5"]
+[gd_scene format=4 uid="uid://vpr0hk8itb0i"]
 
 [ext_resource type="PackedScene" uid="uid://2ajf0sqc0tsw" path="res://levels/map_pieces/map_piece_base.tscn" id="1_kbvf3"]
 [ext_resource type="Texture2D" uid="uid://c22o1eieco5r3" path="res://assets/sprites/decoration/Plant1.png" id="2_ljim4"]

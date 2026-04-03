@@ -13,10 +13,6 @@ region = Rect2(89, 80, 297, 470)
 
 [sub_resource type="Resource" id="Resource_rs7co"]
 script = ExtResource("2_y8ti3")
-id = "lightning_tower"
-display_name = "Lightning Tower"
-description = "Basic lightning tower"
-icon = SubResource("AtlasTexture_i5pku")
 type = 1
 upgrade_price = 70
 base_damage = 10.0
@@ -26,6 +22,10 @@ damage_per_level = 5.0
 attack_range_level = 30.0
 attack_speed_per_level = -0.25
 upgradeable_towers = Array[ExtResource("3_b35vm")]([ExtResource("4_p8d6a"), ExtResource("5_622j4")])
+id = "lightning_tower"
+display_name = "Lightning Tower"
+description = "Basic lightning tower"
+icon = SubResource("AtlasTexture_i5pku")
 
 [resource]
 script = ExtResource("3_b35vm")

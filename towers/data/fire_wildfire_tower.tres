@@ -11,9 +11,9 @@ region = Rect2(1011, 1, 355, 550)
 
 [sub_resource type="Resource" id="Resource_4q8u3"]
 script = ExtResource("2_ctmpg")
-build_price = 300
+build_price = 260
 upgrade_price = 100
-base_damage = 90.0
+base_damage = 50.0
 base_attack_range = 600.0
 base_attack_speed = 1.5
 id = "wild_fire"

@@ -1,6 +1,7 @@
 class_name LootScreenHandler extends Node
 
 const BASE_GOLD: int = 50
+const EXTRA_GOLD_PER_WAVE: int = 5
 const CHANCE_DROP_CONSUMABLE: int = 50
 
 @export var loot_screen_scene: PackedScene
@@ -33,3 +34,6 @@ func generate_loot_items() -> Array[LootItemData]:
 	loot_items.append(consumable_item)
 
 	return loot_items
+
+func _get_base_gold() -> int:
+	return BASE_GOLD + (RunContext.progress.current_wave * EXTRA_GOLD_PER_WAVE)

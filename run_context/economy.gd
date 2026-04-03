@@ -5,7 +5,7 @@ signal gold_change(amount: int)
 
 var is_sell_active: bool = false
 
-var gold: int = 10000:
+var gold: int = 100:
 	set(value):
 		if value >= gold:
 			AudioManager.play_coins()

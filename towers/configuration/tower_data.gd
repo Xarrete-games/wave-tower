@@ -3,7 +3,7 @@ class_name TowerData extends BaseData
 @export_group("Tower")
 @export var type: Tower.Type
 
-@export_group("Build")
+@export_group("Prices")
 @export var build_price: int = 50
 @export var upgrade_price: int = 30
 
@@ -16,7 +16,7 @@ class_name TowerData extends BaseData
 
 @export_group("Stats Per Level")
 @export var damage_per_level: float = 0
-@export var attack_range_level: float = 0
+@export var attack_range_per_level: float = 0
 @export var attack_speed_per_level: float = 0.0
 @export var critic_chance_per_level: float = 0
 @export var critic_damage_per_level: float = 0
@@ -36,7 +36,7 @@ func build() -> void:
 	stats.critic_damage = base_critic_damage
 
 	stats_on_level.damage = damage_per_level
-	stats_on_level.attack_range = attack_range_level
+	stats_on_level.attack_range = attack_range_per_level
 	stats_on_level.attack_speed = attack_speed_per_level
 	stats_on_level.critic_chance = critic_chance_per_level
 	stats_on_level.critic_damage = critic_damage_per_level
