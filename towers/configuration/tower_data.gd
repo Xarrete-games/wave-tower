@@ -21,9 +21,6 @@ class_name TowerData extends BaseData
 @export var critic_chance_per_level: float = 0
 @export var critic_damage_per_level: float = 0
 
-@export_group("Upgrades")
-@export var upgradeable_towers: Array[TowerDataWithInstance] = []
-
 var stats: TowerStats = TowerStats.new()
 var stats_on_level: TowerStats = TowerStats.new()
 

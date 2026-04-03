@@ -1,4 +1,4 @@
-class_name LightningTower extends UpgradeableTower
+class_name LightningTower extends Tower
 
 @export var electric_ball_scene: PackedScene
 

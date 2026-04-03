@@ -1,4 +1,4 @@
-class_name FireTower extends UpgradeableTower
+class_name FireTower extends Tower
 
 @export var fire_ball_scene: PackedScene
 

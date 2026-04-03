@@ -3,8 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_8d4j1"]
 [ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_n2ugo"]
 [ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_data_with_instance.gd" id="3_qvqv1"]
-[ext_resource type="Resource" uid="uid://c87ypetdh5cks" path="res://towers/data/fire_wildfire_tower.tres" id="4_o5ebs"]
-[ext_resource type="Resource" uid="uid://brdcadnrqivh8" path="res://towers/data/fire_laser_tower.tres" id="5_nkrdn"]
 [ext_resource type="PackedScene" uid="uid://djdpfy88ujkfb" path="res://towers/instances/fire/fire_tower/fire_tower.tscn" id="6_r0elt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wv6in"]
@@ -14,11 +12,11 @@ region = Rect2(89, 80, 299, 471)
 [sub_resource type="Resource" id="Resource_185nb"]
 script = ExtResource("2_n2ugo")
 upgrade_price = 70
-base_damage = 18.0
+base_damage = 35.0
 base_attack_range = 450.0
 base_attack_speed = 1.5
-damage_per_level = 22.0
-upgradeable_towers = Array[ExtResource("3_qvqv1")]([ExtResource("4_o5ebs"), ExtResource("5_nkrdn")])
+damage_per_level = 50.0
+attack_range_per_level = 50.0
 id = "fire_tower"
 display_name = "Fire Tower"
 description = "Basic fire tower"
