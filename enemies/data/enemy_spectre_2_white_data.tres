@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://hh7iaivk3ywd"]
 
 [ext_resource type="Script" uid="uid://d4kyl7723aunc" path="res://enemies/enemy_wave_range.gd" id="1_0nips"]
-[ext_resource type="PackedScene" uid="uid://b52ubsv28ea4s" path="res://enemies/variations/enemy_spectre_2.tscn" id="2_3isf3"]
+[ext_resource type="PackedScene" uid="uid://b52ubsv28ea4s" path="res://enemies/variations/enemy_spectre_2_white.tscn" id="2_3isf3"]
 [ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="2_s3wbj"]
 
 [sub_resource type="Resource" id="Resource_s3wbj"]

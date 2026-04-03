@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck7funcss1gra"
-path="res://.godot/imported/sp1.png-ac41a9836189f945377c18f8f818d6e9.ctex"
+uid="uid://c6lw8iwk3jwif"
+path="res://.godot/imported/sp_top2_white.png-90839c2b6b4a4272fb31a6d0cd18967c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/espectro/sp1.png"
-dest_files=["res://.godot/imported/sp1.png-ac41a9836189f945377c18f8f818d6e9.ctex"]
+source_file="res://assets/sprites/enemies/spectre_white/sp_top2_white.png"
+dest_files=["res://.godot/imported/sp_top2_white.png-90839c2b6b4a4272fb31a6d0cd18967c.ctex"]
 
 [params]
 
