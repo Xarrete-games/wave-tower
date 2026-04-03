@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://o4kfogeqn3bp"]
+
+[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_8k3lh"]
+[ext_resource type="Texture2D" uid="uid://qyio5tbmtr3a" path="res://assets/sprites/enemies/spectre_common/sp1_white_blue.png" id="2_8k3lh"]
+[ext_resource type="Texture2D" uid="uid://d0i236eiopbir" path="res://assets/sprites/enemies/spectre_common/sp2_white_blue.png" id="3_p4waa"]
+[ext_resource type="Texture2D" uid="uid://dnni8cjnqd014" path="res://assets/sprites/enemies/spectre_common/sp3_white_blue.png" id="4_kusss"]
+[ext_resource type="Texture2D" uid="uid://df4esp7cgt0h3" path="res://assets/sprites/enemies/spectre_common/sp4_white_blue.png" id="5_lqt4n"]
+[ext_resource type="Texture2D" uid="uid://cjyg2tti7855s" path="res://assets/sprites/enemies/spectre_common/sp5_white_blue.png" id="6_hymnp"]
+[ext_resource type="Texture2D" uid="uid://bcrfjxefxc7f5" path="res://assets/sprites/enemies/spectre_common/sp7_white_blue.png" id="7_uqfcp"]
+[ext_resource type="Texture2D" uid="uid://dxc54d2cps7wv" path="res://assets/sprites/enemies/spectre_common/sp8_white_blue.png" id="8_qe0x3"]
+[ext_resource type="Texture2D" uid="uid://dogvrnela5dcu" path="res://assets/sprites/enemies/spectre_common/sp_top1_white_blue.png" id="9_awf7h"]
+[ext_resource type="Texture2D" uid="uid://cpkha88xr18xt" path="res://assets/sprites/enemies/spectre_common/sp_top2_white_blue.png" id="10_wvwmh"]
+[ext_resource type="Texture2D" uid="uid://bng5qq38ih2ua" path="res://assets/sprites/enemies/spectre_common/sp_top3_white_blue.png" id="11_4txi6"]
+[ext_resource type="Texture2D" uid="uid://b6rvl734tsww8" path="res://assets/sprites/enemies/spectre_common/sp_top4_white_blue.png" id="12_yo5vj"]
+[ext_resource type="Texture2D" uid="uid://dwe7a5l8dagty" path="res://assets/sprites/enemies/spectre_common/sp_top5_white_blue.png" id="13_0v6qk"]
+[ext_resource type="Texture2D" uid="uid://4rfsfgvxbybl" path="res://assets/sprites/enemies/spectre_common/sp_top6_white_blue.png" id="14_l6j3n"]
+[ext_resource type="Texture2D" uid="uid://ii5ghes1v2ne" path="res://assets/sprites/enemies/spectre_common/sp_top7_white_blue.png" id="15_a5abl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ogvbh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8k3lh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_p4waa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kusss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lqt4n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hymnp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kusss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_uqfcp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qe0x3")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_awf7h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wvwmh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_4txi6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_yo5vj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_0v6qk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_l6j3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_a5abl")
+}],
+"loop": true,
+"name": &"top right",
+"speed": 12.0
+}]
+
+[node name="Spectre1_common" unique_id=90748266 instance=ExtResource("1_8k3lh")]
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_ogvbh")
+animation = &"down right"
+frame_progress = 0.0
