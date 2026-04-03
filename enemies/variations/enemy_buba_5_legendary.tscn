@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://dv8lat73qykdn"]
+
+[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_800dv"]
+[ext_resource type="Texture2D" uid="uid://bmyfywnonsrtj" path="res://assets/sprites/enemies/buba_legendary/buba_front_01_legendary.png" id="2_800dv"]
+[ext_resource type="Texture2D" uid="uid://drqht07qygx3" path="res://assets/sprites/enemies/buba_legendary/buba_front_02_legendary.png" id="3_ih2jc"]
+[ext_resource type="Texture2D" uid="uid://b0fadf0rvoo6a" path="res://assets/sprites/enemies/buba_legendary/buba_front_03_legendary.png" id="4_p30sm"]
+[ext_resource type="Texture2D" uid="uid://bjtgdxglaqfv6" path="res://assets/sprites/enemies/buba_legendary/buba_front_04_legendary.png" id="5_g5mp3"]
+[ext_resource type="Texture2D" uid="uid://216qirl3gsnw" path="res://assets/sprites/enemies/buba_legendary/buba_front_05_legendary.png" id="6_wjaww"]
+[ext_resource type="Texture2D" uid="uid://lqbed20nkvgi" path="res://assets/sprites/enemies/buba_legendary/buba_back_01_legendary.png" id="7_wv6qt"]
+[ext_resource type="Texture2D" uid="uid://tspo02q4j72e" path="res://assets/sprites/enemies/buba_legendary/buba_back_02_legendary.png" id="8_pet06"]
+[ext_resource type="Texture2D" uid="uid://cggrhugwsdiif" path="res://assets/sprites/enemies/buba_legendary/buba_back_03_legendary.png" id="9_c053l"]
+[ext_resource type="Texture2D" uid="uid://dmygyx0kp6xqd" path="res://assets/sprites/enemies/buba_legendary/buba_back_04_legendary.png" id="10_8mvrw"]
+[ext_resource type="Texture2D" uid="uid://drelx1vjm4q5j" path="res://assets/sprites/enemies/buba_legendary/buba_back_05_legendary.png" id="11_xpi0r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1wtb6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_800dv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ih2jc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_p30sm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_g5mp3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wjaww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_g5mp3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_p30sm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ih2jc")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wv6qt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pet06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c053l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8mvrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_xpi0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8mvrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c053l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pet06")
+}],
+"loop": true,
+"name": &"top right",
+"speed": 12.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_800dv"]
+offsets = PackedFloat32Array(0, 0.22071308, 0.7419355, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ih2jc"]
+gradient = SubResource("Gradient_800dv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_800dv"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 80.0
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, -20, 0)
+scale_min = 0.0
+scale_max = 3.0
+scale_over_velocity_max = 5.0
+color_ramp = SubResource("GradientTexture1D_ih2jc")
+
+[node name="Buba5_legendary" unique_id=90748266 instance=ExtResource("1_800dv")]
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
+position = Vector2(0, 7)
+sprite_frames = SubResource("SpriteFrames_1wtb6")
+animation = &"down right"
+autoplay = ""
+frame_progress = 0.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="7" unique_id=444477471]
+position = Vector2(0, -20)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_800dv")
