@@ -19,7 +19,6 @@ base_damage = 10.0
 base_attack_range = 580.0
 base_attack_speed = 0.6
 damage_per_level = 5.0
-attack_range_level = 30.0
 attack_speed_per_level = -0.25
 upgradeable_towers = Array[ExtResource("3_b35vm")]([ExtResource("4_p8d6a"), ExtResource("5_622j4")])
 id = "lightning_tower"

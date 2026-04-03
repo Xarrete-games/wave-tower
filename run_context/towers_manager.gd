@@ -7,6 +7,12 @@ signal tower_hovered(tower: Tower)
 signal tower_unhovered(tower: Tower)
 
 const INITIAL_TOWERS_IDS = ["fire_tower", "frost_tower", "lightning_tower"]
+const COMMON_WEIGHT_START := 0.75
+const RARE_WEIGHT_START := 0.20
+const EPIC_WEIGHT_START := 0.05
+const COMMON_WEIGHT_END := 0.34
+const RARE_WEIGHT_END := 0.33
+const EPIC_WEIGHT_END := 0.33
 
 
 var last_tower_ids: Dictionary[String, int] = {
@@ -17,8 +23,10 @@ var towers_ids: Array[String] = []
 var towers: Array[Tower] = []
 var all_tower_data: Array[TowerDataWithInstance] = []
 var tower_cards_amount: Dictionary[String, int] = {}
+var progress: RunProgress
 
-func _init() -> void:
+func _init(progress_p: RunProgress) -> void:
+	progress = progress_p
 	ClickEvents.tower_remove_pressed.connect(tower_removed)
 	ClickEvents.add_tower_card.connect(_on_tower_card_added)
 	all_tower_data = DataLoader.get_all_tower_data()
@@ -26,8 +34,59 @@ func _init() -> void:
 
 func get_random_towers(amount: int) -> Array[TowerDataWithInstance]:
 	var available_towers = all_tower_data.duplicate()
-	available_towers.shuffle()
-	return available_towers.slice(0, amount)
+	var selected_towers: Array[TowerDataWithInstance] = []
+	var picks = mini(amount, available_towers.size())
+
+	for _i in range(picks):
+		var total_weight := 0.0
+		var weights: Array[float] = []
+
+		for tower_data in available_towers:
+			var weight = _get_tower_weight_for_wave(tower_data.data.rarity)
+			weights.append(weight)
+			total_weight += weight
+
+		if total_weight <= 0.0:
+			available_towers.shuffle()
+			selected_towers.append(available_towers.pop_back())
+			continue
+
+		var roll = randf() * total_weight
+		var cumulative_weight := 0.0
+		var selected_index := 0
+
+		for index in range(available_towers.size()):
+			cumulative_weight += weights[index]
+			if roll <= cumulative_weight:
+				selected_index = index
+				break
+
+		selected_towers.append(available_towers[selected_index])
+		available_towers.remove_at(selected_index)
+
+	return selected_towers
+
+func _get_tower_weight_for_wave(rarity: int) -> float:
+	var progress_ratio = _get_wave_progress_ratio()
+	var common_weight = lerpf(COMMON_WEIGHT_START, COMMON_WEIGHT_END, progress_ratio)
+	var rare_weight = lerpf(RARE_WEIGHT_START, RARE_WEIGHT_END, progress_ratio)
+	var epic_weight = lerpf(EPIC_WEIGHT_START, EPIC_WEIGHT_END, progress_ratio)
+
+	match rarity:
+		BaseData.Rarity.COMMON:
+			return common_weight
+		BaseData.Rarity.RARE:
+			return rare_weight
+		BaseData.Rarity.EPIC:
+			return epic_weight
+		_:
+			return common_weight
+
+func _get_wave_progress_ratio() -> float:
+	if progress == null or progress.total_waves <= 0:
+		return 0.0
+
+	return clampf(float(progress.current_wave) / float(progress.total_waves), 0.0, 1.0)
 
 func reset_towers() -> void:
 	_update_tower_count(Tower.Type.FIRE)

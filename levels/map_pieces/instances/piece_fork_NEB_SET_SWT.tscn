@@ -13,9 +13,15 @@ point_count = 17
 
 [sub_resource type="Curve2D" id="Curve2D_ljim4"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 682, -83, 0, 0, 0, 0, 651, -49, 0, 0, 0, 0, 635, -4, 0, 0, 0, 0, 590, 36, 0, 0, 0, 0, 498, 70, 0, 0, 0, 0, 405, 69, 0, 0, 0, 0, 278, 0, 0, 0, 0, 0, 262, -46, 0, 0, 0, 0, 228, -81, 0, 0, 0, 0, 29, -172, 0, 0, 0, 0, -13, -175, 0, 0, 0, 0, -179, -97, 0, 0, 0, 0, -188, -59, 0, 0, 0, 0, -269, 9, 0, 0, 0, 0, -348, 9, 0, 0, 0, 0, -479, -44, 0, 0, 0, 0, -527, -46, 0, 0, 0, 0, -680, 18, 0, 0, 0, 0, -700, 72)
+"points": PackedVector2Array(0, 0, 0, 0, 682, -83, 0, 0, 0, 0, 651, -49, 0, 0, 0, 0, 635, -4, 0, 0, 0, 0, 590, 36, 0, 0, 0, 0, 498, 70, 0, 0, 0, 0, 405, 69, 0, 0, 0, 0, 278, 0, 0, 0, 0, 0, 262, -46, 0, 0, 0, 0, 228, -81, 0, 0, 0, 0, 29, -172, 0, 0, 0, 0, -13, -175, 0, 0, 0, 0, -179, -97, 0, 0, 0, 0, -188, -59, 0, 0, 0, 0, -269, 9, 0, 0, 0, 0, -348, 9, 0, 0, 0, 0, -479, -44, 0, 0, 0, 0, -527, -46, 0, 0, 0, 0, -680, 18, 0, 0, 0, 0, -700, 72, 0, 0, 0, 0, -701, 88)
 }
-point_count = 19
+point_count = 20
+
+[sub_resource type="Curve2D" id="Curve2D_8l2lk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 673, -84, 0, 0, 0, 0, 614, 9, 0, 0, 0, 0, 693, 81)
+}
+point_count = 3
 
 [node name="MapPieceBase" unique_id=183606532 instance=ExtResource("1_kbvf3")]
 
@@ -39,6 +45,9 @@ curve = SubResource("Curve2D_hg4si")
 
 [node name="route_NE_SW" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="1" unique_id=1156292167]
 curve = SubResource("Curve2D_ljim4")
+
+[node name="route_NE_SE" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="2" unique_id=1080931561]
+curve = SubResource("Curve2D_8l2lk")
 
 [node name="Plant7" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="0" unique_id=1552208770]
 position = Vector2(59, -407.00003)

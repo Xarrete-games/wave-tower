@@ -147,7 +147,7 @@ animations = [{
 "speed": 22.0
 }]
 
-[node name="RedEsqueleton" unique_id=90748266 instance=ExtResource("1_ohq5j")]
+[node name="RedSkeleton" unique_id=90748266 instance=ExtResource("1_ohq5j")]
 
 [node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
 self_modulate = Color(0.9411765, 0.09411765, 0.25490198, 1)

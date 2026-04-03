@@ -13,14 +13,18 @@ region = Rect2(971, 7, 433, 543)
 script = ExtResource("2_mq6v3")
 type = 1
 build_price = 280
-upgrade_price = 100
+upgrade_price = 320
 base_damage = 18.0
 base_attack_range = 1200.0
 base_attack_speed = 0.4
+damage_per_level = 30.0
+attack_range_per_level = 500.0
+attack_speed_per_level = -0.3
 id = "overcharge_wave_tower"
 display_name = "Overcharge Tower"
 description = "Increase the damage off all towers in this range in 10%"
 icon = SubResource("AtlasTexture_i5pku")
+rarity = 2
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 
 [resource]

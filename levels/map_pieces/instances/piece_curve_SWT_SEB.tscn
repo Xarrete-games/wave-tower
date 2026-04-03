@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://b22mju44j5tf0" path="res://assets/sprites/decoration/Bush4.png" id="3_2svus"]
 [ext_resource type="Texture2D" uid="uid://f4mk2v0vvh6c" path="res://assets/sprites/decoration/Tree3.png" id="4_5l1yh"]
 
-[sub_resource type="Curve2D" id="Curve2D_clt17"]
+[sub_resource type="Curve2D" id="Curve2D_t4ohw"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 399, -204, 0, 0, 0, 0, 129, -67, 0, 0, 0, 0, 125, -4, 0, 0, 0, 0, 354, 107, 0, 0, 0, 0, 441, 104, 0, 0, 0, 0, 520, 58, 0, 0, 0, 0, 626, 56, 0, 0, 0, 0, 672, 78)
+"points": PackedVector2Array(0, 0, 0, 0, 137, 254, 0, 0, 0, 0, -30, 114, 0, 0, 0, 0, -78, 43, 0, 0, 0, 0, 18, -47, 0, 0, 0, 0, -86, -119, 0, 0, 0, 0, -299, -126, 0, 0, 0, 0, -492, -72, 0, 0, 0, 0, -629, -15, 0, 0, 0, 0, -724, 70)
 }
-point_count = 8
+point_count = 9
 
 [node name="MapPieceBase" unique_id=1367387873 instance=ExtResource("1_4seec")]
 
@@ -28,8 +28,8 @@ tile_map_data = PackedByteArray("AAD4/wAAAAABAAAAAAD4////AAACAAAAAAD4//7/AAABAAA
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD4/wAAAAAFAAYAAAD9//n/AAADAAAAAAD5//v/AAADAAAAAAD4//7/AAADAAAAAAD4////AAACAAAAAAABAPr/AAADAAAAAAAEAPn/AAACAAAAAAA=")
 
-[node name="route_NE_SE" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="0" unique_id=1803058924]
-curve = SubResource("Curve2D_clt17")
+[node name="route_SE_SW" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="0" unique_id=1803058924]
+curve = SubResource("Curve2D_t4ohw")
 
 [node name="Plantas" type="Node2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="0" unique_id=1906667730]
 

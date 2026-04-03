@@ -15,6 +15,6 @@ script = ExtResource("2_s3wbj")
 scene = ExtResource("2_3isf3")
 max_health = 200
 base_speed = 200.0
-weight = 6
+weight = 3
 available_waves = Array[ExtResource("1_0nips")]([SubResource("Resource_s3wbj")])
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

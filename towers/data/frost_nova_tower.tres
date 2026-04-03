@@ -13,15 +13,19 @@ region = Rect2(1005, 83, 367, 553)
 script = ExtResource("2_fd5ad")
 type = 2
 build_price = 310
-upgrade_price = 100
+upgrade_price = 350
 base_damage = 15.0
 base_attack_range = 550.0
 base_attack_speed = 4.0
+damage_per_level = 15.0
+attack_range_per_level = 200.0
+attack_speed_per_level = -0.5
 id = "frost_nova_tower"
 display_name = "Frost Nova Tower"
 description = "Creates an frost nova around itself, 
 hitting all enemies"
 icon = SubResource("AtlasTexture_cq3yl")
+rarity = 2
 metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
 
 [resource]

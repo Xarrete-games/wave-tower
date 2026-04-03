@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://bw1a8l2cansb1"]
+
+[ext_resource type="Script" uid="uid://d4kyl7723aunc" path="res://enemies/enemy_wave_range.gd" id="1_8rcol"]
+[ext_resource type="PackedScene" uid="uid://bbaivmxojf17b" path="res://enemies/variations/enemy_red_skeleton.tscn" id="2_ij7u5"]
+[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="3_nje6k"]
+
+[sub_resource type="Resource" id="Resource_jqldl"]
+script = ExtResource("1_8rcol")
+initial_wave = 21
+final_wave = 30
+metadata/_custom_type_script = "uid://d4kyl7723aunc"
+
+[resource]
+script = ExtResource("3_nje6k")
+type = 1
+name = "Red skeleton"
+scene = ExtResource("2_ij7u5")
+max_health = 400
+base_speed = 550.0
+base_gold_value = 3
+available_waves = Array[ExtResource("1_8rcol")]([SubResource("Resource_jqldl")])
+metadata/_custom_type_script = "uid://cvnj0agbswaym"

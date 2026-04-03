@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://57sh7nlp12vb"]
+[gd_scene format=4 uid="uid://cutvoq3fjdsfx"]
 
 [ext_resource type="PackedScene" uid="uid://2ajf0sqc0tsw" path="res://levels/map_pieces/map_piece_base.tscn" id="1_hg4si"]
 [ext_resource type="Texture2D" uid="uid://c22o1eieco5r3" path="res://assets/sprites/decoration/Plant1.png" id="2_rpry8"]
@@ -12,9 +12,15 @@ point_count = 9
 
 [sub_resource type="Curve2D" id="Curve2D_8p27s"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 178, 322, 0, 0, 0, 0, 154, 274, 0, 0, 0, 0, 230, 203, 0, 0, 0, 0, 283, 116, 0, 0, 0, 0, 348, 56, 0, 0, 0, 0, 248, -18, 0, 0, 0, 0, 240, -47, 0, 0, 0, 0, 282, -104, 0, 0, 0, 0, 177, -190, 0, 0, 0, 0, 156, -254, 0, 0, 0, 0, 179, -335)
+"points": PackedVector2Array(0, 0, 0, 0, 174, -359, 0, 0, 0, 0, 169.12012, -312.56104, 0, 0, 0, 0, 226, -124, 0, 0, 0, 0, 250, -28, 0, 0, 0, 0, 318, 45, 0, 0, 0, 0, 260, 140, 0, 0, 0, 0, 198, 213, 0, 0, 0, 0, 189, 316)
 }
-point_count = 11
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_vxajo"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 167, -302, 0, 0, 0, 0, 208, -171, 0, 0, 0, 0, 295, -110, 0, 0, 0, 0, 211, -31, 0, 0, 0, 0, 371, 54, 0, 0, 0, 0, 178, 231, 0, 0, 0, 0, -20, 300, 0, 0, 0, 0, -399, 101, 0, 0, 0, 0, -284, -10, 0, 0, 0, 0, -449, -203)
+}
+point_count = 10
 
 [node name="MapPieceBase" unique_id=183606532 instance=ExtResource("1_hg4si")]
 
@@ -33,11 +39,14 @@ tile_map_data = PackedByteArray("AAD4/wcAAAAIAAYAAAD4/wYAAAAFAAYAAAD4//r/AAAFAAc
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD4/wcAAAAHAAYAAAAFAPr/AAAHAAcAAAA=")
 
-[node name="route_NE_NW" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="0" unique_id=1676441890]
+[node name="route_SE_NW" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="0" unique_id=1676441890]
 curve = SubResource("Curve2D_hg4si")
 
-[node name="route_SW_NW" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="1" unique_id=1483706471]
+[node name="route_NE_SE" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="1" unique_id=1483706471]
 curve = SubResource("Curve2D_8p27s")
+
+[node name="route_NE_NW" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="2" unique_id=468582774]
+curve = SubResource("Curve2D_vxajo")
 
 [node name="Plant7" type="Sprite2D" parent="Decoration" parent_id_path=PackedInt32Array(1880309883) index="0" unique_id=1552208770]
 position = Vector2(41, -397)

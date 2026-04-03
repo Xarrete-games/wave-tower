@@ -19,7 +19,7 @@ func generate_loot_items() -> Array[LootItemData]:
 	var loot_items: Array[LootItemData] = []
 	
 	var gold_item: LootItemData = LootItemData.new()
-	var ctx: LootContext = LootContext.new(BASE_GOLD, CHANCE_DROP_CONSUMABLE)
+	var ctx: LootContext = LootContext.new(_get_base_gold(), CHANCE_DROP_CONSUMABLE)
 	Hooks.on_before_get_loot(ctx)
 	gold_item.gold_amount = ctx.get_total_gold()
 

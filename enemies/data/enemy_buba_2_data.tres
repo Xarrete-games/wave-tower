@@ -18,6 +18,6 @@ scene = ExtResource("3_gopcq")
 max_health = 600
 base_speed = 200.0
 base_gold_value = 6
-weight = 12
+weight = 6
 available_waves = Array[ExtResource("1_3q0kn")]([SubResource("Resource_yc7df")])
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

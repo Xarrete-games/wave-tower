@@ -20,6 +20,6 @@ icon = ExtResource("1_d5n7i")
 scene = ExtResource("2_054sy")
 max_health = 400
 base_speed = 220.0
-weight = 5
+weight = 3
 available_waves = Array[ExtResource("1_054sy")]([SubResource("Resource_iut5q")])
 metadata/_custom_type_script = "uid://cvnj0agbswaym"

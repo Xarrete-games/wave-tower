@@ -19,6 +19,12 @@ _data = {
 }
 point_count = 9
 
+[sub_resource type="Curve2D" id="Curve2D_jkbol"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 403, -191, 0, 0, 0, 0, 335, -98, 0, 0, 0, 0, 177, -67, 0, 0, 0, 0, 33, -18, 0, 0, 0, 0, -176, 62, 0, 0, 0, 0, -309, 78, 0, 0, 0, 0, -406, 179)
+}
+point_count = 7
+
 [node name="PieceForkNwNeSe" type="Node2D" unique_id=454604557]
 script = ExtResource("1_ls5t0")
 
@@ -54,6 +60,9 @@ curve = SubResource("Curve2D_ls5t0")
 
 [node name="route_SW_NW" type="Path2D" parent="Routes" unique_id=142696227]
 curve = SubResource("Curve2D_2d4f4")
+
+[node name="route_NE_SW" type="Path2D" parent="Routes" unique_id=541581150]
+curve = SubResource("Curve2D_jkbol")
 
 [node name="Decoration" type="Node2D" parent="." unique_id=2120651307]
 scale = Vector2(0.5, 0.5)

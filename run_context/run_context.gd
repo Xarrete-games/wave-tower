@@ -28,7 +28,7 @@ func reset_run() -> void:
 	economy = Economy.new()
 	relics_manager = RelicsManager.new()
 	status = Status.new(progress, relics_manager)
-	towers_manager = TowersManager.new()
+	towers_manager = TowersManager.new(progress)
 	var buff_scheduler = BuffScheduler.new(progress)
 	towers_buffs = TowersBuffsManager.new(buff_scheduler)
 	consumables_manager = ConsumablesManager.new()
