@@ -219,7 +219,7 @@ scale_max = 3.0
 scale_over_velocity_max = 5.0
 color_ramp = SubResource("GradientTexture1D_27gdu")
 
-[node name="Golem_rainbow" unique_id=1800137185 instance=ExtResource("1_ygbyf")]
+[node name="Golem_prismarina" unique_id=1800137185 instance=ExtResource("1_ygbyf")]
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=972753897]
 position = Vector2(0, -4)
@@ -230,7 +230,7 @@ light_mask = 0
 position = Vector2(0, -25)
 scale = Vector2(0.14, 0.14)
 sprite_frames = SubResource("SpriteFrames_cwph5")
-frame_progress = 0.92770636
+frame_progress = 0.48022425
 flip_h = true
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="2" unique_id=273922955]
