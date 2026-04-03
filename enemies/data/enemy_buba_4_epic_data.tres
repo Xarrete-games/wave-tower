@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://c5y2xy1lc70qe"]
 
 [ext_resource type="Script" uid="uid://d4kyl7723aunc" path="res://enemies/enemy_wave_range.gd" id="1_vdly0"]
-[ext_resource type="PackedScene" uid="uid://d23yor0qttd07" path="res://enemies/variations/enemy_buba_2_common.tscn" id="2_icxrr"]
+[ext_resource type="PackedScene" uid="uid://cohp7jt1lxslx" path="res://enemies/variations/enemy_buba_4_epic.tscn" id="2_vdly0"]
 [ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="3_1n2q7"]
 
 [sub_resource type="Resource" id="Resource_yc7df"]
 script = ExtResource("1_vdly0")
-initial_wave = 12
-final_wave = 22
+initial_wave = 24
+final_wave = 30
 metadata/_custom_type_script = "uid://d4kyl7723aunc"
 
 [resource]
@@ -15,8 +15,8 @@ script = ExtResource("3_1n2q7")
 type_legacy = 1
 type = 3
 name = "Buba_epic"
-scene = ExtResource("2_icxrr")
-max_health = 2000
+scene = ExtResource("2_vdly0")
+max_health = 1300
 base_speed = 240.0
 base_gold_value = 6
 weight = 6
