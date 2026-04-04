@@ -10,10 +10,11 @@ const offsett = Vector2(0, 0)
 
 var hints: Dictionary[Control, Hint] = {}
 
-func show_hint(parent: Control, text: String, pos: PositionHint = PositionHint.BOTTOM) -> void:
+func show_hint(parent: Control, text: String, title: String = "", pos: PositionHint = PositionHint.BOTTOM) -> void:
 	var hint: Hint = HINT.instantiate()
 	get_tree().get_root().add_child(hint)
 	hint.set_text(text)
+	hint.set_title(title)
 	# position relative to the parent by default
 	var base_pos = parent.global_position + get_offset(parent, pos)
 	hint.set_position(base_pos)

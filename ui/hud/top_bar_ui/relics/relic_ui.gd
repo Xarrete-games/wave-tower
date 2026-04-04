@@ -17,7 +17,7 @@ func set_relic(p_relic: Relic) -> void:
 		texture.modulate = opaque_color
 	
 func _on_mouse_entered() -> void:
-	HintManager.show_hint(self, relic.data.description)
+	HintManager.show_hint(self, relic.data.description, relic.data.display_name)
 
 func _on_mouse_exited() -> void:
 	HintManager.remove_hint(self)

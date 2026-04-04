@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://f34dinc60kaa"]
+[gd_scene format=3 uid="uid://f34dinc60kaa"]
 
 [ext_resource type="Script" uid="uid://dtjahob531d8j" path="res://ui/hud/top_bar_ui/relics/relic_ui.gd" id="1_ye6dh"]
 [ext_resource type="Texture2D" uid="uid://ddc3y4ouv4tm6" path="res://assets/sprites/relics/paganinis_bow.png" id="2_vhbgb"]
@@ -8,7 +8,7 @@ font_size = 24
 outline_size = 2
 outline_color = Color(0.0142752165, 0.014275218, 0.014275218, 1)
 
-[node name="RelicUI" type="Control"]
+[node name="RelicUI" type="Control" unique_id=140079776]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 3
 anchors_preset = 0
@@ -16,16 +16,16 @@ offset_right = 75.0
 offset_bottom = 75.0
 script = ExtResource("1_ye6dh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=628894747]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1767604188]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="texture" type="TextureRect" parent="VBoxContainer/MarginContainer"]
+[node name="texture" type="TextureRect" parent="VBoxContainer/MarginContainer" unique_id=2127782498]
 clip_contents = true
 custom_minimum_size = Vector2(55, 55)
 layout_mode = 2
@@ -34,7 +34,7 @@ size_flags_vertical = 4
 texture = ExtResource("2_vhbgb")
 expand_mode = 3
 
-[node name="amount" type="Label" parent="VBoxContainer/MarginContainer"]
+[node name="amount" type="Label" parent="VBoxContainer/MarginContainer" unique_id=2000150710]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8

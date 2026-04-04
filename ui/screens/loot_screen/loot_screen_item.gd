@@ -40,4 +40,4 @@ func _on_mouse_entered() -> void:
 	stylebox.bg_color = UIUtils.secondary_color
 	add_theme_stylebox_override("panel", stylebox)
 	if loot_item_data.consumable != null and loot_item_data.consumable.description != "":
-		HintManager.show_hint(self, loot_item_data.consumable.description, HintManager.PositionHint.RIGHT)
+		HintManager.show_hint(self, loot_item_data.consumable.description, "", HintManager.PositionHint.RIGHT)

@@ -35,7 +35,7 @@ func _on_mouse_entered() -> void:
 	AudioManager.play_button_hover()
 	#texture_rect.custom_minimum_size = Vector2(50, 50)
 	if _consumable.data.description != "":
-		HintManager.show_hint(self, _consumable.data.description)
+		HintManager.show_hint(self, _consumable.data.description, _consumable.data.display_name)
 
 func _on_mouse_exited() -> void:
 	#texture_rect.custom_minimum_size = Vector2(40, 40)

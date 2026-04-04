@@ -1,19 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfcxnivp7sm3h"]
+[gd_scene format=3 uid="uid://dfcxnivp7sm3h"]
 
 [ext_resource type="StyleBox" uid="uid://de1oid76vx20r" path="res://assets/shaders/panel_black_box.tres" id="1_74gsb"]
 [ext_resource type="Script" uid="uid://065vw8xvnu1o" path="res://ui/components/hint/hint.gd" id="2_nt2fy"]
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("label", "container")]
+[sub_resource type="LabelSettings" id="LabelSettings_nt2fy"]
+font_color = Color(0.7137255, 0.77254903, 0.64705884, 1)
+
+[node name="HintLayer" type="CanvasLayer" unique_id=257266633 node_paths=PackedStringArray("text_label", "title_label", "container")]
 script = ExtResource("2_nt2fy")
-label = NodePath("Hint/Label")
+text_label = NodePath("Hint/VBoxContainer/TextLabel")
+title_label = NodePath("Hint/VBoxContainer/TitleLabel")
 container = NodePath("Hint")
 
-[node name="Hint" type="PanelContainer" parent="."]
+[node name="Hint" type="PanelContainer" parent="." unique_id=290567249]
 offset_right = 1.0
 offset_bottom = 23.0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_74gsb")
 
-[node name="Label" type="Label" parent="Hint"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Hint" unique_id=1335318434]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Hint/VBoxContainer" unique_id=1189827378]
+layout_mode = 2
+text = "Name:"
+label_settings = SubResource("LabelSettings_nt2fy")
+
+[node name="TextLabel" type="Label" parent="Hint/VBoxContainer" unique_id=268056946]
 layout_mode = 2
 text = "Increase the damage"
