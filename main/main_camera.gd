@@ -8,6 +8,7 @@ class_name MainCamera extends Camera2D
 const ZOOM_STEPS: Array[float] = [0.5, 0.75, 1.0]
 var _zoom_index: int = 0
 var _zoom_tween: Tween = null
+var _is_middle_mouse_panning: bool = false
 
 func _ready() -> void:
 	_zoom_index = 0
@@ -25,10 +26,11 @@ func _process(delta: float) -> void:
 	global_position += input_vector * move_speed * delta
 
 func _input(event: InputEvent) -> void:
-	# for center camera (disabled)
-	if event.is_action_pressed("test"):
-		pass
-		#global_position = level.global_position
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
+		_is_middle_mouse_panning = event.is_pressed()
+	elif event is InputEventMouseMotion and _is_middle_mouse_panning:
+		# Pan speed is adjusted by zoom so movement feels consistent at each zoom step.
+		global_position -= Vector2(event.relative.x / zoom.x, event.relative.y / zoom.y)
 
 
 func _unhandled_input(event):
