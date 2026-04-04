@@ -5,8 +5,12 @@ const opaque_color: Color = Color(1, 1, 1, 1)
 
 @onready var texture: TextureRect = $VBoxContainer/MarginContainer/texture
 @onready var amount: Label = $VBoxContainer/MarginContainer/amount
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var relic: Relic
+
+func _ready() -> void:
+	animation_player.play("on_enter")
 
 func set_relic(p_relic: Relic) -> void:
 	texture.texture = p_relic.data.icon
@@ -15,7 +19,7 @@ func set_relic(p_relic: Relic) -> void:
 		texture.modulate = semi_transparent_color
 	else:
 		texture.modulate = opaque_color
-	
+		
 func _on_mouse_entered() -> void:
 	HintManager.show_hint(self, relic.data.description, relic.data.display_name)
 

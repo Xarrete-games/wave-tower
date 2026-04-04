@@ -3,15 +3,15 @@ class_name RelicsBar extends Control
 const TOP_BAR_RELIC = preload("uid://f34dinc60kaa")
 
 func _ready():
-	RunContext.relics_manager.relics_change.connect(_update_relics)
+	RunContext.relics_manager.relic_added.connect(_on_relic_added)
+	RunContext.relics_manager.relic_removed.connect(_on_relic_removed)
 
-func _update_relics(relics: Array):
-	clear_relics_container()
-	for relic in relics:
-		var relic_instance: RelicUI = TOP_BAR_RELIC.instantiate()
-		add_child(relic_instance)
-		relic_instance.set_relic(relic)
+func _on_relic_added(relic: Relic) -> void:
+	var relic_instance: RelicUI = TOP_BAR_RELIC.instantiate()
+	add_child(relic_instance)
+	relic_instance.set_relic(relic)
 
-func clear_relics_container() -> void:
-	for relic in get_children():
-		relic.queue_free()
+func _on_relic_removed(relic_id: String) -> void:
+	for relic_ui in get_children():
+		if relic_ui.relic.data.id == relic_id:
+			relic_ui.queue_free()

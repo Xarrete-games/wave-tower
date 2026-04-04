@@ -37,6 +37,7 @@ func add_relic(relic: Relic) -> void:
 		push_error("Relic with ID '%s' already exists. Cannot add duplicate relics." % relic.data.id)
 		return
 
+	AudioManager.play_relic_obtain()
 	relic.on_obtain()
 	relic.apply_effect()
 	_add_relic(relic)
