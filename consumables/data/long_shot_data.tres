@@ -15,6 +15,5 @@ cursor_icon_used = ExtResource("2_531ys")
 runtime_script = ExtResource("3_531ys")
 id = "long_shot"
 display_name = "Longshot"
-description = "Doubles the range of a tower to the end of a wave.
-"
+description = "Doubles the range of a tower to the end of a wave."
 icon = ExtResource("4_ql0pa")

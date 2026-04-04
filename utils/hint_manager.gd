@@ -41,7 +41,7 @@ func get_offset(parent: Control, pos: PositionHint) -> Vector2:
 	if pos == PositionHint.RIGHT:
 		return offsett + Vector2(parent.size.x, 0)
 	else:
-		return offsett + Vector2(0, parent.size.y)
+		return offsett + Vector2(0, parent.size.y + 20)
 
 func is_on_left_side(parent: Control) -> bool:
 	var half_x = get_viewport().size.x * 0.5

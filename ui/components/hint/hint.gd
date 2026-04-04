@@ -13,7 +13,7 @@ func set_title(title: String) -> void:
 		title_label.visible = false
 	else:
 		title_label.visible = true
-	title_label.text = title
+	title_label.text = title + ":"
 
 func set_position(pos: Vector2) -> void:
 	container.global_position = pos
