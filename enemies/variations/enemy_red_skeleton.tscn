@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bbaivmxojf17b"]
+[gd_scene format=3 uid="uid://dpegdplia2yss"]
 
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_ohq5j"]
 [ext_resource type="Texture2D" uid="uid://b65g7ydmjtvi2" path="res://assets/sprites/enemies/esqueleton/esqueleto16.png" id="2_yosbp"]
