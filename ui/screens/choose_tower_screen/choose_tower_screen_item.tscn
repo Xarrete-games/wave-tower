@@ -20,8 +20,8 @@ region = Rect2(89, 80, 299, 471)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1512.0
-offset_bottom = -161.0
+offset_right = -1520.0
+offset_bottom = -525.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_xj3me")
@@ -43,7 +43,7 @@ theme_override_constants/margin_bottom = 40
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2068776671]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 20
 
 [node name="TittleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=546555054]
 layout_mode = 2
@@ -51,22 +51,13 @@ text = "Name"
 label_settings = ExtResource("2_0dsth")
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1006375540]
-custom_minimum_size = Vector2(320, 135)
-layout_mode = 2
-text = "Throws a glacial lance that deeply freezes its target, 
-dealing more damage based on the number of Frost
-stacks they have."
-label_settings = ExtResource("5_xj3me")
-horizontal_alignment = 1
-autowrap_mode = 2
-
 [node name="Texture" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=912322065]
-custom_minimum_size = Vector2(100, 140)
+custom_minimum_size = Vector2(180, 220)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = SubResource("AtlasTexture_8kd2t")
-expand_mode = 1
+expand_mode = 3
+stretch_mode = 5
 
 [node name="TowerStats" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1770889320]
 layout_mode = 2
@@ -76,25 +67,31 @@ alignment = 1
 [node name="DamageStatUi" parent="MarginContainer/VBoxContainer/TowerStats" unique_id=1410745448 instance=ExtResource("5_fxrf6")]
 unique_name_in_owner = true
 layout_mode = 2
-stat_name = "Damage"
 stat_icon = ExtResource("6_a0r7t")
 
 [node name="AttkSpeedStatUi" parent="MarginContainer/VBoxContainer/TowerStats" unique_id=102761453 instance=ExtResource("5_fxrf6")]
 unique_name_in_owner = true
 layout_mode = 2
-stat_name = "Damage"
 stat_icon = ExtResource("7_l17e5")
 is_float = true
 
 [node name="RangeStatUi" parent="MarginContainer/VBoxContainer/TowerStats" unique_id=313312033 instance=ExtResource("5_fxrf6")]
 unique_name_in_owner = true
 layout_mode = 2
-stat_name = "Range"
 stat_icon = ExtResource("8_ojjmy")
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1006375540]
+custom_minimum_size = Vector2(320, 20)
+layout_mode = 2
+text = "Throws a glacial lance that deeply freezes its target, "
+label_settings = ExtResource("5_xj3me")
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="GoldPrice" parent="MarginContainer/VBoxContainer" unique_id=1606580088 instance=ExtResource("9_a0r7t")]
 layout_mode = 2
 size_flags_horizontal = 4
+alignment = 2
 
 [node name="AnimationComponent" type="Node" parent="." unique_id=307268817]
 script = ExtResource("12_xj3me")
