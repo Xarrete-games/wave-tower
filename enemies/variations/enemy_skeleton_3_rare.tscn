@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://b3wa2d1vhulle"]
+
+[ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_5ocox"]
+[ext_resource type="Texture2D" uid="uid://bilpxpb5ul8ht" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto16_rare.png" id="2_5ocox"]
+[ext_resource type="Texture2D" uid="uid://d07m6nkqc3bco" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto15_rare.png" id="3_ovi58"]
+[ext_resource type="Texture2D" uid="uid://0g4rbt7r76pc" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto14_rare.png" id="4_itlof"]
+[ext_resource type="Texture2D" uid="uid://bwn50q7ixayd" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto13_rare.png" id="5_fyrx0"]
+[ext_resource type="Texture2D" uid="uid://mlw8wrealclo" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto12_rare.png" id="6_48nds"]
+[ext_resource type="Texture2D" uid="uid://b25cx3wy8vlxf" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto11_rare.png" id="7_f7yp2"]
+[ext_resource type="Texture2D" uid="uid://dlij2whdabx3m" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto10_rare.png" id="8_oivfc"]
+[ext_resource type="Texture2D" uid="uid://85xxi68caa1a" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto9_rare.png" id="9_4l41p"]
+[ext_resource type="Texture2D" uid="uid://dgmyvjtuwrbk3" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto8_rare.png" id="10_acvo5"]
+[ext_resource type="Texture2D" uid="uid://mn0cde8q3n5d" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto7_rare.png" id="11_67hx6"]
+[ext_resource type="Texture2D" uid="uid://cr6j2sufejvac" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto6_rare.png" id="12_0bo7o"]
+[ext_resource type="Texture2D" uid="uid://dpjl08gigia76" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto5_rare.png" id="13_oqmk6"]
+[ext_resource type="Texture2D" uid="uid://6tp0xg56yjxh" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto4_rare.png" id="14_grf88"]
+[ext_resource type="Texture2D" uid="uid://c7ssi0a0ipxtl" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto3_rare.png" id="15_03yqa"]
+[ext_resource type="Texture2D" uid="uid://dufxlpoebx5pp" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto2_rare.png" id="16_7xbtc"]
+[ext_resource type="Texture2D" uid="uid://so3lhjyl154n" path="res://assets/sprites/enemies/esqueleton_rare/esqueleto1_rare.png" id="17_jey88"]
+[ext_resource type="Texture2D" uid="uid://bg0pks4rhbj2x" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback18_rare.png" id="18_04xke"]
+[ext_resource type="Texture2D" uid="uid://dxj42u3c5pjel" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback17_rare.png" id="19_atwab"]
+[ext_resource type="Texture2D" uid="uid://b2gifjirl4eiv" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback16_rare.png" id="20_dnj2y"]
+[ext_resource type="Texture2D" uid="uid://drhdmvkdxk67n" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback15_rare.png" id="21_4yrau"]
+[ext_resource type="Texture2D" uid="uid://v57plyag4ogb" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback14_rare.png" id="22_x454d"]
+[ext_resource type="Texture2D" uid="uid://c8woqe3d8i0w" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback13_rare.png" id="23_x08th"]
+[ext_resource type="Texture2D" uid="uid://jcde3dwepbwb" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback12_rare.png" id="24_2j4s8"]
+[ext_resource type="Texture2D" uid="uid://hd6svgit15jy" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback11_rare.png" id="25_660wd"]
+[ext_resource type="Texture2D" uid="uid://ckr4u5c2fwbhl" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback10_rare.png" id="26_myt1f"]
+[ext_resource type="Texture2D" uid="uid://bnb4134grf5rx" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback9_rare.png" id="27_gd3wm"]
+[ext_resource type="Texture2D" uid="uid://cokikrtxxd0ll" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback8_rare.png" id="28_6dx7b"]
+[ext_resource type="Texture2D" uid="uid://b2swnif5qcu6a" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback7_rare.png" id="29_khgkl"]
+[ext_resource type="Texture2D" uid="uid://dvjjw1e3ee6c8" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback6_rare.png" id="30_508fe"]
+[ext_resource type="Texture2D" uid="uid://dx07vfk1hib7p" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback5_rare.png" id="31_w4hel"]
+[ext_resource type="Texture2D" uid="uid://4awum2gang2j" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback4_rare.png" id="32_3fe8t"]
+[ext_resource type="Texture2D" uid="uid://cxipfsyrs5fc8" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback3_rare.png" id="33_bcsdi"]
+[ext_resource type="Texture2D" uid="uid://d2n0eff5cvod2" path="res://assets/sprites/enemies/esqueleton_rare/esqueletoback2_rare.png" id="34_xjgfj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r3u0i"]
+radius = 16.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cbli0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5ocox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ovi58")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_itlof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fyrx0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_48nds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f7yp2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_oivfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_4l41p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_acvo5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_67hx6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0bo7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_oqmk6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_grf88")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_03yqa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_7xbtc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_jey88")
+}],
+"loop": true,
+"name": &"down right",
+"speed": 22.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_04xke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_atwab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_dnj2y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_4yrau")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_x454d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_x08th")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_2j4s8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_660wd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_myt1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_gd3wm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_6dx7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_khgkl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_508fe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_w4hel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_3fe8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_bcsdi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_xjgfj")
+}],
+"loop": true,
+"name": &"top right",
+"speed": 22.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_pqh0f"]
+offsets = PackedFloat32Array(0, 0.62062615)
+colors = PackedColorArray(0.55828667, 0.55828655, 0.55828655, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r3u0i"]
+gradient = SubResource("Gradient_pqh0f")
+width = 600
+height = 400
+fill = 1
+fill_from = Vector2(0.5071225, 0.48433048)
+
+[node name="Skeleton" unique_id=12608326 instance=ExtResource("1_5ocox")]
+base_speed = 185.0
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=972753897]
+shape = SubResource("CircleShape2D_r3u0i")
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
+light_mask = 0
+position = Vector2(0, -12)
+scale = Vector2(0.08, 0.08)
+sprite_frames = SubResource("SpriteFrames_cbli0")
+frame_progress = 0.0
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="2" unique_id=67541516]
+position = Vector2(5, 16)
+scale = Vector2(0.08, 0.04)
+energy = 0.5
+blend_mode = 1
+texture = SubResource("GradientTexture2D_r3u0i")
+
+[node name="HealthBar" parent="." index="4" unique_id=937412680]
+offset_top = -114.0
+offset_bottom = -114.0
