@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cf7xgd20ynb8n"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://cf7xgd20ynb8n"]
 
 [ext_resource type="Texture2D" uid="uid://c15gu8gh1w0d5" path="res://assets/sprites/ui/main_menu_box.png" id="1_k7xsv"]
 

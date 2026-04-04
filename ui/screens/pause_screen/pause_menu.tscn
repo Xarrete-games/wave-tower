@@ -115,6 +115,7 @@ metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_type_variation = &"ButtonRed"
 text = "Exit"
 
 [node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ExitButton" unique_id=726396231 node_paths=PackedStringArray("wait_for")]

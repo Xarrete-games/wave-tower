@@ -1,8 +1,10 @@
 [gd_resource type="Theme" format=3 uid="uid://br31q0n6y25o7"]
 
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="1_p5s8h"]
-[ext_resource type="StyleBox" uid="uid://cf7xgd20ynb8n" path="res://ui/styles/box_style/buttons/button.tres" id="1_xo2d8"]
-[ext_resource type="StyleBox" uid="uid://dcfbk6rhdnfud" path="res://ui/styles/box_style/buttons/button_hover.tres" id="2_p5s8h"]
+[ext_resource type="StyleBox" uid="uid://do7k5l2i677fp" path="res://ui/styles/themes/button_dark_red_exit.tres" id="3_8eabv"]
+[ext_resource type="StyleBox" uid="uid://bg8uvn0upli8m" path="res://ui/styles/themes/button_intense_red_hover.tres" id="3_p5s8h"]
+[ext_resource type="StyleBox" uid="uid://b2v6yth0ywtk" path="res://ui/styles/themes/button_dark_purple_hover.tres" id="4_8eabv"]
+[ext_resource type="StyleBox" uid="uid://dyktvydm6k2yp" path="res://ui/styles/themes/button_dark_green.tres" id="4_e7soj"]
 
 [resource]
 Button/colors/font_color = Color(0.78431374, 0.9019608, 0.7882353, 1)
@@ -11,8 +13,14 @@ Button/constants/icon_max_width = 30
 Button/constants/outline_size = 12
 Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_p5s8h")
-Button/styles/disabled = ExtResource("1_xo2d8")
-Button/styles/focus = ExtResource("2_p5s8h")
-Button/styles/hover = ExtResource("2_p5s8h")
-Button/styles/normal = ExtResource("1_xo2d8")
-Button/styles/pressed = ExtResource("1_xo2d8")
+Button/styles/disabled = ExtResource("4_e7soj")
+Button/styles/focus = ExtResource("4_8eabv")
+Button/styles/hover = ExtResource("4_8eabv")
+Button/styles/normal = ExtResource("4_e7soj")
+Button/styles/pressed = ExtResource("4_8eabv")
+ButtonRed/base_type = &"Button"
+ButtonRed/colors/font_outline_color = Color(0.3889246, 9.505823e-07, 4.813075e-08, 1)
+ButtonRed/styles/disabled = ExtResource("4_e7soj")
+ButtonRed/styles/hover = ExtResource("3_p5s8h")
+ButtonRed/styles/hover_pressed = ExtResource("3_p5s8h")
+ButtonRed/styles/normal = ExtResource("3_8eabv")
