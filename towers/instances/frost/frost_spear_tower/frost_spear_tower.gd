@@ -1,7 +1,7 @@
 class_name FrostSpearTower extends Tower
 
 @export var frost_spear_projectile_scene: PackedScene
-@export var debuff_stacks: int = 5
+@export var debuff_stacks: int = 2
 
 @onready var projectile_spawn_pos: Marker2D = $ProjectileSpawnPos
 

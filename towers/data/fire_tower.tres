@@ -12,7 +12,7 @@ region = Rect2(89, 80, 299, 471)
 [sub_resource type="Resource" id="Resource_185nb"]
 script = ExtResource("2_n2ugo")
 upgrade_price = 70
-base_damage = 35.0
+base_damage = 45.0
 base_attack_range = 450.0
 base_attack_speed = 1.5
 damage_per_level = 50.0
