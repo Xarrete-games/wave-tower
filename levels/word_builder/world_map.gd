@@ -206,13 +206,25 @@ func _move_piece_decoration_to_visuals(piece: MapPiece) -> void:
 	if decoration == null:
 		return
 
-	var deco_children: Array[Node] = decoration.get_children()
-	for child in deco_children:
-		if not (child is Node2D):
+	var leaf_nodes: Array[Node2D] = []
+	_collect_leaf_node2d(decoration, leaf_nodes)
+
+	for leaf in leaf_nodes:
+		if leaf == decoration:
 			continue
-		if child.get_parent() == visual:
+		if leaf.get_parent() == visual:
 			continue
-		child.reparent(visual, true)
+		leaf.reparent(visual, true)
+
+
+func _collect_leaf_node2d(node: Node, out: Array[Node2D]) -> void:
+	var children: Array[Node] = node.get_children()
+	if children.is_empty():
+		out.append(node as Node2D)
+		return
+
+	for child in children:
+		_collect_leaf_node2d(child, out)
 
 
 func _finalize_spawn_pos(piece: MapPiece, edge: Edge) -> void:
