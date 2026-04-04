@@ -1,21 +1,27 @@
 @tool
 class_name TowerStatUi extends Control
 
-@export var stat_name: String
+
 @export var stat_icon: Texture2D
 @export var stat_value: float
 @export var is_float: bool = false
+@export var unit: String
 
 
 @onready var stat_texture: TextureRect = %StatTexture
 @onready var value_label: Label = %ValueLabel
-@onready var attibute_label: Label = %AttributeLabel
+@onready var unit_label: Label = %UnitLabel
 
 func _ready() -> void:
 	stat_texture.texture = stat_icon
-	attibute_label.text = stat_name
+
+	if unit == "":
+		unit_label.visible = false
+	else:
+		unit_label.text = unit
+
 	if is_float:
-		value_label.text = str(stat_value)
+		value_label.text = str(snapped(stat_value, 0.01))
 	else:
 		value_label.text = str(int(stat_value))
 

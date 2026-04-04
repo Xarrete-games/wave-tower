@@ -200,7 +200,7 @@ func _on_stats_change(new_stats: TowerStats) -> void:
 	_apply_stats_changes()
 
 func _apply_stats_changes() -> void:
-	attack_timer.wait_time = stats.attack_speed
+	attack_timer.wait_time = 1.0 / stats.attack_speed
 	range_preview.radius = stats.attack_range
 	(range_collision.shape as CircleShape2D).radius = stats.attack_range
 		
