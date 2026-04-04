@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cw14sfvcipnum"]
 
-[ext_resource type="StyleBox" uid="uid://5r63ppjcfdsy" path="res://ui/styles/box_style/texture_container.tres" id="1_xj3me"]
+[ext_resource type="StyleBox" uid="uid://doi3f4my6te83" path="res://ui/styles/box_style/tower_rewards/reward_tower_box_basic.tres" id="1_ojjmy"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="2_0dsth"]
 [ext_resource type="Script" uid="uid://blnfa1fvl002n" path="res://ui/screens/choose_tower_screen/choose_tower_screen_item.gd" id="2_l17e5"]
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="4_u2e7x"]
@@ -20,11 +20,13 @@ region = Rect2(89, 80, 299, 471)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1520.0
-offset_bottom = -525.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = -1515.0
+offset_bottom = -520.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("1_xj3me")
+theme_override_styles/panel = ExtResource("1_ojjmy")
 script = ExtResource("2_l17e5")
 title_label = NodePath("MarginContainer/VBoxContainer/TittleLabel")
 description_label = NodePath("MarginContainer/VBoxContainer/Description")
