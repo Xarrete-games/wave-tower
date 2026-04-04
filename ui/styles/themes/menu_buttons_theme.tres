@@ -1,10 +1,10 @@
 [gd_resource type="Theme" format=3 uid="uid://br31q0n6y25o7"]
 
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="1_p5s8h"]
-[ext_resource type="StyleBox" uid="uid://do7k5l2i677fp" path="res://ui/styles/themes/button_dark_red_exit.tres" id="3_8eabv"]
-[ext_resource type="StyleBox" uid="uid://bg8uvn0upli8m" path="res://ui/styles/themes/button_intense_red_hover.tres" id="3_p5s8h"]
-[ext_resource type="StyleBox" uid="uid://b2v6yth0ywtk" path="res://ui/styles/themes/button_dark_purple_hover.tres" id="4_8eabv"]
-[ext_resource type="StyleBox" uid="uid://dyktvydm6k2yp" path="res://ui/styles/themes/button_dark_green.tres" id="4_e7soj"]
+[ext_resource type="StyleBox" path="res://ui/styles/themes/button_dark_red_exit.tres" id="3_8eabv"]
+[ext_resource type="StyleBox" path="res://ui/styles/themes/button_intense_red_hover.tres" id="3_p5s8h"]
+[ext_resource type="StyleBox" path="res://ui/styles/themes/button_dark_purple_hover.tres" id="4_8eabv"]
+[ext_resource type="StyleBox" path="res://ui/styles/themes/button_dark_green.tres" id="4_e7soj"]
 
 [resource]
 Button/colors/font_color = Color(0.78431374, 0.9019608, 0.7882353, 1)
