@@ -2,6 +2,7 @@ class_name ConsumablesHandler extends Node
 
 # for 48x48 cursor icons
 const CENTER_CURSOR_OFFSET: Vector2 = Vector2(24, 24)
+const DEFAULT_CURSOR: Texture2D = preload("res://assets/images/icons/mouse_02.png")
 
 var _current_consumable: ConsumableTargeteable = null
 var _is_valid_target: bool = false
@@ -64,13 +65,13 @@ func _use_consumable() -> void:
 	_current_consumable.use(_current_target)
 	Hooks.on_consumable_used(_current_consumable)
 	_current_consumable = null
-	Input.set_custom_mouse_cursor(null)
+	Input.set_custom_mouse_cursor(DEFAULT_CURSOR)
 	
 	ActionManager.end_action()
 
 func _cancel_consumable() -> void:
 	_current_consumable = null
-	Input.set_custom_mouse_cursor(null)
+	Input.set_custom_mouse_cursor(DEFAULT_CURSOR)
 
 func _on_consumable_clicked(consumable: Consumable) -> void:
 	_current_consumable = consumable
