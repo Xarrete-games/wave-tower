@@ -7,9 +7,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_om66k"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 128, -320, 0, 0, 0, 0, -640, 56)
+"points": PackedVector2Array(0, 0, 0, 0, 128, -320, 0, 0, 0, 0, 120, -276, 0, 0, 0, 0, 301, -171, 0, 0, 0, 0, 439, 25, 0, 0, 0, 0, 463, 86, 0, 0, 0, 0, 230, 213, 0, 0, 0, 0, 190, 282, 0, 0, 0, 0, 29, 354, 0, 0, 0, 0, -43, 354, 0, 0, 0, 0, -202, 269, 0, 0, 0, 0, -199, 227, 0, 0, 0, 0, -107, 179, 0, 0, 0, 0, -100, 144, 0, 0, 0, 0, -170, 107, 0, 0, 0, 0, -455, 51, 0, 0, 0, 0, -635, 89)
 }
-point_count = 2
+point_count = 16
 
 [node name="PieceStraightNetSwt" type="Node2D" unique_id=547431555]
 script = ExtResource("1_om66k")
