@@ -6,7 +6,6 @@ const TOWER_BUTTON = preload("uid://o248nju46k2n")
 var current_tower: Tower
 var button_in_hover: TowerButton = null
 
-
 # definition
 @onready var name_label: Label = %NameLabel
 @onready var id_label: Label = %IdLabel
@@ -28,20 +27,22 @@ var button_in_hover: TowerButton = null
 @onready var tower_hint_panel: TowerButtonHint = %TowerHintPanel
 
 func _ready() -> void:
-	visible = true
+	visible = false
 	tower_hint_panel.visible = false
 	_hide_upgrade_options()
 	ClickEvents.tower_selected.connect(_on_tower_selected)
 
 func _on_tower_selected(tower: Tower) -> void:
 	if tower == null:
-		visible = false
+		if ActionManager.current_action == ActionManager.ActionState.TOWER_SELECTED:
+			ActionManager.end_action()
 		return
 	
 	var tageting_modes: Array[Tower.TargetingMode] = [Tower.TargetingMode.FIRST_IN_PROGRESS]
 	Hooks.on_get_targeting_modes(tageting_modes)
 	_update_targeting_modes(tageting_modes)
 	targeting_mode_selector.select(tower.targeting_mode)
+	ActionManager.start_action(ActionManager.ActionState.TOWER_SELECTED, func(): visible = false)
 	visible = true
 
 	var stats = tower.stats

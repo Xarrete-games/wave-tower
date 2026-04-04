@@ -28,8 +28,6 @@ func _input(event: InputEvent) -> void:
 
 	if UIUtils.is_left_click_event(event) and _is_valid_target:
 		_use_consumable()
-	elif event.is_action("exit"):
-		cancel_current_consumable()
 
 func _handle_blocked_tile_placement() -> void:
 	if composite_tile_map.is_mouse_on_block_tile():
@@ -66,23 +64,20 @@ func _use_consumable() -> void:
 	_current_consumable.use(_current_target)
 	Hooks.on_consumable_used(_current_consumable)
 	_current_consumable = null
-	GameState.state = GameState.STATE.IN_GAME
 	Input.set_custom_mouse_cursor(null)
+	
+	ActionManager.end_action()
 
-
-func cancel_current_consumable() -> void:
+func _cancel_consumable() -> void:
 	_current_consumable = null
-	await get_tree().process_frame 
-	await get_tree().process_frame
-	if GameState.is_using_item():
-		GameState.state = GameState.STATE.IN_GAME
 	Input.set_custom_mouse_cursor(null)
 
 func _on_consumable_clicked(consumable: Consumable) -> void:
 	_current_consumable = consumable
-	GameState.state = GameState.STATE.USING_ITEM
 	Input.set_custom_mouse_cursor(_current_consumable.data.cursor_icon, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
+	
+	ActionManager.start_action(ActionManager.ActionState.USING_ITEM, _cancel_consumable)
 
 func _on_game_state_changed(new_state: GameState.STATE) -> void:
-	if new_state != GameState.STATE.USING_ITEM and _current_consumable:
-		cancel_current_consumable()
+	if new_state != GameState.STATE.IN_GAME and _current_consumable:
+		ActionManager.end_action()

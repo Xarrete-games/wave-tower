@@ -3,14 +3,7 @@ class_name TowerPlacer extends Node2D
 @export var composite_tile_map: CompositeTileMap = null
 @onready var visual: Node2D = $'../Visual'
 
-var _is_placing = false:
-	set(value):
-		_is_placing = value
-		if _is_placing:
-			GameState.state = GameState.STATE.PLACING_TOWER
-		else:
-			if GameState.is_placing_tower():
-				GameState.state = GameState.STATE.IN_GAME
+var _is_placing = false
 
 var _current_tower_instance: Tower = null
 var _is_valid_placement = false
@@ -43,9 +36,6 @@ func _input(event: InputEvent) -> void:
 		event.button_index == MOUSE_BUTTON_LEFT and 
 		event.pressed and _is_valid_placement):
 			_place_tower()
-	# cancel
-	elif event.is_action("exit"):
-		_cancel_tower()
 		
 func _place_tower() -> void:
 	if not _current_tower_instance:
@@ -53,7 +43,7 @@ func _place_tower() -> void:
 	# check gold
 	var tower_price = _current_tower_instance.build_price
 	if not _has_enought_gold(tower_price):
-		_cancel_tower()
+		ActionManager.end_action()
 		return
 	_handle_costs(tower_price)
 	# place tower — mark tile as occupied
@@ -61,12 +51,11 @@ func _place_tower() -> void:
 	_current_tower_instance.composite_tile_key = key
 	
 	_is_placing = false
-	
 	_current_tower_instance.enable()
-
 	RunContext.towers_manager.add_tower_placed(_current_tower_instance)
-
 	_current_tower_instance = null
+	
+	ActionManager.end_action()
 
 func _has_enought_gold(tower_price: int) -> bool:
 	if RunContext.economy.available_free_towers > 0:
@@ -85,9 +74,7 @@ func _cancel_tower() -> void:
 	if _current_tower_instance:
 		_current_tower_instance.queue_free()
 		_current_tower_instance = null
-		await get_tree().process_frame 
-		await get_tree().process_frame
-		_is_placing = false
+	_is_placing = false
 
 func _on_tower_button_pressed(tower_configuration: TowerDataWithInstance, price: int) -> void:
 	if _is_placing:
@@ -97,6 +84,8 @@ func _on_tower_button_pressed(tower_configuration: TowerDataWithInstance, price:
 	_current_tower_instance.build_price = price
 	visual.add_child(_current_tower_instance)
 	_is_placing = true
+	
+	ActionManager.start_action(ActionManager.ActionState.PLACING_TOWER, _cancel_tower)
 
 func _on_tower_upgrade_pressed(current_tower: Tower, new_tower_conf: TowerDataWithInstance, price: int) -> void:
 	var new_tower = new_tower_conf.get_instance()
