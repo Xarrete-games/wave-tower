@@ -8,6 +8,42 @@ font_size = 24
 outline_size = 2
 outline_color = Color(0.0142752165, 0.014275218, 0.014275218, 1)
 
+[sub_resource type="Animation" id="Animation_1sv17"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0rfo3"]
+resource_name = "on_enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vdc07"]
+_data = {
+&"RESET": SubResource("Animation_1sv17"),
+&"on_enter": SubResource("Animation_0rfo3")
+}
+
 [node name="RelicUI" type="Control" unique_id=140079776]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 3
@@ -39,6 +75,9 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 label_settings = SubResource("LabelSettings_ye6dh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1187952058]
+libraries/ = SubResource("AnimationLibrary_vdc07")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

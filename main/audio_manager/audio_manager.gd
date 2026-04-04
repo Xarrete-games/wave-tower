@@ -10,6 +10,9 @@ extends Node
 
 func play_coins():
 	coins.play()
+
+func play_relic_obtain():
+	coins.play()
 	
 func play_button_hover():
 	button_hover.play()
