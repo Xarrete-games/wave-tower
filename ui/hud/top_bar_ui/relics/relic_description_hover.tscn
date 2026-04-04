@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://k70cc61jom3v"]
+[gd_scene format=3 uid="uid://k70cc61jom3v"]
 
+[ext_resource type="FontFile" uid="uid://biwgs5vif6nm6" path="res://assets/fonts/Kreon-VariableFont_wght.ttf" id="2_2rm3s"]
 [ext_resource type="StyleBox" uid="uid://de1oid76vx20r" path="res://assets/shaders/panel_black_box.tres" id="2_p7ubt"]
 
 [sub_resource type="GDScript" id="GDScript_axv7m"]
@@ -12,15 +13,16 @@ func set_description(new_text: String) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_p7ubt"]
+font = ExtResource("2_2rm3s")
 font_size = 24
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" unique_id=1564046520]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = ExtResource("2_p7ubt")
 script = SubResource("GDScript_axv7m")
 
-[node name="DescriptionLabel" type="Label" parent="."]
+[node name="DescriptionLabel" type="Label" parent="." unique_id=1853802051]
 layout_mode = 2
 text = "Hace mucho daño"
 label_settings = SubResource("LabelSettings_p7ubt")

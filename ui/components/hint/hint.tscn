@@ -2,9 +2,14 @@
 
 [ext_resource type="StyleBox" uid="uid://de1oid76vx20r" path="res://assets/shaders/panel_black_box.tres" id="1_74gsb"]
 [ext_resource type="Script" uid="uid://065vw8xvnu1o" path="res://ui/components/hint/hint.gd" id="2_nt2fy"]
+[ext_resource type="FontFile" uid="uid://biwgs5vif6nm6" path="res://assets/fonts/Kreon-VariableFont_wght.ttf" id="3_db7le"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nt2fy"]
+font = ExtResource("3_db7le")
 font_color = Color(0.7137255, 0.77254903, 0.64705884, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8k276"]
+font = ExtResource("3_db7le")
 
 [node name="HintLayer" type="CanvasLayer" unique_id=257266633 node_paths=PackedStringArray("text_label", "title_label", "container")]
 script = ExtResource("2_nt2fy")
@@ -29,3 +34,4 @@ label_settings = SubResource("LabelSettings_nt2fy")
 [node name="TextLabel" type="Label" parent="Hint/VBoxContainer" unique_id=268056946]
 layout_mode = 2
 text = "Increase the damage"
+label_settings = SubResource("LabelSettings_8k276")
