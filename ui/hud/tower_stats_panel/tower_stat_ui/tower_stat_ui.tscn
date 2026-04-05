@@ -30,11 +30,18 @@ size_flags_vertical = 4
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "0"
+text = "100"
 label_settings = ExtResource("2_c8a0f")
 
 [node name="UnitLabel" type="Label" parent="BoxContainer" unique_id=517284047]
 unique_name_in_owner = true
 layout_mode = 2
 text = "/s"
+label_settings = ExtResource("2_c8a0f")
+
+[node name="UpgradeValueLabel" type="Label" parent="BoxContainer" unique_id=894135724]
+unique_name_in_owner = true
+modulate = Color(0.33333334, 0.34901962, 1, 1)
+layout_mode = 2
+text = "(+5)"
 label_settings = ExtResource("2_c8a0f")

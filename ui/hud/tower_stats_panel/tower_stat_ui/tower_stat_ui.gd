@@ -11,9 +11,11 @@ class_name TowerStatUi extends Control
 @onready var stat_texture: TextureRect = %StatTexture
 @onready var value_label: Label = %ValueLabel
 @onready var unit_label: Label = %UnitLabel
+@onready var upgrade_value_label: Label = %UpgradeValueLabel
 
 func _ready() -> void:
 	stat_texture.texture = stat_icon
+	upgrade_value_label.visible = false
 
 	if unit == "":
 		unit_label.visible = false
@@ -31,3 +33,13 @@ func set_value(new_value: float) -> void:
 		value_label.text = str(stat_value)
 	else:
 		value_label.text = str(int(stat_value))
+
+func show_upgrade_value(upgrade_amount: float) -> void:
+	upgrade_value_label.visible = true
+	if is_float:
+		upgrade_value_label.text = "(+" + str(snapped(upgrade_amount, 0.01)) + ")"
+	else:
+		upgrade_value_label.text = "(+" + str(int(upgrade_amount)) + ")"
+
+func hide_upgrade_value() -> void:
+	upgrade_value_label.visible = false

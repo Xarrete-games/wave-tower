@@ -18,6 +18,7 @@ base_attack_range = 580.0
 base_attack_speed = 1.67
 damage_per_level = 10.0
 attack_range_per_level = 100.0
+attack_speed_per_level = 0.2
 id = "lightning_tower"
 display_name = "Lightning Tower"
 description = "Basic lightning tower"

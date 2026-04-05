@@ -19,7 +19,6 @@ var button_in_hover: TowerButton = null
 
 # upgrades
 @onready var upgrade_button_container: Control = %UpgradeButtonContainer
-@onready var upgrades_container: Control = %UpgradesContainer
 @onready var upgrade_tower_price: GoldPrice = %UpgradeTowerPrice
 # tageting
 @onready var targeting_mode_selector: OptionButton = %TargetingModeSelector
@@ -34,6 +33,7 @@ func _ready() -> void:
 
 func _on_tower_selected(tower: Tower) -> void:
 	if tower == null:
+		current_tower = null
 		if ActionManager.current_action == ActionManager.ActionState.TOWER_SELECTED:
 			ActionManager.end_action()
 		return
@@ -53,7 +53,6 @@ func _on_tower_selected(tower: Tower) -> void:
 	name_label.text = tower.data.display_name
 	id_label.text = tower.id
 	current_tower = tower
-	level_container.visible = true
 
 	level_label.text = str(tower.level)
 	if tower.is_max_level():
@@ -62,7 +61,6 @@ func _on_tower_selected(tower: Tower) -> void:
 	else:
 		upgrade_tower_price.price = tower.data.upgrade_price
 		upgrade_button_container.visible = true
-		upgrades_container.visible = false
 
 	
 func update_stats(tower_stats: TowerStats) -> void:
@@ -97,8 +95,7 @@ func _on_upgrade_button_pressed() -> void:
 
 func _hide_upgrade_options() -> void:
 	upgrade_button_container.visible = false
-	upgrades_container.visible = false
-	#level_container.visible = false
+
 
 func _on_tower_button_pressed(tower_data: TowerDataWithInstance, price: int) -> void:
 	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_data, price)
@@ -118,3 +115,13 @@ func _on_tower_button_unhover(tower_button: TowerButton) -> void:
 	if button_in_hover == tower_button:
 		button_in_hover = null
 		tower_hint_panel.visible = false
+
+func _on_upgrade_button_xarreta_mouse_entered() -> void:
+	damage_stat.show_upgrade_value(current_tower.data.stats_on_level.damage)
+	attack_speed_stat.show_upgrade_value(current_tower.data.stats_on_level.attack_speed)
+	range_stat.show_upgrade_value(current_tower.data.stats_on_level.attack_range)
+
+func _on_upgrade_button_xarreta_mouse_exited() -> void:
+	damage_stat.hide_upgrade_value()
+	attack_speed_stat.hide_upgrade_value()
+	range_stat.hide_upgrade_value()
