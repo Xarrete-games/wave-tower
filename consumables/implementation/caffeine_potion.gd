@@ -7,7 +7,9 @@ var bad_buff_id: String:
 
 func use() -> void:
 	var duration = Duration.new(5, 0)
-	var debuff = TowerBuff.new(Source.new(Source.SourceType.CONSUMABLE, bad_buff_id, self), AttackSpeedMultModifier.new(-0.2),duration)
-	var buff = TowerBuff.new(Source.new(Source.SourceType.CONSUMABLE, good_buff_id, self), AttackSpeedMultModifier.new(0.2), duration)
+	var debuff_modifier := TowerStatsModifier.new(TowerStatsModifier.Stat.ATTACK_SPEED, TowerStatsModifier.Mode.MULT, -0.2)
+	var buff_modifier := TowerStatsModifier.new(TowerStatsModifier.Stat.ATTACK_SPEED, TowerStatsModifier.Mode.MULT, 0.2)
+	var debuff = TowerBuffStatsModifier.new(Source.new(Source.SourceType.CONSUMABLE, bad_buff_id, self), debuff_modifier, duration)
+	var buff = TowerBuffStatsModifier.new(Source.new(Source.SourceType.CONSUMABLE, good_buff_id, self), buff_modifier, duration)
 	buff.residual_buff = debuff
 	RunContext.towers_buffs.add_buff(buff)

@@ -1,7 +1,8 @@
 class_name VicMicrophone extends Relic
 
 func apply_effect() -> void:
-	var tower_buff = TowerBuff.new(Source.new(Source.SourceType.RELIC, data.id), AttackRangeMultFrostModifier.new(0.2))
+	var modifier := TowerStatsModifier.new(TowerStatsModifier.Stat.ATTACK_RANGE_FROST, TowerStatsModifier.Mode.MULT, 0.2)
+	var tower_buff = TowerBuffStatsModifier.new(Source.new(Source.SourceType.RELIC, data.id), modifier)
 	RunContext.towers_buffs.add_buff(tower_buff)
 
 func remove_effect() -> void:

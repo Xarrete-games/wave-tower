@@ -62,7 +62,8 @@ func _rebuild_local_stats_acc() -> void:
 	var acc = TowerStatsAccumulator.new()
 	
 	for buff in local_buffs:
-		buff.modifier.contribute(acc)
+		if buff is TowerBuffStatsModifier:
+			(buff as TowerBuffStatsModifier).contribute(acc)
 	local_stats_acc = acc
 
 func level_up(_new_level: int) -> void:

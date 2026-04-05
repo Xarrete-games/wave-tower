@@ -27,7 +27,8 @@ func add_buff(new_buff: TowerBuff) -> void:
 	var acc = TowerStatsAccumulator.new()
 	
 	for buff in towers_buffs:
-		buff.modifier.contribute(acc)
+		if buff is TowerBuffStatsModifier:
+			(buff as TowerBuffStatsModifier).contribute(acc)
 	towers_stats_accumulator = acc
 
 func remove_buff(source_id: String) -> void:
@@ -37,7 +38,8 @@ func remove_buff(source_id: String) -> void:
 	var acc = TowerStatsAccumulator.new()
 	
 	for buff in towers_buffs:
-		buff.modifier.contribute(acc)
+		if buff is TowerBuffStatsModifier:
+			(buff as TowerBuffStatsModifier).contribute(acc)
 	towers_stats_accumulator = acc
 
 func reset_buffs() -> void:
