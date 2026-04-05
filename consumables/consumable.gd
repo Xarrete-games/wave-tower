@@ -9,3 +9,6 @@ var data: ConsumableData
 
 func _init(p_data: ConsumableData) -> void:
 	data = p_data
+
+func get_source() -> Source:
+	return Source.new(Source.SourceType.CONSUMABLE, data.id, self)

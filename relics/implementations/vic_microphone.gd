@@ -1,7 +1,7 @@
 class_name VicMicrophone extends Relic
 
 func apply_effect() -> void:
-	var source = Source.new(Source.SourceType.RELIC, data.id)
+	var source = get_source()
 	var tower_buff = TowerBuffFactory.create_from_id("vic_microphone_buff", source)
 	if tower_buff == null:
 		return

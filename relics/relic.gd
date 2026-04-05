@@ -10,6 +10,9 @@ var id: String:
 func _init(p_data: RelicData) -> void:
 	data = p_data
 
+func get_source() -> Source:
+	return Source.new(Source.SourceType.RELIC, id, self)
+
 func apply_effect() -> void:
 	pass
 

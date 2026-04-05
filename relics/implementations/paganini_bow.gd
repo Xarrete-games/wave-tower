@@ -1,7 +1,7 @@
 class_name PaganiniBow extends Relic
 
 func apply_effect() -> void:
-	var source = Source.new(Source.SourceType.RELIC, data.id)
+	var source = get_source()
 	var red_buff = TowerBuffFactory.create_from_id("paganinis_bow_buff", source)
 	if red_buff == null:
 		return
