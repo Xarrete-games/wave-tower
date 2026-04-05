@@ -48,6 +48,7 @@ var exp_data: TowerExpData:
 
 var id: String
 var type_id: String = get_script().get_global_name()
+var buffs: Array[TowerBuff] = []
 var damage_source: Source:
 	get:
 		return Source.new(Source.SourceType.TOWER, type_id, self)
@@ -122,11 +123,16 @@ func enable() -> void:
 # --------------------
 # --- BUFFS ---
 # --------------------
-func add_local_buff(tower_buff: TowerBuff) -> void:
-	tower_stats_handler.add_local_buff(tower_buff)
+func add_buff(tower_buff: TowerBuff) -> void:
+	buffs.append(tower_buff)
+	if tower_buff is TowerBuffStatsModifier:
+		tower_stats_handler.add_buff(tower_buff as TowerBuffStatsModifier)
 
-func remove_local_buff(source_id: String) -> void:
-	tower_stats_handler.remove_local_buff(source_id)
+func remove_buff(source_id: String) -> void:
+	buffs = buffs.filter(func(buff: TowerBuff) -> bool:
+		return buff.source.type_id != source_id
+	)
+	tower_stats_handler.remove_buff(source_id)
 
 # --------------------
 # --- UPGRADES ---

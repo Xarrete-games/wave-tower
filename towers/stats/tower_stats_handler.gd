@@ -5,89 +5,73 @@ signal stats_change(new_stats: TowerStats)
 # base
 var base_stats: TowerStats
 var stats_on_level: TowerStats
-# local
-var local_buffs: Array[TowerBuff]
-var local_stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new():
-	set(new_local_stats_acc):
-		local_stats_acc = new_local_stats_acc
-		_update_stats()
-# global
-var global_stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new():
-	set(new_global_stats_acc):
-		global_stats_acc = new_global_stats_acc
+# buffs
+var buffs: Array[TowerBuffStatsModifier] = []
+var stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new():
+	set(new_stats_acc):
+		stats_acc = new_stats_acc
 		_update_stats()
 
 # current stats
 var stats: TowerStats = TowerStats.new()
 
-var tower_type: Tower.Type
-var local_buff_scheduler: BuffScheduler
+var buff_scheduler: BuffScheduler
 
 func _ready() -> void:
-	local_buff_scheduler = BuffScheduler.new(RunContext.progress)
-	local_buff_scheduler.buff_expired.connect(remove_local_buff)
-	local_buff_scheduler.buff_applied.connect(add_local_buff)
+	buff_scheduler = BuffScheduler.new(RunContext.progress)
+	buff_scheduler.buff_expired.connect(remove_buff)
+	buff_scheduler.buff_applied.connect(_on_buff_applied)
 
 # initialize the stats handler with base stats, tower type and experience handler
 func set_data(
 	stats_configuration: TowerData,
-	p_tower_type: Tower.Type,
+	_p_tower_type: Tower.Type,
 	) -> void:
 	#base stats
 	base_stats = stats_configuration.stats.duplicate()
 	# stats on level
 	stats_on_level = stats_configuration.stats_on_level.duplicate()
 	
-	# tower type
-	tower_type = p_tower_type
-	# global buffs
-	_set_global_buffs(RunContext.towers_buffs.towers_stats_accumulator)
-	RunContext.towers_buffs.tower_buffs_change.connect(_set_global_buffs)
+	_update_stats()
 
-func add_local_buff(tower_buff: TowerBuff) -> void:
-	tower_buff.scope = TowerBuff.Scope.LOCAL
-	local_buffs.append(tower_buff)
+func add_buff(tower_buff: TowerBuffStatsModifier) -> void:
+	buffs.append(tower_buff)
 	if tower_buff.duration != null:
-		local_buff_scheduler.schedule(tower_buff)
-	_rebuild_local_stats_acc()
+		buff_scheduler.schedule(tower_buff)
+	_rebuild_stats_acc()
 
-func remove_local_buff(source_id: String) -> void:
-	for buff in local_buffs:
+func _on_buff_applied(buff: TowerBuff) -> void:
+	if buff is TowerBuffStatsModifier:
+		add_buff(buff as TowerBuffStatsModifier)
+
+func remove_buff(source_id: String) -> void:
+	for buff in buffs:
 		if buff.source.type_id == source_id:
-			local_buffs.erase(buff)
-			_rebuild_local_stats_acc()
+			buffs.erase(buff)
+			_rebuild_stats_acc()
 			break
 
-func _rebuild_local_stats_acc() -> void:
+func _rebuild_stats_acc() -> void:
 	var acc = TowerStatsAccumulator.new()
 	
-	for buff in local_buffs:
-		if buff is TowerBuffStatsModifier:
-			(buff as TowerBuffStatsModifier).contribute(acc)
-	local_stats_acc = acc
+	for buff in buffs:
+		buff.contribute(acc)
+	stats_acc = acc
 
 func level_up(_new_level: int) -> void:
 	base_stats.add_stats(stats_on_level)
 	_update_stats()
 
-func _set_global_buffs(new_global_stats_acc: TowerStatsAccumulator) -> void:
-	global_stats_acc = new_global_stats_acc
-
-
 # recalculate total stats
 func _update_stats() -> void:
-	var total_stats_acc: TowerStatsAccumulator = global_stats_acc.merge(local_stats_acc)
+	var total_stats_acc: TowerStatsAccumulator = stats_acc
 	# damage
 	stats.damage = (base_stats.damage + total_stats_acc.flat_damage) * (1 + total_stats_acc.damage_mult)
 	# range
 	var attack_range_multiplier: float = 1.0 + total_stats_acc.attack_range_mult
-	if tower_type == Tower.Type.FROST:
-		attack_range_multiplier += total_stats_acc.attack_range_mult_frost
 	stats.attack_range = (base_stats.attack_range + total_stats_acc.flat_attack_range) * attack_range_multiplier
 	# attack speed
 	var attack_speed_multiplier: float = 1.0 + total_stats_acc.attack_speed_mult
-	if tower_type == Tower.Type.LIGHTNING:
-		attack_speed_multiplier += total_stats_acc.attack_speed_mult_lightning
 	stats.attack_speed = (base_stats.attack_speed + total_stats_acc.flat_attack_speed) * attack_speed_multiplier	
 	# critic change
 	stats.critic_chance = (base_stats.critic_chance + total_stats_acc.flat_critic_chance) * (1 + total_stats_acc.critic_chance_mult)

@@ -6,8 +6,6 @@ enum Stat {
 	ATTACK_SPEED,
 	CRITIC_CHANCE,
 	CRITIC_DAMAGE,
-	ATTACK_RANGE_FROST,
-	ATTACK_SPEED_LIGHTNING,
 }
 
 enum Mode {
@@ -51,7 +49,3 @@ func contribute(acc: TowerStatsAccumulator) -> void:
 				acc.flat_critic_damage += value
 			else:
 				acc.critic_damage_mult += value
-		Stat.ATTACK_RANGE_FROST:
-			acc.attack_range_mult_frost += value
-		Stat.ATTACK_SPEED_LIGHTNING:
-			acc.attack_speed_mult_lightning += value

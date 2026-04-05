@@ -1,11 +1,14 @@
-class_name PaganiniBow extends Relic
+class_name PaganiniBow extends TowerBuffRelic
 
-func apply_effect() -> void:
-	var source = get_source()
-	var red_buff = TowerBuffFactory.create_from_id("paganinis_bow_buff", source)
-	if red_buff == null:
-		return
-	RunContext.towers_buffs.add_buff(red_buff)
+const BUFF_ID: String = "paganinis_bow_buff"
 
-func remove_effect() -> void:
-	RunContext.towers_buffs.remove_buff(data.id)
+func _add_buff(tower: Tower) -> void:
+	var tower_buff: TowerBuff = TowerBuffFactory.create_from_id(BUFF_ID, get_source())
+	if tower_buff != null:
+		tower.add_buff(tower_buff)
+
+func _remove_buff(tower: Tower) -> void:
+	tower.remove_buff(get_source().type_id)
+
+func _is_valid_tower(_tower: Tower) -> bool:
+	return true

@@ -56,7 +56,7 @@ func _apply_buff(tower: Tower) -> void:
 	var tower_buff = TowerBuffFactory.create_from_id("overcharge_aura_buff", source)
 	if tower_buff == null:
 		return
-	tower.add_local_buff(tower_buff)
+	tower.add_buff(tower_buff)
 	towers_in_range.append(tower)
 	tower.add_child(buff_particle)
 	particles_dict[tower.name] = buff_particle
@@ -65,7 +65,7 @@ func _remove_buff(tower: Tower) -> void:
 	if tower not in towers_in_range:
 		return
 	
-	tower.remove_local_buff(name)
+	tower.remove_buff(name)
 	towers_in_range.erase(tower)
 	
 	var particle = particles_dict.get(tower.name, null)
