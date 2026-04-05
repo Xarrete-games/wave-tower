@@ -5,6 +5,7 @@ const RELICS_DATA_PATH: String = "res://relics/data/"
 const EVENTS_DATA_PATH: String = "res://events/data/"
 const CONSUMABLES_DATA_PATH: String = "res://consumables/data/"
 const ENEMY_DEBUFFS_DATA_PATH: String = "res://enemies/enemy_debuff/data/"
+const TOWER_BUFFS_DATA_PATH: String = "res://towers/tower-buffs/data/"
 const INITIAL_MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/init/"
 const MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/data/"
 const TOWER_DATA_PATH: String = "res://towers/data/"
@@ -13,6 +14,7 @@ var relics: Array[RelicData] = []
 var events: Array[EventData] = []
 var consumables: Array[ConsumableData] = []
 var enemy_debuffs: Array[EnemyDebuffData] = []
+var tower_buffs_data: Array[BuffData] = []
 var initial_map_pieces: Array[MapPieceData] = []
 var map_pieces: Array[MapPieceData] = []
 var tower_data: Array[TowerDataWithInstance] = []
@@ -23,6 +25,7 @@ func _ready() -> void:
 	_load_events()
 	_load_consumables()
 	_load_enemy_debuffs()
+	_load_tower_buffs_data()
 	_load_map_pieces()
 	_load__initial_map_pieces()
 	_load_tower_data() 
@@ -151,6 +154,16 @@ func get_debuff_data(type: EnemyDebuff.Type) -> EnemyDebuffData:
 	return null
 
 # ---------------------------------------------------------
+# TOWER BUFFS API
+# ---------------------------------------------------------
+
+func get_tower_buff_data_by_id(buff_id: String) -> BuffData:
+	for buff_data in tower_buffs_data:
+		if buff_data.id == buff_id:
+			return _duplicate_resource(buff_data) as BuffData
+	return null
+
+# ---------------------------------------------------------
 # MAP PIECES API
 # ---------------------------------------------------------
 
@@ -229,6 +242,14 @@ func _load_enemy_debuffs() -> void:
 			enemy_debuffs.append(data)
 		else:
 			push_error("[DataLoader] Loaded enemy debuff data has invalid type: %s" % [data])
+
+func _load_tower_buffs_data() -> void:
+	var loaded_array = _load_resources_from_dir(TOWER_BUFFS_DATA_PATH)
+	for data in loaded_array:
+		if data is BuffData:
+			tower_buffs_data.append(data)
+		else:
+			push_error("[DataLoader] Loaded tower buff data has invalid type: %s" % [data])
 
 func _load_map_pieces() -> void:
 	var loaded_array = _load_resources_from_dir(MAP_PIECES_DATA_PATH)

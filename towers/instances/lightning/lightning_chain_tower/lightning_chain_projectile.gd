@@ -104,7 +104,7 @@ func _get_closest_valid_enemy() -> Enemy:
 		if enemy in _hit_enemies:
 			continue
 
-		var d := enemy.global_position.distance_squared_to(_end_global)
+		var d = enemy.global_position.distance_squared_to(_end_global)
 		if d < min_dist:
 			min_dist = d
 			closest = enemy

@@ -1,8 +1,10 @@
 class_name PaganiniBow extends Relic
 
 func apply_effect() -> void:
-	var modifier := TowerStatsModifier.new(TowerStatsModifier.Stat.DAMAGE, TowerStatsModifier.Mode.MULT, 0.1)
-	var red_buff = TowerBuffStatsModifier.new(Source.new(Source.SourceType.RELIC, data.id), modifier)
+	var source = Source.new(Source.SourceType.RELIC, data.id)
+	var red_buff = TowerBuffFactory.create_from_id("paganinis_bow_buff", source)
+	if red_buff == null:
+		return
 	RunContext.towers_buffs.add_buff(red_buff)
 
 func remove_effect() -> void:

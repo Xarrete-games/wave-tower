@@ -7,9 +7,13 @@ var bad_buff_id: String:
 
 func use() -> void:
 	var duration = Duration.new(5, 0)
-	var debuff_modifier := TowerStatsModifier.new(TowerStatsModifier.Stat.ATTACK_SPEED, TowerStatsModifier.Mode.MULT, -0.2)
-	var buff_modifier := TowerStatsModifier.new(TowerStatsModifier.Stat.ATTACK_SPEED, TowerStatsModifier.Mode.MULT, 0.2)
-	var debuff = TowerBuffStatsModifier.new(Source.new(Source.SourceType.CONSUMABLE, bad_buff_id, self), debuff_modifier, duration)
-	var buff = TowerBuffStatsModifier.new(Source.new(Source.SourceType.CONSUMABLE, good_buff_id, self), buff_modifier, duration)
+	var debuff_source = Source.new(Source.SourceType.CONSUMABLE, bad_buff_id, self)
+	var buff_source = Source.new(Source.SourceType.CONSUMABLE, good_buff_id, self)
+	var debuff = TowerBuffFactory.create_from_id("caffeine_bad_buff", debuff_source)
+	var buff = TowerBuffFactory.create_from_id("caffeine_good_buff", buff_source)
+	if debuff == null or buff == null:
+		return
+	debuff.duration = duration
+	buff.duration = duration
 	buff.residual_buff = debuff
 	RunContext.towers_buffs.add_buff(buff)

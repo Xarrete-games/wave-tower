@@ -65,13 +65,13 @@ static func v4_rng(rng: RandomNumberGenerator):
   
 var _uuid: Array
 
-func _init(rng := RandomNumberGenerator.new()):
+func _init(rng = RandomNumberGenerator.new()):
   _uuid = uuidbinrng(rng)
 
 func as_array():
   return _uuid.duplicate()
 
-func as_dict(big_endian := true):
+func as_dict(big_endian = true):
   if big_endian:
     return {
       "low"  : (_uuid[0]  << 24) + (_uuid[1]  << 16) + (_uuid[2]  << 8 ) +  _uuid[3],

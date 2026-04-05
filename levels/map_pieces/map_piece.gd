@@ -235,9 +235,9 @@ func _get_route_cache_key(dir_a: Edge.Dir, dir_b: Edge.Dir) -> String:
 ## Strips variant suffix from path name to get the base route key.
 ## e.g. "route_NE_SW_2" -> "route_NE_SW", "route_NE_END_3" -> "route_NE_END"
 func _get_route_base_key(path_name: String) -> String:
-	var regex := RegEx.new()
+	var regex = RegEx.new()
 	regex.compile("^(route_[A-Z]+_[A-Z]+)(?:_\\d+)?$")
-	var result := regex.search(path_name)
+	var result = regex.search(path_name)
 	if result:
 		return result.get_string(1)
 	return path_name

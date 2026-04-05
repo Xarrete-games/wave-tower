@@ -7,12 +7,12 @@ signal tower_hovered(tower: Tower)
 signal tower_unhovered(tower: Tower)
 
 const INITIAL_TOWERS_IDS = ["fire_tower", "frost_tower", "lightning_tower"]
-const COMMON_WEIGHT_START := 0.75
-const RARE_WEIGHT_START := 0.20
-const EPIC_WEIGHT_START := 0.05
-const COMMON_WEIGHT_END := 0.34
-const RARE_WEIGHT_END := 0.33
-const EPIC_WEIGHT_END := 0.33
+const COMMON_WEIGHT_START = 0.75
+const RARE_WEIGHT_START = 0.20
+const EPIC_WEIGHT_START = 0.05
+const COMMON_WEIGHT_END = 0.34
+const RARE_WEIGHT_END = 0.33
+const EPIC_WEIGHT_END = 0.33
 
 
 var last_tower_ids: Dictionary[String, int] = {
@@ -38,7 +38,7 @@ func get_random_towers(amount: int) -> Array[TowerDataWithInstance]:
 	var picks = mini(amount, available_towers.size())
 
 	for _i in range(picks):
-		var total_weight := 0.0
+		var total_weight = 0.0
 		var weights: Array[float] = []
 
 		for tower_data in available_towers:
@@ -52,8 +52,8 @@ func get_random_towers(amount: int) -> Array[TowerDataWithInstance]:
 			continue
 
 		var roll = randf() * total_weight
-		var cumulative_weight := 0.0
-		var selected_index := 0
+		var cumulative_weight = 0.0
+		var selected_index = 0
 
 		for index in range(available_towers.size()):
 			cumulative_weight += weights[index]

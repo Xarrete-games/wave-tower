@@ -19,10 +19,10 @@ func _ready() -> void:
 	update_button_values()
 
 func update_button_values() -> void:
-	var window_size := get_window().size
-	var current := "%dx%d" % [window_size.x, window_size.y]
+	var window_size = get_window().size
+	var current = "%dx%d" % [window_size.x, window_size.y]
 
-	var index := visible_resolutions.find(current)
+	var index = visible_resolutions.find(current)
 	if index != -1:
 		resolution_option_button.selected = index
 
@@ -30,10 +30,10 @@ func _populate_resolutions() -> void:
 	resolution_option_button.clear()
 	visible_resolutions.clear()
 
-	var screen_size := DisplayServer.screen_get_size()
+	var screen_size = DisplayServer.screen_get_size()
 
 	for res_name in resolutions.keys():
-		var res := resolutions[res_name]
+		var res = resolutions[res_name]
 		if res.x <= screen_size.x and res.y <= screen_size.y:
 			visible_resolutions.append(res_name)
 			resolution_option_button.add_item(res_name)

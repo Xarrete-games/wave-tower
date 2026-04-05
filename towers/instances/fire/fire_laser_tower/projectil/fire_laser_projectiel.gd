@@ -20,9 +20,9 @@ var is_casting: bool = false
 @onready var fire_particles: CPUParticles2D = $FireParticles
 
 # VARIABLES PARA DIBUJAR LA ONDA
-var amplitude := 10			# Altura máxima (+/-)
-var speed := -16 				# Velocidad de la oscilación
-var phase_offset := PI / 3	# Desfase entre puntos
+var amplitude = 10			# Altura máxima (+/-)
+var speed = -16 				# Velocidad de la oscilación
+var phase_offset = PI / 3	# Desfase entre puntos
 
 
 func _ready():
@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 		cast_speed * delta
 	)
 	var imax = int (line_2d.get_point_count() - 1)
-	var time := Time.get_ticks_msec() / 1000.0
+	var time = Time.get_ticks_msec() / 1000.0
 	for i in range(line_2d.get_point_count()):
 		var pos = line_2d.get_point_position(i)
 		pos.x = i * current_laser_length /imax

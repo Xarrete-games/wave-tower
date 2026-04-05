@@ -41,7 +41,7 @@ func set_stats(attack: Attack, area_range: float, frost_debuff: FrostDebuff) -> 
 
 func _draw() -> void:
 	var radius_progress: float = clamp(radius / _max_area_range, 0.0, 1.0)
-	var fade_start_threshold := 0.8
+	var fade_start_threshold = 0.8
 	var alpha_fade: float
 
 	if radius_progress < fade_start_threshold:
@@ -54,7 +54,7 @@ func _draw() -> void:
 	var wave_color = Color(color.r, color.g, color.b, color.a * alpha_fade)
 
 	#set Y scale to 0.5 for isometric
-	var y_scale_transform := Transform2D().scaled(Vector2(1, y_scale))
+	var y_scale_transform = Transform2D().scaled(Vector2(1, y_scale))
 	draw_set_transform_matrix(y_scale_transform)
 
 	# draw the arc

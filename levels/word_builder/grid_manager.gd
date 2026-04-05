@@ -32,7 +32,7 @@ func get_offset(dir: Edge.Dir) -> Vector2i:
 
 ## Checks if placing a piece at candidate would cause an enclosure.
 func would_cause_enclosure_at(candidate: Vector2i) -> bool:
-	var simulated := grid.duplicate()
+	var simulated = grid.duplicate()
 	simulated[candidate] = true
 
 	for d in ALL_DIRS:
@@ -50,13 +50,13 @@ func get_invalid_edges_at(tile: Vector2i, dir_to_connect: Edge.Dir) -> Array[Edg
 	var invalid_dirs: Array[Edge.Dir] = []
 
 	for dir in dirs_check:
-		var new_tile := tile + GRID_OFFSETS[dir]
+		var new_tile = tile + GRID_OFFSETS[dir]
 
 		if grid.has(new_tile):
 			invalid_dirs.append(dir)
 			continue
 
-		var simulated := grid.duplicate()
+		var simulated = grid.duplicate()
 		simulated[new_tile] = true
 
 		if not FloodFill.can_escape_from(new_tile, simulated, GRID_OFFSETS):

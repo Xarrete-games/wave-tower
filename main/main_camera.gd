@@ -1,7 +1,7 @@
 class_name MainCamera extends Camera2D
 
-@export var move_speed := 500.0
-@export var zoom_tween_duration := 0.25
+@export var move_speed = 500.0
+@export var zoom_tween_duration = 0.25
 @export var level: Node2D
 
 ## Fixed zoom steps that look crisp on the tilemap.
