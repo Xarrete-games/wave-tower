@@ -1,15 +1,22 @@
 [gd_scene format=3 uid="uid://42h4ynomckod"]
 
 [ext_resource type="Script" uid="uid://cjcw3vw72ncu8" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar.gd" id="1_dg5wq"]
+[ext_resource type="PackedScene" uid="uid://cfi7esea0276g" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar_slot.tscn" id="2_4jgm5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jgm5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="TowerBuffsBar" type="PanelContainer" unique_id=773910159]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 34.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4jgm5")
 script = ExtResource("1_dg5wq")
 
 [node name="Container" type="GridContainer" parent="." unique_id=823021992]
 layout_mode = 2
-columns = 3
+
+[node name="TowerBuffsBarSlot" parent="Container" unique_id=566470421 instance=ExtResource("2_4jgm5")]
+layout_mode = 2
+
+[node name="TowerBuffsBarSlot2" parent="Container" unique_id=2138026124 instance=ExtResource("2_4jgm5")]
+layout_mode = 2

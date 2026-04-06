@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="3_nbqd2"]
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="4_7jtxt"]
 [ext_resource type="Script" uid="uid://3vv1ts11asqk" path="res://towers/area_detector.gd" id="5_5e1e6"]
+[ext_resource type="PackedScene" uid="uid://42h4ynomckod" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar.tscn" id="6_7jtxt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wmotl"]
 radius = 200.0
@@ -73,6 +74,12 @@ position = Vector2(0, -152)
 
 [node name="ProjectileSpawnPos" type="Marker2D" parent="." unique_id=937664516]
 position = Vector2(0, -90)
+
+[node name="TowerBuffsBar" parent="." unique_id=773910159 instance=ExtResource("6_7jtxt")]
+offset_left = 40.0
+offset_top = -95.0
+offset_right = 155.0
+offset_bottom = 111.0
 
 [connection signal="body_entered" from="AreaDetector" to="AreaDetector" method="_on_body_entered"]
 [connection signal="body_exited" from="AreaDetector" to="AreaDetector" method="_on_body_exited"]

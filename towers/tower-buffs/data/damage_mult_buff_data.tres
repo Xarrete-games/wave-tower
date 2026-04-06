@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://b5tinpowneqbd"]
 
 [ext_resource type="Script" uid="uid://djbo3i8twgv6e" path="res://towers/tower-buffs/tower_buff_data.gd" id="1_data"]
+[ext_resource type="Texture2D" uid="uid://dr7m4cpvovfq1" path="res://assets/images/icons/tower_buffs/buff_dmg_percent.png" id="1_ll1ox"]
 [ext_resource type="Script" uid="uid://dth123qfdhybc" path="res://towers/tower-buffs/scripts/damage_mult_buff.gd" id="2_runtime"]
-[ext_resource type="Texture2D" uid="uid://bus5y7ash7vve" path="res://assets/images/icons/stats/attack_icon_flat.png" id="3_icon"]
 
 [resource]
 script = ExtResource("1_data")
@@ -10,4 +10,4 @@ runtime_script = ExtResource("2_runtime")
 id = "damage_mult_buff"
 display_name = "Damage Mult Buff"
 description = "Damage multiplier buff."
-icon = ExtResource("3_icon")
+icon = ExtResource("1_ll1ox")

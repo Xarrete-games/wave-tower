@@ -4,9 +4,8 @@ class_name Tower extends Node2D
 signal stats_change(tower: Tower)
 signal attack_fired()
 signal on_target_change(enemy: Enemy)
-
-
-
+signal buff_added(buff: TowerBuff)
+signal buff_removed(source_id: String)
 
 enum Type {FIRE, LIGHTNING, FROST}
 enum TargetingMode {FIRST_IN_PROGRESS, HIGH_HP, LOW_HP}
