@@ -6,9 +6,10 @@
 
 [resource]
 script = ExtResource("1_ld7qn")
+show_counter = true
 runtime_script = ExtResource("1_50myw")
 id = "metronome"
 display_name = "Metronome"
-description = "At the end of each wave, a random tower gains +5% attack speed."
+description = "Every 3 waves a random tower gains +5% attack speed."
 icon = ExtResource("3_tm1hr")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

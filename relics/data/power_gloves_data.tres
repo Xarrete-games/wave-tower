@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://taimryddjq1w"]
+[gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://taimryddjq1w"]
 
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_05so2"]
 [ext_resource type="Script" uid="uid://ds5ehn3nrdpr7" path="res://relics/implementations/power_gloves.gd" id="1_xip7g"]
@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("1_05so2")
+runtime_script = ExtResource("1_xip7g")
 id = "power_gloves"
 display_name = "Power Gloves"
-description = "Increase all towers damage by 3"
+description = "When applying an item to a tower, it also gains +3 attack range."
 icon = ExtResource("3_bayem")
-runtime_script = ExtResource("1_xip7g")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"
