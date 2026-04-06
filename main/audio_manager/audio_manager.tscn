@@ -22,7 +22,7 @@ script = ExtResource("1_8qypr")
 
 [node name="Coins" type="AudioStreamPlayer" parent="." unique_id=2038888355]
 stream = ExtResource("2_53i8p")
-volume_db = -9.0
+volume_db = -12.0
 bus = &"SFX"
 
 [node name="ButtonHover" type="AudioStreamPlayer" parent="." unique_id=2043401603]
@@ -55,6 +55,7 @@ bus = &"SFX"
 
 [node name="Loss_Armor" type="AudioStreamPlayer" parent="." unique_id=1993699453]
 stream = ExtResource("10_b5t5h")
+volume_db = -6.0
 bus = &"SFX"
 
 [node name="Armor" type="AudioStreamPlayer" parent="." unique_id=943444721]
