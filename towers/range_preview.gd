@@ -1,6 +1,9 @@
 class_name RangePreview extends Node2D
 
-@export var radius: float = 100.0
+@export var radius: float = 100.0:
+	set(value):
+		radius = value
+		queue_redraw()
 @export var iso_scale_y: float = 0.5
 @export var color_fill: Color = Color(1, 1, 1, 0.3)
 @export var color_border: Color = Color(1, 1, 1, 0.7)

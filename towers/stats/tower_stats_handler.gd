@@ -62,7 +62,6 @@ func _rebuild_stats_acc() -> void:
 	for buff in buffs:
 		buff.contribute(acc)
 	stats_acc = acc
-	_update_stats()
 
 func level_up(_new_level: int) -> void:
 	base_stats.add_stats(stats_on_level)
