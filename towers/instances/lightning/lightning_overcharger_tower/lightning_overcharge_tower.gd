@@ -9,7 +9,7 @@ var towers_in_range: Array[Tower] = []
 var particles_dict: Dictionary[String, Node] = {}
 
 @onready var projectile_spawn_pos: Marker2D = $ProjectileSpawnPos
-@onready var buff_area_shape: CollisionShape2D = $BuffArea/BuffAreaShape
+@onready var buff_area_shape: CollisionPolygon2D = $BuffArea/BuffAreaShape
 @onready var buff_area: Area2D = $BuffArea
 
 func _ready() -> void:
@@ -41,7 +41,7 @@ func _on_tower_placed(tower: Tower) -> void:
 
 func _apply_stats_changes() -> void:
 	super._apply_stats_changes()
-	(buff_area_shape.shape as CircleShape2D).radius = stats.attack_range
+	buff_area_shape.polygon = build_ellipse_polygon(stats.attack_range, stats.attack_range * ELLIPSE_Y_RATIO)
 
 func _on_buff_area_area_entered(area: Area2D) -> void:
 	var tower = area.get_parent() as Tower

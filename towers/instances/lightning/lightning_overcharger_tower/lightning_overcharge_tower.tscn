@@ -11,9 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://d0aubaescaof5" path="res://assets/textures/buff_texture.png" id="8_v3ab0"]
 [ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="9_j0gjm"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kngkr"]
-radius = 78.40918
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bvw1w"]
 shader = ExtResource("7_5h5yc")
 shader_parameter/Dissolver_texture = ExtResource("8_v3ab0")
@@ -56,13 +53,13 @@ script = ExtResource("2_u5ijc")
 projectile_scene = ExtResource("3_kngkr")
 overcharge_particle_scene = ExtResource("4_3bx21")
 
-[node name="Sprite2D" parent="." index="3"]
+[node name="Sprite2D" parent="." index="3" unique_id=1563452745]
 position = Vector2(0, -60)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_1wh8q")
 region_rect = Rect2(971, 7, 433, 543)
 
-[node name="CollisionShape2D" parent="TowerArea" index="0"]
+[node name="CollisionShape2D" parent="TowerArea" parent_id_path=PackedInt32Array(1983938577) index="0" unique_id=590428393]
 position = Vector2(0, -1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="11" unique_id=1320767301]
@@ -87,9 +84,7 @@ position = Vector2(2, -48)
 collision_layer = 8
 collision_mask = 4
 
-[node name="BuffAreaShape" type="CollisionShape2D" parent="BuffArea" index="0" unique_id=1140894700]
-scale = Vector2(1, 0.5)
-shape = SubResource("CircleShape2D_kngkr")
+[node name="BuffAreaShape" type="CollisionPolygon2D" parent="BuffArea" index="0" unique_id=1140894700]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="16" unique_id=1193016126]
 material = SubResource("ShaderMaterial_bvw1w")
