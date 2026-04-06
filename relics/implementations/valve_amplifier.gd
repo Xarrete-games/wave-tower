@@ -1,15 +1,12 @@
-class_name ValveAmplifier extends TowerBuffRelic
+class_name ValveAmplifier extends Relic
 
 const BUFF_ID: String = "attack_range_mult_buff"
 const BUFF_VALUE: int = 10
 
-func _add_buff(tower: Tower) -> void:
-	var tower_buff: TowerBuff = TowerBuffFactory.create_from_id(BUFF_ID, get_source(), BUFF_VALUE)
-	if tower_buff != null:
-		tower.add_buff(tower_buff)
+func on_consumable_used(consumable: Consumable) -> void:
+	if consumable is ConsumableTargeteable:
+		var target_targeteable: ConsumableTargeteable = consumable as ConsumableTargeteable
 
-func _remove_buff(tower: Tower) -> void:
-	tower.remove_buff(get_source().type_id)
-
-func _is_valid_tower(_tower: Tower) -> bool:
-	return true
+		if target_targeteable.data.targeting_type == ConsumableTargeteable.TargetType.TOWER:
+			var tower: Tower = target_targeteable.target as Tower
+			tower.add_buff(TowerBuffFactory.create_from_id(BUFF_ID, get_source(), BUFF_VALUE))
