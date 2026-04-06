@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://708fqgiqj5xt" path="res://assets/sounds/sfx/purchase.mp3" id="6_seqmh"]
 [ext_resource type="AudioStream" uid="uid://dd30420p7euab" path="res://assets/sounds/sfx/wave_clear.wav" id="7_o00yt"]
 [ext_resource type="AudioStream" uid="uid://bjd7mrqdxsdwa" path="res://assets/sounds/sfx/defeated_sound.wav" id="8_j710w"]
+[ext_resource type="AudioStream" uid="uid://dmhsnmybfnwqw" path="res://assets/sounds/sfx/hp_dmg.wav" id="9_kyyb7"]
+[ext_resource type="AudioStream" uid="uid://cr446sxgp781t" path="res://assets/sounds/sfx/Armor.wav" id="10_3eclg"]
 
 [node name="AudioManager" type="Node" unique_id=1769070765]
 process_mode = 3
@@ -41,3 +43,11 @@ bus = &"Scene_change"
 [node name="DefeatedSound" type="AudioStreamPlayer" parent="." unique_id=322434600]
 stream = ExtResource("8_j710w")
 bus = &"Scene_change"
+
+[node name="HP_loss" type="AudioStreamPlayer" parent="." unique_id=636807211]
+stream = ExtResource("9_kyyb7")
+bus = &"SFX"
+
+[node name="Armor" type="AudioStreamPlayer" parent="." unique_id=943444721]
+stream = ExtResource("10_3eclg")
+bus = &"SFX"
