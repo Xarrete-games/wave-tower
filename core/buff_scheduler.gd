@@ -1,6 +1,6 @@
 class_name BuffScheduler extends RefCounted
 
-signal buff_expired(source_id: String)
+signal buff_expired(buff: TowerBuff)
 signal buff_applied(buff: TowerBuff)
 
 var progress: RunProgress
@@ -27,7 +27,7 @@ func _schedule_in_waves(buff: TowerBuff) -> void:
 	_remove_buff(buff)
 
 func _remove_buff(buff: TowerBuff) -> void:
-	buff_expired.emit(buff.source.type_id)
+	buff_expired.emit(buff)
 	if buff.residual_buff:
 		_add_residual(buff.residual_buff)
 

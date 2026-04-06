@@ -5,7 +5,7 @@ signal stats_change(tower: Tower)
 signal attack_fired()
 signal on_target_change(enemy: Enemy)
 signal buff_added(buff: TowerBuff)
-signal buff_removed(source_id: String)
+signal buff_removed(buff: TowerBuff)
 
 enum Type {FIRE, LIGHTNING, FROST}
 enum TargetingMode {FIRST_IN_PROGRESS, HIGH_HP, LOW_HP}
@@ -67,6 +67,8 @@ func _ready():
 	range_collision.shape = CircleShape2D.new()
 	# stats_handlers
 	tower_stats_handler.stats_change.connect(_on_stats_change)
+	tower_stats_handler.buff_applied.connect(add_buff)
+	tower_stats_handler.buff_expired.connect(remove_buff)
 	tower_stats_handler.set_data(data, type)
 	area_detector.target_change.connect(_on_target_change)
 
@@ -129,11 +131,16 @@ func add_buff(tower_buff: TowerBuff) -> void:
 	buff_added.emit(tower_buff)
 
 func remove_buff(source_id: String) -> void:
+	var removed_buffs: Array[TowerBuff] = []
 	buffs = buffs.filter(func(buff: TowerBuff) -> bool:
-		return buff.source.type_id != source_id
+		var should_remove = buff.source.type_id == source_id
+		if should_remove:
+			removed_buffs.append(buff)
+		return not should_remove
 	)
 	tower_stats_handler.remove_buff(source_id)
-	buff_removed.emit(source_id)
+	for removed_buff in removed_buffs:
+		buff_removed.emit(removed_buff)
 
 # --------------------
 # --- UPGRADES ---

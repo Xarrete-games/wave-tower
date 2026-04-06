@@ -1,6 +1,8 @@
 class_name TowerStatsHandler extends Node
 
 signal stats_change(new_stats: TowerStats)
+signal buff_applied(buff: TowerBuff)
+signal buff_expired(source_id: String)
 
 # base
 var base_stats: TowerStats
@@ -19,8 +21,8 @@ var buff_scheduler: BuffScheduler
 
 func _ready() -> void:
 	buff_scheduler = BuffScheduler.new(RunContext.progress)
-	buff_scheduler.buff_expired.connect(remove_buff)
-	buff_scheduler.buff_applied.connect(_on_buff_applied)
+	buff_scheduler.buff_expired.connect(_on_scheduled_buff_expired)
+	buff_scheduler.buff_applied.connect(_on_scheduled_buff_applied)
 
 # initialize the stats handler with base stats, tower type and experience handler
 func set_data(
@@ -40,16 +42,19 @@ func add_buff(tower_buff: TowerBuffStatsModifier) -> void:
 		buff_scheduler.schedule(tower_buff)
 	_rebuild_stats_acc()
 
-func _on_buff_applied(buff: TowerBuff) -> void:
-	if buff is TowerBuffStatsModifier:
-		add_buff(buff as TowerBuffStatsModifier)
+func _on_scheduled_buff_applied(buff: TowerBuff) -> void:
+	buff_applied.emit(buff)
+
+func _on_scheduled_buff_expired(buff: TowerBuff) -> void:
+	buff_expired.emit(buff.source.type_id)
 
 func remove_buff(source_id: String) -> void:
-	for buff in buffs:
-		if buff.source.type_id == source_id:
-			buffs.erase(buff)
-			_rebuild_stats_acc()
-			break
+	var initial_size = buffs.size()
+	buffs = buffs.filter(func(buff: TowerBuffStatsModifier) -> bool:
+		return buff.source.type_id != source_id
+	)
+	if buffs.size() != initial_size:
+		_rebuild_stats_acc()
 
 func _rebuild_stats_acc() -> void:
 	var acc = TowerStatsAccumulator.new()
