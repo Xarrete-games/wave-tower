@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_hkgcx")
+show_counter = true
 runtime_script = ExtResource("1_3dm1a")
 id = "valve_amplifier"
 display_name = "Valve Amplifier 100W"
