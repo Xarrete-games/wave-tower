@@ -7,12 +7,6 @@
 [ext_resource type="Script" uid="uid://3vv1ts11asqk" path="res://towers/area_detector.gd" id="5_5e1e6"]
 [ext_resource type="PackedScene" uid="uid://42h4ynomckod" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar.tscn" id="6_7jtxt"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wmotl"]
-radius = 200.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_7jtxt"]
-radius = 47.042534
-
 [node name="Tower" type="Node2D" unique_id=1114496997 groups=["tower"]]
 
 [node name="TowerStatsHandler" type="Node" parent="." unique_id=249347199]
@@ -40,9 +34,7 @@ input_pickable = false
 monitoring = false
 script = ExtResource("5_5e1e6")
 
-[node name="RangeCollision" type="CollisionShape2D" parent="AreaDetector" unique_id=647791958]
-scale = Vector2(1, 0.5)
-shape = SubResource("CircleShape2D_wmotl")
+[node name="RangeCollision" type="CollisionPolygon2D" parent="AreaDetector" unique_id=647791958]
 
 [node name="TimerToCheckTarget" type="Timer" parent="AreaDetector" unique_id=553063832]
 wait_time = 0.1
@@ -50,13 +42,11 @@ autostart = true
 
 [node name="TowerArea" type="Area2D" parent="." unique_id=1983938577]
 collision_layer = 4
-collision_mask = 8
+collision_mask = 0
 input_pickable = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerArea" unique_id=590428393]
-scale = Vector2(1, 0.5)
-shape = SubResource("CircleShape2D_7jtxt")
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="TowerArea" unique_id=590428393]
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=2037163535]
 wait_time = 2.0

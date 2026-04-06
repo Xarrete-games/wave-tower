@@ -12,6 +12,7 @@ enum TargetingMode {FIRST_IN_PROGRESS, HIGH_HP, LOW_HP}
 const MAX_LEVEL: int = 2
 const uuid_util = preload('res://addons/uuid/uuid.gd')
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
+const ELLIPSE_Y_RATIO: float = 0.5
 
 @export var type: Type = Type.FIRE
 
@@ -54,17 +55,19 @@ var damage_source: Source:
 
 @onready var area_detector: AreaDetector = $AreaDetector
 @onready var range_preview: RangePreview = $RangePreview
-@onready var range_collision: CollisionShape2D = $AreaDetector/RangeCollision
+@onready var range_collision: CollisionPolygon2D = $AreaDetector/RangeCollision
 @onready var mouse_detector: Control = $MouseDetector
 @onready var attack_timer: Timer = $AttackTimer
 @onready var cristal_light: CristalLight = $CristalLight
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var tower_stats_handler: TowerStatsHandler = $TowerStatsHandler
 @onready var tower_area: Area2D = $TowerArea
+@onready var tower_area_collision: CollisionPolygon2D = $TowerArea/CollisionShape2D
+
 
 func _ready():
 	data.build()
-	range_collision.shape = CircleShape2D.new()
+	tower_area_collision.polygon = build_ellipse_polygon(data.stats.attack_range, data.stats.attack_range * ELLIPSE_Y_RATIO)
 	# stats_handlers
 	tower_stats_handler.stats_change.connect(_on_stats_change)
 	tower_stats_handler.buff_applied.connect(add_buff)
@@ -72,9 +75,18 @@ func _ready():
 	tower_stats_handler.set_data(data, type)
 	area_detector.target_change.connect(_on_target_change)
 
+
+
 # --------------------
 # --- HELPER ---
 # --------------------
+
+static func build_ellipse_polygon(radius_x: float, radius_y: float, segments: int = 48) -> PackedVector2Array:
+	var points: PackedVector2Array = []
+	for i in range(segments):
+		var angle: float = TAU * float(i) / float(segments)
+		points.append(Vector2(cos(angle) * radius_x, sin(angle) * radius_y))
+	return points
 
 static func targeting_mode_to_string(mode: Tower.TargetingMode) -> String:
 	match mode:
@@ -216,7 +228,7 @@ func _on_stats_change(new_stats: TowerStats) -> void:
 func _apply_stats_changes() -> void:
 	attack_timer.wait_time = 1.0 / stats.attack_speed
 	range_preview.radius = stats.attack_range
-	(range_collision.shape as CircleShape2D).radius = stats.attack_range
+	range_collision.polygon = build_ellipse_polygon(stats.attack_range, stats.attack_range * ELLIPSE_Y_RATIO)
 		
 func _on_exp_data_change(new_exp_data: TowerExpData) -> void:
 	exp_data = new_exp_data
