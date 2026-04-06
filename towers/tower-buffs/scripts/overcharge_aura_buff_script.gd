@@ -1,5 +1,7 @@
 class_name OverchargeAuraBuffScript extends TowerBuffStatsModifier
 
 static func create_instance(p_data: BuffData, p_source: Source) -> TowerBuff:
-	var modifier = TowerStatsModifier.new(TowerStatsModifier.Stat.DAMAGE, TowerStatsModifier.Mode.MULT, 0.1)
-	return OverchargeAuraBuffScript.new(p_source, modifier, null, null, p_data)
+	return OverchargeAuraBuffScript.new(p_source, null, null, p_data)
+
+func contribute(acc: TowerStatsAccumulator) -> void:
+	acc.damage_mult += 0.1
