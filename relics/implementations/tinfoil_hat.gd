@@ -5,4 +5,4 @@ func on_relic_added(relic: Relic) -> void:
 		return
 
 	RunContext.relics_manager.remove_relic(relic.data.id)
-	RunContext.relics_manager.disable_relic(data.id)
+	disabled = true

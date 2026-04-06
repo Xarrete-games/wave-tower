@@ -1,7 +1,17 @@
 class_name Relic extends AbstractItem
 
+signal changed(relic: Relic)
+
 var data: RelicData
-var disabled: bool = false
+var disabled: bool = false:
+	set(value):
+		disabled = value
+		changed.emit(self)
+
+var counter: int = 0:
+	set(value):
+		counter = value
+		changed.emit(self)
 
 var id: String:
 	get:
@@ -12,12 +22,6 @@ func _init(p_data: RelicData) -> void:
 
 func get_source() -> Source:
 	return Source.new(Source.SourceType.RELIC, id, self)
-
-func apply_effect() -> void:
-	pass
-
-func remove_effect() -> void:
-	pass
 
 func on_obtain() -> void:
 	pass

@@ -6,10 +6,11 @@
 
 [resource]
 script = ExtResource("1_ly321")
+show_counter = true
 runtime_script = ExtResource("1_3ru7g")
 id = "paganinis_bow"
 display_name = "Paganini's Bow"
-description = "Increases the attack damage of all towers by 10%."
+description = "Every 2 towers built, your next tower gains +10% attack damage."
 icon = ExtResource("3_8rgck")
 rarity = 1
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"

@@ -71,9 +71,11 @@ texture = ExtResource("2_vhbgb")
 expand_mode = 3
 
 [node name="amount" type="Label" parent="VBoxContainer/MarginContainer" unique_id=2000150710]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+text = "5"
 label_settings = SubResource("LabelSettings_ye6dh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1187952058]

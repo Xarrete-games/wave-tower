@@ -1,8 +1,8 @@
 class_name RelicsManager extends RefCounted
 
-signal relics_change(relics: Array[Relic])
+signal relic_changed(relic: Relic)
 signal relic_added(relic: Relic)
-signal relic_removed(relic_id: String)	
+signal relic_removed(relic_id: String)
 
 const COMMON_COLOR = Color.GREEN_YELLOW
 const RARE_COLOR = Color.DODGER_BLUE
@@ -28,10 +28,6 @@ func get_all_relics() -> Array[Relic]:
 func get_rarity_color(rarity: BaseData.Rarity) -> Color:
 	return relic_colors[rarity]
 
-func reset_relics() -> void:
-	relics = {}
-	relics_change.emit([] as Array[Relic])
-
 func add_relic(relic: Relic) -> void:
 	if relics.has(relic.data.id):
 		push_error("Relic with ID '%s' already exists. Cannot add duplicate relics." % relic.data.id)
@@ -39,25 +35,25 @@ func add_relic(relic: Relic) -> void:
 
 	AudioManager.play_relic_obtain()
 	relic.on_obtain()
-	relic.apply_effect()
 	_add_relic(relic)
 
 func remove_relic(relic_id: String) -> void:
 	if relics.has(relic_id):
-		relics[relic_id].remove_effect()
 		relics[relic_id].on_remove()
+		relics[relic_id].counter_changed.disconnect(emit_relic_changed)
 		relics.erase(relic_id)
 		relics_count[relic_id] = relics_count.get(relic_id, 0) - 1
-		relics_change.emit(relics.values())
 		relic_removed.emit(relic_id)
-
-func disable_relic(relic_id: String) -> void:
-	if relics.has(relic_id):
-		(relics[relic_id] as Relic).disabled = true
-		relics_change.emit(relics.values())
-
+		
 func _add_relic(relic: Relic) -> void:
 	relics[relic.data.id] = relic
 	relics_count[relic.data.id] = relics_count.get(relic.data.id, 0) + 1
-	relics_change.emit(relics.values())
+	
 	relic_added.emit(relic)
+	relic.changed.connect(emit_relic_changed)
+	
+func emit_relic_changed(relic: Relic) -> void:
+	relic_changed.emit(relic)
+
+func _get_relic(id: String) -> Relic:
+	return relics[id]
