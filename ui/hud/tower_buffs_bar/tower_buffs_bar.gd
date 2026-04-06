@@ -37,14 +37,27 @@ func _on_tower_buff_removed(source_id: String) -> void:
 	for i in range(tower_buffs.size()):
 		var buff = tower_buffs[i]
 		if buff.source.id == source_id:
-			if buff is TowerBuffStatsModifier:
-				var modifier = buff as TowerBuffStatsModifier
-				buffs_modifiers_stacks[buff.data.id] -= modifier.value
-				for slot in slots_container.get_children():
-					var buff_slot = slot as TowerBuffsBarSlot
-					if buff_slot.tower_buff.data.id == buff.data.id:
-						buff_slot.value = buffs_modifiers_stacks[buff.data.id]
+			var buff_id = buff.data.id
 			tower_buffs.remove_at(i)
+
+			var has_same_buff_instance: bool = false
+			var total_value: int = 0
+			for remaining_buff in tower_buffs:
+				if remaining_buff.data.id == buff_id:
+					has_same_buff_instance = true
+					if remaining_buff is TowerBuffStatsModifier:
+						total_value += (remaining_buff as TowerBuffStatsModifier).value
+
+			for slot in slots_container.get_children():
+				var buff_slot = slot as TowerBuffsBarSlot
+				if buff_slot.tower_buff.data.id == buff_id:
+					if has_same_buff_instance:
+						buffs_modifiers_stacks[buff_id] = total_value
+						buff_slot.value = total_value
+					else:
+						buff_slot.queue_free()
+						buffs_modifiers_stacks.erase(buff_id)
+					break
 			return
 
 func _buff_exists(buff_id: String) -> bool:
@@ -52,5 +65,3 @@ func _buff_exists(buff_id: String) -> bool:
 		if buff.data.id == buff_id:
 			return true
 	return false
-
-

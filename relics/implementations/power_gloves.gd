@@ -1,7 +1,7 @@
 class_name PowerGloves extends TowerBuffRelic
 
 const BUFF_ID: String = "damage_flat_buff"
-const BUFF_VALUE: float = 3.0
+const BUFF_VALUE: int = 3
 
 
 func _add_buff(tower: Tower) -> void:

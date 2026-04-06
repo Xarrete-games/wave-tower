@@ -53,7 +53,7 @@ func _apply_buff(tower: Tower) -> void:
 	
 	var buff_particle = overcharge_particle_scene.instantiate()
 	var source = Source.new(Source.SourceType.TOWER, name)
-	var tower_buff = TowerBuffFactory.create_from_id("damage_mult_buff", source, 0.1)
+	var tower_buff = TowerBuffFactory.create_from_id("damage_mult_buff", source, 10)
 	if tower_buff == null:
 		return
 	tower.add_buff(tower_buff)

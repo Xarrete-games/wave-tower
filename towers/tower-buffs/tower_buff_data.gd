@@ -3,7 +3,7 @@ class_name BuffData extends BaseData
 @export_group("Script")
 @export var runtime_script: Script
 
-func create_item(source: Source = null, value: float = 0) -> TowerBuff:
+func create_item(source: Source = null, value: int = 0) -> TowerBuff:
 	if runtime_script == null:
 		push_error("[BuffData] Missing runtime_script for buff id: %s" % id)
 		return null

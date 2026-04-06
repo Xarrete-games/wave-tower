@@ -1,7 +1,7 @@
 class_name PaganiniBow extends TowerBuffRelic
 
 const BUFF_ID: String = "damage_mult_buff"
-const BUFF_VALUE: float = 0.1
+const BUFF_VALUE: int = 10
 
 func _add_buff(tower: Tower) -> void:
 	var tower_buff: TowerBuff = TowerBuffFactory.create_from_id(BUFF_ID, get_source(), BUFF_VALUE)
