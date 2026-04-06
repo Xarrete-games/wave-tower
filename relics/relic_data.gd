@@ -1,6 +1,7 @@
 class_name RelicData extends BaseData
 
 @export_group("Relic")
+@export var show_counter: bool = false
 @export var health_price: int = 0
 @export var is_cursed: bool = false
 @export var is_tome: bool = false

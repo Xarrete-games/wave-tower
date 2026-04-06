@@ -3,8 +3,9 @@ class_name RelicUI extends Control
 const semi_transparent_color: Color = Color(1, 1, 1, 0.5)
 const opaque_color: Color = Color(1, 1, 1, 1)
 
+
 @onready var texture: TextureRect = $VBoxContainer/MarginContainer/texture
-@onready var amount: Label = $VBoxContainer/MarginContainer/amount
+@onready var amount_label: Label = $VBoxContainer/MarginContainer/amount
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var relic: Relic
@@ -19,7 +20,11 @@ func set_relic(p_relic: Relic) -> void:
 		texture.modulate = semi_transparent_color
 	else:
 		texture.modulate = opaque_color
-		
+	
+	amount_label.visible = p_relic.data.show_counter
+	if p_relic.data.show_counter:
+		amount_label.text = str(p_relic.counter)
+
 func _on_mouse_entered() -> void:
 	HintManager.show_hint(self, relic.data.description, relic.data.display_name)
 
