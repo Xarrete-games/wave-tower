@@ -41,7 +41,7 @@ func _on_tower_placed(tower: Tower) -> void:
 
 func _apply_stats_changes() -> void:
 	super._apply_stats_changes()
-	buff_area_shape.polygon = build_ellipse_polygon(stats.attack_range, stats.attack_range * ELLIPSE_Y_RATIO)
+	buff_area_shape.set_deferred("polygon", build_ellipse_polygon(stats.attack_range, stats.attack_range * ELLIPSE_Y_RATIO))
 
 func _on_buff_area_area_entered(area: Area2D) -> void:
 	var tower = area.get_parent() as Tower

@@ -12,7 +12,9 @@ enum TargetingMode {FIRST_IN_PROGRESS, HIGH_HP, LOW_HP}
 const MAX_LEVEL: int = 2
 const uuid_util = preload('res://addons/uuid/uuid.gd')
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
+# area
 const ELLIPSE_Y_RATIO: float = 0.5
+const TOWER_AREA_RADIUS: float = 47.042534 
 
 @export var type: Type = Type.FIRE
 
@@ -67,15 +69,13 @@ var damage_source: Source:
 
 func _ready():
 	data.build()
-	tower_area_collision.polygon = build_ellipse_polygon(data.stats.attack_range, data.stats.attack_range * ELLIPSE_Y_RATIO)
+	tower_area_collision.polygon = build_ellipse_polygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO)
 	# stats_handlers
 	tower_stats_handler.stats_change.connect(_on_stats_change)
 	tower_stats_handler.buff_applied.connect(add_buff)
 	tower_stats_handler.buff_expired.connect(remove_buff)
 	tower_stats_handler.set_data(data, type)
 	area_detector.target_change.connect(_on_target_change)
-
-
 
 # --------------------
 # --- HELPER ---
@@ -228,7 +228,7 @@ func _on_stats_change(new_stats: TowerStats) -> void:
 func _apply_stats_changes() -> void:
 	attack_timer.wait_time = 1.0 / stats.attack_speed
 	range_preview.radius = stats.attack_range
-	range_collision.polygon = build_ellipse_polygon(stats.attack_range, stats.attack_range * ELLIPSE_Y_RATIO)
+	range_collision.set_deferred("polygon", build_ellipse_polygon(stats.attack_range, stats.attack_range * ELLIPSE_Y_RATIO))
 		
 func _on_exp_data_change(new_exp_data: TowerExpData) -> void:
 	exp_data = new_exp_data
