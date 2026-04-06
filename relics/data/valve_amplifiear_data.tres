@@ -9,6 +9,6 @@ script = ExtResource("1_hkgcx")
 runtime_script = ExtResource("1_3dm1a")
 id = "valve_amplifier"
 display_name = "Valve Amplifier 100W"
-description = "When applying an item to a tower, it also gains +10% attack range."
+description = "Every 3 towers built, your next tower gains +10% attack range."
 icon = ExtResource("3_q0l0n")
 metadata/_custom_type_script = "uid://blk23o0i7vnyj"
