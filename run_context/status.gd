@@ -72,10 +72,10 @@ func apply_damage(amount: int) -> void:
 
 	if armor_block_damage:
 		pass
-		#AudioManager.play_armor_block()
+		AudioManager.play_armor_block()
 	else:
 		pass
-		#AudioManager.play_player_hurt()
+		AudioManager.play_player_hurt()
 
 
 func _on_wave_finished() -> void:

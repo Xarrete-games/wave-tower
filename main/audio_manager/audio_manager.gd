@@ -50,10 +50,10 @@ func play_defeated_sound():
 func play_place_tower():
 	place_tower.play()
 
-func play_loss_hp():
+func play_player_hurt():
 	loss_hp.play()
 
-func play_loss_armor():
+func play_armor_block():
 	loss_armor.play()
 
 func play_gain_armor():
