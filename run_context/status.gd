@@ -59,6 +59,7 @@ func apply_damage(amount: int) -> void:
 		return
 
 	var remaining_damage: int = amount
+	var armor_block_damage: bool = armor >= remaining_damage 
 
 	if armor > 0:
 		var absorbed: int = min(armor, remaining_damage)
@@ -68,6 +69,13 @@ func apply_damage(amount: int) -> void:
 
 	if remaining_damage > 0:
 		health -= remaining_damage
+
+	if armor_block_damage:
+		pass
+		#AudioManager.play_armor_block()
+	else:
+		pass
+		#AudioManager.play_player_hurt()
 
 
 func _on_wave_finished() -> void:
