@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfbkg54rlo421"]
+[gd_scene format=3 uid="uid://dfbkg54rlo421"]
 
 [ext_resource type="Script" uid="uid://dpnilgqn044xp" path="res://main/tower_placer/tower_placer.gd" id="1_3u3cv"]
 
-[node name="TowerPlacer" type="Node2D"]
+[node name="TowerPlacer" type="Node2D" unique_id=333116909]
 script = ExtResource("1_3u3cv")

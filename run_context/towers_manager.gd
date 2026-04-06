@@ -109,6 +109,7 @@ func add_tower_placed(tower: Tower) -> void:
 	tower_card_amount_change.emit(tower_configuration, tower_cards_amount[tower.data.id])
 	tower.id = _generate_tower_id(tower)
 	tower_placed.emit(tower)
+	AudioManager.play_place_tower()
 
 func tower_removed(tower: Tower) -> void:
 	towers.erase(tower)

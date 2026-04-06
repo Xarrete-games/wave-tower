@@ -33,6 +33,7 @@ func populate_screen(configurations: Array[TowerDataWithInstance]) -> void:
 func _on_item_selected(item: ChooseTowerScreenItem) -> void:
 	selected_item = item
 	#instant select and confirm
+	AudioManager.play_tower_obtain()
 	_on_ok_pressed()
 
 func _on_ok_pressed() -> void:
