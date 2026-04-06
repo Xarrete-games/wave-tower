@@ -28,6 +28,7 @@ bus = &"SFX"
 
 [node name="MainPianoPlayer" type="AudioStreamPlayer" parent="." unique_id=1925995395]
 stream = ExtResource("5_s3r24")
+bus = &"Music"
 
 [node name="PurchasePlayer" type="AudioStreamPlayer" parent="." unique_id=1107652352]
 stream = ExtResource("6_seqmh")
@@ -35,6 +36,8 @@ bus = &"SFX"
 
 [node name="WaveClear" type="AudioStreamPlayer" parent="." unique_id=1204044153]
 stream = ExtResource("7_o00yt")
+bus = &"Scene_change"
 
 [node name="DefeatedSound" type="AudioStreamPlayer" parent="." unique_id=322434600]
 stream = ExtResource("8_j710w")
+bus = &"Scene_change"
