@@ -6,17 +6,13 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jgm5"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="TowerBuffsBar" type="PanelContainer" unique_id=773910159]
+[node name="TowerBuffsBar" type="PanelContainer" unique_id=773910159 node_paths=PackedStringArray("slots_container")]
 offset_right = 34.0
 offset_bottom = 50.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4jgm5")
 script = ExtResource("1_dg5wq")
+slot_scene = ExtResource("2_4jgm5")
+slots_container = NodePath("Container")
 
 [node name="Container" type="GridContainer" parent="." unique_id=823021992]
-layout_mode = 2
-
-[node name="TowerBuffsBarSlot" parent="Container" unique_id=566470421 instance=ExtResource("2_4jgm5")]
-layout_mode = 2
-
-[node name="TowerBuffsBarSlot2" parent="Container" unique_id=2138026124 instance=ExtResource("2_4jgm5")]
 layout_mode = 2

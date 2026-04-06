@@ -126,12 +126,14 @@ func add_buff(tower_buff: TowerBuff) -> void:
 	buffs.append(tower_buff)
 	if tower_buff is TowerBuffStatsModifier:
 		tower_stats_handler.add_buff(tower_buff as TowerBuffStatsModifier)
+	buff_added.emit(tower_buff)
 
 func remove_buff(source_id: String) -> void:
 	buffs = buffs.filter(func(buff: TowerBuff) -> bool:
 		return buff.source.type_id != source_id
 	)
 	tower_stats_handler.remove_buff(source_id)
+	buff_removed.emit(source_id)
 
 # --------------------
 # --- UPGRADES ---
