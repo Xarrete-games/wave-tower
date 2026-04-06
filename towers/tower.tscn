@@ -77,9 +77,9 @@ position = Vector2(0, -90)
 
 [node name="TowerBuffsBar" parent="." unique_id=773910159 instance=ExtResource("6_7jtxt")]
 offset_left = 40.0
-offset_top = -119.0
+offset_top = -129.0
 offset_right = 155.0
-offset_bottom = 87.0
+offset_bottom = 77.0
 
 [connection signal="body_entered" from="AreaDetector" to="AreaDetector" method="_on_body_entered"]
 [connection signal="body_exited" from="AreaDetector" to="AreaDetector" method="_on_body_exited"]
