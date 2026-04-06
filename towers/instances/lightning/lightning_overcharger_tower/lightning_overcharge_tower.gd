@@ -12,6 +12,10 @@ var particles_dict: Dictionary[String, Node] = {}
 @onready var buff_area_shape: CollisionShape2D = $BuffArea/BuffAreaShape
 @onready var buff_area: Area2D = $BuffArea
 
+func _ready() -> void:
+	super._ready()
+	buff_area.monitoring = false
+	
 func _fire() -> void:
 	var projectile = projectile_scene.instantiate() as SingleTargetProjectile
 	get_parent().add_child(projectile)
