@@ -1,10 +1,11 @@
 class_name PowerGloves extends TowerBuffRelic
 
-const BUFF_ID: String = "power_gloves_buff"
+const BUFF_ID: String = "damage_flat_buff"
+const BUFF_VALUE: float = 3.0
 
 
 func _add_buff(tower: Tower) -> void:
-	var tower_buff: TowerBuff = TowerBuffFactory.create_from_id(BUFF_ID, get_source())
+	var tower_buff: TowerBuff = TowerBuffFactory.create_from_id(BUFF_ID, get_source(), BUFF_VALUE)
 	if tower_buff != null:
 		tower.add_buff(tower_buff)
 
