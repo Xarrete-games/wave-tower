@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="BuffData" format=3]
 
 [ext_resource type="Script" path="res://towers/tower-buffs/tower_buff_data.gd" id="1_data"]
-[ext_resource type="Script" path="res://towers/tower-buffs/scripts/caffeine_bad_buff_script.gd" id="2_runtime"]
+[ext_resource type="Script" path="res://towers/tower-buffs/scripts/attack_speed_mult_buff.gd" id="2_runtime"]
 [ext_resource type="Texture2D" path="res://assets/images/icons/stats/attack_speed_icon_flat.png" id="3_icon"]
 
 [resource]
 script = ExtResource("1_data")
-id = "caffeine_bad_buff"
-display_name = "Caffeine Bad Buff"
-description = "Negative buff applied by consumable Caffeine Potion."
+id = "attack_speed_mult_buff"
+display_name = "Attack Speed Mult Buff"
+description = "Attack speed multiplier buff."
 icon = ExtResource("3_icon")
 runtime_script = ExtResource("2_runtime")

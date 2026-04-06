@@ -1,9 +1,10 @@
 class_name Metronome extends TowerBuffRelic
 
-const BUFF_ID: String = "metronome_buff"
+const BUFF_ID: String = "attack_speed_mult_buff"
+const BUFF_VALUE: float = -0.05
 
 func _add_buff(tower: Tower) -> void:
-	var tower_buff: TowerBuff = TowerBuffFactory.create_from_id(BUFF_ID, get_source())
+	var tower_buff: TowerBuff = TowerBuffFactory.create_from_id(BUFF_ID, get_source(), BUFF_VALUE)
 	if tower_buff != null:
 		tower.add_buff(tower_buff)
 
