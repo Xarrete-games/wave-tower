@@ -1,7 +1,7 @@
 class_name LongShot extends ConsumableTargeteable
 
-func action(target: Variant) -> void:
-	var tower: Tower = target as Tower
+func action(p_target: Variant) -> void:
+	var tower: Tower = p_target as Tower
 	var source = get_source()
 	var tower_buff = TowerBuffFactory.create_from_id("attack_range_mult_buff", source, 100)
 	if tower_buff == null:
