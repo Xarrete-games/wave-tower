@@ -37,6 +37,7 @@ Goal: migrate runtime to 100% C# (no mixed runtime long-term).
   - `run_context/ConsumablesManagerRuntime.cs`
   - `run_context/EconomyRuntime.cs`
   - `run_context/StatusRuntime.cs`
+  - `run_context/CompositeTileMapRuntime.cs`
 - Refined core inheritance order:
   - `core/models/RelicModel.cs` is now the C# base listener model for relic implementations (inherits `AbstractModel`).
   - `run_context/RelicsManagerRuntime.cs` now stores `RelicModel` and includes core parity API (`AddRelic`, `AddRelicById`, `RemoveRelic`, `HasRelic`, `GetRelic`, `GetRelicCount`, `GetAllRelics`).
@@ -45,6 +46,8 @@ Goal: migrate runtime to 100% C# (no mixed runtime long-term).
   - `run_context/ConsumablesManagerRuntime.cs` includes base parity API (`IsFull`, `AddConsumable`, `RemoveConsumable`, `GetConsumables`, `Reset`).
 - Added core relic model factory for deterministic ID-based creation:
   - `relics/RelicModelFactory.cs`.
+- NOTE: direct references from GDScript to C# static runtime classes are currently not available by identifier in this project setup.
+- Runtime wiring from GDScript -> C# remains pending until we add an explicit interop entrypoint.
 - Added first C# relic implementation candidate (not wired yet):
   - `relics/implementations/TunaNigiri.cs` (inherits `RelicModel`, mirrors `tuna_nigiri.gd`).
   - `relics/implementations/SalmonNigiri.cs` (inherits `RelicModel`, mirrors `salmon_nigiri.gd`).
@@ -75,6 +78,17 @@ Goal: migrate runtime to 100% C# (no mixed runtime long-term).
   - `relics/implementations/ArticCube.cs` (inherits `RelicModel`, mirrors `artic_cube.gd`).
   - `relics/implementations/DonRafaelPipe.cs` (inherits `RelicModel`, mirrors `don_rafael_pipe.gd`).
   - `relics/implementations/TunelVision.cs` (inherits `RelicModel`, mirrors `tunel_vision.gd`).
+  - `relics/implementations/Metronome.cs` (inherits `RelicModel`, mirrors `metronome.gd`).
+  - `relics/implementations/ValveAmplifier.cs` (inherits `RelicModel`, mirrors `valve_amplifier.gd`).
+  - `relics/implementations/PaganiniBow.cs` (inherits `RelicModel`, mirrors `paganini_bow.gd`).
+  - `relics/implementations/PowerGloves.cs` (inherits `RelicModel`, mirrors `power_gloves.gd`).
+  - `relics/implementations/CrownOfTheForgottenKing.cs` (inherits `RelicModel`, mirrors `crown_of_the_forgotten_king.gd`).
+  - `relics/implementations/HotChiliPepper.cs` (inherits `RelicModel`, mirrors `hot_chili_pepper.gd`).
+  - `relics/implementations/HeadPhones.cs` (inherits `RelicModel`, mirrors `headphones.gd`).
+  - `relics/implementations/EchoOfVoid.cs` (inherits `RelicModel`, mirrors `echo_of_void.gd`).
+  - `relics/implementations/PerseusFury.cs` (inherits `RelicModel`, mirrors `perseus's_fury.gd`).
+  - `relics/implementations/IgnitionVoltage.cs` (inherits `RelicModel`, mirrors `ignition_voltage.gd`).
+  - `relics/implementations/VicMicrophone.cs` (inherits `RelicModel`, mirrors `vic_microphone.gd`).
 
 - Expanded relic core parity:
   - `RelicModel` now includes `IsCursed` metadata for relic-to-relic interactions.
@@ -82,6 +96,11 @@ Goal: migrate runtime to 100% C# (no mixed runtime long-term).
 - Expanded status/enemy model parity:
   - `StatusModel` and `StatusRuntime` include `ChangeMaxHealth` for property-style max-health modifications.
   - `EnemyModel` includes `GoldValue` and `HasAnyDebuff`.
+
+- Expanded tower/consumable model parity:
+  - `TowerModel` now includes buff/state fields used by relic logic.
+  - Added `TowerBuffModel`, `TowerBuffFactoryModel`, and `ConsumableTargeteableModel` for 1:1 relic behavior mapping.
+  - Added `relics/TowerBuffRelicBase.cs` as C# core base to mirror `tower_buff_relic.gd` behavior.
 
 - Expanded core debuff model parity:
   - `core/models/EnemyDebuffModel.cs` now includes `DebuffType`, `Duration`, and related debuff fields.

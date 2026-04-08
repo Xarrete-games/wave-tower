@@ -118,6 +118,32 @@ public sealed class RelicsManagerRuntime
         return this.GetCountOrZero(relicId);
     }
 
+    public float ApplyPriceHookForRelic(string relicId, int priceType, int basePrice, float currentDiscount)
+    {
+        if (string.IsNullOrEmpty(relicId))
+        {
+            return currentDiscount;
+        }
+
+        if (!this._relicsById.TryGetValue(relicId, out RelicModel relic))
+        {
+            return currentDiscount;
+        }
+
+        if (relic.Disabled)
+        {
+            return currentDiscount;
+        }
+
+        var context = new PriceContext((PriceContext.PriceType)priceType, basePrice)
+        {
+            Discount = currentDiscount,
+        };
+
+        relic.OnGetPrice(context);
+        return context.Discount;
+    }
+
     private int GetCountOrZero(string relicId)
     {
         if (!this._relicsCount.TryGetValue(relicId, out int count))

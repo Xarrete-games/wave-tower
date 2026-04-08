@@ -33,6 +33,17 @@ public static class RelicModelFactory
             "artic_cube" => new ArticCube(),
             "don_rafael_pipe" => new DonRafaelPipe(),
             "tunel_vision" => new TunelVision(),
+            "metronome" => new Metronome(),
+            "valve_amplifier" => new ValveAmplifier(),
+            "paganini_bow" => new PaganiniBow(),
+            "power_gloves" => new PowerGloves(),
+            "crown_of_the_forgotten_king" => new CrownOfTheForgottenKing(),
+            "hot_chili_pepper" => new HotChiliPepper(),
+            "headphones" => new HeadPhones(),
+            "echo_of_void" => new EchoOfVoid(),
+            "perseus_fury" => new PerseusFury(),
+            "ignition_voltage" => new IgnitionVoltage(),
+            "vic_microphone" => new VicMicrophone(),
             _ => null,
         };
     }
