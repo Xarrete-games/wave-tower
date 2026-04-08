@@ -35,7 +35,7 @@ RunContext="*res://run_context/run_context.gd"
 ClickEvents="*res://global/click_events.gd"
 UIUtils="*res://utils/ui_utils.gd"
 HintManager="*res://utils/hint_manager.gd"
-ActionManager="*uid://b3tlm5afw37yw"
+ActionManager="*res://global/action_manager.gd"
 
 [debug]
 

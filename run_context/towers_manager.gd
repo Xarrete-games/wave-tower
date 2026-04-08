@@ -124,8 +124,8 @@ func get_tower_count(tower_type: Tower.Type) -> int:
 			count += 1
 	return count
 
-func get_tower_listeners() -> Array[AbstractItem]:
-	var listeners: Array[AbstractItem] = []
+func get_tower_listeners() -> Array[AbstractModel]:
+	var listeners: Array[AbstractModel] = []
 	for tower in towers:
 		if tower != null and is_instance_valid(tower) and tower.tower_logic != null:
 			listeners.append(tower.tower_logic)

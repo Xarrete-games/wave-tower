@@ -67,7 +67,7 @@ func _use_consumable() -> void:
 	_current_consumable = null
 	Input.set_custom_mouse_cursor(DEFAULT_CURSOR)
 	
-	ActionManager.end_action()
+	ActionManager.EndAction()
 
 func _cancel_consumable() -> void:
 	_current_consumable = null
@@ -77,8 +77,8 @@ func _on_consumable_clicked(consumable: Consumable) -> void:
 	_current_consumable = consumable
 	Input.set_custom_mouse_cursor(_current_consumable.data.cursor_icon, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
 	
-	ActionManager.start_action(ActionManager.ActionState.USING_ITEM, _cancel_consumable)
+	ActionManager.StartAction(ActionManager.ActionState.UsingItem, _cancel_consumable)
 
 func _on_game_state_changed(new_state: GameState.STATE) -> void:
 	if new_state != GameState.STATE.IN_GAME and _current_consumable:
-		ActionManager.end_action()
+		ActionManager.EndAction()

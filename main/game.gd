@@ -27,8 +27,8 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
-		if ActionManager.is_action_active():
-			ActionManager.end_action()
+		if ActionManager.IsActionActive():
+			ActionManager.EndAction()
 		else:
 			_open_config_menu()
 

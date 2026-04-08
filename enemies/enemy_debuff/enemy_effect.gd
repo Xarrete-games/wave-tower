@@ -1,1 +1,1 @@
-class_name EnemyEffect extends AbstractItem
+class_name EnemyEffect extends AbstractModel

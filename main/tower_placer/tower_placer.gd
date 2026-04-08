@@ -43,7 +43,7 @@ func _place_tower() -> void:
 	# check gold
 	var tower_price = _current_tower_instance.build_price
 	if not _has_enought_gold(tower_price):
-		ActionManager.end_action()
+		ActionManager.EndAction()
 		return
 	_handle_costs(tower_price)
 	# place tower — mark tile as occupied
@@ -55,7 +55,7 @@ func _place_tower() -> void:
 	RunContext.towers_manager.add_tower_placed(_current_tower_instance)
 	_current_tower_instance = null
 	
-	ActionManager.end_action()
+	ActionManager.EndAction()
 
 func _has_enought_gold(tower_price: int) -> bool:
 	if RunContext.economy.available_free_towers > 0:
@@ -85,7 +85,7 @@ func _on_tower_button_pressed(tower_configuration: TowerDataWithInstance, price:
 	visual.add_child(_current_tower_instance)
 	_is_placing = true
 	
-	ActionManager.start_action(ActionManager.ActionState.PLACING_TOWER, _cancel_tower)
+	ActionManager.StartAction(ActionManager.ActionState.PlacingTower, _cancel_tower)
 
 func _on_tower_upgrade_pressed(current_tower: Tower, new_tower_conf: TowerDataWithInstance, price: int) -> void:
 	var new_tower = new_tower_conf.get_instance()

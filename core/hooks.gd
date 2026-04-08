@@ -1,7 +1,7 @@
 class_name Hooks
 
-static func get_listeners() -> Array[AbstractItem]:
-	var listeners: Array[AbstractItem] = []
+static func get_listeners() -> Array[AbstractModel]:
+	var listeners: Array[AbstractModel] = []
 	for relic in RunContext.relics_manager.get_all_relics():
 		listeners.append(relic)
 	for tower_listener in RunContext.towers_manager.get_tower_listeners():

@@ -1,4 +1,4 @@
-class_name Relic extends AbstractItem
+class_name Relic extends AbstractModel
 
 signal changed(relic: Relic)
 

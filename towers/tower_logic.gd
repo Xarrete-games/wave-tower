@@ -1,4 +1,4 @@
-class_name TowerLogic extends AbstractItem
+class_name TowerLogic extends AbstractModel
 
 var tower: Tower
 
