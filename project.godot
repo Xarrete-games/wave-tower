@@ -53,6 +53,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://dchhnma7ta7sp"
 
+[dotnet]
+
+project/assembly_name="Wave Tower"
+
 [global_group]
 
 tower="Towers "
