@@ -1,4 +1,17 @@
-public sealed class ConsumableModel
+public abstract class ConsumableModel
 {
-    public string Id { get; set; } = string.Empty;
+    public enum ConsumableType
+    {
+        Other,
+        Potion,
+    }
+
+    public string Id { get; }
+    public ConsumableType Type { get; }
+
+    protected ConsumableModel(string id, ConsumableType type)
+    {
+        this.Id = id;
+        this.Type = type;
+    }
 }

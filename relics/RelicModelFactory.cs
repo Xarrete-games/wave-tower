@@ -1,0 +1,39 @@
+public static class RelicModelFactory
+{
+    public static RelicModel CreateById(string relicId)
+    {
+        return relicId switch
+        {
+            "tuna_nigiri" => new TunaNigiri(),
+            "salmon_nigiri" => new SalmonNigiri(),
+            "butterfish_nigiri" => new ButterfishNigiri(),
+            "soya_sauce" => new SoyaSauce(),
+            "lemon" => new Lemon(),
+            "strategy_tome_low_health_priority" => new StrategyTomeLowHealthPriority(),
+            "strategy_tome_high_health_priority" => new StrategyTomeHighHealthPriority(),
+            "strategy_tome_economy" => new StrategyTomeEconomy(),
+            "safety_helmet" => new SafetyHelmet(),
+            "ice_cream" => new IceCream(),
+            "phoenix_feather" => new PhoenixFeather(),
+            "salt" => new Salt(),
+            "pirate_patch" => new PiratePatch(),
+            "flower_pot" => new FlowerPot(),
+            "ice_veins" => new IceVeins(),
+            "extra_virgin_olive_oil" => new ExtraVirginOliveOil(),
+            "captain_cap" => new CaptainCap(),
+            "big_bowl_of_milk_and_biscuits" => new BigBowlOfMilkAndBiscuits(),
+            "pirate_hat" => new PirateHat(),
+            "runic_lighter" => new RunicLighter(),
+            "tinfoil_hat" => new TinfoilHat(),
+            "buda" => new Buda(),
+            "cursed_buda" => new CursedBuda(),
+            "boniato" => new Boniato(),
+            "pirate_blunderbuss" => new PirateBlunderbuss(),
+            "black_witch_hat" => new BlackWitchHat(),
+            "artic_cube" => new ArticCube(),
+            "don_rafael_pipe" => new DonRafaelPipe(),
+            "tunel_vision" => new TunelVision(),
+            _ => null,
+        };
+    }
+}

@@ -1,8 +1,8 @@
-public sealed class StatusModel
+public sealed class StatusRuntime
 {
-    public int MaxHealth { get; set; } = 20;
-    public int Health { get; set; } = 20;
-    public int Armor { get; set; }
+    public int MaxHealth { get; private set; } = 20;
+    public int Health { get; private set; } = 20;
+    public int Armor { get; private set; }
 
     public void Heal(int amount)
     {
@@ -11,7 +11,8 @@ public sealed class StatusModel
             return;
         }
 
-        this.Health = System.Math.Min(this.Health + amount, this.MaxHealth);
+        int nextHealth = this.Health + amount;
+        this.Health = System.Math.Min(nextHealth, this.MaxHealth);
     }
 
     public void AddArmor(int amount)
@@ -51,6 +52,28 @@ public sealed class StatusModel
         if (this.Health > this.MaxHealth)
         {
             this.Health = this.MaxHealth;
+        }
+    }
+
+    public void ApplyDamage(int amount)
+    {
+        if (amount <= 0)
+        {
+            return;
+        }
+
+        int remainingDamage = amount;
+
+        if (this.Armor > 0)
+        {
+            int absorbed = System.Math.Min(this.Armor, remainingDamage);
+            this.Armor -= absorbed;
+            remainingDamage -= absorbed;
+        }
+
+        if (remainingDamage > 0)
+        {
+            this.Health -= remainingDamage;
         }
     }
 }
