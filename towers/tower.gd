@@ -51,6 +51,7 @@ var exp_data: TowerExpData:
 var id: String
 var type_id: String = get_script().get_global_name()
 var buffs: Array[TowerBuff] = []
+var tower_logic: TowerLogic
 var damage_source: Source:
 	get:
 		return Source.new(Source.SourceType.TOWER, type_id, self)
@@ -69,6 +70,7 @@ var damage_source: Source:
 
 func _ready():
 	data.build()
+	tower_logic = TowerLogic.new(self)
 	tower_area_collision.polygon = build_ellipse_polygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO)
 	# stats_handlers
 	tower_stats_handler.stats_change.connect(_on_stats_change)

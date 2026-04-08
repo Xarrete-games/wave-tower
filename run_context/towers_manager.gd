@@ -124,6 +124,13 @@ func get_tower_count(tower_type: Tower.Type) -> int:
 			count += 1
 	return count
 
+func get_tower_listeners() -> Array[AbstractItem]:
+	var listeners: Array[AbstractItem] = []
+	for tower in towers:
+		if tower != null and is_instance_valid(tower) and tower.tower_logic != null:
+			listeners.append(tower.tower_logic)
+	return listeners
+
 func _update_tower_count(tower_type: Tower.Type) -> void:
 	tower_count_change.emit(tower_type, get_tower_count(tower_type))
 
