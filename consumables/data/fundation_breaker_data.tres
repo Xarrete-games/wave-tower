@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ConsumableData" format=3 uid="uid://6wyiwv1lsmdh"]
 
 [ext_resource type="Texture2D" uid="uid://iylkhr5m2ge7" path="res://assets/sprites/consumables/pickaxe_48.png" id="1_apyb0"]
-[ext_resource type="Script" path="res://consumables/consumable_data.gd" id="1_tvi2s"]
+[ext_resource type="Script" uid="uid://c4vv5l1m0epby" path="res://consumables/ConsumableData.cs" id="1_tvi2s"]
 [ext_resource type="Script" uid="uid://bhygj3sm70n0a" path="res://consumables/implementation/fundation_breaker.gd" id="1_y3mtm"]
 [ext_resource type="Texture2D" uid="uid://d2f83fnd7mxqq" path="res://assets/sprites/consumables/pickle_use_48.png" id="2_qfll5"]
 [ext_resource type="Texture2D" uid="uid://bpm61ubby4nf5" path="res://assets/sprites/consumables/pickaxe.png" id="3_4so7f"]

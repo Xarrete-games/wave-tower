@@ -4,14 +4,14 @@ class_name EnemyDebuff extends EnemyEffect
 enum Type { FROST, BURN }
 
 var type: Type
-var data: EnemyDebuffData
+var data
 var source: Source
 var value: float = 0.0
 var duration: float = 0.0
 var tick_interval: float = 0.0
 var max_stacks: int = 99
 
-func _init(p_data: EnemyDebuffData, p_source: Source) -> void:
+func _init(p_data, p_source: Source) -> void:
 	data = p_data
 	source = p_source
 	type = p_data.debuff_type

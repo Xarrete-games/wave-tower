@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://ds6e6osoii40p"]
 
 [ext_resource type="Script" uid="uid://b1ldf8eracfin" path="res://relics/implementations/flower_pot.gd" id="1_3isox"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_uh30i"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_uh30i"]
 [ext_resource type="Texture2D" uid="uid://dikmy1ryck3s2" path="res://assets/sprites/relics/flowerpot_relic.png" id="3_guxeq"]
 
 [resource]
@@ -11,4 +11,4 @@ id = "flower_pot"
 display_name = "Flower pot"
 description = "When the wave ends, recover 1 health."
 icon = ExtResource("3_guxeq")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"

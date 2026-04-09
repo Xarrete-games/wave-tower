@@ -2,7 +2,7 @@ class_name Relic extends AbstractModel
 
 signal changed(relic: Relic)
 
-var data: RelicData
+var data
 var disabled: bool = false:
 	set(value):
 		disabled = value

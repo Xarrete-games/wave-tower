@@ -1,0 +1,7 @@
+<Project Sdk="Godot.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>WaveTower</RootNamespace>
+  </PropertyGroup>
+</Project>

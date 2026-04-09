@@ -25,7 +25,7 @@ func show_choose_relic_event(event_layer: CanvasLayer) -> void:
 	await  rewards_screen.tree_exited
 	rewards_screen = null
 	
-func _on_item_selected(relic_data: RelicData) -> void:
+func _on_item_selected(relic_data) -> void:
 	rewards_screen.queue_free()
 	if relic_data.health_price > 0:
 		RunContext.status.health -= relic_data.health_price

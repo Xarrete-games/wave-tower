@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://cefxj7dgidelj"]
 
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_1cvfv"]
-[ext_resource type="Script" uid="uid://cf1mdxbh45qfm" path="res://relics/implementations/StrategyTomeHighHealthPriorityRelic.cs" id="1_tsjtp"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_1cvfv"]
+[ext_resource type="Script" uid="uid://bi8sn6s80mvy3" path="res://relics/implementations/StrategyTomeHighHealthPriorityRelic.cs" id="1_tsjtp"]
 [ext_resource type="Texture2D" uid="uid://dwcoafajy4ujf" path="res://assets/sprites/relics/strategy_book_relic.png" id="2_oymg8"]
 
 [resource]
@@ -13,4 +13,4 @@ display_name = "Strategy Tome:
 High Health Priority"
 description = "Allows towers to prioritize enemies with the highest health."
 icon = ExtResource("2_oymg8")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"

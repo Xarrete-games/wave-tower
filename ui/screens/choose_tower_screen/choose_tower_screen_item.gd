@@ -2,7 +2,7 @@ class_name ChooseTowerScreenItem extends Control
 
 signal selected(item: ChooseTowerScreenItem)
 
-@export var tower_data: TowerDataWithInstance
+@export var tower_data = null
 @export var title_label: Label
 @export var description_label: Label
 @export var texture: TextureRect
@@ -18,7 +18,7 @@ signal selected(item: ChooseTowerScreenItem)
 func _ready() -> void:
 	_apply_configuration()
 
-func set_configuration(tower_data_p: TowerDataWithInstance) -> void:
+func set_configuration(tower_data_p) -> void:
 	tower_data = tower_data_p
 
 func _apply_configuration() -> void:

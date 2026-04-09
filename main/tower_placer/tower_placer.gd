@@ -76,7 +76,7 @@ func _cancel_tower() -> void:
 		_current_tower_instance = null
 	_is_placing = false
 
-func _on_tower_button_pressed(tower_configuration: TowerDataWithInstance, price: int) -> void:
+func _on_tower_button_pressed(tower_configuration, price: int) -> void:
 	if _is_placing:
 		return
 	
@@ -87,7 +87,7 @@ func _on_tower_button_pressed(tower_configuration: TowerDataWithInstance, price:
 	
 	ActionManager.StartAction(ActionManager.ActionState.PlacingTower, _cancel_tower)
 
-func _on_tower_upgrade_pressed(current_tower: Tower, new_tower_conf: TowerDataWithInstance, price: int) -> void:
+func _on_tower_upgrade_pressed(current_tower: Tower, new_tower_conf, price: int) -> void:
 	var new_tower = new_tower_conf.get_instance()
 	new_tower.build_price = price
 	RunContext.economy.gold -= price

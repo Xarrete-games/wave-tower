@@ -16,7 +16,7 @@ const MAX_X_SIZE: float = 160.0
 
 var debuffs_slots: Dictionary[int, DebuffSlot] = {}
 var debuffs_count: Dictionary[int, int] = {}
-var debuff_data_by_type: Dictionary[int, EnemyDebuffData] = {}
+var debuff_data_by_type: Dictionary[int, Variant] = {}
 
 func set_max_health(value: float) -> void:
 	var clamped_value = clamp(value, MIN_HEALTH, MAX_HEALTH)
@@ -55,13 +55,13 @@ func _reset_debuffs() -> void:
 	debuffs_count = {}
 	debuff_data_by_type = {}
 
-func _update_debuff_value(type: int, value: int, debuff_data: EnemyDebuffData) -> void:
+func _update_debuff_value(type: int, value: int, debuff_data) -> void:
 	var slot = debuffs_slots.get(type, null)
 	if slot == null:
 		_create_debuff_slot_type(type, debuff_data)
 	debuffs_slots[type].amount = value
 
-func _create_debuff_slot_type(type: int, debuff_data: EnemyDebuffData) -> void:
+func _create_debuff_slot_type(type: int, debuff_data) -> void:
 	var slot = DEBUFF_SLOT.instantiate()
 	debuffs_conatiner.add_child(slot)
 	slot.texture = debuff_data.icon

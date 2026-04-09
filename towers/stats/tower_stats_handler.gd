@@ -1,12 +1,12 @@
 class_name TowerStatsHandler extends Node
 
-signal stats_change(new_stats: TowerStats)
+signal stats_change(new_stats)
 signal buff_applied(buff: TowerBuff)
 signal buff_expired(source_id: String)
 
 # base
-var base_stats: TowerStats
-var stats_on_level: TowerStats
+var base_stats
+var stats_on_level
 # buffs
 var buffs: Array[TowerBuffStatsModifier] = []
 var stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new():
@@ -15,7 +15,7 @@ var stats_acc: TowerStatsAccumulator = TowerStatsAccumulator.new():
 		_update_stats()
 
 # current stats
-var stats: TowerStats = TowerStats.new()
+var stats = null
 
 var buff_scheduler: BuffScheduler
 
@@ -26,13 +26,14 @@ func _ready() -> void:
 
 # initialize the stats handler with base stats, tower type and experience handler
 func set_data(
-	stats_configuration: TowerData,
+	stats_configuration,
 	_p_tower_type: Tower.Type,
 	) -> void:
 	#base stats
 	base_stats = stats_configuration.stats.duplicate()
 	# stats on level
 	stats_on_level = stats_configuration.stats_on_level.duplicate()
+	stats = base_stats.duplicate()
 	
 	_update_stats()
 

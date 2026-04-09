@@ -5,9 +5,9 @@ signal clicked(consumable: Consumable)
 
 enum Type { OTHER, POTION }
 
-var data: ConsumableData
+var data
 
-func _init(p_data: ConsumableData) -> void:
+func _init(p_data) -> void:
 	data = p_data
 
 func get_source() -> Source:

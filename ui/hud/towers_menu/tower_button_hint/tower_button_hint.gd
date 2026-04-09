@@ -6,7 +6,7 @@ class_name TowerButtonHint extends Control
 @onready var attack_speed_stat: TowerStatUi = %AttkSpeedStatUi
 @onready var range_stat: TowerStatUi = %RangeStatUi
 
-func set_stats(configuration: TowerData) -> void:
+func set_stats(configuration) -> void:
 	name_label.text = "[u]" + configuration.display_name + "[/u]"
 	description_label.text = configuration.description
 	damage_stat.set_value(configuration.base_damage)

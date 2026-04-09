@@ -63,7 +63,7 @@ func _on_tower_selected(tower: Tower) -> void:
 		upgrade_button_container.visible = true
 
 	
-func update_stats(tower_stats: TowerStats) -> void:
+func update_stats(tower_stats) -> void:
 	if tower_stats == null:
 		return
 	damage_stat.set_value(tower_stats.damage)
@@ -97,7 +97,7 @@ func _hide_upgrade_options() -> void:
 	upgrade_button_container.visible = false
 
 
-func _on_tower_button_pressed(tower_data: TowerDataWithInstance, price: int) -> void:
+func _on_tower_button_pressed(tower_data, price: int) -> void:
 	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_data, price)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:

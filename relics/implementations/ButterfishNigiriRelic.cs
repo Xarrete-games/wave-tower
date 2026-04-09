@@ -1,3 +1,6 @@
+using Godot;
+
+[GlobalClass]
 public partial class ButterfishNigiriRelic : RelicRuntimeAdapter
 {
     private readonly ButterfishNigiri _model = new ButterfishNigiri();

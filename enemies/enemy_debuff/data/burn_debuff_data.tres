@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyDebuffData" format=3 uid="uid://encdr74menfb"]
 
-[ext_resource type="Script" uid="uid://xo4rq8lghivf" path="res://enemies/enemy_debuff/enemy_debuff_data.gd" id="1_2bn0m"]
+[ext_resource type="Script" uid="uid://bjw8tpiai83u1" path="res://enemies/enemy_debuff/EnemyDebuffData.cs" id="1_2bn0m"]
 [ext_resource type="Script" uid="uid://drtxvls2x13ar" path="res://enemies/enemy_debuff/types/burn_debuff.gd" id="2_01n2b"]
 [ext_resource type="Texture2D" uid="uid://crxeix0v2qrqb" path="res://assets/images/icons/debuffs/burn_icon.png" id="3_jb3if"]
 

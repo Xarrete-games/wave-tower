@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://cxmk52nc4six0"]
 
 [ext_resource type="Texture2D" uid="uid://d2a0mxthrkd5i" path="res://assets/images/icons/tower_buffs/buff_range.png" id="1_2qn7e"]
-[ext_resource type="Script" uid="uid://djbo3i8twgv6e" path="res://towers/tower-buffs/tower_buff_data.gd" id="1_data"]
+[ext_resource type="Script" uid="uid://belffx2l18m14" path="res://towers/tower-buffs/BuffData.cs" id="1_data"]
 [ext_resource type="Script" uid="uid://bqmf0wlv2x0cs" path="res://towers/tower-buffs/scripts/attack_range_mult_buff.gd" id="2_runtime"]
 
 [resource]

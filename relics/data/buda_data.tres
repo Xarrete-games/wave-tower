@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://di1k1stuu5jxq"]
 
 [ext_resource type="Script" uid="uid://dhd3f6hv0412c" path="res://relics/implementations/buda.gd" id="1_nvw2t"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_t1y8r"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_t1y8r"]
 [ext_resource type="Texture2D" uid="uid://dafhdspl8xnqx" path="res://assets/sprites/relics/buda_statue.png" id="2_s2dvm"]
 
 [resource]
@@ -12,4 +12,4 @@ display_name = "Buda"
 description = "Increases max health by 1 for each tower you place"
 icon = ExtResource("2_s2dvm")
 runtime_script = ExtResource("1_nvw2t")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"

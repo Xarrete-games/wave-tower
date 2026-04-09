@@ -10,11 +10,11 @@ signal done()
 
 static var instance: ChooseTowerScreen = null
 
-var selected_tower_configuration: TowerDataWithInstance = null
+var selected_tower_configuration = null
 var selected_item: ChooseTowerScreenItem = null
 
 
-static func show_screen(configurations: Array[TowerDataWithInstance], canvas: CanvasLayer) -> void:
+static func show_screen(configurations: Array, canvas: CanvasLayer) -> void:
 	instance = CHOOSE_TOWER_SCREEN_SCENE.instantiate() as ChooseTowerScreen
 	canvas.add_child(instance)
 	instance.populate_screen(configurations)
@@ -23,7 +23,7 @@ static func show_screen(configurations: Array[TowerDataWithInstance], canvas: Ca
 func _ready() -> void:
 	ok_button.pressed.connect(_on_ok_pressed)
 
-func populate_screen(configurations: Array[TowerDataWithInstance]) -> void:
+func populate_screen(configurations: Array) -> void:
 	for tower_configuration in configurations:
 		var item = TOWER_ITEM_SCENE.instantiate() as ChooseTowerScreenItem
 		item.tower_data = tower_configuration

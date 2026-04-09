@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://ij53qcnt7rm2"]
 
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_25sa2"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_25sa2"]
 [ext_resource type="Script" uid="uid://qeb4o3la37dx" path="res://relics/implementations/boniato.gd" id="1_ijull"]
 [ext_resource type="Texture2D" uid="uid://bmog50xiu4wle" path="res://assets/sprites/relics/boniato_relic.png" id="3_g7kpf"]
 
@@ -13,4 +13,4 @@ description = "Increases the gold dropped by enemies by 1 at the cost of 5 lives
 Be careful!"
 icon = ExtResource("3_g7kpf")
 rarity = 2
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"

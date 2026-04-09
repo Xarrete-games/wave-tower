@@ -1,6 +1,6 @@
 class_name ChooseRelicCard extends Control
 
-signal card_pressed(relic_data: RelicData)
+signal card_pressed(relic_data)
 
 const LABEL_SETTINGS_24_INVALID = preload("uid://c0seek6x1jue3")
 const LABEL_SETTINGS_24 = preload("uid://bqa8xh2lpphdf")
@@ -9,7 +9,7 @@ const COMMON_COLOR = Color.GREEN_YELLOW
 const RARE_COLOR = Color.DODGER_BLUE
 const EPIC_COLOR = Color.GOLD
 
-var relic_data: RelicData
+var relic_data
 
 var _has_enough_live = false
 var _it_cost_health = false
@@ -23,9 +23,9 @@ var _it_cost_health = false
 func _ready() -> void:
 	health_price.visible = false
 
-func set_relic(new_relic_data: RelicData) -> void:
+func set_relic(new_relic_data) -> void:
 	relic_data = new_relic_data
-	var data: BaseData = new_relic_data
+	var data = new_relic_data
 	relic_texture.texture = data.icon
 	title.text = data.display_name
 	description.text = data.description

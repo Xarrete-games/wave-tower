@@ -8,10 +8,10 @@ const COMMON_COLOR = Color.GREEN_YELLOW
 const RARE_COLOR = Color.DODGER_BLUE
 const EPIC_COLOR = Color.GOLD
 
-var relic_colors: Dictionary[BaseData.Rarity, Color] = {
-	BaseData.Rarity.COMMON: COMMON_COLOR,
-	BaseData.Rarity.RARE: RARE_COLOR,
-	BaseData.Rarity.EPIC: EPIC_COLOR,
+var relic_colors: Dictionary[int, Color] = {
+	0: COMMON_COLOR,
+	1: RARE_COLOR,
+	2: EPIC_COLOR,
 }
 
 var relics_count: Dictionary[String, int] = {} 
@@ -25,10 +25,14 @@ func has_relic(relic_id: String) -> bool:
 func get_all_relics() -> Array:
 	return relics.values()
 	
-func get_rarity_color(rarity: BaseData.Rarity) -> Color:
+func get_rarity_color(rarity: int) -> Color:
 	return relic_colors[rarity]
 
 func add_relic(relic) -> void:
+	if relic == null:
+		push_error("[RelicsManager] Attempted to add null relic instance")
+		return
+
 	if relics.has(relic.data.id):
 		push_error("Relic with ID '%s' already exists. Cannot add duplicate relics." % relic.data.id)
 		return

@@ -10,14 +10,14 @@ const INITIAL_MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/init/"
 const MAP_PIECES_DATA_PATH: String = "res://levels/map_pieces/data/"
 const TOWER_DATA_PATH: String = "res://towers/data/"
 
-var relics: Array[RelicData] = []
+var relics: Array = []
 var events: Array[EventData] = []
-var consumables: Array[ConsumableData] = []
-var enemy_debuffs: Array[EnemyDebuffData] = []
-var tower_buffs_data: Array[BuffData] = []
+var consumables: Array = []
+var enemy_debuffs: Array = []
+var tower_buffs_data: Array = []
 var initial_map_pieces: Array[MapPieceData] = []
 var map_pieces: Array[MapPieceData] = []
-var tower_data: Array[TowerDataWithInstance] = []
+var tower_data: Array = []
 var enemy_data: EnemyDataLoader = EnemyDataLoader.new()
 
 func _ready() -> void:
@@ -34,20 +34,20 @@ func _ready() -> void:
 # RELICS API
 # ---------------------------------------------------------
 
-func get_relic_by_id(relic_id: String) -> RelicData:
+func get_relic_by_id(relic_id: String) -> Variant:
 	for relic in relics:
-		if relic.id == relic_id:
-			return _duplicate_resource(relic) as RelicData
+		if _has_property(relic, "id") and relic.id == relic_id:
+			return _duplicate_resource(relic)
 	return null
 
-func get_all_relics() -> Array[RelicData]:
-	var result: Array[RelicData] = []
+func get_all_relics() -> Array:
+	var result: Array = []
 	_append_deep_copies(relics, result)
 	return result
 
-func get_random_relics(amount: int, rarity: Variant = null, include_cursed: bool = false, include_only_for_events: bool = false) -> Array[RelicData]:
+func get_random_relics(amount: int, rarity: Variant = null, include_cursed: bool = false, include_only_for_events: bool = false) -> Array:
 	var candidates = get_not_used_relics(rarity)
-	candidates = candidates.filter(func(relic_data: RelicData):
+	candidates = candidates.filter(func(relic_data):
 		if not include_cursed and relic_data.is_cursed:
 			return false
 		if not include_only_for_events and relic_data.only_for_events:
@@ -57,7 +57,7 @@ func get_random_relics(amount: int, rarity: Variant = null, include_cursed: bool
 
 	candidates.shuffle()
 
-	var result: Array[RelicData] = []
+	var result: Array = []
 	for relic_data in candidates:
 		if result.size() >= amount:
 			break
@@ -65,15 +65,19 @@ func get_random_relics(amount: int, rarity: Variant = null, include_cursed: bool
 
 	return result
 
-func get_not_used_relics(rarity: Variant = null, is_cursed: Variant = null) -> Array[RelicData]:
-	var filtered: Array[RelicData] = relics.filter(func(relic_data: RelicData):
+func get_not_used_relics(rarity: Variant = null, is_cursed: Variant = null) -> Array:
+	var filtered: Array = relics.filter(func(relic_data):
+		if not _has_property(relic_data, "id"):
+			return false
 
 		# If we want a specific rarity
-		if rarity != null and relic_data.rarity != rarity:
+		if rarity != null and (not _has_property(relic_data, "rarity") or relic_data.rarity != rarity):
 			return false
 
 		# If we want only non-cursed relics
 		if is_cursed != null: 
+			if not _has_property(relic_data, "is_cursed"):
+				return false
 			if not is_cursed and relic_data.is_cursed:
 				return false
 			elif is_cursed and not relic_data.is_cursed:
@@ -82,7 +86,7 @@ func get_not_used_relics(rarity: Variant = null, is_cursed: Variant = null) -> A
 		return not RunContext.relics_manager.has_relic(relic_data.id)
 	)
 
-	var result: Array[RelicData] = []
+	var result: Array = []
 	_append_deep_copies(filtered, result)
 	return result
 
@@ -91,10 +95,14 @@ func get_random_available_relics(
 	rarity: Variant = null,
 	include_cursed: bool = false,
 	include_only_for_events: bool = false
-) -> Array[RelicData]:
+) -> Array:
 	var candidates = get_not_used_relics(rarity)
-	candidates = candidates.filter(func(relic_data: RelicData):
+	candidates = candidates.filter(func(relic_data):
+		if not _has_property(relic_data, "is_cursed"):
+			return false
 		if not include_cursed and relic_data.is_cursed:
+			return false
+		if not _has_property(relic_data, "only_for_events"):
 			return false
 		if not include_only_for_events and relic_data.only_for_events:
 			return false
@@ -103,7 +111,7 @@ func get_random_available_relics(
 
 	candidates.shuffle()
 
-	var result: Array[RelicData] = []
+	var result: Array = []
 	for relic_data in candidates:
 		if result.size() >= amount:
 			break
@@ -123,23 +131,23 @@ func get_all_events() -> Array[EventData]:
 # CONSUMABLES API
 # ---------------------------------------------------------
 
-func get_consumable_by_id(consumable_id: String) -> ConsumableData:
+func get_consumable_by_id(consumable_id: String) -> Variant:
 	for consumable in consumables:
 		if consumable.id == consumable_id:
-			return _duplicate_resource(consumable) as ConsumableData
+			return _duplicate_resource(consumable)
 	return null
 
-func get_all_consumables() -> Array[ConsumableData]:
-	var result: Array[ConsumableData] = []
+func get_all_consumables() -> Array:
+	var result: Array = []
 	_append_deep_copies(consumables, result)
 	return result
 
-func get_all_consumables_of_type(consumable_type: Consumable.Type) -> Array[ConsumableData]:
-	var filtered: Array[ConsumableData] = consumables.filter(func(data: ConsumableData):
+func get_all_consumables_of_type(consumable_type: Consumable.Type) -> Array:
+	var filtered: Array = consumables.filter(func(data):
 		return data.consumable_type == consumable_type
 	)
 
-	var result: Array[ConsumableData] = []
+	var result: Array = []
 	_append_deep_copies(filtered, result)
 	return result
 
@@ -147,20 +155,20 @@ func get_all_consumables_of_type(consumable_type: Consumable.Type) -> Array[Cons
 # ENEMY DEBUFFS API
 # ---------------------------------------------------------
 
-func get_debuff_data(type: EnemyDebuff.Type) -> EnemyDebuffData:
+func get_debuff_data(type: EnemyDebuff.Type) -> Variant:
 	for debuff_data in enemy_debuffs:
 		if debuff_data.debuff_type == type:
-			return _duplicate_resource(debuff_data) as EnemyDebuffData
+			return _duplicate_resource(debuff_data)
 	return null
 
 # ---------------------------------------------------------
 # TOWER BUFFS API
 # ---------------------------------------------------------
 
-func get_tower_buff_data_by_id(buff_id: String) -> BuffData:
+func get_tower_buff_data_by_id(buff_id: String) -> Variant:
 	for buff_data in tower_buffs_data:
 		if buff_data.id == buff_id:
-			return _duplicate_resource(buff_data) as BuffData
+			return _duplicate_resource(buff_data)
 	return null
 
 # ---------------------------------------------------------
@@ -203,8 +211,8 @@ func get_spawnable_enemies() -> Array[EnemyData]:
 # TOWERS API
 # ---------------------------------------------------------
 
-func get_all_tower_data() -> Array[TowerDataWithInstance]:
-	var result: Array[TowerDataWithInstance] = []
+func get_all_tower_data() -> Array:
+	var result: Array = []
 	_append_deep_copies(tower_data, result)
 	return result
 	
@@ -214,7 +222,7 @@ func get_all_tower_data() -> Array[TowerDataWithInstance]:
 func _load_relics() -> void:
 	var loaded_array = _load_resources_from_dir(RELICS_DATA_PATH)
 	for data in loaded_array:
-		if data is RelicData:
+		if data != null and _has_property(data, "id") and _has_property(data, "runtime_script"):
 			relics.append(data)
 		else:
 			push_error("[DataLoader] Loaded relic has invalid type: %s" % [data])
@@ -230,7 +238,7 @@ func _load_events() -> void:
 func _load_consumables() -> void:
 	var loaded_array = _load_resources_from_dir(CONSUMABLES_DATA_PATH)
 	for data in loaded_array:
-		if data is ConsumableData:
+		if data != null and _has_property(data, "id") and _has_property(data, "consumable_type"):
 			consumables.append(data)
 		else:
 			push_error("[DataLoader] Loaded consumables data has invalid type: %s" % [data])
@@ -238,7 +246,7 @@ func _load_consumables() -> void:
 func _load_enemy_debuffs() -> void:
 	var loaded_array = _load_resources_from_dir(ENEMY_DEBUFFS_DATA_PATH)
 	for data in loaded_array:
-		if data is EnemyDebuffData:
+		if data != null and _has_property(data, "id") and _has_property(data, "debuff_type"):
 			enemy_debuffs.append(data)
 		else:
 			push_error("[DataLoader] Loaded enemy debuff data has invalid type: %s" % [data])
@@ -246,7 +254,7 @@ func _load_enemy_debuffs() -> void:
 func _load_tower_buffs_data() -> void:
 	var loaded_array = _load_resources_from_dir(TOWER_BUFFS_DATA_PATH)
 	for data in loaded_array:
-		if data is BuffData:
+		if data != null and _has_property(data, "id") and _has_property(data, "runtime_script"):
 			tower_buffs_data.append(data)
 		else:
 			push_error("[DataLoader] Loaded tower buff data has invalid type: %s" % [data])
@@ -270,10 +278,16 @@ func _load__initial_map_pieces() -> void:
 func _load_tower_data() -> void:
 	var loaded_array = _load_resources_from_dir(TOWER_DATA_PATH)
 	for data in loaded_array:
-		if data is TowerDataWithInstance:
+		if data != null and _has_property(data, "data") and _has_property(data, "scene"):
 			tower_data.append(data)
 		else:
 			push_error("[DataLoader] Loaded tower data has invalid type: %s" % [data])
+
+func _has_property(target: Object, property_name: String) -> bool:
+	for prop in target.get_property_list():
+		if prop is Dictionary and prop.get("name", "") == property_name:
+			return true
+	return false
 
 
 # ---------------------------------------------------------

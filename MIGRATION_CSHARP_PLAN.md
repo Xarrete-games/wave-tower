@@ -69,12 +69,16 @@ Goal: migrate runtime to 100% C# (no mixed runtime long-term).
   - `relics/data/captain_cap_data.tres` -> `CaptainCapRelic.cs`
   - `relics/data/ice_cream_data.tres` -> `IceCreamRelic.cs`
   - `relics/data/lemon_data.tres` -> `LemonRelic.cs`
+  - `relics/data/pirate_blunderbuss_data.tres` -> `PirateBlunderbussRelic.cs`
 
 - Decoupled relic manager and key callsites from strict `Relic` typing to support direct C# relic instances.
+- Restored `core/base_data.gd` temporarily to keep non-migrated BaseData inheritors stable (`TowerData`, `ConsumableData`, `BuffData`, `EnemyDebuffData`) while relic data runs on `relics/RelicData.cs`.
 
 - Refactor direction aligned with clean substitution:
   - Added `relics/RelicRuntimeAdapter.cs` as a thin Godot adapter layer.
   - Migrated substituted relic scripts to delegate behavior into pure `RelicModel` implementations (`TunaNigiri`, `SalmonNigiri`, `ButterfishNigiri`, `SoyaSauce`, `StrategyTome*`, `CaptainCap`, `IceCream`, `Lemon`).
+  - Added `PirateBlunderbussRelic.cs` adapter and switched `pirate_blunderbuss` resource to direct C#.
+  - Removed replaced GDScript relic implementation files for migrated resources (no dual path for those relics).
 - Added first C# relic implementation candidate (not wired yet):
   - `relics/implementations/TunaNigiri.cs` (inherits `RelicModel`, mirrors `tuna_nigiri.gd`).
   - `relics/implementations/SalmonNigiri.cs` (inherits `RelicModel`, mirrors `salmon_nigiri.gd`).

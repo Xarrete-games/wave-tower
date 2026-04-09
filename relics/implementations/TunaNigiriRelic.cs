@@ -1,3 +1,6 @@
+using Godot;
+
+[GlobalClass]
 public partial class TunaNigiriRelic : RelicRuntimeAdapter
 {
     private readonly TunaNigiri _model = new TunaNigiri();

@@ -31,10 +31,7 @@ public static class ActionManager
         Callable callback = _onActionCancel;
         _onActionCancel = default;
 
-        if (callback.IsValid())
-        {
-            callback.Call();
-        }
+        callback.Call();
 
         _currentAction = ActionState.None;
     }

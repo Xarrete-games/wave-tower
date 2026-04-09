@@ -1,7 +1,7 @@
 class_name TowersManager extends RefCounted
 
 signal tower_count_change(tower_type: Tower.Type, amount: int)
-signal tower_card_amount_change(tower_configuration: TowerDataWithInstance, amount: int)
+signal tower_card_amount_change(tower_configuration, amount: int)
 signal tower_placed(tower: Tower)
 signal tower_hovered(tower: Tower)
 signal tower_unhovered(tower: Tower)
@@ -21,7 +21,7 @@ var last_tower_ids: Dictionary[String, int] = {
 
 var towers_ids: Array[String] = []
 var towers: Array[Tower] = []
-var all_tower_data: Array[TowerDataWithInstance] = []
+var all_tower_data: Array = []
 var tower_cards_amount: Dictionary[String, int] = {}
 var progress: RunProgress
 
@@ -32,9 +32,9 @@ func _init(progress_p: RunProgress) -> void:
 	all_tower_data = DataLoader.get_all_tower_data()
 	_init_inital_towers_data()
 
-func get_random_towers(amount: int) -> Array[TowerDataWithInstance]:
+func get_random_towers(amount: int) -> Array:
 	var available_towers = all_tower_data.duplicate()
-	var selected_towers: Array[TowerDataWithInstance] = []
+	var selected_towers: Array = []
 	var picks = mini(amount, available_towers.size())
 
 	for _i in range(picks):
@@ -42,6 +42,9 @@ func get_random_towers(amount: int) -> Array[TowerDataWithInstance]:
 		var weights: Array[float] = []
 
 		for tower_data in available_towers:
+			if not _has_configuration_data(tower_data):
+				weights.append(0.0)
+				continue
 			var weight = _get_tower_weight_for_wave(tower_data.data.rarity)
 			weights.append(weight)
 			total_weight += weight
@@ -73,11 +76,11 @@ func _get_tower_weight_for_wave(rarity: int) -> float:
 	var epic_weight = lerpf(EPIC_WEIGHT_START, EPIC_WEIGHT_END, progress_ratio)
 
 	match rarity:
-		BaseData.Rarity.COMMON:
+		0:
 			return common_weight
-		BaseData.Rarity.RARE:
+		1:
 			return rare_weight
-		BaseData.Rarity.EPIC:
+		2:
 			return epic_weight
 		_:
 			return common_weight
@@ -93,9 +96,9 @@ func reset_towers() -> void:
 	_update_tower_count(Tower.Type.LIGHTNING)
 	_update_tower_count(Tower.Type.FROST)
 
-func get_tower_configuration_by_id(id: String) -> TowerDataWithInstance:
+func get_tower_configuration_by_id(id: String) -> Variant:
 	for tower_configuration in all_tower_data:
-		if tower_configuration.data.id == id:
+		if _has_configuration_data(tower_configuration) and tower_configuration.data.id == id:
 			return tower_configuration
 	return null
 
@@ -146,12 +149,24 @@ func _init_inital_towers_data() -> void:
 		_on_tower_card_added(tower_configuration)
 
 
-func _on_tower_card_added(tower_data: TowerDataWithInstance) -> void:
+func _on_tower_card_added(tower_data) -> void:
+	if not _has_configuration_data(tower_data):
+		push_error("[TowersManager] Invalid tower configuration while adding card: %s" % [tower_data])
+		return
+
 	if tower_data.data.id in tower_cards_amount:
 		tower_cards_amount[tower_data.data.id] += 1
 	else:
 		tower_cards_amount[tower_data.data.id] = 1
 	tower_card_amount_change.emit(tower_data, tower_cards_amount[tower_data.data.id])
+
+func _has_configuration_data(tower_configuration) -> bool:
+	if tower_configuration == null:
+		return false
+	for prop in tower_configuration.get_property_list():
+		if prop is Dictionary and prop.get("name", "") == "data":
+			return tower_configuration.get("data") != null
+	return false
 	
 func _generate_tower_id(tower: Tower) -> String:
 	var base_id = tower.type_id

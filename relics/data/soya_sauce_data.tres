@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://dd3ayby1tsl2j"]
 
-[ext_resource type="Script" uid="uid://f714exdhhpas" path="res://relics/implementations/SoyaSauceRelic.cs" id="1_vl8cw"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_xi3p0"]
+[ext_resource type="Script" uid="uid://cljcr0xunil07" path="res://relics/implementations/SoyaSauceRelic.cs" id="1_vl8cw"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_xi3p0"]
 [ext_resource type="Texture2D" uid="uid://c0y1e2ipmrvv3" path="res://assets/sprites/relics/relic_soya_sauce_relic.png" id="2_jb44x"]
 
 [resource]
@@ -11,4 +11,4 @@ id = "soya_sauce"
 display_name = "Soya Sauce"
 description = "Doubles the effects of nigiris"
 icon = ExtResource("2_jb44x")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"

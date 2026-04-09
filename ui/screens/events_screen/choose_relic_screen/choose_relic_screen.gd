@@ -1,6 +1,6 @@
 class_name ChooseRelicScreen extends Control
 
-signal item_selected(item: RelicData)
+signal item_selected(item)
 signal reroll_pressed()
 
 const CHOOSE_RELIC_CARD = preload("uid://dgcv5fdqvfext")
@@ -15,7 +15,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.3, false).timeout
 	_enabled = true
 
-func set_relics(relics: Array[RelicData]) -> void:
+func set_relics(relics: Array) -> void:
 	for child in cards_container.get_children():
 		child.queue_free()
 	
@@ -26,7 +26,7 @@ func set_relics(relics: Array[RelicData]) -> void:
 		card.card_pressed.connect(_on_card_pressed)
 	reroll_priece.price = _reroll_priece
 
-func _on_card_pressed(relic_data: RelicData) -> void:
+func _on_card_pressed(relic_data) -> void:
 	if not _enabled:
 		return
 	

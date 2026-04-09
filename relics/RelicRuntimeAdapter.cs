@@ -149,4 +149,33 @@ public abstract partial class RelicRuntimeAdapter : RefCounted
             modesArray.Add((int)modelModes[index]);
         }
     }
+
+    protected bool HasRelicById(string relicId)
+    {
+        SceneTree tree = Engine.GetMainLoop() as SceneTree;
+        if (tree == null)
+        {
+            return false;
+        }
+
+        Node runContext = tree.Root.GetNodeOrNull<Node>("/root/RunContext");
+        if (runContext == null)
+        {
+            return false;
+        }
+
+        Variant relicsManagerVariant = runContext.Get("relics_manager");
+        if (relicsManagerVariant.VariantType == Variant.Type.Nil)
+        {
+            return false;
+        }
+
+        GodotObject relicsManager = relicsManagerVariant.AsGodotObject();
+        if (relicsManager == null)
+        {
+            return false;
+        }
+
+        return (bool)relicsManager.Call("has_relic", relicId);
+    }
 }

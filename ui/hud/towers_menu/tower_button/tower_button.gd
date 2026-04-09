@@ -1,13 +1,13 @@
 class_name TowerButton extends Control
 
-signal tower_button_pressed(tower_configuration: TowerDataWithInstance, price: int)
+signal tower_button_pressed(tower_configuration, price: int)
 signal hover(tower_button: TowerButton)
 signal unhover(tower_button: TowerButton)
 
 const NORMAL_PANEL = preload("uid://dcjn1y7ofuii7")
 const HOVER_PANEL = preload("uid://5m3jkdualcb3")
 
-@export var tower_data: TowerDataWithInstance:
+@export var tower_data = null:
 	set(value):
 		tower_data = value
 		configuration = tower_data.data
@@ -21,7 +21,7 @@ const HOVER_PANEL = preload("uid://5m3jkdualcb3")
 @export var gold_price: GoldPrice
 @export var amount_label: Label
 
-var configuration: TowerData
+var configuration
 
 var price: int = 0:
 	set(value):

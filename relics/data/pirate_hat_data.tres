@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://c62rb7amyf7cw"]
 
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_r8ywf"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_r8ywf"]
 [ext_resource type="Script" uid="uid://dy25a5uijk3ph" path="res://relics/implementations/pirate_hat.gd" id="1_sr48w"]
 [ext_resource type="Texture2D" uid="uid://cslcqpgy6202k" path="res://assets/sprites/relics/Blackbeard's_hat_relic.png" id="3_sr48w"]
 
@@ -12,4 +12,4 @@ display_name = "Pirate hat"
 description = "When you use an item, you have a 50% chance of getting it back."
 icon = ExtResource("3_sr48w")
 runtime_script = ExtResource("1_sr48w")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"

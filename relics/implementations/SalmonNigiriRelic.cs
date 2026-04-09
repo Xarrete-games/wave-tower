@@ -1,3 +1,6 @@
+using Godot;
+
+[GlobalClass]
 public partial class SalmonNigiriRelic : RelicRuntimeAdapter
 {
     private readonly SalmonNigiri _model = new SalmonNigiri();

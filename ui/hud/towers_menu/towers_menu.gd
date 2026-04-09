@@ -21,7 +21,7 @@ func _init_button_cards() -> void:
 		var tower_configuration = RunContext.towers_manager.get_tower_configuration_by_id(tower_configuration_id)
 		_on_tower_card_added(tower_configuration, amount)
 
-func _on_tower_card_added(tower_data: TowerDataWithInstance, amount: int) -> void:
+func _on_tower_card_added(tower_data, amount: int) -> void:
 	if amount == 0:
 		if tower_data.data.id in buttons:
 			buttons[tower_data.data.id].queue_free()
@@ -42,7 +42,7 @@ func _on_tower_card_added(tower_data: TowerDataWithInstance, amount: int) -> voi
 		if tower_data.data.id in buttons:
 			buttons[tower_data.data.id].amount = amount
 	 
-func _on_tower_button_pressed(tower_data: TowerDataWithInstance, price: int) -> void:
+func _on_tower_button_pressed(tower_data, price: int) -> void:
 	ClickEvents.tower_build_button_pressed.emit(tower_data, price)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:

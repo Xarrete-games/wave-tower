@@ -1,3 +1,6 @@
+using Godot;
+
+[GlobalClass]
 public partial class StrategyTomeLowHealthPriorityRelic : RelicRuntimeAdapter
 {
     private readonly StrategyTomeLowHealthPriority _model = new StrategyTomeLowHealthPriority();

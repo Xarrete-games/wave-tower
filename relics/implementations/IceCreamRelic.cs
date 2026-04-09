@@ -1,3 +1,6 @@
+using Godot;
+
+[GlobalClass]
 public partial class IceCreamRelic : RelicRuntimeAdapter
 {
     private readonly IceCream _model = new IceCream();

@@ -18,7 +18,7 @@ const TOWER_AREA_RADIUS: float = 47.042534
 
 @export var type: Type = Type.FIRE
 
-var data: TowerData
+var data
 var build_price: int = 0
 var _current_target: Enemy
 var _enabled: bool = false
@@ -27,7 +27,7 @@ var range_tween: Tween
 # when true, the tower fires instantly upon detecting an enemy
 var _first_shot = true
 # global stats
-var stats: TowerStats:
+var stats:
 	set(value):
 		stats = value
 		stats_change.emit(self)
@@ -223,7 +223,7 @@ func _fire() -> void
 # --- STATS ---
 # --------------------
 
-func _on_stats_change(new_stats: TowerStats) -> void:
+func _on_stats_change(new_stats) -> void:
 	stats = new_stats
 	_apply_stats_changes()
 

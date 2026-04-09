@@ -11,7 +11,7 @@ signal item_purchased(item_offer: ItemOffer, slot: ShopSlot)
 var _item: ItemOffer
 var _price: int = 0
 var has_enough_health: bool = false
-var item_data: BaseData
+var item_data
 
 func _ready() -> void:
 	health_price.visible = false
@@ -26,8 +26,8 @@ func set_item(item_offer: ItemOffer) -> void:
 	gold_price.price = _price
 	shop_slot_icon.set_icon(item_data.icon)
 
-	if item_data is RelicData:
-		var relic_data: RelicData = item_data as RelicData
+	if item_data.get("is_tome") != null or item_data.get("is_cursed") != null:
+		var relic_data = item_data
 		shop_slot_icon.set_background_color(RunContext.relics_manager.get_rarity_color(relic_data.rarity))
 	# health price
 	_chek_health(RunContext.status.health, item_offer.health_price)
@@ -41,7 +41,7 @@ func set_item(item_offer: ItemOffer) -> void:
 	_item = item_offer
 	
 func _on_gui_input(event: InputEvent) -> void:
-	if _item.item_data is ConsumableData and RunContext.consumables_manager.is_full():
+	if _item.item_data.get("consumable_type") != null and RunContext.consumables_manager.is_full():
 		return
 
 	if UIUtils.is_left_click_event(event) and RunContext.economy.gold >= _price and has_enough_health:
@@ -58,9 +58,9 @@ func _on_mouse_exited() -> void:
 func _on_relic_added(relic) -> void:
 	var id = relic.data.id
 	if id == "salmon_nigiri" or id == "butterfish_nigiri" or id == "soya_sauce" or id == "tuna_nigiri":
-		if _item.item_data is RelicData:
+		if _item.item_data.get("is_tome") != null or _item.item_data.get("is_cursed") != null:
 			set_item(RunContext.offers_manager.create_relic_offer_from_data(_item.item_data))
-		elif _item.item_data is ConsumableData:
+		elif _item.item_data.get("consumable_type") != null:
 			set_item(RunContext.offers_manager.create_consumable_offer_from_data(_item.item_data))
 
 func _chek_health(current_health: int, health_cost: int) -> void:

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://bv6dejhrb33bd"]
 
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_5lf7q"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_5lf7q"]
 [ext_resource type="Script" uid="uid://cdhyjktclbdg1" path="res://relics/implementations/safety_helmet.gd" id="1_g3c2m"]
 [ext_resource type="Texture2D" uid="uid://chee6unpg40xd" path="res://assets/sprites/relics/casco.png" id="3_bf7d8"]
 
@@ -11,4 +11,4 @@ id = "safety_helmet"
 display_name = "Safety Helmet"
 description = "Adds one armor at the start of each wave"
 icon = ExtResource("3_bf7d8")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"

@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="1_birpd"]
 [ext_resource type="PackedScene" uid="uid://byypsvgtaww3g" path="res://towers/instances/lightning/lightning_overcharger_tower/lightning_overcharge_tower.tscn" id="2_birpd"]
-[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_mq6v3"]
-[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_data_with_instance.gd" id="3_mq6v3"]
+[ext_resource type="Script" uid="uid://cg5wpcphk2vka" path="res://towers/configuration/TowerData.cs" id="2_mq6v3"]
+[ext_resource type="Script" uid="uid://dfaljyr1spgsy" path="res://towers/configuration/TowerDataWithInstance.cs" id="3_mq6v3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i5pku"]
 atlas = ExtResource("1_birpd")
@@ -24,10 +24,10 @@ display_name = "Overcharge Tower"
 description = "Increase the damage off all towers in this range in 10%"
 icon = SubResource("AtlasTexture_i5pku")
 rarity = 2
-metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
+metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
 [resource]
 script = ExtResource("3_mq6v3")
 data = SubResource("Resource_6h4w4")
 scene = ExtResource("2_birpd")
-metadata/_custom_type_script = "uid://byiw835k16yc6"
+metadata/_custom_type_script = "uid://dfaljyr1spgsy"
