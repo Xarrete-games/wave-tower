@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://drkkl1ex7lt6w"]
 
-[ext_resource type="Script" uid="uid://ywpwfx6kluv4" path="res://relics/implementations/tuna_nigiri.gd" id="1_08uru"]
+[ext_resource type="Script" uid="uid://ywpwfx6kluv4" path="res://relics/implementations/TunaNigiriRelic.cs" id="1_08uru"]
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_52mwh"]
 [ext_resource type="Texture2D" uid="uid://drf7d0hh3y0ux" path="res://assets/sprites/relics/relics_tuna_niguiri.png" id="2_yojsk"]
 

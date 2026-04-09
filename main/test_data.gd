@@ -23,14 +23,14 @@ func _handle_initial_relics() -> void:
 		for relic_id in initial_relics_ids:
 			var relic_data = DataLoader.get_relic_by_id(relic_id)
 			if relic_data:
-				var relic_instance = relic_data.create_item() as Relic
+				var relic_instance = relic_data.create_item()
 				RunContext.relics_manager.add_relic(relic_instance)
 			else:
 				push_error("[Game]: initial relic id %s not found" % relic_id)
 	if initial_random_relics > 0:
 		var items = DataLoader.get_random_relics(initial_random_relics)
 		for item in items:
-			var relic = item.create_item() as Relic
+			var relic = item.create_item()
 			RunContext.relics_manager.add_relic(relic)
 
 

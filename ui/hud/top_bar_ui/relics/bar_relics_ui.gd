@@ -7,12 +7,12 @@ func _ready():
 	RunContext.relics_manager.relic_removed.connect(_on_relic_removed)
 	RunContext.relics_manager.relic_changed.connect(_on_relic_changed)
 
-func _on_relic_added(relic: Relic) -> void:
+func _on_relic_added(relic) -> void:
 	var relic_instance: RelicUI = TOP_BAR_RELIC.instantiate()
 	add_child(relic_instance)
 	relic_instance.set_relic(relic)
 
-func _on_relic_changed(relic: Relic) -> void:
+func _on_relic_changed(relic) -> void:
 	for relic_ui: RelicUI in get_children():
 		if relic_ui.relic.data.id == relic.data.id:
 			relic_ui.set_relic(relic)

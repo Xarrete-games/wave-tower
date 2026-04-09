@@ -16,7 +16,7 @@ func get_options() -> Array[EventOptionData]:
 
 func handle_response(data: Variant) -> void:
 	var rarity: int = data as int
-	var relic: Relic = DataLoader.get_not_used_relics(rarity, false).pick_random().create_item() as Relic
+	var relic = DataLoader.get_not_used_relics(rarity, false).pick_random().create_item()
 	RunContext.relics_manager.add_relic(relic)
 	var gold_cost: int = 0
 	match rarity:

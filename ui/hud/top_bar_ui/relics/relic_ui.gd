@@ -8,12 +8,12 @@ const opaque_color: Color = Color(1, 1, 1, 1)
 @onready var amount_label: Label = $VBoxContainer/MarginContainer/amount
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-var relic: Relic
+var relic
 
 func _ready() -> void:
 	animation_player.play("on_enter")
 
-func set_relic(p_relic: Relic) -> void:
+func set_relic(p_relic) -> void:
 	texture.texture = p_relic.data.icon
 	self.relic = p_relic
 	if p_relic.disabled:

@@ -46,8 +46,35 @@ Goal: migrate runtime to 100% C# (no mixed runtime long-term).
   - `run_context/ConsumablesManagerRuntime.cs` includes base parity API (`IsFull`, `AddConsumable`, `RemoveConsumable`, `GetConsumables`, `Reset`).
 - Added core relic model factory for deterministic ID-based creation:
   - `relics/RelicModelFactory.cs`.
-- NOTE: direct references from GDScript to C# static runtime classes are currently not available by identifier in this project setup.
-- Runtime wiring from GDScript -> C# remains pending until we add an explicit interop entrypoint.
+- Runtime wiring from GDScript to C# remains pending; no new runtime/autoload bridge classes should be introduced.
+- Reverted resource fallback layer to keep migration clean:
+  - `relics/relic_data.gd` restored to direct `runtime_script.new(self)` behavior.
+  - Relic `.tres` resources restored to original `.gd` runtime scripts.
+- Current substitution strategy (one-by-one, no dual resource wiring):
+  - Keep existing relic resource entrypoints in `.gd`.
+  - Move relic behavior logic into paired C# runtime classes and call them from each `.gd` relic implementation.
+- Core dependency update for direct substitution path:
+  - `relics/relic_data.gd:create_item()` now instantiates relic scripts with `new()` and assigns `item.data` explicitly.
+  - `relics/relic.gd` no longer relies on `_init(p_data)` constructor injection.
+  - `run_context/relics_manager.gd` and relic creation call sites now accept non-`Relic` typed instances, reducing coupling for direct C# runtime script substitution.
+- First direct relic substitution in resource:
+  - `relics/data/tuna_nigiri_data.tres` now points `runtime_script` to `relics/implementations/TunaNigiriRelic.cs`.
+  - `TunaNigiriRelic.cs` implements the relic contract directly (signals/properties/hooks) without `.gd` wrapper delegation.
+- Continued direct substitutions in resources (no wrappers):
+  - `relics/data/salmon_nigiri_data.tres` -> `SalmonNigiriRelic.cs`
+  - `relics/data/butterfish_nigiri.tres` -> `ButterfishNigiriRelic.cs`
+  - `relics/data/soya_sauce_data.tres` -> `SoyaSauceRelic.cs`
+  - `relics/data/strategy_tome_low_health_priority_data.tres` -> `StrategyTomeLowHealthPriorityRelic.cs`
+  - `relics/data/strategy_tome_high_health_priority_data.tres` -> `StrategyTomeHighHealthPriorityRelic.cs`
+  - `relics/data/captain_cap_data.tres` -> `CaptainCapRelic.cs`
+  - `relics/data/ice_cream_data.tres` -> `IceCreamRelic.cs`
+  - `relics/data/lemon_data.tres` -> `LemonRelic.cs`
+
+- Decoupled relic manager and key callsites from strict `Relic` typing to support direct C# relic instances.
+
+- Refactor direction aligned with clean substitution:
+  - Added `relics/RelicRuntimeAdapter.cs` as a thin Godot adapter layer.
+  - Migrated substituted relic scripts to delegate behavior into pure `RelicModel` implementations (`TunaNigiri`, `SalmonNigiri`, `ButterfishNigiri`, `SoyaSauce`, `StrategyTome*`, `CaptainCap`, `IceCream`, `Lemon`).
 - Added first C# relic implementation candidate (not wired yet):
   - `relics/implementations/TunaNigiri.cs` (inherits `RelicModel`, mirrors `tuna_nigiri.gd`).
   - `relics/implementations/SalmonNigiri.cs` (inherits `RelicModel`, mirrors `salmon_nigiri.gd`).

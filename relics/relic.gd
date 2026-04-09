@@ -15,10 +15,9 @@ var counter: int = 0:
 
 var id: String:
 	get:
+		if data == null:
+			return ""
 		return data.id
-
-func _init(p_data: RelicData) -> void:
-	data = p_data
 
 func get_source() -> Source:
 	return Source.new(Source.SourceType.RELIC, id, self)

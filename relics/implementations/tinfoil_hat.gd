@@ -1,6 +1,6 @@
 class_name TinfoilHat extends Relic
 
-func on_relic_added(relic: Relic) -> void:
+func on_relic_added(relic) -> void:
 	if disabled or not relic.data.is_cursed:
 		return
 

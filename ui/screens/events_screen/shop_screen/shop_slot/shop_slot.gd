@@ -55,7 +55,7 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	shop_slot_icon.icon_normal_size()
 
-func _on_relic_added(relic: Relic) -> void:
+func _on_relic_added(relic) -> void:
 	var id = relic.data.id
 	if id == "salmon_nigiri" or id == "butterfish_nigiri" or id == "soya_sauce" or id == "tuna_nigiri":
 		if _item.item_data is RelicData:

@@ -88,7 +88,7 @@ func _change_to_buy_mode() -> void:
 	sell_section.visible = false
 
 func _build_relics_for_sale() -> void:
-	var current_relics: Array[Relic] = RunContext.relics_manager.get_all_relics()
+	var current_relics: Array = RunContext.relics_manager.get_all_relics()
 	var current_relics_data: Array[BaseData] = []
 	for relic_data in current_relics:
 		current_relics_data.append(relic_data.data)

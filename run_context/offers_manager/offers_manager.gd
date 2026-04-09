@@ -40,9 +40,9 @@ func purchase_offer(item_offer: ItemOffer) -> Variant:
 		RunContext.status.health -= item_offer.health_price
 
 	var item = item_offer.item_data.create_item()
-	if item is Relic:
-		RunContext.relics_manager.add_relic(item)
-	elif item is Consumable:
+	if item is Consumable:
 		RunContext.consumables_manager.add_consumable(item)
+	else:
+		RunContext.relics_manager.add_relic(item)
 
 	return item

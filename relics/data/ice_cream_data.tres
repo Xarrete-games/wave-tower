@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://df3crser55sxi"]
 
-[ext_resource type="Script" uid="uid://bwlh3s17i7t3x" path="res://relics/implementations/ice_cream.gd" id="1_48u78"]
+[ext_resource type="Script" uid="uid://bwlh3s17i7t3x" path="res://relics/implementations/IceCreamRelic.cs" id="1_48u78"]
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_q7bfa"]
 [ext_resource type="Texture2D" uid="uid://dqfc7s36geim6" path="res://assets/sprites/relics/ice_cream_relic.png" id="3_hcgnc"]
 

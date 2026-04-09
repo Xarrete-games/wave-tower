@@ -11,6 +11,3 @@ func on_get_price(ctx: PriceContext) -> void:
 		PriceContext.PriceType.CONSUMABLE:
 			if RunContext.relics_manager.has_relic("butterfish_nigiri"):
 				ctx.discount += 0.1
-
-
-

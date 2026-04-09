@@ -11,5 +11,7 @@ class_name RelicData extends BaseData
 @export_group("Script")
 @export var runtime_script: Script
 
-func create_item() -> Relic:
-	return runtime_script.new(self)
+func create_item() -> Variant:
+	var item = runtime_script.new()
+	item.data = self
+	return item

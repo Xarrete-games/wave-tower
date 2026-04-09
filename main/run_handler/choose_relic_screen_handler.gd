@@ -31,8 +31,7 @@ func _on_item_selected(relic_data: RelicData) -> void:
 		RunContext.status.health -= relic_data.health_price
 	
 	var item = relic_data.create_item()
-	if item is Relic:
-		RunContext.relics_manager.add_relic(item)
+	RunContext.relics_manager.add_relic(item)
 
 func _on_reroll_pressed() -> void:
 	RunContext.economy.gold -= REROLL_PRICE

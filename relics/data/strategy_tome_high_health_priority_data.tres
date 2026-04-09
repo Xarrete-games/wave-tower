@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://cefxj7dgidelj"]
 
 [ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_1cvfv"]
-[ext_resource type="Script" uid="uid://cf1mdxbh45qfm" path="res://relics/implementations/strategy_tome_high_health_priority.gd" id="1_tsjtp"]
+[ext_resource type="Script" uid="uid://cf1mdxbh45qfm" path="res://relics/implementations/StrategyTomeHighHealthPriorityRelic.cs" id="1_tsjtp"]
 [ext_resource type="Texture2D" uid="uid://dwcoafajy4ujf" path="res://assets/sprites/relics/strategy_book_relic.png" id="2_oymg8"]
 
 [resource]

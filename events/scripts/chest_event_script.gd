@@ -9,9 +9,8 @@ func get_options() -> Array[EventOptionData]:
 func handle_response(data: Variant) -> void:
 	match data as int:
 		0:
-			var relic: Relic = DataLoader.get_not_used_relics(BaseData.Rarity.COMMON, false).pick_random().create_item() as Relic
+			var relic = DataLoader.get_not_used_relics(BaseData.Rarity.COMMON, false).pick_random().create_item()
 			RunContext.relics_manager.add_relic(relic)
 		1:
 			pass
-
 

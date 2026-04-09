@@ -15,5 +15,5 @@ func get_options() -> Array[EventOptionData]:
 func handle_response(data: Variant) -> void:
 	var relic_data: RelicData = data as RelicData
 	if relic_data:
-		var relic: Relic = relic_data.create_item() as Relic
+		var relic = relic_data.create_item()
 		RunContext.relics_manager.add_relic(relic)

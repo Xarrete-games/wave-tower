@@ -15,5 +15,5 @@ func get_options() -> Array[EventOptionData]:
 	return options
 
 func handle_response(data: Variant) -> void:
-	var relic = data as Relic
+	var relic = data
 	RunContext.relics_manager.remove_relic(relic.data.id)

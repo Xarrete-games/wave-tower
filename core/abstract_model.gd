@@ -24,7 +24,7 @@ func on_enemy_die(enemy: Enemy, attack: Attack) -> void:
 func on_debuff_applied(ctx: DebuffContext, target: Enemy) -> void:
 	pass
 
-func on_relic_added(relic_added: Relic) -> void:
+func on_relic_added(relic_added) -> void:
 	pass
 
 func on_consumable_used(consumable: Consumable) -> void:

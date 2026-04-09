@@ -81,7 +81,7 @@ func _update_price() -> void:
 func _on_available_free_towers_change(available_free_towers: int) -> void:
 	_update_price()
 
-func _on_relic_added(relic: Relic) -> void:
+func _on_relic_added(relic) -> void:
 	if relic.data.id == "soya_sauce" || relic.data.id == "tuna_nigiri":
 		_update_price()
 
