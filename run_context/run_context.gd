@@ -10,13 +10,13 @@ var composite_tile_map: CompositeTileMap
 
 # subsystems
 var offers_manager: OffersManager
-var progress: RunProgress
-var economy: Economy
-var status: Status
+var progress
+var economy
+var status
 var towers_manager: TowersManager
-var relics_manager: RelicsManager
-var consumables_manager: ConsumablesManager
-var enemy_manager: EnemyManager
+var relics_manager
+var consumables_manager
+var enemy_manager
 
 func _ready() -> void:
 	reset_run()
@@ -26,7 +26,8 @@ func reset_run() -> void:
 	progress = RunProgress.new()
 	economy = Economy.new()
 	relics_manager = RelicsManager.new()
-	status = Status.new(progress, relics_manager)
+	status = Status.new()
+	status.setup(progress, relics_manager)
 	towers_manager = TowersManager.new(progress)
 	consumables_manager = ConsumablesManager.new()
 	enemy_manager = EnemyManager.new()

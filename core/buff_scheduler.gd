@@ -3,9 +3,9 @@ class_name BuffScheduler extends RefCounted
 signal buff_expired(buff: TowerBuff)
 signal buff_applied(buff: TowerBuff)
 
-var progress: RunProgress
+var progress
 
-func _init(progress_p: RunProgress) -> void:
+func _init(progress_p) -> void:
 	progress = progress_p
 
 func schedule(buff: TowerBuff) -> void:

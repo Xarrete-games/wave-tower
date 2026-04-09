@@ -23,9 +23,9 @@ var towers_ids: Array[String] = []
 var towers: Array[Tower] = []
 var all_tower_data: Array = []
 var tower_cards_amount: Dictionary[String, int] = {}
-var progress: RunProgress
+var progress
 
-func _init(progress_p: RunProgress) -> void:
+func _init(progress_p) -> void:
 	progress = progress_p
 	ClickEvents.tower_remove_pressed.connect(tower_removed)
 	ClickEvents.add_tower_card.connect(_on_tower_card_added)

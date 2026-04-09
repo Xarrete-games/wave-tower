@@ -30,6 +30,7 @@ event_layer = NodePath("../EventLayer")
 [node name="TestData" type="Node" parent="." unique_id=825568227]
 script = ExtResource("3_oysny")
 initial_relics_ids = Array[String](["tuna_nigiri", "soya_sauce", "strategy_tome_low_health_priority"])
+initial_consumables_ids = Array[String](["long_shot"])
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=917078807 node_paths=PackedStringArray("level")]
 position = Vector2(579, 323)

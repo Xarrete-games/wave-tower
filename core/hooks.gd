@@ -93,6 +93,6 @@ static func on_before_relic_reward(ctx: RelicsRewardsContext) -> void:
 # --- HEALTH ---
 # --------------------
 
-static func on_before_die(status: Status) -> void:
+static func on_before_die(status) -> void:
 	for item in get_listeners():
 		item.on_before_die(status)

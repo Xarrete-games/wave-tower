@@ -39,5 +39,5 @@ func on_before_get_loot(ctx: LootContext) -> void:
 func on_before_relic_reward(ctx: RelicsRewardsContext) -> void:
 	pass
 
-func on_before_die(status: Status) -> void:
+func on_before_die(status) -> void:
 	pass
