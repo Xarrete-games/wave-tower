@@ -8,4 +8,3 @@ func _ready() -> void:
 	RunContext.reset_run()
 	await get_tree().process_frame
 	get_tree().change_scene_to_packed(PROCEDURAL_TEST)
-

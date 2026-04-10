@@ -9,7 +9,7 @@ func get_options() -> Array[EventOptionData]:
 func handle_response(data: Variant) -> void:
 	match data as int:
 		0:
-			var buda: Relic
+			var buda
 			if randf() < 0.5:
 				buda = DataLoader.get_relic_by_id("buda").create_item()
 			else:
