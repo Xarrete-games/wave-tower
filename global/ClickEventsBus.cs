@@ -3,6 +3,12 @@ using Godot;
 
 public static class ClickEventsBus
 {
+    public static event Action NextWavePressed;
+    public static event Action NextLevelPressed;
+    public static event Action ConfigButtonPressed;
+    public static event Action SpeedButtonPressed;
+    public static event Action ResetGameButtonPressed;
+
     public static event Action<Variant, int> TowerBuildButtonPressed;
     public static event Action<Variant> TowerSelected;
     public static event Action<Variant> TowerRemovePressed;
@@ -12,6 +18,31 @@ public static class ClickEventsBus
 
     public static bool HasTowerBuildButtonPressedListeners => TowerBuildButtonPressed != null;
     public static bool HasTowerUpgradePressedListeners => TowerUpgradePressed != null;
+
+    public static void EmitNextWavePressed()
+    {
+        NextWavePressed?.Invoke();
+    }
+
+    public static void EmitNextLevelPressed()
+    {
+        NextLevelPressed?.Invoke();
+    }
+
+    public static void EmitConfigButtonPressed()
+    {
+        ConfigButtonPressed?.Invoke();
+    }
+
+    public static void EmitSpeedButtonPressed()
+    {
+        SpeedButtonPressed?.Invoke();
+    }
+
+    public static void EmitResetGameButtonPressed()
+    {
+        ResetGameButtonPressed?.Invoke();
+    }
 
     public static void EmitTowerBuildButtonPressed(Variant towerConfiguration, int price)
     {

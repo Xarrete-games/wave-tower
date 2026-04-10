@@ -96,7 +96,7 @@ public partial class TowerPlacer : Node2D
         {
             this._currentTowerInstance.Call("copy_tower_data", this._towerToUpgrade);
             runContext.towers_manager.Call("tower_removed", this._towerToUpgrade);
-            ClickEvents.Instance?.emit_tower_selected(this._currentTowerInstance);
+            ClickEventsBus.EmitTowerSelected(this._currentTowerInstance);
         }
 
         this._currentTowerInstance = null;

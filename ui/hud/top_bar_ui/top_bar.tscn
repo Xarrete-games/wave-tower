@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bhdmj77ytfxwb"]
 
-[ext_resource type="Script" uid="uid://cg40tjdw5e2lu" path="res://ui/hud/top_bar_ui/top_bar.gd" id="1_b2kx5"]
+[ext_resource type="Script" path="res://ui/hud/top_bar_ui/TopBar.cs" id="1_b2kx5"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="1_tksin"]
 [ext_resource type="PackedScene" uid="uid://bvafh0bf674y7" path="res://ui/hud/top_bar_ui/relics/bar_relics_ui.tscn" id="2_fdcnu"]
 [ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/hud/top_bar_ui/health_counter/health_counter.tscn" id="3_5yg88"]

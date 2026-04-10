@@ -49,7 +49,7 @@ public partial class TowerSelector : Node
         }
 
         this._currentTowerSelected = null;
-        ClickEvents.Instance?.emit_tower_selected(default);
+        ClickEventsBus.EmitTowerSelected(default);
     }
 
     private void OnTowerSelected(Variant tower)
@@ -87,7 +87,7 @@ public partial class TowerSelector : Node
     {
         if (this._currentTowerSelected == tower.AsGodotObject())
         {
-            ClickEvents.Instance?.emit_tower_selected(tower);
+            ClickEventsBus.EmitTowerSelected(tower);
         }
     }
 }

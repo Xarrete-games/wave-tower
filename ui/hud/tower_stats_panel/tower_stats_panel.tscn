@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c3qi4qp0ko3iq"]
 
-[ext_resource type="Script" uid="uid://mlvqjhawbttl" path="res://ui/hud/tower_stats_panel/tower_stats_panel.gd" id="1_vyalh"]
+[ext_resource type="Script" path="res://ui/hud/tower_stats_panel/TowerStatsPanel.cs" id="1_vyalh"]
 [ext_resource type="StyleBox" uid="uid://5r63ppjcfdsy" path="res://ui/styles/box_style/texture_container.tres" id="2_iqbtr"]
 [ext_resource type="PackedScene" uid="uid://damv0wm6yljhs" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.tscn" id="2_jlxp2"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_g3isl"]

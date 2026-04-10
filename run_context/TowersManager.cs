@@ -38,8 +38,9 @@ public partial class TowersManager : RefCounted
 
     public TowersManager()
     {
+        ClickEventsBus.TowerRemovePressed += this.tower_removed;
+
         Node clickEvents = this.GetSingleton("ClickEvents");
-        clickEvents?.Connect("tower_remove_pressed", Callable.From<Variant>(this.tower_removed));
         clickEvents?.Connect("add_tower_card", Callable.From<Variant>(this._on_tower_card_added));
 
         Node dataLoader = this.GetSingleton("DataLoader");

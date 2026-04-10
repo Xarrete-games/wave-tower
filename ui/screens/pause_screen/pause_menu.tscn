@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1rsi54eynysa"]
 
-[ext_resource type="Script" uid="uid://b2qbndgwbh6n5" path="res://ui/screens/pause_screen/pause_menu.gd" id="1_bgnto"]
+[ext_resource type="Script" path="res://ui/screens/pause_screen/PauseMenu.cs" id="1_bgnto"]
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="2_5l847"]
 [ext_resource type="PackedScene" uid="uid://dj1vromg52jei" path="res://ui/screens/pause_screen/volume_control/volume.tscn" id="2_s7qyn"]
 [ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="2_s48xr"]

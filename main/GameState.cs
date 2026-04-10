@@ -39,8 +39,12 @@ public partial class GameState : Node
 
     public override void _Ready()
     {
-        Node clickEvents = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<Node>("/root/ClickEvents");
-        clickEvents?.Connect("speed_button_pressed", Callable.From(this._button_speed_pressed));
+        ClickEventsBus.SpeedButtonPressed += this._button_speed_pressed;
+    }
+
+    public override void _ExitTree()
+    {
+        ClickEventsBus.SpeedButtonPressed -= this._button_speed_pressed;
     }
 
     public bool is_on_main_menu()
