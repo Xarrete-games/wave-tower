@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://deyqjxbpqlfc4"]
 
-[ext_resource type="Script" uid="uid://ds783qqi72xq1" path="res://ui/hud/top_bar_ui/level_progress_ui/level_progress_ui.gd" id="1_ga602"]
+[ext_resource type="Script" path="res://ui/hud/top_bar_ui/level_progress_ui/LevelProgressUI.cs" id="1_ga602"]
 [ext_resource type="PackedScene" uid="uid://dddlo6uv4ct15" path="res://ui/hud/top_bar_ui/level_progress_ui/level_progress_slot_ui/level_progress_slot.tscn" id="1_i6lgd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iei1m"]
@@ -64,5 +64,5 @@ layout_mode = 2
 [node name="LevelProgressSlot10" parent="MarginContainer/SlotsContainer" unique_id=857360567 instance=ExtResource("1_i6lgd")]
 layout_mode = 2
 
-[connection signal="mouse_entered" from="MarginContainer/SlotsContainer" to="MarginContainer/SlotsContainer" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="MarginContainer/SlotsContainer" to="MarginContainer/SlotsContainer" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/SlotsContainer" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/SlotsContainer" to="." method="_on_mouse_exited"]

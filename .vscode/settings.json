@@ -9,6 +9,7 @@
     "chat.tools.terminal.autoApprove": {
         "Test-Path": true,
         "git rm": true,
-        "ForEach-Object": true
+        "ForEach-Object": true,
+        "dotnet build": true
     }
 }

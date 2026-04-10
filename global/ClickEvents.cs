@@ -88,7 +88,6 @@ public partial class ClickEvents : Node
 
     public void emit_tower_build_button_pressed(Variant tower_configuration, int price)
     {
-        GD.Print($"[ClickEvents] emit_tower_build_button_pressed price={price} hasListeners={ClickEventsBus.HasTowerBuildButtonPressedListeners}");
         ClickEventsBus.EmitTowerBuildButtonPressed(tower_configuration, price);
     }
 
@@ -134,7 +133,6 @@ public partial class ClickEvents : Node
 
     public void emit_tower_upgrade_pressed(Variant tower, Variant tower_to_upgrade, int price)
     {
-        GD.Print($"[ClickEvents] emit_tower_upgrade_pressed price={price} hasListeners={ClickEventsBus.HasTowerUpgradePressedListeners}");
         ClickEventsBus.EmitTowerUpgradePressed(tower, tower_to_upgrade, price);
     }
 

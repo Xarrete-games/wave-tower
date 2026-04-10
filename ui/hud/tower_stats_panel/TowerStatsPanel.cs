@@ -154,6 +154,7 @@ public partial class TowerStatsPanel : Control
     {
         if (this._currentTower == null)
         {
+            GD.PushWarning("[TowerStatsPanel] Upgrade pressed with no selected tower");
             return;
         }
 
@@ -164,6 +165,7 @@ public partial class TowerStatsPanel : Control
         int gold = (int)runContext.economy.Get("gold");
         if (gold < price)
         {
+            GD.Print("[TowerStatsPanel] Not enough gold for upgrade");
             return;
         }
 
@@ -175,6 +177,7 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
+        this._currentTower.Call("upgrade");
         ClickEventsBus.EmitTowerUpgradePressed(this._currentTower, towerConfiguration, price);
     }
 

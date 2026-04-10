@@ -49,7 +49,8 @@ public partial class TowerSelector : Node
         }
 
         this._currentTowerSelected = null;
-        ClickEventsBus.EmitTowerSelected(default);
+        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        runContext.towers_manager.Call("select_tower", default(Variant));
     }
 
     private void OnTowerSelected(Variant tower)
@@ -87,7 +88,8 @@ public partial class TowerSelector : Node
     {
         if (this._currentTowerSelected == tower.AsGodotObject())
         {
-            ClickEventsBus.EmitTowerSelected(tower);
+            RunContext runContext = GetNode<RunContext>("/root/RunContext");
+            runContext.towers_manager.Call("select_tower", tower);
         }
     }
 }

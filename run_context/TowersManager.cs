@@ -19,6 +19,9 @@ public partial class TowersManager : RefCounted
     public delegate void tower_unhoveredEventHandler(Variant tower);
 
     [Signal]
+    public delegate void tower_selectedEventHandler(Variant tower);
+
+    [Signal]
     public delegate void tower_removedEventHandler(Variant tower);
 
     private static readonly Script _hooksScript = GD.Load<Script>("res://core/hooks.gd");
@@ -221,6 +224,12 @@ public partial class TowersManager : RefCounted
         this._update_tower_count(0);
         this._update_tower_count(1);
         this._update_tower_count(2);
+    }
+
+    public void select_tower(Variant tower)
+    {
+        this.EmitSignal(SignalName.tower_selected, tower);
+        ClickEventsBus.EmitTowerSelected(tower);
     }
 
     public void _on_tower_card_added(Variant tower_data)
