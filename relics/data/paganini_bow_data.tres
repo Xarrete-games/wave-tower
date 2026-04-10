@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://c5cmvdga24n4i"]
 
-[ext_resource type="Script" uid="uid://ddxyoyr7wrgbp" path="res://relics/implementations/paganini_bow.gd" id="1_3ru7g"]
+[ext_resource type="Script" path="res://relics/implementations/PaganiniBowRelic.cs" id="1_3ru7g"]
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_ly321"]
 [ext_resource type="Texture2D" uid="uid://ddc3y4ouv4tm6" path="res://assets/sprites/relics/paganinis_bow.png" id="3_8rgck"]
 

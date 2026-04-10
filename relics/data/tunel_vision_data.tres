@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://c4sjjvplxy0eg"]
 
-[ext_resource type="Script" uid="uid://bhhmkvjj6645y" path="res://relics/implementations/tunel_vision.gd" id="1_6hj3t"]
+[ext_resource type="Script" path="res://relics/implementations/TunelVisionRelic.cs" id="1_6hj3t"]
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_wvpyy"]
 [ext_resource type="Texture2D" uid="uid://v84jlhrs1gjq" path="res://assets/sprites/relics/eye.png" id="2_7utw2"]
 

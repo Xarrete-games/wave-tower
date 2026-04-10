@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://ciqr6oegut2n"]
 
-[ext_resource type="Script" uid="uid://it32x66kd23r" path="res://relics/implementations/perseus's_fury.gd" id="1_ic5cl"]
+[ext_resource type="Script" path="res://relics/implementations/PerseusFuryRelic.cs" id="1_ic5cl"]
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_v54sv"]
 [ext_resource type="Texture2D" uid="uid://vgwnobvkolg2" path="res://assets/sprites/relics/perseo's_fury_relic.png" id="3_5vyg6"]
 

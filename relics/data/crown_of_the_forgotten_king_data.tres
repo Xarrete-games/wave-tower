@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://5mjk2fdr8sup"]
 
-[ext_resource type="Script" uid="uid://bo142hokka5su" path="res://relics/implementations/crown_of_the_forgotten_king.gd" id="1_0she3"]
+[ext_resource type="Script" path="res://relics/implementations/CrownOfTheForgottenKingRelic.cs" id="1_0she3"]
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_38oex"]
 [ext_resource type="Texture2D" uid="uid://rkoi3ur2grjg" path="res://assets/sprites/relics/crown_of_the_cursed_king_relic.png" id="3_anmtv"]
 

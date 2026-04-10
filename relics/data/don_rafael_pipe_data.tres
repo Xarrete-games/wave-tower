@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://cmx7smhkswqol"]
 
-[ext_resource type="Script" uid="uid://bwx81yc66pme" path="res://relics/implementations/don_rafael_pipe.gd" id="1_wl5qm"]
+[ext_resource type="Script" path="res://relics/implementations/DonRafaelPipeRelic.cs" id="1_wl5qm"]
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="2_wmmnl"]
 [ext_resource type="Texture2D" uid="uid://boe6t6oolbxcm" path="res://assets/sprites/relics/pipe_relic.png" id="3_wmmnl"]
 

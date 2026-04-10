@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://dtipnxf2o47k"]
 
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_4y5rc"]
-[ext_resource type="Script" uid="uid://fct4ptynh44d" path="res://relics/implementations/ignition_voltage.gd" id="1_qkdx3"]
+[ext_resource type="Script" path="res://relics/implementations/IgnitionVoltageRelic.cs" id="1_qkdx3"]
 [ext_resource type="Texture2D" uid="uid://rbr4l120kg8j" path="res://assets/sprites/relics/light.png" id="3_muhnu"]
 
 [resource]
