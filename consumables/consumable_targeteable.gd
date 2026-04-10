@@ -5,6 +5,9 @@ enum TargetType { BLOCKED_TILE, TOWER }
 
 var target: Variant
 
+func requires_target() -> bool:
+	return true
+
 func use(p_target: Variant) -> void:
 	target = p_target
 	action(target)

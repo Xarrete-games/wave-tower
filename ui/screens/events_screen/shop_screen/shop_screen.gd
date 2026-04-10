@@ -24,14 +24,14 @@ func _ready() -> void:
 		sell_button.visible = false
 	_build_relics_for_sale()
 
-func set_relics(relics: Array[ItemOffer]) -> void:
+func set_relics(relics: Array) -> void:
 	for relic in relics:
 		var slot: ShopSlot = SHOP_SLOT.instantiate()
 		relics_container.add_child(slot)
 		slot.set_item(relic)
 		slot.item_purchased.connect(_on_item_purchase)
 
-func set_consumables(consumables: Array[ItemOffer]) -> void:
+func set_consumables(consumables: Array) -> void:
 	for consumable in consumables:
 		var slot: ShopSlot = SHOP_SLOT.instantiate()
 		consumables_container.add_child(slot)
@@ -92,7 +92,7 @@ func _build_relics_for_sale() -> void:
 	var current_relics_data: Array = []
 	for relic_data in current_relics:
 		current_relics_data.append(relic_data.data)
-	var relic_offers: Array[ItemOffer] = RunContext.offers_manager.create_relic_offers_from_data(current_relics_data)
+	var relic_offers: Array = RunContext.offers_manager.create_relic_offers_from_data(current_relics_data)
 	
 	for relic_offer in relic_offers:
 		var slot: ShopSlot = SHOP_SLOT.instantiate()

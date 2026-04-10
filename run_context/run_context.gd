@@ -9,7 +9,7 @@ var is_on_restarting: bool = false
 var composite_tile_map: CompositeTileMap
 
 # subsystems
-var offers_manager: OffersManager
+var offers_manager
 var progress
 var economy
 var status
@@ -28,7 +28,8 @@ func reset_run() -> void:
 	relics_manager = RelicsManager.new()
 	status = Status.new()
 	status.setup(progress, relics_manager)
-	towers_manager = TowersManager.new(progress)
+	towers_manager = TowersManager.new()
+	towers_manager.setup(progress)
 	consumables_manager = ConsumablesManager.new()
 	enemy_manager = EnemyManager.new()
 	is_on_restarting = false

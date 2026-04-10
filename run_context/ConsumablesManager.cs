@@ -65,7 +65,8 @@ public partial class ConsumablesManager : RefCounted
             return;
         }
 
-        if (consumableObj.IsClass("ConsumableUsable"))
+        bool requiresTarget = consumableObj.HasMethod("requires_target") && (bool)consumableObj.Call("requires_target");
+        if (!requiresTarget)
         {
             consumableObj.Call("use");
             _hooksScript.Call("on_consumable_used", consumable);
