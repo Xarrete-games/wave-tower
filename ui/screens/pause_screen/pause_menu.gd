@@ -1,6 +1,7 @@
 class_name PauseMenu extends Control
 
 signal resume_game()
+const GAME_STATE_ON_MAIN_MENU := 0
 
 var MAIN_MENU = load("uid://4i6kl0xurgeg")
 
@@ -33,12 +34,12 @@ func _on_resume_button_xarreta_pressed() -> void:
 func _on_restart_button_xarreta_pressed() -> void:
 	get_tree().paused = false
 	queue_free()
-	ClickEvents.reset_game_button_pressed.emit()
+	ClickEvents.emit_signal("reset_game_button_pressed")
 
 func _on_exit_button_xarreta_pressed() -> void:
 	get_tree().paused = false
 	queue_free()
-	GameState.state = GameState.STATE.ON_MAIN_MENU
+	GameState.state = GAME_STATE_ON_MAIN_MENU
 	get_tree().change_scene_to_packed(MAIN_MENU)
 
 

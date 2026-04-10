@@ -40,6 +40,6 @@ func _on_ok_pressed() -> void:
 	if not selected_item:
 		return
 
-	ClickEvents.add_tower_card.emit(selected_item.tower_data)
+	ClickEvents.emit_signal("add_tower_card", selected_item.tower_data)
 	done.emit()
 	queue_free()

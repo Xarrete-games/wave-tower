@@ -2,6 +2,7 @@ class_name Game extends Node2D
 
 const LEVELS_PATH = "res://levels/levels/"
 const BOOT = preload("uid://bfm0i7ehshgsf")
+const GAME_STATE_IN_GAME := 1
 
 @export var levels_paths: Array[String]
 @export var pause : PackedScene
@@ -17,10 +18,10 @@ var _pause_instance: Control
 @onready var config_layer: CanvasLayer = $ConfigLayer
 
 func _ready():
-	ClickEvents.config_button_pressed.connect(_open_config_menu)
-	ClickEvents.reset_game_button_pressed.connect(reset_game)
+	ClickEvents.connect("config_button_pressed", _open_config_menu)
+	ClickEvents.connect("reset_game_button_pressed", reset_game)
 	RunContext.progress.total_levels = levels_paths.size()
-	GameState.state = GameState.STATE.IN_GAME
+	GameState.state = GAME_STATE_IN_GAME
 	music_handler.play_music()
 	if trigger_finish_wave:
 		RunContext.progress.current_wave_finished.emit()

@@ -1,5 +1,7 @@
 class_name TowerStatsPanel extends Control
 
+const ACTION_TOWER_SELECTED := 3
+
 
 const TOWER_BUTTON = preload("uid://o248nju46k2n")
 
@@ -29,12 +31,12 @@ func _ready() -> void:
 	visible = false
 	tower_hint_panel.visible = false
 	_hide_upgrade_options()
-	ClickEvents.tower_selected.connect(_on_tower_selected)
+	ClickEvents.connect("tower_selected", _on_tower_selected)
 
 func _on_tower_selected(tower: Tower) -> void:
 	if tower == null:
 		current_tower = null
-		if ActionManager.CurrentAction == ActionManager.ActionState.TowerSelected:
+		if ActionManager.CurrentAction == ACTION_TOWER_SELECTED:
 			ActionManager.EndAction()
 		return
 	
@@ -42,7 +44,7 @@ func _on_tower_selected(tower: Tower) -> void:
 	Hooks.on_get_targeting_modes(tageting_modes)
 	_update_targeting_modes(tageting_modes)
 	targeting_mode_selector.select(tower.targeting_mode)
-	ActionManager.StartAction(ActionManager.ActionState.TowerSelected, func(): visible = false)
+	ActionManager.StartAction(ACTION_TOWER_SELECTED, func(): visible = false)
 	visible = true
 
 	var stats = tower.stats
@@ -85,20 +87,31 @@ func _on_targeting_mode_selector_item_selected(index: Tower.TargetingMode) -> vo
 	current_tower.targeting_mode = index
 
 func _on_remove_button_pressed() -> void:
-	ClickEvents.tower_remove_pressed.emit(current_tower)
+	ClickEvents.emit_tower_remove_pressed(current_tower)
 
 func _on_upgrade_button_pressed() -> void:
-	if RunContext.economy.gold < current_tower.data.upgrade_price:
+	if current_tower == null:
+		push_warning("[TowerStatsPanel] Upgrade pressed with no selected tower")
 		return
 
-	current_tower.upgrade()
+	if RunContext.economy.gold < current_tower.data.upgrade_price:
+		print("[TowerStatsPanel] Not enough gold for upgrade")
+		return
+
+	var tower_configuration = RunContext.towers_manager.get_tower_configuration_by_id(current_tower.data.id)
+	if tower_configuration == null:
+		push_error("[TowerStatsPanel] Missing tower configuration for id: " + str(current_tower.data.id))
+		return
+
+	print("[TowerStatsPanel] Emitting upgrade event for tower id: " + str(current_tower.data.id))
+	ClickEvents.emit_tower_upgrade_pressed(current_tower, tower_configuration, current_tower.data.upgrade_price)
 
 func _hide_upgrade_options() -> void:
 	upgrade_button_container.visible = false
 
 
 func _on_tower_button_pressed(tower_data, price: int) -> void:
-	ClickEvents.tower_upgrade_pressed.emit(current_tower, tower_data, price)
+	ClickEvents.emit_tower_upgrade_pressed(current_tower, tower_data, price)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	button_in_hover = tower_button

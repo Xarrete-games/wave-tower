@@ -6,5 +6,5 @@ func _ready() -> void:
 
 func _on_try_again_button_xarreta_pressed() -> void:
 	get_tree().paused = false
-	ClickEvents.reset_game_button_pressed.emit()
+	ClickEvents.emit_signal("reset_game_button_pressed")
 	queue_free()

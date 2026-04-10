@@ -2,12 +2,13 @@ class_name MainMenu extends Control
 
 const BOOT = preload("uid://bfm0i7ehshgsf")
 const CREDITS = preload("uid://bayb10jsajj4a")
+const GAME_STATE_ON_MAIN_MENU := 0
 
 @export var direct_init: bool = true
 
 func _ready() -> void:
 	AudioManager.play_main_piano()
-	GameState.state = GameState.STATE.ON_MAIN_MENU
+	GameState.state = GAME_STATE_ON_MAIN_MENU
 	if direct_init:
 		_on_new_run_button_xarreta_pressed()
 

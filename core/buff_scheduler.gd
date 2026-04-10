@@ -15,7 +15,7 @@ func schedule(buff: TowerBuff) -> void:
 		_schedule_in_waves(buff)
 
 func _schedule_in_seconds(buff: TowerBuff) -> void:
-	await GameState.delay(buff.duration.seconds_duration)
+	await Engine.get_main_loop().create_timer(buff.duration.seconds_duration, false).timeout
 	_remove_buff(buff)
 
 func _schedule_in_waves(buff: TowerBuff) -> void:

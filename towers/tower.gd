@@ -130,7 +130,7 @@ func enable() -> void:
 
 	await get_tree().create_timer(0.1, false).timeout
 	
-	ClickEvents.tower_selected.connect(_on_tower_selected)
+	ClickEvents.connect("tower_selected", _on_tower_selected)
 	mouse_detector.gui_input.connect(_on_gui_input)
 	mouse_detector.mouse_entered.connect(_on_mouse_entered)
 	mouse_detector.mouse_exited.connect(_on_mouse_exit)
@@ -248,14 +248,14 @@ func _on_gui_input(event: InputEvent) -> void:
 	if not _enabled:
 		return
 	if UIUtils.is_left_click_event(event):
-		ClickEvents.tower_selected.emit(self)
+		ClickEvents.emit_tower_selected(self)
 
 func _on_mouse_entered():
-	ClickEvents.tower_hovered.emit(self)
+	ClickEvents.emit_tower_hovered(self)
 	_show_range()
 
 func _on_mouse_exit():
-	ClickEvents.tower_unhovered.emit(self)
+	ClickEvents.emit_tower_unhovered(self)
 	if current_tower_selected != self:
 		_hide_range()
 # --------------------

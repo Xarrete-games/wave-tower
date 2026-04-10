@@ -1,0 +1,45 @@
+using System;
+using Godot;
+
+public static class ClickEventsBus
+{
+    public static event Action<Variant, int> TowerBuildButtonPressed;
+    public static event Action<Variant> TowerSelected;
+    public static event Action<Variant> TowerRemovePressed;
+    public static event Action<Variant, Variant, int> TowerUpgradePressed;
+    public static event Action<Variant> TowerHovered;
+    public static event Action<Variant> TowerUnhovered;
+
+    public static bool HasTowerBuildButtonPressedListeners => TowerBuildButtonPressed != null;
+    public static bool HasTowerUpgradePressedListeners => TowerUpgradePressed != null;
+
+    public static void EmitTowerBuildButtonPressed(Variant towerConfiguration, int price)
+    {
+        TowerBuildButtonPressed?.Invoke(towerConfiguration, price);
+    }
+
+    public static void EmitTowerSelected(Variant tower)
+    {
+        TowerSelected?.Invoke(tower);
+    }
+
+    public static void EmitTowerRemovePressed(Variant tower)
+    {
+        TowerRemovePressed?.Invoke(tower);
+    }
+
+    public static void EmitTowerUpgradePressed(Variant tower, Variant towerToUpgrade, int price)
+    {
+        TowerUpgradePressed?.Invoke(tower, towerToUpgrade, price);
+    }
+
+    public static void EmitTowerHovered(Variant tower)
+    {
+        TowerHovered?.Invoke(tower);
+    }
+
+    public static void EmitTowerUnhovered(Variant tower)
+    {
+        TowerUnhovered?.Invoke(tower);
+    }
+}

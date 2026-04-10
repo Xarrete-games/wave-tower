@@ -60,7 +60,7 @@ func _ready() -> void:
 		wave_spawner.wave_finished.connect(_on_wave_finished)
 		wave_spawner.enemy_spawned.connect(_on_enemy_spawned)
 
-	ClickEvents.next_wave_pressed.connect(start_next_wave)
+	ClickEvents.connect("next_wave_pressed", start_next_wave)
 
 # ---------------------------------------------------------
 # PUBLIC API

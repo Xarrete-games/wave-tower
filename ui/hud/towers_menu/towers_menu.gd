@@ -43,7 +43,8 @@ func _on_tower_card_added(tower_data, amount: int) -> void:
 			buttons[tower_data.data.id].amount = amount
 	 
 func _on_tower_button_pressed(tower_data, price: int) -> void:
-	ClickEvents.tower_build_button_pressed.emit(tower_data, price)
+	print("[TowersMenu] forwarding build event price=", price)
+	ClickEvents.emit_tower_build_button_pressed(tower_data, price)
 
 func _on_tower_button_hover(tower_button: TowerButton) -> void:
 	button_in_hover = tower_button

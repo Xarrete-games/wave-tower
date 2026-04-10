@@ -1,6 +1,6 @@
 using Godot;
 
-public static class ActionManager
+public partial class ActionManager : Node
 {
     public enum ActionState
     {
@@ -10,34 +10,35 @@ public static class ActionManager
         TowerSelected,
     }
 
-    private static ActionState _currentAction = ActionState.None;
-    private static Callable _onActionCancel = default;
+    public ActionState CurrentAction = ActionState.None;
+    private Callable _onActionCancel = default;
 
-    public static ActionState CurrentAction => _currentAction;
-
-    public static void StartAction(ActionState state, Callable cancelCallback = default)
+    public void StartAction(ActionState state, Callable cancel_callback = default)
     {
-        if (_currentAction != ActionState.None)
+        if (this.CurrentAction != ActionState.None)
         {
-            EndAction();
+            this.EndAction();
         }
 
-        _currentAction = state;
-        _onActionCancel = cancelCallback;
+        this.CurrentAction = state;
+        this._onActionCancel = cancel_callback;
     }
 
-    public static void EndAction()
+    public void EndAction()
     {
-        Callable callback = _onActionCancel;
-        _onActionCancel = default;
+        Callable callback = this._onActionCancel;
+        this._onActionCancel = default;
 
-        callback.Call();
+        if (!callback.Equals(default(Callable)))
+        {
+            callback.Call();
+        }
 
-        _currentAction = ActionState.None;
+        this.CurrentAction = ActionState.None;
     }
 
-    public static bool IsActionActive()
+    public bool IsActionActive()
     {
-        return _currentAction != ActionState.None;
+        return this.CurrentAction != ActionState.None;
     }
 }

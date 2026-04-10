@@ -96,5 +96,7 @@ func _current_wave_finished() -> void:
 func _on_tower_button_pressed() -> void:
 	AudioManager.play_button_click()
 	if RunContext.economy.gold < price:
+		print("[TowerButton] blocked by gold price=", price, " gold=", RunContext.economy.gold)
 		return
+	print("[TowerButton] pressed emits tower_button_pressed price=", price)
 	tower_button_pressed.emit(tower_data, price)

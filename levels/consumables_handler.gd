@@ -5,6 +5,8 @@ const CENTER_CURSOR_OFFSET: Vector2 = Vector2(24, 24)
 const DEFAULT_CURSOR: Texture2D = preload("res://assets/images/icons/mouse_02.png")
 const TARGET_BLOCKED_TILE := 0
 const TARGET_TOWER := 1
+const ACTION_USING_ITEM := 2
+const GAME_STATE_IN_GAME := 1
 
 var _current_consumable = null
 var _is_valid_target: bool = false
@@ -15,8 +17,8 @@ var _current_target: Variant
 func _ready() -> void:
 	RunContext.consumables_manager.consumable_clicked.connect(_on_consumable_clicked)
 	GameState.state_change.connect(_on_game_state_changed)
-	ClickEvents.tower_hovered.connect(_on_tower_hovered)
-	ClickEvents.tower_unhovered.connect(_on_tower_unhovered)
+	ClickEvents.connect("tower_hovered", _on_tower_hovered)
+	ClickEvents.connect("tower_unhovered", _on_tower_unhovered)
 
 func _process(_delta: float) -> void:
 	if not _current_consumable:
@@ -83,8 +85,8 @@ func _on_consumable_clicked(consumable) -> void:
 	_current_consumable = consumable
 	Input.set_custom_mouse_cursor(_current_consumable.data.cursor_icon, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
 	
-	ActionManager.StartAction(ActionManager.ActionState.UsingItem, _cancel_consumable)
+	ActionManager.StartAction(ACTION_USING_ITEM, _cancel_consumable)
 
-func _on_game_state_changed(new_state: GameState.STATE) -> void:
-	if new_state != GameState.STATE.IN_GAME and _current_consumable:
+func _on_game_state_changed(new_state: int) -> void:
+	if new_state != GAME_STATE_IN_GAME and _current_consumable:
 		ActionManager.EndAction()

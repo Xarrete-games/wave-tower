@@ -29,13 +29,13 @@ buses/default_bus_layout="uid://b7hgmpfhi17rw"
 [autoload]
 
 AudioManager="*res://main/audio_manager/audio_manager.tscn"
-GameState="*res://main/game_state.gd"
+GameState="*res://main/GameState.cs"
 DataLoader="*res://global/data_loader.gd"
 RunContext="*res://run_context/RunContext.cs"
-ClickEvents="*res://global/click_events.gd"
+ClickEvents="*res://global/ClickEvents.cs"
 UIUtils="*res://utils/ui_utils.gd"
 HintManager="*res://utils/hint_manager.gd"
-ActionManager="*res://global/action_manager.gd"
+ActionManager="*res://global/ActionManager.cs"
 
 [debug]
 
