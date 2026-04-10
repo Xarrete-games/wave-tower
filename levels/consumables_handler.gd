@@ -3,8 +3,10 @@ class_name ConsumablesHandler extends Node
 # for 48x48 cursor icons
 const CENTER_CURSOR_OFFSET: Vector2 = Vector2(24, 24)
 const DEFAULT_CURSOR: Texture2D = preload("res://assets/images/icons/mouse_02.png")
+const TARGET_BLOCKED_TILE := 0
+const TARGET_TOWER := 1
 
-var _current_consumable: ConsumableTargeteable = null
+var _current_consumable = null
 var _is_valid_target: bool = false
 var _current_target: Variant
 
@@ -20,7 +22,7 @@ func _process(_delta: float) -> void:
 	if not _current_consumable:
 		return
 	
-	if _current_consumable.data.targeting_type == ConsumableTargeteable.TargetType.BLOCKED_TILE:
+	if _current_consumable.data.targeting_type == TARGET_BLOCKED_TILE:
 		_handle_blocked_tile_placement()
 		
 func _input(event: InputEvent) -> void:
@@ -44,7 +46,7 @@ func _invalidate_target() -> void:
 	_current_target = null
 
 func _on_tower_hovered(tower: Tower) -> void:
-	if not _current_consumable or _current_consumable.data.targeting_type != ConsumableTargeteable.TargetType.TOWER:
+	if not _current_consumable or _current_consumable.data.targeting_type != TARGET_TOWER:
 		return
 	
 	Input.set_custom_mouse_cursor(_current_consumable.data.cursor_icon_used, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
@@ -52,7 +54,7 @@ func _on_tower_hovered(tower: Tower) -> void:
 	_current_target = tower
 
 func _on_tower_unhovered(tower: Tower) -> void:
-	if not _current_consumable or _current_consumable.data.targeting_type != ConsumableTargeteable.TargetType.TOWER:
+	if not _current_consumable or _current_consumable.data.targeting_type != TARGET_TOWER:
 		return
 	
 	if tower == _current_target:
@@ -73,7 +75,12 @@ func _cancel_consumable() -> void:
 	_current_consumable = null
 	Input.set_custom_mouse_cursor(DEFAULT_CURSOR)
 
-func _on_consumable_clicked(consumable: Consumable) -> void:
+func _on_consumable_clicked(consumable) -> void:
+	if consumable == null:
+		return
+	if not consumable.has_method("requires_target") or not consumable.requires_target():
+		return
+
 	_current_consumable = consumable
 	Input.set_custom_mouse_cursor(_current_consumable.data.cursor_icon, Input.CURSOR_ARROW, CENTER_CURSOR_OFFSET)
 	

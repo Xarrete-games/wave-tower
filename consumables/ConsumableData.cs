@@ -30,6 +30,20 @@ public partial class ConsumableData : BaseData
             return gdscript.Call("new", this);
         }
 
+        if (this.runtime_script is CSharpScript csharpScript)
+        {
+            Variant created = csharpScript.New();
+            if (created.VariantType == Variant.Type.Nil)
+            {
+                GD.PushError($"[ConsumableData] Could not instantiate runtime_script for '{this.id}'");
+                return default;
+            }
+
+            GodotObject obj = created.AsGodotObject();
+            obj?.Set("data", this);
+            return created;
+        }
+
         GD.PushError($"[ConsumableData] Missing or invalid runtime_script for '{this.id}'");
         return default;
     }

@@ -142,7 +142,7 @@ func get_all_consumables() -> Array:
 	_append_deep_copies(consumables, result)
 	return result
 
-func get_all_consumables_of_type(consumable_type: Consumable.Type) -> Array:
+func get_all_consumables_of_type(consumable_type: int) -> Array:
 	var filtered: Array = consumables.filter(func(data):
 		return data.consumable_type == consumable_type
 	)

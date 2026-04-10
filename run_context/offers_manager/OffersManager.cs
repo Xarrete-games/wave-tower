@@ -74,8 +74,8 @@ public partial class OffersManager : RefCounted
         GodotObject itemData = itemOffer.Get("item_data").AsGodotObject();
         Variant item = itemData.Call("create_item");
 
-        GodotObject itemObj = item.AsGodotObject();
-        if (itemObj != null && itemObj.IsClass("Consumable"))
+        bool isConsumable = this.HasProperty(itemData, "consumable_type");
+        if (isConsumable)
         {
             consumablesManager.Call("add_consumable", item);
         }
@@ -90,5 +90,25 @@ public partial class OffersManager : RefCounted
     private GodotObject GetRunContext()
     {
         return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<Node>("/root/RunContext");
+    }
+
+    private bool HasProperty(GodotObject obj, string propertyName)
+    {
+        if (obj == null || string.IsNullOrEmpty(propertyName))
+        {
+            return false;
+        }
+
+        Godot.Collections.Array<Godot.Collections.Dictionary> propertyList = obj.GetPropertyList();
+        for (int index = 0; index < propertyList.Count; index++)
+        {
+            string name = propertyList[index].ContainsKey("name") ? propertyList[index]["name"].AsString() : string.Empty;
+            if (name == propertyName)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

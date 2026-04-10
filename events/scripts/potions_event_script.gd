@@ -1,9 +1,11 @@
 class_name PotionsEventScript extends EventScript
 
+const CONSUMABLE_TYPE_POTION := 1
+
 
 func get_options() -> Array[EventOptionData]:
 	var options: Array[EventOptionData] = []
-	var consumables: Array = DataLoader.get_all_consumables_of_type(Consumable.Type.POTION)
+	var consumables: Array = DataLoader.get_all_consumables_of_type(CONSUMABLE_TYPE_POTION)
 	
 	consumables.shuffle()
 
@@ -16,4 +18,4 @@ func get_options() -> Array[EventOptionData]:
 	return options
 
 func handle_response(data: Variant) -> void:
-	RunContext.consumables_manager.add_consumable(data as Consumable)
+	RunContext.consumables_manager.add_consumable(data)

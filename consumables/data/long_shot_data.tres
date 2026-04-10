@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bmx20l33acc4i" path="res://assets/sprites/consumables/poti_48.png" id="1_2q3p8"]
 [ext_resource type="Script" uid="uid://c4vv5l1m0epby" path="res://consumables/ConsumableData.cs" id="1_o6u08"]
 [ext_resource type="Texture2D" uid="uid://bncdbwrhna3or" path="res://assets/sprites/consumables/poti_use_48.png" id="2_531ys"]
-[ext_resource type="Script" uid="uid://cdjk3e0v8lr03" path="res://consumables/implementation/long_shot.gd" id="3_531ys"]
+[ext_resource type="Script" path="res://consumables/implementation/LongShot.cs" id="3_531ys"]
 [ext_resource type="Texture2D" uid="uid://bkg3dg5ldktv0" path="res://assets/sprites/consumables/poti.png" id="4_ql0pa"]
 
 [resource]

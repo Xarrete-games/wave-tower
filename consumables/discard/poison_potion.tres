@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ConsumableItemData" format=3 uid="uid://dh113lao15bac"]
 
-[ext_resource type="Script" uid="uid://8vi12c2nftkt" path="res://consumables/implementation/poison_potion.gd" id="1_htjlu"]
+[ext_resource type="Script" path="res://consumables/implementation/PoisonPotion.cs" id="1_htjlu"]
 [ext_resource type="Script" uid="uid://c4vv5l1m0epby" path="res://consumables/ConsumableData.cs" id="1_thdiu"]
 [ext_resource type="Texture2D" uid="uid://bsq8n0trc4cop" path="res://assets/sprites/consumables/purple_potion_relic.png" id="2_sgqh5"]
 
