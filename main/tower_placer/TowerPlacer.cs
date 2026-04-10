@@ -95,7 +95,8 @@ public partial class TowerPlacer : Node2D
         if (this._isUpgradePlacement && this._towerToUpgrade != null)
         {
             this._currentTowerInstance.Call("copy_tower_data", this._towerToUpgrade);
-            runContext.towers_manager.Call("tower_removed", this._towerToUpgrade);
+            runContext.towers_manager.Call("OnTowerRemoved", this._towerToUpgrade);
+            this.composite_tile_map.Call("set_tile_occupied", key);
             ClickEventsBus.EmitTowerSelected(this._currentTowerInstance);
         }
 

@@ -41,6 +41,8 @@ public partial class RunContext : Node
 
     public void reset_run()
     {
+        this.towers_manager?.dispose_events();
+
         this.offers_manager = new OffersManager();
         this.progress = new RunProgress();
         this.economy = new Economy();

@@ -15,6 +15,7 @@ public static class ClickEventsBus
     public static event Action<Variant, Variant, int> TowerUpgradePressed;
     public static event Action<Variant> TowerHovered;
     public static event Action<Variant> TowerUnhovered;
+    public static event Action<Variant> AddTowerCard;
 
     public static bool HasTowerBuildButtonPressedListeners => TowerBuildButtonPressed != null;
     public static bool HasTowerUpgradePressedListeners => TowerUpgradePressed != null;
@@ -72,5 +73,10 @@ public static class ClickEventsBus
     public static void EmitTowerUnhovered(Variant tower)
     {
         TowerUnhovered?.Invoke(tower);
+    }
+
+    public static void EmitAddTowerCard(Variant towerConfiguration)
+    {
+        AddTowerCard?.Invoke(towerConfiguration);
     }
 }

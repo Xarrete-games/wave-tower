@@ -61,6 +61,7 @@ public partial class ClickEvents : Node
         ClickEventsBus.TowerUpgradePressed += this.OnTowerUpgradePressed;
         ClickEventsBus.TowerHovered += this.OnTowerHovered;
         ClickEventsBus.TowerUnhovered += this.OnTowerUnhovered;
+        ClickEventsBus.AddTowerCard += this.OnAddTowerCard;
     }
 
     public override void _ExitTree()
@@ -77,6 +78,7 @@ public partial class ClickEvents : Node
         ClickEventsBus.TowerUpgradePressed -= this.OnTowerUpgradePressed;
         ClickEventsBus.TowerHovered -= this.OnTowerHovered;
         ClickEventsBus.TowerUnhovered -= this.OnTowerUnhovered;
+        ClickEventsBus.AddTowerCard -= this.OnAddTowerCard;
 
         if (ReferenceEquals(Instance, this))
         {
@@ -113,6 +115,11 @@ public partial class ClickEvents : Node
     public void emit_reset_game_button_pressed()
     {
         ClickEventsBus.EmitResetGameButtonPressed();
+    }
+
+    public void emit_add_tower_card(Variant tower_configuration)
+    {
+        ClickEventsBus.EmitAddTowerCard(tower_configuration);
     }
 
     public void emit_tower_selected(Variant tower)
@@ -194,5 +201,10 @@ public partial class ClickEvents : Node
     private void OnTowerUnhovered(Variant tower)
     {
         EmitSignal(SignalName.tower_unhovered, tower);
+    }
+
+    private void OnAddTowerCard(Variant towerConfiguration)
+    {
+        EmitSignal(SignalName.add_tower_card, towerConfiguration);
     }
 }

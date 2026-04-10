@@ -17,8 +17,8 @@ var _current_target: Variant
 func _ready() -> void:
 	RunContext.consumables_manager.consumable_clicked.connect(_on_consumable_clicked)
 	GameState.state_change.connect(_on_game_state_changed)
-	ClickEvents.connect("tower_hovered", _on_tower_hovered)
-	ClickEvents.connect("tower_unhovered", _on_tower_unhovered)
+	RunContext.towers_manager.tower_hovered.connect(_on_tower_hovered)
+	RunContext.towers_manager.tower_unhovered.connect(_on_tower_unhovered)
 
 func _process(_delta: float) -> void:
 	if not _current_consumable:

@@ -57,7 +57,7 @@ var _key_to_tile: Dictionary = {}
 
 func _ready() -> void:
 	RunContext.composite_tile_map = self
-	ClickEvents.connect("tower_remove_pressed", _on_tower_removed)
+	RunContext.towers_manager.tower_removed.connect(_on_tower_removed)
 
 # ---------------------------------------------------------
 # PIECE REGISTRATION

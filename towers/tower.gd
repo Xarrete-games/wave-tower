@@ -251,11 +251,11 @@ func _on_gui_input(event: InputEvent) -> void:
 		ClickEvents.emit_tower_selected(self)
 
 func _on_mouse_entered():
-	ClickEvents.emit_tower_hovered(self)
+	RunContext.towers_manager.tower_hovered.emit(self)
 	_show_range()
 
 func _on_mouse_exit():
-	ClickEvents.emit_tower_unhovered(self)
+	RunContext.towers_manager.tower_unhovered.emit(self)
 	if current_tower_selected != self:
 		_hide_range()
 # --------------------

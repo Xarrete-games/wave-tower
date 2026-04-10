@@ -12,7 +12,7 @@ var _blocked_tiles: Dictionary[Vector2i, bool] = {}
 var _buildeable_tiles: Dictionary[Vector2i, bool] = {}
 
 func _ready() -> void:
-	ClickEvents.connect("tower_remove_pressed", _on_tower_removed)
+	RunContext.towers_manager.tower_removed.connect(_on_tower_removed)
 	#RunContext.level_tile_map = self
 	_fill_data()
 	

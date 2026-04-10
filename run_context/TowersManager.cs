@@ -18,6 +18,9 @@ public partial class TowersManager : RefCounted
     [Signal]
     public delegate void tower_unhoveredEventHandler(Variant tower);
 
+    [Signal]
+    public delegate void tower_removedEventHandler(Variant tower);
+
     private static readonly Script _hooksScript = GD.Load<Script>("res://core/hooks.gd");
 
     private static readonly string[] INITIAL_TOWERS_IDS = { "fire_tower", "frost_tower", "lightning_tower" };
@@ -38,16 +41,20 @@ public partial class TowersManager : RefCounted
 
     public TowersManager()
     {
-        ClickEventsBus.TowerRemovePressed += this.tower_removed;
-
-        Node clickEvents = this.GetSingleton("ClickEvents");
-        clickEvents?.Connect("add_tower_card", Callable.From<Variant>(this._on_tower_card_added));
+        ClickEventsBus.TowerRemovePressed += this.OnTowerRemoved;
+        ClickEventsBus.AddTowerCard += this._on_tower_card_added;
 
         Node dataLoader = this.GetSingleton("DataLoader");
         if (dataLoader != null)
         {
             this.all_tower_data = dataLoader.Call("get_all_tower_data").AsGodotArray<Variant>();
         }
+    }
+
+    public void dispose_events()
+    {
+        ClickEventsBus.TowerRemovePressed -= this.OnTowerRemoved;
+        ClickEventsBus.AddTowerCard -= this._on_tower_card_added;
     }
 
     public void setup(Variant progress_p)
@@ -160,7 +167,7 @@ public partial class TowersManager : RefCounted
         this.GetSingleton("AudioManager")?.Call("play_place_tower");
     }
 
-    public void tower_removed(Variant tower)
+    public void OnTowerRemoved(Variant tower)
     {
         this.towers.Remove(tower);
 
@@ -169,6 +176,7 @@ public partial class TowersManager : RefCounted
         this._update_tower_count(towerType);
 
         this.towers_ids.Remove((string)towerObj.Get("id"));
+        this.EmitSignal(SignalName.tower_removed, tower);
         towerObj.Call("queue_free");
     }
 
