@@ -45,6 +45,8 @@ public partial class ConsumablesManager : RefCounted
 
     public void _on_consumable_used(Variant consumable)
     {
+        _hooksScript.Call("on_consumable_used", consumable);
+
         GodotObject consumableObj = consumable.AsGodotObject();
         if (consumableObj != null)
         {
@@ -69,7 +71,6 @@ public partial class ConsumablesManager : RefCounted
         if (!requiresTarget)
         {
             consumableObj.Call("use");
-            _hooksScript.Call("on_consumable_used", consumable);
             consumableObj.EmitSignal("used", consumable);
         }
         else

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://k5sq2won0dnr"]
 
-[ext_resource type="Script" uid="uid://radim547g2ow" path="res://relics/implementations/metronome.gd" id="1_50myw"]
+[ext_resource type="Script" path="res://relics/implementations/MetronomeRelic.cs" id="1_50myw"]
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_ld7qn"]
 [ext_resource type="Texture2D" uid="uid://bedv81wbj4j7e" path="res://assets/sprites/relics/metronome.png" id="3_tm1hr"]
 

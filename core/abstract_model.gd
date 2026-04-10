@@ -27,7 +27,7 @@ func on_debuff_applied(ctx: DebuffContext, target: Enemy) -> void:
 func on_relic_added(relic_added) -> void:
 	pass
 
-func on_consumable_used(consumable: Consumable) -> void:
+func on_consumable_used(consumable) -> void:
 	pass
 
 func on_get_price(ctx: PriceContext) -> void:

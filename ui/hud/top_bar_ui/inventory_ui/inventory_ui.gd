@@ -6,7 +6,7 @@ class_name InventoryUI extends Control
 func _ready() -> void:
 	RunContext.consumables_manager.consumable_added.connect(_on_consumable_added)
 
-func _on_consumable_added(consumable: Consumable) -> void:
+func _on_consumable_added(consumable) -> void:
 	for slot: InventoryUISlot in slots_container.get_children():
 		if slot.is_empty():
 			slot.set_consumable(consumable)

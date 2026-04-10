@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://blugij0ykyh01"]
 
-[ext_resource type="Script" uid="uid://wigd2ta0efvd" path="res://relics/implementations/strategy_tome_economy.gd" id="1_l5ndh"]
+[ext_resource type="Script" path="res://relics/implementations/StrategyTomeEconomyRelic.cs" id="1_l5ndh"]
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_xvjca"]
 [ext_resource type="Texture2D" uid="uid://irqjwkvb8yq3" path="res://assets/sprites/relics/relics_economy_manual_relic.png" id="2_sjo5h"]
 

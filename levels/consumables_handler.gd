@@ -65,7 +65,6 @@ func _use_consumable() -> void:
 	if not _current_consumable:
 		return
 	_current_consumable.use(_current_target)
-	Hooks.on_consumable_used(_current_consumable)
 	_current_consumable = null
 	Input.set_custom_mouse_cursor(DEFAULT_CURSOR)
 	

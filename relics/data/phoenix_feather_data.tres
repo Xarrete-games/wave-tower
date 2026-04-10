@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://jdugm4p6p7pj"]
 
-[ext_resource type="Script" uid="uid://cwkxkewrixdrf" path="res://relics/implementations/phoenix_feather.gd" id="1_dhkps"]
+[ext_resource type="Script" path="res://relics/implementations/PhoenixFeatherRelic.cs" id="1_dhkps"]
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="2_bxhhi"]
 [ext_resource type="Texture2D" uid="uid://xljviyqnynvd" path="res://assets/sprites/relics/relic_phoenix's_feather_relic.png" id="3_m0o58"]
 

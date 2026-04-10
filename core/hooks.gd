@@ -72,7 +72,7 @@ static func on_relic_added(relic_added) -> void:
 # --- CONSUMABLES ---
 # --------------------
 
-static func on_consumable_used(consumable: Consumable) -> void:
+static func on_consumable_used(consumable) -> void:
 	for item in get_listeners():
 		item.on_consumable_used(consumable)
 

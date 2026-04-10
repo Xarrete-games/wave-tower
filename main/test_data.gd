@@ -38,7 +38,7 @@ func _handle_initial_relics() -> void:
 		for consumable_id in initial_consumables_ids:
 			var consumable_data = DataLoader.get_consumable_by_id(consumable_id)
 			if consumable_data:
-				var consumable_instance = consumable_data.create_item() as Consumable
+				var consumable_instance = consumable_data.create_item()
 				RunContext.consumables_manager.add_consumable(consumable_instance)
 			else:
 				push_error("[Game]: initial consumable id %s not found" % consumable_id)

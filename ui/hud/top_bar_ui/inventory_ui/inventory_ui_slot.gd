@@ -3,7 +3,7 @@ class_name InventoryUISlot extends Control
 @onready var texture_rect: TextureRect = $CenterContainer/TextureRect
 
 
-var _consumable: Consumable = null
+var _consumable = null
 
 func _ready() -> void:
 	RunContext.consumables_manager.consumable_used.connect(_on_consumable_used)
@@ -11,7 +11,7 @@ func _ready() -> void:
 func is_empty() -> bool:
 	return _consumable == null
 
-func set_consumable(consumable: Consumable) -> void:
+func set_consumable(consumable) -> void:
 	_consumable = consumable
 	texture_rect.texture = consumable.data.icon
 
@@ -24,7 +24,7 @@ func _on_gui_input(event: InputEvent) -> void:
 		HintManager.remove_hint(self)
 		_consumable.clicked.emit(_consumable)
 
-func _on_consumable_used(consumable: Consumable) -> void:
+func _on_consumable_used(consumable) -> void:
 	if _consumable == consumable:
 		_consumable = null
 		texture_rect.texture = null
