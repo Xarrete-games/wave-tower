@@ -24,8 +24,7 @@ public partial class TowerSelector : Node
 
     public override void _Input(InputEvent @event)
     {
-        Node uiUtils = GetNode<Node>("/root/UIUtils");
-        if ((bool)uiUtils.Call("is_right_click_event", @event))
+        if (InputClickUtils.IsRightClickReleased(@event))
         {
             this.ClearTowerSelected();
         }
@@ -33,8 +32,7 @@ public partial class TowerSelector : Node
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        Node uiUtils = GetNode<Node>("/root/UIUtils");
-        if ((bool)uiUtils.Call("is_left_click_event", @event))
+        if (InputClickUtils.IsLeftClickReleased(@event))
         {
             this.ClearTowerSelected();
             GetViewport().SetInputAsHandled();

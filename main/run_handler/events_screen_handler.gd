@@ -18,3 +18,4 @@ func show_event_selected(event: EventData, event_layer: CanvasLayer) -> void:
 			await  shop_screen_handler.shop_closed
 		EventData.Type.OPTIONS:
 			await events_options_screen_handler.show_options_event(event, event_layer)
+	event_finished.emit()

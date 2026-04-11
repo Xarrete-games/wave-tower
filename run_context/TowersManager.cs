@@ -47,11 +47,7 @@ public partial class TowersManager : RefCounted
         ClickEventsBus.TowerRemovePressed += this.OnTowerRemoved;
         ClickEventsBus.AddTowerCard += this._on_tower_card_added;
 
-        Node dataLoader = this.GetSingleton("DataLoader");
-        if (dataLoader != null)
-        {
-            this.all_tower_data = dataLoader.Call("get_all_tower_data").AsGodotArray<Variant>();
-        }
+        this.all_tower_data = DataLoaderAccess.GetAllTowerData();
     }
 
     public void dispose_events()

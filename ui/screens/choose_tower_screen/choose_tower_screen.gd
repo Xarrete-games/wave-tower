@@ -21,7 +21,12 @@ static func show_screen(configurations: Array, canvas: CanvasLayer) -> void:
 	await instance.done
 
 func _ready() -> void:
+	instance = self
 	ok_button.pressed.connect(_on_ok_pressed)
+
+func _exit_tree() -> void:
+	if instance == self:
+		instance = null
 
 func populate_screen(configurations: Array) -> void:
 	for tower_configuration in configurations:

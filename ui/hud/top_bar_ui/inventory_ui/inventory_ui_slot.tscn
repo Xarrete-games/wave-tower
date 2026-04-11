@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="2_cjd5i"]
 [ext_resource type="Texture2D" uid="uid://c7q1k1ke1vqoc" path="res://assets/images/icons/bag_item.png" id="2_xbpjj"]
-[ext_resource type="Script" uid="uid://dtookpcol40xx" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui_slot.gd" id="2_xt7kx"]
+[ext_resource type="Script" path="res://ui/hud/top_bar_ui/inventory_ui/InventoryUISlot.cs" id="2_xt7kx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xt7kx"]
 

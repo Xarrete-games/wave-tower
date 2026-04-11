@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://epd2ddueq6ho"]
 
-[ext_resource type="Script" uid="uid://bb04ujedsxvl6" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui.gd" id="1_3fmy8"]
+[ext_resource type="Script" path="res://ui/hud/top_bar_ui/inventory_ui/InventoryUI.cs" id="1_3fmy8"]
 [ext_resource type="PackedScene" uid="uid://bmihqlkojvphp" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui_slot.tscn" id="1_y3m8t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fmy8"]

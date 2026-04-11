@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bjdiwjtvkbeb5"]
 
 [ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/images/icons/wcoin.png" id="1_cne1v"]
-[ext_resource type="Script" uid="uid://dnsxyviefc8h6" path="res://ui/screens/loot_screen/loot_screen_item.gd" id="1_supgx"]
+[ext_resource type="Script" path="res://ui/screens/loot_screen/LootScreenItem.cs" id="1_supgx"]
 [ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="3_66g07"]
 [ext_resource type="Texture2D" uid="uid://bsq8n0trc4cop" path="res://assets/sprites/consumables/purple_potion_relic.png" id="3_pvu0a"]
 [ext_resource type="LabelSettings" uid="uid://d4g1vsd3mdf1g" path="res://ui/styles/label_settings/label_settings_18.tres" id="5_66g07"]

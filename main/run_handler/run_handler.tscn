@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://b7y7a8hvmviqo"]
 
-[ext_resource type="Script" uid="uid://mse5syvk8x0l" path="res://main/run_handler/run_handler.gd" id="1_6aer8"]
+[ext_resource type="Script" path="res://main/run_handler/RunHandler.cs" id="1_6aer8"]
 [ext_resource type="Script" uid="uid://bj5t83u2udagj" path="res://main/run_handler/events_screen_handler.gd" id="3_m1orh"]
 [ext_resource type="Script" uid="uid://cmma1dvmm1d61" path="res://main/run_handler/shop_screen_handler.gd" id="4_3cngx"]
 [ext_resource type="Script" uid="uid://dvu6fvqfm5qye" path="res://main/run_handler/events_options_screen_handler.gd" id="5_ihxdi"]
 [ext_resource type="PackedScene" uid="uid://booaj13prrqkb" path="res://ui/screens/events_screen/event_options_screen/event_options_screen.tscn" id="6_f8xag"]
-[ext_resource type="Script" uid="uid://bmmvjjr2opo8" path="res://main/run_handler/loot_screen_handler.gd" id="7_bp2dt"]
+[ext_resource type="Script" path="res://main/run_handler/LootScreenHandler.cs" id="7_bp2dt"]
 [ext_resource type="Script" uid="uid://7vbjwolprmtx" path="res://main/run_handler/choose_relic_screen_handler.gd" id="8_c86pb"]
 [ext_resource type="PackedScene" uid="uid://ltio37ylr0pp" path="res://ui/screens/loot_screen/loot_screen.tscn" id="8_sjlqx"]
 

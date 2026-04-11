@@ -6,17 +6,17 @@ class_name TestData extends Node
 @export var initial_event: EventData = null
 @export var open_loot_screen: bool = false
 
-@onready var run_handler: RunHandler = $"../RunHandler"
+@onready var run_handler: Node = $"../RunHandler"
 
 func _ready() -> void:
 	await get_tree().create_timer(0.1, false).timeout
 	_handle_initial_relics()
 	
 	if open_loot_screen:
-		await run_handler.show_loot_screen()
+		await run_handler.ShowLootScreen()
 
 	if initial_event:
-		await run_handler.show_events_screen(initial_event)
+		await run_handler.ShowEventsScreen(initial_event)
 
 func _handle_initial_relics() -> void:
 	if initial_relics_ids.size() > 0:

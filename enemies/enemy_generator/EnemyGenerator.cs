@@ -22,9 +22,7 @@ public partial class EnemyGenerator : Node
 
     public override void _Ready()
     {
-        Node dataLoader = GetNode<Node>("/root/DataLoader");
-        GodotObject enemyDataLoader = dataLoader.Get("enemy_data").AsGodotObject();
-        var enemyCatalog = enemyDataLoader.Call("get_all_enemies").AsGodotArray<Variant>();
+        var enemyCatalog = DataLoaderAccess.GetAllEnemies();
 
         if (this.wave_config == null)
         {

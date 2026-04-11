@@ -14,7 +14,7 @@ var options_events: Array[EventData]
 
 @export var event_layer: CanvasLayer
 @export var events_screen_hander: EventsScreenHandler
-@export var loot_screen_handler: LootScreenHandler
+@export var loot_screen_handler: Node
 
 func _ready() -> void:
 	_set_events_by_type()
@@ -24,7 +24,7 @@ func _ready() -> void:
 	_show_next_wave_screen()
 
 func show_loot_screen() -> void:
-	await loot_screen_handler.show_loot_screen(event_layer)
+	await loot_screen_handler.ShowLootScreen(event_layer)
 
 func show_choose_card_screen() -> void:
 	var cards = RunContext.towers_manager.get_random_towers(3)
@@ -34,7 +34,8 @@ func show_events_screen(event_data: EventData) -> void:
 	await events_screen_hander.show_event_selected(event_data, event_layer)
 
 func _set_events_by_type() -> void:
-	events = DataLoader.get_all_events()
+	events = []
+	events.assign(DataLoader.get_all_events())
 	shop_event = null
 	choose_relic_event = null
 	options_events = []

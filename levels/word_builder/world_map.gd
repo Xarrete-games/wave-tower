@@ -32,7 +32,8 @@ var _pending_fork_after_boss: bool = false
 
 func _ready() -> void:
 	# Load data
-	map_pieces = DataLoader.get_all_map_pieces()
+	map_pieces = []
+	map_pieces.assign(DataLoader.get_all_map_pieces())
 	
 	# Create managers
 	grid_manager = GridManager.new()
