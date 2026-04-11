@@ -25,7 +25,8 @@ public partial class TowersManager : RefCounted
     [Signal]
     public delegate void tower_removedEventHandler(Variant tower);
 
-    private static readonly Script _hooksScript = GD.Load<Script>("res://core/hooks.gd");
+    private static readonly Script _towerBuffFactoryScript = GD.Load<Script>("res://towers/tower-buffs/tower_buff_factory.gd");
+    private static readonly Script _sourceScript = GD.Load<Script>("res://core/source.gd");
 
     private static readonly string[] INITIAL_TOWERS_IDS = { "fire_tower", "frost_tower", "lightning_tower" };
     private const float COMMON_WEIGHT_START = 0.75f;
@@ -43,6 +44,7 @@ public partial class TowersManager : RefCounted
 
     private Variant _progress;
     private readonly Dictionary<ulong, TowerModel> _runtimeTowerModels = new();
+    private readonly Dictionary<ulong, HashSet<string>> _appliedRuntimeBuffSources = new();
 
     public TowersManager()
     {
@@ -66,6 +68,7 @@ public partial class TowersManager : RefCounted
         this.towers.Clear();
         this.tower_cards_amount.Clear();
         this._runtimeTowerModels.Clear();
+        this._appliedRuntimeBuffSources.Clear();
         this._init_inital_towers_data();
     }
 
@@ -149,7 +152,6 @@ public partial class TowersManager : RefCounted
 
     public void add_tower_placed(Variant tower)
     {
-        _hooksScript.Call("on_tower_placed", tower);
         this.towers.Add(tower);
 
         GodotObject towerObj = tower.AsGodotObject();
@@ -172,6 +174,11 @@ public partial class TowersManager : RefCounted
             ulong instanceId = towerObj.GetInstanceId();
             this._runtimeTowerModels[instanceId] = towerModel;
             RunContextRuntime.TowersManager.AddTowerPlaced(towerModel, instanceId);
+
+            this.SyncRuntimeStatusFromLegacy();
+            Hooks.OnTowerPlaced(Hooks.GetListenersFromRuntime(), towerModel);
+            this.SyncLegacyStatusFromRuntime();
+            this.ApplyRuntimeBuffsToLegacyTower(instanceId, towerObj, towerModel);
         }
 
         this.EmitSignal(SignalName.tower_placed, tower);
@@ -192,6 +199,11 @@ public partial class TowersManager : RefCounted
         if (this._runtimeTowerModels.ContainsKey(instanceId))
         {
             this._runtimeTowerModels.Remove(instanceId);
+        }
+
+        if (this._appliedRuntimeBuffSources.ContainsKey(instanceId))
+        {
+            this._appliedRuntimeBuffSources.Remove(instanceId);
         }
 
         RunContextRuntime.TowersManager.RemoveTowerByInstanceId(instanceId);
@@ -264,6 +276,22 @@ public partial class TowersManager : RefCounted
         int amount = this.tower_cards_amount.ContainsKey(id) ? this.tower_cards_amount[id] : 0;
         this.tower_cards_amount[id] = amount + 1;
         this.EmitSignal(SignalName.tower_card_amount_change, tower_data, this.tower_cards_amount[id]);
+    }
+
+    public void sync_runtime_buffs_for_tower(ulong instanceId)
+    {
+        if (!this._runtimeTowerModels.TryGetValue(instanceId, out TowerModel towerModel))
+        {
+            return;
+        }
+
+        GodotObject towerObj = GodotObject.InstanceFromId(instanceId);
+        if (towerObj == null)
+        {
+            return;
+        }
+
+        this.ApplyRuntimeBuffsToLegacyTower(instanceId, towerObj, towerModel);
     }
 
     private float _get_tower_weight_for_wave(int rarity)
@@ -387,5 +415,75 @@ public partial class TowersManager : RefCounted
     private Node GetSingleton(string name)
     {
         return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<Node>($"/root/{name}");
+    }
+
+    private void SyncRuntimeStatusFromLegacy()
+    {
+        Status status = this.GetSingleton("RunContext")?.Get("status").As<Status>();
+        if (status == null)
+        {
+            return;
+        }
+
+        RunContextRuntime.Status.SyncFromLegacy(status.max_health, status.health, status.armor);
+    }
+
+    private void SyncLegacyStatusFromRuntime()
+    {
+        Status status = this.GetSingleton("RunContext")?.Get("status").As<Status>();
+        if (status == null)
+        {
+            return;
+        }
+
+        StatusRuntime runtime = RunContextRuntime.Status;
+        if (status.max_health != runtime.MaxHealth)
+        {
+            status.max_health = runtime.MaxHealth;
+        }
+
+        if (status.armor != runtime.Armor)
+        {
+            status.armor = runtime.Armor;
+        }
+
+        if (status.health != runtime.Health)
+        {
+            status.health = runtime.Health;
+        }
+    }
+
+    private void ApplyRuntimeBuffsToLegacyTower(ulong instanceId, GodotObject towerObj, TowerModel towerModel)
+    {
+        if (towerObj == null || towerModel == null || _towerBuffFactoryScript == null || _sourceScript == null)
+        {
+            return;
+        }
+
+        if (!this._appliedRuntimeBuffSources.TryGetValue(instanceId, out HashSet<string> appliedSources))
+        {
+            appliedSources = new HashSet<string>();
+            this._appliedRuntimeBuffSources[instanceId] = appliedSources;
+        }
+
+        var buffs = towerModel.GetBuffs();
+        for (int index = 0; index < buffs.Count; index++)
+        {
+            TowerBuffModel buff = buffs[index];
+            if (buff == null || string.IsNullOrEmpty(buff.SourceId) || appliedSources.Contains(buff.SourceId))
+            {
+                continue;
+            }
+
+            Variant source = _sourceScript.Call("new", 0, buff.SourceId);
+            Variant legacyBuff = _towerBuffFactoryScript.Call("create_from_id", buff.Id, source, buff.Value);
+            if (legacyBuff.VariantType == Variant.Type.Nil)
+            {
+                continue;
+            }
+
+            towerObj.Call("add_buff", legacyBuff);
+            appliedSources.Add(buff.SourceId);
+        }
     }
 }

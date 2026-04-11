@@ -4,7 +4,6 @@ public partial class EnemyGenerator : Node
 {
     private const int TOTAL_WAVES = 30;
     private static readonly Script WaveComposerScript = GD.Load<Script>("res://enemies/enemy_generator/wave_composer.gd");
-    private static readonly Script HooksScript = GD.Load<Script>("res://core/hooks.gd");
 
     [Export]
     public Node wave_spawner;
@@ -164,8 +163,45 @@ public partial class EnemyGenerator : Node
             return;
         }
 
-        HooksScript.Call("on_wave_finished");
+        this.SyncRuntimeStatusFromLegacy(runContext.status);
+        Hooks.OnWaveFinished(Hooks.GetListenersFromRuntime());
+        this.SyncLegacyStatusFromRuntime(runContext.status);
+
         runContext.progress.EmitSignal(RunProgress.SignalName.current_wave_finished);
+    }
+
+    private void SyncRuntimeStatusFromLegacy(Status status)
+    {
+        if (status == null)
+        {
+            return;
+        }
+
+        RunContextRuntime.Status.SyncFromLegacy(status.max_health, status.health, status.armor);
+    }
+
+    private void SyncLegacyStatusFromRuntime(Status status)
+    {
+        if (status == null)
+        {
+            return;
+        }
+
+        StatusRuntime runtime = RunContextRuntime.Status;
+        if (status.max_health != runtime.MaxHealth)
+        {
+            status.max_health = runtime.MaxHealth;
+        }
+
+        if (status.armor != runtime.Armor)
+        {
+            status.armor = runtime.Armor;
+        }
+
+        if (status.health != runtime.Health)
+        {
+            status.health = runtime.Health;
+        }
     }
 
     private void OnEnemyTargetReached(Variant enemy)

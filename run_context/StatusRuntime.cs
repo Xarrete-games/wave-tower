@@ -76,4 +76,11 @@ public sealed class StatusRuntime
             this.Health -= remainingDamage;
         }
     }
+
+    public void SyncFromLegacy(int maxHealth, int health, int armor)
+    {
+        this.MaxHealth = maxHealth;
+        this.Health = health;
+        this.Armor = armor;
+    }
 }

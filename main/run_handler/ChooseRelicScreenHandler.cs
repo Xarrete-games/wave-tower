@@ -7,8 +7,6 @@ public partial class ChooseRelicScreenHandler : Node
     private const int RerollPrice = 20;
 
     private static readonly PackedScene RewardsScreenScene = GD.Load<PackedScene>("uid://bcxsfb0ox3gmq");
-    private static readonly Script RelicsRewardsContextScript = GD.Load<Script>("res://core/context/relics_rewards_context.gd");
-    private static readonly Script HooksScript = GD.Load<Script>("res://core/hooks.gd");
 
     private Node _rewardsScreen;
 
@@ -65,18 +63,8 @@ public partial class ChooseRelicScreenHandler : Node
 
     private int GetCurrentRewardsCount()
     {
-        if (RelicsRewardsContextScript == null || HooksScript == null)
-        {
-            return DefaultNumberOfRelics;
-        }
-
-        GodotObject ctx = RelicsRewardsContextScript.Call("new", DefaultNumberOfRelics).AsGodotObject();
-        if (ctx == null)
-        {
-            return DefaultNumberOfRelics;
-        }
-
-        HooksScript.Call("on_before_relic_reward", ctx);
-        return (int)ctx.Get("number_of_relics");
+        var ctx = new RelicsRewardsContext(DefaultNumberOfRelics);
+        Hooks.OnBeforeRelicReward(Hooks.GetListenersFromRuntime(), ctx);
+        return ctx.NumberOfRelics;
     }
 }

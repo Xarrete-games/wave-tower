@@ -1,8 +1,8 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class TowerStatsPanel : Control
 {
-    private static readonly Script HooksScript = GD.Load<Script>("res://core/hooks.gd");
     private static readonly Script TowerScript = GD.Load<Script>("res://towers/tower.gd");
 
     private Label _nameLabel;
@@ -58,8 +58,11 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        var targetingModes = new Godot.Collections.Array<int> { 0 };
-        HooksScript.Call("on_get_targeting_modes", targetingModes);
+        var targetingModes = new List<TowerTargetingMode>
+        {
+            TowerTargetingMode.FirstInProgress,
+        };
+        Hooks.OnGetTargetingModes(Hooks.GetListenersFromRuntime(), targetingModes);
         this.UpdateTargetingModes(targetingModes);
 
         int targetingMode = (int)towerObj.Get("targeting_mode");
@@ -118,12 +121,12 @@ public partial class TowerStatsPanel : Control
         this._levelLabel.Text = ((int)expData.Get("level")).ToString();
     }
 
-    private void UpdateTargetingModes(Godot.Collections.Array<int> modes)
+    private void UpdateTargetingModes(List<TowerTargetingMode> modes)
     {
         this._targetingModeSelector.Clear();
         for (int index = 0; index < modes.Count; index++)
         {
-            int mode = modes[index];
+            int mode = (int)modes[index];
             string modeName = (string)TowerScript.Call("targeting_mode_to_string", mode);
             this._targetingModeSelector.AddItem(modeName, mode);
         }
