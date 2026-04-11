@@ -12,8 +12,6 @@ public partial class RunProgress : RefCounted
     [Signal]
     public delegate void last_wave_finishedEventHandler();
 
-    private static readonly Script _hooksScript = GD.Load<Script>("res://core/hooks.gd");
-
     private int _currentWave;
 
     public int current_wave
@@ -22,7 +20,7 @@ public partial class RunProgress : RefCounted
         set
         {
             this._currentWave = value;
-            _hooksScript.Call("on_wave_init");
+            Hooks.OnWaveInit(Hooks.GetListenersFromRuntime());
             this.EmitSignal(SignalName.current_wave_changed, this._currentWave);
         }
     }

@@ -11,19 +11,17 @@ public partial class LootScreenItem : Control
     [Export]
     public Label label;
 
-    private Variant _lootItemData = default;
+    private LootItemData _lootItemData;
 
     public void SetLootItem(Variant lootItemData)
     {
-        this._lootItemData = lootItemData;
-        GodotObject lootObj = lootItemData.AsGodotObject();
-        if (lootObj == null)
+        this._lootItemData = lootItemData.As<LootItemData>();
+        if (this._lootItemData == null)
         {
             return;
         }
 
-        Variant consumableVariant = lootObj.Get("consumable");
-        GodotObject consumable = consumableVariant.AsGodotObject();
+        GodotObject consumable = this._lootItemData.Consumable;
         if (consumable != null)
         {
             this.texture_rect.Texture = consumable.Get("icon").As<Texture2D>();
@@ -32,7 +30,7 @@ public partial class LootScreenItem : Control
         }
 
         this.texture_rect.Texture = this.gold_icon;
-        this.label.Text = $"{(int)lootObj.Get("gold_amount")} Gold";
+        this.label.Text = $"{this._lootItemData.GoldAmount} Gold";
     }
 
     private void _on_gui_input(InputEvent @event)
@@ -42,13 +40,12 @@ public partial class LootScreenItem : Control
             return;
         }
 
-        GodotObject lootObj = this._lootItemData.AsGodotObject();
-        if (lootObj == null)
+        if (this._lootItemData == null)
         {
             return;
         }
 
-        GodotObject consumable = lootObj.Get("consumable").AsGodotObject();
+        GodotObject consumable = this._lootItemData.Consumable;
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (consumable != null)
         {
@@ -63,7 +60,7 @@ public partial class LootScreenItem : Control
         }
         else
         {
-            runContext.economy.Call("add_gold", (int)lootObj.Get("gold_amount"));
+            runContext.economy.Call("add_gold", this._lootItemData.GoldAmount);
         }
 
         QueueFree();
@@ -78,7 +75,7 @@ public partial class LootScreenItem : Control
             AddThemeStyleboxOverride("panel", styleBox);
         }
 
-        GodotObject consumable = this._lootItemData.AsGodotObject()?.Get("consumable").AsGodotObject();
+        GodotObject consumable = this._lootItemData?.Consumable;
         GodotObject consumableData = consumable;
         string description = consumableData == null ? string.Empty : (string)consumableData.Get("description");
         if (!string.IsNullOrEmpty(description))
@@ -96,7 +93,7 @@ public partial class LootScreenItem : Control
             AddThemeStyleboxOverride("panel", styleBox);
         }
 
-        GodotObject consumable = this._lootItemData.AsGodotObject()?.Get("consumable").AsGodotObject();
+        GodotObject consumable = this._lootItemData?.Consumable;
         if (consumable == null)
         {
             return;

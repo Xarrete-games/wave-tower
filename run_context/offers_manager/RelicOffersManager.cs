@@ -3,10 +3,6 @@ using Godot;
 [GlobalClass]
 public partial class RelicOffersManager : RefCounted
 {
-    private static readonly Script _hooksScript = GD.Load<Script>("res://core/hooks.gd");
-    private static readonly Script _itemOfferScript = GD.Load<Script>("res://core/item_offer.gd");
-    private static readonly Script _priceContextScript = GD.Load<Script>("res://core/price_context.gd");
-
     private static readonly Godot.Collections.Dictionary<int, int> BASE_PRICE_BY_RARITY = new()
     {
         { 0, 50 },
@@ -18,7 +14,7 @@ public partial class RelicOffersManager : RefCounted
 
     public RelicOffersManager()
     {
-        this._allRelicData = this.GetDataLoader().Call("get_all_relics").AsGodotArray<Variant>();
+        this._allRelicData = DataLoaderAccess.GetAllRelics();
     }
 
     public Godot.Collections.Array<Variant> get_relics_offers_by_ids(Godot.Collections.Array<string> relic_ids)
@@ -93,17 +89,11 @@ public partial class RelicOffersManager : RefCounted
 
         int rarity = (int)data.Get("rarity");
         int basePrice = BASE_PRICE_BY_RARITY.ContainsKey(rarity) ? BASE_PRICE_BY_RARITY[rarity] : BASE_PRICE_BY_RARITY[0];
-        Variant ctx = _priceContextScript.Call("new", 1, basePrice);
-        _hooksScript.Call("on_get_price", ctx);
+        var ctx = new PriceContext(PriceContext.PriceType.Relic, basePrice);
+        Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
 
         int healthPrice = (int)data.Get("health_price");
-        int finalPrice = (int)ctx.AsGodotObject().Get("final_price");
-        return _itemOfferScript.Call("new", dataVariant, finalPrice, healthPrice);
-    }
-
-    private Node GetDataLoader()
-    {
-        return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<Node>("/root/DataLoader");
+        return new ItemOffer(dataVariant, ctx.FinalPrice, healthPrice);
     }
 
     private GodotObject GetRunContext()

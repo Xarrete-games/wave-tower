@@ -6,6 +6,7 @@ public sealed class TowersManagerRuntime
     private readonly List<TowerLogic> _towerListeners = new();
     private readonly Dictionary<TowerModel.TowerType, int> _towerCounts = new();
     private readonly List<TowerModel> _towers = new();
+    private readonly Dictionary<ulong, TowerModel> _towerByInstanceId = new();
 
     public IReadOnlyList<TowerLogic> GetAllTowerListeners()
     {
@@ -24,6 +25,11 @@ public sealed class TowersManagerRuntime
 
     public void AddTowerPlaced(TowerModel tower)
     {
+        this.AddTowerPlaced(tower, 0UL);
+    }
+
+    public void AddTowerPlaced(TowerModel tower, ulong instanceId)
+    {
         if (tower == null)
         {
             return;
@@ -31,6 +37,11 @@ public sealed class TowersManagerRuntime
 
         this._towers.Add(tower);
         this._towerCounts[tower.Type] = this.GetTowerCount(tower.Type) + 1;
+
+        if (instanceId != 0UL)
+        {
+            this._towerByInstanceId[instanceId] = tower;
+        }
     }
 
     public void TowerRemoved(TowerLogic towerLogic)
@@ -47,6 +58,37 @@ public sealed class TowersManagerRuntime
 
         this._towers.Remove(tower);
         this._towerCounts[tower.Type] = this.GetTowerCount(tower.Type) - 1;
+
+        var keysToRemove = new List<ulong>();
+        foreach (var pair in this._towerByInstanceId)
+        {
+            if (ReferenceEquals(pair.Value, tower))
+            {
+                keysToRemove.Add(pair.Key);
+            }
+        }
+
+        for (int index = 0; index < keysToRemove.Count; index++)
+        {
+            this._towerByInstanceId.Remove(keysToRemove[index]);
+        }
+    }
+
+    public bool RemoveTowerByInstanceId(ulong instanceId)
+    {
+        if (!this._towerByInstanceId.TryGetValue(instanceId, out TowerModel tower))
+        {
+            return false;
+        }
+
+        this._towerByInstanceId.Remove(instanceId);
+        this.TowerRemoved(tower);
+        return true;
+    }
+
+    public bool TryGetTowerByInstanceId(ulong instanceId, out TowerModel tower)
+    {
+        return this._towerByInstanceId.TryGetValue(instanceId, out tower);
     }
 
     public IReadOnlyList<TowerModel> GetTowers()
@@ -103,5 +145,6 @@ public sealed class TowersManagerRuntime
         this._towerListeners.Clear();
         this._towerCounts.Clear();
         this._towers.Clear();
+        this._towerByInstanceId.Clear();
     }
 }

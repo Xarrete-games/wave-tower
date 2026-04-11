@@ -96,6 +96,8 @@ public partial class RelicsManager : RefCounted
         this.PlayRelicObtain();
         relicObj.Call("on_obtain");
         this._add_relic(relic);
+
+        RunContextRuntime.RelicsManager.AddRelicById(relicId);
     }
 
     public void remove_relic(string relic_id)
@@ -119,6 +121,8 @@ public partial class RelicsManager : RefCounted
         int currentCount = this._relicsCount.ContainsKey(relic_id) ? this._relicsCount[relic_id] : 0;
         this._relicsCount[relic_id] = currentCount - 1;
         this.EmitSignal(SignalName.relic_removed, relic_id);
+
+        RunContextRuntime.RelicsManager.RemoveRelic(relic_id);
     }
 
     private void _add_relic(Variant relic)

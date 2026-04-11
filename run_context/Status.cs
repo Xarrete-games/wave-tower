@@ -15,8 +15,6 @@ public partial class Status : RefCounted
     [Signal]
     public delegate void player_diedEventHandler();
 
-    private static readonly Script _hooksScript = GD.Load<Script>("res://core/hooks.gd");
-
     private int _maxHealth = 20;
     private int _health = 20;
     private int _armor;
@@ -45,7 +43,38 @@ public partial class Status : RefCounted
             this.EmitSignal(SignalName.health_change, this._health);
             if (this._health <= 0)
             {
-                _hooksScript.Call("on_before_die", this);
+                var statusModel = new StatusModel
+                {
+                    MaxHealth = this._maxHealth,
+                    Health = this._health,
+                    Armor = this._armor,
+                };
+
+                Hooks.OnBeforeDie(Hooks.GetListenersFromRuntime(), statusModel);
+
+                bool maxHealthChanged = this._maxHealth != statusModel.MaxHealth;
+                bool healthChanged = this._health != statusModel.Health;
+                bool armorChanged = this._armor != statusModel.Armor;
+
+                this._maxHealth = statusModel.MaxHealth;
+                this._health = statusModel.Health;
+                this._armor = statusModel.Armor;
+
+                if (maxHealthChanged)
+                {
+                    this.EmitSignal(SignalName.max_health_change, this._maxHealth);
+                }
+
+                if (healthChanged)
+                {
+                    this.EmitSignal(SignalName.health_change, this._health);
+                }
+
+                if (armorChanged)
+                {
+                    this.EmitSignal(SignalName.armor_change, this._armor);
+                }
+
                 if (this._health <= 0)
                 {
                     this.EmitSignal(SignalName.player_died);

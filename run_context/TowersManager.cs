@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class TowersManager : RefCounted
@@ -41,6 +42,7 @@ public partial class TowersManager : RefCounted
     public Godot.Collections.Dictionary<string, int> tower_cards_amount { get; } = new();
 
     private Variant _progress;
+    private readonly Dictionary<ulong, TowerModel> _runtimeTowerModels = new();
 
     public TowersManager()
     {
@@ -63,6 +65,7 @@ public partial class TowersManager : RefCounted
         this.towers_ids.Clear();
         this.towers.Clear();
         this.tower_cards_amount.Clear();
+        this._runtimeTowerModels.Clear();
         this._init_inital_towers_data();
     }
 
@@ -162,6 +165,15 @@ public partial class TowersManager : RefCounted
         this.EmitSignal(SignalName.tower_card_amount_change, towerConfiguration, this.tower_cards_amount[towerDataId]);
 
         towerObj.Set("id", this._generate_tower_id(tower));
+
+        TowerModel towerModel = this.BuildTowerModel(towerObj);
+        if (towerModel != null)
+        {
+            ulong instanceId = towerObj.GetInstanceId();
+            this._runtimeTowerModels[instanceId] = towerModel;
+            RunContextRuntime.TowersManager.AddTowerPlaced(towerModel, instanceId);
+        }
+
         this.EmitSignal(SignalName.tower_placed, tower);
         this.GetSingleton("AudioManager")?.Call("play_place_tower");
     }
@@ -175,6 +187,15 @@ public partial class TowersManager : RefCounted
         this._update_tower_count(towerType);
 
         this.towers_ids.Remove((string)towerObj.Get("id"));
+
+        ulong instanceId = towerObj.GetInstanceId();
+        if (this._runtimeTowerModels.ContainsKey(instanceId))
+        {
+            this._runtimeTowerModels.Remove(instanceId);
+        }
+
+        RunContextRuntime.TowersManager.RemoveTowerByInstanceId(instanceId);
+
         this.EmitSignal(SignalName.tower_removed, tower);
         towerObj.Call("queue_free");
     }
@@ -335,6 +356,32 @@ public partial class TowersManager : RefCounted
         this.towers_ids.Add(newId);
         this.last_tower_ids[baseId] = count;
         return newId;
+    }
+
+    private TowerModel BuildTowerModel(GodotObject towerObj)
+    {
+        if (towerObj == null)
+        {
+            return null;
+        }
+
+        int rawType = (int)towerObj.Get("type");
+        TowerModel.TowerType towerType = rawType switch
+        {
+            0 => TowerModel.TowerType.Fire,
+            1 => TowerModel.TowerType.Lightning,
+            2 => TowerModel.TowerType.Frost,
+            _ => TowerModel.TowerType.Fire,
+        };
+
+        var model = new TowerModel
+        {
+            Id = towerObj.Get("id").AsString(),
+            TypeId = towerObj.Get("type_id").AsString(),
+            Type = towerType,
+        };
+
+        return model;
     }
 
     private Node GetSingleton(string name)

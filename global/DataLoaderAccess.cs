@@ -2,6 +2,38 @@ using Godot;
 
 public static class DataLoaderAccess
 {
+    public static Godot.Collections.Array<Variant> GetAllRelics()
+    {
+        if (DataLoader.Instance != null)
+        {
+            return DataLoader.Instance.get_all_relics();
+        }
+
+        Node dataLoader = GetDataLoaderSingleton();
+        if (dataLoader == null)
+        {
+            return new Godot.Collections.Array<Variant>();
+        }
+
+        return dataLoader.Call("get_all_relics").AsGodotArray<Variant>();
+    }
+
+    public static Godot.Collections.Array<Variant> GetAllConsumables()
+    {
+        if (DataLoader.Instance != null)
+        {
+            return DataLoader.Instance.get_all_consumables();
+        }
+
+        Node dataLoader = GetDataLoaderSingleton();
+        if (dataLoader == null)
+        {
+            return new Godot.Collections.Array<Variant>();
+        }
+
+        return dataLoader.Call("get_all_consumables").AsGodotArray<Variant>();
+    }
+
     public static Godot.Collections.Array<Variant> GetAllTowerData()
     {
         Node dataLoader = GetDataLoaderSingleton();

@@ -41,6 +41,8 @@ public partial class RunContext : Node
 
     public void reset_run()
     {
+        RunContextRuntime.Reset();
+
         this.towers_manager?.dispose_events();
 
         this.offers_manager = new OffersManager();
