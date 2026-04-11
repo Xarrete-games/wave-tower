@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://f428sxnliflm"]
 
-[ext_resource type="Script" uid="uid://ca2u5lva3ss8p" path="res://ui/screens/events_screen/shop_screen/shop_slot/shop_slot.gd" id="1_yea32"]
+[ext_resource type="Script" path="res://ui/screens/events_screen/shop_screen/shop_slot/ShopSlot.cs" id="1_yea32"]
 [ext_resource type="PackedScene" uid="uid://w5v1o84mc2gb" path="res://ui/screens/events_screen/shop_screen/shop_slot/shop_slot_icon.tscn" id="2_d3qw0"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="2_r6lm4"]
 [ext_resource type="PackedScene" uid="uid://di132c8on6fw" path="res://ui/components/health_price/health_price.tscn" id="4_eyx8o"]

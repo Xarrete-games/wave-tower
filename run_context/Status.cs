@@ -98,12 +98,17 @@ public partial class Status : RefCounted
 
     public void setup(RunProgress p_progress, Variant p_relics_manager)
     {
+        if (this.progress != null)
+        {
+            this.progress.current_wave_finished -= this._on_wave_finished;
+        }
+
         this.progress = p_progress;
         this.relics_manager = p_relics_manager;
 
         if (this.progress != null)
         {
-            this.progress.Connect("current_wave_finished", Callable.From(this._on_wave_finished));
+            this.progress.current_wave_finished += this._on_wave_finished;
         }
     }
 

@@ -38,7 +38,7 @@ public partial class ShopScreen : Control
         this.ChangeToBuyMode();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        if (!(bool)runContext.economy.Get("is_sell_active"))
+        if (!runContext.economy.is_sell_active)
         {
             this.sell_button.Visible = false;
         }
@@ -50,10 +50,10 @@ public partial class ShopScreen : Control
     {
         foreach (Variant relic in relics)
         {
-            Node slot = ShopSlotScene.Instantiate();
+            ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
             this.relics_container.AddChild(slot);
-            slot.Call("set_item", relic);
-            slot.Connect("item_purchased", Callable.From<Variant, Variant>(this.OnItemPurchase));
+            slot.set_item(relic);
+            slot.item_purchased += this.OnItemPurchase;
         }
     }
 
@@ -61,10 +61,10 @@ public partial class ShopScreen : Control
     {
         foreach (Variant consumable in consumables)
         {
-            Node slot = ShopSlotScene.Instantiate();
+            ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
             this.consumables_container.AddChild(slot);
-            slot.Call("set_item", consumable);
-            slot.Connect("item_purchased", Callable.From<Variant, Variant>(this.OnItemPurchase));
+            slot.set_item(consumable);
+            slot.item_purchased += this.OnItemPurchase;
         }
     }
 
@@ -116,10 +116,10 @@ public partial class ShopScreen : Control
             GodotObject itemData = itemOfferObj?.Get("item_data").AsGodotObject();
             if (itemData != null)
             {
-                runContext.relics_manager.Call("remove_relic", itemData.Get("id"));
+                runContext.relics_manager.remove_relic((string)itemData.Get("id"));
             }
 
-            runContext.economy.Call("add_gold", itemOfferObj?.Get("price") ?? 0);
+            runContext.economy.add_gold((int)(itemOfferObj?.Get("price") ?? 0));
             GetNode<Node>("/root/AudioManager").Call("play_purchase");
             this.sell_button.Call("disable");
             this._on_exit_button_pressed();
@@ -165,7 +165,7 @@ public partial class ShopScreen : Control
     private void BuildRelicsForSale()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        var currentRelics = runContext.relics_manager.Call("get_all_relics").AsGodotArray<Variant>();
+        var currentRelics = runContext.relics_manager.get_all_relics();
         var currentRelicsData = new Godot.Collections.Array<Variant>();
         foreach (Variant relicData in currentRelics)
         {
@@ -174,13 +174,13 @@ public partial class ShopScreen : Control
             currentRelicsData.Add(data);
         }
 
-        var relicOffers = runContext.offers_manager.Call("create_relic_offers_from_data", currentRelicsData).AsGodotArray<Variant>();
+        var relicOffers = runContext.offers_manager.create_relic_offers_from_data(currentRelicsData);
         foreach (Variant relicOffer in relicOffers)
         {
-            Node slot = ShopSlotScene.Instantiate();
+            ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
             this.sell_relics_container.AddChild(slot);
-            slot.Call("set_item", relicOffer);
-            slot.Connect("item_purchased", Callable.From<Variant, Variant>(this.OnItemSold));
+            slot.set_item(relicOffer);
+            slot.item_purchased += this.OnItemSold;
         }
     }
 }

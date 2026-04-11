@@ -25,16 +25,27 @@ public partial class RunHandler : Node
     private GodotObject _shopEvent;
     private GodotObject _chooseRelicEvent;
     private Godot.Collections.Array<Variant> _optionsEvents = new();
+    private RunProgress _progress;
 
     public override void _Ready()
     {
         this.SetEventsByType();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.progress.Connect("current_wave_finished", Callable.From(this.OnWaveFinished));
-        runContext.progress.Connect("last_wave_finished", Callable.From(this.OnLastWaveFinished));
+        this._progress = runContext.progress;
+        this._progress.current_wave_finished += this.OnWaveFinished;
+        this._progress.last_wave_finished += this.OnLastWaveFinished;
 
         this.ShowNextWaveScreen();
+    }
+
+    public override void _ExitTree()
+    {
+        if (this._progress != null)
+        {
+            this._progress.current_wave_finished -= this.OnWaveFinished;
+            this._progress.last_wave_finished -= this.OnLastWaveFinished;
+        }
     }
 
     public async Task ShowLootScreen()
@@ -126,7 +137,7 @@ public partial class RunHandler : Node
             return;
         }
 
-        int currentWave = (int)runContext.progress.Get("current_wave");
+        int currentWave = runContext.progress.current_wave;
         GodotObject eventData = this.GetNextEvent(currentWave);
         if (eventData == null)
         {
@@ -141,10 +152,9 @@ public partial class RunHandler : Node
     private async void OnLastWaveFinished()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        int currentGold = (int)runContext.economy.Get("gold");
-        runContext.economy.Set("gold", currentGold + 50);
+        runContext.economy.gold += 50;
 
-        bool isLastWave = (bool)runContext.progress.Call("is_last_wave");
+        bool isLastWave = runContext.progress.is_last_wave();
         if (isLastWave)
         {
             await ToSignal(GetTree().CreateTimer(5, false), "timeout");

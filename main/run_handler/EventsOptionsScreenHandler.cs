@@ -8,7 +8,7 @@ public partial class EventsOptionsScreenHandler : Node
 
     public async Task ShowOptionsEventAsync(Variant eventData, CanvasLayer eventLayer)
     {
-        Node optionsScreen = this.events_options_screen.Instantiate();
+        EventOptionsScreen optionsScreen = this.events_options_screen.Instantiate<EventOptionsScreen>();
 
         if (!IsInsideTree())
         {
@@ -18,7 +18,7 @@ public partial class EventsOptionsScreenHandler : Node
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
         eventLayer.AddChild(optionsScreen);
-        optionsScreen.Call("set_event", eventData);
-        await ToSignal(optionsScreen, "event_completed");
+        optionsScreen.set_event(eventData);
+        await ToSignal(optionsScreen, EventOptionsScreen.SignalName.event_completed);
     }
 }

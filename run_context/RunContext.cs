@@ -39,9 +39,22 @@ public partial class RunContext : Node
         this.reset_run();
     }
 
+    public override void _ExitTree()
+    {
+        if (this.status != null)
+        {
+            this.status.player_died -= this._on_die;
+        }
+    }
+
     public void reset_run()
     {
         RunContextRuntime.Reset();
+
+        if (this.status != null)
+        {
+            this.status.player_died -= this._on_die;
+        }
 
         this.towers_manager?.dispose_events();
 
@@ -60,7 +73,7 @@ public partial class RunContext : Node
         this.enemy_manager = new EnemyManager();
         this.is_on_restarting = false;
 
-        this.status.Connect("player_died", Callable.From(this._on_die), (uint)ConnectFlags.OneShot);
+        this.status.player_died += this._on_die;
     }
 
     private void _on_die()

@@ -9,6 +9,7 @@ public partial class TowerPlacer : Node2D
     private bool _isPlacing;
     private Node2D _currentTowerInstance;
     private bool _isValidPlacement;
+    private RunProgress _progress;
 
     public override void _Ready()
     {
@@ -17,13 +18,20 @@ public partial class TowerPlacer : Node2D
         ClickEventsBus.TowerBuildButtonPressed += this.OnTowerButtonPressed;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.progress.Connect("current_wave_finished", Callable.From(this.CancelTower));
-        runContext.progress.Connect("last_wave_finished", Callable.From(this.CancelTower));
+        this._progress = runContext.progress;
+        this._progress.current_wave_finished += this.CancelTower;
+        this._progress.last_wave_finished += this.CancelTower;
     }
 
     public override void _ExitTree()
     {
         ClickEventsBus.TowerBuildButtonPressed -= this.OnTowerButtonPressed;
+
+        if (this._progress != null)
+        {
+            this._progress.current_wave_finished -= this.CancelTower;
+            this._progress.last_wave_finished -= this.CancelTower;
+        }
     }
 
     public override void _Process(double delta)
@@ -85,7 +93,7 @@ public partial class TowerPlacer : Node2D
         this._currentTowerInstance.Call("enable");
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.towers_manager.Call("add_tower_placed", this._currentTowerInstance);
+        runContext.towers_manager.add_tower_placed(this._currentTowerInstance);
 
         this._currentTowerInstance = null;
 
@@ -95,26 +103,25 @@ public partial class TowerPlacer : Node2D
     private bool HasEnoughGold(int towerPrice)
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        if ((int)runContext.economy.Get("available_free_towers") > 0)
+        if (runContext.economy.available_free_towers > 0)
         {
             return true;
         }
 
-        return (int)runContext.economy.Get("gold") >= towerPrice;
+        return runContext.economy.gold >= towerPrice;
     }
 
     private void HandleCosts(int towerPrice)
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        int freeTowers = (int)runContext.economy.Get("available_free_towers");
+        int freeTowers = runContext.economy.available_free_towers;
         if (freeTowers > 0)
         {
-            runContext.economy.Set("available_free_towers", freeTowers - 1);
+            runContext.economy.available_free_towers = freeTowers - 1;
         }
         else
         {
-            int gold = (int)runContext.economy.Get("gold");
-            runContext.economy.Set("gold", gold - towerPrice);
+            runContext.economy.gold -= towerPrice;
         }
     }
 

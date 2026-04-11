@@ -35,10 +35,10 @@ public partial class ChooseRelicScreen : Control
 
         foreach (Variant relicData in relics)
         {
-            Node card = ChooseRelicCardScene.Instantiate();
+            ChooseRelicCard card = ChooseRelicCardScene.Instantiate<ChooseRelicCard>();
             this.cards_container.AddChild(card);
-            card.Call("set_relic", relicData);
-            card.Connect("card_pressed", Callable.From<Variant>(this.OnCardPressed));
+            card.set_relic(relicData);
+            card.card_pressed += this.OnCardPressed;
         }
 
         this.reroll_priece.Set("price", this._rerollPrice);
@@ -57,7 +57,7 @@ public partial class ChooseRelicScreen : Control
     private void _on_reroll_button_xarreta_pressed()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        int gold = (int)runContext.economy.Get("gold");
+        int gold = runContext.economy.gold;
         if (this._rerollPrice <= gold)
         {
             EmitSignal(SignalName.reroll_pressed);

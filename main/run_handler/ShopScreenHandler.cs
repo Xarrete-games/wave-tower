@@ -11,22 +11,23 @@ public partial class ShopScreenHandler : Node
     public async Task OpenShopAsync(CanvasLayer eventLayer)
     {
         var runContext = GetNode<RunContext>("/root/RunContext");
-        var relics = runContext.offers_manager.Call("create_relic_offers", 5).AsGodotArray<Variant>();
-        var consumables = runContext.offers_manager.Call("create_consumables_offers", 5).AsGodotArray<Variant>();
+        var relics = runContext.offers_manager.create_relic_offers(5);
+        var consumables = runContext.offers_manager.create_consumables_offers(5);
 
-        Node shopScreen = ShopScreenScene.Instantiate();
+        ShopScreen shopScreen = ShopScreenScene.Instantiate<ShopScreen>();
         eventLayer.AddChild(shopScreen);
-        shopScreen.Call("set_relics", relics);
-        shopScreen.Call("set_consumables", consumables);
-        shopScreen.Connect("item_purchase", Callable.From<Variant>(this.OnItemPurchased));
+        shopScreen.set_relics(relics);
+        shopScreen.set_consumables(consumables);
+        shopScreen.item_purchase += this.OnItemPurchased;
 
         await ToSignal(shopScreen, "tree_exited");
+        shopScreen.item_purchase -= this.OnItemPurchased;
         EmitSignal(SignalName.shop_closed);
     }
 
     private void OnItemPurchased(Variant itemOffer)
     {
         var runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.offers_manager.Call("purchase_offer", itemOffer);
+        runContext.offers_manager.purchase_offer(itemOffer);
     }
 }

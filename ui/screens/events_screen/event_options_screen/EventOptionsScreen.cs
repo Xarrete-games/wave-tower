@@ -64,19 +64,19 @@ public partial class EventOptionsScreen : Control
                 continue;
             }
 
-            Node buttonOption = this.button_option_scene.Instantiate();
+            EventOptionButton buttonOption = this.button_option_scene.Instantiate<EventOptionButton>();
             this.buttons_container.AddChild(buttonOption);
-            buttonOption.Set("text", optionData.Get("text"));
-            buttonOption.Set("option_data", optionData.Get("data"));
+            buttonOption.Text = optionData.Get("text").AsString();
+            buttonOption.option_data = optionData.Get("data");
             buttonOption.Name = $"OptionButton_{index}";
             index += 1;
 
             if ((bool)optionData.Get("disabled"))
             {
-                buttonOption.Call("disable_option");
+                buttonOption.disable_option();
             }
 
-            buttonOption.Connect("option_selected", Callable.From<Variant>(this.OnOptionSelected));
+            buttonOption.option_selected += this.OnOptionSelected;
         }
     }
 
