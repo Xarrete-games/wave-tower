@@ -53,9 +53,9 @@ public partial class RunHandler : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         var cards = runContext.towers_manager.get_random_towers(3);
 
-        Node chooseTowerScreen = ChooseTowerScreenScene.Instantiate();
+        ChooseTowerScreen chooseTowerScreen = ChooseTowerScreenScene.Instantiate<ChooseTowerScreen>();
         this.event_layer.AddChild(chooseTowerScreen);
-        chooseTowerScreen.Call("populate_screen", cards);
+        chooseTowerScreen.PopulateScreen(cards);
 
         await ToSignal(chooseTowerScreen, "done");
     }
