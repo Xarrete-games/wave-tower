@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://byy7o2o0hm4t"]
 
-[ext_resource type="Script" uid="uid://78rjwke2ur88" path="res://ui/screens/explanation/explanation.gd" id="1_gk24h"]
+[ext_resource type="Script" path="res://ui/screens/explanation/Explanation.cs" id="1_gk24h"]
 [ext_resource type="Texture2D" uid="uid://bq6lt7tlxw0te" path="res://assets/sprites/ui/main_menu_background.png" id="2_05xss"]
 [ext_resource type="Texture2D" uid="uid://deipjkusxh5iy" path="res://assets/sprites/ui/explanation/place_towers.png" id="2_rxyxh"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="2_xtdxm"]

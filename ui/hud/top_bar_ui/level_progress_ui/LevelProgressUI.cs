@@ -16,18 +16,26 @@ public partial class LevelProgressUI : Control
     [Export]
     public Control slots_container;
 
+    private RunProgress _progress;
+
     public override void _Ready()
     {
         this.ClearSlots();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.progress.Connect("current_wave_changed", Callable.From<int>(this.OnWaveInit));
+        this._progress = runContext.progress;
+        this._progress.current_wave_changed += this.OnWaveInit;
 
         ClickEventsBus.ResetGameButtonPressed += this.ClearSlots;
     }
 
     public override void _ExitTree()
     {
+        if (this._progress != null)
+        {
+            this._progress.current_wave_changed -= this.OnWaveInit;
+        }
+
         ClickEventsBus.ResetGameButtonPressed -= this.ClearSlots;
     }
 
@@ -46,29 +54,29 @@ public partial class LevelProgressUI : Control
     {
         for (int index = 0; index < 10; index++)
         {
-            Node slot = LevelProgressSlotScene.Instantiate();
+            LevelProgressSlot slot = LevelProgressSlotScene.Instantiate<LevelProgressSlot>();
             this.slots_container.AddChild(slot);
 
             int waveNumber = index + 1;
             if (Contains(WavesWithEvents, waveNumber))
             {
-                slot.Call("set_icon", QuestionIcon);
+                slot.set_icon(QuestionIcon);
             }
             else if (Contains(WavesWithShops, waveNumber))
             {
-                slot.Call("set_icon", ShopIcon);
+                slot.set_icon(ShopIcon);
             }
             else if (Contains(WavesWithRelics, waveNumber))
             {
-                slot.Call("set_icon", RelicIcon);
+                slot.set_icon(RelicIcon);
             }
             else if (Contains(WavesWithBoss, waveNumber))
             {
-                slot.Call("set_icon", SkullIcon);
+                slot.set_icon(SkullIcon);
             }
             else
             {
-                slot.Call("set_icon", Variant.CreateFrom((Texture2D)null));
+                slot.set_icon(null);
             }
         }
     }
@@ -81,8 +89,8 @@ public partial class LevelProgressUI : Control
         }
 
         int value = ((newValue - 1) % 10) + 1;
-        Node slot = this.slots_container.GetChild(value - 1);
-        slot.Call("fill");
+        LevelProgressSlot slot = this.slots_container.GetChild<LevelProgressSlot>(value - 1);
+        slot.fill();
     }
 
     private void _on_mouse_entered()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bsbslu7gvbl5b"]
 
-[ext_resource type="Script" uid="uid://dgdumc3sps2gj" path="res://ui/hud/top_bar_ui/waves_ui/waves_counter_ui.gd" id="1_u7m1g"]
+[ext_resource type="Script" path="res://ui/hud/top_bar_ui/waves_ui/WavesCounterUI.cs" id="1_u7m1g"]
 
 [node name="WavesCounterUI" type="VBoxContainer"]
 offset_right = 151.0

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsmhbhd7nv78e"]
 
-[ext_resource type="Script" uid="uid://byl0ha6842ni4" path="res://ui/screens/pause_screen/resolution_menu/resolution_menu.gd" id="1_rjtgo"]
+[ext_resource type="Script" path="res://ui/screens/pause_screen/resolution_menu/ResolutionMenu.cs" id="1_rjtgo"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="2_umlkh"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="3_5bay8"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ck6egv1gqhi50"]
 
 [ext_resource type="Texture2D" uid="uid://crnte3lkyvqks" path="res://assets/images/icons/armor.png" id="1_oyqww"]
-[ext_resource type="Script" uid="uid://c8i2a3lre5262" path="res://ui/hud/top_bar_ui/armor_counter/armor_counter.gd" id="1_qf3wk"]
+[ext_resource type="Script" path="res://ui/hud/top_bar_ui/armor_counter/ArmorCounter.cs" id="1_qf3wk"]
 
 [node name="ArmorCounter" type="CenterContainer"]
 offset_right = 22.0

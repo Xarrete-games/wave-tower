@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dfcxnivp7sm3h"]
 
 [ext_resource type="StyleBox" uid="uid://de1oid76vx20r" path="res://assets/shaders/panel_black_box.tres" id="1_74gsb"]
-[ext_resource type="Script" uid="uid://065vw8xvnu1o" path="res://ui/components/hint/hint.gd" id="2_nt2fy"]
+[ext_resource type="Script" path="res://ui/components/hint/Hint.cs" id="2_nt2fy"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="3_8k276"]
 [ext_resource type="FontFile" uid="uid://biwgs5vif6nm6" path="res://assets/fonts/Kreon-VariableFont_wght.ttf" id="3_db7le"]
 
