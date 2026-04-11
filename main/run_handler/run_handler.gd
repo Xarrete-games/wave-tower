@@ -5,7 +5,7 @@ const NEXT_LEVEL_SCREEN = preload("uid://crastw7xnqgvl")
 const END_GAME_SCENE = preload("uid://ovtc0l4cimpl")
 const WAVES_WITH_EVENTS = [8]
 const WAVES_WITH_SHOPS = [4]
-const WAVES_WITH_RELICS = [2,6,10]
+const WAVES_WITH_RELICS = [8,6,10]
 
 var events: Array[EventData]
 var shop_event: EventData

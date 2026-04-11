@@ -16,7 +16,7 @@ public partial class RunHandler : Node
     public CanvasLayer event_layer;
 
     [Export]
-    public Node events_screen_hander;
+    public EventsScreenHandler events_screen_hander;
 
     [Export]
     public LootScreenHandler loot_screen_handler;
@@ -67,8 +67,7 @@ public partial class RunHandler : Node
             return;
         }
 
-        this.events_screen_hander.Call("show_event_selected", eventData, this.event_layer);
-        await ToSignal(this.events_screen_hander, "event_finished");
+        await this.events_screen_hander.ShowEventSelectedAsync(eventData, this.event_layer);
     }
 
     private void SetEventsByType()

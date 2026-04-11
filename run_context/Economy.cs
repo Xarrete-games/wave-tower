@@ -9,7 +9,7 @@ public partial class Economy : RefCounted
     [Signal]
     public delegate void gold_changeEventHandler(int amount);
 
-    private int _gold = 100;
+    private int _gold = 10000;
     private int _availableFreeTowers;
 
     public bool is_sell_active { get; set; }
