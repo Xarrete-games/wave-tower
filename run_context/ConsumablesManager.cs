@@ -57,6 +57,7 @@ public partial class ConsumablesManager : RefCounted
 
         if (consumableModel != null)
         {
+            this.SyncConsumableUseTargetToRuntime(consumableObj, consumableModel);
             this.SyncRuntimeStatusFromLegacy();
             Hooks.OnConsumableUsed(Hooks.GetListenersFromRuntime(), consumableModel);
             this.SyncLegacyStatusFromRuntime();
@@ -227,6 +228,41 @@ public partial class ConsumablesManager : RefCounted
         towersManager.sync_runtime_buffs_for_tower(targetTower.GetInstanceId());
     }
 
+    private void SyncConsumableUseTargetToRuntime(Consumable consumableObj, ConsumableModel consumableModel)
+    {
+        if (consumableObj == null || consumableModel is not ConsumableTargeteableModel targetModel)
+        {
+            return;
+        }
+
+        if (targetModel.TargetingType != ConsumableTargeteableModel.TargetType.Tower)
+        {
+            return;
+        }
+
+        if (this.TryGetTargetTowerModelFromConsumable(consumableObj, out TowerModel towerModel))
+        {
+            targetModel.TargetTower = towerModel;
+        }
+    }
+
+    private bool TryGetTargetTowerModelFromConsumable(Consumable consumableObj, out TowerModel towerModel)
+    {
+        towerModel = null;
+        if (consumableObj is not ConsumableTargeteable targeteable)
+        {
+            return false;
+        }
+
+        GodotObject targetTower = targeteable.target.AsGodotObject();
+        if (targetTower == null)
+        {
+            return false;
+        }
+
+        return RunContextRuntime.TowersManager.TryGetTowerByInstanceId(targetTower.GetInstanceId(), out towerModel);
+    }
+
     private RunContext GetRunContext()
     {
         return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
@@ -260,13 +296,7 @@ public partial class ConsumablesManager : RefCounted
         var model = new ConsumableTargeteableModel(id, targetType);
         if (targetType == ConsumableTargeteableModel.TargetType.Tower)
         {
-            GodotObject targetTower = null;
-            if (consumableObj is ConsumableTargeteable targeteable)
-            {
-                targetTower = targeteable.target.AsGodotObject();
-            }
-
-            if (targetTower != null && RunContextRuntime.TowersManager.TryGetTowerByInstanceId(targetTower.GetInstanceId(), out TowerModel towerModel))
+            if (this.TryGetTargetTowerModelFromConsumable(consumableObj, out TowerModel towerModel))
             {
                 model.TargetTower = towerModel;
             }

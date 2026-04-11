@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://bl4psouhduuh5" path="res://levels/word_builder/composite_tile_map.gd" id="11_ctm01"]
 [ext_resource type="Script" uid="uid://354ibqomb0pe" path="res://levels/TowerSelector.cs" id="12_pb4yr"]
 [ext_resource type="Script" uid="uid://ky15h85r6dhk" path="res://levels/kill_event_handler.gd" id="18_1spm6"]
-[ext_resource type="Script" uid="uid://yhjdvpv621gf" path="res://levels/consumables_handler.gd" id="18_dx4vj"]
+[ext_resource type="Script" uid="uid://bh4878n88siac" path="res://levels/ConsumablesHandler.cs" id="18_dx4vj"]
 [ext_resource type="PackedScene" uid="uid://oesepsa8dbuy" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.tscn" id="19_w0qnt"]
 
 [node name="ProceduralLevel" type="Node2D" unique_id=1437931111]

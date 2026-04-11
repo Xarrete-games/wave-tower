@@ -39,8 +39,16 @@ public partial class ConsumableData : BaseData
                 return default;
             }
 
-            GodotObject obj = created.AsGodotObject();
-            obj?.Set("data", this);
+            if (created.AsGodotObject() is Consumable consumable)
+            {
+                consumable.init(this);
+            }
+            else
+            {
+                GodotObject obj = created.AsGodotObject();
+                obj?.Set("data", this);
+            }
+
             return created;
         }
 

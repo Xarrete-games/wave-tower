@@ -20,6 +20,22 @@ public partial class Consumable : RefCounted
 
     public Variant data { get; set; }
 
+    public ConsumableData Data => this.data.As<ConsumableData>();
+
+    public Consumable()
+    {
+    }
+
+    public Consumable(ConsumableData p_data)
+    {
+        this.init(p_data);
+    }
+
+    public virtual void init(ConsumableData p_data)
+    {
+        this.data = p_data;
+    }
+
     public virtual bool requires_target()
     {
         return false;
@@ -27,8 +43,7 @@ public partial class Consumable : RefCounted
 
     public Variant get_source()
     {
-        GodotObject dataObj = this.data.AsGodotObject();
-        string id = dataObj == null ? string.Empty : dataObj.Get("id").AsString();
+        string id = this.Data?.id ?? string.Empty;
         return _sourceScript.Call("new", CONSUMABLE_SOURCE_TYPE, id, this);
     }
 
