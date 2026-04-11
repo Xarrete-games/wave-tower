@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="1_0pqbo"]
 [ext_resource type="Texture2D" uid="uid://hdde3gfutbf5" path="res://assets/images/events/buda_event.png" id="2_3iddy"]
-[ext_resource type="Script" uid="uid://bbdtqbsv17hei" path="res://ui/screens/events_screen/event_options_screen/event_options_screen.gd" id="2_o48s5"]
+[ext_resource type="Script" path="res://ui/screens/events_screen/event_options_screen/EventOptionsScreen.cs" id="2_o48s5"]
 [ext_resource type="PackedScene" uid="uid://etr820jx2t64" path="res://ui/screens/events_screen/event_options_screen/event_option_button.tscn" id="3_u6cdb"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="4_gu0n2"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="5_cpdtn"]

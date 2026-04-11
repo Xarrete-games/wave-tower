@@ -72,8 +72,8 @@ public partial class RunHandler : Node
 
     private void SetEventsByType()
     {
-        Node dataLoader = GetNode<Node>("/root/DataLoader");
-        this._events = dataLoader.Call("get_all_events").AsGodotArray<Variant>();
+        DataLoader dataLoader = GetNode<DataLoader>("/root/DataLoader");
+        this._events = dataLoader.get_all_events();
         this._shopEvent = null;
         this._chooseRelicEvent = null;
         this._optionsEvents = new Godot.Collections.Array<Variant>();
@@ -87,15 +87,15 @@ public partial class RunHandler : Node
             }
 
             int eventType = (int)eventData.Get("type");
-            if (eventType == 0)
+            if (eventType == 1)
             {
                 this._shopEvent = eventData;
             }
-            else if (eventType == 1)
+            else if (eventType == 2)
             {
                 this._chooseRelicEvent = eventData;
             }
-            else if (eventType == 2)
+            else if (eventType == 0)
             {
                 this._optionsEvents.Add(eventData);
             }
