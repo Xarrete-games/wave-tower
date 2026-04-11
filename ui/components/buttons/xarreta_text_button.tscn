@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bj0kwv4dsl0i1"]
 
 [ext_resource type="Theme" uid="uid://i4yc46f71ey1" path="res://ui/styles/themes/text_button.tres" id="1_d2jns"]
-[ext_resource type="Script" uid="uid://bucqbucrgu1eb" path="res://ui/components/buttons/xarreta_button.gd" id="1_in52u"]
+[ext_resource type="Script" path="res://ui/components/buttons/XarretaButton.cs" id="1_in52u"]
 
 [node name="XarretaTextButton" type="Button"]
 anchors_preset = 15

@@ -71,22 +71,21 @@ public partial class RelicsManager : RefCounted
             return;
         }
 
-        GodotObject relicObj = relic.AsGodotObject();
+        RelicRuntimeAdapter relicObj = relic.AsGodotObject() as RelicRuntimeAdapter;
         if (relicObj == null)
         {
             GD.PushError("[RelicsManager] Attempted to add invalid relic instance");
             return;
         }
 
-        Variant dataVariant = relicObj.Get("data");
-        GodotObject dataObj = dataVariant.AsGodotObject();
+        RelicData dataObj = relicObj.data.As<RelicData>();
         if (dataObj == null)
         {
             GD.PushError("[RelicsManager] Relic data is invalid");
             return;
         }
 
-        string relicId = (string)dataObj.Get("id");
+        string relicId = dataObj.id;
         if (this._relics.ContainsKey(relicId))
         {
             GD.PushError($"Relic with ID '{relicId}' already exists. Cannot add duplicate relics.");
@@ -94,7 +93,7 @@ public partial class RelicsManager : RefCounted
         }
 
         this.PlayRelicObtain();
-        relicObj.Call("on_obtain");
+        relicObj.on_obtain();
         this._add_relic(relic);
 
         RunContextRuntime.RelicsManager.AddRelicById(relicId);
@@ -107,15 +106,15 @@ public partial class RelicsManager : RefCounted
             return;
         }
 
-        GodotObject relicObj = this._relics[relic_id].AsGodotObject();
+        RelicRuntimeAdapter relicObj = this._relics[relic_id].AsGodotObject() as RelicRuntimeAdapter;
         if (relicObj == null)
         {
             this._relics.Remove(relic_id);
             return;
         }
 
-        relicObj.Call("on_remove");
-        relicObj.Disconnect("changed", Callable.From<Variant>(this.emit_relic_changed));
+        relicObj.on_remove();
+        relicObj.changed -= this.emit_relic_changed;
         this._relics.Remove(relic_id);
 
         int currentCount = this._relicsCount.ContainsKey(relic_id) ? this._relicsCount[relic_id] : 0;
@@ -127,16 +126,26 @@ public partial class RelicsManager : RefCounted
 
     private void _add_relic(Variant relic)
     {
-        GodotObject relicObj = relic.AsGodotObject();
-        GodotObject dataObj = relicObj.Get("data").AsGodotObject();
-        string relicId = (string)dataObj.Get("id");
+        RelicRuntimeAdapter relicObj = relic.AsGodotObject() as RelicRuntimeAdapter;
+        if (relicObj == null)
+        {
+            return;
+        }
+
+        RelicData dataObj = relicObj.data.As<RelicData>();
+        if (dataObj == null)
+        {
+            return;
+        }
+
+        string relicId = dataObj.id;
 
         this._relics[relicId] = relic;
         int currentCount = this._relicsCount.ContainsKey(relicId) ? this._relicsCount[relicId] : 0;
         this._relicsCount[relicId] = currentCount + 1;
 
         this.EmitSignal(SignalName.relic_added, relic);
-        relicObj.Connect("changed", Callable.From<Variant>(this.emit_relic_changed));
+        relicObj.changed += this.emit_relic_changed;
     }
 
     public void emit_relic_changed(Variant relic)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7oa0k10y8jb1"]
 
 [ext_resource type="Theme" uid="uid://bfml0mq4yid2" path="res://ui/styles/themes/menu_buttons_icon_theme.tres" id="1_l7bht"]
-[ext_resource type="Script" uid="uid://bucqbucrgu1eb" path="res://ui/components/buttons/xarreta_button.gd" id="2_ly6fl"]
+[ext_resource type="Script" path="res://ui/components/buttons/XarretaButton.cs" id="2_ly6fl"]
 
 [node name="XarretaIconActionButton" type="Button" unique_id=1214621303]
 theme = ExtResource("1_l7bht")

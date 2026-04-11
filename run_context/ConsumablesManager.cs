@@ -31,7 +31,7 @@ public partial class ConsumablesManager : RefCounted
             return;
         }
 
-        GodotObject consumableObj = consumable.AsGodotObject();
+        Consumable consumableObj = consumable.AsGodotObject() as Consumable;
         if (consumableObj == null)
         {
             return;
@@ -39,15 +39,15 @@ public partial class ConsumablesManager : RefCounted
 
         this._consumables.Add(consumable);
         this.SyncConsumableAddedToRuntime(consumableObj);
-        consumableObj.Connect("clicked", Callable.From<Variant>(this._on_consumable_clicked));
-        consumableObj.Connect("used", Callable.From<Variant>(this._on_consumable_used));
+        consumableObj.clicked += this._on_consumable_clicked;
+        consumableObj.used += this._on_consumable_used;
         this.EmitSignal(SignalName.consumables_change, this._consumables);
         this.EmitSignal(SignalName.consumable_added, consumable);
     }
 
     public void _on_consumable_used(Variant consumable)
     {
-        GodotObject consumableObj = consumable.AsGodotObject();
+        Consumable consumableObj = consumable.AsGodotObject() as Consumable;
         ulong instanceId = consumableObj?.GetInstanceId() ?? 0UL;
         ConsumableModel consumableModel = null;
         if (instanceId != 0UL)
@@ -65,8 +65,8 @@ public partial class ConsumablesManager : RefCounted
 
         if (consumableObj != null)
         {
-            consumableObj.Disconnect("clicked", Callable.From<Variant>(this._on_consumable_clicked));
-            consumableObj.Disconnect("used", Callable.From<Variant>(this._on_consumable_used));
+            consumableObj.clicked -= this._on_consumable_clicked;
+            consumableObj.used -= this._on_consumable_used;
             this.SyncConsumableRemovedFromRuntime(consumableObj);
         }
 
@@ -78,8 +78,8 @@ public partial class ConsumablesManager : RefCounted
         {
             this._runtimeConsumableModels[instanceId] = consumableModel;
             this._consumables.Add(consumable);
-            consumableObj.Connect("clicked", Callable.From<Variant>(this._on_consumable_clicked));
-            consumableObj.Connect("used", Callable.From<Variant>(this._on_consumable_used));
+            consumableObj.clicked += this._on_consumable_clicked;
+            consumableObj.used += this._on_consumable_used;
             this.EmitSignal(SignalName.consumable_added, consumable);
         }
 
@@ -88,17 +88,21 @@ public partial class ConsumablesManager : RefCounted
 
     public void _on_consumable_clicked(Variant consumable)
     {
-        GodotObject consumableObj = consumable.AsGodotObject();
+        Consumable consumableObj = consumable.AsGodotObject() as Consumable;
         if (consumableObj == null)
         {
             return;
         }
 
-        bool requiresTarget = consumableObj.HasMethod("requires_target") && (bool)consumableObj.Call("requires_target");
+        bool requiresTarget = consumableObj.requires_target();
         if (!requiresTarget)
         {
-            consumableObj.Call("use");
-            consumableObj.EmitSignal("used", consumable);
+            if (consumableObj is ConsumableUsable usable)
+            {
+                usable.use();
+            }
+
+            consumableObj.EmitSignal(Consumable.SignalName.used, consumable);
         }
         else
         {
@@ -106,7 +110,7 @@ public partial class ConsumablesManager : RefCounted
         }
     }
 
-    private void SyncConsumableAddedToRuntime(GodotObject consumableObj)
+    private void SyncConsumableAddedToRuntime(Consumable consumableObj)
     {
         if (consumableObj == null)
         {
@@ -124,7 +128,7 @@ public partial class ConsumablesManager : RefCounted
         RunContextRuntime.ConsumablesManager.AddConsumable(model);
     }
 
-    private void SyncConsumableRemovedFromRuntime(GodotObject consumableObj)
+    private void SyncConsumableRemovedFromRuntime(Consumable consumableObj)
     {
         if (consumableObj == null)
         {
@@ -162,7 +166,7 @@ public partial class ConsumablesManager : RefCounted
 
     private void SyncRuntimeStatusFromLegacy()
     {
-        Status status = this.GetSingleton("RunContext")?.Get("status").As<Status>();
+        Status status = this.GetRunContext()?.status;
         if (status == null)
         {
             return;
@@ -173,7 +177,7 @@ public partial class ConsumablesManager : RefCounted
 
     private void SyncLegacyStatusFromRuntime()
     {
-        Status status = this.GetSingleton("RunContext")?.Get("status").As<Status>();
+        Status status = this.GetRunContext()?.status;
         if (status == null)
         {
             return;
@@ -196,20 +200,25 @@ public partial class ConsumablesManager : RefCounted
         }
     }
 
-    private void SyncTowerBuffsFromConsumableTarget(GodotObject consumableObj)
+    private void SyncTowerBuffsFromConsumableTarget(Consumable consumableObj)
     {
         if (consumableObj == null)
         {
             return;
         }
 
-        GodotObject targetTower = consumableObj.Get("target").AsGodotObject();
+        GodotObject targetTower = null;
+        if (consumableObj is ConsumableTargeteable targeteable)
+        {
+            targetTower = targeteable.target.AsGodotObject();
+        }
+
         if (targetTower == null)
         {
             return;
         }
 
-        TowersManager towersManager = this.GetSingleton("RunContext")?.Get("towers_manager").As<TowersManager>();
+        TowersManager towersManager = this.GetRunContext()?.towers_manager;
         if (towersManager == null)
         {
             return;
@@ -218,32 +227,32 @@ public partial class ConsumablesManager : RefCounted
         towersManager.sync_runtime_buffs_for_tower(targetTower.GetInstanceId());
     }
 
-    private Node GetSingleton(string name)
+    private RunContext GetRunContext()
     {
-        return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<Node>($"/root/{name}");
+        return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
     }
 
-    private ConsumableModel BuildConsumableModel(GodotObject consumableObj)
+    private ConsumableModel BuildConsumableModel(Consumable consumableObj)
     {
-        GodotObject data = consumableObj.Get("data").AsGodotObject();
+        ConsumableData data = consumableObj.data.As<ConsumableData>();
         if (data == null)
         {
             return null;
         }
 
-        string id = data.Get("id").AsString();
-        int consumableTypeRaw = (int)data.Get("consumable_type");
+        string id = data.id;
+        int consumableTypeRaw = data.consumable_type;
         ConsumableModel.ConsumableType consumableType = consumableTypeRaw == 1
             ? ConsumableModel.ConsumableType.Potion
             : ConsumableModel.ConsumableType.Other;
 
-        bool requiresTarget = consumableObj.HasMethod("requires_target") && (bool)consumableObj.Call("requires_target");
+        bool requiresTarget = consumableObj.requires_target();
         if (!requiresTarget)
         {
             return new SimpleConsumableModel(id, consumableType);
         }
 
-        int targetTypeRaw = (int)data.Get("targeting_type");
+        int targetTypeRaw = data.targeting_type;
         ConsumableTargeteableModel.TargetType targetType = targetTypeRaw == 1
             ? ConsumableTargeteableModel.TargetType.Tower
             : ConsumableTargeteableModel.TargetType.BlockedTile;
@@ -251,7 +260,12 @@ public partial class ConsumablesManager : RefCounted
         var model = new ConsumableTargeteableModel(id, targetType);
         if (targetType == ConsumableTargeteableModel.TargetType.Tower)
         {
-            GodotObject targetTower = consumableObj.Get("target").AsGodotObject();
+            GodotObject targetTower = null;
+            if (consumableObj is ConsumableTargeteable targeteable)
+            {
+                targetTower = targeteable.target.AsGodotObject();
+            }
+
             if (targetTower != null && RunContextRuntime.TowersManager.TryGetTowerByInstanceId(targetTower.GetInstanceId(), out TowerModel towerModel))
             {
                 model.TargetTower = towerModel;

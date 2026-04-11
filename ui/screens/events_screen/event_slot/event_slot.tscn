@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cl23rwbjcvak5"]
 
-[ext_resource type="Script" uid="uid://cky8wbd7mleu0" path="res://ui/screens/events_screen/event_slot/event_slot.gd" id="1_qy0vt"]
+[ext_resource type="Script" path="res://ui/screens/events_screen/event_slot/EventSlot.cs" id="1_qy0vt"]
 [ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="2_yjsho"]
 [ext_resource type="Texture2D" uid="uid://bmog50xiu4wle" path="res://assets/sprites/relics/boniato_relic.png" id="4_c5f36"]
 
