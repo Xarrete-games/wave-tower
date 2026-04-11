@@ -7,10 +7,10 @@ signal edge_finalized(piece: MapPiece, edge: Edge)
 
 var frontiers: Array[MapPiece] = []
 var grid_manager: GridManager
-var available_pieces: Array[MapPieceData] = []
+var available_pieces: Array = []
 
 
-func _init(p_grid_manager: GridManager, p_available_pieces: Array[MapPieceData]) -> void:
+func _init(p_grid_manager: GridManager, p_available_pieces: Array) -> void:
 	grid_manager = p_grid_manager
 	available_pieces = p_available_pieces
 	frontiers = []
