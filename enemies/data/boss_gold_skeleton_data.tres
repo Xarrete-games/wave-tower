@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://cvid14g5uo5i7"]
 
-[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_2btab"]
-[ext_resource type="Script" uid="uid://d4kyl7723aunc" path="res://enemies/enemy_wave_range.gd" id="1_44687"]
+[ext_resource type="Script" path="res://enemies/EnemyData.cs" id="1_2btab"]
+[ext_resource type="Script" path="res://enemies/EnemyWaveRange.cs" id="1_44687"]
 [ext_resource type="Texture2D" uid="uid://7ateg31sl8mh" path="res://assets/sprites/enemies/gold_skeleton/gold_skeleton1.png" id="1_h7ptv"]
 [ext_resource type="PackedScene" uid="uid://qsxiwo0d27dq" path="res://enemies/variations/boss_gold_skeleton.tscn" id="2_44687"]
 
@@ -9,7 +9,6 @@
 script = ExtResource("1_44687")
 initial_wave = 20
 final_wave = 20
-metadata/_custom_type_script = "uid://d4kyl7723aunc"
 
 [resource]
 script = ExtResource("1_2btab")
@@ -24,4 +23,3 @@ damage = 20
 base_gold_value = 50
 weight = 35
 available_waves = Array[ExtResource("1_44687")]([SubResource("Resource_iph4v")])
-metadata/_custom_type_script = "uid://cvnj0agbswaym"

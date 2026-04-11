@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dgcv5fdqvfext"]
 
 [ext_resource type="Theme" uid="uid://bansa1f47pkw0" path="res://ui/styles/themes/reward_card.tres" id="1_kt1bf"]
-[ext_resource type="Script" uid="uid://becnb17nd1vj1" path="res://ui/screens/events_screen/choose_relic_screen/choose_relic_card/choose_relic_card.gd" id="2_txuuf"]
+[ext_resource type="Script" path="res://ui/screens/events_screen/choose_relic_screen/choose_relic_card/ChooseRelicCard.cs" id="2_txuuf"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="3_v3ltv"]
 [ext_resource type="Texture2D" uid="uid://b2yl75fehdgdj" path="res://assets/textures/hexagon light.png" id="4_jemtg"]
 [ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="5_077cq"]

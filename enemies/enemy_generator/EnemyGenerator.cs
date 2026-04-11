@@ -21,7 +21,16 @@ public partial class EnemyGenerator : Node
 
     public override void _Ready()
     {
-        var enemyCatalog = DataLoaderAccess.GetAllEnemies();
+        var enemyCatalog = new Godot.Collections.Array<EnemyData>();
+        var rawEnemyCatalog = DataLoaderAccess.GetAllEnemies();
+        for (int index = 0; index < rawEnemyCatalog.Count; index++)
+        {
+            EnemyData enemyData = rawEnemyCatalog[index].As<EnemyData>();
+            if (enemyData != null)
+            {
+                enemyCatalog.Add(enemyData);
+            }
+        }
 
         if (this.wave_config == null)
         {

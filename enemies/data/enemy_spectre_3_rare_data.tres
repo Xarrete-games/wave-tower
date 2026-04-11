@@ -1,14 +1,13 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://bfdefovsppm46"]
 
-[ext_resource type="Script" uid="uid://d4kyl7723aunc" path="res://enemies/enemy_wave_range.gd" id="1_e4de1"]
+[ext_resource type="Script" path="res://enemies/EnemyWaveRange.cs" id="1_e4de1"]
 [ext_resource type="PackedScene" uid="uid://dsjx46nq7cp8o" path="res://enemies/variations/enemy_spectre_3_rare.tscn" id="2_e4de1"]
-[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="3_c3haw"]
+[ext_resource type="Script" path="res://enemies/EnemyData.cs" id="3_c3haw"]
 
 [sub_resource type="Resource" id="Resource_s3wbj"]
 script = ExtResource("1_e4de1")
 initial_wave = 22
 final_wave = 30
-metadata/_custom_type_script = "uid://d4kyl7723aunc"
 
 [resource]
 script = ExtResource("3_c3haw")
@@ -17,4 +16,3 @@ max_health = 1200
 base_speed = 180.0
 weight = 3
 available_waves = Array[ExtResource("1_e4de1")]([SubResource("Resource_s3wbj")])
-metadata/_custom_type_script = "uid://cvnj0agbswaym"

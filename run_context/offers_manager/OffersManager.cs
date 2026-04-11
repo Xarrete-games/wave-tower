@@ -45,51 +45,80 @@ public partial class OffersManager : RefCounted
 
     public Variant purchase_offer(Variant itemOfferVariant)
     {
-        GodotObject itemOffer = itemOfferVariant.AsGodotObject();
+        ItemOffer itemOffer = itemOfferVariant.AsGodotObject() as ItemOffer;
         if (itemOffer == null)
         {
             return default;
         }
 
-        GodotObject runContext = this.GetRunContext();
+        RunContext runContext = this.GetRunContext();
         if (runContext == null)
         {
             return default;
         }
 
-        GodotObject economy = runContext.Get("economy").AsGodotObject();
-        GodotObject status = runContext.Get("status").AsGodotObject();
-        GodotObject consumablesManager = runContext.Get("consumables_manager").AsGodotObject();
-        GodotObject relicsManager = runContext.Get("relics_manager").AsGodotObject();
-
-        int price = (int)itemOffer.Get("price");
-        int healthPrice = (int)itemOffer.Get("health_price");
-
-        economy.Set("gold", (int)economy.Get("gold") - price);
-        if (healthPrice > 0)
+        Economy economy = runContext.economy;
+        Status status = runContext.status;
+        ConsumablesManager consumablesManager = runContext.consumables_manager;
+        RelicsManager relicsManager = runContext.relics_manager;
+        if (economy == null || status == null)
         {
-            status.Set("health", (int)status.Get("health") - healthPrice);
+            return default;
         }
 
-        GodotObject itemData = itemOffer.Get("item_data").AsGodotObject();
-        Variant item = itemData.Call("create_item");
+        int price = itemOffer.price;
+        int healthPrice = itemOffer.health_price;
+
+        economy.gold -= price;
+        if (healthPrice > 0)
+        {
+            status.health -= healthPrice;
+        }
+
+        GodotObject itemData = itemOffer.item_data.AsGodotObject();
+        Variant item = this.CreateItemFromData(itemData);
 
         bool isConsumable = this.HasProperty(itemData, "consumable_type");
         if (isConsumable)
         {
-            consumablesManager.Call("add_consumable", item);
+            consumablesManager?.add_consumable(item);
         }
         else
         {
-            relicsManager.Call("add_relic", item);
+            relicsManager?.add_relic(item);
         }
 
         return item;
     }
 
-    private GodotObject GetRunContext()
+    private Variant CreateItemFromData(GodotObject itemData)
     {
-        return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<Node>("/root/RunContext");
+        if (itemData == null)
+        {
+            return default;
+        }
+
+        if (itemData is ConsumableData consumableData)
+        {
+            return consumableData.create_item();
+        }
+
+        if (itemData is RelicData relicData)
+        {
+            return relicData.create_item();
+        }
+
+        if (itemData.HasMethod("create_item"))
+        {
+            return itemData.Call("create_item");
+        }
+
+        return default;
+    }
+
+    private RunContext GetRunContext()
+    {
+        return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
     }
 
     private bool HasProperty(GodotObject obj, string propertyName)

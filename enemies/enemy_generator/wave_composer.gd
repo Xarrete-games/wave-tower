@@ -43,6 +43,16 @@ enum PressureType {
 	MIXED, ## Balanced mix of all unlocked types
 }
 
+## Local mirror of EnemyData.cs enum values.
+## GDScript cannot reliably reference nested C# enums as EnemyData.Type.
+enum EnemyType {
+	SWARM,
+	FAST,
+	NORMAL,
+	TANK,
+	BOSS,
+}
+
 # ---------------------------------------------------------
 # INTERNAL STATE
 # ---------------------------------------------------------
@@ -276,7 +286,7 @@ func _has_available_for_pressure(pressure: PressureType, wave_number: int) -> bo
 	if pressure == PressureType.MIXED:
 		return _get_all_available(wave_number).size() > 0
 
-	var enemy_type: EnemyData.Type = _pressure_to_enemy_type(pressure)
+	var enemy_type: int = _pressure_to_enemy_type(pressure)
 	return _get_available(enemy_type, wave_number).size() > 0
 
 func _pressure_to_string(pressure: PressureType) -> String:
@@ -303,17 +313,17 @@ func _groups_to_log(groups: Array[WaveGroup]) -> String:
 
 	return "[" + ", ".join(chunks) + "]"
 
-## Maps a PressureType to the EnemyData.Type used for catalog filtering.
-func _pressure_to_enemy_type(pressure: PressureType) -> EnemyData.Type:
+## Maps a PressureType to the EnemyData type value used for catalog filtering.
+func _pressure_to_enemy_type(pressure: PressureType) -> int:
 	match pressure:
 		PressureType.SWARM:
-			return EnemyData.Type.SWARM
+			return EnemyType.SWARM
 		PressureType.SPEED:
-			return EnemyData.Type.FAST
+			return EnemyType.FAST
 		PressureType.TANK:
-			return EnemyData.Type.TANK
+			return EnemyType.TANK
 		_:
-			return EnemyData.Type.NORMAL
+			return EnemyType.NORMAL
 
 # ---------------------------------------------------------
 # BOSS GROUP
@@ -321,7 +331,7 @@ func _pressure_to_enemy_type(pressure: PressureType) -> EnemyData.Type:
 
 ## Creates a dedicated boss group consuming part of the total budget.
 func _create_boss_group(available_budget: int, wave_number: int) -> WaveGroup:
-	var bosses: Array[EnemyData] = _get_available(EnemyData.Type.BOSS, wave_number)
+	var bosses: Array[EnemyData] = _get_available(EnemyType.BOSS, wave_number)
 	if bosses.size() == 0:
 		return null
 
@@ -352,7 +362,7 @@ func _fill_group(pressure: PressureType, group_budget: int, wave_number: int, fu
 	var group: WaveGroup = WaveGroup.new()
 	group.pressure = pressure
 
-	var primary_type: EnemyData.Type = _pressure_to_enemy_type(pressure)
+	var primary_type: int = _pressure_to_enemy_type(pressure)
 	var primary_candidates: Array[EnemyData] = _get_available(primary_type, wave_number)
 
 	# Fall back to all available if the specific type has no entries
@@ -382,7 +392,7 @@ func _fill_group(pressure: PressureType, group_budget: int, wave_number: int, fu
 # ---------------------------------------------------------
 
 ## Returns enemies of [param type] that are unlocked for [param wave_number].
-func _get_available(type: EnemyData.Type, wave_number: int) -> Array[EnemyData]:
+func _get_available(type: int, wave_number: int) -> Array[EnemyData]:
 	return _enemy_catalog.filter(func(data: EnemyData) -> bool:
 		return data.type == type and _is_unlocked(data, wave_number)
 	)
@@ -390,7 +400,7 @@ func _get_available(type: EnemyData.Type, wave_number: int) -> Array[EnemyData]:
 ## Returns every non-boss enemy unlocked for [param wave_number].
 func _get_all_available(wave_number: int) -> Array[EnemyData]:
 	return _enemy_catalog.filter(func(data: EnemyData) -> bool:
-		return data.type != EnemyData.Type.BOSS and _is_unlocked(data, wave_number)
+		return data.type != EnemyType.BOSS and _is_unlocked(data, wave_number)
 	)
 
 ## Whether a specific enemy is available at [param wave_number].

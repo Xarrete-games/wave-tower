@@ -1,15 +1,14 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://dy6a3hfruq764"]
 
-[ext_resource type="Script" uid="uid://d4kyl7723aunc" path="res://enemies/enemy_wave_range.gd" id="1_serup"]
+[ext_resource type="Script" path="res://enemies/EnemyWaveRange.cs" id="1_serup"]
 [ext_resource type="Texture2D" uid="uid://d0vnyp2ipp52q" path="res://assets/sprites/enemies/golem/golem.png" id="2_laomp"]
 [ext_resource type="PackedScene" uid="uid://b7ov3wko2d84y" path="res://enemies/variations/enemy_golem_3_prismarina.tscn" id="3_serup"]
-[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="4_rk243"]
+[ext_resource type="Script" path="res://enemies/EnemyData.cs" id="4_rk243"]
 
 [sub_resource type="Resource" id="Resource_srpcy"]
 script = ExtResource("1_serup")
 initial_wave = 50
 final_wave = 50
-metadata/_custom_type_script = "uid://d4kyl7723aunc"
 
 [resource]
 script = ExtResource("4_rk243")
@@ -23,4 +22,3 @@ base_speed = 220.0
 base_gold_value = 8
 weight = 8
 available_waves = Array[ExtResource("1_serup")]([SubResource("Resource_srpcy")])
-metadata/_custom_type_script = "uid://cvnj0agbswaym"

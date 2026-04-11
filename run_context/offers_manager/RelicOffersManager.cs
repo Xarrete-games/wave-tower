@@ -47,8 +47,8 @@ public partial class RelicOffersManager : RefCounted
     {
         var filtered = new Godot.Collections.Array<Variant>();
 
-        GodotObject runContext = this.GetRunContext();
-        GodotObject relicsManager = runContext?.Get("relics_manager").AsGodotObject();
+        RunContext runContext = this.GetRunContext();
+        RelicsManager relicsManager = runContext?.relics_manager;
 
         for (int index = 0; index < this._allRelicData.Count; index++)
         {
@@ -58,7 +58,7 @@ public partial class RelicOffersManager : RefCounted
                 continue;
             }
 
-            bool hasRelic = relicsManager != null && (bool)relicsManager.Call("has_relic", (string)data.Get("id"));
+            bool hasRelic = relicsManager != null && relicsManager.has_relic((string)data.Get("id"));
             bool isCursed = (bool)data.Get("is_cursed");
             bool onlyForEvents = (bool)data.Get("only_for_events");
 
@@ -96,9 +96,9 @@ public partial class RelicOffersManager : RefCounted
         return new ItemOffer(dataVariant, ctx.FinalPrice, healthPrice);
     }
 
-    private GodotObject GetRunContext()
+    private RunContext GetRunContext()
     {
-        return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<Node>("/root/RunContext");
+        return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
     }
 
     private void Shuffle(Godot.Collections.Array<Variant> items)

@@ -21,14 +21,12 @@ public partial class DataLoader : Node
     public Godot.Collections.Array<Variant> initial_map_pieces = new();
     public Godot.Collections.Array<Variant> map_pieces = new();
     public Godot.Collections.Array<Variant> tower_data = new();
-    public GodotObject enemy_data;
+    public EnemyDataLoader enemy_data;
 
     public override void _Ready()
     {
         Instance = this;
-
-        Script enemyDataLoaderScript = GD.Load<Script>("res://global/enemy_data_loader.gd");
-        this.enemy_data = enemyDataLoaderScript?.Call("new").AsGodotObject();
+        this.enemy_data = new EnemyDataLoader();
 
         this._load_relics();
         this._load_events();
@@ -111,8 +109,8 @@ public partial class DataLoader : Node
     public Godot.Collections.Array<Variant> get_not_used_relics(Variant rarity = default, Variant is_cursed = default)
     {
         var filtered = new Godot.Collections.Array<Variant>();
-        Node runContext = GetNodeOrNull<Node>("/root/RunContext");
-        GodotObject relicsManager = runContext?.Get("relics_manager").AsGodotObject();
+        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        RelicsManager relicsManager = runContext?.relics_manager;
 
         for (int index = 0; index < this.relics.Count; index++)
         {
@@ -153,7 +151,7 @@ public partial class DataLoader : Node
             bool alreadyOwned = false;
             if (relicsManager != null)
             {
-                alreadyOwned = (bool)relicsManager.Call("has_relic", relicData.Get("id"));
+                alreadyOwned = relicsManager.has_relic((string)relicData.Get("id"));
             }
 
             if (!alreadyOwned)
@@ -305,7 +303,7 @@ public partial class DataLoader : Node
             return new Godot.Collections.Array<Variant>();
         }
 
-        return this.enemy_data.Call("get_all_enemies").AsGodotArray<Variant>();
+        return this.enemy_data.get_all_enemies();
     }
 
     public Godot.Collections.Array<Variant> get_enemies_by_type(int type)
@@ -315,7 +313,7 @@ public partial class DataLoader : Node
             return new Godot.Collections.Array<Variant>();
         }
 
-        return this.enemy_data.Call("get_enemies_by_type", type).AsGodotArray<Variant>();
+        return this.enemy_data.get_enemies_by_type(type);
     }
 
     public Godot.Collections.Array<Variant> get_spawnable_enemies()
@@ -325,7 +323,7 @@ public partial class DataLoader : Node
             return new Godot.Collections.Array<Variant>();
         }
 
-        return this.enemy_data.Call("get_spawnable_enemies").AsGodotArray<Variant>();
+        return this.enemy_data.get_spawnable_enemies();
     }
 
     public Godot.Collections.Array<Variant> get_all_tower_data()
