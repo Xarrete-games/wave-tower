@@ -50,6 +50,7 @@ alpha_curve = SubResource("CurveTexture_5h5yc")
 
 [node name="LightningOverchargeTower" unique_id=1682269334 instance=ExtResource("1_5hrp4")]
 script = ExtResource("2_u5ijc")
+type = 1
 projectile_scene = ExtResource("3_kngkr")
 overcharge_particle_scene = ExtResource("4_3bx21")
 

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_4y5rc")
-id = "Ignition Voltage"
+id = "ignition_voltage"
 display_name = "Ignition Voltage"
 description = "Increases the attack speed of lightning turrets by 10%"
 icon = ExtResource("3_muhnu")

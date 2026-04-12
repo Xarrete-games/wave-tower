@@ -94,9 +94,16 @@ public partial class RelicsManager : RefCounted
 
         this.PlayRelicObtain();
         relicObj.on_obtain();
-        this._add_relic(relic);
 
-        RunContextRuntime.RelicsManager.AddRelicById(relicId);
+        bool addedToRuntime = RunContextRuntime.RelicsManager.AddRelicById(relicId);
+        GD.Print($"[RelicsManager] add_relic id={relicId} runtime_added={addedToRuntime}");
+        if (!addedToRuntime)
+        {
+            GD.PushError($"[RelicsManager] Could not add relic '{relicId}' to runtime listeners. Check RelicModelFactory id mapping.");
+        }
+
+        // Emit legacy signals only after runtime state is updated so UI recalculations read fresh hooks.
+        this._add_relic(relic);
     }
 
     public void remove_relic(string relic_id)
@@ -115,13 +122,13 @@ public partial class RelicsManager : RefCounted
 
         relicObj.on_remove();
         relicObj.changed -= this.emit_relic_changed;
+        RunContextRuntime.RelicsManager.RemoveRelic(relic_id);
+
         this._relics.Remove(relic_id);
 
         int currentCount = this._relicsCount.ContainsKey(relic_id) ? this._relicsCount[relic_id] : 0;
         this._relicsCount[relic_id] = currentCount - 1;
         this.EmitSignal(SignalName.relic_removed, relic_id);
-
-        RunContextRuntime.RelicsManager.RemoveRelic(relic_id);
     }
 
     private void _add_relic(Variant relic)

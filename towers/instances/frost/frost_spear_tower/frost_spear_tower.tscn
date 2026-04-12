@@ -78,6 +78,7 @@ alpha_curve = SubResource("CurveTexture_3kuch")
 
 [node name="FrostSpearTower" unique_id=870709759 instance=ExtResource("1_ue0bx")]
 script = ExtResource("2_dwnik")
+type = 2
 frost_spear_projectile_scene = ExtResource("3_dwnik")
 
 [node name="CristalLight" parent="." index="1" unique_id=1008625391]

@@ -80,6 +80,7 @@ alpha_curve = SubResource("CurveTexture_3kuch")
 
 [node name="FrostTower" unique_id=1290950096 instance=ExtResource("1_jbg6q")]
 script = ExtResource("2_iw8lg")
+type = 2
 upgrade_sprite = SubResource("AtlasTexture_iw8lg")
 
 [node name="Sprite2D" parent="." index="3"]
