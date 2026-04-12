@@ -1,0 +1,213 @@
+using Godot;
+using System.Collections.Generic;
+
+public partial class TowerBuffsBar : Control
+{
+    [Export]
+    public PackedScene slot_scene;
+
+    [Export]
+    public NodePath slots_container;
+
+    private GodotObject tower;
+    private readonly Godot.Collections.Array<GodotObject> tower_buffs = new();
+    private readonly Dictionary<string, int> buffs_modifiers_stacks = new();
+
+    private Control _slotsContainerNode;
+    private Callable _buffAddedCallable;
+    private Callable _buffRemovedCallable;
+
+    public override void _Ready()
+    {
+        this.tower = GetParent() as GodotObject;
+        this._slotsContainerNode = !this.slots_container.IsEmpty ? GetNodeOrNull<Control>(this.slots_container) : GetNodeOrNull<Control>("Container");
+
+        if (this.tower == null)
+        {
+            return;
+        }
+
+        this._buffAddedCallable = Callable.From<Variant>(this._on_tower_buff_added);
+        this._buffRemovedCallable = Callable.From<Variant>(this._on_tower_buff_removed);
+        this.tower.Connect("buff_added", this._buffAddedCallable);
+        this.tower.Connect("buff_removed", this._buffRemovedCallable);
+    }
+
+    public override void _ExitTree()
+    {
+        if (this.tower != null)
+        {
+            if (!this._buffAddedCallable.Equals(default(Callable)) && this.tower.IsConnected("buff_added", this._buffAddedCallable))
+            {
+                this.tower.Disconnect("buff_added", this._buffAddedCallable);
+            }
+
+            if (!this._buffRemovedCallable.Equals(default(Callable)) && this.tower.IsConnected("buff_removed", this._buffRemovedCallable))
+            {
+                this.tower.Disconnect("buff_removed", this._buffRemovedCallable);
+            }
+        }
+
+        this.tower_buffs.Clear();
+        this.buffs_modifiers_stacks.Clear();
+    }
+
+    private void _on_tower_buff_added(Variant buffVar)
+    {
+        GodotObject buff = buffVar.AsGodotObject();
+        if (buff == null)
+        {
+            return;
+        }
+
+        string buffId = this._get_buff_id(buff);
+        if (string.IsNullOrEmpty(buffId))
+        {
+            return;
+        }
+
+        bool buffExists = this._buff_exists(buffId);
+        this.tower_buffs.Add(buff);
+
+        if (!this._is_stats_modifier(buff))
+        {
+            return;
+        }
+
+        int modifierValue = buff.Get("value").AsInt32();
+        if (!buffExists)
+        {
+            this.buffs_modifiers_stacks[buffId] = modifierValue;
+            TowerBuffsBarSlot slot = this.slot_scene?.Instantiate() as TowerBuffsBarSlot;
+            if (slot == null || this._slotsContainerNode == null)
+            {
+                return;
+            }
+
+            this._slotsContainerNode.AddChild(slot);
+            slot.CallDeferred("set_buff", buff, modifierValue);
+            return;
+        }
+
+        this.buffs_modifiers_stacks[buffId] = this.buffs_modifiers_stacks.GetValueOrDefault(buffId, 0) + modifierValue;
+        foreach (Node slotNode in this._slotsContainerNode.GetChildren())
+        {
+            TowerBuffsBarSlot buffSlot = slotNode as TowerBuffsBarSlot;
+            if (buffSlot == null || buffSlot.tower_buff == null)
+            {
+                continue;
+            }
+
+            string slotBuffId = this._get_buff_id(buffSlot.tower_buff);
+            if (slotBuffId == buffId)
+            {
+                buffSlot.value = this.buffs_modifiers_stacks[buffId];
+            }
+        }
+    }
+
+    private void _on_tower_buff_removed(Variant removedBuffVar)
+    {
+        GodotObject removedBuff = removedBuffVar.AsGodotObject();
+        if (removedBuff == null)
+        {
+            return;
+        }
+
+        string buffId = this._get_buff_id(removedBuff);
+        if (string.IsNullOrEmpty(buffId))
+        {
+            return;
+        }
+
+        this._erase_first_buff_instance(removedBuff);
+
+        bool hasSameBuffInstance = false;
+        int totalValue = 0;
+        foreach (GodotObject remainingBuff in this.tower_buffs)
+        {
+            if (remainingBuff == null || this._get_buff_id(remainingBuff) != buffId)
+            {
+                continue;
+            }
+
+            hasSameBuffInstance = true;
+            if (this._is_stats_modifier(remainingBuff))
+            {
+                totalValue += remainingBuff.Get("value").AsInt32();
+            }
+        }
+
+        foreach (Node slotNode in this._slotsContainerNode.GetChildren())
+        {
+            TowerBuffsBarSlot buffSlot = slotNode as TowerBuffsBarSlot;
+            if (buffSlot == null || buffSlot.tower_buff == null)
+            {
+                continue;
+            }
+
+            string slotBuffId = this._get_buff_id(buffSlot.tower_buff);
+            if (slotBuffId != buffId)
+            {
+                continue;
+            }
+
+            if (hasSameBuffInstance)
+            {
+                this.buffs_modifiers_stacks[buffId] = totalValue;
+                buffSlot.value = totalValue;
+            }
+            else
+            {
+                buffSlot.QueueFree();
+                this.buffs_modifiers_stacks.Remove(buffId);
+            }
+
+            break;
+        }
+    }
+
+    private void _erase_first_buff_instance(GodotObject removedBuff)
+    {
+        ulong removedId = removedBuff.GetInstanceId();
+        for (int i = 0; i < this.tower_buffs.Count; i++)
+        {
+            GodotObject candidate = this.tower_buffs[i];
+            if (candidate != null && candidate.GetInstanceId() == removedId)
+            {
+                this.tower_buffs.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    private bool _is_stats_modifier(GodotObject buff)
+    {
+        if (buff == null)
+        {
+            return false;
+        }
+
+        Variant valueProp = buff.Get("value");
+        return valueProp.VariantType != Variant.Type.Nil;
+    }
+
+    private string _get_buff_id(GodotObject buff)
+    {
+        GodotObject data = buff?.Get("data").AsGodotObject();
+        return data?.Get("id").AsString() ?? string.Empty;
+    }
+
+    private bool _buff_exists(string buffId)
+    {
+        foreach (GodotObject buff in this.tower_buffs)
+        {
+            if (buff != null && this._get_buff_id(buff) == buffId)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}

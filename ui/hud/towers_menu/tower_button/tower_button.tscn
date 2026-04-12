@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://o248nju46k2n"]
 
-[ext_resource type="Script" uid="uid://n67chfk5ae8t" path="res://ui/hud/towers_menu/tower_button/tower_button.gd" id="1_bxa3v"]
+[ext_resource type="Script" path="res://ui/hud/towers_menu/tower_button/TowerButton.cs" id="1_bxa3v"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_s7tbd"]
 [ext_resource type="StyleBox" uid="uid://dcjn1y7ofuii7" path="res://ui/styles/box_style/buttons/button_panel.tres" id="2_3ku3x"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_274r1"]

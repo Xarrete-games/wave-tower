@@ -1,0 +1,220 @@
+using Godot;
+
+public partial class TowerButton : Control
+{
+    [Signal]
+    public delegate void tower_button_pressedEventHandler(Variant tower_configuration, int price);
+
+    [Signal]
+    public delegate void hoverEventHandler(Variant tower_button);
+
+    [Signal]
+    public delegate void unhoverEventHandler(Variant tower_button);
+
+    private static readonly StyleBox NORMAL_PANEL = GD.Load<StyleBox>("uid://dcjn1y7ofuii7");
+    private static readonly StyleBox HOVER_PANEL = GD.Load<StyleBox>("uid://5m3jkdualcb3");
+
+    private Variant _tower_data = default;
+    private int _price = 0;
+    private Texture2D _icon;
+    private Texture2D _icon_hover;
+    private int _amount = 0;
+
+    [Export]
+    public Variant tower_data
+    {
+        get => this._tower_data;
+        set
+        {
+            this._tower_data = value;
+            GodotObject towerObj = value.AsGodotObject();
+            this.configuration = towerObj?.Get("data").AsGodotObject();
+            this.tower_scene = towerObj?.Get("scene").As<PackedScene>();
+            this.icon = this.configuration?.Get("icon").As<Texture2D>();
+            this.type = this.configuration?.Get("type").AsInt32() ?? 0;
+            this._update_price();
+        }
+    }
+
+    [Export]
+    public NodePath panel;
+
+    [Export]
+    public NodePath tower_button;
+
+    [Export]
+    public NodePath gold_price;
+
+    [Export]
+    public NodePath amount_label;
+
+    public GodotObject configuration;
+
+    public int price
+    {
+        get => this._price;
+        set
+        {
+            this._price = value;
+            this._goldPriceNode?.Set("price", value);
+        }
+    }
+
+    public Texture2D icon
+    {
+        get => this._icon;
+        set
+        {
+            this._icon = value;
+            this._update_texture();
+        }
+    }
+
+    public Texture2D icon_hover
+    {
+        get => this._icon_hover;
+        set
+        {
+            this._icon_hover = value;
+            this._update_texture_hover();
+        }
+    }
+
+    public int amount
+    {
+        get => this._amount;
+        set
+        {
+            this._amount = value;
+            if (this._amountLabelNode != null)
+            {
+                this._amountLabelNode.Text = "x " + value;
+            }
+        }
+    }
+
+    public PackedScene tower_scene;
+    public int type;
+
+    private Panel _panelNode;
+    private TextureButton _towerButtonNode;
+    private Node _goldPriceNode;
+    private Label _amountLabelNode;
+
+    public override void _Ready()
+    {
+        this._panelNode = !this.panel.IsEmpty ? GetNodeOrNull<Panel>(this.panel) : GetNodeOrNull<Panel>("VBoxContainer/CenterContainer/Panel");
+        this._towerButtonNode = !this.tower_button.IsEmpty ? GetNodeOrNull<TextureButton>(this.tower_button) : GetNodeOrNull<TextureButton>("VBoxContainer/CenterContainer/TowerButton");
+        this._goldPriceNode = !this.gold_price.IsEmpty ? GetNodeOrNull<Node>(this.gold_price) : GetNodeOrNull<Node>("VBoxContainer/GoldPrice");
+        this._amountLabelNode = !this.amount_label.IsEmpty ? GetNodeOrNull<Label>(this.amount_label) : GetNodeOrNull<Label>("HBoxContainer/MarginContainer/AmountLabel");
+
+        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        runContext.economy.Connect("available_free_towers_change", Callable.From<int>(this._on_available_free_towers_change));
+        runContext.relics_manager.Connect("relic_added", Callable.From<Variant>(this._on_relic_added));
+        runContext.relics_manager.Connect("relic_removed", Callable.From<string>(this._on_relic_removed));
+        runContext.progress.Connect("current_wave_finished", Callable.From(this._current_wave_finished));
+
+        this._panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
+        this._update_texture();
+    }
+
+    private void _update_texture()
+    {
+        if (this._towerButtonNode != null)
+        {
+            this._towerButtonNode.TextureNormal = this.icon;
+        }
+    }
+
+    private void _update_texture_hover()
+    {
+        if (this._towerButtonNode != null)
+        {
+            this._towerButtonNode.TextureHover = this.icon_hover;
+        }
+    }
+
+    private void _on_mouse_exited()
+    {
+        EmitSignal("unhover", this);
+        this._panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
+    }
+
+    private void _on_mouse_entered()
+    {
+        this._panelNode?.AddThemeStyleboxOverride("panel", HOVER_PANEL);
+        EmitSignal("hover", this);
+        Node audioManager = GetNodeOrNull<Node>("/root/AudioManager");
+        audioManager?.Call("play_button_hover");
+    }
+
+    private void _update_price()
+    {
+        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        if (runContext == null)
+        {
+            return;
+        }
+
+        if (runContext.economy.available_free_towers > 0)
+        {
+            this.price = 0;
+            return;
+        }
+
+        if (this.configuration == null)
+        {
+            return;
+        }
+
+        int basePrice = this.configuration.Get("build_price").AsInt32();
+        PriceContext ctx = new(PriceContext.PriceType.Tower, basePrice);
+        Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
+        this.price = ctx.FinalPrice;
+    }
+
+    private void _on_available_free_towers_change(int _available_free_towers)
+    {
+        this._update_price();
+    }
+
+    private void _on_relic_added(Variant relic)
+    {
+        string relicId = relic.AsGodotObject()?.Get("data").AsGodotObject()?.Get("id").AsString() ?? string.Empty;
+        if (relicId == "soya_sauce" || relicId == "tuna_nigiri")
+        {
+            this._update_price();
+        }
+    }
+
+    private void _on_relic_removed(string relic_id)
+    {
+        if (relic_id == "soya_sauce" || relic_id == "tuna_nigiri")
+        {
+            this._update_price();
+        }
+    }
+
+    private void _current_wave_finished()
+    {
+        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        if (runContext?.relics_manager != null && runContext.relics_manager.has_relic("lemon"))
+        {
+            this._update_price();
+        }
+    }
+
+    private void _on_tower_button_pressed()
+    {
+        Node audioManager = GetNodeOrNull<Node>("/root/AudioManager");
+        audioManager?.Call("play_button_click");
+
+        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        if (runContext != null && runContext.economy.gold < this.price)
+        {
+            return;
+        }
+
+        EmitSignal("tower_button_pressed", this.tower_data, this.price);
+    }
+}

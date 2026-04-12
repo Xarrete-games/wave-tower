@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cfi7esea0276g"]
 
-[ext_resource type="Script" uid="uid://w2t2qb88lykq" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar_slot.gd" id="1_xymty"]
+[ext_resource type="Script" path="res://ui/hud/tower_buffs_bar/TowerBuffsBarSlot.cs" id="1_xymty"]
 [ext_resource type="Texture2D" uid="uid://cgnkhq4bdk23" path="res://assets/images/icons/tower_buffs/buff_dmg.png" id="2_rrr2d"]
 [ext_resource type="LabelSettings" uid="uid://be6ci8thbq1pj" path="res://ui/styles/label_settings/label_buff_number.tres" id="3_8lnq4"]
 

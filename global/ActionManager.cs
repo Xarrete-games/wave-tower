@@ -31,7 +31,14 @@ public partial class ActionManager : Node
 
         if (!callback.Equals(default(Callable)))
         {
-            callback.Call();
+            try
+            {
+                callback.Call();
+            }
+            catch (System.ObjectDisposedException)
+            {
+                // Ignore stale UI callbacks when scene nodes were already freed.
+            }
         }
 
         this.CurrentAction = ActionState.None;

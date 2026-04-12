@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://pmu46mvlw67" path="res://towers/stats/tower_stats_handler.gd" id="1_7jtxt"]
 [ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/components/cristal_light/cristal_light.tscn" id="2_2233p"]
-[ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="3_nbqd2"]
+[ext_resource type="Script" path="res://towers/RangePreview.cs" id="3_nbqd2"]
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="4_7jtxt"]
-[ext_resource type="Script" uid="uid://3vv1ts11asqk" path="res://towers/area_detector.gd" id="5_5e1e6"]
+[ext_resource type="Script" path="res://towers/AreaDetector.cs" id="5_5e1e6"]
 [ext_resource type="PackedScene" uid="uid://42h4ynomckod" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar.tscn" id="6_7jtxt"]
 
 [node name="Tower" type="Node2D" unique_id=1114496997 groups=["tower"]]
