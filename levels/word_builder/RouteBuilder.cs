@@ -87,7 +87,7 @@ public partial class RouteBuilder : RefCounted
 
             if (hasExit)
             {
-                Godot.Collections.Array<Vector2> intermediate = piece.Call("get_route_waypoints", entryDir, exitDir).AsGodotArray<Vector2>();
+                Godot.Collections.Array<Vector2> intermediate = this._piece_get_route_waypoints(piece, entryDir, exitDir);
                 if (intermediate.Count > 0)
                 {
                     for (int i = 0; i < intermediate.Count; i++)
@@ -102,7 +102,7 @@ public partial class RouteBuilder : RefCounted
             }
             else
             {
-                Godot.Collections.Array<Vector2> toEnd = piece.Call("get_final_route_waypoints", entryDir).AsGodotArray<Vector2>();
+                Godot.Collections.Array<Vector2> toEnd = this._piece_get_final_route_waypoints(piece, entryDir);
                 if (toEnd.Count > 0)
                 {
                     for (int i = 0; i < toEnd.Count; i++)
@@ -124,5 +124,52 @@ public partial class RouteBuilder : RefCounted
     {
         Godot.Collections.Array<Variant> route = this.build_route_to_target(spawn_entry);
         return this.build_waypoints_from_route(spawn_entry, route);
+    }
+
+    private static bool _has_method(GodotObject target, string methodName)
+    {
+        return target != null && GodotObject.IsInstanceValid(target) && target.HasMethod(methodName);
+    }
+
+    private Godot.Collections.Array<Vector2> _piece_get_route_waypoints(GodotObject piece, int entryDir, int exitDir)
+    {
+        if (piece is MapPiece mapPiece)
+        {
+            return mapPiece.get_route_waypoints(entryDir, exitDir);
+        }
+
+        if (_has_method(piece, "get_route_waypoints"))
+        {
+            return piece.Call("get_route_waypoints", entryDir, exitDir).AsGodotArray<Vector2>();
+        }
+
+        if (_has_method(piece, "GetRouteWaypoints"))
+        {
+            return piece.Call("GetRouteWaypoints", entryDir, exitDir).AsGodotArray<Vector2>();
+        }
+
+        GD.PushError("[RouteBuilder] Piece has no route waypoint method.");
+        return new Godot.Collections.Array<Vector2>();
+    }
+
+    private Godot.Collections.Array<Vector2> _piece_get_final_route_waypoints(GodotObject piece, int entryDir)
+    {
+        if (piece is MapPiece mapPiece)
+        {
+            return mapPiece.get_final_route_waypoints(entryDir);
+        }
+
+        if (_has_method(piece, "get_final_route_waypoints"))
+        {
+            return piece.Call("get_final_route_waypoints", entryDir).AsGodotArray<Vector2>();
+        }
+
+        if (_has_method(piece, "GetFinalRouteWaypoints"))
+        {
+            return piece.Call("GetFinalRouteWaypoints", entryDir).AsGodotArray<Vector2>();
+        }
+
+        GD.PushError("[RouteBuilder] Piece has no final route waypoint method.");
+        return new Godot.Collections.Array<Vector2>();
     }
 }

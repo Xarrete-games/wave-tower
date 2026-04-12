@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dnb8o3snwvfak"]
 
 [ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/map_pieces/map_piece_tile_map.tscn" id="1_2fmni"]
-[ext_resource type="Script" uid="uid://chj3cku30pmp1" path="res://levels/map_pieces/map_piece.gd" id="1_fauw3"]
+[ext_resource type="Script" uid="uid://dok4eaedgwho2" path="res://levels/map_pieces/MapPiece.cs" id="1_fauw3"]
 [ext_resource type="TileSet" uid="uid://0mt2a5aix72q" path="res://assets/sprites/tilesheet/tileset v2.tres" id="3_iux3d"]
 [ext_resource type="Script" uid="uid://dhtvl5qh0aodo" path="res://levels/level_tile_map/LevelTileMap.cs" id="4_x8feg"]
 [ext_resource type="Texture2D" uid="uid://bvwt2w8a2mxhr" path="res://assets/sprites/decoration/Lago grande.png" id="5_td3r4"]

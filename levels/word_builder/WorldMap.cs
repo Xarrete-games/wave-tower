@@ -193,7 +193,7 @@ public partial class WorldMap : Node2D
                 Vector2I logicalPos = frontier.Get("logical_pos").AsVector2I();
                 Vector2I tile = this._gridManager.get_neighbor_tile(logicalPos, dir);
                 Vector2 worldPos = frontier.Get("global_position").AsVector2()
-                    + frontier.Call("get_edge_tile_pos", dir, pos).AsVector2()
+                    + this._piece_get_edge_tile_pos(frontier, dir, pos)
                     + PortalOffset;
                 string key = $"{logicalPos.X},{logicalPos.Y}_{dir}_{pos}";
 
@@ -289,8 +289,8 @@ public partial class WorldMap : Node2D
             this._gridManager.occupy(candidateTile);
             this.composite_tile_map?.register_piece(newPiece);
 
-            frontier.Call("set_edge_has_connected", nextEdge);
-            newPiece.Call("set_edge_has_connected", edgeToConnect);
+            this._piece_set_edge_has_connected(frontier, nextEdge);
+            this._piece_set_edge_has_connected(newPiece, edgeToConnect);
 
             this._frontierManager.update_after_placement(frontier, newPiece);
 
@@ -317,10 +317,10 @@ public partial class WorldMap : Node2D
 
     private void _attach_piece(GodotObject pieceA, GodotObject pieceB, int entryDir, int exitDir)
     {
-        Vector2 aWorld = pieceA.Call("get_edge_tile_pos", entryDir).AsVector2();
-        Vector2 bWorld = pieceB.Call("get_edge_tile_pos", exitDir).AsVector2();
-        Vector2I delta = pieceA.Call("get_edge_tile_delta", entryDir).AsVector2I();
-        Vector2 shift = pieceA.Call("get_tile_local_offset", delta).AsVector2();
+        Vector2 aWorld = this._piece_get_edge_tile_pos(pieceA, entryDir);
+        Vector2 bWorld = this._piece_get_edge_tile_pos(pieceB, exitDir);
+        Vector2I delta = this._piece_get_edge_tile_delta(pieceA, entryDir);
+        Vector2 shift = this._piece_get_tile_local_offset(pieceA, delta);
         Vector2 pieceAPosition = pieceA.Get("global_position").AsVector2();
         pieceB.Set("global_position", pieceAPosition + aWorld - bWorld + shift);
 
@@ -340,7 +340,7 @@ public partial class WorldMap : Node2D
             return;
         }
 
-        Node2D decoration = piece.Call("get_decoration").AsGodotObject() as Node2D;
+        Node2D decoration = this._piece_get_decoration(piece);
         if (decoration == null)
         {
             return;
@@ -398,7 +398,7 @@ public partial class WorldMap : Node2D
 
         Vector2I tile = this._gridManager.get_neighbor_tile(logicalPos, dir);
         Vector2 position = piece.Get("global_position").AsVector2()
-            + piece.Call("get_edge_tile_pos", dir, pos).AsVector2()
+            + this._piece_get_edge_tile_pos(piece, dir, pos)
             + PortalOffset;
         string key = $"{logicalPos.X},{logicalPos.Y}_{dir}_{pos}";
 
@@ -481,6 +481,117 @@ public partial class WorldMap : Node2D
         this._append_filtered_by_fork(validPieces, candidatePieces, false);
         candidatePieces.Shuffle();
         return candidatePieces;
+    }
+
+    private static bool _has_method(GodotObject target, string methodName)
+    {
+        return target != null && GodotObject.IsInstanceValid(target) && target.HasMethod(methodName);
+    }
+
+    private Vector2 _piece_get_edge_tile_pos(GodotObject piece, int dir, int pos = 1)
+    {
+        if (piece is MapPiece mapPiece)
+        {
+            return mapPiece.get_edge_tile_pos(dir, pos);
+        }
+
+        if (_has_method(piece, "get_edge_tile_pos"))
+        {
+            return piece.Call("get_edge_tile_pos", dir, pos).AsVector2();
+        }
+
+        if (_has_method(piece, "GetEdgeTilePos"))
+        {
+            return piece.Call("GetEdgeTilePos", dir, pos).AsVector2();
+        }
+
+        GD.PushError("[WorldMap] Piece has no edge position method.");
+        return Vector2.Zero;
+    }
+
+    private Vector2I _piece_get_edge_tile_delta(GodotObject piece, int dir)
+    {
+        if (piece is MapPiece mapPiece)
+        {
+            return mapPiece.get_edge_tile_delta(dir);
+        }
+
+        if (_has_method(piece, "get_edge_tile_delta"))
+        {
+            return piece.Call("get_edge_tile_delta", dir).AsVector2I();
+        }
+
+        if (_has_method(piece, "GetEdgeTileDelta"))
+        {
+            return piece.Call("GetEdgeTileDelta", dir).AsVector2I();
+        }
+
+        GD.PushError("[WorldMap] Piece has no edge tile delta method.");
+        return Vector2I.Zero;
+    }
+
+    private Vector2 _piece_get_tile_local_offset(GodotObject piece, Vector2I delta)
+    {
+        if (piece is MapPiece mapPiece)
+        {
+            return mapPiece.get_tile_local_offset(delta);
+        }
+
+        if (_has_method(piece, "get_tile_local_offset"))
+        {
+            return piece.Call("get_tile_local_offset", delta).AsVector2();
+        }
+
+        if (_has_method(piece, "GetTileLocalOffset"))
+        {
+            return piece.Call("GetTileLocalOffset", delta).AsVector2();
+        }
+
+        GD.PushError("[WorldMap] Piece has no local offset method.");
+        return Vector2.Zero;
+    }
+
+    private Node2D _piece_get_decoration(GodotObject piece)
+    {
+        if (piece is MapPiece mapPiece)
+        {
+            return mapPiece.get_decoration();
+        }
+
+        if (_has_method(piece, "get_decoration"))
+        {
+            return piece.Call("get_decoration").AsGodotObject() as Node2D;
+        }
+
+        if (_has_method(piece, "GetDecoration"))
+        {
+            return piece.Call("GetDecoration").AsGodotObject() as Node2D;
+        }
+
+        return null;
+    }
+
+    private void _piece_set_edge_has_connected(GodotObject piece, Variant edge)
+    {
+        if (piece is MapPiece mapPiece)
+        {
+            mapPiece.set_edge_has_connected(edge.AsGodotObject() as Edge);
+            return;
+        }
+
+        if (_has_method(piece, "set_edge_has_connected"))
+        {
+            piece.Call("set_edge_has_connected", edge);
+            return;
+        }
+
+        if (_has_method(piece, "SetEdgeHasConnected"))
+        {
+            piece.Call("SetEdgeHasConnected", edge);
+            return;
+        }
+
+        GD.PushError("[WorldMap] Piece has no set_edge_has_connected method.");
     }
 
     private void _append_filtered_by_fork(Godot.Collections.Array source, Godot.Collections.Array target, bool isFork)
