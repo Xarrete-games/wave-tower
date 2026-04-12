@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ua04a"]
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="2_qqqk1"]
-[ext_resource type="Script" uid="uid://dver2n58kr6e7" path="res://towers/instances/lightning/lightning_chain_tower/lightning_chain_tower.gd" id="2_tgeyy"]
+[ext_resource type="Script" path="res://towers/instances/lightning/lightning_chain_tower/LightningChainTower.cs" id="2_tgeyy"]
 [ext_resource type="PackedScene" uid="uid://b4p7ki22j70mo" path="res://towers/instances/lightning/lightning_chain_tower/lightning_chain_projectile.tscn" id="3_fuhyt"]
 [ext_resource type="PackedScene" uid="uid://betmeynpmbdyk" path="res://towers/instances/lightning/particles/electric_particles.tscn" id="6_rk1kn"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="8_3h2aw"]

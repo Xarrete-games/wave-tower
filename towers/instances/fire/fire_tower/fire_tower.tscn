@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://djdpfy88ujkfb"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_f8b8m"]
-[ext_resource type="Script" uid="uid://e2332bmer7r0" path="res://towers/instances/fire/fire_tower/fire_tower.gd" id="2_t2lsm"]
+[ext_resource type="Script" path="res://towers/instances/fire/fire_tower/FireTower.cs" id="2_t2lsm"]
 [ext_resource type="PackedScene" uid="uid://bsvjcu86kc8oj" path="res://towers/instances/fire/fire_tower/fire_ball_projectile2.tscn" id="3_1o222"]
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="3_t2lsm"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="5_e0k2h"]

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 public partial class TowerStatsPanel : Control
 {
-    private static readonly Script TowerScript = GD.Load<Script>("res://towers/tower.gd");
-
     private Label _nameLabel;
     private Label _idLabel;
     private Node _damageStat;
@@ -127,7 +125,7 @@ public partial class TowerStatsPanel : Control
         for (int index = 0; index < modes.Count; index++)
         {
             int mode = (int)modes[index];
-            string modeName = (string)TowerScript.Call("targeting_mode_to_string", mode);
+            string modeName = Tower.targeting_mode_to_string(mode);
             this._targetingModeSelector.AddItem(modeName, mode);
         }
     }

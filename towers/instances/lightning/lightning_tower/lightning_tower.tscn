@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://7hfxyb5g3ku"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_y64o4"]
-[ext_resource type="Script" uid="uid://cl5pxh8r8evhq" path="res://towers/instances/lightning/lightning_tower/lightning_tower.gd" id="2_epe63"]
+[ext_resource type="Script" path="res://towers/instances/lightning/lightning_tower/LightningTower.cs" id="2_epe63"]
 [ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="3_epe63"]
 [ext_resource type="PackedScene" uid="uid://daqi7i1vflaq5" path="res://towers/instances/lightning/lightning_tower/projectile/lighting_ball_projectile.tscn" id="3_vgy5y"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="5_vln4f"]

@@ -27,7 +27,7 @@ func _ready() -> void:
 # initialize the stats handler with base stats, tower type and experience handler
 func set_data(
 	stats_configuration,
-	_p_tower_type: Tower.Type,
+	_p_tower_type,
 	) -> void:
 	#base stats
 	base_stats = stats_configuration.stats.duplicate()

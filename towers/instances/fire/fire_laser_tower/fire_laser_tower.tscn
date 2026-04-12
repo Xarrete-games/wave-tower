@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d36t7geqp1sh"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ywuvy"]
-[ext_resource type="Script" uid="uid://buj7pdefu7r4s" path="res://towers/instances/fire/fire_laser_tower/fire_laser_tower.gd" id="2_kgd72"]
+[ext_resource type="Script" path="res://towers/instances/fire/fire_laser_tower/FireLaserTower.cs" id="2_kgd72"]
 [ext_resource type="PackedScene" path="res://towers/instances/fire/fire_laser_tower/projectil/fire_laser_projectile.tscn" id="3_aspyp"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="5_83oqa"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="5_ie052"]

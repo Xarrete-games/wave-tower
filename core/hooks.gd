@@ -57,7 +57,7 @@ static func on_tower_placed(tower: Tower) -> void:
 	for item in get_listeners():
 		item.on_tower_placed(tower)
 
-static func on_get_targeting_modes(targeting_modes: Array[Tower.TargetingMode]) -> void:
+static func on_get_targeting_modes(targeting_modes: Array) -> void:
 	for item in get_listeners():
 		item.on_get_targeting_modes(targeting_modes)
 # --------------------

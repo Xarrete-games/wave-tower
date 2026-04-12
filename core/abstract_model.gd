@@ -1,9 +1,9 @@
 class_name AbstractModel extends RefCounted
 
-func on_tower_placed(tower_instance: Tower) -> void:
+func on_tower_placed(tower_instance) -> void:
 	pass
 
-func on_get_targeting_modes(targeting_modes: Array[Tower.TargetingMode]) -> void:
+func on_get_targeting_modes(targeting_modes: Array) -> void:
 	pass
 
 func on_wave_init() -> void:
