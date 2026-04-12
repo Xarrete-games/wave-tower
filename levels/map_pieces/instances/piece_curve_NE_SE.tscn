@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://chj3cku30pmp1" path="res://levels/map_pieces/map_piece.gd" id="1_kwid0"]
 [ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/map_pieces/map_piece_tile_map.tscn" id="1_u63s2"]
 [ext_resource type="TileSet" uid="uid://0mt2a5aix72q" path="res://assets/sprites/tilesheet/tileset v2.tres" id="3_qvuev"]
-[ext_resource type="Script" uid="uid://bxxphpxqsh7c8" path="res://levels/level_tile_map/level_tile_map.gd" id="4_3xh71"]
+[ext_resource type="Script" uid="uid://dhtvl5qh0aodo" path="res://levels/level_tile_map/LevelTileMap.cs" id="4_3xh71"]
 [ext_resource type="Texture2D" uid="uid://8k5oyrulleh2" path="res://assets/sprites/decoration/Tree1.png" id="5_5e44q"]
 [ext_resource type="Texture2D" uid="uid://bhmn4g1282vrt" path="res://assets/sprites/decoration/Tree2.png" id="6_otub2"]
 [ext_resource type="Texture2D" uid="uid://dyckwy1qhfaoa" path="res://assets/sprites/decoration/Plant3.png" id="7_8fvbk"]
@@ -28,7 +28,7 @@ position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD6//v/AAAFAAYAAAD6//z/AAAFAAcAAAD6//3/AAAGAAYAAAD6//7/AAAIAAYAAAD6////AAAHAAYAAAD6/wAAAAAFAAYAAAD6/wMAAAAHAAcAAAD6/wQAAAAFAAYAAAD6/wUAAAAFAAYAAAD6/wYAAAAFAAcAAAD6//r/AAAIAAYAAAD7//r/AAAHAAcAAAD7//v/AAAIAAYAAAD8//r/AAAIAAYAAAD8//v/AAAIAAYAAAD7//z/AAAFAAcAAAD8//z/AAAGAAcAAAD6/wcAAAAFAAcAAAA=")
 tile_set = ExtResource("3_qvuev")
 script = ExtResource("4_3xh71")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="Routes" type="Node2D" parent="."]
 

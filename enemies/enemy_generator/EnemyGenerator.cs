@@ -3,19 +3,18 @@ using Godot;
 public partial class EnemyGenerator : Node
 {
     private const int TOTAL_WAVES = 30;
-    private static readonly Script WaveComposerScript = GD.Load<Script>("res://enemies/enemy_generator/wave_composer.gd");
 
     [Export]
-    public Node wave_spawner;
+    public WaveSpawner wave_spawner;
 
     [Export]
-    public Resource wave_config;
+    public WaveConfig wave_config;
 
     [Export]
     public Node2D enemies_container;
 
     private int _waveNumber;
-    private GodotObject _composer;
+    private WaveComposer _composer;
     private int _enemiesLeft;
     private bool _isTrackingEnemyExit;
 
@@ -34,10 +33,10 @@ public partial class EnemyGenerator : Node
 
         if (this.wave_config == null)
         {
-            this.wave_config = GD.Load<Resource>("res://enemies/enemy_generator/wave_config.tres");
+            this.wave_config = GD.Load<WaveConfig>("res://enemies/enemy_generator/wave_config.tres");
         }
 
-        this._composer = WaveComposerScript.Call("new", this.wave_config, enemyCatalog).AsGodotObject();
+        this._composer = new WaveComposer(this.wave_config, enemyCatalog);
         if (this._composer == null)
         {
             GD.PushError("[EnemyGenerator] Could not instantiate WaveComposer.");
@@ -49,10 +48,10 @@ public partial class EnemyGenerator : Node
 
         if (this.wave_spawner != null)
         {
-            this.wave_spawner.Set("enemies_container", this.enemies_container);
-            this.wave_spawner.Connect("wave_started", Callable.From<int>(this.OnWaveStarted));
-            this.wave_spawner.Connect("wave_finished", Callable.From<int>(this.OnWaveFinished));
-            this.wave_spawner.Connect("enemy_spawned", Callable.From<Variant>(this.OnEnemySpawned));
+            this.wave_spawner.enemies_container = this.enemies_container;
+            this.wave_spawner.wave_started += this.OnWaveStarted;
+            this.wave_spawner.wave_finished += this.OnWaveFinished;
+            this.wave_spawner.enemy_spawned += this.OnEnemySpawned;
         }
 
         ClickEventsBus.NextWavePressed += this.StartNextWave;
@@ -81,25 +80,18 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.progress.current_wave = this._waveNumber;
 
-        var groups = this._composer.Call("compose_wave", this._waveNumber).AsGodotArray<Variant>();
+        Godot.Collections.Array<WaveComposer.WaveGroup> groups = this._composer.compose_wave(this._waveNumber);
 
         int totalEnemies = 0;
         for (int index = 0; index < groups.Count; index++)
         {
-            GodotObject group = groups[index].AsGodotObject();
-            if (group == null)
-            {
-                continue;
-            }
-
-            var enemies = group.Get("enemies").AsGodotArray<Variant>();
-            totalEnemies += enemies.Count;
+            totalEnemies += groups[index].enemies.Count;
         }
 
-        int budget = (int)this._composer.Call("get_budget_for_wave", this._waveNumber);
+        int budget = this._composer.get_budget_for_wave(this._waveNumber);
         GD.Print($"[Wave {this._waveNumber}] Budget: {budget} | Groups: {groups.Count} | Total enemies: {totalEnemies}");
 
-        this.wave_spawner.Call("start_wave", this._waveNumber, groups, this.wave_config);
+        this.wave_spawner.start_wave(this._waveNumber, groups, this.wave_config);
     }
 
     private void OnWaveStarted(int waveNumber)

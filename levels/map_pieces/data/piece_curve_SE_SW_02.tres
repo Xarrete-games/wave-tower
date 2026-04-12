@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://bfi0luc0nhdmf"]
 
-[ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/map_pieces/edge.gd" id="1_0hub5"]
+[ext_resource type="Script" uid="uid://ysyv6k8aba5o" path="res://levels/map_pieces/Edge.cs" id="1_0hub5"]
 [ext_resource type="PackedScene" uid="uid://dxdrp4n7ps7vp" path="res://levels/map_pieces/instances/piece_curve_SEM_SWT.tscn" id="2_0hub5"]
-[ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/map_pieces/map_piece_data.gd" id="3_w1pum"]
+[ext_resource type="Script" uid="uid://buf7cbkrogset" path="res://levels/map_pieces/MapPieceData.cs" id="3_w1pum"]
 
 [sub_resource type="Resource" id="Resource_tkymm"]
 script = ExtResource("1_0hub5")
@@ -17,4 +17,4 @@ dir = 1
 script = ExtResource("3_w1pum")
 edges = Array[ExtResource("1_0hub5")]([SubResource("Resource_tkymm"), SubResource("Resource_w1pum")])
 scene = ExtResource("2_0hub5")
-metadata/_custom_type_script = "uid://ndxexeof5w0k"
+metadata/_custom_type_script = "uid://buf7cbkrogset"

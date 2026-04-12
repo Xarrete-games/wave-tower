@@ -4,7 +4,6 @@ using Godot;
 public partial class RouteBuilder : RefCounted
 {
     private const int EdgeDirNe = 0;
-    private readonly Script _edgeScript = GD.Load<Script>("res://levels/map_pieces/edge.gd");
 
     private PieceConnectionGraph _connectionGraph;
     private GodotObject _targetPiece;
@@ -77,7 +76,7 @@ public partial class RouteBuilder : RefCounted
             {
                 GodotObject prevPiece = route[index - 1].AsGodotObject();
                 entryDir = this._connectionGraph.find_connection_dir(prevPiece, piece);
-                entryDir = this._edgeScript.Call("get_opposite_dir", entryDir).AsInt32();
+                entryDir = (int)Edge.get_opposite_dir((Edge.Dir)entryDir);
             }
 
             if (hasExit)

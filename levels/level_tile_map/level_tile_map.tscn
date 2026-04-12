@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cat7x3rq7b56p"]
 
 [ext_resource type="TileSet" uid="uid://0mt2a5aix72q" path="res://assets/sprites/tilesheet/tileset v2.tres" id="1_tti04"]
-[ext_resource type="Script" uid="uid://bxxphpxqsh7c8" path="res://levels/level_tile_map/level_tile_map.gd" id="2_lot6j"]
+[ext_resource type="Script" uid="uid://dhtvl5qh0aodo" path="res://levels/level_tile_map/LevelTileMap.cs" id="2_lot6j"]
 
 [node name="LevelTileMap" type="TileMapLayer" unique_id=1153575275]
 scale = Vector2(0.25, 0.25)

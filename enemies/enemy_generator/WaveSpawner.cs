@@ -32,7 +32,7 @@ public partial class WaveSpawner : Node
 
     private bool _is_spawning;
 
-    public async void start_wave(int wave_number, Godot.Collections.Array<Variant> groups, Variant config)
+    public async void start_wave(int wave_number, Godot.Collections.Array<WaveComposer.WaveGroup> groups, WaveConfig config)
     {
         if (this._is_spawning)
         {
@@ -46,8 +46,7 @@ public partial class WaveSpawner : Node
             return;
         }
 
-        GodotObject configObj = config.AsGodotObject();
-        if (configObj == null)
+        if (config == null)
         {
             GD.PushWarning("[WaveSpawner] No WaveConfig provided");
             return;
@@ -58,22 +57,22 @@ public partial class WaveSpawner : Node
 
         for (int groupIndex = 0; groupIndex < groups.Count; groupIndex++)
         {
-            GodotObject group = groups[groupIndex].AsGodotObject();
+            WaveComposer.WaveGroup group = groups[groupIndex];
             if (group == null)
             {
                 continue;
             }
 
-            Godot.Collections.Array<Variant> enemies = group.Get("enemies").AsGodotArray<Variant>();
-            int pressure = group.Get("pressure").AsInt32();
+            Godot.Collections.Array<EnemyData> enemies = group.enemies;
+            int pressure = (int)group.pressure;
 
             for (int enemyIndex = 0; enemyIndex < enemies.Count; enemyIndex++)
             {
-                this._spawn_single(enemies[enemyIndex].As<EnemyData>());
+                this._spawn_single(enemies[enemyIndex]);
 
                 if (enemyIndex < enemies.Count - 1)
                 {
-                    float spawnInterval = this._pick_spawn_interval(pressure, wave_number, configObj);
+                    float spawnInterval = this._pick_spawn_interval(pressure, wave_number, config);
                     await ToSignal(GetTree().CreateTimer(spawnInterval, false), SceneTreeTimer.SignalName.Timeout);
                 }
             }
@@ -82,7 +81,7 @@ public partial class WaveSpawner : Node
 
             if (groupIndex < groups.Count - 1)
             {
-                float groupDelay = (float)configObj.Get("group_delay");
+                float groupDelay = config.group_delay;
                 await ToSignal(GetTree().CreateTimer(groupDelay, false), SceneTreeTimer.SignalName.Timeout);
             }
         }
@@ -91,7 +90,7 @@ public partial class WaveSpawner : Node
         EmitSignal(SignalName.wave_finished, wave_number);
     }
 
-    private float _pick_spawn_interval(int pressure, int wave_number, GodotObject config)
+    private float _pick_spawn_interval(int pressure, int wave_number, WaveConfig config)
     {
         Vector2 intervalRange = this._get_spawn_interval_range(pressure, config);
         Vector2 decayedRange = this._get_decayed_spawn_interval_range(intervalRange, wave_number, config);
@@ -108,22 +107,22 @@ public partial class WaveSpawner : Node
         return (float)GD.RandRange(minInterval, maxInterval);
     }
 
-    private Vector2 _get_spawn_interval_range(int pressure, GodotObject config)
+    private Vector2 _get_spawn_interval_range(int pressure, WaveConfig config)
     {
         return pressure switch
         {
-            0 => new Vector2((float)config.Get("spawn_interval_swarm_min"), (float)config.Get("spawn_interval_swarm_max")),
-            1 => new Vector2((float)config.Get("spawn_interval_speed_min"), (float)config.Get("spawn_interval_speed_max")),
-            3 => new Vector2((float)config.Get("spawn_interval_tank_min"), (float)config.Get("spawn_interval_tank_max")),
-            _ => new Vector2((float)config.Get("spawn_interval_normal_min"), (float)config.Get("spawn_interval_normal_max")),
+            0 => new Vector2(config.spawn_interval_swarm_min, config.spawn_interval_swarm_max),
+            1 => new Vector2(config.spawn_interval_speed_min, config.spawn_interval_speed_max),
+            2 => new Vector2(config.spawn_interval_tank_min, config.spawn_interval_tank_max),
+            _ => new Vector2(config.spawn_interval_normal_min, config.spawn_interval_normal_max),
         };
     }
 
-    private Vector2 _get_decayed_spawn_interval_range(Vector2 base_range, int wave_number, GodotObject config)
+    private Vector2 _get_decayed_spawn_interval_range(Vector2 base_range, int wave_number, WaveConfig config)
     {
-        int everyWaves = Mathf.Max(config.Get("spawn_interval_max_decay_every_waves").AsInt32(), 1);
+        int everyWaves = Mathf.Max(config.spawn_interval_max_decay_every_waves, 1);
         int decaySteps = Mathf.Max((wave_number - 1) / everyWaves, 0);
-        float decayAmount = decaySteps * (float)config.Get("spawn_interval_max_decay_amount");
+        float decayAmount = decaySteps * config.spawn_interval_max_decay_amount;
         float minSpawnInterval = this._get_min_spawn_interval(config);
 
         float decayedMin = Mathf.Max(base_range.X - decayAmount, minSpawnInterval);
@@ -136,9 +135,9 @@ public partial class WaveSpawner : Node
         return new Vector2(decayedMin, decayedMax);
     }
 
-    private float _get_min_spawn_interval(GodotObject config)
+    private float _get_min_spawn_interval(WaveConfig config)
     {
-        return Mathf.Max((float)config.Get("spawn_interval_min_cap"), 0.01f);
+        return Mathf.Max(config.spawn_interval_min_cap, 0.01f);
     }
 
     private void _spawn_single(EnemyData data)

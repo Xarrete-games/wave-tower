@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/map_pieces/map_piece_tile_map.tscn" id="2_qmu87"]
 [ext_resource type="Texture2D" uid="uid://c22o1eieco5r3" path="res://assets/sprites/decoration/Plant1.png" id="3_dt8n6"]
 [ext_resource type="TileSet" uid="uid://0mt2a5aix72q" path="res://assets/sprites/tilesheet/tileset v2.tres" id="4_p3dck"]
-[ext_resource type="Script" uid="uid://bxxphpxqsh7c8" path="res://levels/level_tile_map/level_tile_map.gd" id="5_7wgd6"]
+[ext_resource type="Script" uid="uid://dhtvl5qh0aodo" path="res://levels/level_tile_map/LevelTileMap.cs" id="5_7wgd6"]
 [ext_resource type="PackedScene" uid="uid://gb8anbp5v7hc" path="res://levels/portal/blue_portal.tscn" id="6_koxi5"]
 
 [sub_resource type="Curve2D" id="Curve2D_qfyrc"]
@@ -118,35 +118,35 @@ position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD4/wQAAAAIAAYAAAD5/wQAAAAIAAcAAAD5/wUAAAAFAAYAAAD6/wUAAAAIAAcAAAD7/wYAAAAIAAYAAAD8/wYAAAAFAAcAAAD5/wMAAAAGAAcAAAD4/wMAAAAGAAYAAAD6/wQAAAAGAAYAAAD7/wUAAAAGAAYAAAD4/wIAAAAGAAcAAAD5////AAAHAAYAAAD5/wAAAAAGAAcAAAD6/wAAAAAHAAYAAAD6/wEAAAAGAAcAAAD7/wEAAAAGAAYAAAD7/wIAAAAHAAcAAAD8/wIAAAAFAAcAAAD8/wMAAAAGAAcAAAD9/wMAAAAHAAYAAAD4//z/AAAIAAYAAAD5//z/AAAHAAcAAAD5//3/AAAIAAcAAAD6//3/AAAFAAYAAAD6//7/AAAIAAYAAAD7//7/AAAIAAYAAAD5//n/AAAHAAcAAAD5//r/AAAIAAYAAAD6//r/AAAGAAcAAAD6//v/AAAFAAcAAAD7//v/AAAFAAcAAAD9//z/AAAHAAYAAAD9//3/AAAGAAcAAAD+//3/AAAHAAcAAAD8//n/AAAGAAcAAAD9//n/AAAFAAcAAAD9//r/AAAGAAcAAAD+//r/AAAFAAcAAAD///v/AAAHAAcAAAAAAPz/AAAIAAcAAAABAPr/AAAHAAcAAAACAPv/AAAGAAcAAAADAPz/AAAIAAYAAAD+/wQAAAAFAAYAAAAAAAQAAAAFAAYAAAAAAAUAAAAIAAYAAAABAAUAAAAIAAcAAAABAAYAAAAHAAcAAAA=")
 tile_set = ExtResource("4_p3dck")
 script = ExtResource("5_7wgd6")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="LevelTileMap2" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap2" unique_id=86856768]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD4/wQAAAAIAAYAAAD5/wQAAAAIAAcAAAD5/wUAAAAFAAYAAAD6/wUAAAAIAAcAAAD7/wYAAAAIAAYAAAD8/wYAAAAFAAcAAAD5/wMAAAAGAAcAAAD4/wMAAAAGAAYAAAD6/wQAAAAGAAYAAAD7/wUAAAAGAAYAAAD4/wIAAAAGAAcAAAD5////AAAHAAYAAAD5/wAAAAAGAAcAAAD6/wAAAAAHAAYAAAD6/wEAAAAGAAcAAAD7/wEAAAAGAAYAAAD7/wIAAAAHAAcAAAD8/wIAAAAFAAcAAAD8/wMAAAAGAAcAAAD9/wMAAAAHAAYAAAD4//z/AAAIAAYAAAD5//z/AAAHAAcAAAD5//3/AAAIAAcAAAD6//3/AAAFAAYAAAD6//7/AAAIAAYAAAD7//7/AAAIAAYAAAD5//n/AAAHAAcAAAD5//r/AAAIAAYAAAD6//r/AAAGAAcAAAD6//v/AAAFAAcAAAD7//v/AAAFAAcAAAD9//z/AAAHAAYAAAD9//3/AAAGAAcAAAD+//3/AAAHAAcAAAD8//n/AAAGAAcAAAD9//n/AAAFAAcAAAD9//r/AAAGAAcAAAD+//r/AAAFAAcAAAD///v/AAAHAAcAAAAAAPz/AAAIAAcAAAABAPr/AAAHAAcAAAACAPv/AAAGAAcAAAADAPz/AAAIAAYAAAD+/wQAAAAFAAYAAAAAAAQAAAAFAAYAAAAAAAUAAAAIAAYAAAABAAUAAAAIAAcAAAABAAYAAAAHAAcAAAA=")
 tile_set = ExtResource("4_p3dck")
 script = ExtResource("5_7wgd6")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="LevelTileMap2" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap2/LevelTileMap2" unique_id=1761318822]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD4/wQAAAAIAAYAAAD5/wQAAAAIAAcAAAD5/wUAAAAFAAYAAAD6/wUAAAAIAAcAAAD7/wYAAAAIAAYAAAD8/wYAAAAFAAcAAAD5/wMAAAAGAAcAAAD4/wMAAAAGAAYAAAD6/wQAAAAGAAYAAAD7/wUAAAAGAAYAAAD4/wIAAAAGAAcAAAD5////AAAHAAYAAAD5/wAAAAAGAAcAAAD6/wAAAAAHAAYAAAD6/wEAAAAGAAcAAAD7/wEAAAAGAAYAAAD7/wIAAAAHAAcAAAD8/wIAAAAFAAcAAAD8/wMAAAAGAAcAAAD9/wMAAAAHAAYAAAD4//z/AAAIAAYAAAD5//z/AAAHAAcAAAD5//3/AAAIAAcAAAD6//3/AAAFAAYAAAD6//7/AAAIAAYAAAD7//7/AAAIAAYAAAD5//n/AAAHAAcAAAD5//r/AAAIAAYAAAD6//r/AAAGAAcAAAD6//v/AAAFAAcAAAD7//v/AAAFAAcAAAD9//z/AAAHAAYAAAD9//3/AAAGAAcAAAD+//3/AAAHAAcAAAD8//n/AAAGAAcAAAD9//n/AAAFAAcAAAD9//r/AAAGAAcAAAD+//r/AAAFAAcAAAD///v/AAAHAAcAAAAAAPz/AAAIAAcAAAABAPr/AAAHAAcAAAACAPv/AAAGAAcAAAADAPz/AAAIAAYAAAD+/wQAAAAFAAYAAAAAAAQAAAAFAAYAAAAAAAUAAAAIAAYAAAABAAUAAAAIAAcAAAABAAYAAAAHAAcAAAA=")
 tile_set = ExtResource("4_p3dck")
 script = ExtResource("5_7wgd6")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="LevelTileMap2" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap2/LevelTileMap2/LevelTileMap2" unique_id=354261324]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD4/wQAAAAIAAYAAAD5/wQAAAAIAAcAAAD6/wUAAAAIAAcAAAD7/wYAAAAIAAYAAAD5/wMAAAAGAAcAAAD4/wMAAAAGAAYAAAD6/wQAAAAGAAYAAAD7/wUAAAAGAAYAAAD4/wIAAAAGAAcAAAD5////AAAHAAYAAAD5/wAAAAAGAAcAAAD6/wAAAAAHAAYAAAD6/wEAAAAGAAcAAAD7/wEAAAAGAAYAAAD7/wIAAAAHAAcAAAD8/wIAAAAFAAcAAAD8/wMAAAAGAAcAAAD4//z/AAAIAAYAAAD5//z/AAAHAAcAAAD5//3/AAAIAAcAAAD6//3/AAAFAAYAAAD5//n/AAAHAAcAAAD5//r/AAAIAAYAAAD6//r/AAAGAAcAAAD6//v/AAAFAAcAAAD9//z/AAAHAAYAAAD9//3/AAAGAAcAAAD+//3/AAAHAAcAAAD8//n/AAAGAAcAAAD9//n/AAAFAAcAAAD+//r/AAAFAAcAAAD///v/AAAHAAcAAAABAPr/AAAHAAcAAAACAPv/AAAGAAcAAAAAAAQAAAAFAAYAAAAAAAUAAAAIAAYAAAABAAUAAAAIAAcAAAA=")
 tile_set = ExtResource("4_p3dck")
 script = ExtResource("5_7wgd6")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="LevelTileMap2" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap2/LevelTileMap2/LevelTileMap2/LevelTileMap2" unique_id=336311188]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD5/wQAAAAIAAcAAAD6/wUAAAAIAAcAAAD5/wMAAAAGAAcAAAD4/wMAAAAGAAYAAAD6/wQAAAAGAAYAAAD7/wUAAAAGAAYAAAD4/wIAAAAGAAcAAAD5////AAAHAAYAAAD5/wAAAAAGAAcAAAD6/wEAAAAGAAcAAAD8/wMAAAAGAAcAAAD4//z/AAAIAAYAAAD5//3/AAAIAAcAAAD5//n/AAAHAAcAAAD6//v/AAAFAAcAAAD+//3/AAAHAAcAAAD8//n/AAAGAAcAAAABAPr/AAAHAAcAAAAAAAQAAAAFAAYAAAA=")
 tile_set = ExtResource("4_p3dck")
 script = ExtResource("5_7wgd6")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="BluePortalPortal" parent="." unique_id=492732705 instance=ExtResource("6_koxi5")]
 position = Vector2(-21.000015, -129.00006)

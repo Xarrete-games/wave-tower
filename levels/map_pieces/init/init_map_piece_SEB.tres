@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://c64fb147yvnsb"]
 
-[ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/map_pieces/edge.gd" id="1_gijc5"]
+[ext_resource type="Script" uid="uid://ysyv6k8aba5o" path="res://levels/map_pieces/Edge.cs" id="1_gijc5"]
 [ext_resource type="PackedScene" uid="uid://fb0n4wnfxaon" path="res://levels/map_pieces/init_maps/init_map_piece_SEB.tscn" id="2_gijc5"]
-[ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/map_pieces/map_piece_data.gd" id="3_kh14g"]
+[ext_resource type="Script" uid="uid://buf7cbkrogset" path="res://levels/map_pieces/MapPieceData.cs" id="3_kh14g"]
 
 [sub_resource type="Resource" id="Resource_gijc5"]
 script = ExtResource("1_gijc5")
@@ -13,4 +13,4 @@ pos = 2
 script = ExtResource("3_kh14g")
 edges = Array[ExtResource("1_gijc5")]([SubResource("Resource_gijc5")])
 scene = ExtResource("2_gijc5")
-metadata/_custom_type_script = "uid://ndxexeof5w0k"
+metadata/_custom_type_script = "uid://buf7cbkrogset"

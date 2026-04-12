@@ -1,17 +1,20 @@
 class_name MapPiece extends Node2D
 
+enum Dir { NE, SE, SW, NW }
+enum DirPos { TOP, MIDDLE, BOTTOM }
+
 const size: Vector2i = Vector2i(15, 15)
 const BUILDEABLE_CUSTOM_DATA: String = "buildeable"
 const BLOCKED_CUSTOM_DATA: String = "blocked"
 const ATLAS_ID: int = 0
 const NORMAL_TILE_POS: Vector2i = Vector2i(2, 0)
 
-# Maps Edge.Dir enum to string for path naming
+# Maps direction enum to string for path naming
 const DIR_NAMES: Dictionary = {
-	Edge.Dir.NE: "NE",
-	Edge.Dir.SE: "SE",
-	Edge.Dir.SW: "SW",
-	Edge.Dir.NW: "NW"
+	Dir.NE: "NE",
+	Dir.SE: "SE",
+	Dir.SW: "SW",
+	Dir.NW: "NW"
 }
 
 var edges: Array[Edge] = []
@@ -32,7 +35,7 @@ func get_decoration() -> Node2D:
 	return decoration
 
 # Get the tile position of the edge in the given direction and position
-func get_edge_tile_pos(dir: Edge.Dir, pos: Edge.DirPos = Edge.DirPos.MIDDLE) -> Vector2:
+func get_edge_tile_pos(dir: int, pos: int = DirPos.MIDDLE) -> Vector2:
 	var used: Array[Vector2i] = tile_map.get_used_cells()
 	if used.size() == 0:
 		push_error("TileMap has no used cells")
@@ -41,22 +44,22 @@ func get_edge_tile_pos(dir: Edge.Dir, pos: Edge.DirPos = Edge.DirPos.MIDDLE) -> 
 	var edge: Array[Vector2i] = []
 
 	match dir:
-		Edge.Dir.NE:
+		Dir.NE:
 			var min_y = used.map(func(c): return c.y).min()
 			edge = used.filter(func(c): return c.y == min_y)
 			edge.sort_custom(func(a, b): return a.x < b.x)
 
-		Edge.Dir.SW:
+		Dir.SW:
 			var max_y = used.map(func(c): return c.y).max()
 			edge = used.filter(func(c): return c.y == max_y)
 			edge.sort_custom(func(a, b): return a.x < b.x)
 
-		Edge.Dir.NW:
+		Dir.NW:
 			var min_x = used.map(func(c): return c.x).min()
 			edge = used.filter(func(c): return c.x == min_x)
 			edge.sort_custom(func(a, b): return a.y < b.y)
 
-		Edge.Dir.SE:
+		Dir.SE:
 			var max_x = used.map(func(c): return c.x).max()
 			edge = used.filter(func(c): return c.x == max_x)
 			edge.sort_custom(func(a, b): return a.y < b.y)
@@ -70,11 +73,11 @@ func get_edge_tile_pos(dir: Edge.Dir, pos: Edge.DirPos = Edge.DirPos.MIDDLE) -> 
 	var edge_size: int = edge.size()
 	var tile_index: int
 	match pos:
-		Edge.DirPos.TOP:
+		DirPos.TOP:
 			tile_index = int(edge_size * 0.25)
-		Edge.DirPos.MIDDLE:
+		DirPos.MIDDLE:
 			tile_index = int(edge_size / 2.0)
-		Edge.DirPos.BOTTOM:
+		DirPos.BOTTOM:
 			tile_index = int(edge_size * 0.75)
 		_:
 			tile_index = int(edge_size / 2.0)
@@ -103,7 +106,7 @@ func set_edge_has_connected(edge: Edge) -> void:
 
 
 ## Finds an edge by direction (returns first match or null)
-func find_edge_by_dir(dir: Edge.Dir) -> Edge:
+func find_edge_by_dir(dir: int) -> Edge:
 	for e in edges:
 		if e.dir == dir:
 			return e
@@ -111,7 +114,7 @@ func find_edge_by_dir(dir: Edge.Dir) -> Edge:
 
 
 ## Checks if piece has an edge with given direction
-func has_edge_dir(dir: Edge.Dir) -> bool:
+func has_edge_dir(dir: int) -> bool:
 	return find_edge_by_dir(dir) != null
 
 func _map_to_local(tile_pos: Vector2i) -> Vector2:
@@ -119,28 +122,28 @@ func _map_to_local(tile_pos: Vector2i) -> Vector2:
 	var global_point: Vector2 = tile_map.to_global(local_in_tilemap)
 	return to_local(global_point)
 
-func get_edge_normal(dir: Edge.Dir) -> Vector2:
+func get_edge_normal(dir: int) -> Vector2:
 	match dir:
-		Edge.Dir.NE:
+		Dir.NE:
 			return Vector2(0, -1)
-		Edge.Dir.SE:
+		Dir.SE:
 			return Vector2(1, 0)
-		Edge.Dir.SW:
+		Dir.SW:
 			return Vector2(0, 1)
-		Edge.Dir.NW:
+		Dir.NW:
 			return Vector2(-1, 0)
 		_:
 			return Vector2.ZERO
 
-func get_edge_tile_delta(dir: Edge.Dir) -> Vector2i:
+func get_edge_tile_delta(dir: int) -> Vector2i:
 	match dir:
-		Edge.Dir.NE:
+		Dir.NE:
 			return Vector2i(0, -1)
-		Edge.Dir.SE:
+		Dir.SE:
 			return Vector2i(1, 0)
-		Edge.Dir.SW:
+		Dir.SW:
 			return Vector2i(0, 1)
-		Edge.Dir.NW:
+		Dir.NW:
 			return Vector2i(-1, 0)
 		_:
 			return Vector2i(0, 0)
@@ -154,14 +157,14 @@ func get_tile_local_offset(delta: Vector2i) -> Vector2:
 ## Gets intermediate waypoints for a route between two edges.
 ## Returns points in correct order (entry→exit). Does NOT include entry/exit positions.
 ## Points are snapped to tile centers for precise movement.
-func get_route_waypoints(entry_dir: Edge.Dir, exit_dir: Edge.Dir) -> Array[Vector2]:
+func get_route_waypoints(entry_dir: int, exit_dir: int) -> Array[Vector2]:
 	var cache_key: String = _get_route_cache_key(entry_dir, exit_dir)
 	
 	if _route_cache.has(cache_key):
 		var variants: Array = _route_cache[cache_key]
 		var cached: Array = variants[randi() % variants.size()]
 		# Check if we need to reverse based on entry direction
-		var canonical_first: Edge.Dir = mini(entry_dir, exit_dir) as Edge.Dir
+		var canonical_first: int = mini(entry_dir, exit_dir)
 		if entry_dir != canonical_first:
 			var reversed: Array[Vector2] = []
 			for i in range(cached.size() - 1, -1, -1):
@@ -226,9 +229,9 @@ func _snap_to_tile_center(local_pos: Vector2) -> Vector2:
 
 
 ## Gets the cache key for a route (always uses canonical order)
-func _get_route_cache_key(dir_a: Edge.Dir, dir_b: Edge.Dir) -> String:
-	var first: Edge.Dir = mini(dir_a, dir_b) as Edge.Dir
-	var second: Edge.Dir = maxi(dir_a, dir_b) as Edge.Dir
+func _get_route_cache_key(dir_a: int, dir_b: int) -> String:
+	var first: int = mini(dir_a, dir_b)
+	var second: int = maxi(dir_a, dir_b)
 	return "route_%s_%s" % [DIR_NAMES[first], DIR_NAMES[second]]
 
 
@@ -271,7 +274,7 @@ func limit_buildeable_tiles(max_count: int) -> void:
 
 ## Gets waypoints for the final route (last piece to end).
 ## Path naming: "route_{DIR}_END"
-func get_final_route_waypoints(entry_dir: Edge.Dir) -> Array[Vector2]:
+func get_final_route_waypoints(entry_dir: int) -> Array[Vector2]:
 	var cache_key: String = "route_%s_END" % DIR_NAMES[entry_dir]
 	
 	if _route_cache.has(cache_key):

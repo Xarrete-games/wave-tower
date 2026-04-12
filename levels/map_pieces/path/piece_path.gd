@@ -1,7 +1,7 @@
 class_name PiecePath extends Path2D
 
-@export var start_endpoint: Edge.Dir
-@export var end_endpoint: Edge.Dir
+@export_enum("NE", "SE", "SW", "NW") var start_endpoint: int = 0
+@export_enum("NE", "SE", "SW", "NW") var end_endpoint: int = 0
 
 
 func get_start_position() -> Vector2:
