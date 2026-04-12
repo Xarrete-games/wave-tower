@@ -1,13 +1,25 @@
-public sealed class AttackContext
+using Godot;
+
+[GlobalClass]
+public partial class AttackContext : RefCounted
 {
+    public Variant target { get; set; }
+    public Variant attack { get; set; }
+    public Variant tower { get; set; }
+
+    public float extra_additive { get; set; }
+    public float extra_multiplicative { get; set; }
+    public float damage_cap { get; set; } = 9999f;
+    public float extra_crit_chance { get; set; }
+
     public EnemyModel Target { get; }
     public AttackModel Attack { get; }
     public TowerModel Tower { get; }
 
-    public float ExtraAdditive { get; set; }
-    public float ExtraMultiplicative { get; set; }
-    public float DamageCap { get; set; } = 9999f;
-    public float ExtraCritChance { get; set; }
+    public float ExtraAdditive { get => this.extra_additive; set => this.extra_additive = value; }
+    public float ExtraMultiplicative { get => this.extra_multiplicative; set => this.extra_multiplicative = value; }
+    public float DamageCap { get => this.damage_cap; set => this.damage_cap = value; }
+    public float ExtraCritChance { get => this.extra_crit_chance; set => this.extra_crit_chance = value; }
 
     public AttackContext(EnemyModel target, AttackModel attack, TowerModel tower)
     {
@@ -16,15 +28,46 @@ public sealed class AttackContext
         this.Tower = tower;
     }
 
+    public AttackContext(Variant p_target, Variant p_attack, Variant p_tower)
+    {
+        this.target = p_target;
+        this.attack = p_attack;
+        this.tower = p_tower;
+    }
+
+    public AttackContext(Enemy p_target, Attack p_attack, Tower p_tower)
+    {
+        this.target = p_target;
+        this.attack = p_attack;
+        this.tower = p_tower;
+    }
+
     public float RebuildAttack()
     {
-        float damage = Attack.Damage + ExtraAdditive;
-        damage *= 1f + this.ExtraMultiplicative;
-        return System.MathF.Min(damage, this.DamageCap);
+        Attack legacyAttack = this.attack.As<Attack>();
+        if (legacyAttack != null)
+        {
+            float legacyDamage = legacyAttack.damage + this.extra_additive;
+            legacyDamage *= 1f + this.extra_multiplicative;
+            return System.MathF.Min(legacyDamage, this.damage_cap);
+        }
+
+        float damage = (this.Attack?.Damage ?? 0f) + this.extra_additive;
+        damage *= 1f + this.extra_multiplicative;
+        return System.MathF.Min(damage, this.damage_cap);
     }
 
     public float GetCritChance()
     {
-        return this.Attack.CritChance + this.ExtraCritChance;
+        Attack legacyAttack = this.attack.As<Attack>();
+        if (legacyAttack != null)
+        {
+            return legacyAttack.crit_chance + this.extra_crit_chance;
+        }
+
+        return (this.Attack?.CritChance ?? 0f) + this.extra_crit_chance;
     }
+
+    public float rebuild_attack() => this.RebuildAttack();
+    public float get_crit_chance() => this.GetCritChance();
 }

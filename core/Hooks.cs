@@ -1,10 +1,82 @@
 
 using System;
 using System.Collections.Generic;
+using Godot;
 
 
 public static class Hooks
 {
+    public static void on_before_attack(AttackContext ctx)
+    {
+        ForEachLegacyListener(item => item.Call("on_before_attack", ctx));
+    }
+
+    public static void on_before_damage(DamageContext ctx)
+    {
+        ForEachLegacyListener(item => item.Call("on_before_damage", ctx));
+    }
+
+    public static void on_debuff_applied(DebuffContext ctx, Variant target)
+    {
+        ForEachLegacyListener(item => item.Call("on_debuff_applied", ctx, target));
+    }
+
+    public static void on_enemy_die(Variant enemy, Variant attack)
+    {
+        ForEachLegacyListener(item => item.Call("on_enemy_die", enemy, attack));
+    }
+
+    public static void on_wave_init()
+    {
+        ForEachLegacyListener(item => item.Call("on_wave_init"));
+    }
+
+    public static void on_wave_finished()
+    {
+        ForEachLegacyListener(item => item.Call("on_wave_finished"));
+    }
+
+    public static void on_get_price(PriceContext ctx)
+    {
+        ForEachLegacyListener(item => item.Call("on_get_price", ctx));
+        ctx.FinalPrice = (int)MathF.Round(ctx.BasePrice * (1f - ctx.Discount));
+    }
+
+    public static void on_tower_placed(Variant tower)
+    {
+        ForEachLegacyListener(item => item.Call("on_tower_placed", tower));
+    }
+
+    public static void on_get_targeting_modes(Godot.Collections.Array targetingModes)
+    {
+        ForEachLegacyListener(item => item.Call("on_get_targeting_modes", targetingModes));
+    }
+
+    public static void on_relic_added(Variant relicAdded)
+    {
+        ForEachLegacyListener(item => item.Call("on_relic_added", relicAdded));
+    }
+
+    public static void on_consumable_used(Variant consumable)
+    {
+        ForEachLegacyListener(item => item.Call("on_consumable_used", consumable));
+    }
+
+    public static void on_before_get_loot(LootContext ctx)
+    {
+        ForEachLegacyListener(item => item.Call("on_before_get_loot", ctx));
+    }
+
+    public static void on_before_relic_reward(RelicsRewardsContext ctx)
+    {
+        ForEachLegacyListener(item => item.Call("on_before_relic_reward", ctx));
+    }
+
+    public static void on_before_die(Status status)
+    {
+        ForEachLegacyListener(item => item.Call("on_before_die", status));
+    }
+
     public static List<AbstractModel> GetListenersFromRuntime()
     {
         return RunContextRuntime.GetListeners();
@@ -115,6 +187,47 @@ public static class Hooks
                 continue;
             }
             action(item);
+        }
+    }
+
+    private static void ForEachLegacyListener(Action<GodotObject> action)
+    {
+        if (action == null)
+        {
+            return;
+        }
+
+        SceneTree tree = Engine.GetMainLoop() as SceneTree;
+        RunContext runContext = tree?.Root?.GetNodeOrNull<RunContext>("/root/RunContext");
+        if (runContext == null)
+        {
+            return;
+        }
+
+        Godot.Collections.Array<Variant> relics = runContext.relics_manager?.get_all_relics();
+        if (relics != null)
+        {
+            for (int index = 0; index < relics.Count; index++)
+            {
+                GodotObject item = relics[index].AsGodotObject();
+                if (item != null)
+                {
+                    action(item);
+                }
+            }
+        }
+
+        Godot.Collections.Array<Variant> towerListeners = runContext.towers_manager?.get_tower_listeners();
+        if (towerListeners != null)
+        {
+            for (int index = 0; index < towerListeners.Count; index++)
+            {
+                GodotObject item = towerListeners[index].AsGodotObject();
+                if (item != null)
+                {
+                    action(item);
+                }
+            }
         }
     }
 }

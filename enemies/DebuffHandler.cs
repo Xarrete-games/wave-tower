@@ -8,9 +8,6 @@ public partial class DebuffHandler : Node
     public static readonly Color FROST_COLOR = Colors.Aqua;
     public static readonly Color DEFAULT_COLOR = Colors.White;
 
-    private static readonly Script DebuffContextScript = GD.Load<Script>("res://core/context/debuff_context.gd");
-    private static readonly Script HooksScript = GD.Load<Script>("res://core/hooks.gd");
-
     public Array<EnemyDebuffInstance> debuffs = new();
 
     public void add_debuff(EnemyDebuff debuff, int amount, Variant enemyVar)
@@ -21,9 +18,9 @@ public partial class DebuffHandler : Node
             return;
         }
 
-        GodotObject ctx = DebuffContextScript.Call("new", debuff, amount).AsGodotObject();
-        HooksScript.Call("on_debuff_applied", ctx, enemy);
-        int stacks = ctx?.Get("stacks").AsInt32() ?? amount;
+        DebuffContext ctx = new(debuff, amount);
+        Hooks.on_debuff_applied(ctx, enemy);
+        int stacks = ctx.stacks;
 
         for (int i = 0; i < stacks; i++)
         {

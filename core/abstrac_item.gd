@@ -1,1 +1,0 @@
-class_name AbstractItem extends AbstractModel

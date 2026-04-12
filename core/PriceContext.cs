@@ -1,4 +1,7 @@
-public sealed class PriceContext
+using Godot;
+
+[GlobalClass]
+public partial class PriceContext : RefCounted
 {
     public enum PriceType
     {
@@ -7,8 +10,32 @@ public sealed class PriceContext
         Consumable,
     }
 
-    public PriceType Type { get; }
-    public int BasePrice { get; }
+    public int price_type
+    {
+        get => (int)this.Type;
+        set => this.Type = (PriceType)value;
+    }
+
+    public int base_price
+    {
+        get => this.BasePrice;
+        set => this.BasePrice = value;
+    }
+
+    public float discount
+    {
+        get => this.Discount;
+        set => this.Discount = value;
+    }
+
+    public int final_price
+    {
+        get => this.FinalPrice;
+        set => this.FinalPrice = value;
+    }
+
+    public PriceType Type { get; set; }
+    public int BasePrice { get; set; }
     public float Discount { get; set; }
     public int FinalPrice { get; set; }
 

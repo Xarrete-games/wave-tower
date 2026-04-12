@@ -26,9 +26,6 @@ public partial class Enemy : CharacterBody2D
 
     private static readonly PackedScene GOLD_DROPPED = GD.Load<PackedScene>("uid://cxs4ar5enx4mn");
     private static readonly PackedScene DAMAGE_NUMBERS = GD.Load<PackedScene>("uid://bkiu4qgh3ug1m");
-    private static readonly Script DamageContextScript = GD.Load<Script>("res://core/context/damage_context.gd");
-    private static readonly Script HooksScript = GD.Load<Script>("res://core/hooks.gd");
-
     private const float WAYPOINT_ARRIVAL_THRESHOLD = 8.0f;
     private const float STEERING_FACTOR = 8.0f;
 
@@ -293,9 +290,9 @@ public partial class Enemy : CharacterBody2D
             return;
         }
 
-        GodotObject ctx = DamageContextScript.Call("new", attack, this).AsGodotObject();
-        HooksScript.Call("on_before_damage", ctx);
-        float modifiedDamage = ctx.Call("get_total_damage").AsSingle();
+        DamageContext ctx = new(attack, this);
+        Hooks.on_before_damage(ctx);
+        float modifiedDamage = ctx.get_total_damage();
 
         attack.damage = modifiedDamage;
 
@@ -326,7 +323,7 @@ public partial class Enemy : CharacterBody2D
     public void _die(Attack attack)
     {
         EmitSignal(SignalName.die, this, attack);
-        HooksScript.Call("on_enemy_die", this, attack);
+        Hooks.on_enemy_die(this, attack);
         this._show_gold_dropped();
 
         RunContext runContext = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
