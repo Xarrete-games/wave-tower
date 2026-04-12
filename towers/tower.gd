@@ -9,6 +9,7 @@ signal buff_removed(buff: TowerBuff)
 
 enum Type {FIRE, LIGHTNING, FROST}
 enum TargetingMode {FIRST_IN_PROGRESS, HIGH_HP, LOW_HP}
+const SOURCE_TYPE_TOWER: int = 1
 const MAX_LEVEL: int = 2
 const uuid_util = preload('res://addons/uuid/uuid.gd')
 const PHANTOM_COLOR: Color = Color(1.0, 1.0, 1.0, 0.5)
@@ -54,7 +55,9 @@ var buffs: Array[TowerBuff] = []
 var tower_logic: TowerLogic
 var damage_source: Source:
 	get:
-		return Source.new(Source.SourceType.TOWER, type_id, self)
+		var src := Source.new()
+		src.setup(SOURCE_TYPE_TOWER, type_id, self)
+		return src
 
 @onready var area_detector: AreaDetector = $AreaDetector
 @onready var range_preview: RangePreview = $RangePreview

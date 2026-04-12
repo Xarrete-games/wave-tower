@@ -4,7 +4,6 @@ using Godot;
 public partial class CaffeinePotion : ConsumableUsable
 {
     private static readonly Script _towerBuffFactoryScript = GD.Load<Script>("res://towers/tower-buffs/tower_buff_factory.gd");
-    private static readonly Script _durationScript = GD.Load<Script>("res://core/duration.gd");
 
     public override void use()
     {
@@ -34,7 +33,7 @@ public partial class CaffeinePotion : ConsumableUsable
                 continue;
             }
 
-            Variant duration = _durationScript.Call("new", 5, 0);
+            Variant duration = new Duration(5, 0);
             debuffObj.Set("duration", duration);
             buffObj.Set("duration", duration);
             buffObj.Set("residual_buff", debuff);

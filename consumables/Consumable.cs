@@ -3,9 +3,6 @@ using Godot;
 [GlobalClass]
 public partial class Consumable : RefCounted
 {
-    private const int CONSUMABLE_SOURCE_TYPE = 2;
-    private static readonly Script _sourceScript = GD.Load<Script>("res://core/source.gd");
-
     [Signal]
     public delegate void usedEventHandler(Variant consumable);
 
@@ -44,7 +41,7 @@ public partial class Consumable : RefCounted
     public Variant get_source()
     {
         string id = this.Data?.id ?? string.Empty;
-        return _sourceScript.Call("new", CONSUMABLE_SOURCE_TYPE, id, this);
+        return new Source(Source.SourceType.CONSUMABLE, id, this);
     }
 
     protected Node GetSingleton(string name)

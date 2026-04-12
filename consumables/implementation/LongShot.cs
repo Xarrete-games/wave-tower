@@ -4,7 +4,6 @@ using Godot;
 public partial class LongShot : ConsumableTargeteable
 {
     private static readonly Script _towerBuffFactoryScript = GD.Load<Script>("res://towers/tower-buffs/tower_buff_factory.gd");
-    private static readonly Script _durationScript = GD.Load<Script>("res://core/duration.gd");
 
     public override void action(Variant p_target)
     {
@@ -22,7 +21,7 @@ public partial class LongShot : ConsumableTargeteable
             return;
         }
 
-        towerBuffObj.Set("duration", _durationScript.Call("new", 0, 1));
+        towerBuffObj.Set("duration", new Duration(0, 1));
         tower.Call("add_buff", towerBuff);
     }
 }

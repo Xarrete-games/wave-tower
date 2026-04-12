@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://b8g0wp8j02vu4"]
 
 [ext_resource type="Texture2D" uid="uid://dkwlrr7trj34m" path="res://assets/sprites/portals/orange_portal.png" id="1_wrevt"]
-[ext_resource type="Script" uid="uid://clb5nmsmw7qwo" path="res://levels/portal/portal.gd" id="2_ocubi"]
+[ext_resource type="Script" path="res://levels/portal/Portal.cs" id="2_ocubi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ocubi"]
 atlas = ExtResource("1_wrevt")

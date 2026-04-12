@@ -3,13 +3,11 @@ using Godot;
 [GlobalClass]
 public partial class PaganiniBowRelic : RelicRuntimeAdapter
 {
-    private const int RELIC_SOURCE_TYPE = 0;
     private const string BUFF_ID = "damage_mult_buff";
     private const int BUFF_VALUE = 10;
     private const int COUNTER_THRESHOLD = 4;
 
     private static readonly Script _towerBuffFactoryScript = GD.Load<Script>("res://towers/tower-buffs/tower_buff_factory.gd");
-    private static readonly Script _sourceScript = GD.Load<Script>("res://core/source.gd");
 
     private readonly PaganiniBow _model = new();
 
@@ -30,7 +28,7 @@ public partial class PaganiniBowRelic : RelicRuntimeAdapter
             return;
         }
 
-        Variant source = _sourceScript.Call("new", RELIC_SOURCE_TYPE, this.id, this);
+        Variant source = new Source(Source.SourceType.RELIC, this.id, this);
         Variant buff = _towerBuffFactoryScript.Call("create_from_id", BUFF_ID, source, BUFF_VALUE);
         if (buff.VariantType != Variant.Type.Nil)
         {

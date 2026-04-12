@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://gb8anbp5v7hc"]
 
 [ext_resource type="Texture2D" uid="uid://kj4856efyjt4" path="res://assets/sprites/portals/blue_portal.png" id="1_nyeo4"]
-[ext_resource type="Script" uid="uid://clb5nmsmw7qwo" path="res://levels/portal/portal.gd" id="2_6eqc5"]
+[ext_resource type="Script" path="res://levels/portal/Portal.cs" id="2_6eqc5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_42rqd"]
 atlas = ExtResource("1_nyeo4")
