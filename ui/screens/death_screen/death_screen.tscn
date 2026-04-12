@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ui/screens/death_screen/DeathScreen.cs" id="1_4klge"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="2_fqko3"]
-[ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="3_5mn61"]
+[ext_resource type="Script" path="res://utils/AnimationComponent.cs" id="3_5mn61"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="3_iyktl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lg0me"]

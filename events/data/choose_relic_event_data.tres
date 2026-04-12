@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://c26b6rlq182aq"]
 
-[ext_resource type="Script" uid="uid://bj6frpye8hpbn" path="res://events/event_data.gd" id="1_0g4ry"]
+[ext_resource type="Script" uid="uid://daq85iil68x7r" path="res://events/EventData.cs" id="1_0g4ry"]
 
 [resource]
 script = ExtResource("1_0g4ry")
@@ -8,4 +8,4 @@ id = "choose_relic"
 type = 2
 title = "Choose relic"
 description = "Choose relic"
-metadata/_custom_type_script = "uid://bj6frpye8hpbn"
+metadata/_custom_type_script = "uid://daq85iil68x7r"

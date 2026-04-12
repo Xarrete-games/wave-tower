@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b0aufhy41nftl" path="res://assets/images/icons/stats/attack_speed_icon_flat.png" id="7_l17e5"]
 [ext_resource type="Texture2D" uid="uid://dh4xdb1wo3q44" path="res://assets/images/icons/stats/range_icon_flat.png" id="8_ojjmy"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="9_a0r7t"]
-[ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="12_xj3me"]
+[ext_resource type="Script" path="res://utils/AnimationComponent.cs" id="12_xj3me"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kd2t"]
 atlas = ExtResource("4_u2e7x")

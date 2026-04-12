@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EventData" load_steps=5 format=3 uid="uid://d3sc0y68wuink"]
 
 [ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/images/icons/wcoin.png" id="1_6hylt"]
-[ext_resource type="Script" uid="uid://bj6frpye8hpbn" path="res://events/event_data.gd" id="1_44kid"]
-[ext_resource type="Script" uid="uid://cwhohvrkyys10" path="res://events/scripts/chest_event_script.gd" id="2_2sy50"]
+[ext_resource type="Script" uid="uid://daq85iil68x7r" path="res://events/EventData.cs" id="1_44kid"]
+[ext_resource type="Script" uid="uid://2usu02mvp2xa" path="res://events/scripts/ChestEventScript.cs" id="2_2sy50"]
 [ext_resource type="Texture2D" uid="uid://dufq6mbrugsc6" path="res://assets/images/events/chest_event.png" id="3_2sy50"]
 
 [resource]
@@ -16,4 +16,4 @@ Do you open it, or leave it untouched?"
 icon = ExtResource("1_6hylt")
 texture_background = ExtResource("3_2sy50")
 runtime_script = ExtResource("2_2sy50")
-metadata/_custom_type_script = "uid://bj6frpye8hpbn"
+metadata/_custom_type_script = "uid://daq85iil68x7r"

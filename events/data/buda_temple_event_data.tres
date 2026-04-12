@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EventData" load_steps=5 format=3 uid="uid://degh1bs2dvxi6"]
 
 [ext_resource type="Texture2D" uid="uid://dafhdspl8xnqx" path="res://assets/sprites/relics/buda_statue.png" id="1_0p6f3"]
-[ext_resource type="Script" uid="uid://bj6frpye8hpbn" path="res://events/event_data.gd" id="1_yxnsr"]
-[ext_resource type="Script" uid="uid://crpxp2d7dffbm" path="res://events/scripts/buda_temple_script.gd" id="2_wpwtl"]
+[ext_resource type="Script" uid="uid://daq85iil68x7r" path="res://events/EventData.cs" id="1_yxnsr"]
+[ext_resource type="Script" uid="uid://dsxwnuscj4ltw" path="res://events/scripts/BudaTempleScript.cs" id="2_wpwtl"]
 [ext_resource type="Texture2D" uid="uid://hdde3gfutbf5" path="res://assets/images/events/buda_event.png" id="3_wpwtl"]
 
 [resource]
@@ -13,4 +13,4 @@ description = "A strange Buda temple appears"
 icon = ExtResource("1_0p6f3")
 texture_background = ExtResource("3_wpwtl")
 runtime_script = ExtResource("2_wpwtl")
-metadata/_custom_type_script = "uid://bj6frpye8hpbn"
+metadata/_custom_type_script = "uid://daq85iil68x7r"

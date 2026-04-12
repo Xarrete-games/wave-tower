@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EventData" load_steps=5 format=3 uid="uid://bt13tpk614xyr"]
 
-[ext_resource type="Script" uid="uid://bj6frpye8hpbn" path="res://events/event_data.gd" id="1_1w58q"]
+[ext_resource type="Script" uid="uid://daq85iil68x7r" path="res://events/EventData.cs" id="1_1w58q"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="1_qfvca"]
-[ext_resource type="Script" uid="uid://bfwtvwc7dvg2x" path="res://events/scripts/fountains_of_wishes_script.gd" id="2_tfeuk"]
+[ext_resource type="Script" uid="uid://21pr02aqocit" path="res://events/scripts/FountainsOfWishesScript.cs" id="2_tfeuk"]
 [ext_resource type="Texture2D" uid="uid://bnmlywce7fbxy" path="res://assets/images/events/fountain_of_wishes_event.png" id="4_tfeuk"]
 
 [resource]
@@ -15,4 +15,4 @@ Make a wish… and see what the waters return."
 icon = ExtResource("1_qfvca")
 texture_background = ExtResource("4_tfeuk")
 runtime_script = ExtResource("2_tfeuk")
-metadata/_custom_type_script = "uid://bj6frpye8hpbn"
+metadata/_custom_type_script = "uid://daq85iil68x7r"

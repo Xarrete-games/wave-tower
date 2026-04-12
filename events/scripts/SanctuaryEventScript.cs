@@ -1,0 +1,30 @@
+using Godot;
+
+public partial class SanctuaryEventScript : EventScript
+{
+    public override Godot.Collections.Array<Variant> get_options()
+    {
+        var option1 = new EventOptionData("Take offering (+50 gold)", 0);
+        var option2 = new EventOptionData("Pray (+10 health and 10 maximum health)", 1);
+        return new Godot.Collections.Array<Variant> { option1, option2 };
+    }
+
+    public override void handle_response(Variant data)
+    {
+        RunContext runContext = this.GetRunContext();
+        if (runContext == null)
+        {
+            return;
+        }
+
+        switch (data.AsInt32())
+        {
+            case 0:
+                runContext.economy.add_gold(50);
+                break;
+            case 1:
+                runContext.status.add_max_health(10);
+                break;
+        }
+    }
+}

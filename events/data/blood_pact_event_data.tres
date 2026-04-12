@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EventData" load_steps=5 format=3 uid="uid://c3pkdwnwu0dmc"]
 
-[ext_resource type="Script" uid="uid://bj6frpye8hpbn" path="res://events/event_data.gd" id="1_6hjr0"]
+[ext_resource type="Script" uid="uid://daq85iil68x7r" path="res://events/EventData.cs" id="1_6hjr0"]
 [ext_resource type="Texture2D" uid="uid://bqmmthkywexq7" path="res://assets/sprites/relics/assassin's_knife.png" id="1_hron2"]
-[ext_resource type="Script" uid="uid://dd8kygh8fu1yw" path="res://events/scripts/blood_pact_script.gd" id="2_kosic"]
+[ext_resource type="Script" uid="uid://v31nxx31o4sr" path="res://events/scripts/BloodPactScript.cs" id="2_kosic"]
 [ext_resource type="Texture2D" uid="uid://bup531l5wma0b" path="res://assets/images/events/sacrifice_event.png" id="4_ylvtp"]
 
 [resource]
@@ -16,4 +16,4 @@ Blood is the price. The relic, the reward."
 icon = ExtResource("1_hron2")
 texture_background = ExtResource("4_ylvtp")
 runtime_script = ExtResource("2_kosic")
-metadata/_custom_type_script = "uid://bj6frpye8hpbn"
+metadata/_custom_type_script = "uid://daq85iil68x7r"

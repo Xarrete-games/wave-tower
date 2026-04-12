@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c7oa0k10y8jb1" path="res://ui/components/buttons/xarreta_icon_action_button.tscn" id="2_xjot1"]
 [ext_resource type="Shader" path="res://ui/screens/next_wave_screen/next_wave_screen.gdshader" id="3_4d2i3"]
 [ext_resource type="Texture2D" uid="uid://cmw1h1ggalk6d" path="res://assets/images/icons/minion_icon_40.png" id="4_4d2i3"]
-[ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="4_b0t1q"]
+[ext_resource type="Script" path="res://utils/AnimationComponent.cs" id="4_b0t1q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qt5o3"]
 shader = ExtResource("3_4d2i3")

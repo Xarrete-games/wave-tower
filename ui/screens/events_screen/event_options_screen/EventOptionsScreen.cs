@@ -47,7 +47,14 @@ public partial class EventOptionsScreen : Control
             return;
         }
 
-        this._eventScriptInstance = runtimeScript.Call("new").AsGodotObject();
+        if (runtimeScript is CSharpScript csharpScript)
+        {
+            this._eventScriptInstance = csharpScript.New().AsGodotObject();
+        }
+        else
+        {
+            this._eventScriptInstance = runtimeScript.Call("new").AsGodotObject();
+        }
         if (this._eventScriptInstance == null)
         {
             GD.PushError($"Could not instantiate runtime script for event {eventDataObj.Get("id")}.");
