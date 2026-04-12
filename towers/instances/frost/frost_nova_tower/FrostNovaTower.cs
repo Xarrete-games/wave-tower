@@ -4,8 +4,6 @@ using Godot;
 public partial class FrostNovaTower : Tower
 {
     private static readonly PackedScene FrostNovaProjectileScene = GD.Load<PackedScene>("uid://csif0nju31dcs");
-    private static readonly Script EnemyDebuffScript = GD.Load<Script>("res://enemies/enemy_debuff/enemy_debuff.gd");
-
     public float double_shot_chance = 0;
 
     private Marker2D projectil_spawn_point;
@@ -25,7 +23,7 @@ public partial class FrostNovaTower : Tower
 
         GodotObject attack = this._get_attack();
         float attackRange = this.stats?.Get("attack_range").AsSingle() ?? 0f;
-        projectile.Call("set_stats", attack, attackRange, EnemyDebuffScript.Call("create_frost", this.damage_source));
+        projectile.Call("set_stats", attack, attackRange, EnemyDebuff.create_frost(this.damage_source));
         CallDeferred(MethodName._add_projectil, projectile);
 
         if (!isDoubleHit)
@@ -38,7 +36,7 @@ public partial class FrostNovaTower : Tower
         this.cristal_light?.play();
         projectile = FrostNovaProjectileScene.Instantiate();
         attack = this._get_attack();
-        projectile.Call("set_stats", attack, attackRange, EnemyDebuffScript.Call("create_frost", this.damage_source));
+        projectile.Call("set_stats", attack, attackRange, EnemyDebuff.create_frost(this.damage_source));
         CallDeferred(MethodName._add_projectil, projectile);
     }
 

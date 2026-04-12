@@ -3,8 +3,6 @@ using Godot;
 [GlobalClass]
 public partial class FireTower : Tower
 {
-    private static readonly Script EnemyDebuffScript = GD.Load<Script>("res://enemies/enemy_debuff/enemy_debuff.gd");
-
     [Export] public PackedScene fire_ball_scene;
 
     public bool apply_burn = false;
@@ -33,7 +31,7 @@ public partial class FireTower : Tower
         }
 
         GodotObject attack = this._get_attack();
-        Variant debuff = this.apply_burn ? EnemyDebuffScript.Call("create_burn", this.damage_source) : default;
+        Variant debuff = this.apply_burn ? EnemyDebuff.create_burn(this.damage_source) : default;
         projectile.Call("set_target", this._current_target, attack, debuff);
     }
 }

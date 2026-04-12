@@ -4,8 +4,6 @@ using Godot;
 public partial class FrostTower : Tower
 {
     private static readonly PackedScene FrostBallScene = GD.Load<PackedScene>("uid://cibktj8x8j1t8");
-    private static readonly Script EnemyDebuffScript = GD.Load<Script>("res://enemies/enemy_debuff/enemy_debuff.gd");
-
     private Marker2D projectile_spawn_pos;
 
     public override void _Ready()
@@ -30,7 +28,7 @@ public partial class FrostTower : Tower
         }
 
         GodotObject attack = this._get_attack();
-        Variant debuff = EnemyDebuffScript.Call("create_frost", this.damage_source);
+        Variant debuff = EnemyDebuff.create_frost(this.damage_source);
         projectile.Call("set_target", this._current_target, attack, debuff);
     }
 }

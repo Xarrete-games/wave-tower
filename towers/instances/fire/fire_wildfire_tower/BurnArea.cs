@@ -4,8 +4,6 @@ using Godot.Collections;
 [GlobalClass]
 public partial class BurnArea : Area2D
 {
-    private static readonly Script EnemyDebuffScript = GD.Load<Script>("res://enemies/enemy_debuff/enemy_debuff.gd");
-
     private readonly Array<Node2D> _enemies = new();
 
     [Export] public float duration = 0.3f;
@@ -48,8 +46,12 @@ public partial class BurnArea : Area2D
             return;
         }
 
-        Variant debuff = EnemyDebuffScript.Call("create_burn", this.source);
-        body.Call("apply_debuff", debuff);
+        Source src = this.source as Source;
+        Variant debuff = src != null ? EnemyDebuff.create_burn(src) : default;
+        if (debuff.VariantType != Variant.Type.Nil)
+        {
+            body.Call("apply_debuff", debuff);
+        }
     }
 
     private void _on_duration_timer_timeout()

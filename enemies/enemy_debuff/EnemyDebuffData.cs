@@ -30,6 +30,19 @@ public partial class EnemyDebuffData : BaseData
             return gdscript.Call("new", this);
         }
 
+        if (this.runtime_script is CSharpScript csharpScript)
+        {
+            Variant created = csharpScript.New();
+            EnemyDebuff debuff = created.As<EnemyDebuff>();
+            if (debuff == null)
+            {
+                GD.PushError($"[EnemyDebuffData] Could not instantiate runtime_script for '{this.id}'");
+                return default;
+            }
+
+            return created;
+        }
+
         GD.PushError($"[EnemyDebuffData] Missing or invalid runtime_script for '{this.id}'");
         return default;
     }

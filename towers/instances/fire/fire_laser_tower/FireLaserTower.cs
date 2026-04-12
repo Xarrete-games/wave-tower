@@ -3,8 +3,6 @@ using Godot;
 [GlobalClass]
 public partial class FireLaserTower : Tower
 {
-    private static readonly Script EnemyDebuffScript = GD.Load<Script>("res://enemies/enemy_debuff/enemy_debuff.gd");
-
     private const float EXECUTE_DAMAGE = 9999f;
 
     public float execute_threshold = 0.0f;
@@ -29,7 +27,7 @@ public partial class FireLaserTower : Tower
 
         float hpPercent = this._current_target.Call("get_percentage_remaining_health").AsSingle();
         GodotObject nextAttack = hpPercent > this.execute_threshold ? this._get_attack() : this._get_letal_attack();
-        Variant debuff = this.apply_burn ? EnemyDebuffScript.Call("create_burn", this.damage_source) : default;
+        Variant debuff = this.apply_burn ? EnemyDebuff.create_burn(this.damage_source) : default;
 
         this.red_projectile.Call("set_target", this._current_target, nextAttack, debuff);
         this.cristal_light?.turn_on();

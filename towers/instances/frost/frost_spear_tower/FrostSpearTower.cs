@@ -3,8 +3,6 @@ using Godot;
 [GlobalClass]
 public partial class FrostSpearTower : Tower
 {
-    private static readonly Script EnemyDebuffScript = GD.Load<Script>("res://enemies/enemy_debuff/enemy_debuff.gd");
-
     [Export] public PackedScene frost_spear_projectile_scene;
     [Export] public int debuff_stacks = 2;
 
@@ -37,7 +35,7 @@ public partial class FrostSpearTower : Tower
         float damage = attack.Get("damage").AsSingle();
         attack.Set("damage", damage * damageMultiplier);
 
-        Variant debuff = EnemyDebuffScript.Call("create_frost", this.damage_source);
+        Variant debuff = EnemyDebuff.create_frost(this.damage_source);
         projectile.Call("set_target", this._current_target, attack, debuff, this.debuff_stacks);
     }
 }

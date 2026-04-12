@@ -228,10 +228,10 @@ func get_percentage_remaining_health() -> float:
 func get_remaining_health() -> float:
 	return health
 
-func get_debuff_stacks(debuff_type: EnemyDebuff.Type) -> int:
+func get_debuff_stacks(debuff_type: int) -> int:
 	return debuff_handler.get_stacks(debuff_type)
 
-func get_active_debuffs() -> Array[EnemyDebuff]:
+func get_active_debuffs() -> Array:
 	return debuff_handler.get_active_debuffs()
 
 func has_any_debuff() -> bool:

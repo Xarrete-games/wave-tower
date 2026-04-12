@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bkiu4qgh3ug1m"]
 
-[ext_resource type="Script" uid="uid://3o5c46q6cgoq" path="res://enemies/ui/damage_numers/damage_numbers.gd" id="1_1bkxe"]
+[ext_resource type="Script" path="res://enemies/ui/damage_numers/DamageNumbers.cs" id="1_1bkxe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_n7a7w"]
 font_size = 24

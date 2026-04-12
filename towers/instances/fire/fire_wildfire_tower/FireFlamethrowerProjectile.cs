@@ -4,8 +4,6 @@ using Godot.Collections;
 [GlobalClass]
 public partial class FireFlamethrowerProjectile : Node2D
 {
-    private static readonly Script EnemyDebuffScript = GD.Load<Script>("res://enemies/enemy_debuff/enemy_debuff.gd");
-
     private const float DAMAGE_TICK_INTERVAL = 0.5f;
 
     private Node2D _target;
@@ -86,10 +84,13 @@ public partial class FireFlamethrowerProjectile : Node2D
                 continue;
             }
 
-            GodotObject source = this._attack?.Get("source").AsGodotObject();
-            Variant debuff = EnemyDebuffScript.Call("create_burn", source);
+            Source source = this._attack?.Get("source").As<Source>();
+            Variant debuff = source != null ? EnemyDebuff.create_burn(source) : default;
             target.Call("apply_damage", this._attack);
-            target.Call("apply_debuff", debuff);
+            if (debuff.VariantType != Variant.Type.Nil)
+            {
+                target.Call("apply_debuff", debuff);
+            }
         }
     }
 }
