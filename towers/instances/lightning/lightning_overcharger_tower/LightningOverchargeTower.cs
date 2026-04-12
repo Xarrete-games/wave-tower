@@ -4,8 +4,6 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class LightningOverchargeTower : Tower
 {
-    private static readonly Script TowerBuffFactoryScript = GD.Load<Script>("res://towers/tower-buffs/tower_buff_factory.gd");
-
     [ExportGroup("Scenes")]
     [Export] public PackedScene projectile_scene;
     [Export] public PackedScene overcharge_particle_scene;
@@ -127,7 +125,7 @@ public partial class LightningOverchargeTower : Tower
         Source source = new();
         source.setup(SOURCE_TYPE_TOWER, Name);
 
-        Variant towerBuff = TowerBuffFactoryScript.Call("create_from_id", "damage_mult_buff", source, 10);
+        Variant towerBuff = TowerBuffFactory.create_from_id("damage_mult_buff", source, 10);
         if (towerBuff.VariantType == Variant.Type.Nil)
         {
             return;

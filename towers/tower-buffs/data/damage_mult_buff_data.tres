@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://belffx2l18m14" path="res://towers/tower-buffs/BuffData.cs" id="1_data"]
 [ext_resource type="Texture2D" uid="uid://dr7m4cpvovfq1" path="res://assets/images/icons/tower_buffs/buff_dmg_percent.png" id="1_ll1ox"]
-[ext_resource type="Script" uid="uid://dth123qfdhybc" path="res://towers/tower-buffs/scripts/damage_mult_buff.gd" id="2_runtime"]
+[ext_resource type="Script" path="res://towers/tower-buffs/scripts/DamageMultBuff.cs" id="2_runtime"]
 
 [resource]
 script = ExtResource("1_data")

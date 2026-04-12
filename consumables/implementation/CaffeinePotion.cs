@@ -3,8 +3,6 @@ using Godot;
 [GlobalClass]
 public partial class CaffeinePotion : ConsumableUsable
 {
-    private static readonly Script _towerBuffFactoryScript = GD.Load<Script>("res://towers/tower-buffs/tower_buff_factory.gd");
-
     public override void use()
     {
         GodotObject towersManager = this.GetSingleton("RunContext")?.Get("towers_manager").AsGodotObject();
@@ -23,8 +21,8 @@ public partial class CaffeinePotion : ConsumableUsable
             }
 
             Variant source = this.get_source();
-            Variant debuff = _towerBuffFactoryScript.Call("create_from_id", "attack_speed_mult_buff", source, -20);
-            Variant buff = _towerBuffFactoryScript.Call("create_from_id", "attack_speed_mult_buff", source, 20);
+            Variant debuff = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, -20);
+            Variant buff = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, 20);
 
             GodotObject debuffObj = debuff.AsGodotObject();
             GodotObject buffObj = buff.AsGodotObject();

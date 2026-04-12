@@ -7,8 +7,6 @@ public partial class MetronomeRelic : RelicRuntimeAdapter
     private const int BUFF_VALUE = 5;
     private const int COUNTER_THRESHOLD = 3;
 
-    private static readonly Script _towerBuffFactoryScript = GD.Load<Script>("res://towers/tower-buffs/tower_buff_factory.gd");
-
     private readonly Metronome _model = new();
 
     protected override RelicModel Model => this._model;
@@ -44,7 +42,7 @@ public partial class MetronomeRelic : RelicRuntimeAdapter
         }
 
         Variant source = new Source(Source.SourceType.RELIC, this.id, this);
-        Variant buff = _towerBuffFactoryScript.Call("create_from_id", BUFF_ID, source, BUFF_VALUE);
+        Variant buff = TowerBuffFactory.create_from_id(BUFF_ID, source, BUFF_VALUE);
         if (buff.VariantType == Variant.Type.Nil)
         {
             return;

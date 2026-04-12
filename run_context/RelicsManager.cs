@@ -96,7 +96,6 @@ public partial class RelicsManager : RefCounted
         relicObj.on_obtain();
 
         bool addedToRuntime = RunContextRuntime.RelicsManager.AddRelicById(relicId);
-        GD.Print($"[RelicsManager] add_relic id={relicId} runtime_added={addedToRuntime}");
         if (!addedToRuntime)
         {
             GD.PushError($"[RelicsManager] Could not add relic '{relicId}' to runtime listeners. Check RelicModelFactory id mapping.");

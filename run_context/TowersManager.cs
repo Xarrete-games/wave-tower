@@ -25,8 +25,6 @@ public partial class TowersManager : RefCounted
     [Signal]
     public delegate void tower_removedEventHandler(Variant tower);
 
-    private static readonly Script _towerBuffFactoryScript = GD.Load<Script>("res://towers/tower-buffs/tower_buff_factory.gd");
-
     private static readonly string[] INITIAL_TOWERS_IDS = { "fire_tower", "frost_tower", "lightning_tower" };
     private const float COMMON_WEIGHT_START = 0.75f;
     private const float RARE_WEIGHT_START = 0.20f;
@@ -454,7 +452,7 @@ public partial class TowersManager : RefCounted
 
     private void ApplyRuntimeBuffsToLegacyTower(ulong instanceId, GodotObject towerObj, TowerModel towerModel)
     {
-        if (towerObj == null || towerModel == null || _towerBuffFactoryScript == null)
+        if (towerObj == null || towerModel == null)
         {
             return;
         }
@@ -475,7 +473,7 @@ public partial class TowersManager : RefCounted
             }
 
             Variant source = new Source(Source.SourceType.RELIC, buff.SourceId);
-            Variant legacyBuff = _towerBuffFactoryScript.Call("create_from_id", buff.Id, source, buff.Value);
+            Variant legacyBuff = TowerBuffFactory.create_from_id(buff.Id, source, buff.Value);
             if (legacyBuff.VariantType == Variant.Type.Nil)
             {
                 continue;

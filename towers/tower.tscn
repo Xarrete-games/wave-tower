@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4fkas61wyppq"]
 
-[ext_resource type="Script" uid="uid://pmu46mvlw67" path="res://towers/stats/tower_stats_handler.gd" id="1_7jtxt"]
+[ext_resource type="Script" path="res://towers/stats/TowerStatsHandler.cs" id="1_7jtxt"]
 [ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/components/cristal_light/cristal_light.tscn" id="2_2233p"]
 [ext_resource type="Script" path="res://towers/RangePreview.cs" id="3_nbqd2"]
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="4_7jtxt"]

@@ -41,7 +41,6 @@ public partial class Tower : Node2D
     public const float ELLIPSE_Y_RATIO = 0.5f;
     public const float TOWER_AREA_RADIUS = 47.042534f;
 
-    private static readonly Script AttackScript = GD.Load<Script>("res://towers/stats/attack.gd");
     private static readonly Script AttackContextScript = GD.Load<Script>("res://core/context/attack_context.gd");
     private static readonly Script HooksScript = GD.Load<Script>("res://core/hooks.gd");
 
@@ -357,11 +356,11 @@ public partial class Tower : Node2D
         float critDamage = this.stats?.Get("critic_damage").AsSingle() ?? 0f;
         float attackDamage = is_critical ? baseDamage * (1f + critDamage / 100f) : baseDamage;
 
-        GodotObject attack = AttackScript.Call("new", attackDamage, this.damage_source, is_critical).AsGodotObject();
+        Attack attack = new(attackDamage, this.damage_source, is_critical);
         GodotObject ctx = AttackContextScript.Call("new", this._current_target, attack, this).AsGodotObject();
 
         HooksScript.Call("on_before_attack", ctx);
-        attack.Set("damage", ctx.Call("rebuild_attack"));
+        attack.damage = ctx.Call("rebuild_attack").AsSingle();
 
         return attack;
     }
