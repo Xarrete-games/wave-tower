@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_38oex")
 is_cursed = true
-id = "crown_of_forgotten_king"
+id = "crown_of_the_forgotten_king"
 display_name = "Crown of the forgotten king"
 description = "At the end of each wave, a buildable tile disappears."
 icon = ExtResource("3_anmtv")

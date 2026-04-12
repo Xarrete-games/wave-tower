@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c87kjybjulaxq"]
 
-[ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_4f0f1"]
+[ext_resource type="Script" path="res://towers/instances/SingleTargetProjectile.cs" id="1_4f0f1"]
 [ext_resource type="Texture2D" uid="uid://do1b4oomw0kiu" path="res://assets/textures/particles/flame_particle.png" id="4_w0m2y"]
 
 [sub_resource type="Curve" id="Curve_0wp0u"]

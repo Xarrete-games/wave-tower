@@ -8,7 +8,7 @@
 script = ExtResource("1_ly321")
 show_counter = true
 runtime_script = ExtResource("1_3ru7g")
-id = "paganinis_bow"
+id = "paganini_bow"
 display_name = "Paganini's Bow"
 description = "Every 4 towers built, your next tower gains +10% attack damage."
 icon = ExtResource("3_8rgck")

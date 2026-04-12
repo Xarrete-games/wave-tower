@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bsvjcu86kc8oj"]
 
-[ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_iwpk0"]
+[ext_resource type="Script" path="res://towers/instances/SingleTargetProjectile.cs" id="1_iwpk0"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="2_8dgq6"]
 [ext_resource type="Texture2D" uid="uid://b522y4oy5hi75" path="res://assets/textures/flame5.jpg" id="3_lwi6b"]
 [ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="5_uqeit"]

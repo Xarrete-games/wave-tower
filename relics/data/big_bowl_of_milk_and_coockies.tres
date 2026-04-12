@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_0upk2")
 runtime_script = ExtResource("1_qpufg")
-id = "big_bowl_of_milk_and_cookies"
+id = "big_bowl_of_milk_and_biscuits"
 display_name = "Big bowl of milk and cookies"
 description = "Increases maximum health by 10 and restores full health"
 icon = ExtResource("2_13d8s")

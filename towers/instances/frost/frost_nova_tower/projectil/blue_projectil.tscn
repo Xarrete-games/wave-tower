@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://csif0nju31dcs"]
 
-[ext_resource type="Script" uid="uid://dvhoa4fsbi8gv" path="res://towers/instances/frost/frost_nova_tower/projectil/blue_projectil.gd" id="1_r6vk7"]
+[ext_resource type="Script" path="res://towers/instances/frost/frost_nova_tower/projectil/BlueProjectil.cs" id="1_r6vk7"]
 [ext_resource type="AudioStream" uid="uid://bwcsfkon7k72e" path="res://assets/sounds/sfx/blue_onda_circular.wav" id="3_l8icu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_08vvf"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://oesepsa8dbuy"]
 
-[ext_resource type="Script" uid="uid://c6rmh2ljgrwkf" path="res://towers/instances/fire/fire_wildfire_tower/burn_area.gd" id="1_t1vgp"]
+[ext_resource type="Script" path="res://towers/instances/fire/fire_wildfire_tower/BurnArea.cs" id="1_t1vgp"]
 [ext_resource type="Shader" uid="uid://cj3oop3kolpsy" path="res://assets/shaders/burn_explosion_shader.tres" id="2_kian5"]
 [ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="2_uxlko"]
 [ext_resource type="Texture2D" uid="uid://c382dpfsxj5hx" path="res://assets/textures/impacts/T_flare12.png" id="3_c16l1"]

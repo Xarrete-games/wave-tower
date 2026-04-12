@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bj4raf2gammik"]
 
-[ext_resource type="Script" path="res://towers/instances/fire/fire_laser_tower/projectil/fire_laser_projectiel.gd" id="1_v5rqc"]
+[ext_resource type="Script" path="res://towers/instances/fire/fire_laser_tower/projectil/FireLaserProjectiel.cs" id="1_v5rqc"]
 [ext_resource type="AudioStream" uid="uid://djn8lqy06js3k" path="res://assets/sounds/sfx/A_Red_Attack_001.wav" id="2_5t1h8"]
 [ext_resource type="AudioStream" uid="uid://c6m820cmdipge" path="res://assets/sounds/sfx/A_Red_Attack_002.wav" id="3_sl0jr"]
 [ext_resource type="AudioStream" uid="uid://c0anj1eemcc0h" path="res://assets/sounds/sfx/A_Red_Attack_003.wav" id="4_oghx1"]

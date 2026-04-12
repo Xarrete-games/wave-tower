@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_v54sv")
 runtime_script = ExtResource("1_ic5cl")
-id = "perseuss_fury"
+id = "perseus_fury"
 display_name = "Perseus's fury"
 description = "Increase the execute threashold from execution tower in 5%"
 icon = ExtResource("3_5vyg6")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cg2db7mx3pcxb"]
 
 [ext_resource type="Texture2D" uid="uid://do1b4oomw0kiu" path="res://assets/textures/particles/flame_particle.png" id="1_4pbvb"]
-[ext_resource type="Script" uid="uid://dskm3n0d1gpe6" path="res://towers/instances/fire/fire_wildfire_tower/fire_flamethrower_projectile.gd" id="1_snxe1"]
+[ext_resource type="Script" path="res://towers/instances/fire/fire_wildfire_tower/FireFlamethrowerProjectile.cs" id="1_snxe1"]
 
 [sub_resource type="Curve" id="Curve_snxe1"]
 _data = [Vector2(0.0026881695, 1), 0.0, 0.0, 0, 0, Vector2(0.9596774, 0.44869107), 0.0, 0.0, 0, 0]
