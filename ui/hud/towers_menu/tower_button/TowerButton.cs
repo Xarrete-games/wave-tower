@@ -102,6 +102,7 @@ public partial class TowerButton : Control
     private TextureButton _towerButtonNode;
     private Node _goldPriceNode;
     private Label _amountLabelNode;
+    private RunContext _runContext;
 
     public override void _Ready()
     {
@@ -110,14 +111,27 @@ public partial class TowerButton : Control
         this._goldPriceNode = !this.gold_price.IsEmpty ? GetNodeOrNull<Node>(this.gold_price) : GetNodeOrNull<Node>("VBoxContainer/GoldPrice");
         this._amountLabelNode = !this.amount_label.IsEmpty ? GetNodeOrNull<Label>(this.amount_label) : GetNodeOrNull<Label>("HBoxContainer/MarginContainer/AmountLabel");
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.economy.available_free_towers_change += this._on_available_free_towers_change;
-        runContext.relics_manager.Connect("relic_added", Callable.From<string>(this._on_relic_added));
-        runContext.relics_manager.Connect("relic_removed", Callable.From<string>(this._on_relic_removed));
-        runContext.progress.current_wave_finished += this._current_wave_finished;
+        this._runContext = GetNode<RunContext>("/root/RunContext");
+        this._runContext.economy.available_free_towers_change += this._on_available_free_towers_change;
+        this._runContext.relics_manager.Connect("relic_added", Callable.From<string>(this._on_relic_added));
+        this._runContext.relics_manager.Connect("relic_removed", Callable.From<string>(this._on_relic_removed));
+        this._runContext.progress.current_wave_finished += this._current_wave_finished;
 
         this._panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
         this._update_texture();
+    }
+
+    public override void _ExitTree()
+    {
+        if (this._runContext?.economy != null)
+        {
+            this._runContext.economy.available_free_towers_change -= this._on_available_free_towers_change;
+        }
+
+        if (this._runContext?.progress != null)
+        {
+            this._runContext.progress.current_wave_finished -= this._current_wave_finished;
+        }
     }
 
     private void _update_texture()
