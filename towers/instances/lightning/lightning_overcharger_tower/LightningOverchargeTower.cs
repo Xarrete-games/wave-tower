@@ -99,7 +99,7 @@ public partial class LightningOverchargeTower : Tower
             return;
         }
 
-        float attackRange = this.stats.Get("attack_range").AsSingle();
+        float attackRange = this.stats.attack_range;
         this.buff_area_shape.SetDeferred("polygon", build_ellipse_polygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
     }
 

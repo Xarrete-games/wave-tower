@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class EnemyGenerator : Node
 {
@@ -80,7 +81,7 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.progress.current_wave = this._waveNumber;
 
-        Godot.Collections.Array<WaveComposer.WaveGroup> groups = this._composer.compose_wave(this._waveNumber);
+        List<WaveComposer.WaveGroup> groups = this._composer.compose_wave(this._waveNumber);
 
         int totalEnemies = 0;
         for (int index = 0; index < groups.Count; index++)

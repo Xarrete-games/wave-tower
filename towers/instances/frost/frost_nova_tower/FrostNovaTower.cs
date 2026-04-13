@@ -22,7 +22,7 @@ public partial class FrostNovaTower : Tower
         bool isDoubleHit = this._is_doble_hit();
 
         GodotObject attack = this._get_attack();
-        float attackRange = this.stats?.Get("attack_range").AsSingle() ?? 0f;
+        float attackRange = this.stats?.attack_range ?? 0f;
         projectile.Call("set_stats", attack, attackRange, EnemyDebuff.create_frost(this.damage_source));
         CallDeferred(MethodName._add_projectil, projectile);
 

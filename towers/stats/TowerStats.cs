@@ -1,7 +1,4 @@
-using Godot;
-
-[GlobalClass]
-public partial class TowerStats : RefCounted
+public class TowerStats
 {
     public float damage { get; set; }
     public float attack_range { get; set; }

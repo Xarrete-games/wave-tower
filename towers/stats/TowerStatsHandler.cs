@@ -1,17 +1,13 @@
 using Godot;
 using Godot.Collections;
+using System;
 
 [GlobalClass]
 public partial class TowerStatsHandler : Node
 {
-    [Signal]
-    public delegate void stats_changeEventHandler(Variant new_stats);
-
-    [Signal]
-    public delegate void buff_appliedEventHandler(Variant buff);
-
-    [Signal]
-    public delegate void buff_expiredEventHandler(string source_id);
+    public event Action<TowerStats> stats_change;
+    public event Action<Variant> buff_applied;
+    public event Action<string> buff_expired;
 
     public TowerStats base_stats;
     public TowerStats stats_on_level;
@@ -39,11 +35,10 @@ public partial class TowerStatsHandler : Node
         this.buff_scheduler.Connect("buff_applied", Callable.From<Variant>(this._on_scheduled_buff_applied));
     }
 
-    public void set_data(Variant stats_configuration, Variant _p_tower_type)
+    public void set_data(TowerData stats_configuration, int _p_tower_type)
     {
-        GodotObject config = stats_configuration.AsGodotObject();
-        this.base_stats = config?.Get("stats").As<TowerStats>()?.duplicate() ?? new TowerStats();
-        this.stats_on_level = config?.Get("stats_on_level").As<TowerStats>()?.duplicate() ?? new TowerStats();
+        this.base_stats = stats_configuration?.stats?.duplicate() ?? new TowerStats();
+        this.stats_on_level = stats_configuration?.stats_on_level?.duplicate() ?? new TowerStats();
         this.stats = this.base_stats.duplicate();
         this._update_stats();
     }
@@ -88,14 +83,14 @@ public partial class TowerStatsHandler : Node
 
     private void _on_scheduled_buff_applied(Variant buff)
     {
-        EmitSignal(SignalName.buff_applied, buff);
+        this.buff_applied?.Invoke(buff);
     }
 
     private void _on_scheduled_buff_expired(Variant buff)
     {
         GodotObject buffObj = buff.AsGodotObject();
         string sourceId = buffObj?.Get("source").AsGodotObject()?.Get("type_id").AsString() ?? string.Empty;
-        EmitSignal(SignalName.buff_expired, sourceId);
+        this.buff_expired?.Invoke(sourceId);
     }
 
     private void _rebuild_stats_acc()
@@ -130,6 +125,6 @@ public partial class TowerStatsHandler : Node
         this.stats.critic_chance = (this.base_stats.critic_chance + total.flat_critic_chance) * (1.0f + total.critic_chance_mult);
         this.stats.critic_damage = (this.base_stats.critic_damage + total.flat_critic_damage) * (1.0f + total.critic_damage_mult);
 
-        EmitSignal(SignalName.stats_change, this.stats);
+        this.stats_change?.Invoke(this.stats);
     }
 }

@@ -53,8 +53,8 @@ public partial class Tower : Node2D
     public Tower current_tower_selected;
     public Tween range_tween;
 
-    private GodotObject _stats;
-    public GodotObject stats
+    private TowerStats _stats;
+    public TowerStats stats
     {
         get => this._stats;
         set
@@ -83,8 +83,8 @@ public partial class Tower : Node2D
 
     public int level = 1;
 
-    private GodotObject _exp_data;
-    public GodotObject exp_data
+    private TowerExpData _exp_data;
+    public TowerExpData exp_data
     {
         get => this._exp_data;
         set
@@ -118,7 +118,7 @@ public partial class Tower : Node2D
     protected Timer attack_timer;
     protected CristalLight cristal_light;
     protected Sprite2D sprite_2d;
-    protected Node tower_stats_handler;
+    protected TowerStatsHandler tower_stats_handler;
     protected Area2D tower_area;
     protected CollisionPolygon2D tower_area_collision;
 
@@ -134,7 +134,7 @@ public partial class Tower : Node2D
         this.attack_timer = GetNode<Timer>("AttackTimer");
         this.cristal_light = GetNodeOrNull<CristalLight>("CristalLight");
         this.sprite_2d = GetNodeOrNull<Sprite2D>("Sprite2D");
-        this.tower_stats_handler = GetNode("TowerStatsHandler");
+        this.tower_stats_handler = GetNode<TowerStatsHandler>("TowerStatsHandler");
         this.tower_area = GetNode<Area2D>("TowerArea");
         this.tower_area_collision = GetNode<CollisionPolygon2D>("TowerArea/CollisionShape2D");
 
@@ -144,10 +144,10 @@ public partial class Tower : Node2D
         this.tower_logic = new TowerLogic(this);
         this.tower_area_collision.Polygon = build_ellipse_polygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO);
 
-        this.tower_stats_handler.Connect("stats_change", Callable.From<Variant>(this._on_stats_change));
-        this.tower_stats_handler.Connect("buff_applied", Callable.From<Variant>(this.add_buff));
-        this.tower_stats_handler.Connect("buff_expired", Callable.From<string>(this.remove_buff));
-        this.tower_stats_handler.Call("set_data", this.data, (int)this.type);
+        this.tower_stats_handler.stats_change += this._on_stats_change;
+        this.tower_stats_handler.buff_applied += this.add_buff;
+        this.tower_stats_handler.buff_expired += this.remove_buff;
+        this.tower_stats_handler.set_data(this.data as TowerData, (int)this.type);
 
         this.area_detector.target_change += this._on_target_change;
         this.targeting_mode = this._targeting_mode;
@@ -158,6 +158,13 @@ public partial class Tower : Node2D
         if (this.area_detector != null)
         {
             this.area_detector.target_change -= this._on_target_change;
+        }
+
+        if (this.tower_stats_handler != null)
+        {
+            this.tower_stats_handler.stats_change -= this._on_stats_change;
+            this.tower_stats_handler.buff_applied -= this.add_buff;
+            this.tower_stats_handler.buff_expired -= this.remove_buff;
         }
 
         if (this._eventsConnected)
@@ -270,7 +277,7 @@ public partial class Tower : Node2D
         this.buffs.Add(tower_buff);
         if (tower_buff.Get("value").VariantType != Variant.Type.Nil)
         {
-            this.tower_stats_handler.Call("add_buff", tower_buff);
+            this.tower_stats_handler.add_buff(tower_buff);
         }
 
         EmitSignal(SignalName.buff_added, tower_buff);
@@ -299,7 +306,7 @@ public partial class Tower : Node2D
             this.buffs.RemoveAt(i);
         }
 
-        this.tower_stats_handler.Call("remove_buff", source_id);
+        this.tower_stats_handler.remove_buff(source_id);
 
         foreach (GodotObject removedBuff in removedBuffs)
         {
@@ -319,7 +326,7 @@ public partial class Tower : Node2D
         }
 
         this.level += 1;
-        this.tower_stats_handler.Call("level_up", this.level);
+        this.tower_stats_handler.level_up(this.level);
     }
 
     public bool is_max_level()
@@ -349,8 +356,8 @@ public partial class Tower : Node2D
     {
         bool is_critical = this._is_critical_hit();
 
-        float baseDamage = this.stats?.Get("damage").AsSingle() ?? 0f;
-        float critDamage = this.stats?.Get("critic_damage").AsSingle() ?? 0f;
+        float baseDamage = this.stats?.damage ?? 0f;
+        float critDamage = this.stats?.critic_damage ?? 0f;
         float attackDamage = is_critical ? baseDamage * (1f + critDamage / 100f) : baseDamage;
 
         Attack attack = new(attackDamage, this.damage_source, is_critical);
@@ -429,7 +436,7 @@ public partial class Tower : Node2D
     public bool _is_critical_hit()
     {
         float randomValue = GD.Randf();
-        float critChance = this.stats?.Get("critic_chance").AsSingle() ?? 0f;
+        float critChance = this.stats?.critic_chance ?? 0f;
         return randomValue < (critChance / 100f);
     }
 
@@ -461,9 +468,9 @@ public partial class Tower : Node2D
 
     protected virtual void _fire() { }
 
-    public virtual void _on_stats_change(Variant new_stats)
+    public virtual void _on_stats_change(TowerStats new_stats)
     {
-        this.stats = new_stats.AsGodotObject();
+        this.stats = new_stats;
         this._apply_stats_changes();
     }
 
@@ -474,8 +481,8 @@ public partial class Tower : Node2D
             return;
         }
 
-        float attackSpeed = this.stats.Get("attack_speed").AsSingle();
-        float attackRange = this.stats.Get("attack_range").AsSingle();
+        float attackSpeed = this.stats.attack_speed;
+        float attackRange = this.stats.attack_range;
 
         this.attack_timer.WaitTime = 1.0 / attackSpeed;
         this.range_preview.radius = attackRange;
@@ -484,7 +491,7 @@ public partial class Tower : Node2D
 
     public void _on_exp_data_change(Variant new_exp_data)
     {
-        this.exp_data = new_exp_data.AsGodotObject();
+        this.exp_data = new_exp_data.Obj as TowerExpData;
     }
 
     private void _on_tower_selected(Variant tower_var)

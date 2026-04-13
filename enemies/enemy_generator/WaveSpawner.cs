@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class WaveSpawner : Node
@@ -32,7 +33,7 @@ public partial class WaveSpawner : Node
 
     private bool _is_spawning;
 
-    public async void start_wave(int wave_number, Godot.Collections.Array<WaveComposer.WaveGroup> groups, WaveConfig config)
+    public async void start_wave(int wave_number, List<WaveComposer.WaveGroup> groups, WaveConfig config)
     {
         if (this._is_spawning)
         {

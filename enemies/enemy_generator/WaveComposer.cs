@@ -1,7 +1,7 @@
 using Godot;
+using System.Collections.Generic;
 
-[GlobalClass]
-public partial class WaveComposer : RefCounted
+public class WaveComposer
 {
     public enum PressureType
     {
@@ -11,8 +11,7 @@ public partial class WaveComposer : RefCounted
         MIXED,
     }
 
-    [GlobalClass]
-    public partial class WaveGroup : RefCounted
+    public class WaveGroup
     {
         public PressureType pressure = PressureType.MIXED;
         public Godot.Collections.Array<EnemyData> enemies = new();
@@ -38,10 +37,10 @@ public partial class WaveComposer : RefCounted
         this._enemyCatalog = enemy_catalog ?? new Godot.Collections.Array<EnemyData>();
     }
 
-    public Godot.Collections.Array<WaveGroup> compose_wave(int wave_number)
+    public List<WaveGroup> compose_wave(int wave_number)
     {
         int totalBudget = this._calculate_budget(wave_number);
-        var groups = new Godot.Collections.Array<WaveGroup>();
+        var groups = new List<WaveGroup>();
         PressureType fullPressure = this._pick_full_wave_pressure(wave_number);
         GD.Print($"[WaveComposer] Wave {wave_number} mode: {this._pressure_to_string(fullPressure)}");
 
@@ -298,7 +297,7 @@ public partial class WaveComposer : RefCounted
         return pressure.ToString();
     }
 
-    private string _groups_to_log(Godot.Collections.Array<WaveGroup> groups)
+    private string _groups_to_log(List<WaveGroup> groups)
     {
         if (groups.Count == 0)
         {

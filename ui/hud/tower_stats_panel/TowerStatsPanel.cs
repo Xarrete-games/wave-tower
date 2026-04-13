@@ -14,7 +14,7 @@ public partial class TowerStatsPanel : Control
     private OptionButton _targetingModeSelector;
     private Control _towerHintPanel;
 
-    private GodotObject _currentTower;
+    private Tower _currentTower;
 
     public override void _Ready()
     {
@@ -43,7 +43,7 @@ public partial class TowerStatsPanel : Control
 
     private void OnTowerSelected(Variant tower)
     {
-        GodotObject towerObj = tower.AsGodotObject();
+        Tower towerObj = tower.AsGodotObject() as Tower;
         if (towerObj == null)
         {
             this._currentTower = null;
@@ -63,31 +63,31 @@ public partial class TowerStatsPanel : Control
         Hooks.OnGetTargetingModes(Hooks.GetListenersFromRuntime(), targetingModes);
         this.UpdateTargetingModes(targetingModes);
 
-        int targetingMode = (int)towerObj.Get("targeting_mode");
+        int targetingMode = towerObj.targeting_mode;
         this._targetingModeSelector.Select(targetingMode);
 
         ActionManager manager = GetNode<ActionManager>("/root/ActionManager");
         manager.StartAction(ActionManager.ActionState.TowerSelected, Callable.From(this.HidePanel));
         this.Visible = true;
 
-        GodotObject stats = towerObj.Get("stats").AsGodotObject();
-        GodotObject expData = towerObj.Get("exp_data").AsGodotObject();
+        TowerStats stats = towerObj.stats;
+        TowerExpData expData = towerObj.exp_data;
         this.UpdateStats(stats);
         this.UpdateExpData(expData);
 
-        GodotObject data = towerObj.Get("data").AsGodotObject();
-        this._nameLabel.Text = (string)data.Get("display_name");
-        this._idLabel.Text = (string)towerObj.Get("id");
+        TowerData data = towerObj.data as TowerData;
+        this._nameLabel.Text = data?.display_name ?? string.Empty;
+        this._idLabel.Text = towerObj.id;
         this._currentTower = towerObj;
 
-        this._levelLabel.Text = ((int)towerObj.Get("level")).ToString();
-        if ((bool)towerObj.Call("is_max_level"))
+        this._levelLabel.Text = towerObj.level.ToString();
+        if (towerObj.is_max_level())
         {
             this.HideUpgradeOptions();
         }
         else
         {
-            this._upgradeTowerPrice.Set("price", (int)data.Get("upgrade_price"));
+            this._upgradeTowerPrice.Set("price", data?.upgrade_price ?? 0);
             this._upgradeButtonContainer.Visible = true;
         }
     }
@@ -97,26 +97,26 @@ public partial class TowerStatsPanel : Control
         this.Visible = false;
     }
 
-    private void UpdateStats(GodotObject towerStats)
+    private void UpdateStats(TowerStats towerStats)
     {
         if (towerStats == null)
         {
             return;
         }
 
-        this._damageStat.Call("set_value", towerStats.Get("damage"));
-        this._attackSpeedStat.Call("set_value", towerStats.Get("attack_speed"));
-        this._rangeStat.Call("set_value", towerStats.Get("attack_range"));
+        this._damageStat.Call("set_value", towerStats.damage);
+        this._attackSpeedStat.Call("set_value", towerStats.attack_speed);
+        this._rangeStat.Call("set_value", towerStats.attack_range);
     }
 
-    private void UpdateExpData(GodotObject expData)
+    private void UpdateExpData(TowerExpData expData)
     {
         if (expData == null)
         {
             return;
         }
 
-        this._levelLabel.Text = ((int)expData.Get("level")).ToString();
+        this._levelLabel.Text = expData.level.ToString();
     }
 
     private void UpdateTargetingModes(List<TowerTargetingMode> modes)
@@ -138,7 +138,7 @@ public partial class TowerStatsPanel : Control
         }
 
         int mode = this._targetingModeSelector.GetItemId(index);
-        this._currentTower.Set("targeting_mode", mode);
+        this._currentTower.targeting_mode = mode;
     }
 
     private void _on_remove_button_pressed()
@@ -159,18 +159,23 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        GodotObject data = this._currentTower.Get("data").AsGodotObject();
-        int price = (int)data.Get("upgrade_price");
+        TowerData data = this._currentTower.data as TowerData;
+        if (data == null)
+        {
+            return;
+        }
+
+        int price = data.upgrade_price;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        int gold = (int)runContext.economy.Get("gold");
+        int gold = runContext.economy.gold;
         if (gold < price)
         {
             GD.Print("[TowerStatsPanel] Not enough gold for upgrade");
             return;
         }
 
-        string towerId = (string)data.Get("id");
+        string towerId = data.id;
         Variant towerConfiguration = runContext.towers_manager.get_tower_configuration_by_id(towerId);
         if (towerConfiguration.VariantType == Variant.Type.Nil)
         {
@@ -178,7 +183,7 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        this._currentTower.Call("upgrade");
+        this._currentTower.upgrade();
         ClickEventsBus.EmitTowerUpgradePressed(this._currentTower, towerConfiguration, price);
     }
 
@@ -194,11 +199,16 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        GodotObject data = this._currentTower.Get("data").AsGodotObject();
-        GodotObject statsOnLevel = data.Get("stats_on_level").AsGodotObject();
-        this._damageStat.Call("show_upgrade_value", statsOnLevel.Get("damage"));
-        this._attackSpeedStat.Call("show_upgrade_value", statsOnLevel.Get("attack_speed"));
-        this._rangeStat.Call("show_upgrade_value", statsOnLevel.Get("attack_range"));
+        TowerData data = this._currentTower.data as TowerData;
+        TowerStats statsOnLevel = data?.stats_on_level;
+        if (statsOnLevel == null)
+        {
+            return;
+        }
+
+        this._damageStat.Call("show_upgrade_value", statsOnLevel.damage);
+        this._attackSpeedStat.Call("show_upgrade_value", statsOnLevel.attack_speed);
+        this._rangeStat.Call("show_upgrade_value", statsOnLevel.attack_range);
     }
 
     private void _on_upgrade_button_xarreta_mouse_exited()

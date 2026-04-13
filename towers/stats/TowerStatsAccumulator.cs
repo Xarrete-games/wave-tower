@@ -1,7 +1,4 @@
-using Godot;
-
-[GlobalClass]
-public partial class TowerStatsAccumulator : RefCounted
+public class TowerStatsAccumulator
 {
     public float flat_damage = 0.0f;
     public float damage_mult = 0.0f;
