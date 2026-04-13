@@ -1,12 +1,10 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://ds6e6osoii40p"]
 
-[ext_resource type="Script" path="res://relics/implementations/FlowerPotRelic.cs" id="1_3isox"]
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_uh30i"]
 [ext_resource type="Texture2D" uid="uid://dikmy1ryck3s2" path="res://assets/sprites/relics/flowerpot_relic.png" id="3_guxeq"]
 
 [resource]
 script = ExtResource("1_uh30i")
-runtime_script = ExtResource("1_3isox")
 id = "flower_pot"
 display_name = "Flower pot"
 description = "When the wave ends, recover 1 health."

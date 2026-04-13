@@ -1,4 +1,4 @@
-public sealed class PowerGloves : RelicModel
+public sealed class PowerGloves : Relic
 {
     private const string _buffId = "damage_flat_buff";
     private const int _buffValue = 3;

@@ -12,15 +12,38 @@ public partial class DebuffHandler : Node
 
     public void add_debuff(EnemyDebuff debuff, int amount, Variant enemyVar)
     {
-        GodotObject enemy = enemyVar.AsGodotObject();
+        Enemy enemy = enemyVar.As<Enemy>();
         if (debuff == null || enemy == null)
         {
             return;
         }
 
-        DebuffContext ctx = new(debuff, amount);
-        Hooks.on_debuff_applied(ctx, enemy);
-        int stacks = ctx.stacks;
+        EnemyDebuffModel.DebuffType debuffType = debuff.type == EnemyDebuff.Type.BURN
+            ? EnemyDebuffModel.DebuffType.Burn
+            : EnemyDebuffModel.DebuffType.Frost;
+
+        var debuffModel = new EnemyDebuffModel
+        {
+            Id = debuff.data?.id ?? string.Empty,
+            Type = debuffType,
+            Value = debuff.value,
+            Duration = debuff.duration,
+            TickInterval = debuff.tick_interval,
+            MaxStacks = debuff.max_stacks,
+        };
+
+        var enemyModel = new EnemyModel
+        {
+            MaxHealth = enemy.max_health,
+            RemainingHealth = enemy.health,
+            ProgressRatio = enemy.get_progress_ratio(),
+            GoldValue = enemy.gold_value,
+            HasAnyDebuff = enemy.has_any_debuff(),
+        };
+
+        DebuffContext ctx = new(debuffModel, amount);
+        Hooks.OnDebuffApplied(Hooks.GetListenersFromRuntime(), ctx, enemyModel);
+        int stacks = ctx.Stacks;
 
         for (int i = 0; i < stacks; i++)
         {
@@ -31,7 +54,7 @@ public partial class DebuffHandler : Node
 
             EnemyDebuffInstance instance = new(debuff);
             this.debuffs.Add(instance);
-            enemy.Get("health_bar").AsGodotObject()?.Call("set_debuffs", this.debuffs);
+            enemy.health_bar?.Call("set_debuffs", this.debuffs);
             debuff.on_apply(enemy);
         }
     }

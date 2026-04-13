@@ -2,21 +2,21 @@ using System.Collections.Generic;
 
 public sealed class RelicsManagerRuntime
 {
-    private readonly List<RelicModel> _relicListeners = new();
-    private readonly Dictionary<string, RelicModel> _relicsById = new();
+    private readonly List<Relic> _relicListeners = new();
+    private readonly Dictionary<string, Relic> _relicsById = new();
     private readonly Dictionary<string, int> _relicsCount = new();
 
-    public IReadOnlyList<RelicModel> GetAllRelicListeners()
+    public IReadOnlyList<Relic> GetAllRelicListeners()
     {
         return this._relicListeners;
     }
 
-    public IReadOnlyCollection<RelicModel> GetAllRelics()
+    public IReadOnlyCollection<Relic> GetAllRelics()
     {
         return this._relicsById.Values;
     }
 
-    public void AddRelic(RelicModel relic)
+    public void AddRelic(Relic relic)
     {
         if (relic == null)
         {
@@ -50,7 +50,7 @@ public sealed class RelicsManagerRuntime
             return false;
         }
 
-        RelicModel relic = RelicModelFactory.CreateById(relicId);
+        Relic relic = RelicModelFactory.CreateById(relicId);
         if (relic == null)
         {
             return false;
@@ -67,7 +67,7 @@ public sealed class RelicsManagerRuntime
             return;
         }
 
-        if (!this._relicsById.TryGetValue(relicId, out RelicModel relic))
+        if (!this._relicsById.TryGetValue(relicId, out Relic relic))
         {
             return;
         }
@@ -85,7 +85,7 @@ public sealed class RelicsManagerRuntime
             return false;
         }
 
-        if (!this._relicsById.TryGetValue(relicId, out RelicModel relic))
+        if (!this._relicsById.TryGetValue(relicId, out Relic relic))
         {
             return false;
         }
@@ -93,14 +93,14 @@ public sealed class RelicsManagerRuntime
         return !relic.Disabled;
     }
 
-    public RelicModel GetRelic(string relicId)
+    public Relic GetRelic(string relicId)
     {
         if (string.IsNullOrEmpty(relicId))
         {
             return null;
         }
 
-        if (!this._relicsById.TryGetValue(relicId, out RelicModel relic))
+        if (!this._relicsById.TryGetValue(relicId, out Relic relic))
         {
             return null;
         }
@@ -125,7 +125,7 @@ public sealed class RelicsManagerRuntime
             return currentDiscount;
         }
 
-        if (!this._relicsById.TryGetValue(relicId, out RelicModel relic))
+        if (!this._relicsById.TryGetValue(relicId, out Relic relic))
         {
             return currentDiscount;
         }

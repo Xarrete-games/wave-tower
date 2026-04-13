@@ -1,4 +1,4 @@
-public sealed class SalmonNigiri : RelicModel
+public sealed class SalmonNigiri : Relic
 {
     public SalmonNigiri() : base("salmon_nigiri")
     {

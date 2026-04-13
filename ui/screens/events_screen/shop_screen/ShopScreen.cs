@@ -167,11 +167,12 @@ public partial class ShopScreen : Control
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         var currentRelics = runContext.relics_manager.get_all_relics();
         var currentRelicsData = new Godot.Collections.Array<Variant>();
-        foreach (Variant relicData in currentRelics)
+        foreach (Relic relic in currentRelics)
         {
-            GodotObject relicObj = relicData.AsGodotObject();
-            Variant data = relicObj?.Get("data") ?? default;
-            currentRelicsData.Add(data);
+            if (relic?.Data != null)
+            {
+                currentRelicsData.Add(relic.Data);
+            }
         }
 
         var relicOffers = runContext.offers_manager.create_relic_offers_from_data(currentRelicsData);

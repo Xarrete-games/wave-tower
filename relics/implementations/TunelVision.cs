@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public sealed class TunelVision : RelicModel
+public sealed class TunelVision : Relic
 {
     private const float _damageMultiplierPerHit = 0.05f;
     private readonly Dictionary<TowerModel, EnemyModel> _towersLastTarget = new();

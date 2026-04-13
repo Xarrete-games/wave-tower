@@ -1,4 +1,4 @@
-public sealed class ButterfishNigiri : RelicModel
+public sealed class ButterfishNigiri : Relic
 {
     private const float _discountAmount = 0.1f;
 

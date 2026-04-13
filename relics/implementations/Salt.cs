@@ -1,4 +1,4 @@
-public sealed class Salt : RelicModel
+public sealed class Salt : Relic
 {
     private const float _lowHealthThreshold = 30f;
     private const float _bonusMultiplier = 0.3f;

@@ -3,38 +3,42 @@ using Godot;
 public partial class RelicsBar : Control
 {
     private static readonly PackedScene TopBarRelic = GD.Load<PackedScene>("uid://f34dinc60kaa");
+    private RelicsManager _relicsManager;
 
     public override void _Ready()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.relics_manager.Connect("relic_added", Callable.From<Variant>(this.OnRelicAdded));
-        runContext.relics_manager.Connect("relic_removed", Callable.From<string>(this.OnRelicRemoved));
-        runContext.relics_manager.Connect("relic_changed", Callable.From<Variant>(this.OnRelicChanged));
+        this._relicsManager = runContext.relics_manager;
+        this._relicsManager.Connect("relic_added", Callable.From<string>(this.OnRelicAdded));
+        this._relicsManager.Connect("relic_removed", Callable.From<string>(this.OnRelicRemoved));
+        this._relicsManager.Connect("relic_changed", Callable.From<string>(this.OnRelicChanged));
     }
 
-    private void OnRelicAdded(Variant relic)
+    private void OnRelicAdded(string relicId)
     {
+        Relic relic = this._relicsManager?._get_relic(relicId);
+        if (relic == null)
+        {
+            return;
+        }
+
         RelicUI relicInstance = TopBarRelic.Instantiate<RelicUI>();
         AddChild(relicInstance);
         relicInstance.SetRelic(relic);
     }
 
-    private void OnRelicChanged(Variant relic)
+    private void OnRelicChanged(string relicId)
     {
-        GodotObject relicObj = relic.AsGodotObject();
-        GodotObject relicData = relicObj?.Get("data").AsGodotObject();
-        if (relicData == null)
+        Relic relic = this._relicsManager?._get_relic(relicId);
+        if (relic == null)
         {
             return;
         }
 
-        string relicId = (string)relicData.Get("id");
         foreach (Node child in GetChildren())
         {
             RelicUI relicUi = child as RelicUI;
-            GodotObject existingRelicObj = relicUi?.relic.AsGodotObject();
-            GodotObject existingData = existingRelicObj?.Get("data").AsGodotObject();
-            if (existingData != null && (string)existingData.Get("id") == relicId)
+            if (relicUi?.relic?.Id == relicId)
             {
                 relicUi.SetRelic(relic);
             }
@@ -46,9 +50,7 @@ public partial class RelicsBar : Control
         foreach (Node child in GetChildren())
         {
             RelicUI relicUi = child as RelicUI;
-            GodotObject relicObj = relicUi?.relic.AsGodotObject();
-            GodotObject data = relicObj?.Get("data").AsGodotObject();
-            if (data != null && (string)data.Get("id") == relicId)
+            if (relicUi?.relic?.Id == relicId)
             {
                 relicUi.QueueFree();
             }

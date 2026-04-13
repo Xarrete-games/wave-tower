@@ -10,16 +10,17 @@ public partial class HighwayRobberyScript : EventScript
             return new Godot.Collections.Array<Variant>();
         }
 
-        Godot.Collections.Array<Variant> relics = runContext.relics_manager.get_all_relics();
-        relics.Shuffle();
+        System.Collections.Generic.List<Relic> relics = runContext.relics_manager.get_all_relics();
 
         var options = new Godot.Collections.Array<Variant>();
         int count = Mathf.Min(3, relics.Count);
         for (int index = 0; index < count; index++)
         {
-            GodotObject relic = relics[index].AsGodotObject();
-            string displayName = relic?.Get("data").AsGodotObject()?.Get("display_name").AsString() ?? "relic";
-            options.Add(new EventOptionData($"Give {displayName}.", relics[index]));
+            int randomIndex = (int)(GD.Randi() % (uint)relics.Count);
+            Relic relic = relics[randomIndex];
+            relics.RemoveAt(randomIndex);
+            string displayName = relic?.Data?.display_name ?? "relic";
+            options.Add(new EventOptionData($"Give {displayName}.", Variant.From(relic?.Id ?? string.Empty)));
         }
 
         return options;
@@ -28,13 +29,12 @@ public partial class HighwayRobberyScript : EventScript
     public override void handle_response(Variant data)
     {
         RunContext runContext = this.GetRunContext();
-        GodotObject relic = data.AsGodotObject();
-        if (runContext == null || relic == null)
+        if (runContext == null)
         {
             return;
         }
 
-        string relicId = relic.Get("data").AsGodotObject()?.Get("id").AsString() ?? string.Empty;
+        string relicId = data.AsString();
         if (!string.IsNullOrEmpty(relicId))
         {
             runContext.relics_manager.remove_relic(relicId);

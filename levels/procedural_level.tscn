@@ -29,7 +29,7 @@ event_layer = NodePath("../EventLayer")
 
 [node name="TestData" type="Node" parent="." unique_id=825568227]
 script = ExtResource("3_oysny")
-initial_relics_ids = Array[String](["tuna_nigiri", "soya_sauce", "strategy_tome_low_health_priority", "power_gloves", "ignition_voltage"])
+initial_relics_ids = Array[String](["tuna_nigiri", "soya_sauce", "strategy_tome_low_health_priority", "power_gloves", "ignition_voltage", "salt"])
 initial_consumables_ids = Array[String](["long_shot"])
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=917078807 node_paths=PackedStringArray("level")]
@@ -75,7 +75,6 @@ enemies_container = NodePath("../Visual")
 script = ExtResource("6_pp7gv")
 world_map = NodePath("../../WorldMap")
 fallback_enemy_scene = ExtResource("7_vv3de")
-metadata/_custom_type_script = "uid://d081ug0lnpy8d"
 
 [node name="TowerPlacer" type="Node2D" parent="LevelContainer" unique_id=1890177127 node_paths=PackedStringArray("composite_tile_map")]
 script = ExtResource("10_bebo1")

@@ -1,4 +1,4 @@
-public sealed class IceCream : RelicModel
+public sealed class IceCream : Relic
 {
     public IceCream() : base("ice_cream")
     {

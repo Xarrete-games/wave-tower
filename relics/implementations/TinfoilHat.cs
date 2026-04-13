@@ -1,10 +1,10 @@
-public sealed class TinfoilHat : RelicModel
+public sealed class TinfoilHat : Relic
 {
     public TinfoilHat() : base("tinfoil_hat")
     {
     }
 
-    public override void OnRelicAdded(RelicModel relicAdded)
+    public override void OnRelicAdded(Relic relicAdded)
     {
         if (this.Disabled || !relicAdded.IsCursed)
         {

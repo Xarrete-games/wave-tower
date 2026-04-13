@@ -290,8 +290,8 @@ public partial class Enemy : CharacterBody2D
             return;
         }
 
-        DamageContext ctx = new(attack, this);
-        Hooks.on_before_damage(ctx);
+        DamageContext ctx = new(this.BuildAttackModel(attack), this.BuildEnemyModel());
+        Hooks.OnBeforeDamage(Hooks.GetListenersFromRuntime(), ctx);
         float modifiedDamage = ctx.get_total_damage();
 
         attack.damage = modifiedDamage;
@@ -323,7 +323,7 @@ public partial class Enemy : CharacterBody2D
     public void _die(Attack attack)
     {
         EmitSignal(SignalName.die, this, attack);
-        Hooks.on_enemy_die(this, attack);
+        Hooks.OnEnemyDie(Hooks.GetListenersFromRuntime(), this.BuildEnemyModel(), this.BuildAttackModel(attack));
         this._show_gold_dropped();
 
         RunContext runContext = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
@@ -333,6 +333,47 @@ public partial class Enemy : CharacterBody2D
         }
 
         QueueFree();
+    }
+
+    private AttackModel BuildAttackModel(Attack attack)
+    {
+        var model = new AttackModel
+        {
+            Damage = attack?.damage ?? 0f,
+            CritChance = attack?.crit_chance ?? 0f,
+            IsCritical = attack?.is_critical ?? false,
+            IsExecution = attack?.is_execution ?? false,
+            Hits = attack?.hits ?? 1,
+            Bounces = attack?.bounces ?? 0,
+        };
+
+        Source source = attack?.source;
+        model.Source = new SourceModel
+        {
+            Type = source?.type switch
+            {
+                Source.SourceType.RELIC => SourceModel.SourceType.Relic,
+                Source.SourceType.TOWER => SourceModel.SourceType.Tower,
+                Source.SourceType.CONSUMABLE => SourceModel.SourceType.Consumable,
+                Source.SourceType.DEBUFF => SourceModel.SourceType.Debuff,
+                _ => SourceModel.SourceType.Global,
+            },
+            TypeId = source?.type_id ?? string.Empty,
+        };
+
+        return model;
+    }
+
+    private EnemyModel BuildEnemyModel()
+    {
+        return new EnemyModel
+        {
+            MaxHealth = this.max_health,
+            RemainingHealth = this.health,
+            ProgressRatio = this.get_progress_ratio(),
+            GoldValue = this.gold_value,
+            HasAnyDebuff = this.has_any_debuff(),
+        };
     }
 
     public void _show_damage(Attack attack)

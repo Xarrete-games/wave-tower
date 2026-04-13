@@ -1,4 +1,4 @@
-public sealed class StrategyTomeEconomy : RelicModel
+public sealed class StrategyTomeEconomy : Relic
 {
     public StrategyTomeEconomy() : base("strategy_tome_economy")
     {

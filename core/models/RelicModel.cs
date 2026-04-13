@@ -1,14 +1,46 @@
-public abstract class RelicModel : AbstractModel
-{
-    public string Id { get; }
-    public bool IsCursed { get; }
-    public bool Disabled { get; set; }
-    public int Counter { get; set; }
+using System;
 
-    protected RelicModel(string id, bool isCursed = false)
+public abstract class Relic : AbstractModel
+{
+    public event Action<Relic> Changed;
+
+    public RelicData Data { get; private set; }
+
+    public string Id => this.Data?.id ?? this._fallbackId;
+    public bool IsCursed { get; }
+    private readonly string _fallbackId;
+
+    private bool _disabled;
+    public bool Disabled
     {
-        this.Id = id;
+        get => this._disabled;
+        set
+        {
+            this._disabled = value;
+            this.Changed?.Invoke(this);
+        }
+    }
+
+    private int _counter;
+    public int Counter
+    {
+        get => this._counter;
+        set
+        {
+            this._counter = value;
+            this.Changed?.Invoke(this);
+        }
+    }
+
+    protected Relic(string id, bool isCursed = false)
+    {
+        this._fallbackId = id;
         this.IsCursed = isCursed;
+    }
+
+    public void SetupData(RelicData data)
+    {
+        this.Data = data;
     }
 
     public virtual void OnObtain()

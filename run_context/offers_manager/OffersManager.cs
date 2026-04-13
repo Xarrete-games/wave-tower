@@ -76,19 +76,22 @@ public partial class OffersManager : RefCounted
         }
 
         GodotObject itemData = itemOffer.item_data.AsGodotObject();
-        Variant item = this.CreateItemFromData(itemData);
-
         bool isConsumable = this.HasProperty(itemData, "consumable_type");
         if (isConsumable)
         {
+            Variant item = this.CreateItemFromData(itemData);
             consumablesManager?.add_consumable(item);
-        }
-        else
-        {
-            relicsManager?.add_relic(item);
+            return item;
         }
 
-        return item;
+        if (itemData is RelicData relicData)
+        {
+            Relic relic = relicData.create_item();
+            relicsManager?.add_relic(relic);
+            return Variant.From(relicData.id);
+        }
+
+        return default;
     }
 
     private Variant CreateItemFromData(GodotObject itemData)
@@ -105,7 +108,7 @@ public partial class OffersManager : RefCounted
 
         if (itemData is RelicData relicData)
         {
-            return relicData.create_item();
+            return Variant.From(relicData.id);
         }
 
         if (itemData.HasMethod("create_item"))

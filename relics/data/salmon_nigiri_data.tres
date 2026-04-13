@@ -1,12 +1,10 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://b42253glovasy"]
 
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_hm7gf"]
-[ext_resource type="Script" uid="uid://dnjygc5bgad5x" path="res://relics/implementations/SalmonNigiriRelic.cs" id="1_t7spr"]
 [ext_resource type="Texture2D" uid="uid://52cx2ohdvnun" path="res://assets/sprites/relics/salmon_nigiris_relic.png" id="3_0w3py"]
 
 [resource]
 script = ExtResource("1_hm7gf")
-runtime_script = ExtResource("1_t7spr")
 id = "salmon_nigiri"
 display_name = "Salmon Nigiri"
 description = "Reduces the cost of relics by 10%."

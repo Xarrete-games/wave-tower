@@ -1,4 +1,4 @@
-public sealed class SafetyHelmet : RelicModel
+public sealed class SafetyHelmet : Relic
 {
     public SafetyHelmet() : base("safety_helmet")
     {

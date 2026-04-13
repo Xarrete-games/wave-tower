@@ -1,4 +1,4 @@
-public sealed class Metronome : RelicModel
+public sealed class Metronome : Relic
 {
     private const string _buffId = "attack_speed_mult_buff";
     private const int _buffValue = 5;

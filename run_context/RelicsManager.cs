@@ -4,10 +4,10 @@ using Godot;
 public partial class RelicsManager : RefCounted
 {
     [Signal]
-    public delegate void relic_changedEventHandler(Variant relic);
+    public delegate void relic_changedEventHandler(string relic_id);
 
     [Signal]
-    public delegate void relic_addedEventHandler(Variant relic);
+    public delegate void relic_addedEventHandler(string relic_id);
 
     [Signal]
     public delegate void relic_removedEventHandler(string relic_id);
@@ -24,7 +24,7 @@ public partial class RelicsManager : RefCounted
     };
 
     private readonly Godot.Collections.Dictionary<string, int> _relicsCount = new();
-    private readonly Godot.Collections.Dictionary<string, Variant> _relics = new();
+    private readonly System.Collections.Generic.Dictionary<string, Relic> _relics = new();
 
     public bool has_relic(string relic_id)
     {
@@ -33,19 +33,13 @@ public partial class RelicsManager : RefCounted
             return false;
         }
 
-        GodotObject relicObj = this._relics[relic_id].AsGodotObject();
-        if (relicObj == null)
-        {
-            return false;
-        }
-
-        return !(bool)relicObj.Get("disabled");
+        return !this._relics[relic_id].Disabled;
     }
 
-    public Godot.Collections.Array<Variant> get_all_relics()
+    public System.Collections.Generic.List<Relic> get_all_relics()
     {
-        var values = new Godot.Collections.Array<Variant>();
-        foreach (Variant relic in this._relics.Values)
+        var values = new System.Collections.Generic.List<Relic>();
+        foreach (Relic relic in this._relics.Values)
         {
             values.Add(relic);
         }
@@ -63,25 +57,18 @@ public partial class RelicsManager : RefCounted
         return this._relicColors[rarity];
     }
 
-    public void add_relic(Variant relic)
+    public void add_relic(Relic relic)
     {
-        if (relic.VariantType == Variant.Type.Nil)
+        if (relic == null)
         {
             GD.PushError("[RelicsManager] Attempted to add null relic instance");
             return;
         }
 
-        RelicRuntimeAdapter relicObj = relic.AsGodotObject() as RelicRuntimeAdapter;
-        if (relicObj == null)
-        {
-            GD.PushError("[RelicsManager] Attempted to add invalid relic instance");
-            return;
-        }
-
-        RelicData dataObj = relicObj.data.As<RelicData>();
+        RelicData dataObj = relic.Data;
         if (dataObj == null)
         {
-            GD.PushError("[RelicsManager] Relic data is invalid");
+            GD.PushError("[RelicsManager] Relic data is missing");
             return;
         }
 
@@ -93,12 +80,11 @@ public partial class RelicsManager : RefCounted
         }
 
         this.PlayRelicObtain();
-        relicObj.on_obtain();
+        relic.OnObtain();
 
-        bool addedToRuntime = RunContextRuntime.RelicsManager.AddRelicById(relicId);
-        if (!addedToRuntime)
+        if (RunContextRuntime.RelicsManager.GetRelic(relicId) == null)
         {
-            GD.PushError($"[RelicsManager] Could not add relic '{relicId}' to runtime listeners. Check RelicModelFactory id mapping.");
+            RunContextRuntime.RelicsManager.AddRelic(relic);
         }
 
         // Emit legacy signals only after runtime state is updated so UI recalculations read fresh hooks.
@@ -112,15 +98,15 @@ public partial class RelicsManager : RefCounted
             return;
         }
 
-        RelicRuntimeAdapter relicObj = this._relics[relic_id].AsGodotObject() as RelicRuntimeAdapter;
+        Relic relicObj = this._relics[relic_id];
         if (relicObj == null)
         {
             this._relics.Remove(relic_id);
             return;
         }
 
-        relicObj.on_remove();
-        relicObj.changed -= this.emit_relic_changed;
+        relicObj.OnRemove();
+        relicObj.Changed -= this.emit_relic_changed;
         RunContextRuntime.RelicsManager.RemoveRelic(relic_id);
 
         this._relics.Remove(relic_id);
@@ -130,15 +116,9 @@ public partial class RelicsManager : RefCounted
         this.EmitSignal(SignalName.relic_removed, relic_id);
     }
 
-    private void _add_relic(Variant relic)
+    private void _add_relic(Relic relic)
     {
-        RelicRuntimeAdapter relicObj = relic.AsGodotObject() as RelicRuntimeAdapter;
-        if (relicObj == null)
-        {
-            return;
-        }
-
-        RelicData dataObj = relicObj.data.As<RelicData>();
+        RelicData dataObj = relic.Data;
         if (dataObj == null)
         {
             return;
@@ -150,18 +130,23 @@ public partial class RelicsManager : RefCounted
         int currentCount = this._relicsCount.ContainsKey(relicId) ? this._relicsCount[relicId] : 0;
         this._relicsCount[relicId] = currentCount + 1;
 
-        this.EmitSignal(SignalName.relic_added, relic);
-        relicObj.changed += this.emit_relic_changed;
+        this.EmitSignal(SignalName.relic_added, relicId);
+        relic.Changed += this.emit_relic_changed;
     }
 
-    public void emit_relic_changed(Variant relic)
+    public void emit_relic_changed(Relic relic)
     {
-        this.EmitSignal(SignalName.relic_changed, relic);
+        if (relic == null)
+        {
+            return;
+        }
+
+        this.EmitSignal(SignalName.relic_changed, relic.Id);
     }
 
-    public Variant _get_relic(string id)
+    public Relic _get_relic(string id)
     {
-        return this._relics.ContainsKey(id) ? this._relics[id] : default;
+        return this._relics.ContainsKey(id) ? this._relics[id] : null;
     }
 
     private void PlayRelicObtain()

@@ -125,10 +125,8 @@ public partial class ShopSlot : VBoxContainer
         this.shop_slot_icon?.icon_normal_size();
     }
 
-    private void _on_relic_added(Variant relic)
+    private void _on_relic_added(string id)
     {
-        GodotObject relicObj = relic.AsGodotObject();
-        string id = relicObj?.Get("data").AsGodotObject()?.Get("id").AsString();
         if (id != "salmon_nigiri" && id != "butterfish_nigiri" && id != "soya_sauce" && id != "tuna_nigiri")
         {
             return;

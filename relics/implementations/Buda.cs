@@ -1,4 +1,4 @@
-public sealed class Buda : RelicModel
+public sealed class Buda : Relic
 {
     public Buda() : base("buda")
     {

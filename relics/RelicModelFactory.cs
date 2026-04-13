@@ -1,6 +1,6 @@
 public static class RelicModelFactory
 {
-    public static RelicModel CreateById(string relicId)
+    public static Relic CreateById(string relicId)
     {
         return relicId switch
         {

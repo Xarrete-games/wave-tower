@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://c2gxyymlkthjs"]
 
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_85nhq"]
-[ext_resource type="Script" path="res://relics/implementations/ExtraVirginOliveOilRelic.cs" id="1_hom45"]
 [ext_resource type="Texture2D" uid="uid://c64ejeg2i8s5b" path="res://assets/sprites/relics/relic_a_little_bit_of_oil_relic.png" id="2_hom45"]
 
 [resource]
@@ -10,5 +9,4 @@ id = "extra_virgin_olive_oil"
 display_name = "Extra virgin olive oil"
 description = "Increase the duration of Burn in 1 sec."
 icon = ExtResource("2_hom45")
-runtime_script = ExtResource("1_hom45")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"

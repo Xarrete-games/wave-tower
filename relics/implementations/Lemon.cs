@@ -1,4 +1,4 @@
-public sealed class Lemon : RelicModel
+public sealed class Lemon : Relic
 {
     private bool _isActive = true;
 

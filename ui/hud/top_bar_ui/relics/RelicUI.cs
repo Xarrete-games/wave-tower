@@ -9,7 +9,7 @@ public partial class RelicUI : Control
     private Label _amountLabel;
     private AnimationPlayer _animationPlayer;
 
-    public Variant relic;
+    public Relic relic;
 
     public override void _Ready()
     {
@@ -20,40 +20,37 @@ public partial class RelicUI : Control
         this._animationPlayer.Play("on_enter");
     }
 
-    public void SetRelic(Variant relicData)
+    public void SetRelic(Relic relicData)
     {
-        GodotObject relicObject = relicData.AsGodotObject();
-        GodotObject data = relicObject?.Get("data").AsGodotObject();
-        if (relicObject == null || data == null)
+        RelicData data = relicData?.Data;
+        if (relicData == null || data == null)
         {
             return;
         }
 
         this.relic = relicData;
-        this._texture.Texture = data.Get("icon").As<Texture2D>();
+        this._texture.Texture = data.icon;
 
-        bool disabled = (bool)relicObject.Get("disabled");
-        this._texture.Modulate = disabled ? SemiTransparentColor : OpaqueColor;
+        this._texture.Modulate = relicData.Disabled ? SemiTransparentColor : OpaqueColor;
 
-        bool showCounter = (bool)data.Get("show_counter");
+        bool showCounter = data.show_counter;
         this._amountLabel.Visible = showCounter;
         if (showCounter)
         {
-            this._amountLabel.Text = ((int)relicObject.Get("counter")).ToString();
+            this._amountLabel.Text = relicData.Counter.ToString();
         }
     }
 
     private void _on_mouse_entered()
     {
-        GodotObject relicObject = this.relic.AsGodotObject();
-        GodotObject data = relicObject?.Get("data").AsGodotObject();
+        RelicData data = this.relic?.Data;
         if (data == null)
         {
             return;
         }
 
-        string description = (string)data.Get("description");
-        string displayName = (string)data.Get("display_name");
+        string description = data.description;
+        string displayName = data.display_name;
         HintManagerStatic.ShowHint(this, this, description, displayName, HintManagerStatic.PositionHint.BOTTOM);
     }
 

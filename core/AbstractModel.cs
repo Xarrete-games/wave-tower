@@ -17,7 +17,7 @@ public abstract class AbstractModel
     public virtual void OnDebuffApplied(DebuffContext context, EnemyModel target) { }
 
     // Relic
-    public virtual void OnRelicAdded(RelicModel relicAdded) { }
+    public virtual void OnRelicAdded(Relic relicAdded) { }
 
     // Consumable
     public virtual void OnConsumableUsed(ConsumableModel consumable) { }

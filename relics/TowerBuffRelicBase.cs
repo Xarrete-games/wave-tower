@@ -1,4 +1,4 @@
-public abstract class TowerBuffRelicBase : RelicModel
+public abstract class TowerBuffRelicBase : Relic
 {
     protected TowerBuffRelicBase(string id, bool isCursed = false) : base(id, isCursed)
     {

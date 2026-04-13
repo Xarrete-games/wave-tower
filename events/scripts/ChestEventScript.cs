@@ -30,9 +30,9 @@ public partial class ChestEventScript : EventScript
         }
 
         int randomIndex = (int)(GD.Randi() % (uint)relics.Count);
-        GodotObject relicData = relics[randomIndex].AsGodotObject();
-        Variant relic = relicData?.Call("create_item") ?? default;
-        if (relic.VariantType != Variant.Type.Nil)
+        RelicData relicData = relics[randomIndex].As<RelicData>();
+        Relic relic = relicData?.create_item();
+        if (relic != null)
         {
             runContext.relics_manager.add_relic(relic);
         }

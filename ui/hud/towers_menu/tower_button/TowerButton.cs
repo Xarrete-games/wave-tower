@@ -112,7 +112,7 @@ public partial class TowerButton : Control
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.economy.Connect("available_free_towers_change", Callable.From<int>(this._on_available_free_towers_change));
-        runContext.relics_manager.Connect("relic_added", Callable.From<Variant>(this._on_relic_added));
+        runContext.relics_manager.Connect("relic_added", Callable.From<string>(this._on_relic_added));
         runContext.relics_manager.Connect("relic_removed", Callable.From<string>(this._on_relic_removed));
         runContext.progress.Connect("current_wave_finished", Callable.From(this._current_wave_finished));
 
@@ -188,9 +188,8 @@ public partial class TowerButton : Control
         this._update_price();
     }
 
-    private void _on_relic_added(Variant relic)
+    private void _on_relic_added(string relicId)
     {
-        string relicId = relic.AsGodotObject()?.Get("data").AsGodotObject()?.Get("id").AsString() ?? string.Empty;
         if (relicId == "soya_sauce" || relicId == "tuna_nigiri")
         {
             this._update_price();

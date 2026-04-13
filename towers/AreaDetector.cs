@@ -177,7 +177,7 @@ public partial class AreaDetector : Area2D
             }
 
             // Keep misspelled method name for compatibility with existing Enemy.gd API.
-            var hp = enemy.Call("get_remainig_health").AsSingle();
+            var hp = enemy.Call("get_remaining_health").AsSingle();
             if (hp < lowestHp)
             {
                 lowestHp = hp;

@@ -45,8 +45,9 @@ public partial class LibraryEventScript : EventScript
             return;
         }
 
-        Variant relic = relicData.Call("create_item");
-        if (relic.VariantType != Variant.Type.Nil)
+        RelicData typedRelicData = relicData as RelicData;
+        Relic relic = typedRelicData?.create_item();
+        if (relic != null)
         {
             runContext.relics_manager.add_relic(relic);
         }

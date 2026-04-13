@@ -1,4 +1,4 @@
-public sealed class SoyaSauce : RelicModel
+public sealed class SoyaSauce : Relic
 {
     private const bool DEBUG_SOYA_SAUCE = true;
 

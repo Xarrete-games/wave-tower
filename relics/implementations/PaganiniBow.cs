@@ -1,4 +1,4 @@
-public sealed class PaganiniBow : RelicModel
+public sealed class PaganiniBow : Relic
 {
     private const string _buffId = "damage_mult_buff";
     private const int _buffValue = 10;

@@ -51,9 +51,10 @@ public partial class TestData : Node
                 string relicId = this.initial_relics_ids[index];
                 Variant relicData = dataLoader.get_relic_by_id(relicId);
                 GodotObject relicDataObj = relicData.AsGodotObject();
-                if (relicDataObj != null)
+                RelicData typedRelicData = relicDataObj as RelicData;
+                if (typedRelicData != null)
                 {
-                    Variant relicInstance = relicDataObj.Call("create_item");
+                    Relic relicInstance = typedRelicData.create_item();
                     runContext.relics_manager.add_relic(relicInstance);
                 }
                 else
@@ -74,7 +75,8 @@ public partial class TestData : Node
                     continue;
                 }
 
-                Variant relic = itemObj.Call("create_item");
+                RelicData relicDataObj = itemObj as RelicData;
+                Relic relic = relicDataObj?.create_item();
                 runContext.relics_manager.add_relic(relic);
             }
         }

@@ -1,4 +1,4 @@
-public sealed class PirateBlunderbuss : RelicModel
+public sealed class PirateBlunderbuss : Relic
 {
     public PirateBlunderbuss() : base("pirate_blunderbuss")
     {

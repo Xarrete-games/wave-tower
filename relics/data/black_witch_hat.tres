@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://wergywlvkxhj"]
 
-[ext_resource type="Script" path="res://relics/implementations/BlackWitchHatRelic.cs" id="1_8gi6i"]
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_ti2tw"]
 [ext_resource type="Texture2D" uid="uid://kc5jsm0e1veg" path="res://assets/sprites/relics/witch_hat_relic.png" id="2_2nnme"]
 
@@ -10,5 +9,4 @@ id = "black_witch_hat"
 display_name = "Black witch hat"
 description = "Enemies with debuffs receive +5 dmg per hit"
 icon = ExtResource("2_2nnme")
-runtime_script = ExtResource("1_8gi6i")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"

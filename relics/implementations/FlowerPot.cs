@@ -1,4 +1,4 @@
-public sealed class FlowerPot : RelicModel
+public sealed class FlowerPot : Relic
 {
     private const int _healthBonus = 1;
 

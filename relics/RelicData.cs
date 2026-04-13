@@ -41,38 +41,16 @@ public partial class RelicData : Resource
     [Export]
     public Script runtime_script { get; set; }
 
-    public Variant create_item()
+    public Relic create_item()
     {
-        GodotObject item = this.CreateFromRuntimeScript();
-        if (item == null)
+        Relic relic = RelicModelFactory.CreateById(this.id);
+        if (relic == null)
         {
-            GD.PushError($"[RelicData] Could not instantiate runtime_script for relic '{this.id}'");
-            return default;
-        }
-
-        item.Set("data", this);
-        return item;
-    }
-
-    private GodotObject CreateFromRuntimeScript()
-    {
-        if (this.runtime_script == null)
-        {
+            GD.PushError($"[RelicData] Could not create Relic instance for id '{this.id}'");
             return null;
         }
 
-        if (this.runtime_script is GDScript gdscript)
-        {
-            Variant created = gdscript.Call("new", this);
-            return created.VariantType == Variant.Type.Nil ? null : created.AsGodotObject();
-        }
-
-        if (this.runtime_script is CSharpScript csharpScript)
-        {
-            Variant created = csharpScript.New();
-            return created.VariantType == Variant.Type.Nil ? null : created.AsGodotObject();
-        }
-
-        return null;
+        relic.SetupData(this);
+        return relic;
     }
 }

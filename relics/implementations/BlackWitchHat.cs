@@ -1,4 +1,4 @@
-public sealed class BlackWitchHat : RelicModel
+public sealed class BlackWitchHat : Relic
 {
     private const float _bonusDamage = 5f;
 

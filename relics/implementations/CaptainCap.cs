@@ -1,4 +1,4 @@
-public sealed class CaptainCap : RelicModel
+public sealed class CaptainCap : Relic
 {
     public CaptainCap() : base("captain_cap")
     {

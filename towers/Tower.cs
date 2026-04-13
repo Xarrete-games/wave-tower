@@ -354,12 +354,76 @@ public partial class Tower : Node2D
         float attackDamage = is_critical ? baseDamage * (1f + critDamage / 100f) : baseDamage;
 
         Attack attack = new(attackDamage, this.damage_source, is_critical);
-        AttackContext ctx = new(this._current_target, attack, this);
-
-        Hooks.on_before_attack(ctx);
+        Enemy targetEnemy = this._current_target as Enemy;
+        AttackContext ctx = new(this.BuildEnemyModel(targetEnemy), this.BuildAttackModel(attack), this.BuildTowerModel());
+        Hooks.OnBeforeAttack(Hooks.GetListenersFromRuntime(), ctx);
         attack.damage = ctx.rebuild_attack();
 
         return attack;
+    }
+
+    private AttackModel BuildAttackModel(Attack attack)
+    {
+        var model = new AttackModel
+        {
+            Damage = attack?.damage ?? 0f,
+            CritChance = attack?.crit_chance ?? 0f,
+            IsCritical = attack?.is_critical ?? false,
+            IsExecution = attack?.is_execution ?? false,
+            Hits = attack?.hits ?? 1,
+            Bounces = attack?.bounces ?? 0,
+        };
+
+        Source source = attack?.source;
+        model.Source = new SourceModel
+        {
+            Type = source?.type switch
+            {
+                Source.SourceType.RELIC => SourceModel.SourceType.Relic,
+                Source.SourceType.TOWER => SourceModel.SourceType.Tower,
+                Source.SourceType.CONSUMABLE => SourceModel.SourceType.Consumable,
+                Source.SourceType.DEBUFF => SourceModel.SourceType.Debuff,
+                _ => SourceModel.SourceType.Global,
+            },
+            TypeId = source?.type_id ?? string.Empty,
+        };
+
+        return model;
+    }
+
+    private EnemyModel BuildEnemyModel(Enemy enemy)
+    {
+        if (enemy == null)
+        {
+            return new EnemyModel();
+        }
+
+        return new EnemyModel
+        {
+            MaxHealth = enemy.max_health,
+            RemainingHealth = enemy.health,
+            ProgressRatio = enemy.get_progress_ratio(),
+            GoldValue = enemy.gold_value,
+            HasAnyDebuff = enemy.has_any_debuff(),
+        };
+    }
+
+    private TowerModel BuildTowerModel()
+    {
+        TowerModel.TowerType towerType = this.type switch
+        {
+            Type.FIRE => TowerModel.TowerType.Fire,
+            Type.LIGHTNING => TowerModel.TowerType.Lightning,
+            Type.FROST => TowerModel.TowerType.Frost,
+            _ => TowerModel.TowerType.Fire,
+        };
+
+        return new TowerModel
+        {
+            Id = this.id,
+            TypeId = this.type_id,
+            Type = towerType,
+        };
     }
 
     public bool _is_critical_hit()

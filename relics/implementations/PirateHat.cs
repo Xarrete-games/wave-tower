@@ -1,4 +1,4 @@
-public sealed class PirateHat : RelicModel
+public sealed class PirateHat : Relic
 {
     private const double _chanceToRecoverConsumable = 0.5;
     private readonly System.Random _random = new();

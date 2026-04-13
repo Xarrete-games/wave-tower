@@ -1,4 +1,4 @@
-public sealed class IceVeins : RelicModel
+public sealed class IceVeins : Relic
 {
     public IceVeins() : base("ice_veins")
     {

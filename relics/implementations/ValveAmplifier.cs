@@ -1,4 +1,4 @@
-public sealed class ValveAmplifier : RelicModel
+public sealed class ValveAmplifier : Relic
 {
     private const string _buffId = "attack_range_mult_buff";
     private const int _buffValue = 10;

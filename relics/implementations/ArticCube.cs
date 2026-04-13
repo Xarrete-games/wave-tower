@@ -1,4 +1,4 @@
-public sealed class ArticCube : RelicModel
+public sealed class ArticCube : Relic
 {
     private const float _extraDuration = 1f;
 

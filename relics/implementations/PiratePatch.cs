@@ -1,4 +1,4 @@
-public sealed class PiratePatch : RelicModel
+public sealed class PiratePatch : Relic
 {
     private const int _healthAmount = 2;
 

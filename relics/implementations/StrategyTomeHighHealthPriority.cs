@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public sealed class StrategyTomeHighHealthPriority : RelicModel
+public sealed class StrategyTomeHighHealthPriority : Relic
 {
     public StrategyTomeHighHealthPriority() : base("strategy_tome_high_health_priority")
     {

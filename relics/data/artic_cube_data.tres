@@ -1,12 +1,10 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://csobsxhga1pdn"]
 
 [ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_b3u50"]
-[ext_resource type="Script" path="res://relics/implementations/ArticCubeRelic.cs" id="1_olt0t"]
 [ext_resource type="Texture2D" uid="uid://cfbw0ybj5st27" path="res://assets/sprites/relics/ice_cube_relic.png" id="3_d3rf5"]
 
 [resource]
 script = ExtResource("1_b3u50")
-runtime_script = ExtResource("1_olt0t")
 id = "artic_cube"
 display_name = "Artic Cube"
 description = "Increase the duration of Freeze in 1 sec."

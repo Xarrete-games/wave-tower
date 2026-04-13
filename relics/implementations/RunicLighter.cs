@@ -1,4 +1,4 @@
-public sealed class RunicLighter : RelicModel
+public sealed class RunicLighter : Relic
 {
     private const float _damagePerFireTower = 0.1f;
 

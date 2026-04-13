@@ -147,7 +147,7 @@ public static class Hooks
         ForEach(listeners, item => item.OnGetTargetingModes(targetingModes));
     }
 
-    public static void OnRelicAdded(List<AbstractModel> listeners, RelicModel relicAdded)
+    public static void OnRelicAdded(List<AbstractModel> listeners, Relic relicAdded)
     {
         ForEach(listeners, item => item.OnRelicAdded(relicAdded));
     }
@@ -204,18 +204,7 @@ public static class Hooks
             return;
         }
 
-        Godot.Collections.Array<Variant> relics = runContext.relics_manager?.get_all_relics();
-        if (relics != null)
-        {
-            for (int index = 0; index < relics.Count; index++)
-            {
-                GodotObject item = relics[index].AsGodotObject();
-                if (item != null)
-                {
-                    action(item);
-                }
-            }
-        }
+        // Relics are now pure C# runtime listeners; legacy dispatch only applies to tower listeners.
 
         Godot.Collections.Array<Variant> towerListeners = runContext.towers_manager?.get_tower_listeners();
         if (towerListeners != null)

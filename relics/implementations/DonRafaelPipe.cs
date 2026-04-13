@@ -1,4 +1,4 @@
-public sealed class DonRafaelPipe : RelicModel
+public sealed class DonRafaelPipe : Relic
 {
     private const float _extraDuration = 1f;
 

@@ -1,4 +1,4 @@
-public sealed class ExtraVirginOliveOil : RelicModel
+public sealed class ExtraVirginOliveOil : Relic
 {
     private const float _extraDuration = 1f;
 

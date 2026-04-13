@@ -1,4 +1,4 @@
-public sealed class Boniato : RelicModel
+public sealed class Boniato : Relic
 {
     public Boniato() : base("boniato")
     {

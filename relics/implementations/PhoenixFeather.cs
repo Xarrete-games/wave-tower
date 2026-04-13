@@ -1,4 +1,4 @@
-public sealed class PhoenixFeather : RelicModel
+public sealed class PhoenixFeather : Relic
 {
     public PhoenixFeather() : base("phoenix_feather")
     {

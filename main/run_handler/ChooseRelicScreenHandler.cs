@@ -46,7 +46,7 @@ public partial class ChooseRelicScreenHandler : Node
             runContext.status.health -= healthPrice;
         }
 
-        Variant item = selectedRelicData.create_item();
+        Relic item = selectedRelicData.create_item();
         runContext.relics_manager.add_relic(item);
     }
 

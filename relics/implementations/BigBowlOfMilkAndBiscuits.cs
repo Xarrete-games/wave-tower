@@ -1,4 +1,4 @@
-public sealed class BigBowlOfMilkAndBiscuits : RelicModel
+public sealed class BigBowlOfMilkAndBiscuits : Relic
 {
     private const int _maxHealthBonus = 10;
 

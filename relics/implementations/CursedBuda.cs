@@ -1,4 +1,4 @@
-public sealed class CursedBuda : RelicModel
+public sealed class CursedBuda : Relic
 {
     public CursedBuda() : base("cursed_buda", true)
     {
