@@ -8,17 +8,17 @@ public static class Hooks
 {
     public static void on_before_attack(AttackContext ctx)
     {
-        ForEachLegacyListener(item => item.Call("on_before_attack", ctx));
+        // Legacy Variant dispatch cannot carry pure C# contexts.
     }
 
     public static void on_before_damage(DamageContext ctx)
     {
-        ForEachLegacyListener(item => item.Call("on_before_damage", ctx));
+        // Legacy Variant dispatch cannot carry pure C# contexts.
     }
 
     public static void on_debuff_applied(DebuffContext ctx, Variant target)
     {
-        ForEachLegacyListener(item => item.Call("on_debuff_applied", ctx, target));
+        // Legacy Variant dispatch cannot carry pure C# contexts.
     }
 
     public static void on_enemy_die(Variant enemy, Variant attack)
@@ -38,7 +38,6 @@ public static class Hooks
 
     public static void on_get_price(PriceContext ctx)
     {
-        ForEachLegacyListener(item => item.Call("on_get_price", ctx));
         ctx.FinalPrice = (int)MathF.Round(ctx.BasePrice * (1f - ctx.Discount));
     }
 
@@ -64,12 +63,12 @@ public static class Hooks
 
     public static void on_before_get_loot(LootContext ctx)
     {
-        ForEachLegacyListener(item => item.Call("on_before_get_loot", ctx));
+        // Legacy Variant dispatch cannot carry pure C# contexts.
     }
 
     public static void on_before_relic_reward(RelicsRewardsContext ctx)
     {
-        ForEachLegacyListener(item => item.Call("on_before_relic_reward", ctx));
+        // Legacy Variant dispatch cannot carry pure C# contexts.
     }
 
     public static void on_before_die(Status status)

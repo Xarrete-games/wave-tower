@@ -214,12 +214,12 @@ public partial class EnemyGenerator : Node
             runContext.status.apply_damage((int)enemyObj.Get("damage"));
         }
 
-        runContext.enemy_manager.EmitSignal(EnemyManager.SignalName.enemy_target_reached, enemy);
+        runContext.enemy_manager.notify_enemy_target_reached(enemyObj);
     }
 
     private void OnEnemyDie(Variant enemy, Variant attack)
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.enemy_manager.EmitSignal(EnemyManager.SignalName.enemy_die, enemy, attack);
+        runContext.enemy_manager.notify_enemy_die(enemy.AsGodotObject(), attack.AsGodotObject());
     }
 }

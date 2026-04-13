@@ -1,9 +1,5 @@
-using Godot;
-
-[GlobalClass]
-public partial class DebuffContext : RefCounted
+public class DebuffContext
 {
-    public Variant debuff { get; set; }
     public int stacks { get; set; }
 
     public EnemyDebuffModel Debuff { get; }
@@ -13,17 +9,5 @@ public partial class DebuffContext : RefCounted
     {
         this.Debuff = debuff;
         this.Stacks = stacks;
-    }
-
-    public DebuffContext(Variant p_debuff, int p_stacks)
-    {
-        this.debuff = p_debuff;
-        this.stacks = p_stacks;
-    }
-
-    public DebuffContext(EnemyDebuff p_debuff, int p_stacks)
-    {
-        this.debuff = p_debuff;
-        this.stacks = p_stacks;
     }
 }

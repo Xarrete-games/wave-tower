@@ -1,7 +1,4 @@
-using Godot;
-
-[GlobalClass]
-public partial class TowerExpData : RefCounted
+public class TowerExpData
 {
     public int level = 1;
     public int current_exp = 0;

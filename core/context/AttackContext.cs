@@ -1,12 +1,5 @@
-using Godot;
-
-[GlobalClass]
-public partial class AttackContext : RefCounted
+public class AttackContext
 {
-    public Variant target { get; set; }
-    public Variant attack { get; set; }
-    public Variant tower { get; set; }
-
     public float extra_additive { get; set; }
     public float extra_multiplicative { get; set; }
     public float damage_cap { get; set; } = 9999f;
@@ -28,30 +21,8 @@ public partial class AttackContext : RefCounted
         this.Tower = tower;
     }
 
-    public AttackContext(Variant p_target, Variant p_attack, Variant p_tower)
-    {
-        this.target = p_target;
-        this.attack = p_attack;
-        this.tower = p_tower;
-    }
-
-    public AttackContext(Enemy p_target, Attack p_attack, Tower p_tower)
-    {
-        this.target = p_target;
-        this.attack = p_attack;
-        this.tower = p_tower;
-    }
-
     public float RebuildAttack()
     {
-        Attack legacyAttack = this.attack.As<Attack>();
-        if (legacyAttack != null)
-        {
-            float legacyDamage = legacyAttack.damage + this.extra_additive;
-            legacyDamage *= 1f + this.extra_multiplicative;
-            return System.MathF.Min(legacyDamage, this.damage_cap);
-        }
-
         float damage = (this.Attack?.Damage ?? 0f) + this.extra_additive;
         damage *= 1f + this.extra_multiplicative;
         return System.MathF.Min(damage, this.damage_cap);
@@ -59,12 +30,6 @@ public partial class AttackContext : RefCounted
 
     public float GetCritChance()
     {
-        Attack legacyAttack = this.attack.As<Attack>();
-        if (legacyAttack != null)
-        {
-            return legacyAttack.crit_chance + this.extra_crit_chance;
-        }
-
         return (this.Attack?.CritChance ?? 0f) + this.extra_crit_chance;
     }
 

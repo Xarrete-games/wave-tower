@@ -26,10 +26,10 @@ public partial class KillEventHandler : Node
         }
     }
 
-    private void _on_enemy_killed(Variant enemy, Variant attack)
+    private void _on_enemy_killed(object enemy, object attack)
     {
-        GodotObject enemyObj = enemy.AsGodotObject();
-        GodotObject attackObj = attack.AsGodotObject();
+        GodotObject enemyObj = enemy as GodotObject;
+        GodotObject attackObj = attack as GodotObject;
         if (enemyObj == null || attackObj == null)
         {
             return;

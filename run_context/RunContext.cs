@@ -31,7 +31,6 @@ public partial class RunContext : Node
     [Export]
     public ConsumablesManager consumables_manager;
 
-    [Export]
     public EnemyManager enemy_manager;
 
     public override void _Ready()

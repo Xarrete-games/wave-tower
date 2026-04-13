@@ -1,7 +1,4 @@
-using Godot;
-
-[GlobalClass]
-public partial class PriceContext : RefCounted
+public class PriceContext
 {
     public enum PriceType
     {

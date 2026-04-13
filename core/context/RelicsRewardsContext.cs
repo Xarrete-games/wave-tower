@@ -1,7 +1,4 @@
-using Godot;
-
-[GlobalClass]
-public partial class RelicsRewardsContext : RefCounted
+public class RelicsRewardsContext
 {
     public int number_of_relics
     {

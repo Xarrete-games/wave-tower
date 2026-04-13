@@ -1,7 +1,4 @@
-using Godot;
-
-[GlobalClass]
-public partial class LootContext : RefCounted
+public class LootContext
 {
     public int base_gold
     {

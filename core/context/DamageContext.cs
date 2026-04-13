@@ -1,11 +1,5 @@
-using Godot;
-
-[GlobalClass]
-public partial class DamageContext : RefCounted
+public class DamageContext
 {
-    public Variant attack { get; set; }
-    public Variant target { get; set; }
-
     public float extra_additive { get; set; }
     public float extra_multiplicative { get; set; }
     public float damage_cap { get; set; } = 9999f;
@@ -23,29 +17,8 @@ public partial class DamageContext : RefCounted
         this.Target = target;
     }
 
-    public DamageContext(Variant p_attack, Variant p_target)
-    {
-        this.attack = p_attack;
-        this.target = p_target;
-    }
-
-    public DamageContext(Attack p_attack, Enemy p_target)
-    {
-        this.attack = p_attack;
-        this.target = p_target;
-    }
-
     public float GetTotalDamage()
     {
-        Attack legacyAttack = this.attack.As<Attack>();
-        if (legacyAttack != null)
-        {
-            float legacyDamage = legacyAttack.damage;
-            legacyDamage += this.extra_additive;
-            legacyDamage *= 1f + this.extra_multiplicative;
-            return System.MathF.Min(legacyDamage, this.damage_cap);
-        }
-
         float damage = this.Attack?.Damage ?? 0f;
         damage += this.extra_additive;
         damage *= 1f + this.extra_multiplicative;

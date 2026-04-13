@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class EnemyDataLoader : RefCounted
+public class EnemyDataLoader
 {
     private const string DataPath = "res://enemies/data/";
 
