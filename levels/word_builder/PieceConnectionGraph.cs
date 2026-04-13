@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class PieceConnectionGraph : RefCounted
+public class PieceConnectionGraph
 {
     public Godot.Collections.Dictionary connections = new();
 

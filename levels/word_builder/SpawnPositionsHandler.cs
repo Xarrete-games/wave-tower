@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class SpawnPositionsHandler : RefCounted
+public class SpawnPositionsHandler
 {
     private const string PortalGroup = "orange_portal";
     private const int EdgeDirNe = 0;

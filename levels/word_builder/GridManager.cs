@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class GridManager : RefCounted
+public class GridManager
 {
     private const int EdgeDirNe = 0;
     private const int EdgeDirSe = 1;

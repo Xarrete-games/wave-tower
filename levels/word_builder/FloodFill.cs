@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class FloodFill : RefCounted
+public static class FloodFill
 {
     public static bool can_escape_from(
         Vector2I start,

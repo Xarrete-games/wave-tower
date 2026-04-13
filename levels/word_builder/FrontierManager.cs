@@ -1,10 +1,9 @@
 using Godot;
+using System;
 
-[GlobalClass]
-public partial class FrontierManager : RefCounted
+public class FrontierManager
 {
-    [Signal]
-    public delegate void edge_finalizedEventHandler(Variant piece, Variant edge);
+    public event Action<Variant, Variant> edge_finalized;
 
     private readonly Godot.Collections.Array<Variant> _frontiers = new();
     private GridManager _gridManager;
@@ -150,7 +149,7 @@ public partial class FrontierManager : RefCounted
 
     public void remove_edge_from_frontier(Variant frontier, Variant edge)
     {
-        EmitSignal(SignalName.edge_finalized, frontier, edge);
+        this.edge_finalized?.Invoke(frontier, edge);
 
         GodotObject frontierObj = frontier.AsGodotObject();
         if (frontierObj == null)
@@ -269,7 +268,7 @@ public partial class FrontierManager : RefCounted
             for (int ri = 0; ri < removeEdges.Count; ri++)
             {
                 Variant removeEdge = removeEdges[ri];
-                EmitSignal(SignalName.edge_finalized, frontier, removeEdge);
+                this.edge_finalized?.Invoke(frontier, removeEdge);
                 for (int i = frontierEdges.Count - 1; i >= 0; i--)
                 {
                     if (frontierEdges[i].AsGodotObject()?.Call("matches", removeEdge).AsBool() == true)

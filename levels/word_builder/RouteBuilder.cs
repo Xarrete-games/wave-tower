@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class RouteBuilder : RefCounted
+public class RouteBuilder
 {
     private const int EdgeDirNe = 0;
 
