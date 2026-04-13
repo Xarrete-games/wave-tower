@@ -3,6 +3,7 @@ using Godot;
 public partial class TowerSelector : Node
 {
     private GodotObject _currentTowerSelected;
+    private RunProgress _progress;
 
     public override void _Ready()
     {
@@ -12,7 +13,11 @@ public partial class TowerSelector : Node
         ClickEventsBus.TowerRemovePressed += this.OnTowerRemovePressed;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.progress.Connect("current_wave_finished", Callable.From(this.ClearTowerSelected));
+        this._progress = runContext?.progress;
+        if (this._progress != null)
+        {
+            this._progress.current_wave_finished += this.ClearTowerSelected;
+        }
     }
 
     public override void _ExitTree()
@@ -20,6 +25,12 @@ public partial class TowerSelector : Node
         ClickEventsBus.TowerSelected -= this.OnTowerSelected;
         ClickEventsBus.TowerBuildButtonPressed -= this.OnTowerButtonPressed;
         ClickEventsBus.TowerRemovePressed -= this.OnTowerRemovePressed;
+
+        if (this._progress != null)
+        {
+            this._progress.current_wave_finished -= this.ClearTowerSelected;
+            this._progress = null;
+        }
     }
 
     public override void _Input(InputEvent @event)

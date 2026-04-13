@@ -13,9 +13,9 @@ public partial class LootScreenItem : Control
 
     private LootItemData _lootItemData;
 
-    public void SetLootItem(Variant lootItemData)
+    public void SetLootItem(LootItemData lootItemData)
     {
-        this._lootItemData = lootItemData.As<LootItemData>();
+        this._lootItemData = lootItemData;
         if (this._lootItemData == null)
         {
             return;
@@ -60,7 +60,7 @@ public partial class LootScreenItem : Control
         }
         else
         {
-            runContext.economy.Call("add_gold", this._lootItemData.GoldAmount);
+            runContext.economy.add_gold(this._lootItemData.GoldAmount);
         }
 
         QueueFree();

@@ -21,21 +21,17 @@ public partial class FrostSpearTower : Tower
             return;
         }
 
-        Node projectile = this.frost_spear_projectile_scene.Instantiate();
+        SingleTargetProjectile projectile = this.frost_spear_projectile_scene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
-        if (projectile is Node2D node2D)
-        {
-            node2D.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
-        }
+        projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
 
-        GodotObject attack = this._get_attack();
+        Attack attack = this._get_attack();
         int enemyFrostStacks = this._current_target.Call("get_debuff_stacks", 0).AsInt32();
         float damageMultiplier = 1.0f + enemyFrostStacks * 0.10f;
-        float damage = attack.Get("damage").AsSingle();
-        attack.Set("damage", damage * damageMultiplier);
+        attack.damage *= damageMultiplier;
 
         Variant debuff = EnemyDebuff.create_frost(this.damage_source);
-        projectile.Call("set_target", this._current_target, attack, debuff, this.debuff_stacks);
+        projectile.set_target(this._current_target, attack, debuff, this.debuff_stacks);
     }
 }

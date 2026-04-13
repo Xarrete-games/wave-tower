@@ -120,14 +120,14 @@ public partial class EnemyGenerator : Node
 
     private void OnEnemySpawned(Variant enemy)
     {
-        GodotObject enemyObj = enemy.AsGodotObject();
+        Enemy enemyObj = enemy.AsGodotObject() as Enemy;
         if (enemyObj == null)
         {
             return;
         }
 
-        enemyObj.Connect("die", Callable.From<Variant, Variant>(this.OnEnemyDie));
-        enemyObj.Connect("target_reached", Callable.From<Variant>(this.OnEnemyTargetReached));
+        enemyObj.die += this.OnEnemyDie;
+        enemyObj.target_reached += this.OnEnemyTargetReached;
     }
 
     private void OnEnemyLeft(Node node)
@@ -161,7 +161,7 @@ public partial class EnemyGenerator : Node
 
         if (this._waveNumber >= TOTAL_WAVES)
         {
-            runContext.progress.EmitSignal(RunProgress.SignalName.last_wave_finished);
+            runContext.progress.notify_last_wave_finished();
             return;
         }
 
@@ -169,7 +169,7 @@ public partial class EnemyGenerator : Node
         Hooks.OnWaveFinished(Hooks.GetListenersFromRuntime());
         this.SyncLegacyStatusFromRuntime(runContext.status);
 
-        runContext.progress.EmitSignal(RunProgress.SignalName.current_wave_finished);
+        runContext.progress.notify_current_wave_finished();
     }
 
     private void SyncRuntimeStatusFromLegacy(Status status)
@@ -206,21 +206,20 @@ public partial class EnemyGenerator : Node
         }
     }
 
-    private void OnEnemyTargetReached(Variant enemy)
+    private void OnEnemyTargetReached(Enemy enemy)
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        GodotObject enemyObj = enemy.AsGodotObject();
-        if (enemyObj != null)
+        if (enemy != null)
         {
-            runContext.status.apply_damage((int)enemyObj.Get("damage"));
+            runContext.status.apply_damage(enemy.damage);
         }
 
-        runContext.enemy_manager.notify_enemy_target_reached(enemyObj);
+        runContext.enemy_manager.notify_enemy_target_reached(enemy);
     }
 
-    private void OnEnemyDie(Variant enemy, Variant attack)
+    private void OnEnemyDie(Enemy enemy, Attack attack)
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.enemy_manager.notify_enemy_die(enemy.AsGodotObject(), attack.AsGodotObject());
+        runContext.enemy_manager.notify_enemy_die(enemy, attack);
     }
 }

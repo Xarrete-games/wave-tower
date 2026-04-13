@@ -22,16 +22,13 @@ public partial class FireTower : Tower
             return;
         }
 
-        Node projectile = this.fire_ball_scene.Instantiate();
+        SingleTargetProjectile projectile = this.fire_ball_scene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
-        if (projectile is Node2D node2D)
-        {
-            node2D.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
-        }
+        projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
 
-        GodotObject attack = this._get_attack();
+        Attack attack = this._get_attack();
         Variant debuff = this.apply_burn ? EnemyDebuff.create_burn(this.damage_source) : default;
-        projectile.Call("set_target", this._current_target, attack, debuff);
+        projectile.set_target(this._current_target, attack, debuff);
     }
 }

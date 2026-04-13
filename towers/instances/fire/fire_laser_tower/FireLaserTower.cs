@@ -9,12 +9,12 @@ public partial class FireLaserTower : Tower
     public float base_execute_threshold = 10.0f;
     public bool apply_burn = false;
 
-    private Node red_projectile;
+    private FireLaserProjectiel red_projectile;
 
     public override void _Ready()
     {
         base._Ready();
-        this.red_projectile = GetNode("FireLaserProjectile");
+        this.red_projectile = GetNode<FireLaserProjectiel>("FireLaserProjectile");
         this.execute_threshold = this.base_execute_threshold;
     }
 
@@ -26,24 +26,24 @@ public partial class FireLaserTower : Tower
         }
 
         float hpPercent = this._current_target.Call("get_percentage_remaining_health").AsSingle();
-        GodotObject nextAttack = hpPercent > this.execute_threshold ? this._get_attack() : this._get_letal_attack();
+        Attack nextAttack = hpPercent > this.execute_threshold ? this._get_attack() : this._get_letal_attack();
         Variant debuff = this.apply_burn ? EnemyDebuff.create_burn(this.damage_source) : default;
 
-        this.red_projectile.Call("set_target", this._current_target, nextAttack, debuff);
+        this.red_projectile.set_target(this._current_target, nextAttack, debuff);
         this.cristal_light?.turn_on();
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), Timer.SignalName.Timeout);
 
-        this.red_projectile.Call("hit_target");
-        this.red_projectile.Call("stop");
+        this.red_projectile.hit_target();
+        this.red_projectile.stop();
         this.cristal_light?.turn_off();
     }
 
-    private GodotObject _get_letal_attack()
+    private Attack _get_letal_attack()
     {
-        GodotObject attack = this._get_attack();
-        attack.Set("damage", EXECUTE_DAMAGE);
-        attack.Set("is_execution", true);
+        Attack attack = this._get_attack();
+        attack.damage = EXECUTE_DAMAGE;
+        attack.is_execution = true;
         return attack;
     }
 }

@@ -1,8 +1,9 @@
 using Godot;
+using System.Collections.Generic;
 
-public abstract partial class EventScript : RefCounted
+public abstract class EventScript
 {
-    public abstract Godot.Collections.Array<Variant> get_options();
+    public abstract List<EventOptionData> get_options();
     public abstract void handle_response(Variant data);
 
     protected RunContext GetRunContext()

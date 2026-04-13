@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public partial class LootScreenHandler : Node
@@ -27,9 +28,9 @@ public partial class LootScreenHandler : Node
         await ToSignal(lootScreen, "tree_exited");
     }
 
-    public Godot.Collections.Array<Variant> GenerateLootItems()
+    public List<LootItemData> GenerateLootItems()
     {
-        var lootItems = new Godot.Collections.Array<Variant>();
+        var lootItems = new List<LootItemData>();
 
         LootItemData goldItem = new LootItemData();
         LootContext lootContext = new LootContext(this.GetBaseGold(), ChanceDropConsumable);
@@ -58,6 +59,6 @@ public partial class LootScreenHandler : Node
     private int GetBaseGold()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        return BaseGold + ((int)runContext.progress.Get("current_wave") * ExtraGoldPerWave);
+        return BaseGold + (runContext.progress.current_wave * ExtraGoldPerWave);
     }
 }

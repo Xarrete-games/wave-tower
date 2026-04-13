@@ -316,13 +316,13 @@ public partial class Tower : Node2D
 
     public virtual void upgrade()
     {
-        GodotObject runContext = GetRunContext();
-        GodotObject economy = runContext?.Get("economy").AsGodotObject();
+        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        Economy economy = runContext?.economy;
         if (economy != null && this.data != null)
         {
-            int currentGold = economy.Get("gold").AsInt32();
+            int currentGold = economy.gold;
             int upgradePrice = this.data.Get("upgrade_price").AsInt32();
-            economy.Set("gold", currentGold - upgradePrice);
+            economy.gold = currentGold - upgradePrice;
         }
 
         this.level += 1;
@@ -352,7 +352,7 @@ public partial class Tower : Node2D
         this.targeting_mode = from_tower.targeting_mode;
     }
 
-    public GodotObject _get_attack()
+    public Attack _get_attack()
     {
         bool is_critical = this._is_critical_hit();
 

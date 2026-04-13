@@ -7,7 +7,7 @@ public partial class SingleTargetProjectile : Node2D
     private const float HIT_RADIUS = 12.0f;
 
     private Node2D _enemy;
-    private GodotObject _attack;
+    private Attack _attack;
     private GodotObject _debuff;
     private int _debuffStacks = 1;
 
@@ -25,7 +25,8 @@ public partial class SingleTargetProjectile : Node2D
 
         if (distance <= HIT_RADIUS)
         {
-            this._enemy.Call("apply_damage", this._attack);
+            Enemy enemyModel = this._enemy as Enemy;
+            enemyModel?.apply_damage(this._attack);
             if (this._debuff != null)
             {
                 this._enemy.Call("apply_debuff", this._debuff, this._debuffStacks);
@@ -39,20 +40,20 @@ public partial class SingleTargetProjectile : Node2D
         LookAt(targetPosition);
     }
 
-    public void set_target(Variant p_enemy, Variant p_attack)
+    public void set_target(Node2D p_enemy, Attack p_attack)
     {
         this.set_target(p_enemy, p_attack, default(Variant), 1);
     }
 
-    public void set_target(Variant p_enemy, Variant p_attack, Variant p_debuff)
+    public void set_target(Node2D p_enemy, Attack p_attack, Variant p_debuff)
     {
         this.set_target(p_enemy, p_attack, p_debuff, 1);
     }
 
-    public void set_target(Variant p_enemy, Variant p_attack, Variant p_debuff, int p_debuff_stacks)
+    public void set_target(Node2D p_enemy, Attack p_attack, Variant p_debuff, int p_debuff_stacks)
     {
-        this._enemy = p_enemy.AsGodotObject() as Node2D;
-        this._attack = p_attack.AsGodotObject();
+        this._enemy = p_enemy;
+        this._attack = p_attack;
         this._debuff = p_debuff.AsGodotObject();
         this._debuffStacks = p_debuff_stacks;
     }

@@ -7,7 +7,7 @@ public partial class FireFlamethrowerProjectile : Node2D
     private const float DAMAGE_TICK_INTERVAL = 0.5f;
 
     private Node2D _target;
-    private GodotObject _attack;
+    private Attack _attack;
     private readonly Array<Node2D> _tagers_in_area = new();
 
     private CpuParticles2D _fire_particles;
@@ -45,10 +45,10 @@ public partial class FireFlamethrowerProjectile : Node2D
         this._area_2d.Monitoring = true;
     }
 
-    public void set_target(Variant enemy, Variant attack)
+    public void set_target(Node2D enemy, Attack attack)
     {
-        this._target = enemy.AsGodotObject() as Node2D;
-        this._attack = attack.AsGodotObject();
+        this._target = enemy;
+        this._attack = attack;
     }
 
     public void stop()
@@ -84,9 +84,10 @@ public partial class FireFlamethrowerProjectile : Node2D
                 continue;
             }
 
-            Source source = this._attack?.Get("source").As<Source>();
+            Source source = this._attack?.source;
             Variant debuff = source != null ? EnemyDebuff.create_burn(source) : default;
-            target.Call("apply_damage", this._attack);
+            Enemy enemyModel = target as Enemy;
+            enemyModel?.apply_damage(this._attack);
             if (debuff.VariantType != Variant.Type.Nil)
             {
                 target.Call("apply_debuff", debuff);

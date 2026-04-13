@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class LootItemData : RefCounted
+public class LootItemData
 {
     public int GoldAmount { get; set; }
 

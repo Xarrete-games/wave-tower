@@ -1,7 +1,7 @@
 using Godot;
+using System.Collections.Generic;
 
-[GlobalClass]
-public partial class RelicOffersManager : RefCounted
+public class RelicOffersManager
 {
     private static readonly Godot.Collections.Dictionary<int, int> BASE_PRICE_BY_RARITY = new()
     {
@@ -17,9 +17,9 @@ public partial class RelicOffersManager : RefCounted
         this._allRelicData = DataLoaderAccess.GetAllRelics();
     }
 
-    public Godot.Collections.Array<Variant> get_relics_offers_by_ids(Godot.Collections.Array<string> relic_ids)
+    public List<ItemOffer> get_relics_offers_by_ids(Godot.Collections.Array<string> relic_ids)
     {
-        var offers = new Godot.Collections.Array<Variant>();
+        var offers = new List<ItemOffer>();
 
         for (int index = 0; index < relic_ids.Count; index++)
         {
@@ -43,7 +43,7 @@ public partial class RelicOffersManager : RefCounted
         return offers;
     }
 
-    public Godot.Collections.Array<Variant> create_relic_offers(int amount)
+    public List<ItemOffer> create_relic_offers(int amount)
     {
         var filtered = new Godot.Collections.Array<Variant>();
 
@@ -70,7 +70,7 @@ public partial class RelicOffersManager : RefCounted
 
         this.Shuffle(filtered);
 
-        var offers = new Godot.Collections.Array<Variant>();
+        var offers = new List<ItemOffer>();
         for (int index = 0; index < filtered.Count && offers.Count < amount; index++)
         {
             offers.Add(this.create_relic_offer_from_data(filtered[index]));
@@ -79,12 +79,12 @@ public partial class RelicOffersManager : RefCounted
         return offers;
     }
 
-    public Variant create_relic_offer_from_data(Variant dataVariant)
+    public ItemOffer create_relic_offer_from_data(Variant dataVariant)
     {
         GodotObject data = dataVariant.AsGodotObject();
         if (data == null)
         {
-            return default;
+            return null;
         }
 
         int rarity = (int)data.Get("rarity");

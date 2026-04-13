@@ -1,18 +1,19 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class HighwayRobberyScript : EventScript
 {
-    public override Godot.Collections.Array<Variant> get_options()
+    public override List<EventOptionData> get_options()
     {
         RunContext runContext = this.GetRunContext();
         if (runContext == null)
         {
-            return new Godot.Collections.Array<Variant>();
+            return new List<EventOptionData>();
         }
 
-        System.Collections.Generic.List<Relic> relics = runContext.relics_manager.get_all_relics();
+        List<Relic> relics = runContext.relics_manager.get_all_relics();
 
-        var options = new Godot.Collections.Array<Variant>();
+        var options = new List<EventOptionData>();
         int count = Mathf.Min(3, relics.Count);
         for (int index = 0; index < count; index++)
         {

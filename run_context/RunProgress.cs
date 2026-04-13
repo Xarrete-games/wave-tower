@@ -1,16 +1,10 @@
-using Godot;
+using System;
 
-[GlobalClass]
-public partial class RunProgress : RefCounted
+public class RunProgress
 {
-    [Signal]
-    public delegate void current_wave_changedEventHandler(int wave_num);
-
-    [Signal]
-    public delegate void current_wave_finishedEventHandler();
-
-    [Signal]
-    public delegate void last_wave_finishedEventHandler();
+    public event Action<int> current_wave_changed;
+    public event Action current_wave_finished;
+    public event Action last_wave_finished;
 
     private int _currentWave;
 
@@ -21,7 +15,7 @@ public partial class RunProgress : RefCounted
         {
             this._currentWave = value;
             Hooks.OnWaveInit(Hooks.GetListenersFromRuntime());
-            this.EmitSignal(SignalName.current_wave_changed, this._currentWave);
+            this.current_wave_changed?.Invoke(this._currentWave);
         }
     }
 
@@ -31,5 +25,15 @@ public partial class RunProgress : RefCounted
     public bool is_last_wave()
     {
         return this.current_wave >= this.total_waves;
+    }
+
+    public void notify_current_wave_finished()
+    {
+        this.current_wave_finished?.Invoke();
+    }
+
+    public void notify_last_wave_finished()
+    {
+        this.last_wave_finished?.Invoke();
     }
 }

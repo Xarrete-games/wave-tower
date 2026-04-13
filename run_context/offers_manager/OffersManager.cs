@@ -1,7 +1,7 @@
 using Godot;
+using System.Collections.Generic;
 
-[GlobalClass]
-public partial class OffersManager : RefCounted
+public class OffersManager
 {
     private readonly RelicOffersManager _relicsOffersManager;
     private readonly ConsumablesOffersManager _consumablesOffersManager;
@@ -12,19 +12,19 @@ public partial class OffersManager : RefCounted
         this._consumablesOffersManager = new ConsumablesOffersManager();
     }
 
-    public Godot.Collections.Array<Variant> create_relic_offers(int amount)
+    public List<ItemOffer> create_relic_offers(int amount)
     {
         return this._relicsOffersManager.create_relic_offers(amount);
     }
 
-    public Variant create_relic_offer_from_data(Variant data)
+    public ItemOffer create_relic_offer_from_data(Variant data)
     {
         return this._relicsOffersManager.create_relic_offer_from_data(data);
     }
 
-    public Godot.Collections.Array<Variant> create_relic_offers_from_data(Godot.Collections.Array<Variant> data)
+    public List<ItemOffer> create_relic_offers_from_data(Godot.Collections.Array<Variant> data)
     {
-        var offers = new Godot.Collections.Array<Variant>();
+        var offers = new List<ItemOffer>();
         for (int index = 0; index < data.Count; index++)
         {
             offers.Add(this._relicsOffersManager.create_relic_offer_from_data(data[index]));
@@ -33,19 +33,18 @@ public partial class OffersManager : RefCounted
         return offers;
     }
 
-    public Godot.Collections.Array<Variant> create_consumables_offers(int amount)
+    public List<ItemOffer> create_consumables_offers(int amount)
     {
         return this._consumablesOffersManager.create_consumables_offers(amount);
     }
 
-    public Variant create_consumable_offer_from_data(Variant data)
+    public ItemOffer create_consumable_offer_from_data(Variant data)
     {
         return this._consumablesOffersManager.create_consumable_offer_from_data(data);
     }
 
-    public Variant purchase_offer(Variant itemOfferVariant)
+    public Variant purchase_offer(ItemOffer itemOffer)
     {
-        ItemOffer itemOffer = itemOfferVariant.AsGodotObject() as ItemOffer;
         if (itemOffer == null)
         {
             return default;

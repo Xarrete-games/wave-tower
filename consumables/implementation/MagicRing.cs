@@ -5,13 +5,14 @@ public partial class MagicRing : ConsumableUsable
 {
     public override void use()
     {
-        GodotObject economy = this.GetSingleton("RunContext")?.Get("economy").AsGodotObject();
+        RunContext runContext = this.GetSingleton("RunContext") as RunContext;
+        Economy economy = runContext?.economy;
         if (economy == null)
         {
             return;
         }
 
-        int current = (int)economy.Get("available_free_towers");
-        economy.Set("available_free_towers", current + 1);
+        int current = economy.available_free_towers;
+        economy.available_free_towers = current + 1;
     }
 }

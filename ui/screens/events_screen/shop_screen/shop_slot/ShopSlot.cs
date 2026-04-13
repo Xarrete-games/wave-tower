@@ -1,9 +1,9 @@
 using Godot;
+using System;
 
 public partial class ShopSlot : VBoxContainer
 {
-    [Signal]
-    public delegate void item_purchasedEventHandler(Variant item_offer, Variant slot);
+    public event Action<ItemOffer, ShopSlot> item_purchased;
 
     [Export]
     public Label title_label;
@@ -54,9 +54,8 @@ public partial class ShopSlot : VBoxContainer
         }
     }
 
-    public void set_item(Variant item_offer)
+    public void set_item(ItemOffer itemOffer)
     {
-        ItemOffer itemOffer = item_offer.AsGodotObject() as ItemOffer;
         if (itemOffer == null)
         {
             return;
@@ -110,7 +109,7 @@ public partial class ShopSlot : VBoxContainer
         if (UIUtilsStatic.IsLeftClickEvent(@event) && this._runContext.economy.gold >= this._price && this._hasEnoughHealth)
         {
             GetNode<Node>("/root/AudioManager").Call("play_button_click");
-            EmitSignal(SignalName.item_purchased, this._item, this);
+            this.item_purchased?.Invoke(this._item, this);
         }
     }
 

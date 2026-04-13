@@ -12,7 +12,7 @@ public partial class BlueProjectil : Area2D
 
     private float _radius;
     private CircleShape2D _shape;
-    private GodotObject _attack;
+    private Attack _attack;
     private float _max_area_range;
     private GodotObject _frost_debuff;
 
@@ -53,9 +53,9 @@ public partial class BlueProjectil : Area2D
         }
     }
 
-    public void set_stats(Variant attack, float area_range, Variant frost_debuff)
+    public void set_stats(Attack attack, float area_range, Variant frost_debuff)
     {
-        this._attack = attack.AsGodotObject();
+        this._attack = attack;
         this._max_area_range = area_range;
         this._frost_debuff = frost_debuff.AsGodotObject();
     }
@@ -99,7 +99,8 @@ public partial class BlueProjectil : Area2D
 
         CpuParticles2D explosion = BLUE_EXPLOSION.Instantiate<CpuParticles2D>();
 
-        enemy.Call("apply_damage", this._attack);
+        Enemy enemyModel = enemy as Enemy;
+        enemyModel?.apply_damage(this._attack);
         enemy.Call("apply_debuff", this._frost_debuff);
 
         AddChild(explosion);

@@ -1,14 +1,15 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class FountainsOfWishesScript : EventScript
 {
-    public override Godot.Collections.Array<Variant> get_options()
+    public override List<EventOptionData> get_options()
     {
         RunContext runContext = this.GetRunContext();
         DataLoader dataLoader = this.GetDataLoader();
         if (runContext == null || dataLoader == null)
         {
-            return new Godot.Collections.Array<Variant>();
+            return new List<EventOptionData>();
         }
 
         int gold = runContext.economy.gold;
@@ -20,7 +21,7 @@ public partial class FountainsOfWishesScript : EventScript
         var option2 = new EventOptionData("Offer 80 coins (Receive a Rare Relic)", 1, gold < 80 || !rareAvailable);
         var option3 = new EventOptionData("Offer 120 coins (Receive a Epic Relic)", 2, gold < 120 || !epicAvailable);
 
-        return new Godot.Collections.Array<Variant> { option1, option2, option3 };
+        return new List<EventOptionData> { option1, option2, option3 };
     }
 
     public override void handle_response(Variant data)

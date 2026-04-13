@@ -25,7 +25,7 @@ public partial class ShopScreenHandler : Node
         EmitSignal(SignalName.shop_closed);
     }
 
-    private void OnItemPurchased(Variant itemOffer)
+    private void OnItemPurchased(ItemOffer itemOffer)
     {
         var runContext = GetNode<RunContext>("/root/RunContext");
         runContext.offers_manager.purchase_offer(itemOffer);

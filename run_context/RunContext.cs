@@ -10,13 +10,10 @@ public partial class RunContext : Node
     [Export]
     public Variant composite_tile_map;
 
-    [Export]
     public OffersManager offers_manager;
 
-    [Export]
     public RunProgress progress;
 
-    [Export]
     public Economy economy;
 
     [Export]

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class EventOptionData : RefCounted
+public class EventOptionData
 {
     public string text { get; set; } = string.Empty;
     public Variant data { get; set; }

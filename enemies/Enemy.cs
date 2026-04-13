@@ -1,14 +1,12 @@
 using Godot;
 using Godot.Collections;
+using System;
 
 [GlobalClass]
 public partial class Enemy : CharacterBody2D
 {
-    [Signal]
-    public delegate void dieEventHandler(Variant enemy, Variant attack);
-
-    [Signal]
-    public delegate void target_reachedEventHandler(Variant enemy);
+    public event Action<Enemy, Attack> die;
+    public event Action<Enemy> target_reached;
 
     public enum TypeLegacy
     {
@@ -322,7 +320,7 @@ public partial class Enemy : CharacterBody2D
 
     public void _die(Attack attack)
     {
-        EmitSignal(SignalName.die, this, attack);
+        this.die?.Invoke(this, attack);
         Hooks.OnEnemyDie(Hooks.GetListenersFromRuntime(), this.BuildEnemyModel(), this.BuildAttackModel(attack));
         this._show_gold_dropped();
 
@@ -401,7 +399,7 @@ public partial class Enemy : CharacterBody2D
 
     public void _on_target_reached()
     {
-        EmitSignal(SignalName.target_reached, this);
+        this.target_reached?.Invoke(this);
         QueueFree();
     }
 

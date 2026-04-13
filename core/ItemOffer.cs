@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class ItemOffer : RefCounted
+public class ItemOffer
 {
     public Variant item_data { get; set; }
 

@@ -23,18 +23,15 @@ public partial class LightningChainTower : Tower
             return;
         }
 
-        Node projectile = this.lightning_chain_projectile_scene.Instantiate();
+        LightningChainProjectile projectile = this.lightning_chain_projectile_scene.Instantiate<LightningChainProjectile>();
         CallDeferred(MethodName._fire_chain, projectile);
     }
 
-    private void _fire_chain(Node projectile)
+    private void _fire_chain(LightningChainProjectile projectile)
     {
         AddChild(projectile);
-        if (projectile is Node2D node2D)
-        {
-            node2D.GlobalPosition = this.projectile_spawn_point.GlobalPosition;
-        }
+        projectile.GlobalPosition = this.projectile_spawn_point.GlobalPosition;
 
-        projectile.Call("set_target", this._current_target, this._get_attack(), this.current_bounces);
+        projectile.set_target(this._current_target, this._get_attack(), this.current_bounces);
     }
 }

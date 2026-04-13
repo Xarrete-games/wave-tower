@@ -1,12 +1,13 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class BudaTempleScript : EventScript
 {
-    public override Godot.Collections.Array<Variant> get_options()
+    public override List<EventOptionData> get_options()
     {
         var option1 = new EventOptionData("Enter the temple", 0);
         var option2 = new EventOptionData("Leave it be", 1);
-        return new Godot.Collections.Array<Variant> { option1, option2 };
+        return new List<EventOptionData> { option1, option2 };
     }
 
     public override void handle_response(Variant data)

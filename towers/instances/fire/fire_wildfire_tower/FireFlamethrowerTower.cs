@@ -4,14 +4,14 @@ using Godot;
 public partial class FireFlamethrowerTower : Tower
 {
     private Timer flame_thrower_duration_timer;
-    private Node fire_flamethrower_projectile;
+    private FireFlamethrowerProjectile fire_flamethrower_projectile;
 
     public override void _Ready()
     {
         base._Ready();
 
         this.flame_thrower_duration_timer = GetNode<Timer>("FlameThrowerDurationTimer");
-        this.fire_flamethrower_projectile = GetNode("FireFlamethrowerProjectile");
+        this.fire_flamethrower_projectile = GetNode<FireFlamethrowerProjectile>("FireFlamethrowerProjectile");
 
         this.on_target_change += this._on_new_target_change;
         this.flame_thrower_duration_timer.Timeout += this._on_flame_thrower_duration_timer_timeout;
@@ -35,15 +35,15 @@ public partial class FireFlamethrowerTower : Tower
             return;
         }
 
-        this.fire_flamethrower_projectile.Call("fire");
-        GodotObject attack = this._get_attack();
-        this.fire_flamethrower_projectile.Call("set_target", this._current_target, attack);
+        this.fire_flamethrower_projectile.fire();
+        Attack attack = this._get_attack();
+        this.fire_flamethrower_projectile.set_target(this._current_target, attack);
         this.flame_thrower_duration_timer.Start();
     }
 
     private void _on_new_target_change(Node2D enemy)
     {
-        bool isThrowing = this.fire_flamethrower_projectile.Call("is_throwing").AsBool();
+        bool isThrowing = this.fire_flamethrower_projectile.is_throwing();
         if (!isThrowing)
         {
             return;
@@ -51,16 +51,16 @@ public partial class FireFlamethrowerTower : Tower
 
         if (!GodotObject.IsInstanceValid(enemy))
         {
-            this.fire_flamethrower_projectile.Call("stop");
+            this.fire_flamethrower_projectile.stop();
             return;
         }
 
-        GodotObject attack = this._get_attack();
-        this.fire_flamethrower_projectile.Call("set_target", enemy, attack);
+        Attack attack = this._get_attack();
+        this.fire_flamethrower_projectile.set_target(enemy, attack);
     }
 
     private void _on_flame_thrower_duration_timer_timeout()
     {
-        this.fire_flamethrower_projectile.Call("stop");
+        this.fire_flamethrower_projectile.stop();
     }
 }

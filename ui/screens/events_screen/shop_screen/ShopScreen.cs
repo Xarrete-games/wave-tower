@@ -1,9 +1,10 @@
 using Godot;
+using System;
+using System.Collections.Generic;
 
 public partial class ShopScreen : Control
 {
-    [Signal]
-    public delegate void item_purchaseEventHandler(Variant item);
+    public event Action<ItemOffer> item_purchase;
 
     private static readonly PackedScene ShopSlotScene = GD.Load<PackedScene>("uid://f428sxnliflm");
 
@@ -46,9 +47,9 @@ public partial class ShopScreen : Control
         this.BuildRelicsForSale();
     }
 
-    public void set_relics(Godot.Collections.Array<Variant> relics)
+    public void set_relics(List<ItemOffer> relics)
     {
-        foreach (Variant relic in relics)
+        foreach (ItemOffer relic in relics)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
             this.relics_container.AddChild(slot);
@@ -57,9 +58,9 @@ public partial class ShopScreen : Control
         }
     }
 
-    public void set_consumables(Godot.Collections.Array<Variant> consumables)
+    public void set_consumables(List<ItemOffer> consumables)
     {
-        foreach (Variant consumable in consumables)
+        foreach (ItemOffer consumable in consumables)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
             this.consumables_container.AddChild(slot);
@@ -68,17 +69,17 @@ public partial class ShopScreen : Control
         }
     }
 
-    private void OnItemPurchase(Variant itemOffer, Variant slotPurchased)
+    private void OnItemPurchase(ItemOffer itemOffer, ShopSlot slotPurchased)
     {
-        EmitSignal(SignalName.item_purchase, itemOffer);
+        this.item_purchase?.Invoke(itemOffer);
         GetNode<Node>("/root/AudioManager").Call("play_purchase");
 
-        GodotObject itemOfferObj = itemOffer.AsGodotObject();
-        string purchasedId = itemOfferObj?.Get("item_data").AsGodotObject()?.Get("id").AsString();
+        GodotObject itemData = itemOffer?.item_data.AsGodotObject();
+        string purchasedId = itemData?.Get("id").AsString();
 
         foreach (Node slot in this.relics_container.GetChildren())
         {
-            if (slot == slotPurchased.AsGodotObject())
+            if (slot == slotPurchased)
             {
                 if (purchasedId == "strategy_tome_economy")
                 {
@@ -92,7 +93,7 @@ public partial class ShopScreen : Control
 
         foreach (Node slot in this.consumables_container.GetChildren())
         {
-            if (slot == slotPurchased.AsGodotObject())
+            if (slot == slotPurchased)
             {
                 slot.QueueFree();
                 return;
@@ -100,11 +101,11 @@ public partial class ShopScreen : Control
         }
     }
 
-    private void OnItemSold(Variant itemOffer, Variant slotSold)
+    private void OnItemSold(ItemOffer itemOffer, ShopSlot slotSold)
     {
         foreach (Node slot in this.sell_relics_container.GetChildren())
         {
-            if (slot != slotSold.AsGodotObject())
+            if (slot != slotSold)
             {
                 continue;
             }
@@ -112,14 +113,13 @@ public partial class ShopScreen : Control
             slot.QueueFree();
 
             RunContext runContext = GetNode<RunContext>("/root/RunContext");
-            GodotObject itemOfferObj = itemOffer.AsGodotObject();
-            GodotObject itemData = itemOfferObj?.Get("item_data").AsGodotObject();
+            GodotObject itemData = itemOffer?.item_data.AsGodotObject();
             if (itemData != null)
             {
                 runContext.relics_manager.remove_relic((string)itemData.Get("id"));
             }
 
-            runContext.economy.add_gold((int)(itemOfferObj?.Get("price") ?? 0));
+            runContext.economy.add_gold(itemOffer?.price ?? 0);
             GetNode<Node>("/root/AudioManager").Call("play_purchase");
             this.sell_button.Call("disable");
             this._on_exit_button_pressed();
@@ -176,7 +176,7 @@ public partial class ShopScreen : Control
         }
 
         var relicOffers = runContext.offers_manager.create_relic_offers_from_data(currentRelicsData);
-        foreach (Variant relicOffer in relicOffers)
+        foreach (ItemOffer relicOffer in relicOffers)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
             this.sell_relics_container.AddChild(slot);

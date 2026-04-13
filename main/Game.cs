@@ -35,7 +35,7 @@ public partial class Game : Node2D
 
         if (this.trigger_finish_wave)
         {
-            runContext.progress.EmitSignal(RunProgress.SignalName.current_wave_finished);
+            runContext.progress.notify_current_wave_finished();
         }
     }
 

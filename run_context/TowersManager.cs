@@ -39,7 +39,7 @@ public partial class TowersManager : RefCounted
     public Godot.Collections.Array<Variant> all_tower_data { get; private set; } = new();
     public Godot.Collections.Dictionary<string, int> tower_cards_amount { get; } = new();
 
-    private Variant _progress;
+    private RunProgress _progress;
     private readonly Dictionary<ulong, TowerModel> _runtimeTowerModels = new();
     private readonly Dictionary<ulong, HashSet<string>> _appliedRuntimeBuffSources = new();
 
@@ -57,7 +57,7 @@ public partial class TowersManager : RefCounted
         ClickEventsBus.AddTowerCard -= this._on_tower_card_added;
     }
 
-    public void setup(Variant progress_p)
+    public void setup(RunProgress progress_p)
     {
         this._progress = progress_p;
         this.last_tower_ids.Clear();
@@ -309,19 +309,18 @@ public partial class TowersManager : RefCounted
 
     private float _get_wave_progress_ratio()
     {
-        GodotObject progressObj = this._progress.AsGodotObject();
-        if (progressObj == null)
+        if (this._progress == null)
         {
             return 0f;
         }
 
-        int totalWaves = (int)progressObj.Get("total_waves");
+        int totalWaves = this._progress.total_waves;
         if (totalWaves <= 0)
         {
             return 0f;
         }
 
-        int currentWave = (int)progressObj.Get("current_wave");
+        int currentWave = this._progress.current_wave;
         return Mathf.Clamp((float)currentWave / totalWaves, 0f, 1f);
     }
 

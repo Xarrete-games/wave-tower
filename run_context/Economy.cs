@@ -1,13 +1,10 @@
 using Godot;
+using System;
 
-[GlobalClass]
-public partial class Economy : RefCounted
+public class Economy
 {
-    [Signal]
-    public delegate void available_free_towers_changeEventHandler(int amount);
-
-    [Signal]
-    public delegate void gold_changeEventHandler(int amount);
+    public event Action<int> available_free_towers_change;
+    public event Action<int> gold_change;
 
     private int _gold = 10000;
     private int _availableFreeTowers;
@@ -25,7 +22,7 @@ public partial class Economy : RefCounted
             }
 
             this._gold = value;
-            this.EmitSignal(SignalName.gold_change, this._gold);
+            this.gold_change?.Invoke(this._gold);
         }
     }
 
@@ -35,7 +32,7 @@ public partial class Economy : RefCounted
         set
         {
             this._availableFreeTowers = value;
-            this.EmitSignal(SignalName.available_free_towers_change, this._availableFreeTowers);
+            this.available_free_towers_change?.Invoke(this._availableFreeTowers);
         }
     }
 

@@ -18,7 +18,7 @@ public partial class LightningChainProjectile : Node2D
     private int _bounces_done;
     private Vector2 _start_global;
     private Vector2 _end_global;
-    private GodotObject _attack;
+    private Attack _attack;
 
     private GpuParticles2D _sparks;
     private GpuParticles2D _flare;
@@ -71,11 +71,11 @@ public partial class LightningChainProjectile : Node2D
         }
     }
 
-    public void set_target(Variant target, Variant attack, int bounces)
+    public void set_target(Node2D target, Attack attack, int bounces)
     {
         this.max_bounces = bounces;
-        this._target = target.AsGodotObject() as Node2D;
-        this._attack = attack.AsGodotObject();
+        this._target = target;
+        this._attack = attack;
         this._start_global = this._end_global != Vector2.Zero ? this._end_global : GlobalPosition;
         this._end_global = this._target?.GlobalPosition ?? GlobalPosition;
 
@@ -94,7 +94,8 @@ public partial class LightningChainProjectile : Node2D
     private async void _on_hit()
     {
         this._hit = true;
-        this._target?.Call("apply_damage", this._attack);
+        Enemy enemyModel = this._target as Enemy;
+        enemyModel?.apply_damage(this._attack);
         this._flare.Visible = true;
         this._sparks.Visible = true;
 

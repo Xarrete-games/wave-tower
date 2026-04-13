@@ -31,8 +31,8 @@ public partial class TowerStatsHandler : Node
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
         this.buff_scheduler = new BuffScheduler(runContext?.progress);
-        this.buff_scheduler.Connect("buff_expired", Callable.From<Variant>(this._on_scheduled_buff_expired));
-        this.buff_scheduler.Connect("buff_applied", Callable.From<Variant>(this._on_scheduled_buff_applied));
+        this.buff_scheduler.buff_expired += this._on_scheduled_buff_expired;
+        this.buff_scheduler.buff_applied += this._on_scheduled_buff_applied;
     }
 
     public void set_data(TowerData stats_configuration, int _p_tower_type)

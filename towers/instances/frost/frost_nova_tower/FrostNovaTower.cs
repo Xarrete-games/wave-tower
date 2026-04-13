@@ -18,12 +18,12 @@ public partial class FrostNovaTower : Tower
     {
         this.cristal_light?.play();
 
-        Node projectile = FrostNovaProjectileScene.Instantiate();
+        BlueProjectil projectile = FrostNovaProjectileScene.Instantiate<BlueProjectil>();
         bool isDoubleHit = this._is_doble_hit();
 
-        GodotObject attack = this._get_attack();
+        Attack attack = this._get_attack();
         float attackRange = this.stats?.attack_range ?? 0f;
-        projectile.Call("set_stats", attack, attackRange, EnemyDebuff.create_frost(this.damage_source));
+        projectile.set_stats(attack, attackRange, EnemyDebuff.create_frost(this.damage_source));
         CallDeferred(MethodName._add_projectil, projectile);
 
         if (!isDoubleHit)
@@ -34,9 +34,9 @@ public partial class FrostNovaTower : Tower
         await ToSignal(GetTree().CreateTimer(0.5f, false), Timer.SignalName.Timeout);
 
         this.cristal_light?.play();
-        projectile = FrostNovaProjectileScene.Instantiate();
+        projectile = FrostNovaProjectileScene.Instantiate<BlueProjectil>();
         attack = this._get_attack();
-        projectile.Call("set_stats", attack, attackRange, EnemyDebuff.create_frost(this.damage_source));
+        projectile.set_stats(attack, attackRange, EnemyDebuff.create_frost(this.damage_source));
         CallDeferred(MethodName._add_projectil, projectile);
     }
 

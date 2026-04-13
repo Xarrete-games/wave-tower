@@ -1,21 +1,22 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class PotionsEventScript : EventScript
 {
     private const int CONSUMABLE_TYPE_POTION = 1;
 
-    public override Godot.Collections.Array<Variant> get_options()
+    public override List<EventOptionData> get_options()
     {
         DataLoader dataLoader = this.GetDataLoader();
         if (dataLoader == null)
         {
-            return new Godot.Collections.Array<Variant>();
+            return new List<EventOptionData>();
         }
 
         Godot.Collections.Array<Variant> consumables = dataLoader.get_all_consumables_of_type(CONSUMABLE_TYPE_POTION);
         consumables.Shuffle();
 
-        var options = new Godot.Collections.Array<Variant>();
+        var options = new List<EventOptionData>();
         int count = Mathf.Min(3, consumables.Count);
         for (int index = 0; index < count; index++)
         {

@@ -111,10 +111,10 @@ public partial class TowerButton : Control
         this._amountLabelNode = !this.amount_label.IsEmpty ? GetNodeOrNull<Label>(this.amount_label) : GetNodeOrNull<Label>("HBoxContainer/MarginContainer/AmountLabel");
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.economy.Connect("available_free_towers_change", Callable.From<int>(this._on_available_free_towers_change));
+        runContext.economy.available_free_towers_change += this._on_available_free_towers_change;
         runContext.relics_manager.Connect("relic_added", Callable.From<string>(this._on_relic_added));
         runContext.relics_manager.Connect("relic_removed", Callable.From<string>(this._on_relic_removed));
-        runContext.progress.Connect("current_wave_finished", Callable.From(this._current_wave_finished));
+        runContext.progress.current_wave_finished += this._current_wave_finished;
 
         this._panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
         this._update_texture();

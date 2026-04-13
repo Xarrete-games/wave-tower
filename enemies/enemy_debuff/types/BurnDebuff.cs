@@ -7,7 +7,7 @@ public partial class BurnDebuff : EnemyDebuff
 
     public override void on_tick(Variant enemyVar)
     {
-        GodotObject enemy = enemyVar.AsGodotObject();
+        Enemy enemy = enemyVar.AsGodotObject() as Enemy;
         if (enemy == null)
         {
             return;
@@ -20,6 +20,6 @@ public partial class BurnDebuff : EnemyDebuff
         attack.damage = this.value;
         attack.source = debuff_source;
 
-        enemy.Call("apply_damage", attack);
+        enemy.apply_damage(attack);
     }
 }

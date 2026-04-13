@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class EventOptionsScreen : Control
 {
@@ -20,7 +21,7 @@ public partial class EventOptionsScreen : Control
     [Export]
     public Label description_label;
 
-    private GodotObject _eventScriptInstance;
+    private EventScript _eventScriptInstance;
 
     public void set_event(Variant eventData)
     {
@@ -49,11 +50,11 @@ public partial class EventOptionsScreen : Control
 
         if (runtimeScript is CSharpScript csharpScript)
         {
-            this._eventScriptInstance = csharpScript.New().AsGodotObject();
+            this._eventScriptInstance = csharpScript.New().Obj as EventScript;
         }
         else
         {
-            this._eventScriptInstance = runtimeScript.Call("new").AsGodotObject();
+            this._eventScriptInstance = runtimeScript.Call("new").Obj as EventScript;
         }
         if (this._eventScriptInstance == null)
         {
@@ -61,11 +62,10 @@ public partial class EventOptionsScreen : Control
             return;
         }
 
-        var options = this._eventScriptInstance.Call("get_options").AsGodotArray<Variant>();
+        List<EventOptionData> options = this._eventScriptInstance.get_options();
         int index = 0;
-        foreach (Variant optionDataVariant in options)
+        foreach (EventOptionData optionData in options)
         {
-            GodotObject optionData = optionDataVariant.AsGodotObject();
             if (optionData == null)
             {
                 continue;
@@ -73,12 +73,12 @@ public partial class EventOptionsScreen : Control
 
             EventOptionButton buttonOption = this.button_option_scene.Instantiate<EventOptionButton>();
             this.buttons_container.AddChild(buttonOption);
-            buttonOption.Text = optionData.Get("text").AsString();
-            buttonOption.option_data = optionData.Get("data");
+            buttonOption.Text = optionData.text;
+            buttonOption.option_data = optionData.data;
             buttonOption.Name = $"OptionButton_{index}";
             index += 1;
 
-            if ((bool)optionData.Get("disabled"))
+            if (optionData.disabled)
             {
                 buttonOption.disable_option();
             }
@@ -89,7 +89,7 @@ public partial class EventOptionsScreen : Control
 
     private void OnOptionSelected(Variant data)
     {
-        this._eventScriptInstance?.Call("handle_response", data);
+        this._eventScriptInstance?.handle_response(data);
         EmitSignal(SignalName.event_completed);
         QueueFree();
     }

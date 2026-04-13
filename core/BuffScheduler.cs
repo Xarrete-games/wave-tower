@@ -1,23 +1,21 @@
 using Godot;
+using System;
+using System.Threading.Tasks;
 
-[GlobalClass]
-public partial class BuffScheduler : RefCounted
+public class BuffScheduler
 {
-    [Signal]
-    public delegate void buff_expiredEventHandler(Variant buff);
+    public event Action<Variant> buff_expired;
+    public event Action<Variant> buff_applied;
 
-    [Signal]
-    public delegate void buff_appliedEventHandler(Variant buff);
-
-    private GodotObject progress;
+    private RunProgress progress;
 
     public BuffScheduler()
     {
     }
 
-    public BuffScheduler(Variant progress_p)
+    public BuffScheduler(RunProgress progress_p)
     {
-        this.progress = progress_p.AsGodotObject();
+        this.progress = progress_p;
     }
 
     public void schedule(Variant buffVar)
@@ -42,7 +40,7 @@ public partial class BuffScheduler : RefCounted
         }
     }
 
-    private async System.Threading.Tasks.Task _schedule_in_seconds(GodotObject buff, float seconds)
+    private async Task _schedule_in_seconds(GodotObject buff, float seconds)
     {
         SceneTree tree = Engine.GetMainLoop() as SceneTree;
         if (tree == null)
@@ -50,29 +48,66 @@ public partial class BuffScheduler : RefCounted
             return;
         }
 
-        await ToSignal(tree.CreateTimer(seconds, false), Timer.SignalName.Timeout);
+        await this.WaitForSecondsAsync(tree, seconds);
         this._remove_buff(buff);
     }
 
-    private async System.Threading.Tasks.Task _schedule_in_waves(GodotObject buff, int waves)
+    private async Task _schedule_in_waves(GodotObject buff, int waves)
     {
         if (this.progress == null)
         {
             return;
         }
 
-        int targetWave = this.progress.Get("current_wave").AsInt32() + waves;
-        while (this.progress.Get("current_wave").AsInt32() < targetWave)
+        int targetWave = this.progress.current_wave + waves;
+        while (this.progress.current_wave < targetWave)
         {
-            await ToSignal(this.progress, "current_wave_finished");
+            await this.WaitForWaveFinishedAsync();
         }
 
         this._remove_buff(buff);
     }
 
+    private Task WaitForWaveFinishedAsync()
+    {
+        if (this.progress == null)
+        {
+            return Task.CompletedTask;
+        }
+
+        TaskCompletionSource<bool> tcs = new();
+        void Handler()
+        {
+            this.progress.current_wave_finished -= Handler;
+            tcs.TrySetResult(true);
+        }
+
+        this.progress.current_wave_finished += Handler;
+        return tcs.Task;
+    }
+
+    private Task WaitForSecondsAsync(SceneTree tree, float seconds)
+    {
+        if (tree == null)
+        {
+            return Task.CompletedTask;
+        }
+
+        TaskCompletionSource<bool> tcs = new();
+        SceneTreeTimer timer = tree.CreateTimer(seconds, false);
+        void Handler()
+        {
+            timer.Timeout -= Handler;
+            tcs.TrySetResult(true);
+        }
+
+        timer.Timeout += Handler;
+        return tcs.Task;
+    }
+
     private void _remove_buff(GodotObject buff)
     {
-        EmitSignal(SignalName.buff_expired, buff);
+        this.buff_expired?.Invoke(buff);
 
         Variant residualVar = buff.Get("residual_buff");
         GodotObject residual = residualVar.AsGodotObject();
@@ -84,7 +119,7 @@ public partial class BuffScheduler : RefCounted
 
     private void _add_residual(GodotObject buff)
     {
-        EmitSignal(SignalName.buff_applied, buff);
+        this.buff_applied?.Invoke(buff);
 
         GodotObject duration = buff.Get("duration").AsGodotObject();
         if (duration != null)

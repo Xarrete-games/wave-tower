@@ -19,16 +19,13 @@ public partial class FrostTower : Tower
             return;
         }
 
-        Node projectile = FrostBallScene.Instantiate();
+        SingleTargetProjectile projectile = FrostBallScene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
-        if (projectile is Node2D node2D)
-        {
-            node2D.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
-        }
+        projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
 
-        GodotObject attack = this._get_attack();
+        Attack attack = this._get_attack();
         Variant debuff = EnemyDebuff.create_frost(this.damage_source);
-        projectile.Call("set_target", this._current_target, attack, debuff);
+        projectile.set_target(this._current_target, attack, debuff);
     }
 }

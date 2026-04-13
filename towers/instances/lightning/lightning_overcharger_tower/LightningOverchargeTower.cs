@@ -47,15 +47,12 @@ public partial class LightningOverchargeTower : Tower
             return;
         }
 
-        Node projectile = this.projectile_scene.Instantiate();
+        SingleTargetProjectile projectile = this.projectile_scene.Instantiate<SingleTargetProjectile>();
         GetParent().AddChild(projectile);
 
-        if (projectile is Node2D node2D)
-        {
-            node2D.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
-        }
+        projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
 
-        projectile.Call("set_target", this._current_target, this._get_attack());
+        projectile.set_target(this._current_target, this._get_attack());
     }
 
     public override void placement_mode()

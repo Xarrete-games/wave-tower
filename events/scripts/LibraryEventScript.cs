@@ -1,18 +1,19 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class LibraryEventScript : EventScript
 {
-    public override Godot.Collections.Array<Variant> get_options()
+    public override List<EventOptionData> get_options()
     {
         RunContext runContext = this.GetRunContext();
         DataLoader dataLoader = this.GetDataLoader();
         if (runContext == null || dataLoader == null)
         {
-            return new Godot.Collections.Array<Variant>();
+            return new List<EventOptionData>();
         }
 
         Godot.Collections.Array<Variant> allRelics = dataLoader.get_not_used_relics();
-        var options = new Godot.Collections.Array<Variant>();
+        var options = new List<EventOptionData>();
 
         foreach (Variant relicVariant in allRelics)
         {

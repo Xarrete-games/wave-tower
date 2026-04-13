@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class LootScreen : Control
 {
@@ -13,9 +14,9 @@ public partial class LootScreen : Control
         this.items_container.ChildExitingTree += this.OnItemRemoved;
     }
 
-    public void SetLoot(Godot.Collections.Array<Variant> data)
+    public void SetLoot(List<LootItemData> data)
     {
-        foreach (Variant itemData in data)
+        foreach (LootItemData itemData in data)
         {
             LootScreenItem lootScreenItem = this.loot_screen_item_scene.Instantiate<LootScreenItem>();
             this.items_container.AddChild(lootScreenItem);

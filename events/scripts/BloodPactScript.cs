@@ -1,12 +1,13 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class BloodPactScript : EventScript
 {
-    public override Godot.Collections.Array<Variant> get_options()
+    public override List<EventOptionData> get_options()
     {
         var option1 = new EventOptionData("Sacrifice 15 of your health to gain a powerful relic.", true);
         var option2 = new EventOptionData("Walk away unharmed.", false);
-        return new Godot.Collections.Array<Variant> { option1, option2 };
+        return new List<EventOptionData> { option1, option2 };
     }
 
     public override void handle_response(Variant data)
