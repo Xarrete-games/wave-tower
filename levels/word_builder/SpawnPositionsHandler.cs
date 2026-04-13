@@ -9,56 +9,57 @@ public class SpawnPositionsHandler
     private static readonly PackedScene OrangePortal = GD.Load<PackedScene>("uid://b8g0wp8j02vu4");
 
     private Node2D _portalsContainer;
-    private readonly Godot.Collections.Dictionary<string, Godot.Collections.Dictionary> _portalEntriesMap = new();
-    private readonly Godot.Collections.Array<Vector2> _portalPositions = new();
-    private readonly Godot.Collections.Dictionary<string, Node> _portalNodes = new();
+    private Godot.Collections.Dictionary _portalEntriesMap = new();
+    private Godot.Collections.Array<Vector2> _portalPositions = new();
+    private Godot.Collections.Dictionary _portalNodes = new();
 
-    public void setup(Node2D portals_container_p)
+    public void setup(Node2D portalsContainer)
     {
-        this._portalsContainer = portals_container_p;
+        this._portalsContainer = portalsContainer;
     }
 
     public void update(Godot.Collections.Array<Godot.Collections.Dictionary> entries)
     {
-        var newMap = new Godot.Collections.Dictionary<string, Godot.Collections.Dictionary>();
+        var newMap = new Godot.Collections.Dictionary();
 
-        for (int i = 0; i < entries.Count; i++)
+        for (int index = 0; index < entries.Count; index++)
         {
-            Godot.Collections.Dictionary e = entries[i];
-            if (e == null)
+            Godot.Collections.Dictionary entry = entries[index];
+            if (entry == null)
             {
                 continue;
             }
 
             string key = string.Empty;
-            if (e.ContainsKey("key"))
+            if (entry.ContainsKey("key"))
             {
-                key = e["key"].AsString();
+                key = entry["key"].AsString();
             }
-            else if (e.ContainsKey("tile"))
+            else if (entry.ContainsKey("tile"))
             {
-                key = this._tile_key(e["tile"].AsVector2I());
+                key = this._tile_key(entry["tile"].AsVector2I());
             }
             else
             {
-                if (!e.ContainsKey("pos"))
+                if (!entry.ContainsKey("pos"))
                 {
                     continue;
                 }
 
-                key = this._pos_key(e["pos"].AsVector2());
+                key = this._pos_key(entry["pos"].AsVector2());
             }
 
-            newMap[key] = e;
+            newMap[key] = entry;
         }
 
-        var toPurge = new Godot.Collections.Array<string>();
-        foreach (string key in this._portalNodes.Keys)
+        var toPurge = new Godot.Collections.Array();
+        foreach (Variant keyVar in this._portalNodes.Keys)
         {
-            Node node = this._portalNodes[key];
+            Variant nodeVariant = this._portalNodes[keyVar];
+            Node node = nodeVariant.AsGodotObject() as Node;
             if (!GodotObject.IsInstanceValid(node))
             {
-                toPurge.Add(key);
+                toPurge.Add(keyVar);
             }
         }
 
@@ -67,19 +68,19 @@ public class SpawnPositionsHandler
             this._portalNodes.Remove(toPurge[i]);
         }
 
-        var keysToRemove = new Godot.Collections.Array<string>();
-        foreach (string key in this._portalNodes.Keys)
+        var keysToRemove = new Godot.Collections.Array();
+        foreach (Variant keyVar in this._portalNodes.Keys)
         {
-            if (!newMap.ContainsKey(key))
+            if (!newMap.ContainsKey(keyVar))
             {
-                keysToRemove.Add(key);
+                keysToRemove.Add(keyVar);
             }
         }
 
         for (int i = 0; i < keysToRemove.Count; i++)
         {
-            string key = keysToRemove[i];
-            Node node = this._portalNodes[key];
+            Variant key = keysToRemove[i];
+            Node node = this._portalNodes[key].AsGodotObject() as Node;
             if (GodotObject.IsInstanceValid(node))
             {
                 node.QueueFree();
@@ -88,12 +89,12 @@ public class SpawnPositionsHandler
             this._portalNodes.Remove(key);
         }
 
-        foreach (string key in newMap.Keys)
+        foreach (Variant key in newMap.Keys)
         {
             bool needsCreate = true;
             if (this._portalNodes.ContainsKey(key))
             {
-                Node existing = this._portalNodes[key];
+                Node existing = this._portalNodes[key].AsGodotObject() as Node;
                 if (GodotObject.IsInstanceValid(existing))
                 {
                     needsCreate = false;
@@ -109,8 +110,14 @@ public class SpawnPositionsHandler
                 continue;
             }
 
-            Godot.Collections.Dictionary e = newMap[key];
-            Node portal = OrangePortal.Instantiate();
+            Godot.Collections.Dictionary entry = newMap[key].AsGodotDictionary();
+            Node2D portal = OrangePortal?.Instantiate() as Node2D;
+            if (portal == null)
+            {
+                GD.PushError("[SpawnPositionsHandler] Orange portal scene is null or invalid");
+                continue;
+            }
+
             if (this._portalsContainer != null)
             {
                 this._portalsContainer.AddChild(portal);
@@ -120,10 +127,23 @@ public class SpawnPositionsHandler
                 GD.PushError("[SpawnPositionsHandler]: No container to add portals to!");
             }
 
-            portal.Set("global_position", e["pos"]);
+            if (entry.ContainsKey("pos"))
+            {
+                portal.GlobalPosition = entry["pos"].AsVector2();
+            }
+
             portal.AddToGroup(PortalGroup);
 
-            int dir = e.ContainsKey("dir") ? e["dir"].AsInt32() : -1;
+            int dir = -1;
+            if (entry.ContainsKey("dir"))
+            {
+                dir = entry["dir"].AsInt32();
+            }
+            else if (entry.ContainsKey("edge"))
+            {
+                dir = entry["edge"].AsGodotObject()?.Get("dir").AsInt32() ?? -1;
+            }
+
             if (dir == EdgeDirNe || dir == EdgeDirSe)
             {
                 AnimatedSprite2D sprite = portal.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
@@ -147,16 +167,15 @@ public class SpawnPositionsHandler
             this._portalNodes[key] = portal;
         }
 
-        this._portalEntriesMap.Clear();
-        foreach (string key in newMap.Keys)
-        {
-            this._portalEntriesMap[key] = newMap[key];
-        }
-
+        this._portalEntriesMap = newMap;
         this._portalPositions.Clear();
-        foreach (string key in this._portalEntriesMap.Keys)
+        foreach (Variant key in this._portalEntriesMap.Keys)
         {
-            this._portalPositions.Add(this._portalEntriesMap[key]["pos"].AsVector2());
+            Godot.Collections.Dictionary entry = this._portalEntriesMap[key].AsGodotDictionary();
+            if (entry.ContainsKey("pos"))
+            {
+                this._portalPositions.Add(entry["pos"].AsVector2());
+            }
         }
     }
 
@@ -168,9 +187,9 @@ public class SpawnPositionsHandler
     public Godot.Collections.Array<Godot.Collections.Dictionary> get_entries()
     {
         var entries = new Godot.Collections.Array<Godot.Collections.Dictionary>();
-        foreach (string key in this._portalEntriesMap.Keys)
+        foreach (Variant key in this._portalEntriesMap.Keys)
         {
-            entries.Add(this._portalEntriesMap[key]);
+            entries.Add(this._portalEntriesMap[key].AsGodotDictionary());
         }
 
         return entries;
@@ -178,9 +197,9 @@ public class SpawnPositionsHandler
 
     public void clear_visuals()
     {
-        foreach (string key in this._portalNodes.Keys)
+        foreach (Variant key in this._portalNodes.Keys)
         {
-            Node node = this._portalNodes[key];
+            Node node = this._portalNodes[key].AsGodotObject() as Node;
             if (GodotObject.IsInstanceValid(node))
             {
                 node.QueueFree();

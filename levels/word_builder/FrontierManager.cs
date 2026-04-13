@@ -1,37 +1,53 @@
-using Godot;
 using System;
+using System.Collections.Generic;
+using Godot;
 
 public class FrontierManager
 {
-    public event Action<Variant, Variant> edge_finalized;
-
-    private readonly Godot.Collections.Array<Variant> _frontiers = new();
-    private GridManager _gridManager;
-    private Godot.Collections.Array _availablePieces = new();
-
-    public void setup(GridManager p_grid_manager, Variant p_available_pieces)
+    public sealed class EdgeValidationResult
     {
-        this._gridManager = p_grid_manager;
-        this._availablePieces = p_available_pieces.AsGodotArray();
-        this._frontiers.Clear();
+        public bool Valid { get; set; }
+        public string Reason { get; set; } = string.Empty;
+        public List<int> InvalidEdges { get; } = new();
+        public List<object> ValidPieces { get; } = new();
+        public object EdgeToConnect { get; set; }
     }
 
-    public void add_frontier(Variant piece)
+    public event Action<object, object> edge_finalized;
+
+    private readonly IWordBuilderAdapter _adapter;
+    private readonly List<object> _frontiers = new();
+    private readonly List<object> _availablePieces = new();
+    private GridManager _gridManager;
+
+    public FrontierManager(IWordBuilderAdapter adapter)
     {
-        GodotObject pieceObj = piece.AsGodotObject();
-        if (pieceObj == null)
+        this._adapter = adapter;
+    }
+
+    public void setup(GridManager gridManager, IEnumerable<object> availablePieces)
+    {
+        this._gridManager = gridManager;
+        this._frontiers.Clear();
+        this._availablePieces.Clear();
+        this._availablePieces.AddRange(availablePieces);
+    }
+
+    public void add_frontier(object piece)
+    {
+        if (!this._adapter.IsPieceValid(piece))
         {
             return;
         }
 
-        Godot.Collections.Array edges = pieceObj.Get("edges").AsGodotArray();
+        IList<object> edges = this._adapter.GetPieceEdges(piece);
         if (edges.Count > 0 && !this._frontiers.Contains(piece))
         {
             this._frontiers.Add(piece);
         }
     }
 
-    public void remove_frontier(Variant piece)
+    public void remove_frontier(object piece)
     {
         this._frontiers.Remove(piece);
     }
@@ -41,79 +57,69 @@ public class FrontierManager
         return this._frontiers.Count > 0;
     }
 
-    public Variant select_random_frontier()
+    public object select_random_frontier()
     {
         if (this._frontiers.Count == 0)
         {
-            return default;
+            return null;
         }
 
         int index = (int)(GD.Randi() % (uint)this._frontiers.Count);
         return this._frontiers[index];
     }
 
-    public static Variant pick_random_edge(Variant frontier)
+    public static object pick_random_edge(object frontier, IWordBuilderAdapter adapter)
     {
-        GodotObject frontierObj = frontier.AsGodotObject();
-        if (frontierObj == null)
+        if (!adapter.IsPieceValid(frontier))
         {
-            return default;
+            return null;
         }
 
-        Godot.Collections.Array edgeList = frontierObj.Get("edges").AsGodotArray().Duplicate();
+        IList<object> edgeList = adapter.GetPieceEdges(frontier);
         if (edgeList.Count == 0)
         {
-            return default;
+            return null;
         }
 
         int index = (int)(GD.Randi() % (uint)edgeList.Count);
         return edgeList[index];
     }
 
-    public Godot.Collections.Dictionary validate_edge(Variant frontier, Variant next_edge, Vector2I candidate_tile)
+    public EdgeValidationResult validate_edge(object frontier, object nextEdge, Vector2I candidateTile)
     {
-        Variant edgeToConnect = next_edge.AsGodotObject()?.Call("get_opposite") ?? default;
-        var result = new Godot.Collections.Dictionary
+        object edgeToConnect = this._adapter.GetOppositeEdge(nextEdge);
+        var result = new EdgeValidationResult
         {
-            { "valid", false },
-            { "reason", string.Empty },
-            { "invalid_edges", new Godot.Collections.Array() },
-            { "valid_pieces", new Godot.Collections.Array() },
-            { "edge_to_connect", edgeToConnect },
+            Valid = false,
+            EdgeToConnect = edgeToConnect,
         };
 
         if (this._gridManager == null)
         {
-            result["reason"] = "grid_manager is null";
+            result.Reason = "grid_manager is null";
             return result;
         }
 
-        if (this._gridManager.is_occupied(candidate_tile))
+        if (this._gridManager.is_occupied(candidateTile))
         {
-            result["reason"] = $"frontier={frontier} edge={next_edge} tile={candidate_tile} reason=occupied";
+            result.Reason = $"frontier={frontier} edge={nextEdge} tile={candidateTile} reason=occupied";
             return result;
         }
 
-        if (this._gridManager.would_cause_enclosure_at(candidate_tile))
+        if (this._gridManager.would_cause_enclosure_at(candidateTile))
         {
-            result["reason"] = $"frontier={frontier} edge={next_edge} tile={candidate_tile} reason=enclose";
+            result.Reason = $"frontier={frontier} edge={nextEdge} tile={candidateTile} reason=enclose";
             return result;
         }
 
-        int dir = edgeToConnect.AsGodotObject()?.Get("dir").AsInt32() ?? 0;
-        Godot.Collections.Array<int> invalidEdges = this._gridManager.get_invalid_edges_at(candidate_tile, dir);
-        Godot.Collections.Array validPieces = new();
+        int dir = this._adapter.GetEdgeDir(edgeToConnect);
+        List<int> invalidEdges = this._gridManager.get_invalid_edges_at(candidateTile, dir);
+        result.InvalidEdges.AddRange(invalidEdges);
 
         for (int index = 0; index < this._availablePieces.Count; index++)
         {
-            GodotObject pieceData = this._availablePieces[index].AsGodotObject();
-            if (pieceData == null)
-            {
-                continue;
-            }
-
-            bool hasConnectingEdge = pieceData.Call("has_connecting_edge", next_edge).AsBool();
-            if (!hasConnectingEdge)
+            object pieceData = this._availablePieces[index];
+            if (!this._adapter.PieceDataHasConnectingEdge(pieceData, nextEdge))
             {
                 continue;
             }
@@ -121,7 +127,7 @@ public class FrontierManager
             bool blockedByInvalid = false;
             for (int i = 0; i < invalidEdges.Count; i++)
             {
-                if (pieceData.Call("has_edge_dir", invalidEdges[i]).AsBool())
+                if (this._adapter.PieceDataHasEdgeDir(pieceData, invalidEdges[i]))
                 {
                     blockedByInvalid = true;
                     break;
@@ -130,90 +136,75 @@ public class FrontierManager
 
             if (!blockedByInvalid)
             {
-                validPieces.Add(this._availablePieces[index]);
+                result.ValidPieces.Add(pieceData);
             }
         }
 
-        if (validPieces.Count == 0)
+        if (result.ValidPieces.Count == 0)
         {
-            result["reason"] = $"frontier={frontier} edge={next_edge} tile={candidate_tile} reason=invalid_edges {invalidEdges}";
-            result["invalid_edges"] = invalidEdges;
+            result.Reason = $"frontier={frontier} edge={nextEdge} tile={candidateTile} reason=invalid_edges";
             return result;
         }
 
-        result["valid"] = true;
-        result["invalid_edges"] = invalidEdges;
-        result["valid_pieces"] = validPieces;
+        result.Valid = true;
         return result;
     }
 
-    public void remove_edge_from_frontier(Variant frontier, Variant edge)
+    public void remove_edge_from_frontier(object frontier, object edge)
     {
         this.edge_finalized?.Invoke(frontier, edge);
 
-        GodotObject frontierObj = frontier.AsGodotObject();
-        if (frontierObj == null)
+        if (!this._adapter.IsPieceValid(frontier))
         {
             return;
         }
 
-        Godot.Collections.Array edges = frontierObj.Get("edges").AsGodotArray();
-        for (int i = edges.Count - 1; i >= 0; i--)
-        {
-            if (edges[i].AsGodotObject()?.Call("matches", edge).AsBool() == true)
-            {
-                edges.RemoveAt(i);
-                break;
-            }
-        }
+        this._adapter.RemoveEdgeFromPiece(frontier, edge);
 
-        if (edges.Count == 0)
+        if (this._adapter.GetPieceEdges(frontier).Count == 0)
         {
             this._frontiers.Remove(frontier);
         }
     }
 
-    public void update_after_placement(Variant old_frontier, Variant new_piece)
+    public void update_after_placement(object oldFrontier, object newPiece)
     {
-        GodotObject newPieceObj = new_piece.AsGodotObject();
-        GodotObject oldFrontierObj = old_frontier.AsGodotObject();
-        if (newPieceObj == null || oldFrontierObj == null)
+        if (!this._adapter.IsPieceValid(newPiece) || !this._adapter.IsPieceValid(oldFrontier))
         {
             return;
         }
 
-        if (newPieceObj.Get("edges").AsGodotArray().Count > 0)
+        if (this._adapter.GetPieceEdges(newPiece).Count > 0)
         {
-            this._frontiers.Add(new_piece);
+            this._frontiers.Add(newPiece);
         }
 
-        if (oldFrontierObj.Get("edges").AsGodotArray().Count == 0)
+        if (this._adapter.GetPieceEdges(oldFrontier).Count == 0)
         {
-            this._frontiers.Remove(old_frontier);
+            this._frontiers.Remove(oldFrontier);
         }
     }
 
     public void prune_all_frontiers()
     {
-        Godot.Collections.Array removeFrontiers = new();
+        var removeFrontiers = new List<object>();
 
         for (int fi = 0; fi < this._frontiers.Count; fi++)
         {
-            Variant frontier = this._frontiers[fi];
-            GodotObject frontierObj = frontier.AsGodotObject();
-            if (frontierObj == null)
+            object frontier = this._frontiers[fi];
+            if (!this._adapter.IsPieceValid(frontier))
             {
                 continue;
             }
 
-            Godot.Collections.Array removeEdges = new();
-            Godot.Collections.Array edgesCopy = frontierObj.Get("edges").AsGodotArray().Duplicate();
+            var removeEdges = new List<object>();
+            var edgesCopy = new List<object>(this._adapter.GetPieceEdges(frontier));
 
             for (int ei = 0; ei < edgesCopy.Count; ei++)
             {
-                Variant edge = edgesCopy[ei];
-                int dir = edge.AsGodotObject()?.Get("dir").AsInt32() ?? 0;
-                Vector2I logicalPos = frontierObj.Get("logical_pos").AsVector2I();
+                object edge = edgesCopy[ei];
+                int dir = this._adapter.GetEdgeDir(edge);
+                Vector2I logicalPos = this._adapter.GetPieceLogicalPos(frontier);
                 Vector2I candidate = this._gridManager.get_neighbor_tile(logicalPos, dir);
 
                 if (this._gridManager.is_occupied(candidate))
@@ -228,15 +219,15 @@ public class FrontierManager
                     continue;
                 }
 
-                Variant edgeToConnect = edge.AsGodotObject()?.Call("get_opposite") ?? default;
-                int edgeToConnectDir = edgeToConnect.AsGodotObject()?.Get("dir").AsInt32() ?? 0;
-                Godot.Collections.Array<int> invalid = this._gridManager.get_invalid_edges_at(candidate, edgeToConnectDir);
+                object edgeToConnect = this._adapter.GetOppositeEdge(edge);
+                int edgeToConnectDir = this._adapter.GetEdgeDir(edgeToConnect);
+                List<int> invalid = this._gridManager.get_invalid_edges_at(candidate, edgeToConnectDir);
 
                 bool hasPossiblePiece = false;
                 for (int pi = 0; pi < this._availablePieces.Count; pi++)
                 {
-                    GodotObject pieceData = this._availablePieces[pi].AsGodotObject();
-                    if (pieceData == null || !pieceData.Call("has_connecting_edge", edge).AsBool())
+                    object pieceData = this._availablePieces[pi];
+                    if (!this._adapter.PieceDataHasConnectingEdge(pieceData, edge))
                     {
                         continue;
                     }
@@ -244,7 +235,7 @@ public class FrontierManager
                     bool blocked = false;
                     for (int ii = 0; ii < invalid.Count; ii++)
                     {
-                        if (pieceData.Call("has_edge_dir", invalid[ii]).AsBool())
+                        if (this._adapter.PieceDataHasEdgeDir(pieceData, invalid[ii]))
                         {
                             blocked = true;
                             break;
@@ -264,22 +255,15 @@ public class FrontierManager
                 }
             }
 
-            Godot.Collections.Array frontierEdges = frontierObj.Get("edges").AsGodotArray();
+            IList<object> frontierEdges = this._adapter.GetPieceEdges(frontier);
             for (int ri = 0; ri < removeEdges.Count; ri++)
             {
-                Variant removeEdge = removeEdges[ri];
+                object removeEdge = removeEdges[ri];
                 this.edge_finalized?.Invoke(frontier, removeEdge);
-                for (int i = frontierEdges.Count - 1; i >= 0; i--)
-                {
-                    if (frontierEdges[i].AsGodotObject()?.Call("matches", removeEdge).AsBool() == true)
-                    {
-                        frontierEdges.RemoveAt(i);
-                        break;
-                    }
-                }
+                this._adapter.RemoveEdgeFromPiece(frontier, removeEdge);
             }
 
-            if (frontierEdges.Count == 0)
+            if (this._adapter.GetPieceEdges(frontier).Count == 0)
             {
                 removeFrontiers.Add(frontier);
             }
@@ -291,20 +275,19 @@ public class FrontierManager
         }
     }
 
-    public bool frontier_has_valid_edges(Variant piece)
+    public bool frontier_has_valid_edges(object piece)
     {
-        GodotObject pieceObj = piece.AsGodotObject();
-        if (pieceObj == null)
+        if (!this._adapter.IsPieceValid(piece))
         {
             return false;
         }
 
-        Godot.Collections.Array edges = pieceObj.Get("edges").AsGodotArray();
+        IList<object> edges = this._adapter.GetPieceEdges(piece);
         for (int ei = 0; ei < edges.Count; ei++)
         {
-            Variant edge = edges[ei];
-            int dir = edge.AsGodotObject()?.Get("dir").AsInt32() ?? 0;
-            Vector2I logicalPos = pieceObj.Get("logical_pos").AsVector2I();
+            object edge = edges[ei];
+            int dir = this._adapter.GetEdgeDir(edge);
+            Vector2I logicalPos = this._adapter.GetPieceLogicalPos(piece);
             Vector2I candidate = this._gridManager.get_neighbor_tile(logicalPos, dir);
 
             if (this._gridManager.is_occupied(candidate))
@@ -317,14 +300,14 @@ public class FrontierManager
                 continue;
             }
 
-            Variant edgeToConnect = edge.AsGodotObject()?.Call("get_opposite") ?? default;
-            int edgeToConnectDir = edgeToConnect.AsGodotObject()?.Get("dir").AsInt32() ?? 0;
-            Godot.Collections.Array<int> invalid = this._gridManager.get_invalid_edges_at(candidate, edgeToConnectDir);
+            object edgeToConnect = this._adapter.GetOppositeEdge(edge);
+            int edgeToConnectDir = this._adapter.GetEdgeDir(edgeToConnect);
+            List<int> invalid = this._gridManager.get_invalid_edges_at(candidate, edgeToConnectDir);
 
             for (int pi = 0; pi < this._availablePieces.Count; pi++)
             {
-                GodotObject pieceData = this._availablePieces[pi].AsGodotObject();
-                if (pieceData == null || !pieceData.Call("has_connecting_edge", edge).AsBool())
+                object pieceData = this._availablePieces[pi];
+                if (!this._adapter.PieceDataHasConnectingEdge(pieceData, edge))
                 {
                     continue;
                 }
@@ -332,7 +315,7 @@ public class FrontierManager
                 bool blocked = false;
                 for (int ii = 0; ii < invalid.Count; ii++)
                 {
-                    if (pieceData.Call("has_edge_dir", invalid[ii]).AsBool())
+                    if (this._adapter.PieceDataHasEdgeDir(pieceData, invalid[ii]))
                     {
                         blocked = true;
                         break;
@@ -349,8 +332,8 @@ public class FrontierManager
         return false;
     }
 
-    public Godot.Collections.Array<Variant> get_all_frontiers()
+    public List<object> get_all_frontiers()
     {
-        return this._frontiers.Duplicate();
+        return new List<object>(this._frontiers);
     }
 }

@@ -1,29 +1,35 @@
+using System.Collections.Generic;
 using Godot;
 
 public class RouteBuilder
 {
     private const int EdgeDirNe = 0;
 
+    private readonly IWordBuilderAdapter _adapter;
     private PieceConnectionGraph _connectionGraph;
-    private GodotObject _targetPiece;
+    private object _targetPiece;
 
-    public void setup(PieceConnectionGraph graph, Variant target)
+    public RouteBuilder(IWordBuilderAdapter adapter)
     {
-        this._connectionGraph = graph;
-        this._targetPiece = target.AsGodotObject();
+        this._adapter = adapter;
     }
 
-    public Godot.Collections.Array<Variant> build_route_to_target(Godot.Collections.Dictionary spawn_entry)
+    public void setup(PieceConnectionGraph graph, object target)
     {
-        var empty = new Godot.Collections.Array<Variant>();
-        if (!spawn_entry.ContainsKey("piece"))
+        this._connectionGraph = graph;
+        this._targetPiece = target;
+    }
+
+    public List<object> build_route_to_target(Dictionary<string, object> spawnEntry)
+    {
+        var empty = new List<object>();
+        if (!spawnEntry.TryGetValue("piece", out object startPiece))
         {
             GD.PushError("[RouteBuilder] spawn_entry has no 'piece'");
             return empty;
         }
 
-        GodotObject startPiece = spawn_entry["piece"].AsGodotObject();
-        if (startPiece == null || !GodotObject.IsInstanceValid(startPiece))
+        if (!this._adapter.IsPieceValid(startPiece))
         {
             GD.PushError("[RouteBuilder] spawn_entry.piece is not valid");
             return empty;
@@ -38,24 +44,24 @@ public class RouteBuilder
         return this._connectionGraph.find_path(startPiece, this._targetPiece);
     }
 
-    public Godot.Collections.Array<Vector2> build_waypoints_from_route(Godot.Collections.Dictionary spawn_entry, Godot.Collections.Array<Variant> route)
+    public List<Vector2> build_waypoints_from_route(Dictionary<string, object> spawnEntry, List<object> route)
     {
-        var waypoints = new Godot.Collections.Array<Vector2>();
+        var waypoints = new List<Vector2>();
         if (route.Count == 0)
         {
             GD.PushWarning("[RouteBuilder] Empty route, cannot generate waypoints");
             return waypoints;
         }
 
-        if (spawn_entry.ContainsKey("pos"))
+        if (spawnEntry.TryGetValue("pos", out object spawnPosObj) && spawnPosObj is Vector2 spawnPos)
         {
-            waypoints.Add(spawn_entry["pos"].AsVector2());
+            waypoints.Add(spawnPos);
         }
 
         for (int index = 0; index < route.Count; index++)
         {
-            GodotObject piece = route[index].AsGodotObject();
-            if (piece == null)
+            object piece = route[index];
+            if (!this._adapter.IsPieceValid(piece))
             {
                 continue;
             }
@@ -66,52 +72,54 @@ public class RouteBuilder
 
             if (index == 0)
             {
-                if (spawn_entry.ContainsKey("edge"))
+                if (spawnEntry.TryGetValue("edge", out object edgeObj))
                 {
-                    entryDir = spawn_entry["edge"].AsGodotObject()?.Get("dir").AsInt32() ?? EdgeDirNe;
+                    entryDir = this._adapter.GetEdgeDir(edgeObj);
                 }
             }
             else
             {
-                GodotObject prevPiece = route[index - 1].AsGodotObject();
+                object prevPiece = route[index - 1];
                 entryDir = this._connectionGraph.find_connection_dir(prevPiece, piece);
-                entryDir = (int)Edge.get_opposite_dir((Edge.Dir)entryDir);
+                entryDir = this._adapter.GetOppositeDir(entryDir);
             }
 
             if (hasExit)
             {
-                GodotObject nextPiece = route[index + 1].AsGodotObject();
+                object nextPiece = route[index + 1];
                 exitDir = this._connectionGraph.find_connection_dir(piece, nextPiece);
             }
 
             if (hasExit)
             {
-                Godot.Collections.Array<Vector2> intermediate = this._piece_get_route_waypoints(piece, entryDir, exitDir);
+                IList<Vector2> intermediate = this._adapter.GetRouteWaypoints(piece, entryDir, exitDir);
                 if (intermediate.Count > 0)
                 {
+                    Vector2 globalPosition = this._adapter.GetPieceGlobalPosition(piece);
                     for (int i = 0; i < intermediate.Count; i++)
                     {
-                        waypoints.Add(piece.Get("global_position").AsVector2() + intermediate[i]);
+                        waypoints.Add(globalPosition + intermediate[i]);
                     }
                 }
                 else
                 {
-                    waypoints.Add(piece.Get("global_position").AsVector2());
+                    waypoints.Add(this._adapter.GetPieceGlobalPosition(piece));
                 }
             }
             else
             {
-                Godot.Collections.Array<Vector2> toEnd = this._piece_get_final_route_waypoints(piece, entryDir);
+                IList<Vector2> toEnd = this._adapter.GetFinalRouteWaypoints(piece, entryDir);
                 if (toEnd.Count > 0)
                 {
+                    Vector2 globalPosition = this._adapter.GetPieceGlobalPosition(piece);
                     for (int i = 0; i < toEnd.Count; i++)
                     {
-                        waypoints.Add(piece.Get("global_position").AsVector2() + toEnd[i]);
+                        waypoints.Add(globalPosition + toEnd[i]);
                     }
                 }
                 else
                 {
-                    waypoints.Add(piece.Get("global_position").AsVector2());
+                    waypoints.Add(this._adapter.GetPieceGlobalPosition(piece));
                 }
             }
         }
@@ -119,56 +127,9 @@ public class RouteBuilder
         return waypoints;
     }
 
-    public Godot.Collections.Array<Vector2> get_waypoints_for_spawn(Godot.Collections.Dictionary spawn_entry)
+    public List<Vector2> get_waypoints_for_spawn(Dictionary<string, object> spawnEntry)
     {
-        Godot.Collections.Array<Variant> route = this.build_route_to_target(spawn_entry);
-        return this.build_waypoints_from_route(spawn_entry, route);
-    }
-
-    private static bool _has_method(GodotObject target, string methodName)
-    {
-        return target != null && GodotObject.IsInstanceValid(target) && target.HasMethod(methodName);
-    }
-
-    private Godot.Collections.Array<Vector2> _piece_get_route_waypoints(GodotObject piece, int entryDir, int exitDir)
-    {
-        if (piece is MapPiece mapPiece)
-        {
-            return mapPiece.get_route_waypoints(entryDir, exitDir);
-        }
-
-        if (_has_method(piece, "get_route_waypoints"))
-        {
-            return piece.Call("get_route_waypoints", entryDir, exitDir).AsGodotArray<Vector2>();
-        }
-
-        if (_has_method(piece, "GetRouteWaypoints"))
-        {
-            return piece.Call("GetRouteWaypoints", entryDir, exitDir).AsGodotArray<Vector2>();
-        }
-
-        GD.PushError("[RouteBuilder] Piece has no route waypoint method.");
-        return new Godot.Collections.Array<Vector2>();
-    }
-
-    private Godot.Collections.Array<Vector2> _piece_get_final_route_waypoints(GodotObject piece, int entryDir)
-    {
-        if (piece is MapPiece mapPiece)
-        {
-            return mapPiece.get_final_route_waypoints(entryDir);
-        }
-
-        if (_has_method(piece, "get_final_route_waypoints"))
-        {
-            return piece.Call("get_final_route_waypoints", entryDir).AsGodotArray<Vector2>();
-        }
-
-        if (_has_method(piece, "GetFinalRouteWaypoints"))
-        {
-            return piece.Call("GetFinalRouteWaypoints", entryDir).AsGodotArray<Vector2>();
-        }
-
-        GD.PushError("[RouteBuilder] Piece has no final route waypoint method.");
-        return new Godot.Collections.Array<Vector2>();
+        List<object> route = this.build_route_to_target(spawnEntry);
+        return this.build_waypoints_from_route(spawnEntry, route);
     }
 }

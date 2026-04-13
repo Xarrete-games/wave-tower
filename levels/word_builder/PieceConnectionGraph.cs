@@ -1,155 +1,143 @@
-using Godot;
+using System.Collections.Generic;
 
 public class PieceConnectionGraph
 {
-    public Godot.Collections.Dictionary connections = new();
+    private readonly IWordBuilderAdapter _adapter;
+    private readonly Dictionary<long, Dictionary<int, long>> _connections = new();
+    private readonly Dictionary<long, object> _objects = new();
 
-    public void register_piece(Variant piece)
+    public PieceConnectionGraph(IWordBuilderAdapter adapter)
     {
-        GodotObject pieceObj = piece.AsGodotObject();
-        if (pieceObj == null)
+        this._adapter = adapter;
+    }
+
+    public void register_piece(object piece)
+    {
+        long key = this._adapter.GetObjectKey(piece);
+        if (key == 0)
         {
             return;
         }
 
-        if (!this.connections.ContainsKey(pieceObj))
+        if (!this._connections.ContainsKey(key))
         {
-            this.connections[pieceObj] = new Godot.Collections.Dictionary();
+            this._connections[key] = new Dictionary<int, long>();
         }
+
+        this._objects[key] = piece;
     }
 
-    public void connect_pieces(Variant piece_a, Variant piece_b, int dir_a, int dir_b)
+    public void connect_pieces(object pieceA, object pieceB, int dirA, int dirB)
     {
-        GodotObject a = piece_a.AsGodotObject();
-        GodotObject b = piece_b.AsGodotObject();
-        if (a == null || b == null)
+        long keyA = this._adapter.GetObjectKey(pieceA);
+        long keyB = this._adapter.GetObjectKey(pieceB);
+        if (keyA == 0 || keyB == 0)
         {
             return;
         }
 
-        if (!this.connections.ContainsKey(a))
-        {
-            this.connections[a] = new Godot.Collections.Dictionary();
-        }
+        this.register_piece(pieceA);
+        this.register_piece(pieceB);
 
-        if (!this.connections.ContainsKey(b))
-        {
-            this.connections[b] = new Godot.Collections.Dictionary();
-        }
-
-        Godot.Collections.Dictionary fromA = this.connections[a].AsGodotDictionary();
-        Godot.Collections.Dictionary fromB = this.connections[b].AsGodotDictionary();
-        fromA[dir_a] = b;
-        fromB[dir_b] = a;
+        this._connections[keyA][dirA] = keyB;
+        this._connections[keyB][dirB] = keyA;
     }
 
-    public Godot.Collections.Dictionary get_connections(Variant piece)
+    public int find_connection_dir(object fromPiece, object toPiece)
     {
-        GodotObject pieceObj = piece.AsGodotObject();
-        if (pieceObj != null && this.connections.ContainsKey(pieceObj))
+        long fromKey = this._adapter.GetObjectKey(fromPiece);
+        long toKey = this._adapter.GetObjectKey(toPiece);
+        if (fromKey == 0 || toKey == 0 || !this._connections.TryGetValue(fromKey, out Dictionary<int, long> pieceConnections))
         {
-            return this.connections[pieceObj].AsGodotDictionary();
-        }
-
-        return new Godot.Collections.Dictionary();
-    }
-
-    public int find_connection_dir(Variant from_piece, Variant to_piece)
-    {
-        GodotObject from = from_piece.AsGodotObject();
-        GodotObject to = to_piece.AsGodotObject();
-        if (from == null || to == null || !this.connections.ContainsKey(from))
-        {
-            GD.PushWarning("[PieceConnectionGraph] from_piece has no registered connections");
             return 0;
         }
 
-        Godot.Collections.Dictionary pieceConnections = this.connections[from].AsGodotDictionary();
-        foreach (Variant key in pieceConnections.Keys)
+        foreach (KeyValuePair<int, long> pair in pieceConnections)
         {
-            if (ReferenceEquals(pieceConnections[key].AsGodotObject(), to))
+            if (pair.Value == toKey)
             {
-                return key.AsInt32();
+                return pair.Key;
             }
         }
 
-        GD.PushWarning($"[PieceConnectionGraph] No connection found from {from} to {to}");
         return 0;
     }
 
-    public Godot.Collections.Array<Variant> find_path(Variant from_piece, Variant to_piece)
+    public List<object> find_path(object fromPiece, object toPiece)
     {
-        GodotObject from = from_piece.AsGodotObject();
-        GodotObject to = to_piece.AsGodotObject();
-        var empty = new Godot.Collections.Array<Variant>();
-        if (from == null || to == null)
+        long fromKey = this._adapter.GetObjectKey(fromPiece);
+        long toKey = this._adapter.GetObjectKey(toPiece);
+        var empty = new List<object>();
+
+        if (fromKey == 0 || toKey == 0)
         {
             return empty;
         }
 
-        if (ReferenceEquals(from, to))
+        if (fromKey == toKey)
         {
-            empty.Add(from);
+            if (this._objects.TryGetValue(fromKey, out object startObject))
+            {
+                empty.Add(startObject);
+            }
             return empty;
         }
 
-        var queue = new Godot.Collections.Array<GodotObject> { from };
-        var cameFrom = new Godot.Collections.Dictionary { { from, default(Variant) } };
+        var queue = new Queue<long>();
+        queue.Enqueue(fromKey);
+
+        var cameFrom = new Dictionary<long, long>
+        {
+            [fromKey] = 0,
+        };
 
         while (queue.Count > 0)
         {
-            GodotObject current = queue[0];
-            queue.RemoveAt(0);
-
-            if (!this.connections.ContainsKey(current))
+            long current = queue.Dequeue();
+            if (!this._connections.TryGetValue(current, out Dictionary<int, long> pieceConnections))
             {
                 continue;
             }
 
-            Godot.Collections.Dictionary pieceConnections = this.connections[current].AsGodotDictionary();
-            foreach (Variant dirKey in pieceConnections.Keys)
+            foreach (KeyValuePair<int, long> pair in pieceConnections)
             {
-                GodotObject neighbor = pieceConnections[dirKey].AsGodotObject();
-                if (neighbor == null || !GodotObject.IsInstanceValid(neighbor))
-                {
-                    continue;
-                }
-
-                if (cameFrom.ContainsKey(neighbor))
+                long neighbor = pair.Value;
+                if (neighbor == 0 || cameFrom.ContainsKey(neighbor))
                 {
                     continue;
                 }
 
                 cameFrom[neighbor] = current;
-                if (ReferenceEquals(neighbor, to))
+                if (neighbor == toKey)
                 {
-                    return this._reconstruct_path(cameFrom, to);
+                    return this._reconstruct_path(cameFrom, toKey);
                 }
 
-                queue.Add(neighbor);
+                queue.Enqueue(neighbor);
             }
         }
 
-        GD.PushWarning($"[PieceConnectionGraph] No route found from {from} to {to}");
-        return new Godot.Collections.Array<Variant>();
+        return empty;
     }
 
-    private Godot.Collections.Array<Variant> _reconstruct_path(Godot.Collections.Dictionary came_from, GodotObject end)
+    private List<object> _reconstruct_path(Dictionary<long, long> cameFrom, long end)
     {
-        var path = new Godot.Collections.Array<Variant>();
-        GodotObject current = end;
+        var path = new List<object>();
+        long current = end;
 
-        while (current != null)
+        while (current != 0)
         {
-            path.Add(current);
-            if (came_from.ContainsKey(current))
+            if (this._objects.TryGetValue(current, out object piece))
             {
-                current = came_from[current].AsGodotObject();
+                path.Add(piece);
             }
-            else
+
+            if (!cameFrom.TryGetValue(current, out long parent))
             {
                 break;
             }
+
+            current = parent;
         }
 
         path.Reverse();

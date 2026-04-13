@@ -1,48 +1,46 @@
 using Godot;
+using System.Collections.Generic;
 
 public static class FloodFill
 {
     public static bool can_escape_from(
         Vector2I start,
-        Godot.Collections.Dictionary grid,
-        Godot.Collections.Dictionary grid_offsets)
+        HashSet<Vector2I> occupied,
+        IReadOnlyDictionary<int, Vector2I> gridOffsets)
     {
-        var visited = new Godot.Collections.Dictionary();
-        var stack = new Godot.Collections.Array<Vector2I> { start };
+        var visited = new HashSet<Vector2I>();
+        var stack = new Stack<Vector2I>();
+        stack.Push(start);
 
         while (stack.Count > 0)
         {
-            Vector2I current = stack[stack.Count - 1];
-            stack.RemoveAt(stack.Count - 1);
+            Vector2I current = stack.Pop();
 
-            if (visited.ContainsKey(current))
+            if (!visited.Add(current))
             {
                 continue;
             }
 
-            visited[current] = true;
-
-            foreach (Variant value in grid_offsets.Values)
+            foreach (Vector2I offset in gridOffsets.Values)
             {
-                Vector2I offset = value.AsVector2I();
                 Vector2I next = current + offset;
 
-                if (grid.ContainsKey(next))
+                if (occupied.Contains(next))
                 {
                     continue;
                 }
 
-                if (visited.ContainsKey(next))
+                if (visited.Contains(next))
                 {
                     continue;
                 }
 
-                if (visited.Count > grid.Count)
+                if (visited.Count > occupied.Count)
                 {
                     return true;
                 }
 
-                stack.Add(next);
+                stack.Push(next);
             }
         }
 

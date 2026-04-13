@@ -1,4 +1,6 @@
 using Godot;
+using System;
+using System.Collections.Generic;
 
 public class GridManager
 {
@@ -8,7 +10,7 @@ public class GridManager
     private const int EdgeDirNw = 3;
     private static readonly Vector2I SentinelTile = new(-99999, -99999);
 
-    public static readonly Godot.Collections.Dictionary GRID_OFFSETS = new()
+    public static readonly Dictionary<int, Vector2I> GRID_OFFSETS = new()
     {
         { EdgeDirNe, new Vector2I(1, -1) },
         { EdgeDirSe, new Vector2I(1, 0) },
@@ -16,40 +18,39 @@ public class GridManager
         { EdgeDirNw, new Vector2I(-1, 0) },
     };
 
-    public static readonly Godot.Collections.Array<int> ALL_DIRS = new() { EdgeDirNe, EdgeDirSe, EdgeDirSw, EdgeDirNw };
+    public static readonly int[] ALL_DIRS = { EdgeDirNe, EdgeDirSe, EdgeDirSw, EdgeDirNw };
 
-    public Godot.Collections.Dictionary grid = new();
+    public readonly HashSet<Vector2I> grid = new();
 
     public void occupy(Vector2I tile)
     {
-        this.grid[tile] = true;
+        this.grid.Add(tile);
     }
 
     public bool is_occupied(Vector2I tile)
     {
-        return this.grid.ContainsKey(tile);
+        return this.grid.Contains(tile);
     }
 
     public Vector2I get_neighbor_tile(Vector2I tile, int dir)
     {
-        return tile + GRID_OFFSETS[dir].AsVector2I();
+        return tile + GRID_OFFSETS[dir];
     }
 
     public Vector2I get_offset(int dir)
     {
-        return GRID_OFFSETS[dir].AsVector2I();
+        return GRID_OFFSETS[dir];
     }
 
     public bool would_cause_enclosure_at(Vector2I candidate)
     {
-        Godot.Collections.Dictionary simulated = this.grid.Duplicate();
-        simulated[candidate] = true;
+        var simulated = new HashSet<Vector2I>(this.grid) { candidate };
 
-        for (int i = 0; i < ALL_DIRS.Count; i++)
+        for (int i = 0; i < ALL_DIRS.Length; i++)
         {
             int dir = ALL_DIRS[i];
-            Vector2I n = candidate + GRID_OFFSETS[dir].AsVector2I();
-            if (simulated.ContainsKey(n))
+            Vector2I n = candidate + GRID_OFFSETS[dir];
+            if (simulated.Contains(n))
             {
                 continue;
             }
@@ -63,11 +64,11 @@ public class GridManager
         return true;
     }
 
-    public Godot.Collections.Array<int> get_invalid_edges_at(Vector2I tile, int dir_to_connect)
+    public List<int> get_invalid_edges_at(Vector2I tile, int dir_to_connect)
     {
-        var invalidDirs = new Godot.Collections.Array<int>();
+        var invalidDirs = new List<int>();
 
-        for (int i = 0; i < ALL_DIRS.Count; i++)
+        for (int i = 0; i < ALL_DIRS.Length; i++)
         {
             int dir = ALL_DIRS[i];
             if (dir == dir_to_connect)
@@ -75,15 +76,14 @@ public class GridManager
                 continue;
             }
 
-            Vector2I newTile = tile + GRID_OFFSETS[dir].AsVector2I();
-            if (this.grid.ContainsKey(newTile))
+            Vector2I newTile = tile + GRID_OFFSETS[dir];
+            if (this.grid.Contains(newTile))
             {
                 invalidDirs.Add(dir);
                 continue;
             }
 
-            Godot.Collections.Dictionary simulated = this.grid.Duplicate();
-            simulated[newTile] = true;
+            var simulated = new HashSet<Vector2I>(this.grid) { newTile };
 
             if (!FloodFill.can_escape_from(newTile, simulated, GRID_OFFSETS))
             {
@@ -94,14 +94,13 @@ public class GridManager
         return invalidDirs;
     }
 
-    public bool reachable_to_boundary(Vector2I start, Godot.Collections.Dictionary occ, int lookahead = 8)
+    public bool reachable_to_boundary(Vector2I start, HashSet<string> occ, int lookahead = 8)
     {
-        var xs = new Godot.Collections.Array<int>();
-        var ys = new Godot.Collections.Array<int>();
-        foreach (Variant key in occ.Keys)
+        var xs = new List<int>();
+        var ys = new List<int>();
+        foreach (string key in occ)
         {
-            string k = key.AsString();
-            string[] parts = k.Split(',');
+            string[] parts = key.Split(',');
             if (parts.Length != 2)
             {
                 continue;
@@ -122,10 +121,10 @@ public class GridManager
         int maxY = ys[0];
         for (int i = 1; i < xs.Count; i++)
         {
-            minX = Mathf.Min(minX, xs[i]);
-            maxX = Mathf.Max(maxX, xs[i]);
-            minY = Mathf.Min(minY, ys[i]);
-            maxY = Mathf.Max(maxY, ys[i]);
+            minX = Math.Min(minX, xs[i]);
+            maxX = Math.Max(maxX, xs[i]);
+            minY = Math.Min(minY, ys[i]);
+            maxY = Math.Max(maxY, ys[i]);
         }
 
         minX -= lookahead;
@@ -133,56 +132,55 @@ public class GridManager
         minY -= lookahead;
         maxY += lookahead;
 
-        var q = new Godot.Collections.Array<Vector2I> { start };
-        var seen = new Godot.Collections.Dictionary { { vec_key(start), true } };
-        var neighs = new Godot.Collections.Array<Vector2I>
+        var q = new Queue<Vector2I>();
+        q.Enqueue(start);
+        var seen = new HashSet<string> { vec_key(start) };
+        var neighs = new Vector2I[]
         {
-            GRID_OFFSETS[EdgeDirNe].AsVector2I(),
-            GRID_OFFSETS[EdgeDirSe].AsVector2I(),
-            GRID_OFFSETS[EdgeDirSw].AsVector2I(),
-            GRID_OFFSETS[EdgeDirNw].AsVector2I(),
+            GRID_OFFSETS[EdgeDirNe],
+            GRID_OFFSETS[EdgeDirSe],
+            GRID_OFFSETS[EdgeDirSw],
+            GRID_OFFSETS[EdgeDirNw],
         };
 
         while (q.Count > 0)
         {
-            Vector2I cur = q[0];
-            q.RemoveAt(0);
+            Vector2I cur = q.Dequeue();
 
             if (cur.X <= minX || cur.X >= maxX || cur.Y <= minY || cur.Y >= maxY)
             {
                 return true;
             }
 
-            for (int i = 0; i < neighs.Count; i++)
+            for (int i = 0; i < neighs.Length; i++)
             {
                 Vector2I n = cur + neighs[i];
                 string key = vec_key(n);
-                if (seen.ContainsKey(key) || occ.ContainsKey(key))
+                if (seen.Contains(key) || occ.Contains(key))
                 {
                     continue;
                 }
 
-                seen[key] = true;
-                q.Add(n);
+                seen.Add(key);
+                q.Enqueue(n);
             }
         }
 
         return false;
     }
 
-    public Godot.Collections.Dictionary create_simulated_occupation(Vector2I? extra_tile = null)
+    public HashSet<string> create_simulated_occupation(Vector2I? extra_tile = null)
     {
-        var occ = new Godot.Collections.Dictionary();
-        foreach (Variant k in this.grid.Keys)
+        var occ = new HashSet<string>();
+        foreach (Vector2I tile in this.grid)
         {
-            Vector2I tile = k.AsVector2I();
-            occ[vec_key(tile)] = true;
+            occ.Add(vec_key(tile));
         }
 
         Vector2I extra = extra_tile ?? SentinelTile;
         if (extra != SentinelTile)
         {
-            occ[vec_key(extra)] = true;
+            occ.Add(vec_key(extra));
         }
 
         return occ;
