@@ -326,10 +326,9 @@ public partial class CompositeTileMap : Node
         return piece?.Get("tile_map").AsGodotObject() as TileMapLayer;
     }
 
-    private void _on_tower_removed(Variant tower)
+    private void _on_tower_removed(Tower tower)
     {
-        GodotObject towerObj = tower.AsGodotObject();
-        string key = towerObj?.Get("composite_tile_key").AsString();
+        string key = tower?.Get("composite_tile_key").AsString();
         if (!string.IsNullOrEmpty(key))
         {
             this.set_tile_free(key);

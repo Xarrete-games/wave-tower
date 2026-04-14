@@ -41,7 +41,7 @@ public static class Hooks
         ctx.FinalPrice = (int)MathF.Round(ctx.BasePrice * (1f - ctx.Discount));
     }
 
-    public static void on_tower_placed(Variant tower)
+    public static void on_tower_placed(Tower tower)
     {
         ForEachLegacyListener(item => item.Call("on_tower_placed", tower));
     }

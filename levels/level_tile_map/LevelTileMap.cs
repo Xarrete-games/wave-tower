@@ -145,15 +145,14 @@ public partial class LevelTileMap : TileMapLayer
         }
     }
 
-    private void _on_tower_removed(Variant tower)
+    private void _on_tower_removed(Tower tower)
     {
-        GodotObject towerObj = tower.AsGodotObject();
-        if (towerObj == null)
+        if (tower == null)
         {
             return;
         }
 
-        Vector2I tile = towerObj.Get("tile_pos").AsVector2I();
+        Vector2I tile = tower.Get("tile_pos").AsVector2I();
         this.set_tile_free(tile);
     }
 }

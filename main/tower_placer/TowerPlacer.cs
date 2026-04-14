@@ -93,7 +93,16 @@ public partial class TowerPlacer : Node2D
         this._currentTowerInstance.Call("enable");
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.towers_manager.add_tower_placed(this._currentTowerInstance);
+        Tower tower = this._currentTowerInstance as Tower;
+        if (tower == null)
+        {
+            GD.PushError("[TowerPlacer] Placed node is not a Tower instance.");
+            this._currentTowerInstance = null;
+            GetNode<ActionManager>("/root/ActionManager").EndAction();
+            return;
+        }
+
+        runContext.towers_manager.add_tower_placed(tower);
 
         this._currentTowerInstance = null;
 

@@ -75,9 +75,8 @@ public partial class LightningOverchargeTower : Tower
         }
     }
 
-    private async void _on_tower_placed(Variant towerVar)
+    private async void _on_tower_placed(Tower tower)
     {
-        Tower tower = towerVar.AsGodotObject() as Tower;
         if (tower == this)
         {
             return;

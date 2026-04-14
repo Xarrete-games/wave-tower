@@ -121,7 +121,7 @@ public partial class ConsumablesHandler : Node
         this._currentTarget = default;
     }
 
-    private void _on_tower_hovered(Variant tower)
+    private void _on_tower_hovered(Tower tower)
     {
         if (this._currentConsumable == null)
         {
@@ -136,10 +136,10 @@ public partial class ConsumablesHandler : Node
 
         Input.SetCustomMouseCursor(data.cursor_icon_used, Input.CursorShape.Arrow, CenterCursorOffset);
         this._isValidTarget = true;
-        this._currentTarget = tower;
+        this._currentTarget = Variant.From(tower);
     }
 
-    private void _on_tower_unhovered(Variant tower)
+    private void _on_tower_unhovered(Tower tower)
     {
         if (this._currentConsumable == null)
         {
@@ -152,7 +152,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        if (tower.Obj == this._currentTarget.Obj)
+        if (this._currentTarget.AsGodotObject() == tower)
         {
             Input.SetCustomMouseCursor(data.cursor_icon, Input.CursorShape.Arrow, CenterCursorOffset);
             this._invalidate_target();

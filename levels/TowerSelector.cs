@@ -2,7 +2,7 @@
 
 public partial class TowerSelector : Node
 {
-    private GodotObject _currentTowerSelected;
+    private Tower _currentTowerSelected;
     private RunProgress _progress;
 
     public override void _Ready()
@@ -59,26 +59,25 @@ public partial class TowerSelector : Node
 
         this._currentTowerSelected = null;
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.towers_manager.select_tower(default(Variant));
+        runContext.towers_manager.select_tower(null);
     }
 
-    private void OnTowerSelected(Variant tower)
+    private void OnTowerSelected(Tower tower)
     {
-        GodotObject towerObj = tower.AsGodotObject();
-        if (towerObj == null)
+        if (tower == null)
         {
             return;
         }
 
         if (this._currentTowerSelected == null)
         {
-            this._currentTowerSelected = towerObj;
+            this._currentTowerSelected = tower;
             this._currentTowerSelected.Connect("stats_change", Callable.From<Variant>(this.OnStatsChange));
         }
-        else if (this._currentTowerSelected != towerObj)
+        else if (this._currentTowerSelected != tower)
         {
             this._currentTowerSelected.Disconnect("stats_change", Callable.From<Variant>(this.OnStatsChange));
-            this._currentTowerSelected = towerObj;
+            this._currentTowerSelected = tower;
             this._currentTowerSelected.Connect("stats_change", Callable.From<Variant>(this.OnStatsChange));
         }
     }
@@ -88,17 +87,18 @@ public partial class TowerSelector : Node
         this.ClearTowerSelected();
     }
 
-    private void OnTowerRemovePressed(Variant tower)
+    private void OnTowerRemovePressed(Tower tower)
     {
         this.ClearTowerSelected();
     }
 
     private void OnStatsChange(Variant tower)
     {
-        if (this._currentTowerSelected == tower.AsGodotObject())
+        Tower towerObj = tower.AsGodotObject() as Tower;
+        if (this._currentTowerSelected == towerObj)
         {
             RunContext runContext = GetNode<RunContext>("/root/RunContext");
-            runContext.towers_manager.select_tower(tower);
+            runContext.towers_manager.select_tower(towerObj);
         }
     }
 }

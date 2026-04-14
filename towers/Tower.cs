@@ -489,9 +489,9 @@ public partial class Tower : Node2D
         this.exp_data = new_exp_data.Obj as TowerExpData;
     }
 
-    private void _on_tower_selected(Variant tower_var)
+    private void _on_tower_selected(Tower tower)
     {
-        this.current_tower_selected = tower_var.AsGodotObject() as Tower;
+        this.current_tower_selected = tower;
         this.range_preview.Visible = this.current_tower_selected == this;
     }
 

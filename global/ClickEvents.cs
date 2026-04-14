@@ -10,11 +10,11 @@ public partial class ClickEvents : Node
     public static Action ResetGameButtonPressed;
 
     public static Action<TowerDataWithInstance, int> TowerBuildButtonPressed;
-    public static Action<Variant> TowerSelected;
-    public static Action<Variant> TowerRemovePressed;
-    public static Action<Variant, Variant, int> TowerUpgradePressed;
-    public static Action<Variant> TowerHovered;
-    public static Action<Variant> TowerUnhovered;
+    public static Action<Tower> TowerSelected;
+    public static Action<Tower> TowerRemovePressed;
+    public static Action<Tower, TowerDataWithInstance, int> TowerUpgradePressed;
+    public static Action<Tower> TowerHovered;
+    public static Action<Tower> TowerUnhovered;
     public static Action<TowerDataWithInstance> AddTowerCard;
 
     public static bool HasTowerBuildButtonPressedListeners => TowerBuildButtonPressed != null;

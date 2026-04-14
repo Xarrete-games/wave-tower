@@ -41,10 +41,9 @@ public partial class TowerStatsPanel : Control
         ClickEvents.TowerSelected -= this.OnTowerSelected;
     }
 
-    private void OnTowerSelected(Variant tower)
+    private void OnTowerSelected(Tower tower)
     {
-        Tower towerObj = tower.AsGodotObject() as Tower;
-        if (towerObj == null)
+        if (tower == null)
         {
             this._currentTower = null;
             ActionManager actionManager = GetNode<ActionManager>("/root/ActionManager");
@@ -63,25 +62,25 @@ public partial class TowerStatsPanel : Control
         Hooks.OnGetTargetingModes(Hooks.GetListenersFromRuntime(), targetingModes);
         this.UpdateTargetingModes(targetingModes);
 
-        int targetingMode = towerObj.targeting_mode;
+        int targetingMode = tower.targeting_mode;
         this._targetingModeSelector.Select(targetingMode);
 
         ActionManager manager = GetNode<ActionManager>("/root/ActionManager");
         manager.StartAction(ActionManager.ActionState.TowerSelected, Callable.From(this.HidePanel));
         this.Visible = true;
 
-        TowerStats stats = towerObj.stats;
-        TowerExpData expData = towerObj.exp_data;
+        TowerStats stats = tower.stats;
+        TowerExpData expData = tower.exp_data;
         this.UpdateStats(stats);
         this.UpdateExpData(expData);
 
-        TowerData data = towerObj.data as TowerData;
+        TowerData data = tower.data as TowerData;
         this._nameLabel.Text = data?.display_name ?? string.Empty;
-        this._idLabel.Text = towerObj.id;
-        this._currentTower = towerObj;
+        this._idLabel.Text = tower.id;
+        this._currentTower = tower;
 
-        this._levelLabel.Text = towerObj.level.ToString();
-        if (towerObj.is_max_level())
+        this._levelLabel.Text = tower.level.ToString();
+        if (tower.is_max_level())
         {
             this.HideUpgradeOptions();
         }
@@ -184,7 +183,7 @@ public partial class TowerStatsPanel : Control
         }
 
         this._currentTower.upgrade();
-        ClickEvents.TowerUpgradePressed?.Invoke(this._currentTower, Variant.From(towerConfiguration), price);
+        ClickEvents.TowerUpgradePressed?.Invoke(this._currentTower, towerConfiguration, price);
     }
 
     private void HideUpgradeOptions()
