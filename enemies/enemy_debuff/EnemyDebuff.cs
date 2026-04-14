@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class EnemyDebuff : EnemyEffect
+public class EnemyDebuff : EnemyEffect
 {
     public enum Type
     {
@@ -40,7 +39,7 @@ public partial class EnemyDebuff : EnemyEffect
             return null;
         }
 
-        EnemyDebuff debuff = p_data.create_item().As<EnemyDebuff>();
+        EnemyDebuff debuff = p_data.create_debuff();
         debuff?.init(p_data, p_source);
         return debuff;
     }
@@ -53,7 +52,7 @@ public partial class EnemyDebuff : EnemyEffect
             return null;
         }
 
-        EnemyDebuff debuff = p_data.create_item().As<EnemyDebuff>();
+        EnemyDebuff debuff = p_data.create_debuff();
         debuff?.init(p_data, p_source);
         return debuff;
     }
@@ -68,15 +67,15 @@ public partial class EnemyDebuff : EnemyEffect
         };
     }
 
-    public virtual void on_apply(Variant enemy)
+    public virtual void on_apply(Enemy enemy)
     {
     }
 
-    public virtual void on_tick(Variant enemy)
+    public virtual void on_tick(Enemy enemy)
     {
     }
 
-    public virtual void on_expire(Variant enemy)
+    public virtual void on_expire(Enemy enemy)
     {
     }
 }

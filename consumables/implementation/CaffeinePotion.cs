@@ -15,18 +15,15 @@ public partial class CaffeinePotion : ConsumableUsable
         Godot.Collections.Array<Variant> towers = towersManager.towers;
         for (int index = 0; index < towers.Count; index++)
         {
-            GodotObject tower = towers[index].AsGodotObject();
+            Tower tower = towers[index].AsGodotObject() as Tower;
             if (tower == null)
             {
                 continue;
             }
 
             Source source = this.get_source();
-            Variant debuff = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, -20);
-            Variant buff = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, 20);
-
-            TowerBuff debuffObj = debuff.As<TowerBuff>();
-            TowerBuff buffObj = buff.As<TowerBuff>();
+            TowerBuff debuffObj = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, -20);
+            TowerBuff buffObj = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, 20);
             if (debuffObj == null || buffObj == null)
             {
                 continue;
@@ -37,7 +34,7 @@ public partial class CaffeinePotion : ConsumableUsable
             buffObj.duration = duration;
             buffObj.residual_buff = debuffObj;
 
-            tower.Call("add_buff", buff);
+            tower.add_buff(buffObj);
         }
     }
 }

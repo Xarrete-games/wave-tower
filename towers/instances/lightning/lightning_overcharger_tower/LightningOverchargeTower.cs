@@ -123,8 +123,8 @@ public partial class LightningOverchargeTower : Tower
         Source source = new();
         source.setup(SOURCE_TYPE_TOWER, Name);
 
-        Variant towerBuff = TowerBuffFactory.create_from_id("damage_mult_buff", source, 10);
-        if (towerBuff.VariantType == Variant.Type.Nil)
+        TowerBuff towerBuff = TowerBuffFactory.create_from_id("damage_mult_buff", source, 10);
+        if (towerBuff == null)
         {
             return;
         }

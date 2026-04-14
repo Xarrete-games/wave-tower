@@ -1,20 +1,18 @@
 using Godot;
 
-[GlobalClass]
-public partial class BurnDebuff : EnemyDebuff
+public class BurnDebuff : EnemyDebuff
 {
     private const int SOURCE_TYPE_DEBUFF = 3;
 
-    public override void on_tick(Variant enemyVar)
+    public override void on_tick(Enemy enemy)
     {
-        Enemy enemy = enemyVar.AsGodotObject() as Enemy;
         if (enemy == null)
         {
             return;
         }
 
         Source debuff_source = new();
-        debuff_source.setup(SOURCE_TYPE_DEBUFF, this.data.id, this, this.source);
+        debuff_source.setup(SOURCE_TYPE_DEBUFF, this.data.id, default(Variant), this.source);
 
         Attack attack = new();
         attack.damage = this.value;

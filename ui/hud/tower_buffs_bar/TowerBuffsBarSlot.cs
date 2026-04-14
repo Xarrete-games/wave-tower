@@ -8,7 +8,7 @@ public partial class TowerBuffsBarSlot : Control
     [Export]
     public NodePath value_label;
 
-    public GodotObject tower_buff;
+    public TowerBuff tower_buff;
 
     private int _value = 0;
     public int value
@@ -41,9 +41,9 @@ public partial class TowerBuffsBarSlot : Control
         this.value = this._value;
     }
 
-    public void set_buff(Variant p_tower_buff, int p_value = 0)
+    public void set_buff(TowerBuff p_tower_buff, int p_value = 0)
     {
-        this.tower_buff = p_tower_buff.AsGodotObject();
+        this.tower_buff = p_tower_buff;
         this.value = p_value;
 
         this.ApplyBuffVisuals();
@@ -71,12 +71,12 @@ public partial class TowerBuffsBarSlot : Control
             return;
         }
 
-        GodotObject data = this.tower_buff.Get("data").AsGodotObject();
+        BuffData data = this.tower_buff.data;
         if (data == null)
         {
             return;
         }
 
-        this._textureNode.Texture = data.Get("icon").As<Texture2D>();
+        this._textureNode.Texture = data.icon;
     }
 }

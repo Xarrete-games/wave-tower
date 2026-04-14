@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 public class BuffScheduler
 {
-    public event Action<Variant> buff_expired;
-    public event Action<Variant> buff_applied;
+    public event Action<TowerBuff> buff_expired;
+    public event Action<TowerBuff> buff_applied;
 
     private RunProgress progress;
 
@@ -18,9 +18,8 @@ public class BuffScheduler
         this.progress = progress_p;
     }
 
-    public void schedule(Variant buffVar)
+    public void schedule(TowerBuff buff)
     {
-        TowerBuff buff = buffVar.As<TowerBuff>();
         Duration duration = buff?.duration;
         if (buff == null || duration == null)
         {
@@ -32,15 +31,15 @@ public class BuffScheduler
 
         if (seconds > 0)
         {
-            _ = this._schedule_in_seconds(buffVar.AsGodotObject(), seconds);
+            _ = this._schedule_in_seconds(buff, seconds);
         }
         else if (waves > 0)
         {
-            _ = this._schedule_in_waves(buffVar.AsGodotObject(), waves);
+            _ = this._schedule_in_waves(buff, waves);
         }
     }
 
-    private async Task _schedule_in_seconds(GodotObject buff, float seconds)
+    private async Task _schedule_in_seconds(TowerBuff buff, float seconds)
     {
         SceneTree tree = Engine.GetMainLoop() as SceneTree;
         if (tree == null)
@@ -52,7 +51,7 @@ public class BuffScheduler
         this._remove_buff(buff);
     }
 
-    private async Task _schedule_in_waves(GodotObject buff, int waves)
+    private async Task _schedule_in_waves(TowerBuff buff, int waves)
     {
         if (this.progress == null)
         {
@@ -105,12 +104,11 @@ public class BuffScheduler
         return tcs.Task;
     }
 
-    private void _remove_buff(GodotObject buff)
+    private void _remove_buff(TowerBuff buff)
     {
         this.buff_expired?.Invoke(buff);
 
-        TowerBuff towerBuff = buff as TowerBuff;
-        TowerBuff residual = towerBuff?.residual_buff;
+        TowerBuff residual = buff?.residual_buff;
         if (residual != null)
         {
             this._add_residual(residual);

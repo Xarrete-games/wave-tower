@@ -1,17 +1,17 @@
 using Godot;
-using Godot.Collections;
 using System;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class TowerStatsHandler : Node
 {
     public event Action<TowerStats> stats_change;
-    public event Action<Variant> buff_applied;
+    public event Action<TowerBuff> buff_applied;
     public event Action<string> buff_expired;
 
     public TowerStats base_stats;
     public TowerStats stats_on_level;
-    public Array<Variant> buffs = new();
+    public List<TowerBuff> buffs = new();
 
     private TowerStatsAccumulator _stats_acc = new();
     public TowerStatsAccumulator stats_acc
@@ -43,12 +43,11 @@ public partial class TowerStatsHandler : Node
         this._update_stats();
     }
 
-    public void add_buff(Variant tower_buff)
+    public void add_buff(TowerBuff tower_buff)
     {
         this.buffs.Add(tower_buff);
 
-        TowerBuff buffObj = tower_buff.As<TowerBuff>();
-        if (buffObj?.duration != null)
+        if (tower_buff?.duration != null)
         {
             this.buff_scheduler.schedule(tower_buff);
         }
@@ -61,7 +60,7 @@ public partial class TowerStatsHandler : Node
         int initialSize = this.buffs.Count;
         for (int i = this.buffs.Count - 1; i >= 0; i--)
         {
-            TowerBuff buffObj = this.buffs[i].As<TowerBuff>();
+            TowerBuff buffObj = this.buffs[i];
             string buffSourceId = buffObj?.source?.type_id ?? string.Empty;
             if (buffSourceId == source_id)
             {
@@ -81,15 +80,14 @@ public partial class TowerStatsHandler : Node
         this._update_stats();
     }
 
-    private void _on_scheduled_buff_applied(Variant buff)
+    private void _on_scheduled_buff_applied(TowerBuff buff)
     {
         this.buff_applied?.Invoke(buff);
     }
 
-    private void _on_scheduled_buff_expired(Variant buff)
+    private void _on_scheduled_buff_expired(TowerBuff buff)
     {
-        TowerBuff buffObj = buff.As<TowerBuff>();
-        string sourceId = buffObj?.source?.type_id ?? string.Empty;
+        string sourceId = buff?.source?.type_id ?? string.Empty;
         this.buff_expired?.Invoke(sourceId);
     }
 
@@ -98,7 +96,7 @@ public partial class TowerStatsHandler : Node
         TowerStatsAccumulator acc = new();
         for (int i = 0; i < this.buffs.Count; i++)
         {
-            TowerBuffStatsModifier buff = this.buffs[i].As<TowerBuffStatsModifier>();
+            TowerBuffStatsModifier buff = this.buffs[i] as TowerBuffStatsModifier;
             buff?.contribute(acc);
         }
 

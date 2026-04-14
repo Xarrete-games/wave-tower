@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System;
 using System.Collections.Generic;
 
 [GlobalClass]
@@ -14,11 +15,8 @@ public partial class Tower : Node2D
     [Signal]
     public delegate void on_target_changeEventHandler(Node2D enemy);
 
-    [Signal]
-    public delegate void buff_addedEventHandler(Variant buff);
-
-    [Signal]
-    public delegate void buff_removedEventHandler(Variant buff);
+    public event Action<TowerBuff> buff_added;
+    public event Action<TowerBuff> buff_removed;
 
     public enum Type
     {
@@ -97,7 +95,7 @@ public partial class Tower : Node2D
     public string id = string.Empty;
     public string type_id = string.Empty;
 
-    public readonly Array<GodotObject> buffs = new();
+    public readonly List<TowerBuff> buffs = new();
 
     public TowerLogic tower_logic;
 
@@ -265,37 +263,35 @@ public partial class Tower : Node2D
         this._eventsConnected = true;
     }
 
-    public virtual void add_buff(Variant tower_buff_var)
+    public virtual void add_buff(TowerBuff tower_buff)
     {
-        GodotObject tower_buff = tower_buff_var.AsGodotObject();
         if (tower_buff == null)
         {
             return;
         }
 
         this.buffs.Add(tower_buff);
-        if (tower_buff.Get("value").VariantType != Variant.Type.Nil)
+        if (tower_buff is TowerBuffStatsModifier)
         {
             this.tower_stats_handler.add_buff(tower_buff);
         }
 
-        EmitSignal(SignalName.buff_added, tower_buff);
+        this.buff_added?.Invoke(tower_buff);
     }
 
     public virtual void remove_buff(string source_id)
     {
-        List<GodotObject> removedBuffs = new();
+        List<TowerBuff> removedBuffs = new();
 
         for (int i = this.buffs.Count - 1; i >= 0; i--)
         {
-            GodotObject buff = this.buffs[i];
+            TowerBuff buff = this.buffs[i];
             if (buff == null)
             {
                 continue;
             }
 
-            TowerBuff towerBuff = buff as TowerBuff;
-            string buffSourceId = towerBuff?.source?.type_id ?? string.Empty;
+            string buffSourceId = buff.source?.type_id ?? string.Empty;
             if (buffSourceId != source_id)
             {
                 continue;
@@ -307,9 +303,9 @@ public partial class Tower : Node2D
 
         this.tower_stats_handler.remove_buff(source_id);
 
-        foreach (GodotObject removedBuff in removedBuffs)
+        foreach (TowerBuff removedBuff in removedBuffs)
         {
-            EmitSignal(SignalName.buff_removed, removedBuff);
+            this.buff_removed?.Invoke(removedBuff);
         }
     }
 

@@ -85,12 +85,12 @@ public partial class FireFlamethrowerProjectile : Node2D
             }
 
             Source source = this._attack?.source;
-            Variant debuff = source != null ? EnemyDebuff.create_burn(source) : default;
+            EnemyDebuff debuff = source != null ? EnemyDebuff.create_burn(source) : null;
             Enemy enemyModel = target as Enemy;
             enemyModel?.apply_damage(this._attack);
-            if (debuff.VariantType != Variant.Type.Nil)
+            if (debuff != null)
             {
-                target.Call("apply_debuff", debuff);
+                enemyModel?.apply_debuff(debuff);
             }
         }
     }

@@ -10,7 +10,7 @@ public partial class FireLaserProjectiel : Node2D
 
     private Node2D _target;
     private Attack _attack;
-    private GodotObject _debuff;
+    private EnemyDebuff _debuff;
     private int _amount_debuff = 1;
     private Tween _tween;
     private float _current_laser_length;
@@ -80,15 +80,15 @@ public partial class FireLaserProjectiel : Node2D
 
     public void set_target(Node2D target, Attack attack)
     {
-        this.set_target(target, attack, default(Variant), 1);
+        this.set_target(target, attack, null, 1);
     }
 
-    public void set_target(Node2D target, Attack attack, Variant debuff)
+    public void set_target(Node2D target, Attack attack, EnemyDebuff debuff)
     {
         this.set_target(target, attack, debuff, 1);
     }
 
-    public void set_target(Node2D target, Attack attack, Variant debuff, int amount)
+    public void set_target(Node2D target, Attack attack, EnemyDebuff debuff, int amount)
     {
         if (target == this._target)
         {
@@ -97,7 +97,7 @@ public partial class FireLaserProjectiel : Node2D
 
         this._target = target;
         this._attack = attack;
-        this._debuff = debuff.AsGodotObject();
+        this._debuff = debuff;
         this._amount_debuff = amount;
 
         if (!this._is_casting)
@@ -117,7 +117,7 @@ public partial class FireLaserProjectiel : Node2D
         enemyModel?.apply_damage(this._attack);
         if (this._debuff != null)
         {
-            this._target.Call("apply_debuff", this._debuff, this._amount_debuff);
+            enemyModel?.apply_debuff(this._debuff, this._amount_debuff);
         }
     }
 

@@ -450,7 +450,8 @@ public class TowersManager
 
     private void ApplyRuntimeBuffsToLegacyTower(ulong instanceId, GodotObject towerObj, TowerModel towerModel)
     {
-        if (towerObj == null || towerModel == null)
+        Tower tower = towerObj as Tower;
+        if (tower == null || towerModel == null)
         {
             return;
         }
@@ -471,13 +472,13 @@ public class TowersManager
             }
 
             Source source = new Source(Source.SourceType.RELIC, buff.SourceId);
-            Variant legacyBuff = TowerBuffFactory.create_from_id(buff.Id, source, buff.Value);
-            if (legacyBuff.VariantType == Variant.Type.Nil)
+            TowerBuff legacyBuff = TowerBuffFactory.create_from_id(buff.Id, source, buff.Value);
+            if (legacyBuff == null)
             {
                 continue;
             }
 
-            towerObj.Call("add_buff", legacyBuff);
+            tower.add_buff(legacyBuff);
             appliedSources.Add(buff.SourceId);
         }
     }

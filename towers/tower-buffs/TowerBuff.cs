@@ -1,10 +1,9 @@
 using Godot;
 
-[GlobalClass]
-public partial class TowerBuff : RefCounted
+public class TowerBuff
 {
     public Source source;
-    public Variant data;
+    public BuffData data;
     public Duration duration;
     public TowerBuff residual_buff;
 
@@ -12,7 +11,7 @@ public partial class TowerBuff : RefCounted
     {
     }
 
-    public TowerBuff(Source p_source, Duration p_duration = null, TowerBuff p_residual_buff = null, Variant p_data = default)
+    public TowerBuff(Source p_source, Duration p_duration = null, TowerBuff p_residual_buff = null, BuffData p_data = null)
     {
         this.source = p_source;
         this.duration = p_duration;

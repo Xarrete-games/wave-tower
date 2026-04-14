@@ -25,6 +25,7 @@ public partial class WildFireTower : Tower
 
         projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
 
-        projectile.set_target(this._current_target, this._get_attack(), EnemyDebuff.create_burn(this.damage_source));
+        EnemyDebuff debuff = EnemyDebuff.create_burn(this.damage_source);
+        projectile.set_target(this._current_target, this._get_attack(), debuff);
     }
 }

@@ -23,27 +23,19 @@ public partial class EnemyDebuffData : BaseData
     [Export]
     public Script runtime_script { get; set; }
 
+    public EnemyDebuff create_debuff()
+    {
+        return this.debuff_type switch
+        {
+            (int)EnemyDebuff.Type.FROST => new FrostDebuff(),
+            (int)EnemyDebuff.Type.BURN => new BurnDebuff(),
+            _ => null,
+        };
+    }
+
     public override Variant create_item()
     {
-        if (this.runtime_script is GDScript gdscript)
-        {
-            return gdscript.Call("new", this);
-        }
-
-        if (this.runtime_script is CSharpScript csharpScript)
-        {
-            Variant created = csharpScript.New();
-            EnemyDebuff debuff = created.As<EnemyDebuff>();
-            if (debuff == null)
-            {
-                GD.PushError($"[EnemyDebuffData] Could not instantiate runtime_script for '{this.id}'");
-                return default;
-            }
-
-            return created;
-        }
-
-        GD.PushError($"[EnemyDebuffData] Missing or invalid runtime_script for '{this.id}'");
+        // Debuffs are now created through create_debuff() typed path.
         return default;
     }
 }

@@ -1,5 +1,4 @@
 using Godot;
-using Godot.Collections;
 using System.Collections.Generic;
 
 [GlobalClass]
@@ -62,7 +61,7 @@ public partial class DebuffHandler : Node
 
     public void update_all(Variant enemyVar)
     {
-        GodotObject enemy = enemyVar.AsGodotObject();
+        Enemy enemy = enemyVar.As<Enemy>();
         if (enemy == null)
         {
             return;
@@ -85,8 +84,7 @@ public partial class DebuffHandler : Node
             {
                 debuff.on_expire(enemy);
                 this.debuffs.RemoveAt(i);
-                Enemy typedEnemy = enemy as Enemy;
-                typedEnemy?.health_bar?.set_debuffs(this.debuffs);
+                enemy.health_bar?.set_debuffs(this.debuffs);
             }
         }
     }
@@ -110,9 +108,9 @@ public partial class DebuffHandler : Node
         return this.debuffs.Count > 0;
     }
 
-    public Array<EnemyDebuff> get_active_debuffs()
+    public List<EnemyDebuff> get_active_debuffs()
     {
-        Array<EnemyDebuff> result = new();
+        List<EnemyDebuff> result = new();
         for (int i = 0; i < this.debuffs.Count; i++)
         {
             result.Add(this.debuffs[i].debuff);

@@ -5,21 +5,20 @@ public partial class LongShot : ConsumableTargeteable
 {
     public override void action(Variant p_target)
     {
-        GodotObject tower = p_target.AsGodotObject();
+        Tower tower = p_target.AsGodotObject() as Tower;
         if (tower == null)
         {
             return;
         }
 
         Source source = this.get_source();
-        Variant towerBuff = TowerBuffFactory.create_from_id("attack_range_mult_buff", source, 100);
-        TowerBuff towerBuffObj = towerBuff.As<TowerBuff>();
+        TowerBuff towerBuffObj = TowerBuffFactory.create_from_id("attack_range_mult_buff", source, 100);
         if (towerBuffObj == null)
         {
             return;
         }
 
         towerBuffObj.duration = new Duration(0, 1);
-        tower.Call("add_buff", towerBuff);
+        tower.add_buff(towerBuffObj);
     }
 }

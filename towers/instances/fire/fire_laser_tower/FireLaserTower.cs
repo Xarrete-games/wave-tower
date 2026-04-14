@@ -27,7 +27,7 @@ public partial class FireLaserTower : Tower
 
         float hpPercent = this._current_target.Call("get_percentage_remaining_health").AsSingle();
         Attack nextAttack = hpPercent > this.execute_threshold ? this._get_attack() : this._get_letal_attack();
-        Variant debuff = this.apply_burn ? EnemyDebuff.create_burn(this.damage_source) : default;
+        EnemyDebuff debuff = this.apply_burn ? EnemyDebuff.create_burn(this.damage_source) : null;
 
         this.red_projectile.set_target(this._current_target, nextAttack, debuff);
         this.cristal_light?.turn_on();

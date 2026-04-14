@@ -14,7 +14,7 @@ public partial class BlueProjectil : Area2D
     private CircleShape2D _shape;
     private Attack _attack;
     private float _max_area_range;
-    private GodotObject _frost_debuff;
+    private EnemyDebuff _frost_debuff;
 
     private CollisionShape2D _collision_shape;
     private AudioStreamPlayer2D _blue_attack;
@@ -53,11 +53,11 @@ public partial class BlueProjectil : Area2D
         }
     }
 
-    public void set_stats(Attack attack, float area_range, Variant frost_debuff)
+    public void set_stats(Attack attack, float area_range, EnemyDebuff frost_debuff)
     {
         this._attack = attack;
         this._max_area_range = area_range;
-        this._frost_debuff = frost_debuff.AsGodotObject();
+        this._frost_debuff = frost_debuff;
     }
 
     public override void _Draw()
@@ -101,7 +101,7 @@ public partial class BlueProjectil : Area2D
 
         Enemy enemyModel = enemy as Enemy;
         enemyModel?.apply_damage(this._attack);
-        enemy.Call("apply_debuff", this._frost_debuff);
+        enemyModel?.apply_debuff(this._frost_debuff);
 
         AddChild(explosion);
         explosion.GlobalPosition = enemy.GlobalPosition;

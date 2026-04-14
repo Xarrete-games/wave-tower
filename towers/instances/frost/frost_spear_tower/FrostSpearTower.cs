@@ -31,7 +31,7 @@ public partial class FrostSpearTower : Tower
         float damageMultiplier = 1.0f + enemyFrostStacks * 0.10f;
         attack.damage *= damageMultiplier;
 
-        Variant debuff = EnemyDebuff.create_frost(this.damage_source);
+        EnemyDebuff debuff = EnemyDebuff.create_frost(this.damage_source);
         projectile.set_target(this._current_target, attack, debuff, this.debuff_stacks);
     }
 }

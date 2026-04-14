@@ -2,7 +2,7 @@ using Godot;
 
 public static class TowerBuffFactory
 {
-    public static Variant create_from_id(string buff_id, Source source, int value)
+    public static TowerBuff create_from_id(string buff_id, Source source, int value)
     {
         DataLoader dataLoader = DataLoader.Instance;
         if (dataLoader == null)
@@ -16,14 +16,14 @@ public static class TowerBuffFactory
         if (buffData == null)
         {
             GD.PushError($"[TowerBuffFactory] No buff data found for id: {buff_id}");
-            return default;
+            return null;
         }
 
-        Variant buff = buffData.create_item(source, value);
-        if (buff.VariantType == Variant.Type.Nil)
+        TowerBuff buff = buffData.create_item(source, value);
+        if (buff == null)
         {
             GD.PushError($"[TowerBuffFactory] Could not create buff from data id: {buff_id}");
-            return default;
+            return null;
         }
 
         return buff;

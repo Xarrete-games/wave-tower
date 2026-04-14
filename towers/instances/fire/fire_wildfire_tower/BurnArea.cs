@@ -46,10 +46,11 @@ public partial class BurnArea : Area2D
             return;
         }
 
-        Variant debuff = this.source != null ? EnemyDebuff.create_burn(this.source) : default;
-        if (debuff.VariantType != Variant.Type.Nil)
+        EnemyDebuff debuff = this.source != null ? EnemyDebuff.create_burn(this.source) : null;
+        if (debuff != null)
         {
-            body.Call("apply_debuff", debuff);
+            Enemy enemy = body as Enemy;
+            enemy?.apply_debuff(debuff);
         }
     }
 

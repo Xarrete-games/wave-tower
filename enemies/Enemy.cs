@@ -266,7 +266,7 @@ public partial class Enemy : CharacterBody2D
         return this.debuff_handler.get_stacks(debuff_type);
     }
 
-    public Array<EnemyDebuff> get_active_debuffs()
+    public System.Collections.Generic.List<EnemyDebuff> get_active_debuffs()
     {
         return this.debuff_handler.get_active_debuffs();
     }

@@ -8,7 +8,7 @@ public partial class SingleTargetProjectile : Node2D
 
     private Node2D _enemy;
     private Attack _attack;
-    private GodotObject _debuff;
+    private EnemyDebuff _debuff;
     private int _debuffStacks = 1;
 
     public override void _Process(double delta)
@@ -29,7 +29,7 @@ public partial class SingleTargetProjectile : Node2D
             enemyModel?.apply_damage(this._attack);
             if (this._debuff != null)
             {
-                this._enemy.Call("apply_debuff", this._debuff, this._debuffStacks);
+                enemyModel?.apply_debuff(this._debuff, this._debuffStacks);
             }
 
             QueueFree();
@@ -42,19 +42,19 @@ public partial class SingleTargetProjectile : Node2D
 
     public void set_target(Node2D p_enemy, Attack p_attack)
     {
-        this.set_target(p_enemy, p_attack, default(Variant), 1);
+        this.set_target(p_enemy, p_attack, null, 1);
     }
 
-    public void set_target(Node2D p_enemy, Attack p_attack, Variant p_debuff)
+    public void set_target(Node2D p_enemy, Attack p_attack, EnemyDebuff p_debuff)
     {
         this.set_target(p_enemy, p_attack, p_debuff, 1);
     }
 
-    public void set_target(Node2D p_enemy, Attack p_attack, Variant p_debuff, int p_debuff_stacks)
+    public void set_target(Node2D p_enemy, Attack p_attack, EnemyDebuff p_debuff, int p_debuff_stacks)
     {
         this._enemy = p_enemy;
         this._attack = p_attack;
-        this._debuff = p_debuff.AsGodotObject();
+        this._debuff = p_debuff;
         this._debuffStacks = p_debuff_stacks;
     }
 }
