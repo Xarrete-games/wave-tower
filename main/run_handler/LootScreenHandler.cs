@@ -49,7 +49,7 @@ public partial class LootScreenHandler : Node
         consumables.Shuffle();
         if (consumables.Count > 0)
         {
-            consumableItem.Consumable = consumables[0].AsGodotObject();
+            consumableItem.Consumable = consumables[0].AsGodotObject() as ConsumableData;
             lootItems.Add(consumableItem);
         }
 

@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class LongShot : ConsumableTargeteable
+public class LongShot : ConsumableTargeteable
 {
     public override void action(Variant p_target)
     {

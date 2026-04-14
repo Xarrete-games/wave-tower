@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class CaffeinePotion : ConsumableUsable
+public class CaffeinePotion : ConsumableUsable
 {
     public override void use()
     {

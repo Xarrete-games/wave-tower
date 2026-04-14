@@ -3,7 +3,7 @@ using Godot;
 public partial class InventoryUISlot : Control
 {
     private TextureRect _textureRect;
-    private Variant _consumable = default;
+    private Consumable _consumable;
     private ConsumablesManager _consumablesManager;
 
     public override void _Ready()
@@ -28,17 +28,16 @@ public partial class InventoryUISlot : Control
 
     public bool IsEmpty()
     {
-        return this._consumable.VariantType == Variant.Type.Nil;
+        return this._consumable == null;
     }
 
-    public void SetConsumable(Variant consumable)
+    public void SetConsumable(Consumable consumable)
     {
         this._consumable = consumable;
-        GodotObject consumableObj = consumable.AsGodotObject();
-        GodotObject data = consumableObj?.Get("data").AsGodotObject();
+        ConsumableData data = consumable?.data;
         if (data != null)
         {
-            this._textureRect.Texture = data.Get("icon").As<Texture2D>();
+            this._textureRect.Texture = data.icon;
         }
     }
 
@@ -54,21 +53,20 @@ public partial class InventoryUISlot : Control
             GetNode<Node>("/root/AudioManager").Call("play_button_click");
             HintManagerStatic.RemoveHint(this);
 
-            GodotObject consumableObj = this._consumable.AsGodotObject();
-            consumableObj?.Call("emit_signal", "clicked", this._consumable);
+            this._consumable?.emit_clicked();
         }
     }
 
-    private void OnConsumableUsed(Variant consumable)
+    private void OnConsumableUsed(Consumable consumable)
     {
-        if (this._consumable.VariantType == Variant.Type.Nil)
+        if (this._consumable == null)
         {
             return;
         }
 
-        if (this._consumable.AsGodotObject() == consumable.AsGodotObject())
+        if (ReferenceEquals(this._consumable, consumable))
         {
-            this._consumable = default;
+            this._consumable = null;
             this._textureRect.Texture = null;
         }
     }
@@ -82,17 +80,16 @@ public partial class InventoryUISlot : Control
 
         GetNode<Node>("/root/AudioManager").Call("play_button_hover");
 
-        GodotObject consumableObj = this._consumable.AsGodotObject();
-        GodotObject data = consumableObj?.Get("data").AsGodotObject();
+        ConsumableData data = this._consumable?.data;
         if (data == null)
         {
             return;
         }
 
-        string description = (string)data.Get("description");
+        string description = data.description;
         if (!string.IsNullOrEmpty(description))
         {
-            string displayName = (string)data.Get("display_name");
+            string displayName = data.display_name;
             HintManagerStatic.ShowHint(this, this, description, displayName, HintManagerStatic.PositionHint.BOTTOM);
         }
     }

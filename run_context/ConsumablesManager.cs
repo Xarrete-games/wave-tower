@@ -4,99 +4,92 @@ using System;
 
 public class ConsumablesManager
 {
-    public event Action<Godot.Collections.Array<Variant>> consumables_change;
-    public event Action<Variant> consumable_added;
-    public event Action<Variant> consumable_used;
-    public event Action<Variant> consumable_clicked;
+    public event Action<List<Consumable>> consumables_change;
+    public event Action<Consumable> consumable_added;
+    public event Action<Consumable> consumable_used;
+    public event Action<Consumable> consumable_clicked;
 
-    private readonly Godot.Collections.Array<Variant> _consumables = new();
-    private readonly Dictionary<ulong, ConsumableModel> _runtimeConsumableModels = new();
+    private readonly List<Consumable> _consumables = new();
+    private readonly Dictionary<Consumable, ConsumableModel> _runtimeConsumableModels = new();
 
     public bool is_full()
     {
         return this._consumables.Count == 5;
     }
 
-    public void add_consumable(Variant consumable)
+    public void add_consumable(Consumable consumable)
     {
         if (this.is_full())
         {
             return;
         }
 
-        Consumable consumableObj = consumable.AsGodotObject() as Consumable;
-        if (consumableObj == null)
+        if (consumable == null)
         {
             return;
         }
 
         this._consumables.Add(consumable);
-        this.SyncConsumableAddedToRuntime(consumableObj);
-        consumableObj.clicked += this._on_consumable_clicked;
-        consumableObj.used += this._on_consumable_used;
+        this.SyncConsumableAddedToRuntime(consumable);
+        consumable.clicked += this._on_consumable_clicked;
+        consumable.used += this._on_consumable_used;
         this.consumables_change?.Invoke(this._consumables);
         this.consumable_added?.Invoke(consumable);
     }
 
-    public void _on_consumable_used(Variant consumable)
+    public void _on_consumable_used(Consumable consumable)
     {
-        Consumable consumableObj = consumable.AsGodotObject() as Consumable;
-        ulong instanceId = consumableObj?.GetInstanceId() ?? 0UL;
         ConsumableModel consumableModel = null;
-        if (instanceId != 0UL)
-        {
-            this._runtimeConsumableModels.TryGetValue(instanceId, out consumableModel);
-        }
+        this._runtimeConsumableModels.TryGetValue(consumable, out consumableModel);
 
         if (consumableModel != null)
         {
-            this.SyncConsumableUseTargetToRuntime(consumableObj, consumableModel);
+            this.SyncConsumableUseTargetToRuntime(consumable, consumableModel);
             this.SyncRuntimeStatusFromLegacy();
             Hooks.OnConsumableUsed(Hooks.GetListenersFromRuntime(), consumableModel);
             this.SyncLegacyStatusFromRuntime();
-            this.SyncTowerBuffsFromConsumableTarget(consumableObj);
+            this.SyncTowerBuffsFromConsumableTarget(consumable);
         }
 
-        if (consumableObj != null)
+        if (consumable != null)
         {
-            consumableObj.clicked -= this._on_consumable_clicked;
-            consumableObj.used -= this._on_consumable_used;
-            this.SyncConsumableRemovedFromRuntime(consumableObj);
+            consumable.clicked -= this._on_consumable_clicked;
+            consumable.used -= this._on_consumable_used;
+            this.SyncConsumableRemovedFromRuntime(consumable);
         }
 
         this.consumable_used?.Invoke(consumable);
         this._consumables.Remove(consumable);
 
         bool recoveredByHooks = consumableModel != null && this.IsConsumablePresentInRuntime(consumableModel);
-        if (recoveredByHooks && consumableObj != null && !this.is_full())
+        if (recoveredByHooks && consumable != null && !this.is_full())
         {
-            this._runtimeConsumableModels[instanceId] = consumableModel;
+            this._runtimeConsumableModels[consumable] = consumableModel;
             this._consumables.Add(consumable);
-            consumableObj.clicked += this._on_consumable_clicked;
-            consumableObj.used += this._on_consumable_used;
+            consumable.clicked += this._on_consumable_clicked;
+            consumable.used += this._on_consumable_used;
             this.consumable_added?.Invoke(consumable);
         }
 
         this.consumables_change?.Invoke(this._consumables);
     }
 
-    public void _on_consumable_clicked(Variant consumable)
+    public void _on_consumable_clicked(Consumable consumable)
     {
-        Consumable consumableObj = consumable.AsGodotObject() as Consumable;
-        if (consumableObj == null)
+        if (consumable == null)
         {
             return;
         }
 
-        bool requiresTarget = consumableObj.requires_target();
+        bool requiresTarget = consumable.requires_target();
         if (!requiresTarget)
         {
-            if (consumableObj is ConsumableUsable usable)
+            if (consumable is ConsumableUsable usable)
             {
                 usable.use();
             }
 
-            consumableObj.EmitSignal(Consumable.SignalName.used, consumable);
+            consumable.emit_used();
         }
         else
         {
@@ -111,14 +104,13 @@ public class ConsumablesManager
             return;
         }
 
-        ulong instanceId = consumableObj.GetInstanceId();
         ConsumableModel model = this.BuildConsumableModel(consumableObj);
         if (model == null)
         {
             return;
         }
 
-        this._runtimeConsumableModels[instanceId] = model;
+        this._runtimeConsumableModels[consumableObj] = model;
         RunContextRuntime.ConsumablesManager.AddConsumable(model);
     }
 
@@ -129,14 +121,13 @@ public class ConsumablesManager
             return;
         }
 
-        ulong instanceId = consumableObj.GetInstanceId();
-        if (!this._runtimeConsumableModels.TryGetValue(instanceId, out ConsumableModel model))
+        if (!this._runtimeConsumableModels.TryGetValue(consumableObj, out ConsumableModel model))
         {
             return;
         }
 
         RunContextRuntime.ConsumablesManager.RemoveConsumable(model);
-        this._runtimeConsumableModels.Remove(instanceId);
+        this._runtimeConsumableModels.Remove(consumableObj);
     }
 
     private bool IsConsumablePresentInRuntime(ConsumableModel model)
@@ -263,7 +254,7 @@ public class ConsumablesManager
 
     private ConsumableModel BuildConsumableModel(Consumable consumableObj)
     {
-        ConsumableData data = consumableObj.data.As<ConsumableData>();
+        ConsumableData data = consumableObj.data;
         if (data == null)
         {
             return null;

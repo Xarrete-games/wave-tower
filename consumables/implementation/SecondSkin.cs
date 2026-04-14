@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class SecondSkin : ConsumableUsable
+public class SecondSkin : ConsumableUsable
 {
     public override void use()
     {

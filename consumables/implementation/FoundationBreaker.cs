@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class FoundationBreaker : ConsumableTargeteable
+public class FoundationBreaker : ConsumableTargeteable
 {
     public override void action(Variant p_target)
     {

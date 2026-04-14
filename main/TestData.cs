@@ -87,10 +87,10 @@ public partial class TestData : Node
             {
                 string consumableId = this.initial_consumables_ids[index];
                 Variant consumableData = dataLoader.get_consumable_by_id(consumableId);
-                GodotObject consumableDataObj = consumableData.AsGodotObject();
+                ConsumableData consumableDataObj = consumableData.AsGodotObject() as ConsumableData;
                 if (consumableDataObj != null)
                 {
-                    Variant consumableInstance = consumableDataObj.Call("create_item");
+                    Consumable consumableInstance = consumableDataObj.create_consumable();
                     runContext.consumables_manager.add_consumable(consumableInstance);
                 }
                 else

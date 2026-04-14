@@ -21,11 +21,11 @@ public partial class LootScreenItem : Control
             return;
         }
 
-        GodotObject consumable = this._lootItemData.Consumable;
+        ConsumableData consumable = this._lootItemData.Consumable;
         if (consumable != null)
         {
-            this.texture_rect.Texture = consumable.Get("icon").As<Texture2D>();
-            this.label.Text = (string)consumable.Get("display_name");
+            this.texture_rect.Texture = consumable.icon;
+            this.label.Text = consumable.display_name;
             return;
         }
 
@@ -45,7 +45,7 @@ public partial class LootScreenItem : Control
             return;
         }
 
-        GodotObject consumable = this._lootItemData.Consumable;
+        ConsumableData consumable = this._lootItemData.Consumable;
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (consumable != null)
         {
@@ -55,7 +55,7 @@ public partial class LootScreenItem : Control
                 return;
             }
 
-            Variant consumableItem = consumable.Call("create_item");
+            Consumable consumableItem = consumable.create_consumable();
             runContext.consumables_manager.add_consumable(consumableItem);
         }
         else
@@ -75,9 +75,8 @@ public partial class LootScreenItem : Control
             AddThemeStyleboxOverride("panel", styleBox);
         }
 
-        GodotObject consumable = this._lootItemData?.Consumable;
-        GodotObject consumableData = consumable;
-        string description = consumableData == null ? string.Empty : (string)consumableData.Get("description");
+        ConsumableData consumable = this._lootItemData?.Consumable;
+        string description = consumable == null ? string.Empty : consumable.description;
         if (!string.IsNullOrEmpty(description))
         {
             HintManagerStatic.RemoveHint(this);
@@ -93,13 +92,13 @@ public partial class LootScreenItem : Control
             AddThemeStyleboxOverride("panel", styleBox);
         }
 
-        GodotObject consumable = this._lootItemData?.Consumable;
+        ConsumableData consumable = this._lootItemData?.Consumable;
         if (consumable == null)
         {
             return;
         }
 
-        string description = (string)consumable.Get("description");
+        string description = consumable.description;
         if (!string.IsNullOrEmpty(description))
         {
             HintManagerStatic.ShowHint(this, this, description, string.Empty, HintManagerStatic.PositionHint.RIGHT);

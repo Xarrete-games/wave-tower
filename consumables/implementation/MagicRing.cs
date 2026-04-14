@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class MagicRing : ConsumableUsable
+public class MagicRing : ConsumableUsable
 {
     public override void use()
     {

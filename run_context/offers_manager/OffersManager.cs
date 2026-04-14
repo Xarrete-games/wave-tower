@@ -78,9 +78,12 @@ public class OffersManager
         bool isConsumable = this.HasProperty(itemData, "consumable_type");
         if (isConsumable)
         {
-            Variant item = this.CreateItemFromData(itemData);
-            consumablesManager?.add_consumable(item);
-            return item;
+            Consumable item = this.CreateConsumableFromData(itemData);
+            if (item != null)
+            {
+                consumablesManager?.add_consumable(item);
+            }
+            return default;
         }
 
         if (itemData is RelicData relicData)
@@ -93,29 +96,19 @@ public class OffersManager
         return default;
     }
 
-    private Variant CreateItemFromData(GodotObject itemData)
+    private Consumable CreateConsumableFromData(GodotObject itemData)
     {
         if (itemData == null)
         {
-            return default;
+            return null;
         }
 
         if (itemData is ConsumableData consumableData)
         {
-            return consumableData.create_item();
+            return consumableData.create_consumable();
         }
 
-        if (itemData is RelicData relicData)
-        {
-            return Variant.From(relicData.id);
-        }
-
-        if (itemData.HasMethod("create_item"))
-        {
-            return itemData.Call("create_item");
-        }
-
-        return default;
+        return null;
     }
 
     private RunContext GetRunContext()

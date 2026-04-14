@@ -1,13 +1,10 @@
 using Godot;
+using System;
 
-[GlobalClass]
-public partial class Consumable : RefCounted
+public class Consumable
 {
-    [Signal]
-    public delegate void usedEventHandler(Variant consumable);
-
-    [Signal]
-    public delegate void clickedEventHandler(Variant consumable);
+    public event Action<Consumable> used;
+    public event Action<Consumable> clicked;
 
     public enum Type
     {
@@ -15,9 +12,7 @@ public partial class Consumable : RefCounted
         POTION,
     }
 
-    public Variant data { get; set; }
-
-    public ConsumableData Data => this.data.As<ConsumableData>();
+    public ConsumableData data { get; set; }
 
     public Consumable()
     {
@@ -40,8 +35,18 @@ public partial class Consumable : RefCounted
 
     public Source get_source()
     {
-        string id = this.Data?.id ?? string.Empty;
-        return new Source(Source.SourceType.CONSUMABLE, id, this);
+        string id = this.data?.id ?? string.Empty;
+        return new Source(Source.SourceType.CONSUMABLE, id);
+    }
+
+    public void emit_used()
+    {
+        this.used?.Invoke(this);
+    }
+
+    public void emit_clicked()
+    {
+        this.clicked?.Invoke(this);
     }
 
     protected Node GetSingleton(string name)

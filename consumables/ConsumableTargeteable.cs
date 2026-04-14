@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public abstract partial class ConsumableTargeteable : Consumable
+public abstract class ConsumableTargeteable : Consumable
 {
     public enum TargetType
     {
@@ -20,7 +19,7 @@ public abstract partial class ConsumableTargeteable : Consumable
     {
         this.target = p_target;
         this.action(this.target);
-        this.EmitSignal(SignalName.used, this);
+        this.emit_used();
     }
 
     public abstract void action(Variant p_target);

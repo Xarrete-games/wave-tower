@@ -20,15 +20,14 @@ public partial class PotionsEventScript : EventScript
         int count = Mathf.Min(3, consumables.Count);
         for (int index = 0; index < count; index++)
         {
-            GodotObject consumableData = consumables[index].AsGodotObject();
+            ConsumableData consumableData = consumables[index].AsGodotObject() as ConsumableData;
             if (consumableData == null)
             {
                 continue;
             }
 
-            string displayName = consumableData.Get("display_name").AsString();
-            Variant consumableItem = consumableData.Call("create_item");
-            options.Add(new EventOptionData(displayName, consumableItem));
+            string displayName = consumableData.display_name;
+            options.Add(new EventOptionData(displayName, Variant.From(consumableData)));
         }
 
         return options;
@@ -42,6 +41,11 @@ public partial class PotionsEventScript : EventScript
             return;
         }
 
-        runContext.consumables_manager.add_consumable(data);
+        ConsumableData consumableData = data.AsGodotObject() as ConsumableData;
+        Consumable consumable = consumableData?.create_consumable();
+        if (consumable != null)
+        {
+            runContext.consumables_manager.add_consumable(consumable);
+        }
     }
 }

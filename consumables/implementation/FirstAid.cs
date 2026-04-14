@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class FirstAid : ConsumableUsable
+public class FirstAid : ConsumableUsable
 {
     public override void use()
     {

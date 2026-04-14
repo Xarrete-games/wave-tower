@@ -26,7 +26,7 @@ public partial class InventoryUI : Control
         }
     }
 
-    private void OnConsumableAdded(Variant consumable)
+    private void OnConsumableAdded(Consumable consumable)
     {
         foreach (Node slotNode in this.slots_container.GetChildren())
         {

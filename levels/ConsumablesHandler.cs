@@ -64,7 +64,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        ConsumableData data = this._currentConsumable.data.As<ConsumableData>();
+        ConsumableData data = this._currentConsumable.data;
         if (data != null && data.targeting_type == (int)ConsumableTargeteable.TargetType.BLOCKED_TILE)
         {
             this._handle_blocked_tile_placement();
@@ -94,7 +94,7 @@ public partial class ConsumablesHandler : Node
         bool isMouseOnBlockedTile = (bool)this.composite_tile_map.Call("is_mouse_on_block_tile");
         if (isMouseOnBlockedTile)
         {
-            ConsumableData data = this._currentConsumable?.data.As<ConsumableData>();
+            ConsumableData data = this._currentConsumable?.data;
             if (data != null)
             {
                 Input.SetCustomMouseCursor(data.cursor_icon_used, Input.CursorShape.Arrow, CenterCursorOffset);
@@ -105,7 +105,7 @@ public partial class ConsumablesHandler : Node
         }
         else
         {
-            ConsumableData data = this._currentConsumable?.data.As<ConsumableData>();
+            ConsumableData data = this._currentConsumable?.data;
             if (data != null)
             {
                 Input.SetCustomMouseCursor(data.cursor_icon, Input.CursorShape.Arrow, CenterCursorOffset);
@@ -128,7 +128,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        ConsumableData data = this._currentConsumable.data.As<ConsumableData>();
+        ConsumableData data = this._currentConsumable.data;
         if (data == null || data.targeting_type != (int)ConsumableTargeteable.TargetType.TOWER)
         {
             return;
@@ -146,7 +146,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        ConsumableData data = this._currentConsumable.data.As<ConsumableData>();
+        ConsumableData data = this._currentConsumable.data;
         if (data == null || data.targeting_type != (int)ConsumableTargeteable.TargetType.TOWER)
         {
             return;
@@ -180,9 +180,9 @@ public partial class ConsumablesHandler : Node
         Input.SetCustomMouseCursor(DefaultCursor);
     }
 
-    private void _on_consumable_clicked(Variant consumable)
+    private void _on_consumable_clicked(Consumable consumable)
     {
-        ConsumableTargeteable targeteable = consumable.AsGodotObject() as ConsumableTargeteable;
+        ConsumableTargeteable targeteable = consumable as ConsumableTargeteable;
         if (targeteable == null)
         {
             return;
@@ -196,7 +196,7 @@ public partial class ConsumablesHandler : Node
         this._currentConsumable = targeteable;
         this._invalidate_target();
 
-        ConsumableData data = this._currentConsumable.data.As<ConsumableData>();
+        ConsumableData data = this._currentConsumable.data;
         if (data != null)
         {
             Input.SetCustomMouseCursor(data.cursor_icon, Input.CursorShape.Arrow, CenterCursorOffset);
