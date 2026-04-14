@@ -6,16 +6,15 @@ public partial class FountainsOfWishesScript : EventScript
     public override List<EventOptionData> get_options()
     {
         RunContext runContext = this.GetRunContext();
-        DataLoader dataLoader = this.GetDataLoader();
-        if (runContext == null || dataLoader == null)
+        if (runContext == null)
         {
             return new List<EventOptionData>();
         }
 
         int gold = runContext.economy.gold;
-        bool epicAvailable = dataLoader.get_not_used_relics(2, false).Count > 0;
-        bool rareAvailable = dataLoader.get_not_used_relics(1, false).Count > 0;
-        bool commonAvailable = dataLoader.get_not_used_relics(0, false).Count > 0;
+        bool epicAvailable = DataLoaderAccess.GetNotUsedRelicsTyped(2, false).Count > 0;
+        bool rareAvailable = DataLoaderAccess.GetNotUsedRelicsTyped(1, false).Count > 0;
+        bool commonAvailable = DataLoaderAccess.GetNotUsedRelicsTyped(0, false).Count > 0;
 
         var option1 = new EventOptionData("Offer 50 coins (Receive a Common Relic)", 0, gold < 50 || !commonAvailable);
         var option2 = new EventOptionData("Offer 80 coins (Receive a Rare Relic)", 1, gold < 80 || !rareAvailable);
@@ -24,25 +23,24 @@ public partial class FountainsOfWishesScript : EventScript
         return new List<EventOptionData> { option1, option2, option3 };
     }
 
-    public override void handle_response(Variant data)
+    public override void handle_response(object data)
     {
-        int rarity = data.AsInt32();
+        int rarity = data is int intValue ? intValue : 0;
 
         RunContext runContext = this.GetRunContext();
-        DataLoader dataLoader = this.GetDataLoader();
-        if (runContext == null || dataLoader == null)
+        if (runContext == null)
         {
             return;
         }
 
-        Godot.Collections.Array<Variant> relics = dataLoader.get_not_used_relics(rarity, false);
+        List<RelicData> relics = DataLoaderAccess.GetNotUsedRelicsTyped(rarity, false);
         if (relics.Count == 0)
         {
             return;
         }
 
         int randomIndex = (int)(GD.Randi() % (uint)relics.Count);
-        RelicData relicData = relics[randomIndex].As<RelicData>();
+        RelicData relicData = relics[randomIndex];
         Relic relic = relicData?.create_item();
         if (relic == null)
         {

@@ -23,28 +23,26 @@ public partial class EventOptionsScreen : Control
 
     private EventScript _eventScriptInstance;
 
-    public void set_event(Variant eventData)
+    public void set_event(EventData eventData)
     {
-        GodotObject eventDataObj = eventData.AsGodotObject();
-        if (eventDataObj == null)
+        if (eventData == null)
         {
             return;
         }
 
-        this.title_label.Text = (string)eventDataObj.Get("title");
-        this.description_label.Text = (string)eventDataObj.Get("description");
-        this.texture_rect.Texture = eventDataObj.Get("texture_background").As<Texture2D>();
+        this.title_label.Text = eventData.title;
+        this.description_label.Text = eventData.description;
+        this.texture_rect.Texture = eventData.texture_background;
 
         foreach (Node child in this.buttons_container.GetChildren())
         {
             child.QueueFree();
         }
 
-        Variant runtimeScriptVariant = eventDataObj.Get("runtime_script");
-        Script runtimeScript = runtimeScriptVariant.As<Script>();
+        Script runtimeScript = eventData.runtime_script;
         if (runtimeScript == null)
         {
-            GD.PushError($"Event data {eventDataObj.Get("id")} has no runtime script assigned.");
+            GD.PushError($"Event data {eventData.id} has no runtime script assigned.");
             return;
         }
 
@@ -58,7 +56,7 @@ public partial class EventOptionsScreen : Control
         }
         if (this._eventScriptInstance == null)
         {
-            GD.PushError($"Could not instantiate runtime script for event {eventDataObj.Get("id")}.");
+            GD.PushError($"Could not instantiate runtime script for event {eventData.id}.");
             return;
         }
 
@@ -87,7 +85,7 @@ public partial class EventOptionsScreen : Control
         }
     }
 
-    private void OnOptionSelected(Variant data)
+    private void OnOptionSelected(object data)
     {
         this._eventScriptInstance?.handle_response(data);
         EmitSignal(SignalName.event_completed);

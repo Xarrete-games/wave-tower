@@ -5,7 +5,7 @@ using System;
 public class TowersManager
 {
     public event Action<int, int> tower_count_change;
-    public event Action<Variant, int> tower_card_amount_change;
+    public event Action<TowerDataWithInstance, int> tower_card_amount_change;
     public event Action<Variant> tower_placed;
     public event Action<Variant> tower_hovered;
     public event Action<Variant> tower_unhovered;
@@ -113,7 +113,7 @@ public class TowersManager
         return selectedTowers;
     }
 
-    public Variant get_tower_configuration_by_id(string id)
+    public TowerDataWithInstance get_tower_configuration_by_id(string id)
     {
         for (int index = 0; index < this.all_tower_data.Count; index++)
         {
@@ -124,14 +124,14 @@ public class TowersManager
             }
 
             GodotObject cfg = towerConfiguration.AsGodotObject();
-            GodotObject data = cfg.Get("data").AsGodotObject();
-            if ((string)data.Get("id") == id)
+            TowerDataWithInstance typedConfiguration = cfg as TowerDataWithInstance;
+            if (typedConfiguration != null && typedConfiguration.data != null && typedConfiguration.data.id == id)
             {
-                return towerConfiguration;
+                return typedConfiguration;
             }
         }
 
-        return default;
+        return null;
     }
 
     public void add_tower_placed(Variant tower)
@@ -147,7 +147,7 @@ public class TowersManager
         int currentAmount = this.tower_cards_amount.ContainsKey(towerDataId) ? this.tower_cards_amount[towerDataId] : 0;
         this.tower_cards_amount[towerDataId] = currentAmount - 1;
 
-        Variant towerConfiguration = this.get_tower_configuration_by_id(towerDataId);
+        TowerDataWithInstance towerConfiguration = this.get_tower_configuration_by_id(towerDataId);
         this.tower_card_amount_change?.Invoke(towerConfiguration, this.tower_cards_amount[towerDataId]);
 
         towerObj.Set("id", this._generate_tower_id(tower));
@@ -254,12 +254,16 @@ public class TowersManager
         }
 
         GodotObject cfg = tower_data.AsGodotObject();
-        GodotObject data = cfg.Get("data").AsGodotObject();
-        string id = (string)data.Get("id");
+        TowerDataWithInstance typedConfiguration = cfg as TowerDataWithInstance;
+        string id = typedConfiguration?.data?.id ?? string.Empty;
+        if (string.IsNullOrEmpty(id))
+        {
+            return;
+        }
 
         int amount = this.tower_cards_amount.ContainsKey(id) ? this.tower_cards_amount[id] : 0;
         this.tower_cards_amount[id] = amount + 1;
-        this.tower_card_amount_change?.Invoke(tower_data, this.tower_cards_amount[id]);
+        this.tower_card_amount_change?.Invoke(typedConfiguration, this.tower_cards_amount[id]);
     }
 
     public void emit_tower_hovered(Variant tower)
@@ -331,10 +335,10 @@ public class TowersManager
         var initialCards = new Godot.Collections.Array<Variant>();
         for (int index = 0; index < INITIAL_TOWERS_IDS.Length; index++)
         {
-            Variant towerConfiguration = this.get_tower_configuration_by_id(INITIAL_TOWERS_IDS[index]);
-            if (towerConfiguration.VariantType != Variant.Type.Nil)
+            TowerDataWithInstance towerConfiguration = this.get_tower_configuration_by_id(INITIAL_TOWERS_IDS[index]);
+            if (towerConfiguration != null)
             {
-                initialCards.Add(towerConfiguration);
+                initialCards.Add(Variant.From(towerConfiguration));
             }
         }
 

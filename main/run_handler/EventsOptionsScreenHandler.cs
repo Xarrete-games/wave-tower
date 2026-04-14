@@ -6,7 +6,7 @@ public partial class EventsOptionsScreenHandler : Node
     [Export]
     public PackedScene events_options_screen;
 
-    public async Task ShowOptionsEventAsync(Variant eventData, CanvasLayer eventLayer)
+    public async Task ShowOptionsEventAsync(EventData eventData, CanvasLayer eventLayer)
     {
         EventOptionsScreen optionsScreen = this.events_options_screen.Instantiate<EventOptionsScreen>();
 

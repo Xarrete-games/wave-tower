@@ -1,38 +1,32 @@
 using Godot;
+using System;
 
 public partial class TowerButton : Control
 {
-
-    [Signal]
-    public delegate void tower_button_pressedEventHandler(Variant tower_configuration, int price);
-
-    [Signal]
-    public delegate void hoverEventHandler(Variant tower_button);
-
-    [Signal]
-    public delegate void unhoverEventHandler(Variant tower_button);
+    public event Action<TowerDataWithInstance, int> tower_button_pressed;
+    public event Action<TowerButton> hover;
+    public event Action<TowerButton> unhover;
 
     private static readonly StyleBox NORMAL_PANEL = GD.Load<StyleBox>("uid://dcjn1y7ofuii7");
     private static readonly StyleBox HOVER_PANEL = GD.Load<StyleBox>("uid://5m3jkdualcb3");
 
-    private Variant _tower_data = default;
+    private TowerDataWithInstance _tower_data;
     private int _price = 0;
     private Texture2D _icon;
     private Texture2D _icon_hover;
     private int _amount = 0;
 
     [Export]
-    public Variant tower_data
+    public TowerDataWithInstance tower_data
     {
         get => this._tower_data;
         set
         {
             this._tower_data = value;
-            GodotObject towerObj = value.AsGodotObject();
-            this.configuration = towerObj?.Get("data").AsGodotObject();
-            this.tower_scene = towerObj?.Get("scene").As<PackedScene>();
-            this.icon = this.configuration?.Get("icon").As<Texture2D>();
-            this.type = this.configuration?.Get("type").AsInt32() ?? 0;
+            this.configuration = value?.data;
+            this.tower_scene = value?.scene;
+            this.icon = this.configuration?.icon;
+            this.type = this.configuration?.type ?? 0;
             this._update_price();
         }
     }
@@ -49,7 +43,7 @@ public partial class TowerButton : Control
     [Export]
     public NodePath amount_label;
 
-    public GodotObject configuration;
+    public TowerData configuration;
 
     public int price
     {
@@ -160,14 +154,14 @@ public partial class TowerButton : Control
 
     private void _on_mouse_exited()
     {
-        EmitSignal("unhover", this);
+        this.unhover?.Invoke(this);
         this._panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
     }
 
     private void _on_mouse_entered()
     {
         this._panelNode?.AddThemeStyleboxOverride("panel", HOVER_PANEL);
-        EmitSignal("hover", this);
+        this.hover?.Invoke(this);
         Node audioManager = GetNodeOrNull<Node>("/root/AudioManager");
         audioManager?.Call("play_button_hover");
     }
@@ -191,7 +185,7 @@ public partial class TowerButton : Control
             return;
         }
 
-        int basePrice = this.configuration.Get("build_price").AsInt32();
+        int basePrice = this.configuration.build_price;
         PriceContext ctx = new(PriceContext.PriceType.Tower, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
         this.price = ctx.FinalPrice;
@@ -238,6 +232,6 @@ public partial class TowerButton : Control
             return;
         }
 
-        EmitSignal("tower_button_pressed", this.tower_data, this.price);
+        this.tower_button_pressed?.Invoke(this.tower_data, this.price);
     }
 }

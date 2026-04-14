@@ -21,13 +21,13 @@ public partial class HighwayRobberyScript : EventScript
             Relic relic = relics[randomIndex];
             relics.RemoveAt(randomIndex);
             string displayName = relic?.Data?.display_name ?? "relic";
-            options.Add(new EventOptionData($"Give {displayName}.", Variant.From(relic?.Id ?? string.Empty)));
+            options.Add(new EventOptionData($"Give {displayName}.", relic?.Id ?? string.Empty));
         }
 
         return options;
     }
 
-    public override void handle_response(Variant data)
+    public override void handle_response(object data)
     {
         RunContext runContext = this.GetRunContext();
         if (runContext == null)
@@ -35,7 +35,7 @@ public partial class HighwayRobberyScript : EventScript
             return;
         }
 
-        string relicId = data.AsString();
+        string relicId = data as string;
         if (!string.IsNullOrEmpty(relicId))
         {
             runContext.relics_manager.remove_relic(relicId);

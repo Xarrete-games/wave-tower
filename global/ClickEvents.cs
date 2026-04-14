@@ -86,7 +86,7 @@ public partial class ClickEvents : Node
         }
     }
 
-    public void emit_tower_build_button_pressed(Variant tower_configuration, int price)
+    public void emit_tower_build_button_pressed(TowerDataWithInstance tower_configuration, int price)
     {
         ClickEventsBus.EmitTowerBuildButtonPressed(tower_configuration, price);
     }
@@ -146,9 +146,9 @@ public partial class ClickEvents : Node
         ClickEventsBus.EmitTowerUnhovered(tower);
     }
 
-    private void OnTowerBuildButtonPressed(Variant towerConfiguration, int price)
+    private void OnTowerBuildButtonPressed(TowerDataWithInstance towerConfiguration, int price)
     {
-        EmitSignal(SignalName.tower_build_button_pressed, towerConfiguration, price);
+        EmitSignal(SignalName.tower_build_button_pressed, Variant.From(towerConfiguration), price);
     }
 
     private void OnNextWavePressed()

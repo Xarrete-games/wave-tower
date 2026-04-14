@@ -9,7 +9,7 @@ public static class ClickEventsBus
     public static event Action SpeedButtonPressed;
     public static event Action ResetGameButtonPressed;
 
-    public static event Action<Variant, int> TowerBuildButtonPressed;
+    public static event Action<TowerDataWithInstance, int> TowerBuildButtonPressed;
     public static event Action<Variant> TowerSelected;
     public static event Action<Variant> TowerRemovePressed;
     public static event Action<Variant, Variant, int> TowerUpgradePressed;
@@ -45,7 +45,7 @@ public static class ClickEventsBus
         ResetGameButtonPressed?.Invoke();
     }
 
-    public static void EmitTowerBuildButtonPressed(Variant towerConfiguration, int price)
+    public static void EmitTowerBuildButtonPressed(TowerDataWithInstance towerConfiguration, int price)
     {
         TowerBuildButtonPressed?.Invoke(towerConfiguration, price);
     }

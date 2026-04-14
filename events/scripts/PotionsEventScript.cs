@@ -7,33 +7,34 @@ public partial class PotionsEventScript : EventScript
 
     public override List<EventOptionData> get_options()
     {
-        DataLoader dataLoader = this.GetDataLoader();
-        if (dataLoader == null)
+        List<ConsumableData> consumables = DataLoaderAccess.GetAllConsumablesByTypeTyped(CONSUMABLE_TYPE_POTION);
+        if (consumables.Count == 0)
         {
             return new List<EventOptionData>();
         }
 
-        Godot.Collections.Array<Variant> consumables = dataLoader.get_all_consumables_of_type(CONSUMABLE_TYPE_POTION);
-        consumables.Shuffle();
+        var rng = new RandomNumberGenerator();
+        for (int index = consumables.Count - 1; index > 0; index--)
+        {
+            int swapIndex = rng.RandiRange(0, index);
+            ConsumableData tmp = consumables[index];
+            consumables[index] = consumables[swapIndex];
+            consumables[swapIndex] = tmp;
+        }
 
         var options = new List<EventOptionData>();
         int count = Mathf.Min(3, consumables.Count);
         for (int index = 0; index < count; index++)
         {
-            ConsumableData consumableData = consumables[index].AsGodotObject() as ConsumableData;
-            if (consumableData == null)
-            {
-                continue;
-            }
-
+            ConsumableData consumableData = consumables[index];
             string displayName = consumableData.display_name;
-            options.Add(new EventOptionData(displayName, Variant.From(consumableData)));
+            options.Add(new EventOptionData(displayName, consumableData));
         }
 
         return options;
     }
 
-    public override void handle_response(Variant data)
+    public override void handle_response(object data)
     {
         RunContext runContext = this.GetRunContext();
         if (runContext == null)
@@ -41,7 +42,7 @@ public partial class PotionsEventScript : EventScript
             return;
         }
 
-        ConsumableData consumableData = data.AsGodotObject() as ConsumableData;
+        ConsumableData consumableData = data as ConsumableData;
         Consumable consumable = consumableData?.create_consumable();
         if (consumable != null)
         {

@@ -10,28 +10,28 @@ public partial class ChestEventScript : EventScript
         return new List<EventOptionData> { option1, option2 };
     }
 
-    public override void handle_response(Variant data)
+    public override void handle_response(object data)
     {
-        if (data.AsInt32() != 0)
+        int selectedOption = data is int intValue ? intValue : -1;
+        if (selectedOption != 0)
         {
             return;
         }
 
         RunContext runContext = this.GetRunContext();
-        DataLoader dataLoader = this.GetDataLoader();
-        if (runContext == null || dataLoader == null)
+        if (runContext == null)
         {
             return;
         }
 
-        Godot.Collections.Array<Variant> relics = dataLoader.get_not_used_relics(0, false);
+        List<RelicData> relics = DataLoaderAccess.GetNotUsedRelicsTyped(0, false);
         if (relics.Count == 0)
         {
             return;
         }
 
         int randomIndex = (int)(GD.Randi() % (uint)relics.Count);
-        RelicData relicData = relics[randomIndex].As<RelicData>();
+        RelicData relicData = relics[randomIndex];
         Relic relic = relicData?.create_item();
         if (relic != null)
         {

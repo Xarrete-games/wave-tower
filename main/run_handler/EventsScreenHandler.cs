@@ -17,16 +17,15 @@ public partial class EventsScreenHandler : Node
         this._chooseRelicScreenHandler = GetNode<ChooseRelicScreenHandler>("ChooseRelicScreenHandler");
     }
 
-    public async Task ShowEventSelectedAsync(Variant eventData, CanvasLayer eventLayer)
+    public async Task ShowEventSelectedAsync(EventData eventData, CanvasLayer eventLayer)
     {
-        GodotObject eventDataObj = eventData.AsGodotObject();
-        if (eventDataObj == null)
+        if (eventData == null)
         {
             EmitSignal(SignalName.event_finished);
             return;
         }
 
-        int eventType = (int)eventDataObj.Get("type");
+        int eventType = (int)eventData.type;
         if (eventType == 2)
         {
             await this._chooseRelicScreenHandler.ShowChooseRelicEventAsync(eventLayer);

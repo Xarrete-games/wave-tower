@@ -10,7 +10,7 @@ public partial class SanctuaryEventScript : EventScript
         return new List<EventOptionData> { option1, option2 };
     }
 
-    public override void handle_response(Variant data)
+    public override void handle_response(object data)
     {
         RunContext runContext = this.GetRunContext();
         if (runContext == null)
@@ -18,7 +18,8 @@ public partial class SanctuaryEventScript : EventScript
             return;
         }
 
-        switch (data.AsInt32())
+        int selectedOption = data is int intValue ? intValue : -1;
+        switch (selectedOption)
         {
             case 0:
                 runContext.economy.add_gold(50);

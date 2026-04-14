@@ -6,48 +6,40 @@ public partial class LibraryEventScript : EventScript
     public override List<EventOptionData> get_options()
     {
         RunContext runContext = this.GetRunContext();
-        DataLoader dataLoader = this.GetDataLoader();
-        if (runContext == null || dataLoader == null)
+        if (runContext == null)
         {
             return new List<EventOptionData>();
         }
 
-        Godot.Collections.Array<Variant> allRelics = dataLoader.get_not_used_relics();
+        List<RelicData> allRelics = DataLoaderAccess.GetNotUsedRelicsTyped();
         var options = new List<EventOptionData>();
 
-        foreach (Variant relicVariant in allRelics)
+        foreach (RelicData relicData in allRelics)
         {
-            GodotObject relicData = relicVariant.AsGodotObject();
-            if (relicData == null)
-            {
-                continue;
-            }
-
-            bool isTome = (bool)relicData.Get("is_tome");
-            string relicId = relicData.Get("id").AsString();
+            bool isTome = relicData.is_tome;
+            string relicId = relicData.id;
             if (!isTome || runContext.relics_manager.has_relic(relicId))
             {
                 continue;
             }
 
-            string displayName = relicData.Get("display_name").AsString();
-            options.Add(new EventOptionData($"Acquire the {displayName}", relicVariant));
+            string displayName = relicData.display_name;
+            options.Add(new EventOptionData($"Acquire the {displayName}", relicData));
         }
 
         return options;
     }
 
-    public override void handle_response(Variant data)
+    public override void handle_response(object data)
     {
         RunContext runContext = this.GetRunContext();
-        GodotObject relicData = data.AsGodotObject();
+        RelicData relicData = data as RelicData;
         if (runContext == null || relicData == null)
         {
             return;
         }
 
-        RelicData typedRelicData = relicData as RelicData;
-        Relic relic = typedRelicData?.create_item();
+        Relic relic = relicData.create_item();
         if (relic != null)
         {
             runContext.relics_manager.add_relic(relic);

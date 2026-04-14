@@ -10,30 +10,30 @@ public partial class BloodPactScript : EventScript
         return new List<EventOptionData> { option1, option2 };
     }
 
-    public override void handle_response(Variant data)
+    public override void handle_response(object data)
     {
-        if (!data.AsBool())
+        bool accepted = data is bool boolValue && boolValue;
+        if (!accepted)
         {
             return;
         }
 
         RunContext runContext = this.GetRunContext();
-        DataLoader dataLoader = this.GetDataLoader();
-        if (runContext == null || dataLoader == null)
+        if (runContext == null)
         {
             return;
         }
 
         runContext.status.apply_damage(15);
 
-        Godot.Collections.Array<Variant> allRelics = dataLoader.get_not_used_relics();
+        List<RelicData> allRelics = DataLoaderAccess.GetNotUsedRelicsTyped();
         if (allRelics.Count == 0)
         {
             return;
         }
 
         int randomIndex = (int)(GD.Randi() % (uint)allRelics.Count);
-        RelicData relicData = allRelics[randomIndex].As<RelicData>();
+        RelicData relicData = allRelics[randomIndex];
         Relic relic = relicData?.create_item();
         if (relic != null)
         {

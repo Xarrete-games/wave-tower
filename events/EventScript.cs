@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public abstract class EventScript
 {
     public abstract List<EventOptionData> get_options();
-    public abstract void handle_response(Variant data);
+    public abstract void handle_response(object data);
 
     protected RunContext GetRunContext()
     {

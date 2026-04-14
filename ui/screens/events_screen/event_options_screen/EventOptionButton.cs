@@ -1,12 +1,11 @@
 using Godot;
+using System;
 
 public partial class EventOptionButton : Button
 {
-    [Signal]
-    public delegate void option_selectedEventHandler(Variant data);
+    public event Action<object> option_selected;
 
-    [Export]
-    public Variant option_data;
+    public object option_data;
 
     public void disable_option()
     {
@@ -22,6 +21,6 @@ public partial class EventOptionButton : Button
     private void _on_pressed()
     {
         GetNode<Node>("/root/AudioManager").Call("play_button_click");
-        EmitSignal(SignalName.option_selected, this.option_data);
+        this.option_selected?.Invoke(this.option_data);
     }
 }

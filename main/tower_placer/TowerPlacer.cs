@@ -136,24 +136,23 @@ public partial class TowerPlacer : Node2D
         this._isPlacing = false;
     }
 
-    private void OnTowerButtonPressed(Variant towerConfiguration, int price)
+    private void OnTowerButtonPressed(TowerDataWithInstance towerConfiguration, int price)
     {
         if (this._isPlacing)
         {
             return;
         }
 
-        GodotObject towerConfigurationObj = towerConfiguration.AsGodotObject();
-        if (towerConfigurationObj == null)
+        if (towerConfiguration == null)
         {
-            GD.PushError("[TowerPlacer] Build payload is not a GodotObject configuration.");
+            GD.PushError("[TowerPlacer] Build payload is null.");
             return;
         }
 
-        Node2D instance = towerConfigurationObj.Call("get_instance").As<Node2D>();
+        Node2D instance = towerConfiguration.get_instance_node() as Node2D;
         if (instance == null)
         {
-            GD.PushError("[TowerPlacer] get_instance did not return a Node2D tower.");
+            GD.PushError("[TowerPlacer] get_instance_node did not return a Node2D tower.");
             return;
         }
 

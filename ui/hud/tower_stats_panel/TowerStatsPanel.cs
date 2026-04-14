@@ -176,15 +176,15 @@ public partial class TowerStatsPanel : Control
         }
 
         string towerId = data.id;
-        Variant towerConfiguration = runContext.towers_manager.get_tower_configuration_by_id(towerId);
-        if (towerConfiguration.VariantType == Variant.Type.Nil)
+        TowerDataWithInstance towerConfiguration = runContext.towers_manager.get_tower_configuration_by_id(towerId);
+        if (towerConfiguration == null)
         {
             GD.PushError($"[TowerStatsPanel] Missing tower configuration for id: {towerId}");
             return;
         }
 
         this._currentTower.upgrade();
-        ClickEventsBus.EmitTowerUpgradePressed(this._currentTower, towerConfiguration, price);
+        ClickEventsBus.EmitTowerUpgradePressed(this._currentTower, Variant.From(towerConfiguration), price);
     }
 
     private void HideUpgradeOptions()

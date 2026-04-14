@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public partial class RunHandler : Node
@@ -21,10 +22,10 @@ public partial class RunHandler : Node
     [Export]
     public LootScreenHandler loot_screen_handler;
 
-    private Godot.Collections.Array<Variant> _events = new();
-    private GodotObject _shopEvent;
-    private GodotObject _chooseRelicEvent;
-    private Godot.Collections.Array<Variant> _optionsEvents = new();
+    private List<EventData> _events = new();
+    private EventData _shopEvent;
+    private EventData _chooseRelicEvent;
+    private List<EventData> _optionsEvents = new();
     private RunProgress _progress;
 
     public override void _Ready()
@@ -71,7 +72,7 @@ public partial class RunHandler : Node
         await ToSignal(chooseTowerScreen, "done");
     }
 
-    public async Task ShowEventsScreen(GodotObject eventData)
+    public async Task ShowEventsScreen(EventData eventData)
     {
         if (this.events_screen_hander == null || eventData == null)
         {
@@ -83,21 +84,19 @@ public partial class RunHandler : Node
 
     private void SetEventsByType()
     {
-        DataLoader dataLoader = GetNode<DataLoader>("/root/DataLoader");
-        this._events = dataLoader.get_all_events();
+        this._events = DataLoaderAccess.GetAllEventsTyped();
         this._shopEvent = null;
         this._chooseRelicEvent = null;
-        this._optionsEvents = new Godot.Collections.Array<Variant>();
+        this._optionsEvents = new List<EventData>();
 
-        foreach (Variant eventVariant in this._events)
+        foreach (EventData eventData in this._events)
         {
-            GodotObject eventData = eventVariant.AsGodotObject();
             if (eventData == null)
             {
                 continue;
             }
 
-            int eventType = (int)eventData.Get("type");
+            int eventType = (int)eventData.type;
             if (eventType == 1)
             {
                 this._shopEvent = eventData;
@@ -138,7 +137,7 @@ public partial class RunHandler : Node
         }
 
         int currentWave = runContext.progress.current_wave;
-        GodotObject eventData = this.GetNextEvent(currentWave);
+        EventData eventData = this.GetNextEvent(currentWave);
         if (eventData == null)
         {
             this.ShowNextWaveScreen();
@@ -165,7 +164,7 @@ public partial class RunHandler : Node
         this.ShowNextLevelMenu();
     }
 
-    private GodotObject GetNextEvent(int currentWave)
+    private EventData GetNextEvent(int currentWave)
     {
         int waveInCycle = ((currentWave - 1) % 10) + 1;
 
@@ -181,10 +180,10 @@ public partial class RunHandler : Node
 
         if (Contains(WavesWithEvents, waveInCycle) && this._optionsEvents.Count > 0)
         {
-            this._optionsEvents.Shuffle();
-            Variant picked = this._optionsEvents[this._optionsEvents.Count - 1];
-            this._optionsEvents.RemoveAt(this._optionsEvents.Count - 1);
-            return picked.AsGodotObject();
+            int randomIndex = (int)(GD.Randi() % (uint)this._optionsEvents.Count);
+            EventData picked = this._optionsEvents[randomIndex];
+            this._optionsEvents.RemoveAt(randomIndex);
+            return picked;
         }
 
         return null;

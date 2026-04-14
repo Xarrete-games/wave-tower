@@ -83,7 +83,7 @@ public partial class TowerSelector : Node
         }
     }
 
-    private void OnTowerButtonPressed(Variant towerConfiguration, int price)
+    private void OnTowerButtonPressed(TowerDataWithInstance towerConfiguration, int price)
     {
         this.ClearTowerSelected();
     }
