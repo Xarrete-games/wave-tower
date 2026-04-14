@@ -1,5 +1,3 @@
-using Godot;
-
 public class Source
 {
     public enum SourceType
@@ -13,14 +11,14 @@ public class Source
 
     public SourceType type;
     public string type_id;
-    public Variant entity;
+    public object entity;
     public Source origin;
 
     public Source()
     {
     }
 
-    public Source(SourceType p_type, string p_type_id, Variant p_entity = default, Source p_origin = null)
+    public Source(SourceType p_type, string p_type_id, object p_entity = null, Source p_origin = null)
     {
         this.type = p_type;
         this.type_id = p_type_id;
@@ -32,11 +30,11 @@ public class Source
     {
         this.type = (SourceType)p_type;
         this.type_id = p_type_id;
-        this.entity = default;
+        this.entity = null;
         this.origin = null;
     }
 
-    public void setup(int p_type, string p_type_id, Variant p_entity)
+    public void setup(int p_type, string p_type_id, object p_entity)
     {
         this.type = (SourceType)p_type;
         this.type_id = p_type_id;
@@ -44,7 +42,7 @@ public class Source
         this.origin = null;
     }
 
-    public void setup(int p_type, string p_type_id, Variant p_entity, Source p_origin)
+    public void setup(int p_type, string p_type_id, object p_entity, Source p_origin)
     {
         this.type = (SourceType)p_type;
         this.type_id = p_type_id;

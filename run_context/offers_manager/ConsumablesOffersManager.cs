@@ -1,4 +1,4 @@
-using Godot;
+
 using System.Collections.Generic;
 
 public class ConsumablesOffersManager
@@ -10,16 +10,16 @@ public class ConsumablesOffersManager
         { 2, 120 },
     };
 
-    private Godot.Collections.Array<Variant> _allConsumablesData = new();
+    private readonly List<ConsumableData> _allConsumablesData = new();
 
     public ConsumablesOffersManager()
     {
-        this._allConsumablesData = DataLoaderAccess.GetAllConsumables();
+        this._allConsumablesData.AddRange(DataLoaderAccess.GetAllConsumablesTyped());
     }
 
     public List<ItemOffer> create_consumables_offers(int amount)
     {
-        var consumablesData = this._allConsumablesData.Duplicate();
+        var consumablesData = new List<ConsumableData>(this._allConsumablesData);
         var offers = new List<ItemOffer>();
 
         for (int index = 0; index < consumablesData.Count && offers.Count < amount; index++)
@@ -30,19 +30,18 @@ public class ConsumablesOffersManager
         return offers;
     }
 
-    public ItemOffer create_consumable_offer_from_data(Variant dataVariant)
+    public ItemOffer create_consumable_offer_from_data(ConsumableData data)
     {
-        GodotObject data = dataVariant.AsGodotObject();
         if (data == null)
         {
             return null;
         }
 
-        int rarity = (int)data.Get("rarity");
+        int rarity = (int)data.rarity;
         int basePrice = BASE_PRICE_BY_RARITY.ContainsKey(rarity) ? BASE_PRICE_BY_RARITY[rarity] : BASE_PRICE_BY_RARITY[0];
         var ctx = new PriceContext(PriceContext.PriceType.Consumable, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
 
-        return new ItemOffer(dataVariant, ctx.FinalPrice, 0);
+        return new ItemOffer(data, ctx.FinalPrice, 0);
     }
 }

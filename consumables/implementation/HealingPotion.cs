@@ -1,5 +1,3 @@
-using Godot;
-
 public class HealingPotion : ConsumableUsable
 {
     public override void use()

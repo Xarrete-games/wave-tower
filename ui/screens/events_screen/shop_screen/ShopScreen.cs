@@ -74,8 +74,13 @@ public partial class ShopScreen : Control
         this.item_purchase?.Invoke(itemOffer);
         GetNode<Node>("/root/AudioManager").Call("play_purchase");
 
-        GodotObject itemData = itemOffer?.item_data.AsGodotObject();
-        string purchasedId = itemData?.Get("id").AsString();
+        Resource itemData = itemOffer?.item_data;
+        string purchasedId = itemData switch
+        {
+            RelicData relicData => relicData.id,
+            ConsumableData consumableData => consumableData.id,
+            _ => string.Empty,
+        };
 
         foreach (Node slot in this.relics_container.GetChildren())
         {
@@ -113,10 +118,10 @@ public partial class ShopScreen : Control
             slot.QueueFree();
 
             RunContext runContext = GetNode<RunContext>("/root/RunContext");
-            GodotObject itemData = itemOffer?.item_data.AsGodotObject();
-            if (itemData != null)
+            Resource itemData = itemOffer?.item_data;
+            if (itemData is RelicData relicData)
             {
-                runContext.relics_manager.remove_relic((string)itemData.Get("id"));
+                runContext.relics_manager.remove_relic(relicData.id);
             }
 
             runContext.economy.add_gold(itemOffer?.price ?? 0);
@@ -166,7 +171,7 @@ public partial class ShopScreen : Control
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         var currentRelics = runContext.relics_manager.get_all_relics();
-        var currentRelicsData = new Godot.Collections.Array<Variant>();
+        var currentRelicsData = new List<RelicData>();
         foreach (Relic relic in currentRelics)
         {
             if (relic?.Data != null)

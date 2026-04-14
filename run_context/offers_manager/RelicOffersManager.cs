@@ -10,11 +10,11 @@ public class RelicOffersManager
         { 2, 120 },
     };
 
-    private Godot.Collections.Array<Variant> _allRelicData = new();
+    private readonly List<RelicData> _allRelicData = new();
 
     public RelicOffersManager()
     {
-        this._allRelicData = DataLoaderAccess.GetAllRelics();
+        this._allRelicData.AddRange(DataLoaderAccess.GetAllRelicsTyped());
     }
 
     public List<ItemOffer> get_relics_offers_by_ids(Godot.Collections.Array<string> relic_ids)
@@ -26,15 +26,11 @@ public class RelicOffersManager
             string relicId = relic_ids[index];
             for (int dataIndex = 0; dataIndex < this._allRelicData.Count; dataIndex++)
             {
-                GodotObject data = this._allRelicData[dataIndex].AsGodotObject();
-                if (data == null)
-                {
-                    continue;
-                }
+                RelicData data = this._allRelicData[dataIndex];
 
-                if ((string)data.Get("id") == relicId)
+                if (data.id == relicId)
                 {
-                    offers.Add(this.create_relic_offer_from_data(this._allRelicData[dataIndex]));
+                    offers.Add(this.create_relic_offer_from_data(data));
                     break;
                 }
             }
@@ -45,26 +41,22 @@ public class RelicOffersManager
 
     public List<ItemOffer> create_relic_offers(int amount)
     {
-        var filtered = new Godot.Collections.Array<Variant>();
+        var filtered = new List<RelicData>();
 
         RunContext runContext = this.GetRunContext();
         RelicsManager relicsManager = runContext?.relics_manager;
 
         for (int index = 0; index < this._allRelicData.Count; index++)
         {
-            GodotObject data = this._allRelicData[index].AsGodotObject();
-            if (data == null)
-            {
-                continue;
-            }
+            RelicData data = this._allRelicData[index];
 
-            bool hasRelic = relicsManager != null && relicsManager.has_relic((string)data.Get("id"));
-            bool isCursed = (bool)data.Get("is_cursed");
-            bool onlyForEvents = (bool)data.Get("only_for_events");
+            bool hasRelic = relicsManager != null && relicsManager.has_relic(data.id);
+            bool isCursed = data.is_cursed;
+            bool onlyForEvents = data.only_for_events;
 
             if (!hasRelic && !isCursed && !onlyForEvents)
             {
-                filtered.Add(this._allRelicData[index]);
+                filtered.Add(data);
             }
         }
 
@@ -79,21 +71,20 @@ public class RelicOffersManager
         return offers;
     }
 
-    public ItemOffer create_relic_offer_from_data(Variant dataVariant)
+    public ItemOffer create_relic_offer_from_data(RelicData data)
     {
-        GodotObject data = dataVariant.AsGodotObject();
         if (data == null)
         {
             return null;
         }
 
-        int rarity = (int)data.Get("rarity");
+        int rarity = (int)data.rarity;
         int basePrice = BASE_PRICE_BY_RARITY.ContainsKey(rarity) ? BASE_PRICE_BY_RARITY[rarity] : BASE_PRICE_BY_RARITY[0];
         var ctx = new PriceContext(PriceContext.PriceType.Relic, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
 
-        int healthPrice = (int)data.Get("health_price");
-        return new ItemOffer(dataVariant, ctx.FinalPrice, healthPrice);
+        int healthPrice = data.health_price;
+        return new ItemOffer(data, ctx.FinalPrice, healthPrice);
     }
 
     private RunContext GetRunContext()
@@ -101,13 +92,13 @@ public class RelicOffersManager
         return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
     }
 
-    private void Shuffle(Godot.Collections.Array<Variant> items)
+    private void Shuffle(List<RelicData> items)
     {
         var rng = new RandomNumberGenerator();
         for (int i = items.Count - 1; i > 0; i--)
         {
             int j = rng.RandiRange(0, i);
-            Variant tmp = items[i];
+            RelicData tmp = items[i];
             items[i] = items[j];
             items[j] = tmp;
         }

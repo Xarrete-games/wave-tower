@@ -17,17 +17,21 @@ public class OffersManager
         return this._relicsOffersManager.create_relic_offers(amount);
     }
 
-    public ItemOffer create_relic_offer_from_data(Variant data)
+    public ItemOffer create_relic_offer_from_data(RelicData data)
     {
         return this._relicsOffersManager.create_relic_offer_from_data(data);
     }
 
-    public List<ItemOffer> create_relic_offers_from_data(Godot.Collections.Array<Variant> data)
+    public List<ItemOffer> create_relic_offers_from_data(List<RelicData> data)
     {
         var offers = new List<ItemOffer>();
         for (int index = 0; index < data.Count; index++)
         {
-            offers.Add(this._relicsOffersManager.create_relic_offer_from_data(data[index]));
+            RelicData relicData = data[index];
+            if (relicData != null)
+            {
+                offers.Add(this._relicsOffersManager.create_relic_offer_from_data(relicData));
+            }
         }
 
         return offers;
@@ -38,22 +42,22 @@ public class OffersManager
         return this._consumablesOffersManager.create_consumables_offers(amount);
     }
 
-    public ItemOffer create_consumable_offer_from_data(Variant data)
+    public ItemOffer create_consumable_offer_from_data(ConsumableData data)
     {
         return this._consumablesOffersManager.create_consumable_offer_from_data(data);
     }
 
-    public Variant purchase_offer(ItemOffer itemOffer)
+    public void purchase_offer(ItemOffer itemOffer)
     {
         if (itemOffer == null)
         {
-            return default;
+            return;
         }
 
         RunContext runContext = this.GetRunContext();
         if (runContext == null)
         {
-            return default;
+            return;
         }
 
         Economy economy = runContext.economy;
@@ -62,7 +66,7 @@ public class OffersManager
         RelicsManager relicsManager = runContext.relics_manager;
         if (economy == null || status == null)
         {
-            return default;
+            return;
         }
 
         int price = itemOffer.price;
@@ -74,41 +78,23 @@ public class OffersManager
             status.health -= healthPrice;
         }
 
-        GodotObject itemData = itemOffer.item_data.AsGodotObject();
-        bool isConsumable = this.HasProperty(itemData, "consumable_type");
-        if (isConsumable)
+        Resource itemData = itemOffer.item_data;
+        if (itemData is ConsumableData consumableData)
         {
-            Consumable item = this.CreateConsumableFromData(itemData);
+            Consumable item = consumableData.create_consumable();
             if (item != null)
             {
                 consumablesManager?.add_consumable(item);
             }
-            return default;
+            return;
         }
 
         if (itemData is RelicData relicData)
         {
             Relic relic = relicData.create_item();
             relicsManager?.add_relic(relic);
-            return Variant.From(relicData.id);
+            return;
         }
-
-        return default;
-    }
-
-    private Consumable CreateConsumableFromData(GodotObject itemData)
-    {
-        if (itemData == null)
-        {
-            return null;
-        }
-
-        if (itemData is ConsumableData consumableData)
-        {
-            return consumableData.create_consumable();
-        }
-
-        return null;
     }
 
     private RunContext GetRunContext()
@@ -116,23 +102,4 @@ public class OffersManager
         return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
     }
 
-    private bool HasProperty(GodotObject obj, string propertyName)
-    {
-        if (obj == null || string.IsNullOrEmpty(propertyName))
-        {
-            return false;
-        }
-
-        Godot.Collections.Array<Godot.Collections.Dictionary> propertyList = obj.GetPropertyList();
-        for (int index = 0; index < propertyList.Count; index++)
-        {
-            string name = propertyList[index].ContainsKey("name") ? propertyList[index]["name"].AsString() : string.Empty;
-            if (name == propertyName)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }

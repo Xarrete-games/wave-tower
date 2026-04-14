@@ -1,5 +1,3 @@
-using Godot;
-
 public class FirstAid : ConsumableUsable
 {
     public override void use()

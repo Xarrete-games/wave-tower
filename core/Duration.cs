@@ -1,5 +1,3 @@
-using Godot;
-
 public class Duration
 {
     public float seconds_duration = 0.0f;

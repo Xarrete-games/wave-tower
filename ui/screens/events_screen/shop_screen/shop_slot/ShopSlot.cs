@@ -64,17 +64,33 @@ public partial class ShopSlot : VBoxContainer
         this._item = itemOffer;
         this._price = itemOffer.price;
 
-        GodotObject itemData = itemOffer.item_data.AsGodotObject();
+        Resource itemData = itemOffer.item_data;
         if (itemData == null)
         {
             return;
         }
 
-        this.title_label.Text = itemData.Get("display_name").AsString();
-        this.description_label.Text = itemData.Get("description").AsString();
-        this.TooltipText = itemData.Get("description").AsString();
+        string displayName = string.Empty;
+        string description = string.Empty;
+        Texture2D icon = null;
+        if (itemData is RelicData relicInfo)
+        {
+            displayName = relicInfo.display_name;
+            description = relicInfo.description;
+            icon = relicInfo.icon;
+        }
+        else if (itemData is ConsumableData consumableInfo)
+        {
+            displayName = consumableInfo.display_name;
+            description = consumableInfo.description;
+            icon = consumableInfo.icon;
+        }
+
+        this.title_label.Text = displayName;
+        this.description_label.Text = description;
+        this.TooltipText = description;
         this.gold_price?.Set("price", this._price);
-        this.shop_slot_icon?.set_icon(itemData.Get("icon").As<Texture2D>());
+        this.shop_slot_icon?.set_icon(icon);
 
         RelicData relicData = itemData as RelicData;
         if (relicData != null)
@@ -99,7 +115,7 @@ public partial class ShopSlot : VBoxContainer
             return;
         }
 
-        GodotObject itemData = this._item.item_data.AsGodotObject();
+        Resource itemData = this._item.item_data;
         bool isConsumable = itemData is ConsumableData;
         if (isConsumable && this._runContext.consumables_manager.is_full())
         {
@@ -136,16 +152,16 @@ public partial class ShopSlot : VBoxContainer
             return;
         }
 
-        GodotObject itemData = this._item.item_data.AsGodotObject();
+        Resource itemData = this._item.item_data;
         if (itemData is RelicData)
         {
-            this.set_item(this._runContext.offers_manager.create_relic_offer_from_data(this._item.item_data));
+            this.set_item(this._runContext.offers_manager.create_relic_offer_from_data(itemData as RelicData));
             return;
         }
 
         if (itemData is ConsumableData)
         {
-            this.set_item(this._runContext.offers_manager.create_consumable_offer_from_data(this._item.item_data));
+            this.set_item(this._runContext.offers_manager.create_consumable_offer_from_data(itemData as ConsumableData));
         }
     }
 

@@ -13,7 +13,7 @@ public partial class TestData : Node
     public Godot.Collections.Array<string> initial_consumables_ids = new();
 
     [Export]
-    public Variant initial_event;
+    public EventData initial_event;
 
     [Export]
     public bool open_loot_screen = false;
@@ -32,16 +32,14 @@ public partial class TestData : Node
             await this._runHandler.ShowLootScreen();
         }
 
-        GodotObject eventData = this.initial_event.AsGodotObject();
-        if (eventData != null && this._runHandler != null)
+        if (this.initial_event != null && this._runHandler != null)
         {
-            await this._runHandler.ShowEventsScreen(eventData);
+            await this._runHandler.ShowEventsScreen(this.initial_event);
         }
     }
 
     private void _handle_initial_relics()
     {
-        DataLoader dataLoader = GetNode<DataLoader>("/root/DataLoader");
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
 
         if (this.initial_relics_ids.Count > 0)
@@ -49,9 +47,7 @@ public partial class TestData : Node
             for (int index = 0; index < this.initial_relics_ids.Count; index++)
             {
                 string relicId = this.initial_relics_ids[index];
-                Variant relicData = dataLoader.get_relic_by_id(relicId);
-                GodotObject relicDataObj = relicData.AsGodotObject();
-                RelicData typedRelicData = relicDataObj as RelicData;
+                RelicData typedRelicData = DataLoaderAccess.GetRelicById(relicId);
                 if (typedRelicData != null)
                 {
                     Relic relicInstance = typedRelicData.create_item();
@@ -66,16 +62,15 @@ public partial class TestData : Node
 
         if (this.initial_random_relics > 0)
         {
-            Godot.Collections.Array<Variant> items = dataLoader.get_random_relics(this.initial_random_relics);
+            System.Collections.Generic.List<RelicData> items = DataLoaderAccess.GetRandomRelicsTyped(this.initial_random_relics);
             for (int index = 0; index < items.Count; index++)
             {
-                GodotObject itemObj = items[index].AsGodotObject();
-                if (itemObj == null)
+                RelicData relicDataObj = items[index];
+                if (relicDataObj == null)
                 {
                     continue;
                 }
 
-                RelicData relicDataObj = itemObj as RelicData;
                 Relic relic = relicDataObj?.create_item();
                 runContext.relics_manager.add_relic(relic);
             }
@@ -86,8 +81,7 @@ public partial class TestData : Node
             for (int index = 0; index < this.initial_consumables_ids.Count; index++)
             {
                 string consumableId = this.initial_consumables_ids[index];
-                Variant consumableData = dataLoader.get_consumable_by_id(consumableId);
-                ConsumableData consumableDataObj = consumableData.AsGodotObject() as ConsumableData;
+                ConsumableData consumableDataObj = DataLoaderAccess.GetConsumableById(consumableId);
                 if (consumableDataObj != null)
                 {
                     Consumable consumableInstance = consumableDataObj.create_consumable();

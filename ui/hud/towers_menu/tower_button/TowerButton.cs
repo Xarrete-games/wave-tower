@@ -2,7 +2,6 @@ using Godot;
 
 public partial class TowerButton : Control
 {
-    private const bool DEBUG_TOWER_PRICE = true;
 
     [Signal]
     public delegate void tower_button_pressedEventHandler(Variant tower_configuration, int price);
@@ -196,14 +195,6 @@ public partial class TowerButton : Control
         PriceContext ctx = new(PriceContext.PriceType.Tower, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
         this.price = ctx.FinalPrice;
-
-        if (DEBUG_TOWER_PRICE)
-        {
-            bool hasSoya = runContext.relics_manager?.has_relic("soya_sauce") ?? false;
-            bool hasTuna = runContext.relics_manager?.has_relic("tuna_nigiri") ?? false;
-            string towerId = this.configuration?.Get("id").AsString() ?? string.Empty;
-            Godot.GD.Print($"[TowerButton] tower={towerId} base={basePrice} discount={ctx.Discount:0.###} final={ctx.FinalPrice} hasSoya={hasSoya} hasTuna={hasTuna}");
-        }
     }
 
     private void _on_available_free_towers_change(int _available_free_towers)

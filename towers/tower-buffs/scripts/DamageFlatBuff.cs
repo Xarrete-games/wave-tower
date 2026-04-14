@@ -1,5 +1,3 @@
-using Godot;
-
 public class DamageFlatBuff : TowerBuffStatsModifier
 {
     public DamageFlatBuff()

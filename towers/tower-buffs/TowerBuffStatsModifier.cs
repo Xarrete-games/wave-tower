@@ -1,5 +1,3 @@
-using Godot;
-
 public abstract class TowerBuffStatsModifier : TowerBuff
 {
     public int value = 0;

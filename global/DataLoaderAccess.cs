@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 public static class DataLoaderAccess
 {
@@ -22,6 +23,69 @@ public static class DataLoaderAccess
         }
 
         return dataLoader.get_all_consumables();
+    }
+
+    public static List<RelicData> GetAllRelicsTyped()
+    {
+        var result = new List<RelicData>();
+        Godot.Collections.Array<Variant> allRelics = GetAllRelics();
+        for (int index = 0; index < allRelics.Count; index++)
+        {
+            RelicData relicData = allRelics[index].AsGodotObject() as RelicData;
+            if (relicData != null)
+            {
+                result.Add(relicData);
+            }
+        }
+
+        return result;
+    }
+
+    public static List<ConsumableData> GetAllConsumablesTyped()
+    {
+        var result = new List<ConsumableData>();
+        Godot.Collections.Array<Variant> allConsumables = GetAllConsumables();
+        for (int index = 0; index < allConsumables.Count; index++)
+        {
+            ConsumableData consumableData = allConsumables[index].AsGodotObject() as ConsumableData;
+            if (consumableData != null)
+            {
+                result.Add(consumableData);
+            }
+        }
+
+        return result;
+    }
+
+    public static RelicData GetRelicById(string relicId)
+    {
+        DataLoader dataLoader = GetDataLoaderSingleton();
+        Variant data = dataLoader?.get_relic_by_id(relicId) ?? default;
+        return data.AsGodotObject() as RelicData;
+    }
+
+    public static List<RelicData> GetRandomRelicsTyped(int amount)
+    {
+        var result = new List<RelicData>();
+        DataLoader dataLoader = GetDataLoaderSingleton();
+        Godot.Collections.Array<Variant> randomRelics = dataLoader?.get_random_relics(amount) ?? new Godot.Collections.Array<Variant>();
+        for (int index = 0; index < randomRelics.Count; index++)
+        {
+            RelicData relicData = randomRelics[index].AsGodotObject() as RelicData;
+            if (relicData != null)
+            {
+                result.Add(relicData);
+            }
+        }
+
+        return result;
+    }
+
+    public static ConsumableData GetConsumableById(string consumableId)
+    {
+        DataLoader dataLoader = GetDataLoaderSingleton();
+        Variant data = dataLoader?.get_consumable_by_id(consumableId) ?? default;
+        return data.AsGodotObject() as ConsumableData;
     }
 
     public static Godot.Collections.Array<Variant> GetAllTowerData()

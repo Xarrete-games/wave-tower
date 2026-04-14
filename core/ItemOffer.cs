@@ -2,7 +2,7 @@ using Godot;
 
 public class ItemOffer
 {
-    public Variant item_data { get; set; }
+    public Resource item_data { get; set; }
 
     public int price { get; set; }
 
@@ -12,7 +12,7 @@ public class ItemOffer
     {
     }
 
-    public ItemOffer(Variant p_item_data, int p_price, int p_health_price = 0)
+    public ItemOffer(Resource p_item_data, int p_price, int p_health_price = 0)
     {
         this.item_data = p_item_data;
         this.price = p_price;
