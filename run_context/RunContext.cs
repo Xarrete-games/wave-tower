@@ -18,12 +18,10 @@ public partial class RunContext : Node
 
     public Status status;
 
-    [Export]
     public TowersManager towers_manager;
 
     public RelicsManager relics_manager;
 
-    [Export]
     public ConsumablesManager consumables_manager;
 
     public EnemyManager enemy_manager;

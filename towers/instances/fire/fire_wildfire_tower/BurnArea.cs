@@ -8,7 +8,7 @@ public partial class BurnArea : Area2D
 
     [Export] public float duration = 0.3f;
 
-    public GodotObject source;
+    public Source source;
 
     private Timer _duration_timer;
     private GpuParticles2D _explosion_particles;
@@ -24,9 +24,9 @@ public partial class BurnArea : Area2D
         Monitoring = false;
     }
 
-    public void setup(Variant p_source)
+    public void setup(Source p_source)
     {
-        this.source = p_source.AsGodotObject();
+        this.source = p_source;
 
         this._duration_timer.Start();
         Monitoring = true;
@@ -46,8 +46,7 @@ public partial class BurnArea : Area2D
             return;
         }
 
-        Source src = this.source as Source;
-        Variant debuff = src != null ? EnemyDebuff.create_burn(src) : default;
+        Variant debuff = this.source != null ? EnemyDebuff.create_burn(this.source) : default;
         if (debuff.VariantType != Variant.Type.Nil)
         {
             body.Call("apply_debuff", debuff);

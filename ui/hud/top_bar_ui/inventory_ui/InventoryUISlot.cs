@@ -4,12 +4,26 @@ public partial class InventoryUISlot : Control
 {
     private TextureRect _textureRect;
     private Variant _consumable = default;
+    private ConsumablesManager _consumablesManager;
 
     public override void _Ready()
     {
         this._textureRect = GetNode<TextureRect>("CenterContainer/TextureRect");
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.consumables_manager.Connect("consumable_used", Callable.From<Variant>(this.OnConsumableUsed));
+        this._consumablesManager = runContext?.consumables_manager;
+        if (this._consumablesManager != null)
+        {
+            this._consumablesManager.consumable_used += this.OnConsumableUsed;
+        }
+    }
+
+    public override void _ExitTree()
+    {
+        if (this._consumablesManager != null)
+        {
+            this._consumablesManager.consumable_used -= this.OnConsumableUsed;
+            this._consumablesManager = null;
+        }
     }
 
     public bool IsEmpty()

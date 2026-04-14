@@ -13,6 +13,7 @@ public partial class MusicHandler : Node
     private Node green_players;
     private AudioStreamPlayer base_player;
     private Status _status;
+    private TowersManager _towersManager;
 
     private readonly Dictionary<int, Node> tower_players = new();
 
@@ -30,7 +31,11 @@ public partial class MusicHandler : Node
         this.stop_music();
 
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        runContext?.towers_manager?.Connect("tower_count_change", Callable.From<int, int>(this._on_tower_count_change));
+        this._towersManager = runContext?.towers_manager;
+        if (this._towersManager != null)
+        {
+            this._towersManager.tower_count_change += this._on_tower_count_change;
+        }
         this._status = runContext?.status;
         if (this._status != null)
         {
@@ -40,6 +45,12 @@ public partial class MusicHandler : Node
 
     public override void _ExitTree()
     {
+        if (this._towersManager != null)
+        {
+            this._towersManager.tower_count_change -= this._on_tower_count_change;
+            this._towersManager = null;
+        }
+
         if (this._status != null)
         {
             this._status.player_died -= this.stop_music;

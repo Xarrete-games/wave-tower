@@ -1,20 +1,13 @@
 using Godot;
 using System.Collections.Generic;
+using System;
 
-[GlobalClass]
-public partial class ConsumablesManager : RefCounted
+public class ConsumablesManager
 {
-    [Signal]
-    public delegate void consumables_changeEventHandler(Godot.Collections.Array<Variant> consumables);
-
-    [Signal]
-    public delegate void consumable_addedEventHandler(Variant consumable);
-
-    [Signal]
-    public delegate void consumable_usedEventHandler(Variant consumable);
-
-    [Signal]
-    public delegate void consumable_clickedEventHandler(Variant consumable);
+    public event Action<Godot.Collections.Array<Variant>> consumables_change;
+    public event Action<Variant> consumable_added;
+    public event Action<Variant> consumable_used;
+    public event Action<Variant> consumable_clicked;
 
     private readonly Godot.Collections.Array<Variant> _consumables = new();
     private readonly Dictionary<ulong, ConsumableModel> _runtimeConsumableModels = new();
@@ -41,8 +34,8 @@ public partial class ConsumablesManager : RefCounted
         this.SyncConsumableAddedToRuntime(consumableObj);
         consumableObj.clicked += this._on_consumable_clicked;
         consumableObj.used += this._on_consumable_used;
-        this.EmitSignal(SignalName.consumables_change, this._consumables);
-        this.EmitSignal(SignalName.consumable_added, consumable);
+        this.consumables_change?.Invoke(this._consumables);
+        this.consumable_added?.Invoke(consumable);
     }
 
     public void _on_consumable_used(Variant consumable)
@@ -71,7 +64,7 @@ public partial class ConsumablesManager : RefCounted
             this.SyncConsumableRemovedFromRuntime(consumableObj);
         }
 
-        this.EmitSignal(SignalName.consumable_used, consumable);
+        this.consumable_used?.Invoke(consumable);
         this._consumables.Remove(consumable);
 
         bool recoveredByHooks = consumableModel != null && this.IsConsumablePresentInRuntime(consumableModel);
@@ -81,10 +74,10 @@ public partial class ConsumablesManager : RefCounted
             this._consumables.Add(consumable);
             consumableObj.clicked += this._on_consumable_clicked;
             consumableObj.used += this._on_consumable_used;
-            this.EmitSignal(SignalName.consumable_added, consumable);
+            this.consumable_added?.Invoke(consumable);
         }
 
-        this.EmitSignal(SignalName.consumables_change, this._consumables);
+        this.consumables_change?.Invoke(this._consumables);
     }
 
     public void _on_consumable_clicked(Variant consumable)
@@ -107,7 +100,7 @@ public partial class ConsumablesManager : RefCounted
         }
         else
         {
-            this.EmitSignal(SignalName.consumable_clicked, consumable);
+            this.consumable_clicked?.Invoke(consumable);
         }
     }
 

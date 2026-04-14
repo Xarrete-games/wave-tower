@@ -1,9 +1,8 @@
 using Godot;
 
-[GlobalClass]
-public partial class TowerBuffFactory : RefCounted
+public static class TowerBuffFactory
 {
-    public static Variant create_from_id(string buff_id, Variant source, int value)
+    public static Variant create_from_id(string buff_id, Source source, int value)
     {
         DataLoader dataLoader = DataLoader.Instance;
         if (dataLoader == null)

@@ -5,13 +5,14 @@ public partial class CaffeinePotion : ConsumableUsable
 {
     public override void use()
     {
-        GodotObject towersManager = this.GetSingleton("RunContext")?.Get("towers_manager").AsGodotObject();
+        RunContext runContext = this.GetSingleton("RunContext") as RunContext;
+        TowersManager towersManager = runContext?.towers_manager;
         if (towersManager == null)
         {
             return;
         }
 
-        Godot.Collections.Array<Variant> towers = towersManager.Get("towers").AsGodotArray<Variant>();
+        Godot.Collections.Array<Variant> towers = towersManager.towers;
         for (int index = 0; index < towers.Count; index++)
         {
             GodotObject tower = towers[index].AsGodotObject();
@@ -20,21 +21,21 @@ public partial class CaffeinePotion : ConsumableUsable
                 continue;
             }
 
-            Variant source = this.get_source();
+            Source source = this.get_source();
             Variant debuff = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, -20);
             Variant buff = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, 20);
 
-            GodotObject debuffObj = debuff.AsGodotObject();
-            GodotObject buffObj = buff.AsGodotObject();
+            TowerBuff debuffObj = debuff.As<TowerBuff>();
+            TowerBuff buffObj = buff.As<TowerBuff>();
             if (debuffObj == null || buffObj == null)
             {
                 continue;
             }
 
-            Variant duration = new Duration(5, 0);
-            debuffObj.Set("duration", duration);
-            buffObj.Set("duration", duration);
-            buffObj.Set("residual_buff", debuff);
+            Duration duration = new Duration(5, 0);
+            debuffObj.duration = duration;
+            buffObj.duration = duration;
+            buffObj.residual_buff = debuffObj;
 
             tower.Call("add_buff", buff);
         }

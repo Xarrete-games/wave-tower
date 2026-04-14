@@ -14,8 +14,7 @@ public partial class LightningOverchargeTower : Tower
     private Marker2D projectile_spawn_pos;
     private CollisionPolygon2D buff_area_shape;
     private Area2D buff_area;
-
-    private Callable _towerPlacedCallable;
+    private TowersManager _towersManager;
 
     public override void _Ready()
     {
@@ -31,10 +30,10 @@ public partial class LightningOverchargeTower : Tower
 
     public override void _ExitTree()
     {
-        GodotObject towersManager = GetTowersManager();
-        if (towersManager != null && !this._towerPlacedCallable.Equals(default(Callable)) && towersManager.IsConnected("tower_placed", this._towerPlacedCallable))
+        if (this._towersManager != null)
         {
-            towersManager.Disconnect("tower_placed", this._towerPlacedCallable);
+            this._towersManager.tower_placed -= this._on_tower_placed;
+            this._towersManager = null;
         }
 
         base._ExitTree();
@@ -66,11 +65,13 @@ public partial class LightningOverchargeTower : Tower
         base.enable();
         this.buff_area.Monitoring = true;
 
-        GodotObject towersManager = GetTowersManager();
-        if (towersManager != null && this._towerPlacedCallable.Equals(default(Callable)))
+        if (this._towersManager == null)
         {
-            this._towerPlacedCallable = Callable.From<Variant>(this._on_tower_placed);
-            towersManager.Connect("tower_placed", this._towerPlacedCallable);
+            this._towersManager = GetTowersManager();
+            if (this._towersManager != null)
+            {
+                this._towersManager.tower_placed += this._on_tower_placed;
+            }
         }
     }
 

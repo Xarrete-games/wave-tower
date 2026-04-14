@@ -14,6 +14,7 @@ public partial class TowersMenu : Control
 
     private GodotObject _buttonInHover;
     private readonly Dictionary<string, Node> _buttons = new();
+    private TowersManager _towersManager;
 
     public override void _Ready()
     {
@@ -23,8 +24,21 @@ public partial class TowersMenu : Control
         }
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.towers_manager.Connect("tower_card_amount_change", Callable.From<Variant, int>(this.OnTowerCardAdded));
+        this._towersManager = runContext?.towers_manager;
+        if (this._towersManager != null)
+        {
+            this._towersManager.tower_card_amount_change += this.OnTowerCardAdded;
+        }
         this.InitButtonCards();
+    }
+
+    public override void _ExitTree()
+    {
+        if (this._towersManager != null)
+        {
+            this._towersManager.tower_card_amount_change -= this.OnTowerCardAdded;
+            this._towersManager = null;
+        }
     }
 
     private void InitButtonCards()

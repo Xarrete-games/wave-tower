@@ -47,8 +47,8 @@ public partial class TowerStatsHandler : Node
     {
         this.buffs.Add(tower_buff);
 
-        GodotObject buffObj = tower_buff.AsGodotObject();
-        if (buffObj?.Get("duration").AsGodotObject() != null)
+        TowerBuff buffObj = tower_buff.As<TowerBuff>();
+        if (buffObj?.duration != null)
         {
             this.buff_scheduler.schedule(tower_buff);
         }
@@ -61,8 +61,8 @@ public partial class TowerStatsHandler : Node
         int initialSize = this.buffs.Count;
         for (int i = this.buffs.Count - 1; i >= 0; i--)
         {
-            GodotObject buffObj = this.buffs[i].AsGodotObject();
-            string buffSourceId = buffObj?.Get("source").AsGodotObject()?.Get("type_id").AsString() ?? string.Empty;
+            TowerBuff buffObj = this.buffs[i].As<TowerBuff>();
+            string buffSourceId = buffObj?.source?.type_id ?? string.Empty;
             if (buffSourceId == source_id)
             {
                 this.buffs.RemoveAt(i);
@@ -88,8 +88,8 @@ public partial class TowerStatsHandler : Node
 
     private void _on_scheduled_buff_expired(Variant buff)
     {
-        GodotObject buffObj = buff.AsGodotObject();
-        string sourceId = buffObj?.Get("source").AsGodotObject()?.Get("type_id").AsString() ?? string.Empty;
+        TowerBuff buffObj = buff.As<TowerBuff>();
+        string sourceId = buffObj?.source?.type_id ?? string.Empty;
         this.buff_expired?.Invoke(sourceId);
     }
 

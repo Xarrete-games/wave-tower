@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class Source : RefCounted
+public class Source
 {
     public enum SourceType
     {

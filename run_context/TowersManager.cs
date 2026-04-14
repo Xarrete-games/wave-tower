@@ -1,29 +1,16 @@
 using Godot;
 using System.Collections.Generic;
+using System;
 
-[GlobalClass]
-public partial class TowersManager : RefCounted
+public class TowersManager
 {
-    [Signal]
-    public delegate void tower_count_changeEventHandler(int tower_type, int amount);
-
-    [Signal]
-    public delegate void tower_card_amount_changeEventHandler(Variant tower_configuration, int amount);
-
-    [Signal]
-    public delegate void tower_placedEventHandler(Variant tower);
-
-    [Signal]
-    public delegate void tower_hoveredEventHandler(Variant tower);
-
-    [Signal]
-    public delegate void tower_unhoveredEventHandler(Variant tower);
-
-    [Signal]
-    public delegate void tower_selectedEventHandler(Variant tower);
-
-    [Signal]
-    public delegate void tower_removedEventHandler(Variant tower);
+    public event Action<int, int> tower_count_change;
+    public event Action<Variant, int> tower_card_amount_change;
+    public event Action<Variant> tower_placed;
+    public event Action<Variant> tower_hovered;
+    public event Action<Variant> tower_unhovered;
+    public event Action<Variant> tower_selected;
+    public event Action<Variant> tower_removed;
 
     private static readonly string[] INITIAL_TOWERS_IDS = { "fire_tower", "frost_tower", "lightning_tower" };
     private const float COMMON_WEIGHT_START = 0.75f;
@@ -161,7 +148,7 @@ public partial class TowersManager : RefCounted
         this.tower_cards_amount[towerDataId] = currentAmount - 1;
 
         Variant towerConfiguration = this.get_tower_configuration_by_id(towerDataId);
-        this.EmitSignal(SignalName.tower_card_amount_change, towerConfiguration, this.tower_cards_amount[towerDataId]);
+        this.tower_card_amount_change?.Invoke(towerConfiguration, this.tower_cards_amount[towerDataId]);
 
         towerObj.Set("id", this._generate_tower_id(tower));
 
@@ -178,7 +165,7 @@ public partial class TowersManager : RefCounted
             this.ApplyRuntimeBuffsToLegacyTower(instanceId, towerObj, towerModel);
         }
 
-        this.EmitSignal(SignalName.tower_placed, tower);
+        this.tower_placed?.Invoke(tower);
         this.GetSingleton("AudioManager")?.Call("play_place_tower");
     }
 
@@ -205,7 +192,7 @@ public partial class TowersManager : RefCounted
 
         RunContextRuntime.TowersManager.RemoveTowerByInstanceId(instanceId);
 
-        this.EmitSignal(SignalName.tower_removed, tower);
+        this.tower_removed?.Invoke(tower);
         towerObj.Call("queue_free");
     }
 
@@ -254,7 +241,7 @@ public partial class TowersManager : RefCounted
 
     public void select_tower(Variant tower)
     {
-        this.EmitSignal(SignalName.tower_selected, tower);
+        this.tower_selected?.Invoke(tower);
         ClickEventsBus.EmitTowerSelected(tower);
     }
 
@@ -272,7 +259,17 @@ public partial class TowersManager : RefCounted
 
         int amount = this.tower_cards_amount.ContainsKey(id) ? this.tower_cards_amount[id] : 0;
         this.tower_cards_amount[id] = amount + 1;
-        this.EmitSignal(SignalName.tower_card_amount_change, tower_data, this.tower_cards_amount[id]);
+        this.tower_card_amount_change?.Invoke(tower_data, this.tower_cards_amount[id]);
+    }
+
+    public void emit_tower_hovered(Variant tower)
+    {
+        this.tower_hovered?.Invoke(tower);
+    }
+
+    public void emit_tower_unhovered(Variant tower)
+    {
+        this.tower_unhovered?.Invoke(tower);
     }
 
     public void sync_runtime_buffs_for_tower(ulong instanceId)
@@ -326,7 +323,7 @@ public partial class TowersManager : RefCounted
 
     private void _update_tower_count(int tower_type)
     {
-        this.EmitSignal(SignalName.tower_count_change, tower_type, this.get_tower_count(tower_type));
+        this.tower_count_change?.Invoke(tower_type, this.get_tower_count(tower_type));
     }
 
     private void _init_inital_towers_data()
@@ -473,7 +470,7 @@ public partial class TowersManager : RefCounted
                 continue;
             }
 
-            Variant source = new Source(Source.SourceType.RELIC, buff.SourceId);
+            Source source = new Source(Source.SourceType.RELIC, buff.SourceId);
             Variant legacyBuff = TowerBuffFactory.create_from_id(buff.Id, source, buff.Value);
             if (legacyBuff.VariantType == Variant.Type.Nil)
             {

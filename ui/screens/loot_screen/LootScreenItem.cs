@@ -49,14 +49,14 @@ public partial class LootScreenItem : Control
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (consumable != null)
         {
-            bool isFull = (bool)runContext.consumables_manager.Call("is_full");
+            bool isFull = runContext.consumables_manager.is_full();
             if (isFull)
             {
                 return;
             }
 
             Variant consumableItem = consumable.Call("create_item");
-            runContext.consumables_manager.Call("add_consumable", consumableItem);
+            runContext.consumables_manager.add_consumable(consumableItem);
         }
         else
         {

@@ -20,23 +20,23 @@ public class BuffScheduler
 
     public void schedule(Variant buffVar)
     {
-        GodotObject buff = buffVar.AsGodotObject();
-        GodotObject duration = buff?.Get("duration").AsGodotObject();
+        TowerBuff buff = buffVar.As<TowerBuff>();
+        Duration duration = buff?.duration;
         if (buff == null || duration == null)
         {
             return;
         }
 
-        float seconds = duration.Get("seconds_duration").AsSingle();
-        int waves = duration.Get("waves_duration").AsInt32();
+        float seconds = duration.seconds_duration;
+        int waves = duration.waves_duration;
 
         if (seconds > 0)
         {
-            _ = this._schedule_in_seconds(buff, seconds);
+            _ = this._schedule_in_seconds(buffVar.AsGodotObject(), seconds);
         }
         else if (waves > 0)
         {
-            _ = this._schedule_in_waves(buff, waves);
+            _ = this._schedule_in_waves(buffVar.AsGodotObject(), waves);
         }
     }
 
@@ -109,20 +109,19 @@ public class BuffScheduler
     {
         this.buff_expired?.Invoke(buff);
 
-        Variant residualVar = buff.Get("residual_buff");
-        GodotObject residual = residualVar.AsGodotObject();
+        TowerBuff towerBuff = buff as TowerBuff;
+        TowerBuff residual = towerBuff?.residual_buff;
         if (residual != null)
         {
             this._add_residual(residual);
         }
     }
 
-    private void _add_residual(GodotObject buff)
+    private void _add_residual(TowerBuff buff)
     {
         this.buff_applied?.Invoke(buff);
 
-        GodotObject duration = buff.Get("duration").AsGodotObject();
-        if (duration != null)
+        if (buff.duration != null)
         {
             this.schedule(buff);
         }

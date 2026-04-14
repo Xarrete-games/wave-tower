@@ -123,7 +123,7 @@ public partial class Tower : Node2D
     protected CollisionPolygon2D tower_area_collision;
 
     private bool _eventsConnected;
-    private Callable _towerSelectedCallable;
+    private TowersManager _towersManager;
 
     public override void _Ready()
     {
@@ -169,10 +169,10 @@ public partial class Tower : Node2D
 
         if (this._eventsConnected)
         {
-            GodotObject towersManager = GetTowersManager();
-            if (towersManager != null && !this._towerSelectedCallable.Equals(default(Callable)) && towersManager.IsConnected("tower_selected", this._towerSelectedCallable))
+            if (this._towersManager != null)
             {
-                towersManager.Disconnect("tower_selected", this._towerSelectedCallable);
+                this._towersManager.tower_selected -= this._on_tower_selected;
+                this._towersManager = null;
             }
 
             this.mouse_detector.GuiInput -= this._on_gui_input;
@@ -253,11 +253,10 @@ public partial class Tower : Node2D
             return;
         }
 
-        GodotObject towersManager = GetTowersManager();
-        if (towersManager != null)
+        this._towersManager = GetTowersManager();
+        if (this._towersManager != null)
         {
-            this._towerSelectedCallable = Callable.From<Variant>(this._on_tower_selected);
-            towersManager.Connect("tower_selected", this._towerSelectedCallable);
+            this._towersManager.tower_selected += this._on_tower_selected;
         }
 
         this.mouse_detector.GuiInput += this._on_gui_input;
@@ -295,8 +294,8 @@ public partial class Tower : Node2D
                 continue;
             }
 
-            GodotObject source = buff.Get("source").AsGodotObject();
-            string buffSourceId = source?.Get("type_id").AsString() ?? string.Empty;
+            TowerBuff towerBuff = buff as TowerBuff;
+            string buffSourceId = towerBuff?.source?.type_id ?? string.Empty;
             if (buffSourceId != source_id)
             {
                 continue;
@@ -512,21 +511,18 @@ public partial class Tower : Node2D
             return;
         }
 
-        GodotObject towersManager = GetTowersManager();
-        towersManager?.Call("select_tower", this);
+        this._towersManager?.select_tower(this);
     }
 
     private void _on_mouse_entered()
     {
-        GodotObject towersManager = GetTowersManager();
-        towersManager?.EmitSignal("tower_hovered", this);
+        this._towersManager?.emit_tower_hovered(this);
         this._show_range();
     }
 
     private void _on_mouse_exit()
     {
-        GodotObject towersManager = GetTowersManager();
-        towersManager?.EmitSignal("tower_unhovered", this);
+        this._towersManager?.emit_tower_unhovered(this);
 
         if (this.current_tower_selected != this)
         {
@@ -555,8 +551,9 @@ public partial class Tower : Node2D
         return GetNodeOrNull<Node>("/root/RunContext") as GodotObject;
     }
 
-    protected GodotObject GetTowersManager()
+    protected TowersManager GetTowersManager()
     {
-        return GetRunContext()?.Get("towers_manager").AsGodotObject();
+        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        return runContext?.towers_manager;
     }
 }

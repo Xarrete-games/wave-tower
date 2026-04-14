@@ -28,39 +28,39 @@ public partial class KillEventHandler : Node
 
     private void _on_enemy_killed(object enemy, object attack)
     {
-        GodotObject enemyObj = enemy as GodotObject;
-        GodotObject attackObj = attack as GodotObject;
+        Enemy enemyObj = enemy as Enemy;
+        Attack attackObj = attack as Attack;
         if (enemyObj == null || attackObj == null)
         {
             return;
         }
 
-        GodotObject source = attackObj.Get("source").AsGodotObject();
+        Source source = attackObj.source;
         if (source == null)
         {
             return;
         }
 
-        string typeId = source.Get("type_id").AsString();
+        string typeId = source.type_id;
         if (typeId != "WildFireTower")
         {
             return;
         }
 
-        Vector2 position = enemyObj.Get("global_position").AsVector2();
+        Vector2 position = enemyObj.GlobalPosition;
         this._spawn_burn_area(position, source);
     }
 
-    private void _spawn_burn_area(Vector2 position, GodotObject source)
+    private void _spawn_burn_area(Vector2 position, Source source)
     {
         if (this.burn_area_scene == null)
         {
             return;
         }
 
-        Node burnArea = this.burn_area_scene.Instantiate();
+        BurnArea burnArea = this.burn_area_scene.Instantiate<BurnArea>();
         AddChild(burnArea);
-        burnArea.Set("global_position", position);
-        burnArea.Call("setup", source);
+        burnArea.GlobalPosition = position;
+        burnArea.setup(source);
     }
 }

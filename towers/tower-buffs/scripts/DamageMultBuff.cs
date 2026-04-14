@@ -3,11 +3,6 @@ using Godot;
 [GlobalClass]
 public partial class DamageMultBuff : TowerBuffStatsModifier
 {
-    public static Variant create_instance(Variant p_data, Variant p_source, int p_value)
-    {
-        return new DamageMultBuff(p_source.As<Source>(), null, null, p_data, p_value);
-    }
-
     public DamageMultBuff()
     {
     }

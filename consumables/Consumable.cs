@@ -38,7 +38,7 @@ public partial class Consumable : RefCounted
         return false;
     }
 
-    public Variant get_source()
+    public Source get_source()
     {
         string id = this.Data?.id ?? string.Empty;
         return new Source(Source.SourceType.CONSUMABLE, id, this);

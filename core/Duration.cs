@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class Duration : RefCounted
+public class Duration
 {
     public float seconds_duration = 0.0f;
     public int waves_duration = 0;
