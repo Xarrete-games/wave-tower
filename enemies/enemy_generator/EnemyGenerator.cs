@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 
 public partial class EnemyGenerator : Node
@@ -55,12 +55,12 @@ public partial class EnemyGenerator : Node
             this.wave_spawner.enemy_spawned += this.OnEnemySpawned;
         }
 
-        ClickEventsBus.NextWavePressed += this.StartNextWave;
+        ClickEvents.NextWavePressed += this.StartNextWave;
     }
 
     public override void _ExitTree()
     {
-        ClickEventsBus.NextWavePressed -= this.StartNextWave;
+        ClickEvents.NextWavePressed -= this.StartNextWave;
 
         if (this._isTrackingEnemyExit && this.enemies_container != null)
         {

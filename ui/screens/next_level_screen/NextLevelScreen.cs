@@ -1,10 +1,10 @@
-using Godot;
+﻿using Godot;
 
 public partial class NextLevelScreen : Control
 {
     private void _on_next_level_button_pressed()
     {
-        ClickEventsBus.EmitNextLevelPressed();
+        ClickEvents.NextLevelPressed?.Invoke();
         QueueFree();
     }
 }

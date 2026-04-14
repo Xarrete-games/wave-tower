@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public partial class TowerPlacer : Node2D
 {
@@ -15,7 +15,7 @@ public partial class TowerPlacer : Node2D
     {
         this._isPlacing = false;
         this.visual = GetNode<Node2D>("../Visual");
-        ClickEventsBus.TowerBuildButtonPressed += this.OnTowerButtonPressed;
+        ClickEvents.TowerBuildButtonPressed += this.OnTowerButtonPressed;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         this._progress = runContext.progress;
@@ -25,7 +25,7 @@ public partial class TowerPlacer : Node2D
 
     public override void _ExitTree()
     {
-        ClickEventsBus.TowerBuildButtonPressed -= this.OnTowerButtonPressed;
+        ClickEvents.TowerBuildButtonPressed -= this.OnTowerButtonPressed;
 
         if (this._progress != null)
         {
@@ -164,3 +164,4 @@ public partial class TowerPlacer : Node2D
         GetNode<ActionManager>("/root/ActionManager").StartAction(ActionManager.ActionState.PlacingTower, Callable.From(this.CancelTower));
     }
 }
+

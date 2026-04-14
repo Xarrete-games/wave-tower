@@ -26,14 +26,14 @@ public partial class ChooseTowerScreenItem : Control
     [Export]
     public Node gold_price;
 
-    private Variant _towerData = default;
+    private TowerDataWithInstance _towerData;
 
     public override void _Ready()
     {
         this.ApplyConfiguration();
     }
 
-    public void SetTowerData(Variant towerData)
+    public void SetTowerData(TowerDataWithInstance towerData)
     {
         this._towerData = towerData;
         if (this.IsNodeReady())
@@ -46,33 +46,28 @@ public partial class ChooseTowerScreenItem : Control
         }
     }
 
-    public Variant GetTowerData()
+    public TowerDataWithInstance GetTowerData()
     {
         return this._towerData;
     }
 
     private void ApplyConfiguration()
     {
-        if (this._towerData.VariantType == Variant.Type.Nil)
+        if (this._towerData?.data == null)
         {
             return;
         }
 
-        GodotObject towerDataObj = this._towerData.AsGodotObject();
-        GodotObject configuration = towerDataObj?.Get("data").AsGodotObject();
-        if (configuration == null)
-        {
-            return;
-        }
+        TowerData configuration = this._towerData.data;
 
-        this.title_label.Text = (string)configuration.Get("display_name");
-        this.description_label.Text = (string)configuration.Get("description");
-        this.texture.Texture = configuration.Get("icon").As<Texture2D>();
+        this.title_label.Text = configuration.display_name;
+        this.description_label.Text = configuration.description;
+        this.texture.Texture = configuration.icon;
 
-        this.damage_stat.Call("set_value", configuration.Get("base_damage"));
-        this.range_stat.Call("set_value", configuration.Get("base_attack_range"));
-        this.attack_speed_stat.Call("set_value", configuration.Get("base_attack_speed"));
-        this.gold_price.Set("price", configuration.Get("build_price"));
+        this.damage_stat.Call("set_value", configuration.base_damage);
+        this.range_stat.Call("set_value", configuration.base_attack_range);
+        this.attack_speed_stat.Call("set_value", configuration.base_attack_speed);
+        this.gold_price.Set("price", configuration.build_price);
     }
 
     private void ApplyConfigurationDeferred()

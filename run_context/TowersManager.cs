@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 using System;
 
@@ -32,16 +32,16 @@ public class TowersManager
 
     public TowersManager()
     {
-        ClickEventsBus.TowerRemovePressed += this.OnTowerRemoved;
-        ClickEventsBus.AddTowerCard += this._on_tower_card_added;
+        ClickEvents.TowerRemovePressed += this.OnTowerRemoved;
+        ClickEvents.AddTowerCard += this._on_tower_card_added;
 
         this.all_tower_data = DataLoaderAccess.GetAllTowerData();
     }
 
     public void dispose_events()
     {
-        ClickEventsBus.TowerRemovePressed -= this.OnTowerRemoved;
-        ClickEventsBus.AddTowerCard -= this._on_tower_card_added;
+        ClickEvents.TowerRemovePressed -= this.OnTowerRemoved;
+        ClickEvents.AddTowerCard -= this._on_tower_card_added;
     }
 
     public void setup(RunProgress progress_p)
@@ -56,10 +56,10 @@ public class TowersManager
         this._init_inital_towers_data();
     }
 
-    public Godot.Collections.Array<Variant> get_random_towers(int amount)
+    public List<TowerDataWithInstance> get_random_towers(int amount)
     {
         var availableTowers = this.all_tower_data.Duplicate();
-        var selectedTowers = new Godot.Collections.Array<Variant>();
+        var selectedTowers = new List<TowerDataWithInstance>();
         int picks = Mathf.Min(amount, availableTowers.Count);
 
         for (int i = 0; i < picks; i++)
@@ -87,7 +87,11 @@ public class TowersManager
             if (totalWeight <= 0f)
             {
                 availableTowers.Shuffle();
-                selectedTowers.Add(availableTowers[availableTowers.Count - 1]);
+                TowerDataWithInstance fallbackTower = availableTowers[availableTowers.Count - 1].AsGodotObject() as TowerDataWithInstance;
+                if (fallbackTower != null)
+                {
+                    selectedTowers.Add(fallbackTower);
+                }
                 availableTowers.RemoveAt(availableTowers.Count - 1);
                 continue;
             }
@@ -106,7 +110,11 @@ public class TowersManager
                 }
             }
 
-            selectedTowers.Add(availableTowers[selectedIndex]);
+            TowerDataWithInstance selectedTower = availableTowers[selectedIndex].AsGodotObject() as TowerDataWithInstance;
+            if (selectedTower != null)
+            {
+                selectedTowers.Add(selectedTower);
+            }
             availableTowers.RemoveAt(selectedIndex);
         }
 
@@ -242,20 +250,18 @@ public class TowersManager
     public void select_tower(Variant tower)
     {
         this.tower_selected?.Invoke(tower);
-        ClickEventsBus.EmitTowerSelected(tower);
+        ClickEvents.TowerSelected?.Invoke(tower);
     }
 
-    public void _on_tower_card_added(Variant tower_data)
+    public void _on_tower_card_added(TowerDataWithInstance tower_data)
     {
-        if (!this._has_configuration_data(tower_data))
+        if (tower_data == null || tower_data.data == null)
         {
             GD.PushError($"[TowersManager] Invalid tower configuration while adding card: {tower_data}");
             return;
         }
 
-        GodotObject cfg = tower_data.AsGodotObject();
-        TowerDataWithInstance typedConfiguration = cfg as TowerDataWithInstance;
-        string id = typedConfiguration?.data?.id ?? string.Empty;
+        string id = tower_data.data.id;
         if (string.IsNullOrEmpty(id))
         {
             return;
@@ -263,7 +269,7 @@ public class TowersManager
 
         int amount = this.tower_cards_amount.ContainsKey(id) ? this.tower_cards_amount[id] : 0;
         this.tower_cards_amount[id] = amount + 1;
-        this.tower_card_amount_change?.Invoke(typedConfiguration, this.tower_cards_amount[id]);
+        this.tower_card_amount_change?.Invoke(tower_data, this.tower_cards_amount[id]);
     }
 
     public void emit_tower_hovered(Variant tower)
@@ -332,19 +338,13 @@ public class TowersManager
 
     private void _init_inital_towers_data()
     {
-        var initialCards = new Godot.Collections.Array<Variant>();
         for (int index = 0; index < INITIAL_TOWERS_IDS.Length; index++)
         {
             TowerDataWithInstance towerConfiguration = this.get_tower_configuration_by_id(INITIAL_TOWERS_IDS[index]);
             if (towerConfiguration != null)
             {
-                initialCards.Add(Variant.From(towerConfiguration));
+                this._on_tower_card_added(towerConfiguration);
             }
-        }
-
-        for (int index = 0; index < initialCards.Count; index++)
-        {
-            this._on_tower_card_added(initialCards[index]);
         }
     }
 
@@ -487,3 +487,4 @@ public class TowersManager
         }
     }
 }
+

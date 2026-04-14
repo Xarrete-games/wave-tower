@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public partial class ConfigButton : Control
 {
@@ -6,7 +6,7 @@ public partial class ConfigButton : Control
     {
         Node audioManager = GetNode<Node>("/root/AudioManager");
         audioManager.Call("play_button_click");
-        ClickEventsBus.EmitConfigButtonPressed();
+        ClickEvents.ConfigButtonPressed?.Invoke();
     }
 
     private void _on_mouse_entered()

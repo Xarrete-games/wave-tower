@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public partial class Game : Node2D
 {
@@ -22,8 +22,8 @@ public partial class Game : Node2D
         this._musicHandler = GetNode<Node>("MusicHandler");
         this._configLayer = GetNode<CanvasLayer>("ConfigLayer");
 
-        ClickEventsBus.ConfigButtonPressed += this.OpenConfigMenu;
-        ClickEventsBus.ResetGameButtonPressed += this.ResetGame;
+        ClickEvents.ConfigButtonPressed += this.OpenConfigMenu;
+        ClickEvents.ResetGameButtonPressed += this.ResetGame;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.progress.total_levels = this.levels_paths.Count;
@@ -41,8 +41,8 @@ public partial class Game : Node2D
 
     public override void _ExitTree()
     {
-        ClickEventsBus.ConfigButtonPressed -= this.OpenConfigMenu;
-        ClickEventsBus.ResetGameButtonPressed -= this.ResetGame;
+        ClickEvents.ConfigButtonPressed -= this.OpenConfigMenu;
+        ClickEvents.ResetGameButtonPressed -= this.ResetGame;
     }
 
     public override void _Process(double delta)

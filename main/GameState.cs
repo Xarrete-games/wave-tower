@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public partial class GameState : Node
 {
@@ -39,12 +39,12 @@ public partial class GameState : Node
 
     public override void _Ready()
     {
-        ClickEventsBus.SpeedButtonPressed += this._button_speed_pressed;
+        ClickEvents.SpeedButtonPressed += this._button_speed_pressed;
     }
 
     public override void _ExitTree()
     {
-        ClickEventsBus.SpeedButtonPressed -= this._button_speed_pressed;
+        ClickEvents.SpeedButtonPressed -= this._button_speed_pressed;
     }
 
     public bool is_on_main_menu()
@@ -78,3 +78,4 @@ public partial class GameState : Node
         }
     }
 }
+

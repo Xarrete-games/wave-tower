@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 
 public partial class TowersMenu : Control
@@ -98,7 +98,7 @@ public partial class TowersMenu : Control
 
     private void OnTowerButtonPressed(TowerDataWithInstance towerData, int price)
     {
-        ClickEventsBus.EmitTowerBuildButtonPressed(towerData, price);
+        ClickEvents.TowerBuildButtonPressed?.Invoke(towerData, price);
     }
 
     private void OnTowerButtonHover(TowerButton towerButton)

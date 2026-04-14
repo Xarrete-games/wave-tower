@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 
 public partial class TowerStatsPanel : Control
@@ -33,12 +33,12 @@ public partial class TowerStatsPanel : Control
         this._towerHintPanel.Visible = false;
         this.HideUpgradeOptions();
 
-        ClickEventsBus.TowerSelected += this.OnTowerSelected;
+        ClickEvents.TowerSelected += this.OnTowerSelected;
     }
 
     public override void _ExitTree()
     {
-        ClickEventsBus.TowerSelected -= this.OnTowerSelected;
+        ClickEvents.TowerSelected -= this.OnTowerSelected;
     }
 
     private void OnTowerSelected(Variant tower)
@@ -148,7 +148,7 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        ClickEventsBus.EmitTowerRemovePressed(this._currentTower);
+        ClickEvents.TowerRemovePressed?.Invoke(this._currentTower);
     }
 
     private void _on_upgrade_button_pressed()
@@ -184,7 +184,7 @@ public partial class TowerStatsPanel : Control
         }
 
         this._currentTower.upgrade();
-        ClickEventsBus.EmitTowerUpgradePressed(this._currentTower, Variant.From(towerConfiguration), price);
+        ClickEvents.TowerUpgradePressed?.Invoke(this._currentTower, Variant.From(towerConfiguration), price);
     }
 
     private void HideUpgradeOptions()

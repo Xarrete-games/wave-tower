@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public partial class TowerSelector : Node
 {
@@ -8,9 +8,9 @@ public partial class TowerSelector : Node
     public override void _Ready()
     {
         this.ClearTowerSelected();
-        ClickEventsBus.TowerSelected += this.OnTowerSelected;
-        ClickEventsBus.TowerBuildButtonPressed += this.OnTowerButtonPressed;
-        ClickEventsBus.TowerRemovePressed += this.OnTowerRemovePressed;
+        ClickEvents.TowerSelected += this.OnTowerSelected;
+        ClickEvents.TowerBuildButtonPressed += this.OnTowerButtonPressed;
+        ClickEvents.TowerRemovePressed += this.OnTowerRemovePressed;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         this._progress = runContext?.progress;
@@ -22,9 +22,9 @@ public partial class TowerSelector : Node
 
     public override void _ExitTree()
     {
-        ClickEventsBus.TowerSelected -= this.OnTowerSelected;
-        ClickEventsBus.TowerBuildButtonPressed -= this.OnTowerButtonPressed;
-        ClickEventsBus.TowerRemovePressed -= this.OnTowerRemovePressed;
+        ClickEvents.TowerSelected -= this.OnTowerSelected;
+        ClickEvents.TowerBuildButtonPressed -= this.OnTowerButtonPressed;
+        ClickEvents.TowerRemovePressed -= this.OnTowerRemovePressed;
 
         if (this._progress != null)
         {
@@ -102,3 +102,4 @@ public partial class TowerSelector : Node
         }
     }
 }
+

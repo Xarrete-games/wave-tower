@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public partial class TopBar : MarginContainer
 {
@@ -24,7 +24,7 @@ public partial class TopBar : MarginContainer
 
     private void _on_xarreta_text_button_xarreta_pressed()
     {
-        ClickEventsBus.EmitSpeedButtonPressed();
+        ClickEvents.SpeedButtonPressed?.Invoke();
     }
 
     private void UpdateText(float value)

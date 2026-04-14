@@ -1,6 +1,5 @@
 public sealed class SoyaSauce : Relic
 {
-    private const bool DEBUG_SOYA_SAUCE = true;
 
     public SoyaSauce() : base("soya_sauce")
     {
@@ -33,11 +32,6 @@ public sealed class SoyaSauce : Relic
                     context.Discount += 0.1f;
                 }
                 break;
-        }
-
-        if (DEBUG_SOYA_SAUCE)
-        {
-            Godot.GD.Print($"[SoyaSauce] type={context.Type} base={context.BasePrice} discount {discountBefore:0.###}->{context.Discount:0.###} tuna={hasTuna} salmon={hasSalmon} butterfish={hasButterfish}");
         }
     }
 

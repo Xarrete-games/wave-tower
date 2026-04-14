@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Threading.Tasks;
 
 public partial class PauseMenu : Control
@@ -58,7 +58,7 @@ public partial class PauseMenu : Control
     {
         GetTree().Paused = false;
         QueueFree();
-        ClickEventsBus.EmitResetGameButtonPressed();
+        ClickEvents.ResetGameButtonPressed?.Invoke();
     }
 
     private void _on_exit_button_xarreta_pressed()

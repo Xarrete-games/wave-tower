@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class ChooseTowerScreen : Control
 {
@@ -20,9 +21,9 @@ public partial class ChooseTowerScreen : Control
         this.ok_button.Pressed += this.OnOkPressed;
     }
 
-    public void PopulateScreen(Godot.Collections.Array<Variant> configurations)
+    public void PopulateScreen(List<TowerDataWithInstance> configurations)
     {
-        foreach (Variant towerConfiguration in configurations)
+        foreach (TowerDataWithInstance towerConfiguration in configurations)
         {
             ChooseTowerScreenItem item = TowerItemScene.Instantiate<ChooseTowerScreenItem>();
             this.cards_container.AddChild(item);

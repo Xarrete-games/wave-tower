@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public partial class LevelProgressUI : Control
 {
@@ -26,7 +26,7 @@ public partial class LevelProgressUI : Control
         this._progress = runContext.progress;
         this._progress.current_wave_changed += this.OnWaveInit;
 
-        ClickEventsBus.ResetGameButtonPressed += this.ClearSlots;
+        ClickEvents.ResetGameButtonPressed += this.ClearSlots;
     }
 
     public override void _ExitTree()
@@ -36,7 +36,7 @@ public partial class LevelProgressUI : Control
             this._progress.current_wave_changed -= this.OnWaveInit;
         }
 
-        ClickEventsBus.ResetGameButtonPressed -= this.ClearSlots;
+        ClickEvents.ResetGameButtonPressed -= this.ClearSlots;
     }
 
     private void ClearSlots()
