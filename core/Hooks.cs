@@ -73,7 +73,7 @@ public static class Hooks
 
     public static void on_before_die(Status status)
     {
-        ForEachLegacyListener(item => item.Call("on_before_die", status));
+        ForEachLegacyListener(item => item.Call("on_before_die"));
     }
 
     public static List<AbstractModel> GetListenersFromRuntime()

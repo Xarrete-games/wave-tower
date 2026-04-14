@@ -1,5 +1,4 @@
 using Godot;
-using Godot.Collections;
 using System.Collections.Generic;
 
 [GlobalClass]
@@ -34,7 +33,7 @@ public partial class HealthBar : Control
         this.texture_progress_bar.Value = new_value;
     }
 
-    public void set_debuffs(Array<EnemyDebuffInstance> debuffs)
+    public void set_debuffs(List<EnemyDebuffInstance> debuffs)
     {
         this._reset_debuffs();
 

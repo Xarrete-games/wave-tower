@@ -16,13 +16,11 @@ public partial class RunContext : Node
 
     public Economy economy;
 
-    [Export]
     public Status status;
 
     [Export]
     public TowersManager towers_manager;
 
-    [Export]
     public RelicsManager relics_manager;
 
     [Export]

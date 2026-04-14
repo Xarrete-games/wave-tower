@@ -9,9 +9,23 @@ public partial class RelicsBar : Control
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         this._relicsManager = runContext.relics_manager;
-        this._relicsManager.Connect("relic_added", Callable.From<string>(this.OnRelicAdded));
-        this._relicsManager.Connect("relic_removed", Callable.From<string>(this.OnRelicRemoved));
-        this._relicsManager.Connect("relic_changed", Callable.From<string>(this.OnRelicChanged));
+        if (this._relicsManager != null)
+        {
+            this._relicsManager.relic_added += this.OnRelicAdded;
+            this._relicsManager.relic_removed += this.OnRelicRemoved;
+            this._relicsManager.relic_changed += this.OnRelicChanged;
+        }
+    }
+
+    public override void _ExitTree()
+    {
+        if (this._relicsManager != null)
+        {
+            this._relicsManager.relic_added -= this.OnRelicAdded;
+            this._relicsManager.relic_removed -= this.OnRelicRemoved;
+            this._relicsManager.relic_changed -= this.OnRelicChanged;
+            this._relicsManager = null;
+        }
     }
 
     private void OnRelicAdded(string relicId)

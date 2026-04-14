@@ -113,8 +113,11 @@ public partial class TowerButton : Control
 
         this._runContext = GetNode<RunContext>("/root/RunContext");
         this._runContext.economy.available_free_towers_change += this._on_available_free_towers_change;
-        this._runContext.relics_manager.Connect("relic_added", Callable.From<string>(this._on_relic_added));
-        this._runContext.relics_manager.Connect("relic_removed", Callable.From<string>(this._on_relic_removed));
+        if (this._runContext.relics_manager != null)
+        {
+            this._runContext.relics_manager.relic_added += this._on_relic_added;
+            this._runContext.relics_manager.relic_removed += this._on_relic_removed;
+        }
         this._runContext.progress.current_wave_finished += this._current_wave_finished;
 
         this._panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
@@ -131,6 +134,12 @@ public partial class TowerButton : Control
         if (this._runContext?.progress != null)
         {
             this._runContext.progress.current_wave_finished -= this._current_wave_finished;
+        }
+
+        if (this._runContext?.relics_manager != null)
+        {
+            this._runContext.relics_manager.relic_added -= this._on_relic_added;
+            this._runContext.relics_manager.relic_removed -= this._on_relic_removed;
         }
     }
 

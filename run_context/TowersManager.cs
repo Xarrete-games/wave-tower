@@ -415,7 +415,8 @@ public partial class TowersManager : RefCounted
 
     private void SyncRuntimeStatusFromLegacy()
     {
-        Status status = this.GetSingleton("RunContext")?.Get("status").As<Status>();
+        RunContext runContext = this.GetSingleton("RunContext") as RunContext;
+        Status status = runContext?.status;
         if (status == null)
         {
             return;
@@ -426,7 +427,8 @@ public partial class TowersManager : RefCounted
 
     private void SyncLegacyStatusFromRuntime()
     {
-        Status status = this.GetSingleton("RunContext")?.Get("status").As<Status>();
+        RunContext runContext = this.GetSingleton("RunContext") as RunContext;
+        Status status = runContext?.status;
         if (status == null)
         {
             return;

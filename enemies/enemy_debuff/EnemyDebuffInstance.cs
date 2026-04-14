@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-public partial class EnemyDebuffInstance : RefCounted
+public class EnemyDebuffInstance
 {
     public EnemyDebuff debuff;
     public float expire_time;

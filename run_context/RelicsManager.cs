@@ -1,16 +1,11 @@
 using Godot;
+using System;
 
-[GlobalClass]
-public partial class RelicsManager : RefCounted
+public class RelicsManager
 {
-    [Signal]
-    public delegate void relic_changedEventHandler(string relic_id);
-
-    [Signal]
-    public delegate void relic_addedEventHandler(string relic_id);
-
-    [Signal]
-    public delegate void relic_removedEventHandler(string relic_id);
+    public event Action<string> relic_changed;
+    public event Action<string> relic_added;
+    public event Action<string> relic_removed;
 
     private static readonly Color COMMON_COLOR = Colors.GreenYellow;
     private static readonly Color RARE_COLOR = Colors.DodgerBlue;
@@ -113,7 +108,7 @@ public partial class RelicsManager : RefCounted
 
         int currentCount = this._relicsCount.ContainsKey(relic_id) ? this._relicsCount[relic_id] : 0;
         this._relicsCount[relic_id] = currentCount - 1;
-        this.EmitSignal(SignalName.relic_removed, relic_id);
+        this.relic_removed?.Invoke(relic_id);
     }
 
     private void _add_relic(Relic relic)
@@ -130,7 +125,7 @@ public partial class RelicsManager : RefCounted
         int currentCount = this._relicsCount.ContainsKey(relicId) ? this._relicsCount[relicId] : 0;
         this._relicsCount[relicId] = currentCount + 1;
 
-        this.EmitSignal(SignalName.relic_added, relicId);
+        this.relic_added?.Invoke(relicId);
         relic.Changed += this.emit_relic_changed;
     }
 
@@ -141,7 +136,7 @@ public partial class RelicsManager : RefCounted
             return;
         }
 
-        this.EmitSignal(SignalName.relic_changed, relic.Id);
+        this.relic_changed?.Invoke(relic.Id);
     }
 
     public Relic _get_relic(string id)

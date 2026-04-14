@@ -1,19 +1,12 @@
 using Godot;
+using System;
 
-[GlobalClass]
-public partial class Status : RefCounted
+public class Status
 {
-    [Signal]
-    public delegate void health_changeEventHandler(int amount);
-
-    [Signal]
-    public delegate void armor_changeEventHandler(int amount);
-
-    [Signal]
-    public delegate void max_health_changeEventHandler(int amount);
-
-    [Signal]
-    public delegate void player_diedEventHandler();
+    public event Action<int> health_change;
+    public event Action<int> armor_change;
+    public event Action<int> max_health_change;
+    public event Action player_died;
 
     private int _maxHealth = 20;
     private int _health = 20;
@@ -30,7 +23,7 @@ public partial class Status : RefCounted
                 this._health = this._maxHealth;
             }
 
-            this.EmitSignal(SignalName.max_health_change, this._maxHealth);
+            this.max_health_change?.Invoke(this._maxHealth);
         }
     }
 
@@ -40,7 +33,7 @@ public partial class Status : RefCounted
         set
         {
             this._health = Mathf.Min(value, this._maxHealth);
-            this.EmitSignal(SignalName.health_change, this._health);
+            this.health_change?.Invoke(this._health);
             if (this._health <= 0)
             {
                 var statusModel = new StatusModel
@@ -62,22 +55,22 @@ public partial class Status : RefCounted
 
                 if (maxHealthChanged)
                 {
-                    this.EmitSignal(SignalName.max_health_change, this._maxHealth);
+                    this.max_health_change?.Invoke(this._maxHealth);
                 }
 
                 if (healthChanged)
                 {
-                    this.EmitSignal(SignalName.health_change, this._health);
+                    this.health_change?.Invoke(this._health);
                 }
 
                 if (armorChanged)
                 {
-                    this.EmitSignal(SignalName.armor_change, this._armor);
+                    this.armor_change?.Invoke(this._armor);
                 }
 
                 if (this._health <= 0)
                 {
-                    this.EmitSignal(SignalName.player_died);
+                    this.player_died?.Invoke();
                 }
             }
         }
@@ -89,14 +82,14 @@ public partial class Status : RefCounted
         set
         {
             this._armor = value;
-            this.EmitSignal(SignalName.armor_change, this._armor);
+            this.armor_change?.Invoke(this._armor);
         }
     }
 
     public RunProgress progress { get; private set; }
-    public Variant relics_manager { get; private set; }
+    public RelicsManager relics_manager { get; private set; }
 
-    public void setup(RunProgress p_progress, Variant p_relics_manager)
+    public void setup(RunProgress p_progress, RelicsManager p_relics_manager)
     {
         if (this.progress != null)
         {
@@ -158,7 +151,7 @@ public partial class Status : RefCounted
             int absorbed = Mathf.Min(this.armor, remainingDamage);
             this.armor -= absorbed;
             remainingDamage -= absorbed;
-            this.EmitSignal(SignalName.armor_change, this.armor);
+            this.armor_change?.Invoke(this.armor);
         }
 
         if (remainingDamage > 0)

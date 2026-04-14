@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class DebuffHandler : Node
@@ -8,7 +9,7 @@ public partial class DebuffHandler : Node
     public static readonly Color FROST_COLOR = Colors.Aqua;
     public static readonly Color DEFAULT_COLOR = Colors.White;
 
-    public Array<EnemyDebuffInstance> debuffs = new();
+    public List<EnemyDebuffInstance> debuffs = new();
 
     public void add_debuff(EnemyDebuff debuff, int amount, Variant enemyVar)
     {
@@ -54,7 +55,7 @@ public partial class DebuffHandler : Node
 
             EnemyDebuffInstance instance = new(debuff);
             this.debuffs.Add(instance);
-            enemy.health_bar?.Call("set_debuffs", this.debuffs);
+            enemy.health_bar?.set_debuffs(this.debuffs);
             debuff.on_apply(enemy);
         }
     }
@@ -84,7 +85,8 @@ public partial class DebuffHandler : Node
             {
                 debuff.on_expire(enemy);
                 this.debuffs.RemoveAt(i);
-                enemy.Get("health_bar").AsGodotObject()?.Call("set_debuffs", this.debuffs);
+                Enemy typedEnemy = enemy as Enemy;
+                typedEnemy?.health_bar?.set_debuffs(this.debuffs);
             }
         }
     }
