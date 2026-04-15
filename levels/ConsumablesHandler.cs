@@ -7,11 +7,11 @@ public partial class ConsumablesHandler : Node
     private static readonly Texture2D DefaultCursor = GD.Load<Texture2D>("res://assets/images/icons/mouse_02.png");
 
     [Export]
-    public Node composite_tile_map;
+    public CompositeTileMap composite_tile_map;
 
     private ConsumableTargeteable _currentConsumable;
     private bool _isValidTarget;
-    private Variant _currentTarget;
+    private object _currentTarget;
 
     private RunContext _runContext;
     private GameState _gameState;
@@ -91,7 +91,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        bool isMouseOnBlockedTile = (bool)this.composite_tile_map.Call("is_mouse_on_block_tile");
+        bool isMouseOnBlockedTile = this.composite_tile_map.is_mouse_on_block_tile();
         if (isMouseOnBlockedTile)
         {
             ConsumableData data = this._currentConsumable?.data;
@@ -118,7 +118,7 @@ public partial class ConsumablesHandler : Node
     private void _invalidate_target()
     {
         this._isValidTarget = false;
-        this._currentTarget = default;
+        this._currentTarget = null;
     }
 
     private void _on_tower_hovered(Tower tower)
@@ -136,7 +136,7 @@ public partial class ConsumablesHandler : Node
 
         Input.SetCustomMouseCursor(data.cursor_icon_used, Input.CursorShape.Arrow, CenterCursorOffset);
         this._isValidTarget = true;
-        this._currentTarget = Variant.From(tower);
+        this._currentTarget = tower;
     }
 
     private void _on_tower_unhovered(Tower tower)
@@ -152,7 +152,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        if (this._currentTarget.AsGodotObject() == tower)
+        if (ReferenceEquals(this._currentTarget, tower))
         {
             Input.SetCustomMouseCursor(data.cursor_icon, Input.CursorShape.Arrow, CenterCursorOffset);
             this._invalidate_target();

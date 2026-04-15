@@ -22,8 +22,8 @@ public class TowersManager
 
     public Godot.Collections.Dictionary<string, int> last_tower_ids { get; } = new();
     public Godot.Collections.Array<string> towers_ids { get; } = new();
-    public Godot.Collections.Array<Variant> towers { get; } = new();
-    public Godot.Collections.Array<Variant> all_tower_data { get; private set; } = new();
+    public List<Tower> towers { get; } = new();
+    public List<TowerDataWithInstance> all_tower_data { get; private set; } = new();
     public Godot.Collections.Dictionary<string, int> tower_cards_amount { get; } = new();
 
     private RunProgress _progress;
@@ -35,7 +35,7 @@ public class TowersManager
         ClickEvents.TowerRemovePressed += this.OnTowerRemoved;
         ClickEvents.AddTowerCard += this._on_tower_card_added;
 
-        this.all_tower_data = DataLoaderAccess.GetAllTowerData();
+        this.all_tower_data = DataLoaderAccess.GetAllTowerDataTyped();
     }
 
     public void dispose_events()
@@ -58,27 +58,25 @@ public class TowersManager
 
     public List<TowerDataWithInstance> get_random_towers(int amount)
     {
-        var availableTowers = this.all_tower_data.Duplicate();
+        var availableTowers = new List<TowerDataWithInstance>(this.all_tower_data);
         var selectedTowers = new List<TowerDataWithInstance>();
         int picks = Mathf.Min(amount, availableTowers.Count);
 
         for (int i = 0; i < picks; i++)
         {
             float totalWeight = 0f;
-            var weights = new Godot.Collections.Array<float>();
+            var weights = new List<float>(availableTowers.Count);
 
             for (int index = 0; index < availableTowers.Count; index++)
             {
-                Variant towerData = availableTowers[index];
-                if (!this._has_configuration_data(towerData))
+                TowerDataWithInstance towerData = availableTowers[index];
+                if (towerData?.data == null)
                 {
                     weights.Add(0f);
                     continue;
                 }
 
-                GodotObject cfg = towerData.AsGodotObject();
-                GodotObject data = cfg.Get("data").AsGodotObject();
-                int rarity = (int)data.Get("rarity");
+                int rarity = (int)towerData.data.rarity;
                 float weight = this._get_tower_weight_for_wave(rarity);
                 weights.Add(weight);
                 totalWeight += weight;
@@ -86,13 +84,13 @@ public class TowersManager
 
             if (totalWeight <= 0f)
             {
-                availableTowers.Shuffle();
-                TowerDataWithInstance fallbackTower = availableTowers[availableTowers.Count - 1].AsGodotObject() as TowerDataWithInstance;
-                if (fallbackTower != null)
+                int randomIndex = (int)(GD.Randi() % (uint)availableTowers.Count);
+                TowerDataWithInstance fallbackTower = availableTowers[randomIndex];
+                if (fallbackTower?.data != null)
                 {
                     selectedTowers.Add(fallbackTower);
                 }
-                availableTowers.RemoveAt(availableTowers.Count - 1);
+                availableTowers.RemoveAt(randomIndex);
                 continue;
             }
 
@@ -110,8 +108,8 @@ public class TowersManager
                 }
             }
 
-            TowerDataWithInstance selectedTower = availableTowers[selectedIndex].AsGodotObject() as TowerDataWithInstance;
-            if (selectedTower != null)
+            TowerDataWithInstance selectedTower = availableTowers[selectedIndex];
+            if (selectedTower?.data != null)
             {
                 selectedTowers.Add(selectedTower);
             }
@@ -125,15 +123,13 @@ public class TowersManager
     {
         for (int index = 0; index < this.all_tower_data.Count; index++)
         {
-            Variant towerConfiguration = this.all_tower_data[index];
-            if (!this._has_configuration_data(towerConfiguration))
+            TowerDataWithInstance typedConfiguration = this.all_tower_data[index];
+            if (typedConfiguration?.data == null)
             {
                 continue;
             }
 
-            GodotObject cfg = towerConfiguration.AsGodotObject();
-            TowerDataWithInstance typedConfiguration = cfg as TowerDataWithInstance;
-            if (typedConfiguration != null && typedConfiguration.data != null && typedConfiguration.data.id == id)
+            if (typedConfiguration.data.id == id)
             {
                 return typedConfiguration;
             }
@@ -149,7 +145,7 @@ public class TowersManager
             return;
         }
 
-        this.towers.Add(Variant.From(tower));
+        this.towers.Add(tower);
 
         int towerType = (int)tower.type;
         this._update_tower_count(towerType);
@@ -184,7 +180,7 @@ public class TowersManager
         }
 
         this.tower_placed?.Invoke(tower);
-        this.GetSingleton("AudioManager")?.Call("play_place_tower");
+        this.GetAudioManager()?.play_place_tower();
     }
 
     public void OnTowerRemoved(Tower tower)
@@ -194,7 +190,7 @@ public class TowersManager
             return;
         }
 
-        this.towers.Remove(Variant.From(tower));
+        this.towers.Remove(tower);
 
         int towerType = (int)tower.type;
         this._update_tower_count(towerType);
@@ -223,7 +219,7 @@ public class TowersManager
         int count = 0;
         for (int index = 0; index < this.towers.Count; index++)
         {
-            Tower tower = this.towers[index].AsGodotObject() as Tower;
+            Tower tower = this.towers[index];
             if (tower != null && (int)tower.type == tower_type)
             {
                 count++;
@@ -233,22 +229,33 @@ public class TowersManager
         return count;
     }
 
+    public List<Tower> get_placed_towers()
+    {
+        var placedTowers = new List<Tower>();
+        for (int index = 0; index < this.towers.Count; index++)
+        {
+            Tower tower = this.towers[index];
+            if (tower != null)
+            {
+                placedTowers.Add(tower);
+            }
+        }
+
+        return placedTowers;
+    }
+
     public Godot.Collections.Array<Variant> get_tower_listeners()
     {
         var listeners = new Godot.Collections.Array<Variant>();
         for (int index = 0; index < this.towers.Count; index++)
         {
-            GodotObject towerObj = this.towers[index].AsGodotObject();
-            if (towerObj == null)
+            Tower tower = this.towers[index];
+            if (tower == null || tower.tower_logic == null)
             {
                 continue;
             }
 
-            Variant towerLogic = towerObj.Get("tower_logic");
-            if (towerLogic.VariantType != Variant.Type.Nil)
-            {
-                listeners.Add(towerLogic);
-            }
+            listeners.Add(Variant.From(tower.tower_logic));
         }
 
         return listeners;
@@ -305,13 +312,13 @@ public class TowersManager
             return;
         }
 
-        GodotObject towerObj = GodotObject.InstanceFromId(instanceId);
-        if (towerObj == null)
+        Tower tower = GodotObject.InstanceFromId(instanceId) as Tower;
+        if (tower == null)
         {
             return;
         }
 
-        this.ApplyRuntimeBuffsToLegacyTower(instanceId, towerObj, towerModel);
+        this.ApplyRuntimeBuffsToLegacyTower(instanceId, tower, towerModel);
     }
 
     private float _get_tower_weight_for_wave(int rarity)
@@ -362,18 +369,6 @@ public class TowersManager
                 this._on_tower_card_added(towerConfiguration);
             }
         }
-    }
-
-    private bool _has_configuration_data(Variant tower_configuration)
-    {
-        GodotObject cfg = tower_configuration.AsGodotObject();
-        if (cfg == null)
-        {
-            return false;
-        }
-
-        Variant data = cfg.Get("data");
-        return data.VariantType != Variant.Type.Nil;
     }
 
     private string _generate_tower_id(Tower tower)
@@ -434,6 +429,11 @@ public class TowersManager
         return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<Node>($"/root/{name}");
     }
 
+    private AudioManager GetAudioManager()
+    {
+        return this.GetSingleton("AudioManager") as AudioManager;
+    }
+
     private void SyncRuntimeStatusFromLegacy()
     {
         RunContext runContext = this.GetSingleton("RunContext") as RunContext;
@@ -472,9 +472,8 @@ public class TowersManager
         }
     }
 
-    private void ApplyRuntimeBuffsToLegacyTower(ulong instanceId, GodotObject towerObj, TowerModel towerModel)
+    private void ApplyRuntimeBuffsToLegacyTower(ulong instanceId, Tower tower, TowerModel towerModel)
     {
-        Tower tower = towerObj as Tower;
         if (tower == null || towerModel == null)
         {
             return;

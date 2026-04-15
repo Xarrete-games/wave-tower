@@ -152,6 +152,22 @@ public static class DataLoaderAccess
         return dataLoader.get_all_tower_data();
     }
 
+    public static List<TowerDataWithInstance> GetAllTowerDataTyped()
+    {
+        var result = new List<TowerDataWithInstance>();
+        Godot.Collections.Array<Variant> allTowerData = GetAllTowerData();
+        for (int index = 0; index < allTowerData.Count; index++)
+        {
+            TowerDataWithInstance towerData = allTowerData[index].AsGodotObject() as TowerDataWithInstance;
+            if (towerData?.data != null)
+            {
+                result.Add(towerData);
+            }
+        }
+
+        return result;
+    }
+
     public static Godot.Collections.Array<Variant> GetAllEnemies()
     {
         DataLoader dataLoader = GetDataLoaderSingleton();

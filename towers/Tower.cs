@@ -313,10 +313,11 @@ public partial class Tower : Node2D
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
         Economy economy = runContext?.economy;
-        if (economy != null && this.data != null)
+        TowerData towerData = this.data as TowerData;
+        if (economy != null && towerData != null)
         {
             int currentGold = economy.gold;
-            int upgradePrice = this.data.Get("upgrade_price").AsInt32();
+            int upgradePrice = towerData.upgrade_price;
             economy.gold = currentGold - upgradePrice;
         }
 
@@ -329,9 +330,8 @@ public partial class Tower : Node2D
         return this.level >= MAX_LEVEL;
     }
 
-    public void copy_tower_data(Variant from_tower_var)
+    public void copy_tower_data(Tower from_tower)
     {
-        Tower from_tower = from_tower_var.AsGodotObject() as Tower;
         if (from_tower == null)
         {
             return;

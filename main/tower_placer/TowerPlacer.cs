@@ -3,11 +3,11 @@
 public partial class TowerPlacer : Node2D
 {
     [Export]
-    public Node composite_tile_map;
+    public CompositeTileMap composite_tile_map;
 
     private Node2D visual;
     private bool _isPlacing;
-    private Node2D _currentTowerInstance;
+    private Tower _currentTowerInstance;
     private bool _isValidPlacement;
     private RunProgress _progress;
 
@@ -41,16 +41,16 @@ public partial class TowerPlacer : Node2D
             return;
         }
 
-        if ((bool)this.composite_tile_map.Call("is_mouse_on_buildeable_tile"))
+        if (this.composite_tile_map.is_mouse_on_buildeable_tile())
         {
             this._isValidPlacement = true;
-            this._currentTowerInstance.Call("normal_color");
-            this._currentTowerInstance.GlobalPosition = (Vector2)this.composite_tile_map.Call("get_current_tile_pos");
+            this._currentTowerInstance.normal_color();
+            this._currentTowerInstance.GlobalPosition = this.composite_tile_map.get_current_tile_pos();
         }
         else
         {
             this._isValidPlacement = false;
-            this._currentTowerInstance.Call("phantom_mode");
+            this._currentTowerInstance.phantom_mode();
             this._currentTowerInstance.GlobalPosition = GetGlobalMousePosition();
         }
     }
@@ -78,7 +78,7 @@ public partial class TowerPlacer : Node2D
             return;
         }
 
-        int towerPrice = (int)this._currentTowerInstance.Get("build_price");
+        int towerPrice = this._currentTowerInstance.build_price;
         if (!this.HasEnoughGold(towerPrice))
         {
             GetNode<ActionManager>("/root/ActionManager").EndAction();
@@ -86,23 +86,14 @@ public partial class TowerPlacer : Node2D
         }
 
         this.HandleCosts(towerPrice);
-        string key = this.composite_tile_map.Call("set_tile_occupied_at_mouse").AsString();
-        this._currentTowerInstance.Set("composite_tile_key", key);
+        string key = this.composite_tile_map.set_tile_occupied_at_mouse();
+        this._currentTowerInstance.composite_tile_key = key;
 
         this._isPlacing = false;
-        this._currentTowerInstance.Call("enable");
+        this._currentTowerInstance.enable();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        Tower tower = this._currentTowerInstance as Tower;
-        if (tower == null)
-        {
-            GD.PushError("[TowerPlacer] Placed node is not a Tower instance.");
-            this._currentTowerInstance = null;
-            GetNode<ActionManager>("/root/ActionManager").EndAction();
-            return;
-        }
-
-        runContext.towers_manager.add_tower_placed(tower);
+        runContext.towers_manager.add_tower_placed(this._currentTowerInstance);
 
         this._currentTowerInstance = null;
 
@@ -158,15 +149,15 @@ public partial class TowerPlacer : Node2D
             return;
         }
 
-        Node2D instance = towerConfiguration.get_instance_node() as Node2D;
+        Tower instance = towerConfiguration.get_instance_node() as Tower;
         if (instance == null)
         {
-            GD.PushError("[TowerPlacer] get_instance_node did not return a Node2D tower.");
+            GD.PushError("[TowerPlacer] get_instance_node did not return a Tower.");
             return;
         }
 
         this._currentTowerInstance = instance;
-        this._currentTowerInstance.Set("build_price", price);
+        this._currentTowerInstance.build_price = price;
         this.visual.AddChild(this._currentTowerInstance);
         this._isPlacing = true;
 

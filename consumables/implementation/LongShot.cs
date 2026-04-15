@@ -1,10 +1,8 @@
-using Godot;
-
 public class LongShot : ConsumableTargeteable
 {
-    public override void action(Variant p_target)
+    public override void action(object p_target)
     {
-        Tower tower = p_target.AsGodotObject() as Tower;
+        Tower tower = p_target as Tower;
         if (tower == null)
         {
             return;

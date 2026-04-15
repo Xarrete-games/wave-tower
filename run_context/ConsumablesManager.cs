@@ -192,11 +192,7 @@ public class ConsumablesManager
             return;
         }
 
-        GodotObject targetTower = null;
-        if (consumableObj is ConsumableTargeteable targeteable)
-        {
-            targetTower = targeteable.target.AsGodotObject();
-        }
+        Tower targetTower = (consumableObj as ConsumableTargeteable)?.get_target_tower();
 
         if (targetTower == null)
         {
@@ -238,7 +234,7 @@ public class ConsumablesManager
             return false;
         }
 
-        GodotObject targetTower = targeteable.target.AsGodotObject();
+        Tower targetTower = targeteable.get_target_tower();
         if (targetTower == null)
         {
             return false;

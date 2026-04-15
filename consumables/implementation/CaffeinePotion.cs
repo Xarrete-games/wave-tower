@@ -1,5 +1,3 @@
-using Godot;
-
 public class CaffeinePotion : ConsumableUsable
 {
     public override void use()
@@ -11,10 +9,10 @@ public class CaffeinePotion : ConsumableUsable
             return;
         }
 
-        Godot.Collections.Array<Variant> towers = towersManager.towers;
+        System.Collections.Generic.List<Tower> towers = towersManager.get_placed_towers();
         for (int index = 0; index < towers.Count; index++)
         {
-            Tower tower = towers[index].AsGodotObject() as Tower;
+            Tower tower = towers[index];
             if (tower == null)
             {
                 continue;

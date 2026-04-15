@@ -1,10 +1,8 @@
-using Godot;
-
 public class FoundationBreaker : ConsumableTargeteable
 {
-    public override void action(Variant p_target)
+    public override void action(object p_target)
     {
-        GodotObject tileMap = p_target.AsGodotObject();
-        tileMap?.Call("unblock_tile_at_mouse");
+        CompositeTileMap tileMap = (CompositeTileMap)p_target;
+        tileMap.unblock_tile_at_mouse();
     }
 }

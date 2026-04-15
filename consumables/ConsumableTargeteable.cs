@@ -1,5 +1,3 @@
-using Godot;
-
 public abstract class ConsumableTargeteable : Consumable
 {
     public enum TargetType
@@ -8,19 +6,24 @@ public abstract class ConsumableTargeteable : Consumable
         TOWER,
     }
 
-    public Variant target { get; private set; }
+    public object target { get; private set; }
 
     public override bool requires_target()
     {
         return true;
     }
 
-    public void use(Variant p_target)
+    public void use(object p_target)
     {
         this.target = p_target;
         this.action(this.target);
         this.emit_used();
     }
 
-    public abstract void action(Variant p_target);
+    public Tower get_target_tower()
+    {
+        return this.target as Tower;
+    }
+
+    public abstract void action(object p_target);
 }
