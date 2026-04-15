@@ -7,7 +7,7 @@ public partial class TowersMenu : Control
     public Control buttons_container;
 
     [Export]
-    public Control tower_hint;
+    public TowerButtonHint tower_hint;
 
     [Export]
     public PackedScene tower_button_scene;
@@ -115,7 +115,7 @@ public partial class TowersMenu : Control
             return;
         }
 
-        this.tower_hint.Call("set_stats", data);
+        this.tower_hint.set_stats(data);
 
         Rect2 rect = towerButton.GetGlobalRect();
         this.tower_hint.GlobalPosition = new Vector2(

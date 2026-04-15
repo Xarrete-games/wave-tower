@@ -93,7 +93,7 @@ public partial class ChooseRelicCard : Control
             return;
         }
 
-        GetNode<Node>("/root/AudioManager").Call("play_button_click");
+        GetNode<AudioManager>("/root/AudioManager").play_button_click();
         EmitSignal(SignalName.card_pressed, this._relicData);
     }
 
@@ -109,7 +109,7 @@ public partial class ChooseRelicCard : Control
 
     private void _on_mouse_entered()
     {
-        GetNode<Node>("/root/AudioManager").Call("play_button_hover");
+        GetNode<AudioManager>("/root/AudioManager").play_button_hover();
         this._relicTexture.CustomMinimumSize = new Vector2(130, 130);
     }
 

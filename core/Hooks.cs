@@ -23,17 +23,17 @@ public static class Hooks
 
     public static void on_enemy_die(Variant enemy, Variant attack)
     {
-        ForEachLegacyListener(item => item.Call("on_enemy_die", enemy, attack));
+        // Legacy Variant bridge removed from gameplay path. Prefer OnEnemyDie with typed models.
     }
 
     public static void on_wave_init()
     {
-        ForEachLegacyListener(item => item.Call("on_wave_init"));
+        OnWaveInit(GetListenersFromRuntime());
     }
 
     public static void on_wave_finished()
     {
-        ForEachLegacyListener(item => item.Call("on_wave_finished"));
+        OnWaveFinished(GetListenersFromRuntime());
     }
 
     public static void on_get_price(PriceContext ctx)
@@ -43,22 +43,55 @@ public static class Hooks
 
     public static void on_tower_placed(Tower tower)
     {
-        ForEachLegacyListener(item => item.Call("on_tower_placed", tower));
+        if (tower == null)
+        {
+            return;
+        }
+
+        if (!RunContextRuntime.TowersManager.TryGetTowerByInstanceId(tower.GetInstanceId(), out TowerModel towerModel))
+        {
+            return;
+        }
+
+        OnTowerPlaced(GetListenersFromRuntime(), towerModel);
     }
 
     public static void on_get_targeting_modes(Godot.Collections.Array targetingModes)
     {
-        ForEachLegacyListener(item => item.Call("on_get_targeting_modes", targetingModes));
+        if (targetingModes == null)
+        {
+            return;
+        }
+
+        var typedModes = new List<TowerTargetingMode>();
+        for (int index = 0; index < targetingModes.Count; index++)
+        {
+            typedModes.Add((TowerTargetingMode)targetingModes[index].AsInt32());
+        }
+
+        OnGetTargetingModes(GetListenersFromRuntime(), typedModes);
+
+        targetingModes.Clear();
+        for (int index = 0; index < typedModes.Count; index++)
+        {
+            targetingModes.Add((int)typedModes[index]);
+        }
     }
 
     public static void on_relic_added(Variant relicAdded)
     {
-        ForEachLegacyListener(item => item.Call("on_relic_added", relicAdded));
+        Relic relic = relicAdded.Obj as Relic;
+        if (relic == null)
+        {
+            return;
+        }
+
+        OnRelicAdded(GetListenersFromRuntime(), relic);
     }
 
     public static void on_consumable_used(Variant consumable)
     {
-        ForEachLegacyListener(item => item.Call("on_consumable_used", consumable));
+        // Legacy Variant bridge removed from gameplay path. Prefer OnConsumableUsed with typed models.
     }
 
     public static void on_before_get_loot(LootContext ctx)
@@ -73,7 +106,19 @@ public static class Hooks
 
     public static void on_before_die(Status status)
     {
-        ForEachLegacyListener(item => item.Call("on_before_die"));
+        if (status == null)
+        {
+            return;
+        }
+
+        var model = new StatusModel
+        {
+            MaxHealth = status.max_health,
+            Health = status.health,
+            Armor = status.armor,
+        };
+
+        OnBeforeDie(GetListenersFromRuntime(), model);
     }
 
     public static List<AbstractModel> GetListenersFromRuntime()
@@ -189,33 +234,4 @@ public static class Hooks
         }
     }
 
-    private static void ForEachLegacyListener(Action<GodotObject> action)
-    {
-        if (action == null)
-        {
-            return;
-        }
-
-        SceneTree tree = Engine.GetMainLoop() as SceneTree;
-        RunContext runContext = tree?.Root?.GetNodeOrNull<RunContext>("/root/RunContext");
-        if (runContext == null)
-        {
-            return;
-        }
-
-        // Relics are now pure C# runtime listeners; legacy dispatch only applies to tower listeners.
-
-        Godot.Collections.Array<Variant> towerListeners = runContext.towers_manager?.get_tower_listeners();
-        if (towerListeners != null)
-        {
-            for (int index = 0; index < towerListeners.Count; index++)
-            {
-                GodotObject item = towerListeners[index].AsGodotObject();
-                if (item != null)
-                {
-                    action(item);
-                }
-            }
-        }
-    }
 }

@@ -14,12 +14,12 @@ public partial class Game : Node2D
     public bool trigger_finish_wave { get; set; } = false;
 
     private Control _pauseInstance;
-    private Node _musicHandler;
+    private MusicHandler _musicHandler;
     private CanvasLayer _configLayer;
 
     public override void _Ready()
     {
-        this._musicHandler = GetNode<Node>("MusicHandler");
+        this._musicHandler = GetNode<MusicHandler>("MusicHandler");
         this._configLayer = GetNode<CanvasLayer>("ConfigLayer");
 
         ClickEvents.ConfigButtonPressed += this.OpenConfigMenu;
@@ -31,7 +31,7 @@ public partial class Game : Node2D
         GameState gameState = GetNode<GameState>("/root/GameState");
         gameState.state = GameState.IN_GAME;
 
-        this._musicHandler.Call("play_music");
+        this._musicHandler.play_music();
 
         if (this.trigger_finish_wave)
         {

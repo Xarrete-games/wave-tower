@@ -13,17 +13,17 @@ public partial class CompositeTileMap : Node
 
     private sealed class TileKey
     {
-        public GodotObject Piece { get; }
+        public MapPiece Piece { get; }
         public Vector2I Coords { get; }
 
-        public TileKey(GodotObject piece, Vector2I coords)
+        public TileKey(MapPiece piece, Vector2I coords)
         {
             this.Piece = piece;
             this.Coords = coords;
         }
     }
 
-    private readonly List<GodotObject> _pieces = new();
+    private readonly List<MapPiece> _pieces = new();
     private readonly Dictionary<string, bool> _occupiedTiles = new();
     private readonly Dictionary<string, bool> _blockedTiles = new();
     private readonly Dictionary<string, bool> _buildeableTiles = new();
@@ -51,22 +51,20 @@ public partial class CompositeTileMap : Node
         }
     }
 
-    public void register_piece(Variant pieceVariant)
+    public void register_piece(MapPiece piece)
     {
-        GodotObject piece = pieceVariant.AsGodotObject();
         if (piece == null || this._pieces.Contains(piece))
         {
             return;
         }
 
         this._pieces.Add(piece);
-        piece.Call("limit_buildeable_tiles", MAX_BUILDEABLE_PER_PIECE);
+        piece.limit_buildeable_tiles(MAX_BUILDEABLE_PER_PIECE);
         this._scan_piece(piece);
     }
 
-    public void unregister_piece(Variant pieceVariant)
+    public void unregister_piece(MapPiece piece)
     {
-        GodotObject piece = pieceVariant.AsGodotObject();
         if (piece == null || !this._pieces.Contains(piece))
         {
             return;
@@ -266,7 +264,7 @@ public partial class CompositeTileMap : Node
 
         for (int index = 0; index < this._pieces.Count; index++)
         {
-            GodotObject piece = this._pieces[index];
+            MapPiece piece = this._pieces[index];
             TileMapLayer tileMap = this._get_tile_map(piece);
             if (tileMap == null)
             {
@@ -284,7 +282,7 @@ public partial class CompositeTileMap : Node
         return null;
     }
 
-    private void _scan_piece(GodotObject piece)
+    private void _scan_piece(MapPiece piece)
     {
         TileMapLayer tileMap = this._get_tile_map(piece);
         if (tileMap == null)
@@ -316,14 +314,14 @@ public partial class CompositeTileMap : Node
         }
     }
 
-    private string _make_key(GodotObject piece, Vector2I coords)
+    private string _make_key(MapPiece piece, Vector2I coords)
     {
         return $"{piece.GetInstanceId()}:{coords.X},{coords.Y}";
     }
 
-    private TileMapLayer _get_tile_map(GodotObject piece)
+    private TileMapLayer _get_tile_map(MapPiece piece)
     {
-        return piece?.Get("tile_map").AsGodotObject() as TileMapLayer;
+        return piece?.GetNodeOrNull<TileMapLayer>("MapPieceTileMap");
     }
 
     private void _on_tower_removed(Tower tower)

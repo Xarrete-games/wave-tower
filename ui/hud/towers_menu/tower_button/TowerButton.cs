@@ -162,8 +162,8 @@ public partial class TowerButton : Control
     {
         this._panelNode?.AddThemeStyleboxOverride("panel", HOVER_PANEL);
         this.hover?.Invoke(this);
-        Node audioManager = GetNodeOrNull<Node>("/root/AudioManager");
-        audioManager?.Call("play_button_hover");
+        AudioManager audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
+        audioManager?.play_button_hover();
     }
 
     private void _update_price()
@@ -223,8 +223,8 @@ public partial class TowerButton : Control
 
     private void _on_tower_button_pressed()
     {
-        Node audioManager = GetNodeOrNull<Node>("/root/AudioManager");
-        audioManager?.Call("play_button_click");
+        AudioManager audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
+        audioManager?.play_button_click();
 
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
         if (runContext != null && runContext.economy.gold < this.price)

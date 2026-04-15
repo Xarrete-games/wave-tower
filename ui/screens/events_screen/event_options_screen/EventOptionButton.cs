@@ -15,12 +15,12 @@ public partial class EventOptionButton : Button
 
     private void _on_mouse_entered()
     {
-        GetNode<Node>("/root/AudioManager").Call("play_button_hover");
+        GetNode<AudioManager>("/root/AudioManager").play_button_hover();
     }
 
     private void _on_pressed()
     {
-        GetNode<Node>("/root/AudioManager").Call("play_button_click");
+        GetNode<AudioManager>("/root/AudioManager").play_button_click();
         this.option_selected?.Invoke(this.option_data);
     }
 }

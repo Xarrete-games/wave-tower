@@ -5,12 +5,12 @@ public partial class TowerStatsPanel : Control
 {
     private Label _nameLabel;
     private Label _idLabel;
-    private Node _damageStat;
-    private Node _attackSpeedStat;
-    private Node _rangeStat;
+    private TowerStatUi _damageStat;
+    private TowerStatUi _attackSpeedStat;
+    private TowerStatUi _rangeStat;
     private Label _levelLabel;
     private Control _upgradeButtonContainer;
-    private Node _upgradeTowerPrice;
+    private GoldPrice _upgradeTowerPrice;
     private OptionButton _targetingModeSelector;
     private Control _towerHintPanel;
 
@@ -20,12 +20,12 @@ public partial class TowerStatsPanel : Control
     {
         this._nameLabel = GetNode<Label>("Panel/MarginContainer/MainContainer/NameLabel");
         this._idLabel = GetNode<Label>("Panel/MarginContainer/MainContainer/IdLabel");
-        this._damageStat = GetNode<Node>("Panel/MarginContainer/MainContainer/DataContainer/DamageStatUi");
-        this._attackSpeedStat = GetNode<Node>("Panel/MarginContainer/MainContainer/DataContainer/AttkSpeedStatUi");
-        this._rangeStat = GetNode<Node>("Panel/MarginContainer/MainContainer/DataContainer/RangeStatUi");
+        this._damageStat = GetNode<TowerStatUi>("Panel/MarginContainer/MainContainer/DataContainer/DamageStatUi");
+        this._attackSpeedStat = GetNode<TowerStatUi>("Panel/MarginContainer/MainContainer/DataContainer/AttkSpeedStatUi");
+        this._rangeStat = GetNode<TowerStatUi>("Panel/MarginContainer/MainContainer/DataContainer/RangeStatUi");
         this._levelLabel = GetNode<Label>("Panel/MarginContainer/MainContainer/ExpDataContainer/LevelContainer/LevelLabel");
         this._upgradeButtonContainer = GetNode<Control>("Panel/MarginContainer/MainContainer/UpgradeButtonContainer");
-        this._upgradeTowerPrice = GetNode<Node>("Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeTowerPrice");
+        this._upgradeTowerPrice = GetNode<GoldPrice>("Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeTowerPrice");
         this._targetingModeSelector = GetNode<OptionButton>("Panel/MarginContainer/MainContainer/TargetingContainer/TargetingModeSelector");
         this._towerHintPanel = GetNode<Control>("TowerHintPanel");
 
@@ -86,7 +86,7 @@ public partial class TowerStatsPanel : Control
         }
         else
         {
-            this._upgradeTowerPrice.Set("price", data?.upgrade_price ?? 0);
+            this._upgradeTowerPrice.price = data?.upgrade_price ?? 0;
             this._upgradeButtonContainer.Visible = true;
         }
     }
@@ -103,9 +103,9 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        this._damageStat.Call("set_value", towerStats.damage);
-        this._attackSpeedStat.Call("set_value", towerStats.attack_speed);
-        this._rangeStat.Call("set_value", towerStats.attack_range);
+        this._damageStat.set_value(towerStats.damage);
+        this._attackSpeedStat.set_value(towerStats.attack_speed);
+        this._rangeStat.set_value(towerStats.attack_range);
     }
 
     private void UpdateExpData(TowerExpData expData)
@@ -205,15 +205,15 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        this._damageStat.Call("show_upgrade_value", statsOnLevel.damage);
-        this._attackSpeedStat.Call("show_upgrade_value", statsOnLevel.attack_speed);
-        this._rangeStat.Call("show_upgrade_value", statsOnLevel.attack_range);
+        this._damageStat.show_upgrade_value(statsOnLevel.damage);
+        this._attackSpeedStat.show_upgrade_value(statsOnLevel.attack_speed);
+        this._rangeStat.show_upgrade_value(statsOnLevel.attack_range);
     }
 
     private void _on_upgrade_button_xarreta_mouse_exited()
     {
-        this._damageStat.Call("hide_upgrade_value");
-        this._attackSpeedStat.Call("hide_upgrade_value");
-        this._rangeStat.Call("hide_upgrade_value");
+        this._damageStat.hide_upgrade_value();
+        this._attackSpeedStat.hide_upgrade_value();
+        this._rangeStat.hide_upgrade_value();
     }
 }

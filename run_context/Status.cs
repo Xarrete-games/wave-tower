@@ -175,7 +175,7 @@ public class Status
             return;
         }
 
-        Node audioManager = tree.Root.GetNodeOrNull<Node>("/root/AudioManager");
+        AudioManager audioManager = tree.Root.GetNodeOrNull<AudioManager>("/root/AudioManager");
         if (audioManager == null)
         {
             return;
@@ -183,11 +183,11 @@ public class Status
 
         if (armorBlockDamage)
         {
-            audioManager.Call("play_armor_block");
+            audioManager.play_armor_block();
         }
         else
         {
-            audioManager.Call("play_player_hurt");
+            audioManager.play_player_hurt();
         }
     }
 }

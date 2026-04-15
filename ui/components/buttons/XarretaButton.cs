@@ -20,7 +20,7 @@ public partial class XarretaButton : Button
 
     private void _on_mouse_entered()
     {
-        GetNode<Node>("/root/AudioManager").Call("play_button_hover");
+        GetNode<AudioManager>("/root/AudioManager").play_button_hover();
         EmitSignal(SignalName.xarreta_mouse_entered);
     }
 
@@ -31,7 +31,7 @@ public partial class XarretaButton : Button
 
     private void _on_pressed()
     {
-        GetNode<Node>("/root/AudioManager").Call("play_button_click");
+        GetNode<AudioManager>("/root/AudioManager").play_button_click();
         EmitSignal(SignalName.xarreta_pressed);
     }
 

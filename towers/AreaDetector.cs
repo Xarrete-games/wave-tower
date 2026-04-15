@@ -125,16 +125,16 @@ public partial class AreaDetector : Area2D
 
         foreach (var enemy in targets_in_range)
         {
-            if (!GodotObject.IsInstanceValid(enemy))
+            if (enemy is not Enemy typedEnemy || !GodotObject.IsInstanceValid(typedEnemy))
             {
                 continue;
             }
 
-            var ratio = enemy.Call("get_progress_ratio").AsSingle();
+            var ratio = typedEnemy.get_progress_ratio();
             if (ratio > highestProgress)
             {
                 highestProgress = ratio;
-                bestEnemy = enemy;
+                bestEnemy = typedEnemy;
             }
         }
 
@@ -148,16 +148,16 @@ public partial class AreaDetector : Area2D
 
         foreach (var enemy in targets_in_range)
         {
-            if (!GodotObject.IsInstanceValid(enemy))
+            if (enemy is not Enemy typedEnemy || !GodotObject.IsInstanceValid(typedEnemy))
             {
                 continue;
             }
 
-            var hp = enemy.Call("get_remaining_health").AsSingle();
+            var hp = typedEnemy.get_remaining_health();
             if (hp > highestHp)
             {
                 highestHp = hp;
-                bestEnemy = enemy;
+                bestEnemy = typedEnemy;
             }
         }
 
@@ -171,17 +171,16 @@ public partial class AreaDetector : Area2D
 
         foreach (var enemy in targets_in_range)
         {
-            if (!GodotObject.IsInstanceValid(enemy))
+            if (enemy is not Enemy typedEnemy || !GodotObject.IsInstanceValid(typedEnemy))
             {
                 continue;
             }
 
-            // Keep misspelled method name for compatibility with existing Enemy.gd API.
-            var hp = enemy.Call("get_remaining_health").AsSingle();
+            var hp = typedEnemy.get_remaining_health();
             if (hp < lowestHp)
             {
                 lowestHp = hp;
-                bestEnemy = enemy;
+                bestEnemy = typedEnemy;
             }
         }
 

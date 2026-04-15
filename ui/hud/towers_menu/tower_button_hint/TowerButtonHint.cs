@@ -17,26 +17,25 @@ public partial class TowerButtonHint : Control
         this.range_stat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/RangeStatUi");
     }
 
-    public void set_stats(Variant configuration)
+    public void set_stats(TowerData configuration)
     {
-        GodotObject cfg = configuration.AsGodotObject();
-        if (cfg == null)
+        if (configuration == null)
         {
             return;
         }
 
         if (this.name_label != null)
         {
-            this.name_label.Text = "[u]" + cfg.Get("display_name").AsString() + "[/u]";
+            this.name_label.Text = "[u]" + configuration.display_name + "[/u]";
         }
 
         if (this.description_label != null)
         {
-            this.description_label.Text = cfg.Get("description").AsString();
+            this.description_label.Text = configuration.description;
         }
 
-        this.damage_stat?.set_value(cfg.Get("base_damage").AsSingle());
-        this.attack_speed_stat?.set_value(cfg.Get("base_attack_speed").AsSingle());
-        this.range_stat?.set_value(cfg.Get("base_attack_range").AsSingle());
+        this.damage_stat?.set_value(configuration.base_damage);
+        this.attack_speed_stat?.set_value(configuration.base_attack_speed);
+        this.range_stat?.set_value(configuration.base_attack_range);
     }
 }

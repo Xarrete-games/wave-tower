@@ -63,8 +63,8 @@ public partial class AnimationComponent : Node
         _ = add_tween(this.hover_values, this.parallel_animations, this.hover_time, this.hover_delay, this.hover_transition, this.hover_easing);
         if (this.play_hover_sound)
         {
-            Node audioManager = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<Node>("/root/AudioManager");
-            audioManager?.Call("play_button_hover");
+            AudioManager audioManager = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<AudioManager>("/root/AudioManager");
+            audioManager?.play_button_hover();
         }
     }
 

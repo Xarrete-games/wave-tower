@@ -138,7 +138,7 @@ public partial class Tower : Node2D
 
         this.type_id = GetType().Name;
 
-        this.data?.Call("build");
+        (this.data as TowerData)?.build();
         this.tower_logic = new TowerLogic(this);
         this.tower_area_collision.Polygon = build_ellipse_polygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO);
 

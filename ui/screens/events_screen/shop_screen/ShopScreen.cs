@@ -30,7 +30,7 @@ public partial class ShopScreen : Control
     public Button exit_button;
 
     [Export]
-    public Button sell_button;
+    public XarretaButton sell_button;
 
     private bool _isOnSellMode;
 
@@ -72,7 +72,7 @@ public partial class ShopScreen : Control
     private void OnItemPurchase(ItemOffer itemOffer, ShopSlot slotPurchased)
     {
         this.item_purchase?.Invoke(itemOffer);
-        GetNode<Node>("/root/AudioManager").Call("play_purchase");
+        GetNode<AudioManager>("/root/AudioManager").play_purchase();
 
         Resource itemData = itemOffer?.item_data;
         string purchasedId = itemData switch
@@ -125,8 +125,8 @@ public partial class ShopScreen : Control
             }
 
             runContext.economy.add_gold(itemOffer?.price ?? 0);
-            GetNode<Node>("/root/AudioManager").Call("play_purchase");
-            this.sell_button.Call("disable");
+            GetNode<AudioManager>("/root/AudioManager").play_purchase();
+            this.sell_button.disable();
             this._on_exit_button_pressed();
             return;
         }

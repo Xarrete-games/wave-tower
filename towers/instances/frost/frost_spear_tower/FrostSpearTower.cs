@@ -16,7 +16,8 @@ public partial class FrostSpearTower : Tower
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(this._current_target) || this.frost_spear_projectile_scene == null)
+        Enemy targetEnemy = this._current_target as Enemy;
+        if (!GodotObject.IsInstanceValid(targetEnemy) || this.frost_spear_projectile_scene == null)
         {
             return;
         }
@@ -27,11 +28,11 @@ public partial class FrostSpearTower : Tower
         projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
 
         Attack attack = this._get_attack();
-        int enemyFrostStacks = this._current_target.Call("get_debuff_stacks", 0).AsInt32();
+        int enemyFrostStacks = targetEnemy.get_debuff_stacks(0);
         float damageMultiplier = 1.0f + enemyFrostStacks * 0.10f;
         attack.damage *= damageMultiplier;
 
         EnemyDebuff debuff = EnemyDebuff.create_frost(this.damage_source);
-        projectile.set_target(this._current_target, attack, debuff, this.debuff_stacks);
+        projectile.set_target(targetEnemy, attack, debuff, this.debuff_stacks);
     }
 }

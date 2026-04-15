@@ -46,14 +46,13 @@ public partial class EventOptionsScreen : Control
             return;
         }
 
-        if (runtimeScript is CSharpScript csharpScript)
+        if (runtimeScript is not CSharpScript csharpScript)
         {
-            this._eventScriptInstance = csharpScript.New().Obj as EventScript;
+            GD.PushError($"Runtime script for event {eventData.id} is not C#.");
+            return;
         }
-        else
-        {
-            this._eventScriptInstance = runtimeScript.Call("new").Obj as EventScript;
-        }
+
+        this._eventScriptInstance = csharpScript.New().Obj as EventScript;
         if (this._eventScriptInstance == null)
         {
             GD.PushError($"Could not instantiate runtime script for event {eventData.id}.");

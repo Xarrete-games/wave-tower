@@ -15,16 +15,16 @@ public partial class ChooseTowerScreenItem : Control
     public TextureRect texture;
 
     [Export]
-    public Node damage_stat;
+    public TowerStatUi damage_stat;
 
     [Export]
-    public Node range_stat;
+    public TowerStatUi range_stat;
 
     [Export]
-    public Node attack_speed_stat;
+    public TowerStatUi attack_speed_stat;
 
     [Export]
-    public Node gold_price;
+    public GoldPrice gold_price;
 
     private TowerDataWithInstance _towerData;
 
@@ -64,10 +64,10 @@ public partial class ChooseTowerScreenItem : Control
         this.description_label.Text = configuration.description;
         this.texture.Texture = configuration.icon;
 
-        this.damage_stat.Call("set_value", configuration.base_damage);
-        this.range_stat.Call("set_value", configuration.base_attack_range);
-        this.attack_speed_stat.Call("set_value", configuration.base_attack_speed);
-        this.gold_price.Set("price", configuration.build_price);
+        this.damage_stat.set_value(configuration.base_damage);
+        this.range_stat.set_value(configuration.base_attack_range);
+        this.attack_speed_stat.set_value(configuration.base_attack_speed);
+        this.gold_price.price = configuration.build_price;
     }
 
     private void ApplyConfigurationDeferred()
@@ -82,7 +82,7 @@ public partial class ChooseTowerScreenItem : Control
             return;
         }
 
-        GetNode<Node>("/root/AudioManager").Call("play_button_click");
+        GetNode<AudioManager>("/root/AudioManager").play_button_click();
         EmitSignal(SignalName.selected, this);
     }
 }

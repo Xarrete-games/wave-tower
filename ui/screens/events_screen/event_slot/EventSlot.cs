@@ -38,13 +38,13 @@ public partial class EventSlot : VBoxContainer
         }
 
         EmitSignal(SignalName.event_pressed, this._event);
-        GetNode<Node>("/root/AudioManager").Call("play_button_click");
+        GetNode<AudioManager>("/root/AudioManager").play_button_click();
     }
 
     private void _on_mouse_entered()
     {
         this.event_texture.CustomMinimumSize = new Vector2(150, 150);
-        GetNode<Node>("/root/AudioManager").Call("play_button_hover");
+        GetNode<AudioManager>("/root/AudioManager").play_button_hover();
     }
 
     private void _on_mouse_exited()

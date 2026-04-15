@@ -152,7 +152,7 @@ public class RelicsManager
             return;
         }
 
-        Node audioManager = tree.Root.GetNodeOrNull<Node>("/root/AudioManager");
-        audioManager?.Call("play_relic_obtain");
+        AudioManager audioManager = tree.Root.GetNodeOrNull<AudioManager>("/root/AudioManager");
+        audioManager?.play_relic_obtain();
     }
 }

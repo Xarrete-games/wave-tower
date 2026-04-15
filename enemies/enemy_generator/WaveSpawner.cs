@@ -172,7 +172,7 @@ public partial class WaveSpawner : Node
             return;
         }
 
-        Node enemy = scene.Instantiate();
+        Enemy enemy = scene.Instantiate<Enemy>();
         if (enemy == null)
         {
             GD.PushError($"[WaveSpawner] Scene for '{data.name}' did not produce an Enemy");
@@ -181,7 +181,7 @@ public partial class WaveSpawner : Node
 
         this._apply_stats(enemy, data);
         enemy.AddToGroup("enemy");
-        enemy.Set("enabled", false);
+        enemy.enabled = false;
 
         if (this.enemies_container == null)
         {
@@ -191,10 +191,10 @@ public partial class WaveSpawner : Node
         }
 
         this.enemies_container.AddChild(enemy);
-        enemy.Call("disable");
-        enemy.Set("global_position", enemyWaypoints[0]);
-        enemy.Call("enable");
-        enemy.Call("set_waypoints", enemyWaypoints);
+        enemy.disable();
+        enemy.GlobalPosition = enemyWaypoints[0];
+        enemy.enable();
+        enemy.set_waypoints(enemyWaypoints);
 
         EmitSignal(SignalName.enemy_spawned, enemy);
     }

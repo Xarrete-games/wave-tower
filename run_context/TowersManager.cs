@@ -244,23 +244,6 @@ public class TowersManager
         return placedTowers;
     }
 
-    public Godot.Collections.Array<Variant> get_tower_listeners()
-    {
-        var listeners = new Godot.Collections.Array<Variant>();
-        for (int index = 0; index < this.towers.Count; index++)
-        {
-            Tower tower = this.towers[index];
-            if (tower == null || tower.tower_logic == null)
-            {
-                continue;
-            }
-
-            listeners.Add(Variant.From(tower.tower_logic));
-        }
-
-        return listeners;
-    }
-
     public void reset_towers()
     {
         this._update_tower_count(0);

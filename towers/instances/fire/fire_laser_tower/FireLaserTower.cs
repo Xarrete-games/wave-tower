@@ -20,16 +20,17 @@ public partial class FireLaserTower : Tower
 
     protected override async void _fire()
     {
-        if (!GodotObject.IsInstanceValid(this._current_target) || this.red_projectile == null)
+        Enemy targetEnemy = this._current_target as Enemy;
+        if (!GodotObject.IsInstanceValid(targetEnemy) || this.red_projectile == null)
         {
             return;
         }
 
-        float hpPercent = this._current_target.Call("get_percentage_remaining_health").AsSingle();
+        float hpPercent = targetEnemy.get_percentage_remaining_health();
         Attack nextAttack = hpPercent > this.execute_threshold ? this._get_attack() : this._get_letal_attack();
         EnemyDebuff debuff = this.apply_burn ? EnemyDebuff.create_burn(this.damage_source) : null;
 
-        this.red_projectile.set_target(this._current_target, nextAttack, debuff);
+        this.red_projectile.set_target(targetEnemy, nextAttack, debuff);
         this.cristal_light?.turn_on();
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), Timer.SignalName.Timeout);

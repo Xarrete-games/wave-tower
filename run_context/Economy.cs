@@ -61,7 +61,7 @@ public class Economy
             return;
         }
 
-        Node audioManager = tree.Root.GetNodeOrNull<Node>("/root/AudioManager");
-        audioManager?.Call("play_coins");
+        AudioManager audioManager = tree.Root.GetNodeOrNull<AudioManager>("/root/AudioManager");
+        audioManager?.play_coins();
     }
 }

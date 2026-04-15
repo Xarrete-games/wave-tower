@@ -124,14 +124,14 @@ public partial class ShopSlot : VBoxContainer
 
         if (UIUtilsStatic.IsLeftClickEvent(@event) && this._runContext.economy.gold >= this._price && this._hasEnoughHealth)
         {
-            GetNode<Node>("/root/AudioManager").Call("play_button_click");
+            GetNode<AudioManager>("/root/AudioManager").play_button_click();
             this.item_purchased?.Invoke(this._item, this);
         }
     }
 
     private void _on_mouse_entered()
     {
-        GetNode<Node>("/root/AudioManager").Call("play_button_hover");
+        GetNode<AudioManager>("/root/AudioManager").play_button_hover();
         this.shop_slot_icon?.increased_icon_size();
     }
 

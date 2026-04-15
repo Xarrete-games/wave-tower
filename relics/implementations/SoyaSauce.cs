@@ -37,14 +37,6 @@ public sealed class SoyaSauce : Relic
 
     private bool HasRelicById(string relicId)
     {
-        var tree = Godot.Engine.GetMainLoop() as Godot.SceneTree;
-        var runContext = tree?.Root.GetNodeOrNull<Godot.Node>("/root/RunContext");
-        var relicsManager = runContext?.Get("relics_manager").AsGodotObject();
-        if (relicsManager != null)
-        {
-            return relicsManager.Call("has_relic", relicId).AsBool();
-        }
-
         return RunContextRuntime.RelicsManager.HasRelic(relicId);
     }
 }

@@ -50,7 +50,7 @@ public partial class InventoryUISlot : Control
 
         if (InputClickUtils.IsLeftClickReleased(@event))
         {
-            GetNode<Node>("/root/AudioManager").Call("play_button_click");
+            GetNode<AudioManager>("/root/AudioManager").play_button_click();
             HintManagerStatic.RemoveHint(this);
 
             this._consumable?.emit_clicked();
@@ -78,7 +78,7 @@ public partial class InventoryUISlot : Control
             return;
         }
 
-        GetNode<Node>("/root/AudioManager").Call("play_button_hover");
+        GetNode<AudioManager>("/root/AudioManager").play_button_hover();
 
         ConsumableData data = this._consumable?.data;
         if (data == null)
