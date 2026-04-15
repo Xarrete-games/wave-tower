@@ -69,7 +69,24 @@ public partial class RunHandler : Node
         this.event_layer.AddChild(chooseTowerScreen);
         chooseTowerScreen.PopulateScreen(cards);
 
-        await ToSignal(chooseTowerScreen, "done");
+        var completion = new TaskCompletionSource<bool>();
+        void OnDone()
+        {
+            completion.TrySetResult(true);
+        }
+
+        chooseTowerScreen.done += OnDone;
+        try
+        {
+            await completion.Task;
+        }
+        finally
+        {
+            if (GodotObject.IsInstanceValid(chooseTowerScreen))
+            {
+                chooseTowerScreen.done -= OnDone;
+            }
+        }
     }
 
     public async Task ShowEventsScreen(EventData eventData)
@@ -156,7 +173,7 @@ public partial class RunHandler : Node
         bool isLastWave = runContext.progress.is_last_wave();
         if (isLastWave)
         {
-            await ToSignal(GetTree().CreateTimer(5, false), "timeout");
+            await ToSignal(GetTree().CreateTimer(5, false), SceneTreeTimer.SignalName.Timeout);
             GetTree().ChangeSceneToPacked(EndGameScene);
             return;
         }

@@ -54,7 +54,7 @@ public partial class TowerSelector : Node
     {
         if (this._currentTowerSelected != null)
         {
-            this._currentTowerSelected.Disconnect("stats_change", Callable.From<Variant>(this.OnStatsChange));
+            this._currentTowerSelected.stats_changed -= this.OnStatsChange;
         }
 
         this._currentTowerSelected = null;
@@ -72,13 +72,13 @@ public partial class TowerSelector : Node
         if (this._currentTowerSelected == null)
         {
             this._currentTowerSelected = tower;
-            this._currentTowerSelected.Connect("stats_change", Callable.From<Variant>(this.OnStatsChange));
+            this._currentTowerSelected.stats_changed += this.OnStatsChange;
         }
         else if (this._currentTowerSelected != tower)
         {
-            this._currentTowerSelected.Disconnect("stats_change", Callable.From<Variant>(this.OnStatsChange));
+            this._currentTowerSelected.stats_changed -= this.OnStatsChange;
             this._currentTowerSelected = tower;
-            this._currentTowerSelected.Connect("stats_change", Callable.From<Variant>(this.OnStatsChange));
+            this._currentTowerSelected.stats_changed += this.OnStatsChange;
         }
     }
 
@@ -92,9 +92,8 @@ public partial class TowerSelector : Node
         this.ClearTowerSelected();
     }
 
-    private void OnStatsChange(Variant tower)
+    private void OnStatsChange(Tower towerObj)
     {
-        Tower towerObj = tower.AsGodotObject() as Tower;
         if (this._currentTowerSelected == towerObj)
         {
             RunContext runContext = GetNode<RunContext>("/root/RunContext");

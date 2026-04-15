@@ -1,10 +1,10 @@
 using Godot;
+using System;
 using System.Threading.Tasks;
 
 public partial class EventsScreenHandler : Node
 {
-    [Signal]
-    public delegate void event_finishedEventHandler();
+    public event Action event_finished;
 
     private ShopScreenHandler _shopScreenHandler;
     private EventsOptionsScreenHandler _eventsOptionsScreenHandler;
@@ -21,7 +21,7 @@ public partial class EventsScreenHandler : Node
     {
         if (eventData == null)
         {
-            EmitSignal(SignalName.event_finished);
+            this.event_finished?.Invoke();
             return;
         }
 
@@ -39,6 +39,6 @@ public partial class EventsScreenHandler : Node
             await this._eventsOptionsScreenHandler.ShowOptionsEventAsync(eventData, eventLayer);
         }
 
-        EmitSignal(SignalName.event_finished);
+        this.event_finished?.Invoke();
     }
 }

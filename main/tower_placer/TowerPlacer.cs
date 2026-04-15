@@ -161,7 +161,7 @@ public partial class TowerPlacer : Node2D
         this.visual.AddChild(this._currentTowerInstance);
         this._isPlacing = true;
 
-        GetNode<ActionManager>("/root/ActionManager").StartAction(ActionManager.ActionState.PlacingTower, Callable.From(this.CancelTower));
+        GetNode<ActionManager>("/root/ActionManager").StartAction(ActionManager.ActionState.PlacingTower, this.CancelTower);
     }
 }
 

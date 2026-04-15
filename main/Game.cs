@@ -13,7 +13,7 @@ public partial class Game : Node2D
     [Export]
     public bool trigger_finish_wave { get; set; } = false;
 
-    private Control _pauseInstance;
+    private PauseMenu _pauseInstance;
     private MusicHandler _musicHandler;
     private CanvasLayer _configLayer;
 
@@ -78,8 +78,8 @@ public partial class Game : Node2D
         }
 
         GetTree().Paused = !GetTree().Paused;
-        this._pauseInstance = this.pause.Instantiate<Control>();
-        this._pauseInstance.Connect("resume_game", Callable.From(this.CloseConfigMenu));
+        this._pauseInstance = this.pause.Instantiate<PauseMenu>();
+        this._pauseInstance.resume_game += this.CloseConfigMenu;
         this._configLayer.AddChild(this._pauseInstance);
     }
 
@@ -90,6 +90,7 @@ public partial class Game : Node2D
             return;
         }
 
+        this._pauseInstance.resume_game -= this.CloseConfigMenu;
         this._pauseInstance.QueueFree();
         this._pauseInstance = null;
     }

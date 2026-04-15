@@ -1,12 +1,11 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class ChooseTowerScreen : Control
 {
     private static readonly PackedScene TowerItemScene = GD.Load<PackedScene>("uid://cw14sfvcipnum");
-
-    [Signal]
-    public delegate void doneEventHandler();
+    public event Action done;
 
     [Export]
     public Control cards_container;
@@ -49,7 +48,7 @@ public partial class ChooseTowerScreen : Control
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.towers_manager._on_tower_card_added(this._selectedItem.GetTowerData());
 
-        EmitSignal(SignalName.done);
+        this.done?.Invoke();
         QueueFree();
     }
 }

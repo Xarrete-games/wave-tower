@@ -1,10 +1,10 @@
 ﻿using Godot;
+using System;
 using System.Threading.Tasks;
 
 public partial class PauseMenu : Control
 {
-    [Signal]
-    public delegate void resume_gameEventHandler();
+    public event Action resume_game;
 
     private static readonly PackedScene MainMenu = GD.Load<PackedScene>("uid://4i6kl0xurgeg");
 
@@ -41,7 +41,7 @@ public partial class PauseMenu : Control
         GetTree().Paused = false;
         SceneTreeTimer timer = GetTree().CreateTimer(0.1f);
         await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
-        EmitSignal(SignalName.resume_game);
+        this.resume_game?.Invoke();
     }
 
     public void pause()

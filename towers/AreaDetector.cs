@@ -1,14 +1,12 @@
 using Godot;
 using Godot.Collections;
+using System;
 
 [GlobalClass]
 public partial class AreaDetector : Area2D
 {
-    [Signal]
-    public delegate void target_changeEventHandler(Node2D enemy);
-
-    [Signal]
-    public delegate void enemy_dieEventHandler(Node2D enemy);
+    public event Action<Node2D> target_change;
+    public event Action<Node2D> enemy_die;
 
     public Array<Node2D> targets_in_range { get; set; } = new();
 
@@ -19,7 +17,7 @@ public partial class AreaDetector : Area2D
         set
         {
             _currentTarget = value;
-            EmitSignal(SignalName.target_change, value);
+            this.target_change?.Invoke(value);
         }
     }
 
@@ -71,7 +69,7 @@ public partial class AreaDetector : Area2D
 
     private void _on_enemy_die(Node2D enemy)
     {
-        EmitSignal(SignalName.enemy_die, enemy);
+        this.enemy_die?.Invoke(enemy);
         _remove_target_and_get_next(enemy);
     }
 

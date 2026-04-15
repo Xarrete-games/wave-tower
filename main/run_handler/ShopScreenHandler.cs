@@ -1,12 +1,12 @@
 using Godot;
+using System;
 using System.Threading.Tasks;
 
 public partial class ShopScreenHandler : Node
 {
     private static readonly PackedScene ShopScreenScene = GD.Load<PackedScene>("uid://bpf44acq183yv");
 
-    [Signal]
-    public delegate void shop_closedEventHandler();
+    public event Action shop_closed;
 
     public async Task OpenShopAsync(CanvasLayer eventLayer)
     {
@@ -22,7 +22,7 @@ public partial class ShopScreenHandler : Node
 
         await ToSignal(shopScreen, "tree_exited");
         shopScreen.item_purchase -= this.OnItemPurchased;
-        EmitSignal(SignalName.shop_closed);
+        this.shop_closed?.Invoke();
     }
 
     private void OnItemPurchased(ItemOffer itemOffer)

@@ -1,9 +1,9 @@
 using Godot;
+using System;
 
 public partial class ChooseTowerScreenItem : Control
 {
-    [Signal]
-    public delegate void selectedEventHandler(ChooseTowerScreenItem item);
+    public event Action<ChooseTowerScreenItem> selected;
 
     [Export]
     public Label title_label;
@@ -83,6 +83,6 @@ public partial class ChooseTowerScreenItem : Control
         }
 
         GetNode<AudioManager>("/root/AudioManager").play_button_click();
-        EmitSignal(SignalName.selected, this);
+        this.selected?.Invoke(this);
     }
 }

@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class ActionManager : Node
 {
@@ -11,9 +12,9 @@ public partial class ActionManager : Node
     }
 
     public ActionState CurrentAction = ActionState.None;
-    private Callable _onActionCancel = default;
+    private Action _onActionCancel;
 
-    public void StartAction(ActionState state, Callable cancel_callback = default)
+    public void StartAction(ActionState state, Action cancel_callback = null)
     {
         if (this.CurrentAction != ActionState.None)
         {
@@ -26,14 +27,14 @@ public partial class ActionManager : Node
 
     public void EndAction()
     {
-        Callable callback = this._onActionCancel;
-        this._onActionCancel = default;
+        Action callback = this._onActionCancel;
+        this._onActionCancel = null;
 
-        if (!callback.Equals(default(Callable)))
+        if (callback != null)
         {
             try
             {
-                callback.Call();
+                callback();
             }
             catch (System.ObjectDisposedException)
             {

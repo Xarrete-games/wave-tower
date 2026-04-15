@@ -6,17 +6,11 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class Tower : Node2D
 {
-    [Signal]
-    public delegate void stats_changeEventHandler(Variant tower);
-
-    [Signal]
-    public delegate void attack_firedEventHandler();
-
-    [Signal]
-    public delegate void on_target_changeEventHandler(Node2D enemy);
-
     public event Action<TowerBuff> buff_added;
     public event Action<TowerBuff> buff_removed;
+    public event Action<Tower> stats_changed;
+    public event Action attack_fired;
+    public event Action<Node2D> on_target_change;
 
     public enum Type
     {
@@ -58,7 +52,7 @@ public partial class Tower : Node2D
         set
         {
             this._stats = value;
-            EmitSignal(SignalName.stats_change, this);
+            this.stats_changed?.Invoke(this);
         }
     }
 
@@ -88,7 +82,7 @@ public partial class Tower : Node2D
         set
         {
             this._exp_data = value;
-            EmitSignal(SignalName.stats_change, this);
+            this.stats_changed?.Invoke(this);
         }
     }
 
@@ -438,12 +432,12 @@ public partial class Tower : Node2D
     private void _on_target_change(Node2D enemy)
     {
         this._current_target = enemy;
-        EmitSignal(SignalName.on_target_change, enemy);
+        this.on_target_change?.Invoke(enemy);
 
         if (this._first_shot && GodotObject.IsInstanceValid(this._current_target))
         {
             this._fire();
-            EmitSignal(SignalName.attack_fired);
+            this.attack_fired?.Invoke();
             this.attack_timer.Start();
             this._first_shot = false;
         }
@@ -458,7 +452,7 @@ public partial class Tower : Node2D
         }
 
         this._fire();
-        EmitSignal(SignalName.attack_fired);
+        this.attack_fired?.Invoke();
     }
 
     protected virtual void _fire() { }
@@ -539,7 +533,15 @@ public partial class Tower : Node2D
         this.range_tween?.Kill();
         this.range_tween = CreateTween();
         this.range_tween.TweenProperty(this.range_preview, "self_modulate:a", 0.0f, 0.5f).SetTrans(Tween.TransitionType.Sine);
-        this.range_tween.TweenCallback(Callable.From(() => this.range_preview.Visible = false));
+        this.range_tween.Finished += this._on_hide_range_tween_finished;
+    }
+
+    private void _on_hide_range_tween_finished()
+    {
+        if (this.range_preview != null)
+        {
+            this.range_preview.Visible = false;
+        }
     }
 
     protected GodotObject GetRunContext()

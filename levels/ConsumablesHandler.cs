@@ -203,7 +203,7 @@ public partial class ConsumablesHandler : Node
         }
 
         ActionManager actionManager = GetNode<ActionManager>("/root/ActionManager");
-        actionManager.StartAction(ActionManager.ActionState.UsingItem, Callable.From(this._cancel_consumable));
+        actionManager.StartAction(ActionManager.ActionState.UsingItem, this._cancel_consumable);
     }
 
     private void _on_game_state_changed(int newState)

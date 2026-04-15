@@ -66,7 +66,7 @@ public partial class TowerStatsPanel : Control
         this._targetingModeSelector.Select(targetingMode);
 
         ActionManager manager = GetNode<ActionManager>("/root/ActionManager");
-        manager.StartAction(ActionManager.ActionState.TowerSelected, Callable.From(this.HidePanel));
+        manager.StartAction(ActionManager.ActionState.TowerSelected, this.HidePanel);
         this.Visible = true;
 
         TowerStats stats = tower.stats;

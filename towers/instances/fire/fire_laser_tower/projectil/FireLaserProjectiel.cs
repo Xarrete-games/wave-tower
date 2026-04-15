@@ -173,8 +173,13 @@ public partial class FireLaserProjectiel : Node2D
         this._fire_particles.Emitting = false;
         this._tween = CreateTween();
         this._tween.TweenProperty(this._line_2d, "width", 0.0f, this.growth_time * 2.0f).FromCurrent();
-        this._tween.TweenCallback(Callable.From(this._line_2d.Hide));
-        this._tween.TweenCallback(Callable.From(() => this._current_laser_length = 0.0f));
+        this._tween.Finished += this._on_disappear_tween_finished;
+    }
+
+    private void _on_disappear_tween_finished()
+    {
+        this._line_2d?.Hide();
+        this._current_laser_length = 0.0f;
     }
 
     private async void _appear()
