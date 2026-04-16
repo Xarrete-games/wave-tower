@@ -73,4 +73,4 @@ theme_override_constants/margin_right = 40
 layout_mode = 2
 text = "Exit"
 
-[connection signal="xarreta_pressed" from="MarginContainer/XarretaMenuButton" to="." method="_on_xarreta_menu_button_xarreta_pressed"]
+[connection signal="pressed" from="MarginContainer/XarretaMenuButton" to="." method="_on_xarreta_menu_button_xarreta_pressed"]

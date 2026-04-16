@@ -12,12 +12,12 @@ public partial class ShopSlot : VBoxContainer
     public RichTextLabel description_label;
 
     [Export]
-    public Control gold_price;
+    public GoldPrice gold_price;
 
     [Export]
     public ShopSlotIcon shop_slot_icon;
 
-    private Control _healthPrice;
+    private HealthPrice _healthPrice;
     private RunContext _runContext;
     private ItemOffer _item;
     private int _price;
@@ -26,7 +26,7 @@ public partial class ShopSlot : VBoxContainer
 
     public override void _Ready()
     {
-        this._healthPrice = GetNode<Control>("HealthPrice");
+        this._healthPrice = GetNode<HealthPrice>("HealthPrice");
         this._healthPrice.Visible = false;
 
         this._runContext = GetNode<RunContext>("/root/RunContext");
@@ -89,7 +89,10 @@ public partial class ShopSlot : VBoxContainer
         this.title_label.Text = displayName;
         this.description_label.Text = description;
         this.TooltipText = description;
-        this.gold_price?.Set("price", this._price);
+        if (this.gold_price != null)
+        {
+            this.gold_price.price = this._price;
+        }
         this.shop_slot_icon?.set_icon(icon);
 
         RelicData relicData = itemData as RelicData;
@@ -102,7 +105,7 @@ public partial class ShopSlot : VBoxContainer
         this._healthPrice.Visible = this._currentHealthCost > 0;
         if (this._currentHealthCost > 0)
         {
-            this._healthPrice.Set("price", this._currentHealthCost);
+            this._healthPrice.price = this._currentHealthCost;
         }
 
         this._chek_health(this._runContext.status.health, this._currentHealthCost);

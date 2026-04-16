@@ -1,12 +1,10 @@
 ﻿using Godot;
+using System;
 
 public partial class GameState : Node
 {
-    [Signal]
-    public delegate void state_changeEventHandler(int state);
-
-    [Signal]
-    public delegate void speed_changeEventHandler(float value);
+    public event Action<int> state_change;
+    public event Action<float> speed_change;
 
     public const int ON_MAIN_MENU = 0;
     public const int IN_GAME = 1;
@@ -22,7 +20,7 @@ public partial class GameState : Node
         {
             this._speed = value;
             Engine.TimeScale = value;
-            this.EmitSignal(SignalName.speed_change, value);
+            this.speed_change?.Invoke(value);
         }
     }
 
@@ -33,7 +31,7 @@ public partial class GameState : Node
         set
         {
             this._state = value;
-            this.EmitSignal(SignalName.state_change, value);
+            this.state_change?.Invoke(value);
         }
     }
 

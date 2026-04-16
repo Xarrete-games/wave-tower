@@ -1,16 +1,16 @@
 using Godot;
+using System;
 
 public partial class EventScreen : Control
 {
-    [Signal]
-    public delegate void event_selectedEventHandler(Variant @event);
+    public event Action<EventData> event_selected;
 
     private static readonly PackedScene EventSlotScene = GD.Load<PackedScene>("uid://cl23rwbjcvak5");
 
     [Export]
     public Control events_container;
 
-    public void set_events(Godot.Collections.Array<Variant> events)
+    public void set_events(Godot.Collections.Array<EventData> events)
     {
         for (int index = 0; index < events.Count; index++)
         {
@@ -21,9 +21,9 @@ public partial class EventScreen : Control
         }
     }
 
-    private void _on_event_pressed(Variant @event)
+    private void _on_event_pressed(EventData @event)
     {
-        EmitSignal(SignalName.event_selected, @event);
+        this.event_selected?.Invoke(@event);
         QueueFree();
     }
 }

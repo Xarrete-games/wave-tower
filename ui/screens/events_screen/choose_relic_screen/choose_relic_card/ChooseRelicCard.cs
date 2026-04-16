@@ -1,9 +1,9 @@
 using Godot;
+using System;
 
 public partial class ChooseRelicCard : Control
 {
-    [Signal]
-    public delegate void card_pressedEventHandler(Variant relicData);
+    public event Action<Variant> card_pressed;
 
     private Variant _relicData;
     private bool _hasEnoughLife;
@@ -16,7 +16,7 @@ public partial class ChooseRelicCard : Control
     private Label _title;
     private TextureRect _relicTexture;
     private Polygon2D _hexagonBorder;
-    private Control _healthPrice;
+    private HealthPrice _healthPrice;
 
     public override void _Ready()
     {
@@ -24,7 +24,7 @@ public partial class ChooseRelicCard : Control
         this._title = GetNode<Label>("VBoxContainer/Title");
         this._relicTexture = GetNode<TextureRect>("RelicIcon/RelicTexture");
         this._hexagonBorder = GetNode<Polygon2D>("RelicIcon/Hexagon/Control/Root2d/HexagonBorder");
-        this._healthPrice = GetNode<Control>("VBoxContainer/HealthPrice");
+        this._healthPrice = GetNode<HealthPrice>("VBoxContainer/HealthPrice");
         this._runContext = GetNode<RunContext>("/root/RunContext");
         this._healthPrice.Visible = false;
     }
@@ -56,7 +56,7 @@ public partial class ChooseRelicCard : Control
         {
             this._healthPrice.Visible = true;
             this._itCostsHealth = true;
-            this._healthPrice.Set("price", this._healthCost);
+            this._healthPrice.price = this._healthCost;
 
             this.CheckHealth(this._runContext.status.health, this._healthCost);
             if (!this._isHealthSubscribed)
@@ -94,7 +94,7 @@ public partial class ChooseRelicCard : Control
         }
 
         GetNode<AudioManager>("/root/AudioManager").play_button_click();
-        EmitSignal(SignalName.card_pressed, this._relicData);
+        this.card_pressed?.Invoke(this._relicData);
     }
 
     private void CheckHealth(int currentHealth, int healthCost)

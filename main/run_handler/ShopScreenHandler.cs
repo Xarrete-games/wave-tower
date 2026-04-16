@@ -20,7 +20,7 @@ public partial class ShopScreenHandler : Node
         shopScreen.set_consumables(consumables);
         shopScreen.item_purchase += this.OnItemPurchased;
 
-        await ToSignal(shopScreen, "tree_exited");
+        await ToSignal(shopScreen, Node.SignalName.TreeExited);
         shopScreen.item_purchase -= this.OnItemPurchased;
         this.shop_closed?.Invoke();
     }

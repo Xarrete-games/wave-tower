@@ -1,11 +1,11 @@
 using Godot;
 using Godot.Collections;
+using System;
 
 [GlobalClass]
 public partial class AnimationComponent : Node
 {
-    [Signal]
-    public delegate void enteredEventHandler();
+    public event Action entered;
 
     private const Tween.TransitionType IMMEDIATE_TRANSITION = Tween.TransitionType.Linear;
 
@@ -157,7 +157,7 @@ public partial class AnimationComponent : Node
         else
         {
             await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-            EmitSignal(SignalName.entered);
+            this.entered?.Invoke();
         }
     }
 
@@ -196,7 +196,7 @@ public partial class AnimationComponent : Node
         if (entering)
         {
             await ToSignal(tween, Tween.SignalName.Finished);
-            EmitSignal(SignalName.entered);
+            this.entered?.Invoke();
         }
     }
 

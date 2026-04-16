@@ -23,7 +23,7 @@ public partial class ChooseRelicScreenHandler : Node
         this._rewardsScreen.item_selected += this.OnItemSelected;
         this._rewardsScreen.reroll_pressed += this.OnRerollPressed;
 
-        await ToSignal(this._rewardsScreen, "tree_exited");
+        await ToSignal(this._rewardsScreen, Node.SignalName.TreeExited);
         this._rewardsScreen.item_selected -= this.OnItemSelected;
         this._rewardsScreen.reroll_pressed -= this.OnRerollPressed;
         this._rewardsScreen = null;

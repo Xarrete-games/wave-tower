@@ -149,7 +149,7 @@ public partial class TowerPlacer : Node2D
             return;
         }
 
-        Tower instance = towerConfiguration.get_instance_node() as Tower;
+        Tower instance = towerConfiguration.get_instance_node();
         if (instance == null)
         {
             GD.PushError("[TowerPlacer] get_instance_node did not return a Tower.");

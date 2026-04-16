@@ -118,7 +118,15 @@ public partial class MapPieceData : Resource
             }
         }
 
-        instance.Set("edges", newEdges);
+        if (instance is MapPiece mapPiece)
+        {
+            mapPiece.edges = newEdges;
+        }
+        else
+        {
+            GD.PushWarning("[MapPieceData] Instanced node is not a MapPiece; edges were not assigned.");
+        }
+
         return instance;
     }
 }

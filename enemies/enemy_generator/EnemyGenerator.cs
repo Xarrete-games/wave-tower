@@ -118,9 +118,8 @@ public partial class EnemyGenerator : Node
         }
     }
 
-    private void OnEnemySpawned(Variant enemy)
+    private void OnEnemySpawned(Enemy enemyObj)
     {
-        Enemy enemyObj = enemy.AsGodotObject() as Enemy;
         if (enemyObj == null)
         {
             return;

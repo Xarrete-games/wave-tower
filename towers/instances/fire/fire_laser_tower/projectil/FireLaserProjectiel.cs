@@ -43,12 +43,13 @@ public partial class FireLaserProjectiel : Node2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (!this._is_casting || !GodotObject.IsInstanceValid(this._target))
+        Enemy targetEnemy = this._target as Enemy;
+        if (!this._is_casting || !GodotObject.IsInstanceValid(targetEnemy))
         {
             return;
         }
 
-        Vector2 targetPosition = this._target.Get("target_position").AsVector2();
+        Vector2 targetPosition = targetEnemy.target_position;
         LookAt(targetPosition);
 
         float distanceToTarget = GlobalPosition.DistanceTo(targetPosition);

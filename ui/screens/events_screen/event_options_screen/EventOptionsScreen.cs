@@ -1,10 +1,10 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class EventOptionsScreen : Control
 {
-    [Signal]
-    public delegate void event_completedEventHandler();
+    public event Action event_completed;
 
     [Export]
     public PackedScene button_option_scene;
@@ -87,7 +87,7 @@ public partial class EventOptionsScreen : Control
     private void OnOptionSelected(object data)
     {
         this._eventScriptInstance?.handle_response(data);
-        EmitSignal(SignalName.event_completed);
+        this.event_completed?.Invoke();
         QueueFree();
     }
 }

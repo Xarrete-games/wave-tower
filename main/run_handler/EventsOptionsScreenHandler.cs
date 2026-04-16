@@ -19,6 +19,24 @@ public partial class EventsOptionsScreenHandler : Node
 
         eventLayer.AddChild(optionsScreen);
         optionsScreen.set_event(eventData);
-        await ToSignal(optionsScreen, EventOptionsScreen.SignalName.event_completed);
+
+        var completion = new TaskCompletionSource<bool>();
+        void OnCompleted()
+        {
+            completion.TrySetResult(true);
+        }
+
+        optionsScreen.event_completed += OnCompleted;
+        try
+        {
+            await completion.Task;
+        }
+        finally
+        {
+            if (GodotObject.IsInstanceValid(optionsScreen))
+            {
+                optionsScreen.event_completed -= OnCompleted;
+            }
+        }
     }
 }

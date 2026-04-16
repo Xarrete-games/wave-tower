@@ -59,23 +59,15 @@ public static class UIUtilsStatic
         }
 
         _initialized = true;
-        Resource paletteResource = ResourceLoader.Load("uid://dbyjsuchchdht");
-        GodotObject paletteObject = paletteResource as GodotObject;
-        if (paletteObject == null)
+        Godot.ColorPalette palette = ResourceLoader.Load<Godot.ColorPalette>("uid://dbyjsuchchdht");
+        if (palette == null || palette.Colors == null || palette.Colors.Length < 3)
         {
             return;
         }
 
-        Variant colorsVariant = paletteObject.Get("colors");
-        var colors = colorsVariant.AsGodotArray<Color>();
-        if (colors == null || colors.Count < 3)
-        {
-            return;
-        }
-
-        _primaryColor = colors[0];
-        _secondaryColor = colors[1];
-        _accentColor = colors[2];
+        _primaryColor = palette.Colors[0];
+        _secondaryColor = palette.Colors[1];
+        _accentColor = palette.Colors[2];
     }
 }
 

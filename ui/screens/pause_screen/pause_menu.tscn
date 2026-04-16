@@ -127,8 +127,8 @@ enter_time = 0.05
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
-[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/MainContainer/SettingsSections/BackButton" to="." method="_on_back_button_xarreta_pressed"]
-[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ResumeButton" to="." method="_on_resume_button_xarreta_pressed"]
-[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/SettingsButton" to="." method="_on_settings_button_xarreta_pressed"]
-[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/RestartButton" to="." method="_on_restart_button_xarreta_pressed"]
-[connection signal="xarreta_pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ExitButton" to="." method="_on_exit_button_xarreta_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/MainContainer/SettingsSections/BackButton" to="." method="_on_back_button_xarreta_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ResumeButton" to="." method="_on_resume_button_xarreta_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/SettingsButton" to="." method="_on_settings_button_xarreta_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/RestartButton" to="." method="_on_restart_button_xarreta_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ExitButton" to="." method="_on_exit_button_xarreta_pressed"]

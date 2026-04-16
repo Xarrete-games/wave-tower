@@ -198,17 +198,11 @@ public partial class AreaDetector : Area2D
             return false;
         }
 
-        if (!enemy.HasMethod("get") && !enemy.HasMethod("is_enabled"))
+        if (enemy is Enemy typedEnemy)
         {
-            return true;
+            return typedEnemy.enabled;
         }
 
-        var enabled = enemy.Get("enabled");
-        if (enabled.VariantType == Variant.Type.Nil)
-        {
-            return true;
-        }
-
-        return enabled.AsBool();
+        return true;
     }
 }

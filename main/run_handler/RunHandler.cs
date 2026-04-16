@@ -132,13 +132,13 @@ public partial class RunHandler : Node
     private void ShowNextWaveScreen()
     {
         Node nextWaveScreen = NextWaveScreenScene.Instantiate();
-        this.event_layer.CallDeferred("add_child", nextWaveScreen);
+        this.event_layer.CallDeferred(Node.MethodName.AddChild, nextWaveScreen);
     }
 
     private void ShowNextLevelMenu()
     {
         Node nextLevelScreen = NextLevelScreenScene.Instantiate();
-        this.event_layer.CallDeferred("add_child", nextLevelScreen);
+        this.event_layer.CallDeferred(Node.MethodName.AddChild, nextLevelScreen);
     }
 
     private async void OnWaveFinished()

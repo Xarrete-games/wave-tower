@@ -141,7 +141,8 @@ public class SpawnPositionsHandler
             }
             else if (entry.ContainsKey("edge"))
             {
-                dir = entry["edge"].AsGodotObject()?.Get("dir").AsInt32() ?? -1;
+                Edge edge = entry["edge"].As<Edge>();
+                dir = edge != null ? (int)edge.dir : -1;
             }
 
             if (dir == EdgeDirNe || dir == EdgeDirSe)

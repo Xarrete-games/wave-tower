@@ -53,7 +53,18 @@ public partial class LightningChainProjectile : Node2D
             return;
         }
 
-        this._end_global = this._target.Get("target_position").AsVector2();
+        Enemy targetEnemy = this._target as Enemy;
+        if (!GodotObject.IsInstanceValid(targetEnemy))
+        {
+            if (!this._hit)
+            {
+                QueueFree();
+            }
+
+            return;
+        }
+
+        this._end_global = targetEnemy.target_position;
         this._max_length = this._start_global.DistanceTo(this._end_global);
 
         this._current_length += this.extend_speed * (float)delta;

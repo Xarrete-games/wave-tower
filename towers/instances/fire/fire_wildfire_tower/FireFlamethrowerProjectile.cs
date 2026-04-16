@@ -28,12 +28,13 @@ public partial class FireFlamethrowerProjectile : Node2D
 
     public override void _Process(double delta)
     {
-        if (!GodotObject.IsInstanceValid(this._target))
+        Enemy targetEnemy = this._target as Enemy;
+        if (!GodotObject.IsInstanceValid(targetEnemy))
         {
             return;
         }
 
-        Vector2 targetPosition = this._target.Get("target_position").AsVector2();
+        Vector2 targetPosition = targetEnemy.target_position;
         Vector2 dir = targetPosition - GlobalPosition;
         this._flamethrower.Rotation = dir.Angle();
     }

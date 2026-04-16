@@ -1,20 +1,14 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 [GlobalClass]
 public partial class WaveSpawner : Node
 {
-    [Signal]
-    public delegate void wave_startedEventHandler(int wave_number);
-
-    [Signal]
-    public delegate void enemy_spawnedEventHandler(Variant enemy);
-
-    [Signal]
-    public delegate void group_finishedEventHandler(int group_index, int pressure);
-
-    [Signal]
-    public delegate void wave_finishedEventHandler(int wave_number);
+    public event Action<int> wave_started;
+    public event Action<Enemy> enemy_spawned;
+    public event Action<int, int> group_finished;
+    public event Action<int> wave_finished;
 
     [Export]
     public WorldMap world_map;
@@ -54,7 +48,7 @@ public partial class WaveSpawner : Node
         }
 
         this._is_spawning = true;
-        EmitSignal(SignalName.wave_started, wave_number);
+        this.wave_started?.Invoke(wave_number);
 
         for (int groupIndex = 0; groupIndex < groups.Count; groupIndex++)
         {
@@ -78,7 +72,7 @@ public partial class WaveSpawner : Node
                 }
             }
 
-            EmitSignal(SignalName.group_finished, groupIndex, pressure);
+            this.group_finished?.Invoke(groupIndex, pressure);
 
             if (groupIndex < groups.Count - 1)
             {
@@ -88,7 +82,7 @@ public partial class WaveSpawner : Node
         }
 
         this._is_spawning = false;
-        EmitSignal(SignalName.wave_finished, wave_number);
+        this.wave_finished?.Invoke(wave_number);
     }
 
     private float _pick_spawn_interval(int pressure, int wave_number, WaveConfig config)
@@ -196,7 +190,7 @@ public partial class WaveSpawner : Node
         enemy.enable();
         enemy.set_waypoints(enemyWaypoints);
 
-        EmitSignal(SignalName.enemy_spawned, enemy);
+        this.enemy_spawned?.Invoke(enemy);
     }
 
     private Godot.Collections.Array<Vector2> _build_enemy_waypoints_with_offset(Godot.Collections.Array<Vector2> base_waypoints)
@@ -221,11 +215,11 @@ public partial class WaveSpawner : Node
         return result;
     }
 
-    private void _apply_stats(Node enemy, EnemyData data)
+    private void _apply_stats(Enemy enemy, EnemyData data)
     {
-        enemy.Set("max_health", data.max_health);
-        enemy.Set("base_speed", data.base_speed);
-        enemy.Set("damage", data.damage);
-        enemy.Set("gold_value", data.base_gold_value);
+        enemy.max_health = data.max_health;
+        enemy.base_speed = data.base_speed;
+        enemy.damage = data.damage;
+        enemy.gold_value = data.base_gold_value;
     }
 }

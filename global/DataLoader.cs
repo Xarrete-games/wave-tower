@@ -50,8 +50,8 @@ public partial class DataLoader : Node
     {
         for (int index = 0; index < this.relics.Count; index++)
         {
-            GodotObject relic = this.relics[index].AsGodotObject();
-            if (relic != null && this._has_property(relic, "id") && (string)relic.Get("id") == relic_id)
+            RelicData relic = this.relics[index].As<RelicData>();
+            if (relic != null && relic.id == relic_id)
             {
                 return this._duplicate_resource(this.relics[index]);
             }
@@ -74,14 +74,14 @@ public partial class DataLoader : Node
 
         for (int index = 0; index < candidates.Count; index++)
         {
-            GodotObject relicData = candidates[index].AsGodotObject();
+            RelicData relicData = candidates[index].As<RelicData>();
             if (relicData == null)
             {
                 continue;
             }
 
-            bool isCursed = this._has_property(relicData, "is_cursed") && (bool)relicData.Get("is_cursed");
-            bool onlyForEvents = this._has_property(relicData, "only_for_events") && (bool)relicData.Get("only_for_events");
+            bool isCursed = relicData.is_cursed;
+            bool onlyForEvents = relicData.only_for_events;
             if (!include_cursed && isCursed)
             {
                 continue;
@@ -114,15 +114,15 @@ public partial class DataLoader : Node
 
         for (int index = 0; index < this.relics.Count; index++)
         {
-            GodotObject relicData = this.relics[index].AsGodotObject();
-            if (relicData == null || !this._has_property(relicData, "id"))
+            RelicData relicData = this.relics[index].As<RelicData>();
+            if (relicData == null)
             {
                 continue;
             }
 
             if (rarity.VariantType != Variant.Type.Nil)
             {
-                if (!this._has_property(relicData, "rarity") || (int)relicData.Get("rarity") != (int)rarity)
+                if (relicData.rarity != (int)rarity)
                 {
                     continue;
                 }
@@ -130,12 +130,7 @@ public partial class DataLoader : Node
 
             if (is_cursed.VariantType != Variant.Type.Nil)
             {
-                if (!this._has_property(relicData, "is_cursed"))
-                {
-                    continue;
-                }
-
-                bool relicIsCursed = (bool)relicData.Get("is_cursed");
+                bool relicIsCursed = relicData.is_cursed;
                 bool filterCursed = (bool)is_cursed;
                 if (!filterCursed && relicIsCursed)
                 {
@@ -151,7 +146,7 @@ public partial class DataLoader : Node
             bool alreadyOwned = false;
             if (relicsManager != null)
             {
-                alreadyOwned = relicsManager.has_relic((string)relicData.Get("id"));
+                alreadyOwned = relicsManager.has_relic(relicData.id);
             }
 
             if (!alreadyOwned)
@@ -172,19 +167,14 @@ public partial class DataLoader : Node
 
         for (int index = 0; index < candidates.Count; index++)
         {
-            GodotObject relicData = candidates[index].AsGodotObject();
+            RelicData relicData = candidates[index].As<RelicData>();
             if (relicData == null)
             {
                 continue;
             }
 
-            if (!this._has_property(relicData, "is_cursed") || !this._has_property(relicData, "only_for_events"))
-            {
-                continue;
-            }
-
-            bool isCursed = (bool)relicData.Get("is_cursed");
-            bool onlyForEvents = (bool)relicData.Get("only_for_events");
+            bool isCursed = relicData.is_cursed;
+            bool onlyForEvents = relicData.only_for_events;
             if (!include_cursed && isCursed)
             {
                 continue;
@@ -220,8 +210,8 @@ public partial class DataLoader : Node
     {
         for (int index = 0; index < this.consumables.Count; index++)
         {
-            GodotObject consumable = this.consumables[index].AsGodotObject();
-            if (consumable != null && (string)consumable.Get("id") == consumable_id)
+            ConsumableData consumable = this.consumables[index].As<ConsumableData>();
+            if (consumable != null && consumable.id == consumable_id)
             {
                 return this._duplicate_resource(this.consumables[index]);
             }
@@ -242,8 +232,8 @@ public partial class DataLoader : Node
         var filtered = new Godot.Collections.Array<Variant>();
         for (int index = 0; index < this.consumables.Count; index++)
         {
-            GodotObject data = this.consumables[index].AsGodotObject();
-            if (data != null && (int)data.Get("consumable_type") == consumable_type)
+            ConsumableData data = this.consumables[index].As<ConsumableData>();
+            if (data != null && data.consumable_type == consumable_type)
             {
                 filtered.Add(this.consumables[index]);
             }
@@ -258,8 +248,8 @@ public partial class DataLoader : Node
     {
         for (int index = 0; index < this.enemy_debuffs.Count; index++)
         {
-            GodotObject debuffData = this.enemy_debuffs[index].AsGodotObject();
-            if (debuffData != null && (int)debuffData.Get("debuff_type") == type)
+            EnemyDebuffData debuffData = this.enemy_debuffs[index].As<EnemyDebuffData>();
+            if (debuffData != null && debuffData.debuff_type == type)
             {
                 return this._duplicate_resource(this.enemy_debuffs[index]);
             }
@@ -272,8 +262,8 @@ public partial class DataLoader : Node
     {
         for (int index = 0; index < this.tower_buffs_data.Count; index++)
         {
-            GodotObject buffData = this.tower_buffs_data[index].AsGodotObject();
-            if (buffData != null && (string)buffData.Get("id") == buff_id)
+            BuffData buffData = this.tower_buffs_data[index].As<BuffData>();
+            if (buffData != null && buffData.id == buff_id)
             {
                 return this._duplicate_resource(this.tower_buffs_data[index]);
             }

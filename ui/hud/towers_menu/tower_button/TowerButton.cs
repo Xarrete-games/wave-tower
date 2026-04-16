@@ -51,7 +51,10 @@ public partial class TowerButton : Control
         set
         {
             this._price = value;
-            this._goldPriceNode?.Set("price", value);
+                if (this._goldPriceNode != null)
+                {
+                    this._goldPriceNode.price = value;
+                }
         }
     }
 
@@ -93,7 +96,7 @@ public partial class TowerButton : Control
 
     private Panel _panelNode;
     private TextureButton _towerButtonNode;
-    private Node _goldPriceNode;
+    private GoldPrice _goldPriceNode;
     private Label _amountLabelNode;
     private RunContext _runContext;
 
@@ -101,7 +104,7 @@ public partial class TowerButton : Control
     {
         this._panelNode = !this.panel.IsEmpty ? GetNodeOrNull<Panel>(this.panel) : GetNodeOrNull<Panel>("VBoxContainer/CenterContainer/Panel");
         this._towerButtonNode = !this.tower_button.IsEmpty ? GetNodeOrNull<TextureButton>(this.tower_button) : GetNodeOrNull<TextureButton>("VBoxContainer/CenterContainer/TowerButton");
-        this._goldPriceNode = !this.gold_price.IsEmpty ? GetNodeOrNull<Node>(this.gold_price) : GetNodeOrNull<Node>("VBoxContainer/GoldPrice");
+        this._goldPriceNode = !this.gold_price.IsEmpty ? GetNodeOrNull<GoldPrice>(this.gold_price) : GetNodeOrNull<GoldPrice>("VBoxContainer/GoldPrice");
         this._amountLabelNode = !this.amount_label.IsEmpty ? GetNodeOrNull<Label>(this.amount_label) : GetNodeOrNull<Label>("HBoxContainer/MarginContainer/AmountLabel");
 
         this._runContext = GetNode<RunContext>("/root/RunContext");

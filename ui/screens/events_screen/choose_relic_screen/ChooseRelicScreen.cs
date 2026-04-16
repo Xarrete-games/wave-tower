@@ -1,13 +1,11 @@
 using Godot;
+using System;
 using System.Threading.Tasks;
 
 public partial class ChooseRelicScreen : Control
 {
-    [Signal]
-    public delegate void item_selectedEventHandler(Variant item);
-
-    [Signal]
-    public delegate void reroll_pressedEventHandler();
+    public event Action<Variant> item_selected;
+    public event Action reroll_pressed;
 
     private static readonly PackedScene ChooseRelicCardScene = GD.Load<PackedScene>("uid://dgcv5fdqvfext");
 
@@ -15,14 +13,14 @@ public partial class ChooseRelicScreen : Control
     public Control cards_container;
 
     [Export]
-    public Node reroll_priece;
+    public GoldPrice reroll_priece;
 
     private bool _enabled;
     private int _rerollPrice = 20;
 
     public override async void _Ready()
     {
-        await ToSignal(GetTree().CreateTimer(0.3f, false), "timeout");
+        await ToSignal(GetTree().CreateTimer(0.3f, false), SceneTreeTimer.SignalName.Timeout);
         this._enabled = true;
     }
 
@@ -41,7 +39,7 @@ public partial class ChooseRelicScreen : Control
             card.card_pressed += this.OnCardPressed;
         }
 
-        this.reroll_priece.Set("price", this._rerollPrice);
+        this.reroll_priece.price = this._rerollPrice;
     }
 
     private void OnCardPressed(Variant relicData)
@@ -51,7 +49,7 @@ public partial class ChooseRelicScreen : Control
             return;
         }
 
-        EmitSignal(SignalName.item_selected, relicData);
+        this.item_selected?.Invoke(relicData);
     }
 
     private void _on_reroll_button_xarreta_pressed()
@@ -60,7 +58,7 @@ public partial class ChooseRelicScreen : Control
         int gold = runContext.economy.gold;
         if (this._rerollPrice <= gold)
         {
-            EmitSignal(SignalName.reroll_pressed);
+            this.reroll_pressed?.Invoke();
         }
     }
 

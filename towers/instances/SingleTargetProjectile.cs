@@ -13,19 +13,19 @@ public partial class SingleTargetProjectile : Node2D
 
     public override void _Process(double delta)
     {
-        if (!GodotObject.IsInstanceValid(this._enemy))
+        Enemy enemyModel = this._enemy as Enemy;
+        if (!GodotObject.IsInstanceValid(enemyModel))
         {
             QueueFree();
             return;
         }
 
-        Vector2 targetPosition = this._enemy.Get("target_position").AsVector2();
+        Vector2 targetPosition = enemyModel.target_position;
         Vector2 direction = targetPosition - GlobalPosition;
         float distance = direction.Length();
 
         if (distance <= HIT_RADIUS)
         {
-            Enemy enemyModel = this._enemy as Enemy;
             enemyModel?.apply_damage(this._attack);
             if (this._debuff != null)
             {

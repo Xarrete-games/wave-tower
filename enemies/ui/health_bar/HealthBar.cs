@@ -16,7 +16,7 @@ public partial class HealthBar : Control
 
     public System.Collections.Generic.Dictionary<int, DebuffSlot> debuffs_slots = new();
     public System.Collections.Generic.Dictionary<int, int> debuffs_count = new();
-    public System.Collections.Generic.Dictionary<int, Variant> debuff_data_by_type = new();
+    public System.Collections.Generic.Dictionary<int, EnemyDebuffData> debuff_data_by_type = new();
 
     public void set_max_health(float value)
     {
@@ -67,25 +67,25 @@ public partial class HealthBar : Control
     private void _reset_debuffs()
     {
         this.debuffs_count = new System.Collections.Generic.Dictionary<int, int>();
-        this.debuff_data_by_type = new System.Collections.Generic.Dictionary<int, Variant>();
+        this.debuff_data_by_type = new System.Collections.Generic.Dictionary<int, EnemyDebuffData>();
     }
 
-    private void _update_debuff_value(int type, int value, Variant debuff_data)
+    private void _update_debuff_value(int type, int value, EnemyDebuffData debuff_data)
     {
         DebuffSlot slot = this.debuffs_slots.ContainsKey(type) ? this.debuffs_slots[type] : null;
         if (slot == null)
         {
-            this._create_debuff_slot_type(type, debuff_data.AsGodotObject());
+            this._create_debuff_slot_type(type, debuff_data);
         }
 
         this.debuffs_slots[type].amount = value;
     }
 
-    private void _create_debuff_slot_type(int type, GodotObject debuff_data)
+    private void _create_debuff_slot_type(int type, EnemyDebuffData debuff_data)
     {
         DebuffSlot slot = DEBUFF_SLOT.Instantiate<DebuffSlot>();
         this.debuffs_conatiner.AddChild(slot);
-        slot.texture = debuff_data?.Get("icon").As<Texture2D>();
+        slot.texture = debuff_data?.icon;
         this.debuffs_slots[type] = slot;
     }
 

@@ -1,9 +1,9 @@
 using Godot;
+using System;
 
 public partial class EventSlot : VBoxContainer
 {
-    [Signal]
-    public delegate void event_pressedEventHandler(Variant @event);
+    public event Action<EventData> event_pressed;
 
     [Export]
     public TextureRect event_texture;
@@ -14,20 +14,19 @@ public partial class EventSlot : VBoxContainer
     [Export]
     public Label title_lable;
 
-    private Variant _event;
+    private EventData _event;
 
-    public void set_event(Variant @event)
+    public void set_event(EventData eventData)
     {
-        GodotObject eventObj = @event.AsGodotObject();
-        if (eventObj == null)
+        if (eventData == null)
         {
             return;
         }
 
-        this.event_texture.Texture = eventObj.Get("icon").As<Texture2D>();
-        this.description_label.Text = eventObj.Get("description").AsString();
-        this.title_lable.Text = eventObj.Get("title").AsString();
-        this._event = @event;
+        this.event_texture.Texture = eventData.icon;
+        this.description_label.Text = eventData.description;
+        this.title_lable.Text = eventData.title;
+        this._event = eventData;
     }
 
     private void _on_gui_input(InputEvent @event)
@@ -37,7 +36,7 @@ public partial class EventSlot : VBoxContainer
             return;
         }
 
-        EmitSignal(SignalName.event_pressed, this._event);
+        this.event_pressed?.Invoke(this._event);
         GetNode<AudioManager>("/root/AudioManager").play_button_click();
     }
 

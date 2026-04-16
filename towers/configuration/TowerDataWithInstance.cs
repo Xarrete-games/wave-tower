@@ -9,11 +9,11 @@ public partial class TowerDataWithInstance : Resource
     [Export]
     public PackedScene scene { get; set; }
 
-    public Node get_instance_node()
+    public Tower get_instance_node()
     {
-        Node instance = this.scene.Instantiate();
-        instance.Set("data", this.data);
-        instance.Set("type", this.data.type);
+        Tower instance = this.scene.Instantiate<Tower>();
+        instance.data = this.data;
+        instance.type = (Tower.Type)this.data.type;
         return instance;
     }
 

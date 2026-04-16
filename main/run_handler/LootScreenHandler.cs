@@ -25,7 +25,7 @@ public partial class LootScreenHandler : Node
         var lootItems = this.GenerateLootItems();
         lootScreen.SetLoot(lootItems);
 
-        await ToSignal(lootScreen, "tree_exited");
+        await ToSignal(lootScreen, Node.SignalName.TreeExited);
     }
 
     public List<LootItemData> GenerateLootItems()
