@@ -24,6 +24,42 @@ public partial class ConsumableData : BaseData
     [Export]
     public Script runtime_script { get; set; }
 
+    public int ConsumableType
+    {
+        get => consumable_type;
+        set => consumable_type = value;
+    }
+
+    public int TargetingType
+    {
+        get => targeting_type;
+        set => targeting_type = value;
+    }
+
+    public Texture2D CursorIcon
+    {
+        get => cursor_icon;
+        set => cursor_icon = value;
+    }
+
+    public Texture2D CursorIconUsed
+    {
+        get => cursor_icon_used;
+        set => cursor_icon_used = value;
+    }
+
+    public AudioStream UseSound
+    {
+        get => use_sound;
+        set => use_sound = value;
+    }
+
+    public Script RuntimeScript
+    {
+        get => runtime_script;
+        set => runtime_script = value;
+    }
+
     public Consumable create_consumable()
     {
         string idValue = (id ?? string.Empty).ToLowerInvariant();
@@ -42,6 +78,11 @@ public partial class ConsumableData : BaseData
 
         consumable?.init(this);
         return consumable;
+    }
+
+    public Consumable CreateConsumable()
+    {
+        return create_consumable();
     }
 
     private Consumable CreateConsumableFromRuntimeScript()

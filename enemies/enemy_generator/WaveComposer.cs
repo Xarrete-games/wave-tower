@@ -174,9 +174,9 @@ public class WaveComposer
             return PressureType.MIXED;
         }
 
-        float chanceSwarm = chance.chance_full_swarn;
-        float chanceSpeed = chance.chance_full_speed;
-        float chanceTank = chance.chance_full_tank;
+        float chanceSwarm = chance.ChanceFullSwarm;
+        float chanceSpeed = chance.ChanceFullSpeed;
+        float chanceTank = chance.ChanceFullTank;
 
         if (!IsValidWaveChanceValue(chanceSwarm))
         {
@@ -423,14 +423,14 @@ public class WaveComposer
 
     private bool IsWaveAvailableForEnemy(EnemyData data, int wave_number)
     {
-        if (data.available_waves == null || data.available_waves.Count == 0)
+        if (data.AvailableWaves == null || data.AvailableWaves.Count == 0)
         {
             return true;
         }
 
-        for (int i = 0; i < data.available_waves.Count; i++)
+        for (int i = 0; i < data.AvailableWaves.Count; i++)
         {
-            EnemyWaveRange waveRange = data.available_waves[i];
+            EnemyWaveRange waveRange = data.AvailableWaves[i];
             if (waveRange != null && IsWaveInRange(wave_number, waveRange))
             {
                 return true;
@@ -442,17 +442,17 @@ public class WaveComposer
 
     private bool IsWaveInRange(int wave_number, EnemyWaveRange wave_range)
     {
-        if (wave_number < wave_range.initial_wave)
+        if (wave_number < wave_range.InitialWave)
         {
             return false;
         }
 
-        if (wave_range.final_wave <= 0)
+        if (wave_range.FinalWave <= 0)
         {
             return true;
         }
 
-        return wave_number <= wave_range.final_wave;
+        return wave_number <= wave_range.FinalWave;
     }
 
     private int FillBudget(

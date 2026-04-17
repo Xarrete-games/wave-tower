@@ -188,7 +188,7 @@ public partial class TowerButton : Control
             return;
         }
 
-        int basePrice = Configuration.build_price;
+        int basePrice = Configuration.BuildPrice;
         PriceContext ctx = new(PriceContext.PriceType.Tower, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
         Price = ctx.FinalPrice;

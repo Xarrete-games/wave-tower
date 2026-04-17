@@ -75,7 +75,7 @@ public partial class TowerStatsPanel : Control
         UpdateExpData(expData);
 
         TowerData data = tower.data as TowerData;
-        _nameLabel.Text = data?.display_name ?? string.Empty;
+        _nameLabel.Text = data?.DisplayName ?? string.Empty;
         _idLabel.Text = tower.id;
         _currentTower = tower;
 
@@ -86,7 +86,7 @@ public partial class TowerStatsPanel : Control
         }
         else
         {
-            _upgradeTowerPrice.price = data?.upgrade_price ?? 0;
+            _upgradeTowerPrice.price = data?.UpgradePrice ?? 0;
             _upgradeButtonContainer.Visible = true;
         }
     }
@@ -164,7 +164,7 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        int price = data.upgrade_price;
+        int price = data.UpgradePrice;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         int gold = runContext.economy.gold;

@@ -26,7 +26,7 @@ public partial class BudaTempleScript : EventScript
 
         string relicId = GD.Randf() < 0.5f ? "buda" : "cursed_buda";
         RelicData relicData = DataLoaderAccess.GetRelicById(relicId);
-        Relic relic = relicData?.create_item();
+        Relic relic = relicData?.CreateItem();
         if (relic != null)
         {
             runContext.relics_manager.add_relic(relic);

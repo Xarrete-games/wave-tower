@@ -63,4 +63,118 @@ public partial class WaveConfig : Resource
 
     [Export]
     public Godot.Collections.Array<WaveTypeChance> wave_chances { get; set; } = new();
+
+    public int BaseBudget
+    {
+        get => base_budget;
+        set => base_budget = value;
+    }
+
+    public int BudgetPerWave
+    {
+        get => budget_per_wave;
+        set => budget_per_wave = value;
+    }
+
+    public int ExponentialStartWave
+    {
+        get => exponential_start_wave;
+        set => exponential_start_wave = value;
+    }
+
+    public float ExponentialGrowth
+    {
+        get => exponential_growth;
+        set => exponential_growth = value;
+    }
+
+    public float SpawnIntervalSwarmMin
+    {
+        get => spawn_interval_swarm_min;
+        set => spawn_interval_swarm_min = value;
+    }
+
+    public float SpawnIntervalSwarmMax
+    {
+        get => spawn_interval_swarm_max;
+        set => spawn_interval_swarm_max = value;
+    }
+
+    public float SpawnIntervalSpeedMin
+    {
+        get => spawn_interval_speed_min;
+        set => spawn_interval_speed_min = value;
+    }
+
+    public float SpawnIntervalSpeedMax
+    {
+        get => spawn_interval_speed_max;
+        set => spawn_interval_speed_max = value;
+    }
+
+    public float SpawnIntervalNormalMin
+    {
+        get => spawn_interval_normal_min;
+        set => spawn_interval_normal_min = value;
+    }
+
+    public float SpawnIntervalNormalMax
+    {
+        get => spawn_interval_normal_max;
+        set => spawn_interval_normal_max = value;
+    }
+
+    public float SpawnIntervalTankMin
+    {
+        get => spawn_interval_tank_min;
+        set => spawn_interval_tank_min = value;
+    }
+
+    public float SpawnIntervalTankMax
+    {
+        get => spawn_interval_tank_max;
+        set => spawn_interval_tank_max = value;
+    }
+
+    public int SpawnIntervalMaxDecayEveryWaves
+    {
+        get => spawn_interval_max_decay_every_waves;
+        set => spawn_interval_max_decay_every_waves = value;
+    }
+
+    public float SpawnIntervalMaxDecayAmount
+    {
+        get => spawn_interval_max_decay_amount;
+        set => spawn_interval_max_decay_amount = value;
+    }
+
+    public float SpawnIntervalMinCap
+    {
+        get => spawn_interval_min_cap;
+        set => spawn_interval_min_cap = value;
+    }
+
+    public float GroupDelay
+    {
+        get => group_delay;
+        set => group_delay = value;
+    }
+
+    public int BossWaveEvery
+    {
+        get => boss_wave_every;
+        set => boss_wave_every = value;
+    }
+
+    public float PrimaryPressureRatio
+    {
+        get => primary_pressure_ratio;
+        set => primary_pressure_ratio = value;
+    }
+
+    public Godot.Collections.Array<WaveTypeChance> WaveChances
+    {
+        get => wave_chances;
+        set => wave_chances = value;
+    }
 }

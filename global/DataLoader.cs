@@ -80,8 +80,8 @@ public partial class DataLoader : Node
                 continue;
             }
 
-            bool isCursed = relicData.is_cursed;
-            bool onlyForEvents = relicData.only_for_events;
+            bool isCursed = relicData.IsCursed;
+            bool onlyForEvents = relicData.OnlyForEvents;
             if (!include_cursed && isCursed)
             {
                 continue;
@@ -130,7 +130,7 @@ public partial class DataLoader : Node
 
             if (is_cursed.VariantType != Variant.Type.Nil)
             {
-                bool relicIsCursed = relicData.is_cursed;
+                bool relicIsCursed = relicData.IsCursed;
                 bool filterCursed = (bool)is_cursed;
                 if (!filterCursed && relicIsCursed)
                 {
@@ -146,7 +146,7 @@ public partial class DataLoader : Node
             bool alreadyOwned = false;
             if (relicsManager != null)
             {
-                alreadyOwned = relicsManager.has_relic(relicData.id);
+                alreadyOwned = relicsManager.has_relic(relicData.Id);
             }
 
             if (!alreadyOwned)
@@ -173,8 +173,8 @@ public partial class DataLoader : Node
                 continue;
             }
 
-            bool isCursed = relicData.is_cursed;
-            bool onlyForEvents = relicData.only_for_events;
+            bool isCursed = relicData.IsCursed;
+            bool onlyForEvents = relicData.OnlyForEvents;
             if (!include_cursed && isCursed)
             {
                 continue;

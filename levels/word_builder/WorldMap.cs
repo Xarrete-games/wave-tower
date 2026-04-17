@@ -230,7 +230,7 @@ public partial class WorldMap : Node2D
         _frontierManager.edge_finalized += OnEdgeFinalized;
 
         MapPieceData initPieceData = PickRandom(_safe_array(dataLoader.get_all_initial_map_pieces())).AsGodotObject() as MapPieceData;
-        MapPiece initPiece = initPieceData?.get_instance().AsGodotObject() as MapPiece;
+        MapPiece initPiece = initPieceData?.GetInstance().AsGodotObject() as MapPiece;
         if (initPiece == null)
         {
             GD.PushError("[WorldMap] Could not instantiate initial piece.");
@@ -414,7 +414,7 @@ public partial class WorldMap : Node2D
         for (int index = 0; index < candidatePieces.Count; index++)
         {
             MapPieceData pieceData = candidatePieces[index] as MapPieceData;
-            MapPiece newPiece = pieceData?.get_instance().AsGodotObject() as MapPiece;
+            MapPiece newPiece = pieceData?.GetInstance().AsGodotObject() as MapPiece;
             if (newPiece == null)
             {
                 continue;

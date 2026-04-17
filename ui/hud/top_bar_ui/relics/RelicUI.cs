@@ -50,7 +50,7 @@ public partial class RelicUI : Control
         }
 
         string description = data.description;
-        string displayName = data.display_name;
+        string displayName = data.DisplayName;
         HintManagerStatic.ShowHint(this, this, description, displayName, HintManagerStatic.PositionHint.BOTTOM);
     }
 

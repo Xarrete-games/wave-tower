@@ -60,14 +60,14 @@ public partial class ChooseTowerScreenItem : Control
 
         TowerData configuration = _towerData.data;
 
-        title_label.Text = configuration.display_name;
+        title_label.Text = configuration.DisplayName;
         description_label.Text = configuration.description;
         texture.Texture = configuration.icon;
 
-        damage_stat.SetValue(configuration.base_damage);
-        range_stat.SetValue(configuration.base_attack_range);
-        attack_speed_stat.SetValue(configuration.base_attack_speed);
-        gold_price.price = configuration.build_price;
+        damage_stat.SetValue(configuration.BaseDamage);
+        range_stat.SetValue(configuration.BaseAttackRange);
+        attack_speed_stat.SetValue(configuration.BaseAttackSpeed);
+        gold_price.price = configuration.BuildPrice;
     }
 
     private void ApplyConfigurationDeferred()

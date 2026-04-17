@@ -89,7 +89,7 @@ public partial class InventoryUISlot : Control
         string description = data.description;
         if (!string.IsNullOrEmpty(description))
         {
-            string displayName = data.display_name;
+            string displayName = data.DisplayName;
             HintManagerStatic.ShowHint(this, this, description, displayName, HintManagerStatic.PositionHint.BOTTOM);
         }
     }

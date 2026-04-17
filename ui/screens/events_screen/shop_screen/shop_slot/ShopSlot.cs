@@ -62,9 +62,9 @@ public partial class ShopSlot : VBoxContainer
         }
 
         _item = itemOffer;
-        _price = itemOffer.price;
+        _price = itemOffer.Price;
 
-        Resource itemData = itemOffer.item_data;
+        Resource itemData = itemOffer.ItemData;
         if (itemData == null)
         {
             return;
@@ -75,13 +75,13 @@ public partial class ShopSlot : VBoxContainer
         Texture2D icon = null;
         if (itemData is RelicData relicInfo)
         {
-            displayName = relicInfo.display_name;
+            displayName = relicInfo.DisplayName;
             description = relicInfo.description;
             icon = relicInfo.icon;
         }
         else if (itemData is ConsumableData consumableInfo)
         {
-            displayName = consumableInfo.display_name;
+            displayName = consumableInfo.DisplayName;
             description = consumableInfo.description;
             icon = consumableInfo.icon;
         }
@@ -101,7 +101,7 @@ public partial class ShopSlot : VBoxContainer
             shop_slot_icon?.set_background_color(_runContext.relics_manager.get_rarity_color(relicData.rarity));
         }
 
-        _currentHealthCost = itemOffer.health_price;
+        _currentHealthCost = itemOffer.HealthPrice;
         _healthPrice.Visible = _currentHealthCost > 0;
         if (_currentHealthCost > 0)
         {
@@ -118,7 +118,7 @@ public partial class ShopSlot : VBoxContainer
             return;
         }
 
-        Resource itemData = _item.item_data;
+        Resource itemData = _item.ItemData;
         bool isConsumable = itemData is ConsumableData;
         if (isConsumable && _runContext.consumables_manager.is_full())
         {
@@ -155,7 +155,7 @@ public partial class ShopSlot : VBoxContainer
             return;
         }
 
-        Resource itemData = _item.item_data;
+        Resource itemData = _item.ItemData;
         if (itemData is RelicData)
         {
             SetItem(_runContext.offers_manager.create_relic_offer_from_data(itemData as RelicData));

@@ -25,7 +25,7 @@ public partial class LootScreenItem : Control
         if (consumable != null)
         {
             texture_rect.Texture = consumable.icon;
-            label.Text = consumable.display_name;
+            label.Text = consumable.DisplayName;
             return;
         }
 
@@ -55,7 +55,7 @@ public partial class LootScreenItem : Control
                 return;
             }
 
-            Consumable consumableItem = consumable.create_consumable();
+            Consumable consumableItem = consumable.CreateConsumable();
             runContext.consumables_manager.add_consumable(consumableItem);
         }
         else

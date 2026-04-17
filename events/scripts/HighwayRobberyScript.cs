@@ -20,7 +20,7 @@ public partial class HighwayRobberyScript : EventScript
             int randomIndex = (int)(GD.Randi() % (uint)relics.Count);
             Relic relic = relics[randomIndex];
             relics.RemoveAt(randomIndex);
-            string displayName = relic?.Data?.display_name ?? "relic";
+            string displayName = relic?.Data?.DisplayName ?? "relic";
             options.Add(new EventOptionData($"Give {displayName}.", relic?.Id ?? string.Empty));
         }
 

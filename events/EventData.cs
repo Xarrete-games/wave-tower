@@ -41,4 +41,52 @@ public partial class EventData : Resource
     [ExportGroup("Script")]
     [Export]
     public Script runtime_script { get; set; }
+
+    public string Id
+    {
+        get => id;
+        set => id = value;
+    }
+
+    public Type EventType
+    {
+        get => type;
+        set => type = value;
+    }
+
+    public Role EventRole
+    {
+        get => role;
+        set => role = value;
+    }
+
+    public string Title
+    {
+        get => title;
+        set => title = value;
+    }
+
+    public string Description
+    {
+        get => description;
+        set => description = value;
+    }
+
+    public Texture2D Icon
+    {
+        get => icon;
+        set => icon = value;
+    }
+
+    public Texture2D TextureBackground
+    {
+        get => texture_background;
+        set => texture_background = value;
+    }
+
+    public Script RuntimeScript
+    {
+        get => runtime_script;
+        set => runtime_script = value;
+    }
 }

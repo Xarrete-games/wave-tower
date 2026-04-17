@@ -9,10 +9,24 @@ public partial class MapPieceData : Resource
     [Export]
     public PackedScene scene { get; set; }
 
+    public Godot.Collections.Array<Edge> Edges
+    {
+        get => edges;
+        set => edges = value;
+    }
+
+    public PackedScene Scene
+    {
+        get => scene;
+        set => scene = value;
+    }
+
     public bool is_fork
     {
         get => edges != null && edges.Count > 2;
     }
+
+    public bool IsFork => is_fork;
 
     public bool has_edge(Edge edge)
     {
@@ -31,6 +45,11 @@ public partial class MapPieceData : Resource
         }
 
         return false;
+    }
+
+    public bool HasEdge(Edge edge)
+    {
+        return has_edge(edge);
     }
 
     public bool has_connecting_edge(Edge edge)
@@ -52,6 +71,11 @@ public partial class MapPieceData : Resource
         return false;
     }
 
+    public bool HasConnectingEdge(Edge edge)
+    {
+        return has_connecting_edge(edge);
+    }
+
     public Edge get_connecting_edge(Edge edge)
     {
         if (edge == null || edges == null)
@@ -71,6 +95,11 @@ public partial class MapPieceData : Resource
         return null;
     }
 
+    public Edge GetConnectingEdge(Edge edge)
+    {
+        return get_connecting_edge(edge);
+    }
+
     public bool has_edge_dir(int dir)
     {
         if (edges == null)
@@ -88,6 +117,11 @@ public partial class MapPieceData : Resource
         }
 
         return false;
+    }
+
+    public bool HasEdgeDir(int dir)
+    {
+        return has_edge_dir(dir);
     }
 
     public Variant get_instance()
@@ -128,5 +162,10 @@ public partial class MapPieceData : Resource
         }
 
         return instance;
+    }
+
+    public Variant GetInstance()
+    {
+        return get_instance();
     }
 }

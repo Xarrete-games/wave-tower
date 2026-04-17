@@ -48,10 +48,10 @@ public partial class ChooseRelicCard : Control
         }
 
         _relicTexture.Texture = data.icon;
-        _title.Text = data.display_name;
+        _title.Text = data.DisplayName;
         _description.Text = data.description;
 
-        _healthCost = data.health_price;
+        _healthCost = data.HealthPrice;
         if (_healthCost > 0)
         {
             _healthPrice.Visible = true;

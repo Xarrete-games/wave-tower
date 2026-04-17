@@ -35,7 +35,14 @@ public partial class Tower : Node2D
     [Export] public Type type = Type.FIRE;
 
     public GodotObject data;
-    public int build_price = 0;
+    public int BuildPrice { get; set; } = 0;
+
+    // Legacy alias kept temporarily while migrating remaining consumers.
+    public int build_price
+    {
+        get => BuildPrice;
+        set => BuildPrice = value;
+    }
 
     protected Node2D _current_target;
     protected bool _enabled = false;
@@ -308,7 +315,7 @@ public partial class Tower : Node2D
         if (economy != null && towerData != null)
         {
             int currentGold = economy.gold;
-            int upgradePrice = towerData.upgrade_price;
+            int upgradePrice = towerData.UpgradePrice;
             economy.gold = currentGold - upgradePrice;
         }
 

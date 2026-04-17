@@ -69,8 +69,8 @@ public class OffersManager
             return;
         }
 
-        int price = itemOffer.price;
-        int healthPrice = itemOffer.health_price;
+        int price = itemOffer.Price;
+        int healthPrice = itemOffer.HealthPrice;
 
         economy.gold -= price;
         if (healthPrice > 0)
@@ -78,10 +78,10 @@ public class OffersManager
             status.health -= healthPrice;
         }
 
-        Resource itemData = itemOffer.item_data;
+        Resource itemData = itemOffer.ItemData;
         if (itemData is ConsumableData consumableData)
         {
-            Consumable item = consumableData.create_consumable();
+            Consumable item = consumableData.CreateConsumable();
             if (item != null)
             {
                 consumablesManager?.add_consumable(item);
@@ -91,7 +91,7 @@ public class OffersManager
 
         if (itemData is RelicData relicData)
         {
-            Relic relic = relicData.create_item();
+            Relic relic = relicData.CreateItem();
             relicsManager?.add_relic(relic);
             return;
         }

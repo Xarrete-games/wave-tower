@@ -19,7 +19,7 @@ public static class TowerBuffFactory
             return null;
         }
 
-        TowerBuff buff = buffData.create_item(source, value);
+        TowerBuff buff = buffData.CreateItem(source, value);
         if (buff == null)
         {
             GD.PushError($"[TowerBuffFactory] Could not create buff from data id: {buff_id}");

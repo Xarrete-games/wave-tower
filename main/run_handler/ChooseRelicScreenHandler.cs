@@ -39,14 +39,14 @@ public partial class ChooseRelicScreenHandler : Node
             return;
         }
 
-        int healthPrice = selectedRelicData.health_price;
+        int healthPrice = selectedRelicData.HealthPrice;
         var runContext = GetNode<RunContext>("/root/RunContext");
         if (healthPrice > 0)
         {
             runContext.status.health -= healthPrice;
         }
 
-        Relic item = selectedRelicData.create_item();
+        Relic item = selectedRelicData.CreateItem();
         runContext.relics_manager.add_relic(item);
     }
 

@@ -34,7 +34,7 @@ public partial class BloodPactScript : EventScript
 
         int randomIndex = (int)(GD.Randi() % (uint)allRelics.Count);
         RelicData relicData = allRelics[randomIndex];
-        Relic relic = relicData?.create_item();
+        Relic relic = relicData?.CreateItem();
         if (relic != null)
         {
             runContext.relics_manager.add_relic(relic);

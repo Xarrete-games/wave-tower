@@ -23,6 +23,42 @@ public partial class EnemyDebuffData : BaseData
     [Export]
     public Script runtime_script { get; set; }
 
+    public int DebuffType
+    {
+        get => debuff_type;
+        set => debuff_type = value;
+    }
+
+    public float Value
+    {
+        get => value;
+        set => this.value = value;
+    }
+
+    public float Duration
+    {
+        get => duration;
+        set => duration = value;
+    }
+
+    public float TickInterval
+    {
+        get => tick_interval;
+        set => tick_interval = value;
+    }
+
+    public int MaxStacks
+    {
+        get => max_stacks;
+        set => max_stacks = value;
+    }
+
+    public Script RuntimeScript
+    {
+        get => runtime_script;
+        set => runtime_script = value;
+    }
+
     public EnemyDebuff create_debuff()
     {
         return debuff_type switch
@@ -31,6 +67,11 @@ public partial class EnemyDebuffData : BaseData
             (int)EnemyDebuff.Type.BURN => new BurnDebuff(),
             _ => null,
         };
+    }
+
+    public EnemyDebuff CreateDebuff()
+    {
+        return create_debuff();
     }
 
     public override Variant create_item()

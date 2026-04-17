@@ -25,7 +25,7 @@ public class EnemyDebuff : EnemyEffect {
             if (data == null) {
                 return null;
             }
-            EnemyDebuff debuff = data.create_debuff();
+            EnemyDebuff debuff = data.CreateDebuff();
             debuff?.init(data, source);
             return debuff;
         }
@@ -34,7 +34,7 @@ public class EnemyDebuff : EnemyEffect {
             if (data == null) {
                 return null;
             }
-            EnemyDebuff debuff = data.create_debuff();
+            EnemyDebuff debuff = data.CreateDebuff();
             debuff?.init(data, source);
             return debuff;
         }

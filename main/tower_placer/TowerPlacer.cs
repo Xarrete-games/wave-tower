@@ -78,7 +78,7 @@ public partial class TowerPlacer : Node2D
             return;
         }
 
-        int towerPrice = _currentTowerInstance.build_price;
+        int towerPrice = _currentTowerInstance.BuildPrice;
         if (!HasEnoughGold(towerPrice))
         {
             GetNode<ActionManager>("/root/ActionManager").EndAction();
@@ -149,7 +149,7 @@ public partial class TowerPlacer : Node2D
             return;
         }
 
-        Tower instance = towerConfiguration.get_instance_node();
+        Tower instance = towerConfiguration.GetInstanceNode();
         if (instance == null)
         {
             GD.PushError("[TowerPlacer] get_instance_node did not return a Tower.");
@@ -157,7 +157,7 @@ public partial class TowerPlacer : Node2D
         }
 
         _currentTowerInstance = instance;
-        _currentTowerInstance.build_price = price;
+        _currentTowerInstance.BuildPrice = price;
         visual.AddChild(_currentTowerInstance);
         _isPlacing = true;
 

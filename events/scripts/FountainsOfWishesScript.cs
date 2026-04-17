@@ -41,7 +41,7 @@ public partial class FountainsOfWishesScript : EventScript
 
         int randomIndex = (int)(GD.Randi() % (uint)relics.Count);
         RelicData relicData = relics[randomIndex];
-        Relic relic = relicData?.create_item();
+        Relic relic = relicData?.CreateItem();
         if (relic == null)
         {
             return;

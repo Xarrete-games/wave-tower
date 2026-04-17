@@ -46,6 +46,84 @@ public partial class TowerData : BaseData
     [Export]
     public float critic_damage_per_level { get; set; }
 
+    public int TowerType
+    {
+        get => type;
+        set => type = value;
+    }
+
+    public int BuildPrice
+    {
+        get => build_price;
+        set => build_price = value;
+    }
+
+    public int UpgradePrice
+    {
+        get => upgrade_price;
+        set => upgrade_price = value;
+    }
+
+    public float BaseDamage
+    {
+        get => base_damage;
+        set => base_damage = value;
+    }
+
+    public float BaseAttackRange
+    {
+        get => base_attack_range;
+        set => base_attack_range = value;
+    }
+
+    public float BaseAttackSpeed
+    {
+        get => base_attack_speed;
+        set => base_attack_speed = value;
+    }
+
+    public float BaseCriticChance
+    {
+        get => base_critic_chance;
+        set => base_critic_chance = value;
+    }
+
+    public float BaseCriticDamage
+    {
+        get => base_critic_damage;
+        set => base_critic_damage = value;
+    }
+
+    public float DamagePerLevel
+    {
+        get => damage_per_level;
+        set => damage_per_level = value;
+    }
+
+    public float AttackRangePerLevel
+    {
+        get => attack_range_per_level;
+        set => attack_range_per_level = value;
+    }
+
+    public float AttackSpeedPerLevel
+    {
+        get => attack_speed_per_level;
+        set => attack_speed_per_level = value;
+    }
+
+    public float CriticChancePerLevel
+    {
+        get => critic_chance_per_level;
+        set => critic_chance_per_level = value;
+    }
+
+    public float CriticDamagePerLevel
+    {
+        get => critic_damage_per_level;
+        set => critic_damage_per_level = value;
+    }
+
     public TowerStats stats { get; set; } = new TowerStats();
     public TowerStats stats_on_level { get; set; } = new TowerStats();
 
@@ -62,5 +140,10 @@ public partial class TowerData : BaseData
         stats_on_level.attack_speed = attack_speed_per_level;
         stats_on_level.critic_chance = critic_chance_per_level;
         stats_on_level.critic_damage = critic_damage_per_level;
+    }
+
+    public void Build()
+    {
+        build();
     }
 }

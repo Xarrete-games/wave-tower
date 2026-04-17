@@ -50,7 +50,7 @@ public partial class TestData : Node
                 RelicData typedRelicData = DataLoaderAccess.GetRelicById(relicId);
                 if (typedRelicData != null)
                 {
-                    Relic relicInstance = typedRelicData.create_item();
+                    Relic relicInstance = typedRelicData.CreateItem();
                     runContext.relics_manager.add_relic(relicInstance);
                 }
                 else
@@ -71,7 +71,7 @@ public partial class TestData : Node
                     continue;
                 }
 
-                Relic relic = relicDataObj?.create_item();
+                Relic relic = relicDataObj?.CreateItem();
                 runContext.relics_manager.add_relic(relic);
             }
         }
@@ -84,7 +84,7 @@ public partial class TestData : Node
                 ConsumableData consumableDataObj = DataLoaderAccess.GetConsumableById(consumableId);
                 if (consumableDataObj != null)
                 {
-                    Consumable consumableInstance = consumableDataObj.create_consumable();
+                    Consumable consumableInstance = consumableDataObj.CreateConsumable();
                     runContext.consumables_manager.add_consumable(consumableInstance);
                 }
                 else

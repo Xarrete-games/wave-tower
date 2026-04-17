@@ -27,7 +27,7 @@ public partial class PotionsEventScript : EventScript
         for (int index = 0; index < count; index++)
         {
             ConsumableData consumableData = consumables[index];
-            string displayName = consumableData.display_name;
+            string displayName = consumableData.DisplayName;
             options.Add(new EventOptionData(displayName, consumableData));
         }
 
@@ -43,7 +43,7 @@ public partial class PotionsEventScript : EventScript
         }
 
         ConsumableData consumableData = data as ConsumableData;
-        Consumable consumable = consumableData?.create_consumable();
+        Consumable consumable = consumableData?.CreateConsumable();
         if (consumable != null)
         {
             runContext.consumables_manager.add_consumable(consumable);

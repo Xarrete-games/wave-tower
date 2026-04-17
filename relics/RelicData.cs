@@ -41,6 +41,78 @@ public partial class RelicData : Resource
     [Export]
     public Script runtime_script { get; set; }
 
+    public string Id
+    {
+        get => id;
+        set => id = value;
+    }
+
+    public string DisplayName
+    {
+        get => display_name;
+        set => display_name = value;
+    }
+
+    public string Description
+    {
+        get => description;
+        set => description = value;
+    }
+
+    public Texture2D Icon
+    {
+        get => icon;
+        set => icon = value;
+    }
+
+    public int RarityValue
+    {
+        get => rarity;
+        set => rarity = value;
+    }
+
+    public bool ShowCounter
+    {
+        get => show_counter;
+        set => show_counter = value;
+    }
+
+    public int HealthPrice
+    {
+        get => health_price;
+        set => health_price = value;
+    }
+
+    public bool IsCursed
+    {
+        get => is_cursed;
+        set => is_cursed = value;
+    }
+
+    public bool IsTome
+    {
+        get => is_tome;
+        set => is_tome = value;
+    }
+
+    public bool OnlyForEvents
+    {
+        get => only_for_events;
+        set => only_for_events = value;
+    }
+
+    public int MaxStacks
+    {
+        get => max_stacks;
+        set => max_stacks = value;
+    }
+
+    public Script RuntimeScript
+    {
+        get => runtime_script;
+        set => runtime_script = value;
+    }
+
     public Relic create_item()
     {
         Relic relic = RelicModelFactory.CreateById(id);
@@ -52,5 +124,10 @@ public partial class RelicData : Resource
 
         relic.SetupData(this);
         return relic;
+    }
+
+    public Relic CreateItem()
+    {
+        return create_item();
     }
 }

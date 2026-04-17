@@ -51,8 +51,8 @@ public class RelicOffersManager
             RelicData data = _allRelicData[index];
 
             bool hasRelic = relicsManager != null && relicsManager.has_relic(data.id);
-            bool isCursed = data.is_cursed;
-            bool onlyForEvents = data.only_for_events;
+            bool isCursed = data.IsCursed;
+            bool onlyForEvents = data.OnlyForEvents;
 
             if (!hasRelic && !isCursed && !onlyForEvents)
             {
@@ -83,7 +83,7 @@ public class RelicOffersManager
         var ctx = new PriceContext(PriceContext.PriceType.Relic, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
 
-        int healthPrice = data.health_price;
+        int healthPrice = data.HealthPrice;
         return new ItemOffer(data, ctx.FinalPrice, healthPrice);
     }
 

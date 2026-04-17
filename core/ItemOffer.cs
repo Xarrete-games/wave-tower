@@ -2,11 +2,30 @@ using Godot;
 
 public class ItemOffer
 {
-    public Resource item_data { get; set; }
+    public Resource ItemData { get; set; }
 
-    public int price { get; set; }
+    public int Price { get; set; }
 
-    public int health_price { get; set; }
+    public int HealthPrice { get; set; }
+
+    // Legacy aliases kept temporarily while migrating remaining consumers.
+    public Resource item_data
+    {
+        get => ItemData;
+        set => ItemData = value;
+    }
+
+    public int price
+    {
+        get => Price;
+        set => Price = value;
+    }
+
+    public int health_price
+    {
+        get => HealthPrice;
+        set => HealthPrice = value;
+    }
 
     public ItemOffer()
     {
@@ -14,8 +33,8 @@ public class ItemOffer
 
     public ItemOffer(Resource itemData, int itemPrice, int healthPrice = 0)
     {
-        item_data = itemData;
-        price = itemPrice;
-        health_price = healthPrice;
+        ItemData = itemData;
+        Price = itemPrice;
+        HealthPrice = healthPrice;
     }
 }

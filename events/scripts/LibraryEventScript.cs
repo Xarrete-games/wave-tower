@@ -16,14 +16,14 @@ public partial class LibraryEventScript : EventScript
 
         foreach (RelicData relicData in allRelics)
         {
-            bool isTome = relicData.is_tome;
+            bool isTome = relicData.IsTome;
             string relicId = relicData.id;
             if (!isTome || runContext.relics_manager.has_relic(relicId))
             {
                 continue;
             }
 
-            string displayName = relicData.display_name;
+            string displayName = relicData.DisplayName;
             options.Add(new EventOptionData($"Acquire the {displayName}", relicData));
         }
 
@@ -39,7 +39,7 @@ public partial class LibraryEventScript : EventScript
             return;
         }
 
-        Relic relic = relicData.create_item();
+        Relic relic = relicData.CreateItem();
         if (relic != null)
         {
             runContext.relics_manager.add_relic(relic);

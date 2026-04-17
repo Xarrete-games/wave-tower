@@ -26,7 +26,7 @@ public partial class TowerButtonHint : Control
 
         if (_nameLabel != null)
         {
-            _nameLabel.Text = "[u]" + configuration.display_name + "[/u]";
+            _nameLabel.Text = "[u]" + configuration.DisplayName + "[/u]";
         }
 
         if (_descriptionLabel != null)
@@ -34,8 +34,8 @@ public partial class TowerButtonHint : Control
             _descriptionLabel.Text = configuration.description;
         }
 
-        _damageStat?.SetValue(configuration.base_damage);
-        _attackSpeedStat?.SetValue(configuration.base_attack_speed);
-        _rangeStat?.SetValue(configuration.base_attack_range);
+        _damageStat?.SetValue(configuration.BaseDamage);
+        _attackSpeedStat?.SetValue(configuration.BaseAttackSpeed);
+        _rangeStat?.SetValue(configuration.BaseAttackRange);
     }
 }
