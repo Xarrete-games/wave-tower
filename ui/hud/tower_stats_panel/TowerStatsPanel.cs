@@ -103,9 +103,9 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        _damageStat.set_value(towerStats.damage);
-        _attackSpeedStat.set_value(towerStats.attack_speed);
-        _rangeStat.set_value(towerStats.attack_range);
+        _damageStat.SetValue(towerStats.damage);
+        _attackSpeedStat.SetValue(towerStats.attack_speed);
+        _rangeStat.SetValue(towerStats.attack_range);
     }
 
     private void UpdateExpData(TowerExpData expData)
@@ -205,15 +205,15 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        _damageStat.show_upgrade_value(statsOnLevel.damage);
-        _attackSpeedStat.show_upgrade_value(statsOnLevel.attack_speed);
-        _rangeStat.show_upgrade_value(statsOnLevel.attack_range);
+        _damageStat.ShowUpgradeValue(statsOnLevel.damage);
+        _attackSpeedStat.ShowUpgradeValue(statsOnLevel.attack_speed);
+        _rangeStat.ShowUpgradeValue(statsOnLevel.attack_range);
     }
 
     private void OnUpgradeButtonXarretaMouseExited()
     {
-        _damageStat.hide_upgrade_value();
-        _attackSpeedStat.hide_upgrade_value();
-        _rangeStat.hide_upgrade_value();
+        _damageStat.HideUpgradeValue();
+        _attackSpeedStat.HideUpgradeValue();
+        _rangeStat.HideUpgradeValue();
     }
 }

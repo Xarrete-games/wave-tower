@@ -4,30 +4,30 @@ using System.Threading.Tasks;
 
 public partial class PauseMenu : Control
 {
-    public event Action resume_game;
+    public event Action ResumeGame;
 
     private static readonly PackedScene MainMenu = GD.Load<PackedScene>("uid://4i6kl0xurgeg");
 
     [Export]
-    public Control settings_section;
+    public Control SettingsSection;
 
     [Export]
-    public Control menu_section;
+    public Control MenuSection;
 
     public override void _Ready()
     {
-        settings_section.Visible = false;
-        menu_section.Visible = true;
+        SettingsSection.Visible = false;
+        MenuSection.Visible = true;
     }
 
     public override void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("exit"))
         {
-            if (settings_section.Visible)
+            if (SettingsSection.Visible)
             {
-                settings_section.Visible = false;
-                menu_section.Visible = true;
+                SettingsSection.Visible = false;
+                MenuSection.Visible = true;
             }
             else
             {
@@ -41,10 +41,10 @@ public partial class PauseMenu : Control
         GetTree().Paused = false;
         SceneTreeTimer timer = GetTree().CreateTimer(0.1f);
         await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
-        resume_game?.Invoke();
+        ResumeGame?.Invoke();
     }
 
-    public void pause()
+    public void Pause()
     {
         GetTree().Paused = true;
     }
@@ -73,13 +73,13 @@ public partial class PauseMenu : Control
 
     private void OnBackButtonXarretaPressed()
     {
-        settings_section.Visible = false;
-        menu_section.Visible = true;
+        SettingsSection.Visible = false;
+        MenuSection.Visible = true;
     }
 
     private void OnSettingsButtonXarretaPressed()
     {
-        settings_section.Visible = true;
-        menu_section.Visible = false;
+        SettingsSection.Visible = true;
+        MenuSection.Visible = false;
     }
 }

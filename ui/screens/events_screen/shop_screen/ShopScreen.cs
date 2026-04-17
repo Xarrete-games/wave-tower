@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class ShopScreen : Control
 {
-    public event Action<ItemOffer> item_purchase;
+    public event Action<ItemOffer> ItemPurchase;
 
     private static readonly PackedScene ShopSlotScene = GD.Load<PackedScene>("uid://f428sxnliflm");
 
@@ -47,31 +47,31 @@ public partial class ShopScreen : Control
         BuildRelicsForSale();
     }
 
-    public void set_relics(List<ItemOffer> relics)
+    public void SetRelics(List<ItemOffer> relics)
     {
         foreach (ItemOffer relic in relics)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
             relics_container.AddChild(slot);
-            slot.set_item(relic);
-            slot.item_purchased += OnItemPurchase;
+            slot.SetItem(relic);
+            slot.ItemPurchased += OnItemPurchase;
         }
     }
 
-    public void set_consumables(List<ItemOffer> consumables)
+    public void SetConsumables(List<ItemOffer> consumables)
     {
         foreach (ItemOffer consumable in consumables)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
             consumables_container.AddChild(slot);
-            slot.set_item(consumable);
-            slot.item_purchased += OnItemPurchase;
+            slot.SetItem(consumable);
+            slot.ItemPurchased += OnItemPurchase;
         }
     }
 
     private void OnItemPurchase(ItemOffer itemOffer, ShopSlot slotPurchased)
     {
-        item_purchase?.Invoke(itemOffer);
+        ItemPurchase?.Invoke(itemOffer);
         GetNode<AudioManager>("/root/AudioManager").play_purchase();
 
         Resource itemData = itemOffer?.item_data;
@@ -185,8 +185,8 @@ public partial class ShopScreen : Control
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
             sell_relics_container.AddChild(slot);
-            slot.set_item(relicOffer);
-            slot.item_purchased += OnItemSold;
+            slot.SetItem(relicOffer);
+            slot.ItemPurchased += OnItemSold;
         }
     }
 }

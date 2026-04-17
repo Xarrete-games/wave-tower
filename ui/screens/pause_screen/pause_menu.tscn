@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/buttons/xarreta_menu_button.tscn" id="4_snj08"]
 [ext_resource type="PackedScene" uid="uid://bsmhbhd7nv78e" path="res://ui/screens/pause_screen/resolution_menu/resolution_menu.tscn" id="5_s34hw"]
 
-[node name="PauseMenu" type="PanelContainer" unique_id=974378324 node_paths=PackedStringArray("settings_section", "menu_section")]
+[node name="PauseMenu" type="PanelContainer" unique_id=974378324 node_paths=PackedStringArray("SettingsSection", "MenuSection")]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,8 +16,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_bgnto")
-settings_section = NodePath("CenterContainer/MarginContainer/MainContainer/SettingsSections")
-menu_section = NodePath("CenterContainer/MarginContainer/MainContainer/ButtonsSecitons")
+SettingsSection = NodePath("CenterContainer/MarginContainer/MainContainer/SettingsSections")
+MenuSection = NodePath("CenterContainer/MarginContainer/MainContainer/ButtonsSecitons")
 
 [node name="CenterContainer" type="PanelContainer" parent="." unique_id=1710609385]
 layout_mode = 2

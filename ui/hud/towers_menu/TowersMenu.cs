@@ -4,13 +4,13 @@ using System.Collections.Generic;
 public partial class TowersMenu : Control
 {
     [Export]
-    public Control buttons_container;
+    public Control ButtonsContainer;
 
     [Export]
-    public TowerButtonHint tower_hint;
+    public TowerButtonHint TowerHint;
 
     [Export]
-    public PackedScene tower_button_scene;
+    public PackedScene TowerButtonScene;
 
     private TowerButton _buttonInHover;
     private readonly Dictionary<string, Node> _buttons = new();
@@ -18,9 +18,9 @@ public partial class TowersMenu : Control
 
     public override void _Ready()
     {
-        if (tower_hint != null)
+        if (TowerHint != null)
         {
-            tower_hint.Visible = false;
+            TowerHint.Visible = false;
         }
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
@@ -72,14 +72,14 @@ public partial class TowersMenu : Control
 
         if (!_buttons.TryGetValue(towerId, out Node buttonNode))
         {
-            TowerButton towerButton = tower_button_scene.Instantiate<TowerButton>();
-            buttons_container.AddChild(towerButton);
-            towerButton.tower_data = towerData;
-            towerButton.amount = amount;
+            TowerButton towerButton = TowerButtonScene.Instantiate<TowerButton>();
+            ButtonsContainer.AddChild(towerButton);
+            towerButton.TowerData = towerData;
+            towerButton.Amount = amount;
 
-            towerButton.tower_button_pressed += OnTowerButtonPressed;
-            towerButton.hover += OnTowerButtonHover;
-            towerButton.unhover += OnTowerButtonUnhover;
+            towerButton.TowerButtonPressed += OnTowerButtonPressed;
+            towerButton.Hover += OnTowerButtonHover;
+            towerButton.Unhover += OnTowerButtonUnhover;
 
             _buttons[towerId] = towerButton;
             return;
@@ -87,7 +87,7 @@ public partial class TowersMenu : Control
 
         if (buttonNode is TowerButton existingButton)
         {
-            existingButton.amount = amount;
+            existingButton.Amount = amount;
         }
     }
 
@@ -103,31 +103,31 @@ public partial class TowersMenu : Control
 
     private void OnTowerButtonHover(TowerButton towerButton)
     {
-        if (towerButton == null || tower_hint == null)
+        if (towerButton == null || TowerHint == null)
         {
             return;
         }
 
         _buttonInHover = towerButton;
-        TowerData data = towerButton.tower_data?.data;
+        TowerData data = towerButton.TowerData?.data;
         if (data == null)
         {
             return;
         }
 
-        tower_hint.set_stats(data);
+        TowerHint.SetStats(data);
 
         Rect2 rect = towerButton.GetGlobalRect();
-        tower_hint.GlobalPosition = new Vector2(
-            rect.Position.X + rect.Size.X * 0.25f - tower_hint.Size.X * 0.5f,
-            tower_hint.GlobalPosition.Y
+        TowerHint.GlobalPosition = new Vector2(
+            rect.Position.X + rect.Size.X * 0.25f - TowerHint.Size.X * 0.5f,
+            TowerHint.GlobalPosition.Y
         );
-        tower_hint.Visible = true;
+        TowerHint.Visible = true;
     }
 
     private void OnTowerButtonUnhover(TowerButton towerButton)
     {
-        if (towerButton == null || tower_hint == null)
+        if (towerButton == null || TowerHint == null)
         {
             return;
         }
@@ -135,7 +135,7 @@ public partial class TowersMenu : Control
         if (_buttonInHover == towerButton)
         {
             _buttonInHover = null;
-            tower_hint.Visible = false;
+            TowerHint.Visible = false;
         }
     }
 }

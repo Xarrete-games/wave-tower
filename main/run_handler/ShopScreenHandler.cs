@@ -16,12 +16,12 @@ public partial class ShopScreenHandler : Node
 
         ShopScreen shopScreen = ShopScreenScene.Instantiate<ShopScreen>();
         eventLayer.AddChild(shopScreen);
-        shopScreen.set_relics(relics);
-        shopScreen.set_consumables(consumables);
-        shopScreen.item_purchase += OnItemPurchased;
+        shopScreen.SetRelics(relics);
+        shopScreen.SetConsumables(consumables);
+        shopScreen.ItemPurchase += OnItemPurchased;
 
         await ToSignal(shopScreen, Node.SignalName.TreeExited);
-        shopScreen.item_purchase -= OnItemPurchased;
+        shopScreen.ItemPurchase -= OnItemPurchased;
         shop_closed?.Invoke();
     }
 

@@ -18,89 +18,89 @@ public partial class TowerStatUi : Control
     [Export]
     public string unit { get; set; } = string.Empty;
 
-    private TextureRect stat_texture;
-    private Label value_label;
-    private Label unit_label;
-    private Label upgrade_value_label;
+    private TextureRect _statTexture;
+    private Label _valueLabel;
+    private Label _unitLabel;
+    private Label _upgradeValueLabel;
 
     public override void _Ready()
     {
-        stat_texture = GetNodeOrNull<TextureRect>("MarginContainer/StatTexture");
-        value_label = GetNodeOrNull<Label>("BoxContainer/ValueLabel");
-        unit_label = GetNodeOrNull<Label>("BoxContainer/UnitLabel");
-        upgrade_value_label = GetNodeOrNull<Label>("BoxContainer/UpgradeValueLabel");
+        _statTexture = GetNodeOrNull<TextureRect>("MarginContainer/StatTexture");
+        _valueLabel = GetNodeOrNull<Label>("BoxContainer/ValueLabel");
+        _unitLabel = GetNodeOrNull<Label>("BoxContainer/UnitLabel");
+        _upgradeValueLabel = GetNodeOrNull<Label>("BoxContainer/UpgradeValueLabel");
 
-        if (stat_texture != null)
+        if (_statTexture != null)
         {
-            stat_texture.Texture = stat_icon;
+            _statTexture.Texture = stat_icon;
         }
 
-        if (upgrade_value_label != null)
+        if (_upgradeValueLabel != null)
         {
-            upgrade_value_label.Visible = false;
+            _upgradeValueLabel.Visible = false;
         }
 
-        if (unit_label != null)
+        if (_unitLabel != null)
         {
             if (string.IsNullOrEmpty(unit))
             {
-                unit_label.Visible = false;
+                _unitLabel.Visible = false;
             }
             else
             {
-                unit_label.Text = unit;
+                _unitLabel.Text = unit;
             }
         }
 
         RefreshValueLabel();
     }
 
-    public void set_value(float new_value)
+    public void SetValue(float newValue)
     {
-        stat_value = new_value;
+        stat_value = newValue;
         RefreshValueLabel();
     }
 
-    public void show_upgrade_value(float upgrade_amount)
+    public void ShowUpgradeValue(float upgradeAmount)
     {
-        if (upgrade_value_label == null)
+        if (_upgradeValueLabel == null)
         {
             return;
         }
 
-        upgrade_value_label.Visible = true;
+        _upgradeValueLabel.Visible = true;
         if (is_float)
         {
-            upgrade_value_label.Text = "(+" + Mathf.Snapped(upgrade_amount, 0.01f) + ")";
+            _upgradeValueLabel.Text = "(+" + Mathf.Snapped(upgradeAmount, 0.01f) + ")";
         }
         else
         {
-            upgrade_value_label.Text = "(+" + (int)upgrade_amount + ")";
+            _upgradeValueLabel.Text = "(+" + (int)upgradeAmount + ")";
         }
     }
 
-    public void hide_upgrade_value()
+    public void HideUpgradeValue()
     {
-        if (upgrade_value_label != null)
+        if (_upgradeValueLabel != null)
         {
-            upgrade_value_label.Visible = false;
+            _upgradeValueLabel.Visible = false;
         }
     }
 
     private void RefreshValueLabel()
     {
-        if (value_label == null)
+        if (_valueLabel == null)
         {
             return;
         }
 
         if (is_float)
         {
-            value_label.Text = Mathf.Snapped(stat_value, 0.01f).ToString();
+            _valueLabel.Text = Mathf.Snapped(stat_value, 0.01f).ToString();
         }
         else
         {
-            value_label.Text = ((int)stat_value).ToString();
+            _valueLabel.Text = ((int)stat_value).ToString();
         }
     }
 }

@@ -14,16 +14,16 @@
 atlas = ExtResource("1_s7tbd")
 region = Rect2(0, 0, 128, 191)
 
-[node name="TowerButton" type="HBoxContainer" unique_id=1780577747 node_paths=PackedStringArray("panel", "tower_button", "gold_price", "amount_label")]
+[node name="TowerButton" type="HBoxContainer" unique_id=1780577747 node_paths=PackedStringArray("PanelPath", "TowerButtonPath", "GoldPricePath", "AmountLabelPath")]
 offset_right = 106.0
 offset_bottom = 112.0
 size_flags_vertical = 10
 theme_override_constants/separation = 20
 script = ExtResource("1_bxa3v")
-panel = NodePath("VBoxContainer/CenterContainer/Panel")
-tower_button = NodePath("VBoxContainer/CenterContainer/TowerButton")
-gold_price = NodePath("VBoxContainer/GoldPrice")
-amount_label = NodePath("HBoxContainer/MarginContainer/AmountLabel")
+PanelPath = NodePath("VBoxContainer/CenterContainer/Panel")
+TowerButtonPath = NodePath("VBoxContainer/CenterContainer/TowerButton")
+GoldPricePath = NodePath("VBoxContainer/GoldPrice")
+AmountLabelPath = NodePath("HBoxContainer/MarginContainer/AmountLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1900875026]
 layout_mode = 2

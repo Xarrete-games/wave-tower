@@ -24,22 +24,22 @@ public static class HintManagerStatic
 
         Hint hint = HintScene.Instantiate<Hint>();
         context.GetTree().Root.AddChild(hint);
-        hint.set_text(text);
-        hint.set_title(title);
+        hint.SetText(text);
+        hint.SetTitle(title);
 
         Vector2 basePos = parent.GlobalPosition + GetOffset(parent, pos);
-        hint.set_position(basePos);
+        hint.SetPosition(basePos);
         Hints[parent] = hint;
 
         if (!IsOnLeftSide(context, parent) && pos == PositionHint.BOTTOM)
         {
             Vector2 viewportSize = context.GetViewport().GetVisibleRect().Size;
-            float hintWidth = hint.get_size().X;
-            Vector2 newPos = hint.get_position();
+            float hintWidth = hint.GetSize().X;
+            Vector2 newPos = hint.GetPosition();
             newPos.X = parent.GlobalPosition.X + parent.Size.X - hintWidth;
             newPos.X = Mathf.Clamp(newPos.X, 0.0f, viewportSize.X - hintWidth);
             newPos.Y = parent.GlobalPosition.Y + parent.Size.Y;
-            hint.set_position(newPos);
+            hint.SetPosition(newPos);
         }
     }
 

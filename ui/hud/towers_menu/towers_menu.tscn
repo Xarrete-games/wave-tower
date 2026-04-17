@@ -11,7 +11,7 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="TowersMenu" type="Control" unique_id=57997931 node_paths=PackedStringArray("buttons_container", "tower_hint")]
+[node name="TowersMenu" type="Control" unique_id=57997931 node_paths=PackedStringArray("ButtonsContainer", "TowerHint")]
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
@@ -23,9 +23,9 @@ grow_vertical = 0
 size_flags_horizontal = 4
 mouse_filter = 2
 script = ExtResource("1_d3tgk")
-buttons_container = NodePath("Container/TowersButtons")
-tower_hint = NodePath("TowerButtonHint")
-tower_button_scene = ExtResource("3_1xlmg")
+ButtonsContainer = NodePath("Container/TowersButtons")
+TowerHint = NodePath("TowerButtonHint")
+TowerButtonScene = ExtResource("3_1xlmg")
 
 [node name="TowerButtonHint" parent="." unique_id=999503119 instance=ExtResource("2_57b1o")]
 layout_mode = 0

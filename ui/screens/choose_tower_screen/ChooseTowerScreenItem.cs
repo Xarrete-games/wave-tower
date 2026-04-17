@@ -64,9 +64,9 @@ public partial class ChooseTowerScreenItem : Control
         description_label.Text = configuration.description;
         texture.Texture = configuration.icon;
 
-        damage_stat.set_value(configuration.base_damage);
-        range_stat.set_value(configuration.base_attack_range);
-        attack_speed_stat.set_value(configuration.base_attack_speed);
+        damage_stat.SetValue(configuration.base_damage);
+        range_stat.SetValue(configuration.base_attack_range);
+        attack_speed_stat.SetValue(configuration.base_attack_speed);
         gold_price.price = configuration.build_price;
     }
 

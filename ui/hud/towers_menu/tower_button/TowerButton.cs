@@ -3,49 +3,49 @@ using System;
 
 public partial class TowerButton : Control
 {
-    public event Action<TowerDataWithInstance, int> tower_button_pressed;
-    public event Action<TowerButton> hover;
-    public event Action<TowerButton> unhover;
+    public event Action<TowerDataWithInstance, int> TowerButtonPressed;
+    public event Action<TowerButton> Hover;
+    public event Action<TowerButton> Unhover;
 
     private static readonly StyleBox NORMAL_PANEL = GD.Load<StyleBox>("uid://dcjn1y7ofuii7");
     private static readonly StyleBox HOVER_PANEL = GD.Load<StyleBox>("uid://5m3jkdualcb3");
 
-    private TowerDataWithInstance _tower_data;
+    private TowerDataWithInstance _towerData;
     private int _price = 0;
     private Texture2D _icon;
-    private Texture2D _icon_hover;
+    private Texture2D _iconHover;
     private int _amount = 0;
 
     [Export]
-    public TowerDataWithInstance tower_data
+    public TowerDataWithInstance TowerData
     {
-        get => _tower_data;
+        get => _towerData;
         set
         {
-            _tower_data = value;
-            configuration = value?.data;
-            tower_scene = value?.scene;
-            icon = configuration?.icon;
-            type = configuration?.type ?? 0;
+            _towerData = value;
+            Configuration = value?.data;
+            TowerScene = value?.scene;
+            Icon = Configuration?.icon;
+            TowerType = Configuration?.type ?? 0;
             UpdatePrice();
         }
     }
 
     [Export]
-    public NodePath panel;
+    public NodePath PanelPath;
 
     [Export]
-    public NodePath tower_button;
+    public NodePath TowerButtonPath;
 
     [Export]
-    public NodePath gold_price;
+    public NodePath GoldPricePath;
 
     [Export]
-    public NodePath amount_label;
+    public NodePath AmountLabelPath;
 
-    public TowerData configuration;
+    public TowerData Configuration;
 
-    public int price
+    public int Price
     {
         get => _price;
         set
@@ -58,7 +58,7 @@ public partial class TowerButton : Control
         }
     }
 
-    public Texture2D icon
+    public Texture2D Icon
     {
         get => _icon;
         set
@@ -68,17 +68,17 @@ public partial class TowerButton : Control
         }
     }
 
-    public Texture2D icon_hover
+    public Texture2D IconHover
     {
-        get => _icon_hover;
+        get => _iconHover;
         set
         {
-            _icon_hover = value;
+            _iconHover = value;
             UpdateTextureHover();
         }
     }
 
-    public int amount
+    public int Amount
     {
         get => _amount;
         set
@@ -91,8 +91,8 @@ public partial class TowerButton : Control
         }
     }
 
-    public PackedScene tower_scene;
-    public int type;
+    public PackedScene TowerScene;
+    public int TowerType;
 
     private Panel _panelNode;
     private TextureButton _towerButtonNode;
@@ -102,10 +102,10 @@ public partial class TowerButton : Control
 
     public override void _Ready()
     {
-        _panelNode = !panel.IsEmpty ? GetNodeOrNull<Panel>(panel) : GetNodeOrNull<Panel>("VBoxContainer/CenterContainer/Panel");
-        _towerButtonNode = !tower_button.IsEmpty ? GetNodeOrNull<TextureButton>(tower_button) : GetNodeOrNull<TextureButton>("VBoxContainer/CenterContainer/TowerButton");
-        _goldPriceNode = !gold_price.IsEmpty ? GetNodeOrNull<GoldPrice>(gold_price) : GetNodeOrNull<GoldPrice>("VBoxContainer/GoldPrice");
-        _amountLabelNode = !amount_label.IsEmpty ? GetNodeOrNull<Label>(amount_label) : GetNodeOrNull<Label>("HBoxContainer/MarginContainer/AmountLabel");
+        _panelNode = !PanelPath.IsEmpty ? GetNodeOrNull<Panel>(PanelPath) : GetNodeOrNull<Panel>("VBoxContainer/CenterContainer/Panel");
+        _towerButtonNode = !TowerButtonPath.IsEmpty ? GetNodeOrNull<TextureButton>(TowerButtonPath) : GetNodeOrNull<TextureButton>("VBoxContainer/CenterContainer/TowerButton");
+        _goldPriceNode = !GoldPricePath.IsEmpty ? GetNodeOrNull<GoldPrice>(GoldPricePath) : GetNodeOrNull<GoldPrice>("VBoxContainer/GoldPrice");
+        _amountLabelNode = !AmountLabelPath.IsEmpty ? GetNodeOrNull<Label>(AmountLabelPath) : GetNodeOrNull<Label>("HBoxContainer/MarginContainer/AmountLabel");
 
         _runContext = GetNode<RunContext>("/root/RunContext");
         _runContext.economy.available_free_towers_change += OnAvailableFreeTowersChange;
@@ -143,7 +143,7 @@ public partial class TowerButton : Control
     {
         if (_towerButtonNode != null)
         {
-            _towerButtonNode.TextureNormal = icon;
+            _towerButtonNode.TextureNormal = Icon;
         }
     }
 
@@ -151,20 +151,20 @@ public partial class TowerButton : Control
     {
         if (_towerButtonNode != null)
         {
-            _towerButtonNode.TextureHover = icon_hover;
+            _towerButtonNode.TextureHover = IconHover;
         }
     }
 
     private void OnMouseExited()
     {
-        unhover?.Invoke(this);
+        Unhover?.Invoke(this);
         _panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
     }
 
     private void OnMouseEntered()
     {
         _panelNode?.AddThemeStyleboxOverride("panel", HOVER_PANEL);
-        hover?.Invoke(this);
+        Hover?.Invoke(this);
         AudioManager audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
         audioManager?.play_button_hover();
     }
@@ -179,22 +179,22 @@ public partial class TowerButton : Control
 
         if (runContext.economy.available_free_towers > 0)
         {
-            price = 0;
+            Price = 0;
             return;
         }
 
-        if (configuration == null)
+        if (Configuration == null)
         {
             return;
         }
 
-        int basePrice = configuration.build_price;
+        int basePrice = Configuration.build_price;
         PriceContext ctx = new(PriceContext.PriceType.Tower, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
-        price = ctx.FinalPrice;
+        Price = ctx.FinalPrice;
     }
 
-    private void OnAvailableFreeTowersChange(int _available_free_towers)
+    private void OnAvailableFreeTowersChange(int availableFreeTowers)
     {
         UpdatePrice();
     }
@@ -207,9 +207,9 @@ public partial class TowerButton : Control
         }
     }
 
-    private void OnRelicRemoved(string relic_id)
+    private void OnRelicRemoved(string relicId)
     {
-        if (relic_id == "soya_sauce" || relic_id == "tuna_nigiri")
+        if (relicId == "soya_sauce" || relicId == "tuna_nigiri")
         {
             UpdatePrice();
         }
@@ -230,11 +230,11 @@ public partial class TowerButton : Control
         audioManager?.play_button_click();
 
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        if (runContext != null && runContext.economy.gold < price)
+        if (runContext != null && runContext.economy.gold < Price)
         {
             return;
         }
 
-        tower_button_pressed?.Invoke(tower_data, price);
+        TowerButtonPressed?.Invoke(TowerData, Price);
     }
 }

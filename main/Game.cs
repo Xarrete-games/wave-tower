@@ -79,7 +79,7 @@ public partial class Game : Node2D
 
         GetTree().Paused = !GetTree().Paused;
         _pauseInstance = pause.Instantiate<PauseMenu>();
-        _pauseInstance.resume_game += CloseConfigMenu;
+        _pauseInstance.ResumeGame += CloseConfigMenu;
         _configLayer.AddChild(_pauseInstance);
     }
 
@@ -90,7 +90,7 @@ public partial class Game : Node2D
             return;
         }
 
-        _pauseInstance.resume_game -= CloseConfigMenu;
+        _pauseInstance.ResumeGame -= CloseConfigMenu;
         _pauseInstance.QueueFree();
         _pauseInstance = null;
     }

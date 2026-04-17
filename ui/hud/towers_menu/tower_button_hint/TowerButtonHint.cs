@@ -2,40 +2,40 @@ using Godot;
 
 public partial class TowerButtonHint : Control
 {
-    private RichTextLabel name_label;
-    private Label description_label;
-    private TowerStatUi damage_stat;
-    private TowerStatUi attack_speed_stat;
-    private TowerStatUi range_stat;
+    private RichTextLabel _nameLabel;
+    private Label _descriptionLabel;
+    private TowerStatUi _damageStat;
+    private TowerStatUi _attackSpeedStat;
+    private TowerStatUi _rangeStat;
 
     public override void _Ready()
     {
-        name_label = GetNodeOrNull<RichTextLabel>("MarginContainer/VBoxContainer/DescriptionContainer/NameLabel");
-        description_label = GetNodeOrNull<Label>("MarginContainer/VBoxContainer/DescriptionContainer/DescriptionLabel");
-        damage_stat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/DamageStatUi");
-        attack_speed_stat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/AttkSpeedStatUi");
-        range_stat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/RangeStatUi");
+        _nameLabel = GetNodeOrNull<RichTextLabel>("MarginContainer/VBoxContainer/DescriptionContainer/NameLabel");
+        _descriptionLabel = GetNodeOrNull<Label>("MarginContainer/VBoxContainer/DescriptionContainer/DescriptionLabel");
+        _damageStat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/DamageStatUi");
+        _attackSpeedStat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/AttkSpeedStatUi");
+        _rangeStat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/RangeStatUi");
     }
 
-    public void set_stats(TowerData configuration)
+    public void SetStats(TowerData configuration)
     {
         if (configuration == null)
         {
             return;
         }
 
-        if (name_label != null)
+        if (_nameLabel != null)
         {
-            name_label.Text = "[u]" + configuration.display_name + "[/u]";
+            _nameLabel.Text = "[u]" + configuration.display_name + "[/u]";
         }
 
-        if (description_label != null)
+        if (_descriptionLabel != null)
         {
-            description_label.Text = configuration.description;
+            _descriptionLabel.Text = configuration.description;
         }
 
-        damage_stat?.set_value(configuration.base_damage);
-        attack_speed_stat?.set_value(configuration.base_attack_speed);
-        range_stat?.set_value(configuration.base_attack_range);
+        _damageStat?.SetValue(configuration.base_damage);
+        _attackSpeedStat?.SetValue(configuration.base_attack_speed);
+        _rangeStat?.SetValue(configuration.base_attack_range);
     }
 }

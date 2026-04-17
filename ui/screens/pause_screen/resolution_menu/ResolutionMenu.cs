@@ -4,10 +4,10 @@ using Godot;
 public partial class ResolutionMenu : VBoxContainer
 {
     [Export]
-    public OptionButton resolution_option_button;
+    public OptionButton ResolutionOptionButton;
 
     [Export]
-    public OptionButton mode_option_button;
+    public OptionButton ModeOptionButton;
 
     private readonly Godot.Collections.Dictionary<string, Vector2I> _resolutions = new()
     {
@@ -25,10 +25,10 @@ public partial class ResolutionMenu : VBoxContainer
     public override void _Ready()
     {
         PopulateResolutions();
-        update_button_values();
+        UpdateButtonValues();
     }
 
-    public void update_button_values()
+    public void UpdateButtonValues()
     {
         Vector2I windowSize = GetWindow().Size;
         string current = $"{windowSize.X}x{windowSize.Y}";
@@ -36,13 +36,13 @@ public partial class ResolutionMenu : VBoxContainer
         int index = _visibleResolutions.IndexOf(current);
         if (index != -1)
         {
-            resolution_option_button.Selected = index;
+            ResolutionOptionButton.Selected = index;
         }
     }
 
     private void PopulateResolutions()
     {
-        resolution_option_button.Clear();
+        ResolutionOptionButton.Clear();
         _visibleResolutions.Clear();
 
         Vector2I screenSize = DisplayServer.ScreenGetSize();
@@ -54,7 +54,7 @@ public partial class ResolutionMenu : VBoxContainer
             if (res.X <= screenSize.X && res.Y <= screenSize.Y)
             {
                 _visibleResolutions.Add(resName);
-                resolution_option_button.AddItem(resName);
+                ResolutionOptionButton.AddItem(resName);
             }
         }
     }
@@ -68,10 +68,10 @@ public partial class ResolutionMenu : VBoxContainer
 
         string key = _visibleResolutions[index];
         GetWindow().Size = _resolutions[key];
-        center_window();
+        CenterWindow();
     }
 
-    private void center_window()
+    private void CenterWindow()
     {
         Vector2I screenCenter = DisplayServer.ScreenGetPosition() + (DisplayServer.ScreenGetSize() / 2);
         Vector2I windowSize = GetWindow().GetSizeWithDecorations();

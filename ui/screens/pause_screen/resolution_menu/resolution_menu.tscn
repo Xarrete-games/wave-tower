@@ -4,11 +4,11 @@
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="2_umlkh"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="3_5bay8"]
 
-[node name="ResolutionMenu" type="VBoxContainer" unique_id=864623530 node_paths=PackedStringArray("resolution_option_button")]
+[node name="ResolutionMenu" type="VBoxContainer" unique_id=864623530 node_paths=PackedStringArray("ResolutionOptionButton")]
 offset_right = 119.0
 offset_bottom = 23.0
 script = ExtResource("1_rjtgo")
-resolution_option_button = NodePath("VBoxContainer/ResolutionButton")
+ResolutionOptionButton = NodePath("VBoxContainer/ResolutionButton")
 
 [node name="VBoxContainer" type="HBoxContainer" parent="." unique_id=573951614]
 layout_mode = 2

@@ -3,7 +3,7 @@ using System;
 
 public partial class ShopSlot : VBoxContainer
 {
-    public event Action<ItemOffer, ShopSlot> item_purchased;
+    public event Action<ItemOffer, ShopSlot> ItemPurchased;
 
     [Export]
     public Label title_label;
@@ -54,7 +54,7 @@ public partial class ShopSlot : VBoxContainer
         }
     }
 
-    public void set_item(ItemOffer itemOffer)
+    public void SetItem(ItemOffer itemOffer)
     {
         if (itemOffer == null)
         {
@@ -108,7 +108,7 @@ public partial class ShopSlot : VBoxContainer
             _healthPrice.price = _currentHealthCost;
         }
 
-        ChekHealth(_runContext.status.health, _currentHealthCost);
+        CheckHealth(_runContext.status.health, _currentHealthCost);
     }
 
     private void OnGuiInput(InputEvent @event)
@@ -128,7 +128,7 @@ public partial class ShopSlot : VBoxContainer
         if (UIUtilsStatic.IsLeftClickEvent(@event) && _runContext.economy.gold >= _price && _hasEnoughHealth)
         {
             GetNode<AudioManager>("/root/AudioManager").play_button_click();
-            item_purchased?.Invoke(_item, this);
+            ItemPurchased?.Invoke(_item, this);
         }
     }
 
@@ -158,23 +158,23 @@ public partial class ShopSlot : VBoxContainer
         Resource itemData = _item.item_data;
         if (itemData is RelicData)
         {
-            set_item(_runContext.offers_manager.create_relic_offer_from_data(itemData as RelicData));
+            SetItem(_runContext.offers_manager.create_relic_offer_from_data(itemData as RelicData));
             return;
         }
 
         if (itemData is ConsumableData)
         {
-            set_item(_runContext.offers_manager.create_consumable_offer_from_data(itemData as ConsumableData));
+            SetItem(_runContext.offers_manager.create_consumable_offer_from_data(itemData as ConsumableData));
         }
     }
 
-    private void OnStatusHealthChange(int current_health)
+    private void OnStatusHealthChange(int currentHealth)
     {
-        ChekHealth(current_health, _currentHealthCost);
+        CheckHealth(currentHealth, _currentHealthCost);
     }
 
-    private void ChekHealth(int current_health, int health_cost)
+    private void CheckHealth(int currentHealth, int healthCost)
     {
-        _hasEnoughHealth = current_health > health_cost;
+        _hasEnoughHealth = currentHealth > healthCost;
     }
 }
