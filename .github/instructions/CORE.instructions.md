@@ -19,3 +19,4 @@ applyTo: "**/*.cs"
 - Naming convention: method arguments and local variables in `camelCase`.
 - Remove legacy GDScript shadowing naming from parameters/locals: do not use `p_*` prefixes or `*_p` suffixes.
 - When refactoring existing code, rename `p_*` and `*_p` arguments/locals to standard `camelCase`.
+- Do not declare `using Godot;` if it is not needed in the file. For puro c# files that do not interact with Godot APIs, omit the `using Godot;` directive.
