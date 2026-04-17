@@ -247,7 +247,7 @@ animations = [{
 }]
 
 [node name="Skull" unique_id=973535397 instance=ExtResource("1_k4uph")]
-base_speed = 90.0
+BaseSpeed = 90.0
 
 [node name="AnimatedSprite2D" parent="." index="1" unique_id=1853220279]
 sprite_frames = SubResource("SpriteFrames_kkdne")
@@ -256,3 +256,4 @@ frame_progress = 0.0
 [node name="HealthBar" parent="." index="3" unique_id=937412680]
 offset_top = -158.0
 offset_bottom = -158.0
+

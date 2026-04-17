@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_t1y8r")
-only_for_events = true
-id = "buda"
-display_name = "Buda"
-description = "Increases max health by 1 for each tower you place"
-icon = ExtResource("2_s2dvm")
+OnlyForEvents = true
+Id = "buda"
+DisplayName = "Buda"
+Description = "Increases max health by 1 for each tower you place"
+Icon = ExtResource("2_s2dvm")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_r8ywf")
-rarity = 1
-id = "pirate_hat"
-display_name = "Pirate hat"
-description = "When you use an item, you have a 50% chance of getting it back."
-icon = ExtResource("3_sr48w")
+Rarity = 1
+Id = "pirate_hat"
+DisplayName = "Pirate hat"
+Description = "When you use an item, you have a 50% chance of getting it back."
+Icon = ExtResource("3_sr48w")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

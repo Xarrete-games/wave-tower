@@ -7,19 +7,20 @@
 
 [sub_resource type="Resource" id="Resource_d6nks"]
 script = ExtResource("1_hj6cg")
-initial_wave = 10
-final_wave = 10
+InitialWave = 10
+FinalWave = 10
 
 [resource]
 script = ExtResource("3_d6nks")
-type_legacy = 2
+TypeLegacy = 2
 type = 4
-name = "Big Spectre"
-icon = ExtResource("1_chpqd")
-scene = ExtResource("2_hj6cg")
-max_health = 3000
-base_speed = 100.0
-damage = 20
-base_gold_value = 30
-weight = 25
-available_waves = Array[ExtResource("1_hj6cg")]([SubResource("Resource_d6nks")])
+Name = "Big Spectre"
+Icon = ExtResource("1_chpqd")
+Scene = ExtResource("2_hj6cg")
+MaxHealth = 3000
+BaseSpeed = 100.0
+Damage = 20
+BaseGoldValue = 30
+Weight = 25
+AvailableWaves = Array[ExtResource("1_hj6cg")]([SubResource("Resource_d6nks")])
+

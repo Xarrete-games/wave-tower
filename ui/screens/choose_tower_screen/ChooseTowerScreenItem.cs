@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System;
 
 public partial class ChooseTowerScreenItem : Control
@@ -53,12 +53,12 @@ public partial class ChooseTowerScreenItem : Control
 
     private void ApplyConfiguration()
     {
-        if (_towerData?.data == null)
+        if (_towerData?.Data == null)
         {
             return;
         }
 
-        TowerData configuration = _towerData.data;
+        TowerData configuration = _towerData.Data;
 
         title_label.Text = configuration.DisplayName;
         description_label.Text = configuration.description;

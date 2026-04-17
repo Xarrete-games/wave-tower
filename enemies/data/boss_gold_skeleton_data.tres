@@ -7,19 +7,20 @@
 
 [sub_resource type="Resource" id="Resource_iph4v"]
 script = ExtResource("1_44687")
-initial_wave = 20
-final_wave = 20
+InitialWave = 20
+FinalWave = 20
 
 [resource]
 script = ExtResource("1_2btab")
-type_legacy = 7
+TypeLegacy = 7
 type = 4
-name = "Gold Skeleton"
-icon = ExtResource("1_h7ptv")
-scene = ExtResource("2_44687")
-max_health = 12000
-base_speed = 70.0
-damage = 20
-base_gold_value = 50
-weight = 35
-available_waves = Array[ExtResource("1_44687")]([SubResource("Resource_iph4v")])
+Name = "Gold Skeleton"
+Icon = ExtResource("1_h7ptv")
+Scene = ExtResource("2_44687")
+MaxHealth = 12000
+BaseSpeed = 70.0
+Damage = 20
+BaseGoldValue = 50
+Weight = 35
+AvailableWaves = Array[ExtResource("1_44687")]([SubResource("Resource_iph4v")])
+

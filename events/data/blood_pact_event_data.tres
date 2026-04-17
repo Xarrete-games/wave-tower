@@ -7,13 +7,14 @@
 
 [resource]
 script = ExtResource("1_6hjr0")
-id = "blood_pact"
+Id = "blood_pact"
 title = "The Blood Pact"
-description = "The sorcerer watches you silently as the relic pulses on the altar.
+Description = "The sorcerer watches you silently as the relic pulses on the altar.
 \"Nothing is free,\" he whispers.
 If you are willing to offer a part of your life, the forbidden power will be yours.
 Blood is the price. The relic, the reward."
-icon = ExtResource("1_hron2")
-texture_background = ExtResource("4_ylvtp")
-runtime_script = ExtResource("2_kosic")
+Icon = ExtResource("1_hron2")
+TextureBackground = ExtResource("4_ylvtp")
+RuntimeScript = ExtResource("2_kosic")
 metadata/_custom_type_script = "uid://daq85iil68x7r"
+

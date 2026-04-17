@@ -232,7 +232,7 @@ animations = [{
 }]
 
 [node name="Invoker" instance=ExtResource("1_8pmpf")]
-base_speed = 90.0
+BaseSpeed = 90.0
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(0.1, 0.1)
@@ -243,3 +243,4 @@ frame_progress = 0.18466122
 [node name="HealthBar" parent="." index="3"]
 offset_top = -158.0
 offset_bottom = -158.0
+

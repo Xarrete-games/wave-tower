@@ -12,19 +12,20 @@ region = Rect2(94, 175, 289, 461)
 [sub_resource type="Resource" id="Resource_tjead"]
 script = ExtResource("2_4xtpd")
 type = 2
-upgrade_price = 70
-base_damage = 30.0
-base_attack_range = 450.0
-base_attack_speed = 0.33
-damage_per_level = 30.0
-id = "frost_tower"
-display_name = "Frost Tower"
-description = "Basic frost tower"
-icon = SubResource("AtlasTexture_ncsk7")
+UpgradePrice = 70
+BaseDamage = 30.0
+BaseAttackRange = 450.0
+BaseAttackSpeed = 0.33
+DamagePerLevel = 30.0
+Id = "frost_tower"
+DisplayName = "Frost Tower"
+Description = "Basic frost tower"
+Icon = SubResource("AtlasTexture_ncsk7")
 metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
 [resource]
 script = ExtResource("3_7u0s0")
-data = SubResource("Resource_tjead")
-scene = ExtResource("6_8vsmr")
+Data = SubResource("Resource_tjead")
+Scene = ExtResource("6_8vsmr")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
+

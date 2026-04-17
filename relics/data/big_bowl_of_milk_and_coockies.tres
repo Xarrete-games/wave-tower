@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_0upk2")
-id = "big_bowl_of_milk_and_biscuits"
-display_name = "Big bowl of milk and cookies"
-description = "Increases maximum health by 10 and restores full health"
-icon = ExtResource("2_13d8s")
-rarity = 1
+Id = "big_bowl_of_milk_and_biscuits"
+DisplayName = "Big bowl of milk and cookies"
+Description = "Increases maximum health by 10 and restores full health"
+Icon = ExtResource("2_13d8s")
+Rarity = 1
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

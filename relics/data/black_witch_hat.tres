@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_ti2tw")
-id = "black_witch_hat"
-display_name = "Black witch hat"
-description = "Enemies with debuffs receive +5 dmg per hit"
-icon = ExtResource("2_2nnme")
+Id = "black_witch_hat"
+DisplayName = "Black witch hat"
+Description = "Enemies with debuffs receive +5 dmg per hit"
+Icon = ExtResource("2_2nnme")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

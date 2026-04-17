@@ -198,10 +198,10 @@ fill = 1
 fill_from = Vector2(0.5071225, 0.48433048)
 
 [node name="BlackGolem" unique_id=1274580640 instance=ExtResource("1_d4lxy")]
-base_speed = 60.0
-max_health = 50000.0
-base_gold_value = 100
-damage = 999
+BaseSpeed = 60.0
+MaxHealth = 50000.0
+BaseGoldValue = 100
+Damage = 999
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, -4)
@@ -228,3 +228,4 @@ offset_top = -221.0
 offset_right = -26.000008
 offset_bottom = -167.0
 scale = Vector2(3.333, 1)
+

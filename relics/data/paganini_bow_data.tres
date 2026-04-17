@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_ly321")
-show_counter = true
-id = "paganini_bow"
-display_name = "Paganini's Bow"
-description = "Every 4 towers built, your next tower gains +10% attack damage."
-icon = ExtResource("3_8rgck")
-rarity = 1
+ShowCounter = true
+Id = "paganini_bow"
+DisplayName = "Paganini's Bow"
+Description = "Every 4 towers built, your next tower gains +10% attack damage."
+Icon = ExtResource("3_8rgck")
+Rarity = 1
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

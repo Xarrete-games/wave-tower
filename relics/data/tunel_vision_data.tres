@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_wvpyy")
-id = "tunel_vision"
-display_name = "Tunel Vision"
-description = "Increases damage by 10% for each consecutive hit on the same enemy"
-icon = ExtResource("2_7utw2")
+Id = "tunel_vision"
+DisplayName = "Tunel Vision"
+Description = "Increases damage by 10% for each consecutive hit on the same enemy"
+Icon = ExtResource("2_7utw2")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

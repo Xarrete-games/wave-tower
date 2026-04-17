@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_f5i6s")
-rarity = 2
-id = "captain_cap"
-display_name = "Captain Cap"
-description = "4 relics appear to choose from instead of 3 as a reward"
-icon = ExtResource("3_x7kdt")
+Rarity = 2
+Id = "captain_cap"
+DisplayName = "Captain Cap"
+Description = "4 relics appear to choose from instead of 3 as a reward"
+Icon = ExtResource("3_x7kdt")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

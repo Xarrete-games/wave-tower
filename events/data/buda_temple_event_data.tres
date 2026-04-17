@@ -7,10 +7,11 @@
 
 [resource]
 script = ExtResource("1_yxnsr")
-id = "buda_temple"
+Id = "buda_temple"
 title = "Buda"
-description = "A strange Buda temple appears"
-icon = ExtResource("1_0p6f3")
-texture_background = ExtResource("3_wpwtl")
-runtime_script = ExtResource("2_wpwtl")
+Description = "A strange Buda temple appears"
+Icon = ExtResource("1_0p6f3")
+TextureBackground = ExtResource("3_wpwtl")
+RuntimeScript = ExtResource("2_wpwtl")
 metadata/_custom_type_script = "uid://daq85iil68x7r"
+

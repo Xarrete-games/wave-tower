@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_uh30i")
-id = "flower_pot"
-display_name = "Flower pot"
-description = "When the wave ends, recover 1 health."
-icon = ExtResource("3_guxeq")
+Id = "flower_pot"
+DisplayName = "Flower pot"
+Description = "When the wave ends, recover 1 health."
+Icon = ExtResource("3_guxeq")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -5,13 +5,7 @@ public partial class BuffData : BaseData
 {
     [ExportGroup("Script")]
     [Export]
-    public Script runtime_script { get; set; }
-
-    public Script RuntimeScript
-    {
-        get => runtime_script;
-        set => runtime_script = value;
-    }
+    public Script RuntimeScript { get; set; }
 
     public TowerBuff create_item(Source source, int value = 0)
     {
@@ -20,7 +14,7 @@ public partial class BuffData : BaseData
             return null;
         }
 
-        TowerBuffStatsModifier buff = id switch
+        TowerBuffStatsModifier buff = Id switch
         {
             "attack_speed_mult_buff" => new AttackSpeedMultBuff(),
             "attack_range_mult_buff" => new AttackRangeMultBuff(),
@@ -31,7 +25,7 @@ public partial class BuffData : BaseData
 
         if (buff == null)
         {
-            GD.PushError($"[BuffData] Unknown buff id: {id}");
+            GD.PushError($"[BuffData] Unknown buff id: {Id}");
             return null;
         }
 

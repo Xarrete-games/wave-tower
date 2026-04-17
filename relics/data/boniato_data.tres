@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_25sa2")
-id = "boniato"
-display_name = "Sweet Potato"
-description = "Increases the gold dropped by enemies by 1 at the cost of 5 lives.
+Id = "boniato"
+DisplayName = "Sweet Potato"
+Description = "Increases the gold dropped by enemies by 1 at the cost of 5 lives.
 Be careful!"
-icon = ExtResource("3_g7kpf")
-rarity = 2
+Icon = ExtResource("3_g7kpf")
+Rarity = 2
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

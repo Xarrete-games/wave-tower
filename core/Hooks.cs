@@ -1,4 +1,4 @@
-
+﻿
 using System;
 using System.Collections.Generic;
 using Godot;
@@ -113,7 +113,7 @@ public static class Hooks
 
         var model = new StatusModel
         {
-            MaxHealth = status.max_health,
+            MaxHealth = status.MaxHealth,
             Health = status.health,
             Armor = status.armor,
         };
@@ -235,3 +235,4 @@ public static class Hooks
     }
 
 }
+

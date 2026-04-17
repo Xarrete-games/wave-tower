@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_q7bfa")
-id = "ice_cream"
-display_name = "Ice cream with cherry"
-description = "Increases the gold received at the end of each wave by 10"
-icon = ExtResource("3_hcgnc")
+Id = "ice_cream"
+DisplayName = "Ice cream with cherry"
+Description = "Increases the gold received at the end of each wave by 10"
+Icon = ExtResource("3_hcgnc")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

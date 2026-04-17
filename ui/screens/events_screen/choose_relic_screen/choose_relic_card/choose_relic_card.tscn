@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="3_v3ltv"]
 [ext_resource type="Texture2D" uid="uid://b2yl75fehdgdj" path="res://assets/textures/hexagon light.png" id="4_jemtg"]
 [ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="5_077cq"]
-[ext_resource type="PackedScene" uid="uid://di132c8on6fw" path="res://ui/components/health_price/health_price.tscn" id="6_ilhn2"]
+[ext_resource type="PackedScene" uid="uid://di132c8on6fw" path="res://ui/components/HealthPrice/HealthPrice.tscn" id="6_ilhn2"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="6_txuuf"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sdsj4"]
@@ -111,4 +111,5 @@ size_flags_horizontal = 4
 [connection signal="gui_input" from="." to="." method="OnGuiInput"]
 [connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExited"]
+
 

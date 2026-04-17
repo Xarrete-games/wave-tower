@@ -6,17 +6,18 @@
 
 [sub_resource type="Resource" id="Resource_w6lbs"]
 script = ExtResource("1_8jooc")
-pos = 2
+Position = 2
 metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 
 [sub_resource type="Resource" id="Resource_juhvm"]
 script = ExtResource("1_8jooc")
-dir = 3
-pos = 0
+Direction = 3
+Position = 0
 metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 
 [resource]
 script = ExtResource("3_juhvm")
-edges = Array[ExtResource("1_8jooc")]([SubResource("Resource_w6lbs"), SubResource("Resource_juhvm")])
-scene = ExtResource("2_8jooc")
+Edges = Array[ExtResource("1_8jooc")]([SubResource("Resource_w6lbs"), SubResource("Resource_juhvm")])
+Scene = ExtResource("2_8jooc")
 metadata/_custom_type_script = "uid://buf7cbkrogset"
+

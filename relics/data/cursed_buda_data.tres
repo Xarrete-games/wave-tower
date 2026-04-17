@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_8nn0f")
-is_cursed = true
-only_for_events = true
-id = "cursed_buda"
-display_name = "Cursed buda"
-description = "Reduces max health  by 1 for each tower you place"
-icon = ExtResource("2_vhu5r")
+IsCursed = true
+OnlyForEvents = true
+Id = "cursed_buda"
+DisplayName = "Cursed buda"
+Description = "Reduces max health  by 1 for each tower you place"
+Icon = ExtResource("2_vhu5r")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

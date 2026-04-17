@@ -7,12 +7,13 @@
 
 [resource]
 script = ExtResource("1_60is1")
-id = "hightway_robbery_event"
+Id = "hightway_robbery_event"
 title = "Highway Robbery"
-description = "Two masked robbers block your way.
+Description = "Two masked robbers block your way.
 With swords drawn, they demand a relic.
 Pick one ..., you have no choice."
-icon = ExtResource("1_7h2fc")
-texture_background = ExtResource("3_xjape")
-runtime_script = ExtResource("2_xjape")
+Icon = ExtResource("1_7h2fc")
+TextureBackground = ExtResource("3_xjape")
+RuntimeScript = ExtResource("2_xjape")
 metadata/_custom_type_script = "uid://daq85iil68x7r"
+

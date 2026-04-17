@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public partial class RelicUI : Control
 {
@@ -33,7 +33,7 @@ public partial class RelicUI : Control
 
         _texture.Modulate = relicData.Disabled ? SemiTransparentColor : OpaqueColor;
 
-        bool showCounter = data.show_counter;
+        bool showCounter = data.ShowCounter;
         _amountLabel.Visible = showCounter;
         if (showCounter)
         {

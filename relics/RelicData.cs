@@ -4,121 +4,74 @@ using Godot;
 public partial class RelicData : Resource
 {
     [Export]
-    public string id { get; set; } = string.Empty;
+    public string Id { get; set; } = string.Empty;
 
     [Export]
-    public string display_name { get; set; } = string.Empty;
+    public string DisplayName { get; set; } = string.Empty;
 
     [Export(PropertyHint.MultilineText)]
-    public string description { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
 
     [Export]
-    public Texture2D icon { get; set; }
+    public Texture2D Icon { get; set; }
 
     [Export]
-    public int rarity { get; set; }
+    public int Rarity { get; set; }
+
+    // Legacy compatibility aliases (non-exported).
+    public string id
+    {
+        get => Id;
+        set => Id = value;
+    }
+
+    public string description
+    {
+        get => Description;
+        set => Description = value;
+    }
+
+    public Texture2D icon
+    {
+        get => Icon;
+        set => Icon = value;
+    }
+
+    public int rarity
+    {
+        get => Rarity;
+        set => Rarity = value;
+    }
 
     [ExportGroup("Relic")]
     [Export]
-    public bool show_counter { get; set; }
+    public bool ShowCounter { get; set; }
 
     [Export]
-    public int health_price { get; set; }
+    public int HealthPrice { get; set; }
 
     [Export]
-    public bool is_cursed { get; set; }
+    public bool IsCursed { get; set; }
 
     [Export]
-    public bool is_tome { get; set; }
+    public bool IsTome { get; set; }
 
     [Export]
-    public bool only_for_events { get; set; }
+    public bool OnlyForEvents { get; set; }
 
     [Export]
-    public int max_stacks { get; set; } = 1;
+    public int MaxStacks { get; set; } = 1;
 
     [ExportGroup("Script")]
     [Export]
-    public Script runtime_script { get; set; }
-
-    public string Id
-    {
-        get => id;
-        set => id = value;
-    }
-
-    public string DisplayName
-    {
-        get => display_name;
-        set => display_name = value;
-    }
-
-    public string Description
-    {
-        get => description;
-        set => description = value;
-    }
-
-    public Texture2D Icon
-    {
-        get => icon;
-        set => icon = value;
-    }
-
-    public int RarityValue
-    {
-        get => rarity;
-        set => rarity = value;
-    }
-
-    public bool ShowCounter
-    {
-        get => show_counter;
-        set => show_counter = value;
-    }
-
-    public int HealthPrice
-    {
-        get => health_price;
-        set => health_price = value;
-    }
-
-    public bool IsCursed
-    {
-        get => is_cursed;
-        set => is_cursed = value;
-    }
-
-    public bool IsTome
-    {
-        get => is_tome;
-        set => is_tome = value;
-    }
-
-    public bool OnlyForEvents
-    {
-        get => only_for_events;
-        set => only_for_events = value;
-    }
-
-    public int MaxStacks
-    {
-        get => max_stacks;
-        set => max_stacks = value;
-    }
-
-    public Script RuntimeScript
-    {
-        get => runtime_script;
-        set => runtime_script = value;
-    }
+    public Script RuntimeScript { get; set; }
 
     public Relic create_item()
     {
-        Relic relic = RelicModelFactory.CreateById(id);
+        Relic relic = RelicModelFactory.CreateById(Id);
         if (relic == null)
         {
-            GD.PushError($"[RelicData] Could not create Relic instance for id '{id}'");
+            GD.PushError($"[RelicData] Could not create Relic instance for id '{Id}'");
             return null;
         }
 

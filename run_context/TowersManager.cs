@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 using System;
 
@@ -70,13 +70,13 @@ public class TowersManager
             for (int index = 0; index < availableTowers.Count; index++)
             {
                 TowerDataWithInstance towerData = availableTowers[index];
-                if (towerData?.data == null)
+                if (towerData?.Data == null)
                 {
                     weights.Add(0f);
                     continue;
                 }
 
-                int rarity = (int)towerData.data.rarity;
+                int rarity = (int)towerData.Data.rarity;
                 float weight = GetTowerWeightForWave(rarity);
                 weights.Add(weight);
                 totalWeight += weight;
@@ -86,7 +86,7 @@ public class TowersManager
             {
                 int randomIndex = (int)(GD.Randi() % (uint)availableTowers.Count);
                 TowerDataWithInstance fallbackTower = availableTowers[randomIndex];
-                if (fallbackTower?.data != null)
+                if (fallbackTower?.Data != null)
                 {
                     selectedTowers.Add(fallbackTower);
                 }
@@ -109,7 +109,7 @@ public class TowersManager
             }
 
             TowerDataWithInstance selectedTower = availableTowers[selectedIndex];
-            if (selectedTower?.data != null)
+            if (selectedTower?.Data != null)
             {
                 selectedTowers.Add(selectedTower);
             }
@@ -124,12 +124,12 @@ public class TowersManager
         for (int index = 0; index < all_tower_data.Count; index++)
         {
             TowerDataWithInstance typedConfiguration = all_tower_data[index];
-            if (typedConfiguration?.data == null)
+            if (typedConfiguration?.Data == null)
             {
                 continue;
             }
 
-            if (typedConfiguration.data.id == id)
+            if (typedConfiguration.Data.id == id)
             {
                 return typedConfiguration;
             }
@@ -259,13 +259,13 @@ public class TowersManager
 
     public void OnTowerCardAdded(TowerDataWithInstance towerData)
     {
-        if (towerData == null || towerData.data == null)
+        if (towerData == null || towerData.Data == null)
         {
             GD.PushError($"[TowersManager] Invalid tower configuration while adding card: {towerData}");
             return;
         }
 
-        string id = towerData.data.id;
+        string id = towerData.Data.id;
         if (string.IsNullOrEmpty(id))
         {
             return;
@@ -426,7 +426,7 @@ public class TowersManager
             return;
         }
 
-        RunContextRuntime.Status.SyncFromLegacy(status.max_health, status.health, status.armor);
+        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.health, status.armor);
     }
 
     private void SyncLegacyStatusFromRuntime()
@@ -439,9 +439,9 @@ public class TowersManager
         }
 
         StatusRuntime runtime = RunContextRuntime.Status;
-        if (status.max_health != runtime.MaxHealth)
+        if (status.MaxHealth != runtime.MaxHealth)
         {
-            status.max_health = runtime.MaxHealth;
+            status.MaxHealth = runtime.MaxHealth;
         }
 
         if (status.armor != runtime.Armor)
@@ -489,4 +489,6 @@ public class TowersManager
         }
     }
 }
+
+
 

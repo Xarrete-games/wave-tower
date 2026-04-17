@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System;
 using System.Collections.Generic;
 
@@ -32,14 +32,14 @@ public partial class EventOptionsScreen : Control
 
         title_label.Text = eventData.title;
         description_label.Text = eventData.description;
-        texture_rect.Texture = eventData.texture_background;
+        texture_rect.Texture = eventData.TextureBackground;
 
         foreach (Node child in buttons_container.GetChildren())
         {
             child.QueueFree();
         }
 
-        Script runtimeScript = eventData.runtime_script;
+        Script runtimeScript = eventData.RuntimeScript;
         if (runtimeScript == null)
         {
             GD.PushError($"Event data {eventData.id} has no runtime script assigned.");

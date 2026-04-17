@@ -6,12 +6,13 @@
 
 [resource]
 script = ExtResource("1_2bn0m")
-debuff_type = 1
-value = 10.0
-duration = 5.0
-tick_interval = 1.0
-runtime_script = ExtResource("2_01n2b")
-id = "burn_debuff"
-display_name = "Burn"
-description = "Deals periodic damage over time."
-icon = ExtResource("3_jb3if")
+DebuffType = 1
+Value = 10.0
+Duration = 5.0
+TickInterval = 1.0
+RuntimeScript = ExtResource("2_01n2b")
+Id = "burn_debuff"
+DisplayName = "Burn"
+Description = "Deals periodic damage over time."
+Icon = ExtResource("3_jb3if")
+

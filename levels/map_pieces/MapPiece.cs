@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -98,7 +98,7 @@ public partial class MapPiece : Node2D
         for (int i = 0; i < edges.Count; i++)
         {
             Edge e = edges[i];
-            if (e != null && e.matches(edge))
+            if (e != null && e.Matches(edge))
             {
                 toRemove = e;
                 break;
@@ -119,7 +119,7 @@ public partial class MapPiece : Node2D
         for (int i = 0; i < edges.Count; i++)
         {
             Edge e = edges[i];
-            if (e != null && (int)e.dir == dir)
+            if (e != null && (int)e.Direction == dir)
             {
                 return e;
             }
@@ -128,7 +128,7 @@ public partial class MapPiece : Node2D
         return null;
     }
 
-    public bool has_edge_dir(int dir)
+    public bool HasEdgeDir(int dir)
     {
         return find_edge_by_dir(dir) != null;
     }
@@ -393,3 +393,4 @@ public partial class MapPiece : Node2D
         return result;
     }
 }
+

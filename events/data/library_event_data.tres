@@ -6,9 +6,10 @@
 
 [resource]
 script = ExtResource("1_kr3af")
-id = "library_event"
+Id = "library_event"
 title = "The LIbrary"
-description = "A mysterious library appears, many books to choose from but you can only take one."
-texture_background = ExtResource("2_fuj2f")
-runtime_script = ExtResource("1_cfdss")
+Description = "A mysterious library appears, many books to choose from but you can only take one."
+TextureBackground = ExtResource("2_fuj2f")
+RuntimeScript = ExtResource("1_cfdss")
 metadata/_custom_type_script = "uid://daq85iil68x7r"
+

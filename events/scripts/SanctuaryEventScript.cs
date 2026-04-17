@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 
 public partial class SanctuaryEventScript : EventScript
@@ -25,8 +25,9 @@ public partial class SanctuaryEventScript : EventScript
                 runContext.economy.add_gold(50);
                 break;
             case 1:
-                runContext.status.add_max_health(10);
+                runContext.status.add_MaxHealth(10);
                 break;
         }
     }
 }
+

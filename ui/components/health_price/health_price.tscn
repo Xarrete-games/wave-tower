@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://di132c8on6fw"]
 
-[ext_resource type="Script" path="res://ui/components/health_price/HealthPrice.cs" id="1_rc7h7"]
+[ext_resource type="Script" path="res://ui/components/HealthPrice/HealthPrice.cs" id="1_rc7h7"]
 [ext_resource type="Texture2D" uid="uid://t0orxc251is3" path="res://assets/images/icons/corazon.png" id="2_j6c4j"]
 [ext_resource type="LabelSettings" uid="uid://bgmdyxc6jka5f" path="res://ui/styles/label_settings/label_28_no_background.tres" id="2_rc7h7"]
 
@@ -30,3 +30,4 @@ size_flags_horizontal = 8
 texture = ExtResource("2_j6c4j")
 expand_mode = 1
 stretch_mode = 5
+

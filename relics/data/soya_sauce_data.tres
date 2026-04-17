@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_xi3p0")
-id = "soya_sauce"
-display_name = "Soya Sauce"
-description = "Doubles the effects of nigiris"
-icon = ExtResource("2_jb44x")
+Id = "soya_sauce"
+DisplayName = "Soya Sauce"
+Description = "Doubles the effects of nigiris"
+Icon = ExtResource("2_jb44x")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

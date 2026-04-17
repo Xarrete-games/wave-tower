@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("2_bxhhi")
-rarity = 1
-id = "phoenix_feather"
-display_name = "Phoenix feather"
-description = "If you receive a fatal blow, it is consumed to revive you with 10 health."
-icon = ExtResource("3_m0o58")
+Rarity = 1
+Id = "phoenix_feather"
+DisplayName = "Phoenix feather"
+Description = "If you receive a fatal blow, it is consumed to revive you with 10 health."
+Icon = ExtResource("3_m0o58")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_05so2")
-id = "power_gloves"
-display_name = "Power Gloves"
-description = "When applying an item to a tower, it also gains +3 attack range."
-icon = ExtResource("3_bayem")
+Id = "power_gloves"
+DisplayName = "Power Gloves"
+Description = "When applying an item to a tower, it also gains +3 attack range."
+Icon = ExtResource("3_bayem")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

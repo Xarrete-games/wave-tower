@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_bv3v8")
-id = "salt"
-display_name = "Salt"
-description = "Enemies below 30% health receive 15% more damage"
-icon = ExtResource("3_of58n")
+Id = "salt"
+DisplayName = "Salt"
+Description = "Enemies below 30% health receive 15% more damage"
+Icon = ExtResource("3_of58n")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

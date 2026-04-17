@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class BaseData : Resource
 {
-    public enum Rarity
+    public enum DataRarity
     {
         COMMON,
         RARE,
@@ -11,49 +11,43 @@ public partial class BaseData : Resource
     }
 
     [Export]
-    public string id { get; set; } = string.Empty;
+    public string Id { get; set; } = string.Empty;
 
     [Export]
-    public string display_name { get; set; } = string.Empty;
+    public string DisplayName { get; set; } = string.Empty;
 
     [Export(PropertyHint.MultilineText)]
-    public string description { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
 
     [Export]
-    public Texture2D icon { get; set; }
+    public Texture2D Icon { get; set; }
 
     [Export]
-    public Rarity rarity { get; set; } = Rarity.COMMON;
+    public DataRarity Rarity { get; set; } = DataRarity.COMMON;
 
-    // Keep exported snake_case for .tres/.tscn compatibility and expose PascalCase aliases for C# code.
-    public string Id
+    // Legacy compatibility aliases (non-exported).
+    public string id
     {
-        get => id;
-        set => id = value;
+        get => Id;
+        set => Id = value;
     }
 
-    public string DisplayName
+    public string description
     {
-        get => display_name;
-        set => display_name = value;
+        get => Description;
+        set => Description = value;
     }
 
-    public string Description
+    public Texture2D icon
     {
-        get => description;
-        set => description = value;
+        get => Icon;
+        set => Icon = value;
     }
 
-    public Texture2D Icon
+    public DataRarity rarity
     {
-        get => icon;
-        set => icon = value;
-    }
-
-    public Rarity DataRarity
-    {
-        get => rarity;
-        set => rarity = value;
+        get => Rarity;
+        set => Rarity = value;
     }
 
     public virtual Variant create_item()

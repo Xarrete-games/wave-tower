@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public partial class DataLoader : Node
 {
@@ -67,7 +67,7 @@ public partial class DataLoader : Node
         return result;
     }
 
-    public Godot.Collections.Array<Variant> get_random_relics(int amount, Variant rarity = default, bool include_cursed = false, bool include_only_for_events = false)
+    public Godot.Collections.Array<Variant> get_random_relics(int amount, Variant rarity = default, bool include_cursed = false, bool include_OnlyForEvents = false)
     {
         var candidates = get_not_used_relics(rarity);
         var filtered = new Godot.Collections.Array<Variant>();
@@ -87,7 +87,7 @@ public partial class DataLoader : Node
                 continue;
             }
 
-            if (!include_only_for_events && onlyForEvents)
+            if (!include_OnlyForEvents && onlyForEvents)
             {
                 continue;
             }
@@ -106,7 +106,7 @@ public partial class DataLoader : Node
         return result;
     }
 
-    public Godot.Collections.Array<Variant> get_not_used_relics(Variant rarity = default, Variant is_cursed = default)
+    public Godot.Collections.Array<Variant> get_not_used_relics(Variant rarity = default, Variant IsCursed = default)
     {
         var filtered = new Godot.Collections.Array<Variant>();
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
@@ -128,10 +128,10 @@ public partial class DataLoader : Node
                 }
             }
 
-            if (is_cursed.VariantType != Variant.Type.Nil)
+            if (IsCursed.VariantType != Variant.Type.Nil)
             {
                 bool relicIsCursed = relicData.IsCursed;
-                bool filterCursed = (bool)is_cursed;
+                bool filterCursed = (bool)IsCursed;
                 if (!filterCursed && relicIsCursed)
                 {
                     continue;
@@ -146,7 +146,7 @@ public partial class DataLoader : Node
             bool alreadyOwned = false;
             if (relicsManager != null)
             {
-                alreadyOwned = relicsManager.has_relic(relicData.Id);
+                alreadyOwned = relicsManager.has_relic(relicData.id);
             }
 
             if (!alreadyOwned)
@@ -160,7 +160,7 @@ public partial class DataLoader : Node
         return result;
     }
 
-    public Godot.Collections.Array<Variant> get_random_available_relics(int amount, Variant rarity = default, bool include_cursed = false, bool include_only_for_events = false)
+    public Godot.Collections.Array<Variant> get_random_available_relics(int amount, Variant rarity = default, bool include_cursed = false, bool include_OnlyForEvents = false)
     {
         var candidates = get_not_used_relics(rarity);
         var filtered = new Godot.Collections.Array<Variant>();
@@ -180,7 +180,7 @@ public partial class DataLoader : Node
                 continue;
             }
 
-            if (!include_only_for_events && onlyForEvents)
+            if (!include_OnlyForEvents && onlyForEvents)
             {
                 continue;
             }
@@ -227,13 +227,13 @@ public partial class DataLoader : Node
         return result;
     }
 
-    public Godot.Collections.Array<Variant> get_all_consumables_of_type(int consumable_type)
+    public Godot.Collections.Array<Variant> get_all_consumables_of_type(int ConsumableType)
     {
         var filtered = new Godot.Collections.Array<Variant>();
         for (int index = 0; index < consumables.Count; index++)
         {
             ConsumableData data = consumables[index].As<ConsumableData>();
-            if (data != null && data.consumable_type == consumable_type)
+            if (data != null && data.ConsumableType == ConsumableType)
             {
                 filtered.Add(consumables[index]);
             }
@@ -249,7 +249,7 @@ public partial class DataLoader : Node
         for (int index = 0; index < enemy_debuffs.Count; index++)
         {
             EnemyDebuffData debuffData = enemy_debuffs[index].As<EnemyDebuffData>();
-            if (debuffData != null && debuffData.debuff_type == type)
+            if (debuffData != null && debuffData.DebuffType == type)
             {
                 return DuplicateResource(enemy_debuffs[index]);
             }
@@ -329,7 +329,7 @@ public partial class DataLoader : Node
         for (int index = 0; index < loadedArray.Count; index++)
         {
             GodotObject data = loadedArray[index].AsGodotObject();
-            if (data != null && HasProperty(data, "id") && HasProperty(data, "runtime_script"))
+            if (data != null && HasAnyProperty(data, "Id", "id") && HasProperty(data, "RuntimeScript"))
             {
                 relics.Add(loadedArray[index]);
             }
@@ -355,7 +355,7 @@ public partial class DataLoader : Node
         for (int index = 0; index < loadedArray.Count; index++)
         {
             GodotObject data = loadedArray[index].AsGodotObject();
-            if (data != null && HasProperty(data, "id") && HasProperty(data, "consumable_type"))
+            if (data != null && HasAnyProperty(data, "Id", "id") && HasProperty(data, "ConsumableType"))
             {
                 consumables.Add(loadedArray[index]);
             }
@@ -372,7 +372,7 @@ public partial class DataLoader : Node
         for (int index = 0; index < loadedArray.Count; index++)
         {
             GodotObject data = loadedArray[index].AsGodotObject();
-            if (data != null && HasProperty(data, "id") && HasProperty(data, "debuff_type"))
+            if (data != null && HasAnyProperty(data, "Id", "id") && HasProperty(data, "DebuffType"))
             {
                 enemy_debuffs.Add(loadedArray[index]);
             }
@@ -389,7 +389,7 @@ public partial class DataLoader : Node
         for (int index = 0; index < loadedArray.Count; index++)
         {
             GodotObject data = loadedArray[index].AsGodotObject();
-            if (data != null && HasProperty(data, "id") && HasProperty(data, "runtime_script"))
+            if (data != null && HasAnyProperty(data, "Id", "id") && HasProperty(data, "RuntimeScript"))
             {
                 tower_buffs_data.Add(loadedArray[index]);
             }
@@ -424,7 +424,7 @@ public partial class DataLoader : Node
         for (int index = 0; index < loadedArray.Count; index++)
         {
             GodotObject data = loadedArray[index].AsGodotObject();
-            if (data != null && HasProperty(data, "data") && HasProperty(data, "scene"))
+            if (data != null && HasAnyProperty(data, "Data", "data") && HasAnyProperty(data, "Scene", "scene"))
             {
                 tower_data.Add(loadedArray[index]);
             }
@@ -447,6 +447,19 @@ public partial class DataLoader : Node
         {
             var dict = properties[index];
             if (dict.ContainsKey("name") && dict["name"].AsString() == propertyName)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool HasAnyProperty(GodotObject target, params string[] propertyNames)
+    {
+        for (int index = 0; index < propertyNames.Length; index++)
+        {
+            if (HasProperty(target, propertyNames[index]))
             {
                 return true;
             }
@@ -506,3 +519,4 @@ public partial class DataLoader : Node
         return original.Duplicate(true);
     }
 }
+

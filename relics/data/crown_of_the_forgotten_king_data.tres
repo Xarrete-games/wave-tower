@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_38oex")
-is_cursed = true
-id = "crown_of_the_forgotten_king"
-display_name = "Crown of the forgotten king"
-description = "At the end of each wave, a buildable tile disappears."
-icon = ExtResource("3_anmtv")
+IsCursed = true
+Id = "crown_of_the_forgotten_king"
+DisplayName = "Crown of the forgotten king"
+Description = "At the end of each wave, a buildable tile disappears."
+Icon = ExtResource("3_anmtv")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_1cvfv")
-is_tome = true
-id = "strategy_tome_high_health_priority"
-display_name = "Strategy Tome: 
+IsTome = true
+Id = "strategy_tome_high_health_priority"
+DisplayName = "Strategy Tome: 
 High Health Priority"
-description = "Allows towers to prioritize enemies with the highest health."
-icon = ExtResource("2_oymg8")
+Description = "Allows towers to prioritize enemies with the highest health."
+Icon = ExtResource("2_oymg8")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

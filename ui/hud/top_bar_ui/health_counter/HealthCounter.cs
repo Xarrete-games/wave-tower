@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public partial class HealthCounter : HBoxContainer
 {
@@ -20,7 +20,7 @@ public partial class HealthCounter : HBoxContainer
         }
     }
 
-    private int max_health
+    private int MaxHealth
     {
         get => _maxHealth;
         set
@@ -40,10 +40,10 @@ public partial class HealthCounter : HBoxContainer
         _status = runContext.status;
 
         _status.health_change += OnHealthChange;
-        _status.max_health_change += OnMaxHealthChange;
+        _status.MaxHealth_change += OnMaxHealthChange;
         _status.armor_change += OnArmorChange;
 
-        max_health = _status.max_health;
+        MaxHealth = _status.MaxHealth;
         health = _status.health;
         OnArmorChange(_status.armor);
     }
@@ -53,7 +53,7 @@ public partial class HealthCounter : HBoxContainer
         if (_status != null)
         {
             _status.health_change -= OnHealthChange;
-            _status.max_health_change -= OnMaxHealthChange;
+            _status.MaxHealth_change -= OnMaxHealthChange;
             _status.armor_change -= OnArmorChange;
         }
     }
@@ -65,7 +65,7 @@ public partial class HealthCounter : HBoxContainer
 
     private void OnMaxHealthChange(int value)
     {
-        max_health = value;
+        MaxHealth = value;
     }
 
     private void OnArmorChange(int amount)
@@ -73,3 +73,4 @@ public partial class HealthCounter : HBoxContainer
         _armorCounter.Visible = amount > 0;
     }
 }
+

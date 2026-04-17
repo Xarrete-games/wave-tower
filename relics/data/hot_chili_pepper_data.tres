@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_auyjm")
-id = "hot_chili_pepper"
-display_name = "Hot chili pepper"
-description = "All fire towers apply burn"
-icon = ExtResource("2_p5u2x")
+Id = "hot_chili_pepper"
+DisplayName = "Hot chili pepper"
+Description = "All fire towers apply burn"
+Icon = ExtResource("2_p5u2x")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

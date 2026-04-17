@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_yb56j")
-id = "headphones"
-display_name = "Headphones"
-description = "Nova tower have a 20% chance to perform a double attack."
-icon = ExtResource("3_xt11d")
-rarity = 1
+Id = "headphones"
+DisplayName = "Headphones"
+Description = "Nova tower have a 20% chance to perform a double attack."
+Icon = ExtResource("3_xt11d")
+Rarity = 1
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

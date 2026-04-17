@@ -1,18 +1,18 @@
-using Godot;
+﻿using Godot;
 using System;
 
 public class Status
 {
     public event Action<int> health_change;
     public event Action<int> armor_change;
-    public event Action<int> max_health_change;
+    public event Action<int> MaxHealth_change;
     public event Action player_died;
 
     private int _maxHealth = 20;
     private int _health = 20;
     private int _armor;
 
-    public int max_health
+    public int MaxHealth
     {
         get => _maxHealth;
         set
@@ -23,7 +23,7 @@ public class Status
                 _health = _maxHealth;
             }
 
-            max_health_change?.Invoke(_maxHealth);
+            MaxHealth_change?.Invoke(_maxHealth);
         }
     }
 
@@ -55,7 +55,7 @@ public class Status
 
                 if (maxHealthChanged)
                 {
-                    max_health_change?.Invoke(_maxHealth);
+                    MaxHealth_change?.Invoke(_maxHealth);
                 }
 
                 if (healthChanged)
@@ -125,14 +125,14 @@ public class Status
         armor += amount;
     }
 
-    public void add_max_health(int amount)
+    public void add_MaxHealth(int amount)
     {
         if (amount <= 0)
         {
             return;
         }
 
-        max_health += amount;
+        MaxHealth += amount;
         health += amount;
     }
 
@@ -191,3 +191,4 @@ public class Status
         }
     }
 }
+

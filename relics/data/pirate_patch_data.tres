@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_nb88y")
-id = "pirate_patch"
-display_name = "Pirate patch"
-description = "Recovers 2 health when using an item"
-icon = ExtResource("2_jj4ya")
+Id = "pirate_patch"
+DisplayName = "Pirate patch"
+Description = "Recovers 2 health when using an item"
+Icon = ExtResource("2_jj4ya")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_85nhq")
-id = "extra_virgin_olive_oil"
-display_name = "Extra virgin olive oil"
-description = "Increase the duration of Burn in 1 sec."
-icon = ExtResource("2_hom45")
+Id = "extra_virgin_olive_oil"
+DisplayName = "Extra virgin olive oil"
+Description = "Increase the duration of Burn in 1 sec."
+Icon = ExtResource("2_hom45")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

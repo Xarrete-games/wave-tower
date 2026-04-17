@@ -12,20 +12,21 @@ region = Rect2(89, 80, 297, 470)
 [sub_resource type="Resource" id="Resource_rs7co"]
 script = ExtResource("2_y8ti3")
 type = 1
-upgrade_price = 70
-base_damage = 10.0
-base_attack_range = 580.0
-base_attack_speed = 1.67
-damage_per_level = 10.0
-attack_range_per_level = 100.0
-attack_speed_per_level = 0.2
-id = "lightning_tower"
-display_name = "Lightning Tower"
-description = "Basic lightning tower"
-icon = SubResource("AtlasTexture_i5pku")
+UpgradePrice = 70
+BaseDamage = 10.0
+BaseAttackRange = 580.0
+BaseAttackSpeed = 1.67
+DamagePerLevel = 10.0
+AttackRangePerLevel = 100.0
+AttackSpeedPerLevel = 0.2
+Id = "lightning_tower"
+DisplayName = "Lightning Tower"
+Description = "Basic lightning tower"
+Icon = SubResource("AtlasTexture_i5pku")
 
 [resource]
 script = ExtResource("3_b35vm")
-data = SubResource("Resource_rs7co")
-scene = ExtResource("6_p4ogc")
+Data = SubResource("Resource_rs7co")
+Scene = ExtResource("6_p4ogc")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
+

@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("2_fo8d3")
-id = "pirate_blunderbuss"
-display_name = "Pirate blunderbuss"
-description = "Increases the probability of receiving an item as loot by 20%"
-icon = ExtResource("3_08fvy")
+Id = "pirate_blunderbuss"
+DisplayName = "Pirate blunderbuss"
+Description = "Increases the probability of receiving an item as loot by 20%"
+Icon = ExtResource("3_08fvy")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

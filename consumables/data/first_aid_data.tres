@@ -6,8 +6,9 @@
 
 [resource]
 script = ExtResource("2_fmtq1")
-runtime_script = ExtResource("1_365ip")
-id = "first_aid"
-display_name = "First Aid"
-description = "Regain 10 lives."
-icon = ExtResource("3_sd7pa")
+RuntimeScript = ExtResource("1_365ip")
+Id = "first_aid"
+DisplayName = "First Aid"
+Description = "Regain 10 lives."
+Icon = ExtResource("3_sd7pa")
+

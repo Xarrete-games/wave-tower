@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System;
 using System.Collections.Generic;
 
@@ -76,7 +76,7 @@ public partial class WaveSpawner : Node
 
             if (groupIndex < groups.Count - 1)
             {
-                float groupDelay = config.group_delay;
+                float groupDelay = config.GroupDelay;
                 await ToSignal(GetTree().CreateTimer(groupDelay, false), SceneTreeTimer.SignalName.Timeout);
             }
         }
@@ -106,18 +106,18 @@ public partial class WaveSpawner : Node
     {
         return pressure switch
         {
-            0 => new Vector2(config.spawn_interval_swarm_min, config.spawn_interval_swarm_max),
-            1 => new Vector2(config.spawn_interval_speed_min, config.spawn_interval_speed_max),
-            2 => new Vector2(config.spawn_interval_tank_min, config.spawn_interval_tank_max),
-            _ => new Vector2(config.spawn_interval_normal_min, config.spawn_interval_normal_max),
+            0 => new Vector2(config.SpawnIntervalSwarmMin, config.SpawnIntervalSwarmMax),
+            1 => new Vector2(config.SpawnIntervalSpeedMin, config.SpawnIntervalSpeedMax),
+            2 => new Vector2(config.SpawnIntervalTankMin, config.SpawnIntervalTankMax),
+            _ => new Vector2(config.SpawnIntervalNormalMin, config.SpawnIntervalNormalMax),
         };
     }
 
     private Vector2 GetDecayedSpawnIntervalRange(Vector2 base_range, int wave_number, WaveConfig config)
     {
-        int everyWaves = Mathf.Max(config.spawn_interval_max_decay_every_waves, 1);
+        int everyWaves = Mathf.Max(config.SpawnIntervalMaxDecayEveryWaves, 1);
         int decaySteps = Mathf.Max((wave_number - 1) / everyWaves, 0);
-        float decayAmount = decaySteps * config.spawn_interval_max_decay_amount;
+        float decayAmount = decaySteps * config.SpawnIntervalMaxDecayAmount;
         float minSpawnInterval = GetMinSpawnInterval(config);
 
         float decayedMin = Mathf.Max(base_range.X - decayAmount, minSpawnInterval);
@@ -132,7 +132,7 @@ public partial class WaveSpawner : Node
 
     private float GetMinSpawnInterval(WaveConfig config)
     {
-        return Mathf.Max(config.spawn_interval_min_cap, 0.01f);
+        return Mathf.Max(config.SpawnIntervalMinCap, 0.01f);
     }
 
     private void SpawnSingle(EnemyData data)
@@ -217,9 +217,10 @@ public partial class WaveSpawner : Node
 
     private void ApplyStats(Enemy enemy, EnemyData data)
     {
-        enemy.max_health = data.max_health;
-        enemy.base_speed = data.base_speed;
+        enemy.MaxHealth = data.MaxHealth;
+        enemy.BaseSpeed = data.BaseSpeed;
         enemy.damage = data.damage;
-        enemy.gold_value = data.base_gold_value;
+        enemy.gold_value = data.BaseGoldValue;
     }
 }
+

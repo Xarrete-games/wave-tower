@@ -10,12 +10,13 @@ metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 
 [sub_resource type="Resource" id="Resource_f1nr2"]
 script = ExtResource("1_xw6o6")
-dir = 2
-pos = 0
+Direction = 2
+Position = 0
 metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 
 [resource]
 script = ExtResource("2_1qyj3")
-edges = Array[ExtResource("1_xw6o6")]([SubResource("Resource_hkia1"), SubResource("Resource_f1nr2")])
-scene = ExtResource("2_ijc6l")
+Edges = Array[ExtResource("1_xw6o6")]([SubResource("Resource_hkia1"), SubResource("Resource_f1nr2")])
+Scene = ExtResource("2_ijc6l")
 metadata/_custom_type_script = "uid://buf7cbkrogset"
+

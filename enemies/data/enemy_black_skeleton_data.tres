@@ -7,17 +7,18 @@
 
 [sub_resource type="Resource" id="Resource_d83w8"]
 script = ExtResource("1_68qhb")
-initial_wave = 11
-final_wave = 20
+InitialWave = 11
+FinalWave = 20
 
 [resource]
 script = ExtResource("1_ucfcj")
-type_legacy = 6
+TypeLegacy = 6
 type = 1
-name = "Black skeleton"
-icon = ExtResource("1_s0d6s")
-scene = ExtResource("2_68qhb")
-max_health = 120
-base_speed = 500.0
-base_gold_value = 2
-available_waves = Array[ExtResource("1_68qhb")]([SubResource("Resource_d83w8")])
+Name = "Black skeleton"
+Icon = ExtResource("1_s0d6s")
+Scene = ExtResource("2_68qhb")
+MaxHealth = 120
+BaseSpeed = 500.0
+BaseGoldValue = 2
+AvailableWaves = Array[ExtResource("1_68qhb")]([SubResource("Resource_d83w8")])
+

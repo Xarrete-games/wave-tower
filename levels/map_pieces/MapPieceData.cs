@@ -1,68 +1,30 @@
-using Godot;
+﻿using Godot;
 
 [GlobalClass]
 public partial class MapPieceData : Resource
 {
     [Export]
-    public Godot.Collections.Array<Edge> edges { get; set; } = new();
+    public Godot.Collections.Array<Edge> Edges { get; set; } = new();
 
     [Export]
-    public PackedScene scene { get; set; }
+    public PackedScene Scene { get; set; }
 
-    public Godot.Collections.Array<Edge> Edges
+    public bool IsFork
     {
-        get => edges;
-        set => edges = value;
-    }
-
-    public PackedScene Scene
-    {
-        get => scene;
-        set => scene = value;
-    }
-
-    public bool is_fork
-    {
-        get => edges != null && edges.Count > 2;
-    }
-
-    public bool IsFork => is_fork;
-
-    public bool has_edge(Edge edge)
-    {
-        if (edge == null || edges == null)
-        {
-            return false;
-        }
-
-        for (int i = 0; i < edges.Count; i++)
-        {
-            Edge current = edges[i];
-            if (current != null && current.matches(edge))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        get => Edges != null && Edges.Count > 2;
     }
 
     public bool HasEdge(Edge edge)
     {
-        return has_edge(edge);
-    }
-
-    public bool has_connecting_edge(Edge edge)
-    {
-        if (edge == null || edges == null)
+        if (edge == null || Edges == null)
         {
             return false;
         }
 
-        for (int i = 0; i < edges.Count; i++)
+        for (int i = 0; i < Edges.Count; i++)
         {
-            Edge current = edges[i];
-            if (current != null && current.can_connect_with(edge))
+            Edge current = Edges[i];
+            if (current != null && current.Matches(edge))
             {
                 return true;
             }
@@ -73,44 +35,15 @@ public partial class MapPieceData : Resource
 
     public bool HasConnectingEdge(Edge edge)
     {
-        return has_connecting_edge(edge);
-    }
-
-    public Edge get_connecting_edge(Edge edge)
-    {
-        if (edge == null || edges == null)
-        {
-            return null;
-        }
-
-        for (int i = 0; i < edges.Count; i++)
-        {
-            Edge current = edges[i];
-            if (current != null && current.can_connect_with(edge))
-            {
-                return current;
-            }
-        }
-
-        return null;
-    }
-
-    public Edge GetConnectingEdge(Edge edge)
-    {
-        return get_connecting_edge(edge);
-    }
-
-    public bool has_edge_dir(int dir)
-    {
-        if (edges == null)
+        if (edge == null || Edges == null)
         {
             return false;
         }
 
-        for (int i = 0; i < edges.Count; i++)
+        for (int i = 0; i < Edges.Count; i++)
         {
-            Edge current = edges[i];
-            if (current != null && (int)current.dir == dir)
+            Edge current = Edges[i];
+            if (current != null && current.CanConnectWith(edge))
             {
                 return true;
             }
@@ -119,20 +52,53 @@ public partial class MapPieceData : Resource
         return false;
     }
 
-    public bool HasEdgeDir(int dir)
+    public Edge GetConnectingEdge(Edge edge)
     {
-        return has_edge_dir(dir);
+        if (edge == null || Edges == null)
+        {
+            return null;
+        }
+
+        for (int i = 0; i < Edges.Count; i++)
+        {
+            Edge current = Edges[i];
+            if (current != null && current.CanConnectWith(edge))
+            {
+                return current;
+            }
+        }
+
+        return null;
     }
 
-    public Variant get_instance()
+    public bool HasEdgeDir(int dir)
     {
-        if (scene == null)
+        if (Edges == null)
         {
-            GD.PushError("[MapPieceData] scene is null in get_instance().");
+            return false;
+        }
+
+        for (int i = 0; i < Edges.Count; i++)
+        {
+            Edge current = Edges[i];
+            if (current != null && (int)current.Direction == dir)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Variant GetInstance()
+    {
+        if (Scene == null)
+        {
+            GD.PushError("[MapPieceData] Scene is null in GetInstance().");
             return default;
         }
 
-        Node instance = scene.Instantiate<Node>();
+        Node instance = Scene.Instantiate<Node>();
         if (instance == null)
         {
             GD.PushError("[MapPieceData] Could not instantiate scene.");
@@ -140,14 +106,14 @@ public partial class MapPieceData : Resource
         }
 
         var newEdges = new Godot.Collections.Array<Edge>();
-        if (edges != null)
+        if (Edges != null)
         {
-            for (int i = 0; i < edges.Count; i++)
+            for (int i = 0; i < Edges.Count; i++)
             {
-                Edge e = edges[i];
+                Edge e = Edges[i];
                 if (e != null)
                 {
-                    newEdges.Add(new Edge(e.dir, e.pos));
+                    newEdges.Add(new Edge(e.Direction, e.Position));
                 }
             }
         }
@@ -164,8 +130,5 @@ public partial class MapPieceData : Resource
         return instance;
     }
 
-    public Variant GetInstance()
-    {
-        return get_instance();
-    }
 }
+

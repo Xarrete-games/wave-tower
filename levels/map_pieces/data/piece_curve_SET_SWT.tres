@@ -6,16 +6,17 @@
 
 [sub_resource type="Resource" id="Resource_4pkoc"]
 script = ExtResource("1_kwm27")
-dir = 2
-pos = 0
+Direction = 2
+Position = 0
 
 [sub_resource type="Resource" id="Resource_yb3mj"]
 script = ExtResource("1_kwm27")
-dir = 1
-pos = 0
+Direction = 1
+Position = 0
 
 [resource]
 script = ExtResource("3_yb3mj")
-edges = Array[ExtResource("1_kwm27")]([SubResource("Resource_4pkoc"), SubResource("Resource_yb3mj")])
-scene = ExtResource("2_kwm27")
+Edges = Array[ExtResource("1_kwm27")]([SubResource("Resource_4pkoc"), SubResource("Resource_yb3mj")])
+Scene = ExtResource("2_kwm27")
 metadata/_custom_type_script = "uid://buf7cbkrogset"
+

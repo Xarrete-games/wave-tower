@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 
 [GlobalClass]
@@ -18,7 +18,7 @@ public partial class HealthBar : Control
     public System.Collections.Generic.Dictionary<int, int> debuffs_count = new();
     public System.Collections.Generic.Dictionary<int, EnemyDebuffData> debuff_data_by_type = new();
 
-    public void set_max_health(float value)
+    public void set_MaxHealth(float value)
     {
         float clampedValue = Mathf.Clamp(value, MIN_HEALTH, MAX_HEALTH);
         float newXSize = Mathf.Remap(clampedValue, MIN_HEALTH, MAX_HEALTH, MIN_X_SIZE, MAX_X_SIZE);
@@ -101,3 +101,4 @@ public partial class HealthBar : Control
         debuffs_slots.Remove(type);
     }
 }
+

@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 
 public class WaveComposer
@@ -113,22 +113,22 @@ public class WaveComposer
 
     private int CalculateBudget(int wave_number)
     {
-        int linearBudget = _config.base_budget + ((wave_number - 1) * _config.budget_per_wave);
-        int startWave = Mathf.Max(_config.exponential_start_wave, 1);
-        if (wave_number <= startWave || _config.exponential_growth <= 0.0f)
+        int linearBudget = _config.BaseBudget + ((wave_number - 1) * _config.BudgetPerWave);
+        int startWave = Mathf.Max(_config.ExponentialStartWave, 1);
+        if (wave_number <= startWave || _config.ExponentialGrowth <= 0.0f)
         {
             return linearBudget;
         }
 
         int growthSteps = wave_number - startWave;
-        float multiplier = Mathf.Pow(1.0f + _config.exponential_growth, growthSteps);
+        float multiplier = Mathf.Pow(1.0f + _config.ExponentialGrowth, growthSteps);
         int scaledBudget = Mathf.RoundToInt(linearBudget * multiplier);
         return Mathf.Max(scaledBudget, linearBudget);
     }
 
     private bool IsBossWave(int wave_number)
     {
-        return wave_number % _config.boss_wave_every == 0;
+        return wave_number % _config.BossWaveEvery == 0;
     }
 
     private int CalculateGroupCount(int wave_number)
@@ -180,19 +180,19 @@ public class WaveComposer
 
         if (!IsValidWaveChanceValue(chanceSwarm))
         {
-            GD.PushError($"[WaveComposer] Invalid chance_full_swarn in wave {wave_number}. Expected 0..100, got {chanceSwarm}");
+            GD.PushError($"[WaveComposer] Invalid ChanceFullSwarm in wave {wave_number}. Expected 0..100, got {chanceSwarm}");
             return PressureType.MIXED;
         }
 
         if (!IsValidWaveChanceValue(chanceSpeed))
         {
-            GD.PushError($"[WaveComposer] Invalid chance_full_speed in wave {wave_number}. Expected 0..100, got {chanceSpeed}");
+            GD.PushError($"[WaveComposer] Invalid ChanceFullSpeed in wave {wave_number}. Expected 0..100, got {chanceSpeed}");
             return PressureType.MIXED;
         }
 
         if (!IsValidWaveChanceValue(chanceTank))
         {
-            GD.PushError($"[WaveComposer] Invalid chance_full_tank in wave {wave_number}. Expected 0..100, got {chanceTank}");
+            GD.PushError($"[WaveComposer] Invalid ChanceFullTank in wave {wave_number}. Expected 0..100, got {chanceTank}");
             return PressureType.MIXED;
         }
 
@@ -236,18 +236,18 @@ public class WaveComposer
 
     private WaveTypeChance GetWaveTypeChance(int wave_number)
     {
-        if (_config.wave_chances == null || _config.wave_chances.Count == 0)
+        if (_config.WaveChances == null || _config.WaveChances.Count == 0)
         {
             return null;
         }
 
         int waveIndex = wave_number - 1;
-        if (waveIndex < 0 || waveIndex >= _config.wave_chances.Count)
+        if (waveIndex < 0 || waveIndex >= _config.WaveChances.Count)
         {
             return null;
         }
 
-        return _config.wave_chances[waveIndex];
+        return _config.WaveChances[waveIndex];
     }
 
     private bool IsValidWaveChanceValue(float value)
@@ -288,7 +288,7 @@ public class WaveComposer
             return _get_all_available(wave_number).Count > 0;
         }
 
-        EnemyData.Type enemyType = _pressure_to_enemy_type(pressure);
+        EnemyData.EnemyType enemyType = _pressure_to_enemy_type(pressure);
         return _get_available(enemyType, wave_number).Count > 0;
     }
 
@@ -314,20 +314,20 @@ public class WaveComposer
         return "[" + string.Join(", ", chunks) + "]";
     }
 
-    private EnemyData.Type _pressure_to_enemy_type(PressureType pressure)
+    private EnemyData.EnemyType _pressure_to_enemy_type(PressureType pressure)
     {
         return pressure switch
         {
-            PressureType.SWARM => EnemyData.Type.SWARM,
-            PressureType.SPEED => EnemyData.Type.FAST,
-            PressureType.TANK => EnemyData.Type.TANK,
-            _ => EnemyData.Type.NORMAL,
+            PressureType.SWARM => EnemyData.EnemyType.SWARM,
+            PressureType.SPEED => EnemyData.EnemyType.FAST,
+            PressureType.TANK => EnemyData.EnemyType.TANK,
+            _ => EnemyData.EnemyType.NORMAL,
         };
     }
 
     private WaveGroup CreateBossGroup(int available_budget, int wave_number)
     {
-        Godot.Collections.Array<EnemyData> bosses = _get_available(EnemyData.Type.BOSS, wave_number);
+        Godot.Collections.Array<EnemyData> bosses = _get_available(EnemyData.EnemyType.BOSS, wave_number);
         if (bosses.Count == 0)
         {
             return null;
@@ -358,14 +358,14 @@ public class WaveComposer
     {
         var group = new WaveGroup { pressure = pressure };
 
-        EnemyData.Type primaryType = _pressure_to_enemy_type(pressure);
+        EnemyData.EnemyType primaryType = _pressure_to_enemy_type(pressure);
         Godot.Collections.Array<EnemyData> primaryCandidates = _get_available(primaryType, wave_number);
         if (primaryCandidates.Count == 0)
         {
             primaryCandidates = _get_all_available(wave_number);
         }
 
-        int primarySpend = Mathf.RoundToInt(group_budget * _config.primary_pressure_ratio);
+        int primarySpend = Mathf.RoundToInt(group_budget * _config.PrimaryPressureRatio);
         if (full_only)
         {
             primarySpend = group_budget;
@@ -386,13 +386,13 @@ public class WaveComposer
         return group;
     }
 
-    private Godot.Collections.Array<EnemyData> _get_available(EnemyData.Type type, int wave_number)
+    private Godot.Collections.Array<EnemyData> _get_available(EnemyData.EnemyType type, int wave_number)
     {
         var result = new Godot.Collections.Array<EnemyData>();
         for (int i = 0; i < _enemyCatalog.Count; i++)
         {
             EnemyData data = _enemyCatalog[i];
-            if (data.type == type && IsUnlocked(data, wave_number))
+            if (data.Type == type && IsUnlocked(data, wave_number))
             {
                 result.Add(data);
             }
@@ -407,7 +407,7 @@ public class WaveComposer
         for (int i = 0; i < _enemyCatalog.Count; i++)
         {
             EnemyData data = _enemyCatalog[i];
-            if (data.type != EnemyData.Type.BOSS && IsUnlocked(data, wave_number))
+            if (data.Type != EnemyData.EnemyType.BOSS && IsUnlocked(data, wave_number))
             {
                 result.Add(data);
             }
@@ -488,3 +488,5 @@ public class WaveComposer
         return total_remaining;
     }
 }
+
+

@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_xvjca")
-is_tome = true
-id = "strategy_tome_economy"
-display_name = "Strategy Tome: 
+IsTome = true
+Id = "strategy_tome_economy"
+DisplayName = "Strategy Tome: 
 Economy"
-description = "Allows you to sell one of your relics upon entering the shop"
-icon = ExtResource("2_sjo5h")
+Description = "Allows you to sell one of your relics upon entering the shop"
+Icon = ExtResource("2_sjo5h")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

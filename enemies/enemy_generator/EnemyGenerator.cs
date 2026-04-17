@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 
 public partial class EnemyGenerator : Node
@@ -178,7 +178,7 @@ public partial class EnemyGenerator : Node
             return;
         }
 
-        RunContextRuntime.Status.SyncFromLegacy(status.max_health, status.health, status.armor);
+        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.health, status.armor);
     }
 
     private void SyncLegacyStatusFromRuntime(Status status)
@@ -189,9 +189,9 @@ public partial class EnemyGenerator : Node
         }
 
         StatusRuntime runtime = RunContextRuntime.Status;
-        if (status.max_health != runtime.MaxHealth)
+        if (status.MaxHealth != runtime.MaxHealth)
         {
-            status.max_health = runtime.MaxHealth;
+            status.MaxHealth = runtime.MaxHealth;
         }
 
         if (status.armor != runtime.Armor)
@@ -222,3 +222,4 @@ public partial class EnemyGenerator : Node
         runContext.enemy_manager.notify_enemy_die(enemy, attack);
     }
 }
+

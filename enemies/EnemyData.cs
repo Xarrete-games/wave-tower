@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class EnemyData : Resource
 {
-    public enum Type
+    public enum EnemyType
     {
         SWARM,
         FAST,
@@ -14,113 +14,85 @@ public partial class EnemyData : Resource
 
     [ExportGroup("General")]
     [Export]
-    public int type_legacy { get; set; }
+    public int TypeLegacy { get; set; }
 
     [Export]
-    public Type type { get; set; } = Type.NORMAL;
+    public EnemyType Type { get; set; } = EnemyType.NORMAL;
 
     [Export]
-    public string name { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
 
     [Export(PropertyHint.MultilineText)]
-    public string description { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
 
     [Export]
-    public Texture2D icon { get; set; }
+    public Texture2D Icon { get; set; }
 
     [ExportGroup("Scene")]
     [Export]
-    public PackedScene scene { get; set; }
+    public PackedScene Scene { get; set; }
 
     [ExportGroup("Stats")]
     [Export]
-    public int max_health { get; set; } = 50;
+    public int MaxHealth { get; set; } = 50;
 
     [Export]
-    public float base_speed { get; set; } = 80f;
+    public float BaseSpeed { get; set; } = 80f;
 
     [Export]
-    public int damage { get; set; } = 1;
+    public int Damage { get; set; } = 1;
 
     [Export]
-    public int base_gold_value { get; set; } = 1;
+    public int BaseGoldValue { get; set; } = 1;
 
     [ExportGroup("Wave")]
     [Export]
-    public int weight { get; set; } = 1;
+    public int Weight { get; set; } = 1;
+
+    // Legacy compatibility aliases (non-exported).
+    public string name
+    {
+        get => Name;
+        set => Name = value;
+    }
+
+    public string description
+    {
+        get => Description;
+        set => Description = value;
+    }
+
+    public Texture2D icon
+    {
+        get => Icon;
+        set => Icon = value;
+    }
+
+    public PackedScene scene
+    {
+        get => Scene;
+        set => Scene = value;
+    }
+
+    public int damage
+    {
+        get => Damage;
+        set => Damage = value;
+    }
+
+    public int weight
+    {
+        get => Weight;
+        set => Weight = value;
+    }
 
     [Export]
-    public Godot.Collections.Array<EnemyWaveRange> available_waves { get; set; } = new();
+    public Godot.Collections.Array<EnemyWaveRange> AvailableWaves { get; set; } = new();
 
-    public int TypeLegacy
+    public EnemyType EnemyTypeValue
     {
-        get => type_legacy;
-        set => type_legacy = value;
+        get => Type;
+        set => Type = value;
     }
 
-    public Type EnemyType
-    {
-        get => type;
-        set => type = value;
-    }
-
-    public string EnemyName
-    {
-        get => name;
-        set => name = value;
-    }
-
-    public string Description
-    {
-        get => description;
-        set => description = value;
-    }
-
-    public Texture2D Icon
-    {
-        get => icon;
-        set => icon = value;
-    }
-
-    public PackedScene Scene
-    {
-        get => scene;
-        set => scene = value;
-    }
-
-    public int MaxHealth
-    {
-        get => max_health;
-        set => max_health = value;
-    }
-
-    public float BaseSpeed
-    {
-        get => base_speed;
-        set => base_speed = value;
-    }
-
-    public int Damage
-    {
-        get => damage;
-        set => damage = value;
-    }
-
-    public int BaseGoldValue
-    {
-        get => base_gold_value;
-        set => base_gold_value = value;
-    }
-
-    public int Weight
-    {
-        get => weight;
-        set => weight = value;
-    }
-
-    public Godot.Collections.Array<EnemyWaveRange> AvailableWaves
-    {
-        get => available_waves;
-        set => available_waves = value;
-    }
 }

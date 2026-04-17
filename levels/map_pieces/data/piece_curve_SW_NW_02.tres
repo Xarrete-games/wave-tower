@@ -6,17 +6,18 @@
 
 [sub_resource type="Resource" id="Resource_cv7t8"]
 script = ExtResource("1_qvj28")
-dir = 2
+Direction = 2
 metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 
 [sub_resource type="Resource" id="Resource_eie8s"]
 script = ExtResource("1_qvj28")
-dir = 3
-pos = 2
+Direction = 3
+Position = 2
 metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 
 [resource]
 script = ExtResource("3_bdk32")
-edges = Array[ExtResource("1_qvj28")]([SubResource("Resource_cv7t8"), SubResource("Resource_eie8s")])
-scene = ExtResource("2_qb47n")
+Edges = Array[ExtResource("1_qvj28")]([SubResource("Resource_cv7t8"), SubResource("Resource_eie8s")])
+Scene = ExtResource("2_qb47n")
 metadata/_custom_type_script = "uid://buf7cbkrogset"
+

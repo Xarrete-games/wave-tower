@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 
 [GlobalClass]
@@ -28,13 +28,13 @@ public partial class DebuffHandler : Node
             Type = debuffType,
             Value = debuff.value,
             Duration = debuff.duration,
-            TickInterval = debuff.tick_interval,
-            MaxStacks = debuff.max_stacks,
+            TickInterval = debuff.TickInterval,
+            MaxStacks = debuff.MaxStacks,
         };
 
         var enemyModel = new EnemyModel
         {
-            MaxHealth = enemy.max_health,
+            MaxHealth = enemy.MaxHealth,
             RemainingHealth = enemy.health,
             ProgressRatio = enemy.get_progress_ratio(),
             GoldValue = enemy.gold_value,
@@ -47,7 +47,7 @@ public partial class DebuffHandler : Node
 
         for (int i = 0; i < stacks; i++)
         {
-            if (get_stacks((int)debuff.type) >= debuff.max_stacks)
+            if (get_stacks((int)debuff.type) >= debuff.MaxStacks)
             {
                 break;
             }
@@ -74,10 +74,10 @@ public partial class DebuffHandler : Node
             EnemyDebuffInstance inst = debuffs[i];
             EnemyDebuff debuff = inst.debuff;
 
-            if (debuff.tick_interval > 0.0f && now >= inst.next_tick_time)
+            if (debuff.TickInterval > 0.0f && now >= inst.next_tick_time)
             {
                 debuff.on_tick(enemy);
-                inst.next_tick_time += debuff.tick_interval;
+                inst.next_tick_time += debuff.TickInterval;
             }
 
             if (now >= inst.expire_time)
@@ -89,12 +89,12 @@ public partial class DebuffHandler : Node
         }
     }
 
-    public int get_stacks(int debuff_type)
+    public int get_stacks(int DebuffType)
     {
         int count = 0;
         for (int i = 0; i < debuffs.Count; i++)
         {
-            if ((int)debuffs[i].debuff.type == debuff_type)
+            if ((int)debuffs[i].debuff.type == DebuffType)
             {
                 count += 1;
             }
@@ -119,3 +119,4 @@ public partial class DebuffHandler : Node
         return result;
     }
 }
+

@@ -7,12 +7,13 @@
 
 [resource]
 script = ExtResource("1_1w58q")
-id = "fountain_of_wishing"
+Id = "fountain_of_wishing"
 title = "Wishing Fountain"
-description = "A peaceful fountain shimmers with ancient magic.
+Description = "A peaceful fountain shimmers with ancient magic.
 The more gold you offer, the greater the favor it may grant.
-Make a wish… and see what the waters return."
-icon = ExtResource("1_qfvca")
-texture_background = ExtResource("4_tfeuk")
-runtime_script = ExtResource("2_tfeuk")
+Make a wishâ€¦ and see what the waters return."
+Icon = ExtResource("1_qfvca")
+TextureBackground = ExtResource("4_tfeuk")
+RuntimeScript = ExtResource("2_tfeuk")
 metadata/_custom_type_script = "uid://daq85iil68x7r"
+

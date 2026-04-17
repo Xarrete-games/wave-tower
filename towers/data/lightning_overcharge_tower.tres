@@ -12,22 +12,23 @@ region = Rect2(971, 7, 433, 543)
 [sub_resource type="Resource" id="Resource_6h4w4"]
 script = ExtResource("2_mq6v3")
 type = 1
-build_price = 280
-upgrade_price = 320
-base_damage = 10.0
-base_attack_range = 1200.0
-damage_per_level = 30.0
-attack_range_per_level = 500.0
-attack_speed_per_level = -0.3
-id = "overcharge_wave_tower"
-display_name = "Overcharge Tower"
-description = "Increase the damage off all towers in this range in 10%"
-icon = SubResource("AtlasTexture_i5pku")
-rarity = 2
+BuildPrice = 280
+UpgradePrice = 320
+BaseDamage = 10.0
+BaseAttackRange = 1200.0
+DamagePerLevel = 30.0
+AttackRangePerLevel = 500.0
+AttackSpeedPerLevel = -0.3
+Id = "overcharge_wave_tower"
+DisplayName = "Overcharge Tower"
+Description = "Increase the damage off all towers in this range in 10%"
+Icon = SubResource("AtlasTexture_i5pku")
+Rarity = 2
 metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
 [resource]
 script = ExtResource("3_mq6v3")
-data = SubResource("Resource_6h4w4")
-scene = ExtResource("2_birpd")
+Data = SubResource("Resource_6h4w4")
+Scene = ExtResource("2_birpd")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
+

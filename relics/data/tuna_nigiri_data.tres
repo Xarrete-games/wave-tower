@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_52mwh")
-id = "tuna_nigiri"
-display_name = "Tuna nigiri"
-description = "Reduce the cost of towers by 10%"
-icon = ExtResource("2_yojsk")
+Id = "tuna_nigiri"
+DisplayName = "Tuna nigiri"
+Description = "Reduce the cost of towers by 10%"
+Icon = ExtResource("2_yojsk")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

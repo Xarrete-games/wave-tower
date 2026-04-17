@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using Godot.Collections;
 using System;
 
@@ -27,8 +27,8 @@ public partial class Enemy : CharacterBody2D
     private const float WAYPOINT_ARRIVAL_THRESHOLD = 8.0f;
     private const float STEERING_FACTOR = 8.0f;
 
-    [Export] public float base_speed = 80.0f;
-    [Export] public float max_health = 50.0f;
+    [Export] public float BaseSpeed = 80.0f;
+    [Export] public float MaxHealth = 50.0f;
     [Export] public int gold_value = 1;
     [Export] public int damage = 1;
 
@@ -37,7 +37,7 @@ public partial class Enemy : CharacterBody2D
     public bool _last_is_right_direction = false;
 
     public Color default_modulate_color = Colors.White;
-    public float _base_speed = 100.0f;
+    public float _BaseSpeed = 100.0f;
     public float _speed_mult = 1.0f;
     public bool is_right_direction = true;
 
@@ -59,8 +59,8 @@ public partial class Enemy : CharacterBody2D
 
     public float speed
     {
-        get => _base_speed * _speed_mult;
-        set => _base_speed = value;
+        get => _BaseSpeed * _speed_mult;
+        set => _BaseSpeed = value;
     }
 
     public float speed_mult
@@ -83,9 +83,9 @@ public partial class Enemy : CharacterBody2D
         target_position_left = GetNode<Marker2D>("TargetPositionLeft");
         target_position_right = GetNode<Marker2D>("TargetPositionRight");
 
-        speed = base_speed;
-        health_bar.set_max_health(max_health);
-        _set_health(max_health);
+        speed = BaseSpeed;
+        health_bar.set_MaxHealth(MaxHealth);
+        _set_health(MaxHealth);
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), Timer.SignalName.Timeout);
         enabled = true;
@@ -246,12 +246,12 @@ public partial class Enemy : CharacterBody2D
 
     public float get_percentage_remaining_health()
     {
-        if (max_health <= 0.0f)
+        if (MaxHealth <= 0.0f)
         {
             return 0.0f;
         }
 
-        float healthRatio = health / max_health;
+        float healthRatio = health / MaxHealth;
         float percentage = healthRatio * 100.0f;
         return Mathf.Min(100.0f, percentage);
     }
@@ -261,9 +261,9 @@ public partial class Enemy : CharacterBody2D
         return health;
     }
 
-    public int get_debuff_stacks(int debuff_type)
+    public int get_debuff_stacks(int DebuffType)
     {
-        return debuff_handler.get_stacks(debuff_type);
+        return debuff_handler.get_stacks(DebuffType);
     }
 
     public System.Collections.Generic.List<EnemyDebuff> get_active_debuffs()
@@ -366,7 +366,7 @@ public partial class Enemy : CharacterBody2D
     {
         return new EnemyModel
         {
-            MaxHealth = max_health,
+            MaxHealth = MaxHealth,
             RemainingHealth = health,
             ProgressRatio = get_progress_ratio(),
             GoldValue = gold_value,
@@ -409,3 +409,4 @@ public partial class Enemy : CharacterBody2D
         health_bar.update_health(health);
     }
 }
+

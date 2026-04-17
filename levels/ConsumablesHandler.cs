@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 [GlobalClass]
 public partial class ConsumablesHandler : Node
@@ -65,7 +65,7 @@ public partial class ConsumablesHandler : Node
         }
 
         ConsumableData data = _currentConsumable.data;
-        if (data != null && data.targeting_type == (int)ConsumableTargeteable.TargetType.BLOCKED_TILE)
+        if (data != null && data.TargetingType == (int)ConsumableTargeteable.TargetType.BLOCKED_TILE)
         {
             HandleBlockedTilePlacement();
         }
@@ -97,7 +97,7 @@ public partial class ConsumablesHandler : Node
             ConsumableData data = _currentConsumable?.data;
             if (data != null)
             {
-                Input.SetCustomMouseCursor(data.cursor_icon_used, Input.CursorShape.Arrow, CenterCursorOffset);
+                Input.SetCustomMouseCursor(data.CursorIconUsed, Input.CursorShape.Arrow, CenterCursorOffset);
             }
 
             _isValidTarget = true;
@@ -108,7 +108,7 @@ public partial class ConsumablesHandler : Node
             ConsumableData data = _currentConsumable?.data;
             if (data != null)
             {
-                Input.SetCustomMouseCursor(data.cursor_icon, Input.CursorShape.Arrow, CenterCursorOffset);
+                Input.SetCustomMouseCursor(data.CursorIcon, Input.CursorShape.Arrow, CenterCursorOffset);
             }
 
             InvalidateTarget();
@@ -129,12 +129,12 @@ public partial class ConsumablesHandler : Node
         }
 
         ConsumableData data = _currentConsumable.data;
-        if (data == null || data.targeting_type != (int)ConsumableTargeteable.TargetType.TOWER)
+        if (data == null || data.TargetingType != (int)ConsumableTargeteable.TargetType.TOWER)
         {
             return;
         }
 
-        Input.SetCustomMouseCursor(data.cursor_icon_used, Input.CursorShape.Arrow, CenterCursorOffset);
+        Input.SetCustomMouseCursor(data.CursorIconUsed, Input.CursorShape.Arrow, CenterCursorOffset);
         _isValidTarget = true;
         _currentTarget = tower;
     }
@@ -147,14 +147,14 @@ public partial class ConsumablesHandler : Node
         }
 
         ConsumableData data = _currentConsumable.data;
-        if (data == null || data.targeting_type != (int)ConsumableTargeteable.TargetType.TOWER)
+        if (data == null || data.TargetingType != (int)ConsumableTargeteable.TargetType.TOWER)
         {
             return;
         }
 
         if (ReferenceEquals(_currentTarget, tower))
         {
-            Input.SetCustomMouseCursor(data.cursor_icon, Input.CursorShape.Arrow, CenterCursorOffset);
+            Input.SetCustomMouseCursor(data.CursorIcon, Input.CursorShape.Arrow, CenterCursorOffset);
             InvalidateTarget();
         }
     }
@@ -199,7 +199,7 @@ public partial class ConsumablesHandler : Node
         ConsumableData data = _currentConsumable.data;
         if (data != null)
         {
-            Input.SetCustomMouseCursor(data.cursor_icon, Input.CursorShape.Arrow, CenterCursorOffset);
+            Input.SetCustomMouseCursor(data.CursorIcon, Input.CursorShape.Arrow, CenterCursorOffset);
         }
 
         ActionManager actionManager = GetNode<ActionManager>("/root/ActionManager");
@@ -215,3 +215,4 @@ public partial class ConsumablesHandler : Node
         }
     }
 }
+

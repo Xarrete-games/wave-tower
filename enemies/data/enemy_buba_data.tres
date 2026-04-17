@@ -7,18 +7,19 @@
 
 [sub_resource type="Resource" id="Resource_6pl50"]
 script = ExtResource("1_d1pjp")
-initial_wave = 4
-final_wave = 7
+InitialWave = 4
+FinalWave = 7
 
 [resource]
 script = ExtResource("1_fsua3")
-type_legacy = 1
+TypeLegacy = 1
 type = 3
-name = "Buba"
-icon = ExtResource("1_a3f8k")
-scene = ExtResource("2_d1pjp")
-max_health = 200
-base_speed = 190.0
-base_gold_value = 3
-weight = 6
-available_waves = Array[ExtResource("1_d1pjp")]([SubResource("Resource_6pl50")])
+Name = "Buba"
+Icon = ExtResource("1_a3f8k")
+Scene = ExtResource("2_d1pjp")
+MaxHealth = 200
+BaseSpeed = 190.0
+BaseGoldValue = 3
+Weight = 6
+AvailableWaves = Array[ExtResource("1_d1pjp")]([SubResource("Resource_6pl50")])
+

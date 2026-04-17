@@ -6,8 +6,9 @@
 
 [resource]
 script = ExtResource("1_data")
-runtime_script = ExtResource("2_runtime")
-id = "damage_flat_buff"
-display_name = "Damage Flat Buff"
-description = "Flat damage buff."
-icon = ExtResource("1_utb5y")
+RuntimeScript = ExtResource("2_runtime")
+Id = "damage_flat_buff"
+DisplayName = "Damage Flat Buff"
+Description = "Flat damage buff."
+Icon = ExtResource("1_utb5y")
+

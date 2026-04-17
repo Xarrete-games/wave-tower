@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_6cu4n")
-id = "tinfoil_hat"
-display_name = "Tinfoil Hat"
-description = "It protects you from the next cursed relic."
-icon = ExtResource("2_jnqg1")
+Id = "tinfoil_hat"
+DisplayName = "Tinfoil Hat"
+Description = "It protects you from the next cursed relic."
+Icon = ExtResource("2_jnqg1")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

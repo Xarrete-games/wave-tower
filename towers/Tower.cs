@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
@@ -37,13 +37,6 @@ public partial class Tower : Node2D
     public GodotObject data;
     public int BuildPrice { get; set; } = 0;
 
-    // Legacy alias kept temporarily while migrating remaining consumers.
-    public int build_price
-    {
-        get => BuildPrice;
-        set => BuildPrice = value;
-    }
-
     protected Node2D _current_target;
     protected bool _enabled = false;
     protected bool _first_shot = true;
@@ -74,7 +67,7 @@ public partial class Tower : Node2D
             _targeting_mode = value;
             if (area_detector != null)
             {
-                area_detector.targeting_type = value;
+                area_detector.TargetingType = value;
             }
         }
     }
@@ -400,7 +393,7 @@ public partial class Tower : Node2D
 
         return new EnemyModel
         {
-            MaxHealth = enemy.max_health,
+            MaxHealth = enemy.MaxHealth,
             RemainingHealth = enemy.health,
             ProgressRatio = enemy.get_progress_ratio(),
             GoldValue = enemy.gold_value,
@@ -559,3 +552,4 @@ public partial class Tower : Node2D
         return runContext?.towers_manager;
     }
 }
+

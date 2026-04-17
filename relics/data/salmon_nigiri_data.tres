@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_hm7gf")
-id = "salmon_nigiri"
-display_name = "Salmon Nigiri"
-description = "Reduces the cost of relics by 10%."
-icon = ExtResource("3_0w3py")
-rarity = 1
+Id = "salmon_nigiri"
+DisplayName = "Salmon Nigiri"
+Description = "Reduces the cost of relics by 10%."
+Icon = ExtResource("3_0w3py")
+Rarity = 1
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

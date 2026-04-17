@@ -8,10 +8,11 @@
 
 [resource]
 script = ExtResource("1_tvi2s")
-cursor_icon = ExtResource("1_apyb0")
-cursor_icon_used = ExtResource("2_qfll5")
-runtime_script = ExtResource("1_y3mtm")
-id = "foundation_breaker"
-display_name = "Foundation Breaker"
-description = "Clears a random blocked build slot."
-icon = ExtResource("3_4so7f")
+CursorIcon = ExtResource("1_apyb0")
+CursorIconUsed = ExtResource("2_qfll5")
+RuntimeScript = ExtResource("1_y3mtm")
+Id = "foundation_breaker"
+DisplayName = "Foundation Breaker"
+Description = "Clears a random blocked build slot."
+Icon = ExtResource("3_4so7f")
+

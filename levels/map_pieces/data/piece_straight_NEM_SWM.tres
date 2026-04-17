@@ -9,10 +9,11 @@ script = ExtResource("1_qj8vc")
 
 [sub_resource type="Resource" id="edge_SW"]
 script = ExtResource("1_qj8vc")
-dir = 2
+Direction = 2
 
 [resource]
 script = ExtResource("3_x5t0j")
-edges = Array[ExtResource("1_qj8vc")]([SubResource("edge_NE"), SubResource("edge_SW")])
-scene = ExtResource("2_mvoxr")
+Edges = Array[ExtResource("1_qj8vc")]([SubResource("edge_NE"), SubResource("edge_SW")])
+Scene = ExtResource("2_mvoxr")
 metadata/_custom_type_script = "uid://buf7cbkrogset"
+

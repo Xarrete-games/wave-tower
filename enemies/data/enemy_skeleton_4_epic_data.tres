@@ -7,15 +7,16 @@
 
 [sub_resource type="Resource" id="Resource_806lk"]
 script = ExtResource("1_qthaq")
-initial_wave = 50
-final_wave = 50
+InitialWave = 50
+FinalWave = 50
 
 [resource]
 script = ExtResource("4_o1xjf")
-type_legacy = 4
+TypeLegacy = 4
 type = 1
-name = "Skeleton"
-icon = ExtResource("2_yp6kw")
-scene = ExtResource("3_qthaq")
-base_speed = 450.0
-available_waves = Array[ExtResource("1_qthaq")]([SubResource("Resource_806lk")])
+Name = "Skeleton"
+Icon = ExtResource("2_yp6kw")
+Scene = ExtResource("3_qthaq")
+BaseSpeed = 450.0
+AvailableWaves = Array[ExtResource("1_qthaq")]([SubResource("Resource_806lk")])
+

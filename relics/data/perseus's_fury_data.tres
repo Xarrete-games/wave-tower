@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_v54sv")
-id = "perseus_fury"
-display_name = "Perseus's fury"
-description = "Increase the execute threashold from execution tower in 5%"
-icon = ExtResource("3_5vyg6")
-rarity = 1
+Id = "perseus_fury"
+DisplayName = "Perseus's fury"
+Description = "Increase the execute threashold from execution tower in 5%"
+Icon = ExtResource("3_5vyg6")
+Rarity = 1
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System;
 
 public partial class TowerButton : Control
@@ -23,8 +23,8 @@ public partial class TowerButton : Control
         set
         {
             _towerData = value;
-            Configuration = value?.data;
-            TowerScene = value?.scene;
+            Configuration = value?.Data;
+            TowerScene = value?.Scene;
             Icon = Configuration?.icon;
             TowerType = Configuration?.type ?? 0;
             UpdatePrice();
@@ -238,3 +238,4 @@ public partial class TowerButton : Control
         TowerButtonPressed?.Invoke(TowerData, Price);
     }
 }
+

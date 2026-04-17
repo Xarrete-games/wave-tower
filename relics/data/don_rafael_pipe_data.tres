@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("2_wmmnl")
-id = "don_rafael_pipe"
-display_name = "Don Rafael pipe"
-description = "Increased the duration off all debuffs in 1s."
-icon = ExtResource("3_wmmnl")
+Id = "don_rafael_pipe"
+DisplayName = "Don Rafael pipe"
+Description = "Increased the duration off all debuffs in 1s."
+Icon = ExtResource("3_wmmnl")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

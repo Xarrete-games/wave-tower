@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("2_bsg6w")
-id = "Shop"
+Id = "Shop"
 type = 1
 title = "Shop"
-description = "Open a shop"
-icon = ExtResource("1_jftsn")
+Description = "Open a shop"
+Icon = ExtResource("1_jftsn")

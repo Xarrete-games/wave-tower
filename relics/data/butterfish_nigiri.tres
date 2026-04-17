@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_fyu7h")
-id = "butterfish_nigiri"
-display_name = "Butterfish nigiri	"
-description = "Reduces the cost of consumible items by 10%."
-icon = ExtResource("2_nbxfo")
+Id = "butterfish_nigiri"
+DisplayName = "Butterfish nigiri	"
+Description = "Reduces the cost of consumible items by 10%."
+Icon = ExtResource("2_nbxfo")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

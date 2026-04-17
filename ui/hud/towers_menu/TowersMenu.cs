@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 
 public partial class TowersMenu : Control
@@ -93,7 +93,7 @@ public partial class TowersMenu : Control
 
     private string GetTowerId(TowerDataWithInstance towerData)
     {
-        return towerData?.data?.id ?? string.Empty;
+        return towerData?.Data?.id ?? string.Empty;
     }
 
     private void OnTowerButtonPressed(TowerDataWithInstance towerData, int price)
@@ -109,7 +109,7 @@ public partial class TowersMenu : Control
         }
 
         _buttonInHover = towerButton;
-        TowerData data = towerButton.TowerData?.data;
+        TowerData data = towerButton.TowerData?.Data;
         if (data == null)
         {
             return;
@@ -139,3 +139,4 @@ public partial class TowersMenu : Control
         }
     }
 }
+

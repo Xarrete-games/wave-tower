@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using Godot.Collections;
 using System;
 
@@ -22,7 +22,7 @@ public partial class AreaDetector : Area2D
     }
 
     // Kept as int for GDScript interop with Tower.TargetingMode enum values.
-    public int targeting_type { get; set; } = 0;
+    public int TargetingType { get; set; } = 0;
 
     private Timer _timerToCheckTarget;
 
@@ -99,7 +99,7 @@ public partial class AreaDetector : Area2D
             return;
         }
 
-        switch (targeting_type)
+        switch (TargetingType)
         {
             case 0: // FIRST_IN_PROGRESS
                 current_target = SelectByProgress();
@@ -206,3 +206,4 @@ public partial class AreaDetector : Area2D
         return true;
     }
 }
+

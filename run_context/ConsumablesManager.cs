@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 using System;
 
@@ -157,7 +157,7 @@ public class ConsumablesManager
             return;
         }
 
-        RunContextRuntime.Status.SyncFromLegacy(status.max_health, status.health, status.armor);
+        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.health, status.armor);
     }
 
     private void SyncLegacyStatusFromRuntime()
@@ -169,9 +169,9 @@ public class ConsumablesManager
         }
 
         StatusRuntime runtime = RunContextRuntime.Status;
-        if (status.max_health != runtime.MaxHealth)
+        if (status.MaxHealth != runtime.MaxHealth)
         {
-            status.max_health = runtime.MaxHealth;
+            status.MaxHealth = runtime.MaxHealth;
         }
 
         if (status.armor != runtime.Armor)
@@ -257,7 +257,7 @@ public class ConsumablesManager
         }
 
         string id = data.id;
-        int consumableTypeRaw = data.consumable_type;
+        int consumableTypeRaw = data.ConsumableType;
         ConsumableModel.ConsumableType consumableType = consumableTypeRaw == 1
             ? ConsumableModel.ConsumableType.Potion
             : ConsumableModel.ConsumableType.Other;
@@ -268,7 +268,7 @@ public class ConsumablesManager
             return new SimpleConsumableModel(id, consumableType);
         }
 
-        int targetTypeRaw = data.targeting_type;
+        int targetTypeRaw = data.TargetingType;
         ConsumableTargeteableModel.TargetType targetType = targetTypeRaw == 1
             ? ConsumableTargeteableModel.TargetType.Tower
             : ConsumableTargeteableModel.TargetType.BlockedTile;
@@ -285,3 +285,4 @@ public class ConsumablesManager
         return model;
     }
 }
+

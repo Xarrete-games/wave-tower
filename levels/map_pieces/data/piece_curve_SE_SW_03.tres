@@ -6,16 +6,17 @@
 
 [sub_resource type="Resource" id="Resource_be84u"]
 script = ExtResource("1_uji32")
-dir = 2
-pos = 2
+Direction = 2
+Position = 2
 
 [sub_resource type="Resource" id="Resource_ir4r2"]
 script = ExtResource("1_uji32")
-dir = 1
-pos = 0
+Direction = 1
+Position = 0
 
 [resource]
 script = ExtResource("3_ir4r2")
-edges = Array[ExtResource("1_uji32")]([SubResource("Resource_be84u"), SubResource("Resource_ir4r2")])
-scene = ExtResource("2_uji32")
+Edges = Array[ExtResource("1_uji32")]([SubResource("Resource_be84u"), SubResource("Resource_ir4r2")])
+Scene = ExtResource("2_uji32")
 metadata/_custom_type_script = "uid://buf7cbkrogset"
+

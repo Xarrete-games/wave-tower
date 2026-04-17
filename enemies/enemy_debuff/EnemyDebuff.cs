@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 public class EnemyDebuff : EnemyEffect {
     public enum Type {
         FROST, BURN, }
@@ -7,18 +7,18 @@ public class EnemyDebuff : EnemyEffect {
         public Source source;
         public float value = 0.0f;
         public float duration = 0.0f;
-        public float tick_interval = 0.0f;
-        public int max_stacks = 99;
+        public float TickInterval = 0.0f;
+        public int MaxStacks = 99;
         public EnemyDebuff() {
         }
         public virtual void init(EnemyDebuffData debuffData, Source debuffSource) {
             data = debuffData;
             source = debuffSource;
-            type = (Type)debuffData.debuff_type;
+            type = (Type)debuffData.DebuffType;
             value = debuffData.value;
             duration = debuffData.duration;
-            tick_interval = debuffData.tick_interval;
-            max_stacks = debuffData.max_stacks;
+            TickInterval = debuffData.TickInterval;
+            MaxStacks = debuffData.MaxStacks;
         }
         public static EnemyDebuff create_frost(Source source) {
             EnemyDebuffData data = DataLoader.Instance?.get_debuff_data((int)Type.FROST).As<EnemyDebuffData>();
@@ -50,4 +50,5 @@ public class EnemyDebuff : EnemyEffect {
             public virtual void on_expire(Enemy enemy) {
             }
         }
+
 

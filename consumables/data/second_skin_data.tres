@@ -6,8 +6,9 @@
 
 [resource]
 script = ExtResource("1_lha01")
-runtime_script = ExtResource("1_oftu8")
-id = "second_skin"
-display_name = "Second skin"
-description = "Adds 10 armor."
-icon = ExtResource("3_3vg22")
+RuntimeScript = ExtResource("1_oftu8")
+Id = "second_skin"
+DisplayName = "Second skin"
+Description = "Adds 10 armor."
+Icon = ExtResource("3_3vg22")
+

@@ -3,14 +3,14 @@ using Godot;
 [GlobalClass]
 public partial class EventData : Resource
 {
-    public enum Type
+    public enum EventType
     {
         OPTIONS,
         SHOP,
         CHOOSE_RELIC,
     }
 
-    public enum Role
+    public enum EventRole
     {
         FRIENDLY,
         RANDOM,
@@ -18,75 +18,77 @@ public partial class EventData : Resource
     }
 
     [Export]
-    public string id { get; set; } = string.Empty;
+    public string Id { get; set; } = string.Empty;
 
     [Export]
-    public Type type { get; set; }
+    public EventType Type { get; set; }
 
     [Export]
-    public Role role { get; set; }
+    public EventRole Role { get; set; }
 
     [Export]
-    public string title { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
 
     [Export(PropertyHint.MultilineText)]
-    public string description { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
 
     [Export]
-    public Texture2D icon { get; set; }
+    public Texture2D Icon { get; set; }
+
+    // Legacy compatibility aliases (non-exported).
+    public string id
+    {
+        get => Id;
+        set => Id = value;
+    }
+
+    public string description
+    {
+        get => Description;
+        set => Description = value;
+    }
+
+    public Texture2D icon
+    {
+        get => Icon;
+        set => Icon = value;
+    }
+
+    public EventType type
+    {
+        get => Type;
+        set => Type = value;
+    }
+
+    public EventRole role
+    {
+        get => Role;
+        set => Role = value;
+    }
+
+    public string title
+    {
+        get => Title;
+        set => Title = value;
+    }
 
     [Export]
-    public Texture2D texture_background { get; set; }
+    public Texture2D TextureBackground { get; set; }
 
     [ExportGroup("Script")]
     [Export]
-    public Script runtime_script { get; set; }
+    public Script RuntimeScript { get; set; }
 
-    public string Id
+    public EventType EventTypeValue
     {
-        get => id;
-        set => id = value;
+        get => Type;
+        set => Type = value;
     }
 
-    public Type EventType
+    public EventRole EventRoleValue
     {
-        get => type;
-        set => type = value;
+        get => Role;
+        set => Role = value;
     }
 
-    public Role EventRole
-    {
-        get => role;
-        set => role = value;
-    }
-
-    public string Title
-    {
-        get => title;
-        set => title = value;
-    }
-
-    public string Description
-    {
-        get => description;
-        set => description = value;
-    }
-
-    public Texture2D Icon
-    {
-        get => icon;
-        set => icon = value;
-    }
-
-    public Texture2D TextureBackground
-    {
-        get => texture_background;
-        set => texture_background = value;
-    }
-
-    public Script RuntimeScript
-    {
-        get => runtime_script;
-        set => runtime_script = value;
-    }
 }

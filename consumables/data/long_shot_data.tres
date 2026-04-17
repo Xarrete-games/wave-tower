@@ -8,12 +8,13 @@
 
 [resource]
 script = ExtResource("1_o6u08")
-consumable_type = 1
-targeting_type = 1
-cursor_icon = ExtResource("1_2q3p8")
-cursor_icon_used = ExtResource("2_531ys")
-runtime_script = ExtResource("3_531ys")
-id = "long_shot"
-display_name = "Longshot"
-description = "Doubles the range of a tower to the end of a wave."
-icon = ExtResource("4_ql0pa")
+ConsumableType = 1
+TargetingType = 1
+CursorIcon = ExtResource("1_2q3p8")
+CursorIconUsed = ExtResource("2_531ys")
+RuntimeScript = ExtResource("3_531ys")
+Id = "long_shot"
+DisplayName = "Longshot"
+Description = "Doubles the range of a tower to the end of a wave."
+Icon = ExtResource("4_ql0pa")
+

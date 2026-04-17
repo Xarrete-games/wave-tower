@@ -6,63 +6,27 @@ public partial class ConsumableData : BaseData
 {
     [ExportGroup("Consumable")]
     [Export]
-    public int consumable_type { get; set; }
+    public int ConsumableType { get; set; }
 
     [Export]
-    public int targeting_type { get; set; }
+    public int TargetingType { get; set; }
 
     [Export]
-    public Texture2D cursor_icon { get; set; }
+    public Texture2D CursorIcon { get; set; }
 
     [Export]
-    public Texture2D cursor_icon_used { get; set; }
+    public Texture2D CursorIconUsed { get; set; }
 
     [Export]
-    public AudioStream use_sound { get; set; }
+    public AudioStream UseSound { get; set; }
 
     [ExportGroup("Script")]
     [Export]
-    public Script runtime_script { get; set; }
-
-    public int ConsumableType
-    {
-        get => consumable_type;
-        set => consumable_type = value;
-    }
-
-    public int TargetingType
-    {
-        get => targeting_type;
-        set => targeting_type = value;
-    }
-
-    public Texture2D CursorIcon
-    {
-        get => cursor_icon;
-        set => cursor_icon = value;
-    }
-
-    public Texture2D CursorIconUsed
-    {
-        get => cursor_icon_used;
-        set => cursor_icon_used = value;
-    }
-
-    public AudioStream UseSound
-    {
-        get => use_sound;
-        set => use_sound = value;
-    }
-
-    public Script RuntimeScript
-    {
-        get => runtime_script;
-        set => runtime_script = value;
-    }
+    public Script RuntimeScript { get; set; }
 
     public Consumable create_consumable()
     {
-        string idValue = (id ?? string.Empty).ToLowerInvariant();
+        string idValue = (Id ?? string.Empty).ToLowerInvariant();
         Consumable consumable = idValue switch
         {
             "first_aid" => new FirstAid(),
@@ -87,13 +51,13 @@ public partial class ConsumableData : BaseData
 
     private Consumable CreateConsumableFromRuntimeScript()
     {
-        if (runtime_script == null)
+        if (RuntimeScript == null)
         {
-            GD.PushError($"[ConsumableData] Missing runtime_script for '{id}'");
+            GD.PushError($"[ConsumableData] Missing RuntimeScript for '{Id}'");
             return null;
         }
 
-        string scriptName = System.IO.Path.GetFileNameWithoutExtension(runtime_script.ResourcePath)?.ToLowerInvariant() ?? string.Empty;
+        string scriptName = System.IO.Path.GetFileNameWithoutExtension(RuntimeScript.ResourcePath)?.ToLowerInvariant() ?? string.Empty;
         return scriptName switch
         {
             "firstaid" => new FirstAid(),

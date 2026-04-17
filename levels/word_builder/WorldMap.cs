@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -125,7 +125,7 @@ public partial class WorldMap : Node2D
             for (int i = edges.Count - 1; i >= 0; i--)
             {
                 Edge currentEdge = edges[i];
-                if (currentEdge != null && currentEdge.matches(edgeObject))
+                if (currentEdge != null && currentEdge.Matches(edgeObject))
                 {
                     edges.RemoveAt(i);
                     return true;
@@ -144,39 +144,39 @@ public partial class WorldMap : Node2D
         public int GetEdgeDir(object edge)
         {
             Edge edgeObject = AsEdge(edge);
-            return edgeObject != null ? (int)edgeObject.dir : 0;
+            return edgeObject != null ? (int)edgeObject.Direction : 0;
         }
 
         public int GetEdgePos(object edge)
         {
             Edge edgeObject = AsEdge(edge);
-            return edgeObject != null ? (int)edgeObject.pos : 0;
+            return edgeObject != null ? (int)edgeObject.Position : 0;
         }
 
         public object GetOppositeEdge(object edge)
         {
             Edge edgeObject = AsEdge(edge);
-            return edgeObject?.get_opposite();
+            return edgeObject?.GetOpposite();
         }
 
         public bool EdgesMatch(object leftEdge, object rightEdge)
         {
             Edge left = AsEdge(leftEdge);
             Edge right = AsEdge(rightEdge);
-            return left != null && right != null && left.matches(right);
+            return left != null && right != null && left.Matches(right);
         }
 
         public bool PieceDataHasConnectingEdge(object pieceData, object edge)
         {
             MapPieceData data = AsPieceData(pieceData);
             Edge edgeObject = AsEdge(edge);
-            return data != null && edgeObject != null && data.has_connecting_edge(edgeObject);
+            return data != null && edgeObject != null && data.HasConnectingEdge(edgeObject);
         }
 
         public bool PieceDataHasEdgeDir(object pieceData, int dir)
         {
             MapPieceData data = AsPieceData(pieceData);
-            return data != null && data.has_edge_dir(dir);
+            return data != null && data.HasEdgeDir(dir);
         }
 
         public Vector2 GetPieceGlobalPosition(object piece)
@@ -199,13 +199,13 @@ public partial class WorldMap : Node2D
 
         public int GetOppositeDir(int dir)
         {
-            return (int)Edge.get_opposite_dir((Edge.Dir)dir);
+            return (int)Edge.GetOppositeDir((Edge.Dir)dir);
         }
 
         public bool PieceDataIsFork(object pieceData)
         {
             MapPieceData data = AsPieceData(pieceData);
-            return data != null && data.is_fork;
+            return data != null && data.IsFork;
         }
     }
     public override void _Ready()
@@ -304,7 +304,7 @@ public partial class WorldMap : Node2D
 
         Edge nextEdge = FrontierManagerPickRandomEdge(frontier) as Edge;
         Vector2I frontierLogicalPos = frontier.logical_pos;
-        int nextEdgeDir = nextEdge != null ? (int)nextEdge.dir : 0;
+        int nextEdgeDir = nextEdge != null ? (int)nextEdge.Direction : 0;
         Vector2I candidateTile = _gridManager.get_neighbor_tile(frontierLogicalPos, nextEdgeDir);
 
         FrontierManager.EdgeValidationResult validation = _frontierManager.validate_edge(frontier, nextEdge, candidateTile);
@@ -366,8 +366,8 @@ public partial class WorldMap : Node2D
             for (int edgeIndex = 0; edgeIndex < edges.Count; edgeIndex++)
             {
                 Edge edge = edges[edgeIndex];
-                int dir = edge != null ? (int)edge.dir : 0;
-                int pos = edge != null ? (int)edge.pos : 0;
+                int dir = edge != null ? (int)edge.Direction : 0;
+                int pos = edge != null ? (int)edge.Position : 0;
 
                 Vector2I logicalPos = frontier.logical_pos;
                 Vector2I tile = _gridManager.get_neighbor_tile(logicalPos, dir);
@@ -427,7 +427,7 @@ public partial class WorldMap : Node2D
             for (int i = 0; i < newPiece.edges.Count; i++)
             {
                 Edge edge = newPiece.edges[i];
-                if (edge != null && (edgeToConnectTyped == null || !edge.matches(edgeToConnectTyped)))
+                if (edge != null && (edgeToConnectTyped == null || !edge.Matches(edgeToConnectTyped)))
                 {
                     remainingEdges.Add(edge);
                 }
@@ -442,7 +442,7 @@ public partial class WorldMap : Node2D
                     continue;
                 }
 
-                int dir = (int)edgeObj.dir;
+                int dir = (int)edgeObj.Direction;
                 Vector2I neigh = candidateTile + _gridManager.get_offset(dir);
                 string neighKey = GridManager.vec_key(neigh);
                 if (occSim.Contains(neighKey))
@@ -472,8 +472,8 @@ public partial class WorldMap : Node2D
 
             _frontierManager.update_after_placement(frontier, newPiece);
 
-            int entryDir = nextEdge != null ? (int)nextEdge.dir : 0;
-            int exitDir = edgeToConnectTyped != null ? (int)edgeToConnectTyped.dir : 0;
+            int entryDir = nextEdge != null ? (int)nextEdge.Direction : 0;
+            int exitDir = edgeToConnectTyped != null ? (int)edgeToConnectTyped.Direction : 0;
             AttachPiece(frontier, newPiece, entryDir, exitDir);
             MovePieceDecorationToVisuals(newPiece);
             _lastPieceAttached = newPiece;
@@ -482,7 +482,7 @@ public partial class WorldMap : Node2D
                 _hasPlacedFirstExpansion = true;
             }
 
-            if (_pendingForkAfterBoss && pieceData != null && pieceData.is_fork)
+            if (_pendingForkAfterBoss && pieceData != null && pieceData.IsFork)
             {
                 _pendingForkAfterBoss = false;
             }
@@ -570,8 +570,8 @@ public partial class WorldMap : Node2D
             return;
         }
 
-        int dir = edge != null ? (int)edge.dir : 0;
-        int pos = edge != null ? (int)edge.pos : 0;
+        int dir = edge != null ? (int)edge.Direction : 0;
+        int pos = edge != null ? (int)edge.Position : 0;
         Vector2I logicalPos = piece.logical_pos;
 
         Vector2I tile = _gridManager.get_neighbor_tile(logicalPos, dir);
@@ -691,7 +691,7 @@ public partial class WorldMap : Node2D
         for (int index = 0; index < source.Count; index++)
         {
             MapPieceData pieceData = source[index] as MapPieceData;
-            if (pieceData != null && pieceData.is_fork == isFork)
+            if (pieceData != null && pieceData.IsFork == isFork)
             {
                 target.Add(source[index]);
             }
@@ -802,3 +802,4 @@ public partial class WorldMap : Node2D
         return result;
     }
 }
+

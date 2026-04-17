@@ -4,43 +4,21 @@ using Godot;
 public partial class TowerDataWithInstance : Resource
 {
     [Export]
-    public TowerData data { get; set; }
+    public TowerData Data { get; set; }
 
     [Export]
-    public PackedScene scene { get; set; }
-
-    public TowerData Data
-    {
-        get => data;
-        set => data = value;
-    }
-
-    public PackedScene Scene
-    {
-        get => scene;
-        set => scene = value;
-    }
-
-    public Tower get_instance_node()
-    {
-        Tower instance = scene.Instantiate<Tower>();
-        instance.data = data;
-        instance.type = (Tower.Type)data.type;
-        return instance;
-    }
+    public PackedScene Scene { get; set; }
 
     public Tower GetInstanceNode()
     {
-        return get_instance_node();
-    }
-
-    public Variant get_instance()
-    {
-        return get_instance_node();
+        Tower instance = Scene.Instantiate<Tower>();
+        instance.data = Data;
+        instance.type = (Tower.Type)Data.type;
+        return instance;
     }
 
     public Variant GetInstance()
     {
-        return get_instance();
+        return GetInstanceNode();
     }
 }

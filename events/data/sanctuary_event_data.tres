@@ -7,10 +7,11 @@
 
 [resource]
 script = ExtResource("1_h5dls")
-id = "sactuary_event"
+Id = "sactuary_event"
 title = "Sanctuary"
-description = "A shrine appears, what do you decide to do?"
-icon = ExtResource("1_cjont")
-texture_background = ExtResource("3_owmpu")
-runtime_script = ExtResource("2_owmpu")
+Description = "A shrine appears, what do you decide to do?"
+Icon = ExtResource("1_cjont")
+TextureBackground = ExtResource("3_owmpu")
+RuntimeScript = ExtResource("2_owmpu")
 metadata/_custom_type_script = "uid://daq85iil68x7r"
+

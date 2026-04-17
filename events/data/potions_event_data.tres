@@ -7,10 +7,11 @@
 
 [resource]
 script = ExtResource("1_iomn8")
-id = "potions_event"
+Id = "potions_event"
 title = "The hooded man"
-description = "A shadow appears that gives you a choice between 3 potions:"
-icon = ExtResource("1_gywyq")
-texture_background = ExtResource("3_nds13")
-runtime_script = ExtResource("2_nds13")
+Description = "A shadow appears that gives you a choice between 3 potions:"
+Icon = ExtResource("1_gywyq")
+TextureBackground = ExtResource("3_nds13")
+RuntimeScript = ExtResource("2_nds13")
 metadata/_custom_type_script = "uid://daq85iil68x7r"
+

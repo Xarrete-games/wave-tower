@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_5lf7q")
-id = "safety_helmet"
-display_name = "Safety Helmet"
-description = "Adds one armor at the start of each wave"
-icon = ExtResource("3_bf7d8")
+Id = "safety_helmet"
+DisplayName = "Safety Helmet"
+Description = "Adds one armor at the start of each wave"
+Icon = ExtResource("3_bf7d8")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

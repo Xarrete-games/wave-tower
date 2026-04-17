@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_hkgcx")
-show_counter = true
-id = "valve_amplifier"
-display_name = "Valve Amplifier 100W"
-description = "Every 3 towers built, your next tower gains +10% attack range."
-icon = ExtResource("3_q0l0n")
+ShowCounter = true
+Id = "valve_amplifier"
+DisplayName = "Valve Amplifier 100W"
+Description = "Every 3 towers built, your next tower gains +10% attack range."
+Icon = ExtResource("3_q0l0n")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public class EnemyDataLoader
 {
@@ -31,7 +31,7 @@ public class EnemyDataLoader
                 continue;
             }
 
-            enemies_data_dic[enemyData.type_legacy] = enemyData;
+            enemies_data_dic[enemyData.TypeLegacy] = enemyData;
         }
     }
 
@@ -57,7 +57,7 @@ public class EnemyDataLoader
         for (int index = 0; index < enemies_data.Count; index++)
         {
             EnemyData data = enemies_data[index];
-            if (data != null && (int)data.type == type)
+            if (data != null && (int)data.Type == type)
             {
                 result.Add(data);
             }
@@ -77,7 +77,7 @@ public class EnemyDataLoader
         for (int index = 0; index < enemies_data.Count; index++)
         {
             EnemyData data = enemies_data[index];
-            if (data != null && data.type != EnemyData.Type.BOSS)
+            if (data != null && data.Type != EnemyData.EnemyType.BOSS)
             {
                 result.Add(data);
             }
@@ -134,3 +134,5 @@ public class EnemyDataLoader
         return result;
     }
 }
+
+

@@ -6,10 +6,11 @@
 
 [sub_resource type="Resource" id="edge_SE"]
 script = ExtResource("1_v7pk3")
-dir = 1
+Direction = 1
 
 [resource]
 script = ExtResource("3_1pg8u")
-edges = Array[ExtResource("1_v7pk3")]([SubResource("edge_SE")])
-scene = ExtResource("2_yxn8n")
+Edges = Array[ExtResource("1_v7pk3")]([SubResource("edge_SE")])
+Scene = ExtResource("2_yxn8n")
 metadata/_custom_type_script = "uid://buf7cbkrogset"
+

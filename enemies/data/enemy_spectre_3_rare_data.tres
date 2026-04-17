@@ -6,13 +6,14 @@
 
 [sub_resource type="Resource" id="Resource_s3wbj"]
 script = ExtResource("1_e4de1")
-initial_wave = 22
-final_wave = 30
+InitialWave = 22
+FinalWave = 30
 
 [resource]
 script = ExtResource("3_c3haw")
-scene = ExtResource("2_e4de1")
-max_health = 1200
-base_speed = 180.0
-weight = 3
-available_waves = Array[ExtResource("1_e4de1")]([SubResource("Resource_s3wbj")])
+Scene = ExtResource("2_e4de1")
+MaxHealth = 1200
+BaseSpeed = 180.0
+Weight = 3
+AvailableWaves = Array[ExtResource("1_e4de1")]([SubResource("Resource_s3wbj")])
+

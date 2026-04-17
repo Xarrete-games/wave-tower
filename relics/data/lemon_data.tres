@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("2_cakfj")
-is_cursed = true
-id = "lemon"
-display_name = "Lemon"
-description = "At the beginning of each wave, the first tower costs 50% more."
-icon = ExtResource("3_uhjbw")
+IsCursed = true
+Id = "lemon"
+DisplayName = "Lemon"
+Description = "At the beginning of each wave, the first tower costs 50% more."
+Icon = ExtResource("3_uhjbw")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System;
 using System.Collections.Generic;
 
@@ -74,7 +74,7 @@ public partial class ShopScreen : Control
         ItemPurchase?.Invoke(itemOffer);
         GetNode<AudioManager>("/root/AudioManager").play_purchase();
 
-        Resource itemData = itemOffer?.item_data;
+        Resource itemData = itemOffer?.ItemData;
         string purchasedId = itemData switch
         {
             RelicData relicData => relicData.id,
@@ -118,13 +118,13 @@ public partial class ShopScreen : Control
             slot.QueueFree();
 
             RunContext runContext = GetNode<RunContext>("/root/RunContext");
-            Resource itemData = itemOffer?.item_data;
+            Resource itemData = itemOffer?.ItemData;
             if (itemData is RelicData relicData)
             {
                 runContext.relics_manager.remove_relic(relicData.id);
             }
 
-            runContext.economy.add_gold(itemOffer?.price ?? 0);
+            runContext.economy.add_gold(itemOffer?.Price ?? 0);
             GetNode<AudioManager>("/root/AudioManager").play_purchase();
             sell_button.disable();
             OnExitButtonPressed();
@@ -190,3 +190,4 @@ public partial class ShopScreen : Control
         }
     }
 }
+

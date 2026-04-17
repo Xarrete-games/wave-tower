@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_0g4ry")
-id = "choose_relic"
+Id = "choose_relic"
 type = 2
 title = "Choose relic"
-description = "Choose relic"
+Description = "Choose relic"
 metadata/_custom_type_script = "uid://daq85iil68x7r"

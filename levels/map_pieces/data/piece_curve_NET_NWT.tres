@@ -6,17 +6,18 @@
 
 [sub_resource type="Resource" id="Resource_pxstw"]
 script = ExtResource("1_y47t2")
-pos = 0
+Position = 0
 metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 
 [sub_resource type="Resource" id="Resource_oo26b"]
 script = ExtResource("1_y47t2")
-dir = 3
-pos = 0
+Direction = 3
+Position = 0
 metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 
 [resource]
 script = ExtResource("3_lcuuy")
-edges = Array[ExtResource("1_y47t2")]([SubResource("Resource_pxstw"), SubResource("Resource_oo26b")])
-scene = ExtResource("2_f4gtd")
+Edges = Array[ExtResource("1_y47t2")]([SubResource("Resource_pxstw"), SubResource("Resource_oo26b")])
+Scene = ExtResource("2_f4gtd")
 metadata/_custom_type_script = "uid://buf7cbkrogset"
+

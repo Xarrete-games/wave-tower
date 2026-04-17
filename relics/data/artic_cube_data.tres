@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_b3u50")
-id = "artic_cube"
-display_name = "Artic Cube"
-description = "Increase the duration of Freeze in 1 sec."
-icon = ExtResource("3_d3rf5")
+Id = "artic_cube"
+DisplayName = "Artic Cube"
+Description = "Increase the duration of Freeze in 1 sec."
+Icon = ExtResource("3_d3rf5")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

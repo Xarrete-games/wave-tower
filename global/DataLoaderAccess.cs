@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System.Collections.Generic;
 
 public static class DataLoaderAccess
@@ -159,7 +159,7 @@ public static class DataLoaderAccess
         for (int index = 0; index < allTowerData.Count; index++)
         {
             TowerDataWithInstance towerData = allTowerData[index].AsGodotObject() as TowerDataWithInstance;
-            if (towerData?.data != null)
+            if (towerData?.Data != null)
             {
                 result.Add(towerData);
             }

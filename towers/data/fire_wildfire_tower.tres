@@ -11,22 +11,23 @@ region = Rect2(1011, 1, 355, 550)
 
 [sub_resource type="Resource" id="Resource_4q8u3"]
 script = ExtResource("2_ctmpg")
-build_price = 180
-upgrade_price = 200
-base_damage = 45.0
-base_attack_range = 600.0
-base_attack_speed = 0.5
-damage_per_level = 60.0
-attack_range_per_level = 100.0
-id = "wild_fire"
-display_name = "Wildfire tower"
-description = "Fire a flamethrower to burn several enemies"
-icon = SubResource("AtlasTexture_ncsk7")
-rarity = 1
+BuildPrice = 180
+UpgradePrice = 200
+BaseDamage = 45.0
+BaseAttackRange = 600.0
+BaseAttackSpeed = 0.5
+DamagePerLevel = 60.0
+AttackRangePerLevel = 100.0
+Id = "wild_fire"
+DisplayName = "Wildfire tower"
+Description = "Fire a flamethrower to burn several enemies"
+Icon = SubResource("AtlasTexture_ncsk7")
+Rarity = 1
 metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
 [resource]
 script = ExtResource("3_ctmpg")
-data = SubResource("Resource_4q8u3")
-scene = ExtResource("2_clbp5")
+Data = SubResource("Resource_4q8u3")
+Scene = ExtResource("2_clbp5")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
+

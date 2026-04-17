@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 
 public class SpawnPositionsHandler
 {
@@ -142,7 +142,7 @@ public class SpawnPositionsHandler
             else if (entry.ContainsKey("edge"))
             {
                 Edge edge = entry["edge"].As<Edge>();
-                dir = edge != null ? (int)edge.dir : -1;
+                dir = edge != null ? (int)edge.Direction : -1;
             }
 
             if (dir == EdgeDirNe || dir == EdgeDirSe)
@@ -220,3 +220,4 @@ public class SpawnPositionsHandler
         return $"{tile.X},{tile.Y}";
     }
 }
+

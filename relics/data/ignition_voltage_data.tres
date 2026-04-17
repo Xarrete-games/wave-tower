@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_4y5rc")
-id = "ignition_voltage"
-display_name = "Ignition Voltage"
-description = "Increases the attack speed of lightning turrets by 10%"
-icon = ExtResource("3_muhnu")
+Id = "ignition_voltage"
+DisplayName = "Ignition Voltage"
+Description = "Increases the attack speed of lightning turrets by 10%"
+Icon = ExtResource("3_muhnu")
 metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+
