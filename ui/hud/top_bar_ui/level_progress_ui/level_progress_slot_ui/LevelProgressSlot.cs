@@ -16,7 +16,7 @@ public partial class LevelProgressSlot : PanelContainer
 
     public void set_icon(Texture2D newTexture)
     {
-        this.texture_rec.Texture = newTexture;
+        texture_rec.Texture = newTexture;
     }
 
     public void fill()

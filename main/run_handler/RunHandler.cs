@@ -30,34 +30,34 @@ public partial class RunHandler : Node
 
     public override void _Ready()
     {
-        this.SetEventsByType();
+        SetEventsByType();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._progress = runContext.progress;
-        this._progress.current_wave_finished += this.OnWaveFinished;
-        this._progress.last_wave_finished += this.OnLastWaveFinished;
+        _progress = runContext.progress;
+        _progress.current_wave_finished += OnWaveFinished;
+        _progress.last_wave_finished += OnLastWaveFinished;
 
-        this.ShowNextWaveScreen();
+        ShowNextWaveScreen();
     }
 
     public override void _ExitTree()
     {
-        if (this._progress != null)
+        if (_progress != null)
         {
-            this._progress.current_wave_finished -= this.OnWaveFinished;
-            this._progress.last_wave_finished -= this.OnLastWaveFinished;
+            _progress.current_wave_finished -= OnWaveFinished;
+            _progress.last_wave_finished -= OnLastWaveFinished;
         }
     }
 
     public async Task ShowLootScreen()
     {
-        if (this.loot_screen_handler == null)
+        if (loot_screen_handler == null)
         {
             GD.PushError("[RunHandler] loot_screen_handler is null.");
             return;
         }
 
-        await this.loot_screen_handler.ShowLootScreenAsync(this.event_layer);
+        await loot_screen_handler.ShowLootScreenAsync(event_layer);
     }
 
     public async Task ShowChooseCardScreen()
@@ -66,7 +66,7 @@ public partial class RunHandler : Node
         var cards = runContext.towers_manager.get_random_towers(3);
 
         ChooseTowerScreen chooseTowerScreen = ChooseTowerScreenScene.Instantiate<ChooseTowerScreen>();
-        this.event_layer.AddChild(chooseTowerScreen);
+        event_layer.AddChild(chooseTowerScreen);
         chooseTowerScreen.PopulateScreen(cards);
 
         var completion = new TaskCompletionSource<bool>();
@@ -91,22 +91,22 @@ public partial class RunHandler : Node
 
     public async Task ShowEventsScreen(EventData eventData)
     {
-        if (this.events_screen_hander == null || eventData == null)
+        if (events_screen_hander == null || eventData == null)
         {
             return;
         }
 
-        await this.events_screen_hander.ShowEventSelectedAsync(eventData, this.event_layer);
+        await events_screen_hander.ShowEventSelectedAsync(eventData, event_layer);
     }
 
     private void SetEventsByType()
     {
-        this._events = DataLoaderAccess.GetAllEventsTyped();
-        this._shopEvent = null;
-        this._chooseRelicEvent = null;
-        this._optionsEvents = new List<EventData>();
+        _events = DataLoaderAccess.GetAllEventsTyped();
+        _shopEvent = null;
+        _chooseRelicEvent = null;
+        _optionsEvents = new List<EventData>();
 
-        foreach (EventData eventData in this._events)
+        foreach (EventData eventData in _events)
         {
             if (eventData == null)
             {
@@ -116,15 +116,15 @@ public partial class RunHandler : Node
             int eventType = (int)eventData.type;
             if (eventType == 1)
             {
-                this._shopEvent = eventData;
+                _shopEvent = eventData;
             }
             else if (eventType == 2)
             {
-                this._chooseRelicEvent = eventData;
+                _chooseRelicEvent = eventData;
             }
             else if (eventType == 0)
             {
-                this._optionsEvents.Add(eventData);
+                _optionsEvents.Add(eventData);
             }
         }
     }
@@ -132,20 +132,20 @@ public partial class RunHandler : Node
     private void ShowNextWaveScreen()
     {
         Node nextWaveScreen = NextWaveScreenScene.Instantiate();
-        this.event_layer.CallDeferred(Node.MethodName.AddChild, nextWaveScreen);
+        event_layer.CallDeferred(Node.MethodName.AddChild, nextWaveScreen);
     }
 
     private void ShowNextLevelMenu()
     {
         Node nextLevelScreen = NextLevelScreenScene.Instantiate();
-        this.event_layer.CallDeferred(Node.MethodName.AddChild, nextLevelScreen);
+        event_layer.CallDeferred(Node.MethodName.AddChild, nextLevelScreen);
     }
 
     private async void OnWaveFinished()
     {
         GetNode<AudioManager>("/root/AudioManager").play_wave_clear();
-        await this.ShowLootScreen();
-        await this.ShowChooseCardScreen();
+        await ShowLootScreen();
+        await ShowChooseCardScreen();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (runContext.is_on_restarting)
@@ -154,15 +154,15 @@ public partial class RunHandler : Node
         }
 
         int currentWave = runContext.progress.current_wave;
-        EventData eventData = this.GetNextEvent(currentWave);
+        EventData eventData = GetNextEvent(currentWave);
         if (eventData == null)
         {
-            this.ShowNextWaveScreen();
+            ShowNextWaveScreen();
             return;
         }
 
-        await this.ShowEventsScreen(eventData);
-        this.ShowNextWaveScreen();
+        await ShowEventsScreen(eventData);
+        ShowNextWaveScreen();
     }
 
     private async void OnLastWaveFinished()
@@ -178,28 +178,28 @@ public partial class RunHandler : Node
             return;
         }
 
-        this.ShowNextLevelMenu();
+        ShowNextLevelMenu();
     }
 
     private EventData GetNextEvent(int currentWave)
     {
         int waveInCycle = ((currentWave - 1) % 10) + 1;
 
-        if (Contains(WavesWithShops, waveInCycle) && this._shopEvent != null)
+        if (Contains(WavesWithShops, waveInCycle) && _shopEvent != null)
         {
-            return this._shopEvent;
+            return _shopEvent;
         }
 
-        if (Contains(WavesWithRelics, waveInCycle) && this._chooseRelicEvent != null)
+        if (Contains(WavesWithRelics, waveInCycle) && _chooseRelicEvent != null)
         {
-            return this._chooseRelicEvent;
+            return _chooseRelicEvent;
         }
 
-        if (Contains(WavesWithEvents, waveInCycle) && this._optionsEvents.Count > 0)
+        if (Contains(WavesWithEvents, waveInCycle) && _optionsEvents.Count > 0)
         {
-            int randomIndex = (int)(GD.Randi() % (uint)this._optionsEvents.Count);
-            EventData picked = this._optionsEvents[randomIndex];
-            this._optionsEvents.RemoveAt(randomIndex);
+            int randomIndex = (int)(GD.Randi() % (uint)_optionsEvents.Count);
+            EventData picked = _optionsEvents[randomIndex];
+            _optionsEvents.RemoveAt(randomIndex);
             return picked;
         }
 

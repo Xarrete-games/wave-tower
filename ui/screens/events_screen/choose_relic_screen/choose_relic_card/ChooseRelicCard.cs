@@ -20,70 +20,70 @@ public partial class ChooseRelicCard : Control
 
     public override void _Ready()
     {
-        this._description = GetNode<RichTextLabel>("VBoxContainer/Description");
-        this._title = GetNode<Label>("VBoxContainer/Title");
-        this._relicTexture = GetNode<TextureRect>("RelicIcon/RelicTexture");
-        this._hexagonBorder = GetNode<Polygon2D>("RelicIcon/Hexagon/Control/Root2d/HexagonBorder");
-        this._healthPrice = GetNode<HealthPrice>("VBoxContainer/HealthPrice");
-        this._runContext = GetNode<RunContext>("/root/RunContext");
-        this._healthPrice.Visible = false;
+        _description = GetNode<RichTextLabel>("VBoxContainer/Description");
+        _title = GetNode<Label>("VBoxContainer/Title");
+        _relicTexture = GetNode<TextureRect>("RelicIcon/RelicTexture");
+        _hexagonBorder = GetNode<Polygon2D>("RelicIcon/Hexagon/Control/Root2d/HexagonBorder");
+        _healthPrice = GetNode<HealthPrice>("VBoxContainer/HealthPrice");
+        _runContext = GetNode<RunContext>("/root/RunContext");
+        _healthPrice.Visible = false;
     }
 
     public override void _ExitTree()
     {
-        if (this._runContext?.status != null && this._isHealthSubscribed)
+        if (_runContext?.status != null && _isHealthSubscribed)
         {
-            this._runContext.status.health_change -= this.OnHealthChanged;
-            this._isHealthSubscribed = false;
+            _runContext.status.health_change -= OnHealthChanged;
+            _isHealthSubscribed = false;
         }
     }
 
     public void set_relic(Variant newRelicData)
     {
-        this._relicData = newRelicData;
+        _relicData = newRelicData;
         RelicData data = newRelicData.As<RelicData>();
         if (data == null)
         {
             return;
         }
 
-        this._relicTexture.Texture = data.icon;
-        this._title.Text = data.display_name;
-        this._description.Text = data.description;
+        _relicTexture.Texture = data.icon;
+        _title.Text = data.display_name;
+        _description.Text = data.description;
 
-        this._healthCost = data.health_price;
-        if (this._healthCost > 0)
+        _healthCost = data.health_price;
+        if (_healthCost > 0)
         {
-            this._healthPrice.Visible = true;
-            this._itCostsHealth = true;
-            this._healthPrice.price = this._healthCost;
+            _healthPrice.Visible = true;
+            _itCostsHealth = true;
+            _healthPrice.price = _healthCost;
 
-            this.CheckHealth(this._runContext.status.health, this._healthCost);
-            if (!this._isHealthSubscribed)
+            CheckHealth(_runContext.status.health, _healthCost);
+            if (!_isHealthSubscribed)
             {
-                this._runContext.status.health_change += this.OnHealthChanged;
-                this._isHealthSubscribed = true;
+                _runContext.status.health_change += OnHealthChanged;
+                _isHealthSubscribed = true;
             }
         }
         else
         {
-            this._healthPrice.Visible = false;
-            this._itCostsHealth = false;
-            this._hasEnoughLife = true;
+            _healthPrice.Visible = false;
+            _itCostsHealth = false;
+            _hasEnoughLife = true;
 
-            if (this._runContext?.status != null && this._isHealthSubscribed)
+            if (_runContext?.status != null && _isHealthSubscribed)
             {
-                this._runContext.status.health_change -= this.OnHealthChanged;
-                this._isHealthSubscribed = false;
+                _runContext.status.health_change -= OnHealthChanged;
+                _isHealthSubscribed = false;
             }
         }
 
-        this._hexagonBorder.Color = this._runContext.relics_manager.get_rarity_color(data.rarity);
+        _hexagonBorder.Color = _runContext.relics_manager.get_rarity_color(data.rarity);
     }
 
-    private void _on_gui_input(InputEvent @event)
+    private void OnGuiInput(InputEvent @event)
     {
-        if (this._itCostsHealth && !this._hasEnoughLife)
+        if (_itCostsHealth && !_hasEnoughLife)
         {
             return;
         }
@@ -94,27 +94,27 @@ public partial class ChooseRelicCard : Control
         }
 
         GetNode<AudioManager>("/root/AudioManager").play_button_click();
-        this.card_pressed?.Invoke(this._relicData);
+        card_pressed?.Invoke(_relicData);
     }
 
     private void CheckHealth(int currentHealth, int healthCost)
     {
-        this._hasEnoughLife = currentHealth > healthCost;
+        _hasEnoughLife = currentHealth > healthCost;
     }
 
     private void OnHealthChanged(int currentHealth)
     {
-        this.CheckHealth(currentHealth, this._healthCost);
+        CheckHealth(currentHealth, _healthCost);
     }
 
-    private void _on_mouse_entered()
+    private void OnMouseEntered()
     {
         GetNode<AudioManager>("/root/AudioManager").play_button_hover();
-        this._relicTexture.CustomMinimumSize = new Vector2(130, 130);
+        _relicTexture.CustomMinimumSize = new Vector2(130, 130);
     }
 
-    private void _on_mouse_exited()
+    private void OnMouseExited()
     {
-        this._relicTexture.CustomMinimumSize = new Vector2(80, 80);
+        _relicTexture.CustomMinimumSize = new Vector2(80, 80);
     }
 }

@@ -11,28 +11,28 @@ public partial class FrostSpearTower : Tower
     public override void _Ready()
     {
         base._Ready();
-        this.projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
+        projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
     protected override void _fire()
     {
-        Enemy targetEnemy = this._current_target as Enemy;
-        if (!GodotObject.IsInstanceValid(targetEnemy) || this.frost_spear_projectile_scene == null)
+        Enemy targetEnemy = _current_target as Enemy;
+        if (!GodotObject.IsInstanceValid(targetEnemy) || frost_spear_projectile_scene == null)
         {
             return;
         }
 
-        SingleTargetProjectile projectile = this.frost_spear_projectile_scene.Instantiate<SingleTargetProjectile>();
+        SingleTargetProjectile projectile = frost_spear_projectile_scene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
-        projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
+        projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
-        Attack attack = this._get_attack();
+        Attack attack = _get_attack();
         int enemyFrostStacks = targetEnemy.get_debuff_stacks(0);
         float damageMultiplier = 1.0f + enemyFrostStacks * 0.10f;
         attack.damage *= damageMultiplier;
 
-        EnemyDebuff debuff = EnemyDebuff.create_frost(this.damage_source);
-        projectile.set_target(targetEnemy, attack, debuff, this.debuff_stacks);
+        EnemyDebuff debuff = EnemyDebuff.create_frost(damage_source);
+        projectile.set_target(targetEnemy, attack, debuff, debuff_stacks);
     }
 }

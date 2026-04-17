@@ -13,16 +13,16 @@ public partial class LootScreenHandler : Node
 
     public async Task ShowLootScreenAsync(CanvasLayer eventLayer)
     {
-        if (this.loot_screen_scene == null)
+        if (loot_screen_scene == null)
         {
             GD.PushError("[LootScreenHandler] loot_screen_scene is null.");
             return;
         }
 
-        LootScreen lootScreen = this.loot_screen_scene.Instantiate<LootScreen>();
+        LootScreen lootScreen = loot_screen_scene.Instantiate<LootScreen>();
         eventLayer.AddChild(lootScreen);
 
-        var lootItems = this.GenerateLootItems();
+        var lootItems = GenerateLootItems();
         lootScreen.SetLoot(lootItems);
 
         await ToSignal(lootScreen, Node.SignalName.TreeExited);
@@ -33,7 +33,7 @@ public partial class LootScreenHandler : Node
         var lootItems = new List<LootItemData>();
 
         LootItemData goldItem = new LootItemData();
-        LootContext lootContext = new LootContext(this.GetBaseGold(), ChanceDropConsumable);
+        LootContext lootContext = new LootContext(GetBaseGold(), ChanceDropConsumable);
         Hooks.OnBeforeGetLoot(Hooks.GetListenersFromRuntime(), lootContext);
         goldItem.GoldAmount = lootContext.GetTotalGold();
 

@@ -18,11 +18,11 @@ public partial class ShopScreenHandler : Node
         eventLayer.AddChild(shopScreen);
         shopScreen.set_relics(relics);
         shopScreen.set_consumables(consumables);
-        shopScreen.item_purchase += this.OnItemPurchased;
+        shopScreen.item_purchase += OnItemPurchased;
 
         await ToSignal(shopScreen, Node.SignalName.TreeExited);
-        shopScreen.item_purchase -= this.OnItemPurchased;
-        this.shop_closed?.Invoke();
+        shopScreen.item_purchase -= OnItemPurchased;
+        shop_closed?.Invoke();
     }
 
     private void OnItemPurchased(ItemOffer itemOffer)

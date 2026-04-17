@@ -7,22 +7,22 @@ public sealed class ConsumablesManagerRuntime
 
     public IReadOnlyList<ConsumableModel> GetConsumables()
     {
-        return this._consumables;
+        return _consumables;
     }
 
     public bool IsFull()
     {
-        return this._consumables.Count >= _maxConsumables;
+        return _consumables.Count >= _maxConsumables;
     }
 
     public bool AddConsumable(ConsumableModel consumable)
     {
-        if (consumable == null || this.IsFull())
+        if (consumable == null || IsFull())
         {
             return false;
         }
 
-        this._consumables.Add(consumable);
+        _consumables.Add(consumable);
         return true;
     }
 
@@ -33,11 +33,11 @@ public sealed class ConsumablesManagerRuntime
             return false;
         }
 
-        return this._consumables.Remove(consumable);
+        return _consumables.Remove(consumable);
     }
 
     public void Reset()
     {
-        this._consumables.Clear();
+        _consumables.Clear();
     }
 }

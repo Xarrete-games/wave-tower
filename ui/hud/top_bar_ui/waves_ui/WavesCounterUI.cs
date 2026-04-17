@@ -7,23 +7,23 @@ public partial class WavesCounterUI : VBoxContainer
 
     public override void _Ready()
     {
-        this._levelLabel = GetNode<Label>("HBoxContainer2/LevelLabel");
+        _levelLabel = GetNode<Label>("HBoxContainer2/LevelLabel");
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._progress = runContext.progress;
-        this._progress.current_wave_changed += this._on_wave_change;
+        _progress = runContext.progress;
+        _progress.current_wave_changed += OnWaveChange;
     }
 
     public override void _ExitTree()
     {
-        if (this._progress != null)
+        if (_progress != null)
         {
-            this._progress.current_wave_changed -= this._on_wave_change;
+            _progress.current_wave_changed -= OnWaveChange;
         }
     }
 
-    private void _on_wave_change(int wave_num)
+    private void OnWaveChange(int wave_num)
     {
-        this._levelLabel.Text = wave_num.ToString();
+        _levelLabel.Text = wave_num.ToString();
     }
 }

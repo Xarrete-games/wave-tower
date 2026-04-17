@@ -26,31 +26,31 @@ public partial class ShopSlot : VBoxContainer
 
     public override void _Ready()
     {
-        this._healthPrice = GetNode<HealthPrice>("HealthPrice");
-        this._healthPrice.Visible = false;
+        _healthPrice = GetNode<HealthPrice>("HealthPrice");
+        _healthPrice.Visible = false;
 
-        this._runContext = GetNode<RunContext>("/root/RunContext");
-        if (this._runContext?.relics_manager != null)
+        _runContext = GetNode<RunContext>("/root/RunContext");
+        if (_runContext?.relics_manager != null)
         {
-            this._runContext.relics_manager.relic_added += this._on_relic_added;
+            _runContext.relics_manager.relic_added += OnRelicAdded;
         }
 
-        if (this._runContext?.status != null)
+        if (_runContext?.status != null)
         {
-            this._runContext.status.health_change += this._on_status_health_change;
+            _runContext.status.health_change += OnStatusHealthChange;
         }
     }
 
     public override void _ExitTree()
     {
-        if (this._runContext?.relics_manager != null)
+        if (_runContext?.relics_manager != null)
         {
-            this._runContext.relics_manager.relic_added -= this._on_relic_added;
+            _runContext.relics_manager.relic_added -= OnRelicAdded;
         }
 
-        if (this._runContext?.status != null)
+        if (_runContext?.status != null)
         {
-            this._runContext.status.health_change -= this._on_status_health_change;
+            _runContext.status.health_change -= OnStatusHealthChange;
         }
     }
 
@@ -61,8 +61,8 @@ public partial class ShopSlot : VBoxContainer
             return;
         }
 
-        this._item = itemOffer;
-        this._price = itemOffer.price;
+        _item = itemOffer;
+        _price = itemOffer.price;
 
         Resource itemData = itemOffer.item_data;
         if (itemData == null)
@@ -86,95 +86,95 @@ public partial class ShopSlot : VBoxContainer
             icon = consumableInfo.icon;
         }
 
-        this.title_label.Text = displayName;
-        this.description_label.Text = description;
-        this.TooltipText = description;
-        if (this.gold_price != null)
+        title_label.Text = displayName;
+        description_label.Text = description;
+        TooltipText = description;
+        if (gold_price != null)
         {
-            this.gold_price.price = this._price;
+            gold_price.price = _price;
         }
-        this.shop_slot_icon?.set_icon(icon);
+        shop_slot_icon?.set_icon(icon);
 
         RelicData relicData = itemData as RelicData;
         if (relicData != null)
         {
-            this.shop_slot_icon?.set_background_color(this._runContext.relics_manager.get_rarity_color(relicData.rarity));
+            shop_slot_icon?.set_background_color(_runContext.relics_manager.get_rarity_color(relicData.rarity));
         }
 
-        this._currentHealthCost = itemOffer.health_price;
-        this._healthPrice.Visible = this._currentHealthCost > 0;
-        if (this._currentHealthCost > 0)
+        _currentHealthCost = itemOffer.health_price;
+        _healthPrice.Visible = _currentHealthCost > 0;
+        if (_currentHealthCost > 0)
         {
-            this._healthPrice.price = this._currentHealthCost;
+            _healthPrice.price = _currentHealthCost;
         }
 
-        this._chek_health(this._runContext.status.health, this._currentHealthCost);
+        ChekHealth(_runContext.status.health, _currentHealthCost);
     }
 
-    private void _on_gui_input(InputEvent @event)
+    private void OnGuiInput(InputEvent @event)
     {
-        if (this._item == null)
+        if (_item == null)
         {
             return;
         }
 
-        Resource itemData = this._item.item_data;
+        Resource itemData = _item.item_data;
         bool isConsumable = itemData is ConsumableData;
-        if (isConsumable && this._runContext.consumables_manager.is_full())
+        if (isConsumable && _runContext.consumables_manager.is_full())
         {
             return;
         }
 
-        if (UIUtilsStatic.IsLeftClickEvent(@event) && this._runContext.economy.gold >= this._price && this._hasEnoughHealth)
+        if (UIUtilsStatic.IsLeftClickEvent(@event) && _runContext.economy.gold >= _price && _hasEnoughHealth)
         {
             GetNode<AudioManager>("/root/AudioManager").play_button_click();
-            this.item_purchased?.Invoke(this._item, this);
+            item_purchased?.Invoke(_item, this);
         }
     }
 
-    private void _on_mouse_entered()
+    private void OnMouseEntered()
     {
         GetNode<AudioManager>("/root/AudioManager").play_button_hover();
-        this.shop_slot_icon?.increased_icon_size();
+        shop_slot_icon?.increased_icon_size();
     }
 
-    private void _on_mouse_exited()
+    private void OnMouseExited()
     {
-        this.shop_slot_icon?.icon_normal_size();
+        shop_slot_icon?.icon_normal_size();
     }
 
-    private void _on_relic_added(string id)
+    private void OnRelicAdded(string id)
     {
         if (id != "salmon_nigiri" && id != "butterfish_nigiri" && id != "soya_sauce" && id != "tuna_nigiri")
         {
             return;
         }
 
-        if (this._item == null)
+        if (_item == null)
         {
             return;
         }
 
-        Resource itemData = this._item.item_data;
+        Resource itemData = _item.item_data;
         if (itemData is RelicData)
         {
-            this.set_item(this._runContext.offers_manager.create_relic_offer_from_data(itemData as RelicData));
+            set_item(_runContext.offers_manager.create_relic_offer_from_data(itemData as RelicData));
             return;
         }
 
         if (itemData is ConsumableData)
         {
-            this.set_item(this._runContext.offers_manager.create_consumable_offer_from_data(itemData as ConsumableData));
+            set_item(_runContext.offers_manager.create_consumable_offer_from_data(itemData as ConsumableData));
         }
     }
 
-    private void _on_status_health_change(int current_health)
+    private void OnStatusHealthChange(int current_health)
     {
-        this._chek_health(current_health, this._currentHealthCost);
+        ChekHealth(current_health, _currentHealthCost);
     }
 
-    private void _chek_health(int current_health, int health_cost)
+    private void ChekHealth(int current_health, int health_cost)
     {
-        this._hasEnoughHealth = current_health > health_cost;
+        _hasEnoughHealth = current_health > health_cost;
     }
 }

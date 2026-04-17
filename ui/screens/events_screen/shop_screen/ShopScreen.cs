@@ -36,15 +36,15 @@ public partial class ShopScreen : Control
 
     public override void _Ready()
     {
-        this.ChangeToBuyMode();
+        ChangeToBuyMode();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (!runContext.economy.is_sell_active)
         {
-            this.sell_button.Visible = false;
+            sell_button.Visible = false;
         }
 
-        this.BuildRelicsForSale();
+        BuildRelicsForSale();
     }
 
     public void set_relics(List<ItemOffer> relics)
@@ -52,9 +52,9 @@ public partial class ShopScreen : Control
         foreach (ItemOffer relic in relics)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
-            this.relics_container.AddChild(slot);
+            relics_container.AddChild(slot);
             slot.set_item(relic);
-            slot.item_purchased += this.OnItemPurchase;
+            slot.item_purchased += OnItemPurchase;
         }
     }
 
@@ -63,15 +63,15 @@ public partial class ShopScreen : Control
         foreach (ItemOffer consumable in consumables)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
-            this.consumables_container.AddChild(slot);
+            consumables_container.AddChild(slot);
             slot.set_item(consumable);
-            slot.item_purchased += this.OnItemPurchase;
+            slot.item_purchased += OnItemPurchase;
         }
     }
 
     private void OnItemPurchase(ItemOffer itemOffer, ShopSlot slotPurchased)
     {
-        this.item_purchase?.Invoke(itemOffer);
+        item_purchase?.Invoke(itemOffer);
         GetNode<AudioManager>("/root/AudioManager").play_purchase();
 
         Resource itemData = itemOffer?.item_data;
@@ -82,13 +82,13 @@ public partial class ShopScreen : Control
             _ => string.Empty,
         };
 
-        foreach (Node slot in this.relics_container.GetChildren())
+        foreach (Node slot in relics_container.GetChildren())
         {
             if (slot == slotPurchased)
             {
                 if (purchasedId == "strategy_tome_economy")
                 {
-                    this.sell_button.Visible = true;
+                    sell_button.Visible = true;
                 }
 
                 slot.QueueFree();
@@ -96,7 +96,7 @@ public partial class ShopScreen : Control
             }
         }
 
-        foreach (Node slot in this.consumables_container.GetChildren())
+        foreach (Node slot in consumables_container.GetChildren())
         {
             if (slot == slotPurchased)
             {
@@ -108,7 +108,7 @@ public partial class ShopScreen : Control
 
     private void OnItemSold(ItemOffer itemOffer, ShopSlot slotSold)
     {
-        foreach (Node slot in this.sell_relics_container.GetChildren())
+        foreach (Node slot in sell_relics_container.GetChildren())
         {
             if (slot != slotSold)
             {
@@ -126,45 +126,45 @@ public partial class ShopScreen : Control
 
             runContext.economy.add_gold(itemOffer?.price ?? 0);
             GetNode<AudioManager>("/root/AudioManager").play_purchase();
-            this.sell_button.disable();
-            this._on_exit_button_pressed();
+            sell_button.disable();
+            OnExitButtonPressed();
             return;
         }
     }
 
-    private void _on_exit_button_pressed()
+    private void OnExitButtonPressed()
     {
-        if (this._isOnSellMode)
+        if (_isOnSellMode)
         {
-            this.ChangeToBuyMode();
+            ChangeToBuyMode();
             return;
         }
 
         QueueFree();
     }
 
-    private void _on_sell_button_pressed()
+    private void OnSellButtonPressed()
     {
-        this.ChangeToSellMode();
+        ChangeToSellMode();
     }
 
     private void ChangeToSellMode()
     {
-        this._isOnSellMode = true;
-        this.sell_button.Visible = false;
-        this.exit_button.Visible = true;
-        this.relics_section.Visible = false;
-        this.consumables_section.Visible = false;
-        this.sell_section.Visible = true;
+        _isOnSellMode = true;
+        sell_button.Visible = false;
+        exit_button.Visible = true;
+        relics_section.Visible = false;
+        consumables_section.Visible = false;
+        sell_section.Visible = true;
     }
 
     private void ChangeToBuyMode()
     {
-        this.sell_button.Visible = true;
-        this._isOnSellMode = false;
-        this.relics_section.Visible = true;
-        this.consumables_section.Visible = true;
-        this.sell_section.Visible = false;
+        sell_button.Visible = true;
+        _isOnSellMode = false;
+        relics_section.Visible = true;
+        consumables_section.Visible = true;
+        sell_section.Visible = false;
     }
 
     private void BuildRelicsForSale()
@@ -184,9 +184,9 @@ public partial class ShopScreen : Control
         foreach (ItemOffer relicOffer in relicOffers)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
-            this.sell_relics_container.AddChild(slot);
+            sell_relics_container.AddChild(slot);
             slot.set_item(relicOffer);
-            slot.item_purchased += this.OnItemSold;
+            slot.item_purchased += OnItemSold;
         }
     }
 }

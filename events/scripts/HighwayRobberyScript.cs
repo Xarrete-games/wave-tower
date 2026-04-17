@@ -5,7 +5,7 @@ public partial class HighwayRobberyScript : EventScript
 {
     public override List<EventOptionData> get_options()
     {
-        RunContext runContext = this.GetRunContext();
+        RunContext runContext = GetRunContext();
         if (runContext == null)
         {
             return new List<EventOptionData>();
@@ -29,7 +29,7 @@ public partial class HighwayRobberyScript : EventScript
 
     public override void handle_response(object data)
     {
-        RunContext runContext = this.GetRunContext();
+        RunContext runContext = GetRunContext();
         if (runContext == null)
         {
             return;

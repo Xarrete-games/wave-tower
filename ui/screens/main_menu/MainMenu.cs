@@ -13,29 +13,29 @@ public partial class MainMenu : Control
         GetNode<AudioManager>("/root/AudioManager").play_main_piano();
         GetNode<GameState>("/root/GameState").state = GameState.ON_MAIN_MENU;
 
-        if (this.direct_init)
+        if (direct_init)
         {
-            this._on_new_run_button_xarreta_pressed();
+            OnNewRunButtonXarretaPressed();
         }
     }
 
-    private void _on_new_run_button_xarreta_pressed()
+    private void OnNewRunButtonXarretaPressed()
     {
         GetNode<AudioManager>("/root/AudioManager").stop_main_piano();
-        this.CallDeferred(MethodName._init_game);
+        CallDeferred(MethodName.InitGame);
     }
 
-    private void _on_credits_button_xarreta_pressed()
+    private void OnCreditsButtonXarretaPressed()
     {
         GetTree().Root.AddChild(CreditsScene.Instantiate());
     }
 
-    private void _on_exit_button_xarreta_pressed()
+    private void OnExitButtonXarretaPressed()
     {
         GetTree().Quit();
     }
 
-    private void _init_game()
+    private void InitGame()
     {
         GetTree().ChangeSceneToPacked(BootScene);
     }

@@ -36,7 +36,7 @@ public partial class PotionsEventScript : EventScript
 
     public override void handle_response(object data)
     {
-        RunContext runContext = this.GetRunContext();
+        RunContext runContext = GetRunContext();
         if (runContext == null)
         {
             return;

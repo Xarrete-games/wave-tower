@@ -6,41 +6,41 @@ public abstract class Relic : AbstractModel
 
     public RelicData Data { get; private set; }
 
-    public string Id => this.Data?.id ?? this._fallbackId;
+    public string Id => Data?.id ?? _fallbackId;
     public bool IsCursed { get; }
     private readonly string _fallbackId;
 
     private bool _disabled;
     public bool Disabled
     {
-        get => this._disabled;
+        get => _disabled;
         set
         {
-            this._disabled = value;
-            this.Changed?.Invoke(this);
+            _disabled = value;
+            Changed?.Invoke(this);
         }
     }
 
     private int _counter;
     public int Counter
     {
-        get => this._counter;
+        get => _counter;
         set
         {
-            this._counter = value;
-            this.Changed?.Invoke(this);
+            _counter = value;
+            Changed?.Invoke(this);
         }
     }
 
     protected Relic(string id, bool isCursed = false)
     {
-        this._fallbackId = id;
-        this.IsCursed = isCursed;
+        _fallbackId = id;
+        IsCursed = isCursed;
     }
 
     public void SetupData(RelicData data)
     {
-        this.Data = data;
+        Data = data;
     }
 
     public virtual void OnObtain()

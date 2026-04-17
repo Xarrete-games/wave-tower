@@ -19,20 +19,20 @@ public partial class LevelTileMap : TileMapLayer
     public override void _Ready()
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        this._towersManager = runContext?.towers_manager;
-        if (this._towersManager != null)
+        _towersManager = runContext?.towers_manager;
+        if (_towersManager != null)
         {
-            this._towersManager.tower_removed += this._on_tower_removed;
+            _towersManager.tower_removed += OnTowerRemoved;
         }
 
-        this._fill_data();
+        FillData();
     }
 
     public override void _ExitTree()
     {
-        if (this._towersManager != null)
+        if (_towersManager != null)
         {
-            this._towersManager.tower_removed -= this._on_tower_removed;
+            _towersManager.tower_removed -= OnTowerRemoved;
         }
     }
 
@@ -44,7 +44,7 @@ public partial class LevelTileMap : TileMapLayer
 
     public bool is_mouse_on_block_tile()
     {
-        Vector2I mapCoords = this.get_mouse_tile_pos();
+        Vector2I mapCoords = get_mouse_tile_pos();
         TileData tileData = GetCellTileData(mapCoords);
         if (tileData == null)
         {
@@ -56,21 +56,21 @@ public partial class LevelTileMap : TileMapLayer
 
     public bool is_mouse_on_buildeable_tile()
     {
-        Vector2I mapCoords = this.get_mouse_tile_pos();
-        if (!this._buildeableTiles.ContainsKey(mapCoords))
+        Vector2I mapCoords = get_mouse_tile_pos();
+        if (!_buildeableTiles.ContainsKey(mapCoords))
         {
             return false;
         }
 
-        return !this._occupiedTiles.ContainsKey(mapCoords) && !this._blockedTiles.ContainsKey(mapCoords);
+        return !_occupiedTiles.ContainsKey(mapCoords) && !_blockedTiles.ContainsKey(mapCoords);
     }
 
     public void destroy_random_buildeable_tile()
     {
         var buildeableTilesArray = new Godot.Collections.Array<Vector2I>();
-        foreach (Vector2I tilePos in this._buildeableTiles.Keys)
+        foreach (Vector2I tilePos in _buildeableTiles.Keys)
         {
-            if (!this._blockedTiles.ContainsKey(tilePos))
+            if (!_blockedTiles.ContainsKey(tilePos))
             {
                 buildeableTilesArray.Add(tilePos);
             }
@@ -83,46 +83,46 @@ public partial class LevelTileMap : TileMapLayer
 
         int randIndex = (int)(GD.Randi() % (uint)buildeableTilesArray.Count);
         Vector2I tileToBlock = buildeableTilesArray[randIndex];
-        this._occupiedTiles[tileToBlock] = true;
+        _occupiedTiles[tileToBlock] = true;
         SetCell(tileToBlock, ATLAS_ID, NORMAL_TILE_POS);
-        this._buildeableTiles.Remove(tileToBlock);
+        _buildeableTiles.Remove(tileToBlock);
     }
 
     public Vector2 get_current_tile_pos()
     {
-        Vector2 centerPosLocal = MapToLocal(this.get_mouse_tile_pos());
+        Vector2 centerPosLocal = MapToLocal(get_mouse_tile_pos());
         centerPosLocal.Y -= 16;
         return ToGlobal(centerPosLocal);
     }
 
     public void set_tile_occupied(Vector2I map_coords)
     {
-        this._occupiedTiles[map_coords] = true;
-        this._buildeableTiles.Remove(map_coords);
+        _occupiedTiles[map_coords] = true;
+        _buildeableTiles.Remove(map_coords);
     }
 
     public void set_tile_free(Vector2I map_coords)
     {
-        if (this._occupiedTiles.ContainsKey(map_coords))
+        if (_occupiedTiles.ContainsKey(map_coords))
         {
-            this._occupiedTiles.Remove(map_coords);
-            this._buildeableTiles[map_coords] = true;
+            _occupiedTiles.Remove(map_coords);
+            _buildeableTiles[map_coords] = true;
         }
     }
 
     public void unblock_tile(Vector2I map_coords)
     {
-        if (this._blockedTiles.Count == 0)
+        if (_blockedTiles.Count == 0)
         {
             return;
         }
 
-        this._blockedTiles.Remove(map_coords);
+        _blockedTiles.Remove(map_coords);
         SetCell(map_coords, ATLAS_ID, UNLOCK_TILE_POS);
-        this._buildeableTiles[map_coords] = true;
+        _buildeableTiles[map_coords] = true;
     }
 
-    private void _fill_data()
+    private void FillData()
     {
         Godot.Collections.Array<Vector2I> usedCells = GetUsedCells();
         for (int i = 0; i < usedCells.Count; i++)
@@ -136,16 +136,16 @@ public partial class LevelTileMap : TileMapLayer
 
             if (tileData.GetCustomData(BLOCKED).AsBool())
             {
-                this._blockedTiles[mapCoords] = true;
+                _blockedTiles[mapCoords] = true;
             }
             else if (tileData.GetCustomData(BUILDEABLE).AsBool())
             {
-                this._buildeableTiles[mapCoords] = true;
+                _buildeableTiles[mapCoords] = true;
             }
         }
     }
 
-    private void _on_tower_removed(Tower tower)
+    private void OnTowerRemoved(Tower tower)
     {
         if (tower == null)
         {
@@ -153,6 +153,6 @@ public partial class LevelTileMap : TileMapLayer
         }
 
         Vector2I tile = tower.tile_pos;
-        this.set_tile_free(tile);
+        set_tile_free(tile);
     }
 }

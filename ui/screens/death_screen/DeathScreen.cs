@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 
 public partial class DeathScreen : CanvasLayer
 {
@@ -9,7 +9,7 @@ public partial class DeathScreen : CanvasLayer
         GetTree().Paused = true;
     }
 
-    private void _on_try_again_button_xarreta_pressed()
+    private void OnTryAgainButtonXarretaPressed()
     {
         GetTree().Paused = false;
         ClickEvents.ResetGameButtonPressed?.Invoke();

@@ -6,8 +6,8 @@ public sealed class TowerBuffModel
 
     public TowerBuffModel(string id, string sourceId, int value)
     {
-        this.Id = id;
-        this.SourceId = sourceId;
-        this.Value = value;
+        Id = id;
+        SourceId = sourceId;
+        Value = value;
     }
 }

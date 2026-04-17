@@ -20,7 +20,7 @@ public sealed class TowerModel
 
     public System.Collections.Generic.IReadOnlyList<TowerBuffModel> GetBuffs()
     {
-        return this._buffs;
+        return _buffs;
     }
 
     public void AddBuff(TowerBuffModel buff)
@@ -30,7 +30,7 @@ public sealed class TowerModel
             return;
         }
 
-        this._buffs.Add(buff);
+        _buffs.Add(buff);
     }
 
     public void RemoveBuff(string sourceId)
@@ -40,6 +40,6 @@ public sealed class TowerModel
             return;
         }
 
-        this._buffs.RemoveAll(buff => buff.SourceId == sourceId);
+        _buffs.RemoveAll(buff => buff.SourceId == sourceId);
     }
 }

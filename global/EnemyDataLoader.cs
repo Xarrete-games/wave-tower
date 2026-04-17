@@ -9,7 +9,7 @@ public class EnemyDataLoader
 
     public EnemyDataLoader()
     {
-        var resources = this.LoadResourcesFromDir(DataPath);
+        var resources = LoadResourcesFromDir(DataPath);
         for (int index = 0; index < resources.Count; index++)
         {
             Resource candidate = resources[index];
@@ -20,27 +20,27 @@ public class EnemyDataLoader
                 continue;
             }
 
-            this.enemies_data.Add(data);
+            enemies_data.Add(data);
         }
 
-        for (int index = 0; index < this.enemies_data.Count; index++)
+        for (int index = 0; index < enemies_data.Count; index++)
         {
-            EnemyData enemyData = this.enemies_data[index];
+            EnemyData enemyData = enemies_data[index];
             if (enemyData == null)
             {
                 continue;
             }
 
-            this.enemies_data_dic[enemyData.type_legacy] = enemyData;
+            enemies_data_dic[enemyData.type_legacy] = enemyData;
         }
     }
 
     public Godot.Collections.Array<EnemyData> get_all_enemies_typed()
     {
         var result = new Godot.Collections.Array<EnemyData>();
-        for (int index = 0; index < this.enemies_data.Count; index++)
+        for (int index = 0; index < enemies_data.Count; index++)
         {
-            result.Add(this.enemies_data[index]);
+            result.Add(enemies_data[index]);
         }
 
         return result;
@@ -48,15 +48,15 @@ public class EnemyDataLoader
 
     public Godot.Collections.Array<Variant> get_all_enemies()
     {
-        return ToVariantArray(this.get_all_enemies_typed());
+        return ToVariantArray(get_all_enemies_typed());
     }
 
     public Godot.Collections.Array<EnemyData> get_enemies_by_type_typed(int type)
     {
         var result = new Godot.Collections.Array<EnemyData>();
-        for (int index = 0; index < this.enemies_data.Count; index++)
+        for (int index = 0; index < enemies_data.Count; index++)
         {
-            EnemyData data = this.enemies_data[index];
+            EnemyData data = enemies_data[index];
             if (data != null && (int)data.type == type)
             {
                 result.Add(data);
@@ -68,15 +68,15 @@ public class EnemyDataLoader
 
     public Godot.Collections.Array<Variant> get_enemies_by_type(int type)
     {
-        return ToVariantArray(this.get_enemies_by_type_typed(type));
+        return ToVariantArray(get_enemies_by_type_typed(type));
     }
 
     public Godot.Collections.Array<EnemyData> get_spawnable_enemies_typed()
     {
         var result = new Godot.Collections.Array<EnemyData>();
-        for (int index = 0; index < this.enemies_data.Count; index++)
+        for (int index = 0; index < enemies_data.Count; index++)
         {
-            EnemyData data = this.enemies_data[index];
+            EnemyData data = enemies_data[index];
             if (data != null && data.type != EnemyData.Type.BOSS)
             {
                 result.Add(data);
@@ -88,7 +88,7 @@ public class EnemyDataLoader
 
     public Godot.Collections.Array<Variant> get_spawnable_enemies()
     {
-        return ToVariantArray(this.get_spawnable_enemies_typed());
+        return ToVariantArray(get_spawnable_enemies_typed());
     }
 
     private Godot.Collections.Array<Resource> LoadResourcesFromDir(string path)

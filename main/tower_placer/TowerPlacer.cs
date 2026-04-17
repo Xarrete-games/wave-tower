@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 
 public partial class TowerPlacer : Node2D
 {
@@ -13,51 +13,51 @@ public partial class TowerPlacer : Node2D
 
     public override void _Ready()
     {
-        this._isPlacing = false;
-        this.visual = GetNode<Node2D>("../Visual");
-        ClickEvents.TowerBuildButtonPressed += this.OnTowerButtonPressed;
+        _isPlacing = false;
+        visual = GetNode<Node2D>("../Visual");
+        ClickEvents.TowerBuildButtonPressed += OnTowerButtonPressed;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._progress = runContext.progress;
-        this._progress.current_wave_finished += this.CancelTower;
-        this._progress.last_wave_finished += this.CancelTower;
+        _progress = runContext.progress;
+        _progress.current_wave_finished += CancelTower;
+        _progress.last_wave_finished += CancelTower;
     }
 
     public override void _ExitTree()
     {
-        ClickEvents.TowerBuildButtonPressed -= this.OnTowerButtonPressed;
+        ClickEvents.TowerBuildButtonPressed -= OnTowerButtonPressed;
 
-        if (this._progress != null)
+        if (_progress != null)
         {
-            this._progress.current_wave_finished -= this.CancelTower;
-            this._progress.last_wave_finished -= this.CancelTower;
+            _progress.current_wave_finished -= CancelTower;
+            _progress.last_wave_finished -= CancelTower;
         }
     }
 
     public override void _Process(double delta)
     {
-        if (!this._isPlacing || this._currentTowerInstance == null)
+        if (!_isPlacing || _currentTowerInstance == null)
         {
             return;
         }
 
-        if (this.composite_tile_map.is_mouse_on_buildeable_tile())
+        if (composite_tile_map.is_mouse_on_buildeable_tile())
         {
-            this._isValidPlacement = true;
-            this._currentTowerInstance.normal_color();
-            this._currentTowerInstance.GlobalPosition = this.composite_tile_map.get_current_tile_pos();
+            _isValidPlacement = true;
+            _currentTowerInstance.normal_color();
+            _currentTowerInstance.GlobalPosition = composite_tile_map.get_current_tile_pos();
         }
         else
         {
-            this._isValidPlacement = false;
-            this._currentTowerInstance.phantom_mode();
-            this._currentTowerInstance.GlobalPosition = GetGlobalMousePosition();
+            _isValidPlacement = false;
+            _currentTowerInstance.phantom_mode();
+            _currentTowerInstance.GlobalPosition = GetGlobalMousePosition();
         }
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (!this._isPlacing)
+        if (!_isPlacing)
         {
             return;
         }
@@ -65,37 +65,37 @@ public partial class TowerPlacer : Node2D
         if (@event is InputEventMouseButton mouseButton
             && mouseButton.ButtonIndex == MouseButton.Left
             && mouseButton.Pressed
-            && this._isValidPlacement)
+            && _isValidPlacement)
         {
-            this.PlaceTower();
+            PlaceTower();
         }
     }
 
     private void PlaceTower()
     {
-        if (this._currentTowerInstance == null)
+        if (_currentTowerInstance == null)
         {
             return;
         }
 
-        int towerPrice = this._currentTowerInstance.build_price;
-        if (!this.HasEnoughGold(towerPrice))
+        int towerPrice = _currentTowerInstance.build_price;
+        if (!HasEnoughGold(towerPrice))
         {
             GetNode<ActionManager>("/root/ActionManager").EndAction();
             return;
         }
 
-        this.HandleCosts(towerPrice);
-        string key = this.composite_tile_map.set_tile_occupied_at_mouse();
-        this._currentTowerInstance.composite_tile_key = key;
+        HandleCosts(towerPrice);
+        string key = composite_tile_map.set_tile_occupied_at_mouse();
+        _currentTowerInstance.composite_tile_key = key;
 
-        this._isPlacing = false;
-        this._currentTowerInstance.enable();
+        _isPlacing = false;
+        _currentTowerInstance.enable();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.towers_manager.add_tower_placed(this._currentTowerInstance);
+        runContext.towers_manager.add_tower_placed(_currentTowerInstance);
 
-        this._currentTowerInstance = null;
+        _currentTowerInstance = null;
 
         GetNode<ActionManager>("/root/ActionManager").EndAction();
     }
@@ -127,18 +127,18 @@ public partial class TowerPlacer : Node2D
 
     private void CancelTower()
     {
-        if (this._currentTowerInstance != null)
+        if (_currentTowerInstance != null)
         {
-            this._currentTowerInstance.QueueFree();
-            this._currentTowerInstance = null;
+            _currentTowerInstance.QueueFree();
+            _currentTowerInstance = null;
         }
 
-        this._isPlacing = false;
+        _isPlacing = false;
     }
 
     private void OnTowerButtonPressed(TowerDataWithInstance towerConfiguration, int price)
     {
-        if (this._isPlacing)
+        if (_isPlacing)
         {
             return;
         }
@@ -156,12 +156,12 @@ public partial class TowerPlacer : Node2D
             return;
         }
 
-        this._currentTowerInstance = instance;
-        this._currentTowerInstance.build_price = price;
-        this.visual.AddChild(this._currentTowerInstance);
-        this._isPlacing = true;
+        _currentTowerInstance = instance;
+        _currentTowerInstance.build_price = price;
+        visual.AddChild(_currentTowerInstance);
+        _isPlacing = true;
 
-        GetNode<ActionManager>("/root/ActionManager").StartAction(ActionManager.ActionState.PlacingTower, this.CancelTower);
+        GetNode<ActionManager>("/root/ActionManager").StartAction(ActionManager.ActionState.PlacingTower, CancelTower);
     }
 }
 

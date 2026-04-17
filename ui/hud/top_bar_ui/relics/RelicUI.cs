@@ -13,11 +13,11 @@ public partial class RelicUI : Control
 
     public override void _Ready()
     {
-        this._texture = GetNode<TextureRect>("VBoxContainer/MarginContainer/texture");
-        this._amountLabel = GetNode<Label>("VBoxContainer/MarginContainer/amount");
-        this._animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        _texture = GetNode<TextureRect>("VBoxContainer/MarginContainer/texture");
+        _amountLabel = GetNode<Label>("VBoxContainer/MarginContainer/amount");
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
-        this._animationPlayer.Play("on_enter");
+        _animationPlayer.Play("on_enter");
     }
 
     public void SetRelic(Relic relicData)
@@ -28,22 +28,22 @@ public partial class RelicUI : Control
             return;
         }
 
-        this.relic = relicData;
-        this._texture.Texture = data.icon;
+        relic = relicData;
+        _texture.Texture = data.icon;
 
-        this._texture.Modulate = relicData.Disabled ? SemiTransparentColor : OpaqueColor;
+        _texture.Modulate = relicData.Disabled ? SemiTransparentColor : OpaqueColor;
 
         bool showCounter = data.show_counter;
-        this._amountLabel.Visible = showCounter;
+        _amountLabel.Visible = showCounter;
         if (showCounter)
         {
-            this._amountLabel.Text = relicData.Counter.ToString();
+            _amountLabel.Text = relicData.Counter.ToString();
         }
     }
 
-    private void _on_mouse_entered()
+    private void OnMouseEntered()
     {
-        RelicData data = this.relic?.Data;
+        RelicData data = relic?.Data;
         if (data == null)
         {
             return;
@@ -54,18 +54,18 @@ public partial class RelicUI : Control
         HintManagerStatic.ShowHint(this, this, description, displayName, HintManagerStatic.PositionHint.BOTTOM);
     }
 
-    private void _on_mouse_exited()
+    private void OnMouseExited()
     {
         HintManagerStatic.RemoveHint(this);
     }
 
-    private void _on_margin_container_mouse_entered()
+    private void OnMarginContainerMouseEntered()
     {
-        this._on_mouse_entered();
+        OnMouseEntered();
     }
 
-    private void _on_margin_container_mouse_exited()
+    private void OnMarginContainerMouseExited()
     {
-        this._on_mouse_exited();
+        OnMouseExited();
     }
 }

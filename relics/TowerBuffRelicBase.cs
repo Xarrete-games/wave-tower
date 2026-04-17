@@ -10,18 +10,18 @@ public abstract class TowerBuffRelicBase : Relic
         for (int index = 0; index < towers.Count; index++)
         {
             TowerModel tower = towers[index];
-            if (this.IsValidTower(tower))
+            if (IsValidTower(tower))
             {
-                this.AddBuff(tower);
+                AddBuff(tower);
             }
         }
     }
 
     public override void OnTowerPlaced(TowerModel tower)
     {
-        if (this.IsValidTower(tower))
+        if (IsValidTower(tower))
         {
-            this.AddBuff(tower);
+            AddBuff(tower);
         }
     }
 
@@ -31,9 +31,9 @@ public abstract class TowerBuffRelicBase : Relic
         for (int index = 0; index < towers.Count; index++)
         {
             TowerModel tower = towers[index];
-            if (this.IsValidTower(tower))
+            if (IsValidTower(tower))
             {
-                this.RemoveBuff(tower);
+                RemoveBuff(tower);
             }
         }
     }

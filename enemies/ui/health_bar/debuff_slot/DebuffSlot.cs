@@ -9,13 +9,13 @@ public partial class DebuffSlot : Control
     private int _amount;
     public int amount
     {
-        get => this._amount;
+        get => _amount;
         set
         {
-            this._amount = value;
-            if (this.label != null)
+            _amount = value;
+            if (label != null)
             {
-                this.label.Text = this._amount.ToString();
+                label.Text = _amount.ToString();
             }
         }
     }
@@ -23,13 +23,13 @@ public partial class DebuffSlot : Control
     private Texture2D _texture;
     public Texture2D texture
     {
-        get => this._texture;
+        get => _texture;
         set
         {
-            this._texture = value;
-            if (this.texture_rect != null)
+            _texture = value;
+            if (texture_rect != null)
             {
-                this.texture_rect.Texture = value;
+                texture_rect.Texture = value;
             }
         }
     }

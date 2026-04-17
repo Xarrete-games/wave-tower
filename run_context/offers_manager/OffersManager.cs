@@ -8,18 +8,18 @@ public class OffersManager
 
     public OffersManager()
     {
-        this._relicsOffersManager = new RelicOffersManager();
-        this._consumablesOffersManager = new ConsumablesOffersManager();
+        _relicsOffersManager = new RelicOffersManager();
+        _consumablesOffersManager = new ConsumablesOffersManager();
     }
 
     public List<ItemOffer> create_relic_offers(int amount)
     {
-        return this._relicsOffersManager.create_relic_offers(amount);
+        return _relicsOffersManager.create_relic_offers(amount);
     }
 
     public ItemOffer create_relic_offer_from_data(RelicData data)
     {
-        return this._relicsOffersManager.create_relic_offer_from_data(data);
+        return _relicsOffersManager.create_relic_offer_from_data(data);
     }
 
     public List<ItemOffer> create_relic_offers_from_data(List<RelicData> data)
@@ -30,7 +30,7 @@ public class OffersManager
             RelicData relicData = data[index];
             if (relicData != null)
             {
-                offers.Add(this._relicsOffersManager.create_relic_offer_from_data(relicData));
+                offers.Add(_relicsOffersManager.create_relic_offer_from_data(relicData));
             }
         }
 
@@ -39,12 +39,12 @@ public class OffersManager
 
     public List<ItemOffer> create_consumables_offers(int amount)
     {
-        return this._consumablesOffersManager.create_consumables_offers(amount);
+        return _consumablesOffersManager.create_consumables_offers(amount);
     }
 
     public ItemOffer create_consumable_offer_from_data(ConsumableData data)
     {
-        return this._consumablesOffersManager.create_consumable_offer_from_data(data);
+        return _consumablesOffersManager.create_consumable_offer_from_data(data);
     }
 
     public void purchase_offer(ItemOffer itemOffer)
@@ -54,7 +54,7 @@ public class OffersManager
             return;
         }
 
-        RunContext runContext = this.GetRunContext();
+        RunContext runContext = GetRunContext();
         if (runContext == null)
         {
             return;

@@ -29,13 +29,13 @@ public partial class WaveSpawner : Node
 
     public async void start_wave(int wave_number, List<WaveComposer.WaveGroup> groups, WaveConfig config)
     {
-        if (this._is_spawning)
+        if (_is_spawning)
         {
             GD.PushWarning("[WaveSpawner] Already spawning a wave - ignoring request");
             return;
         }
 
-        if (this.world_map == null)
+        if (world_map == null)
         {
             GD.PushWarning("[WaveSpawner] No world_map assigned");
             return;
@@ -47,8 +47,8 @@ public partial class WaveSpawner : Node
             return;
         }
 
-        this._is_spawning = true;
-        this.wave_started?.Invoke(wave_number);
+        _is_spawning = true;
+        wave_started?.Invoke(wave_number);
 
         for (int groupIndex = 0; groupIndex < groups.Count; groupIndex++)
         {
@@ -63,16 +63,16 @@ public partial class WaveSpawner : Node
 
             for (int enemyIndex = 0; enemyIndex < enemies.Count; enemyIndex++)
             {
-                this._spawn_single(enemies[enemyIndex]);
+                SpawnSingle(enemies[enemyIndex]);
 
                 if (enemyIndex < enemies.Count - 1)
                 {
-                    float spawnInterval = this._pick_spawn_interval(pressure, wave_number, config);
+                    float spawnInterval = PickSpawnInterval(pressure, wave_number, config);
                     await ToSignal(GetTree().CreateTimer(spawnInterval, false), SceneTreeTimer.SignalName.Timeout);
                 }
             }
 
-            this.group_finished?.Invoke(groupIndex, pressure);
+            group_finished?.Invoke(groupIndex, pressure);
 
             if (groupIndex < groups.Count - 1)
             {
@@ -81,15 +81,15 @@ public partial class WaveSpawner : Node
             }
         }
 
-        this._is_spawning = false;
-        this.wave_finished?.Invoke(wave_number);
+        _is_spawning = false;
+        wave_finished?.Invoke(wave_number);
     }
 
-    private float _pick_spawn_interval(int pressure, int wave_number, WaveConfig config)
+    private float PickSpawnInterval(int pressure, int wave_number, WaveConfig config)
     {
-        Vector2 intervalRange = this._get_spawn_interval_range(pressure, config);
-        Vector2 decayedRange = this._get_decayed_spawn_interval_range(intervalRange, wave_number, config);
-        float minSpawnInterval = this._get_min_spawn_interval(config);
+        Vector2 intervalRange = GetSpawnIntervalRange(pressure, config);
+        Vector2 decayedRange = GetDecayedSpawnIntervalRange(intervalRange, wave_number, config);
+        float minSpawnInterval = GetMinSpawnInterval(config);
         float minInterval = Mathf.Max(decayedRange.X, minSpawnInterval);
         float maxInterval = Mathf.Max(decayedRange.Y, minInterval);
         maxInterval = Mathf.Max(maxInterval, minInterval);
@@ -102,7 +102,7 @@ public partial class WaveSpawner : Node
         return (float)GD.RandRange(minInterval, maxInterval);
     }
 
-    private Vector2 _get_spawn_interval_range(int pressure, WaveConfig config)
+    private Vector2 GetSpawnIntervalRange(int pressure, WaveConfig config)
     {
         return pressure switch
         {
@@ -113,12 +113,12 @@ public partial class WaveSpawner : Node
         };
     }
 
-    private Vector2 _get_decayed_spawn_interval_range(Vector2 base_range, int wave_number, WaveConfig config)
+    private Vector2 GetDecayedSpawnIntervalRange(Vector2 base_range, int wave_number, WaveConfig config)
     {
         int everyWaves = Mathf.Max(config.spawn_interval_max_decay_every_waves, 1);
         int decaySteps = Mathf.Max((wave_number - 1) / everyWaves, 0);
         float decayAmount = decaySteps * config.spawn_interval_max_decay_amount;
-        float minSpawnInterval = this._get_min_spawn_interval(config);
+        float minSpawnInterval = GetMinSpawnInterval(config);
 
         float decayedMin = Mathf.Max(base_range.X - decayAmount, minSpawnInterval);
         float decayedMax = Mathf.Max(base_range.Y - decayAmount, minSpawnInterval);
@@ -130,19 +130,19 @@ public partial class WaveSpawner : Node
         return new Vector2(decayedMin, decayedMax);
     }
 
-    private float _get_min_spawn_interval(WaveConfig config)
+    private float GetMinSpawnInterval(WaveConfig config)
     {
         return Mathf.Max(config.spawn_interval_min_cap, 0.01f);
     }
 
-    private void _spawn_single(EnemyData data)
+    private void SpawnSingle(EnemyData data)
     {
         if (data == null)
         {
             return;
         }
 
-        Godot.Collections.Array<Godot.Collections.Dictionary> portalEntries = this.world_map.portal_entries;
+        Godot.Collections.Array<Godot.Collections.Dictionary> portalEntries = world_map.portal_entries;
         if (portalEntries.Count == 0)
         {
             GD.PushWarning("[WaveSpawner] No spawn points available");
@@ -151,15 +151,15 @@ public partial class WaveSpawner : Node
 
         int portalIndex = (int)(GD.Randi() % (uint)portalEntries.Count);
         Godot.Collections.Dictionary spawnEntry = portalEntries[portalIndex];
-        Godot.Collections.Array<Vector2> waypoints = this.world_map.get_waypoints_for_spawn(spawnEntry);
+        Godot.Collections.Array<Vector2> waypoints = world_map.get_waypoints_for_spawn(spawnEntry);
         if (waypoints.Count == 0)
         {
             GD.PushWarning("[WaveSpawner] No waypoints for spawn entry");
             return;
         }
 
-        Godot.Collections.Array<Vector2> enemyWaypoints = this._build_enemy_waypoints_with_offset(waypoints);
-        PackedScene scene = data.scene ?? this.fallback_enemy_scene;
+        Godot.Collections.Array<Vector2> enemyWaypoints = _build_enemy_waypoints_with_offset(waypoints);
+        PackedScene scene = data.scene ?? fallback_enemy_scene;
         if (scene == null)
         {
             GD.PushError($"[WaveSpawner] No scene for enemy '{data.name}' and no fallback set");
@@ -173,24 +173,24 @@ public partial class WaveSpawner : Node
             return;
         }
 
-        this._apply_stats(enemy, data);
+        ApplyStats(enemy, data);
         enemy.AddToGroup("enemy");
         enemy.enabled = false;
 
-        if (this.enemies_container == null)
+        if (enemies_container == null)
         {
             GD.PushWarning("[WaveSpawner] enemies_container is null");
             enemy.QueueFree();
             return;
         }
 
-        this.enemies_container.AddChild(enemy);
+        enemies_container.AddChild(enemy);
         enemy.disable();
         enemy.GlobalPosition = enemyWaypoints[0];
         enemy.enable();
         enemy.set_waypoints(enemyWaypoints);
 
-        this.enemy_spawned?.Invoke(enemy);
+        enemy_spawned?.Invoke(enemy);
     }
 
     private Godot.Collections.Array<Vector2> _build_enemy_waypoints_with_offset(Godot.Collections.Array<Vector2> base_waypoints)
@@ -200,8 +200,8 @@ public partial class WaveSpawner : Node
             return new Godot.Collections.Array<Vector2>();
         }
 
-        float minY = Mathf.Min(this.path_offset_y_min, this.path_offset_y_max);
-        float maxY = Mathf.Max(this.path_offset_y_min, this.path_offset_y_max);
+        float minY = Mathf.Min(path_offset_y_min, path_offset_y_max);
+        float maxY = Mathf.Max(path_offset_y_min, path_offset_y_max);
         float offsetY = (float)GD.RandRange(minY, maxY);
         Vector2 offset = new(0.0f, offsetY);
 
@@ -215,7 +215,7 @@ public partial class WaveSpawner : Node
         return result;
     }
 
-    private void _apply_stats(Enemy enemy, EnemyData data)
+    private void ApplyStats(Enemy enemy, EnemyData data)
     {
         enemy.max_health = data.max_health;
         enemy.base_speed = data.base_speed;

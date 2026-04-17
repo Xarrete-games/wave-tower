@@ -23,18 +23,18 @@ public class RelicsManager
 
     public bool has_relic(string relic_id)
     {
-        if (!this._relics.ContainsKey(relic_id))
+        if (!_relics.ContainsKey(relic_id))
         {
             return false;
         }
 
-        return !this._relics[relic_id].Disabled;
+        return !_relics[relic_id].Disabled;
     }
 
     public System.Collections.Generic.List<Relic> get_all_relics()
     {
         var values = new System.Collections.Generic.List<Relic>();
-        foreach (Relic relic in this._relics.Values)
+        foreach (Relic relic in _relics.Values)
         {
             values.Add(relic);
         }
@@ -44,12 +44,12 @@ public class RelicsManager
 
     public Color get_rarity_color(int rarity)
     {
-        if (!this._relicColors.ContainsKey(rarity))
+        if (!_relicColors.ContainsKey(rarity))
         {
             return COMMON_COLOR;
         }
 
-        return this._relicColors[rarity];
+        return _relicColors[rarity];
     }
 
     public void add_relic(Relic relic)
@@ -68,13 +68,13 @@ public class RelicsManager
         }
 
         string relicId = dataObj.id;
-        if (this._relics.ContainsKey(relicId))
+        if (_relics.ContainsKey(relicId))
         {
             GD.PushError($"Relic with ID '{relicId}' already exists. Cannot add duplicate relics.");
             return;
         }
 
-        this.PlayRelicObtain();
+        PlayRelicObtain();
         relic.OnObtain();
 
         if (RunContextRuntime.RelicsManager.GetRelic(relicId) == null)
@@ -83,35 +83,35 @@ public class RelicsManager
         }
 
         // Emit legacy signals only after runtime state is updated so UI recalculations read fresh hooks.
-        this._add_relic(relic);
+        AddRelicInternal(relic);
     }
 
     public void remove_relic(string relic_id)
     {
-        if (!this._relics.ContainsKey(relic_id))
+        if (!_relics.ContainsKey(relic_id))
         {
             return;
         }
 
-        Relic relicObj = this._relics[relic_id];
+        Relic relicObj = _relics[relic_id];
         if (relicObj == null)
         {
-            this._relics.Remove(relic_id);
+            _relics.Remove(relic_id);
             return;
         }
 
         relicObj.OnRemove();
-        relicObj.Changed -= this.emit_relic_changed;
+        relicObj.Changed -= emit_relic_changed;
         RunContextRuntime.RelicsManager.RemoveRelic(relic_id);
 
-        this._relics.Remove(relic_id);
+        _relics.Remove(relic_id);
 
-        int currentCount = this._relicsCount.ContainsKey(relic_id) ? this._relicsCount[relic_id] : 0;
-        this._relicsCount[relic_id] = currentCount - 1;
-        this.relic_removed?.Invoke(relic_id);
+        int currentCount = _relicsCount.ContainsKey(relic_id) ? _relicsCount[relic_id] : 0;
+        _relicsCount[relic_id] = currentCount - 1;
+        relic_removed?.Invoke(relic_id);
     }
 
-    private void _add_relic(Relic relic)
+    private void AddRelicInternal(Relic relic)
     {
         RelicData dataObj = relic.Data;
         if (dataObj == null)
@@ -121,12 +121,12 @@ public class RelicsManager
 
         string relicId = dataObj.id;
 
-        this._relics[relicId] = relic;
-        int currentCount = this._relicsCount.ContainsKey(relicId) ? this._relicsCount[relicId] : 0;
-        this._relicsCount[relicId] = currentCount + 1;
+        _relics[relicId] = relic;
+        int currentCount = _relicsCount.ContainsKey(relicId) ? _relicsCount[relicId] : 0;
+        _relicsCount[relicId] = currentCount + 1;
 
-        this.relic_added?.Invoke(relicId);
-        relic.Changed += this.emit_relic_changed;
+        relic_added?.Invoke(relicId);
+        relic.Changed += emit_relic_changed;
     }
 
     public void emit_relic_changed(Relic relic)
@@ -136,12 +136,12 @@ public class RelicsManager
             return;
         }
 
-        this.relic_changed?.Invoke(relic.Id);
+        relic_changed?.Invoke(relic.Id);
     }
 
     public Relic _get_relic(string id)
     {
-        return this._relics.ContainsKey(id) ? this._relics[id] : null;
+        return _relics.ContainsKey(id) ? _relics[id] : null;
     }
 
     private void PlayRelicObtain()

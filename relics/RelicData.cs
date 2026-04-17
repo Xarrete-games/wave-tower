@@ -43,10 +43,10 @@ public partial class RelicData : Resource
 
     public Relic create_item()
     {
-        Relic relic = RelicModelFactory.CreateById(this.id);
+        Relic relic = RelicModelFactory.CreateById(id);
         if (relic == null)
         {
-            GD.PushError($"[RelicData] Could not create Relic instance for id '{this.id}'");
+            GD.PushError($"[RelicData] Could not create Relic instance for id '{id}'");
             return null;
         }
 

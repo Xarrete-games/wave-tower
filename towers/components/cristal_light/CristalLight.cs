@@ -21,7 +21,7 @@ public partial class CristalLight : PointLight2D
 
     public async Task turn_on()
     {
-        _kill_previous_animation();
+        KillPreviousAnimation();
         _attackEnergyTween = CreateTween();
         _attackScaleTween = CreateTween();
         _attackEnergyTween.TweenProperty(this, "energy", max_energy, attack_animation_time);
@@ -31,7 +31,7 @@ public partial class CristalLight : PointLight2D
 
     public async Task turn_off()
     {
-        _kill_previous_animation();
+        KillPreviousAnimation();
         _attackEnergyTween = CreateTween();
         _attackScaleTween = CreateTween();
         _attackEnergyTween.TweenProperty(this, "energy", min_energy, attack_animation_time);
@@ -39,7 +39,7 @@ public partial class CristalLight : PointLight2D
         await ToSignal(_attackEnergyTween, Tween.SignalName.Finished);
     }
 
-    private void _kill_previous_animation()
+    private void KillPreviousAnimation()
     {
         if (_attackScaleTween != null && _attackScaleTween.IsRunning())
         {

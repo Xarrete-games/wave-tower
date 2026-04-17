@@ -11,8 +11,8 @@ public partial class PassiveLight : PointLight2D
 
     public override void _Process(double delta)
     {
-        this.t += (float)delta * this.velocidad;
-        float s = (Mathf.Sin(this.t) + 1.0f) * 0.5f;
-        this.TextureScale = Mathf.Lerp(this.escala_min, this.escala_max, s);
+        t += (float)delta * velocidad;
+        float s = (Mathf.Sin(t) + 1.0f) * 0.5f;
+        TextureScale = Mathf.Lerp(escala_min, escala_max, s);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 
 public partial class TowerSelector : Node
 {
@@ -7,29 +7,29 @@ public partial class TowerSelector : Node
 
     public override void _Ready()
     {
-        this.ClearTowerSelected();
-        ClickEvents.TowerSelected += this.OnTowerSelected;
-        ClickEvents.TowerBuildButtonPressed += this.OnTowerButtonPressed;
-        ClickEvents.TowerRemovePressed += this.OnTowerRemovePressed;
+        ClearTowerSelected();
+        ClickEvents.TowerSelected += OnTowerSelected;
+        ClickEvents.TowerBuildButtonPressed += OnTowerButtonPressed;
+        ClickEvents.TowerRemovePressed += OnTowerRemovePressed;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._progress = runContext?.progress;
-        if (this._progress != null)
+        _progress = runContext?.progress;
+        if (_progress != null)
         {
-            this._progress.current_wave_finished += this.ClearTowerSelected;
+            _progress.current_wave_finished += ClearTowerSelected;
         }
     }
 
     public override void _ExitTree()
     {
-        ClickEvents.TowerSelected -= this.OnTowerSelected;
-        ClickEvents.TowerBuildButtonPressed -= this.OnTowerButtonPressed;
-        ClickEvents.TowerRemovePressed -= this.OnTowerRemovePressed;
+        ClickEvents.TowerSelected -= OnTowerSelected;
+        ClickEvents.TowerBuildButtonPressed -= OnTowerButtonPressed;
+        ClickEvents.TowerRemovePressed -= OnTowerRemovePressed;
 
-        if (this._progress != null)
+        if (_progress != null)
         {
-            this._progress.current_wave_finished -= this.ClearTowerSelected;
-            this._progress = null;
+            _progress.current_wave_finished -= ClearTowerSelected;
+            _progress = null;
         }
     }
 
@@ -37,7 +37,7 @@ public partial class TowerSelector : Node
     {
         if (InputClickUtils.IsRightClickReleased(@event))
         {
-            this.ClearTowerSelected();
+            ClearTowerSelected();
         }
     }
 
@@ -45,19 +45,19 @@ public partial class TowerSelector : Node
     {
         if (InputClickUtils.IsLeftClickReleased(@event))
         {
-            this.ClearTowerSelected();
+            ClearTowerSelected();
             GetViewport().SetInputAsHandled();
         }
     }
 
     private void ClearTowerSelected()
     {
-        if (this._currentTowerSelected != null)
+        if (_currentTowerSelected != null)
         {
-            this._currentTowerSelected.stats_changed -= this.OnStatsChange;
+            _currentTowerSelected.stats_changed -= OnStatsChange;
         }
 
-        this._currentTowerSelected = null;
+        _currentTowerSelected = null;
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.towers_manager.select_tower(null);
     }
@@ -69,32 +69,32 @@ public partial class TowerSelector : Node
             return;
         }
 
-        if (this._currentTowerSelected == null)
+        if (_currentTowerSelected == null)
         {
-            this._currentTowerSelected = tower;
-            this._currentTowerSelected.stats_changed += this.OnStatsChange;
+            _currentTowerSelected = tower;
+            _currentTowerSelected.stats_changed += OnStatsChange;
         }
-        else if (this._currentTowerSelected != tower)
+        else if (_currentTowerSelected != tower)
         {
-            this._currentTowerSelected.stats_changed -= this.OnStatsChange;
-            this._currentTowerSelected = tower;
-            this._currentTowerSelected.stats_changed += this.OnStatsChange;
+            _currentTowerSelected.stats_changed -= OnStatsChange;
+            _currentTowerSelected = tower;
+            _currentTowerSelected.stats_changed += OnStatsChange;
         }
     }
 
     private void OnTowerButtonPressed(TowerDataWithInstance towerConfiguration, int price)
     {
-        this.ClearTowerSelected();
+        ClearTowerSelected();
     }
 
     private void OnTowerRemovePressed(Tower tower)
     {
-        this.ClearTowerSelected();
+        ClearTowerSelected();
     }
 
     private void OnStatsChange(Tower towerObj)
     {
-        if (this._currentTowerSelected == towerObj)
+        if (_currentTowerSelected == towerObj)
         {
             RunContext runContext = GetNode<RunContext>("/root/RunContext");
             runContext.towers_manager.select_tower(towerObj);

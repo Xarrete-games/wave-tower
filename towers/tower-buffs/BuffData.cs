@@ -14,7 +14,7 @@ public partial class BuffData : BaseData
             return null;
         }
 
-        TowerBuffStatsModifier buff = this.id switch
+        TowerBuffStatsModifier buff = id switch
         {
             "attack_speed_mult_buff" => new AttackSpeedMultBuff(),
             "attack_range_mult_buff" => new AttackRangeMultBuff(),
@@ -25,7 +25,7 @@ public partial class BuffData : BaseData
 
         if (buff == null)
         {
-            GD.PushError($"[BuffData] Unknown buff id: {this.id}");
+            GD.PushError($"[BuffData] Unknown buff id: {id}");
             return null;
         }
 

@@ -11,7 +11,7 @@ public abstract class ConsumableModel
 
     protected ConsumableModel(string id, ConsumableType type)
     {
-        this.Id = id;
-        this.Type = type;
+        Id = id;
+        Type = type;
     }
 }

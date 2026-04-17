@@ -11,7 +11,7 @@ public sealed class StatusModel
             return;
         }
 
-        this.Health = System.Math.Min(this.Health + amount, this.MaxHealth);
+        Health = System.Math.Min(Health + amount, MaxHealth);
     }
 
     public void AddArmor(int amount)
@@ -21,7 +21,7 @@ public sealed class StatusModel
             return;
         }
 
-        this.Armor += amount;
+        Armor += amount;
     }
 
     public void AddMaxHealth(int amount)
@@ -31,8 +31,8 @@ public sealed class StatusModel
             return;
         }
 
-        this.MaxHealth += amount;
-        this.Health = System.Math.Min(this.Health + amount, this.MaxHealth);
+        MaxHealth += amount;
+        Health = System.Math.Min(Health + amount, MaxHealth);
     }
 
     public void ChangeMaxHealth(int amount)
@@ -42,15 +42,15 @@ public sealed class StatusModel
             return;
         }
 
-        this.MaxHealth += amount;
-        if (this.MaxHealth < 1)
+        MaxHealth += amount;
+        if (MaxHealth < 1)
         {
-            this.MaxHealth = 1;
+            MaxHealth = 1;
         }
 
-        if (this.Health > this.MaxHealth)
+        if (Health > MaxHealth)
         {
-            this.Health = this.MaxHealth;
+            Health = MaxHealth;
         }
     }
 }

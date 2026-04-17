@@ -9,35 +9,35 @@ public partial class XarretaButton : Button
     [Export]
     public Theme disabled_theme_override;
 
-    private void _on_mouse_entered()
+    private void OnMouseEntered()
     {
         GetNode<AudioManager>("/root/AudioManager").play_button_hover();
     }
 
-    private void _on_mouse_exited()
+    private void OnMouseExited()
     {
     }
 
-    private void _on_pressed()
+    private void OnPressed()
     {
         GetNode<AudioManager>("/root/AudioManager").play_button_click();
     }
 
     public void disable()
     {
-        this.Disabled = true;
-        if (this.disabled_theme_override != null)
+        Disabled = true;
+        if (disabled_theme_override != null)
         {
-            this.Theme = this.disabled_theme_override;
+            Theme = disabled_theme_override;
         }
     }
 
     public void enable()
     {
-        this.Disabled = false;
-        if (this.theme_override != null)
+        Disabled = false;
+        if (theme_override != null)
         {
-            this.Theme = this.theme_override;
+            Theme = theme_override;
         }
     }
 }

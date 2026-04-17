@@ -13,37 +13,37 @@ public partial class HealthPrice : HBoxContainer
 
     public int price
     {
-        get => this._price;
+        get => _price;
         set
         {
-            this._price = value;
-            if (this._priceLabel != null)
+            _price = value;
+            if (_priceLabel != null)
             {
-                this._priceLabel.Text = value.ToString();
-                this._check_label_color(this._runContext?.status?.health ?? 0);
+                _priceLabel.Text = value.ToString();
+                CheckLabelColor(_runContext?.status?.health ?? 0);
             }
         }
     }
 
     public override void _Ready()
     {
-        this._priceLabel = GetNode<Label>("PriceLabel");
-        this._runContext = GetNode<RunContext>("/root/RunContext");
-        this._runContext.status.health_change += this._check_label_color;
-        this._check_label_color(this._runContext.status.health);
+        _priceLabel = GetNode<Label>("PriceLabel");
+        _runContext = GetNode<RunContext>("/root/RunContext");
+        _runContext.status.health_change += CheckLabelColor;
+        CheckLabelColor(_runContext.status.health);
     }
 
     public override void _ExitTree()
     {
-        if (this._runContext?.status != null)
+        if (_runContext?.status != null)
         {
-            this._runContext.status.health_change -= this._check_label_color;
+            _runContext.status.health_change -= CheckLabelColor;
         }
     }
 
-    private void _check_label_color(int health)
+    private void CheckLabelColor(int health)
     {
-        this._hasEnoughHealth = health > this._price;
-        this._priceLabel.LabelSettings = this._hasEnoughHealth ? LabelSettings24 : LabelSettings24Invalid;
+        _hasEnoughHealth = health > _price;
+        _priceLabel.LabelSettings = _hasEnoughHealth ? LabelSettings24 : LabelSettings24Invalid;
     }
 }

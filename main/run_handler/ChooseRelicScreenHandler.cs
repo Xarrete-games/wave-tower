@@ -12,26 +12,26 @@ public partial class ChooseRelicScreenHandler : Node
 
     public async Task ShowChooseRelicEventAsync(CanvasLayer eventLayer)
     {
-        this._rewardsScreen = RewardsScreenScene.Instantiate<ChooseRelicScreen>();
+        _rewardsScreen = RewardsScreenScene.Instantiate<ChooseRelicScreen>();
 
-        int numberOfRelics = this.GetCurrentRewardsCount();
+        int numberOfRelics = GetCurrentRewardsCount();
         DataLoader dataLoader = GetNode<DataLoader>("/root/DataLoader");
         var relics = dataLoader.get_random_available_relics(numberOfRelics);
 
-        eventLayer.AddChild(this._rewardsScreen);
-        this._rewardsScreen.set_relics(relics);
-        this._rewardsScreen.item_selected += this.OnItemSelected;
-        this._rewardsScreen.reroll_pressed += this.OnRerollPressed;
+        eventLayer.AddChild(_rewardsScreen);
+        _rewardsScreen.set_relics(relics);
+        _rewardsScreen.item_selected += OnItemSelected;
+        _rewardsScreen.reroll_pressed += OnRerollPressed;
 
-        await ToSignal(this._rewardsScreen, Node.SignalName.TreeExited);
-        this._rewardsScreen.item_selected -= this.OnItemSelected;
-        this._rewardsScreen.reroll_pressed -= this.OnRerollPressed;
-        this._rewardsScreen = null;
+        await ToSignal(_rewardsScreen, Node.SignalName.TreeExited);
+        _rewardsScreen.item_selected -= OnItemSelected;
+        _rewardsScreen.reroll_pressed -= OnRerollPressed;
+        _rewardsScreen = null;
     }
 
     private void OnItemSelected(Variant relicData)
     {
-        this._rewardsScreen?.QueueFree();
+        _rewardsScreen?.QueueFree();
 
         RelicData selectedRelicData = relicData.As<RelicData>();
         if (selectedRelicData == null)
@@ -55,10 +55,10 @@ public partial class ChooseRelicScreenHandler : Node
         var runContext = GetNode<RunContext>("/root/RunContext");
         runContext.economy.gold -= RerollPrice;
 
-        int numberOfRelics = this.GetCurrentRewardsCount();
+        int numberOfRelics = GetCurrentRewardsCount();
         DataLoader dataLoader = GetNode<DataLoader>("/root/DataLoader");
         var relics = dataLoader.get_random_available_relics(numberOfRelics);
-        this._rewardsScreen?.set_relics(relics);
+        _rewardsScreen?.set_relics(relics);
     }
 
     private int GetCurrentRewardsCount()

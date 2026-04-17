@@ -12,44 +12,44 @@ public partial class GoldCounter : HBoxContainer
 
     public override void _Ready()
     {
-        this._amountGoldLabel = GetNode<Label>("AmountGoldLabel");
+        _amountGoldLabel = GetNode<Label>("AmountGoldLabel");
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._economy = runContext.economy;
+        _economy = runContext.economy;
 
-        this._targetGold = this._economy.gold;
-        this._currentDisplayedGold = this._economy.gold;
+        _targetGold = _economy.gold;
+        _currentDisplayedGold = _economy.gold;
 
-        this._economy.gold_change += this._on_gold_change;
-        this._update_label();
+        _economy.gold_change += OnGoldChange;
+        UpdateLabel();
     }
 
     public override void _ExitTree()
     {
-        if (this._economy != null)
+        if (_economy != null)
         {
-            this._economy.gold_change -= this._on_gold_change;
+            _economy.gold_change -= OnGoldChange;
         }
     }
 
     public override void _Process(double delta)
     {
-        this._currentDisplayedGold = Mathf.Lerp(this._currentDisplayedGold, this._targetGold, CountingSpeed);
-        this._update_label();
+        _currentDisplayedGold = Mathf.Lerp(_currentDisplayedGold, _targetGold, CountingSpeed);
+        UpdateLabel();
 
-        if (Mathf.Abs(this._currentDisplayedGold - this._targetGold) < 0.01f)
+        if (Mathf.Abs(_currentDisplayedGold - _targetGold) < 0.01f)
         {
-            this._currentDisplayedGold = this._targetGold;
+            _currentDisplayedGold = _targetGold;
         }
     }
 
-    private void _on_gold_change(int amount)
+    private void OnGoldChange(int amount)
     {
-        this._targetGold = amount;
+        _targetGold = amount;
     }
 
-    private void _update_label()
+    private void UpdateLabel()
     {
-        this._amountGoldLabel.Text = Mathf.RoundToInt(this._currentDisplayedGold).ToString();
+        _amountGoldLabel.Text = Mathf.RoundToInt(_currentDisplayedGold).ToString();
     }
 }

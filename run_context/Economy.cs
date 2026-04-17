@@ -13,43 +13,43 @@ public class Economy
 
     public int gold
     {
-        get => this._gold;
+        get => _gold;
         set
         {
-            if (value >= this._gold)
+            if (value >= _gold)
             {
-                this.PlayCoins();
+                PlayCoins();
             }
 
-            this._gold = value;
-            this.gold_change?.Invoke(this._gold);
+            _gold = value;
+            gold_change?.Invoke(_gold);
         }
     }
 
     public int available_free_towers
     {
-        get => this._availableFreeTowers;
+        get => _availableFreeTowers;
         set
         {
-            this._availableFreeTowers = value;
-            this.available_free_towers_change?.Invoke(this._availableFreeTowers);
+            _availableFreeTowers = value;
+            available_free_towers_change?.Invoke(_availableFreeTowers);
         }
     }
 
     public void add_gold(int amount)
     {
-        this.gold += amount;
+        gold += amount;
     }
 
     public bool spend_gold(int amount)
     {
-        if (this.gold >= amount)
+        if (gold >= amount)
         {
-            this.gold -= amount;
+            gold -= amount;
             return true;
         }
 
-        GD.PushError($"Not enough gold to spend: {amount} requested, {this.gold} available.");
+        GD.PushError($"Not enough gold to spend: {amount} requested, {gold} available.");
         return false;
     }
 

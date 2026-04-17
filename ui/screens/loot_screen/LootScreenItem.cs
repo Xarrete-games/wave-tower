@@ -15,37 +15,37 @@ public partial class LootScreenItem : Control
 
     public void SetLootItem(LootItemData lootItemData)
     {
-        this._lootItemData = lootItemData;
-        if (this._lootItemData == null)
+        _lootItemData = lootItemData;
+        if (_lootItemData == null)
         {
             return;
         }
 
-        ConsumableData consumable = this._lootItemData.Consumable;
+        ConsumableData consumable = _lootItemData.Consumable;
         if (consumable != null)
         {
-            this.texture_rect.Texture = consumable.icon;
-            this.label.Text = consumable.display_name;
+            texture_rect.Texture = consumable.icon;
+            label.Text = consumable.display_name;
             return;
         }
 
-        this.texture_rect.Texture = this.gold_icon;
-        this.label.Text = $"{this._lootItemData.GoldAmount} Gold";
+        texture_rect.Texture = gold_icon;
+        label.Text = $"{_lootItemData.GoldAmount} Gold";
     }
 
-    private void _on_gui_input(InputEvent @event)
+    private void OnGuiInput(InputEvent @event)
     {
         if (!InputClickUtils.IsLeftClickReleased(@event))
         {
             return;
         }
 
-        if (this._lootItemData == null)
+        if (_lootItemData == null)
         {
             return;
         }
 
-        ConsumableData consumable = this._lootItemData.Consumable;
+        ConsumableData consumable = _lootItemData.Consumable;
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (consumable != null)
         {
@@ -60,13 +60,13 @@ public partial class LootScreenItem : Control
         }
         else
         {
-            runContext.economy.add_gold(this._lootItemData.GoldAmount);
+            runContext.economy.add_gold(_lootItemData.GoldAmount);
         }
 
         QueueFree();
     }
 
-    private void _on_mouse_exited()
+    private void OnMouseExited()
     {
         StyleBoxFlat styleBox = GetThemeStylebox("panel").Duplicate() as StyleBoxFlat;
         if (styleBox != null)
@@ -75,7 +75,7 @@ public partial class LootScreenItem : Control
             AddThemeStyleboxOverride("panel", styleBox);
         }
 
-        ConsumableData consumable = this._lootItemData?.Consumable;
+        ConsumableData consumable = _lootItemData?.Consumable;
         string description = consumable == null ? string.Empty : consumable.description;
         if (!string.IsNullOrEmpty(description))
         {
@@ -83,7 +83,7 @@ public partial class LootScreenItem : Control
         }
     }
 
-    private void _on_mouse_entered()
+    private void OnMouseEntered()
     {
         StyleBoxFlat styleBox = GetThemeStylebox("panel").Duplicate() as StyleBoxFlat;
         if (styleBox != null)
@@ -92,7 +92,7 @@ public partial class LootScreenItem : Control
             AddThemeStyleboxOverride("panel", styleBox);
         }
 
-        ConsumableData consumable = this._lootItemData?.Consumable;
+        ConsumableData consumable = _lootItemData?.Consumable;
         if (consumable == null)
         {
             return;

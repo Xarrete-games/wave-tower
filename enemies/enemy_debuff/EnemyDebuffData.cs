@@ -25,7 +25,7 @@ public partial class EnemyDebuffData : BaseData
 
     public EnemyDebuff create_debuff()
     {
-        return this.debuff_type switch
+        return debuff_type switch
         {
             (int)EnemyDebuff.Type.FROST => new FrostDebuff(),
             (int)EnemyDebuff.Type.BURN => new BurnDebuff(),

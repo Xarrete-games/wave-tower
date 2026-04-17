@@ -19,62 +19,62 @@ public partial class MusicHandler : Node
 
     public override void _Ready()
     {
-        this.red_players = GetNodeOrNull<Node>("RedPlayers");
-        this.blue_players = GetNodeOrNull<Node>("BluePlayers");
-        this.green_players = GetNodeOrNull<Node>("GreenPlayers");
-        this.base_player = GetNodeOrNull<AudioStreamPlayer>("BasePlayer");
+        red_players = GetNodeOrNull<Node>("RedPlayers");
+        blue_players = GetNodeOrNull<Node>("BluePlayers");
+        green_players = GetNodeOrNull<Node>("GreenPlayers");
+        base_player = GetNodeOrNull<AudioStreamPlayer>("BasePlayer");
 
-        this.tower_players[TOWER_TYPE_FIRE] = this.red_players;
-        this.tower_players[TOWER_TYPE_FROST] = this.blue_players;
-        this.tower_players[TOWER_TYPE_LIGHTNING] = this.green_players;
+        tower_players[TOWER_TYPE_FIRE] = red_players;
+        tower_players[TOWER_TYPE_FROST] = blue_players;
+        tower_players[TOWER_TYPE_LIGHTNING] = green_players;
 
-        this.stop_music();
+        stop_music();
 
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        this._towersManager = runContext?.towers_manager;
-        if (this._towersManager != null)
+        _towersManager = runContext?.towers_manager;
+        if (_towersManager != null)
         {
-            this._towersManager.tower_count_change += this._on_tower_count_change;
+            _towersManager.tower_count_change += OnTowerCountChange;
         }
-        this._status = runContext?.status;
-        if (this._status != null)
+        _status = runContext?.status;
+        if (_status != null)
         {
-            this._status.player_died += this.stop_music;
+            _status.player_died += stop_music;
         }
     }
 
     public override void _ExitTree()
     {
-        if (this._towersManager != null)
+        if (_towersManager != null)
         {
-            this._towersManager.tower_count_change -= this._on_tower_count_change;
-            this._towersManager = null;
+            _towersManager.tower_count_change -= OnTowerCountChange;
+            _towersManager = null;
         }
 
-        if (this._status != null)
+        if (_status != null)
         {
-            this._status.player_died -= this.stop_music;
-            this._status = null;
+            _status.player_died -= stop_music;
+            _status = null;
         }
     }
 
     public void play_music()
     {
-        this.base_player?.Play();
-        this._start_players(this.red_players);
-        this._start_players(this.blue_players);
-        this._start_players(this.green_players);
+        base_player?.Play();
+        StartPlayers(red_players);
+        StartPlayers(blue_players);
+        StartPlayers(green_players);
     }
 
     public void stop_music()
     {
-        this._stop_players(this.red_players);
-        this._stop_players(this.blue_players);
-        this._stop_players(this.green_players);
-        this.base_player?.Stop();
+        StopPlayers(red_players);
+        StopPlayers(blue_players);
+        StopPlayers(green_players);
+        base_player?.Stop();
     }
 
-    private void _start_players(Node node)
+    private void StartPlayers(Node node)
     {
         if (node == null)
         {
@@ -90,7 +90,7 @@ public partial class MusicHandler : Node
         }
     }
 
-    private void _stop_players(Node node)
+    private void StopPlayers(Node node)
     {
         if (node == null)
         {
@@ -101,19 +101,19 @@ public partial class MusicHandler : Node
         {
             if (child is AudioStreamPlayer player)
             {
-                this._stop_player(player);
+                StopPlayer(player);
             }
         }
     }
 
-    private void _on_tower_count_change(int tower_type, int amount)
+    private void OnTowerCountChange(int tower_type, int amount)
     {
         if (amount > MAX_PLAYERS || amount == 0)
         {
             return;
         }
 
-        if (!this.tower_players.TryGetValue(tower_type, out Node playersNode) || playersNode == null)
+        if (!tower_players.TryGetValue(tower_type, out Node playersNode) || playersNode == null)
         {
             return;
         }
@@ -126,10 +126,10 @@ public partial class MusicHandler : Node
         }
 
         AudioStreamPlayer player = playerList[playerIndex] as AudioStreamPlayer;
-        this._play_player(player);
+        PlayPlayer(player);
     }
 
-    private void _play_player(AudioStreamPlayer player)
+    private void PlayPlayer(AudioStreamPlayer player)
     {
         if (player == null)
         {
@@ -140,7 +140,7 @@ public partial class MusicHandler : Node
         tween.TweenProperty(player, "volume_db", 0, 1);
     }
 
-    private void _stop_player(AudioStreamPlayer player)
+    private void StopPlayer(AudioStreamPlayer player)
     {
         if (player == null)
         {

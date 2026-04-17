@@ -12,23 +12,23 @@ public partial class FireTower : Tower
     public override void _Ready()
     {
         base._Ready();
-        this.projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
+        projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(this._current_target) || this.fire_ball_scene == null)
+        if (!GodotObject.IsInstanceValid(_current_target) || fire_ball_scene == null)
         {
             return;
         }
 
-        SingleTargetProjectile projectile = this.fire_ball_scene.Instantiate<SingleTargetProjectile>();
+        SingleTargetProjectile projectile = fire_ball_scene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
-        projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
+        projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
-        Attack attack = this._get_attack();
-        EnemyDebuff debuff = this.apply_burn ? EnemyDebuff.create_burn(this.damage_source) : null;
-        projectile.set_target(this._current_target, attack, debuff);
+        Attack attack = _get_attack();
+        EnemyDebuff debuff = apply_burn ? EnemyDebuff.create_burn(damage_source) : null;
+        projectile.set_target(_current_target, attack, debuff);
     }
 }

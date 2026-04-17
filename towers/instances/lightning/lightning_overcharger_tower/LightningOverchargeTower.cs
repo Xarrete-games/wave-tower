@@ -18,22 +18,22 @@ public partial class LightningOverchargeTower : Tower
 
     public override void _Ready()
     {
-        this.projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
-        this.buff_area_shape = GetNode<CollisionPolygon2D>("BuffArea/BuffAreaShape");
-        this.buff_area = GetNode<Area2D>("BuffArea");
+        projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
+        buff_area_shape = GetNode<CollisionPolygon2D>("BuffArea/BuffAreaShape");
+        buff_area = GetNode<Area2D>("BuffArea");
 
         base._Ready();
 
-        this.buff_area.Monitoring = false;
-        this._apply_stats_changes();
+        buff_area.Monitoring = false;
+        _apply_stats_changes();
     }
 
     public override void _ExitTree()
     {
-        if (this._towersManager != null)
+        if (_towersManager != null)
         {
-            this._towersManager.tower_placed -= this._on_tower_placed;
-            this._towersManager = null;
+            _towersManager.tower_placed -= OnTowerPlaced;
+            _towersManager = null;
         }
 
         base._ExitTree();
@@ -41,80 +41,80 @@ public partial class LightningOverchargeTower : Tower
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(this._current_target) || this.projectile_scene == null)
+        if (!GodotObject.IsInstanceValid(_current_target) || projectile_scene == null)
         {
             return;
         }
 
-        SingleTargetProjectile projectile = this.projectile_scene.Instantiate<SingleTargetProjectile>();
+        SingleTargetProjectile projectile = projectile_scene.Instantiate<SingleTargetProjectile>();
         GetParent().AddChild(projectile);
 
-        projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
+        projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
-        projectile.set_target(this._current_target, this._get_attack());
+        projectile.set_target(_current_target, _get_attack());
     }
 
     public override void placement_mode()
     {
         base.placement_mode();
-        this.buff_area.Monitoring = false;
+        buff_area.Monitoring = false;
     }
 
     public override void enable()
     {
         base.enable();
-        this.buff_area.Monitoring = true;
+        buff_area.Monitoring = true;
 
-        if (this._towersManager == null)
+        if (_towersManager == null)
         {
-            this._towersManager = GetTowersManager();
-            if (this._towersManager != null)
+            _towersManager = GetTowersManager();
+            if (_towersManager != null)
             {
-                this._towersManager.tower_placed += this._on_tower_placed;
+                _towersManager.tower_placed += OnTowerPlaced;
             }
         }
     }
 
-    private async void _on_tower_placed(Tower tower)
+    private async void OnTowerPlaced(Tower tower)
     {
         if (tower == this)
         {
             return;
         }
 
-        this.buff_area.Monitoring = false;
+        buff_area.Monitoring = false;
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        this.buff_area.Monitoring = true;
+        buff_area.Monitoring = true;
     }
 
     public override void _apply_stats_changes()
     {
         base._apply_stats_changes();
 
-        if (this.stats == null || this.buff_area_shape == null)
+        if (stats == null || buff_area_shape == null)
         {
             return;
         }
 
-        float attackRange = this.stats.attack_range;
-        this.buff_area_shape.SetDeferred("polygon", build_ellipse_polygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
+        float attackRange = stats.attack_range;
+        buff_area_shape.SetDeferred("polygon", build_ellipse_polygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
     }
 
-    private void _on_buff_area_area_entered(Area2D area)
+    private void OnBuffAreaAreaEntered(Area2D area)
     {
         Tower tower = area.GetParent() as Tower;
-        this._apply_buff(tower);
+        ApplyBuff(tower);
     }
 
-    private void _on_buff_area_area_exited(Area2D area)
+    private void OnBuffAreaAreaExited(Area2D area)
     {
         Tower tower = area.GetParent() as Tower;
-        this._remove_buff(tower);
+        RemoveBuff(tower);
     }
 
-    private void _apply_buff(Tower tower)
+    private void ApplyBuff(Tower tower)
     {
-        if (tower == null || tower == this || this.towers_in_range.Contains(tower))
+        if (tower == null || tower == this || towers_in_range.Contains(tower))
         {
             return;
         }
@@ -127,33 +127,33 @@ public partial class LightningOverchargeTower : Tower
             return;
         }
 
-        Node buffParticle = this.overcharge_particle_scene?.Instantiate();
+        Node buffParticle = overcharge_particle_scene?.Instantiate();
         tower.add_buff(towerBuff);
-        this.towers_in_range.Add(tower);
+        towers_in_range.Add(tower);
 
         if (buffParticle != null)
         {
             tower.AddChild(buffParticle);
-            this.particles_dict[tower.Name] = buffParticle;
+            particles_dict[tower.Name] = buffParticle;
         }
     }
 
-    private void _remove_buff(Tower tower)
+    private void RemoveBuff(Tower tower)
     {
-        if (tower == null || !this.towers_in_range.Contains(tower))
+        if (tower == null || !towers_in_range.Contains(tower))
         {
             return;
         }
 
         tower.remove_buff(Name);
-        this.towers_in_range.Remove(tower);
+        towers_in_range.Remove(tower);
 
-        if (!this.particles_dict.TryGetValue(tower.Name, out Node particle) || particle == null)
+        if (!particles_dict.TryGetValue(tower.Name, out Node particle) || particle == null)
         {
             return;
         }
 
         particle.QueueFree();
-        this.particles_dict.Remove(tower.Name);
+        particles_dict.Remove(tower.Name);
     }
 }

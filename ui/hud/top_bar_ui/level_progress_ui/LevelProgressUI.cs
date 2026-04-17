@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 
 public partial class LevelProgressUI : Control
 {
@@ -20,34 +20,34 @@ public partial class LevelProgressUI : Control
 
     public override void _Ready()
     {
-        this.ClearSlots();
+        ClearSlots();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._progress = runContext.progress;
-        this._progress.current_wave_changed += this.OnWaveInit;
+        _progress = runContext.progress;
+        _progress.current_wave_changed += OnWaveInit;
 
-        ClickEvents.ResetGameButtonPressed += this.ClearSlots;
+        ClickEvents.ResetGameButtonPressed += ClearSlots;
     }
 
     public override void _ExitTree()
     {
-        if (this._progress != null)
+        if (_progress != null)
         {
-            this._progress.current_wave_changed -= this.OnWaveInit;
+            _progress.current_wave_changed -= OnWaveInit;
         }
 
-        ClickEvents.ResetGameButtonPressed -= this.ClearSlots;
+        ClickEvents.ResetGameButtonPressed -= ClearSlots;
     }
 
     private void ClearSlots()
     {
-        foreach (Node child in this.slots_container.GetChildren())
+        foreach (Node child in slots_container.GetChildren())
         {
-            this.slots_container.RemoveChild(child);
+            slots_container.RemoveChild(child);
             child.QueueFree();
         }
 
-        this.BuildSlots();
+        BuildSlots();
     }
 
     private void BuildSlots()
@@ -55,7 +55,7 @@ public partial class LevelProgressUI : Control
         for (int index = 0; index < 10; index++)
         {
             LevelProgressSlot slot = LevelProgressSlotScene.Instantiate<LevelProgressSlot>();
-            this.slots_container.AddChild(slot);
+            slots_container.AddChild(slot);
 
             int waveNumber = index + 1;
             if (Contains(WavesWithEvents, waveNumber))
@@ -85,19 +85,19 @@ public partial class LevelProgressUI : Control
     {
         if (newValue % 10 == 1)
         {
-            this.ClearSlots();
+            ClearSlots();
         }
 
         int value = ((newValue - 1) % 10) + 1;
-        LevelProgressSlot slot = this.slots_container.GetChild<LevelProgressSlot>(value - 1);
+        LevelProgressSlot slot = slots_container.GetChild<LevelProgressSlot>(value - 1);
         slot.fill();
     }
 
-    private void _on_mouse_entered()
+    private void OnMouseEntered()
     {
     }
 
-    private void _on_mouse_exited()
+    private void OnMouseExited()
     {
     }
 

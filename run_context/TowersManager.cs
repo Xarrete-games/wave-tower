@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 using System;
 
@@ -32,33 +32,33 @@ public class TowersManager
 
     public TowersManager()
     {
-        ClickEvents.TowerRemovePressed += this.OnTowerRemoved;
-        ClickEvents.AddTowerCard += this._on_tower_card_added;
+        ClickEvents.TowerRemovePressed += OnTowerRemoved;
+        ClickEvents.AddTowerCard += OnTowerCardAdded;
 
-        this.all_tower_data = DataLoaderAccess.GetAllTowerDataTyped();
+        all_tower_data = DataLoaderAccess.GetAllTowerDataTyped();
     }
 
     public void dispose_events()
     {
-        ClickEvents.TowerRemovePressed -= this.OnTowerRemoved;
-        ClickEvents.AddTowerCard -= this._on_tower_card_added;
+        ClickEvents.TowerRemovePressed -= OnTowerRemoved;
+        ClickEvents.AddTowerCard -= OnTowerCardAdded;
     }
 
-    public void setup(RunProgress progress_p)
+    public void setup(RunProgress progress)
     {
-        this._progress = progress_p;
-        this.last_tower_ids.Clear();
-        this.towers_ids.Clear();
-        this.towers.Clear();
-        this.tower_cards_amount.Clear();
-        this._runtimeTowerModels.Clear();
-        this._appliedRuntimeBuffSources.Clear();
-        this._init_inital_towers_data();
+        _progress = progress;
+        last_tower_ids.Clear();
+        towers_ids.Clear();
+        towers.Clear();
+        tower_cards_amount.Clear();
+        _runtimeTowerModels.Clear();
+        _appliedRuntimeBuffSources.Clear();
+        InitInitialTowersData();
     }
 
     public List<TowerDataWithInstance> get_random_towers(int amount)
     {
-        var availableTowers = new List<TowerDataWithInstance>(this.all_tower_data);
+        var availableTowers = new List<TowerDataWithInstance>(all_tower_data);
         var selectedTowers = new List<TowerDataWithInstance>();
         int picks = Mathf.Min(amount, availableTowers.Count);
 
@@ -77,7 +77,7 @@ public class TowersManager
                 }
 
                 int rarity = (int)towerData.data.rarity;
-                float weight = this._get_tower_weight_for_wave(rarity);
+                float weight = GetTowerWeightForWave(rarity);
                 weights.Add(weight);
                 totalWeight += weight;
             }
@@ -121,9 +121,9 @@ public class TowersManager
 
     public TowerDataWithInstance get_tower_configuration_by_id(string id)
     {
-        for (int index = 0; index < this.all_tower_data.Count; index++)
+        for (int index = 0; index < all_tower_data.Count; index++)
         {
-            TowerDataWithInstance typedConfiguration = this.all_tower_data[index];
+            TowerDataWithInstance typedConfiguration = all_tower_data[index];
             if (typedConfiguration?.data == null)
             {
                 continue;
@@ -145,10 +145,10 @@ public class TowersManager
             return;
         }
 
-        this.towers.Add(tower);
+        towers.Add(tower);
 
         int towerType = (int)tower.type;
-        this._update_tower_count(towerType);
+        UpdateTowerCount(towerType);
 
         TowerData towerData = tower.data as TowerData;
         if (towerData == null)
@@ -158,29 +158,29 @@ public class TowersManager
         }
 
         string towerDataId = towerData.id;
-        int currentAmount = this.tower_cards_amount.ContainsKey(towerDataId) ? this.tower_cards_amount[towerDataId] : 0;
-        this.tower_cards_amount[towerDataId] = currentAmount - 1;
+        int currentAmount = tower_cards_amount.ContainsKey(towerDataId) ? tower_cards_amount[towerDataId] : 0;
+        tower_cards_amount[towerDataId] = currentAmount - 1;
 
-        TowerDataWithInstance towerConfiguration = this.get_tower_configuration_by_id(towerDataId);
-        this.tower_card_amount_change?.Invoke(towerConfiguration, this.tower_cards_amount[towerDataId]);
+        TowerDataWithInstance towerConfiguration = get_tower_configuration_by_id(towerDataId);
+        tower_card_amount_change?.Invoke(towerConfiguration, tower_cards_amount[towerDataId]);
 
-        tower.id = this._generate_tower_id(tower);
+        tower.id = GenerateTowerId(tower);
 
-        TowerModel towerModel = this.BuildTowerModel(tower);
+        TowerModel towerModel = BuildTowerModel(tower);
         if (towerModel != null)
         {
             ulong instanceId = tower.GetInstanceId();
-            this._runtimeTowerModels[instanceId] = towerModel;
+            _runtimeTowerModels[instanceId] = towerModel;
             RunContextRuntime.TowersManager.AddTowerPlaced(towerModel, instanceId);
 
-            this.SyncRuntimeStatusFromLegacy();
+            SyncRuntimeStatusFromLegacy();
             Hooks.OnTowerPlaced(Hooks.GetListenersFromRuntime(), towerModel);
-            this.SyncLegacyStatusFromRuntime();
-            this.ApplyRuntimeBuffsToLegacyTower(instanceId, tower, towerModel);
+            SyncLegacyStatusFromRuntime();
+            ApplyRuntimeBuffsToLegacyTower(instanceId, tower, towerModel);
         }
 
-        this.tower_placed?.Invoke(tower);
-        this.GetAudioManager()?.play_place_tower();
+        tower_placed?.Invoke(tower);
+        GetAudioManager()?.play_place_tower();
     }
 
     public void OnTowerRemoved(Tower tower)
@@ -190,36 +190,36 @@ public class TowersManager
             return;
         }
 
-        this.towers.Remove(tower);
+        towers.Remove(tower);
 
         int towerType = (int)tower.type;
-        this._update_tower_count(towerType);
+        UpdateTowerCount(towerType);
 
-        this.towers_ids.Remove(tower.id);
+        towers_ids.Remove(tower.id);
 
         ulong instanceId = tower.GetInstanceId();
-        if (this._runtimeTowerModels.ContainsKey(instanceId))
+        if (_runtimeTowerModels.ContainsKey(instanceId))
         {
-            this._runtimeTowerModels.Remove(instanceId);
+            _runtimeTowerModels.Remove(instanceId);
         }
 
-        if (this._appliedRuntimeBuffSources.ContainsKey(instanceId))
+        if (_appliedRuntimeBuffSources.ContainsKey(instanceId))
         {
-            this._appliedRuntimeBuffSources.Remove(instanceId);
+            _appliedRuntimeBuffSources.Remove(instanceId);
         }
 
         RunContextRuntime.TowersManager.RemoveTowerByInstanceId(instanceId);
 
-        this.tower_removed?.Invoke(tower);
+        tower_removed?.Invoke(tower);
         tower.QueueFree();
     }
 
     public int get_tower_count(int tower_type)
     {
         int count = 0;
-        for (int index = 0; index < this.towers.Count; index++)
+        for (int index = 0; index < towers.Count; index++)
         {
-            Tower tower = this.towers[index];
+            Tower tower = towers[index];
             if (tower != null && (int)tower.type == tower_type)
             {
                 count++;
@@ -232,9 +232,9 @@ public class TowersManager
     public List<Tower> get_placed_towers()
     {
         var placedTowers = new List<Tower>();
-        for (int index = 0; index < this.towers.Count; index++)
+        for (int index = 0; index < towers.Count; index++)
         {
-            Tower tower = this.towers[index];
+            Tower tower = towers[index];
             if (tower != null)
             {
                 placedTowers.Add(tower);
@@ -246,51 +246,51 @@ public class TowersManager
 
     public void reset_towers()
     {
-        this._update_tower_count(0);
-        this._update_tower_count(1);
-        this._update_tower_count(2);
+        UpdateTowerCount(0);
+        UpdateTowerCount(1);
+        UpdateTowerCount(2);
     }
 
     public void select_tower(Tower tower)
     {
-        this.tower_selected?.Invoke(tower);
+        tower_selected?.Invoke(tower);
         ClickEvents.TowerSelected?.Invoke(tower);
     }
 
-    public void _on_tower_card_added(TowerDataWithInstance tower_data)
+    public void OnTowerCardAdded(TowerDataWithInstance towerData)
     {
-        if (tower_data == null || tower_data.data == null)
+        if (towerData == null || towerData.data == null)
         {
-            GD.PushError($"[TowersManager] Invalid tower configuration while adding card: {tower_data}");
+            GD.PushError($"[TowersManager] Invalid tower configuration while adding card: {towerData}");
             return;
         }
 
-        string id = tower_data.data.id;
+        string id = towerData.data.id;
         if (string.IsNullOrEmpty(id))
         {
             return;
         }
 
-        int amount = this.tower_cards_amount.ContainsKey(id) ? this.tower_cards_amount[id] : 0;
-        this.tower_cards_amount[id] = amount + 1;
-        this.tower_card_amount_change?.Invoke(tower_data, this.tower_cards_amount[id]);
+        int amount = tower_cards_amount.ContainsKey(id) ? tower_cards_amount[id] : 0;
+        tower_cards_amount[id] = amount + 1;
+        tower_card_amount_change?.Invoke(towerData, tower_cards_amount[id]);
     }
 
     public void emit_tower_hovered(Tower tower)
     {
-        this.tower_hovered?.Invoke(tower);
+        tower_hovered?.Invoke(tower);
         ClickEvents.TowerHovered?.Invoke(tower);
     }
 
     public void emit_tower_unhovered(Tower tower)
     {
-        this.tower_unhovered?.Invoke(tower);
+        tower_unhovered?.Invoke(tower);
         ClickEvents.TowerUnhovered?.Invoke(tower);
     }
 
     public void sync_runtime_buffs_for_tower(ulong instanceId)
     {
-        if (!this._runtimeTowerModels.TryGetValue(instanceId, out TowerModel towerModel))
+        if (!_runtimeTowerModels.TryGetValue(instanceId, out TowerModel towerModel))
         {
             return;
         }
@@ -301,12 +301,12 @@ public class TowersManager
             return;
         }
 
-        this.ApplyRuntimeBuffsToLegacyTower(instanceId, tower, towerModel);
+        ApplyRuntimeBuffsToLegacyTower(instanceId, tower, towerModel);
     }
 
-    private float _get_tower_weight_for_wave(int rarity)
+    private float GetTowerWeightForWave(int rarity)
     {
-        float progressRatio = this._get_wave_progress_ratio();
+        float progressRatio = GetWaveProgressRatio();
         float commonWeight = Mathf.Lerp(COMMON_WEIGHT_START, COMMON_WEIGHT_END, progressRatio);
         float rareWeight = Mathf.Lerp(RARE_WEIGHT_START, RARE_WEIGHT_END, progressRatio);
         float epicWeight = Mathf.Lerp(EPIC_WEIGHT_START, EPIC_WEIGHT_END, progressRatio);
@@ -320,41 +320,41 @@ public class TowersManager
         };
     }
 
-    private float _get_wave_progress_ratio()
+    private float GetWaveProgressRatio()
     {
-        if (this._progress == null)
+        if (_progress == null)
         {
             return 0f;
         }
 
-        int totalWaves = this._progress.total_waves;
+        int totalWaves = _progress.total_waves;
         if (totalWaves <= 0)
         {
             return 0f;
         }
 
-        int currentWave = this._progress.current_wave;
+        int currentWave = _progress.current_wave;
         return Mathf.Clamp((float)currentWave / totalWaves, 0f, 1f);
     }
 
-    private void _update_tower_count(int tower_type)
+    private void UpdateTowerCount(int towerType)
     {
-        this.tower_count_change?.Invoke(tower_type, this.get_tower_count(tower_type));
+        tower_count_change?.Invoke(towerType, get_tower_count(towerType));
     }
 
-    private void _init_inital_towers_data()
+    private void InitInitialTowersData()
     {
         for (int index = 0; index < INITIAL_TOWERS_IDS.Length; index++)
         {
-            TowerDataWithInstance towerConfiguration = this.get_tower_configuration_by_id(INITIAL_TOWERS_IDS[index]);
+            TowerDataWithInstance towerConfiguration = get_tower_configuration_by_id(INITIAL_TOWERS_IDS[index]);
             if (towerConfiguration != null)
             {
-                this._on_tower_card_added(towerConfiguration);
+                OnTowerCardAdded(towerConfiguration);
             }
         }
     }
 
-    private string _generate_tower_id(Tower tower)
+    private string GenerateTowerId(Tower tower)
     {
         if (tower == null)
         {
@@ -363,21 +363,21 @@ public class TowersManager
 
         string baseId = tower.type_id;
 
-        if (!this.last_tower_ids.ContainsKey(baseId))
+        if (!last_tower_ids.ContainsKey(baseId))
         {
-            this.last_tower_ids[baseId] = 0;
+            last_tower_ids[baseId] = 0;
         }
 
-        int count = this.last_tower_ids[baseId] + 1;
+        int count = last_tower_ids[baseId] + 1;
         string newId = $"{baseId}_{count}";
-        while (this.towers_ids.Contains(newId))
+        while (towers_ids.Contains(newId))
         {
             count += 1;
             newId = $"{baseId}_{count}";
         }
 
-        this.towers_ids.Add(newId);
-        this.last_tower_ids[baseId] = count;
+        towers_ids.Add(newId);
+        last_tower_ids[baseId] = count;
         return newId;
     }
 
@@ -414,12 +414,12 @@ public class TowersManager
 
     private AudioManager GetAudioManager()
     {
-        return this.GetSingleton("AudioManager") as AudioManager;
+        return GetSingleton("AudioManager") as AudioManager;
     }
 
     private void SyncRuntimeStatusFromLegacy()
     {
-        RunContext runContext = this.GetSingleton("RunContext") as RunContext;
+        RunContext runContext = GetSingleton("RunContext") as RunContext;
         Status status = runContext?.status;
         if (status == null)
         {
@@ -431,7 +431,7 @@ public class TowersManager
 
     private void SyncLegacyStatusFromRuntime()
     {
-        RunContext runContext = this.GetSingleton("RunContext") as RunContext;
+        RunContext runContext = GetSingleton("RunContext") as RunContext;
         Status status = runContext?.status;
         if (status == null)
         {
@@ -462,10 +462,10 @@ public class TowersManager
             return;
         }
 
-        if (!this._appliedRuntimeBuffSources.TryGetValue(instanceId, out HashSet<string> appliedSources))
+        if (!_appliedRuntimeBuffSources.TryGetValue(instanceId, out HashSet<string> appliedSources))
         {
             appliedSources = new HashSet<string>();
-            this._appliedRuntimeBuffSources[instanceId] = appliedSources;
+            _appliedRuntimeBuffSources[instanceId] = appliedSources;
         }
 
         var buffs = towerModel.GetBuffs();

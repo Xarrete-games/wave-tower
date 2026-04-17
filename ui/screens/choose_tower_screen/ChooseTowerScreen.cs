@@ -17,7 +17,7 @@ public partial class ChooseTowerScreen : Control
 
     public override void _Ready()
     {
-        this.ok_button.Pressed += this.OnOkPressed;
+        ok_button.Pressed += OnOkPressed;
     }
 
     public void PopulateScreen(List<TowerDataWithInstance> configurations)
@@ -25,30 +25,30 @@ public partial class ChooseTowerScreen : Control
         foreach (TowerDataWithInstance towerConfiguration in configurations)
         {
             ChooseTowerScreenItem item = TowerItemScene.Instantiate<ChooseTowerScreenItem>();
-            this.cards_container.AddChild(item);
+            cards_container.AddChild(item);
             item.SetTowerData(towerConfiguration);
-            item.selected += this.OnItemSelected;
+            item.selected += OnItemSelected;
         }
     }
 
     private void OnItemSelected(ChooseTowerScreenItem item)
     {
-        this._selectedItem = item;
+        _selectedItem = item;
         GetNode<AudioManager>("/root/AudioManager").play_tower_obtain();
-        this.OnOkPressed();
+        OnOkPressed();
     }
 
     private void OnOkPressed()
     {
-        if (this._selectedItem == null)
+        if (_selectedItem == null)
         {
             return;
         }
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.towers_manager._on_tower_card_added(this._selectedItem.GetTowerData());
+        runContext.towers_manager.OnTowerCardAdded(_selectedItem.GetTowerData());
 
-        this.done?.Invoke();
+        done?.Invoke();
         QueueFree();
     }
 }

@@ -15,15 +15,15 @@ public partial class EventScreen : Control
         for (int index = 0; index < events.Count; index++)
         {
             EventSlot eventSlot = EventSlotScene.Instantiate<EventSlot>();
-            this.events_container.AddChild(eventSlot);
+            events_container.AddChild(eventSlot);
             eventSlot.set_event(events[index]);
-            eventSlot.event_pressed += this._on_event_pressed;
+            eventSlot.event_pressed += OnEventPressed;
         }
     }
 
-    private void _on_event_pressed(EventData @event)
+    private void OnEventPressed(EventData @event)
     {
-        this.event_selected?.Invoke(@event);
+        event_selected?.Invoke(@event);
         QueueFree();
     }
 }

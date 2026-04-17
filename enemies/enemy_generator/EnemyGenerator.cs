@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 
 public partial class EnemyGenerator : Node
@@ -32,13 +32,13 @@ public partial class EnemyGenerator : Node
             }
         }
 
-        if (this.wave_config == null)
+        if (wave_config == null)
         {
-            this.wave_config = GD.Load<WaveConfig>("res://enemies/enemy_generator/wave_config.tres");
+            wave_config = GD.Load<WaveConfig>("res://enemies/enemy_generator/wave_config.tres");
         }
 
-        this._composer = new WaveComposer(this.wave_config, enemyCatalog);
-        if (this._composer == null)
+        _composer = new WaveComposer(wave_config, enemyCatalog);
+        if (_composer == null)
         {
             GD.PushError("[EnemyGenerator] Could not instantiate WaveComposer.");
             return;
@@ -47,41 +47,41 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.progress.total_waves = TOTAL_WAVES;
 
-        if (this.wave_spawner != null)
+        if (wave_spawner != null)
         {
-            this.wave_spawner.enemies_container = this.enemies_container;
-            this.wave_spawner.wave_started += this.OnWaveStarted;
-            this.wave_spawner.wave_finished += this.OnWaveFinished;
-            this.wave_spawner.enemy_spawned += this.OnEnemySpawned;
+            wave_spawner.enemies_container = enemies_container;
+            wave_spawner.wave_started += OnWaveStarted;
+            wave_spawner.wave_finished += OnWaveFinished;
+            wave_spawner.enemy_spawned += OnEnemySpawned;
         }
 
-        ClickEvents.NextWavePressed += this.StartNextWave;
+        ClickEvents.NextWavePressed += StartNextWave;
     }
 
     public override void _ExitTree()
     {
-        ClickEvents.NextWavePressed -= this.StartNextWave;
+        ClickEvents.NextWavePressed -= StartNextWave;
 
-        if (this._isTrackingEnemyExit && this.enemies_container != null)
+        if (_isTrackingEnemyExit && enemies_container != null)
         {
-            this.enemies_container.ChildExitingTree -= this.OnEnemyLeft;
-            this._isTrackingEnemyExit = false;
+            enemies_container.ChildExitingTree -= OnEnemyLeft;
+            _isTrackingEnemyExit = false;
         }
     }
 
     public void StartNextWave()
     {
-        if (this.wave_spawner == null)
+        if (wave_spawner == null)
         {
             GD.PushWarning("[EnemyGeneratorProcedural] No WaveSpawner assigned");
             return;
         }
 
-        this._waveNumber += 1;
+        _waveNumber += 1;
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.progress.current_wave = this._waveNumber;
+        runContext.progress.current_wave = _waveNumber;
 
-        List<WaveComposer.WaveGroup> groups = this._composer.compose_wave(this._waveNumber);
+        List<WaveComposer.WaveGroup> groups = _composer.compose_wave(_waveNumber);
 
         int totalEnemies = 0;
         for (int index = 0; index < groups.Count; index++)
@@ -89,10 +89,10 @@ public partial class EnemyGenerator : Node
             totalEnemies += groups[index].enemies.Count;
         }
 
-        int budget = this._composer.get_budget_for_wave(this._waveNumber);
-        GD.Print($"[Wave {this._waveNumber}] Budget: {budget} | Groups: {groups.Count} | Total enemies: {totalEnemies}");
+        int budget = _composer.get_budget_for_wave(_waveNumber);
+        GD.Print($"[Wave {_waveNumber}] Budget: {budget} | Groups: {groups.Count} | Total enemies: {totalEnemies}");
 
-        this.wave_spawner.start_wave(this._waveNumber, groups, this.wave_config);
+        wave_spawner.start_wave(_waveNumber, groups, wave_config);
     }
 
     private void OnWaveStarted(int waveNumber)
@@ -104,17 +104,17 @@ public partial class EnemyGenerator : Node
     {
         GD.Print($"[EnemyGeneratorProcedural] Wave {waveNumber} finished spawning");
 
-        this._enemiesLeft = GetTree().GetNodesInGroup("enemy").Count;
-        if (this._enemiesLeft == 0)
+        _enemiesLeft = GetTree().GetNodesInGroup("enemy").Count;
+        if (_enemiesLeft == 0)
         {
-            this.ReportFinished();
+            ReportFinished();
             return;
         }
 
-        if (!this._isTrackingEnemyExit)
+        if (!_isTrackingEnemyExit)
         {
-            this.enemies_container.ChildExitingTree += this.OnEnemyLeft;
-            this._isTrackingEnemyExit = true;
+            enemies_container.ChildExitingTree += OnEnemyLeft;
+            _isTrackingEnemyExit = true;
         }
     }
 
@@ -125,26 +125,26 @@ public partial class EnemyGenerator : Node
             return;
         }
 
-        enemyObj.die += this.OnEnemyDie;
-        enemyObj.target_reached += this.OnEnemyTargetReached;
+        enemyObj.die += OnEnemyDie;
+        enemyObj.target_reached += OnEnemyTargetReached;
     }
 
     private void OnEnemyLeft(Node node)
     {
         if (node.IsInGroup("enemy"))
         {
-            this._enemiesLeft -= 1;
+            _enemiesLeft -= 1;
         }
 
-        if (this._enemiesLeft <= 0)
+        if (_enemiesLeft <= 0)
         {
-            if (this._isTrackingEnemyExit)
+            if (_isTrackingEnemyExit)
             {
-                this.enemies_container.ChildExitingTree -= this.OnEnemyLeft;
-                this._isTrackingEnemyExit = false;
+                enemies_container.ChildExitingTree -= OnEnemyLeft;
+                _isTrackingEnemyExit = false;
             }
 
-            this.CallDeferred(MethodName.ReportFinished);
+            CallDeferred(MethodName.ReportFinished);
         }
     }
 
@@ -158,15 +158,15 @@ public partial class EnemyGenerator : Node
             return;
         }
 
-        if (this._waveNumber >= TOTAL_WAVES)
+        if (_waveNumber >= TOTAL_WAVES)
         {
             runContext.progress.notify_last_wave_finished();
             return;
         }
 
-        this.SyncRuntimeStatusFromLegacy(runContext.status);
+        SyncRuntimeStatusFromLegacy(runContext.status);
         Hooks.OnWaveFinished(Hooks.GetListenersFromRuntime());
-        this.SyncLegacyStatusFromRuntime(runContext.status);
+        SyncLegacyStatusFromRuntime(runContext.status);
 
         runContext.progress.notify_current_wave_finished();
     }

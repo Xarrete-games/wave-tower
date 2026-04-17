@@ -9,12 +9,12 @@ public partial class FrostTower : Tower
     public override void _Ready()
     {
         base._Ready();
-        this.projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
+        projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(this._current_target))
+        if (!GodotObject.IsInstanceValid(_current_target))
         {
             return;
         }
@@ -22,10 +22,10 @@ public partial class FrostTower : Tower
         SingleTargetProjectile projectile = FrostBallScene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
-        projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
+        projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
-        Attack attack = this._get_attack();
-        EnemyDebuff debuff = EnemyDebuff.create_frost(this.damage_source);
-        projectile.set_target(this._current_target, attack, debuff);
+        Attack attack = _get_attack();
+        EnemyDebuff debuff = EnemyDebuff.create_frost(damage_source);
+        projectile.set_target(_current_target, attack, debuff);
     }
 }

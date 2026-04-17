@@ -2,7 +2,7 @@ public class CaffeinePotion : ConsumableUsable
 {
     public override void use()
     {
-        RunContext runContext = this.GetSingleton("RunContext") as RunContext;
+        RunContext runContext = GetSingleton("RunContext") as RunContext;
         TowersManager towersManager = runContext?.towers_manager;
         if (towersManager == null)
         {
@@ -18,7 +18,7 @@ public class CaffeinePotion : ConsumableUsable
                 continue;
             }
 
-            Source source = this.get_source();
+            Source source = get_source();
             TowerBuff debuffObj = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, -20);
             TowerBuff buffObj = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, 20);
             if (debuffObj == null || buffObj == null)

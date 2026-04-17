@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 
 public partial class TowersMenu : Control
@@ -18,26 +18,26 @@ public partial class TowersMenu : Control
 
     public override void _Ready()
     {
-        if (this.tower_hint != null)
+        if (tower_hint != null)
         {
-            this.tower_hint.Visible = false;
+            tower_hint.Visible = false;
         }
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._towersManager = runContext?.towers_manager;
-        if (this._towersManager != null)
+        _towersManager = runContext?.towers_manager;
+        if (_towersManager != null)
         {
-            this._towersManager.tower_card_amount_change += this.OnTowerCardAdded;
+            _towersManager.tower_card_amount_change += OnTowerCardAdded;
         }
-        this.InitButtonCards();
+        InitButtonCards();
     }
 
     public override void _ExitTree()
     {
-        if (this._towersManager != null)
+        if (_towersManager != null)
         {
-            this._towersManager.tower_card_amount_change -= this.OnTowerCardAdded;
-            this._towersManager = null;
+            _towersManager.tower_card_amount_change -= OnTowerCardAdded;
+            _towersManager = null;
         }
     }
 
@@ -47,13 +47,13 @@ public partial class TowersMenu : Control
         foreach (KeyValuePair<string, int> pair in runContext.towers_manager.tower_cards_amount)
         {
             TowerDataWithInstance towerConfiguration = runContext.towers_manager.get_tower_configuration_by_id(pair.Key);
-            this.OnTowerCardAdded(towerConfiguration, pair.Value);
+            OnTowerCardAdded(towerConfiguration, pair.Value);
         }
     }
 
     private void OnTowerCardAdded(TowerDataWithInstance towerData, int amount)
     {
-        string towerId = this.GetTowerId(towerData);
+        string towerId = GetTowerId(towerData);
         if (string.IsNullOrEmpty(towerId))
         {
             return;
@@ -61,27 +61,27 @@ public partial class TowersMenu : Control
 
         if (amount == 0)
         {
-            if (this._buttons.TryGetValue(towerId, out Node nodeToRemove))
+            if (_buttons.TryGetValue(towerId, out Node nodeToRemove))
             {
                 nodeToRemove.QueueFree();
-                this._buttons.Remove(towerId);
+                _buttons.Remove(towerId);
             }
 
             return;
         }
 
-        if (!this._buttons.TryGetValue(towerId, out Node buttonNode))
+        if (!_buttons.TryGetValue(towerId, out Node buttonNode))
         {
-            TowerButton towerButton = this.tower_button_scene.Instantiate<TowerButton>();
-            this.buttons_container.AddChild(towerButton);
+            TowerButton towerButton = tower_button_scene.Instantiate<TowerButton>();
+            buttons_container.AddChild(towerButton);
             towerButton.tower_data = towerData;
             towerButton.amount = amount;
 
-            towerButton.tower_button_pressed += this.OnTowerButtonPressed;
-            towerButton.hover += this.OnTowerButtonHover;
-            towerButton.unhover += this.OnTowerButtonUnhover;
+            towerButton.tower_button_pressed += OnTowerButtonPressed;
+            towerButton.hover += OnTowerButtonHover;
+            towerButton.unhover += OnTowerButtonUnhover;
 
-            this._buttons[towerId] = towerButton;
+            _buttons[towerId] = towerButton;
             return;
         }
 
@@ -103,39 +103,39 @@ public partial class TowersMenu : Control
 
     private void OnTowerButtonHover(TowerButton towerButton)
     {
-        if (towerButton == null || this.tower_hint == null)
+        if (towerButton == null || tower_hint == null)
         {
             return;
         }
 
-        this._buttonInHover = towerButton;
+        _buttonInHover = towerButton;
         TowerData data = towerButton.tower_data?.data;
         if (data == null)
         {
             return;
         }
 
-        this.tower_hint.set_stats(data);
+        tower_hint.set_stats(data);
 
         Rect2 rect = towerButton.GetGlobalRect();
-        this.tower_hint.GlobalPosition = new Vector2(
-            rect.Position.X + rect.Size.X * 0.25f - this.tower_hint.Size.X * 0.5f,
-            this.tower_hint.GlobalPosition.Y
+        tower_hint.GlobalPosition = new Vector2(
+            rect.Position.X + rect.Size.X * 0.25f - tower_hint.Size.X * 0.5f,
+            tower_hint.GlobalPosition.Y
         );
-        this.tower_hint.Visible = true;
+        tower_hint.Visible = true;
     }
 
     private void OnTowerButtonUnhover(TowerButton towerButton)
     {
-        if (towerButton == null || this.tower_hint == null)
+        if (towerButton == null || tower_hint == null)
         {
             return;
         }
 
-        if (this._buttonInHover == towerButton)
+        if (_buttonInHover == towerButton)
         {
-            this._buttonInHover = null;
-            this.tower_hint.Visible = false;
+            _buttonInHover = null;
+            tower_hint.Visible = false;
         }
     }
 }

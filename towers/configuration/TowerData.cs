@@ -51,16 +51,16 @@ public partial class TowerData : BaseData
 
     public void build()
     {
-        this.stats.damage = this.base_damage;
-        this.stats.attack_range = this.base_attack_range;
-        this.stats.attack_speed = this.base_attack_speed;
-        this.stats.critic_chance = this.base_critic_chance;
-        this.stats.critic_damage = this.base_critic_damage;
+        stats.damage = base_damage;
+        stats.attack_range = base_attack_range;
+        stats.attack_speed = base_attack_speed;
+        stats.critic_chance = base_critic_chance;
+        stats.critic_damage = base_critic_damage;
 
-        this.stats_on_level.damage = this.damage_per_level;
-        this.stats_on_level.attack_range = this.attack_range_per_level;
-        this.stats_on_level.attack_speed = this.attack_speed_per_level;
-        this.stats_on_level.critic_chance = this.critic_chance_per_level;
-        this.stats_on_level.critic_damage = this.critic_damage_per_level;
+        stats_on_level.damage = damage_per_level;
+        stats_on_level.attack_range = attack_range_per_level;
+        stats_on_level.attack_speed = attack_speed_per_level;
+        stats_on_level.critic_chance = critic_chance_per_level;
+        stats_on_level.critic_damage = critic_damage_per_level;
     }
 }

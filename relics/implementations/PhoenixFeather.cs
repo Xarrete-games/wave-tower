@@ -6,12 +6,12 @@ public sealed class PhoenixFeather : Relic
 
     public override void OnBeforeDie(StatusModel status)
     {
-        if (this.Disabled)
+        if (Disabled)
         {
             return;
         }
 
         status.Heal(10);
-        this.Disabled = true;
+        Disabled = true;
     }
 }

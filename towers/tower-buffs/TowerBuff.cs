@@ -1,19 +1,15 @@
-public class TowerBuff
-{
+public class TowerBuff {
     public Source source;
     public BuffData data;
     public Duration duration;
     public TowerBuff residual_buff;
-
-    public TowerBuff()
-    {
+    public TowerBuff() {
     }
-
-    public TowerBuff(Source p_source, Duration p_duration = null, TowerBuff p_residual_buff = null, BuffData p_data = null)
-    {
-        this.source = p_source;
-        this.duration = p_duration;
-        this.residual_buff = p_residual_buff;
-        this.data = p_data;
+    public TowerBuff(Source buffSource, Duration buffDuration = null, TowerBuff residualBuff = null, BuffData buffData = null) {
+        source = buffSource;
+        duration = buffDuration;
+        residual_buff = residualBuff;
+        data = buffData;
     }
 }
+

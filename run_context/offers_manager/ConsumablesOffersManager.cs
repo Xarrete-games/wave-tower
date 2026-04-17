@@ -14,17 +14,17 @@ public class ConsumablesOffersManager
 
     public ConsumablesOffersManager()
     {
-        this._allConsumablesData.AddRange(DataLoaderAccess.GetAllConsumablesTyped());
+        _allConsumablesData.AddRange(DataLoaderAccess.GetAllConsumablesTyped());
     }
 
     public List<ItemOffer> create_consumables_offers(int amount)
     {
-        var consumablesData = new List<ConsumableData>(this._allConsumablesData);
+        var consumablesData = new List<ConsumableData>(_allConsumablesData);
         var offers = new List<ItemOffer>();
 
         for (int index = 0; index < consumablesData.Count && offers.Count < amount; index++)
         {
-            offers.Add(this.create_consumable_offer_from_data(consumablesData[index]));
+            offers.Add(create_consumable_offer_from_data(consumablesData[index]));
         }
 
         return offers;

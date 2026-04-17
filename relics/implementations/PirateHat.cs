@@ -9,7 +9,7 @@ public sealed class PirateHat : Relic
 
     public override void OnConsumableUsed(ConsumableModel consumable)
     {
-        double value = this._random.NextDouble();
+        double value = _random.NextDouble();
         if (value < _chanceToRecoverConsumable)
         {
             RunContextRuntime.ConsumablesManager.AddConsumable(consumable);

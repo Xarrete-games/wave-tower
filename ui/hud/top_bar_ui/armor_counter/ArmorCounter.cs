@@ -9,36 +9,36 @@ public partial class ArmorCounter : CenterContainer
 
     public int armor
     {
-        get => this._armor;
+        get => _armor;
         set
         {
-            this._armor = value;
-            if (this._counterLabel != null)
+            _armor = value;
+            if (_counterLabel != null)
             {
-                this._counterLabel.Text = value.ToString();
+                _counterLabel.Text = value.ToString();
             }
         }
     }
 
     public override void _Ready()
     {
-        this._counterLabel = GetNode<Label>("CounterLabel");
+        _counterLabel = GetNode<Label>("CounterLabel");
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._status = runContext.status;
-        this._status.armor_change += this._on_armor_change;
-        this.armor = this._status.armor;
+        _status = runContext.status;
+        _status.armor_change += OnArmorChange;
+        armor = _status.armor;
     }
 
     public override void _ExitTree()
     {
-        if (this._status != null)
+        if (_status != null)
         {
-            this._status.armor_change -= this._on_armor_change;
+            _status.armor_change -= OnArmorChange;
         }
     }
 
-    private void _on_armor_change(int value)
+    private void OnArmorChange(int value)
     {
-        this.armor = value;
+        armor = value;
     }
 }

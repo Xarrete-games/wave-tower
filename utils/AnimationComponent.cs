@@ -54,15 +54,15 @@ public partial class AnimationComponent : Node
 
     public override void _Ready()
     {
-        this.target = GetParent() as Control;
+        target = GetParent() as Control;
         CallDeferred(nameof(setup));
     }
 
     public void on_hover_entered()
     {
-        this.on_hover = true;
-        _ = add_tween(this.hover_values, this.parallel_animations, this.hover_time, this.hover_delay, this.hover_transition, this.hover_easing);
-        if (this.play_hover_sound)
+        on_hover = true;
+        _ = add_tween(hover_values, parallel_animations, hover_time, hover_delay, hover_transition, hover_easing);
+        if (play_hover_sound)
         {
             AudioManager audioManager = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<AudioManager>("/root/AudioManager");
             audioManager?.play_button_hover();
@@ -71,110 +71,110 @@ public partial class AnimationComponent : Node
 
     public void on_hover_exited()
     {
-        this.on_hover = false;
-        _ = add_tween(this.default_values, this.parallel_animations, this.hover_time, this.hover_delay, this.hover_transition, this.hover_easing);
+        on_hover = false;
+        _ = add_tween(default_values, parallel_animations, hover_time, hover_delay, hover_transition, hover_easing);
     }
 
     public void on_entered_action()
     {
-        _ = add_tween(this.default_values, this.parallel_animations, this.enter_time, this.enter_delay, this.enter_transition, this.enter_easing, true);
+        _ = add_tween(default_values, parallel_animations, enter_time, enter_delay, enter_transition, enter_easing, true);
     }
 
     public void connect_signals()
     {
-        this.target.MouseEntered += this.on_hover_entered;
-        this.target.MouseExited += this.on_hover_exited;
+        target.MouseEntered += on_hover_entered;
+        target.MouseExited += on_hover_exited;
 
-        if (this.wait_for != null)
+        if (wait_for != null)
         {
-            this.wait_for.entered += this.on_entered_action;
+            wait_for.entered += on_entered_action;
         }
     }
 
     public async void setup()
     {
-        if (this.target == null)
+        if (target == null)
         {
             return;
         }
 
-        if (this.hover_position == Vector2.Zero && this.enter_position == Vector2.Zero)
+        if (hover_position == Vector2.Zero && enter_position == Vector2.Zero)
         {
             var filtered = new List<string>();
-            for (int i = 0; i < this.properties.Length; i++)
+            for (int i = 0; i < properties.Length; i++)
             {
-                if (this.properties[i] != "position")
+                if (properties[i] != "position")
                 {
-                    filtered.Add(this.properties[i]);
+                    filtered.Add(properties[i]);
                 }
             }
-            this.properties = filtered.ToArray();
+            properties = filtered.ToArray();
         }
 
-        if (this.from_center)
+        if (from_center)
         {
-            this.target.PivotOffset = this.target.Size / 2.0f;
+            target.PivotOffset = target.Size / 2.0f;
         }
 
-        this.default_scale = this.target.Scale;
-        this.default_values = new Dictionary<string, Variant>
+        default_scale = target.Scale;
+        default_values = new Dictionary<string, Variant>
         {
-            { "scale", this.target.Scale },
-            { "position", this.target.Position },
-            { "rotation", this.target.Rotation },
-            { "size", this.target.Size },
-            { "self_modulate", this.target.SelfModulate },
+            { "scale", target.Scale },
+            { "position", target.Position },
+            { "rotation", target.Rotation },
+            { "size", target.Size },
+            { "self_modulate", target.SelfModulate },
         };
 
-        this.hover_values = new Dictionary<string, Variant>
+        hover_values = new Dictionary<string, Variant>
         {
-            { "scale", this.hover_scale },
-            { "position", this.target.Position + this.hover_position },
-            { "rotation", this.target.Rotation + Mathf.DegToRad(this.hover_rotation) },
-            { "size", this.target.Size * this.hover_size },
-            { "self_modulate", this.hover_modulate },
+            { "scale", hover_scale },
+            { "position", target.Position + hover_position },
+            { "rotation", target.Rotation + Mathf.DegToRad(hover_rotation) },
+            { "size", target.Size * hover_size },
+            { "self_modulate", hover_modulate },
         };
 
-        this.enter_values = new Dictionary<string, Variant>
+        enter_values = new Dictionary<string, Variant>
         {
-            { "scale", this.enter_scale },
-            { "position", this.target.Position + this.enter_position },
-            { "rotation", this.target.Rotation + Mathf.DegToRad(this.enter_rotation) },
-            { "size", this.target.Size * this.enter_size },
-            { "self_modulate", this.enter_modulate },
+            { "scale", enter_scale },
+            { "position", target.Position + enter_position },
+            { "rotation", target.Rotation + Mathf.DegToRad(enter_rotation) },
+            { "size", target.Size * enter_size },
+            { "self_modulate", enter_modulate },
         };
 
-        this.connect_signals();
+        connect_signals();
 
-        if (this.flicked)
+        if (flicked)
         {
             _ = flick_loop();
         }
 
-        if (this.enter_animation)
+        if (enter_animation)
         {
-            this.on_enter();
+            on_enter();
         }
         else
         {
             await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-            this.entered?.Invoke();
+            entered?.Invoke();
         }
     }
 
     public void on_enter()
     {
-        _ = add_tween(this.enter_values, true, 0.0f, 0.0f, IMMEDIATE_TRANSITION, Tween.EaseType.In);
+        _ = add_tween(enter_values, true, 0.0f, 0.0f, IMMEDIATE_TRANSITION, Tween.EaseType.In);
 
-        if (this.wait_for == null)
+        if (wait_for == null)
         {
-            this.on_entered_action();
+            on_entered_action();
         }
     }
 
     public async System.Threading.Tasks.Task add_tween(Dictionary<string, Variant> values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
     {
-        if (!IsInsideTree() || this.target == null)
+        if (!IsInsideTree() || target == null)
         {
             return;
         }
@@ -184,11 +184,11 @@ public partial class AnimationComponent : Node
         tween.SetPauseMode(Tween.TweenPauseMode.Process);
         tween.Pause();
 
-        for (int i = 0; i < this.properties.Length; i++)
+        for (int i = 0; i < properties.Length; i++)
         {
-            string property = this.properties[i];
+            string property = properties[i];
             Variant value = values.TryGetValue(property, out Variant configuredValue) ? configuredValue : default;
-            tween.TweenProperty(this.target, property, value, seconds).SetTrans(transition).SetEase(easing);
+            tween.TweenProperty(target, property, value, seconds).SetTrans(transition).SetEase(easing);
         }
 
         await ToSignal(GetTree().CreateTimer(delay), Timer.SignalName.Timeout);
@@ -197,37 +197,37 @@ public partial class AnimationComponent : Node
         if (entering)
         {
             await ToSignal(tween, Tween.SignalName.Finished);
-            this.entered?.Invoke();
+            entered?.Invoke();
         }
     }
 
     public async System.Threading.Tasks.Task flick_loop()
     {
-        if (this.default_values.Count == 0)
+        if (default_values.Count == 0)
         {
             return;
         }
 
-        Color defaultModulate = this.default_values["self_modulate"].AsColor();
+        Color defaultModulate = default_values["self_modulate"].AsColor();
         bool useFlick = true;
 
-        while (this.flicked && IsInsideTree())
+        while (flicked && IsInsideTree())
         {
-            if (this.on_hover)
+            if (on_hover)
             {
-                this.target.SelfModulate = defaultModulate;
+                target.SelfModulate = defaultModulate;
                 await ToSignal(GetTree().CreateTimer(0.05f), Timer.SignalName.Timeout);
                 continue;
             }
 
-            this.target.SelfModulate = useFlick ? this.flicked_color : defaultModulate;
+            target.SelfModulate = useFlick ? flicked_color : defaultModulate;
             useFlick = !useFlick;
-            await ToSignal(GetTree().CreateTimer(this.flicked_time), Timer.SignalName.Timeout);
+            await ToSignal(GetTree().CreateTimer(flicked_time), Timer.SignalName.Timeout);
         }
 
         if (IsInsideTree())
         {
-            this.target.SelfModulate = defaultModulate;
+            target.SelfModulate = defaultModulate;
         }
     }
 }

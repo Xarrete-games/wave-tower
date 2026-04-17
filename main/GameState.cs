@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System;
 
 public partial class GameState : Node
@@ -15,64 +15,64 @@ public partial class GameState : Node
     [Export]
     public float speed
     {
-        get => this._speed;
+        get => _speed;
         set
         {
-            this._speed = value;
+            _speed = value;
             Engine.TimeScale = value;
-            this.speed_change?.Invoke(value);
+            speed_change?.Invoke(value);
         }
     }
 
     [Export]
     public int state
     {
-        get => this._state;
+        get => _state;
         set
         {
-            this._state = value;
-            this.state_change?.Invoke(value);
+            _state = value;
+            state_change?.Invoke(value);
         }
     }
 
     public override void _Ready()
     {
-        ClickEvents.SpeedButtonPressed += this._button_speed_pressed;
+        ClickEvents.SpeedButtonPressed += ButtonSpeedPressed;
     }
 
     public override void _ExitTree()
     {
-        ClickEvents.SpeedButtonPressed -= this._button_speed_pressed;
+        ClickEvents.SpeedButtonPressed -= ButtonSpeedPressed;
     }
 
     public bool is_on_main_menu()
     {
-        return this.state == ON_MAIN_MENU;
+        return state == ON_MAIN_MENU;
     }
 
     public bool is_in_game()
     {
-        return this.state == IN_GAME;
+        return state == IN_GAME;
     }
 
     public void reset_run()
     {
-        this.speed = 1.0f;
+        speed = 1.0f;
     }
 
-    private void _button_speed_pressed()
+    private void ButtonSpeedPressed()
     {
-        if (Mathf.IsEqualApprox(this.speed, 1.0f))
+        if (Mathf.IsEqualApprox(speed, 1.0f))
         {
-            this.speed = 2.0f;
+            speed = 2.0f;
         }
-        else if (Mathf.IsEqualApprox(this.speed, 2.0f))
+        else if (Mathf.IsEqualApprox(speed, 2.0f))
         {
-            this.speed = 4.0f;
+            speed = 4.0f;
         }
         else
         {
-            this.speed = 1.0f;
+            speed = 1.0f;
         }
     }
 }

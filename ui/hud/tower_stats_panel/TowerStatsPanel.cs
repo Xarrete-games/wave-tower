@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 
 public partial class TowerStatsPanel : Control
@@ -18,34 +18,34 @@ public partial class TowerStatsPanel : Control
 
     public override void _Ready()
     {
-        this._nameLabel = GetNode<Label>("Panel/MarginContainer/MainContainer/NameLabel");
-        this._idLabel = GetNode<Label>("Panel/MarginContainer/MainContainer/IdLabel");
-        this._damageStat = GetNode<TowerStatUi>("Panel/MarginContainer/MainContainer/DataContainer/DamageStatUi");
-        this._attackSpeedStat = GetNode<TowerStatUi>("Panel/MarginContainer/MainContainer/DataContainer/AttkSpeedStatUi");
-        this._rangeStat = GetNode<TowerStatUi>("Panel/MarginContainer/MainContainer/DataContainer/RangeStatUi");
-        this._levelLabel = GetNode<Label>("Panel/MarginContainer/MainContainer/ExpDataContainer/LevelContainer/LevelLabel");
-        this._upgradeButtonContainer = GetNode<Control>("Panel/MarginContainer/MainContainer/UpgradeButtonContainer");
-        this._upgradeTowerPrice = GetNode<GoldPrice>("Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeTowerPrice");
-        this._targetingModeSelector = GetNode<OptionButton>("Panel/MarginContainer/MainContainer/TargetingContainer/TargetingModeSelector");
-        this._towerHintPanel = GetNode<Control>("TowerHintPanel");
+        _nameLabel = GetNode<Label>("Panel/MarginContainer/MainContainer/NameLabel");
+        _idLabel = GetNode<Label>("Panel/MarginContainer/MainContainer/IdLabel");
+        _damageStat = GetNode<TowerStatUi>("Panel/MarginContainer/MainContainer/DataContainer/DamageStatUi");
+        _attackSpeedStat = GetNode<TowerStatUi>("Panel/MarginContainer/MainContainer/DataContainer/AttkSpeedStatUi");
+        _rangeStat = GetNode<TowerStatUi>("Panel/MarginContainer/MainContainer/DataContainer/RangeStatUi");
+        _levelLabel = GetNode<Label>("Panel/MarginContainer/MainContainer/ExpDataContainer/LevelContainer/LevelLabel");
+        _upgradeButtonContainer = GetNode<Control>("Panel/MarginContainer/MainContainer/UpgradeButtonContainer");
+        _upgradeTowerPrice = GetNode<GoldPrice>("Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeTowerPrice");
+        _targetingModeSelector = GetNode<OptionButton>("Panel/MarginContainer/MainContainer/TargetingContainer/TargetingModeSelector");
+        _towerHintPanel = GetNode<Control>("TowerHintPanel");
 
-        this.Visible = false;
-        this._towerHintPanel.Visible = false;
-        this.HideUpgradeOptions();
+        Visible = false;
+        _towerHintPanel.Visible = false;
+        HideUpgradeOptions();
 
-        ClickEvents.TowerSelected += this.OnTowerSelected;
+        ClickEvents.TowerSelected += OnTowerSelected;
     }
 
     public override void _ExitTree()
     {
-        ClickEvents.TowerSelected -= this.OnTowerSelected;
+        ClickEvents.TowerSelected -= OnTowerSelected;
     }
 
     private void OnTowerSelected(Tower tower)
     {
         if (tower == null)
         {
-            this._currentTower = null;
+            _currentTower = null;
             ActionManager actionManager = GetNode<ActionManager>("/root/ActionManager");
             if (actionManager.CurrentAction == ActionManager.ActionState.TowerSelected)
             {
@@ -60,40 +60,40 @@ public partial class TowerStatsPanel : Control
             TowerTargetingMode.FirstInProgress,
         };
         Hooks.OnGetTargetingModes(Hooks.GetListenersFromRuntime(), targetingModes);
-        this.UpdateTargetingModes(targetingModes);
+        UpdateTargetingModes(targetingModes);
 
         int targetingMode = tower.targeting_mode;
-        this._targetingModeSelector.Select(targetingMode);
+        _targetingModeSelector.Select(targetingMode);
 
         ActionManager manager = GetNode<ActionManager>("/root/ActionManager");
-        manager.StartAction(ActionManager.ActionState.TowerSelected, this.HidePanel);
-        this.Visible = true;
+        manager.StartAction(ActionManager.ActionState.TowerSelected, HidePanel);
+        Visible = true;
 
         TowerStats stats = tower.stats;
         TowerExpData expData = tower.exp_data;
-        this.UpdateStats(stats);
-        this.UpdateExpData(expData);
+        UpdateStats(stats);
+        UpdateExpData(expData);
 
         TowerData data = tower.data as TowerData;
-        this._nameLabel.Text = data?.display_name ?? string.Empty;
-        this._idLabel.Text = tower.id;
-        this._currentTower = tower;
+        _nameLabel.Text = data?.display_name ?? string.Empty;
+        _idLabel.Text = tower.id;
+        _currentTower = tower;
 
-        this._levelLabel.Text = tower.level.ToString();
+        _levelLabel.Text = tower.level.ToString();
         if (tower.is_max_level())
         {
-            this.HideUpgradeOptions();
+            HideUpgradeOptions();
         }
         else
         {
-            this._upgradeTowerPrice.price = data?.upgrade_price ?? 0;
-            this._upgradeButtonContainer.Visible = true;
+            _upgradeTowerPrice.price = data?.upgrade_price ?? 0;
+            _upgradeButtonContainer.Visible = true;
         }
     }
 
     private void HidePanel()
     {
-        this.Visible = false;
+        Visible = false;
     }
 
     private void UpdateStats(TowerStats towerStats)
@@ -103,9 +103,9 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        this._damageStat.set_value(towerStats.damage);
-        this._attackSpeedStat.set_value(towerStats.attack_speed);
-        this._rangeStat.set_value(towerStats.attack_range);
+        _damageStat.set_value(towerStats.damage);
+        _attackSpeedStat.set_value(towerStats.attack_speed);
+        _rangeStat.set_value(towerStats.attack_range);
     }
 
     private void UpdateExpData(TowerExpData expData)
@@ -115,50 +115,50 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        this._levelLabel.Text = expData.level.ToString();
+        _levelLabel.Text = expData.level.ToString();
     }
 
     private void UpdateTargetingModes(List<TowerTargetingMode> modes)
     {
-        this._targetingModeSelector.Clear();
+        _targetingModeSelector.Clear();
         for (int index = 0; index < modes.Count; index++)
         {
             int mode = (int)modes[index];
             string modeName = Tower.targeting_mode_to_string(mode);
-            this._targetingModeSelector.AddItem(modeName, mode);
+            _targetingModeSelector.AddItem(modeName, mode);
         }
     }
 
-    private void _on_targeting_mode_selector_item_selected(int index)
+    private void OnTargetingModeSelectorItemSelected(int index)
     {
-        if (this._currentTower == null)
+        if (_currentTower == null)
         {
             return;
         }
 
-        int mode = this._targetingModeSelector.GetItemId(index);
-        this._currentTower.targeting_mode = mode;
+        int mode = _targetingModeSelector.GetItemId(index);
+        _currentTower.targeting_mode = mode;
     }
 
-    private void _on_remove_button_pressed()
+    private void OnRemoveButtonPressed()
     {
-        if (this._currentTower == null)
+        if (_currentTower == null)
         {
             return;
         }
 
-        ClickEvents.TowerRemovePressed?.Invoke(this._currentTower);
+        ClickEvents.TowerRemovePressed?.Invoke(_currentTower);
     }
 
-    private void _on_upgrade_button_pressed()
+    private void OnUpgradeButtonPressed()
     {
-        if (this._currentTower == null)
+        if (_currentTower == null)
         {
             GD.PushWarning("[TowerStatsPanel] Upgrade pressed with no selected tower");
             return;
         }
 
-        TowerData data = this._currentTower.data as TowerData;
+        TowerData data = _currentTower.data as TowerData;
         if (data == null)
         {
             return;
@@ -182,38 +182,38 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        this._currentTower.upgrade();
-        ClickEvents.TowerUpgradePressed?.Invoke(this._currentTower, towerConfiguration, price);
+        _currentTower.upgrade();
+        ClickEvents.TowerUpgradePressed?.Invoke(_currentTower, towerConfiguration, price);
     }
 
     private void HideUpgradeOptions()
     {
-        this._upgradeButtonContainer.Visible = false;
+        _upgradeButtonContainer.Visible = false;
     }
 
-    private void _on_upgrade_button_xarreta_mouse_entered()
+    private void OnUpgradeButtonXarretaMouseEntered()
     {
-        if (this._currentTower == null)
+        if (_currentTower == null)
         {
             return;
         }
 
-        TowerData data = this._currentTower.data as TowerData;
+        TowerData data = _currentTower.data as TowerData;
         TowerStats statsOnLevel = data?.stats_on_level;
         if (statsOnLevel == null)
         {
             return;
         }
 
-        this._damageStat.show_upgrade_value(statsOnLevel.damage);
-        this._attackSpeedStat.show_upgrade_value(statsOnLevel.attack_speed);
-        this._rangeStat.show_upgrade_value(statsOnLevel.attack_range);
+        _damageStat.show_upgrade_value(statsOnLevel.damage);
+        _attackSpeedStat.show_upgrade_value(statsOnLevel.attack_speed);
+        _rangeStat.show_upgrade_value(statsOnLevel.attack_range);
     }
 
-    private void _on_upgrade_button_xarreta_mouse_exited()
+    private void OnUpgradeButtonXarretaMouseExited()
     {
-        this._damageStat.hide_upgrade_value();
-        this._attackSpeedStat.hide_upgrade_value();
-        this._rangeStat.hide_upgrade_value();
+        _damageStat.hide_upgrade_value();
+        _attackSpeedStat.hide_upgrade_value();
+        _rangeStat.hide_upgrade_value();
     }
 }

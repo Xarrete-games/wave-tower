@@ -18,7 +18,7 @@ public partial class BloodPactScript : EventScript
             return;
         }
 
-        RunContext runContext = this.GetRunContext();
+        RunContext runContext = GetRunContext();
         if (runContext == null)
         {
             return;

@@ -14,12 +14,12 @@ public class ConsumablesManager
 
     public bool is_full()
     {
-        return this._consumables.Count == 5;
+        return _consumables.Count == 5;
     }
 
     public void add_consumable(Consumable consumable)
     {
-        if (this.is_full())
+        if (is_full())
         {
             return;
         }
@@ -29,49 +29,49 @@ public class ConsumablesManager
             return;
         }
 
-        this._consumables.Add(consumable);
-        this.SyncConsumableAddedToRuntime(consumable);
-        consumable.clicked += this._on_consumable_clicked;
-        consumable.used += this._on_consumable_used;
-        this.consumables_change?.Invoke(this._consumables);
-        this.consumable_added?.Invoke(consumable);
+        _consumables.Add(consumable);
+        SyncConsumableAddedToRuntime(consumable);
+        consumable.clicked += _on_consumable_clicked;
+        consumable.used += _on_consumable_used;
+        consumables_change?.Invoke(_consumables);
+        consumable_added?.Invoke(consumable);
     }
 
     public void _on_consumable_used(Consumable consumable)
     {
         ConsumableModel consumableModel = null;
-        this._runtimeConsumableModels.TryGetValue(consumable, out consumableModel);
+        _runtimeConsumableModels.TryGetValue(consumable, out consumableModel);
 
         if (consumableModel != null)
         {
-            this.SyncConsumableUseTargetToRuntime(consumable, consumableModel);
-            this.SyncRuntimeStatusFromLegacy();
+            SyncConsumableUseTargetToRuntime(consumable, consumableModel);
+            SyncRuntimeStatusFromLegacy();
             Hooks.OnConsumableUsed(Hooks.GetListenersFromRuntime(), consumableModel);
-            this.SyncLegacyStatusFromRuntime();
-            this.SyncTowerBuffsFromConsumableTarget(consumable);
+            SyncLegacyStatusFromRuntime();
+            SyncTowerBuffsFromConsumableTarget(consumable);
         }
 
         if (consumable != null)
         {
-            consumable.clicked -= this._on_consumable_clicked;
-            consumable.used -= this._on_consumable_used;
-            this.SyncConsumableRemovedFromRuntime(consumable);
+            consumable.clicked -= _on_consumable_clicked;
+            consumable.used -= _on_consumable_used;
+            SyncConsumableRemovedFromRuntime(consumable);
         }
 
-        this.consumable_used?.Invoke(consumable);
-        this._consumables.Remove(consumable);
+        consumable_used?.Invoke(consumable);
+        _consumables.Remove(consumable);
 
-        bool recoveredByHooks = consumableModel != null && this.IsConsumablePresentInRuntime(consumableModel);
-        if (recoveredByHooks && consumable != null && !this.is_full())
+        bool recoveredByHooks = consumableModel != null && IsConsumablePresentInRuntime(consumableModel);
+        if (recoveredByHooks && consumable != null && !is_full())
         {
-            this._runtimeConsumableModels[consumable] = consumableModel;
-            this._consumables.Add(consumable);
-            consumable.clicked += this._on_consumable_clicked;
-            consumable.used += this._on_consumable_used;
-            this.consumable_added?.Invoke(consumable);
+            _runtimeConsumableModels[consumable] = consumableModel;
+            _consumables.Add(consumable);
+            consumable.clicked += _on_consumable_clicked;
+            consumable.used += _on_consumable_used;
+            consumable_added?.Invoke(consumable);
         }
 
-        this.consumables_change?.Invoke(this._consumables);
+        consumables_change?.Invoke(_consumables);
     }
 
     public void _on_consumable_clicked(Consumable consumable)
@@ -93,7 +93,7 @@ public class ConsumablesManager
         }
         else
         {
-            this.consumable_clicked?.Invoke(consumable);
+            consumable_clicked?.Invoke(consumable);
         }
     }
 
@@ -104,13 +104,13 @@ public class ConsumablesManager
             return;
         }
 
-        ConsumableModel model = this.BuildConsumableModel(consumableObj);
+        ConsumableModel model = BuildConsumableModel(consumableObj);
         if (model == null)
         {
             return;
         }
 
-        this._runtimeConsumableModels[consumableObj] = model;
+        _runtimeConsumableModels[consumableObj] = model;
         RunContextRuntime.ConsumablesManager.AddConsumable(model);
     }
 
@@ -121,13 +121,13 @@ public class ConsumablesManager
             return;
         }
 
-        if (!this._runtimeConsumableModels.TryGetValue(consumableObj, out ConsumableModel model))
+        if (!_runtimeConsumableModels.TryGetValue(consumableObj, out ConsumableModel model))
         {
             return;
         }
 
         RunContextRuntime.ConsumablesManager.RemoveConsumable(model);
-        this._runtimeConsumableModels.Remove(consumableObj);
+        _runtimeConsumableModels.Remove(consumableObj);
     }
 
     private bool IsConsumablePresentInRuntime(ConsumableModel model)
@@ -151,7 +151,7 @@ public class ConsumablesManager
 
     private void SyncRuntimeStatusFromLegacy()
     {
-        Status status = this.GetRunContext()?.status;
+        Status status = GetRunContext()?.status;
         if (status == null)
         {
             return;
@@ -162,7 +162,7 @@ public class ConsumablesManager
 
     private void SyncLegacyStatusFromRuntime()
     {
-        Status status = this.GetRunContext()?.status;
+        Status status = GetRunContext()?.status;
         if (status == null)
         {
             return;
@@ -199,7 +199,7 @@ public class ConsumablesManager
             return;
         }
 
-        TowersManager towersManager = this.GetRunContext()?.towers_manager;
+        TowersManager towersManager = GetRunContext()?.towers_manager;
         if (towersManager == null)
         {
             return;
@@ -220,7 +220,7 @@ public class ConsumablesManager
             return;
         }
 
-        if (this.TryGetTargetTowerModelFromConsumable(consumableObj, out TowerModel towerModel))
+        if (TryGetTargetTowerModelFromConsumable(consumableObj, out TowerModel towerModel))
         {
             targetModel.TargetTower = towerModel;
         }
@@ -276,7 +276,7 @@ public class ConsumablesManager
         var model = new ConsumableTargeteableModel(id, targetType);
         if (targetType == ConsumableTargeteableModel.TargetType.Tower)
         {
-            if (this.TryGetTargetTowerModelFromConsumable(consumableObj, out TowerModel towerModel))
+            if (TryGetTargetTowerModelFromConsumable(consumableObj, out TowerModel towerModel))
             {
                 model.TargetTower = towerModel;
             }

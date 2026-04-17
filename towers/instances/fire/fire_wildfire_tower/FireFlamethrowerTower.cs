@@ -10,19 +10,19 @@ public partial class FireFlamethrowerTower : Tower
     {
         base._Ready();
 
-        this.flame_thrower_duration_timer = GetNode<Timer>("FlameThrowerDurationTimer");
-        this.fire_flamethrower_projectile = GetNode<FireFlamethrowerProjectile>("FireFlamethrowerProjectile");
+        flame_thrower_duration_timer = GetNode<Timer>("FlameThrowerDurationTimer");
+        fire_flamethrower_projectile = GetNode<FireFlamethrowerProjectile>("FireFlamethrowerProjectile");
 
-        this.on_target_change += this._on_new_target_change;
-        this.flame_thrower_duration_timer.Timeout += this._on_flame_thrower_duration_timer_timeout;
+        on_target_change += OnNewTargetChange;
+        flame_thrower_duration_timer.Timeout += OnFlameThrowerDurationTimerTimeout;
     }
 
     public override void _ExitTree()
     {
-        this.on_target_change -= this._on_new_target_change;
-        if (this.flame_thrower_duration_timer != null)
+        on_target_change -= OnNewTargetChange;
+        if (flame_thrower_duration_timer != null)
         {
-            this.flame_thrower_duration_timer.Timeout -= this._on_flame_thrower_duration_timer_timeout;
+            flame_thrower_duration_timer.Timeout -= OnFlameThrowerDurationTimerTimeout;
         }
 
         base._ExitTree();
@@ -30,20 +30,20 @@ public partial class FireFlamethrowerTower : Tower
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(this._current_target))
+        if (!GodotObject.IsInstanceValid(_current_target))
         {
             return;
         }
 
-        this.fire_flamethrower_projectile.fire();
-        Attack attack = this._get_attack();
-        this.fire_flamethrower_projectile.set_target(this._current_target, attack);
-        this.flame_thrower_duration_timer.Start();
+        fire_flamethrower_projectile.fire();
+        Attack attack = _get_attack();
+        fire_flamethrower_projectile.set_target(_current_target, attack);
+        flame_thrower_duration_timer.Start();
     }
 
-    private void _on_new_target_change(Node2D enemy)
+    private void OnNewTargetChange(Node2D enemy)
     {
-        bool isThrowing = this.fire_flamethrower_projectile.is_throwing();
+        bool isThrowing = fire_flamethrower_projectile.is_throwing();
         if (!isThrowing)
         {
             return;
@@ -51,16 +51,16 @@ public partial class FireFlamethrowerTower : Tower
 
         if (!GodotObject.IsInstanceValid(enemy))
         {
-            this.fire_flamethrower_projectile.stop();
+            fire_flamethrower_projectile.stop();
             return;
         }
 
-        Attack attack = this._get_attack();
-        this.fire_flamethrower_projectile.set_target(enemy, attack);
+        Attack attack = _get_attack();
+        fire_flamethrower_projectile.set_target(enemy, attack);
     }
 
-    private void _on_flame_thrower_duration_timer_timeout()
+    private void OnFlameThrowerDurationTimerTimeout()
     {
-        this.fire_flamethrower_projectile.stop();
+        fire_flamethrower_projectile.stop();
     }
 }

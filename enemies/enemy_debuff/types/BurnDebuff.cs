@@ -14,7 +14,7 @@ public class BurnDebuff : EnemyDebuff
         Source debuff_source = new(SourceTypeDebuff, data.id, null, source);
 
         Attack attack = new();
-        attack.damage = this.value;
+        attack.damage = value;
         attack.source = debuff_source;
 
         enemy.apply_damage(attack);

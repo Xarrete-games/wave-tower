@@ -12,6 +12,6 @@ public sealed class ConsumableTargeteableModel : ConsumableModel
     public ConsumableTargeteableModel(string id, TargetType targetingType)
         : base(id, ConsumableType.Other)
     {
-        this.TargetingType = targetingType;
+        TargetingType = targetingType;
     }
 }

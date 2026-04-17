@@ -18,169 +18,169 @@ public partial class ConsumablesHandler : Node
 
     public override void _Ready()
     {
-        this._runContext = GetNode<RunContext>("/root/RunContext");
-        this._gameState = GetNode<GameState>("/root/GameState");
+        _runContext = GetNode<RunContext>("/root/RunContext");
+        _gameState = GetNode<GameState>("/root/GameState");
 
-        if (this._runContext?.consumables_manager != null)
+        if (_runContext?.consumables_manager != null)
         {
-            this._runContext.consumables_manager.consumable_clicked += this._on_consumable_clicked;
+            _runContext.consumables_manager.consumable_clicked += OnConsumableClicked;
         }
 
-        if (this._gameState != null)
+        if (_gameState != null)
         {
-            this._gameState.state_change += this._on_game_state_changed;
+            _gameState.state_change += OnGameStateChanged;
         }
 
-        if (this._runContext?.towers_manager != null)
+        if (_runContext?.towers_manager != null)
         {
-            this._runContext.towers_manager.tower_hovered += this._on_tower_hovered;
-            this._runContext.towers_manager.tower_unhovered += this._on_tower_unhovered;
+            _runContext.towers_manager.tower_hovered += OnTowerHovered;
+            _runContext.towers_manager.tower_unhovered += OnTowerUnhovered;
         }
     }
 
     public override void _ExitTree()
     {
-        if (this._runContext?.consumables_manager != null)
+        if (_runContext?.consumables_manager != null)
         {
-            this._runContext.consumables_manager.consumable_clicked -= this._on_consumable_clicked;
+            _runContext.consumables_manager.consumable_clicked -= OnConsumableClicked;
         }
 
-        if (this._gameState != null)
+        if (_gameState != null)
         {
-            this._gameState.state_change -= this._on_game_state_changed;
+            _gameState.state_change -= OnGameStateChanged;
         }
 
-        if (this._runContext?.towers_manager != null)
+        if (_runContext?.towers_manager != null)
         {
-            this._runContext.towers_manager.tower_hovered -= this._on_tower_hovered;
-            this._runContext.towers_manager.tower_unhovered -= this._on_tower_unhovered;
+            _runContext.towers_manager.tower_hovered -= OnTowerHovered;
+            _runContext.towers_manager.tower_unhovered -= OnTowerUnhovered;
         }
     }
 
     public override void _Process(double delta)
     {
-        if (this._currentConsumable == null)
+        if (_currentConsumable == null)
         {
             return;
         }
 
-        ConsumableData data = this._currentConsumable.data;
+        ConsumableData data = _currentConsumable.data;
         if (data != null && data.targeting_type == (int)ConsumableTargeteable.TargetType.BLOCKED_TILE)
         {
-            this._handle_blocked_tile_placement();
+            HandleBlockedTilePlacement();
         }
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (this._currentConsumable == null)
+        if (_currentConsumable == null)
         {
             return;
         }
 
-        if (UIUtilsStatic.IsLeftClickEvent(@event) && this._isValidTarget)
+        if (UIUtilsStatic.IsLeftClickEvent(@event) && _isValidTarget)
         {
-            this._use_consumable();
+            UseConsumable();
         }
     }
 
-    private void _handle_blocked_tile_placement()
+    private void HandleBlockedTilePlacement()
     {
-        if (this.composite_tile_map == null)
+        if (composite_tile_map == null)
         {
             return;
         }
 
-        bool isMouseOnBlockedTile = this.composite_tile_map.is_mouse_on_block_tile();
+        bool isMouseOnBlockedTile = composite_tile_map.is_mouse_on_block_tile();
         if (isMouseOnBlockedTile)
         {
-            ConsumableData data = this._currentConsumable?.data;
+            ConsumableData data = _currentConsumable?.data;
             if (data != null)
             {
                 Input.SetCustomMouseCursor(data.cursor_icon_used, Input.CursorShape.Arrow, CenterCursorOffset);
             }
 
-            this._isValidTarget = true;
-            this._currentTarget = this.composite_tile_map;
+            _isValidTarget = true;
+            _currentTarget = composite_tile_map;
         }
         else
         {
-            ConsumableData data = this._currentConsumable?.data;
+            ConsumableData data = _currentConsumable?.data;
             if (data != null)
             {
                 Input.SetCustomMouseCursor(data.cursor_icon, Input.CursorShape.Arrow, CenterCursorOffset);
             }
 
-            this._invalidate_target();
+            InvalidateTarget();
         }
     }
 
-    private void _invalidate_target()
+    private void InvalidateTarget()
     {
-        this._isValidTarget = false;
-        this._currentTarget = null;
+        _isValidTarget = false;
+        _currentTarget = null;
     }
 
-    private void _on_tower_hovered(Tower tower)
+    private void OnTowerHovered(Tower tower)
     {
-        if (this._currentConsumable == null)
+        if (_currentConsumable == null)
         {
             return;
         }
 
-        ConsumableData data = this._currentConsumable.data;
+        ConsumableData data = _currentConsumable.data;
         if (data == null || data.targeting_type != (int)ConsumableTargeteable.TargetType.TOWER)
         {
             return;
         }
 
         Input.SetCustomMouseCursor(data.cursor_icon_used, Input.CursorShape.Arrow, CenterCursorOffset);
-        this._isValidTarget = true;
-        this._currentTarget = tower;
+        _isValidTarget = true;
+        _currentTarget = tower;
     }
 
-    private void _on_tower_unhovered(Tower tower)
+    private void OnTowerUnhovered(Tower tower)
     {
-        if (this._currentConsumable == null)
+        if (_currentConsumable == null)
         {
             return;
         }
 
-        ConsumableData data = this._currentConsumable.data;
+        ConsumableData data = _currentConsumable.data;
         if (data == null || data.targeting_type != (int)ConsumableTargeteable.TargetType.TOWER)
         {
             return;
         }
 
-        if (ReferenceEquals(this._currentTarget, tower))
+        if (ReferenceEquals(_currentTarget, tower))
         {
             Input.SetCustomMouseCursor(data.cursor_icon, Input.CursorShape.Arrow, CenterCursorOffset);
-            this._invalidate_target();
+            InvalidateTarget();
         }
     }
 
-    private void _use_consumable()
+    private void UseConsumable()
     {
-        if (this._currentConsumable == null)
+        if (_currentConsumable == null)
         {
             return;
         }
 
-        this._currentConsumable.use(this._currentTarget);
-        this._cancel_consumable();
+        _currentConsumable.use(_currentTarget);
+        CancelConsumable();
 
         ActionManager actionManager = GetNode<ActionManager>("/root/ActionManager");
         actionManager.EndAction();
     }
 
-    private void _cancel_consumable()
+    private void CancelConsumable()
     {
-        this._currentConsumable = null;
-        this._invalidate_target();
+        _currentConsumable = null;
+        InvalidateTarget();
         Input.SetCustomMouseCursor(DefaultCursor);
     }
 
-    private void _on_consumable_clicked(Consumable consumable)
+    private void OnConsumableClicked(Consumable consumable)
     {
         ConsumableTargeteable targeteable = consumable as ConsumableTargeteable;
         if (targeteable == null)
@@ -193,22 +193,22 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        this._currentConsumable = targeteable;
-        this._invalidate_target();
+        _currentConsumable = targeteable;
+        InvalidateTarget();
 
-        ConsumableData data = this._currentConsumable.data;
+        ConsumableData data = _currentConsumable.data;
         if (data != null)
         {
             Input.SetCustomMouseCursor(data.cursor_icon, Input.CursorShape.Arrow, CenterCursorOffset);
         }
 
         ActionManager actionManager = GetNode<ActionManager>("/root/ActionManager");
-        actionManager.StartAction(ActionManager.ActionState.UsingItem, this._cancel_consumable);
+        actionManager.StartAction(ActionManager.ActionState.UsingItem, CancelConsumable);
     }
 
-    private void _on_game_state_changed(int newState)
+    private void OnGameStateChanged(int newState)
     {
-        if (newState != GameState.IN_GAME && this._currentConsumable != null)
+        if (newState != GameState.IN_GAME && _currentConsumable != null)
         {
             ActionManager actionManager = GetNode<ActionManager>("/root/ActionManager");
             actionManager.EndAction();

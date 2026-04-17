@@ -22,31 +22,31 @@ public partial class TestData : Node
 
     public async override void _Ready()
     {
-        this._runHandler = GetNodeOrNull<RunHandler>("../RunHandler");
+        _runHandler = GetNodeOrNull<RunHandler>("../RunHandler");
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), SceneTreeTimer.SignalName.Timeout);
-        this._handle_initial_relics();
+        HandleInitialRelics();
 
-        if (this.open_loot_screen && this._runHandler != null)
+        if (open_loot_screen && _runHandler != null)
         {
-            await this._runHandler.ShowLootScreen();
+            await _runHandler.ShowLootScreen();
         }
 
-        if (this.initial_event != null && this._runHandler != null)
+        if (initial_event != null && _runHandler != null)
         {
-            await this._runHandler.ShowEventsScreen(this.initial_event);
+            await _runHandler.ShowEventsScreen(initial_event);
         }
     }
 
-    private void _handle_initial_relics()
+    private void HandleInitialRelics()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
 
-        if (this.initial_relics_ids.Count > 0)
+        if (initial_relics_ids.Count > 0)
         {
-            for (int index = 0; index < this.initial_relics_ids.Count; index++)
+            for (int index = 0; index < initial_relics_ids.Count; index++)
             {
-                string relicId = this.initial_relics_ids[index];
+                string relicId = initial_relics_ids[index];
                 RelicData typedRelicData = DataLoaderAccess.GetRelicById(relicId);
                 if (typedRelicData != null)
                 {
@@ -60,9 +60,9 @@ public partial class TestData : Node
             }
         }
 
-        if (this.initial_random_relics > 0)
+        if (initial_random_relics > 0)
         {
-            System.Collections.Generic.List<RelicData> items = DataLoaderAccess.GetRandomRelicsTyped(this.initial_random_relics);
+            System.Collections.Generic.List<RelicData> items = DataLoaderAccess.GetRandomRelicsTyped(initial_random_relics);
             for (int index = 0; index < items.Count; index++)
             {
                 RelicData relicDataObj = items[index];
@@ -76,11 +76,11 @@ public partial class TestData : Node
             }
         }
 
-        if (this.initial_consumables_ids.Count > 0)
+        if (initial_consumables_ids.Count > 0)
         {
-            for (int index = 0; index < this.initial_consumables_ids.Count; index++)
+            for (int index = 0; index < initial_consumables_ids.Count; index++)
             {
-                string consumableId = this.initial_consumables_ids[index];
+                string consumableId = initial_consumables_ids[index];
                 ConsumableData consumableDataObj = DataLoaderAccess.GetConsumableById(consumableId);
                 if (consumableDataObj != null)
                 {

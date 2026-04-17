@@ -8,29 +8,29 @@ public partial class RelicsBar : Control
     public override void _Ready()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._relicsManager = runContext.relics_manager;
-        if (this._relicsManager != null)
+        _relicsManager = runContext.relics_manager;
+        if (_relicsManager != null)
         {
-            this._relicsManager.relic_added += this.OnRelicAdded;
-            this._relicsManager.relic_removed += this.OnRelicRemoved;
-            this._relicsManager.relic_changed += this.OnRelicChanged;
+            _relicsManager.relic_added += OnRelicAdded;
+            _relicsManager.relic_removed += OnRelicRemoved;
+            _relicsManager.relic_changed += OnRelicChanged;
         }
     }
 
     public override void _ExitTree()
     {
-        if (this._relicsManager != null)
+        if (_relicsManager != null)
         {
-            this._relicsManager.relic_added -= this.OnRelicAdded;
-            this._relicsManager.relic_removed -= this.OnRelicRemoved;
-            this._relicsManager.relic_changed -= this.OnRelicChanged;
-            this._relicsManager = null;
+            _relicsManager.relic_added -= OnRelicAdded;
+            _relicsManager.relic_removed -= OnRelicRemoved;
+            _relicsManager.relic_changed -= OnRelicChanged;
+            _relicsManager = null;
         }
     }
 
     private void OnRelicAdded(string relicId)
     {
-        Relic relic = this._relicsManager?._get_relic(relicId);
+        Relic relic = _relicsManager?._get_relic(relicId);
         if (relic == null)
         {
             return;
@@ -43,7 +43,7 @@ public partial class RelicsBar : Control
 
     private void OnRelicChanged(string relicId)
     {
-        Relic relic = this._relicsManager?._get_relic(relicId);
+        Relic relic = _relicsManager?._get_relic(relicId);
         if (relic == null)
         {
             return;

@@ -8,42 +8,42 @@ public partial class InventoryUISlot : Control
 
     public override void _Ready()
     {
-        this._textureRect = GetNode<TextureRect>("CenterContainer/TextureRect");
+        _textureRect = GetNode<TextureRect>("CenterContainer/TextureRect");
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._consumablesManager = runContext?.consumables_manager;
-        if (this._consumablesManager != null)
+        _consumablesManager = runContext?.consumables_manager;
+        if (_consumablesManager != null)
         {
-            this._consumablesManager.consumable_used += this.OnConsumableUsed;
+            _consumablesManager.consumable_used += OnConsumableUsed;
         }
     }
 
     public override void _ExitTree()
     {
-        if (this._consumablesManager != null)
+        if (_consumablesManager != null)
         {
-            this._consumablesManager.consumable_used -= this.OnConsumableUsed;
-            this._consumablesManager = null;
+            _consumablesManager.consumable_used -= OnConsumableUsed;
+            _consumablesManager = null;
         }
     }
 
     public bool IsEmpty()
     {
-        return this._consumable == null;
+        return _consumable == null;
     }
 
     public void SetConsumable(Consumable consumable)
     {
-        this._consumable = consumable;
+        _consumable = consumable;
         ConsumableData data = consumable?.data;
         if (data != null)
         {
-            this._textureRect.Texture = data.icon;
+            _textureRect.Texture = data.icon;
         }
     }
 
-    private void _on_gui_input(InputEvent @event)
+    private void OnGuiInput(InputEvent @event)
     {
-        if (this.IsEmpty())
+        if (IsEmpty())
         {
             return;
         }
@@ -53,34 +53,34 @@ public partial class InventoryUISlot : Control
             GetNode<AudioManager>("/root/AudioManager").play_button_click();
             HintManagerStatic.RemoveHint(this);
 
-            this._consumable?.emit_clicked();
+            _consumable?.emit_clicked();
         }
     }
 
     private void OnConsumableUsed(Consumable consumable)
     {
-        if (this._consumable == null)
+        if (_consumable == null)
         {
             return;
         }
 
-        if (ReferenceEquals(this._consumable, consumable))
+        if (ReferenceEquals(_consumable, consumable))
         {
-            this._consumable = null;
-            this._textureRect.Texture = null;
+            _consumable = null;
+            _textureRect.Texture = null;
         }
     }
 
-    private void _on_mouse_entered()
+    private void OnMouseEntered()
     {
-        if (this.IsEmpty())
+        if (IsEmpty())
         {
             return;
         }
 
         GetNode<AudioManager>("/root/AudioManager").play_button_hover();
 
-        ConsumableData data = this._consumable?.data;
+        ConsumableData data = _consumable?.data;
         if (data == null)
         {
             return;
@@ -94,7 +94,7 @@ public partial class InventoryUISlot : Control
         }
     }
 
-    private void _on_mouse_exited()
+    private void OnMouseExited()
     {
         HintManagerStatic.RemoveHint(this);
     }

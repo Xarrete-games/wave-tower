@@ -1,82 +1,51 @@
 using Godot;
-
-public partial class TowerBuffsBarSlot : Control
-{
-    [Export]
-    public NodePath texture;
-
-    [Export]
-    public NodePath value_label;
-
+public partial class TowerBuffsBarSlot : Control {
+    [Export] public NodePath texture;
+    [Export] public NodePath value_label;
     public TowerBuff tower_buff;
-
     private int _value = 0;
-    public int value
-    {
-        get => this._value;
-        set
-        {
-            this._value = value;
-            if (this._valueLabelNode == null)
-            {
+    public int value {
+        get => _value;
+        set {
+            _value = value;
+            if (_valueLabelNode == null) {
                 return;
             }
-
-            this._valueLabelNode.Text = this._value != 0 ? this._value.ToString() : string.Empty;
+            _valueLabelNode.Text = _value != 0 ? _value.ToString() : string.Empty;
         }
     }
-
     private TextureRect _textureNode;
     private Label _valueLabelNode;
-
-    public override void _Ready()
-    {
-        this.ResolveNodes();
-
-        if (this.tower_buff != null)
-        {
-            this.ApplyBuffVisuals();
+    public override void _Ready() {
+        ResolveNodes();
+        if (tower_buff != null) {
+            ApplyBuffVisuals();
         }
-
-        this.value = this._value;
+        value = _value;
     }
-
-    public void set_buff(TowerBuff p_tower_buff, int p_value = 0)
-    {
-        this.tower_buff = p_tower_buff;
-        this.value = p_value;
-
-        this.ApplyBuffVisuals();
+    public void set_buff(TowerBuff towerBuff, int stackValue = 0) {
+        tower_buff = towerBuff;
+        value = stackValue;
+        ApplyBuffVisuals();
     }
-
-    private void ResolveNodes()
-    {
-        if (this._textureNode == null)
-        {
-            this._textureNode = !this.texture.IsEmpty ? GetNodeOrNull<TextureRect>(this.texture) : GetNodeOrNull<TextureRect>("Texture");
+    private void ResolveNodes() {
+        if (_textureNode == null) {
+            _textureNode = !texture.IsEmpty ? GetNodeOrNull<TextureRect>(texture) : GetNodeOrNull<TextureRect>("Texture");
         }
-
-        if (this._valueLabelNode == null)
-        {
-            this._valueLabelNode = !this.value_label.IsEmpty ? GetNodeOrNull<Label>(this.value_label) : GetNodeOrNull<Label>("Label");
+        if (_valueLabelNode == null) {
+            _valueLabelNode = !value_label.IsEmpty ? GetNodeOrNull<Label>(value_label) : GetNodeOrNull<Label>("Label");
         }
     }
-
-    private void ApplyBuffVisuals()
-    {
-        this.ResolveNodes();
-
-        if (this._textureNode == null || this.tower_buff == null)
-        {
+    private void ApplyBuffVisuals() {
+        ResolveNodes();
+        if (_textureNode == null || tower_buff == null) {
             return;
         }
-
-        BuffData data = this.tower_buff.data;
-        if (data == null)
-        {
+        BuffData data = tower_buff.data;
+        if (data == null) {
             return;
         }
-
-        this._textureNode.Texture = data.icon;
+        _textureNode.Texture = data.icon;
     }
 }
+

@@ -14,29 +14,29 @@ public partial class TowerCounterPanel : Control
     [Export]
     public Texture2D icon
     {
-        get => this._icon;
+        get => _icon;
         set
         {
-            this._icon = value;
-            this._update_texture();
+            _icon = value;
+            UpdateTexture();
         }
     }
 
     public int count
     {
-        get => this._count;
-        set => this._set_count(value);
+        get => _count;
+        set => SetCount(value);
     }
 
     public int max_value
     {
-        get => this._max_value;
+        get => _max_value;
         set
         {
-            this._max_value = value;
-            if (this.max_label != null)
+            _max_value = value;
+            if (max_label != null)
             {
-                this.max_label.Text = this._max_value.ToString();
+                max_label.Text = _max_value.ToString();
             }
         }
     }
@@ -47,48 +47,48 @@ public partial class TowerCounterPanel : Control
 
     public override void _Ready()
     {
-        this.current_label = GetNodeOrNull<Label>("RedCount/Value/CurrentLabel");
-        this.texture_rect = GetNodeOrNull<TextureRect>("RedCount/TextureRect");
-        this.max_label = GetNodeOrNull<Label>("RedCount/Value/MaxLabel");
+        current_label = GetNodeOrNull<Label>("RedCount/Value/CurrentLabel");
+        texture_rect = GetNodeOrNull<TextureRect>("RedCount/TextureRect");
+        max_label = GetNodeOrNull<Label>("RedCount/Value/MaxLabel");
 
-        this._update_texture();
-        if (this.texture_rect != null)
+        UpdateTexture();
+        if (texture_rect != null)
         {
-            this.texture_rect.Texture = this.icon;
+            texture_rect.Texture = icon;
         }
     }
 
-    private void _update_texture()
+    private void UpdateTexture()
     {
-        if (this.texture_rect != null)
+        if (texture_rect != null)
         {
-            this.texture_rect.Texture = this.icon;
+            texture_rect.Texture = icon;
         }
     }
 
-    private void _set_count(int value)
+    private void SetCount(int value)
     {
-        if (value < TIER_1_COUNT && this.max_value < TIER_1_COUNT)
+        if (value < TIER_1_COUNT && max_value < TIER_1_COUNT)
         {
-            this.max_value = TIER_1_COUNT;
+            max_value = TIER_1_COUNT;
         }
-        else if (value >= TIER_1_COUNT && value < TIER_2_COUNT && this.max_value < TIER_2_COUNT)
+        else if (value >= TIER_1_COUNT && value < TIER_2_COUNT && max_value < TIER_2_COUNT)
         {
-            this.max_value = TIER_2_COUNT;
+            max_value = TIER_2_COUNT;
         }
-        else if (value >= TIER_2_COUNT && value < TIER_3_COUNT && this.max_value < TIER_3_COUNT)
+        else if (value >= TIER_2_COUNT && value < TIER_3_COUNT && max_value < TIER_3_COUNT)
         {
-            this.max_value = TIER_3_COUNT;
+            max_value = TIER_3_COUNT;
         }
-        else if (value >= TIER_3_COUNT && value < TIER_4_COUNT && this.max_value < TIER_4_COUNT)
+        else if (value >= TIER_3_COUNT && value < TIER_4_COUNT && max_value < TIER_4_COUNT)
         {
-            this.max_value = TIER_4_COUNT;
+            max_value = TIER_4_COUNT;
         }
 
-        this._count = value;
-        if (this._count <= TIER_4_COUNT && this.current_label != null)
+        _count = value;
+        if (_count <= TIER_4_COUNT && current_label != null)
         {
-            this.current_label.Text = this._count.ToString();
+            current_label.Text = _count.ToString();
         }
     }
 }

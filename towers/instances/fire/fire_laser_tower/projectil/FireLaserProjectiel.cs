@@ -30,21 +30,21 @@ public partial class FireLaserProjectiel : Node2D
 
     public override void _Ready()
     {
-        this._line_2d = GetNode<Line2D>("Line2D");
-        this._line_width = this._line_2d.Width;
-        this._red_attack_start = GetNode<AudioStreamPlayer2D>("RedAttack_start");
-        this._red_attack_loop = GetNode<AudioStreamPlayer2D>("RedAttack_loop");
-        this._red_attack_finish = GetNode<AudioStreamPlayer2D>("RedAttack_finish");
-        this._fire_particles = GetNode<CpuParticles2D>("FireParticles");
+        _line_2d = GetNode<Line2D>("Line2D");
+        _line_width = _line_2d.Width;
+        _red_attack_start = GetNode<AudioStreamPlayer2D>("RedAttack_start");
+        _red_attack_loop = GetNode<AudioStreamPlayer2D>("RedAttack_loop");
+        _red_attack_finish = GetNode<AudioStreamPlayer2D>("RedAttack_finish");
+        _fire_particles = GetNode<CpuParticles2D>("FireParticles");
 
-        this.set_color(this.color);
-        this._fire_particles.Emitting = false;
+        set_color(color);
+        _fire_particles.Emitting = false;
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        Enemy targetEnemy = this._target as Enemy;
-        if (!this._is_casting || !GodotObject.IsInstanceValid(targetEnemy))
+        Enemy targetEnemy = _target as Enemy;
+        if (!_is_casting || !GodotObject.IsInstanceValid(targetEnemy))
         {
             return;
         }
@@ -53,158 +53,158 @@ public partial class FireLaserProjectiel : Node2D
         LookAt(targetPosition);
 
         float distanceToTarget = GlobalPosition.DistanceTo(targetPosition);
-        this._fire_particles.GlobalPosition = targetPosition;
+        _fire_particles.GlobalPosition = targetPosition;
 
-        this._current_laser_length = Mathf.MoveToward(this._current_laser_length, distanceToTarget, this.cast_speed * (float)delta);
+        _current_laser_length = Mathf.MoveToward(_current_laser_length, distanceToTarget, cast_speed * (float)delta);
 
-        int iMax = this._line_2d.GetPointCount() - 1;
+        int iMax = _line_2d.GetPointCount() - 1;
         if (iMax <= 0)
         {
             return;
         }
 
         float time = Time.GetTicksMsec() / 1000.0f;
-        for (int i = 0; i < this._line_2d.GetPointCount(); i++)
+        for (int i = 0; i < _line_2d.GetPointCount(); i++)
         {
-            Vector2 pos = this._line_2d.GetPointPosition(i);
-            pos.X = i * this._current_laser_length / iMax;
-            pos.Y = Mathf.Sin(time * this._speed + i * this._phase_offset) * this._amplitude * Mathf.Sin(Mathf.Pi * i / iMax);
-            this._line_2d.SetPointPosition(i, pos);
+            Vector2 pos = _line_2d.GetPointPosition(i);
+            pos.X = i * _current_laser_length / iMax;
+            pos.Y = Mathf.Sin(time * _speed + i * _phase_offset) * _amplitude * Mathf.Sin(Mathf.Pi * i / iMax);
+            _line_2d.SetPointPosition(i, pos);
         }
     }
 
     public void stop()
     {
-        this._target = null;
-        this._set_is_casting(false);
+        _target = null;
+        SetIsCasting(false);
     }
 
     public void set_target(Node2D target, Attack attack)
     {
-        this.set_target(target, attack, null, 1);
+        set_target(target, attack, null, 1);
     }
 
     public void set_target(Node2D target, Attack attack, EnemyDebuff debuff)
     {
-        this.set_target(target, attack, debuff, 1);
+        set_target(target, attack, debuff, 1);
     }
 
     public void set_target(Node2D target, Attack attack, EnemyDebuff debuff, int amount)
     {
-        if (target == this._target)
+        if (target == _target)
         {
             return;
         }
 
-        this._target = target;
-        this._attack = attack;
-        this._debuff = debuff;
-        this._amount_debuff = amount;
+        _target = target;
+        _attack = attack;
+        _debuff = debuff;
+        _amount_debuff = amount;
 
-        if (!this._is_casting)
+        if (!_is_casting)
         {
-            this._set_is_casting(true);
+            SetIsCasting(true);
         }
     }
 
     public void hit_target()
     {
-        if (!GodotObject.IsInstanceValid(this._target))
+        if (!GodotObject.IsInstanceValid(_target))
         {
             return;
         }
 
-        Enemy enemyModel = this._target as Enemy;
-        enemyModel?.apply_damage(this._attack);
-        if (this._debuff != null)
+        Enemy enemyModel = _target as Enemy;
+        enemyModel?.apply_damage(_attack);
+        if (_debuff != null)
         {
-            enemyModel?.apply_debuff(this._debuff, this._amount_debuff);
+            enemyModel?.apply_debuff(_debuff, _amount_debuff);
         }
     }
 
     public void set_color(Color new_color)
     {
-        this._color = new_color;
-        if (this._line_2d != null)
+        _color = new_color;
+        if (_line_2d != null)
         {
-            this._line_2d.Modulate = new_color;
+            _line_2d.Modulate = new_color;
         }
     }
 
-    private void _set_is_casting(bool new_value)
+    private void SetIsCasting(bool new_value)
     {
-        if (this._is_casting == new_value)
+        if (_is_casting == new_value)
         {
             return;
         }
 
-        this._is_casting = new_value;
-        if (!this._is_casting)
+        _is_casting = new_value;
+        if (!_is_casting)
         {
-            this._dissapear();
+            Dissapear();
             return;
         }
 
-        this._current_laser_length = 0.0f;
-        this._appear();
+        _current_laser_length = 0.0f;
+        Appear();
     }
 
-    private void _dissapear()
+    private void Dissapear()
     {
-        if (this._red_attack_loop.IsInsideTree())
+        if (_red_attack_loop.IsInsideTree())
         {
-            this._red_attack_loop.Stop();
+            _red_attack_loop.Stop();
         }
 
-        if (this._red_attack_finish.IsInsideTree())
+        if (_red_attack_finish.IsInsideTree())
         {
-            this._red_attack_finish.Play();
+            _red_attack_finish.Play();
         }
 
-        if (this._line_2d == null)
-        {
-            return;
-        }
-
-        if (this._tween != null && this._tween.IsRunning())
-        {
-            this._tween.Kill();
-        }
-
-        this._fire_particles.Emitting = false;
-        this._tween = CreateTween();
-        this._tween.TweenProperty(this._line_2d, "width", 0.0f, this.growth_time * 2.0f).FromCurrent();
-        this._tween.Finished += this._on_disappear_tween_finished;
-    }
-
-    private void _on_disappear_tween_finished()
-    {
-        this._line_2d?.Hide();
-        this._current_laser_length = 0.0f;
-    }
-
-    private async void _appear()
-    {
-        this._red_attack_start.Play();
-        if (this._line_2d == null)
+        if (_line_2d == null)
         {
             return;
         }
 
-        this._line_2d.Visible = true;
-        if (this._tween != null && this._tween.IsRunning())
+        if (_tween != null && _tween.IsRunning())
         {
-            this._tween.Kill();
+            _tween.Kill();
         }
 
-        this._fire_particles.Emitting = true;
-        this._tween = CreateTween();
-        this._tween.TweenProperty(this._line_2d, "width", this._line_width, this.growth_time * 2.0f).From(0.0f);
+        _fire_particles.Emitting = false;
+        _tween = CreateTween();
+        _tween.TweenProperty(_line_2d, "width", 0.0f, growth_time * 2.0f).FromCurrent();
+        _tween.Finished += OnDisappearTweenFinished;
+    }
 
-        await ToSignal(this._red_attack_start, AudioStreamPlayer2D.SignalName.Finished);
-        if (this._is_casting)
+    private void OnDisappearTweenFinished()
+    {
+        _line_2d?.Hide();
+        _current_laser_length = 0.0f;
+    }
+
+    private async void Appear()
+    {
+        _red_attack_start.Play();
+        if (_line_2d == null)
         {
-            this._red_attack_loop.Play();
+            return;
+        }
+
+        _line_2d.Visible = true;
+        if (_tween != null && _tween.IsRunning())
+        {
+            _tween.Kill();
+        }
+
+        _fire_particles.Emitting = true;
+        _tween = CreateTween();
+        _tween.TweenProperty(_line_2d, "width", _line_width, growth_time * 2.0f).From(0.0f);
+
+        await ToSignal(_red_attack_start, AudioStreamPlayer2D.SignalName.Finished);
+        if (_is_casting)
+        {
+            _red_attack_loop.Play();
         }
     }
 }

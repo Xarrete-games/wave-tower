@@ -1,16 +1,10 @@
-public class AttackSpeedMultBuff : TowerBuffStatsModifier
-{
-    public AttackSpeedMultBuff()
-    {
+public class AttackSpeedMultBuff : TowerBuffStatsModifier {
+    public AttackSpeedMultBuff() {
     }
-
-    public AttackSpeedMultBuff(Source p_source, Duration p_duration = null, TowerBuff p_residual_buff = null, BuffData p_data = null, int p_value = 0)
-        : base(p_source, p_duration, p_residual_buff, p_data, p_value)
-    {
+    public AttackSpeedMultBuff(Source source, Duration duration = null, TowerBuff residual_buff = null, BuffData data = null, int value = 0) : base(source, duration, residual_buff, data, value) {
     }
-
-    public override void contribute(TowerStatsAccumulator acc)
-    {
-        acc.attack_speed_mult += this.value / 100.0f;
+    public override void contribute(TowerStatsAccumulator acc) {
+        acc.attack_speed_mult += value / 100.0f;
     }
 }
+

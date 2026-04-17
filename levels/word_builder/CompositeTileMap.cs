@@ -18,8 +18,8 @@ public partial class CompositeTileMap : Node
 
         public TileKey(MapPiece piece, Vector2I coords)
         {
-            this.Piece = piece;
-            this.Coords = coords;
+            Piece = piece;
+            Coords = coords;
         }
     }
 
@@ -36,74 +36,74 @@ public partial class CompositeTileMap : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.composite_tile_map = this;
 
-        this._towersManager = runContext.towers_manager;
-        if (this._towersManager != null)
+        _towersManager = runContext.towers_manager;
+        if (_towersManager != null)
         {
-            this._towersManager.tower_removed += this._on_tower_removed;
+            _towersManager.tower_removed += OnTowerRemoved;
         }
     }
 
     public override void _ExitTree()
     {
-        if (this._towersManager != null)
+        if (_towersManager != null)
         {
-            this._towersManager.tower_removed -= this._on_tower_removed;
+            _towersManager.tower_removed -= OnTowerRemoved;
         }
     }
 
     public void register_piece(MapPiece piece)
     {
-        if (piece == null || this._pieces.Contains(piece))
+        if (piece == null || _pieces.Contains(piece))
         {
             return;
         }
 
-        this._pieces.Add(piece);
+        _pieces.Add(piece);
         piece.limit_buildeable_tiles(MAX_BUILDEABLE_PER_PIECE);
-        this._scan_piece(piece);
+        ScanPiece(piece);
     }
 
     public void unregister_piece(MapPiece piece)
     {
-        if (piece == null || !this._pieces.Contains(piece))
+        if (piece == null || !_pieces.Contains(piece))
         {
             return;
         }
 
-        this._pieces.Remove(piece);
+        _pieces.Remove(piece);
         string prefix = $"{piece.GetInstanceId()}:";
 
-        foreach (string key in new List<string>(this._buildeableTiles.Keys))
+        foreach (string key in new List<string>(_buildeableTiles.Keys))
         {
             if (key.StartsWith(prefix))
             {
-                this._buildeableTiles.Remove(key);
-                this._keyToTile.Remove(key);
+                _buildeableTiles.Remove(key);
+                _keyToTile.Remove(key);
             }
         }
 
-        foreach (string key in new List<string>(this._blockedTiles.Keys))
+        foreach (string key in new List<string>(_blockedTiles.Keys))
         {
             if (key.StartsWith(prefix))
             {
-                this._blockedTiles.Remove(key);
-                this._keyToTile.Remove(key);
+                _blockedTiles.Remove(key);
+                _keyToTile.Remove(key);
             }
         }
 
-        foreach (string key in new List<string>(this._occupiedTiles.Keys))
+        foreach (string key in new List<string>(_occupiedTiles.Keys))
         {
             if (key.StartsWith(prefix))
             {
-                this._occupiedTiles.Remove(key);
-                this._keyToTile.Remove(key);
+                _occupiedTiles.Remove(key);
+                _keyToTile.Remove(key);
             }
         }
     }
 
     public Vector2I get_mouse_tile_pos()
     {
-        TileKey info = this.get_mouse_tile_info();
+        TileKey info = get_mouse_tile_info();
         if (info == null)
         {
             return new Vector2I(-9999, -9999);
@@ -114,42 +114,42 @@ public partial class CompositeTileMap : Node
 
     public bool is_mouse_on_buildeable_tile()
     {
-        TileKey info = this.get_mouse_tile_info();
+        TileKey info = get_mouse_tile_info();
         if (info == null)
         {
             return false;
         }
 
-        string key = this._make_key(info.Piece, info.Coords);
-        if (!this._buildeableTiles.ContainsKey(key))
+        string key = MakeKey(info.Piece, info.Coords);
+        if (!_buildeableTiles.ContainsKey(key))
         {
             return false;
         }
 
-        return !this._occupiedTiles.ContainsKey(key) && !this._blockedTiles.ContainsKey(key);
+        return !_occupiedTiles.ContainsKey(key) && !_blockedTiles.ContainsKey(key);
     }
 
     public bool is_mouse_on_block_tile()
     {
-        TileKey info = this.get_mouse_tile_info();
+        TileKey info = get_mouse_tile_info();
         if (info == null)
         {
             return false;
         }
 
-        string key = this._make_key(info.Piece, info.Coords);
-        return this._blockedTiles.ContainsKey(key);
+        string key = MakeKey(info.Piece, info.Coords);
+        return _blockedTiles.ContainsKey(key);
     }
 
     public Vector2 get_current_tile_pos()
     {
-        TileKey info = this.get_mouse_tile_info();
+        TileKey info = get_mouse_tile_info();
         if (info == null)
         {
             return GetViewport().GetMousePosition();
         }
 
-        TileMapLayer tileMap = this._get_tile_map(info.Piece);
+        TileMapLayer tileMap = GetTileMap(info.Piece);
         if (tileMap == null)
         {
             return GetViewport().GetMousePosition();
@@ -162,77 +162,77 @@ public partial class CompositeTileMap : Node
 
     public string set_tile_occupied_at_mouse()
     {
-        TileKey info = this.get_mouse_tile_info();
+        TileKey info = get_mouse_tile_info();
         if (info == null)
         {
             return string.Empty;
         }
 
-        string key = this._make_key(info.Piece, info.Coords);
-        this._occupiedTiles[key] = true;
-        this._buildeableTiles.Remove(key);
+        string key = MakeKey(info.Piece, info.Coords);
+        _occupiedTiles[key] = true;
+        _buildeableTiles.Remove(key);
         return key;
     }
 
     public void set_tile_occupied(string key)
     {
-        this._occupiedTiles[key] = true;
-        this._buildeableTiles.Remove(key);
+        _occupiedTiles[key] = true;
+        _buildeableTiles.Remove(key);
     }
 
     public void set_tile_free(string key)
     {
-        if (!this._occupiedTiles.ContainsKey(key))
+        if (!_occupiedTiles.ContainsKey(key))
         {
             return;
         }
 
-        this._occupiedTiles.Remove(key);
-        this._buildeableTiles[key] = true;
+        _occupiedTiles.Remove(key);
+        _buildeableTiles[key] = true;
     }
 
     public void unblock_tile(string key)
     {
-        if (!this._blockedTiles.ContainsKey(key))
+        if (!_blockedTiles.ContainsKey(key))
         {
             return;
         }
 
-        this._blockedTiles.Remove(key);
+        _blockedTiles.Remove(key);
 
-        if (this._keyToTile.TryGetValue(key, out TileKey tile) && tile != null)
+        if (_keyToTile.TryGetValue(key, out TileKey tile) && tile != null)
         {
-            TileMapLayer tileMap = this._get_tile_map(tile.Piece);
+            TileMapLayer tileMap = GetTileMap(tile.Piece);
             tileMap?.SetCell(tile.Coords, ATLAS_ID, UNLOCK_TILE_POS);
         }
 
-        this._buildeableTiles[key] = true;
+        _buildeableTiles[key] = true;
     }
 
     public bool unblock_tile_at_mouse()
     {
-        TileKey info = this.get_mouse_tile_info();
+        TileKey info = get_mouse_tile_info();
         if (info == null)
         {
             return false;
         }
 
-        string key = this._make_key(info.Piece, info.Coords);
-        if (!this._blockedTiles.ContainsKey(key))
+        string key = MakeKey(info.Piece, info.Coords);
+        if (!_blockedTiles.ContainsKey(key))
         {
             return false;
         }
 
-        this.unblock_tile(key);
+        unblock_tile(key);
         return true;
     }
 
     public void destroy_random_buildeable_tile()
     {
         List<string> candidates = new();
-        foreach (string key in this._buildeableTiles.Keys)
+        foreach (string key in _buildeableTiles.Keys)
         {
-            if (!this._blockedTiles.ContainsKey(key))
+            if (!_blockedTiles.ContainsKey(key))
             {
                 candidates.Add(key);
             }
@@ -246,12 +246,12 @@ public partial class CompositeTileMap : Node
         int randomIndex = (int)(GD.Randi() % (uint)candidates.Count);
         string selectedKey = candidates[randomIndex];
 
-        this._occupiedTiles[selectedKey] = true;
-        this._buildeableTiles.Remove(selectedKey);
+        _occupiedTiles[selectedKey] = true;
+        _buildeableTiles.Remove(selectedKey);
 
-        if (this._keyToTile.TryGetValue(selectedKey, out TileKey tile) && tile != null)
+        if (_keyToTile.TryGetValue(selectedKey, out TileKey tile) && tile != null)
         {
-            TileMapLayer tileMap = this._get_tile_map(tile.Piece);
+            TileMapLayer tileMap = GetTileMap(tile.Piece);
             tileMap?.SetCell(tile.Coords, ATLAS_ID, NORMAL_TILE_POS);
         }
     }
@@ -262,10 +262,10 @@ public partial class CompositeTileMap : Node
         Transform2D canvasTransform = GetViewport().GetCanvasTransform();
         Vector2 globalMouse = canvasTransform.AffineInverse() * mousePos;
 
-        for (int index = 0; index < this._pieces.Count; index++)
+        for (int index = 0; index < _pieces.Count; index++)
         {
-            MapPiece piece = this._pieces[index];
-            TileMapLayer tileMap = this._get_tile_map(piece);
+            MapPiece piece = _pieces[index];
+            TileMapLayer tileMap = GetTileMap(piece);
             if (tileMap == null)
             {
                 continue;
@@ -282,9 +282,9 @@ public partial class CompositeTileMap : Node
         return null;
     }
 
-    private void _scan_piece(MapPiece piece)
+    private void ScanPiece(MapPiece piece)
     {
-        TileMapLayer tileMap = this._get_tile_map(piece);
+        TileMapLayer tileMap = GetTileMap(piece);
         if (tileMap == null)
         {
             return;
@@ -300,36 +300,36 @@ public partial class CompositeTileMap : Node
                 continue;
             }
 
-            string key = this._make_key(piece, mapCoords);
-            this._keyToTile[key] = new TileKey(piece, mapCoords);
+            string key = MakeKey(piece, mapCoords);
+            _keyToTile[key] = new TileKey(piece, mapCoords);
 
             if ((bool)tileData.GetCustomData(BLOCKED))
             {
-                this._blockedTiles[key] = true;
+                _blockedTiles[key] = true;
             }
             else if ((bool)tileData.GetCustomData(BUILDEABLE))
             {
-                this._buildeableTiles[key] = true;
+                _buildeableTiles[key] = true;
             }
         }
     }
 
-    private string _make_key(MapPiece piece, Vector2I coords)
+    private string MakeKey(MapPiece piece, Vector2I coords)
     {
         return $"{piece.GetInstanceId()}:{coords.X},{coords.Y}";
     }
 
-    private TileMapLayer _get_tile_map(MapPiece piece)
+    private TileMapLayer GetTileMap(MapPiece piece)
     {
         return piece?.GetNodeOrNull<TileMapLayer>("MapPieceTileMap");
     }
 
-    private void _on_tower_removed(Tower tower)
+    private void OnTowerRemoved(Tower tower)
     {
         string key = tower?.composite_tile_key;
         if (!string.IsNullOrEmpty(key))
         {
-            this.set_tile_free(key);
+            set_tile_free(key);
         }
     }
 }

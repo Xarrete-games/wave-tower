@@ -10,11 +10,11 @@ public partial class TowerButtonHint : Control
 
     public override void _Ready()
     {
-        this.name_label = GetNodeOrNull<RichTextLabel>("MarginContainer/VBoxContainer/DescriptionContainer/NameLabel");
-        this.description_label = GetNodeOrNull<Label>("MarginContainer/VBoxContainer/DescriptionContainer/DescriptionLabel");
-        this.damage_stat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/DamageStatUi");
-        this.attack_speed_stat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/AttkSpeedStatUi");
-        this.range_stat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/RangeStatUi");
+        name_label = GetNodeOrNull<RichTextLabel>("MarginContainer/VBoxContainer/DescriptionContainer/NameLabel");
+        description_label = GetNodeOrNull<Label>("MarginContainer/VBoxContainer/DescriptionContainer/DescriptionLabel");
+        damage_stat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/DamageStatUi");
+        attack_speed_stat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/AttkSpeedStatUi");
+        range_stat = GetNodeOrNull<TowerStatUi>("MarginContainer/VBoxContainer/StatsContainer/RangeStatUi");
     }
 
     public void set_stats(TowerData configuration)
@@ -24,18 +24,18 @@ public partial class TowerButtonHint : Control
             return;
         }
 
-        if (this.name_label != null)
+        if (name_label != null)
         {
-            this.name_label.Text = "[u]" + configuration.display_name + "[/u]";
+            name_label.Text = "[u]" + configuration.display_name + "[/u]";
         }
 
-        if (this.description_label != null)
+        if (description_label != null)
         {
-            this.description_label.Text = configuration.description;
+            description_label.Text = configuration.description;
         }
 
-        this.damage_stat?.set_value(configuration.base_damage);
-        this.attack_speed_stat?.set_value(configuration.base_attack_speed);
-        this.range_stat?.set_value(configuration.base_attack_range);
+        damage_stat?.set_value(configuration.base_damage);
+        attack_speed_stat?.set_value(configuration.base_attack_speed);
+        range_stat?.set_value(configuration.base_attack_range);
     }
 }

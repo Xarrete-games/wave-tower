@@ -19,15 +19,15 @@ public partial class TowerButton : Control
     [Export]
     public TowerDataWithInstance tower_data
     {
-        get => this._tower_data;
+        get => _tower_data;
         set
         {
-            this._tower_data = value;
-            this.configuration = value?.data;
-            this.tower_scene = value?.scene;
-            this.icon = this.configuration?.icon;
-            this.type = this.configuration?.type ?? 0;
-            this._update_price();
+            _tower_data = value;
+            configuration = value?.data;
+            tower_scene = value?.scene;
+            icon = configuration?.icon;
+            type = configuration?.type ?? 0;
+            UpdatePrice();
         }
     }
 
@@ -47,46 +47,46 @@ public partial class TowerButton : Control
 
     public int price
     {
-        get => this._price;
+        get => _price;
         set
         {
-            this._price = value;
-                if (this._goldPriceNode != null)
-                {
-                    this._goldPriceNode.price = value;
-                }
+            _price = value;
+            if (_goldPriceNode != null)
+            {
+                _goldPriceNode.price = value;
+            }
         }
     }
 
     public Texture2D icon
     {
-        get => this._icon;
+        get => _icon;
         set
         {
-            this._icon = value;
-            this._update_texture();
+            _icon = value;
+            UpdateTexture();
         }
     }
 
     public Texture2D icon_hover
     {
-        get => this._icon_hover;
+        get => _icon_hover;
         set
         {
-            this._icon_hover = value;
-            this._update_texture_hover();
+            _icon_hover = value;
+            UpdateTextureHover();
         }
     }
 
     public int amount
     {
-        get => this._amount;
+        get => _amount;
         set
         {
-            this._amount = value;
-            if (this._amountLabelNode != null)
+            _amount = value;
+            if (_amountLabelNode != null)
             {
-                this._amountLabelNode.Text = "x " + value;
+                _amountLabelNode.Text = "x " + value;
             }
         }
     }
@@ -102,74 +102,74 @@ public partial class TowerButton : Control
 
     public override void _Ready()
     {
-        this._panelNode = !this.panel.IsEmpty ? GetNodeOrNull<Panel>(this.panel) : GetNodeOrNull<Panel>("VBoxContainer/CenterContainer/Panel");
-        this._towerButtonNode = !this.tower_button.IsEmpty ? GetNodeOrNull<TextureButton>(this.tower_button) : GetNodeOrNull<TextureButton>("VBoxContainer/CenterContainer/TowerButton");
-        this._goldPriceNode = !this.gold_price.IsEmpty ? GetNodeOrNull<GoldPrice>(this.gold_price) : GetNodeOrNull<GoldPrice>("VBoxContainer/GoldPrice");
-        this._amountLabelNode = !this.amount_label.IsEmpty ? GetNodeOrNull<Label>(this.amount_label) : GetNodeOrNull<Label>("HBoxContainer/MarginContainer/AmountLabel");
+        _panelNode = !panel.IsEmpty ? GetNodeOrNull<Panel>(panel) : GetNodeOrNull<Panel>("VBoxContainer/CenterContainer/Panel");
+        _towerButtonNode = !tower_button.IsEmpty ? GetNodeOrNull<TextureButton>(tower_button) : GetNodeOrNull<TextureButton>("VBoxContainer/CenterContainer/TowerButton");
+        _goldPriceNode = !gold_price.IsEmpty ? GetNodeOrNull<GoldPrice>(gold_price) : GetNodeOrNull<GoldPrice>("VBoxContainer/GoldPrice");
+        _amountLabelNode = !amount_label.IsEmpty ? GetNodeOrNull<Label>(amount_label) : GetNodeOrNull<Label>("HBoxContainer/MarginContainer/AmountLabel");
 
-        this._runContext = GetNode<RunContext>("/root/RunContext");
-        this._runContext.economy.available_free_towers_change += this._on_available_free_towers_change;
-        if (this._runContext.relics_manager != null)
+        _runContext = GetNode<RunContext>("/root/RunContext");
+        _runContext.economy.available_free_towers_change += OnAvailableFreeTowersChange;
+        if (_runContext.relics_manager != null)
         {
-            this._runContext.relics_manager.relic_added += this._on_relic_added;
-            this._runContext.relics_manager.relic_removed += this._on_relic_removed;
+            _runContext.relics_manager.relic_added += OnRelicAdded;
+            _runContext.relics_manager.relic_removed += OnRelicRemoved;
         }
-        this._runContext.progress.current_wave_finished += this._current_wave_finished;
+        _runContext.progress.current_wave_finished += CurrentWaveFinished;
 
-        this._panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
-        this._update_texture();
+        _panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
+        UpdateTexture();
     }
 
     public override void _ExitTree()
     {
-        if (this._runContext?.economy != null)
+        if (_runContext?.economy != null)
         {
-            this._runContext.economy.available_free_towers_change -= this._on_available_free_towers_change;
+            _runContext.economy.available_free_towers_change -= OnAvailableFreeTowersChange;
         }
 
-        if (this._runContext?.progress != null)
+        if (_runContext?.progress != null)
         {
-            this._runContext.progress.current_wave_finished -= this._current_wave_finished;
+            _runContext.progress.current_wave_finished -= CurrentWaveFinished;
         }
 
-        if (this._runContext?.relics_manager != null)
+        if (_runContext?.relics_manager != null)
         {
-            this._runContext.relics_manager.relic_added -= this._on_relic_added;
-            this._runContext.relics_manager.relic_removed -= this._on_relic_removed;
-        }
-    }
-
-    private void _update_texture()
-    {
-        if (this._towerButtonNode != null)
-        {
-            this._towerButtonNode.TextureNormal = this.icon;
+            _runContext.relics_manager.relic_added -= OnRelicAdded;
+            _runContext.relics_manager.relic_removed -= OnRelicRemoved;
         }
     }
 
-    private void _update_texture_hover()
+    private void UpdateTexture()
     {
-        if (this._towerButtonNode != null)
+        if (_towerButtonNode != null)
         {
-            this._towerButtonNode.TextureHover = this.icon_hover;
+            _towerButtonNode.TextureNormal = icon;
         }
     }
 
-    private void _on_mouse_exited()
+    private void UpdateTextureHover()
     {
-        this.unhover?.Invoke(this);
-        this._panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
+        if (_towerButtonNode != null)
+        {
+            _towerButtonNode.TextureHover = icon_hover;
+        }
     }
 
-    private void _on_mouse_entered()
+    private void OnMouseExited()
     {
-        this._panelNode?.AddThemeStyleboxOverride("panel", HOVER_PANEL);
-        this.hover?.Invoke(this);
+        unhover?.Invoke(this);
+        _panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
+    }
+
+    private void OnMouseEntered()
+    {
+        _panelNode?.AddThemeStyleboxOverride("panel", HOVER_PANEL);
+        hover?.Invoke(this);
         AudioManager audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
         audioManager?.play_button_hover();
     }
 
-    private void _update_price()
+    private void UpdatePrice()
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
         if (runContext == null)
@@ -179,62 +179,62 @@ public partial class TowerButton : Control
 
         if (runContext.economy.available_free_towers > 0)
         {
-            this.price = 0;
+            price = 0;
             return;
         }
 
-        if (this.configuration == null)
+        if (configuration == null)
         {
             return;
         }
 
-        int basePrice = this.configuration.build_price;
+        int basePrice = configuration.build_price;
         PriceContext ctx = new(PriceContext.PriceType.Tower, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
-        this.price = ctx.FinalPrice;
+        price = ctx.FinalPrice;
     }
 
-    private void _on_available_free_towers_change(int _available_free_towers)
+    private void OnAvailableFreeTowersChange(int _available_free_towers)
     {
-        this._update_price();
+        UpdatePrice();
     }
 
-    private void _on_relic_added(string relicId)
+    private void OnRelicAdded(string relicId)
     {
         if (relicId == "soya_sauce" || relicId == "tuna_nigiri")
         {
-            this._update_price();
+            UpdatePrice();
         }
     }
 
-    private void _on_relic_removed(string relic_id)
+    private void OnRelicRemoved(string relic_id)
     {
         if (relic_id == "soya_sauce" || relic_id == "tuna_nigiri")
         {
-            this._update_price();
+            UpdatePrice();
         }
     }
 
-    private void _current_wave_finished()
+    private void CurrentWaveFinished()
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
         if (runContext?.relics_manager != null && runContext.relics_manager.has_relic("lemon"))
         {
-            this._update_price();
+            UpdatePrice();
         }
     }
 
-    private void _on_tower_button_pressed()
+    private void OnTowerButtonPressed()
     {
         AudioManager audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
         audioManager?.play_button_click();
 
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        if (runContext != null && runContext.economy.gold < this.price)
+        if (runContext != null && runContext.economy.gold < price)
         {
             return;
         }
 
-        this.tower_button_pressed?.Invoke(this.tower_data, this.price);
+        tower_button_pressed?.Invoke(tower_data, price);
     }
 }

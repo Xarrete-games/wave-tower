@@ -24,12 +24,12 @@ public class GridManager
 
     public void occupy(Vector2I tile)
     {
-        this.grid.Add(tile);
+        grid.Add(tile);
     }
 
     public bool is_occupied(Vector2I tile)
     {
-        return this.grid.Contains(tile);
+        return grid.Contains(tile);
     }
 
     public Vector2I get_neighbor_tile(Vector2I tile, int dir)
@@ -44,7 +44,7 @@ public class GridManager
 
     public bool would_cause_enclosure_at(Vector2I candidate)
     {
-        var simulated = new HashSet<Vector2I>(this.grid) { candidate };
+        var simulated = new HashSet<Vector2I>(grid) { candidate };
 
         for (int i = 0; i < ALL_DIRS.Length; i++)
         {
@@ -77,13 +77,13 @@ public class GridManager
             }
 
             Vector2I newTile = tile + GRID_OFFSETS[dir];
-            if (this.grid.Contains(newTile))
+            if (grid.Contains(newTile))
             {
                 invalidDirs.Add(dir);
                 continue;
             }
 
-            var simulated = new HashSet<Vector2I>(this.grid) { newTile };
+            var simulated = new HashSet<Vector2I>(grid) { newTile };
 
             if (!FloodFill.can_escape_from(newTile, simulated, GRID_OFFSETS))
             {
@@ -172,7 +172,7 @@ public class GridManager
     public HashSet<string> create_simulated_occupation(Vector2I? extra_tile = null)
     {
         var occ = new HashSet<string>();
-        foreach (Vector2I tile in this.grid)
+        foreach (Vector2I tile in grid)
         {
             occ.Add(vec_key(tile));
         }

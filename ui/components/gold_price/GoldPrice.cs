@@ -13,39 +13,39 @@ public partial class GoldPrice : HBoxContainer
 
     public int price
     {
-        get => this._price;
+        get => _price;
         set
         {
-            this._price = value;
-            if (this._priceLabel != null)
+            _price = value;
+            if (_priceLabel != null)
             {
-                this._priceLabel.Text = value.ToString();
-                this._check_label_color(this._runContext?.economy?.gold ?? 0);
+                _priceLabel.Text = value.ToString();
+                CheckLabelColor(_runContext?.economy?.gold ?? 0);
             }
         }
     }
 
     public override void _Ready()
     {
-        this._priceLabel = GetNode<Label>("PriceLabel");
-        this._runContext = GetNode<RunContext>("/root/RunContext");
+        _priceLabel = GetNode<Label>("PriceLabel");
+        _runContext = GetNode<RunContext>("/root/RunContext");
 
-        this._priceLabel.Text = this._price.ToString();
-        this._check_label_color(this._runContext.economy.gold);
-        this._runContext.economy.gold_change += this._check_label_color;
+        _priceLabel.Text = _price.ToString();
+        CheckLabelColor(_runContext.economy.gold);
+        _runContext.economy.gold_change += CheckLabelColor;
     }
 
     public override void _ExitTree()
     {
-        if (this._runContext?.economy != null)
+        if (_runContext?.economy != null)
         {
-            this._runContext.economy.gold_change -= this._check_label_color;
+            _runContext.economy.gold_change -= CheckLabelColor;
         }
     }
 
-    private void _check_label_color(int gold)
+    private void CheckLabelColor(int gold)
     {
-        this._hasEnoughGold = gold >= this._price;
-        this._priceLabel.LabelSettings = this._hasEnoughGold ? LabelSettings24 : LabelSettings24Invalid;
+        _hasEnoughGold = gold >= _price;
+        _priceLabel.LabelSettings = _hasEnoughGold ? LabelSettings24 : LabelSettings24Invalid;
     }
 }

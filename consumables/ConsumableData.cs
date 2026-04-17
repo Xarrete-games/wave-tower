@@ -26,7 +26,7 @@ public partial class ConsumableData : BaseData
 
     public Consumable create_consumable()
     {
-        string idValue = (this.id ?? string.Empty).ToLowerInvariant();
+        string idValue = (id ?? string.Empty).ToLowerInvariant();
         Consumable consumable = idValue switch
         {
             "first_aid" => new FirstAid(),
@@ -37,7 +37,7 @@ public partial class ConsumableData : BaseData
             "long_shot" => new LongShot(),
             "foundation_breaker" => new FoundationBreaker(),
             "caffeine_potion" => new CaffeinePotion(),
-            _ => this.CreateConsumableFromRuntimeScript(),
+            _ => CreateConsumableFromRuntimeScript(),
         };
 
         consumable?.init(this);
@@ -46,13 +46,13 @@ public partial class ConsumableData : BaseData
 
     private Consumable CreateConsumableFromRuntimeScript()
     {
-        if (this.runtime_script == null)
+        if (runtime_script == null)
         {
-            GD.PushError($"[ConsumableData] Missing runtime_script for '{this.id}'");
+            GD.PushError($"[ConsumableData] Missing runtime_script for '{id}'");
             return null;
         }
 
-        string scriptName = System.IO.Path.GetFileNameWithoutExtension(this.runtime_script.ResourcePath)?.ToLowerInvariant() ?? string.Empty;
+        string scriptName = System.IO.Path.GetFileNameWithoutExtension(runtime_script.ResourcePath)?.ToLowerInvariant() ?? string.Empty;
         return scriptName switch
         {
             "firstaid" => new FirstAid(),

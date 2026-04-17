@@ -14,27 +14,27 @@ public partial class Hint : CanvasLayer
 
     public void set_text(string text)
     {
-        this.text_label.Text = text;
+        text_label.Text = text;
     }
 
     public void set_title(string title)
     {
-        this.title_label.Visible = !string.IsNullOrEmpty(title);
-        this.title_label.Text = string.IsNullOrEmpty(title) ? string.Empty : $"{title}:";
+        title_label.Visible = !string.IsNullOrEmpty(title);
+        title_label.Text = string.IsNullOrEmpty(title) ? string.Empty : $"{title}:";
     }
 
     public void set_position(Vector2 pos)
     {
-        this.container.GlobalPosition = pos;
+        container.GlobalPosition = pos;
     }
 
     public Vector2 get_position()
     {
-        return this.container.GlobalPosition;
+        return container.GlobalPosition;
     }
 
     public Vector2 get_size()
     {
-        return this.container.Size;
+        return container.Size;
     }
 }

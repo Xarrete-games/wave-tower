@@ -23,81 +23,81 @@ public partial class HealthBar : Control
         float clampedValue = Mathf.Clamp(value, MIN_HEALTH, MAX_HEALTH);
         float newXSize = Mathf.Remap(clampedValue, MIN_HEALTH, MAX_HEALTH, MIN_X_SIZE, MAX_X_SIZE);
 
-        this.texture_progress_bar.CustomMinimumSize = new Vector2(newXSize, this.texture_progress_bar.CustomMinimumSize.Y);
-        this.texture_progress_bar.MaxValue = value;
-        this.CustomMinimumSize = new Vector2(newXSize, this.CustomMinimumSize.Y);
+        texture_progress_bar.CustomMinimumSize = new Vector2(newXSize, texture_progress_bar.CustomMinimumSize.Y);
+        texture_progress_bar.MaxValue = value;
+        CustomMinimumSize = new Vector2(newXSize, CustomMinimumSize.Y);
     }
 
     public void update_health(float new_value)
     {
-        this.texture_progress_bar.Value = new_value;
+        texture_progress_bar.Value = new_value;
     }
 
     public void set_debuffs(List<EnemyDebuffInstance> debuffs)
     {
-        this._reset_debuffs();
+        ResetDebuffs();
 
         for (int i = 0; i < debuffs.Count; i++)
         {
             EnemyDebuffInstance debuffInstance = debuffs[i];
             int debuffType = (int)debuffInstance.debuff.type;
-            int current = this.debuffs_count.ContainsKey(debuffType) ? this.debuffs_count[debuffType] : 0;
-            this.debuffs_count[debuffType] = current + 1;
-            this.debuff_data_by_type[debuffType] = debuffInstance.debuff.data;
+            int current = debuffs_count.ContainsKey(debuffType) ? debuffs_count[debuffType] : 0;
+            debuffs_count[debuffType] = current + 1;
+            debuff_data_by_type[debuffType] = debuffInstance.debuff.data;
         }
 
-        List<int> slotKeys = new(this.debuffs_slots.Keys);
+        List<int> slotKeys = new(debuffs_slots.Keys);
         for (int i = 0; i < slotKeys.Count; i++)
         {
             int type = slotKeys[i];
-            if (!this.debuffs_count.ContainsKey(type))
+            if (!debuffs_count.ContainsKey(type))
             {
-                this._remove_debuff(type);
+                RemoveDebuff(type);
             }
         }
 
-        List<int> keys = new(this.debuffs_count.Keys);
+        List<int> keys = new(debuffs_count.Keys);
         for (int i = 0; i < keys.Count; i++)
         {
             int type = keys[i];
-            this._update_debuff_value(type, this.debuffs_count[type], this.debuff_data_by_type[type]);
+            UpdateDebuffValue(type, debuffs_count[type], debuff_data_by_type[type]);
         }
     }
 
-    private void _reset_debuffs()
+    private void ResetDebuffs()
     {
-        this.debuffs_count = new System.Collections.Generic.Dictionary<int, int>();
-        this.debuff_data_by_type = new System.Collections.Generic.Dictionary<int, EnemyDebuffData>();
+        debuffs_count = new System.Collections.Generic.Dictionary<int, int>();
+        debuff_data_by_type = new System.Collections.Generic.Dictionary<int, EnemyDebuffData>();
     }
 
-    private void _update_debuff_value(int type, int value, EnemyDebuffData debuff_data)
+    private void UpdateDebuffValue(int type, int value, EnemyDebuffData debuff_data)
     {
-        DebuffSlot slot = this.debuffs_slots.ContainsKey(type) ? this.debuffs_slots[type] : null;
+        DebuffSlot slot = debuffs_slots.ContainsKey(type) ? debuffs_slots[type] : null;
         if (slot == null)
         {
-            this._create_debuff_slot_type(type, debuff_data);
+            CreateDebuffSlotType(type, debuff_data);
         }
 
-        this.debuffs_slots[type].amount = value;
+        debuffs_slots[type].amount = value;
     }
 
-    private void _create_debuff_slot_type(int type, EnemyDebuffData debuff_data)
+    private void CreateDebuffSlotType(int type, EnemyDebuffData debuff_data)
     {
         DebuffSlot slot = DEBUFF_SLOT.Instantiate<DebuffSlot>();
-        this.debuffs_conatiner.AddChild(slot);
+        debuffs_conatiner.AddChild(slot);
         slot.texture = debuff_data?.icon;
-        this.debuffs_slots[type] = slot;
+        debuffs_slots[type] = slot;
     }
 
-    private void _remove_debuff(int type)
+    private void RemoveDebuff(int type)
     {
-        DebuffSlot slot = this.debuffs_slots.ContainsKey(type) ? this.debuffs_slots[type] : null;
+        DebuffSlot slot = debuffs_slots.ContainsKey(type) ? debuffs_slots[type] : null;
         if (slot == null)
         {
             return;
         }
 
         slot.QueueFree();
-        this.debuffs_slots.Remove(type);
+        debuffs_slots.Remove(type);
     }
 }

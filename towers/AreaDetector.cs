@@ -17,7 +17,7 @@ public partial class AreaDetector : Area2D
         set
         {
             _currentTarget = value;
-            this.target_change?.Invoke(value);
+            target_change?.Invoke(value);
         }
     }
 
@@ -29,10 +29,10 @@ public partial class AreaDetector : Area2D
     public override void _Ready()
     {
         _timerToCheckTarget = GetNode<Timer>("TimerToCheckTarget");
-        _timerToCheckTarget.Timeout += _select_next_target;
+        _timerToCheckTarget.Timeout += SelectNextTarget;
     }
 
-    private void _on_body_entered(Node2D body)
+    private void OnBodyEntered(Node2D body)
     {
         var enemy = body;
         if (!IsEnemyEnabled(enemy))
@@ -40,7 +40,7 @@ public partial class AreaDetector : Area2D
             return;
         }
 
-        enemy.TreeExited += () => _on_enemy_die(enemy);
+        enemy.TreeExited += () => OnEnemyDie(enemy);
         targets_in_range.Add(enemy);
 
         if (!IsInstanceValid(current_target))
@@ -49,14 +49,14 @@ public partial class AreaDetector : Area2D
         }
     }
 
-    private void _on_body_exited(Node2D body)
+    private void OnBodyExited(Node2D body)
     {
-        _remove_target_and_get_next(body);
+        RemoveTargetAndGetNext(body);
     }
 
-    private void _remove_target_and_get_next(Node2D enemy)
+    private void RemoveTargetAndGetNext(Node2D enemy)
     {
-        _prune_invalid_targets();
+        PruneInvalidTargets();
         targets_in_range.Remove(enemy);
 
         if (!GodotObject.IsInstanceValid(current_target) || enemy != current_target)
@@ -64,16 +64,16 @@ public partial class AreaDetector : Area2D
             return;
         }
 
-        _select_next_target();
+        SelectNextTarget();
     }
 
-    private void _on_enemy_die(Node2D enemy)
+    private void OnEnemyDie(Node2D enemy)
     {
-        this.enemy_die?.Invoke(enemy);
-        _remove_target_and_get_next(enemy);
+        enemy_die?.Invoke(enemy);
+        RemoveTargetAndGetNext(enemy);
     }
 
-    private void _prune_invalid_targets()
+    private void PruneInvalidTargets()
     {
         for (var i = targets_in_range.Count - 1; i >= 0; i--)
         {
@@ -90,9 +90,9 @@ public partial class AreaDetector : Area2D
         }
     }
 
-    private void _select_next_target()
+    private void SelectNextTarget()
     {
-        _prune_invalid_targets();
+        PruneInvalidTargets();
         if (targets_in_range.Count == 0 || !Monitoring)
         {
             current_target = null;

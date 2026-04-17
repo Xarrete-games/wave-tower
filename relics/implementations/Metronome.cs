@@ -10,20 +10,20 @@ public sealed class Metronome : Relic
 
     public override void OnWaveFinished()
     {
-        this.Counter += 1;
-        if (this.Counter < _counterThreshold)
+        Counter += 1;
+        if (Counter < _counterThreshold)
         {
             return;
         }
 
-        this.Counter = 0;
+        Counter = 0;
         TowerModel tower = RunContextRuntime.TowersManager.PickRandomTower();
         if (tower == null)
         {
             return;
         }
 
-        TowerBuffModel buff = TowerBuffFactoryModel.CreateFromId(_buffId, this.Id, _buffValue);
+        TowerBuffModel buff = TowerBuffFactoryModel.CreateFromId(_buffId, Id, _buffValue);
         if (buff != null)
         {
             tower.AddBuff(buff);

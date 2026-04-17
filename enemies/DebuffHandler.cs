@@ -47,14 +47,14 @@ public partial class DebuffHandler : Node
 
         for (int i = 0; i < stacks; i++)
         {
-            if (this.get_stacks((int)debuff.type) >= debuff.max_stacks)
+            if (get_stacks((int)debuff.type) >= debuff.max_stacks)
             {
                 break;
             }
 
             EnemyDebuffInstance instance = new(debuff);
-            this.debuffs.Add(instance);
-            enemy.health_bar?.set_debuffs(this.debuffs);
+            debuffs.Add(instance);
+            enemy.health_bar?.set_debuffs(debuffs);
             debuff.on_apply(enemy);
         }
     }
@@ -69,9 +69,9 @@ public partial class DebuffHandler : Node
 
         float now = Time.GetTicksMsec() / 1000.0f;
 
-        for (int i = this.debuffs.Count - 1; i >= 0; i--)
+        for (int i = debuffs.Count - 1; i >= 0; i--)
         {
-            EnemyDebuffInstance inst = this.debuffs[i];
+            EnemyDebuffInstance inst = debuffs[i];
             EnemyDebuff debuff = inst.debuff;
 
             if (debuff.tick_interval > 0.0f && now >= inst.next_tick_time)
@@ -83,8 +83,8 @@ public partial class DebuffHandler : Node
             if (now >= inst.expire_time)
             {
                 debuff.on_expire(enemy);
-                this.debuffs.RemoveAt(i);
-                enemy.health_bar?.set_debuffs(this.debuffs);
+                debuffs.RemoveAt(i);
+                enemy.health_bar?.set_debuffs(debuffs);
             }
         }
     }
@@ -92,9 +92,9 @@ public partial class DebuffHandler : Node
     public int get_stacks(int debuff_type)
     {
         int count = 0;
-        for (int i = 0; i < this.debuffs.Count; i++)
+        for (int i = 0; i < debuffs.Count; i++)
         {
-            if ((int)this.debuffs[i].debuff.type == debuff_type)
+            if ((int)debuffs[i].debuff.type == debuff_type)
             {
                 count += 1;
             }
@@ -105,15 +105,15 @@ public partial class DebuffHandler : Node
 
     public bool has_any_defbuff()
     {
-        return this.debuffs.Count > 0;
+        return debuffs.Count > 0;
     }
 
     public List<EnemyDebuff> get_active_debuffs()
     {
         List<EnemyDebuff> result = new();
-        for (int i = 0; i < this.debuffs.Count; i++)
+        for (int i = 0; i < debuffs.Count; i++)
         {
-            result.Add(this.debuffs[i].debuff);
+            result.Add(debuffs[i].debuff);
         }
 
         return result;

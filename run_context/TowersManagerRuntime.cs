@@ -10,22 +10,22 @@ public sealed class TowersManagerRuntime
 
     public IReadOnlyList<TowerLogic> GetAllTowerListeners()
     {
-        return this._towerListeners;
+        return _towerListeners;
     }
 
     public IReadOnlyList<TowerLogic> GetTowerListeners()
     {
-        return this.GetAllTowerListeners();
+        return GetAllTowerListeners();
     }
 
     public void AddTowerPlaced(TowerLogic towerLogic)
     {
-        this.AddTowerListener(towerLogic);
+        AddTowerListener(towerLogic);
     }
 
     public void AddTowerPlaced(TowerModel tower)
     {
-        this.AddTowerPlaced(tower, 0UL);
+        AddTowerPlaced(tower, 0UL);
     }
 
     public void AddTowerPlaced(TowerModel tower, ulong instanceId)
@@ -35,18 +35,18 @@ public sealed class TowersManagerRuntime
             return;
         }
 
-        this._towers.Add(tower);
-        this._towerCounts[tower.Type] = this.GetTowerCount(tower.Type) + 1;
+        _towers.Add(tower);
+        _towerCounts[tower.Type] = GetTowerCount(tower.Type) + 1;
 
         if (instanceId != 0UL)
         {
-            this._towerByInstanceId[instanceId] = tower;
+            _towerByInstanceId[instanceId] = tower;
         }
     }
 
     public void TowerRemoved(TowerLogic towerLogic)
     {
-        this.RemoveTowerListener(towerLogic);
+        RemoveTowerListener(towerLogic);
     }
 
     public void TowerRemoved(TowerModel tower)
@@ -56,11 +56,11 @@ public sealed class TowersManagerRuntime
             return;
         }
 
-        this._towers.Remove(tower);
-        this._towerCounts[tower.Type] = this.GetTowerCount(tower.Type) - 1;
+        _towers.Remove(tower);
+        _towerCounts[tower.Type] = GetTowerCount(tower.Type) - 1;
 
         var keysToRemove = new List<ulong>();
-        foreach (var pair in this._towerByInstanceId)
+        foreach (var pair in _towerByInstanceId)
         {
             if (ReferenceEquals(pair.Value, tower))
             {
@@ -70,46 +70,46 @@ public sealed class TowersManagerRuntime
 
         for (int index = 0; index < keysToRemove.Count; index++)
         {
-            this._towerByInstanceId.Remove(keysToRemove[index]);
+            _towerByInstanceId.Remove(keysToRemove[index]);
         }
     }
 
     public bool RemoveTowerByInstanceId(ulong instanceId)
     {
-        if (!this._towerByInstanceId.TryGetValue(instanceId, out TowerModel tower))
+        if (!_towerByInstanceId.TryGetValue(instanceId, out TowerModel tower))
         {
             return false;
         }
 
-        this._towerByInstanceId.Remove(instanceId);
-        this.TowerRemoved(tower);
+        _towerByInstanceId.Remove(instanceId);
+        TowerRemoved(tower);
         return true;
     }
 
     public bool TryGetTowerByInstanceId(ulong instanceId, out TowerModel tower)
     {
-        return this._towerByInstanceId.TryGetValue(instanceId, out tower);
+        return _towerByInstanceId.TryGetValue(instanceId, out tower);
     }
 
     public IReadOnlyList<TowerModel> GetTowers()
     {
-        return this._towers;
+        return _towers;
     }
 
     public TowerModel PickRandomTower()
     {
-        if (this._towers.Count == 0)
+        if (_towers.Count == 0)
         {
             return null;
         }
 
-        int index = this._random.Next(this._towers.Count);
-        return this._towers[index];
+        int index = _random.Next(_towers.Count);
+        return _towers[index];
     }
 
     public int GetTowerCount(TowerModel.TowerType towerType)
     {
-        if (!this._towerCounts.TryGetValue(towerType, out int count))
+        if (!_towerCounts.TryGetValue(towerType, out int count))
         {
             return 0;
         }
@@ -124,9 +124,9 @@ public sealed class TowersManagerRuntime
             return;
         }
 
-        if (!this._towerListeners.Contains(towerLogic))
+        if (!_towerListeners.Contains(towerLogic))
         {
-            this._towerListeners.Add(towerLogic);
+            _towerListeners.Add(towerLogic);
         }
     }
 
@@ -137,14 +137,14 @@ public sealed class TowersManagerRuntime
             return;
         }
 
-        this._towerListeners.Remove(towerLogic);
+        _towerListeners.Remove(towerLogic);
     }
 
     public void Reset()
     {
-        this._towerListeners.Clear();
-        this._towerCounts.Clear();
-        this._towers.Clear();
-        this._towerByInstanceId.Clear();
+        _towerListeners.Clear();
+        _towerCounts.Clear();
+        _towers.Clear();
+        _towerByInstanceId.Clear();
     }
 }

@@ -6,12 +6,12 @@ public sealed class TinfoilHat : Relic
 
     public override void OnRelicAdded(Relic relicAdded)
     {
-        if (this.Disabled || !relicAdded.IsCursed)
+        if (Disabled || !relicAdded.IsCursed)
         {
             return;
         }
 
         RunContextRuntime.RelicsManager.RemoveRelic(relicAdded.Id);
-        this.Disabled = true;
+        Disabled = true;
     }
 }

@@ -5,7 +5,7 @@ public partial class FountainsOfWishesScript : EventScript
 {
     public override List<EventOptionData> get_options()
     {
-        RunContext runContext = this.GetRunContext();
+        RunContext runContext = GetRunContext();
         if (runContext == null)
         {
             return new List<EventOptionData>();
@@ -27,7 +27,7 @@ public partial class FountainsOfWishesScript : EventScript
     {
         int rarity = data is int intValue ? intValue : 0;
 
-        RunContext runContext = this.GetRunContext();
+        RunContext runContext = GetRunContext();
         if (runContext == null)
         {
             return;

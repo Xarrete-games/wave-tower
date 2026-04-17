@@ -17,18 +17,18 @@ public partial class FireFlamethrowerProjectile : Node2D
 
     public override void _Ready()
     {
-        this._fire_particles = GetNode<CpuParticles2D>("%FireParticles");
-        this._damage_timer = GetNode<Timer>("%DamageTimer");
-        this._area_2d = GetNode<Area2D>("%Area2D");
-        this._flamethrower = GetNode<Node2D>("%Flamethrower");
+        _fire_particles = GetNode<CpuParticles2D>("%FireParticles");
+        _damage_timer = GetNode<Timer>("%DamageTimer");
+        _area_2d = GetNode<Area2D>("%Area2D");
+        _flamethrower = GetNode<Node2D>("%Flamethrower");
 
-        this._damage_timer.WaitTime = DAMAGE_TICK_INTERVAL;
-        this.stop();
+        _damage_timer.WaitTime = DAMAGE_TICK_INTERVAL;
+        stop();
     }
 
     public override void _Process(double delta)
     {
-        Enemy targetEnemy = this._target as Enemy;
+        Enemy targetEnemy = _target as Enemy;
         if (!GodotObject.IsInstanceValid(targetEnemy))
         {
             return;
@@ -36,59 +36,59 @@ public partial class FireFlamethrowerProjectile : Node2D
 
         Vector2 targetPosition = targetEnemy.target_position;
         Vector2 dir = targetPosition - GlobalPosition;
-        this._flamethrower.Rotation = dir.Angle();
+        _flamethrower.Rotation = dir.Angle();
     }
 
     public void fire()
     {
-        this._damage_timer.Start();
-        this._fire_particles.Emitting = true;
-        this._area_2d.Monitoring = true;
+        _damage_timer.Start();
+        _fire_particles.Emitting = true;
+        _area_2d.Monitoring = true;
     }
 
     public void set_target(Node2D enemy, Attack attack)
     {
-        this._target = enemy;
-        this._attack = attack;
+        _target = enemy;
+        _attack = attack;
     }
 
     public void stop()
     {
-        this._fire_particles.Emitting = false;
-        this._area_2d.Monitoring = false;
-        this._damage_timer.Stop();
-        this._tagers_in_area.Clear();
+        _fire_particles.Emitting = false;
+        _area_2d.Monitoring = false;
+        _damage_timer.Stop();
+        _tagers_in_area.Clear();
     }
 
     public bool is_throwing()
     {
-        return this._fire_particles.Emitting;
+        return _fire_particles.Emitting;
     }
 
-    private void _on_area_2d_body_exited(Node2D body)
+    private void OnArea2dBodyExited(Node2D body)
     {
-        this._tagers_in_area.Remove(body);
+        _tagers_in_area.Remove(body);
     }
 
-    private void _on_area_2d_body_entered(Node2D body)
+    private void OnArea2dBodyEntered(Node2D body)
     {
-        this._tagers_in_area.Add(body);
-        body.TreeExited += () => this._tagers_in_area.Remove(body);
+        _tagers_in_area.Add(body);
+        body.TreeExited += () => _tagers_in_area.Remove(body);
     }
 
-    private void _on_damage_timer_timeout()
+    private void OnDamageTimerTimeout()
     {
-        foreach (Node2D target in this._tagers_in_area)
+        foreach (Node2D target in _tagers_in_area)
         {
             if (!GodotObject.IsInstanceValid(target))
             {
                 continue;
             }
 
-            Source source = this._attack?.source;
+            Source source = _attack?.source;
             EnemyDebuff debuff = source != null ? EnemyDebuff.create_burn(source) : null;
             Enemy enemyModel = target as Enemy;
-            enemyModel?.apply_damage(this._attack);
+            enemyModel?.apply_damage(_attack);
             if (debuff != null)
             {
                 enemyModel?.apply_debuff(debuff);

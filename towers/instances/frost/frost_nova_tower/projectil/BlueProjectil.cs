@@ -21,33 +21,33 @@ public partial class BlueProjectil : Area2D
 
     public override void _Ready()
     {
-        this._collision_shape = GetNode<CollisionShape2D>("CollisionShape");
-        this._blue_attack = GetNode<AudioStreamPlayer2D>("BlueAttack");
+        _collision_shape = GetNode<CollisionShape2D>("CollisionShape");
+        _blue_attack = GetNode<AudioStreamPlayer2D>("BlueAttack");
 
         // Keep the nova wave above gameplay sprites so the ring is always visible.
-        this.ZAsRelative = false;
-        this.ZIndex = 50;
+        ZAsRelative = false;
+        ZIndex = 50;
 
-        this._shape = this._collision_shape.Shape as CircleShape2D;
-        if (this._shape != null)
+        _shape = _collision_shape.Shape as CircleShape2D;
+        if (_shape != null)
         {
-            this._shape.Radius = 0.0f;
+            _shape.Radius = 0.0f;
         }
 
-        this._blue_attack.Play();
+        _blue_attack.Play();
     }
 
     public override void _Process(double delta)
     {
-        this._radius += this.expand_speed * (float)delta;
-        if (this._shape != null)
+        _radius += expand_speed * (float)delta;
+        if (_shape != null)
         {
-            this._shape.Radius = this._radius;
+            _shape.Radius = _radius;
         }
 
         QueueRedraw();
 
-        if (this._radius >= this._max_area_range)
+        if (_radius >= _max_area_range)
         {
             QueueFree();
         }
@@ -55,19 +55,19 @@ public partial class BlueProjectil : Area2D
 
     public void set_stats(Attack attack, float area_range, EnemyDebuff frost_debuff)
     {
-        this._attack = attack;
-        this._max_area_range = area_range;
-        this._frost_debuff = frost_debuff;
+        _attack = attack;
+        _max_area_range = area_range;
+        _frost_debuff = frost_debuff;
     }
 
     public override void _Draw()
     {
-        if (this._max_area_range <= 0.0f)
+        if (_max_area_range <= 0.0f)
         {
             return;
         }
 
-        float radiusProgress = Mathf.Clamp(this._radius / this._max_area_range, 0.0f, 1.0f);
+        float radiusProgress = Mathf.Clamp(_radius / _max_area_range, 0.0f, 1.0f);
         const float fadeStartThreshold = 0.8f;
 
         float alphaFade;
@@ -81,15 +81,15 @@ public partial class BlueProjectil : Area2D
             alphaFade = Mathf.Pow(1.0f - fadeProgress, 2.0f);
         }
 
-        Color waveColor = new(this.color.R, this.color.G, this.color.B, this.color.A * alphaFade);
+        Color waveColor = new(color.R, color.G, color.B, color.A * alphaFade);
 
-        DrawSetTransform(Vector2.Zero, 0.0f, new Vector2(1.0f, this.y_scale));
-        DrawCircle(Vector2.Zero, this._radius, new Color(waveColor.R, waveColor.G, waveColor.B, waveColor.A * 0.12f));
-        DrawArc(Vector2.Zero, this._radius, 0, Mathf.Tau, 64, waveColor, this.thickness);
+        DrawSetTransform(Vector2.Zero, 0.0f, new Vector2(1.0f, y_scale));
+        DrawCircle(Vector2.Zero, _radius, new Color(waveColor.R, waveColor.G, waveColor.B, waveColor.A * 0.12f));
+        DrawArc(Vector2.Zero, _radius, 0, Mathf.Tau, 64, waveColor, thickness);
         DrawSetTransform(Vector2.Zero, 0.0f, Vector2.One);
     }
 
-    private async void _on_body_entered(Node2D body)
+    private async void OnBodyEntered(Node2D body)
     {
         Node2D enemy = body;
         if (!GodotObject.IsInstanceValid(enemy))
@@ -100,8 +100,8 @@ public partial class BlueProjectil : Area2D
         CpuParticles2D explosion = BLUE_EXPLOSION.Instantiate<CpuParticles2D>();
 
         Enemy enemyModel = enemy as Enemy;
-        enemyModel?.apply_damage(this._attack);
-        enemyModel?.apply_debuff(this._frost_debuff);
+        enemyModel?.apply_damage(_attack);
+        enemyModel?.apply_debuff(_frost_debuff);
 
         AddChild(explosion);
         explosion.GlobalPosition = enemy.GlobalPosition;

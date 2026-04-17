@@ -12,64 +12,64 @@ public partial class HealthCounter : HBoxContainer
 
     private int health
     {
-        get => this._health;
+        get => _health;
         set
         {
-            this._health = value;
-            this._counterLabel.Text = value.ToString();
+            _health = value;
+            _counterLabel.Text = value.ToString();
         }
     }
 
     private int max_health
     {
-        get => this._maxHealth;
+        get => _maxHealth;
         set
         {
-            this._maxHealth = value;
-            this._counterMaxLabel.Text = value.ToString();
+            _maxHealth = value;
+            _counterMaxLabel.Text = value.ToString();
         }
     }
 
     public override void _Ready()
     {
-        this._counterMaxLabel = GetNode<Label>("CounterMaxLabel");
-        this._counterLabel = GetNode<Label>("CounterLabel");
-        this._armorCounter = GetNode<Control>("HBoxContainer/ArmorCounter");
+        _counterMaxLabel = GetNode<Label>("CounterMaxLabel");
+        _counterLabel = GetNode<Label>("CounterLabel");
+        _armorCounter = GetNode<Control>("HBoxContainer/ArmorCounter");
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._status = runContext.status;
+        _status = runContext.status;
 
-        this._status.health_change += this._on_health_change;
-        this._status.max_health_change += this._on_max_health_change;
-        this._status.armor_change += this._on_armor_change;
+        _status.health_change += OnHealthChange;
+        _status.max_health_change += OnMaxHealthChange;
+        _status.armor_change += OnArmorChange;
 
-        this.max_health = this._status.max_health;
-        this.health = this._status.health;
-        this._on_armor_change(this._status.armor);
+        max_health = _status.max_health;
+        health = _status.health;
+        OnArmorChange(_status.armor);
     }
 
     public override void _ExitTree()
     {
-        if (this._status != null)
+        if (_status != null)
         {
-            this._status.health_change -= this._on_health_change;
-            this._status.max_health_change -= this._on_max_health_change;
-            this._status.armor_change -= this._on_armor_change;
+            _status.health_change -= OnHealthChange;
+            _status.max_health_change -= OnMaxHealthChange;
+            _status.armor_change -= OnArmorChange;
         }
     }
 
-    private void _on_health_change(int value)
+    private void OnHealthChange(int value)
     {
-        this.health = value;
+        health = value;
     }
 
-    private void _on_max_health_change(int value)
+    private void OnMaxHealthChange(int value)
     {
-        this.max_health = value;
+        max_health = value;
     }
 
-    private void _on_armor_change(int amount)
+    private void OnArmorChange(int amount)
     {
-        this._armorCounter.Visible = amount > 0;
+        _armorCounter.Visible = amount > 0;
     }
 }

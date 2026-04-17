@@ -13,25 +13,25 @@ public partial class LightningChainTower : Tower
     public override void _Ready()
     {
         base._Ready();
-        this.projectile_spawn_point = GetNode<Marker2D>("ProjectileSpawnPos");
+        projectile_spawn_point = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(this._current_target) || this.lightning_chain_projectile_scene == null)
+        if (!GodotObject.IsInstanceValid(_current_target) || lightning_chain_projectile_scene == null)
         {
             return;
         }
 
-        LightningChainProjectile projectile = this.lightning_chain_projectile_scene.Instantiate<LightningChainProjectile>();
-        CallDeferred(MethodName._fire_chain, projectile);
+        LightningChainProjectile projectile = lightning_chain_projectile_scene.Instantiate<LightningChainProjectile>();
+        CallDeferred(MethodName.FireChain, projectile);
     }
 
-    private void _fire_chain(LightningChainProjectile projectile)
+    private void FireChain(LightningChainProjectile projectile)
     {
         AddChild(projectile);
-        projectile.GlobalPosition = this.projectile_spawn_point.GlobalPosition;
+        projectile.GlobalPosition = projectile_spawn_point.GlobalPosition;
 
-        projectile.set_target(this._current_target, this._get_attack(), this.current_bounces);
+        projectile.set_target(_current_target, _get_attack(), current_bounces);
     }
 }

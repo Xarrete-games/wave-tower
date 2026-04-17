@@ -21,12 +21,12 @@ public partial class ChooseRelicScreen : Control
     public override async void _Ready()
     {
         await ToSignal(GetTree().CreateTimer(0.3f, false), SceneTreeTimer.SignalName.Timeout);
-        this._enabled = true;
+        _enabled = true;
     }
 
     public void set_relics(Godot.Collections.Array<Variant> relics)
     {
-        foreach (Node child in this.cards_container.GetChildren())
+        foreach (Node child in cards_container.GetChildren())
         {
             child.QueueFree();
         }
@@ -34,35 +34,35 @@ public partial class ChooseRelicScreen : Control
         foreach (Variant relicData in relics)
         {
             ChooseRelicCard card = ChooseRelicCardScene.Instantiate<ChooseRelicCard>();
-            this.cards_container.AddChild(card);
+            cards_container.AddChild(card);
             card.set_relic(relicData);
-            card.card_pressed += this.OnCardPressed;
+            card.card_pressed += OnCardPressed;
         }
 
-        this.reroll_priece.price = this._rerollPrice;
+        reroll_priece.price = _rerollPrice;
     }
 
     private void OnCardPressed(Variant relicData)
     {
-        if (!this._enabled)
+        if (!_enabled)
         {
             return;
         }
 
-        this.item_selected?.Invoke(relicData);
+        item_selected?.Invoke(relicData);
     }
 
-    private void _on_reroll_button_xarreta_pressed()
+    private void OnRerollButtonXarretaPressed()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         int gold = runContext.economy.gold;
-        if (this._rerollPrice <= gold)
+        if (_rerollPrice <= gold)
         {
-            this.reroll_pressed?.Invoke();
+            reroll_pressed?.Invoke();
         }
     }
 
-    private void _on_exit_button_xarreta_pressed()
+    private void OnExitButtonXarretaPressed()
     {
         QueueFree();
     }

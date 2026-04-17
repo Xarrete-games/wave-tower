@@ -15,18 +15,18 @@ public partial class EndGameScreen : CanvasLayer
     {
         GetNode<AudioManager>("/root/AudioManager").play_main_piano();
 
-        this._panel = GetNode<Panel>("Panel");
-        this._label3 = GetNode<Label>("PanelContainer/CenterContainer/VBoxContainer2/Label3");
+        _panel = GetNode<Panel>("Panel");
+        _label3 = GetNode<Label>("PanelContainer/CenterContainer/VBoxContainer2/Label3");
 
-        this._label3.Visible = false;
-        this._panel.Modulate = Colors.White with { A = 1.0f };
+        _label3.Visible = false;
+        _panel.Modulate = Colors.White with { A = 1.0f };
 
-        this.fade_in();
+        fade_in();
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventKey keyEvent && keyEvent.Pressed && this._readyToExit)
+        if (@event is InputEventKey keyEvent && keyEvent.Pressed && _readyToExit)
         {
             GetTree().ChangeSceneToPacked(MainMenuScene);
         }
@@ -35,12 +35,12 @@ public partial class EndGameScreen : CanvasLayer
     public void fade_in()
     {
         Tween tween = CreateTween();
-        tween.TweenProperty(this._panel, "modulate:a", 0.0f, FadeDuration);
+        tween.TweenProperty(_panel, "modulate:a", 0.0f, FadeDuration);
     }
 
-    private void _on_exit_timer_timeout()
+    private void OnExitTimerTimeout()
     {
-        this._label3.Visible = true;
-        this._readyToExit = true;
+        _label3.Visible = true;
+        _readyToExit = true;
     }
 }

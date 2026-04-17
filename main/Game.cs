@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 
 public partial class Game : Node2D
 {
@@ -19,21 +19,21 @@ public partial class Game : Node2D
 
     public override void _Ready()
     {
-        this._musicHandler = GetNode<MusicHandler>("MusicHandler");
-        this._configLayer = GetNode<CanvasLayer>("ConfigLayer");
+        _musicHandler = GetNode<MusicHandler>("MusicHandler");
+        _configLayer = GetNode<CanvasLayer>("ConfigLayer");
 
-        ClickEvents.ConfigButtonPressed += this.OpenConfigMenu;
-        ClickEvents.ResetGameButtonPressed += this.ResetGame;
+        ClickEvents.ConfigButtonPressed += OpenConfigMenu;
+        ClickEvents.ResetGameButtonPressed += ResetGame;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.progress.total_levels = this.levels_paths.Count;
+        runContext.progress.total_levels = levels_paths.Count;
 
         GameState gameState = GetNode<GameState>("/root/GameState");
         gameState.state = GameState.IN_GAME;
 
-        this._musicHandler.play_music();
+        _musicHandler.play_music();
 
-        if (this.trigger_finish_wave)
+        if (trigger_finish_wave)
         {
             runContext.progress.notify_current_wave_finished();
         }
@@ -41,8 +41,8 @@ public partial class Game : Node2D
 
     public override void _ExitTree()
     {
-        ClickEvents.ConfigButtonPressed -= this.OpenConfigMenu;
-        ClickEvents.ResetGameButtonPressed -= this.ResetGame;
+        ClickEvents.ConfigButtonPressed -= OpenConfigMenu;
+        ClickEvents.ResetGameButtonPressed -= ResetGame;
     }
 
     public override void _Process(double delta)
@@ -59,7 +59,7 @@ public partial class Game : Node2D
         }
         else
         {
-            this.OpenConfigMenu();
+            OpenConfigMenu();
         }
     }
 
@@ -72,26 +72,26 @@ public partial class Game : Node2D
 
     public void OpenConfigMenu()
     {
-        if (this._pauseInstance != null && this._pauseInstance.IsVisibleInTree())
+        if (_pauseInstance != null && _pauseInstance.IsVisibleInTree())
         {
             return;
         }
 
         GetTree().Paused = !GetTree().Paused;
-        this._pauseInstance = this.pause.Instantiate<PauseMenu>();
-        this._pauseInstance.resume_game += this.CloseConfigMenu;
-        this._configLayer.AddChild(this._pauseInstance);
+        _pauseInstance = pause.Instantiate<PauseMenu>();
+        _pauseInstance.resume_game += CloseConfigMenu;
+        _configLayer.AddChild(_pauseInstance);
     }
 
     public void CloseConfigMenu()
     {
-        if (this._pauseInstance == null || !this._pauseInstance.IsVisibleInTree())
+        if (_pauseInstance == null || !_pauseInstance.IsVisibleInTree())
         {
             return;
         }
 
-        this._pauseInstance.resume_game -= this.CloseConfigMenu;
-        this._pauseInstance.QueueFree();
-        this._pauseInstance = null;
+        _pauseInstance.resume_game -= CloseConfigMenu;
+        _pauseInstance.QueueFree();
+        _pauseInstance = null;
     }
 }

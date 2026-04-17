@@ -10,21 +10,21 @@ public partial class LightningTower : Tower
     public override void _Ready()
     {
         base._Ready();
-        this.projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
+        projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(this._current_target) || this.electric_ball_scene == null)
+        if (!GodotObject.IsInstanceValid(_current_target) || electric_ball_scene == null)
         {
             return;
         }
 
-        SingleTargetProjectile projectile = this.electric_ball_scene.Instantiate<SingleTargetProjectile>();
+        SingleTargetProjectile projectile = electric_ball_scene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
-        projectile.GlobalPosition = this.projectile_spawn_pos.GlobalPosition;
+        projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
-        projectile.set_target(this._current_target, this._get_attack());
+        projectile.set_target(_current_target, _get_attack());
     }
 }

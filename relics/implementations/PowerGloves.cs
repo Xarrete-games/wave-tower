@@ -24,7 +24,7 @@ public sealed class PowerGloves : Relic
             return;
         }
 
-        TowerBuffModel buff = TowerBuffFactoryModel.CreateFromId(_buffId, this.Id, _buffValue);
+        TowerBuffModel buff = TowerBuffFactoryModel.CreateFromId(_buffId, Id, _buffValue);
         if (buff != null)
         {
             targeteable.TargetTower.AddBuff(buff);

@@ -10,12 +10,12 @@ public class RunProgress
 
     public int current_wave
     {
-        get => this._currentWave;
+        get => _currentWave;
         set
         {
-            this._currentWave = value;
+            _currentWave = value;
             Hooks.OnWaveInit(Hooks.GetListenersFromRuntime());
-            this.current_wave_changed?.Invoke(this._currentWave);
+            current_wave_changed?.Invoke(_currentWave);
         }
     }
 
@@ -24,16 +24,16 @@ public class RunProgress
 
     public bool is_last_wave()
     {
-        return this.current_wave >= this.total_waves;
+        return current_wave >= total_waves;
     }
 
     public void notify_current_wave_finished()
     {
-        this.current_wave_finished?.Invoke();
+        current_wave_finished?.Invoke();
     }
 
     public void notify_last_wave_finished()
     {
-        this.last_wave_finished?.Invoke();
+        last_wave_finished?.Invoke();
     }
 }

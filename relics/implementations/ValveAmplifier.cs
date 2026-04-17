@@ -10,14 +10,14 @@ public sealed class ValveAmplifier : Relic
 
     public override void OnTowerPlaced(TowerModel tower)
     {
-        this.Counter += 1;
-        if (this.Counter < _counterThreshold)
+        Counter += 1;
+        if (Counter < _counterThreshold)
         {
             return;
         }
 
-        this.Counter = 0;
-        TowerBuffModel buff = TowerBuffFactoryModel.CreateFromId(_buffId, this.Id, _buffValue);
+        Counter = 0;
+        TowerBuffModel buff = TowerBuffFactoryModel.CreateFromId(_buffId, Id, _buffValue);
         if (buff != null)
         {
             tower.AddBuff(buff);

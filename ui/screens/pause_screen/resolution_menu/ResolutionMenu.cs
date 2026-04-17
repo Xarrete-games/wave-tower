@@ -24,8 +24,8 @@ public partial class ResolutionMenu : VBoxContainer
 
     public override void _Ready()
     {
-        this._populate_resolutions();
-        this.update_button_values();
+        PopulateResolutions();
+        update_button_values();
     }
 
     public void update_button_values()
@@ -33,42 +33,42 @@ public partial class ResolutionMenu : VBoxContainer
         Vector2I windowSize = GetWindow().Size;
         string current = $"{windowSize.X}x{windowSize.Y}";
 
-        int index = this._visibleResolutions.IndexOf(current);
+        int index = _visibleResolutions.IndexOf(current);
         if (index != -1)
         {
-            this.resolution_option_button.Selected = index;
+            resolution_option_button.Selected = index;
         }
     }
 
-    private void _populate_resolutions()
+    private void PopulateResolutions()
     {
-        this.resolution_option_button.Clear();
-        this._visibleResolutions.Clear();
+        resolution_option_button.Clear();
+        _visibleResolutions.Clear();
 
         Vector2I screenSize = DisplayServer.ScreenGetSize();
 
-        foreach (var entry in this._resolutions)
+        foreach (var entry in _resolutions)
         {
             string resName = entry.Key;
             Vector2I res = entry.Value;
             if (res.X <= screenSize.X && res.Y <= screenSize.Y)
             {
-                this._visibleResolutions.Add(resName);
-                this.resolution_option_button.AddItem(resName);
+                _visibleResolutions.Add(resName);
+                resolution_option_button.AddItem(resName);
             }
         }
     }
 
-    private void _on_option_button_item_selected(int index)
+    private void OnOptionButtonItemSelected(int index)
     {
-        if (index < 0 || index >= this._visibleResolutions.Count)
+        if (index < 0 || index >= _visibleResolutions.Count)
         {
             return;
         }
 
-        string key = this._visibleResolutions[index];
-        GetWindow().Size = this._resolutions[key];
-        this.center_window();
+        string key = _visibleResolutions[index];
+        GetWindow().Size = _resolutions[key];
+        center_window();
     }
 
     private void center_window()

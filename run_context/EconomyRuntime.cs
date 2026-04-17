@@ -6,14 +6,14 @@ public sealed class EconomyRuntime
 
     public void AddGold(int amount)
     {
-        this.Gold += amount;
+        Gold += amount;
     }
 
     public bool SpendGold(int amount)
     {
-        if (this.Gold >= amount)
+        if (Gold >= amount)
         {
-            this.Gold -= amount;
+            Gold -= amount;
             return true;
         }
 

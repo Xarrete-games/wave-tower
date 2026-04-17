@@ -30,11 +30,11 @@ public partial class EventOptionsScreen : Control
             return;
         }
 
-        this.title_label.Text = eventData.title;
-        this.description_label.Text = eventData.description;
-        this.texture_rect.Texture = eventData.texture_background;
+        title_label.Text = eventData.title;
+        description_label.Text = eventData.description;
+        texture_rect.Texture = eventData.texture_background;
 
-        foreach (Node child in this.buttons_container.GetChildren())
+        foreach (Node child in buttons_container.GetChildren())
         {
             child.QueueFree();
         }
@@ -52,14 +52,14 @@ public partial class EventOptionsScreen : Control
             return;
         }
 
-        this._eventScriptInstance = csharpScript.New().Obj as EventScript;
-        if (this._eventScriptInstance == null)
+        _eventScriptInstance = csharpScript.New().Obj as EventScript;
+        if (_eventScriptInstance == null)
         {
             GD.PushError($"Could not instantiate runtime script for event {eventData.id}.");
             return;
         }
 
-        List<EventOptionData> options = this._eventScriptInstance.get_options();
+        List<EventOptionData> options = _eventScriptInstance.get_options();
         int index = 0;
         foreach (EventOptionData optionData in options)
         {
@@ -68,8 +68,8 @@ public partial class EventOptionsScreen : Control
                 continue;
             }
 
-            EventOptionButton buttonOption = this.button_option_scene.Instantiate<EventOptionButton>();
-            this.buttons_container.AddChild(buttonOption);
+            EventOptionButton buttonOption = button_option_scene.Instantiate<EventOptionButton>();
+            buttons_container.AddChild(buttonOption);
             buttonOption.Text = optionData.text;
             buttonOption.option_data = optionData.data;
             buttonOption.Name = $"OptionButton_{index}";
@@ -80,14 +80,14 @@ public partial class EventOptionsScreen : Control
                 buttonOption.disable_option();
             }
 
-            buttonOption.option_selected += this.OnOptionSelected;
+            buttonOption.option_selected += OnOptionSelected;
         }
     }
 
     private void OnOptionSelected(object data)
     {
-        this._eventScriptInstance?.handle_response(data);
-        this.event_completed?.Invoke();
+        _eventScriptInstance?.handle_response(data);
+        event_completed?.Invoke();
         QueueFree();
     }
 }

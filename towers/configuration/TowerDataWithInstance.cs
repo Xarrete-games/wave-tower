@@ -11,14 +11,14 @@ public partial class TowerDataWithInstance : Resource
 
     public Tower get_instance_node()
     {
-        Tower instance = this.scene.Instantiate<Tower>();
-        instance.data = this.data;
-        instance.type = (Tower.Type)this.data.type;
+        Tower instance = scene.Instantiate<Tower>();
+        instance.data = data;
+        instance.type = (Tower.Type)data.type;
         return instance;
     }
 
     public Variant get_instance()
     {
-        return this.get_instance_node();
+        return get_instance_node();
     }
 }

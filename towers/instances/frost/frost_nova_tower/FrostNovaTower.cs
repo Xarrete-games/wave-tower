@@ -11,20 +11,20 @@ public partial class FrostNovaTower : Tower
     public override void _Ready()
     {
         base._Ready();
-        this.projectil_spawn_point = GetNode<Marker2D>("ProjectilSpawnPoint");
+        projectil_spawn_point = GetNode<Marker2D>("ProjectilSpawnPoint");
     }
 
     protected override async void _fire()
     {
-        this.cristal_light?.play();
+        cristal_light?.play();
 
         BlueProjectil projectile = FrostNovaProjectileScene.Instantiate<BlueProjectil>();
-        bool isDoubleHit = this._is_doble_hit();
+        bool isDoubleHit = IsDobleHit();
 
-        Attack attack = this._get_attack();
-        float attackRange = this.stats?.attack_range ?? 0f;
-        projectile.set_stats(attack, attackRange, EnemyDebuff.create_frost(this.damage_source));
-        CallDeferred(MethodName._add_projectil, projectile);
+        Attack attack = _get_attack();
+        float attackRange = stats?.attack_range ?? 0f;
+        projectile.set_stats(attack, attackRange, EnemyDebuff.create_frost(damage_source));
+        CallDeferred(MethodName.AddProjectil, projectile);
 
         if (!isDoubleHit)
         {
@@ -33,25 +33,25 @@ public partial class FrostNovaTower : Tower
 
         await ToSignal(GetTree().CreateTimer(0.5f, false), Timer.SignalName.Timeout);
 
-        this.cristal_light?.play();
+        cristal_light?.play();
         projectile = FrostNovaProjectileScene.Instantiate<BlueProjectil>();
-        attack = this._get_attack();
-        projectile.set_stats(attack, attackRange, EnemyDebuff.create_frost(this.damage_source));
-        CallDeferred(MethodName._add_projectil, projectile);
+        attack = _get_attack();
+        projectile.set_stats(attack, attackRange, EnemyDebuff.create_frost(damage_source));
+        CallDeferred(MethodName.AddProjectil, projectile);
     }
 
-    private void _add_projectil(Node projectile)
+    private void AddProjectil(Node projectile)
     {
         AddChild(projectile);
         if (projectile is Node2D node2D)
         {
-            node2D.Position = this.projectil_spawn_point.Position;
+            node2D.Position = projectil_spawn_point.Position;
         }
     }
 
-    private bool _is_doble_hit()
+    private bool IsDobleHit()
     {
         float random = GD.Randf();
-        return (this.double_shot_chance / 100f) >= random;
+        return (double_shot_chance / 100f) >= random;
     }
 }

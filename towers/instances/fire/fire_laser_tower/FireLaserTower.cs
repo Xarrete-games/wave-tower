@@ -14,35 +14,35 @@ public partial class FireLaserTower : Tower
     public override void _Ready()
     {
         base._Ready();
-        this.red_projectile = GetNode<FireLaserProjectiel>("FireLaserProjectile");
-        this.execute_threshold = this.base_execute_threshold;
+        red_projectile = GetNode<FireLaserProjectiel>("FireLaserProjectile");
+        execute_threshold = base_execute_threshold;
     }
 
     protected override async void _fire()
     {
-        Enemy targetEnemy = this._current_target as Enemy;
-        if (!GodotObject.IsInstanceValid(targetEnemy) || this.red_projectile == null)
+        Enemy targetEnemy = _current_target as Enemy;
+        if (!GodotObject.IsInstanceValid(targetEnemy) || red_projectile == null)
         {
             return;
         }
 
         float hpPercent = targetEnemy.get_percentage_remaining_health();
-        Attack nextAttack = hpPercent > this.execute_threshold ? this._get_attack() : this._get_letal_attack();
-        EnemyDebuff debuff = this.apply_burn ? EnemyDebuff.create_burn(this.damage_source) : null;
+        Attack nextAttack = hpPercent > execute_threshold ? _get_attack() : GetLetalAttack();
+        EnemyDebuff debuff = apply_burn ? EnemyDebuff.create_burn(damage_source) : null;
 
-        this.red_projectile.set_target(targetEnemy, nextAttack, debuff);
-        this.cristal_light?.turn_on();
+        red_projectile.set_target(targetEnemy, nextAttack, debuff);
+        cristal_light?.turn_on();
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), Timer.SignalName.Timeout);
 
-        this.red_projectile.hit_target();
-        this.red_projectile.stop();
-        this.cristal_light?.turn_off();
+        red_projectile.hit_target();
+        red_projectile.stop();
+        cristal_light?.turn_off();
     }
 
-    private Attack _get_letal_attack()
+    private Attack GetLetalAttack()
     {
-        Attack attack = this._get_attack();
+        Attack attack = _get_attack();
         attack.damage = EXECUTE_DAMAGE;
         attack.is_execution = true;
         return attack;

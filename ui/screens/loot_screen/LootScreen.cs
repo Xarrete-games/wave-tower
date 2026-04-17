@@ -11,27 +11,27 @@ public partial class LootScreen : Control
 
     public override void _Ready()
     {
-        this.items_container.ChildExitingTree += this.OnItemRemoved;
+        items_container.ChildExitingTree += OnItemRemoved;
     }
 
     public void SetLoot(List<LootItemData> data)
     {
         foreach (LootItemData itemData in data)
         {
-            LootScreenItem lootScreenItem = this.loot_screen_item_scene.Instantiate<LootScreenItem>();
-            this.items_container.AddChild(lootScreenItem);
+            LootScreenItem lootScreenItem = loot_screen_item_scene.Instantiate<LootScreenItem>();
+            items_container.AddChild(lootScreenItem);
             lootScreenItem.SetLootItem(itemData);
         }
     }
 
-    private void _on_xarrete_action_button_xarreta_pressed()
+    private void OnXarreteActionButtonXarretaPressed()
     {
         QueueFree();
     }
 
     private void OnItemRemoved(Node _item)
     {
-        if (this.items_container.GetChildCount() == 1)
+        if (items_container.GetChildCount() == 1)
         {
             QueueFree();
         }

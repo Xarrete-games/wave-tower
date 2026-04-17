@@ -14,7 +14,7 @@ public class RelicOffersManager
 
     public RelicOffersManager()
     {
-        this._allRelicData.AddRange(DataLoaderAccess.GetAllRelicsTyped());
+        _allRelicData.AddRange(DataLoaderAccess.GetAllRelicsTyped());
     }
 
     public List<ItemOffer> get_relics_offers_by_ids(Godot.Collections.Array<string> relic_ids)
@@ -24,13 +24,13 @@ public class RelicOffersManager
         for (int index = 0; index < relic_ids.Count; index++)
         {
             string relicId = relic_ids[index];
-            for (int dataIndex = 0; dataIndex < this._allRelicData.Count; dataIndex++)
+            for (int dataIndex = 0; dataIndex < _allRelicData.Count; dataIndex++)
             {
-                RelicData data = this._allRelicData[dataIndex];
+                RelicData data = _allRelicData[dataIndex];
 
                 if (data.id == relicId)
                 {
-                    offers.Add(this.create_relic_offer_from_data(data));
+                    offers.Add(create_relic_offer_from_data(data));
                     break;
                 }
             }
@@ -43,12 +43,12 @@ public class RelicOffersManager
     {
         var filtered = new List<RelicData>();
 
-        RunContext runContext = this.GetRunContext();
+        RunContext runContext = GetRunContext();
         RelicsManager relicsManager = runContext?.relics_manager;
 
-        for (int index = 0; index < this._allRelicData.Count; index++)
+        for (int index = 0; index < _allRelicData.Count; index++)
         {
-            RelicData data = this._allRelicData[index];
+            RelicData data = _allRelicData[index];
 
             bool hasRelic = relicsManager != null && relicsManager.has_relic(data.id);
             bool isCursed = data.is_cursed;
@@ -60,12 +60,12 @@ public class RelicOffersManager
             }
         }
 
-        this.Shuffle(filtered);
+        Shuffle(filtered);
 
         var offers = new List<ItemOffer>();
         for (int index = 0; index < filtered.Count && offers.Count < amount; index++)
         {
-            offers.Add(this.create_relic_offer_from_data(filtered[index]));
+            offers.Add(create_relic_offer_from_data(filtered[index]));
         }
 
         return offers;

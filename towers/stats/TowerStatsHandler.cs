@@ -16,11 +16,11 @@ public partial class TowerStatsHandler : Node
     private TowerStatsAccumulator _stats_acc = new();
     public TowerStatsAccumulator stats_acc
     {
-        get => this._stats_acc;
+        get => _stats_acc;
         set
         {
-            this._stats_acc = value;
-            this._update_stats();
+            _stats_acc = value;
+            UpdateStats();
         }
     }
 
@@ -30,99 +30,99 @@ public partial class TowerStatsHandler : Node
     public override void _Ready()
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        this.buff_scheduler = new BuffScheduler(runContext?.progress);
-        this.buff_scheduler.buff_expired += this._on_scheduled_buff_expired;
-        this.buff_scheduler.buff_applied += this._on_scheduled_buff_applied;
+        buff_scheduler = new BuffScheduler(runContext?.progress);
+        buff_scheduler.buff_expired += OnScheduledBuffExpired;
+        buff_scheduler.buff_applied += OnScheduledBuffApplied;
     }
 
     public void set_data(TowerData stats_configuration, int _p_tower_type)
     {
-        this.base_stats = stats_configuration?.stats?.duplicate() ?? new TowerStats();
-        this.stats_on_level = stats_configuration?.stats_on_level?.duplicate() ?? new TowerStats();
-        this.stats = this.base_stats.duplicate();
-        this._update_stats();
+        base_stats = stats_configuration?.stats?.duplicate() ?? new TowerStats();
+        stats_on_level = stats_configuration?.stats_on_level?.duplicate() ?? new TowerStats();
+        stats = base_stats.duplicate();
+        UpdateStats();
     }
 
     public void add_buff(TowerBuff tower_buff)
     {
-        this.buffs.Add(tower_buff);
+        buffs.Add(tower_buff);
 
         if (tower_buff?.duration != null)
         {
-            this.buff_scheduler.schedule(tower_buff);
+            buff_scheduler.schedule(tower_buff);
         }
 
-        this._rebuild_stats_acc();
+        RebuildStatsAcc();
     }
 
     public void remove_buff(string source_id)
     {
-        int initialSize = this.buffs.Count;
-        for (int i = this.buffs.Count - 1; i >= 0; i--)
+        int initialSize = buffs.Count;
+        for (int i = buffs.Count - 1; i >= 0; i--)
         {
-            TowerBuff buffObj = this.buffs[i];
+            TowerBuff buffObj = buffs[i];
             string buffSourceId = buffObj?.source?.TypeId ?? string.Empty;
             if (buffSourceId == source_id)
             {
-                this.buffs.RemoveAt(i);
+                buffs.RemoveAt(i);
             }
         }
 
-        if (this.buffs.Count != initialSize)
+        if (buffs.Count != initialSize)
         {
-            this._rebuild_stats_acc();
+            RebuildStatsAcc();
         }
     }
 
     public void level_up(int _new_level)
     {
-        this.base_stats.add_stats(this.stats_on_level);
-        this._update_stats();
+        base_stats.add_stats(stats_on_level);
+        UpdateStats();
     }
 
-    private void _on_scheduled_buff_applied(TowerBuff buff)
+    private void OnScheduledBuffApplied(TowerBuff buff)
     {
-        this.buff_applied?.Invoke(buff);
+        buff_applied?.Invoke(buff);
     }
 
-    private void _on_scheduled_buff_expired(TowerBuff buff)
+    private void OnScheduledBuffExpired(TowerBuff buff)
     {
         string sourceId = buff?.source?.TypeId ?? string.Empty;
-        this.buff_expired?.Invoke(sourceId);
+        buff_expired?.Invoke(sourceId);
     }
 
-    private void _rebuild_stats_acc()
+    private void RebuildStatsAcc()
     {
         TowerStatsAccumulator acc = new();
-        for (int i = 0; i < this.buffs.Count; i++)
+        for (int i = 0; i < buffs.Count; i++)
         {
-            TowerBuffStatsModifier buff = this.buffs[i] as TowerBuffStatsModifier;
+            TowerBuffStatsModifier buff = buffs[i] as TowerBuffStatsModifier;
             buff?.contribute(acc);
         }
 
-        this.stats_acc = acc;
+        stats_acc = acc;
     }
 
-    private void _update_stats()
+    private void UpdateStats()
     {
-        if (this.stats == null || this.base_stats == null)
+        if (stats == null || base_stats == null)
         {
             return;
         }
 
-        TowerStatsAccumulator total = this.stats_acc ?? new TowerStatsAccumulator();
+        TowerStatsAccumulator total = stats_acc ?? new TowerStatsAccumulator();
 
-        this.stats.damage = (this.base_stats.damage + total.flat_damage) * (1.0f + total.damage_mult);
+        stats.damage = (base_stats.damage + total.flat_damage) * (1.0f + total.damage_mult);
 
         float attackRangeMultiplier = 1.0f + total.attack_range_mult;
-        this.stats.attack_range = (this.base_stats.attack_range + total.flat_attack_range) * attackRangeMultiplier;
+        stats.attack_range = (base_stats.attack_range + total.flat_attack_range) * attackRangeMultiplier;
 
         float attackSpeedMultiplier = 1.0f + total.attack_speed_mult;
-        this.stats.attack_speed = (this.base_stats.attack_speed + total.flat_attack_speed) * attackSpeedMultiplier;
+        stats.attack_speed = (base_stats.attack_speed + total.flat_attack_speed) * attackSpeedMultiplier;
 
-        this.stats.critic_chance = (this.base_stats.critic_chance + total.flat_critic_chance) * (1.0f + total.critic_chance_mult);
-        this.stats.critic_damage = (this.base_stats.critic_damage + total.flat_critic_damage) * (1.0f + total.critic_damage_mult);
+        stats.critic_chance = (base_stats.critic_chance + total.flat_critic_chance) * (1.0f + total.critic_chance_mult);
+        stats.critic_damage = (base_stats.critic_damage + total.flat_critic_damage) * (1.0f + total.critic_damage_mult);
 
-        this.stats_change?.Invoke(this.stats);
+        stats_change?.Invoke(stats);
     }
 }

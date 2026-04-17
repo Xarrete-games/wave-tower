@@ -9,7 +9,7 @@ public sealed class IgnitionVoltage : TowerBuffRelicBase
 
     protected override void AddBuff(TowerModel tower)
     {
-        TowerBuffModel buff = TowerBuffFactoryModel.CreateFromId(_buffId, this.Id, _buffValue);
+        TowerBuffModel buff = TowerBuffFactoryModel.CreateFromId(_buffId, Id, _buffValue);
         if (buff != null)
         {
             tower.AddBuff(buff);
@@ -18,7 +18,7 @@ public sealed class IgnitionVoltage : TowerBuffRelicBase
 
     protected override void RemoveBuff(TowerModel tower)
     {
-        tower.RemoveBuff(this.Id);
+        tower.RemoveBuff(Id);
     }
 
     protected override bool IsValidTower(TowerModel tower)

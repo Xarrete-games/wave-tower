@@ -10,20 +10,20 @@ public class TowerStats
     {
         return new TowerStats
         {
-            damage = this.damage,
-            attack_range = this.attack_range,
-            attack_speed = this.attack_speed,
-            critic_chance = this.critic_chance,
-            critic_damage = this.critic_damage,
+            damage = damage,
+            attack_range = attack_range,
+            attack_speed = attack_speed,
+            critic_chance = critic_chance,
+            critic_damage = critic_damage,
         };
     }
 
     public void add_stats(TowerStats other)
     {
-        this.damage += other.damage;
-        this.attack_range += other.attack_range;
-        this.attack_speed += other.attack_speed;
-        this.critic_chance += other.critic_chance;
-        this.critic_damage += other.critic_damage;
+        damage += other.damage;
+        attack_range += other.attack_range;
+        attack_speed += other.attack_speed;
+        critic_chance += other.critic_chance;
+        critic_damage += other.critic_damage;
     }
 }

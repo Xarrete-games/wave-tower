@@ -8,12 +8,12 @@ public sealed class RelicsManagerRuntime
 
     public IReadOnlyList<Relic> GetAllRelicListeners()
     {
-        return this._relicListeners;
+        return _relicListeners;
     }
 
     public IReadOnlyCollection<Relic> GetAllRelics()
     {
-        return this._relicsById.Values;
+        return _relicsById.Values;
     }
 
     public void AddRelic(Relic relic)
@@ -23,18 +23,18 @@ public sealed class RelicsManagerRuntime
             return;
         }
 
-        if (this._relicsById.ContainsKey(relic.Id))
+        if (_relicsById.ContainsKey(relic.Id))
         {
             return;
         }
 
-        this._relicsById[relic.Id] = relic;
-        this._relicsCount[relic.Id] = this.GetCountOrZero(relic.Id) + 1;
+        _relicsById[relic.Id] = relic;
+        _relicsCount[relic.Id] = GetCountOrZero(relic.Id) + 1;
         relic.OnObtain();
 
-        if (!this._relicListeners.Contains(relic))
+        if (!_relicListeners.Contains(relic))
         {
-            this._relicListeners.Add(relic);
+            _relicListeners.Add(relic);
         }
     }
 
@@ -45,7 +45,7 @@ public sealed class RelicsManagerRuntime
             return false;
         }
 
-        if (this._relicsById.ContainsKey(relicId))
+        if (_relicsById.ContainsKey(relicId))
         {
             return false;
         }
@@ -56,7 +56,7 @@ public sealed class RelicsManagerRuntime
             return false;
         }
 
-        this.AddRelic(relic);
+        AddRelic(relic);
         return true;
     }
 
@@ -67,15 +67,15 @@ public sealed class RelicsManagerRuntime
             return;
         }
 
-        if (!this._relicsById.TryGetValue(relicId, out Relic relic))
+        if (!_relicsById.TryGetValue(relicId, out Relic relic))
         {
             return;
         }
 
-        this._relicsById.Remove(relicId);
-        this._relicsCount[relicId] = this.GetCountOrZero(relicId) - 1;
+        _relicsById.Remove(relicId);
+        _relicsCount[relicId] = GetCountOrZero(relicId) - 1;
         relic.OnRemove();
-        this._relicListeners.Remove(relic);
+        _relicListeners.Remove(relic);
     }
 
     public bool HasRelic(string relicId)
@@ -85,7 +85,7 @@ public sealed class RelicsManagerRuntime
             return false;
         }
 
-        if (!this._relicsById.TryGetValue(relicId, out Relic relic))
+        if (!_relicsById.TryGetValue(relicId, out Relic relic))
         {
             return false;
         }
@@ -100,7 +100,7 @@ public sealed class RelicsManagerRuntime
             return null;
         }
 
-        if (!this._relicsById.TryGetValue(relicId, out Relic relic))
+        if (!_relicsById.TryGetValue(relicId, out Relic relic))
         {
             return null;
         }
@@ -115,7 +115,7 @@ public sealed class RelicsManagerRuntime
             return 0;
         }
 
-        return this.GetCountOrZero(relicId);
+        return GetCountOrZero(relicId);
     }
 
     public float ApplyPriceHookForRelic(string relicId, int priceType, int basePrice, float currentDiscount)
@@ -125,7 +125,7 @@ public sealed class RelicsManagerRuntime
             return currentDiscount;
         }
 
-        if (!this._relicsById.TryGetValue(relicId, out Relic relic))
+        if (!_relicsById.TryGetValue(relicId, out Relic relic))
         {
             return currentDiscount;
         }
@@ -146,7 +146,7 @@ public sealed class RelicsManagerRuntime
 
     private int GetCountOrZero(string relicId)
     {
-        if (!this._relicsCount.TryGetValue(relicId, out int count))
+        if (!_relicsCount.TryGetValue(relicId, out int count))
         {
             return 0;
         }
@@ -156,8 +156,8 @@ public sealed class RelicsManagerRuntime
 
     public void Reset()
     {
-        this._relicListeners.Clear();
-        this._relicsById.Clear();
-        this._relicsCount.Clear();
+        _relicListeners.Clear();
+        _relicsById.Clear();
+        _relicsCount.Clear();
     }
 }

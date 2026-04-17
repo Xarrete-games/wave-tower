@@ -14,16 +14,16 @@ public class TowerStatsAccumulator
     public TowerStatsAccumulator merge(TowerStatsAccumulator other)
     {
         TowerStatsAccumulator result = new TowerStatsAccumulator();
-        result.flat_damage = this.flat_damage + other.flat_damage;
-        result.damage_mult = this.damage_mult + other.damage_mult;
-        result.flat_attack_range = this.flat_attack_range + other.flat_attack_range;
-        result.attack_range_mult = this.attack_range_mult + other.attack_range_mult;
-        result.flat_attack_speed = this.flat_attack_speed + other.flat_attack_speed;
-        result.attack_speed_mult = this.attack_speed_mult + other.attack_speed_mult;
-        result.flat_critic_chance = this.flat_critic_chance + other.flat_critic_chance;
-        result.critic_chance_mult = this.critic_chance_mult + other.critic_chance_mult;
-        result.flat_critic_damage = this.flat_critic_damage + other.flat_critic_damage;
-        result.critic_damage_mult = this.critic_damage_mult + other.critic_damage_mult;
+        result.flat_damage = flat_damage + other.flat_damage;
+        result.damage_mult = damage_mult + other.damage_mult;
+        result.flat_attack_range = flat_attack_range + other.flat_attack_range;
+        result.attack_range_mult = attack_range_mult + other.attack_range_mult;
+        result.flat_attack_speed = flat_attack_speed + other.flat_attack_speed;
+        result.attack_speed_mult = attack_speed_mult + other.attack_speed_mult;
+        result.flat_critic_chance = flat_critic_chance + other.flat_critic_chance;
+        result.critic_chance_mult = critic_chance_mult + other.critic_chance_mult;
+        result.flat_critic_damage = flat_critic_damage + other.flat_critic_damage;
+        result.critic_damage_mult = critic_damage_mult + other.critic_damage_mult;
         return result;
     }
 }

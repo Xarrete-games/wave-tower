@@ -8,12 +8,12 @@ public sealed class EnemyModel
 
     public float GetPercentageRemainingHealth()
     {
-        if (this.MaxHealth <= 0f)
+        if (MaxHealth <= 0f)
         {
             return 0f;
         }
 
-        float healthRatio = this.RemainingHealth / this.MaxHealth;
+        float healthRatio = RemainingHealth / MaxHealth;
         float percentage = healthRatio * 100f;
         return System.MathF.Min(100f, percentage);
     }

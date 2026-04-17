@@ -16,19 +16,19 @@ public partial class ActionManager : Node
 
     public void StartAction(ActionState state, Action cancel_callback = null)
     {
-        if (this.CurrentAction != ActionState.None)
+        if (CurrentAction != ActionState.None)
         {
-            this.EndAction();
+            EndAction();
         }
 
-        this.CurrentAction = state;
-        this._onActionCancel = cancel_callback;
+        CurrentAction = state;
+        _onActionCancel = cancel_callback;
     }
 
     public void EndAction()
     {
-        Action callback = this._onActionCancel;
-        this._onActionCancel = null;
+        Action callback = _onActionCancel;
+        _onActionCancel = null;
 
         if (callback != null)
         {
@@ -42,11 +42,11 @@ public partial class ActionManager : Node
             }
         }
 
-        this.CurrentAction = ActionState.None;
+        CurrentAction = ActionState.None;
     }
 
     public bool IsActionActive()
     {
-        return this.CurrentAction != ActionState.None;
+        return CurrentAction != ActionState.None;
     }
 }

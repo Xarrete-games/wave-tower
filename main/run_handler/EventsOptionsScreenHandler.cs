@@ -8,7 +8,7 @@ public partial class EventsOptionsScreenHandler : Node
 
     public async Task ShowOptionsEventAsync(EventData eventData, CanvasLayer eventLayer)
     {
-        EventOptionsScreen optionsScreen = this.events_options_screen.Instantiate<EventOptionsScreen>();
+        EventOptionsScreen optionsScreen = events_options_screen.Instantiate<EventOptionsScreen>();
 
         if (!IsInsideTree())
         {

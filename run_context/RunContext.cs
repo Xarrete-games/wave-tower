@@ -28,14 +28,14 @@ public partial class RunContext : Node
 
     public override void _Ready()
     {
-        this.reset_run();
+        reset_run();
     }
 
     public override void _ExitTree()
     {
-        if (this.status != null)
+        if (status != null)
         {
-            this.status.player_died -= this._on_die;
+            status.player_died -= OnDie;
         }
     }
 
@@ -43,34 +43,34 @@ public partial class RunContext : Node
     {
         RunContextRuntime.Reset();
 
-        if (this.status != null)
+        if (status != null)
         {
-            this.status.player_died -= this._on_die;
+            status.player_died -= OnDie;
         }
 
-        this.towers_manager?.dispose_events();
+        towers_manager?.dispose_events();
 
-        this.offers_manager = new OffersManager();
-        this.progress = new RunProgress();
-        this.economy = new Economy();
-        this.relics_manager = new RelicsManager();
+        offers_manager = new OffersManager();
+        progress = new RunProgress();
+        economy = new Economy();
+        relics_manager = new RelicsManager();
 
-        this.status = new Status();
-        this.status.setup(this.progress, this.relics_manager);
+        status = new Status();
+        status.setup(progress, relics_manager);
 
-        this.towers_manager = new TowersManager();
-        this.towers_manager.setup(this.progress);
+        towers_manager = new TowersManager();
+        towers_manager.setup(progress);
 
-        this.consumables_manager = new ConsumablesManager();
-        this.enemy_manager = new EnemyManager();
-        this.is_on_restarting = false;
+        consumables_manager = new ConsumablesManager();
+        enemy_manager = new EnemyManager();
+        is_on_restarting = false;
 
-        this.status.player_died += this._on_die;
+        status.player_died += OnDie;
     }
 
-    private void _on_die()
+    private void OnDie()
     {
         Node deathScene = DEATH_SCENE.Instantiate();
-        this.GetTree().Root.AddChild(deathScene);
+        GetTree().Root.AddChild(deathScene);
     }
 }

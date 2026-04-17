@@ -11,13 +11,13 @@ public class RouteBuilder
 
     public RouteBuilder(IWordBuilderAdapter adapter)
     {
-        this._adapter = adapter;
+        _adapter = adapter;
     }
 
     public void setup(PieceConnectionGraph graph, object target)
     {
-        this._connectionGraph = graph;
-        this._targetPiece = target;
+        _connectionGraph = graph;
+        _targetPiece = target;
     }
 
     public List<object> build_route_to_target(Dictionary<string, object> spawnEntry)
@@ -29,19 +29,19 @@ public class RouteBuilder
             return empty;
         }
 
-        if (!this._adapter.IsPieceValid(startPiece))
+        if (!_adapter.IsPieceValid(startPiece))
         {
             GD.PushError("[RouteBuilder] spawn_entry.piece is not valid");
             return empty;
         }
 
-        if (ReferenceEquals(startPiece, this._targetPiece))
+        if (ReferenceEquals(startPiece, _targetPiece))
         {
-            empty.Add(this._targetPiece);
+            empty.Add(_targetPiece);
             return empty;
         }
 
-        return this._connectionGraph.find_path(startPiece, this._targetPiece);
+        return _connectionGraph.find_path(startPiece, _targetPiece);
     }
 
     public List<Vector2> build_waypoints_from_route(Dictionary<string, object> spawnEntry, List<object> route)
@@ -61,7 +61,7 @@ public class RouteBuilder
         for (int index = 0; index < route.Count; index++)
         {
             object piece = route[index];
-            if (!this._adapter.IsPieceValid(piece))
+            if (!_adapter.IsPieceValid(piece))
             {
                 continue;
             }
@@ -74,28 +74,28 @@ public class RouteBuilder
             {
                 if (spawnEntry.TryGetValue("edge", out object edgeObj))
                 {
-                    entryDir = this._adapter.GetEdgeDir(edgeObj);
+                    entryDir = _adapter.GetEdgeDir(edgeObj);
                 }
             }
             else
             {
                 object prevPiece = route[index - 1];
-                entryDir = this._connectionGraph.find_connection_dir(prevPiece, piece);
-                entryDir = this._adapter.GetOppositeDir(entryDir);
+                entryDir = _connectionGraph.find_connection_dir(prevPiece, piece);
+                entryDir = _adapter.GetOppositeDir(entryDir);
             }
 
             if (hasExit)
             {
                 object nextPiece = route[index + 1];
-                exitDir = this._connectionGraph.find_connection_dir(piece, nextPiece);
+                exitDir = _connectionGraph.find_connection_dir(piece, nextPiece);
             }
 
             if (hasExit)
             {
-                IList<Vector2> intermediate = this._adapter.GetRouteWaypoints(piece, entryDir, exitDir);
+                IList<Vector2> intermediate = _adapter.GetRouteWaypoints(piece, entryDir, exitDir);
                 if (intermediate.Count > 0)
                 {
-                    Vector2 globalPosition = this._adapter.GetPieceGlobalPosition(piece);
+                    Vector2 globalPosition = _adapter.GetPieceGlobalPosition(piece);
                     for (int i = 0; i < intermediate.Count; i++)
                     {
                         waypoints.Add(globalPosition + intermediate[i]);
@@ -103,15 +103,15 @@ public class RouteBuilder
                 }
                 else
                 {
-                    waypoints.Add(this._adapter.GetPieceGlobalPosition(piece));
+                    waypoints.Add(_adapter.GetPieceGlobalPosition(piece));
                 }
             }
             else
             {
-                IList<Vector2> toEnd = this._adapter.GetFinalRouteWaypoints(piece, entryDir);
+                IList<Vector2> toEnd = _adapter.GetFinalRouteWaypoints(piece, entryDir);
                 if (toEnd.Count > 0)
                 {
-                    Vector2 globalPosition = this._adapter.GetPieceGlobalPosition(piece);
+                    Vector2 globalPosition = _adapter.GetPieceGlobalPosition(piece);
                     for (int i = 0; i < toEnd.Count; i++)
                     {
                         waypoints.Add(globalPosition + toEnd[i]);
@@ -119,7 +119,7 @@ public class RouteBuilder
                 }
                 else
                 {
-                    waypoints.Add(this._adapter.GetPieceGlobalPosition(piece));
+                    waypoints.Add(_adapter.GetPieceGlobalPosition(piece));
                 }
             }
         }
@@ -129,7 +129,7 @@ public class RouteBuilder
 
     public List<Vector2> get_waypoints_for_spawn(Dictionary<string, object> spawnEntry)
     {
-        List<object> route = this.build_route_to_target(spawnEntry);
-        return this.build_waypoints_from_route(spawnEntry, route);
+        List<object> route = build_route_to_target(spawnEntry);
+        return build_waypoints_from_route(spawnEntry, route);
     }
 }

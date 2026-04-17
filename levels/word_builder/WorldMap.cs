@@ -211,25 +211,25 @@ public partial class WorldMap : Node2D
     public override void _Ready()
     {
         DataLoader dataLoader = GetNode<DataLoader>("/root/DataLoader");
-        this._mapPieces = dataLoader.get_all_map_pieces();
+        _mapPieces = dataLoader.get_all_map_pieces();
 
-        this._gridManager = new GridManager();
-        this._wordBuilderAdapter = new GodotWordBuilderAdapter();
-        this._connectionGraph = new PieceConnectionGraph(this._wordBuilderAdapter);
-        this._frontierManager = new FrontierManager(this._wordBuilderAdapter);
-        this._frontierManager.setup(this._gridManager, this._to_object_list(this._mapPieces));
-        this._spawnHandler = new SpawnPositionsHandler();
-        this._spawnHandler.setup(this.visual);
+        _gridManager = new GridManager();
+        _wordBuilderAdapter = new GodotWordBuilderAdapter();
+        _connectionGraph = new PieceConnectionGraph(_wordBuilderAdapter);
+        _frontierManager = new FrontierManager(_wordBuilderAdapter);
+        _frontierManager.setup(_gridManager, ToObjectList(_mapPieces));
+        _spawnHandler = new SpawnPositionsHandler();
+        _spawnHandler.setup(visual);
 
-        if (this._gridManager == null || this._connectionGraph == null || this._spawnHandler == null)
+        if (_gridManager == null || _connectionGraph == null || _spawnHandler == null)
         {
             GD.PushError("[WorldMap] Failed to initialize world builder managers.");
             return;
         }
 
-        this._frontierManager.edge_finalized += this._on_edge_finalized;
+        _frontierManager.edge_finalized += OnEdgeFinalized;
 
-        MapPieceData initPieceData = this._pick_random(this._safe_array(dataLoader.get_all_initial_map_pieces())).AsGodotObject() as MapPieceData;
+        MapPieceData initPieceData = PickRandom(_safe_array(dataLoader.get_all_initial_map_pieces())).AsGodotObject() as MapPieceData;
         MapPiece initPiece = initPieceData?.get_instance().AsGodotObject() as MapPiece;
         if (initPiece == null)
         {
@@ -239,35 +239,35 @@ public partial class WorldMap : Node2D
 
         AddChild(initPiece);
         initPiece.logical_pos = Vector2I.Zero;
-        this._move_piece_decoration_to_visuals(initPiece);
+        MovePieceDecorationToVisuals(initPiece);
 
-        this._gridManager.occupy(Vector2I.Zero);
-        this._connectionGraph.register_piece(initPiece);
-        this.composite_tile_map?.register_piece(initPiece);
-        this._frontierManager.add_frontier(initPiece);
+        _gridManager.occupy(Vector2I.Zero);
+        _connectionGraph.register_piece(initPiece);
+        composite_tile_map?.register_piece(initPiece);
+        _frontierManager.add_frontier(initPiece);
 
-        this._routeBuilder = new RouteBuilder(this._wordBuilderAdapter);
-        this._routeBuilder.setup(this._connectionGraph, initPiece);
+        _routeBuilder = new RouteBuilder(_wordBuilderAdapter);
+        _routeBuilder.setup(_connectionGraph, initPiece);
 
-        this._lastPieceAttached = initPiece;
-        this.update_portals();
-        this.attach_next_piece();
+        _lastPieceAttached = initPiece;
+        update_portals();
+        attach_next_piece();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        this._progress = runContext.progress;
-        this._progress.current_wave_finished += this._on_wave_finished;
+        _progress = runContext.progress;
+        _progress.current_wave_finished += OnWaveFinished;
     }
 
     public override void _ExitTree()
     {
-        if (this._frontierManager != null)
+        if (_frontierManager != null)
         {
-            this._frontierManager.edge_finalized -= this._on_edge_finalized;
+            _frontierManager.edge_finalized -= OnEdgeFinalized;
         }
 
-        if (this._progress != null)
+        if (_progress != null)
         {
-            this._progress.current_wave_finished -= this._on_wave_finished;
+            _progress.current_wave_finished -= OnWaveFinished;
         }
     }
 
@@ -275,19 +275,19 @@ public partial class WorldMap : Node2D
     {
         if (@event.IsActionPressed("test"))
         {
-            this.attach_next_piece();
+            attach_next_piece();
         }
     }
 
     public void attach_next_piece()
     {
-        if (!this._frontierManager.has_frontiers())
+        if (!_frontierManager.has_frontiers())
         {
             GD.PushError("No frontiers available for placement");
             return;
         }
 
-        MapPiece frontier = this._frontierManager.select_random_frontier() as MapPiece;
+        MapPiece frontier = _frontierManager.select_random_frontier() as MapPiece;
         if (frontier == null)
         {
             GD.PushError("Failed to select frontier");
@@ -297,63 +297,63 @@ public partial class WorldMap : Node2D
         Godot.Collections.Array<Edge> frontierEdges = frontier.edges;
         if (frontierEdges.Count == 0)
         {
-            this._frontierManager.remove_frontier(frontier);
-            this.update_portals();
+            _frontierManager.remove_frontier(frontier);
+            update_portals();
             return;
         }
 
-        Edge nextEdge = this._frontier_manager_pick_random_edge(frontier) as Edge;
+        Edge nextEdge = FrontierManagerPickRandomEdge(frontier) as Edge;
         Vector2I frontierLogicalPos = frontier.logical_pos;
         int nextEdgeDir = nextEdge != null ? (int)nextEdge.dir : 0;
-        Vector2I candidateTile = this._gridManager.get_neighbor_tile(frontierLogicalPos, nextEdgeDir);
+        Vector2I candidateTile = _gridManager.get_neighbor_tile(frontierLogicalPos, nextEdgeDir);
 
-        FrontierManager.EdgeValidationResult validation = this._frontierManager.validate_edge(frontier, nextEdge, candidateTile);
+        FrontierManager.EdgeValidationResult validation = _frontierManager.validate_edge(frontier, nextEdge, candidateTile);
         if (!validation.Valid)
         {
             string reason = string.IsNullOrEmpty(validation.Reason) ? "unknown reason" : validation.Reason;
             GD.PushWarning(reason);
-            this._frontierManager.remove_edge_from_frontier(frontier, nextEdge);
-            this.update_portals();
+            _frontierManager.remove_edge_from_frontier(frontier, nextEdge);
+            update_portals();
             return;
         }
 
         List<object> validPieces = validation.ValidPieces;
         object edgeToConnect = validation.EdgeToConnect;
-        bool placed = this._try_place_on_edge(frontier, nextEdge, candidateTile, validPieces, edgeToConnect);
+        bool placed = TryPlaceOnEdge(frontier, nextEdge, candidateTile, validPieces, edgeToConnect);
         if (!placed)
         {
             GD.PushWarning($"frontier={frontier} edge={nextEdge} tile={candidateTile} no fitting piece -> removing edge");
-            this._frontierManager.remove_edge_from_frontier(frontier, nextEdge);
-            this.update_portals();
+            _frontierManager.remove_edge_from_frontier(frontier, nextEdge);
+            update_portals();
             return;
         }
 
-        this._frontierManager.prune_all_frontiers();
-        this.update_portals();
+        _frontierManager.prune_all_frontiers();
+        update_portals();
     }
 
     public Godot.Collections.Array<Vector2> get_waypoints_for_spawn(Godot.Collections.Dictionary spawn_entry)
     {
-        if (this._routeBuilder == null)
+        if (_routeBuilder == null)
         {
             return new Godot.Collections.Array<Vector2>();
         }
 
-        Dictionary<string, object> spawnEntry = this._to_cs_object_dict(spawn_entry);
-        List<Vector2> waypoints = this._routeBuilder.get_waypoints_for_spawn(spawnEntry);
+        Dictionary<string, object> spawnEntry = _to_cs_object_dict(spawn_entry);
+        List<Vector2> waypoints = _routeBuilder.get_waypoints_for_spawn(spawnEntry);
         return new Godot.Collections.Array<Vector2>(waypoints.ToArray());
     }
 
     public void update_portals()
     {
-        this.portal_entries.Clear();
+        portal_entries.Clear();
 
-        for (int index = 0; index < this.finalized_portal_entries.Count; index++)
+        for (int index = 0; index < finalized_portal_entries.Count; index++)
         {
-            this.portal_entries.Add(this.finalized_portal_entries[index]);
+            portal_entries.Add(finalized_portal_entries[index]);
         }
 
-        List<object> frontiers = this._frontierManager.get_all_frontiers();
+        List<object> frontiers = _frontierManager.get_all_frontiers();
         for (int index = 0; index < frontiers.Count; index++)
         {
             MapPiece frontier = frontiers[index] as MapPiece;
@@ -370,9 +370,9 @@ public partial class WorldMap : Node2D
                 int pos = edge != null ? (int)edge.pos : 0;
 
                 Vector2I logicalPos = frontier.logical_pos;
-                Vector2I tile = this._gridManager.get_neighbor_tile(logicalPos, dir);
+                Vector2I tile = _gridManager.get_neighbor_tile(logicalPos, dir);
                 Vector2 worldPos = frontier.GlobalPosition
-                    + this._piece_get_edge_tile_pos(frontier, dir, pos)
+                    + PieceGetEdgeTilePos(frontier, dir, pos)
                     + PortalOffset;
                 string key = $"{logicalPos.X},{logicalPos.Y}_{dir}_{pos}";
 
@@ -384,31 +384,31 @@ public partial class WorldMap : Node2D
                     { "edge", Variant.From(edge) },
                     { "piece", frontier },
                 };
-                this.portal_entries.Add(entry);
+                portal_entries.Add(entry);
             }
         }
 
-        this.portal_spawn_positions.Clear();
-        for (int index = 0; index < this.portal_entries.Count; index++)
+        portal_spawn_positions.Clear();
+        for (int index = 0; index < portal_entries.Count; index++)
         {
-            this.portal_spawn_positions.Add(this.portal_entries[index]["pos"].AsVector2());
+            portal_spawn_positions.Add(portal_entries[index]["pos"].AsVector2());
         }
 
-        if (this._spawnHandler != null)
+        if (_spawnHandler != null)
         {
-            this._spawnHandler.update(this.portal_entries);
-            this.portal_spawn_positions = this._spawnHandler.get_positions();
+            _spawnHandler.update(portal_entries);
+            portal_spawn_positions = _spawnHandler.get_positions();
         }
     }
 
-    private void _on_edge_finalized(object piece, object edge)
+    private void OnEdgeFinalized(object piece, object edge)
     {
-        this._finalize_spawn_pos(piece as MapPiece, edge as Edge);
+        FinalizeSpawnPos(piece as MapPiece, edge as Edge);
     }
 
-    private bool _try_place_on_edge(MapPiece frontier, Edge nextEdge, Vector2I candidateTile, List<object> validPieces, object edgeToConnect)
+    private bool TryPlaceOnEdge(MapPiece frontier, Edge nextEdge, Vector2I candidateTile, List<object> validPieces, object edgeToConnect)
     {
-        List<object> candidatePieces = this._build_candidate_pieces(validPieces);
+        List<object> candidatePieces = BuildCandidatePieces(validPieces);
         Edge edgeToConnectTyped = edgeToConnect as Edge;
 
         for (int index = 0; index < candidatePieces.Count; index++)
@@ -422,7 +422,7 @@ public partial class WorldMap : Node2D
 
             AddChild(newPiece);
 
-            HashSet<string> occSim = this._gridManager.create_simulated_occupation(candidateTile);
+            HashSet<string> occSim = _gridManager.create_simulated_occupation(candidateTile);
             var remainingEdges = new List<Edge>();
             for (int i = 0; i < newPiece.edges.Count; i++)
             {
@@ -443,14 +443,14 @@ public partial class WorldMap : Node2D
                 }
 
                 int dir = (int)edgeObj.dir;
-                Vector2I neigh = candidateTile + this._gridManager.get_offset(dir);
+                Vector2I neigh = candidateTile + _gridManager.get_offset(dir);
                 string neighKey = GridManager.vec_key(neigh);
                 if (occSim.Contains(neighKey))
                 {
                     continue;
                 }
 
-                if (this._gridManager.reachable_to_boundary(neigh, occSim))
+                if (_gridManager.reachable_to_boundary(neigh, occSim))
                 {
                     hasOpenPath = true;
                     break;
@@ -464,27 +464,27 @@ public partial class WorldMap : Node2D
             }
 
             newPiece.logical_pos = candidateTile;
-            this._gridManager.occupy(candidateTile);
-            this.composite_tile_map?.register_piece(newPiece);
+            _gridManager.occupy(candidateTile);
+            composite_tile_map?.register_piece(newPiece);
 
-            this._piece_set_edge_has_connected(frontier, nextEdge);
-            this._piece_set_edge_has_connected(newPiece, edgeToConnect);
+            PieceSetEdgeHasConnected(frontier, nextEdge);
+            PieceSetEdgeHasConnected(newPiece, edgeToConnect);
 
-            this._frontierManager.update_after_placement(frontier, newPiece);
+            _frontierManager.update_after_placement(frontier, newPiece);
 
             int entryDir = nextEdge != null ? (int)nextEdge.dir : 0;
             int exitDir = edgeToConnectTyped != null ? (int)edgeToConnectTyped.dir : 0;
-            this._attach_piece(frontier, newPiece, entryDir, exitDir);
-            this._move_piece_decoration_to_visuals(newPiece);
-            this._lastPieceAttached = newPiece;
-            if (!this._hasPlacedFirstExpansion)
+            AttachPiece(frontier, newPiece, entryDir, exitDir);
+            MovePieceDecorationToVisuals(newPiece);
+            _lastPieceAttached = newPiece;
+            if (!_hasPlacedFirstExpansion)
             {
-                this._hasPlacedFirstExpansion = true;
+                _hasPlacedFirstExpansion = true;
             }
 
-            if (this._pendingForkAfterBoss && pieceData != null && pieceData.is_fork)
+            if (_pendingForkAfterBoss && pieceData != null && pieceData.is_fork)
             {
-                this._pendingForkAfterBoss = false;
+                _pendingForkAfterBoss = false;
             }
 
             return true;
@@ -493,53 +493,53 @@ public partial class WorldMap : Node2D
         return false;
     }
 
-    private void _attach_piece(MapPiece pieceA, MapPiece pieceB, int entryDir, int exitDir)
+    private void AttachPiece(MapPiece pieceA, MapPiece pieceB, int entryDir, int exitDir)
     {
-        Vector2 aWorld = this._piece_get_edge_tile_pos(pieceA, entryDir);
-        Vector2 bWorld = this._piece_get_edge_tile_pos(pieceB, exitDir);
-        Vector2I delta = this._piece_get_edge_tile_delta(pieceA, entryDir);
-        Vector2 shift = this._piece_get_tile_local_offset(pieceA, delta);
+        Vector2 aWorld = PieceGetEdgeTilePos(pieceA, entryDir);
+        Vector2 bWorld = PieceGetEdgeTilePos(pieceB, exitDir);
+        Vector2I delta = PieceGetEdgeTileDelta(pieceA, entryDir);
+        Vector2 shift = PieceGetTileLocalOffset(pieceA, delta);
         Vector2 pieceAPosition = pieceA.GlobalPosition;
         pieceB.GlobalPosition = pieceAPosition + aWorld - bWorld + shift;
 
-        this._connectionGraph.connect_pieces(pieceA, pieceB, entryDir, exitDir);
+        _connectionGraph.connect_pieces(pieceA, pieceB, entryDir, exitDir);
     }
 
-    private void _move_piece_decoration_to_visuals(MapPiece piece)
+    private void MovePieceDecorationToVisuals(MapPiece piece)
     {
         if (piece == null)
         {
             return;
         }
 
-        if (this.visual == null)
+        if (visual == null)
         {
             GD.PushWarning($"[WorldMap] visual container is null; cannot move decoration for piece {piece.Name}");
             return;
         }
 
-        Node2D decoration = this._piece_get_decoration(piece);
+        Node2D decoration = PieceGetDecoration(piece);
         if (decoration == null)
         {
             return;
         }
 
         List<Node2D> leafNodes = new();
-        this._collect_leaf_node2d(decoration, leafNodes);
+        CollectLeafNode2d(decoration, leafNodes);
 
         for (int index = 0; index < leafNodes.Count; index++)
         {
             Node2D leaf = leafNodes[index];
-            if (leaf == decoration || leaf.GetParent() == this.visual)
+            if (leaf == decoration || leaf.GetParent() == visual)
             {
                 continue;
             }
 
-            leaf.Reparent(this.visual, true);
+            leaf.Reparent(visual, true);
         }
     }
 
-    private void _collect_leaf_node2d(Node node, List<Node2D> output)
+    private void CollectLeafNode2d(Node node, List<Node2D> output)
     {
         if (node == null)
         {
@@ -559,11 +559,11 @@ public partial class WorldMap : Node2D
 
         for (int index = 0; index < children.Count; index++)
         {
-            this._collect_leaf_node2d(children[index], output);
+            CollectLeafNode2d(children[index], output);
         }
     }
 
-    private void _finalize_spawn_pos(MapPiece piece, Edge edge)
+    private void FinalizeSpawnPos(MapPiece piece, Edge edge)
     {
         if (piece == null)
         {
@@ -574,15 +574,15 @@ public partial class WorldMap : Node2D
         int pos = edge != null ? (int)edge.pos : 0;
         Vector2I logicalPos = piece.logical_pos;
 
-        Vector2I tile = this._gridManager.get_neighbor_tile(logicalPos, dir);
+        Vector2I tile = _gridManager.get_neighbor_tile(logicalPos, dir);
         Vector2 position = piece.GlobalPosition
-            + this._piece_get_edge_tile_pos(piece, dir, pos)
+            + PieceGetEdgeTilePos(piece, dir, pos)
             + PortalOffset;
         string key = $"{logicalPos.X},{logicalPos.Y}_{dir}_{pos}";
 
-        for (int index = 0; index < this.finalized_portal_entries.Count; index++)
+        for (int index = 0; index < finalized_portal_entries.Count; index++)
         {
-            Godot.Collections.Dictionary existing = this.finalized_portal_entries[index];
+            Godot.Collections.Dictionary existing = finalized_portal_entries[index];
             if (existing.ContainsKey("key") && existing["key"].AsString() == key)
             {
                 return;
@@ -598,51 +598,51 @@ public partial class WorldMap : Node2D
             { "piece", piece },
         };
 
-        this.finalized_portal_entries.Add(entry);
+        finalized_portal_entries.Add(entry);
     }
 
-    private void _on_wave_finished()
+    private void OnWaveFinished()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         int currentWave = runContext.progress.current_wave;
 
-        if (!this.enable_fork && currentWave % WavesPerBoss == 0)
+        if (!enable_fork && currentWave % WavesPerBoss == 0)
         {
-            this._pendingForkAfterBoss = true;
+            _pendingForkAfterBoss = true;
         }
 
         if (currentWave % 3 == 0)
         {
-            this.attach_next_piece();
+            attach_next_piece();
         }
     }
 
-    private List<object> _build_candidate_pieces(List<object> validPieces)
+    private List<object> BuildCandidatePieces(List<object> validPieces)
     {
         var candidatePieces = new List<object>();
 
-        if (!this._hasPlacedFirstExpansion)
+        if (!_hasPlacedFirstExpansion)
         {
-            this._append_filtered_by_fork(validPieces, candidatePieces, false);
-            this._shuffle(candidatePieces);
+            AppendFilteredByFork(validPieces, candidatePieces, false);
+            Shuffle(candidatePieces);
             return candidatePieces;
         }
 
-        if (this.enable_fork)
+        if (enable_fork)
         {
             candidatePieces = new List<object>(validPieces);
-            this._shuffle(candidatePieces);
+            Shuffle(candidatePieces);
             return candidatePieces;
         }
 
-        if (this._pendingForkAfterBoss)
+        if (_pendingForkAfterBoss)
         {
             var forkPieces = new List<object>();
             var otherPieces = new List<object>();
-            this._append_filtered_by_fork(validPieces, forkPieces, true);
-            this._append_filtered_by_fork(validPieces, otherPieces, false);
-            this._shuffle(forkPieces);
-            this._shuffle(otherPieces);
+            AppendFilteredByFork(validPieces, forkPieces, true);
+            AppendFilteredByFork(validPieces, otherPieces, false);
+            Shuffle(forkPieces);
+            Shuffle(otherPieces);
             for (int index = 0; index < forkPieces.Count; index++)
             {
                 candidatePieces.Add(forkPieces[index]);
@@ -656,37 +656,37 @@ public partial class WorldMap : Node2D
             return candidatePieces;
         }
 
-        this._append_filtered_by_fork(validPieces, candidatePieces, false);
-        this._shuffle(candidatePieces);
+        AppendFilteredByFork(validPieces, candidatePieces, false);
+        Shuffle(candidatePieces);
         return candidatePieces;
     }
 
-    private Vector2 _piece_get_edge_tile_pos(MapPiece piece, int dir, int pos = 1)
+    private Vector2 PieceGetEdgeTilePos(MapPiece piece, int dir, int pos = 1)
     {
         return piece != null ? piece.get_edge_tile_pos(dir, pos) : Vector2.Zero;
     }
 
-    private Vector2I _piece_get_edge_tile_delta(MapPiece piece, int dir)
+    private Vector2I PieceGetEdgeTileDelta(MapPiece piece, int dir)
     {
         return piece != null ? piece.get_edge_tile_delta(dir) : Vector2I.Zero;
     }
 
-    private Vector2 _piece_get_tile_local_offset(MapPiece piece, Vector2I delta)
+    private Vector2 PieceGetTileLocalOffset(MapPiece piece, Vector2I delta)
     {
         return piece != null ? piece.get_tile_local_offset(delta) : Vector2.Zero;
     }
 
-    private Node2D _piece_get_decoration(MapPiece piece)
+    private Node2D PieceGetDecoration(MapPiece piece)
     {
         return piece?.get_decoration();
     }
 
-    private void _piece_set_edge_has_connected(MapPiece piece, object edge)
+    private void PieceSetEdgeHasConnected(MapPiece piece, object edge)
     {
         piece?.set_edge_has_connected(edge as Edge);
     }
 
-    private void _append_filtered_by_fork(List<object> source, List<object> target, bool isFork)
+    private void AppendFilteredByFork(List<object> source, List<object> target, bool isFork)
     {
         for (int index = 0; index < source.Count; index++)
         {
@@ -698,7 +698,7 @@ public partial class WorldMap : Node2D
         }
     }
 
-    private Variant _pick_random(Godot.Collections.Array array)
+    private Variant PickRandom(Godot.Collections.Array array)
     {
         if (array.Count == 0)
         {
@@ -719,12 +719,12 @@ public partial class WorldMap : Node2D
         return new Godot.Collections.Array();
     }
 
-    private object _frontier_manager_pick_random_edge(GodotObject frontier)
+    private object FrontierManagerPickRandomEdge(GodotObject frontier)
     {
-        return FrontierManager.pick_random_edge(frontier, this._wordBuilderAdapter);
+        return FrontierManager.pick_random_edge(frontier, _wordBuilderAdapter);
     }
 
-    private void _shuffle(List<object> items)
+    private void Shuffle(List<object> items)
     {
         for (int i = items.Count - 1; i > 0; i--)
         {
@@ -749,7 +749,7 @@ public partial class WorldMap : Node2D
         var result = new List<Dictionary<string, Variant>>(entries.Count);
         for (int i = 0; i < entries.Count; i++)
         {
-            result.Add(this._to_cs_dict(entries[i]));
+            result.Add(_to_cs_dict(entries[i]));
         }
 
         return result;
@@ -785,13 +785,13 @@ public partial class WorldMap : Node2D
         var result = new List<Dictionary<string, object>>(entries.Count);
         for (int i = 0; i < entries.Count; i++)
         {
-            result.Add(this._to_cs_object_dict(entries[i]));
+            result.Add(_to_cs_object_dict(entries[i]));
         }
 
         return result;
     }
 
-    private List<object> _to_object_list(Godot.Collections.Array<Variant> source)
+    private List<object> ToObjectList(Godot.Collections.Array<Variant> source)
     {
         var result = new List<object>(source.Count);
         for (int i = 0; i < source.Count; i++)

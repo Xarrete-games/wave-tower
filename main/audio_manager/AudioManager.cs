@@ -18,42 +18,42 @@ public partial class AudioManager : Node
 
     public override void _Ready()
     {
-        this.button_click = GetNodeOrNull<AudioStreamPlayer>("ButtonClick");
-        this.button_hover = GetNodeOrNull<AudioStreamPlayer>("ButtonHover");
-        this.coins = GetNodeOrNull<AudioStreamPlayer>("Coins");
-        this.main_piano_player = GetNodeOrNull<AudioStreamPlayer>("MainPianoPlayer");
-        this.purchase_player = GetNodeOrNull<AudioStreamPlayer>("PurchasePlayer");
-        this.wave_clear = GetNodeOrNull<AudioStreamPlayer>("WaveClear");
-        this.defeated_sound = GetNodeOrNull<AudioStreamPlayer>("DefeatedSound");
-        this.relic_obtain = GetNodeOrNull<AudioStreamPlayer>("Relic_obtain");
-        this.tower_obtain = GetNodeOrNull<AudioStreamPlayer>("Tower_obtain");
-        this.place_tower = GetNodeOrNull<AudioStreamPlayer>("Place_tower");
-        this.armor = GetNodeOrNull<AudioStreamPlayer>("Armor");
-        this.loss_hp = GetNodeOrNull<AudioStreamPlayer>("Loss_HP");
-        this.loss_armor = GetNodeOrNull<AudioStreamPlayer>("Loss_Armor");
+        button_click = GetNodeOrNull<AudioStreamPlayer>("ButtonClick");
+        button_hover = GetNodeOrNull<AudioStreamPlayer>("ButtonHover");
+        coins = GetNodeOrNull<AudioStreamPlayer>("Coins");
+        main_piano_player = GetNodeOrNull<AudioStreamPlayer>("MainPianoPlayer");
+        purchase_player = GetNodeOrNull<AudioStreamPlayer>("PurchasePlayer");
+        wave_clear = GetNodeOrNull<AudioStreamPlayer>("WaveClear");
+        defeated_sound = GetNodeOrNull<AudioStreamPlayer>("DefeatedSound");
+        relic_obtain = GetNodeOrNull<AudioStreamPlayer>("Relic_obtain");
+        tower_obtain = GetNodeOrNull<AudioStreamPlayer>("Tower_obtain");
+        place_tower = GetNodeOrNull<AudioStreamPlayer>("Place_tower");
+        armor = GetNodeOrNull<AudioStreamPlayer>("Armor");
+        loss_hp = GetNodeOrNull<AudioStreamPlayer>("Loss_HP");
+        loss_armor = GetNodeOrNull<AudioStreamPlayer>("Loss_Armor");
     }
 
-    public void play_coins() => this.coins?.Play();
-    public void play_relic_obtain() => this.relic_obtain?.Play();
-    public void play_tower_obtain() => this.tower_obtain?.Play();
-    public void play_button_hover() => this.button_hover?.Play();
-    public void play_button_click() => this.button_click?.Play();
-    public void play_purchase() => this.purchase_player?.Play();
-    public void stop_main_piano() => this.main_piano_player?.Stop();
-    public void play_wave_clear() => this.wave_clear?.Play();
-    public void play_defeated_sound() => this.defeated_sound?.Play();
-    public void play_place_tower() => this.place_tower?.Play();
-    public void play_player_hurt() => this.loss_hp?.Play();
-    public void play_armor_block() => this.loss_armor?.Play();
-    public void play_gain_armor() => this.armor?.Play();
+    public void play_coins() => coins?.Play();
+    public void play_relic_obtain() => relic_obtain?.Play();
+    public void play_tower_obtain() => tower_obtain?.Play();
+    public void play_button_hover() => button_hover?.Play();
+    public void play_button_click() => button_click?.Play();
+    public void play_purchase() => purchase_player?.Play();
+    public void stop_main_piano() => main_piano_player?.Stop();
+    public void play_wave_clear() => wave_clear?.Play();
+    public void play_defeated_sound() => defeated_sound?.Play();
+    public void play_place_tower() => place_tower?.Play();
+    public void play_player_hurt() => loss_hp?.Play();
+    public void play_armor_block() => loss_armor?.Play();
+    public void play_gain_armor() => armor?.Play();
 
     public void play_main_piano()
     {
-        if (this.main_piano_player == null || this.main_piano_player.Playing)
+        if (main_piano_player == null || main_piano_player.Playing)
         {
             return;
         }
 
-        this.main_piano_player.Play();
+        main_piano_player.Play();
     }
 }

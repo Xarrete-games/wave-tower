@@ -1,15 +1,15 @@
-﻿using Godot;
+using Godot;
 
 public partial class ConfigButton : Control
 {
-    private void _on_pressed()
+    private void OnPressed()
     {
         AudioManager audioManager = GetNode<AudioManager>("/root/AudioManager");
         audioManager.play_button_click();
         ClickEvents.ConfigButtonPressed?.Invoke();
     }
 
-    private void _on_mouse_entered()
+    private void OnMouseEntered()
     {
         AudioManager audioManager = GetNode<AudioManager>("/root/AudioManager");
         audioManager.play_button_hover();

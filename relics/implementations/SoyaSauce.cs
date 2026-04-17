@@ -8,9 +8,9 @@ public sealed class SoyaSauce : Relic
     public override void OnGetPrice(PriceContext context)
     {
         float discountBefore = context.Discount;
-        bool hasTuna = this.HasRelicById("tuna_nigiri");
-        bool hasSalmon = this.HasRelicById("salmon_nigiri");
-        bool hasButterfish = this.HasRelicById("butterfish_nigiri");
+        bool hasTuna = HasRelicById("tuna_nigiri");
+        bool hasSalmon = HasRelicById("salmon_nigiri");
+        bool hasButterfish = HasRelicById("butterfish_nigiri");
 
         switch (context.Type)
         {

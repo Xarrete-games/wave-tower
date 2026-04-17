@@ -11,8 +11,8 @@ public sealed class StatusRuntime
             return;
         }
 
-        int nextHealth = this.Health + amount;
-        this.Health = System.Math.Min(nextHealth, this.MaxHealth);
+        int nextHealth = Health + amount;
+        Health = System.Math.Min(nextHealth, MaxHealth);
     }
 
     public void AddArmor(int amount)
@@ -22,7 +22,7 @@ public sealed class StatusRuntime
             return;
         }
 
-        this.Armor += amount;
+        Armor += amount;
     }
 
     public void AddMaxHealth(int amount)
@@ -32,8 +32,8 @@ public sealed class StatusRuntime
             return;
         }
 
-        this.MaxHealth += amount;
-        this.Health = System.Math.Min(this.Health + amount, this.MaxHealth);
+        MaxHealth += amount;
+        Health = System.Math.Min(Health + amount, MaxHealth);
     }
 
     public void ChangeMaxHealth(int amount)
@@ -43,15 +43,15 @@ public sealed class StatusRuntime
             return;
         }
 
-        this.MaxHealth += amount;
-        if (this.MaxHealth < 1)
+        MaxHealth += amount;
+        if (MaxHealth < 1)
         {
-            this.MaxHealth = 1;
+            MaxHealth = 1;
         }
 
-        if (this.Health > this.MaxHealth)
+        if (Health > MaxHealth)
         {
-            this.Health = this.MaxHealth;
+            Health = MaxHealth;
         }
     }
 
@@ -64,23 +64,23 @@ public sealed class StatusRuntime
 
         int remainingDamage = amount;
 
-        if (this.Armor > 0)
+        if (Armor > 0)
         {
-            int absorbed = System.Math.Min(this.Armor, remainingDamage);
-            this.Armor -= absorbed;
+            int absorbed = System.Math.Min(Armor, remainingDamage);
+            Armor -= absorbed;
             remainingDamage -= absorbed;
         }
 
         if (remainingDamage > 0)
         {
-            this.Health -= remainingDamage;
+            Health -= remainingDamage;
         }
     }
 
     public void SyncFromLegacy(int maxHealth, int health, int armor)
     {
-        this.MaxHealth = maxHealth;
-        this.Health = health;
-        this.Armor = armor;
+        MaxHealth = maxHealth;
+        Health = health;
+        Armor = armor;
     }
 }

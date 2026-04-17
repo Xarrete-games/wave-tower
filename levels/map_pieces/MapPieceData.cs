@@ -11,19 +11,19 @@ public partial class MapPieceData : Resource
 
     public bool is_fork
     {
-        get => this.edges != null && this.edges.Count > 2;
+        get => edges != null && edges.Count > 2;
     }
 
     public bool has_edge(Edge edge)
     {
-        if (edge == null || this.edges == null)
+        if (edge == null || edges == null)
         {
             return false;
         }
 
-        for (int i = 0; i < this.edges.Count; i++)
+        for (int i = 0; i < edges.Count; i++)
         {
-            Edge current = this.edges[i];
+            Edge current = edges[i];
             if (current != null && current.matches(edge))
             {
                 return true;
@@ -35,14 +35,14 @@ public partial class MapPieceData : Resource
 
     public bool has_connecting_edge(Edge edge)
     {
-        if (edge == null || this.edges == null)
+        if (edge == null || edges == null)
         {
             return false;
         }
 
-        for (int i = 0; i < this.edges.Count; i++)
+        for (int i = 0; i < edges.Count; i++)
         {
-            Edge current = this.edges[i];
+            Edge current = edges[i];
             if (current != null && current.can_connect_with(edge))
             {
                 return true;
@@ -54,14 +54,14 @@ public partial class MapPieceData : Resource
 
     public Edge get_connecting_edge(Edge edge)
     {
-        if (edge == null || this.edges == null)
+        if (edge == null || edges == null)
         {
             return null;
         }
 
-        for (int i = 0; i < this.edges.Count; i++)
+        for (int i = 0; i < edges.Count; i++)
         {
-            Edge current = this.edges[i];
+            Edge current = edges[i];
             if (current != null && current.can_connect_with(edge))
             {
                 return current;
@@ -73,14 +73,14 @@ public partial class MapPieceData : Resource
 
     public bool has_edge_dir(int dir)
     {
-        if (this.edges == null)
+        if (edges == null)
         {
             return false;
         }
 
-        for (int i = 0; i < this.edges.Count; i++)
+        for (int i = 0; i < edges.Count; i++)
         {
-            Edge current = this.edges[i];
+            Edge current = edges[i];
             if (current != null && (int)current.dir == dir)
             {
                 return true;
@@ -92,13 +92,13 @@ public partial class MapPieceData : Resource
 
     public Variant get_instance()
     {
-        if (this.scene == null)
+        if (scene == null)
         {
             GD.PushError("[MapPieceData] scene is null in get_instance().");
             return default;
         }
 
-        Node instance = this.scene.Instantiate<Node>();
+        Node instance = scene.Instantiate<Node>();
         if (instance == null)
         {
             GD.PushError("[MapPieceData] Could not instantiate scene.");
@@ -106,11 +106,11 @@ public partial class MapPieceData : Resource
         }
 
         var newEdges = new Godot.Collections.Array<Edge>();
-        if (this.edges != null)
+        if (edges != null)
         {
-            for (int i = 0; i < this.edges.Count; i++)
+            for (int i = 0; i < edges.Count; i++)
             {
-                Edge e = this.edges[i];
+                Edge e = edges[i];
                 if (e != null)
                 {
                     newEdges.Add(new Edge(e.dir, e.pos));

@@ -23,31 +23,31 @@ public partial class EventSlot : VBoxContainer
             return;
         }
 
-        this.event_texture.Texture = eventData.icon;
-        this.description_label.Text = eventData.description;
-        this.title_lable.Text = eventData.title;
-        this._event = eventData;
+        event_texture.Texture = eventData.icon;
+        description_label.Text = eventData.description;
+        title_lable.Text = eventData.title;
+        _event = eventData;
     }
 
-    private void _on_gui_input(InputEvent @event)
+    private void OnGuiInput(InputEvent @event)
     {
         if (!UIUtilsStatic.IsLeftClickEvent(@event))
         {
             return;
         }
 
-        this.event_pressed?.Invoke(this._event);
+        event_pressed?.Invoke(_event);
         GetNode<AudioManager>("/root/AudioManager").play_button_click();
     }
 
-    private void _on_mouse_entered()
+    private void OnMouseEntered()
     {
-        this.event_texture.CustomMinimumSize = new Vector2(150, 150);
+        event_texture.CustomMinimumSize = new Vector2(150, 150);
         GetNode<AudioManager>("/root/AudioManager").play_button_hover();
     }
 
-    private void _on_mouse_exited()
+    private void OnMouseExited()
     {
-        this.event_texture.CustomMinimumSize = new Vector2(100, 100);
+        event_texture.CustomMinimumSize = new Vector2(100, 100);
     }
 }

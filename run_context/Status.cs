@@ -14,63 +14,63 @@ public class Status
 
     public int max_health
     {
-        get => this._maxHealth;
+        get => _maxHealth;
         set
         {
-            this._maxHealth = value;
-            if (this._health > this._maxHealth)
+            _maxHealth = value;
+            if (_health > _maxHealth)
             {
-                this._health = this._maxHealth;
+                _health = _maxHealth;
             }
 
-            this.max_health_change?.Invoke(this._maxHealth);
+            max_health_change?.Invoke(_maxHealth);
         }
     }
 
     public int health
     {
-        get => this._health;
+        get => _health;
         set
         {
-            this._health = Mathf.Min(value, this._maxHealth);
-            this.health_change?.Invoke(this._health);
-            if (this._health <= 0)
+            _health = Mathf.Min(value, _maxHealth);
+            health_change?.Invoke(_health);
+            if (_health <= 0)
             {
                 var statusModel = new StatusModel
                 {
-                    MaxHealth = this._maxHealth,
-                    Health = this._health,
-                    Armor = this._armor,
+                    MaxHealth = _maxHealth,
+                    Health = _health,
+                    Armor = _armor,
                 };
 
                 Hooks.OnBeforeDie(Hooks.GetListenersFromRuntime(), statusModel);
 
-                bool maxHealthChanged = this._maxHealth != statusModel.MaxHealth;
-                bool healthChanged = this._health != statusModel.Health;
-                bool armorChanged = this._armor != statusModel.Armor;
+                bool maxHealthChanged = _maxHealth != statusModel.MaxHealth;
+                bool healthChanged = _health != statusModel.Health;
+                bool armorChanged = _armor != statusModel.Armor;
 
-                this._maxHealth = statusModel.MaxHealth;
-                this._health = statusModel.Health;
-                this._armor = statusModel.Armor;
+                _maxHealth = statusModel.MaxHealth;
+                _health = statusModel.Health;
+                _armor = statusModel.Armor;
 
                 if (maxHealthChanged)
                 {
-                    this.max_health_change?.Invoke(this._maxHealth);
+                    max_health_change?.Invoke(_maxHealth);
                 }
 
                 if (healthChanged)
                 {
-                    this.health_change?.Invoke(this._health);
+                    health_change?.Invoke(_health);
                 }
 
                 if (armorChanged)
                 {
-                    this.armor_change?.Invoke(this._armor);
+                    armor_change?.Invoke(_armor);
                 }
 
-                if (this._health <= 0)
+                if (_health <= 0)
                 {
-                    this.player_died?.Invoke();
+                    player_died?.Invoke();
                 }
             }
         }
@@ -78,30 +78,30 @@ public class Status
 
     public int armor
     {
-        get => this._armor;
+        get => _armor;
         set
         {
-            this._armor = value;
-            this.armor_change?.Invoke(this._armor);
+            _armor = value;
+            armor_change?.Invoke(_armor);
         }
     }
 
     public RunProgress progress { get; private set; }
     public RelicsManager relics_manager { get; private set; }
 
-    public void setup(RunProgress p_progress, RelicsManager p_relics_manager)
+    public void setup(RunProgress runProgress, RelicsManager relicsManager)
     {
-        if (this.progress != null)
+        if (progress != null)
         {
-            this.progress.current_wave_finished -= this._on_wave_finished;
+            progress.current_wave_finished -= OnWaveFinished;
         }
 
-        this.progress = p_progress;
-        this.relics_manager = p_relics_manager;
+        progress = runProgress;
+        relics_manager = relicsManager;
 
-        if (this.progress != null)
+        if (progress != null)
         {
-            this.progress.current_wave_finished += this._on_wave_finished;
+            progress.current_wave_finished += OnWaveFinished;
         }
     }
 
@@ -112,7 +112,7 @@ public class Status
             return;
         }
 
-        this.health += amount;
+        health += amount;
     }
 
     public void add_amor(int amount)
@@ -122,7 +122,7 @@ public class Status
             return;
         }
 
-        this.armor += amount;
+        armor += amount;
     }
 
     public void add_max_health(int amount)
@@ -132,8 +132,8 @@ public class Status
             return;
         }
 
-        this.max_health += amount;
-        this.health += amount;
+        max_health += amount;
+        health += amount;
     }
 
     public void apply_damage(int amount)
@@ -144,27 +144,27 @@ public class Status
         }
 
         int remainingDamage = amount;
-        bool armorBlockDamage = this.armor >= remainingDamage;
+        bool armorBlockDamage = armor >= remainingDamage;
 
-        if (this.armor > 0)
+        if (armor > 0)
         {
-            int absorbed = Mathf.Min(this.armor, remainingDamage);
-            this.armor -= absorbed;
+            int absorbed = Mathf.Min(armor, remainingDamage);
+            armor -= absorbed;
             remainingDamage -= absorbed;
-            this.armor_change?.Invoke(this.armor);
+            armor_change?.Invoke(armor);
         }
 
         if (remainingDamage > 0)
         {
-            this.health -= remainingDamage;
+            health -= remainingDamage;
         }
 
-        this.PlayDamageAudio(armorBlockDamage);
+        PlayDamageAudio(armorBlockDamage);
     }
 
-    private void _on_wave_finished()
+    private void OnWaveFinished()
     {
-        this.armor = 0;
+        armor = 0;
     }
 
     private void PlayDamageAudio(bool armorBlockDamage)

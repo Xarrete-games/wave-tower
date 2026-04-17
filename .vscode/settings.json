@@ -19,6 +19,9 @@
         "/^\\$symbols = 'seconds_duration','waves_duration','item_data','health_price','base_price','final_price','price_type','discount','buff_expired','buff_applied','setup\\\\\\('; foreach\\(\\$s in \\$symbols\\)\\{ \"=== \\$s ===\"; \\(Select-String -Path \\(Get-ChildItem -Recurse -Filter \\*\\.cs \\| Where-Object \\{ \\$_\\.FullName -notmatch '\\\\\\\\\\.godot\\\\\\\\' \\}\\)\\.FullName -Pattern \\$s \\| Measure-Object\\)\\.Count \\} \\| Out-String$/": {
             "approve": true,
             "matchCommandLine": true
-        }
+        },
+        "ToPascal": true,
+        "Set-Content": true,
+        "ToCamelFromLegacy": true
     }
 }

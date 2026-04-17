@@ -2,26 +2,26 @@ public class LootContext
 {
     public int base_gold
     {
-        get => this.BaseGold;
-        set => this.BaseGold = value;
+        get => BaseGold;
+        set => BaseGold = value;
     }
 
     public int extra_gold
     {
-        get => this.ExtraGold;
-        set => this.ExtraGold = value;
+        get => ExtraGold;
+        set => ExtraGold = value;
     }
 
     public int gold_mult
     {
-        get => this.GoldMultiplier;
-        set => this.GoldMultiplier = value;
+        get => GoldMultiplier;
+        set => GoldMultiplier = value;
     }
 
     public int chance_drop_consumable
     {
-        get => this.ChanceDropConsumable;
-        set => this.ChanceDropConsumable = value;
+        get => ChanceDropConsumable;
+        set => ChanceDropConsumable = value;
     }
 
     public int BaseGold { get; set; }
@@ -31,14 +31,14 @@ public class LootContext
 
     public LootContext(int baseGold = 0, int chanceDropConsumable = 50)
     {
-        this.BaseGold = baseGold;
-        this.ChanceDropConsumable = chanceDropConsumable;
+        BaseGold = baseGold;
+        ChanceDropConsumable = chanceDropConsumable;
     }
 
     public int GetTotalGold()
     {
-        return (this.BaseGold + this.ExtraGold) * this.GoldMultiplier;
+        return (BaseGold + ExtraGold) * GoldMultiplier;
     }
 
-    public int get_total_gold() => this.GetTotalGold();
+    public int get_total_gold() => GetTotalGold();
 }

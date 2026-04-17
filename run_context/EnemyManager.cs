@@ -7,11 +7,11 @@ public class EnemyManager
 
     public void notify_enemy_die(object enemy, object attack)
     {
-        this.enemy_die?.Invoke(enemy, attack);
+        enemy_die?.Invoke(enemy, attack);
     }
 
     public void notify_enemy_target_reached(object enemy)
     {
-        this.enemy_target_reached?.Invoke(enemy);
+        enemy_target_reached?.Invoke(enemy);
     }
 }

@@ -10,8 +10,8 @@ public class TowerExpData
 
     public TowerExpData(int new_level, int new_current_exp, int new_exp_for_next_level)
     {
-        this.level = new_level;
-        this.current_exp = new_current_exp;
-        this.exp_for_next_level = new_exp_for_next_level;
+        level = new_level;
+        current_exp = new_current_exp;
+        exp_for_next_level = new_exp_for_next_level;
     }
 }

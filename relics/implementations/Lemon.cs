@@ -8,12 +8,12 @@ public sealed class Lemon : Relic
 
     public override void OnTowerPlaced(TowerModel tower)
     {
-        this._isActive = false;
+        _isActive = false;
     }
 
     public override void OnGetPrice(PriceContext context)
     {
-        if (context.Type == PriceContext.PriceType.Tower && this._isActive)
+        if (context.Type == PriceContext.PriceType.Tower && _isActive)
         {
             context.Discount += 0.5f;
         }
@@ -21,6 +21,6 @@ public sealed class Lemon : Relic
 
     public override void OnWaveFinished()
     {
-        this._isActive = true;
+        _isActive = true;
     }
 }

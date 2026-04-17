@@ -47,11 +47,11 @@ public partial class Tower : Node2D
     private TowerStats _stats;
     public TowerStats stats
     {
-        get => this._stats;
+        get => _stats;
         set
         {
-            this._stats = value;
-            this.stats_changed?.Invoke(this);
+            _stats = value;
+            stats_changed?.Invoke(this);
         }
     }
 
@@ -61,13 +61,13 @@ public partial class Tower : Node2D
     private int _targeting_mode = (int)TargetingMode.FIRST_IN_PROGRESS;
     public int targeting_mode
     {
-        get => this._targeting_mode;
+        get => _targeting_mode;
         set
         {
-            this._targeting_mode = value;
-            if (this.area_detector != null)
+            _targeting_mode = value;
+            if (area_detector != null)
             {
-                this.area_detector.targeting_type = value;
+                area_detector.targeting_type = value;
             }
         }
     }
@@ -77,11 +77,11 @@ public partial class Tower : Node2D
     private TowerExpData _exp_data;
     public TowerExpData exp_data
     {
-        get => this._exp_data;
+        get => _exp_data;
         set
         {
-            this._exp_data = value;
-            this.stats_changed?.Invoke(this);
+            _exp_data = value;
+            stats_changed?.Invoke(this);
         }
     }
 
@@ -96,7 +96,7 @@ public partial class Tower : Node2D
     {
         get
         {
-            return new Source(Source.SourceType.TOWER, this.type_id, this);
+            return new Source(Source.SourceType.TOWER, type_id, this);
         }
     }
 
@@ -116,58 +116,58 @@ public partial class Tower : Node2D
 
     public override void _Ready()
     {
-        this.area_detector = GetNode<AreaDetector>("AreaDetector");
-        this.range_preview = GetNode<RangePreview>("RangePreview");
-        this.range_collision = GetNode<CollisionPolygon2D>("AreaDetector/RangeCollision");
-        this.mouse_detector = GetNode<Control>("MouseDetector");
-        this.attack_timer = GetNode<Timer>("AttackTimer");
-        this.cristal_light = GetNodeOrNull<CristalLight>("CristalLight");
-        this.sprite_2d = GetNodeOrNull<Sprite2D>("Sprite2D");
-        this.tower_stats_handler = GetNode<TowerStatsHandler>("TowerStatsHandler");
-        this.tower_area = GetNode<Area2D>("TowerArea");
-        this.tower_area_collision = GetNode<CollisionPolygon2D>("TowerArea/CollisionShape2D");
+        area_detector = GetNode<AreaDetector>("AreaDetector");
+        range_preview = GetNode<RangePreview>("RangePreview");
+        range_collision = GetNode<CollisionPolygon2D>("AreaDetector/RangeCollision");
+        mouse_detector = GetNode<Control>("MouseDetector");
+        attack_timer = GetNode<Timer>("AttackTimer");
+        cristal_light = GetNodeOrNull<CristalLight>("CristalLight");
+        sprite_2d = GetNodeOrNull<Sprite2D>("Sprite2D");
+        tower_stats_handler = GetNode<TowerStatsHandler>("TowerStatsHandler");
+        tower_area = GetNode<Area2D>("TowerArea");
+        tower_area_collision = GetNode<CollisionPolygon2D>("TowerArea/CollisionShape2D");
 
-        this.type_id = GetType().Name;
+        type_id = GetType().Name;
 
-        (this.data as TowerData)?.build();
-        this.tower_logic = new TowerLogic(this);
-        this.tower_area_collision.Polygon = build_ellipse_polygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO);
+        (data as TowerData)?.build();
+        tower_logic = new TowerLogic(this);
+        tower_area_collision.Polygon = build_ellipse_polygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO);
 
-        this.tower_stats_handler.stats_change += this._on_stats_change;
-        this.tower_stats_handler.buff_applied += this.add_buff;
-        this.tower_stats_handler.buff_expired += this.remove_buff;
-        this.tower_stats_handler.set_data(this.data as TowerData, (int)this.type);
+        tower_stats_handler.stats_change += _on_stats_change;
+        tower_stats_handler.buff_applied += add_buff;
+        tower_stats_handler.buff_expired += remove_buff;
+        tower_stats_handler.set_data(data as TowerData, (int)type);
 
-        this.area_detector.target_change += this._on_target_change;
-        this.targeting_mode = this._targeting_mode;
+        area_detector.target_change += OnTargetChange;
+        targeting_mode = _targeting_mode;
     }
 
     public override void _ExitTree()
     {
-        if (this.area_detector != null)
+        if (area_detector != null)
         {
-            this.area_detector.target_change -= this._on_target_change;
+            area_detector.target_change -= OnTargetChange;
         }
 
-        if (this.tower_stats_handler != null)
+        if (tower_stats_handler != null)
         {
-            this.tower_stats_handler.stats_change -= this._on_stats_change;
-            this.tower_stats_handler.buff_applied -= this.add_buff;
-            this.tower_stats_handler.buff_expired -= this.remove_buff;
+            tower_stats_handler.stats_change -= _on_stats_change;
+            tower_stats_handler.buff_applied -= add_buff;
+            tower_stats_handler.buff_expired -= remove_buff;
         }
 
-        if (this._eventsConnected)
+        if (_eventsConnected)
         {
-            if (this._towersManager != null)
+            if (_towersManager != null)
             {
-                this._towersManager.tower_selected -= this._on_tower_selected;
-                this._towersManager = null;
+                _towersManager.tower_selected -= OnTowerSelected;
+                _towersManager = null;
             }
 
-            this.mouse_detector.GuiInput -= this._on_gui_input;
-            this.mouse_detector.MouseEntered -= this._on_mouse_entered;
-            this.mouse_detector.MouseExited -= this._on_mouse_exit;
-            this._eventsConnected = false;
+            mouse_detector.GuiInput -= OnGuiInput;
+            mouse_detector.MouseEntered -= OnMouseEntered;
+            mouse_detector.MouseExited -= OnMouseExit;
+            _eventsConnected = false;
         }
     }
 
@@ -196,62 +196,62 @@ public partial class Tower : Node2D
 
     public void phantom_mode()
     {
-        if (this.sprite_2d != null)
+        if (sprite_2d != null)
         {
-            this.sprite_2d.Modulate = PHANTOM_COLOR;
+            sprite_2d.Modulate = PHANTOM_COLOR;
         }
 
-        if (this.range_preview != null)
+        if (range_preview != null)
         {
-            this.range_preview.Visible = false;
+            range_preview.Visible = false;
         }
     }
 
     public void normal_color()
     {
-        if (this.sprite_2d != null)
+        if (sprite_2d != null)
         {
-            this.sprite_2d.Modulate = Colors.White;
+            sprite_2d.Modulate = Colors.White;
         }
 
-        this._show_range();
+        ShowRange();
     }
 
     public virtual void placement_mode()
     {
-        this._enabled = false;
-        this.area_detector.Monitoring = false;
-        this.tower_area.Monitorable = false;
+        _enabled = false;
+        area_detector.Monitoring = false;
+        tower_area.Monitorable = false;
     }
 
     public virtual async void enable()
     {
-        if (this.sprite_2d != null)
+        if (sprite_2d != null)
         {
-            this.sprite_2d.Modulate = Colors.White;
+            sprite_2d.Modulate = Colors.White;
         }
 
-        this._enabled = true;
-        this.area_detector.Monitoring = true;
-        this.tower_area.Monitorable = true;
+        _enabled = true;
+        area_detector.Monitoring = true;
+        tower_area.Monitorable = true;
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), Timer.SignalName.Timeout);
 
-        if (this._eventsConnected)
+        if (_eventsConnected)
         {
             return;
         }
 
-        this._towersManager = GetTowersManager();
-        if (this._towersManager != null)
+        _towersManager = GetTowersManager();
+        if (_towersManager != null)
         {
-            this._towersManager.tower_selected += this._on_tower_selected;
+            _towersManager.tower_selected += OnTowerSelected;
         }
 
-        this.mouse_detector.GuiInput += this._on_gui_input;
-        this.mouse_detector.MouseEntered += this._on_mouse_entered;
-        this.mouse_detector.MouseExited += this._on_mouse_exit;
-        this._eventsConnected = true;
+        mouse_detector.GuiInput += OnGuiInput;
+        mouse_detector.MouseEntered += OnMouseEntered;
+        mouse_detector.MouseExited += OnMouseExit;
+        _eventsConnected = true;
     }
 
     public virtual void add_buff(TowerBuff tower_buff)
@@ -261,22 +261,22 @@ public partial class Tower : Node2D
             return;
         }
 
-        this.buffs.Add(tower_buff);
+        buffs.Add(tower_buff);
         if (tower_buff is TowerBuffStatsModifier)
         {
-            this.tower_stats_handler.add_buff(tower_buff);
+            tower_stats_handler.add_buff(tower_buff);
         }
 
-        this.buff_added?.Invoke(tower_buff);
+        buff_added?.Invoke(tower_buff);
     }
 
     public virtual void remove_buff(string source_id)
     {
         List<TowerBuff> removedBuffs = new();
 
-        for (int i = this.buffs.Count - 1; i >= 0; i--)
+        for (int i = buffs.Count - 1; i >= 0; i--)
         {
-            TowerBuff buff = this.buffs[i];
+            TowerBuff buff = buffs[i];
             if (buff == null)
             {
                 continue;
@@ -289,14 +289,14 @@ public partial class Tower : Node2D
             }
 
             removedBuffs.Add(buff);
-            this.buffs.RemoveAt(i);
+            buffs.RemoveAt(i);
         }
 
-        this.tower_stats_handler.remove_buff(source_id);
+        tower_stats_handler.remove_buff(source_id);
 
         foreach (TowerBuff removedBuff in removedBuffs)
         {
-            this.buff_removed?.Invoke(removedBuff);
+            buff_removed?.Invoke(removedBuff);
         }
     }
 
@@ -304,7 +304,7 @@ public partial class Tower : Node2D
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
         Economy economy = runContext?.economy;
-        TowerData towerData = this.data as TowerData;
+        TowerData towerData = data as TowerData;
         if (economy != null && towerData != null)
         {
             int currentGold = economy.gold;
@@ -312,13 +312,13 @@ public partial class Tower : Node2D
             economy.gold = currentGold - upgradePrice;
         }
 
-        this.level += 1;
-        this.tower_stats_handler.level_up(this.level);
+        level += 1;
+        tower_stats_handler.level_up(level);
     }
 
     public bool is_max_level()
     {
-        return this.level >= MAX_LEVEL;
+        return level >= MAX_LEVEL;
     }
 
     public void copy_tower_data(Tower from_tower)
@@ -328,27 +328,27 @@ public partial class Tower : Node2D
             return;
         }
 
-        this.area_detector.targets_in_range.Clear();
+        area_detector.targets_in_range.Clear();
         foreach (Node2D enemy in from_tower.area_detector.targets_in_range)
         {
-            this.area_detector.targets_in_range.Add(enemy);
+            area_detector.targets_in_range.Add(enemy);
         }
 
-        this.area_detector.current_target = from_tower.area_detector.current_target;
-        this.targeting_mode = from_tower.targeting_mode;
+        area_detector.current_target = from_tower.area_detector.current_target;
+        targeting_mode = from_tower.targeting_mode;
     }
 
     public Attack _get_attack()
     {
-        bool is_critical = this._is_critical_hit();
+        bool is_critical = _is_critical_hit();
 
-        float baseDamage = this.stats?.damage ?? 0f;
-        float critDamage = this.stats?.critic_damage ?? 0f;
+        float baseDamage = stats?.damage ?? 0f;
+        float critDamage = stats?.critic_damage ?? 0f;
         float attackDamage = is_critical ? baseDamage * (1f + critDamage / 100f) : baseDamage;
 
-        Attack attack = new(attackDamage, this.damage_source, is_critical);
-        Enemy targetEnemy = this._current_target as Enemy;
-        AttackContext ctx = new(this.BuildEnemyModel(targetEnemy), this.BuildAttackModel(attack), this.BuildTowerModel());
+        Attack attack = new(attackDamage, damage_source, is_critical);
+        Enemy targetEnemy = _current_target as Enemy;
+        AttackContext ctx = new(BuildEnemyModel(targetEnemy), BuildAttackModel(attack), BuildTowerModel());
         Hooks.OnBeforeAttack(Hooks.GetListenersFromRuntime(), ctx);
         attack.damage = ctx.rebuild_attack();
 
@@ -403,7 +403,7 @@ public partial class Tower : Node2D
 
     private TowerModel BuildTowerModel()
     {
-        TowerModel.TowerType towerType = this.type switch
+        TowerModel.TowerType towerType = type switch
         {
             Type.FIRE => TowerModel.TowerType.Fire,
             Type.LIGHTNING => TowerModel.TowerType.Lightning,
@@ -413,8 +413,8 @@ public partial class Tower : Node2D
 
         return new TowerModel
         {
-            Id = this.id,
-            TypeId = this.type_id,
+            Id = id,
+            TypeId = type_id,
             Type = towerType,
         };
     }
@@ -422,73 +422,73 @@ public partial class Tower : Node2D
     public bool _is_critical_hit()
     {
         float randomValue = GD.Randf();
-        float critChance = this.stats?.critic_chance ?? 0f;
+        float critChance = stats?.critic_chance ?? 0f;
         return randomValue < (critChance / 100f);
     }
 
-    private void _on_target_change(Node2D enemy)
+    private void OnTargetChange(Node2D enemy)
     {
-        this._current_target = enemy;
-        this.on_target_change?.Invoke(enemy);
+        _current_target = enemy;
+        on_target_change?.Invoke(enemy);
 
-        if (this._first_shot && GodotObject.IsInstanceValid(this._current_target))
+        if (_first_shot && GodotObject.IsInstanceValid(_current_target))
         {
-            this._fire();
-            this.attack_fired?.Invoke();
-            this.attack_timer.Start();
-            this._first_shot = false;
+            _fire();
+            attack_fired?.Invoke();
+            attack_timer.Start();
+            _first_shot = false;
         }
     }
 
-    private void _on_attack_timer_timeout()
+    private void OnAttackTimerTimeout()
     {
-        if (!GodotObject.IsInstanceValid(this._current_target) || !this._enabled)
+        if (!GodotObject.IsInstanceValid(_current_target) || !_enabled)
         {
-            this._first_shot = true;
+            _first_shot = true;
             return;
         }
 
-        this._fire();
-        this.attack_fired?.Invoke();
+        _fire();
+        attack_fired?.Invoke();
     }
 
     protected virtual void _fire() { }
 
     public virtual void _on_stats_change(TowerStats new_stats)
     {
-        this.stats = new_stats;
-        this._apply_stats_changes();
+        stats = new_stats;
+        _apply_stats_changes();
     }
 
     public virtual void _apply_stats_changes()
     {
-        if (this.stats == null)
+        if (stats == null)
         {
             return;
         }
 
-        float attackSpeed = this.stats.attack_speed;
-        float attackRange = this.stats.attack_range;
+        float attackSpeed = stats.attack_speed;
+        float attackRange = stats.attack_range;
 
-        this.attack_timer.WaitTime = 1.0 / attackSpeed;
-        this.range_preview.radius = attackRange;
-        this.range_collision.SetDeferred("polygon", build_ellipse_polygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
+        attack_timer.WaitTime = 1.0 / attackSpeed;
+        range_preview.radius = attackRange;
+        range_collision.SetDeferred("polygon", build_ellipse_polygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
     }
 
     public void _on_exp_data_change(Variant new_exp_data)
     {
-        this.exp_data = new_exp_data.Obj as TowerExpData;
+        exp_data = new_exp_data.Obj as TowerExpData;
     }
 
-    private void _on_tower_selected(Tower tower)
+    private void OnTowerSelected(Tower tower)
     {
-        this.current_tower_selected = tower;
-        this.range_preview.Visible = this.current_tower_selected == this;
+        current_tower_selected = tower;
+        range_preview.Visible = current_tower_selected == this;
     }
 
-    private void _on_gui_input(InputEvent @event)
+    private void OnGuiInput(InputEvent @event)
     {
-        if (!this._enabled)
+        if (!_enabled)
         {
             return;
         }
@@ -498,46 +498,46 @@ public partial class Tower : Node2D
             return;
         }
 
-        this._towersManager?.select_tower(this);
+        _towersManager?.select_tower(this);
     }
 
-    private void _on_mouse_entered()
+    private void OnMouseEntered()
     {
-        this._towersManager?.emit_tower_hovered(this);
-        this._show_range();
+        _towersManager?.emit_tower_hovered(this);
+        ShowRange();
     }
 
-    private void _on_mouse_exit()
+    private void OnMouseExit()
     {
-        this._towersManager?.emit_tower_unhovered(this);
+        _towersManager?.emit_tower_unhovered(this);
 
-        if (this.current_tower_selected != this)
+        if (current_tower_selected != this)
         {
-            this._hide_range();
+            HideRange();
         }
     }
 
-    private void _show_range()
+    private void ShowRange()
     {
-        this.range_tween?.Kill();
-        this.range_tween = CreateTween();
-        this.range_preview.Visible = true;
-        this.range_tween.TweenProperty(this.range_preview, "self_modulate:a", 1.0f, 0.1f).SetTrans(Tween.TransitionType.Sine);
+        range_tween?.Kill();
+        range_tween = CreateTween();
+        range_preview.Visible = true;
+        range_tween.TweenProperty(range_preview, "self_modulate:a", 1.0f, 0.1f).SetTrans(Tween.TransitionType.Sine);
     }
 
-    private void _hide_range()
+    private void HideRange()
     {
-        this.range_tween?.Kill();
-        this.range_tween = CreateTween();
-        this.range_tween.TweenProperty(this.range_preview, "self_modulate:a", 0.0f, 0.5f).SetTrans(Tween.TransitionType.Sine);
-        this.range_tween.Finished += this._on_hide_range_tween_finished;
+        range_tween?.Kill();
+        range_tween = CreateTween();
+        range_tween.TweenProperty(range_preview, "self_modulate:a", 0.0f, 0.5f).SetTrans(Tween.TransitionType.Sine);
+        range_tween.Finished += OnHideRangeTweenFinished;
     }
 
-    private void _on_hide_range_tween_finished()
+    private void OnHideRangeTweenFinished()
     {
-        if (this.range_preview != null)
+        if (range_preview != null)
         {
-            this.range_preview.Visible = false;
+            range_preview.Visible = false;
         }
     }
 

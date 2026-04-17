@@ -9,13 +9,13 @@ public partial class GoldDropped : Control
 
     public override async void _Ready()
     {
-        this.label = GetNode<Label>("Label");
+        label = GetNode<Label>("Label");
 
         Tween tween1 = CreateTween();
-        tween1.TweenProperty(this.label, "position", new Vector2(0, -10), this.time_to_vanish);
+        tween1.TweenProperty(label, "position", new Vector2(0, -10), time_to_vanish);
 
         Tween tween2 = CreateTween();
-        tween2.TweenProperty(this.label, "modulate:a", 0.0f, this.time_to_vanish);
+        tween2.TweenProperty(label, "modulate:a", 0.0f, time_to_vanish);
 
         await ToSignal(tween2, Tween.SignalName.Finished);
         QueueFree();
@@ -23,6 +23,6 @@ public partial class GoldDropped : Control
 
     public void set_gold(int new_value)
     {
-        this.label.Text = "+" + new_value;
+        label.Text = "+" + new_value;
     }
 }

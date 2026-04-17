@@ -20,9 +20,9 @@ public partial class MainCamera : Camera2D
 
     public override void _Ready()
     {
-        this._zoomIndex = 0;
-        float zoomValue = ZoomSteps[this._zoomIndex];
-        this.Zoom = new Vector2(zoomValue, zoomValue);
+        _zoomIndex = 0;
+        float zoomValue = ZoomSteps[_zoomIndex];
+        Zoom = new Vector2(zoomValue, zoomValue);
     }
 
     public override void _Process(double delta)
@@ -36,18 +36,18 @@ public partial class MainCamera : Camera2D
             inputVector = inputVector.Normalized();
         }
 
-        this.GlobalPosition += inputVector * this.move_speed * (float)delta;
+        GlobalPosition += inputVector * move_speed * (float)delta;
     }
 
     public override void _Input(InputEvent @event)
     {
         if (@event is InputEventMouseButton mouseButton && mouseButton.ButtonIndex == MouseButton.Middle)
         {
-            this._isMiddleMousePanning = mouseButton.Pressed;
+            _isMiddleMousePanning = mouseButton.Pressed;
         }
-        else if (@event is InputEventMouseMotion mouseMotion && this._isMiddleMousePanning)
+        else if (@event is InputEventMouseMotion mouseMotion && _isMiddleMousePanning)
         {
-            this.GlobalPosition -= new Vector2(mouseMotion.Relative.X / this.Zoom.X, mouseMotion.Relative.Y / this.Zoom.Y);
+            GlobalPosition -= new Vector2(mouseMotion.Relative.X / Zoom.X, mouseMotion.Relative.Y / Zoom.Y);
         }
     }
 
@@ -58,38 +58,38 @@ public partial class MainCamera : Camera2D
             return;
         }
 
-        if (this._zoomTween != null && this._zoomTween.IsRunning())
+        if (_zoomTween != null && _zoomTween.IsRunning())
         {
             return;
         }
 
         if (mouseButton.ButtonIndex == MouseButton.WheelUp)
         {
-            this._change_zoom_step(1);
+            ChangeZoomStep(1);
         }
         else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
         {
-            this._change_zoom_step(-1);
+            ChangeZoomStep(-1);
         }
     }
 
-    private void _change_zoom_step(int direction)
+    private void ChangeZoomStep(int direction)
     {
-        int newIndex = Mathf.Clamp(this._zoomIndex + direction, 0, ZoomSteps.Length - 1);
-        if (newIndex == this._zoomIndex)
+        int newIndex = Mathf.Clamp(_zoomIndex + direction, 0, ZoomSteps.Length - 1);
+        if (newIndex == _zoomIndex)
         {
             return;
         }
 
-        this._zoomIndex = newIndex;
-        float target = ZoomSteps[this._zoomIndex];
+        _zoomIndex = newIndex;
+        float target = ZoomSteps[_zoomIndex];
 
-        if (this._zoomTween != null && this._zoomTween.IsRunning())
+        if (_zoomTween != null && _zoomTween.IsRunning())
         {
-            this._zoomTween.Kill();
+            _zoomTween.Kill();
         }
 
-        this._zoomTween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-        this._zoomTween.TweenProperty(this, "zoom", new Vector2(target, target), this.zoom_tween_duration);
+        _zoomTween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        _zoomTween.TweenProperty(this, "zoom", new Vector2(target, target), zoom_tween_duration);
     }
 }
