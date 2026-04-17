@@ -1,6 +1,7 @@
 using Godot;
-using Godot.Collections;
 using System;
+using System.Collections.Generic;
+
 
 [GlobalClass]
 public partial class AnimationComponent : Node
@@ -13,7 +14,7 @@ public partial class AnimationComponent : Node
     [Export] public bool from_center = true;
     [Export] public bool parallel_animations = true;
     [Export] public bool enter_animation = false;
-    [Export] public Array<string> properties = new() { "scale", "position", "rotation", "size", "self_modulate" };
+    [Export] public string[] properties = { "scale", "position", "rotation", "size", "self_modulate" };
     [Export] public bool flicked = false;
 
     [ExportGroup("Hover Settings")]
@@ -46,9 +47,9 @@ public partial class AnimationComponent : Node
 
     private Control target;
     private Vector2 default_scale;
-    private Dictionary hover_values = new();
-    private Dictionary enter_values = new();
-    private Dictionary default_values = new();
+    private Dictionary<string, Variant> hover_values = new();
+    private Dictionary<string, Variant> enter_values = new();
+    private Dictionary<string, Variant> default_values = new();
     private bool on_hover = false;
 
     public override void _Ready()
@@ -99,15 +100,15 @@ public partial class AnimationComponent : Node
 
         if (this.hover_position == Vector2.Zero && this.enter_position == Vector2.Zero)
         {
-            var filtered = new Array<string>();
-            for (int i = 0; i < this.properties.Count; i++)
+            var filtered = new List<string>();
+            for (int i = 0; i < this.properties.Length; i++)
             {
                 if (this.properties[i] != "position")
                 {
                     filtered.Add(this.properties[i]);
                 }
             }
-            this.properties = filtered;
+            this.properties = filtered.ToArray();
         }
 
         if (this.from_center)
@@ -116,7 +117,7 @@ public partial class AnimationComponent : Node
         }
 
         this.default_scale = this.target.Scale;
-        this.default_values = new Dictionary
+        this.default_values = new Dictionary<string, Variant>
         {
             { "scale", this.target.Scale },
             { "position", this.target.Position },
@@ -125,7 +126,7 @@ public partial class AnimationComponent : Node
             { "self_modulate", this.target.SelfModulate },
         };
 
-        this.hover_values = new Dictionary
+        this.hover_values = new Dictionary<string, Variant>
         {
             { "scale", this.hover_scale },
             { "position", this.target.Position + this.hover_position },
@@ -134,7 +135,7 @@ public partial class AnimationComponent : Node
             { "self_modulate", this.hover_modulate },
         };
 
-        this.enter_values = new Dictionary
+        this.enter_values = new Dictionary<string, Variant>
         {
             { "scale", this.enter_scale },
             { "position", this.target.Position + this.enter_position },
@@ -171,7 +172,7 @@ public partial class AnimationComponent : Node
         }
     }
 
-    public async System.Threading.Tasks.Task add_tween(Dictionary values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
+    public async System.Threading.Tasks.Task add_tween(Dictionary<string, Variant> values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
     {
         if (!IsInsideTree() || this.target == null)
         {
@@ -183,10 +184,10 @@ public partial class AnimationComponent : Node
         tween.SetPauseMode(Tween.TweenPauseMode.Process);
         tween.Pause();
 
-        for (int i = 0; i < this.properties.Count; i++)
+        for (int i = 0; i < this.properties.Length; i++)
         {
             string property = this.properties[i];
-            Variant value = values.ContainsKey(property) ? values[property] : default;
+            Variant value = values.TryGetValue(property, out Variant configuredValue) ? configuredValue : default;
             tween.TweenProperty(this.target, property, value, seconds).SetTrans(transition).SetEase(easing);
         }
 
