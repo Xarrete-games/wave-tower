@@ -54,6 +54,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Exit"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/NewRunButton" to="." method="_on_new_run_button_xarreta_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_xarreta_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_xarreta_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NewRunButton" to="." method="OnNewRunButtonXarretaPressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CreditsButton" to="." method="OnCreditsButtonXarretaPressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonXarretaPressed"]
+

@@ -102,4 +102,5 @@ hover_scale = Vector2(1.05, 1.05)
 play_hover_sound = true
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="gui_input" from="." to="." method="OnGuiInput"]
+

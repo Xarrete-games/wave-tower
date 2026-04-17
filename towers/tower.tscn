@@ -73,6 +73,6 @@ offset_top = -129.0
 offset_right = 155.0
 offset_bottom = 77.0
 
-[connection signal="body_entered" from="AreaDetector" to="AreaDetector" method="_on_body_entered"]
-[connection signal="body_exited" from="AreaDetector" to="AreaDetector" method="_on_body_exited"]
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="AreaDetector" to="AreaDetector" method="OnBodyEntered"]
+[connection signal="body_exited" from="AreaDetector" to="AreaDetector" method="OnBodyExited"]
+[connection signal="timeout" from="AttackTimer" to="." method="OnAttackTimerTimeout"]

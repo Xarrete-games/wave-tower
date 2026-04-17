@@ -71,4 +71,5 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8nwye")
 
-[connection signal="timeout" from="ExitTimer" to="." method="_on_exit_timer_timeout"]
+[connection signal="timeout" from="ExitTimer" to="." method="OnExitTimerTimeout"]
+

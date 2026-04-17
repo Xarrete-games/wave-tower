@@ -19,4 +19,5 @@ shape = SubResource("CircleShape2D_08vvf")
 stream = ExtResource("3_l8icu")
 volume_db = -18.0
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+

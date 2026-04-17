@@ -59,5 +59,6 @@ text = "Reroll"
 layout_mode = 2
 alignment = 1
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsContainer/ExitButton" to="." method="_on_exit_button_xarreta_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsContainer/VBoxContainer/RerollButton" to="." method="_on_reroll_button_xarreta_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsContainer/ExitButton" to="." method="OnExitButtonXarretaPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsContainer/VBoxContainer/RerollButton" to="." method="OnRerollButtonXarretaPressed"]
+

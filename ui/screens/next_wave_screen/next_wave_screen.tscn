@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b7ttkk4pasgin"]
 
-[ext_resource type="Script" path="res://ui/screens/next_wave_screen/NextWaveScreen.cs" id="1_s7bum"]
+[ext_resource type="Script" uid="uid://csxa4camlw45y" path="res://ui/screens/next_wave_screen/NextWaveScreen.cs" id="1_s7bum"]
 [ext_resource type="PackedScene" uid="uid://c7oa0k10y8jb1" path="res://ui/components/buttons/xarreta_icon_action_button.tscn" id="2_xjot1"]
-[ext_resource type="Shader" path="res://ui/screens/next_wave_screen/next_wave_screen.gdshader" id="3_4d2i3"]
+[ext_resource type="Shader" uid="uid://comdeiinyqyr0" path="res://ui/screens/next_wave_screen/next_wave_screen.gdshader" id="3_4d2i3"]
 [ext_resource type="Texture2D" uid="uid://cmw1h1ggalk6d" path="res://assets/images/icons/minion_icon_40.png" id="4_4d2i3"]
-[ext_resource type="Script" path="res://utils/AnimationComponent.cs" id="4_b0t1q"]
+[ext_resource type="Script" uid="uid://d2ta7qbmbh3kw" path="res://utils/AnimationComponent.cs" id="4_b0t1q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qt5o3"]
 shader = ExtResource("3_4d2i3")
@@ -36,6 +36,6 @@ script = ExtResource("4_b0t1q")
 flicked = true
 flicked_time = 0.3
 flicked_color = Color(0.7137255, 0.77254903, 0.64705884, 1)
-metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
-[connection signal="pressed" from="NextWaveButton" to="." method="_on_next_wave_button_pressed"]
+[connection signal="pressed" from="NextWaveButton" to="." method="OnNextWaveButtonPressed"]
+

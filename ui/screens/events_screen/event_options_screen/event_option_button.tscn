@@ -11,5 +11,6 @@ theme = ExtResource("1_e3pa8")
 text = "Testing"
 script = ExtResource("2_4tgh2")
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
+[connection signal="pressed" from="." to="." method="OnPressed"]
+

@@ -45,4 +45,5 @@ label_settings = ExtResource("2_ak2q7")
 layout_mode = 2
 text = "Go Next Level"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NextLevelButton" to="." method="OnNextLevelButtonPressed"]
+

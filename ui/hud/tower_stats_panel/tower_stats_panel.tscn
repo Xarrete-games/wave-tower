@@ -198,8 +198,9 @@ offset_top = 89.328995
 offset_right = -52.375977
 offset_bottom = -75.26303
 
-[connection signal="mouse_entered" from="Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="_on_upgrade_button_xarreta_mouse_entered"]
-[connection signal="mouse_exited" from="Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="_on_upgrade_button_xarreta_mouse_exited"]
-[connection signal="pressed" from="Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/MainContainer/ButtonsContainer/RemoveButton" to="." method="_on_remove_button_pressed"]
-[connection signal="item_selected" from="Panel/MarginContainer/MainContainer/TargetingContainer/TargetingModeSelector" to="." method="_on_targeting_mode_selector_item_selected"]
+[connection signal="mouse_entered" from="Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="OnUpgradeButtonXarretaMouseEntered"]
+[connection signal="mouse_exited" from="Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="OnUpgradeButtonXarretaMouseExited"]
+[connection signal="pressed" from="Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="OnUpgradeButtonPressed"]
+[connection signal="pressed" from="Panel/MarginContainer/MainContainer/ButtonsContainer/RemoveButton" to="." method="OnRemoveButtonPressed"]
+[connection signal="item_selected" from="Panel/MarginContainer/MainContainer/TargetingContainer/TargetingModeSelector" to="." method="OnTargetingModeSelectorItemSelected"]
+

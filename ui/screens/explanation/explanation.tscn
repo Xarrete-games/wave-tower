@@ -130,4 +130,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "¡Defend the Kingdom of the Waves!"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/XarretaMenuButton" to="." method="_on_xarreta_menu_button_xarreta_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/XarretaMenuButton" to="." method="OnXarretaMenuButtonXarretaPressed"]
+

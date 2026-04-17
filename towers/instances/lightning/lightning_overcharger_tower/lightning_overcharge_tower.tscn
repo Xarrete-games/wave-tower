@@ -96,5 +96,6 @@ lifetime = 2.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_c1yp4")
 
-[connection signal="area_entered" from="BuffArea" to="." method="_on_buff_area_area_entered"]
-[connection signal="area_exited" from="BuffArea" to="." method="_on_buff_area_area_exited"]
+[connection signal="area_entered" from="BuffArea" to="." method="OnBuffAreaAreaEntered"]
+[connection signal="area_exited" from="BuffArea" to="." method="OnBuffAreaAreaExited"]
+

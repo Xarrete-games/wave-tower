@@ -109,5 +109,6 @@ lifetime = 0.15000000000000002
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_4jxr5")
 
-[connection signal="body_entered" from="Area" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Area" to="." method="OnArea2dBodyEntered"]
+[connection signal="body_exited" from="Area" to="." method="OnArea2dBodyExited"]
+
