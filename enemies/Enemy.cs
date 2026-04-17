@@ -348,7 +348,7 @@ public partial class Enemy : CharacterBody2D
         Source source = attack?.source;
         model.Source = new SourceModel
         {
-            Type = source?.type switch
+            Type = source?.Type switch
             {
                 Source.SourceType.RELIC => SourceModel.SourceType.Relic,
                 Source.SourceType.TOWER => SourceModel.SourceType.Tower,
@@ -356,7 +356,7 @@ public partial class Enemy : CharacterBody2D
                 Source.SourceType.DEBUFF => SourceModel.SourceType.Debuff,
                 _ => SourceModel.SourceType.Global,
             },
-            TypeId = source?.type_id ?? string.Empty,
+            TypeId = source?.TypeId ?? string.Empty,
         };
 
         return model;

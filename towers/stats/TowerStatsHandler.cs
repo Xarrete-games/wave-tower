@@ -61,7 +61,7 @@ public partial class TowerStatsHandler : Node
         for (int i = this.buffs.Count - 1; i >= 0; i--)
         {
             TowerBuff buffObj = this.buffs[i];
-            string buffSourceId = buffObj?.source?.type_id ?? string.Empty;
+            string buffSourceId = buffObj?.source?.TypeId ?? string.Empty;
             if (buffSourceId == source_id)
             {
                 this.buffs.RemoveAt(i);
@@ -87,7 +87,7 @@ public partial class TowerStatsHandler : Node
 
     private void _on_scheduled_buff_expired(TowerBuff buff)
     {
-        string sourceId = buff?.source?.type_id ?? string.Empty;
+        string sourceId = buff?.source?.TypeId ?? string.Empty;
         this.buff_expired?.Invoke(sourceId);
     }
 

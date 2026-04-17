@@ -9,26 +9,26 @@ public class PriceContext
 
     public int price_type
     {
-        get => (int)this.Type;
-        set => this.Type = (PriceType)value;
+        get => (int)Type;
+        set => Type = (PriceType)value;
     }
 
     public int base_price
     {
-        get => this.BasePrice;
-        set => this.BasePrice = value;
+        get => BasePrice;
+        set => BasePrice = value;
     }
 
     public float discount
     {
-        get => this.Discount;
-        set => this.Discount = value;
+        get => Discount;
+        set => Discount = value;
     }
 
     public int final_price
     {
-        get => this.FinalPrice;
-        set => this.FinalPrice = value;
+        get => FinalPrice;
+        set => FinalPrice = value;
     }
 
     public PriceType Type { get; set; }
@@ -38,9 +38,9 @@ public class PriceContext
 
     public PriceContext(PriceType type, int basePrice)
     {
-        this.Type = type;
-        this.BasePrice = basePrice;
-        this.Discount = 0f;
-        this.FinalPrice = basePrice;
+        Type = type;
+        BasePrice = basePrice;
+        Discount = 0f;
+        FinalPrice = basePrice;
     }
 }

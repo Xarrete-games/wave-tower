@@ -41,7 +41,7 @@ public partial class KillEventHandler : Node
             return;
         }
 
-        string typeId = source.type_id;
+        string typeId = source.TypeId;
         if (typeId != "WildFireTower")
         {
             return;

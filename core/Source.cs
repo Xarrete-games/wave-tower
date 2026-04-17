@@ -1,4 +1,4 @@
-public class Source
+public sealed record Source(Source.SourceType Type, string TypeId, object Entity = null, Source Origin = null)
 {
     public enum SourceType
     {
@@ -7,46 +7,5 @@ public class Source
         CONSUMABLE,
         DEBUFF,
         GLOBAL,
-    }
-
-    public SourceType type;
-    public string type_id;
-    public object entity;
-    public Source origin;
-
-    public Source()
-    {
-    }
-
-    public Source(SourceType p_type, string p_type_id, object p_entity = null, Source p_origin = null)
-    {
-        this.type = p_type;
-        this.type_id = p_type_id;
-        this.entity = p_entity;
-        this.origin = p_origin;
-    }
-
-    public void setup(int p_type, string p_type_id)
-    {
-        this.type = (SourceType)p_type;
-        this.type_id = p_type_id;
-        this.entity = null;
-        this.origin = null;
-    }
-
-    public void setup(int p_type, string p_type_id, object p_entity)
-    {
-        this.type = (SourceType)p_type;
-        this.type_id = p_type_id;
-        this.entity = p_entity;
-        this.origin = null;
-    }
-
-    public void setup(int p_type, string p_type_id, object p_entity, Source p_origin)
-    {
-        this.type = (SourceType)p_type;
-        this.type_id = p_type_id;
-        this.entity = p_entity;
-        this.origin = p_origin;
     }
 }

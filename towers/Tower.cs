@@ -26,7 +26,6 @@ public partial class Tower : Node2D
         LOW_HP,
     }
 
-    public const int SOURCE_TYPE_TOWER = 1;
     public const int MAX_LEVEL = 2;
     public static readonly Color PHANTOM_COLOR = new(1f, 1f, 1f, 0.5f);
 
@@ -97,9 +96,7 @@ public partial class Tower : Node2D
     {
         get
         {
-            Source src = new();
-            src.setup(SOURCE_TYPE_TOWER, this.type_id, this);
-            return src;
+            return new Source(Source.SourceType.TOWER, this.type_id, this);
         }
     }
 
@@ -285,7 +282,7 @@ public partial class Tower : Node2D
                 continue;
             }
 
-            string buffSourceId = buff.source?.type_id ?? string.Empty;
+            string buffSourceId = buff.source?.TypeId ?? string.Empty;
             if (buffSourceId != source_id)
             {
                 continue;
@@ -373,7 +370,7 @@ public partial class Tower : Node2D
         Source source = attack?.source;
         model.Source = new SourceModel
         {
-            Type = source?.type switch
+            Type = source?.Type switch
             {
                 Source.SourceType.RELIC => SourceModel.SourceType.Relic,
                 Source.SourceType.TOWER => SourceModel.SourceType.Tower,
@@ -381,7 +378,7 @@ public partial class Tower : Node2D
                 Source.SourceType.DEBUFF => SourceModel.SourceType.Debuff,
                 _ => SourceModel.SourceType.Global,
             },
-            TypeId = source?.type_id ?? string.Empty,
+            TypeId = source?.TypeId ?? string.Empty,
         };
 
         return model;

@@ -12,10 +12,10 @@ public class ItemOffer
     {
     }
 
-    public ItemOffer(Resource p_item_data, int p_price, int p_health_price = 0)
+    public ItemOffer(Resource itemData, int itemPrice, int healthPrice = 0)
     {
-        this.item_data = p_item_data;
-        this.price = p_price;
-        this.health_price = p_health_price;
+        item_data = itemData;
+        price = itemPrice;
+        health_price = healthPrice;
     }
 }

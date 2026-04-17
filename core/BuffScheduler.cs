@@ -13,9 +13,9 @@ public class BuffScheduler
     {
     }
 
-    public BuffScheduler(RunProgress progress_p)
+    public BuffScheduler(RunProgress runProgress)
     {
-        this.progress = progress_p;
+        progress = runProgress;
     }
 
     public void schedule(TowerBuff buff)
@@ -31,15 +31,15 @@ public class BuffScheduler
 
         if (seconds > 0)
         {
-            _ = this._schedule_in_seconds(buff, seconds);
+            _ = ScheduleInSecondsAsync(buff, seconds);
         }
         else if (waves > 0)
         {
-            _ = this._schedule_in_waves(buff, waves);
+            _ = ScheduleInWavesAsync(buff, waves);
         }
     }
 
-    private async Task _schedule_in_seconds(TowerBuff buff, float seconds)
+    private async Task ScheduleInSecondsAsync(TowerBuff buff, float seconds)
     {
         SceneTree tree = Engine.GetMainLoop() as SceneTree;
         if (tree == null)
@@ -47,29 +47,29 @@ public class BuffScheduler
             return;
         }
 
-        await this.WaitForSecondsAsync(tree, seconds);
-        this._remove_buff(buff);
+        await WaitForSecondsAsync(tree, seconds);
+        RemoveBuff(buff);
     }
 
-    private async Task _schedule_in_waves(TowerBuff buff, int waves)
+    private async Task ScheduleInWavesAsync(TowerBuff buff, int waves)
     {
-        if (this.progress == null)
+        if (progress == null)
         {
             return;
         }
 
-        int targetWave = this.progress.current_wave + waves;
-        while (this.progress.current_wave < targetWave)
+        int targetWave = progress.current_wave + waves;
+        while (progress.current_wave < targetWave)
         {
-            await this.WaitForWaveFinishedAsync();
+            await WaitForWaveFinishedAsync();
         }
 
-        this._remove_buff(buff);
+        RemoveBuff(buff);
     }
 
     private Task WaitForWaveFinishedAsync()
     {
-        if (this.progress == null)
+        if (progress == null)
         {
             return Task.CompletedTask;
         }
@@ -77,11 +77,11 @@ public class BuffScheduler
         TaskCompletionSource<bool> tcs = new();
         void Handler()
         {
-            this.progress.current_wave_finished -= Handler;
+            progress.current_wave_finished -= Handler;
             tcs.TrySetResult(true);
         }
 
-        this.progress.current_wave_finished += Handler;
+        progress.current_wave_finished += Handler;
         return tcs.Task;
     }
 
@@ -104,24 +104,24 @@ public class BuffScheduler
         return tcs.Task;
     }
 
-    private void _remove_buff(TowerBuff buff)
+    private void RemoveBuff(TowerBuff buff)
     {
-        this.buff_expired?.Invoke(buff);
+        buff_expired?.Invoke(buff);
 
         TowerBuff residual = buff?.residual_buff;
         if (residual != null)
         {
-            this._add_residual(residual);
+            AddResidual(residual);
         }
     }
 
-    private void _add_residual(TowerBuff buff)
+    private void AddResidual(TowerBuff buff)
     {
-        this.buff_applied?.Invoke(buff);
+        buff_applied?.Invoke(buff);
 
         if (buff.duration != null)
         {
-            this.schedule(buff);
+            schedule(buff);
         }
     }
 }

@@ -66,6 +66,7 @@ Always apply CORE first, then apply .NET conventions where CORE is silent.
 - Naming:
   - Public members in PascalCase
   - Private fields in _camelCase
+  - Private methods in PascalCase (do not use leading `_`)
   - Method arguments and locals in camelCase
   - Remove legacy parameter/local patterns p_* and *_p
 - Remove using Godot; when file does not use Godot APIs.
@@ -79,6 +80,7 @@ Apply these when they do not conflict with CORE or engine constraints:
 - Keep methods small and single-purpose where practical.
 - Remove dead code and stale usings.
 - Prefer strongly typed calls over reflective/dynamic dispatch.
+- Prefer immutable value objects for contextual metadata models (for example `Source`) and create new instances instead of mutating existing ones.
 - For asynchronous methods, use `Task`/`Task<T>` return types.
 - Avoid `async void` except where the signature is framework-required.
 - Prefer C# `async`/`await` orchestration whenever possible.

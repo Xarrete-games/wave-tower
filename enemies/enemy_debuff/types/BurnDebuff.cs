@@ -2,7 +2,7 @@ using Godot;
 
 public class BurnDebuff : EnemyDebuff
 {
-    private const int SOURCE_TYPE_DEBUFF = 3;
+    private const Source.SourceType SourceTypeDebuff = Source.SourceType.DEBUFF;
 
     public override void on_tick(Enemy enemy)
     {
@@ -11,8 +11,7 @@ public class BurnDebuff : EnemyDebuff
             return;
         }
 
-        Source debuff_source = new();
-        debuff_source.setup(SOURCE_TYPE_DEBUFF, this.data.id, default(Variant), this.source);
+        Source debuff_source = new(SourceTypeDebuff, data.id, null, source);
 
         Attack attack = new();
         attack.damage = this.value;

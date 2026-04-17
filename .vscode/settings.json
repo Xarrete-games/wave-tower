@@ -11,6 +11,14 @@
         "git rm": true,
         "ForEach-Object": true,
         "dotnet build": true,
-        "Group-Object": true
+        "Group-Object": true,
+        "/^\\$files = Get-ChildItem core -Recurse -Filter \\*\\.cs; \\$patterns = 'Godot\\\\\\.Collections\\\\\\.Array','\\\\bVariant\\\\b','\\\\bthis\\\\\\.','\\\\bp_\\[A-Za-z0-9_\\]\\+','\\\\b\\[A-Za-z0-9_\\]\\+_p\\\\b','\\\\basync\\\\s\\+void\\\\b'; foreach \\(\\$p in \\$patterns\\) \\{ \"=== Pattern: \\$p ===\"; Select-String -Path \\$files\\.FullName -Pattern \\$p \\| Group-Object Path \\| Sort-Object Count -Descending \\| Select-Object -First 8 @\\{N='Count';E=\\{\\$_\\.Count\\}\\}, @\\{N='File';E=\\{\\$_\\.Name\\}\\} \\| Format-Table -AutoSize; \\} \\| Out-String$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^\\$symbols = 'seconds_duration','waves_duration','item_data','health_price','base_price','final_price','price_type','discount','buff_expired','buff_applied','setup\\\\\\('; foreach\\(\\$s in \\$symbols\\)\\{ \"=== \\$s ===\"; \\(Select-String -Path \\(Get-ChildItem -Recurse -Filter \\*\\.cs \\| Where-Object \\{ \\$_\\.FullName -notmatch '\\\\\\\\\\.godot\\\\\\\\' \\}\\)\\.FullName -Pattern \\$s \\| Measure-Object\\)\\.Count \\} \\| Out-String$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     }
 }
