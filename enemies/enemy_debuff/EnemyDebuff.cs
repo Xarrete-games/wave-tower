@@ -21,7 +21,7 @@ public class EnemyDebuff : EnemyEffect {
             MaxStacks = debuffData.MaxStacks;
         }
         public static EnemyDebuff create_frost(Source source) {
-            EnemyDebuffData data = DataLoader.Instance?.get_debuff_data((int)Type.FROST).As<EnemyDebuffData>();
+            EnemyDebuffData data = DataLoader.Instance?.GetDebuffData((int)Type.FROST);
             if (data == null) {
                 return null;
             }
@@ -30,7 +30,7 @@ public class EnemyDebuff : EnemyEffect {
             return debuff;
         }
         public static EnemyDebuff create_burn(Source source) {
-            EnemyDebuffData data = DataLoader.Instance?.get_debuff_data((int)Type.BURN).As<EnemyDebuffData>();
+            EnemyDebuffData data = DataLoader.Instance?.GetDebuffData((int)Type.BURN);
             if (data == null) {
                 return null;
             }

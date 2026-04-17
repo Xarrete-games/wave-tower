@@ -21,7 +21,7 @@ public partial class WorldMap : Node2D
     public Godot.Collections.Array<Godot.Collections.Dictionary> finalized_portal_entries { get; private set; } = new();
     public Godot.Collections.Array<Vector2> portal_spawn_positions { get; private set; } = new();
 
-    private Godot.Collections.Array<Variant> _mapPieces = new();
+    private List<MapPieceData> _mapPieces = new();
     private MapPiece _lastPieceAttached;
     private bool _hasPlacedFirstExpansion;
     private bool _pendingForkAfterBoss;
@@ -211,7 +211,7 @@ public partial class WorldMap : Node2D
     public override void _Ready()
     {
         DataLoader dataLoader = GetNode<DataLoader>("/root/DataLoader");
-        _mapPieces = dataLoader.get_all_map_pieces();
+        _mapPieces = dataLoader.GetAllMapPieces();
 
         _gridManager = new GridManager();
         _wordBuilderAdapter = new GodotWordBuilderAdapter();
@@ -229,7 +229,7 @@ public partial class WorldMap : Node2D
 
         _frontierManager.edge_finalized += OnEdgeFinalized;
 
-        MapPieceData initPieceData = PickRandom(_safe_array(dataLoader.get_all_initial_map_pieces())).AsGodotObject() as MapPieceData;
+        MapPieceData initPieceData = PickRandom(dataLoader.GetAllInitialMapPieces());
         MapPiece initPiece = initPieceData?.GetInstance().AsGodotObject() as MapPiece;
         if (initPiece == null)
         {
@@ -698,25 +698,15 @@ public partial class WorldMap : Node2D
         }
     }
 
-    private Variant PickRandom(Godot.Collections.Array array)
+    private T PickRandom<T>(List<T> items)
     {
-        if (array.Count == 0)
+        if (items.Count == 0)
         {
             return default;
         }
 
-        int index = (int)(GD.Randi() % (uint)array.Count);
-        return array[index];
-    }
-
-    private Godot.Collections.Array _safe_array(Variant value)
-    {
-        if (value.VariantType == Variant.Type.Array)
-        {
-            return value.AsGodotArray();
-        }
-
-        return new Godot.Collections.Array();
+        int index = (int)(GD.Randi() % (uint)items.Count);
+        return items[index];
     }
 
     private object FrontierManagerPickRandomEdge(GodotObject frontier)
@@ -791,12 +781,12 @@ public partial class WorldMap : Node2D
         return result;
     }
 
-    private List<object> ToObjectList(Godot.Collections.Array<Variant> source)
+    private List<object> ToObjectList(List<MapPieceData> source)
     {
         var result = new List<object>(source.Count);
         for (int i = 0; i < source.Count; i++)
         {
-            result.Add(source[i].AsGodotObject() as MapPieceData);
+            result.Add(source[i]);
         }
 
         return result;

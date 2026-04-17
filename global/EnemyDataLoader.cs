@@ -1,11 +1,12 @@
 ﻿using Godot;
+using System.Collections.Generic;
 
 public class EnemyDataLoader
 {
     private const string DataPath = "res://enemies/data/";
 
-    public Godot.Collections.Dictionary<int, EnemyData> enemies_data_dic = new();
-    public Godot.Collections.Array<EnemyData> enemies_data = new();
+    public Dictionary<int, EnemyData> EnemiesByLegacyType { get; } = new();
+    private readonly List<EnemyData> _enemies = new();
 
     public EnemyDataLoader()
     {
@@ -20,80 +21,65 @@ public class EnemyDataLoader
                 continue;
             }
 
-            enemies_data.Add(data);
+            _enemies.Add(data);
         }
 
-        for (int index = 0; index < enemies_data.Count; index++)
+        for (int index = 0; index < _enemies.Count; index++)
         {
-            EnemyData enemyData = enemies_data[index];
+            EnemyData enemyData = _enemies[index];
             if (enemyData == null)
             {
                 continue;
             }
 
-            enemies_data_dic[enemyData.TypeLegacy] = enemyData;
+            EnemiesByLegacyType[enemyData.TypeLegacy] = enemyData;
         }
     }
 
-    public Godot.Collections.Array<EnemyData> get_all_enemies_typed()
+    public List<EnemyData> GetAllEnemies()
     {
-        var result = new Godot.Collections.Array<EnemyData>();
-        for (int index = 0; index < enemies_data.Count; index++)
+        var result = new List<EnemyData>(_enemies.Count);
+        for (int index = 0; index < _enemies.Count; index++)
         {
-            result.Add(enemies_data[index]);
+            result.Add(DuplicateResource(_enemies[index]));
         }
 
         return result;
     }
 
-    public Godot.Collections.Array<Variant> get_all_enemies()
+    public List<EnemyData> GetEnemiesByType(int type)
     {
-        return ToVariantArray(get_all_enemies_typed());
-    }
-
-    public Godot.Collections.Array<EnemyData> get_enemies_by_type_typed(int type)
-    {
-        var result = new Godot.Collections.Array<EnemyData>();
-        for (int index = 0; index < enemies_data.Count; index++)
+        var result = new List<EnemyData>();
+        for (int index = 0; index < _enemies.Count; index++)
         {
-            EnemyData data = enemies_data[index];
+            EnemyData data = _enemies[index];
             if (data != null && (int)data.Type == type)
             {
-                result.Add(data);
+                result.Add(DuplicateResource(data));
             }
         }
 
         return result;
     }
 
-    public Godot.Collections.Array<Variant> get_enemies_by_type(int type)
+    public List<EnemyData> GetSpawnableEnemies()
     {
-        return ToVariantArray(get_enemies_by_type_typed(type));
-    }
-
-    public Godot.Collections.Array<EnemyData> get_spawnable_enemies_typed()
-    {
-        var result = new Godot.Collections.Array<EnemyData>();
-        for (int index = 0; index < enemies_data.Count; index++)
+        var result = new List<EnemyData>();
+        for (int index = 0; index < _enemies.Count; index++)
         {
-            EnemyData data = enemies_data[index];
+            EnemyData data = _enemies[index];
             if (data != null && data.Type != EnemyData.EnemyType.BOSS)
             {
-                result.Add(data);
+                result.Add(DuplicateResource(data));
             }
         }
 
         return result;
     }
 
-    public Godot.Collections.Array<Variant> get_spawnable_enemies()
+    private List<Resource> LoadResourcesFromDir(string path)
     {
-        return ToVariantArray(get_spawnable_enemies_typed());
-    }
-
-    private Godot.Collections.Array<Resource> LoadResourcesFromDir(string path)
-    {
-        var result = new Godot.Collections.Array<Resource>();
+        var result = new List<Resource>();
 
         using DirAccess dir = DirAccess.Open(path);
         if (dir == null)
@@ -123,15 +109,14 @@ public class EnemyDataLoader
         return result;
     }
 
-    private static Godot.Collections.Array<Variant> ToVariantArray(Godot.Collections.Array<EnemyData> source)
+    private static EnemyData DuplicateResource(EnemyData resource)
     {
-        var result = new Godot.Collections.Array<Variant>();
-        for (int index = 0; index < source.Count; index++)
+        if (resource == null)
         {
-            result.Add(Variant.From(source[index]));
+            return null;
         }
 
-        return result;
+        return resource.Duplicate(true) as EnemyData;
     }
 }
 

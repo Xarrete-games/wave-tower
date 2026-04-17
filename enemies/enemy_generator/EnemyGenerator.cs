@@ -22,10 +22,10 @@ public partial class EnemyGenerator : Node
     public override void _Ready()
     {
         var enemyCatalog = new Godot.Collections.Array<EnemyData>();
-        var rawEnemyCatalog = DataLoaderAccess.GetAllEnemies();
+        List<EnemyData> rawEnemyCatalog = DataLoaderAccess.GetAllEnemies();
         for (int index = 0; index < rawEnemyCatalog.Count; index++)
         {
-            EnemyData enemyData = rawEnemyCatalog[index].As<EnemyData>();
+            EnemyData enemyData = rawEnemyCatalog[index];
             if (enemyData != null)
             {
                 enemyCatalog.Add(enemyData);

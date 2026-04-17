@@ -45,11 +45,17 @@ public partial class LootScreenHandler : Node
 
         LootItemData consumableItem = new LootItemData();
 
-        var consumables = DataLoaderAccess.GetAllConsumables();
-        consumables.Shuffle();
+        List<ConsumableData> consumables = DataLoaderAccess.GetAllConsumables();
+        for (int index = consumables.Count - 1; index > 0; index--)
+        {
+            int swapIndex = (int)(GD.Randi() % (uint)(index + 1));
+            ConsumableData tmp = consumables[index];
+            consumables[index] = consumables[swapIndex];
+            consumables[swapIndex] = tmp;
+        }
         if (consumables.Count > 0)
         {
-            consumableItem.Consumable = consumables[0].AsGodotObject() as ConsumableData;
+            consumableItem.Consumable = consumables[0];
             lootItems.Add(consumableItem);
         }
 

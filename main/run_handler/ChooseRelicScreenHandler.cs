@@ -16,7 +16,7 @@ public partial class ChooseRelicScreenHandler : Node
 
         int numberOfRelics = GetCurrentRewardsCount();
         DataLoader dataLoader = GetNode<DataLoader>("/root/DataLoader");
-        var relics = dataLoader.get_random_available_relics(numberOfRelics);
+        var relics = dataLoader.GetRandomAvailableRelics(numberOfRelics);
 
         eventLayer.AddChild(_rewardsScreen);
         _rewardsScreen.set_relics(relics);
@@ -29,11 +29,9 @@ public partial class ChooseRelicScreenHandler : Node
         _rewardsScreen = null;
     }
 
-    private void OnItemSelected(Variant relicData)
+    private void OnItemSelected(RelicData selectedRelicData)
     {
         _rewardsScreen?.QueueFree();
-
-        RelicData selectedRelicData = relicData.As<RelicData>();
         if (selectedRelicData == null)
         {
             return;
@@ -57,7 +55,7 @@ public partial class ChooseRelicScreenHandler : Node
 
         int numberOfRelics = GetCurrentRewardsCount();
         DataLoader dataLoader = GetNode<DataLoader>("/root/DataLoader");
-        var relics = dataLoader.get_random_available_relics(numberOfRelics);
+        var relics = dataLoader.GetRandomAvailableRelics(numberOfRelics);
         _rewardsScreen?.set_relics(relics);
     }
 

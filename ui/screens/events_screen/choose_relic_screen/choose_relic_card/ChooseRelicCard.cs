@@ -3,9 +3,9 @@ using System;
 
 public partial class ChooseRelicCard : Control
 {
-    public event Action<Variant> card_pressed;
+    public event Action<RelicData> card_pressed;
 
-    private Variant _relicData;
+    private RelicData _relicData;
     private bool _hasEnoughLife;
     private bool _itCostsHealth;
     private int _healthCost;
@@ -38,10 +38,10 @@ public partial class ChooseRelicCard : Control
         }
     }
 
-    public void set_relic(Variant newRelicData)
+    public void set_relic(RelicData newRelicData)
     {
         _relicData = newRelicData;
-        RelicData data = newRelicData.As<RelicData>();
+        RelicData data = newRelicData;
         if (data == null)
         {
             return;

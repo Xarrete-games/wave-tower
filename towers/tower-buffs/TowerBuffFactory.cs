@@ -11,8 +11,7 @@ public static class TowerBuffFactory
             dataLoader = tree?.Root?.GetNodeOrNull<DataLoader>("DataLoader");
         }
 
-        Variant buffDataVar = dataLoader?.get_tower_buff_data_by_id(buff_id) ?? default;
-        BuffData buffData = buffDataVar.As<BuffData>();
+        BuffData buffData = dataLoader?.GetTowerBuffDataById(buff_id);
         if (buffData == null)
         {
             GD.PushError($"[TowerBuffFactory] No buff data found for id: {buff_id}");

@@ -1,10 +1,11 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public partial class ChooseRelicScreen : Control
 {
-    public event Action<Variant> item_selected;
+    public event Action<RelicData> item_selected;
     public event Action reroll_pressed;
 
     private static readonly PackedScene ChooseRelicCardScene = GD.Load<PackedScene>("uid://dgcv5fdqvfext");
@@ -24,14 +25,14 @@ public partial class ChooseRelicScreen : Control
         _enabled = true;
     }
 
-    public void set_relics(Godot.Collections.Array<Variant> relics)
+    public void set_relics(List<RelicData> relics)
     {
         foreach (Node child in cards_container.GetChildren())
         {
             child.QueueFree();
         }
 
-        foreach (Variant relicData in relics)
+        foreach (RelicData relicData in relics)
         {
             ChooseRelicCard card = ChooseRelicCardScene.Instantiate<ChooseRelicCard>();
             cards_container.AddChild(card);
@@ -42,7 +43,7 @@ public partial class ChooseRelicScreen : Control
         reroll_priece.price = _rerollPrice;
     }
 
-    private void OnCardPressed(Variant relicData)
+    private void OnCardPressed(RelicData relicData)
     {
         if (!_enabled)
         {
