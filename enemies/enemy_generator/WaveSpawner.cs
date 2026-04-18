@@ -159,17 +159,17 @@ public partial class WaveSpawner : Node
         }
 
         Godot.Collections.Array<Vector2> enemyWaypoints = _build_enemy_waypoints_with_offset(waypoints);
-        PackedScene scene = data.scene ?? fallback_enemy_scene;
+        PackedScene scene = data.Scene ?? fallback_enemy_scene;
         if (scene == null)
         {
-            GD.PushError($"[WaveSpawner] No scene for enemy '{data.name}' and no fallback set");
+            GD.PushError($"[WaveSpawner] No scene for enemy '{data.Name}' and no fallback set");
             return;
         }
 
         Enemy enemy = scene.Instantiate<Enemy>();
         if (enemy == null)
         {
-            GD.PushError($"[WaveSpawner] Scene for '{data.name}' did not produce an Enemy");
+            GD.PushError($"[WaveSpawner] Scene for '{data.Name}' did not produce an Enemy");
             return;
         }
 
@@ -219,7 +219,7 @@ public partial class WaveSpawner : Node
     {
         enemy.MaxHealth = data.MaxHealth;
         enemy.BaseSpeed = data.BaseSpeed;
-        enemy.damage = data.damage;
+        enemy.damage = data.Damage;
         enemy.gold_value = data.BaseGoldValue;
     }
 }

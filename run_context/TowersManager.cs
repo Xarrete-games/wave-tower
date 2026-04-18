@@ -76,7 +76,7 @@ public class TowersManager
                     continue;
                 }
 
-                int rarity = (int)towerData.Data.rarity;
+                int rarity = (int)towerData.Data.Rarity;
                 float weight = GetTowerWeightForWave(rarity);
                 weights.Add(weight);
                 totalWeight += weight;
@@ -129,7 +129,7 @@ public class TowersManager
                 continue;
             }
 
-            if (typedConfiguration.Data.id == id)
+            if (typedConfiguration.Data.Id == id)
             {
                 return typedConfiguration;
             }
@@ -157,7 +157,7 @@ public class TowersManager
             return;
         }
 
-        string towerDataId = towerData.id;
+        string towerDataId = towerData.Id;
         int currentAmount = tower_cards_amount.ContainsKey(towerDataId) ? tower_cards_amount[towerDataId] : 0;
         tower_cards_amount[towerDataId] = currentAmount - 1;
 
@@ -265,7 +265,7 @@ public class TowersManager
             return;
         }
 
-        string id = towerData.Data.id;
+        string id = towerData.Data.Id;
         if (string.IsNullOrEmpty(id))
         {
             return;

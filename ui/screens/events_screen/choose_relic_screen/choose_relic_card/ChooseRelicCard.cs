@@ -47,9 +47,9 @@ public partial class ChooseRelicCard : Control
             return;
         }
 
-        _relicTexture.Texture = data.icon;
+        _relicTexture.Texture = data.Icon;
         _title.Text = data.DisplayName;
-        _description.Text = data.description;
+        _description.Text = data.Description;
 
         _healthCost = data.HealthPrice;
         if (_healthCost > 0)
@@ -78,7 +78,7 @@ public partial class ChooseRelicCard : Control
             }
         }
 
-        _hexagonBorder.Color = _runContext.relics_manager.get_rarity_color(data.rarity);
+        _hexagonBorder.Color = _runContext.relics_manager.get_rarity_color(data.Rarity);
     }
 
     private void OnGuiInput(InputEvent @event)

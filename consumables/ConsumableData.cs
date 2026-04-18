@@ -24,7 +24,7 @@ public partial class ConsumableData : BaseData
     [Export]
     public Script RuntimeScript { get; set; }
 
-    public Consumable create_consumable()
+    public Consumable CreateConsumable()
     {
         string idValue = (Id ?? string.Empty).ToLowerInvariant();
         Consumable consumable = idValue switch
@@ -42,11 +42,6 @@ public partial class ConsumableData : BaseData
 
         consumable?.init(this);
         return consumable;
-    }
-
-    public Consumable CreateConsumable()
-    {
-        return create_consumable();
     }
 
     private Consumable CreateConsumableFromRuntimeScript()
@@ -72,9 +67,9 @@ public partial class ConsumableData : BaseData
         };
     }
 
-    public override Variant create_item()
+    public override Variant CreateItem()
     {
-        // Consumables are now plain C# objects; callers should use create_consumable().
+        // Consumables are now plain C# objects; callers should use CreateConsumable().
         return default;
     }
 }

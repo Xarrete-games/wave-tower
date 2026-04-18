@@ -61,8 +61,8 @@ public partial class ChooseTowerScreenItem : Control
         TowerData configuration = _towerData.Data;
 
         title_label.Text = configuration.DisplayName;
-        description_label.Text = configuration.description;
-        texture.Texture = configuration.icon;
+        description_label.Text = configuration.Description;
+        texture.Texture = configuration.Icon;
 
         damage_stat.SetValue(configuration.BaseDamage);
         range_stat.SetValue(configuration.BaseAttackRange);

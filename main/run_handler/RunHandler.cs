@@ -113,7 +113,7 @@ public partial class RunHandler : Node
                 continue;
             }
 
-            int eventType = (int)eventData.type;
+            int eventType = (int)eventData.Type;
             if (eventType == 1)
             {
                 _shopEvent = eventData;

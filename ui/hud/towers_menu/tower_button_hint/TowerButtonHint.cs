@@ -31,7 +31,7 @@ public partial class TowerButtonHint : Control
 
         if (_descriptionLabel != null)
         {
-            _descriptionLabel.Text = configuration.description;
+            _descriptionLabel.Text = configuration.Description;
         }
 
         _damageStat?.SetValue(configuration.BaseDamage);

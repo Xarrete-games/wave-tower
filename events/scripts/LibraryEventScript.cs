@@ -17,7 +17,7 @@ public partial class LibraryEventScript : EventScript
         foreach (RelicData relicData in allRelics)
         {
             bool isTome = relicData.IsTome;
-            string relicId = relicData.id;
+            string relicId = relicData.Id;
             if (!isTome || runContext.relics_manager.has_relic(relicId))
             {
                 continue;

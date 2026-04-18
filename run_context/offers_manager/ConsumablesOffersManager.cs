@@ -37,7 +37,7 @@ public class ConsumablesOffersManager
             return null;
         }
 
-        int rarity = (int)data.rarity;
+        int rarity = (int)data.Rarity;
         int basePrice = BASE_PRICE_BY_RARITY.ContainsKey(rarity) ? BASE_PRICE_BY_RARITY[rarity] : BASE_PRICE_BY_RARITY[0];
         var ctx = new PriceContext(PriceContext.PriceType.Consumable, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);

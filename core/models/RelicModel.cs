@@ -6,7 +6,7 @@ public abstract class Relic : AbstractModel
 
     public RelicData Data { get; private set; }
 
-    public string Id => Data?.id ?? _fallbackId;
+    public string Id => Data?.Id ?? _fallbackId;
     public bool IsCursed { get; }
     private readonly string _fallbackId;
 

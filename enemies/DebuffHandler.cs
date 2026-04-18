@@ -24,7 +24,7 @@ public partial class DebuffHandler : Node
 
         var debuffModel = new EnemyDebuffModel
         {
-            Id = debuff.data?.id ?? string.Empty,
+            Id = debuff.data?.Id ?? string.Empty,
             Type = debuffType,
             Value = debuff.value,
             Duration = debuff.duration,

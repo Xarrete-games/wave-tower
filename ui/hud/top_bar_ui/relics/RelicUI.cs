@@ -29,7 +29,7 @@ public partial class RelicUI : Control
         }
 
         relic = relicData;
-        _texture.Texture = data.icon;
+        _texture.Texture = data.Icon;
 
         _texture.Modulate = relicData.Disabled ? SemiTransparentColor : OpaqueColor;
 
@@ -49,7 +49,7 @@ public partial class RelicUI : Control
             return;
         }
 
-        string description = data.description;
+        string description = data.Description;
         string displayName = data.DisplayName;
         HintManagerStatic.ShowHint(this, this, description, displayName, HintManagerStatic.PositionHint.BOTTOM);
     }

@@ -67,7 +67,7 @@ public class RelicsManager
             return;
         }
 
-        string relicId = dataObj.id;
+        string relicId = dataObj.Id;
         if (_relics.ContainsKey(relicId))
         {
             GD.PushError($"Relic with ID '{relicId}' already exists. Cannot add duplicate relics.");
@@ -119,7 +119,7 @@ public class RelicsManager
             return;
         }
 
-        string relicId = dataObj.id;
+        string relicId = dataObj.Id;
 
         _relics[relicId] = relic;
         int currentCount = _relicsCount.ContainsKey(relicId) ? _relicsCount[relicId] : 0;

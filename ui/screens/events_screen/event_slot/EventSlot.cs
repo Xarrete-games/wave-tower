@@ -23,9 +23,9 @@ public partial class EventSlot : VBoxContainer
             return;
         }
 
-        event_texture.Texture = eventData.icon;
-        description_label.Text = eventData.description;
-        title_lable.Text = eventData.title;
+        event_texture.Texture = eventData.Icon;
+        description_label.Text = eventData.Description;
+        title_lable.Text = eventData.Title;
         _event = eventData;
     }
 

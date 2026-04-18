@@ -49,43 +49,6 @@ public partial class EnemyData : Resource
     [Export]
     public int Weight { get; set; } = 1;
 
-    // Legacy compatibility aliases (non-exported).
-    public string name
-    {
-        get => Name;
-        set => Name = value;
-    }
-
-    public string description
-    {
-        get => Description;
-        set => Description = value;
-    }
-
-    public Texture2D icon
-    {
-        get => Icon;
-        set => Icon = value;
-    }
-
-    public PackedScene scene
-    {
-        get => Scene;
-        set => Scene = value;
-    }
-
-    public int damage
-    {
-        get => Damage;
-        set => Damage = value;
-    }
-
-    public int weight
-    {
-        get => Weight;
-        set => Weight = value;
-    }
-
     [Export]
     public Godot.Collections.Array<EnemyWaveRange> AvailableWaves { get; set; } = new();
 

@@ -174,7 +174,7 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        string towerId = data.id;
+        string towerId = data.Id;
         TowerDataWithInstance towerConfiguration = runContext.towers_manager.get_tower_configuration_by_id(towerId);
         if (towerConfiguration == null)
         {

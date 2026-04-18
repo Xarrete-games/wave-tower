@@ -7,7 +7,7 @@ public partial class BuffData : BaseData
     [Export]
     public Script RuntimeScript { get; set; }
 
-    public TowerBuff create_item(Source source, int value = 0)
+    public TowerBuff CreateItem(Source source, int value = 0)
     {
         if (source == null)
         {
@@ -33,10 +33,5 @@ public partial class BuffData : BaseData
         buff.data = this;
         buff.value = value;
         return buff;
-    }
-
-    public TowerBuff CreateItem(Source source, int value = 0)
-    {
-        return create_item(source, value);
     }
 }

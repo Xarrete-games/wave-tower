@@ -25,7 +25,7 @@ public partial class EventsScreenHandler : Node
             return;
         }
 
-        int eventType = (int)eventData.type;
+        int eventType = (int)eventData.Type;
         if (eventType == 2)
         {
             await _chooseRelicScreenHandler.ShowChooseRelicEventAsync(eventLayer);

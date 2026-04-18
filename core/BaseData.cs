@@ -25,38 +25,8 @@ public partial class BaseData : Resource
     [Export]
     public DataRarity Rarity { get; set; } = DataRarity.COMMON;
 
-    // Legacy compatibility aliases (non-exported).
-    public string id
-    {
-        get => Id;
-        set => Id = value;
-    }
-
-    public string description
-    {
-        get => Description;
-        set => Description = value;
-    }
-
-    public Texture2D icon
-    {
-        get => Icon;
-        set => Icon = value;
-    }
-
-    public DataRarity rarity
-    {
-        get => Rarity;
-        set => Rarity = value;
-    }
-
-    public virtual Variant create_item()
-    {
-        return default;
-    }
-
     public virtual Variant CreateItem()
     {
-        return create_item();
+        return default;
     }
 }

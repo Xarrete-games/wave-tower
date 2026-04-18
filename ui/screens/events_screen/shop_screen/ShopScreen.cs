@@ -77,8 +77,8 @@ public partial class ShopScreen : Control
         Resource itemData = itemOffer?.ItemData;
         string purchasedId = itemData switch
         {
-            RelicData relicData => relicData.id,
-            ConsumableData consumableData => consumableData.id,
+            RelicData relicData => relicData.Id,
+            ConsumableData consumableData => consumableData.Id,
             _ => string.Empty,
         };
 
@@ -121,7 +121,7 @@ public partial class ShopScreen : Control
             Resource itemData = itemOffer?.ItemData;
             if (itemData is RelicData relicData)
             {
-                runContext.relics_manager.remove_relic(relicData.id);
+                runContext.relics_manager.remove_relic(relicData.Id);
             }
 
             runContext.economy.add_gold(itemOffer?.Price ?? 0);

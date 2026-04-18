@@ -76,14 +76,14 @@ public partial class ShopSlot : VBoxContainer
         if (itemData is RelicData relicInfo)
         {
             displayName = relicInfo.DisplayName;
-            description = relicInfo.description;
-            icon = relicInfo.icon;
+            description = relicInfo.Description;
+            icon = relicInfo.Icon;
         }
         else if (itemData is ConsumableData consumableInfo)
         {
             displayName = consumableInfo.DisplayName;
-            description = consumableInfo.description;
-            icon = consumableInfo.icon;
+            description = consumableInfo.Description;
+            icon = consumableInfo.Icon;
         }
 
         title_label.Text = displayName;
@@ -98,7 +98,7 @@ public partial class ShopSlot : VBoxContainer
         RelicData relicData = itemData as RelicData;
         if (relicData != null)
         {
-            shop_slot_icon?.set_background_color(_runContext.relics_manager.get_rarity_color(relicData.rarity));
+            shop_slot_icon?.set_background_color(_runContext.relics_manager.get_rarity_color(relicData.Rarity));
         }
 
         _currentHealthCost = itemOffer.HealthPrice;

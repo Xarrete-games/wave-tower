@@ -28,7 +28,7 @@ public class RelicOffersManager
             {
                 RelicData data = _allRelicData[dataIndex];
 
-                if (data.id == relicId)
+                if (data.Id == relicId)
                 {
                     offers.Add(create_relic_offer_from_data(data));
                     break;
@@ -50,7 +50,7 @@ public class RelicOffersManager
         {
             RelicData data = _allRelicData[index];
 
-            bool hasRelic = relicsManager != null && relicsManager.has_relic(data.id);
+            bool hasRelic = relicsManager != null && relicsManager.has_relic(data.Id);
             bool isCursed = data.IsCursed;
             bool onlyForEvents = data.OnlyForEvents;
 
@@ -78,7 +78,7 @@ public class RelicOffersManager
             return null;
         }
 
-        int rarity = (int)data.rarity;
+        int rarity = (int)data.Rarity;
         int basePrice = BASE_PRICE_BY_RARITY.ContainsKey(rarity) ? BASE_PRICE_BY_RARITY[rarity] : BASE_PRICE_BY_RARITY[0];
         var ctx = new PriceContext(PriceContext.PriceType.Relic, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);

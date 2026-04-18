@@ -93,7 +93,7 @@ public partial class TowersMenu : Control
 
     private string GetTowerId(TowerDataWithInstance towerData)
     {
-        return towerData?.Data?.id ?? string.Empty;
+        return towerData?.Data?.Id ?? string.Empty;
     }
 
     private void OnTowerButtonPressed(TowerDataWithInstance towerData, int price)

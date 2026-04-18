@@ -25,7 +25,7 @@ public partial class TowerButton : Control
             _towerData = value;
             Configuration = value?.Data;
             TowerScene = value?.Scene;
-            Icon = Configuration?.icon;
+            Icon = Configuration?.Icon;
             TowerType = Configuration?.type ?? 0;
             UpdatePrice();
         }

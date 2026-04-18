@@ -21,7 +21,7 @@ public class WaveComposer
             int total = 0;
             for (int i = 0; i < enemies.Count; i++)
             {
-                total += enemies[i].weight;
+                total += enemies[i].Weight;
             }
 
             return total;
@@ -337,7 +337,7 @@ public class WaveComposer
         for (int i = 0; i < bosses.Count; i++)
         {
             EnemyData data = bosses[i];
-            if (data.weight <= available_budget)
+            if (data.Weight <= available_budget)
             {
                 affordableBosses.Add(data);
             }
@@ -468,7 +468,7 @@ public class WaveComposer
             for (int i = 0; i < candidates.Count; i++)
             {
                 EnemyData candidate = candidates[i];
-                if (candidate.weight <= total_remaining)
+                if (candidate.Weight <= total_remaining)
                 {
                     affordable.Add(candidate);
                 }
@@ -481,8 +481,8 @@ public class WaveComposer
 
             EnemyData pick = affordable[(int)(GD.Randi() % (uint)affordable.Count)];
             result.Add(pick);
-            spent += pick.weight;
-            total_remaining -= pick.weight;
+            spent += pick.Weight;
+            total_remaining -= pick.Weight;
         }
 
         return total_remaining;

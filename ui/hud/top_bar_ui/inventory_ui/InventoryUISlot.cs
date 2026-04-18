@@ -37,7 +37,7 @@ public partial class InventoryUISlot : Control
         ConsumableData data = consumable?.data;
         if (data != null)
         {
-            _textureRect.Texture = data.icon;
+            _textureRect.Texture = data.Icon;
         }
     }
 
@@ -86,7 +86,7 @@ public partial class InventoryUISlot : Control
             return;
         }
 
-        string description = data.description;
+        string description = data.Description;
         if (!string.IsNullOrEmpty(description))
         {
             string displayName = data.DisplayName;

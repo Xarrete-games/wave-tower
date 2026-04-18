@@ -45,7 +45,7 @@ public partial class TowerBuffsBarSlot : Control {
         if (data == null) {
             return;
         }
-        _textureNode.Texture = data.icon;
+        _textureNode.Texture = data.Icon;
     }
 }
 

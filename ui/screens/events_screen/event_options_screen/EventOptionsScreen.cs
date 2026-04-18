@@ -30,8 +30,8 @@ public partial class EventOptionsScreen : Control
             return;
         }
 
-        title_label.Text = eventData.title;
-        description_label.Text = eventData.description;
+        title_label.Text = eventData.Title;
+        description_label.Text = eventData.Description;
         texture_rect.Texture = eventData.TextureBackground;
 
         foreach (Node child in buttons_container.GetChildren())
@@ -42,20 +42,20 @@ public partial class EventOptionsScreen : Control
         Script runtimeScript = eventData.RuntimeScript;
         if (runtimeScript == null)
         {
-            GD.PushError($"Event data {eventData.id} has no runtime script assigned.");
+            GD.PushError($"Event data {eventData.Id} has no runtime script assigned.");
             return;
         }
 
         if (runtimeScript is not CSharpScript csharpScript)
         {
-            GD.PushError($"Runtime script for event {eventData.id} is not C#.");
+            GD.PushError($"Runtime script for event {eventData.Id} is not C#.");
             return;
         }
 
         _eventScriptInstance = csharpScript.New().Obj as EventScript;
         if (_eventScriptInstance == null)
         {
-            GD.PushError($"Could not instantiate runtime script for event {eventData.id}.");
+            GD.PushError($"Could not instantiate runtime script for event {eventData.Id}.");
             return;
         }
 

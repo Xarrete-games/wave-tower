@@ -256,7 +256,7 @@ public class ConsumablesManager
             return null;
         }
 
-        string id = data.id;
+        string id = data.Id;
         int consumableTypeRaw = data.ConsumableType;
         ConsumableModel.ConsumableType consumableType = consumableTypeRaw == 1
             ? ConsumableModel.ConsumableType.Potion

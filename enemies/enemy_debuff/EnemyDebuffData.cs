@@ -13,19 +13,6 @@ public partial class EnemyDebuffData : BaseData
     [Export]
     public float Duration { get; set; }
 
-    // Legacy compatibility aliases (non-exported).
-    public float value
-    {
-        get => Value;
-        set => Value = value;
-    }
-
-    public float duration
-    {
-        get => Duration;
-        set => Duration = value;
-    }
-
     [Export]
     public float TickInterval { get; set; }
 
@@ -36,7 +23,7 @@ public partial class EnemyDebuffData : BaseData
     [Export]
     public Script RuntimeScript { get; set; }
 
-    public EnemyDebuff create_debuff()
+    public EnemyDebuff CreateDebuff()
     {
         return DebuffType switch
         {
@@ -46,14 +33,9 @@ public partial class EnemyDebuffData : BaseData
         };
     }
 
-    public EnemyDebuff CreateDebuff()
+    public override Variant CreateItem()
     {
-        return create_debuff();
-    }
-
-    public override Variant create_item()
-    {
-        // Debuffs are now created through create_debuff() typed path.
+        // Debuffs are now created through CreateDebuff() typed path.
         return default;
     }
 }

@@ -85,7 +85,7 @@ public partial class HealthBar : Control
     {
         DebuffSlot slot = DEBUFF_SLOT.Instantiate<DebuffSlot>();
         debuffs_conatiner.AddChild(slot);
-        slot.texture = debuff_data?.icon;
+        slot.texture = debuff_data?.Icon;
         debuffs_slots[type] = slot;
     }
 

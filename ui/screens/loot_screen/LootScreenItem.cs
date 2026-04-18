@@ -24,7 +24,7 @@ public partial class LootScreenItem : Control
         ConsumableData consumable = _lootItemData.Consumable;
         if (consumable != null)
         {
-            texture_rect.Texture = consumable.icon;
+            texture_rect.Texture = consumable.Icon;
             label.Text = consumable.DisplayName;
             return;
         }
@@ -76,7 +76,7 @@ public partial class LootScreenItem : Control
         }
 
         ConsumableData consumable = _lootItemData?.Consumable;
-        string description = consumable == null ? string.Empty : consumable.description;
+        string description = consumable == null ? string.Empty : consumable.Description;
         if (!string.IsNullOrEmpty(description))
         {
             HintManagerStatic.RemoveHint(this);
@@ -98,7 +98,7 @@ public partial class LootScreenItem : Control
             return;
         }
 
-        string description = consumable.description;
+        string description = consumable.Description;
         if (!string.IsNullOrEmpty(description))
         {
             HintManagerStatic.ShowHint(this, this, description, string.Empty, HintManagerStatic.PositionHint.RIGHT);

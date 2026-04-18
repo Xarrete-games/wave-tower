@@ -35,43 +35,6 @@ public partial class EventData : Resource
     [Export]
     public Texture2D Icon { get; set; }
 
-    // Legacy compatibility aliases (non-exported).
-    public string id
-    {
-        get => Id;
-        set => Id = value;
-    }
-
-    public string description
-    {
-        get => Description;
-        set => Description = value;
-    }
-
-    public Texture2D icon
-    {
-        get => Icon;
-        set => Icon = value;
-    }
-
-    public EventType type
-    {
-        get => Type;
-        set => Type = value;
-    }
-
-    public EventRole role
-    {
-        get => Role;
-        set => Role = value;
-    }
-
-    public string title
-    {
-        get => Title;
-        set => Title = value;
-    }
-
     [Export]
     public Texture2D TextureBackground { get; set; }
 

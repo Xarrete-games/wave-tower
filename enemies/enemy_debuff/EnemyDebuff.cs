@@ -15,8 +15,8 @@ public class EnemyDebuff : EnemyEffect {
             data = debuffData;
             source = debuffSource;
             type = (Type)debuffData.DebuffType;
-            value = debuffData.value;
-            duration = debuffData.duration;
+            value = debuffData.Value;
+            duration = debuffData.Duration;
             TickInterval = debuffData.TickInterval;
             MaxStacks = debuffData.MaxStacks;
         }

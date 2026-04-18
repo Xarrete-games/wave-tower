@@ -174,7 +174,7 @@ public partial class TowerBuffsBar : Control
 
     private string GetBuffId(TowerBuff buff)
     {
-        return buff?.data?.id ?? string.Empty;
+        return buff?.data?.Id ?? string.Empty;
     }
 
     private bool BuffExists(string buffId)
