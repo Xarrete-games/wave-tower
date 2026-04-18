@@ -28,9 +28,9 @@ theme_override_styles/panel = ExtResource("2_5l847")
 [node name="AnimationComponent" type="Node" parent="CenterContainer" unique_id=44155825]
 process_mode = 3
 script = ExtResource("2_s48xr")
-enter_animation = true
-enter_position = Vector2(0, -1000)
-enter_modulate = Color(1, 1, 1, 0)
+EnterAnimation = true
+EnterPosition = Vector2(0, -1000)
+EnterModulate = Color(1, 1, 1, 0)
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer" unique_id=443300225]
 custom_minimum_size = Vector2(405, 425)
@@ -76,9 +76,9 @@ text = "Resume"
 [node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ResumeButton" unique_id=797789922]
 process_mode = 3
 script = ExtResource("2_s48xr")
-enter_animation = true
-enter_time = 0.05
-enter_scale = Vector2(0, 0)
+EnterAnimation = true
+EnterTime = 0.05
+EnterScale = Vector2(0, 0)
 
 [node name="SettingsButton" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons" unique_id=95046184 instance=ExtResource("4_snj08")]
 custom_minimum_size = Vector2(200, 0)
@@ -89,9 +89,9 @@ text = "Settings"
 [node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/SettingsButton" unique_id=1100506625]
 process_mode = 3
 script = ExtResource("2_s48xr")
-enter_animation = true
-enter_time = 0.05
-enter_scale = Vector2(0, 0)
+EnterAnimation = true
+EnterTime = 0.05
+EnterScale = Vector2(0, 0)
 
 [node name="RestartButton" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons" unique_id=252323432 instance=ExtResource("4_snj08")]
 custom_minimum_size = Vector2(200, 0)
@@ -99,13 +99,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Restart"
 
-[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/RestartButton" unique_id=982796959 node_paths=PackedStringArray("wait_for")]
+[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/RestartButton" unique_id=982796959 node_paths=PackedStringArray("WaitFor")]
 process_mode = 3
 script = ExtResource("2_s48xr")
-enter_animation = true
-wait_for = NodePath("../../ResumeButton/AnimationComponent")
-enter_time = 0.05
-enter_scale = Vector2(0, 0)
+EnterAnimation = true
+WaitFor = NodePath("../../ResumeButton/AnimationComponent")
+EnterTime = 0.05
+EnterScale = Vector2(0, 0)
 
 [node name="ExitButton" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons" unique_id=671778560 instance=ExtResource("4_snj08")]
 custom_minimum_size = Vector2(200, 0)
@@ -114,17 +114,16 @@ size_flags_horizontal = 4
 theme_type_variation = &"ButtonRed"
 text = "Exit"
 
-[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ExitButton" unique_id=726396231 node_paths=PackedStringArray("wait_for")]
+[node name="AnimationComponent" type="Node" parent="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ExitButton" unique_id=726396231 node_paths=PackedStringArray("WaitFor")]
 process_mode = 3
 script = ExtResource("2_s48xr")
-enter_animation = true
-wait_for = NodePath("../../RestartButton/AnimationComponent")
-enter_time = 0.05
-enter_scale = Vector2(0, 0)
+EnterAnimation = true
+WaitFor = NodePath("../../RestartButton/AnimationComponent")
+EnterTime = 0.05
+EnterScale = Vector2(0, 0)
 
 [connection signal="pressed" from="CenterContainer/MarginContainer/MainContainer/SettingsSections/BackButton" to="." method="OnBackButtonXarretaPressed"]
 [connection signal="pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ResumeButton" to="." method="OnResumeButtonXarretaPressed"]
 [connection signal="pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/SettingsButton" to="." method="OnSettingsButtonXarretaPressed"]
 [connection signal="pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/RestartButton" to="." method="OnRestartButtonXarretaPressed"]
 [connection signal="pressed" from="CenterContainer/MarginContainer/MainContainer/ButtonsSecitons/ExitButton" to="." method="OnExitButtonXarretaPressed"]
-

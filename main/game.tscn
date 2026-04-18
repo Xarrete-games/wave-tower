@@ -11,16 +11,16 @@
 
 [node name="Game" type="Node2D" unique_id=2020377401]
 script = ExtResource("1_jc0vi")
-levels_paths = Array[String](["res://levels/levels/level1b/level_1b.tscn", "res://levels/levels/level2a/level_2a.tscn", "res://levels/levels/level3a/level_3a.tscn"])
+LevelsPaths = Array[String](["res://levels/levels/level1b/level_1b.tscn", "res://levels/levels/level2a/level_2a.tscn", "res://levels/levels/level3a/level_3a.tscn"])
 pause = ExtResource("4_f7m14")
 
 [node name="TestData" type="Node" parent="." unique_id=1452994315]
 script = ExtResource("3_2c7eb")
-initial_random_relics = 5
-initial_relics_ids = Array[String](["boniato", "salt"])
+InitialRandomRelics = 5
+InitialRelicsIds = Array[String](["boniato", "salt"])
 
-[node name="RunHandler" parent="." unique_id=181150192 node_paths=PackedStringArray("event_layer") instance=ExtResource("3_3qcir")]
-event_layer = NodePath("../EventLayer")
+[node name="RunHandler" parent="." unique_id=181150192 node_paths=PackedStringArray("EventLayer") instance=ExtResource("3_3qcir")]
+EventLayer = NodePath("../EventLayer")
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=564851877]
 position = Vector2(579, 323)

@@ -110,7 +110,7 @@ script = ExtResource("2_kgd72")
 [node name="CristalLight" parent="." index="1" unique_id=1008625391]
 position = Vector2(0, -113)
 color = Color(0.6117647, 0, 0, 1)
-attack_animation_time = 0.2
+AttackAnimationTime = 0.2
 
 [node name="RangePreview" parent="." index="2" unique_id=1110296903]
 visible = false

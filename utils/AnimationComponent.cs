@@ -11,39 +11,39 @@ public partial class AnimationComponent : Node
     private const Tween.TransitionType IMMEDIATE_TRANSITION = Tween.TransitionType.Linear;
 
     [ExportGroup("Options")]
-    [Export] public bool from_center = true;
-    [Export] public bool parallel_animations = true;
-    [Export] public bool enter_animation = false;
+    [Export] public bool FromCenter = true;
+    [Export] public bool ParallelAnimations = true;
+    [Export] public bool EnterAnimation = false;
     [Export] public string[] properties = { "scale", "position", "rotation", "size", "self_modulate" };
     [Export] public bool flicked = false;
 
     [ExportGroup("Hover Settings")]
-    [Export] public float hover_time = 0.2f;
-    [Export] public float hover_delay = 0.0f;
-    [Export] public Tween.TransitionType hover_transition = Tween.TransitionType.Linear;
-    [Export] public Tween.EaseType hover_easing = Tween.EaseType.InOut;
-    [Export] public Vector2 hover_scale = Vector2.One;
-    [Export] public Vector2 hover_position = Vector2.Zero;
-    [Export] public float hover_rotation = 0.0f;
-    [Export] public Vector2 hover_size = Vector2.One;
-    [Export] public Color hover_modulate = Colors.White;
-    [Export] public bool play_hover_sound = false;
+    [Export] public float HoverTime = 0.2f;
+    [Export] public float HoverDelay = 0.0f;
+    [Export] public Tween.TransitionType HoverTransition = Tween.TransitionType.Linear;
+    [Export] public Tween.EaseType HoverEasing = Tween.EaseType.InOut;
+    [Export] public Vector2 HoverScale = Vector2.One;
+    [Export] public Vector2 HoverPosition = Vector2.Zero;
+    [Export] public float HoverRotation = 0.0f;
+    [Export] public Vector2 HoverSize = Vector2.One;
+    [Export] public Color HoverModulate = Colors.White;
+    [Export] public bool PlayHoverSound = false;
 
     [ExportGroup("Enter Settings")]
-    [Export] public AnimationComponent wait_for;
-    [Export] public float enter_time = 0.2f;
-    [Export] public float enter_delay = 0.0f;
-    [Export] public Tween.TransitionType enter_transition = Tween.TransitionType.Linear;
-    [Export] public Tween.EaseType enter_easing = Tween.EaseType.InOut;
-    [Export] public Vector2 enter_scale = Vector2.One;
-    [Export] public Vector2 enter_position = Vector2.Zero;
-    [Export] public float enter_rotation = 0.0f;
-    [Export] public Vector2 enter_size = Vector2.One;
-    [Export] public Color enter_modulate = Colors.White;
+    [Export] public AnimationComponent WaitFor;
+    [Export] public float EnterTime = 0.2f;
+    [Export] public float EnterDelay = 0.0f;
+    [Export] public Tween.TransitionType EnterTransition = Tween.TransitionType.Linear;
+    [Export] public Tween.EaseType EnterEasing = Tween.EaseType.InOut;
+    [Export] public Vector2 EnterScale = Vector2.One;
+    [Export] public Vector2 EnterPosition = Vector2.Zero;
+    [Export] public float EnterRotation = 0.0f;
+    [Export] public Vector2 EnterSize = Vector2.One;
+    [Export] public Color EnterModulate = Colors.White;
 
     [ExportGroup("Flicked Settings")]
-    [Export] public float flicked_time = 0.1f;
-    [Export] public Color flicked_color = new(1, 1, 1, 0.5f);
+    [Export] public float FlickedTime = 0.1f;
+    [Export] public Color FlickedColor = new(1, 1, 1, 0.5f);
 
     private Control target;
     private Vector2 default_scale;
@@ -61,8 +61,8 @@ public partial class AnimationComponent : Node
     public void on_hover_entered()
     {
         on_hover = true;
-        _ = add_tween(hover_values, parallel_animations, hover_time, hover_delay, hover_transition, hover_easing);
-        if (play_hover_sound)
+        _ = add_tween(hover_values, ParallelAnimations, HoverTime, HoverDelay, HoverTransition, HoverEasing);
+        if (PlayHoverSound)
         {
             AudioManager audioManager = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<AudioManager>("/root/AudioManager");
             audioManager?.play_button_hover();
@@ -72,12 +72,12 @@ public partial class AnimationComponent : Node
     public void on_hover_exited()
     {
         on_hover = false;
-        _ = add_tween(default_values, parallel_animations, hover_time, hover_delay, hover_transition, hover_easing);
+        _ = add_tween(default_values, ParallelAnimations, HoverTime, HoverDelay, HoverTransition, HoverEasing);
     }
 
     public void on_entered_action()
     {
-        _ = add_tween(default_values, parallel_animations, enter_time, enter_delay, enter_transition, enter_easing, true);
+        _ = add_tween(default_values, ParallelAnimations, EnterTime, EnterDelay, EnterTransition, EnterEasing, true);
     }
 
     public void connect_signals()
@@ -85,9 +85,9 @@ public partial class AnimationComponent : Node
         target.MouseEntered += on_hover_entered;
         target.MouseExited += on_hover_exited;
 
-        if (wait_for != null)
+        if (WaitFor != null)
         {
-            wait_for.entered += on_entered_action;
+            WaitFor.entered += on_entered_action;
         }
     }
 
@@ -98,7 +98,7 @@ public partial class AnimationComponent : Node
             return;
         }
 
-        if (hover_position == Vector2.Zero && enter_position == Vector2.Zero)
+        if (HoverPosition == Vector2.Zero && EnterPosition == Vector2.Zero)
         {
             var filtered = new List<string>();
             for (int i = 0; i < properties.Length; i++)
@@ -111,7 +111,7 @@ public partial class AnimationComponent : Node
             properties = filtered.ToArray();
         }
 
-        if (from_center)
+        if (FromCenter)
         {
             target.PivotOffset = target.Size / 2.0f;
         }
@@ -128,20 +128,20 @@ public partial class AnimationComponent : Node
 
         hover_values = new Dictionary<string, Variant>
         {
-            { "scale", hover_scale },
-            { "position", target.Position + hover_position },
-            { "rotation", target.Rotation + Mathf.DegToRad(hover_rotation) },
-            { "size", target.Size * hover_size },
-            { "self_modulate", hover_modulate },
+            { "scale", HoverScale },
+            { "position", target.Position + HoverPosition },
+            { "rotation", target.Rotation + Mathf.DegToRad(HoverRotation) },
+            { "size", target.Size * HoverSize },
+            { "self_modulate", HoverModulate },
         };
 
         enter_values = new Dictionary<string, Variant>
         {
-            { "scale", enter_scale },
-            { "position", target.Position + enter_position },
-            { "rotation", target.Rotation + Mathf.DegToRad(enter_rotation) },
-            { "size", target.Size * enter_size },
-            { "self_modulate", enter_modulate },
+            { "scale", EnterScale },
+            { "position", target.Position + EnterPosition },
+            { "rotation", target.Rotation + Mathf.DegToRad(EnterRotation) },
+            { "size", target.Size * EnterSize },
+            { "self_modulate", EnterModulate },
         };
 
         connect_signals();
@@ -151,7 +151,7 @@ public partial class AnimationComponent : Node
             _ = flick_loop();
         }
 
-        if (enter_animation)
+        if (EnterAnimation)
         {
             on_enter();
         }
@@ -166,7 +166,7 @@ public partial class AnimationComponent : Node
     {
         _ = add_tween(enter_values, true, 0.0f, 0.0f, IMMEDIATE_TRANSITION, Tween.EaseType.In);
 
-        if (wait_for == null)
+        if (WaitFor == null)
         {
             on_entered_action();
         }
@@ -220,9 +220,9 @@ public partial class AnimationComponent : Node
                 continue;
             }
 
-            target.SelfModulate = useFlick ? flicked_color : defaultModulate;
+            target.SelfModulate = useFlick ? FlickedColor : defaultModulate;
             useFlick = !useFlick;
-            await ToSignal(GetTree().CreateTimer(flicked_time), Timer.SignalName.Timeout);
+            await ToSignal(GetTree().CreateTimer(FlickedTime), Timer.SignalName.Timeout);
         }
 
         if (IsInsideTree())

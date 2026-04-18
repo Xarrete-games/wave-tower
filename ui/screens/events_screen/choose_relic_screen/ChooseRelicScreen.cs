@@ -11,10 +11,10 @@ public partial class ChooseRelicScreen : Control
     private static readonly PackedScene ChooseRelicCardScene = GD.Load<PackedScene>("uid://dgcv5fdqvfext");
 
     [Export]
-    public Control cards_container;
+    public Control CardsContainer;
 
     [Export]
-    public GoldPrice reroll_priece;
+    public GoldPrice RerollPriece;
 
     private bool _enabled;
     private int _rerollPrice = 20;
@@ -27,7 +27,7 @@ public partial class ChooseRelicScreen : Control
 
     public void set_relics(List<RelicData> relics)
     {
-        foreach (Node child in cards_container.GetChildren())
+        foreach (Node child in CardsContainer.GetChildren())
         {
             child.QueueFree();
         }
@@ -35,12 +35,12 @@ public partial class ChooseRelicScreen : Control
         foreach (RelicData relicData in relics)
         {
             ChooseRelicCard card = ChooseRelicCardScene.Instantiate<ChooseRelicCard>();
-            cards_container.AddChild(card);
+            CardsContainer.AddChild(card);
             card.set_relic(relicData);
             card.card_pressed += OnCardPressed;
         }
 
-        reroll_priece.price = _rerollPrice;
+        RerollPriece.price = _rerollPrice;
     }
 
     private void OnCardPressed(RelicData relicData)

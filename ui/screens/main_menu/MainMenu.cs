@@ -6,14 +6,14 @@ public partial class MainMenu : Control
     private static readonly PackedScene CreditsScene = GD.Load<PackedScene>("uid://bayb10jsajj4a");
 
     [Export]
-    public bool direct_init = true;
+    public bool DirectInit = true;
 
     public override void _Ready()
     {
         GetNode<AudioManager>("/root/AudioManager").play_main_piano();
         GetNode<GameState>("/root/GameState").state = GameState.ON_MAIN_MENU;
 
-        if (direct_init)
+        if (DirectInit)
         {
             OnNewRunButtonXarretaPressed();
         }

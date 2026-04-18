@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class LightningTower : Tower
 {
-    [Export] public PackedScene electric_ball_scene;
+    [Export] public PackedScene ElectricBallScene;
 
     private Marker2D projectile_spawn_pos;
 
@@ -15,12 +15,12 @@ public partial class LightningTower : Tower
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || electric_ball_scene == null)
+        if (!GodotObject.IsInstanceValid(_current_target) || ElectricBallScene == null)
         {
             return;
         }
 
-        SingleTargetProjectile projectile = electric_ball_scene.Instantiate<SingleTargetProjectile>();
+        SingleTargetProjectile projectile = ElectricBallScene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;

@@ -4,23 +4,23 @@ using Godot;
 public partial class Hint : CanvasLayer
 {
     [Export]
-    public Label text_label;
+    public Label TextLabel;
 
     [Export]
-    public Label title_label;
+    public Label TitleLabel;
 
     [Export]
     public Control container;
 
     public void SetText(string text)
     {
-        text_label.Text = text;
+        TextLabel.Text = text;
     }
 
     public void SetTitle(string title)
     {
-        title_label.Visible = !string.IsNullOrEmpty(title);
-        title_label.Text = string.IsNullOrEmpty(title) ? string.Empty : $"{title}:";
+        TitleLabel.Visible = !string.IsNullOrEmpty(title);
+        TitleLabel.Text = string.IsNullOrEmpty(title) ? string.Empty : $"{title}:";
     }
 
     public void SetPosition(Vector2 pos)

@@ -9,17 +9,17 @@ public partial class LootScreenHandler : Node
     private const int ChanceDropConsumable = 50;
 
     [Export]
-    public PackedScene loot_screen_scene;
+    public PackedScene LootScreenScene;
 
     public async Task ShowLootScreenAsync(CanvasLayer eventLayer)
     {
-        if (loot_screen_scene == null)
+        if (LootScreenScene == null)
         {
-            GD.PushError("[LootScreenHandler] loot_screen_scene is null.");
+            GD.PushError("[LootScreenHandler] LootScreenScene is null.");
             return;
         }
 
-        LootScreen lootScreen = loot_screen_scene.Instantiate<LootScreen>();
+        LootScreen lootScreen = LootScreenScene.Instantiate<LootScreen>();
         eventLayer.AddChild(lootScreen);
 
         var lootItems = GenerateLootItems();

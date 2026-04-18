@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System;
 
 public partial class ChooseTowerScreenItem : Control
@@ -6,25 +6,25 @@ public partial class ChooseTowerScreenItem : Control
     public event Action<ChooseTowerScreenItem> selected;
 
     [Export]
-    public Label title_label;
+    public Label TitleLabel;
 
     [Export]
-    public Label description_label;
+    public Label DescriptionLabel;
 
     [Export]
     public TextureRect texture;
 
     [Export]
-    public TowerStatUi damage_stat;
+    public TowerStatUi DamageStat;
 
     [Export]
-    public TowerStatUi range_stat;
+    public TowerStatUi RangeStat;
 
     [Export]
-    public TowerStatUi attack_speed_stat;
+    public TowerStatUi AttackSpeedStat;
 
     [Export]
-    public GoldPrice gold_price;
+    public GoldPrice GoldPrice;
 
     private TowerDataWithInstance _towerData;
 
@@ -60,14 +60,14 @@ public partial class ChooseTowerScreenItem : Control
 
         TowerData configuration = _towerData.Data;
 
-        title_label.Text = configuration.DisplayName;
-        description_label.Text = configuration.Description;
+        TitleLabel.Text = configuration.DisplayName;
+        DescriptionLabel.Text = configuration.Description;
         texture.Texture = configuration.Icon;
 
-        damage_stat.SetValue(configuration.BaseDamage);
-        range_stat.SetValue(configuration.BaseAttackRange);
-        attack_speed_stat.SetValue(configuration.BaseAttackSpeed);
-        gold_price.price = configuration.BuildPrice;
+        DamageStat.SetValue(configuration.BaseDamage);
+        RangeStat.SetValue(configuration.BaseAttackRange);
+        AttackSpeedStat.SetValue(configuration.BaseAttackSpeed);
+        GoldPrice.price = configuration.BuildPrice;
     }
 
     private void ApplyConfigurationDeferred()

@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class DamageNumbers : Control
 {
-    [Export] public float time_to_vanish = 2.0f;
+    [Export] public float TimeToVanish = 2.0f;
 
     private Label damage_label;
 
@@ -13,10 +13,10 @@ public partial class DamageNumbers : Control
 
         Tween tween1 = CreateTween();
         int randomNumber = (int)GD.RandRange(-100, 100);
-        tween1.TweenProperty(damage_label, "position", new Vector2(randomNumber, -30), time_to_vanish / 2.0f);
+        tween1.TweenProperty(damage_label, "position", new Vector2(randomNumber, -30), TimeToVanish / 2.0f);
 
         Tween tween2 = CreateTween();
-        tween2.TweenProperty(damage_label, "modulate:a", 0.0f, time_to_vanish / 2.0f);
+        tween2.TweenProperty(damage_label, "modulate:a", 0.0f, TimeToVanish / 2.0f);
 
         await ToSignal(tween2, Tween.SignalName.Finished);
         QueueFree();
@@ -34,7 +34,7 @@ public partial class DamageNumbers : Control
                 damage_label.LabelSettings = criticalSettings;
 
                 Tween tween = CreateTween();
-                tween.TweenProperty(damage_label.LabelSettings, "font_size", 48, time_to_vanish);
+                tween.TweenProperty(damage_label.LabelSettings, "font_size", 48, TimeToVanish);
             }
         }
     }

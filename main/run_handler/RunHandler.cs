@@ -14,13 +14,13 @@ public partial class RunHandler : Node
     private static readonly int[] WavesWithRelics = { 2, 6, 10 };
 
     [Export]
-    public CanvasLayer event_layer;
+    public CanvasLayer EventLayer;
 
     [Export]
-    public EventsScreenHandler events_screen_hander;
+    public EventsScreenHandler EventsScreenHander;
 
     [Export]
-    public LootScreenHandler loot_screen_handler;
+    public LootScreenHandler LootScreenHandler;
 
     private List<EventData> _events = new();
     private EventData _shopEvent;
@@ -51,13 +51,13 @@ public partial class RunHandler : Node
 
     public async Task ShowLootScreen()
     {
-        if (loot_screen_handler == null)
+        if (LootScreenHandler == null)
         {
-            GD.PushError("[RunHandler] loot_screen_handler is null.");
+            GD.PushError("[RunHandler] LootScreenHandler is null.");
             return;
         }
 
-        await loot_screen_handler.ShowLootScreenAsync(event_layer);
+        await LootScreenHandler.ShowLootScreenAsync(EventLayer);
     }
 
     public async Task ShowChooseCardScreen()
@@ -66,7 +66,7 @@ public partial class RunHandler : Node
         var cards = runContext.towers_manager.get_random_towers(3);
 
         ChooseTowerScreen chooseTowerScreen = ChooseTowerScreenScene.Instantiate<ChooseTowerScreen>();
-        event_layer.AddChild(chooseTowerScreen);
+        EventLayer.AddChild(chooseTowerScreen);
         chooseTowerScreen.PopulateScreen(cards);
 
         var completion = new TaskCompletionSource<bool>();
@@ -91,12 +91,12 @@ public partial class RunHandler : Node
 
     public async Task ShowEventsScreen(EventData eventData)
     {
-        if (events_screen_hander == null || eventData == null)
+        if (EventsScreenHander == null || eventData == null)
         {
             return;
         }
 
-        await events_screen_hander.ShowEventSelectedAsync(eventData, event_layer);
+        await EventsScreenHander.ShowEventSelectedAsync(eventData, EventLayer);
     }
 
     private void SetEventsByType()
@@ -132,13 +132,13 @@ public partial class RunHandler : Node
     private void ShowNextWaveScreen()
     {
         Node nextWaveScreen = NextWaveScreenScene.Instantiate();
-        event_layer.CallDeferred(Node.MethodName.AddChild, nextWaveScreen);
+        EventLayer.CallDeferred(Node.MethodName.AddChild, nextWaveScreen);
     }
 
     private void ShowNextLevelMenu()
     {
         Node nextLevelScreen = NextLevelScreenScene.Instantiate();
-        event_layer.CallDeferred(Node.MethodName.AddChild, nextLevelScreen);
+        EventLayer.CallDeferred(Node.MethodName.AddChild, nextLevelScreen);
     }
 
     private async void OnWaveFinished()
@@ -148,7 +148,7 @@ public partial class RunHandler : Node
         await ShowChooseCardScreen();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        if (runContext.is_on_restarting)
+        if (runContext.IsOnRestarting)
         {
             return;
         }

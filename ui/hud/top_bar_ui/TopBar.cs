@@ -3,7 +3,7 @@ using Godot;
 public partial class TopBar : MarginContainer
 {
     [Export]
-    public XarretaButton speed_button;
+    public XarretaButton SpeedButton;
 
     private GameState _gameState;
 
@@ -29,9 +29,9 @@ public partial class TopBar : MarginContainer
 
     private void UpdateText(float value)
     {
-        if (speed_button != null)
+        if (SpeedButton != null)
         {
-            speed_button.Text = $"x{(int)value}";
+            SpeedButton.Text = $"x{(int)value}";
         }
     }
 }

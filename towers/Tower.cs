@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
@@ -396,7 +396,7 @@ public partial class Tower : Node2D
             MaxHealth = enemy.MaxHealth,
             RemainingHealth = enemy.health,
             ProgressRatio = enemy.get_progress_ratio(),
-            GoldValue = enemy.gold_value,
+            GoldValue = enemy.GoldValue,
             HasAnyDebuff = enemy.has_any_debuff(),
         };
     }

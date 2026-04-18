@@ -5,15 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="2_r6lm4"]
 [ext_resource type="PackedScene" uid="uid://di132c8on6fw" path="res://ui/components/health_price/health_price.tscn" id="4_eyx8o"]
 
-[node name="ShopSlot" type="VBoxContainer" node_paths=PackedStringArray("title_label", "description_label", "gold_price", "shop_slot_icon")]
+[node name="ShopSlot" type="VBoxContainer" node_paths=PackedStringArray("TitleLabel", "DescriptionLabel", "GoldPrice", "ShopSlotIcon")]
 offset_right = 104.0
 offset_bottom = 188.0
 tooltip_text = "Estamos testings"
 script = ExtResource("1_yea32")
-title_label = NodePath("Title")
-description_label = NodePath("Description")
-gold_price = NodePath("GoldPrice")
-shop_slot_icon = NodePath("ShopSlotIcon")
+TitleLabel = NodePath("Title")
+DescriptionLabel = NodePath("Description")
+GoldPrice = NodePath("GoldPrice")
+ShopSlotIcon = NodePath("ShopSlotIcon")
 
 [node name="ShopSlotIcon" parent="." instance=ExtResource("2_d3qw0")]
 layout_mode = 2

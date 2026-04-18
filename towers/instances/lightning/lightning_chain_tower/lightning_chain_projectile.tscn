@@ -76,7 +76,7 @@ color = Color(1.1638972, 1.1638972, 0.7348413, 1)
 
 [node name="LightningChainProjectile" type="Node2D"]
 script = ExtResource("1_3hj8a")
-max_bounces = 6
+MaxBounces = 6
 
 [node name="Line" type="Line2D" parent="."]
 unique_name_in_owner = true

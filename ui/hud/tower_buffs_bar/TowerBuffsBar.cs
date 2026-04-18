@@ -4,10 +4,10 @@ using System.Collections.Generic;
 public partial class TowerBuffsBar : Control
 {
     [Export]
-    public PackedScene slot_scene;
+    public PackedScene SlotScene;
 
     [Export]
-    public NodePath slots_container;
+    public NodePath SlotsContainer;
 
     private Tower tower;
     private readonly List<TowerBuff> tower_buffs = new();
@@ -18,7 +18,7 @@ public partial class TowerBuffsBar : Control
     public override void _Ready()
     {
         tower = GetParent() as Tower;
-        _slotsContainerNode = !slots_container.IsEmpty ? GetNodeOrNull<Control>(slots_container) : GetNodeOrNull<Control>("Container");
+        _slotsContainerNode = !SlotsContainer.IsEmpty ? GetNodeOrNull<Control>(SlotsContainer) : GetNodeOrNull<Control>("Container");
 
         if (tower == null)
         {
@@ -66,7 +66,7 @@ public partial class TowerBuffsBar : Control
         if (!buffExists)
         {
             buffs_modifiers_stacks[buffId] = modifierValue;
-            TowerBuffsBarSlot slot = slot_scene?.Instantiate() as TowerBuffsBarSlot;
+            TowerBuffsBarSlot slot = SlotScene?.Instantiate() as TowerBuffsBarSlot;
             if (slot == null || _slotsContainerNode == null)
             {
                 return;

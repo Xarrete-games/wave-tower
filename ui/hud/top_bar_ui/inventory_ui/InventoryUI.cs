@@ -3,7 +3,7 @@ using Godot;
 public partial class InventoryUI : Control
 {
     [Export]
-    public Control slots_container;
+    public Control SlotsContainer;
 
     private ConsumablesManager _consumablesManager;
 
@@ -28,7 +28,7 @@ public partial class InventoryUI : Control
 
     private void OnConsumableAdded(Consumable consumable)
     {
-        foreach (Node slotNode in slots_container.GetChildren())
+        foreach (Node slotNode in SlotsContainer.GetChildren())
         {
             InventoryUISlot slot = slotNode as InventoryUISlot;
             if (slot != null && slot.IsEmpty())

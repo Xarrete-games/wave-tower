@@ -4,10 +4,10 @@ using Godot;
 public partial class XarretaButton : Button
 {
     [Export]
-    public Theme theme_override;
+    public Theme ThemeOverride;
 
     [Export]
-    public Theme disabled_theme_override;
+    public Theme DisabledThemeOverride;
 
     private void OnMouseEntered()
     {
@@ -26,18 +26,18 @@ public partial class XarretaButton : Button
     public void disable()
     {
         Disabled = true;
-        if (disabled_theme_override != null)
+        if (DisabledThemeOverride != null)
         {
-            Theme = disabled_theme_override;
+            Theme = DisabledThemeOverride;
         }
     }
 
     public void enable()
     {
         Disabled = false;
-        if (theme_override != null)
+        if (ThemeOverride != null)
         {
-            Theme = theme_override;
+            Theme = ThemeOverride;
         }
     }
 }

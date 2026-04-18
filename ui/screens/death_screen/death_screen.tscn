@@ -35,9 +35,9 @@ label_settings = SubResource("LabelSettings_lg0me")
 
 [node name="AnimationComponent" type="Node" parent="PanelContainer/CenterContainer/VBoxContainer/Label" unique_id=585701245]
 script = ExtResource("3_5mn61")
-enter_animation = true
-enter_time = 5.0
-enter_modulate = Color(1, 1, 1, 0)
+EnterAnimation = true
+EnterTime = 5.0
+EnterModulate = Color(1, 1, 1, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [node name="TryAgainButton" parent="PanelContainer/CenterContainer/VBoxContainer" unique_id=2081541098 instance=ExtResource("3_iyktl")]
@@ -48,10 +48,10 @@ text = "Try Again"
 
 [node name="AnimationComponent" type="Node" parent="PanelContainer/CenterContainer/VBoxContainer/TryAgainButton" unique_id=1237211827]
 script = ExtResource("3_5mn61")
-enter_animation = true
-enter_time = 2.0
-enter_delay = 4.0
-enter_modulate = Color(1, 1, 1, 0)
+EnterAnimation = true
+EnterTime = 2.0
+EnterDelay = 4.0
+EnterModulate = Color(1, 1, 1, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/TryAgainButton" to="." method="OnTryAgainButtonXarretaPressed"]

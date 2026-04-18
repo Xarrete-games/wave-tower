@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://doi3f4my6te83" path="res://ui/styles/box_style/tower_rewards/reward_tower_box_basic.tres" id="1_ojjmy"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="2_0dsth"]
-[ext_resource type="Script" path="res://ui/screens/choose_tower_screen/ChooseTowerScreenItem.cs" id="2_l17e5"]
+[ext_resource type="Script" uid="uid://wy030hlyyv0w" path="res://ui/screens/choose_tower_screen/ChooseTowerScreenItem.cs" id="2_l17e5"]
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="4_u2e7x"]
 [ext_resource type="PackedScene" uid="uid://damv0wm6yljhs" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.tscn" id="5_fxrf6"]
 [ext_resource type="LabelSettings" uid="uid://d4g1vsd3mdf1g" path="res://ui/styles/label_settings/label_settings_18.tres" id="5_xj3me"]
@@ -10,13 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://b0aufhy41nftl" path="res://assets/images/icons/stats/attack_speed_icon_flat.png" id="7_l17e5"]
 [ext_resource type="Texture2D" uid="uid://dh4xdb1wo3q44" path="res://assets/images/icons/stats/range_icon_flat.png" id="8_ojjmy"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="9_a0r7t"]
-[ext_resource type="Script" path="res://utils/AnimationComponent.cs" id="12_xj3me"]
+[ext_resource type="Script" uid="uid://d2ta7qbmbh3kw" path="res://utils/AnimationComponent.cs" id="12_xj3me"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kd2t"]
 atlas = ExtResource("4_u2e7x")
 region = Rect2(89, 80, 299, 471)
 
-[node name="ChooseTowerScreenItem" type="PanelContainer" unique_id=593375898 node_paths=PackedStringArray("title_label", "description_label", "texture", "damage_stat", "range_stat", "attack_speed_stat", "gold_price")]
+[node name="ChooseTowerScreenItem" type="PanelContainer" unique_id=593375898 node_paths=PackedStringArray("TitleLabel", "DescriptionLabel", "texture", "DamageStat", "RangeStat", "AttackSpeedStat", "GoldPrice")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,13 +28,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_ojjmy")
 script = ExtResource("2_l17e5")
-title_label = NodePath("MarginContainer/VBoxContainer/TittleLabel")
-description_label = NodePath("MarginContainer/VBoxContainer/Description")
+TitleLabel = NodePath("MarginContainer/VBoxContainer/TittleLabel")
+DescriptionLabel = NodePath("MarginContainer/VBoxContainer/Description")
 texture = NodePath("MarginContainer/VBoxContainer/Texture")
-damage_stat = NodePath("MarginContainer/VBoxContainer/TowerStats/DamageStatUi")
-range_stat = NodePath("MarginContainer/VBoxContainer/TowerStats/RangeStatUi")
-attack_speed_stat = NodePath("MarginContainer/VBoxContainer/TowerStats/AttkSpeedStatUi")
-gold_price = NodePath("MarginContainer/VBoxContainer/GoldPrice")
+DamageStat = NodePath("MarginContainer/VBoxContainer/TowerStats/DamageStatUi")
+RangeStat = NodePath("MarginContainer/VBoxContainer/TowerStats/RangeStatUi")
+AttackSpeedStat = NodePath("MarginContainer/VBoxContainer/TowerStats/AttkSpeedStatUi")
+GoldPrice = NodePath("MarginContainer/VBoxContainer/GoldPrice")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=440021034]
 layout_mode = 2
@@ -69,18 +69,18 @@ alignment = 1
 [node name="DamageStatUi" parent="MarginContainer/VBoxContainer/TowerStats" unique_id=1410745448 instance=ExtResource("5_fxrf6")]
 unique_name_in_owner = true
 layout_mode = 2
-stat_icon = ExtResource("6_a0r7t")
+StatIcon = ExtResource("6_a0r7t")
 
 [node name="AttkSpeedStatUi" parent="MarginContainer/VBoxContainer/TowerStats" unique_id=102761453 instance=ExtResource("5_fxrf6")]
 unique_name_in_owner = true
 layout_mode = 2
-stat_icon = ExtResource("7_l17e5")
-is_float = true
+StatIcon = ExtResource("7_l17e5")
+IsFloat = true
 
 [node name="RangeStatUi" parent="MarginContainer/VBoxContainer/TowerStats" unique_id=313312033 instance=ExtResource("5_fxrf6")]
 unique_name_in_owner = true
 layout_mode = 2
-stat_icon = ExtResource("8_ojjmy")
+StatIcon = ExtResource("8_ojjmy")
 
 [node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1006375540]
 custom_minimum_size = Vector2(320, 20)
@@ -97,10 +97,8 @@ alignment = 2
 
 [node name="AnimationComponent" type="Node" parent="." unique_id=307268817]
 script = ExtResource("12_xj3me")
-hover_time = 0.1
-hover_scale = Vector2(1.05, 1.05)
-play_hover_sound = true
-metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
+HoverTime = 0.1
+HoverScale = Vector2(1.05, 1.05)
+PlayHoverSound = true
 
 [connection signal="gui_input" from="." to="." method="OnGuiInput"]
-

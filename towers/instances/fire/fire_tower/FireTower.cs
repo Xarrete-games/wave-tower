@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class FireTower : Tower
 {
-    [Export] public PackedScene fire_ball_scene;
+    [Export] public PackedScene FireBallScene;
 
     public bool apply_burn = false;
 
@@ -17,12 +17,12 @@ public partial class FireTower : Tower
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || fire_ball_scene == null)
+        if (!GodotObject.IsInstanceValid(_current_target) || FireBallScene == null)
         {
             return;
         }
 
-        SingleTargetProjectile projectile = fire_ball_scene.Instantiate<SingleTargetProjectile>();
+        SingleTargetProjectile projectile = FireBallScene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;

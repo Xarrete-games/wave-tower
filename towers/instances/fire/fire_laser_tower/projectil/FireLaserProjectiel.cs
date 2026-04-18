@@ -3,10 +3,10 @@ using Godot;
 [GlobalClass]
 public partial class FireLaserProjectiel : Node2D
 {
-    [Export] public int cast_speed = 7000;
+    [Export] public int CastSpeed = 7000;
     [Export] public Color color = Colors.Red;
 
-    [Export] public float growth_time = 0.1f;
+    [Export] public float GrowthTime = 0.1f;
 
     private Node2D _target;
     private Attack _attack;
@@ -55,7 +55,7 @@ public partial class FireLaserProjectiel : Node2D
         float distanceToTarget = GlobalPosition.DistanceTo(targetPosition);
         _fire_particles.GlobalPosition = targetPosition;
 
-        _current_laser_length = Mathf.MoveToward(_current_laser_length, distanceToTarget, cast_speed * (float)delta);
+        _current_laser_length = Mathf.MoveToward(_current_laser_length, distanceToTarget, CastSpeed * (float)delta);
 
         int iMax = _line_2d.GetPointCount() - 1;
         if (iMax <= 0)
@@ -173,7 +173,7 @@ public partial class FireLaserProjectiel : Node2D
 
         _fire_particles.Emitting = false;
         _tween = CreateTween();
-        _tween.TweenProperty(_line_2d, "width", 0.0f, growth_time * 2.0f).FromCurrent();
+        _tween.TweenProperty(_line_2d, "width", 0.0f, GrowthTime * 2.0f).FromCurrent();
         _tween.Finished += OnDisappearTweenFinished;
     }
 
@@ -199,7 +199,7 @@ public partial class FireLaserProjectiel : Node2D
 
         _fire_particles.Emitting = true;
         _tween = CreateTween();
-        _tween.TweenProperty(_line_2d, "width", _line_width, growth_time * 2.0f).From(0.0f);
+        _tween.TweenProperty(_line_2d, "width", _line_width, GrowthTime * 2.0f).From(0.0f);
 
         await ToSignal(_red_attack_start, AudioStreamPlayer2D.SignalName.Finished);
         if (_is_casting)

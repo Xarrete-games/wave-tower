@@ -6,13 +6,13 @@ public partial class EventSlot : VBoxContainer
     public event Action<EventData> event_pressed;
 
     [Export]
-    public TextureRect event_texture;
+    public TextureRect EventTexture;
 
     [Export]
-    public RichTextLabel description_label;
+    public RichTextLabel DescriptionLabel;
 
     [Export]
-    public Label title_lable;
+    public Label TitleLable;
 
     private EventData _event;
 
@@ -23,9 +23,9 @@ public partial class EventSlot : VBoxContainer
             return;
         }
 
-        event_texture.Texture = eventData.Icon;
-        description_label.Text = eventData.Description;
-        title_lable.Text = eventData.Title;
+        EventTexture.Texture = eventData.Icon;
+        DescriptionLabel.Text = eventData.Description;
+        TitleLable.Text = eventData.Title;
         _event = eventData;
     }
 
@@ -42,12 +42,12 @@ public partial class EventSlot : VBoxContainer
 
     private void OnMouseEntered()
     {
-        event_texture.CustomMinimumSize = new Vector2(150, 150);
+        EventTexture.CustomMinimumSize = new Vector2(150, 150);
         GetNode<AudioManager>("/root/AudioManager").play_button_hover();
     }
 
     private void OnMouseExited()
     {
-        event_texture.CustomMinimumSize = new Vector2(100, 100);
+        EventTexture.CustomMinimumSize = new Vector2(100, 100);
     }
 }

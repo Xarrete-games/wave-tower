@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public partial class LightningOverchargeTower : Tower
 {
     [ExportGroup("Scenes")]
-    [Export] public PackedScene projectile_scene;
-    [Export] public PackedScene overcharge_particle_scene;
+    [Export] public PackedScene ProjectileScene;
+    [Export] public PackedScene OverchargeParticleScene;
 
     public readonly List<Tower> towers_in_range = new();
     public readonly Dictionary<string, Node> particles_dict = new();
@@ -41,12 +41,12 @@ public partial class LightningOverchargeTower : Tower
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || projectile_scene == null)
+        if (!GodotObject.IsInstanceValid(_current_target) || ProjectileScene == null)
         {
             return;
         }
 
-        SingleTargetProjectile projectile = projectile_scene.Instantiate<SingleTargetProjectile>();
+        SingleTargetProjectile projectile = ProjectileScene.Instantiate<SingleTargetProjectile>();
         GetParent().AddChild(projectile);
 
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
@@ -127,7 +127,7 @@ public partial class LightningOverchargeTower : Tower
             return;
         }
 
-        Node buffParticle = overcharge_particle_scene?.Instantiate();
+        Node buffParticle = OverchargeParticleScene?.Instantiate();
         tower.add_buff(towerBuff);
         towers_in_range.Add(tower);
 

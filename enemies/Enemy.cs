@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using Godot.Collections;
 using System;
 
@@ -29,7 +29,7 @@ public partial class Enemy : CharacterBody2D
 
     [Export] public float BaseSpeed = 80.0f;
     [Export] public float MaxHealth = 50.0f;
-    [Export] public int gold_value = 1;
+    [Export] public int GoldValue = 1;
     [Export] public int damage = 1;
 
     public float health;
@@ -327,7 +327,7 @@ public partial class Enemy : CharacterBody2D
         RunContext runContext = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
         if (runContext?.economy != null)
         {
-            runContext.economy.gold += gold_value;
+            runContext.economy.gold += GoldValue;
         }
 
         QueueFree();
@@ -369,7 +369,7 @@ public partial class Enemy : CharacterBody2D
             MaxHealth = MaxHealth,
             RemainingHealth = health,
             ProgressRatio = get_progress_ratio(),
-            GoldValue = gold_value,
+            GoldValue = GoldValue,
             HasAnyDebuff = has_any_debuff(),
         };
     }
@@ -393,7 +393,7 @@ public partial class Enemy : CharacterBody2D
     {
         GoldDropped goldDropped = GOLD_DROPPED.Instantiate<GoldDropped>();
         GetTree().Root.AddChild(goldDropped);
-        goldDropped.set_gold(gold_value);
+        goldDropped.set_gold(GoldValue);
         goldDropped.GlobalPosition = target_position;
     }
 

@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,10 +12,10 @@ public partial class WorldMap : Node2D
     public Node2D visual;
 
     [Export]
-    public CompositeTileMap composite_tile_map;
+    public CompositeTileMap CompositeTileMap;
 
     [Export]
-    public bool enable_fork = true;
+    public bool EnableFork = true;
 
     public Godot.Collections.Array<Godot.Collections.Dictionary> portal_entries { get; private set; } = new();
     public Godot.Collections.Array<Godot.Collections.Dictionary> finalized_portal_entries { get; private set; } = new();
@@ -138,7 +138,7 @@ public partial class WorldMap : Node2D
         public Vector2I GetPieceLogicalPos(object piece)
         {
             MapPiece mapPiece = AsMapPiece(piece);
-            return mapPiece != null ? mapPiece.logical_pos : Vector2I.Zero;
+            return mapPiece != null ? mapPiece.LogicalPos : Vector2I.Zero;
         }
 
         public int GetEdgeDir(object edge)
@@ -238,12 +238,12 @@ public partial class WorldMap : Node2D
         }
 
         AddChild(initPiece);
-        initPiece.logical_pos = Vector2I.Zero;
+        initPiece.LogicalPos = Vector2I.Zero;
         MovePieceDecorationToVisuals(initPiece);
 
         _gridManager.occupy(Vector2I.Zero);
         _connectionGraph.register_piece(initPiece);
-        composite_tile_map?.register_piece(initPiece);
+        CompositeTileMap?.register_piece(initPiece);
         _frontierManager.add_frontier(initPiece);
 
         _routeBuilder = new RouteBuilder(_wordBuilderAdapter);
@@ -303,7 +303,7 @@ public partial class WorldMap : Node2D
         }
 
         Edge nextEdge = FrontierManagerPickRandomEdge(frontier) as Edge;
-        Vector2I frontierLogicalPos = frontier.logical_pos;
+        Vector2I frontierLogicalPos = frontier.LogicalPos;
         int nextEdgeDir = nextEdge != null ? (int)nextEdge.Direction : 0;
         Vector2I candidateTile = _gridManager.get_neighbor_tile(frontierLogicalPos, nextEdgeDir);
 
@@ -369,7 +369,7 @@ public partial class WorldMap : Node2D
                 int dir = edge != null ? (int)edge.Direction : 0;
                 int pos = edge != null ? (int)edge.Position : 0;
 
-                Vector2I logicalPos = frontier.logical_pos;
+                Vector2I logicalPos = frontier.LogicalPos;
                 Vector2I tile = _gridManager.get_neighbor_tile(logicalPos, dir);
                 Vector2 worldPos = frontier.GlobalPosition
                     + PieceGetEdgeTilePos(frontier, dir, pos)
@@ -463,9 +463,9 @@ public partial class WorldMap : Node2D
                 continue;
             }
 
-            newPiece.logical_pos = candidateTile;
+            newPiece.LogicalPos = candidateTile;
             _gridManager.occupy(candidateTile);
-            composite_tile_map?.register_piece(newPiece);
+            CompositeTileMap?.register_piece(newPiece);
 
             PieceSetEdgeHasConnected(frontier, nextEdge);
             PieceSetEdgeHasConnected(newPiece, edgeToConnect);
@@ -572,7 +572,7 @@ public partial class WorldMap : Node2D
 
         int dir = edge != null ? (int)edge.Direction : 0;
         int pos = edge != null ? (int)edge.Position : 0;
-        Vector2I logicalPos = piece.logical_pos;
+        Vector2I logicalPos = piece.LogicalPos;
 
         Vector2I tile = _gridManager.get_neighbor_tile(logicalPos, dir);
         Vector2 position = piece.GlobalPosition
@@ -606,7 +606,7 @@ public partial class WorldMap : Node2D
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         int currentWave = runContext.progress.current_wave;
 
-        if (!enable_fork && currentWave % WavesPerBoss == 0)
+        if (!EnableFork && currentWave % WavesPerBoss == 0)
         {
             _pendingForkAfterBoss = true;
         }
@@ -628,7 +628,7 @@ public partial class WorldMap : Node2D
             return candidatePieces;
         }
 
-        if (enable_fork)
+        if (EnableFork)
         {
             candidatePieces = new List<object>(validPieces);
             Shuffle(candidatePieces);

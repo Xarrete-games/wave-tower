@@ -3,10 +3,10 @@ using Godot;
 public partial class LootScreenItem : Control
 {
     [Export]
-    public Texture2D gold_icon;
+    public Texture2D GoldIcon;
 
     [Export]
-    public TextureRect texture_rect;
+    public TextureRect TextureRect;
 
     [Export]
     public Label label;
@@ -24,12 +24,12 @@ public partial class LootScreenItem : Control
         ConsumableData consumable = _lootItemData.Consumable;
         if (consumable != null)
         {
-            texture_rect.Texture = consumable.Icon;
+            TextureRect.Texture = consumable.Icon;
             label.Text = consumable.DisplayName;
             return;
         }
 
-        texture_rect.Texture = gold_icon;
+        TextureRect.Texture = GoldIcon;
         label.Text = $"{_lootItemData.GoldAmount} Gold";
     }
 

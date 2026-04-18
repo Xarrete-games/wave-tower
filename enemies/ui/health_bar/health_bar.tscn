@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://bjdgwe43owpg7" path="res://assets/textures/red.jpg" id="2_olp7g"]
 [ext_resource type="Texture2D" uid="uid://cnpo8o3c3x5hq" path="res://assets/textures/green.jpg" id="3_q54p0"]
 
-[node name="HealthBar" type="CenterContainer" unique_id=851635033 node_paths=PackedStringArray("debuffs_conatiner", "texture_progress_bar")]
+[node name="HealthBar" type="CenterContainer" unique_id=851635033 node_paths=PackedStringArray("DebuffsConatiner", "TextureProgressBar")]
 offset_right = 40.0
 offset_bottom = 54.0
 mouse_filter = 2
 script = ExtResource("1_uke46")
-debuffs_conatiner = NodePath("VBoxContainer/DebuffsContainer")
-texture_progress_bar = NodePath("VBoxContainer/TextureProgressBar")
+DebuffsConatiner = NodePath("VBoxContainer/DebuffsContainer")
+TextureProgressBar = NodePath("VBoxContainer/TextureProgressBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1023273090]
 layout_mode = 2

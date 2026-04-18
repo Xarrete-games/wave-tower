@@ -32,11 +32,11 @@ using Godot;
     public void set_target(Node2D enemy, Attack attack, EnemyDebuff debuff) {
         set_target(enemy, attack, debuff, 1);
     }
-    public void set_target(Node2D enemy, Attack attack, EnemyDebuff debuff, int debuff_stacks) {
+    public void set_target(Node2D enemy, Attack attack, EnemyDebuff debuff, int DebuffStacks) {
         _enemy = enemy;
         _attack = attack;
         _debuff = debuff;
-        _debuffStacks = debuff_stacks;
+        _debuffStacks = DebuffStacks;
     }
 }
 

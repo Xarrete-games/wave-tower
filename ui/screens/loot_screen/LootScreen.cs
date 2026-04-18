@@ -4,22 +4,22 @@ using System.Collections.Generic;
 public partial class LootScreen : Control
 {
     [Export]
-    public PackedScene loot_screen_item_scene;
+    public PackedScene LootScreenItemScene;
 
     [Export]
-    public Control items_container;
+    public Control ItemsContainer;
 
     public override void _Ready()
     {
-        items_container.ChildExitingTree += OnItemRemoved;
+        ItemsContainer.ChildExitingTree += OnItemRemoved;
     }
 
     public void SetLoot(List<LootItemData> data)
     {
         foreach (LootItemData itemData in data)
         {
-            LootScreenItem lootScreenItem = loot_screen_item_scene.Instantiate<LootScreenItem>();
-            items_container.AddChild(lootScreenItem);
+            LootScreenItem lootScreenItem = LootScreenItemScene.Instantiate<LootScreenItem>();
+            ItemsContainer.AddChild(lootScreenItem);
             lootScreenItem.SetLootItem(itemData);
         }
     }
@@ -31,7 +31,7 @@ public partial class LootScreen : Control
 
     private void OnItemRemoved(Node _item)
     {
-        if (items_container.GetChildCount() == 1)
+        if (ItemsContainer.GetChildCount() == 1)
         {
             QueueFree();
         }

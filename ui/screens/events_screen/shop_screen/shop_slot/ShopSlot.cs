@@ -6,16 +6,16 @@ public partial class ShopSlot : VBoxContainer
     public event Action<ItemOffer, ShopSlot> ItemPurchased;
 
     [Export]
-    public Label title_label;
+    public Label TitleLabel;
 
     [Export]
-    public RichTextLabel description_label;
+    public RichTextLabel DescriptionLabel;
 
     [Export]
-    public GoldPrice gold_price;
+    public GoldPrice GoldPrice;
 
     [Export]
-    public ShopSlotIcon shop_slot_icon;
+    public ShopSlotIcon ShopSlotIcon;
 
     private HealthPrice _healthPrice;
     private RunContext _runContext;
@@ -86,19 +86,19 @@ public partial class ShopSlot : VBoxContainer
             icon = consumableInfo.Icon;
         }
 
-        title_label.Text = displayName;
-        description_label.Text = description;
+        TitleLabel.Text = displayName;
+        DescriptionLabel.Text = description;
         TooltipText = description;
-        if (gold_price != null)
+        if (GoldPrice != null)
         {
-            gold_price.price = _price;
+            GoldPrice.price = _price;
         }
-        shop_slot_icon?.set_icon(icon);
+        ShopSlotIcon?.set_icon(icon);
 
         RelicData relicData = itemData as RelicData;
         if (relicData != null)
         {
-            shop_slot_icon?.set_background_color(_runContext.relics_manager.get_rarity_color(relicData.Rarity));
+            ShopSlotIcon?.set_background_color(_runContext.relics_manager.get_rarity_color(relicData.Rarity));
         }
 
         _currentHealthCost = itemOffer.HealthPrice;
@@ -135,12 +135,12 @@ public partial class ShopSlot : VBoxContainer
     private void OnMouseEntered()
     {
         GetNode<AudioManager>("/root/AudioManager").play_button_hover();
-        shop_slot_icon?.increased_icon_size();
+        ShopSlotIcon?.increased_icon_size();
     }
 
     private void OnMouseExited()
     {
-        shop_slot_icon?.icon_normal_size();
+        ShopSlotIcon?.icon_normal_size();
     }
 
     private void OnRelicAdded(string id)

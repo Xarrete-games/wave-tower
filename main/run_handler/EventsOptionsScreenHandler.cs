@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 public partial class EventsOptionsScreenHandler : Node
 {
     [Export]
-    public PackedScene events_options_screen;
+    public PackedScene EventsOptionsScreen;
 
     public async Task ShowOptionsEventAsync(EventData eventData, CanvasLayer eventLayer)
     {
-        EventOptionsScreen optionsScreen = events_options_screen.Instantiate<EventOptionsScreen>();
+        EventOptionsScreen optionsScreen = EventsOptionsScreen.Instantiate<EventOptionsScreen>();
 
         if (!IsInsideTree())
         {

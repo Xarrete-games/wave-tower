@@ -8,7 +8,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nisgj"]
 bg_color = Color(0.09803922, 0.1254902, 0.09411765, 1)
 
-[node name="ShopScreen" type="PanelContainer" node_paths=PackedStringArray("relics_container", "consumables_container", "sell_relics_container", "relics_section", "consumables_section", "sell_section", "exit_button", "sell_button")]
+[node name="ShopScreen" type="PanelContainer" node_paths=PackedStringArray("RelicsContainer", "ConsumablesContainer", "SellRelicsContainer", "RelicsSection", "ConsumablesSection", "SellSection", "ExitButton", "SellButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,14 +16,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nisgj")
 script = ExtResource("1_g4y81")
-relics_container = NodePath("ShopContainer/VBoxContainer/RelicSection/Relics")
-consumables_container = NodePath("ShopContainer/VBoxContainer/ItemsSection/Consumables")
-sell_relics_container = NodePath("ShopContainer/VBoxContainer/SellSection/RelicsToSell")
-relics_section = NodePath("ShopContainer/VBoxContainer/RelicSection")
-consumables_section = NodePath("ShopContainer/VBoxContainer/ItemsSection")
-sell_section = NodePath("ShopContainer/VBoxContainer/SellSection")
-exit_button = NodePath("ShopContainer/ButtonsSection/ExitButton")
-sell_button = NodePath("ShopContainer/ButtonsSection/SellButton")
+RelicsContainer = NodePath("ShopContainer/VBoxContainer/RelicSection/Relics")
+ConsumablesContainer = NodePath("ShopContainer/VBoxContainer/ItemsSection/Consumables")
+SellRelicsContainer = NodePath("ShopContainer/VBoxContainer/SellSection/RelicsToSell")
+RelicsSection = NodePath("ShopContainer/VBoxContainer/RelicSection")
+ConsumablesSection = NodePath("ShopContainer/VBoxContainer/ItemsSection")
+SellSection = NodePath("ShopContainer/VBoxContainer/SellSection")
+ExitButton = NodePath("ShopContainer/ButtonsSection/ExitButton")
+SellButton = NodePath("ShopContainer/ButtonsSection/SellButton")
 
 [node name="ShopContainer" type="MarginContainer" parent="."]
 layout_mode = 2

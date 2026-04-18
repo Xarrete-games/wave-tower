@@ -39,7 +39,7 @@ Button/styles/hover = SubResource("StyleBoxEmpty_tns2n")
 Button/styles/normal = SubResource("StyleBoxEmpty_2407u")
 Button/styles/pressed = SubResource("StyleBoxEmpty_fccpc")
 
-[node name="TopBar" type="MarginContainer" unique_id=1440994670 node_paths=PackedStringArray("speed_button")]
+[node name="TopBar" type="MarginContainer" unique_id=1440994670 node_paths=PackedStringArray("SpeedButton")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 130.0
@@ -50,7 +50,7 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 20
 script = ExtResource("1_b2kx5")
-speed_button = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/SpeedButton")
+SpeedButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/SpeedButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1817111365]
 layout_mode = 2

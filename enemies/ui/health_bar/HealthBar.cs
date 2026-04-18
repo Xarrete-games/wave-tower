@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 
 [GlobalClass]
@@ -11,8 +11,8 @@ public partial class HealthBar : Control
     private const float MIN_X_SIZE = 40.0f;
     private const float MAX_X_SIZE = 160.0f;
 
-    [Export] public Control debuffs_conatiner;
-    [Export] public TextureProgressBar texture_progress_bar;
+    [Export] public Control DebuffsConatiner;
+    [Export] public TextureProgressBar TextureProgressBar;
 
     public System.Collections.Generic.Dictionary<int, DebuffSlot> debuffs_slots = new();
     public System.Collections.Generic.Dictionary<int, int> debuffs_count = new();
@@ -23,14 +23,14 @@ public partial class HealthBar : Control
         float clampedValue = Mathf.Clamp(value, MIN_HEALTH, MAX_HEALTH);
         float newXSize = Mathf.Remap(clampedValue, MIN_HEALTH, MAX_HEALTH, MIN_X_SIZE, MAX_X_SIZE);
 
-        texture_progress_bar.CustomMinimumSize = new Vector2(newXSize, texture_progress_bar.CustomMinimumSize.Y);
-        texture_progress_bar.MaxValue = value;
+        TextureProgressBar.CustomMinimumSize = new Vector2(newXSize, TextureProgressBar.CustomMinimumSize.Y);
+        TextureProgressBar.MaxValue = value;
         CustomMinimumSize = new Vector2(newXSize, CustomMinimumSize.Y);
     }
 
     public void update_health(float new_value)
     {
-        texture_progress_bar.Value = new_value;
+        TextureProgressBar.Value = new_value;
     }
 
     public void set_debuffs(List<EnemyDebuffInstance> debuffs)
@@ -84,7 +84,7 @@ public partial class HealthBar : Control
     private void CreateDebuffSlotType(int type, EnemyDebuffData debuff_data)
     {
         DebuffSlot slot = DEBUFF_SLOT.Instantiate<DebuffSlot>();
-        debuffs_conatiner.AddChild(slot);
+        DebuffsConatiner.AddChild(slot);
         slot.texture = debuff_data?.Icon;
         debuffs_slots[type] = slot;
     }

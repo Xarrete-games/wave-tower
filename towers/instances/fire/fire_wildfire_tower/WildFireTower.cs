@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class WildFireTower : Tower
 {
-    [Export] public PackedScene projectile_scene;
+    [Export] public PackedScene ProjectileScene;
 
     private Marker2D projectile_spawn_pos;
 
@@ -15,12 +15,12 @@ public partial class WildFireTower : Tower
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || projectile_scene == null)
+        if (!GodotObject.IsInstanceValid(_current_target) || ProjectileScene == null)
         {
             return;
         }
 
-        SingleTargetProjectile projectile = projectile_scene.Instantiate<SingleTargetProjectile>();
+        SingleTargetProjectile projectile = ProjectileScene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;

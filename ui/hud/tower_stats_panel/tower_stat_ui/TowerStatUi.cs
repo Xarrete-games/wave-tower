@@ -4,16 +4,16 @@ using Godot;
 public partial class TowerStatUi : Control
 {
     [Export]
-    public string stat_name { get; set; } = string.Empty;
+    public string StatName { get; set; } = string.Empty;
 
     [Export]
-    public Texture2D stat_icon { get; set; }
+    public Texture2D StatIcon { get; set; }
 
     [Export]
-    public float stat_value { get; set; }
+    public float StatValue { get; set; }
 
     [Export]
-    public bool is_float { get; set; } = false;
+    public bool IsFloat { get; set; } = false;
 
     [Export]
     public string unit { get; set; } = string.Empty;
@@ -32,7 +32,7 @@ public partial class TowerStatUi : Control
 
         if (_statTexture != null)
         {
-            _statTexture.Texture = stat_icon;
+            _statTexture.Texture = StatIcon;
         }
 
         if (_upgradeValueLabel != null)
@@ -57,7 +57,7 @@ public partial class TowerStatUi : Control
 
     public void SetValue(float newValue)
     {
-        stat_value = newValue;
+        StatValue = newValue;
         RefreshValueLabel();
     }
 
@@ -69,7 +69,7 @@ public partial class TowerStatUi : Control
         }
 
         _upgradeValueLabel.Visible = true;
-        if (is_float)
+        if (IsFloat)
         {
             _upgradeValueLabel.Text = "(+" + Mathf.Snapped(upgradeAmount, 0.01f) + ")";
         }
@@ -94,13 +94,13 @@ public partial class TowerStatUi : Control
             return;
         }
 
-        if (is_float)
+        if (IsFloat)
         {
-            _valueLabel.Text = Mathf.Snapped(stat_value, 0.01f).ToString();
+            _valueLabel.Text = Mathf.Snapped(StatValue, 0.01f).ToString();
         }
         else
         {
-            _valueLabel.Text = ((int)stat_value).ToString();
+            _valueLabel.Text = ((int)StatValue).ToString();
         }
     }
 }

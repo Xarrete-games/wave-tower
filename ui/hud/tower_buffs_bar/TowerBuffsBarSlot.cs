@@ -1,7 +1,7 @@
 using Godot;
 public partial class TowerBuffsBarSlot : Control {
     [Export] public NodePath texture;
-    [Export] public NodePath value_label;
+    [Export] public NodePath ValueLabel;
     public TowerBuff tower_buff;
     private int _value = 0;
     public int value {
@@ -33,7 +33,7 @@ public partial class TowerBuffsBarSlot : Control {
             _textureNode = !texture.IsEmpty ? GetNodeOrNull<TextureRect>(texture) : GetNodeOrNull<TextureRect>("Texture");
         }
         if (_valueLabelNode == null) {
-            _valueLabelNode = !value_label.IsEmpty ? GetNodeOrNull<Label>(value_label) : GetNodeOrNull<Label>("Label");
+            _valueLabelNode = !ValueLabel.IsEmpty ? GetNodeOrNull<Label>(ValueLabel) : GetNodeOrNull<Label>("Label");
         }
     }
     private void ApplyBuffVisuals() {

@@ -3,8 +3,8 @@ using Godot;
 [GlobalClass]
 public partial class FrostSpearTower : Tower
 {
-    [Export] public PackedScene frost_spear_projectile_scene;
-    [Export] public int debuff_stacks = 2;
+    [Export] public PackedScene FrostSpearProjectileScene;
+    [Export] public int DebuffStacks = 2;
 
     private Marker2D projectile_spawn_pos;
 
@@ -17,12 +17,12 @@ public partial class FrostSpearTower : Tower
     protected override void _fire()
     {
         Enemy targetEnemy = _current_target as Enemy;
-        if (!GodotObject.IsInstanceValid(targetEnemy) || frost_spear_projectile_scene == null)
+        if (!GodotObject.IsInstanceValid(targetEnemy) || FrostSpearProjectileScene == null)
         {
             return;
         }
 
-        SingleTargetProjectile projectile = frost_spear_projectile_scene.Instantiate<SingleTargetProjectile>();
+        SingleTargetProjectile projectile = FrostSpearProjectileScene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
@@ -33,6 +33,6 @@ public partial class FrostSpearTower : Tower
         attack.damage *= damageMultiplier;
 
         EnemyDebuff debuff = EnemyDebuff.create_frost(damage_source);
-        projectile.set_target(targetEnemy, attack, debuff, debuff_stacks);
+        projectile.set_target(targetEnemy, attack, debuff, DebuffStacks);
     }
 }

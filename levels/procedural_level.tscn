@@ -24,18 +24,18 @@
 script = ExtResource("1_j1bfp")
 pause = ExtResource("2_oysny")
 
-[node name="RunHandler" parent="." unique_id=283953083 node_paths=PackedStringArray("event_layer") instance=ExtResource("2_4cdkm")]
-event_layer = NodePath("../EventLayer")
+[node name="RunHandler" parent="." unique_id=283953083 node_paths=PackedStringArray("EventLayer") instance=ExtResource("2_4cdkm")]
+EventLayer = NodePath("../EventLayer")
 
 [node name="TestData" type="Node" parent="." unique_id=825568227]
 script = ExtResource("3_oysny")
-initial_relics_ids = Array[String](["tuna_nigiri", "soya_sauce", "strategy_tome_low_health_priority", "power_gloves", "ignition_voltage", "salt"])
-initial_consumables_ids = Array[String](["long_shot"])
+InitialRelicsIds = Array[String](["tuna_nigiri", "soya_sauce", "strategy_tome_low_health_priority", "power_gloves", "ignition_voltage", "salt"])
+InitialConsumablesIds = Array[String](["long_shot"])
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=917078807 node_paths=PackedStringArray("level")]
 position = Vector2(579, 323)
 script = ExtResource("4_8f3b7")
-move_speed = 700.0
+MoveSpeed = 700.0
 level = NodePath("../LevelContainer")
 
 [node name="HUDLayer" parent="." unique_id=1155857538 instance=ExtResource("8_crvxy")]
@@ -55,38 +55,38 @@ level = NodePath("../LevelContainer")
 [node name="CompositeTileMap" type="Node" parent="LevelContainer" unique_id=56426098]
 script = ExtResource("11_ctm01")
 
-[node name="WorldMap" type="Node2D" parent="LevelContainer" unique_id=841588024 node_paths=PackedStringArray("visual", "composite_tile_map")]
+[node name="WorldMap" type="Node2D" parent="LevelContainer" unique_id=841588024 node_paths=PackedStringArray("visual", "CompositeTileMap")]
 z_index = -1
 y_sort_enabled = true
 script = ExtResource("1_ldccm")
 visual = NodePath("../Visual")
-composite_tile_map = NodePath("../CompositeTileMap")
+CompositeTileMap = NodePath("../CompositeTileMap")
 
 [node name="Visual" type="Node2D" parent="LevelContainer" unique_id=1918036028]
 y_sort_enabled = true
 
-[node name="EnemyGenerator" type="Node" parent="LevelContainer" unique_id=316350539 node_paths=PackedStringArray("wave_spawner", "enemies_container")]
+[node name="EnemyGenerator" type="Node" parent="LevelContainer" unique_id=316350539 node_paths=PackedStringArray("WaveSpawner", "EnemiesContainer")]
 script = ExtResource("11_1spm6")
-wave_spawner = NodePath("WaveSpawner")
-wave_config = ExtResource("5_t5t77")
-enemies_container = NodePath("../Visual")
+WaveSpawner = NodePath("WaveSpawner")
+WaveConfig = ExtResource("5_t5t77")
+EnemiesContainer = NodePath("../Visual")
 
-[node name="WaveSpawner" type="Node" parent="LevelContainer/EnemyGenerator" unique_id=668843349 node_paths=PackedStringArray("world_map")]
+[node name="WaveSpawner" type="Node" parent="LevelContainer/EnemyGenerator" unique_id=668843349 node_paths=PackedStringArray("WorldMap")]
 script = ExtResource("6_pp7gv")
-world_map = NodePath("../../WorldMap")
-fallback_enemy_scene = ExtResource("7_vv3de")
+WorldMap = NodePath("../../WorldMap")
+FallbackEnemyScene = ExtResource("7_vv3de")
 
-[node name="TowerPlacer" type="Node2D" parent="LevelContainer" unique_id=1890177127 node_paths=PackedStringArray("composite_tile_map")]
+[node name="TowerPlacer" type="Node2D" parent="LevelContainer" unique_id=1890177127 node_paths=PackedStringArray("CompositeTileMap")]
 script = ExtResource("10_bebo1")
-composite_tile_map = NodePath("../CompositeTileMap")
+CompositeTileMap = NodePath("../CompositeTileMap")
 
 [node name="TowerSelector" type="Node" parent="LevelContainer" unique_id=685062433]
 script = ExtResource("12_pb4yr")
 
-[node name="ConsumablesHandler" type="Node" parent="LevelContainer" unique_id=941246025 node_paths=PackedStringArray("composite_tile_map")]
+[node name="ConsumablesHandler" type="Node" parent="LevelContainer" unique_id=941246025 node_paths=PackedStringArray("CompositeTileMap")]
 script = ExtResource("18_dx4vj")
-composite_tile_map = NodePath("../CompositeTileMap")
+CompositeTileMap = NodePath("../CompositeTileMap")
 
 [node name="KillEventHandler" type="Node" parent="LevelContainer" unique_id=983914350]
 script = ExtResource("18_1spm6")
-burn_area_scene = ExtResource("19_w0qnt")
+BurnAreaScene = ExtResource("19_w0qnt")

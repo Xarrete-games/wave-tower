@@ -7,7 +7,7 @@ public partial class LevelProgressSlot : PanelContainer
     private static readonly StyleBox ProgressSlotEmpty = GD.Load<StyleBox>("uid://d37mrhcqm5byv");
 
     [Export]
-    public TextureRect texture_rec;
+    public TextureRect TextureRec;
 
     public override void _Ready()
     {
@@ -16,7 +16,7 @@ public partial class LevelProgressSlot : PanelContainer
 
     public void set_icon(Texture2D newTexture)
     {
-        texture_rec.Texture = newTexture;
+        TextureRec.Texture = newTexture;
     }
 
     public void fill()

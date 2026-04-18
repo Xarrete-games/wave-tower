@@ -92,7 +92,7 @@ alpha_curve = SubResource("CurveTexture_3crl6")
 
 [node name="FireTower" unique_id=801244625 instance=ExtResource("1_f8b8m")]
 script = ExtResource("2_t2lsm")
-fire_ball_scene = ExtResource("3_1o222")
+FireBallScene = ExtResource("3_1o222")
 upgrade_sprite = SubResource("AtlasTexture_t2lsm")
 
 [node name="Sprite2D" parent="." index="3" unique_id=1563452745]

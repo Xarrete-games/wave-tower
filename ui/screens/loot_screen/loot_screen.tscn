@@ -14,15 +14,15 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="LootScreen" type="PanelContainer" unique_id=39602821 node_paths=PackedStringArray("items_container")]
+[node name="LootScreen" type="PanelContainer" unique_id=39602821 node_paths=PackedStringArray("ItemsContainer")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gxqxu")
-loot_screen_item_scene = ExtResource("2_dr51t")
-items_container = NodePath("Center/VBoxContainer2/VBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/ItemsContainer")
+LootScreenItemScene = ExtResource("2_dr51t")
+ItemsContainer = NodePath("Center/VBoxContainer2/VBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/ItemsContainer")
 
 [node name="Center" type="CenterContainer" parent="." unique_id=2918588]
 layout_mode = 2
@@ -70,8 +70,8 @@ theme_override_constants/separation = 12
 
 [node name="AnimationComponent" type="Node" parent="Center/VBoxContainer2/VBoxContainer" unique_id=2067222044]
 script = ExtResource("6_fnoye")
-enter_animation = true
-enter_scale = Vector2(0, 0)
+EnterAnimation = true
+EnterScale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [node name="XarreteActionButton" parent="Center/VBoxContainer2" unique_id=736151224 instance=ExtResource("5_6vran")]
@@ -80,12 +80,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Exit"
 
-[node name="AnimationComponent" type="Node" parent="Center/VBoxContainer2/XarreteActionButton" unique_id=583502968 node_paths=PackedStringArray("wait_for")]
+[node name="AnimationComponent" type="Node" parent="Center/VBoxContainer2/XarreteActionButton" unique_id=583502968 node_paths=PackedStringArray("WaitFor")]
 script = ExtResource("6_fnoye")
-enter_animation = true
-hover_scale = Vector2(1.1, 1.1)
-wait_for = NodePath("../../VBoxContainer/AnimationComponent")
-enter_scale = Vector2(0, 0)
+EnterAnimation = true
+HoverScale = Vector2(1.1, 1.1)
+WaitFor = NodePath("../../VBoxContainer/AnimationComponent")
+EnterScale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [connection signal="pressed" from="Center/VBoxContainer2/XarreteActionButton" to="." method="OnXarreteActionButtonXarretaPressed"]

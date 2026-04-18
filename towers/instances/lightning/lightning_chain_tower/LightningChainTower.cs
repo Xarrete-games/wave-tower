@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class LightningChainTower : Tower
 {
-    [Export] public PackedScene lightning_chain_projectile_scene;
+    [Export] public PackedScene LightningChainProjectileScene;
 
     public int base_bounces = 3;
     public int current_bounces = 3;
@@ -18,12 +18,12 @@ public partial class LightningChainTower : Tower
 
     protected override void _fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || lightning_chain_projectile_scene == null)
+        if (!GodotObject.IsInstanceValid(_current_target) || LightningChainProjectileScene == null)
         {
             return;
         }
 
-        LightningChainProjectile projectile = lightning_chain_projectile_scene.Instantiate<LightningChainProjectile>();
+        LightningChainProjectile projectile = LightningChainProjectileScene.Instantiate<LightningChainProjectile>();
         CallDeferred(MethodName.FireChain, projectile);
     }
 

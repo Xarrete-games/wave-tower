@@ -39,7 +39,7 @@ vertical_alignment = 1
 
 [node name="AnimationComponent" type="Node" parent="CenterContainer/TextureRect/Label" unique_id=873351278]
 script = ExtResource("3_3c13r")
-enter_animation = true
-enter_delay = 0.2
-enter_scale = Vector2(0, 0)
+EnterAnimation = true
+EnterDelay = 0.2
+EnterScale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"

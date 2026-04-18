@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System;
 using System.Collections.Generic;
 
@@ -9,28 +9,28 @@ public partial class ShopScreen : Control
     private static readonly PackedScene ShopSlotScene = GD.Load<PackedScene>("uid://f428sxnliflm");
 
     [Export]
-    public Control relics_container;
+    public Control RelicsContainer;
 
     [Export]
-    public Control consumables_container;
+    public Control ConsumablesContainer;
 
     [Export]
-    public Control sell_relics_container;
+    public Control SellRelicsContainer;
 
     [Export]
-    public Control relics_section;
+    public Control RelicsSection;
 
     [Export]
-    public Control consumables_section;
+    public Control ConsumablesSection;
 
     [Export]
-    public Control sell_section;
+    public Control SellSection;
 
     [Export]
-    public Button exit_button;
+    public Button ExitButton;
 
     [Export]
-    public XarretaButton sell_button;
+    public XarretaButton SellButton;
 
     private bool _isOnSellMode;
 
@@ -41,7 +41,7 @@ public partial class ShopScreen : Control
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (!runContext.economy.is_sell_active)
         {
-            sell_button.Visible = false;
+            SellButton.Visible = false;
         }
 
         BuildRelicsForSale();
@@ -52,7 +52,7 @@ public partial class ShopScreen : Control
         foreach (ItemOffer relic in relics)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
-            relics_container.AddChild(slot);
+            RelicsContainer.AddChild(slot);
             slot.SetItem(relic);
             slot.ItemPurchased += OnItemPurchase;
         }
@@ -63,7 +63,7 @@ public partial class ShopScreen : Control
         foreach (ItemOffer consumable in consumables)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
-            consumables_container.AddChild(slot);
+            ConsumablesContainer.AddChild(slot);
             slot.SetItem(consumable);
             slot.ItemPurchased += OnItemPurchase;
         }
@@ -82,13 +82,13 @@ public partial class ShopScreen : Control
             _ => string.Empty,
         };
 
-        foreach (Node slot in relics_container.GetChildren())
+        foreach (Node slot in RelicsContainer.GetChildren())
         {
             if (slot == slotPurchased)
             {
                 if (purchasedId == "strategy_tome_economy")
                 {
-                    sell_button.Visible = true;
+                    SellButton.Visible = true;
                 }
 
                 slot.QueueFree();
@@ -96,7 +96,7 @@ public partial class ShopScreen : Control
             }
         }
 
-        foreach (Node slot in consumables_container.GetChildren())
+        foreach (Node slot in ConsumablesContainer.GetChildren())
         {
             if (slot == slotPurchased)
             {
@@ -108,7 +108,7 @@ public partial class ShopScreen : Control
 
     private void OnItemSold(ItemOffer itemOffer, ShopSlot slotSold)
     {
-        foreach (Node slot in sell_relics_container.GetChildren())
+        foreach (Node slot in SellRelicsContainer.GetChildren())
         {
             if (slot != slotSold)
             {
@@ -126,7 +126,7 @@ public partial class ShopScreen : Control
 
             runContext.economy.add_gold(itemOffer?.Price ?? 0);
             GetNode<AudioManager>("/root/AudioManager").play_purchase();
-            sell_button.disable();
+            SellButton.disable();
             OnExitButtonPressed();
             return;
         }
@@ -151,20 +151,20 @@ public partial class ShopScreen : Control
     private void ChangeToSellMode()
     {
         _isOnSellMode = true;
-        sell_button.Visible = false;
-        exit_button.Visible = true;
-        relics_section.Visible = false;
-        consumables_section.Visible = false;
-        sell_section.Visible = true;
+        SellButton.Visible = false;
+        ExitButton.Visible = true;
+        RelicsSection.Visible = false;
+        ConsumablesSection.Visible = false;
+        SellSection.Visible = true;
     }
 
     private void ChangeToBuyMode()
     {
-        sell_button.Visible = true;
+        SellButton.Visible = true;
         _isOnSellMode = false;
-        relics_section.Visible = true;
-        consumables_section.Visible = true;
-        sell_section.Visible = false;
+        RelicsSection.Visible = true;
+        ConsumablesSection.Visible = true;
+        SellSection.Visible = false;
     }
 
     private void BuildRelicsForSale()
@@ -184,7 +184,7 @@ public partial class ShopScreen : Control
         foreach (ItemOffer relicOffer in relicOffers)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();
-            sell_relics_container.AddChild(slot);
+            SellRelicsContainer.AddChild(slot);
             slot.SetItem(relicOffer);
             slot.ItemPurchased += OnItemSold;
         }

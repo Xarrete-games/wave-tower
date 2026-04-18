@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System;
 using System.Collections.Generic;
 
@@ -11,19 +11,19 @@ public partial class WaveSpawner : Node
     public event Action<int> wave_finished;
 
     [Export]
-    public WorldMap world_map;
+    public WorldMap WorldMap;
 
     [Export]
-    public PackedScene fallback_enemy_scene;
+    public PackedScene FallbackEnemyScene;
 
     [Export]
-    public float path_offset_y_min = -50.0f;
+    public float PathOffsetYMin = -50.0f;
 
     [Export]
-    public float path_offset_y_max = 50.0f;
+    public float PathOffsetYMax = 50.0f;
 
     [Export]
-    public Node2D enemies_container;
+    public Node2D EnemiesContainer;
 
     private bool _is_spawning;
 
@@ -35,9 +35,9 @@ public partial class WaveSpawner : Node
             return;
         }
 
-        if (world_map == null)
+        if (WorldMap == null)
         {
-            GD.PushWarning("[WaveSpawner] No world_map assigned");
+            GD.PushWarning("[WaveSpawner] No WorldMap assigned");
             return;
         }
 
@@ -142,7 +142,7 @@ public partial class WaveSpawner : Node
             return;
         }
 
-        Godot.Collections.Array<Godot.Collections.Dictionary> portalEntries = world_map.portal_entries;
+        Godot.Collections.Array<Godot.Collections.Dictionary> portalEntries = WorldMap.portal_entries;
         if (portalEntries.Count == 0)
         {
             GD.PushWarning("[WaveSpawner] No spawn points available");
@@ -151,7 +151,7 @@ public partial class WaveSpawner : Node
 
         int portalIndex = (int)(GD.Randi() % (uint)portalEntries.Count);
         Godot.Collections.Dictionary spawnEntry = portalEntries[portalIndex];
-        Godot.Collections.Array<Vector2> waypoints = world_map.get_waypoints_for_spawn(spawnEntry);
+        Godot.Collections.Array<Vector2> waypoints = WorldMap.get_waypoints_for_spawn(spawnEntry);
         if (waypoints.Count == 0)
         {
             GD.PushWarning("[WaveSpawner] No waypoints for spawn entry");
@@ -159,7 +159,7 @@ public partial class WaveSpawner : Node
         }
 
         Godot.Collections.Array<Vector2> enemyWaypoints = _build_enemy_waypoints_with_offset(waypoints);
-        PackedScene scene = data.Scene ?? fallback_enemy_scene;
+        PackedScene scene = data.Scene ?? FallbackEnemyScene;
         if (scene == null)
         {
             GD.PushError($"[WaveSpawner] No scene for enemy '{data.Name}' and no fallback set");
@@ -177,14 +177,14 @@ public partial class WaveSpawner : Node
         enemy.AddToGroup("enemy");
         enemy.enabled = false;
 
-        if (enemies_container == null)
+        if (EnemiesContainer == null)
         {
-            GD.PushWarning("[WaveSpawner] enemies_container is null");
+            GD.PushWarning("[WaveSpawner] EnemiesContainer is null");
             enemy.QueueFree();
             return;
         }
 
-        enemies_container.AddChild(enemy);
+        EnemiesContainer.AddChild(enemy);
         enemy.disable();
         enemy.GlobalPosition = enemyWaypoints[0];
         enemy.enable();
@@ -200,8 +200,8 @@ public partial class WaveSpawner : Node
             return new Godot.Collections.Array<Vector2>();
         }
 
-        float minY = Mathf.Min(path_offset_y_min, path_offset_y_max);
-        float maxY = Mathf.Max(path_offset_y_min, path_offset_y_max);
+        float minY = Mathf.Min(PathOffsetYMin, PathOffsetYMax);
+        float maxY = Mathf.Max(PathOffsetYMin, PathOffsetYMax);
         float offsetY = (float)GD.RandRange(minY, maxY);
         Vector2 offset = new(0.0f, offsetY);
 
@@ -220,7 +220,7 @@ public partial class WaveSpawner : Node
         enemy.MaxHealth = data.MaxHealth;
         enemy.BaseSpeed = data.BaseSpeed;
         enemy.damage = data.Damage;
-        enemy.gold_value = data.BaseGoldValue;
+        enemy.GoldValue = data.BaseGoldValue;
     }
 }
 

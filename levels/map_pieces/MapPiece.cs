@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -38,7 +38,7 @@ public partial class MapPiece : Node2D
     public Godot.Collections.Array<Edge> edges { get; set; } = new();
 
     [Export]
-    public Vector2I logical_pos { get; set; } = Vector2I.Zero;
+    public Vector2I LogicalPos { get; set; } = Vector2I.Zero;
 
     private readonly Godot.Collections.Dictionary<string, Godot.Collections.Array<Godot.Collections.Array<Vector2>>> _routeCache = new();
 

@@ -4,14 +4,14 @@
 [ext_resource type="StyleBox" uid="uid://cu0b10p3y57qo" path="res://ui/styles/box_style/shop/section_tittle_box.tres" id="2_l4pag"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="3_ybmhx"]
 
-[node name="EventScreen" type="PanelContainer" node_paths=PackedStringArray("events_container")]
+[node name="EventScreen" type="PanelContainer" node_paths=PackedStringArray("EventsContainer")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_13c3w")
-events_container = NodePath("MarginContainer/VBoxContainer/EventsContainer")
+EventsContainer = NodePath("MarginContainer/VBoxContainer/EventsContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

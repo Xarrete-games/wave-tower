@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System;
 using System.Collections.Generic;
 
@@ -7,19 +7,19 @@ public partial class EventOptionsScreen : Control
     public event Action event_completed;
 
     [Export]
-    public PackedScene button_option_scene;
+    public PackedScene ButtonOptionScene;
 
     [Export]
-    public Control buttons_container;
+    public Control ButtonsContainer;
 
     [Export]
-    public TextureRect texture_rect;
+    public TextureRect TextureRect;
 
     [Export]
-    public Label title_label;
+    public Label TitleLabel;
 
     [Export]
-    public Label description_label;
+    public Label DescriptionLabel;
 
     private EventScript _eventScriptInstance;
 
@@ -30,11 +30,11 @@ public partial class EventOptionsScreen : Control
             return;
         }
 
-        title_label.Text = eventData.Title;
-        description_label.Text = eventData.Description;
-        texture_rect.Texture = eventData.TextureBackground;
+        TitleLabel.Text = eventData.Title;
+        DescriptionLabel.Text = eventData.Description;
+        TextureRect.Texture = eventData.TextureBackground;
 
-        foreach (Node child in buttons_container.GetChildren())
+        foreach (Node child in ButtonsContainer.GetChildren())
         {
             child.QueueFree();
         }
@@ -68,8 +68,8 @@ public partial class EventOptionsScreen : Control
                 continue;
             }
 
-            EventOptionButton buttonOption = button_option_scene.Instantiate<EventOptionButton>();
-            buttons_container.AddChild(buttonOption);
+            EventOptionButton buttonOption = ButtonOptionScene.Instantiate<EventOptionButton>();
+            ButtonsContainer.AddChild(buttonOption);
             buttonOption.Text = optionData.text;
             buttonOption.option_data = optionData.data;
             buttonOption.Name = $"OptionButton_{index}";

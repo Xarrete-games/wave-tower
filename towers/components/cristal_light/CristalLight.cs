@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 [GlobalClass]
 public partial class CristalLight : PointLight2D
 {
-    [Export] public float attack_animation_time = 0.5f;
-    [Export] public float max_scale = 2f;
-    [Export] public float min_scale = 0.01f;
-    [Export] public float max_energy = 2.0f;
-    [Export] public float min_energy = 0f;
+    [Export] public float AttackAnimationTime = 0.5f;
+    [Export] public float MaxScale = 2f;
+    [Export] public float MinScale = 0.01f;
+    [Export] public float MaxEnergy = 2.0f;
+    [Export] public float MinEnergy = 0f;
 
     private Tween _attackScaleTween;
     private Tween _attackEnergyTween;
@@ -24,8 +24,8 @@ public partial class CristalLight : PointLight2D
         KillPreviousAnimation();
         _attackEnergyTween = CreateTween();
         _attackScaleTween = CreateTween();
-        _attackEnergyTween.TweenProperty(this, "energy", max_energy, attack_animation_time);
-        _attackScaleTween.TweenProperty(this, "texture_scale", max_scale, attack_animation_time);
+        _attackEnergyTween.TweenProperty(this, "energy", MaxEnergy, AttackAnimationTime);
+        _attackScaleTween.TweenProperty(this, "texture_scale", MaxScale, AttackAnimationTime);
         await ToSignal(_attackEnergyTween, Tween.SignalName.Finished);
     }
 
@@ -34,8 +34,8 @@ public partial class CristalLight : PointLight2D
         KillPreviousAnimation();
         _attackEnergyTween = CreateTween();
         _attackScaleTween = CreateTween();
-        _attackEnergyTween.TweenProperty(this, "energy", min_energy, attack_animation_time);
-        _attackScaleTween.TweenProperty(this, "texture_scale", min_scale, attack_animation_time);
+        _attackEnergyTween.TweenProperty(this, "energy", MinEnergy, AttackAnimationTime);
+        _attackScaleTween.TweenProperty(this, "texture_scale", MinScale, AttackAnimationTime);
         await ToSignal(_attackEnergyTween, Tween.SignalName.Finished);
     }
 

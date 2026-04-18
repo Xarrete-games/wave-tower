@@ -3,7 +3,7 @@ using Godot;
 public partial class TowerPlacer : Node2D
 {
     [Export]
-    public CompositeTileMap composite_tile_map;
+    public CompositeTileMap CompositeTileMap;
 
     private Node2D visual;
     private bool _isPlacing;
@@ -41,11 +41,11 @@ public partial class TowerPlacer : Node2D
             return;
         }
 
-        if (composite_tile_map.is_mouse_on_buildeable_tile())
+        if (CompositeTileMap.is_mouse_on_buildeable_tile())
         {
             _isValidPlacement = true;
             _currentTowerInstance.normal_color();
-            _currentTowerInstance.GlobalPosition = composite_tile_map.get_current_tile_pos();
+            _currentTowerInstance.GlobalPosition = CompositeTileMap.get_current_tile_pos();
         }
         else
         {
@@ -86,7 +86,7 @@ public partial class TowerPlacer : Node2D
         }
 
         HandleCosts(towerPrice);
-        string key = composite_tile_map.set_tile_occupied_at_mouse();
+        string key = CompositeTileMap.set_tile_occupied_at_mouse();
         _currentTowerInstance.composite_tile_key = key;
 
         _isPlacing = false;

@@ -14,7 +14,7 @@ public partial class LevelProgressUI : Control
     private static readonly int[] WavesWithBoss = { 10 };
 
     [Export]
-    public Control slots_container;
+    public Control SlotsContainer;
 
     private RunProgress _progress;
 
@@ -41,9 +41,9 @@ public partial class LevelProgressUI : Control
 
     private void ClearSlots()
     {
-        foreach (Node child in slots_container.GetChildren())
+        foreach (Node child in SlotsContainer.GetChildren())
         {
-            slots_container.RemoveChild(child);
+            SlotsContainer.RemoveChild(child);
             child.QueueFree();
         }
 
@@ -55,7 +55,7 @@ public partial class LevelProgressUI : Control
         for (int index = 0; index < 10; index++)
         {
             LevelProgressSlot slot = LevelProgressSlotScene.Instantiate<LevelProgressSlot>();
-            slots_container.AddChild(slot);
+            SlotsContainer.AddChild(slot);
 
             int waveNumber = index + 1;
             if (Contains(WavesWithEvents, waveNumber))
@@ -89,7 +89,7 @@ public partial class LevelProgressUI : Control
         }
 
         int value = ((newValue - 1) % 10) + 1;
-        LevelProgressSlot slot = slots_container.GetChild<LevelProgressSlot>(value - 1);
+        LevelProgressSlot slot = SlotsContainer.GetChild<LevelProgressSlot>(value - 1);
         slot.fill();
     }
 

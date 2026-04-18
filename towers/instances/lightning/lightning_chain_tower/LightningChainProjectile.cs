@@ -4,9 +4,9 @@ using Godot.Collections;
 [GlobalClass]
 public partial class LightningChainProjectile : Node2D
 {
-    [Export] public float extend_speed = 1500.0f;
-    [Export] public int max_bounces = 3;
-    [Export] public float bounce_delay = 0.1f;
+    [Export] public float ExtendSpeed = 1500.0f;
+    [Export] public int MaxBounces = 3;
+    [Export] public float BounceDelay = 0.1f;
 
     private readonly Array<Node2D> enemies_in_range = new();
     private readonly Array<Node2D> _hit_enemies = new();
@@ -67,7 +67,7 @@ public partial class LightningChainProjectile : Node2D
         _end_global = targetEnemy.target_position;
         _max_length = _start_global.DistanceTo(_end_global);
 
-        _current_length += extend_speed * (float)delta;
+        _current_length += ExtendSpeed * (float)delta;
         _current_length = Mathf.Min(_current_length, _max_length);
 
         Vector2 dir = (_end_global - _start_global).Normalized();
@@ -84,7 +84,7 @@ public partial class LightningChainProjectile : Node2D
 
     public void set_target(Node2D target, Attack attack, int bounces)
     {
-        max_bounces = bounces;
+        MaxBounces = bounces;
         _target = target;
         _attack = attack;
         _start_global = _end_global != Vector2.Zero ? _end_global : GlobalPosition;
@@ -113,13 +113,13 @@ public partial class LightningChainProjectile : Node2D
         _hit_enemies.Add(_target);
         _bounces_done += 1;
 
-        await ToSignal(GetTree().CreateTimer(bounce_delay, false), Timer.SignalName.Timeout);
+        await ToSignal(GetTree().CreateTimer(BounceDelay, false), Timer.SignalName.Timeout);
         TryBounce();
     }
 
     private void TryBounce()
     {
-        if (_bounces_done >= max_bounces)
+        if (_bounces_done >= MaxBounces)
         {
             QueueFree();
             return;
@@ -132,7 +132,7 @@ public partial class LightningChainProjectile : Node2D
             return;
         }
 
-        set_target(nextEnemy, _attack, max_bounces);
+        set_target(nextEnemy, _attack, MaxBounces);
     }
 
     private Node2D GetClosestValidEnemy()

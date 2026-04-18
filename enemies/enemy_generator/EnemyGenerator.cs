@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 
 public partial class EnemyGenerator : Node
@@ -6,13 +6,13 @@ public partial class EnemyGenerator : Node
     private const int TOTAL_WAVES = 30;
 
     [Export]
-    public WaveSpawner wave_spawner;
+    public WaveSpawner WaveSpawner;
 
     [Export]
-    public WaveConfig wave_config;
+    public WaveConfig WaveConfig;
 
     [Export]
-    public Node2D enemies_container;
+    public Node2D EnemiesContainer;
 
     private int _waveNumber;
     private WaveComposer _composer;
@@ -32,12 +32,12 @@ public partial class EnemyGenerator : Node
             }
         }
 
-        if (wave_config == null)
+        if (WaveConfig == null)
         {
-            wave_config = GD.Load<WaveConfig>("res://enemies/enemy_generator/wave_config.tres");
+            WaveConfig = GD.Load<WaveConfig>("res://enemies/enemy_generator/WaveConfig.tres");
         }
 
-        _composer = new WaveComposer(wave_config, enemyCatalog);
+        _composer = new WaveComposer(WaveConfig, enemyCatalog);
         if (_composer == null)
         {
             GD.PushError("[EnemyGenerator] Could not instantiate WaveComposer.");
@@ -47,12 +47,12 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.progress.total_waves = TOTAL_WAVES;
 
-        if (wave_spawner != null)
+        if (WaveSpawner != null)
         {
-            wave_spawner.enemies_container = enemies_container;
-            wave_spawner.wave_started += OnWaveStarted;
-            wave_spawner.wave_finished += OnWaveFinished;
-            wave_spawner.enemy_spawned += OnEnemySpawned;
+            WaveSpawner.EnemiesContainer = EnemiesContainer;
+            WaveSpawner.wave_started += OnWaveStarted;
+            WaveSpawner.wave_finished += OnWaveFinished;
+            WaveSpawner.enemy_spawned += OnEnemySpawned;
         }
 
         ClickEvents.NextWavePressed += StartNextWave;
@@ -62,16 +62,16 @@ public partial class EnemyGenerator : Node
     {
         ClickEvents.NextWavePressed -= StartNextWave;
 
-        if (_isTrackingEnemyExit && enemies_container != null)
+        if (_isTrackingEnemyExit && EnemiesContainer != null)
         {
-            enemies_container.ChildExitingTree -= OnEnemyLeft;
+            EnemiesContainer.ChildExitingTree -= OnEnemyLeft;
             _isTrackingEnemyExit = false;
         }
     }
 
     public void StartNextWave()
     {
-        if (wave_spawner == null)
+        if (WaveSpawner == null)
         {
             GD.PushWarning("[EnemyGeneratorProcedural] No WaveSpawner assigned");
             return;
@@ -92,7 +92,7 @@ public partial class EnemyGenerator : Node
         int budget = _composer.get_budget_for_wave(_waveNumber);
         GD.Print($"[Wave {_waveNumber}] Budget: {budget} | Groups: {groups.Count} | Total enemies: {totalEnemies}");
 
-        wave_spawner.start_wave(_waveNumber, groups, wave_config);
+        WaveSpawner.start_wave(_waveNumber, groups, WaveConfig);
     }
 
     private void OnWaveStarted(int waveNumber)
@@ -113,7 +113,7 @@ public partial class EnemyGenerator : Node
 
         if (!_isTrackingEnemyExit)
         {
-            enemies_container.ChildExitingTree += OnEnemyLeft;
+            EnemiesContainer.ChildExitingTree += OnEnemyLeft;
             _isTrackingEnemyExit = true;
         }
     }
@@ -140,7 +140,7 @@ public partial class EnemyGenerator : Node
         {
             if (_isTrackingEnemyExit)
             {
-                enemies_container.ChildExitingTree -= OnEnemyLeft;
+                EnemiesContainer.ChildExitingTree -= OnEnemyLeft;
                 _isTrackingEnemyExit = false;
             }
 
@@ -153,7 +153,7 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         GameState gameState = GetNode<GameState>("/root/GameState");
 
-        if (runContext.is_on_restarting || runContext.status.health <= 0 || gameState.is_on_main_menu())
+        if (runContext.IsOnRestarting || runContext.status.health <= 0 || gameState.is_on_main_menu())
         {
             return;
         }

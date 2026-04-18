@@ -8,14 +8,14 @@ public partial class EventScreen : Control
     private static readonly PackedScene EventSlotScene = GD.Load<PackedScene>("uid://cl23rwbjcvak5");
 
     [Export]
-    public Control events_container;
+    public Control EventsContainer;
 
     public void set_events(Godot.Collections.Array<EventData> events)
     {
         for (int index = 0; index < events.Count; index++)
         {
             EventSlot eventSlot = EventSlotScene.Instantiate<EventSlot>();
-            events_container.AddChild(eventSlot);
+            EventsContainer.AddChild(eventSlot);
             eventSlot.set_event(events[index]);
             eventSlot.event_pressed += OnEventPressed;
         }

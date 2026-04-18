@@ -14,10 +14,10 @@ font_color = Color(0.7137255, 0.77254903, 0.64705884, 1)
 font = ExtResource("3_db7le")
 font_size = 20
 
-[node name="HintLayer" type="CanvasLayer" unique_id=257266633 node_paths=PackedStringArray("text_label", "title_label", "container")]
+[node name="HintLayer" type="CanvasLayer" unique_id=257266633 node_paths=PackedStringArray("TextLabel", "TitleLabel", "container")]
 script = ExtResource("2_nt2fy")
-text_label = NodePath("Hint/VBoxContainer/TextLabel")
-title_label = NodePath("Hint/VBoxContainer/TitleLabel")
+TextLabel = NodePath("Hint/VBoxContainer/TextLabel")
+TitleLabel = NodePath("Hint/VBoxContainer/TitleLabel")
 container = NodePath("Hint")
 
 [node name="Hint" type="PanelContainer" parent="." unique_id=290567249]

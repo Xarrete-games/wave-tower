@@ -5,13 +5,13 @@ public partial class Game : Node2D
     private static readonly PackedScene BootScene = GD.Load<PackedScene>("uid://bfm0i7ehshgsf");
 
     [Export]
-    public Godot.Collections.Array<string> levels_paths { get; set; } = new();
+    public Godot.Collections.Array<string> LevelsPaths { get; set; } = new();
 
     [Export]
     public PackedScene pause { get; set; }
 
     [Export]
-    public bool trigger_finish_wave { get; set; } = false;
+    public bool TriggerFinishWave { get; set; } = false;
 
     private PauseMenu _pauseInstance;
     private MusicHandler _musicHandler;
@@ -26,14 +26,14 @@ public partial class Game : Node2D
         ClickEvents.ResetGameButtonPressed += ResetGame;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.progress.total_levels = levels_paths.Count;
+        runContext.progress.total_levels = LevelsPaths.Count;
 
         GameState gameState = GetNode<GameState>("/root/GameState");
         gameState.state = GameState.IN_GAME;
 
         _musicHandler.play_music();
 
-        if (trigger_finish_wave)
+        if (TriggerFinishWave)
         {
             runContext.progress.notify_current_wave_finished();
         }
@@ -66,7 +66,7 @@ public partial class Game : Node2D
     public void ResetGame()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.is_on_restarting = true;
+        runContext.IsOnRestarting = true;
         GetTree().ChangeSceneToPacked(BootScene);
     }
 

@@ -34,7 +34,7 @@ public partial class CompositeTileMap : Node
     public override void _Ready()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.composite_tile_map = this;
+        runContext.CompositeTileMap = this;
 
         _towersManager = runContext.towers_manager;
         if (_towersManager != null)

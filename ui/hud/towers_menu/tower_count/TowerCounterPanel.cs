@@ -42,27 +42,27 @@ public partial class TowerCounterPanel : Control
     }
 
     private Label current_label;
-    private TextureRect texture_rect;
+    private TextureRect TextureRect;
     private Label max_label;
 
     public override void _Ready()
     {
         current_label = GetNodeOrNull<Label>("RedCount/Value/CurrentLabel");
-        texture_rect = GetNodeOrNull<TextureRect>("RedCount/TextureRect");
+        TextureRect = GetNodeOrNull<TextureRect>("RedCount/TextureRect");
         max_label = GetNodeOrNull<Label>("RedCount/Value/MaxLabel");
 
         UpdateTexture();
-        if (texture_rect != null)
+        if (TextureRect != null)
         {
-            texture_rect.Texture = icon;
+            TextureRect.Texture = icon;
         }
     }
 
     private void UpdateTexture()
     {
-        if (texture_rect != null)
+        if (TextureRect != null)
         {
-            texture_rect.Texture = icon;
+            TextureRect.Texture = icon;
         }
     }
 

@@ -15,12 +15,12 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="PanelContainer" type="PanelContainer" unique_id=1870016146 node_paths=PackedStringArray("slots_container")]
+[node name="PanelContainer" type="PanelContainer" unique_id=1870016146 node_paths=PackedStringArray("SlotsContainer")]
 offset_right = 449.0
 offset_bottom = 44.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_iei1m")
 script = ExtResource("1_ga602")
-slots_container = NodePath("MarginContainer/SlotsContainer")
+SlotsContainer = NodePath("MarginContainer/SlotsContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=29183108]
 layout_mode = 2

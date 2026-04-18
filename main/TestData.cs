@@ -4,19 +4,19 @@ using Godot;
 public partial class TestData : Node
 {
     [Export]
-    public int initial_random_relics = 0;
+    public int InitialRandomRelics = 0;
 
     [Export]
-    public Godot.Collections.Array<string> initial_relics_ids = new();
+    public Godot.Collections.Array<string> InitialRelicsIds = new();
 
     [Export]
-    public Godot.Collections.Array<string> initial_consumables_ids = new();
+    public Godot.Collections.Array<string> InitialConsumablesIds = new();
 
     [Export]
-    public EventData initial_event;
+    public EventData InitialEvent;
 
     [Export]
-    public bool open_loot_screen = false;
+    public bool OpenLootScreen = false;
 
     private RunHandler _runHandler;
 
@@ -27,14 +27,14 @@ public partial class TestData : Node
         await ToSignal(GetTree().CreateTimer(0.1f, false), SceneTreeTimer.SignalName.Timeout);
         HandleInitialRelics();
 
-        if (open_loot_screen && _runHandler != null)
+        if (OpenLootScreen && _runHandler != null)
         {
             await _runHandler.ShowLootScreen();
         }
 
-        if (initial_event != null && _runHandler != null)
+        if (InitialEvent != null && _runHandler != null)
         {
-            await _runHandler.ShowEventsScreen(initial_event);
+            await _runHandler.ShowEventsScreen(InitialEvent);
         }
     }
 
@@ -42,11 +42,11 @@ public partial class TestData : Node
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
 
-        if (initial_relics_ids.Count > 0)
+        if (InitialRelicsIds.Count > 0)
         {
-            for (int index = 0; index < initial_relics_ids.Count; index++)
+            for (int index = 0; index < InitialRelicsIds.Count; index++)
             {
-                string relicId = initial_relics_ids[index];
+                string relicId = InitialRelicsIds[index];
                 RelicData typedRelicData = DataLoaderAccess.GetRelicById(relicId);
                 if (typedRelicData != null)
                 {
@@ -60,9 +60,9 @@ public partial class TestData : Node
             }
         }
 
-        if (initial_random_relics > 0)
+        if (InitialRandomRelics > 0)
         {
-            System.Collections.Generic.List<RelicData> items = DataLoaderAccess.GetRandomRelicsTyped(initial_random_relics);
+            System.Collections.Generic.List<RelicData> items = DataLoaderAccess.GetRandomRelicsTyped(InitialRandomRelics);
             for (int index = 0; index < items.Count; index++)
             {
                 RelicData relicDataObj = items[index];
@@ -76,11 +76,11 @@ public partial class TestData : Node
             }
         }
 
-        if (initial_consumables_ids.Count > 0)
+        if (InitialConsumablesIds.Count > 0)
         {
-            for (int index = 0; index < initial_consumables_ids.Count; index++)
+            for (int index = 0; index < InitialConsumablesIds.Count; index++)
             {
-                string consumableId = initial_consumables_ids[index];
+                string consumableId = InitialConsumablesIds[index];
                 ConsumableData consumableDataObj = DataLoaderAccess.GetConsumableById(consumableId);
                 if (consumableDataObj != null)
                 {

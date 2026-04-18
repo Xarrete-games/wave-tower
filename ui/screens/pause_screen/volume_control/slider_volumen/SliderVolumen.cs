@@ -3,13 +3,13 @@ using Godot;
 public partial class SliderVolumen : HSlider
 {
     [Export]
-    public string bus_name = string.Empty;
+    public string BusName = string.Empty;
 
     private int _busIndex;
 
     public override void _Ready()
     {
-        _busIndex = AudioServer.GetBusIndex(bus_name);
+        _busIndex = AudioServer.GetBusIndex(BusName);
         ValueChanged += OnValueChanged;
         Value = Mathf.DbToLinear(AudioServer.GetBusVolumeDb(_busIndex));
     }

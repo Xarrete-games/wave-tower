@@ -4,7 +4,7 @@ using Godot;
 public partial class KillEventHandler : Node
 {
     [Export]
-    public PackedScene burn_area_scene;
+    public PackedScene BurnAreaScene;
 
     private EnemyManager _enemyManager;
 
@@ -53,12 +53,12 @@ public partial class KillEventHandler : Node
 
     private void SpawnBurnArea(Vector2 position, Source source)
     {
-        if (burn_area_scene == null)
+        if (BurnAreaScene == null)
         {
             return;
         }
 
-        BurnArea burnArea = burn_area_scene.Instantiate<BurnArea>();
+        BurnArea burnArea = BurnAreaScene.Instantiate<BurnArea>();
         AddChild(burnArea);
         burnArea.GlobalPosition = position;
         burnArea.setup(source);

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="5_cpdtn"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="6_u6cdb"]
 
-[node name="EventOptionsScreen" type="PanelContainer" unique_id=2110702547 node_paths=PackedStringArray("buttons_container", "texture_rect", "title_label", "description_label")]
+[node name="EventOptionsScreen" type="PanelContainer" unique_id=2110702547 node_paths=PackedStringArray("ButtonsContainer", "TextureRect", "TitleLabel", "DescriptionLabel")]
 anchors_preset = -1
 anchor_left = 0.223
 anchor_top = 0.23900001
@@ -22,11 +22,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_0pqbo")
 script = ExtResource("2_o48s5")
-button_option_scene = ExtResource("3_u6cdb")
-buttons_container = NodePath("MarginContainer/VBoxContainer/VBoxContainer/OptionsContainer")
-texture_rect = NodePath("MarginContainer/VBoxContainer/DataContainer/TextureRect")
-title_label = NodePath("MarginContainer/VBoxContainer/VBoxContainer/TitleLabel")
-description_label = NodePath("MarginContainer/VBoxContainer/VBoxContainer/DescriptionLabel")
+ButtonOptionScene = ExtResource("3_u6cdb")
+ButtonsContainer = NodePath("MarginContainer/VBoxContainer/VBoxContainer/OptionsContainer")
+TextureRect = NodePath("MarginContainer/VBoxContainer/DataContainer/TextureRect")
+TitleLabel = NodePath("MarginContainer/VBoxContainer/VBoxContainer/TitleLabel")
+DescriptionLabel = NodePath("MarginContainer/VBoxContainer/VBoxContainer/DescriptionLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1299265526]
 layout_mode = 2

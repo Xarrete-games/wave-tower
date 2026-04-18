@@ -8,16 +8,16 @@ public partial class ChooseTowerScreen : Control
     public event Action done;
 
     [Export]
-    public Control cards_container;
+    public Control CardsContainer;
 
     [Export]
-    public Button ok_button;
+    public Button OkButton;
 
     private ChooseTowerScreenItem _selectedItem;
 
     public override void _Ready()
     {
-        ok_button.Pressed += OnOkPressed;
+        OkButton.Pressed += OnOkPressed;
     }
 
     public void PopulateScreen(List<TowerDataWithInstance> configurations)
@@ -25,7 +25,7 @@ public partial class ChooseTowerScreen : Control
         foreach (TowerDataWithInstance towerConfiguration in configurations)
         {
             ChooseTowerScreenItem item = TowerItemScene.Instantiate<ChooseTowerScreenItem>();
-            cards_container.AddChild(item);
+            CardsContainer.AddChild(item);
             item.SetTowerData(towerConfiguration);
             item.selected += OnItemSelected;
         }

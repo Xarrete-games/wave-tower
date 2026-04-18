@@ -6,10 +6,10 @@ public partial class MainCamera : Camera2D
     private static readonly float[] ZoomSteps = { 0.5f, 0.75f, 1.0f };
 
     [Export]
-    public float move_speed = 500.0f;
+    public float MoveSpeed = 500.0f;
 
     [Export]
-    public float zoom_tween_duration = 0.25f;
+    public float ZoomTweenDuration = 0.25f;
 
     [Export]
     public Node2D level;
@@ -36,7 +36,7 @@ public partial class MainCamera : Camera2D
             inputVector = inputVector.Normalized();
         }
 
-        GlobalPosition += inputVector * move_speed * (float)delta;
+        GlobalPosition += inputVector * MoveSpeed * (float)delta;
     }
 
     public override void _Input(InputEvent @event)
@@ -90,6 +90,6 @@ public partial class MainCamera : Camera2D
         }
 
         _zoomTween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-        _zoomTween.TweenProperty(this, "zoom", new Vector2(target, target), zoom_tween_duration);
+        _zoomTween.TweenProperty(this, "zoom", new Vector2(target, target), ZoomTweenDuration);
     }
 }

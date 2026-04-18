@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 
 [GlobalClass]
 public partial class ConsumablesHandler : Node
@@ -7,7 +7,7 @@ public partial class ConsumablesHandler : Node
     private static readonly Texture2D DefaultCursor = GD.Load<Texture2D>("res://assets/images/icons/mouse_02.png");
 
     [Export]
-    public CompositeTileMap composite_tile_map;
+    public CompositeTileMap CompositeTileMap;
 
     private ConsumableTargeteable _currentConsumable;
     private bool _isValidTarget;
@@ -86,12 +86,12 @@ public partial class ConsumablesHandler : Node
 
     private void HandleBlockedTilePlacement()
     {
-        if (composite_tile_map == null)
+        if (CompositeTileMap == null)
         {
             return;
         }
 
-        bool isMouseOnBlockedTile = composite_tile_map.is_mouse_on_block_tile();
+        bool isMouseOnBlockedTile = CompositeTileMap.is_mouse_on_block_tile();
         if (isMouseOnBlockedTile)
         {
             ConsumableData data = _currentConsumable?.data;
@@ -101,7 +101,7 @@ public partial class ConsumablesHandler : Node
             }
 
             _isValidTarget = true;
-            _currentTarget = composite_tile_map;
+            _currentTarget = CompositeTileMap;
         }
         else
         {

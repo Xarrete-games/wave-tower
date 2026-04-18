@@ -104,7 +104,7 @@ alpha_curve = SubResource("CurveTexture_3crl6")
 
 [node name="WildFireTower" unique_id=1829344544 instance=ExtResource("1_j8mcx")]
 script = ExtResource("2_sym80")
-projectile_scene = ExtResource("3_8u8ke")
+ProjectileScene = ExtResource("3_8u8ke")
 
 [node name="CristalLight" parent="." index="1"]
 visible = false

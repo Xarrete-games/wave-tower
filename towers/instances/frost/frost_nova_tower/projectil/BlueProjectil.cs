@@ -5,8 +5,8 @@ public partial class BlueProjectil : Area2D
 {
     private static readonly PackedScene BLUE_EXPLOSION = GD.Load<PackedScene>("uid://bntnbljmfy1p4");
 
-    [Export] public float expand_speed = 300.0f;
-    [Export] public float y_scale = 0.5f;
+    [Export] public float ExpandSpeed = 300.0f;
+    [Export] public float YScale = 0.5f;
     [Export] public float thickness = 20.0f;
     [Export] public Color color = new(0.302f, 0.173f, 1.0f, 1.0f);
 
@@ -39,7 +39,7 @@ public partial class BlueProjectil : Area2D
 
     public override void _Process(double delta)
     {
-        _radius += expand_speed * (float)delta;
+        _radius += ExpandSpeed * (float)delta;
         if (_shape != null)
         {
             _shape.Radius = _radius;
@@ -83,7 +83,7 @@ public partial class BlueProjectil : Area2D
 
         Color waveColor = new(color.R, color.G, color.B, color.A * alphaFade);
 
-        DrawSetTransform(Vector2.Zero, 0.0f, new Vector2(1.0f, y_scale));
+        DrawSetTransform(Vector2.Zero, 0.0f, new Vector2(1.0f, YScale));
         DrawCircle(Vector2.Zero, _radius, new Color(waveColor.R, waveColor.G, waveColor.B, waveColor.A * 0.12f));
         DrawArc(Vector2.Zero, _radius, 0, Mathf.Tau, 64, waveColor, thickness);
         DrawSetTransform(Vector2.Zero, 0.0f, Vector2.One);

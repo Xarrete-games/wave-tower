@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class DebuffSlot : Control
 {
-    [Export] public TextureRect texture_rect;
+    [Export] public TextureRect TextureRect;
     [Export] public Label label;
 
     private int _amount;
@@ -27,9 +27,9 @@ public partial class DebuffSlot : Control
         set
         {
             _texture = value;
-            if (texture_rect != null)
+            if (TextureRect != null)
             {
-                texture_rect.Texture = value;
+                TextureRect.Texture = value;
             }
         }
     }

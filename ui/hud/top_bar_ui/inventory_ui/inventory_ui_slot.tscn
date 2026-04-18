@@ -43,8 +43,8 @@ expand_mode = 3
 
 [node name="AnimationComponent" type="Node" parent="CenterContainer/TextureRect" unique_id=797447062]
 script = ExtResource("2_cjd5i")
-hover_time = 0.1
-hover_scale = Vector2(1.1, 1.1)
+HoverTime = 0.1
+HoverScale = Vector2(1.1, 1.1)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [connection signal="gui_input" from="." to="." method="OnGuiInput"]

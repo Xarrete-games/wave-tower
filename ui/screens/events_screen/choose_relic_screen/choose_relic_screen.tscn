@@ -7,7 +7,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wubjr"]
 bg_color = Color(0.1, 0.1, 0.1, 0.6)
 
-[node name="ChooseRelicScreen" type="PanelContainer" unique_id=1056449746 node_paths=PackedStringArray("cards_container", "reroll_priece")]
+[node name="ChooseRelicScreen" type="PanelContainer" unique_id=1056449746 node_paths=PackedStringArray("CardsContainer", "RerollPriece")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,8 +15,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wubjr")
 script = ExtResource("1_phl5k")
-cards_container = NodePath("MarginContainer/VBoxContainer/CardsContainer")
-reroll_priece = NodePath("MarginContainer/VBoxContainer/ButtonsContainer/VBoxContainer/RerollPrice")
+CardsContainer = NodePath("MarginContainer/VBoxContainer/CardsContainer")
+RerollPriece = NodePath("MarginContainer/VBoxContainer/ButtonsContainer/VBoxContainer/RerollPrice")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2044611182]
 layout_mode = 2

@@ -15,8 +15,8 @@ grow_vertical = 2
 theme = ExtResource("1_myxe3")
 text = "Remove"
 script = ExtResource("2_nsq7y")
-theme_override = ExtResource("1_myxe3")
-disabled_theme_override = ExtResource("3_nsq7y")
+ThemeOverride = ExtResource("1_myxe3")
+DisabledThemeOverride = ExtResource("3_nsq7y")
 
 [connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExited"]
