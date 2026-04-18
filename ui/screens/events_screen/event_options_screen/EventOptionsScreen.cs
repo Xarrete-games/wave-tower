@@ -39,20 +39,7 @@ public partial class EventOptionsScreen : Control
             child.QueueFree();
         }
 
-        Script runtimeScript = eventData.RuntimeScript;
-        if (runtimeScript == null)
-        {
-            GD.PushError($"Event data {eventData.Id} has no runtime script assigned.");
-            return;
-        }
-
-        if (runtimeScript is not CSharpScript csharpScript)
-        {
-            GD.PushError($"Runtime script for event {eventData.Id} is not C#.");
-            return;
-        }
-
-        _eventScriptInstance = csharpScript.New().Obj as EventScript;
+        _eventScriptInstance = eventData.CreateRuntimeEventScript();
         if (_eventScriptInstance == null)
         {
             GD.PushError($"Could not instantiate runtime script for event {eventData.Id}.");

@@ -1,4 +1,5 @@
 using Godot;
+using System.IO;
 
 [GlobalClass]
 public partial class EventData : Resource
@@ -52,6 +53,30 @@ public partial class EventData : Resource
     {
         get => Role;
         set => Role = value;
+    }
+
+    public EventScript CreateRuntimeEventScript()
+    {
+        string scriptName = Path.GetFileNameWithoutExtension(RuntimeScript?.ResourcePath)?.ToLowerInvariant() ?? string.Empty;
+        EventScript eventScript = scriptName switch
+        {
+            "bloodpactscript" => new BloodPactScript(),
+            "budatemplescript" => new BudaTempleScript(),
+            "chesteventscript" => new ChestEventScript(),
+            "fountainsofwishesscript" => new FountainsOfWishesScript(),
+            "highwayrobberyscript" => new HighwayRobberyScript(),
+            "libraryeventscript" => new LibraryEventScript(),
+            "potionseventscript" => new PotionsEventScript(),
+            "sanctuaryeventscript" => new SanctuaryEventScript(),
+            _ => null,
+        };
+
+        if (eventScript == null)
+        {
+            GD.PushError($"[EventData] Unknown RuntimeScript '{RuntimeScript?.ResourcePath}' for event '{Id}'");
+        }
+
+        return eventScript;
     }
 
 }
