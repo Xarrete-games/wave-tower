@@ -5,15 +5,15 @@ public partial class LightningChainTower : Tower
 {
     [Export] public PackedScene LightningChainProjectileScene;
 
-    public int base_bounces = 3;
-    public int current_bounces = 3;
+    public int BaseBounces = 3;
+    public int CurrentBounces = 3;
 
-    private Marker2D projectile_spawn_point;
+    private Marker2D _projectileSpawnPoint;
 
     public override void _Ready()
     {
         base._Ready();
-        projectile_spawn_point = GetNode<Marker2D>("ProjectileSpawnPos");
+        _projectileSpawnPoint = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
     protected override void _fire()
@@ -30,8 +30,8 @@ public partial class LightningChainTower : Tower
     private void FireChain(LightningChainProjectile projectile)
     {
         AddChild(projectile);
-        projectile.GlobalPosition = projectile_spawn_point.GlobalPosition;
+        projectile.GlobalPosition = _projectileSpawnPoint.GlobalPosition;
 
-        projectile.set_target(_current_target, _get_attack(), current_bounces);
+        projectile.SetTarget(_current_target, _get_attack(), CurrentBounces);
     }
 }

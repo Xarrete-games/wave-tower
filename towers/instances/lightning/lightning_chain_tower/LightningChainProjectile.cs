@@ -8,32 +8,32 @@ public partial class LightningChainProjectile : Node2D
     [Export] public int MaxBounces = 3;
     [Export] public float BounceDelay = 0.1f;
 
-    private readonly Array<Node2D> enemies_in_range = new();
-    private readonly Array<Node2D> _hit_enemies = new();
+    private readonly Array<Node2D> _enemiesInRange = new();
+    private readonly Array<Node2D> _hitEnemies = new();
 
     private Node2D _target;
-    private float _current_length = 0.0f;
-    private float _max_length = 0.0f;
+    private float _currentLength;
+    private float _maxLength;
     private bool _hit;
-    private int _bounces_done;
-    private Vector2 _start_global;
-    private Vector2 _end_global;
+    private int _bouncesDone;
+    private Vector2 _startGlobal;
+    private Vector2 _endGlobal;
     private Attack _attack;
 
     private GpuParticles2D _sparks;
     private GpuParticles2D _flare;
-    private Area2D _area2d;
+    private Area2D _area2D;
     private Line2D _line;
 
     public override void _Ready()
     {
         _sparks = GetNode<GpuParticles2D>("%Sparks");
         _flare = GetNode<GpuParticles2D>("%Flare");
-        _area2d = GetNode<Area2D>("%Area");
+        _area2D = GetNode<Area2D>("%Area");
         _line = GetNode<Line2D>("%Line");
 
         _line.TopLevel = true;
-        _area2d.TopLevel = true;
+        _area2D.TopLevel = true;
     }
 
     public override void _Process(double delta)
@@ -64,39 +64,39 @@ public partial class LightningChainProjectile : Node2D
             return;
         }
 
-        _end_global = targetEnemy.target_position;
-        _max_length = _start_global.DistanceTo(_end_global);
+        _endGlobal = targetEnemy.TargetPosition;
+        _maxLength = _startGlobal.DistanceTo(_endGlobal);
 
-        _current_length += ExtendSpeed * (float)delta;
-        _current_length = Mathf.Min(_current_length, _max_length);
+        _currentLength += ExtendSpeed * (float)delta;
+        _currentLength = Mathf.Min(_currentLength, _maxLength);
 
-        Vector2 dir = (_end_global - _start_global).Normalized();
-        Vector2 tipGlobal = _start_global + dir * _current_length;
+        Vector2 dir = (_endGlobal - _startGlobal).Normalized();
+        Vector2 tipGlobal = _startGlobal + dir * _currentLength;
 
         _line.SetPointPosition(1, tipGlobal);
-        _area2d.GlobalPosition = tipGlobal;
+        _area2D.GlobalPosition = tipGlobal;
 
-        if (_current_length >= _max_length && !_hit)
+        if (_currentLength >= _maxLength && !_hit)
         {
             OnHit();
         }
     }
 
-    public void set_target(Node2D target, Attack attack, int bounces)
+    public void SetTarget(Node2D target, Attack attack, int bounces)
     {
         MaxBounces = bounces;
         _target = target;
         _attack = attack;
-        _start_global = _end_global != Vector2.Zero ? _end_global : GlobalPosition;
-        _end_global = _target?.GlobalPosition ?? GlobalPosition;
+        _startGlobal = _endGlobal != Vector2.Zero ? _endGlobal : GlobalPosition;
+        _endGlobal = _target?.GlobalPosition ?? GlobalPosition;
 
-        _max_length = _start_global.DistanceTo(_end_global);
-        _current_length = 0.0f;
+        _maxLength = _startGlobal.DistanceTo(_endGlobal);
+        _currentLength = 0.0f;
         _hit = false;
 
         _line.ClearPoints();
-        _line.AddPoint(_start_global);
-        _line.AddPoint(_start_global);
+        _line.AddPoint(_startGlobal);
+        _line.AddPoint(_startGlobal);
 
         _flare.Visible = false;
         _sparks.Visible = false;
@@ -105,13 +105,13 @@ public partial class LightningChainProjectile : Node2D
     private async void OnHit()
     {
         _hit = true;
-        Enemy enemyModel = _target as Enemy;
-        enemyModel?.apply_damage(_attack);
+        Enemy enemy = _target as Enemy;
+        enemy?.ApplyDamage(_attack);
         _flare.Visible = true;
         _sparks.Visible = true;
 
-        _hit_enemies.Add(_target);
-        _bounces_done += 1;
+        _hitEnemies.Add(_target);
+        _bouncesDone += 1;
 
         await ToSignal(GetTree().CreateTimer(BounceDelay, false), Timer.SignalName.Timeout);
         TryBounce();
@@ -119,7 +119,7 @@ public partial class LightningChainProjectile : Node2D
 
     private void TryBounce()
     {
-        if (_bounces_done >= MaxBounces)
+        if (_bouncesDone >= MaxBounces)
         {
             QueueFree();
             return;
@@ -132,7 +132,7 @@ public partial class LightningChainProjectile : Node2D
             return;
         }
 
-        set_target(nextEnemy, _attack, MaxBounces);
+        SetTarget(nextEnemy, _attack, MaxBounces);
     }
 
     private Node2D GetClosestValidEnemy()
@@ -140,14 +140,14 @@ public partial class LightningChainProjectile : Node2D
         Node2D closest = null;
         float minDist = float.PositiveInfinity;
 
-        foreach (Node2D enemy in enemies_in_range)
+        foreach (Node2D enemy in _enemiesInRange)
         {
-            if (!GodotObject.IsInstanceValid(enemy) || !enemy.IsInsideTree() || _hit_enemies.Contains(enemy))
+            if (!GodotObject.IsInstanceValid(enemy) || !enemy.IsInsideTree() || _hitEnemies.Contains(enemy))
             {
                 continue;
             }
 
-            float d = enemy.GlobalPosition.DistanceSquaredTo(_end_global);
+            float d = enemy.GlobalPosition.DistanceSquaredTo(_endGlobal);
             if (d < minDist)
             {
                 minDist = d;
@@ -160,12 +160,12 @@ public partial class LightningChainProjectile : Node2D
 
     private void OnArea2dBodyExited(Node2D body)
     {
-        enemies_in_range.Remove(body);
+        _enemiesInRange.Remove(body);
     }
 
     private void OnArea2dBodyEntered(Node2D body)
     {
-        enemies_in_range.Add(body);
-        body.TreeExited += () => enemies_in_range.Remove(body);
+        _enemiesInRange.Add(body);
+        body.TreeExited += () => _enemiesInRange.Remove(body);
     }
 }

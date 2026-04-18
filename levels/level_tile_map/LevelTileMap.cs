@@ -152,7 +152,7 @@ public partial class LevelTileMap : TileMapLayer
             return;
         }
 
-        Vector2I tile = tower.tile_pos;
+        Vector2I tile = tower.TilePos;
         set_tile_free(tile);
     }
 }

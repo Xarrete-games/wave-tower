@@ -4,7 +4,7 @@ public sealed class Boniato : Relic
     {
     }
 
-    public override void OnEnemyDie(EnemyModel enemy, AttackModel attack)
+    public override void OnEnemyDie(Enemy enemy, AttackModel attack)
     {
         enemy.GoldValue += 1;
     }

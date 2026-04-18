@@ -6,7 +6,7 @@ public sealed class ExtraVirginOliveOil : Relic
     {
     }
 
-    public override void OnDebuffApplied(DebuffContext context, EnemyModel target)
+    public override void OnDebuffApplied(DebuffContext context, Enemy target)
     {
         if (context.Debuff.Type == EnemyDebuffModel.DebuffType.Burn)
         {

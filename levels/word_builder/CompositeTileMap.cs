@@ -326,7 +326,7 @@ public partial class CompositeTileMap : Node
 
     private void OnTowerRemoved(Tower tower)
     {
-        string key = tower?.composite_tile_key;
+        string key = tower?.CompositeTileKey;
         if (!string.IsNullOrEmpty(key))
         {
             set_tile_free(key);

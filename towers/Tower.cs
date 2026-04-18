@@ -6,11 +6,11 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class Tower : Node2D
 {
-    public event Action<TowerBuff> buff_added;
-    public event Action<TowerBuff> buff_removed;
-    public event Action<Tower> stats_changed;
-    public event Action attack_fired;
-    public event Action<Node2D> on_target_change;
+    public event Action<TowerBuff> BuffAdded;
+    public event Action<TowerBuff> BuffRemoved;
+    public event Action<Tower> StatsChanged;
+    public event Action AttackFired;
+    public event Action<Node2D> TargetChanged;
 
     public enum Type
     {
@@ -41,8 +41,8 @@ public partial class Tower : Node2D
     protected bool _enabled = false;
     protected bool _first_shot = true;
 
-    public Tower current_tower_selected;
-    public Tween range_tween;
+    public Tower CurrentTowerSelected;
+    public Tween RangeTween;
 
     private TowerStats _stats;
     public TowerStats stats
@@ -51,15 +51,15 @@ public partial class Tower : Node2D
         set
         {
             _stats = value;
-            stats_changed?.Invoke(this);
+            StatsChanged?.Invoke(this);
         }
     }
 
-    public Vector2I tile_pos;
-    public string composite_tile_key = string.Empty;
+    public Vector2I TilePos;
+    public string CompositeTileKey = string.Empty;
 
     private int _targeting_mode = (int)TargetingMode.FIRST_IN_PROGRESS;
-    public int targeting_mode
+    public int CurrentTargetingMode
     {
         get => _targeting_mode;
         set
@@ -75,28 +75,28 @@ public partial class Tower : Node2D
     public int level = 1;
 
     private TowerExpData _exp_data;
-    public TowerExpData exp_data
+    public TowerExpData ExpData
     {
         get => _exp_data;
         set
         {
             _exp_data = value;
-            stats_changed?.Invoke(this);
+            StatsChanged?.Invoke(this);
         }
     }
 
     public string id = string.Empty;
-    public string type_id = string.Empty;
+    public string TypeId = string.Empty;
 
     public readonly List<TowerBuff> buffs = new();
 
     public TowerLogic tower_logic;
 
-    public Source damage_source
+    public Source DamageSource
     {
         get
         {
-            return new Source(Source.SourceType.TOWER, type_id, this);
+            return new Source(Source.SourceType.TOWER, TypeId, this);
         }
     }
 
@@ -127,19 +127,19 @@ public partial class Tower : Node2D
         tower_area = GetNode<Area2D>("TowerArea");
         tower_area_collision = GetNode<CollisionPolygon2D>("TowerArea/CollisionShape2D");
 
-        type_id = GetType().Name;
+        TypeId = GetType().Name;
 
         (data as TowerData)?.build();
         tower_logic = new TowerLogic(this);
-        tower_area_collision.Polygon = build_ellipse_polygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO);
+        tower_area_collision.Polygon = BuildEllipsePolygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO);
 
-        tower_stats_handler.stats_change += _on_stats_change;
-        tower_stats_handler.buff_applied += add_buff;
-        tower_stats_handler.buff_expired += remove_buff;
-        tower_stats_handler.set_data(data as TowerData, (int)type);
+        tower_stats_handler.StatsChanged += _on_stats_change;
+        tower_stats_handler.BuffApplied += AddBuff;
+        tower_stats_handler.BuffExpired += RemoveBuff;
+        tower_stats_handler.SetData(data as TowerData, (int)type);
 
         area_detector.target_change += OnTargetChange;
-        targeting_mode = _targeting_mode;
+        CurrentTargetingMode = _targeting_mode;
     }
 
     public override void _ExitTree()
@@ -151,9 +151,9 @@ public partial class Tower : Node2D
 
         if (tower_stats_handler != null)
         {
-            tower_stats_handler.stats_change -= _on_stats_change;
-            tower_stats_handler.buff_applied -= add_buff;
-            tower_stats_handler.buff_expired -= remove_buff;
+            tower_stats_handler.StatsChanged -= _on_stats_change;
+            tower_stats_handler.BuffApplied -= AddBuff;
+            tower_stats_handler.BuffExpired -= RemoveBuff;
         }
 
         if (_eventsConnected)
@@ -171,7 +171,7 @@ public partial class Tower : Node2D
         }
     }
 
-    public static Vector2[] build_ellipse_polygon(float radius_x, float radius_y, int segments = 48)
+    public static Vector2[] BuildEllipsePolygon(float radius_x, float radius_y, int segments = 48)
     {
         Vector2[] points = new Vector2[segments];
         for (int i = 0; i < segments; i++)
@@ -183,7 +183,7 @@ public partial class Tower : Node2D
         return points;
     }
 
-    public static string targeting_mode_to_string(int mode)
+    public static string TargetingModeToString(int mode)
     {
         return mode switch
         {
@@ -194,7 +194,7 @@ public partial class Tower : Node2D
         };
     }
 
-    public void phantom_mode()
+    public void PhantomMode()
     {
         if (sprite_2d != null)
         {
@@ -207,7 +207,7 @@ public partial class Tower : Node2D
         }
     }
 
-    public void normal_color()
+    public void NormalColor()
     {
         if (sprite_2d != null)
         {
@@ -217,14 +217,14 @@ public partial class Tower : Node2D
         ShowRange();
     }
 
-    public virtual void placement_mode()
+    public virtual void PlacementMode()
     {
         _enabled = false;
         area_detector.Monitoring = false;
         tower_area.Monitorable = false;
     }
 
-    public virtual async void enable()
+    public virtual async void Enable()
     {
         if (sprite_2d != null)
         {
@@ -254,7 +254,7 @@ public partial class Tower : Node2D
         _eventsConnected = true;
     }
 
-    public virtual void add_buff(TowerBuff tower_buff)
+    public virtual void AddBuff(TowerBuff tower_buff)
     {
         if (tower_buff == null)
         {
@@ -264,13 +264,13 @@ public partial class Tower : Node2D
         buffs.Add(tower_buff);
         if (tower_buff is TowerBuffStatsModifier)
         {
-            tower_stats_handler.add_buff(tower_buff);
+            tower_stats_handler.AddBuff(tower_buff);
         }
 
-        buff_added?.Invoke(tower_buff);
+        BuffAdded?.Invoke(tower_buff);
     }
 
-    public virtual void remove_buff(string source_id)
+    public virtual void RemoveBuff(string source_id)
     {
         List<TowerBuff> removedBuffs = new();
 
@@ -292,11 +292,11 @@ public partial class Tower : Node2D
             buffs.RemoveAt(i);
         }
 
-        tower_stats_handler.remove_buff(source_id);
+        tower_stats_handler.RemoveBuff(source_id);
 
         foreach (TowerBuff removedBuff in removedBuffs)
         {
-            buff_removed?.Invoke(removedBuff);
+            BuffRemoved?.Invoke(removedBuff);
         }
     }
 
@@ -313,15 +313,15 @@ public partial class Tower : Node2D
         }
 
         level += 1;
-        tower_stats_handler.level_up(level);
+        tower_stats_handler.LevelUp(level);
     }
 
-    public bool is_max_level()
+    public bool IsMaxLevel()
     {
         return level >= MAX_LEVEL;
     }
 
-    public void copy_tower_data(Tower from_tower)
+    public void CopyTowerData(Tower from_tower)
     {
         if (from_tower == null)
         {
@@ -335,7 +335,7 @@ public partial class Tower : Node2D
         }
 
         area_detector.current_target = from_tower.area_detector.current_target;
-        targeting_mode = from_tower.targeting_mode;
+        CurrentTargetingMode = from_tower.CurrentTargetingMode;
     }
 
     public Attack _get_attack()
@@ -346,9 +346,9 @@ public partial class Tower : Node2D
         float critDamage = stats?.critic_damage ?? 0f;
         float attackDamage = is_critical ? baseDamage * (1f + critDamage / 100f) : baseDamage;
 
-        Attack attack = new(attackDamage, damage_source, is_critical);
+        Attack attack = new(attackDamage, DamageSource, is_critical);
         Enemy targetEnemy = _current_target as Enemy;
-        AttackContext ctx = new(BuildEnemyModel(targetEnemy), BuildAttackModel(attack), BuildTowerModel());
+        AttackContext ctx = new(targetEnemy, BuildAttackModel(attack), BuildTowerModel());
         Hooks.OnBeforeAttack(Hooks.GetListenersFromRuntime(), ctx);
         attack.damage = ctx.rebuild_attack();
 
@@ -384,23 +384,6 @@ public partial class Tower : Node2D
         return model;
     }
 
-    private EnemyModel BuildEnemyModel(Enemy enemy)
-    {
-        if (enemy == null)
-        {
-            return new EnemyModel();
-        }
-
-        return new EnemyModel
-        {
-            MaxHealth = enemy.MaxHealth,
-            RemainingHealth = enemy.health,
-            ProgressRatio = enemy.get_progress_ratio(),
-            GoldValue = enemy.GoldValue,
-            HasAnyDebuff = enemy.has_any_debuff(),
-        };
-    }
-
     private TowerModel BuildTowerModel()
     {
         TowerModel.TowerType towerType = type switch
@@ -414,7 +397,7 @@ public partial class Tower : Node2D
         return new TowerModel
         {
             Id = id,
-            TypeId = type_id,
+            TypeId = TypeId,
             Type = towerType,
         };
     }
@@ -429,12 +412,12 @@ public partial class Tower : Node2D
     private void OnTargetChange(Node2D enemy)
     {
         _current_target = enemy;
-        on_target_change?.Invoke(enemy);
+        TargetChanged?.Invoke(enemy);
 
         if (_first_shot && GodotObject.IsInstanceValid(_current_target))
         {
             _fire();
-            attack_fired?.Invoke();
+            AttackFired?.Invoke();
             attack_timer.Start();
             _first_shot = false;
         }
@@ -449,7 +432,7 @@ public partial class Tower : Node2D
         }
 
         _fire();
-        attack_fired?.Invoke();
+        AttackFired?.Invoke();
     }
 
     protected virtual void _fire() { }
@@ -472,18 +455,18 @@ public partial class Tower : Node2D
 
         attack_timer.WaitTime = 1.0 / attackSpeed;
         range_preview.radius = attackRange;
-        range_collision.SetDeferred("polygon", build_ellipse_polygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
+        range_collision.SetDeferred("polygon", BuildEllipsePolygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
     }
 
     public void _on_exp_data_change(Variant new_exp_data)
     {
-        exp_data = new_exp_data.Obj as TowerExpData;
+        ExpData = new_exp_data.Obj as TowerExpData;
     }
 
     private void OnTowerSelected(Tower tower)
     {
-        current_tower_selected = tower;
-        range_preview.Visible = current_tower_selected == this;
+        CurrentTowerSelected = tower;
+        range_preview.Visible = CurrentTowerSelected == this;
     }
 
     private void OnGuiInput(InputEvent @event)
@@ -511,7 +494,7 @@ public partial class Tower : Node2D
     {
         _towersManager?.emit_tower_unhovered(this);
 
-        if (current_tower_selected != this)
+        if (CurrentTowerSelected != this)
         {
             HideRange();
         }
@@ -519,18 +502,18 @@ public partial class Tower : Node2D
 
     private void ShowRange()
     {
-        range_tween?.Kill();
-        range_tween = CreateTween();
+        RangeTween?.Kill();
+        RangeTween = CreateTween();
         range_preview.Visible = true;
-        range_tween.TweenProperty(range_preview, "self_modulate:a", 1.0f, 0.1f).SetTrans(Tween.TransitionType.Sine);
+        RangeTween.TweenProperty(range_preview, "self_modulate:a", 1.0f, 0.1f).SetTrans(Tween.TransitionType.Sine);
     }
 
     private void HideRange()
     {
-        range_tween?.Kill();
-        range_tween = CreateTween();
-        range_tween.TweenProperty(range_preview, "self_modulate:a", 0.0f, 0.5f).SetTrans(Tween.TransitionType.Sine);
-        range_tween.Finished += OnHideRangeTweenFinished;
+        RangeTween?.Kill();
+        RangeTween = CreateTween();
+        RangeTween.TweenProperty(range_preview, "self_modulate:a", 0.0f, 0.5f).SetTrans(Tween.TransitionType.Sine);
+        RangeTween.Finished += OnHideRangeTweenFinished;
     }
 
     private void OnHideRangeTweenFinished()

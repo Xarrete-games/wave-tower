@@ -155,12 +155,12 @@ public static class Hooks
         ForEach(listeners, item => item.OnBeforeDamage(context));
     }
 
-    public static void OnDebuffApplied(List<AbstractModel> listeners, DebuffContext context, EnemyModel target)
+    public static void OnDebuffApplied(List<AbstractModel> listeners, DebuffContext context, Enemy target)
     {
         ForEach(listeners, item => item.OnDebuffApplied(context, target));
     }
 
-    public static void OnEnemyDie(List<AbstractModel> listeners, EnemyModel enemy, AttackModel attack)
+    public static void OnEnemyDie(List<AbstractModel> listeners, Enemy enemy, AttackModel attack)
     {
         ForEach(listeners, item => item.OnEnemyDie(enemy, attack));
     }

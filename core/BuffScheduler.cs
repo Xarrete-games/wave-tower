@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 public class BuffScheduler
 {
-    public event Action<TowerBuff> buff_expired;
-    public event Action<TowerBuff> buff_applied;
+    public event Action<TowerBuff> BuffExpired;
+    public event Action<TowerBuff> BuffApplied;
 
     private RunProgress progress;
 
@@ -18,7 +18,7 @@ public class BuffScheduler
         progress = runProgress;
     }
 
-    public void schedule(TowerBuff buff)
+    public void Schedule(TowerBuff buff)
     {
         Duration duration = buff?.duration;
         if (buff == null || duration == null)
@@ -106,7 +106,7 @@ public class BuffScheduler
 
     private void RemoveBuff(TowerBuff buff)
     {
-        buff_expired?.Invoke(buff);
+        BuffExpired?.Invoke(buff);
 
         TowerBuff residual = buff?.residual_buff;
         if (residual != null)
@@ -117,11 +117,11 @@ public class BuffScheduler
 
     private void AddResidual(TowerBuff buff)
     {
-        buff_applied?.Invoke(buff);
+        BuffApplied?.Invoke(buff);
 
         if (buff.duration != null)
         {
-            schedule(buff);
+            Schedule(buff);
         }
     }
 }

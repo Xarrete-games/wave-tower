@@ -125,8 +125,8 @@ public partial class EnemyGenerator : Node
             return;
         }
 
-        enemyObj.die += OnEnemyDie;
-        enemyObj.target_reached += OnEnemyTargetReached;
+        enemyObj.Died += OnEnemyDie;
+        enemyObj.TargetReached += OnEnemyTargetReached;
     }
 
     private void OnEnemyLeft(Node node)

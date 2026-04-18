@@ -10,7 +10,7 @@ public partial class DebuffHandler : Node
 
     public List<EnemyDebuffInstance> debuffs = new();
 
-    public void add_debuff(EnemyDebuff debuff, int amount, Variant enemyVar)
+    public void AddDebuff(EnemyDebuff debuff, int amount, Variant enemyVar)
     {
         Enemy enemy = enemyVar.As<Enemy>();
         if (debuff == null || enemy == null)
@@ -32,34 +32,25 @@ public partial class DebuffHandler : Node
             MaxStacks = debuff.MaxStacks,
         };
 
-        var enemyModel = new EnemyModel
-        {
-            MaxHealth = enemy.MaxHealth,
-            RemainingHealth = enemy.health,
-            ProgressRatio = enemy.get_progress_ratio(),
-            GoldValue = enemy.GoldValue,
-            HasAnyDebuff = enemy.has_any_debuff(),
-        };
-
         DebuffContext ctx = new(debuffModel, amount);
-        Hooks.OnDebuffApplied(Hooks.GetListenersFromRuntime(), ctx, enemyModel);
+        Hooks.OnDebuffApplied(Hooks.GetListenersFromRuntime(), ctx, enemy);
         int stacks = ctx.Stacks;
 
         for (int i = 0; i < stacks; i++)
         {
-            if (get_stacks((int)debuff.type) >= debuff.MaxStacks)
+            if (GetStacks((int)debuff.type) >= debuff.MaxStacks)
             {
                 break;
             }
 
             EnemyDebuffInstance instance = new(debuff);
             debuffs.Add(instance);
-            enemy.health_bar?.set_debuffs(debuffs);
+            enemy.HealthBar?.set_debuffs(debuffs);
             debuff.on_apply(enemy);
         }
     }
 
-    public void update_all(Variant enemyVar)
+    public void UpdateAll(Variant enemyVar)
     {
         Enemy enemy = enemyVar.As<Enemy>();
         if (enemy == null)
@@ -84,17 +75,17 @@ public partial class DebuffHandler : Node
             {
                 debuff.on_expire(enemy);
                 debuffs.RemoveAt(i);
-                enemy.health_bar?.set_debuffs(debuffs);
+                enemy.HealthBar?.set_debuffs(debuffs);
             }
         }
     }
 
-    public int get_stacks(int DebuffType)
+    public int GetStacks(int debuffType)
     {
         int count = 0;
         for (int i = 0; i < debuffs.Count; i++)
         {
-            if ((int)debuffs[i].debuff.type == DebuffType)
+            if ((int)debuffs[i].debuff.type == debuffType)
             {
                 count += 1;
             }
@@ -103,12 +94,12 @@ public partial class DebuffHandler : Node
         return count;
     }
 
-    public bool has_any_defbuff()
+    public bool HasAnyDebuff()
     {
         return debuffs.Count > 0;
     }
 
-    public List<EnemyDebuff> get_active_debuffs()
+    public List<EnemyDebuff> GetActiveDebuffs()
     {
         List<EnemyDebuff> result = new();
         for (int i = 0; i < debuffs.Count; i++)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public sealed class TunelVision : Relic
 {
     private const float _damageMultiplierPerHit = 0.05f;
-    private readonly Dictionary<TowerModel, EnemyModel> _towersLastTarget = new();
+    private readonly Dictionary<TowerModel, Enemy> _towersLastTarget = new();
     private readonly Dictionary<TowerModel, int> _hitCount = new();
 
     public TunelVision() : base("tunel_vision")

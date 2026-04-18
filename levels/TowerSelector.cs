@@ -54,7 +54,7 @@ public partial class TowerSelector : Node
     {
         if (_currentTowerSelected != null)
         {
-            _currentTowerSelected.stats_changed -= OnStatsChange;
+            _currentTowerSelected.StatsChanged -= OnStatsChange;
         }
 
         _currentTowerSelected = null;
@@ -72,13 +72,13 @@ public partial class TowerSelector : Node
         if (_currentTowerSelected == null)
         {
             _currentTowerSelected = tower;
-            _currentTowerSelected.stats_changed += OnStatsChange;
+            _currentTowerSelected.StatsChanged += OnStatsChange;
         }
         else if (_currentTowerSelected != tower)
         {
-            _currentTowerSelected.stats_changed -= OnStatsChange;
+            _currentTowerSelected.StatsChanged -= OnStatsChange;
             _currentTowerSelected = tower;
-            _currentTowerSelected.stats_changed += OnStatsChange;
+            _currentTowerSelected.StatsChanged += OnStatsChange;
         }
     }
 

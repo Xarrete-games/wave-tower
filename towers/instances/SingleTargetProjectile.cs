@@ -7,18 +7,18 @@ using Godot;
     private EnemyDebuff _debuff;
     private int _debuffStacks = 1;
     public override void _Process(double delta) {
-        Enemy enemyModel = _enemy as Enemy;
-        if (!GodotObject.IsInstanceValid(enemyModel)) {
+        Enemy enemy = _enemy as Enemy;
+        if (!GodotObject.IsInstanceValid(enemy)) {
             QueueFree();
             return;
         }
-        Vector2 targetPosition = enemyModel.target_position;
+        Vector2 targetPosition = enemy.TargetPosition;
         Vector2 direction = targetPosition - GlobalPosition;
         float distance = direction.Length();
         if (distance <= HIT_RADIUS) {
-            enemyModel?.apply_damage(_attack);
+            enemy?.ApplyDamage(_attack);
             if (_debuff != null) {
-                enemyModel?.apply_debuff(_debuff, _debuffStacks);
+                enemy?.ApplyDebuff(_debuff, _debuffStacks);
             }
             QueueFree();
             return;
@@ -26,17 +26,17 @@ using Godot;
         GlobalPosition += direction.Normalized() * SPEED * (float)delta;
         LookAt(targetPosition);
     }
-    public void set_target(Node2D enemy, Attack attack) {
-        set_target(enemy, attack, null, 1);
+    public void SetTarget(Node2D enemy, Attack attack) {
+        SetTarget(enemy, attack, null, 1);
     }
-    public void set_target(Node2D enemy, Attack attack, EnemyDebuff debuff) {
-        set_target(enemy, attack, debuff, 1);
+    public void SetTarget(Node2D enemy, Attack attack, EnemyDebuff debuff) {
+        SetTarget(enemy, attack, debuff, 1);
     }
-    public void set_target(Node2D enemy, Attack attack, EnemyDebuff debuff, int DebuffStacks) {
+    public void SetTarget(Node2D enemy, Attack attack, EnemyDebuff debuff, int debuffStacks) {
         _enemy = enemy;
         _attack = attack;
         _debuff = debuff;
-        _debuffStacks = DebuffStacks;
+        _debuffStacks = debuffStacks;
     }
 }
 

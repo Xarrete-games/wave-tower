@@ -11,10 +11,10 @@ public abstract class AbstractModel
     // Damage
     public virtual void OnBeforeDamage(DamageContext context) { }
     public virtual void OnBeforeAttack(AttackContext context) { }
-    public virtual void OnEnemyDie(EnemyModel enemy, AttackModel attack) { }
+    public virtual void OnEnemyDie(Enemy enemy, AttackModel attack) { }
 
     // Debuff
-    public virtual void OnDebuffApplied(DebuffContext context, EnemyModel target) { }
+    public virtual void OnDebuffApplied(DebuffContext context, Enemy target) { }
 
     // Relic
     public virtual void OnRelicAdded(Relic relicAdded) { }

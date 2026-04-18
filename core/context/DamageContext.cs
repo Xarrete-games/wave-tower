@@ -5,13 +5,13 @@ public class DamageContext
     public float damage_cap { get; set; } = 9999f;
 
     public AttackModel Attack { get; }
-    public EnemyModel Target { get; }
+    public Enemy Target { get; }
 
     public float ExtraAdditive { get => extra_additive; set => extra_additive = value; }
     public float ExtraMultiplicative { get => extra_multiplicative; set => extra_multiplicative = value; }
     public float DamageCap { get => damage_cap; set => damage_cap = value; }
 
-    public DamageContext(AttackModel attack, EnemyModel target)
+    public DamageContext(AttackModel attack, Enemy target)
     {
         Attack = attack;
         Target = target;

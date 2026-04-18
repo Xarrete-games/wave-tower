@@ -44,13 +44,13 @@ public partial class TowerPlacer : Node2D
         if (CompositeTileMap.is_mouse_on_buildeable_tile())
         {
             _isValidPlacement = true;
-            _currentTowerInstance.normal_color();
+            _currentTowerInstance.NormalColor();
             _currentTowerInstance.GlobalPosition = CompositeTileMap.get_current_tile_pos();
         }
         else
         {
             _isValidPlacement = false;
-            _currentTowerInstance.phantom_mode();
+            _currentTowerInstance.PhantomMode();
             _currentTowerInstance.GlobalPosition = GetGlobalMousePosition();
         }
     }
@@ -87,10 +87,10 @@ public partial class TowerPlacer : Node2D
 
         HandleCosts(towerPrice);
         string key = CompositeTileMap.set_tile_occupied_at_mouse();
-        _currentTowerInstance.composite_tile_key = key;
+        _currentTowerInstance.CompositeTileKey = key;
 
         _isPlacing = false;
-        _currentTowerInstance.enable();
+        _currentTowerInstance.Enable();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.towers_manager.add_tower_placed(_currentTowerInstance);

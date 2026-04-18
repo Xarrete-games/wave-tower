@@ -5,12 +5,12 @@ public partial class LightningTower : Tower
 {
     [Export] public PackedScene ElectricBallScene;
 
-    private Marker2D projectile_spawn_pos;
+    private Marker2D _projectileSpawnPos;
 
     public override void _Ready()
     {
         base._Ready();
-        projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
+        _projectileSpawnPos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
     protected override void _fire()
@@ -23,8 +23,8 @@ public partial class LightningTower : Tower
         SingleTargetProjectile projectile = ElectricBallScene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
-        projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
+        projectile.GlobalPosition = _projectileSpawnPos.GlobalPosition;
 
-        projectile.set_target(_current_target, _get_attack());
+        projectile.SetTarget(_current_target, _get_attack());
     }
 }

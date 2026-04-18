@@ -99,9 +99,9 @@ public partial class BlueProjectil : Area2D
 
         CpuParticles2D explosion = BLUE_EXPLOSION.Instantiate<CpuParticles2D>();
 
-        Enemy enemyModel = enemy as Enemy;
-        enemyModel?.apply_damage(_attack);
-        enemyModel?.apply_debuff(_frost_debuff);
+        Enemy enemyNode = enemy as Enemy;
+        enemyNode?.ApplyDamage(_attack);
+        enemyNode?.ApplyDebuff(_frost_debuff);
 
         AddChild(explosion);
         explosion.GlobalPosition = enemy.GlobalPosition;

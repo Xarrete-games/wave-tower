@@ -26,17 +26,17 @@ public partial class FireLaserTower : Tower
             return;
         }
 
-        float hpPercent = targetEnemy.get_percentage_remaining_health();
+        float hpPercent = targetEnemy.GetPercentageRemainingHealth();
         Attack nextAttack = hpPercent > execute_threshold ? _get_attack() : GetLetalAttack();
-        EnemyDebuff debuff = apply_burn ? EnemyDebuff.create_burn(damage_source) : null;
+        EnemyDebuff debuff = apply_burn ? EnemyDebuff.create_burn(DamageSource) : null;
 
-        red_projectile.set_target(targetEnemy, nextAttack, debuff);
+        red_projectile.SetTarget(targetEnemy, nextAttack, debuff);
         cristal_light?.turn_on();
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), Timer.SignalName.Timeout);
 
-        red_projectile.hit_target();
-        red_projectile.stop();
+        red_projectile.HitTarget();
+        red_projectile.Stop();
         cristal_light?.turn_off();
     }
 

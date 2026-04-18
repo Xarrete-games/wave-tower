@@ -28,7 +28,7 @@ public partial class FireTower : Tower
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
         Attack attack = _get_attack();
-        EnemyDebuff debuff = apply_burn ? EnemyDebuff.create_burn(damage_source) : null;
-        projectile.set_target(_current_target, attack, debuff);
+        EnemyDebuff debuff = apply_burn ? EnemyDebuff.create_burn(DamageSource) : null;
+        projectile.SetTarget(_current_target, attack, debuff);
     }
 }

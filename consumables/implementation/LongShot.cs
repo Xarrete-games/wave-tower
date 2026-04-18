@@ -10,7 +10,7 @@ public class LongShot : ConsumableTargeteable {
             return;
         }
         towerBuffObj.duration = new Duration(0, 1);
-        tower.add_buff(towerBuffObj);
+        tower.AddBuff(towerBuffObj);
     }
 }
 

@@ -17,6 +17,6 @@ public class BurnDebuff : EnemyDebuff
         attack.damage = value;
         attack.source = debuff_source;
 
-        enemy.apply_damage(attack);
+        enemy.ApplyDamage(attack);
     }
 }

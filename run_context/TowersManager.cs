@@ -361,7 +361,7 @@ public class TowersManager
             return string.Empty;
         }
 
-        string baseId = tower.type_id;
+        string baseId = tower.TypeId;
 
         if (!last_tower_ids.ContainsKey(baseId))
         {
@@ -400,7 +400,7 @@ public class TowersManager
         var model = new TowerModel
         {
             Id = tower.id,
-            TypeId = tower.type_id,
+            TypeId = tower.TypeId,
             Type = towerType,
         };
 
@@ -484,7 +484,7 @@ public class TowersManager
                 continue;
             }
 
-            tower.add_buff(legacyBuff);
+            tower.AddBuff(legacyBuff);
             appliedSources.Add(buff.SourceId);
         }
     }

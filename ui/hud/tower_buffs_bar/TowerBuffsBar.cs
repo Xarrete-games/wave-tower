@@ -25,16 +25,16 @@ public partial class TowerBuffsBar : Control
             return;
         }
 
-        tower.buff_added += OnTowerBuffAdded;
-        tower.buff_removed += OnTowerBuffRemoved;
+        tower.BuffAdded += OnTowerBuffAdded;
+        tower.BuffRemoved += OnTowerBuffRemoved;
     }
 
     public override void _ExitTree()
     {
         if (tower != null)
         {
-            tower.buff_added -= OnTowerBuffAdded;
-            tower.buff_removed -= OnTowerBuffRemoved;
+            tower.BuffAdded -= OnTowerBuffAdded;
+            tower.BuffRemoved -= OnTowerBuffRemoved;
         }
 
         tower_buffs.Clear();

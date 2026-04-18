@@ -13,13 +13,13 @@ public partial class FireFlamethrowerTower : Tower
         flame_thrower_duration_timer = GetNode<Timer>("FlameThrowerDurationTimer");
         fire_flamethrower_projectile = GetNode<FireFlamethrowerProjectile>("FireFlamethrowerProjectile");
 
-        on_target_change += OnNewTargetChange;
+        TargetChanged += OnNewTargetChange;
         flame_thrower_duration_timer.Timeout += OnFlameThrowerDurationTimerTimeout;
     }
 
     public override void _ExitTree()
     {
-        on_target_change -= OnNewTargetChange;
+        TargetChanged -= OnNewTargetChange;
         if (flame_thrower_duration_timer != null)
         {
             flame_thrower_duration_timer.Timeout -= OnFlameThrowerDurationTimerTimeout;
@@ -35,15 +35,15 @@ public partial class FireFlamethrowerTower : Tower
             return;
         }
 
-        fire_flamethrower_projectile.fire();
+        fire_flamethrower_projectile.Fire();
         Attack attack = _get_attack();
-        fire_flamethrower_projectile.set_target(_current_target, attack);
+        fire_flamethrower_projectile.SetTarget(_current_target, attack);
         flame_thrower_duration_timer.Start();
     }
 
     private void OnNewTargetChange(Node2D enemy)
     {
-        bool isThrowing = fire_flamethrower_projectile.is_throwing();
+        bool isThrowing = fire_flamethrower_projectile.IsThrowing();
         if (!isThrowing)
         {
             return;
@@ -51,16 +51,16 @@ public partial class FireFlamethrowerTower : Tower
 
         if (!GodotObject.IsInstanceValid(enemy))
         {
-            fire_flamethrower_projectile.stop();
+            fire_flamethrower_projectile.Stop();
             return;
         }
 
         Attack attack = _get_attack();
-        fire_flamethrower_projectile.set_target(enemy, attack);
+        fire_flamethrower_projectile.SetTarget(enemy, attack);
     }
 
     private void OnFlameThrowerDurationTimerTimeout()
     {
-        fire_flamethrower_projectile.stop();
+        fire_flamethrower_projectile.Stop();
     }
 }

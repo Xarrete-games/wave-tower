@@ -5,9 +5,9 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class TowerStatsHandler : Node
 {
-    public event Action<TowerStats> stats_change;
-    public event Action<TowerBuff> buff_applied;
-    public event Action<string> buff_expired;
+    public event Action<TowerStats> StatsChanged;
+    public event Action<TowerBuff> BuffApplied;
+    public event Action<string> BuffExpired;
 
     public TowerStats base_stats;
     public TowerStats stats_on_level;
@@ -25,44 +25,44 @@ public partial class TowerStatsHandler : Node
     }
 
     public TowerStats stats;
-    public BuffScheduler buff_scheduler;
+    public BuffScheduler BuffScheduler;
 
     public override void _Ready()
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        buff_scheduler = new BuffScheduler(runContext?.progress);
-        buff_scheduler.buff_expired += OnScheduledBuffExpired;
-        buff_scheduler.buff_applied += OnScheduledBuffApplied;
+        BuffScheduler = new BuffScheduler(runContext?.progress);
+        BuffScheduler.BuffExpired += OnScheduledBuffExpired;
+        BuffScheduler.BuffApplied += OnScheduledBuffApplied;
     }
 
-    public void set_data(TowerData stats_configuration, int _p_tower_type)
+    public void SetData(TowerData statsConfiguration, int towerType)
     {
-        base_stats = stats_configuration?.stats?.duplicate() ?? new TowerStats();
-        stats_on_level = stats_configuration?.stats_on_level?.duplicate() ?? new TowerStats();
+        base_stats = statsConfiguration?.stats?.duplicate() ?? new TowerStats();
+        stats_on_level = statsConfiguration?.stats_on_level?.duplicate() ?? new TowerStats();
         stats = base_stats.duplicate();
         UpdateStats();
     }
 
-    public void add_buff(TowerBuff tower_buff)
+    public void AddBuff(TowerBuff towerBuff)
     {
-        buffs.Add(tower_buff);
+        buffs.Add(towerBuff);
 
-        if (tower_buff?.duration != null)
+        if (towerBuff?.duration != null)
         {
-            buff_scheduler.schedule(tower_buff);
+            BuffScheduler.Schedule(towerBuff);
         }
 
         RebuildStatsAcc();
     }
 
-    public void remove_buff(string source_id)
+    public void RemoveBuff(string sourceId)
     {
         int initialSize = buffs.Count;
         for (int i = buffs.Count - 1; i >= 0; i--)
         {
             TowerBuff buffObj = buffs[i];
             string buffSourceId = buffObj?.source?.TypeId ?? string.Empty;
-            if (buffSourceId == source_id)
+            if (buffSourceId == sourceId)
             {
                 buffs.RemoveAt(i);
             }
@@ -74,7 +74,7 @@ public partial class TowerStatsHandler : Node
         }
     }
 
-    public void level_up(int _new_level)
+    public void LevelUp(int newLevel)
     {
         base_stats.add_stats(stats_on_level);
         UpdateStats();
@@ -82,13 +82,13 @@ public partial class TowerStatsHandler : Node
 
     private void OnScheduledBuffApplied(TowerBuff buff)
     {
-        buff_applied?.Invoke(buff);
+        BuffApplied?.Invoke(buff);
     }
 
     private void OnScheduledBuffExpired(TowerBuff buff)
     {
         string sourceId = buff?.source?.TypeId ?? string.Empty;
-        buff_expired?.Invoke(sourceId);
+        BuffExpired?.Invoke(sourceId);
     }
 
     private void RebuildStatsAcc()
@@ -123,6 +123,6 @@ public partial class TowerStatsHandler : Node
         stats.critic_chance = (base_stats.critic_chance + total.flat_critic_chance) * (1.0f + total.critic_chance_mult);
         stats.critic_damage = (base_stats.critic_damage + total.flat_critic_damage) * (1.0f + total.critic_damage_mult);
 
-        stats_change?.Invoke(stats);
+        StatsChanged?.Invoke(stats);
     }
 }

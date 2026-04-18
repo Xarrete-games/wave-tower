@@ -8,22 +8,22 @@ public partial class FireFlamethrowerProjectile : Node2D
 
     private Node2D _target;
     private Attack _attack;
-    private readonly Array<Node2D> _tagers_in_area = new();
+    private readonly Array<Node2D> _targetsInArea = new();
 
     private CpuParticles2D _fire_particles;
     private Timer _damage_timer;
-    private Area2D _area_2d;
+    private Area2D _area2D;
     private Node2D _flamethrower;
 
     public override void _Ready()
     {
         _fire_particles = GetNode<CpuParticles2D>("%FireParticles");
         _damage_timer = GetNode<Timer>("%DamageTimer");
-        _area_2d = GetNode<Area2D>("%Area2D");
+        _area2D = GetNode<Area2D>("%Area2D");
         _flamethrower = GetNode<Node2D>("%Flamethrower");
 
         _damage_timer.WaitTime = DAMAGE_TICK_INTERVAL;
-        stop();
+        Stop();
     }
 
     public override void _Process(double delta)
@@ -34,51 +34,51 @@ public partial class FireFlamethrowerProjectile : Node2D
             return;
         }
 
-        Vector2 targetPosition = targetEnemy.target_position;
+        Vector2 targetPosition = targetEnemy.TargetPosition;
         Vector2 dir = targetPosition - GlobalPosition;
         _flamethrower.Rotation = dir.Angle();
     }
 
-    public void fire()
+    public void Fire()
     {
         _damage_timer.Start();
         _fire_particles.Emitting = true;
-        _area_2d.Monitoring = true;
+        _area2D.Monitoring = true;
     }
 
-    public void set_target(Node2D enemy, Attack attack)
+    public void SetTarget(Node2D enemy, Attack attack)
     {
         _target = enemy;
         _attack = attack;
     }
 
-    public void stop()
+    public void Stop()
     {
         _fire_particles.Emitting = false;
-        _area_2d.Monitoring = false;
+        _area2D.Monitoring = false;
         _damage_timer.Stop();
-        _tagers_in_area.Clear();
+        _targetsInArea.Clear();
     }
 
-    public bool is_throwing()
+    public bool IsThrowing()
     {
         return _fire_particles.Emitting;
     }
 
     private void OnArea2dBodyExited(Node2D body)
     {
-        _tagers_in_area.Remove(body);
+        _targetsInArea.Remove(body);
     }
 
     private void OnArea2dBodyEntered(Node2D body)
     {
-        _tagers_in_area.Add(body);
-        body.TreeExited += () => _tagers_in_area.Remove(body);
+        _targetsInArea.Add(body);
+        body.TreeExited += () => _targetsInArea.Remove(body);
     }
 
     private void OnDamageTimerTimeout()
     {
-        foreach (Node2D target in _tagers_in_area)
+        foreach (Node2D target in _targetsInArea)
         {
             if (!GodotObject.IsInstanceValid(target))
             {
@@ -87,11 +87,11 @@ public partial class FireFlamethrowerProjectile : Node2D
 
             Source source = _attack?.source;
             EnemyDebuff debuff = source != null ? EnemyDebuff.create_burn(source) : null;
-            Enemy enemyModel = target as Enemy;
-            enemyModel?.apply_damage(_attack);
+            Enemy enemy = target as Enemy;
+            enemy?.ApplyDamage(_attack);
             if (debuff != null)
             {
-                enemyModel?.apply_debuff(debuff);
+                enemy?.ApplyDebuff(debuff);
             }
         }
     }

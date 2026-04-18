@@ -5,8 +5,8 @@ using System;
 [GlobalClass]
 public partial class Enemy : CharacterBody2D
 {
-    public event Action<Enemy, Attack> die;
-    public event Action<Enemy> target_reached;
+    public event Action<Enemy, Attack> Died;
+    public event Action<Enemy> TargetReached;
 
     public enum TypeLegacy
     {
@@ -32,89 +32,89 @@ public partial class Enemy : CharacterBody2D
     [Export] public int GoldValue = 1;
     [Export] public int damage = 1;
 
-    public float health;
-    public Tween hit_tween;
-    public bool _last_is_right_direction = false;
+    public float Health;
+    public HealthBar HealthBar;
+    public DebuffHandler DebuffHandler;
 
-    public Color default_modulate_color = Colors.White;
-    public float _BaseSpeed = 100.0f;
-    public float _speed_mult = 1.0f;
-    public bool is_right_direction = true;
-
-    public bool enabled = true;
-    public bool _is_dead = false;
+    private Tween _hitTween;
+    private bool _lastIsRightDirection;
+    private Color _defaultModulateColor = Colors.White;
+    private float _baseSpeed = 100.0f;
+    private float _speedMultiplier = 1.0f;
+    private bool _isRightDirection = true;
+    private bool _isDead;
 
     private readonly Array<Vector2> _waypoints = new();
-    private int _current_waypoint_index = 0;
-    private float _total_path_length = 0.0f;
+    private int _currentWaypointIndex;
+    private float _totalPathLength;
     private Vector2 _velocity = Vector2.Zero;
 
-    private AnimationPlayer animation_player;
-    public HealthBar health_bar;
-    private AnimatedSprite2D animated_sprite_2d;
-    private CollisionShape2D collision_shape_2d;
-    public DebuffHandler debuff_handler;
-    private Marker2D target_position_left;
-    private Marker2D target_position_right;
+    private AnimationPlayer _animationPlayer;
+    private AnimatedSprite2D _animatedSprite2D;
+    private CollisionShape2D _collisionShape2D;
+    private Marker2D _targetPositionLeft;
+    private Marker2D _targetPositionRight;
 
-    public float speed
+    public bool IsEnabled { get; private set; } = true;
+
+    public float Speed
     {
-        get => _BaseSpeed * _speed_mult;
-        set => _BaseSpeed = value;
+        get => _baseSpeed * _speedMultiplier;
+        set => _baseSpeed = value;
     }
 
-    public float speed_mult
+    public float SpeedMultiplier
     {
-        get => _speed_mult;
-        set => _speed_mult = value;
+        get => _speedMultiplier;
+        set => _speedMultiplier = value;
     }
 
-    public Vector2 target_position => is_right_direction ? target_position_right.GlobalPosition : target_position_left.GlobalPosition;
+    public Vector2 TargetPosition => _isRightDirection ? _targetPositionRight.GlobalPosition : _targetPositionLeft.GlobalPosition;
 
-    public Vector2 inversed_target_position => is_right_direction ? target_position_left.GlobalPosition : target_position_right.GlobalPosition;
+    public Vector2 InversedTargetPosition => _isRightDirection ? _targetPositionLeft.GlobalPosition : _targetPositionRight.GlobalPosition;
 
     public override async void _Ready()
     {
-        animation_player = GetNode<AnimationPlayer>("AnimationPlayer");
-        health_bar = GetNode<HealthBar>("HealthBar");
-        animated_sprite_2d = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-        collision_shape_2d = GetNode<CollisionShape2D>("CollisionShape2D");
-        debuff_handler = GetNode<DebuffHandler>("DebuffHandler");
-        target_position_left = GetNode<Marker2D>("TargetPositionLeft");
-        target_position_right = GetNode<Marker2D>("TargetPositionRight");
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        HealthBar = GetNode<HealthBar>("HealthBar");
+        _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        _collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
+        DebuffHandler = GetNode<DebuffHandler>("DebuffHandler");
+        _targetPositionLeft = GetNode<Marker2D>("TargetPositionLeft");
+        _targetPositionRight = GetNode<Marker2D>("TargetPositionRight");
 
-        speed = BaseSpeed;
-        health_bar.set_MaxHealth(MaxHealth);
-        _set_health(MaxHealth);
+        Speed = BaseSpeed;
+        HealthBar.set_MaxHealth(MaxHealth);
+        SetHealth(MaxHealth);
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), Timer.SignalName.Timeout);
-        enabled = true;
+        IsEnabled = true;
     }
 
     public override void _Process(double delta)
     {
-        debuff_handler.update_all(this);
+        DebuffHandler.UpdateAll(this);
 
         if (_waypoints.Count > 0)
         {
-            _process_waypoints((float)delta);
+            ProcessWaypoints((float)delta);
         }
     }
 
-    public void _process_waypoints(float delta)
+    private void ProcessWaypoints(float delta)
     {
-        if (_current_waypoint_index >= _waypoints.Count)
+        if (_currentWaypointIndex >= _waypoints.Count)
         {
-            _on_target_reached();
+            OnTargetReached();
             return;
         }
 
-        Vector2 targetPoint = _waypoints[_current_waypoint_index];
+        Vector2 targetPoint = _waypoints[_currentWaypointIndex];
         float distance = GlobalPosition.DistanceTo(targetPoint);
 
         if (distance <= WAYPOINT_ARRIVAL_THRESHOLD)
         {
-            _current_waypoint_index += 1;
+            _currentWaypointIndex += 1;
             return;
         }
 
@@ -122,8 +122,8 @@ public partial class Enemy : CharacterBody2D
         float previousGlobalY = GlobalPosition.Y;
 
         Vector2 direction = (targetPoint - GlobalPosition).Normalized();
-        Vector2 desiredVelocity = direction * speed;
-        _velocity = _velocity.MoveToward(desiredVelocity, STEERING_FACTOR * speed * delta);
+        Vector2 desiredVelocity = direction * Speed;
+        _velocity = _velocity.MoveToward(desiredVelocity, STEERING_FACTOR * Speed * delta);
 
         Vector2 displacement = _velocity * delta;
         if (displacement.Length() >= distance)
@@ -135,36 +135,36 @@ public partial class Enemy : CharacterBody2D
             GlobalPosition += displacement;
         }
 
-        _update_sprite_direction(previousGlobalX);
-        _update_animation(previousGlobalY);
+        UpdateSpriteDirection(previousGlobalX);
+        UpdateAnimation(previousGlobalY);
     }
 
-    public void _update_sprite_direction(float previous_x)
+    private void UpdateSpriteDirection(float previousX)
     {
-        is_right_direction = GlobalPosition.X > previous_x;
-        Marker2D marker = is_right_direction ? target_position_right : target_position_left;
+        _isRightDirection = GlobalPosition.X > previousX;
+        Marker2D marker = _isRightDirection ? _targetPositionRight : _targetPositionLeft;
 
-        Vector2 hbPos = health_bar.Position;
-        hbPos.X = marker.Position.X - health_bar.Size.X * health_bar.Scale.X * 0.5f;
-        health_bar.Position = hbPos;
+        Vector2 hbPos = HealthBar.Position;
+        hbPos.X = marker.Position.X - HealthBar.Size.X * HealthBar.Scale.X * 0.5f;
+        HealthBar.Position = hbPos;
 
-        if (is_right_direction != _last_is_right_direction)
+        if (_isRightDirection != _lastIsRightDirection)
         {
-            animated_sprite_2d.FlipH = !animated_sprite_2d.FlipH;
-            _last_is_right_direction = is_right_direction;
+            _animatedSprite2D.FlipH = !_animatedSprite2D.FlipH;
+            _lastIsRightDirection = _isRightDirection;
         }
     }
 
-    public void _update_animation(float previous_y)
+    private void UpdateAnimation(float previousY)
     {
-        string animation = previous_y > GlobalPosition.Y ? "top right" : "down right";
-        if (animated_sprite_2d.Animation != animation || !animated_sprite_2d.IsPlaying())
+        string animation = previousY > GlobalPosition.Y ? "top right" : "down right";
+        if (_animatedSprite2D.Animation != animation || !_animatedSprite2D.IsPlaying())
         {
-            animated_sprite_2d.Play(animation);
+            _animatedSprite2D.Play(animation);
         }
     }
 
-    public void set_waypoints(Array<Vector2> waypoints)
+    public void SetWaypoints(Array<Vector2> waypoints)
     {
         _waypoints.Clear();
         for (int i = 0; i < waypoints.Count; i++)
@@ -172,12 +172,12 @@ public partial class Enemy : CharacterBody2D
             _waypoints.Add(waypoints[i]);
         }
 
-        _current_waypoint_index = 0;
+        _currentWaypointIndex = 0;
         _velocity = Vector2.Zero;
-        _total_path_length = _compute_path_length(_waypoints);
+        _totalPathLength = ComputePathLength(_waypoints);
     }
 
-    public float _compute_path_length(Array<Vector2> points)
+    private float ComputePathLength(Array<Vector2> points)
     {
         float length = 0.0f;
         for (int i = 1; i < points.Count; i++)
@@ -188,141 +188,151 @@ public partial class Enemy : CharacterBody2D
         return length;
     }
 
-    public float get_progress_ratio()
+    public float GetProgressRatio()
     {
-        if (_waypoints.Count == 0 || _total_path_length <= 0.0f)
+        if (_waypoints.Count == 0 || _totalPathLength <= 0.0f)
         {
             return 0.0f;
         }
 
-        if (_current_waypoint_index >= _waypoints.Count)
+        if (_currentWaypointIndex >= _waypoints.Count)
         {
             return 1.0f;
         }
 
         float covered = 0.0f;
-        for (int i = 1; i < _current_waypoint_index; i++)
+        for (int i = 1; i < _currentWaypointIndex; i++)
         {
             covered += _waypoints[i - 1].DistanceTo(_waypoints[i]);
         }
 
-        Vector2 segStart = _current_waypoint_index > 0 ? _waypoints[_current_waypoint_index - 1] : _waypoints[0];
+        Vector2 segStart = _currentWaypointIndex > 0 ? _waypoints[_currentWaypointIndex - 1] : _waypoints[0];
         covered += segStart.DistanceTo(GlobalPosition);
-        return Mathf.Clamp(covered / _total_path_length, 0.0f, 1.0f);
+        return Mathf.Clamp(covered / _totalPathLength, 0.0f, 1.0f);
     }
 
-    public bool has_waypoints()
+    public bool HasWaypoints()
     {
-        return _waypoints.Count > 0 && _current_waypoint_index < _waypoints.Count;
+        return _waypoints.Count > 0 && _currentWaypointIndex < _waypoints.Count;
     }
 
-    public Vector2 get_current_waypoint()
+    public Vector2 GetCurrentWaypoint()
     {
-        if (_current_waypoint_index < _waypoints.Count)
+        if (_currentWaypointIndex < _waypoints.Count)
         {
-            return _waypoints[_current_waypoint_index];
+            return _waypoints[_currentWaypointIndex];
         }
 
         return Vector2.Zero;
     }
 
-    public void disable()
+    public void Disable()
     {
-        enabled = false;
-        animated_sprite_2d.Visible = false;
-        collision_shape_2d.Disabled = true;
-        health_bar.Visible = false;
+        IsEnabled = false;
+        if (_animatedSprite2D == null || _collisionShape2D == null || HealthBar == null)
+        {
+            return;
+        }
+
+        _animatedSprite2D.Visible = false;
+        _collisionShape2D.Disabled = true;
+        HealthBar.Visible = false;
     }
 
-    public async void enable()
+    public async void Enable()
     {
-        enabled = true;
-        animated_sprite_2d.Visible = true;
-        health_bar.Visible = true;
+        IsEnabled = true;
+        if (_animatedSprite2D == null || _collisionShape2D == null || HealthBar == null)
+        {
+            return;
+        }
+
+        _animatedSprite2D.Visible = true;
+        HealthBar.Visible = true;
 
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        collision_shape_2d.Disabled = false;
+        _collisionShape2D.Disabled = false;
     }
 
-    public float get_percentage_remaining_health()
+    public float GetPercentageRemainingHealth()
     {
         if (MaxHealth <= 0.0f)
         {
             return 0.0f;
         }
 
-        float healthRatio = health / MaxHealth;
+        float healthRatio = Health / MaxHealth;
         float percentage = healthRatio * 100.0f;
         return Mathf.Min(100.0f, percentage);
     }
 
-    public float get_remaining_health()
+    public float GetRemainingHealth()
     {
-        return health;
+        return Health;
     }
 
-    public int get_debuff_stacks(int DebuffType)
+    public int GetDebuffStacks(int debuffType)
     {
-        return debuff_handler.get_stacks(DebuffType);
+        return DebuffHandler.GetStacks(debuffType);
     }
 
-    public System.Collections.Generic.List<EnemyDebuff> get_active_debuffs()
+    public System.Collections.Generic.List<EnemyDebuff> GetActiveDebuffs()
     {
-        return debuff_handler.get_active_debuffs();
+        return DebuffHandler.GetActiveDebuffs();
     }
 
-    public bool has_any_debuff()
+    public bool HasAnyDebuff()
     {
-        return debuff_handler.has_any_defbuff();
+        return DebuffHandler.HasAnyDebuff();
     }
 
-    public void apply_debuff(EnemyDebuff debuff, int amount = 1)
+    public void ApplyDebuff(EnemyDebuff debuff, int amount = 1)
     {
-        debuff_handler.add_debuff(debuff, amount, this);
+        DebuffHandler.AddDebuff(debuff, amount, this);
     }
 
-    public void apply_damage(Attack attack)
+    public void ApplyDamage(Attack attack)
     {
-        if (_is_dead)
+        if (_isDead)
         {
             return;
         }
 
-        DamageContext ctx = new(BuildAttackModel(attack), BuildEnemyModel());
+        DamageContext ctx = new(BuildAttackModel(attack), this);
         Hooks.OnBeforeDamage(Hooks.GetListenersFromRuntime(), ctx);
         float modifiedDamage = ctx.get_total_damage();
 
         attack.damage = modifiedDamage;
 
-        _set_health(health - attack.damage);
-        _play_hit_animation();
-        _show_damage(attack);
+        SetHealth(Health - attack.damage);
+        PlayHitAnimation();
+        ShowDamage(attack);
 
-        if (health <= 0.0f && !_is_dead)
+        if (Health <= 0.0f && !_isDead)
         {
-            _is_dead = true;
-            _die(attack);
+            _isDead = true;
+            Die(attack);
         }
     }
 
-    public async void _play_hit_animation()
+    private async void PlayHitAnimation()
     {
-        if (hit_tween != null && hit_tween.IsRunning())
+        if (_hitTween != null && _hitTween.IsRunning())
         {
-            hit_tween.Kill();
+            _hitTween.Kill();
         }
 
-        hit_tween = CreateTween();
-        hit_tween.TweenProperty(animated_sprite_2d, "modulate", Colors.Red, 0.2f);
-        await ToSignal(hit_tween, Tween.SignalName.Finished);
-        animated_sprite_2d.Modulate = default_modulate_color;
+        _hitTween = CreateTween();
+        _hitTween.TweenProperty(_animatedSprite2D, "modulate", Colors.Red, 0.2f);
+        await ToSignal(_hitTween, Tween.SignalName.Finished);
+        _animatedSprite2D.Modulate = _defaultModulateColor;
     }
 
-    public void _die(Attack attack)
+    private void Die(Attack attack)
     {
-        die?.Invoke(this, attack);
-        Hooks.OnEnemyDie(Hooks.GetListenersFromRuntime(), BuildEnemyModel(), BuildAttackModel(attack));
-        _show_gold_dropped();
+        Died?.Invoke(this, attack);
+        Hooks.OnEnemyDie(Hooks.GetListenersFromRuntime(), this, BuildAttackModel(attack));
+        ShowGoldDropped();
 
         RunContext runContext = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
         if (runContext?.economy != null)
@@ -362,23 +372,11 @@ public partial class Enemy : CharacterBody2D
         return model;
     }
 
-    private EnemyModel BuildEnemyModel()
-    {
-        return new EnemyModel
-        {
-            MaxHealth = MaxHealth,
-            RemainingHealth = health,
-            ProgressRatio = get_progress_ratio(),
-            GoldValue = GoldValue,
-            HasAnyDebuff = has_any_debuff(),
-        };
-    }
-
-    public void _show_damage(Attack attack)
+    private void ShowDamage(Attack attack)
     {
         const int MAX_OFFSET = 30;
         DamageNumbers damageNumbers = DAMAGE_NUMBERS.Instantiate<DamageNumbers>();
-        Vector2 basePosition = target_position;
+        Vector2 basePosition = TargetPosition;
 
         int randomOffsetX = (int)GD.RandRange(-MAX_OFFSET, MAX_OFFSET);
         int randomOffsetY = (int)GD.RandRange(-MAX_OFFSET, MAX_OFFSET);
@@ -389,24 +387,24 @@ public partial class Enemy : CharacterBody2D
         damageNumbers.set_attack(attack);
     }
 
-    public void _show_gold_dropped()
+    private void ShowGoldDropped()
     {
         GoldDropped goldDropped = GOLD_DROPPED.Instantiate<GoldDropped>();
         GetTree().Root.AddChild(goldDropped);
         goldDropped.set_gold(GoldValue);
-        goldDropped.GlobalPosition = target_position;
+        goldDropped.GlobalPosition = TargetPosition;
     }
 
-    public void _on_target_reached()
+    private void OnTargetReached()
     {
-        target_reached?.Invoke(this);
+        TargetReached?.Invoke(this);
         QueueFree();
     }
 
-    public void _set_health(float new_value)
+    private void SetHealth(float newValue)
     {
-        health = new_value;
-        health_bar.update_health(health);
+        Health = newValue;
+        HealthBar.update_health(Health);
     }
 }
 

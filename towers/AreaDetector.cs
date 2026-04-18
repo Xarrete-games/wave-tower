@@ -128,7 +128,7 @@ public partial class AreaDetector : Area2D
                 continue;
             }
 
-            var ratio = typedEnemy.get_progress_ratio();
+            var ratio = typedEnemy.GetProgressRatio();
             if (ratio > highestProgress)
             {
                 highestProgress = ratio;
@@ -151,7 +151,7 @@ public partial class AreaDetector : Area2D
                 continue;
             }
 
-            var hp = typedEnemy.get_remaining_health();
+            var hp = typedEnemy.GetRemainingHealth();
             if (hp > highestHp)
             {
                 highestHp = hp;
@@ -174,7 +174,7 @@ public partial class AreaDetector : Area2D
                 continue;
             }
 
-            var hp = typedEnemy.get_remaining_health();
+            var hp = typedEnemy.GetRemainingHealth();
             if (hp < lowestHp)
             {
                 lowestHp = hp;
@@ -200,7 +200,7 @@ public partial class AreaDetector : Area2D
 
         if (enemy is Enemy typedEnemy)
         {
-            return typedEnemy.enabled;
+            return typedEnemy.IsEnabled;
         }
 
         return true;

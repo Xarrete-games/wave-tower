@@ -9,7 +9,7 @@ public class FrostDebuff : EnemyDebuff
             return;
         }
 
-        enemy.speed_mult -= value / 100.0f;
+        enemy.SpeedMultiplier -= value / 100.0f;
     }
 
     public override void on_expire(Enemy enemy)
@@ -19,6 +19,6 @@ public class FrostDebuff : EnemyDebuff
             return;
         }
 
-        enemy.speed_mult += value / 100.0f;
+        enemy.SpeedMultiplier += value / 100.0f;
     }
 }

@@ -37,7 +37,7 @@ public partial class FireLaserProjectiel : Node2D
         _red_attack_finish = GetNode<AudioStreamPlayer2D>("RedAttack_finish");
         _fire_particles = GetNode<CpuParticles2D>("FireParticles");
 
-        set_color(color);
+        SetColor(color);
         _fire_particles.Emitting = false;
     }
 
@@ -49,7 +49,7 @@ public partial class FireLaserProjectiel : Node2D
             return;
         }
 
-        Vector2 targetPosition = targetEnemy.target_position;
+        Vector2 targetPosition = targetEnemy.TargetPosition;
         LookAt(targetPosition);
 
         float distanceToTarget = GlobalPosition.DistanceTo(targetPosition);
@@ -73,23 +73,23 @@ public partial class FireLaserProjectiel : Node2D
         }
     }
 
-    public void stop()
+    public void Stop()
     {
         _target = null;
         SetIsCasting(false);
     }
 
-    public void set_target(Node2D target, Attack attack)
+    public void SetTarget(Node2D target, Attack attack)
     {
-        set_target(target, attack, null, 1);
+        SetTarget(target, attack, null, 1);
     }
 
-    public void set_target(Node2D target, Attack attack, EnemyDebuff debuff)
+    public void SetTarget(Node2D target, Attack attack, EnemyDebuff debuff)
     {
-        set_target(target, attack, debuff, 1);
+        SetTarget(target, attack, debuff, 1);
     }
 
-    public void set_target(Node2D target, Attack attack, EnemyDebuff debuff, int amount)
+    public void SetTarget(Node2D target, Attack attack, EnemyDebuff debuff, int amount)
     {
         if (target == _target)
         {
@@ -107,22 +107,22 @@ public partial class FireLaserProjectiel : Node2D
         }
     }
 
-    public void hit_target()
+    public void HitTarget()
     {
         if (!GodotObject.IsInstanceValid(_target))
         {
             return;
         }
 
-        Enemy enemyModel = _target as Enemy;
-        enemyModel?.apply_damage(_attack);
+        Enemy enemy = _target as Enemy;
+        enemy?.ApplyDamage(_attack);
         if (_debuff != null)
         {
-            enemyModel?.apply_debuff(_debuff, _amount_debuff);
+            enemy?.ApplyDebuff(_debuff, _amount_debuff);
         }
     }
 
-    public void set_color(Color new_color)
+    public void SetColor(Color new_color)
     {
         _color = new_color;
         if (_line_2d != null)

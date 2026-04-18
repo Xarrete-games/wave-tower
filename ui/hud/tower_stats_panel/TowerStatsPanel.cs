@@ -62,7 +62,7 @@ public partial class TowerStatsPanel : Control
         Hooks.OnGetTargetingModes(Hooks.GetListenersFromRuntime(), targetingModes);
         UpdateTargetingModes(targetingModes);
 
-        int targetingMode = tower.targeting_mode;
+        int targetingMode = tower.CurrentTargetingMode;
         _targetingModeSelector.Select(targetingMode);
 
         ActionManager manager = GetNode<ActionManager>("/root/ActionManager");
@@ -70,7 +70,7 @@ public partial class TowerStatsPanel : Control
         Visible = true;
 
         TowerStats stats = tower.stats;
-        TowerExpData expData = tower.exp_data;
+        TowerExpData expData = tower.ExpData;
         UpdateStats(stats);
         UpdateExpData(expData);
 
@@ -80,7 +80,7 @@ public partial class TowerStatsPanel : Control
         _currentTower = tower;
 
         _levelLabel.Text = tower.level.ToString();
-        if (tower.is_max_level())
+        if (tower.IsMaxLevel())
         {
             HideUpgradeOptions();
         }
@@ -124,7 +124,7 @@ public partial class TowerStatsPanel : Control
         for (int index = 0; index < modes.Count; index++)
         {
             int mode = (int)modes[index];
-            string modeName = Tower.targeting_mode_to_string(mode);
+            string modeName = Tower.TargetingModeToString(mode);
             _targetingModeSelector.AddItem(modeName, mode);
         }
     }
@@ -137,7 +137,7 @@ public partial class TowerStatsPanel : Control
         }
 
         int mode = _targetingModeSelector.GetItemId(index);
-        _currentTower.targeting_mode = mode;
+        _currentTower.CurrentTargetingMode = mode;
     }
 
     private void OnRemoveButtonPressed()

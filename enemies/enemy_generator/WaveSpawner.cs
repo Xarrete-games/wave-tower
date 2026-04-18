@@ -175,7 +175,6 @@ public partial class WaveSpawner : Node
 
         ApplyStats(enemy, data);
         enemy.AddToGroup("enemy");
-        enemy.enabled = false;
 
         if (EnemiesContainer == null)
         {
@@ -185,10 +184,10 @@ public partial class WaveSpawner : Node
         }
 
         EnemiesContainer.AddChild(enemy);
-        enemy.disable();
+        enemy.Disable();
         enemy.GlobalPosition = enemyWaypoints[0];
-        enemy.enable();
-        enemy.set_waypoints(enemyWaypoints);
+        enemy.Enable();
+        enemy.SetWaypoints(enemyWaypoints);
 
         enemy_spawned?.Invoke(enemy);
     }

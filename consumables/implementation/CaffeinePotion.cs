@@ -31,7 +31,7 @@ public class CaffeinePotion : ConsumableUsable
             buffObj.duration = duration;
             buffObj.residual_buff = debuffObj;
 
-            tower.add_buff(buffObj);
+            tower.AddBuff(buffObj);
         }
     }
 }
