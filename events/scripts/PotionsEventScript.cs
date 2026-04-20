@@ -46,7 +46,7 @@ public partial class PotionsEventScript : EventScript
         Consumable consumable = consumableData?.CreateConsumable();
         if (consumable != null)
         {
-            runContext.consumables_manager.AddConsumable(consumable);
+            runContext.ConsumablesManager.AddConsumable(consumable);
         }
     }
 }

@@ -11,7 +11,7 @@ public partial class FountainsOfWishesScript : EventScript
             return new List<EventOptionData>();
         }
 
-        int gold = runContext.economy.gold;
+        int gold = runContext.Economy.Gold;
         bool epicAvailable = DataLoaderAccess.GetNotUsedRelicsTyped(2, false).Count > 0;
         bool rareAvailable = DataLoaderAccess.GetNotUsedRelicsTyped(1, false).Count > 0;
         bool commonAvailable = DataLoaderAccess.GetNotUsedRelicsTyped(0, false).Count > 0;
@@ -47,7 +47,7 @@ public partial class FountainsOfWishesScript : EventScript
             return;
         }
 
-        runContext.relics_manager.AddRelic(relic);
+        runContext.RelicsManager.AddRelic(relic);
 
         int goldCost = rarity switch
         {
@@ -57,6 +57,6 @@ public partial class FountainsOfWishesScript : EventScript
             _ => 0,
         };
 
-        runContext.economy.SpendGold(goldCost);
+        runContext.Economy.SpendGold(goldCost);
     }
 }

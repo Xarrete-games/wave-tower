@@ -24,10 +24,10 @@ public partial class TowersMenu : Control
         }
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _towersManager = runContext?.towers_manager;
+        _towersManager = runContext?.TowersManager;
         if (_towersManager != null)
         {
-            _towersManager.tower_card_amount_change += OnTowerCardAdded;
+            _towersManager.TowerCardAmountChanged += OnTowerCardAdded;
         }
         InitButtonCards();
     }
@@ -36,7 +36,7 @@ public partial class TowersMenu : Control
     {
         if (_towersManager != null)
         {
-            _towersManager.tower_card_amount_change -= OnTowerCardAdded;
+            _towersManager.TowerCardAmountChanged -= OnTowerCardAdded;
             _towersManager = null;
         }
     }
@@ -44,9 +44,9 @@ public partial class TowersMenu : Control
     private void InitButtonCards()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        foreach (KeyValuePair<string, int> pair in runContext.towers_manager.tower_cards_amount)
+        foreach (KeyValuePair<string, int> pair in runContext.TowersManager.TowerCardsAmount)
         {
-            TowerDataWithInstance towerConfiguration = runContext.towers_manager.get_tower_configuration_by_id(pair.Key);
+            TowerDataWithInstance towerConfiguration = runContext.TowersManager.GetTowerConfigurationById(pair.Key);
             OnTowerCardAdded(towerConfiguration, pair.Value);
         }
     }

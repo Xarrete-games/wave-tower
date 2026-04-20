@@ -44,7 +44,7 @@ public class RelicOffersManager
         var filtered = new List<RelicData>();
 
         RunContext runContext = GetRunContext();
-        RelicsManager relicsManager = runContext?.relics_manager;
+        RelicsManager relicsManager = runContext?.RelicsManager;
 
         for (int index = 0; index < _allRelicData.Count; index++)
         {

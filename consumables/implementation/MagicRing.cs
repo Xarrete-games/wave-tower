@@ -3,13 +3,13 @@ public class MagicRing : ConsumableUsable
     public override void use()
     {
         RunContext runContext = GetSingleton("RunContext") as RunContext;
-        Economy economy = runContext?.economy;
+        Economy economy = runContext?.Economy;
         if (economy == null)
         {
             return;
         }
 
-        int current = economy.available_free_towers;
-        economy.available_free_towers = current + 1;
+        int current = economy.AvailableFreeTowers;
+        economy.AvailableFreeTowers = current + 1;
     }
 }

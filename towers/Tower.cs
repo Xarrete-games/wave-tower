@@ -160,7 +160,7 @@ public partial class Tower : Node2D
         {
             if (_towersManager != null)
             {
-                _towersManager.tower_selected -= OnTowerSelected;
+                _towersManager.TowerSelected -= OnTowerSelected;
                 _towersManager = null;
             }
 
@@ -245,7 +245,7 @@ public partial class Tower : Node2D
         _towersManager = GetTowersManager();
         if (_towersManager != null)
         {
-            _towersManager.tower_selected += OnTowerSelected;
+            _towersManager.TowerSelected += OnTowerSelected;
         }
 
         mouse_detector.GuiInput += OnGuiInput;
@@ -303,13 +303,13 @@ public partial class Tower : Node2D
     public virtual void upgrade()
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        Economy economy = runContext?.economy;
+        Economy economy = runContext?.Economy;
         TowerData towerData = data as TowerData;
         if (economy != null && towerData != null)
         {
-            int currentGold = economy.gold;
+            int currentGold = economy.Gold;
             int upgradePrice = towerData.UpgradePrice;
-            economy.gold = currentGold - upgradePrice;
+            economy.Gold = currentGold - upgradePrice;
         }
 
         level += 1;
@@ -481,18 +481,18 @@ public partial class Tower : Node2D
             return;
         }
 
-        _towersManager?.select_tower(this);
+        _towersManager?.SelectTower(this);
     }
 
     private void OnMouseEntered()
     {
-        _towersManager?.emit_tower_hovered(this);
+        _towersManager?.EmitTowerHovered(this);
         ShowRange();
     }
 
     private void OnMouseExit()
     {
-        _towersManager?.emit_tower_unhovered(this);
+        _towersManager?.EmitTowerUnhovered(this);
 
         if (CurrentTowerSelected != this)
         {
@@ -532,7 +532,7 @@ public partial class Tower : Node2D
     protected TowersManager GetTowersManager()
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        return runContext?.towers_manager;
+        return runContext?.TowersManager;
     }
 }
 

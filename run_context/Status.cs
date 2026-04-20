@@ -93,7 +93,7 @@ public class Status
     {
         if (Progress != null)
         {
-            Progress.current_wave_finished -= OnWaveFinished;
+            Progress.CurrentWaveFinished -= OnWaveFinished;
         }
 
         Progress = runProgress;
@@ -101,7 +101,7 @@ public class Status
 
         if (Progress != null)
         {
-            Progress.current_wave_finished += OnWaveFinished;
+            Progress.CurrentWaveFinished += OnWaveFinished;
         }
     }
 

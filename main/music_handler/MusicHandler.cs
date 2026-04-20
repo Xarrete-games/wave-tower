@@ -31,12 +31,12 @@ public partial class MusicHandler : Node
         stop_music();
 
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        _towersManager = runContext?.towers_manager;
+        _towersManager = runContext?.TowersManager;
         if (_towersManager != null)
         {
-            _towersManager.tower_count_change += OnTowerCountChange;
+            _towersManager.TowerCountChanged += OnTowerCountChange;
         }
-        _status = runContext?.status;
+        _status = runContext?.Status;
         if (_status != null)
         {
             _status.PlayerDied += stop_music;
@@ -47,7 +47,7 @@ public partial class MusicHandler : Node
     {
         if (_towersManager != null)
         {
-            _towersManager.tower_count_change -= OnTowerCountChange;
+            _towersManager.TowerCountChanged -= OnTowerCountChange;
             _towersManager = null;
         }
 

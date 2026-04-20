@@ -56,7 +56,7 @@ public partial class ChooseRelicScreen : Control
     private void OnRerollButtonXarretaPressed()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        int gold = runContext.economy.gold;
+        int gold = runContext.Economy.Gold;
         if (_rerollPrice <= gold)
         {
             RerollPressed?.Invoke();

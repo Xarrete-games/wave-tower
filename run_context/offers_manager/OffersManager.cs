@@ -60,10 +60,10 @@ public class OffersManager
             return;
         }
 
-        Economy economy = runContext.economy;
-        Status status = runContext.status;
-        ConsumablesManager consumablesManager = runContext.consumables_manager;
-        RelicsManager relicsManager = runContext.relics_manager;
+        Economy economy = runContext.Economy;
+        Status status = runContext.Status;
+        ConsumablesManager consumablesManager = runContext.ConsumablesManager;
+        RelicsManager relicsManager = runContext.RelicsManager;
         if (economy == null || status == null)
         {
             return;
@@ -72,7 +72,7 @@ public class OffersManager
         int price = itemOffer.Price;
         int healthPrice = itemOffer.HealthPrice;
 
-        economy.gold -= price;
+        economy.Gold -= price;
         if (healthPrice > 0)
         {
             status.Health -= healthPrice;

@@ -24,7 +24,7 @@ public partial class ArmorCounter : CenterContainer
     {
         _counterLabel = GetNode<Label>("CounterLabel");
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _status = runContext.status;
+        _status = runContext.Status;
         _status.ArmorChanged += OnArmorChange;
         armor = _status.Armor;
     }

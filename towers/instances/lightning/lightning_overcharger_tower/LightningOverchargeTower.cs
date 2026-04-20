@@ -32,7 +32,7 @@ public partial class LightningOverchargeTower : Tower
     {
         if (_towersManager != null)
         {
-            _towersManager.tower_placed -= OnTowerPlaced;
+            _towersManager.TowerPlaced -= OnTowerPlaced;
             _towersManager = null;
         }
 
@@ -70,7 +70,7 @@ public partial class LightningOverchargeTower : Tower
             _towersManager = GetTowersManager();
             if (_towersManager != null)
             {
-                _towersManager.tower_placed += OnTowerPlaced;
+                _towersManager.TowerPlaced += OnTowerPlaced;
             }
         }
     }

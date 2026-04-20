@@ -10,7 +10,7 @@ public partial class InventoryUISlot : Control
     {
         _textureRect = GetNode<TextureRect>("CenterContainer/TextureRect");
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _consumablesManager = runContext?.consumables_manager;
+        _consumablesManager = runContext?.ConsumablesManager;
         if (_consumablesManager != null)
         {
             _consumablesManager.ConsumableUsed += OnConsumableUsed;

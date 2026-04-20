@@ -22,10 +22,10 @@ public partial class SanctuaryEventScript : EventScript
         switch (selectedOption)
         {
             case 0:
-                runContext.economy.AddGold(50);
+                runContext.Economy.AddGold(50);
                 break;
             case 1:
-                runContext.status.AddMaxHealth(10);
+                runContext.Status.AddMaxHealth(10);
                 break;
         }
     }

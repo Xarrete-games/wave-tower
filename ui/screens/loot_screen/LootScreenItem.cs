@@ -49,18 +49,18 @@ public partial class LootScreenItem : Control
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (consumable != null)
         {
-            bool isFull = runContext.consumables_manager.IsFull();
+            bool isFull = runContext.ConsumablesManager.IsFull();
             if (isFull)
             {
                 return;
             }
 
             Consumable consumableItem = consumable.CreateConsumable();
-            runContext.consumables_manager.AddConsumable(consumableItem);
+            runContext.ConsumablesManager.AddConsumable(consumableItem);
         }
         else
         {
-            runContext.economy.AddGold(_lootItemData.GoldAmount);
+            runContext.Economy.AddGold(_lootItemData.GoldAmount);
         }
 
         QueueFree();

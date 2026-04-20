@@ -4,13 +4,13 @@ using System;
 
 public class TowersManager
 {
-    public event Action<int, int> tower_count_change;
-    public event Action<TowerDataWithInstance, int> tower_card_amount_change;
-    public event Action<Tower> tower_placed;
-    public event Action<Tower> tower_hovered;
-    public event Action<Tower> tower_unhovered;
-    public event Action<Tower> tower_selected;
-    public event Action<Tower> tower_removed;
+    public event Action<int, int> TowerCountChanged;
+    public event Action<TowerDataWithInstance, int> TowerCardAmountChanged;
+    public event Action<Tower> TowerPlaced;
+    public event Action<Tower> TowerHovered;
+    public event Action<Tower> TowerUnhovered;
+    public event Action<Tower> TowerSelected;
+    public event Action<Tower> TowerRemoved;
 
     private static readonly string[] INITIAL_TOWERS_IDS = { "fire_tower", "frost_tower", "lightning_tower" };
     private const float COMMON_WEIGHT_START = 0.75f;
@@ -20,11 +20,11 @@ public class TowersManager
     private const float RARE_WEIGHT_END = 0.33f;
     private const float EPIC_WEIGHT_END = 0.33f;
 
-    public Godot.Collections.Dictionary<string, int> last_tower_ids { get; } = new();
-    public Godot.Collections.Array<string> towers_ids { get; } = new();
-    public List<Tower> towers { get; } = new();
-    public List<TowerDataWithInstance> all_tower_data { get; private set; } = new();
-    public Godot.Collections.Dictionary<string, int> tower_cards_amount { get; } = new();
+    public Godot.Collections.Dictionary<string, int> LastTowerIds { get; } = new();
+    public Godot.Collections.Array<string> TowersIds { get; } = new();
+    public List<Tower> Towers { get; } = new();
+    public List<TowerDataWithInstance> AllTowerData { get; private set; } = new();
+    public Godot.Collections.Dictionary<string, int> TowerCardsAmount { get; } = new();
 
     private RunProgress _progress;
     private readonly Dictionary<ulong, TowerModel> _runtimeTowerModels = new();
@@ -35,30 +35,30 @@ public class TowersManager
         ClickEvents.TowerRemovePressed += OnTowerRemoved;
         ClickEvents.AddTowerCard += OnTowerCardAdded;
 
-        all_tower_data = DataLoaderAccess.GetAllTowerDataTyped();
+        AllTowerData = DataLoaderAccess.GetAllTowerDataTyped();
     }
 
-    public void dispose_events()
+    public void DisposeEvents()
     {
         ClickEvents.TowerRemovePressed -= OnTowerRemoved;
         ClickEvents.AddTowerCard -= OnTowerCardAdded;
     }
 
-    public void setup(RunProgress progress)
+    public void Setup(RunProgress progress)
     {
         _progress = progress;
-        last_tower_ids.Clear();
-        towers_ids.Clear();
-        towers.Clear();
-        tower_cards_amount.Clear();
+        LastTowerIds.Clear();
+        TowersIds.Clear();
+        Towers.Clear();
+        TowerCardsAmount.Clear();
         _runtimeTowerModels.Clear();
         _appliedRuntimeBuffSources.Clear();
         InitInitialTowersData();
     }
 
-    public List<TowerDataWithInstance> get_random_towers(int amount)
+    public List<TowerDataWithInstance> GetRandomTowers(int amount)
     {
-        var availableTowers = new List<TowerDataWithInstance>(all_tower_data);
+        var availableTowers = new List<TowerDataWithInstance>(AllTowerData);
         var selectedTowers = new List<TowerDataWithInstance>();
         int picks = Mathf.Min(amount, availableTowers.Count);
 
@@ -119,11 +119,11 @@ public class TowersManager
         return selectedTowers;
     }
 
-    public TowerDataWithInstance get_tower_configuration_by_id(string id)
+    public TowerDataWithInstance GetTowerConfigurationById(string id)
     {
-        for (int index = 0; index < all_tower_data.Count; index++)
+        for (int index = 0; index < AllTowerData.Count; index++)
         {
-            TowerDataWithInstance typedConfiguration = all_tower_data[index];
+            TowerDataWithInstance typedConfiguration = AllTowerData[index];
             if (typedConfiguration?.Data == null)
             {
                 continue;
@@ -138,14 +138,14 @@ public class TowersManager
         return null;
     }
 
-    public void add_tower_placed(Tower tower)
+    public void AddTowerPlaced(Tower tower)
     {
         if (tower == null)
         {
             return;
         }
 
-        towers.Add(tower);
+        Towers.Add(tower);
 
         int towerType = (int)tower.type;
         UpdateTowerCount(towerType);
@@ -158,11 +158,11 @@ public class TowersManager
         }
 
         string towerDataId = towerData.Id;
-        int currentAmount = tower_cards_amount.ContainsKey(towerDataId) ? tower_cards_amount[towerDataId] : 0;
-        tower_cards_amount[towerDataId] = currentAmount - 1;
+        int currentAmount = TowerCardsAmount.ContainsKey(towerDataId) ? TowerCardsAmount[towerDataId] : 0;
+        TowerCardsAmount[towerDataId] = currentAmount - 1;
 
-        TowerDataWithInstance towerConfiguration = get_tower_configuration_by_id(towerDataId);
-        tower_card_amount_change?.Invoke(towerConfiguration, tower_cards_amount[towerDataId]);
+        TowerDataWithInstance towerConfiguration = GetTowerConfigurationById(towerDataId);
+        TowerCardAmountChanged?.Invoke(towerConfiguration, TowerCardsAmount[towerDataId]);
 
         tower.id = GenerateTowerId(tower);
 
@@ -179,7 +179,7 @@ public class TowersManager
             ApplyRuntimeBuffsToLegacyTower(instanceId, tower, towerModel);
         }
 
-        tower_placed?.Invoke(tower);
+        TowerPlaced?.Invoke(tower);
         GetAudioManager()?.play_place_tower();
     }
 
@@ -190,12 +190,12 @@ public class TowersManager
             return;
         }
 
-        towers.Remove(tower);
+        Towers.Remove(tower);
 
         int towerType = (int)tower.type;
         UpdateTowerCount(towerType);
 
-        towers_ids.Remove(tower.id);
+        TowersIds.Remove(tower.id);
 
         ulong instanceId = tower.GetInstanceId();
         if (_runtimeTowerModels.ContainsKey(instanceId))
@@ -210,16 +210,16 @@ public class TowersManager
 
         RunContextRuntime.TowersManager.RemoveTowerByInstanceId(instanceId);
 
-        tower_removed?.Invoke(tower);
+        TowerRemoved?.Invoke(tower);
         tower.QueueFree();
     }
 
-    public int get_tower_count(int tower_type)
+    public int GetTowerCount(int tower_type)
     {
         int count = 0;
-        for (int index = 0; index < towers.Count; index++)
+        for (int index = 0; index < Towers.Count; index++)
         {
-            Tower tower = towers[index];
+            Tower tower = Towers[index];
             if (tower != null && (int)tower.type == tower_type)
             {
                 count++;
@@ -229,12 +229,12 @@ public class TowersManager
         return count;
     }
 
-    public List<Tower> get_placed_towers()
+    public List<Tower> GetPlacedTowers()
     {
         var placedTowers = new List<Tower>();
-        for (int index = 0; index < towers.Count; index++)
+        for (int index = 0; index < Towers.Count; index++)
         {
-            Tower tower = towers[index];
+            Tower tower = Towers[index];
             if (tower != null)
             {
                 placedTowers.Add(tower);
@@ -244,16 +244,16 @@ public class TowersManager
         return placedTowers;
     }
 
-    public void reset_towers()
+    public void ResetTowers()
     {
         UpdateTowerCount(0);
         UpdateTowerCount(1);
         UpdateTowerCount(2);
     }
 
-    public void select_tower(Tower tower)
+    public void SelectTower(Tower tower)
     {
-        tower_selected?.Invoke(tower);
+        TowerSelected?.Invoke(tower);
         ClickEvents.TowerSelected?.Invoke(tower);
     }
 
@@ -271,24 +271,24 @@ public class TowersManager
             return;
         }
 
-        int amount = tower_cards_amount.ContainsKey(id) ? tower_cards_amount[id] : 0;
-        tower_cards_amount[id] = amount + 1;
-        tower_card_amount_change?.Invoke(towerData, tower_cards_amount[id]);
+        int amount = TowerCardsAmount.ContainsKey(id) ? TowerCardsAmount[id] : 0;
+        TowerCardsAmount[id] = amount + 1;
+        TowerCardAmountChanged?.Invoke(towerData, TowerCardsAmount[id]);
     }
 
-    public void emit_tower_hovered(Tower tower)
+    public void EmitTowerHovered(Tower tower)
     {
-        tower_hovered?.Invoke(tower);
+        TowerHovered?.Invoke(tower);
         ClickEvents.TowerHovered?.Invoke(tower);
     }
 
-    public void emit_tower_unhovered(Tower tower)
+    public void EmitTowerUnhovered(Tower tower)
     {
-        tower_unhovered?.Invoke(tower);
+        TowerUnhovered?.Invoke(tower);
         ClickEvents.TowerUnhovered?.Invoke(tower);
     }
 
-    public void sync_runtime_buffs_for_tower(ulong instanceId)
+    public void SyncRuntimeBuffsForTower(ulong instanceId)
     {
         if (!_runtimeTowerModels.TryGetValue(instanceId, out TowerModel towerModel))
         {
@@ -327,26 +327,26 @@ public class TowersManager
             return 0f;
         }
 
-        int totalWaves = _progress.total_waves;
+        int totalWaves = _progress.TotalWaves;
         if (totalWaves <= 0)
         {
             return 0f;
         }
 
-        int currentWave = _progress.current_wave;
+        int currentWave = _progress.CurrentWave;
         return Mathf.Clamp((float)currentWave / totalWaves, 0f, 1f);
     }
 
     private void UpdateTowerCount(int towerType)
     {
-        tower_count_change?.Invoke(towerType, get_tower_count(towerType));
+        TowerCountChanged?.Invoke(towerType, GetTowerCount(towerType));
     }
 
     private void InitInitialTowersData()
     {
         for (int index = 0; index < INITIAL_TOWERS_IDS.Length; index++)
         {
-            TowerDataWithInstance towerConfiguration = get_tower_configuration_by_id(INITIAL_TOWERS_IDS[index]);
+            TowerDataWithInstance towerConfiguration = GetTowerConfigurationById(INITIAL_TOWERS_IDS[index]);
             if (towerConfiguration != null)
             {
                 OnTowerCardAdded(towerConfiguration);
@@ -363,21 +363,21 @@ public class TowersManager
 
         string baseId = tower.TypeId;
 
-        if (!last_tower_ids.ContainsKey(baseId))
+        if (!LastTowerIds.ContainsKey(baseId))
         {
-            last_tower_ids[baseId] = 0;
+            LastTowerIds[baseId] = 0;
         }
 
-        int count = last_tower_ids[baseId] + 1;
+        int count = LastTowerIds[baseId] + 1;
         string newId = $"{baseId}_{count}";
-        while (towers_ids.Contains(newId))
+        while (TowersIds.Contains(newId))
         {
             count += 1;
             newId = $"{baseId}_{count}";
         }
 
-        towers_ids.Add(newId);
-        last_tower_ids[baseId] = count;
+        TowersIds.Add(newId);
+        LastTowerIds[baseId] = count;
         return newId;
     }
 
@@ -420,7 +420,7 @@ public class TowersManager
     private void SyncRuntimeStatusFromLegacy()
     {
         RunContext runContext = GetSingleton("RunContext") as RunContext;
-        Status status = runContext?.status;
+        Status status = runContext?.Status;
         if (status == null)
         {
             return;
@@ -432,7 +432,7 @@ public class TowersManager
     private void SyncLegacyStatusFromRuntime()
     {
         RunContext runContext = GetSingleton("RunContext") as RunContext;
-        Status status = runContext?.status;
+        Status status = runContext?.Status;
         if (status == null)
         {
             return;

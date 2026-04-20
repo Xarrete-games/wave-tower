@@ -23,8 +23,8 @@ public partial class LevelProgressUI : Control
         ClearSlots();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _progress = runContext.progress;
-        _progress.current_wave_changed += OnWaveInit;
+        _progress = runContext.Progress;
+        _progress.CurrentWaveChanged += OnWaveInit;
 
         ClickEvents.ResetGameButtonPressed += ClearSlots;
     }
@@ -33,7 +33,7 @@ public partial class LevelProgressUI : Control
     {
         if (_progress != null)
         {
-            _progress.current_wave_changed -= OnWaveInit;
+            _progress.CurrentWaveChanged -= OnWaveInit;
         }
 
         ClickEvents.ResetGameButtonPressed -= ClearSlots;

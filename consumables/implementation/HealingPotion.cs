@@ -3,6 +3,6 @@ public class HealingPotion : ConsumableUsable
     public override void use()
     {
         RunContext runContext = GetSingleton("RunContext") as RunContext;
-        runContext?.status?.Heal(15);
+        runContext?.Status?.Heal(15);
     }
 }

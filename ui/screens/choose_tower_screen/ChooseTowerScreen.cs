@@ -46,7 +46,7 @@ public partial class ChooseTowerScreen : Control
         }
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.towers_manager.OnTowerCardAdded(_selectedItem.GetTowerData());
+        runContext.TowersManager.OnTowerCardAdded(_selectedItem.GetTowerData());
 
         done?.Invoke();
         QueueFree();

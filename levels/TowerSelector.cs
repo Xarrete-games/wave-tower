@@ -13,10 +13,10 @@ public partial class TowerSelector : Node
         ClickEvents.TowerRemovePressed += OnTowerRemovePressed;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _progress = runContext?.progress;
+        _progress = runContext?.Progress;
         if (_progress != null)
         {
-            _progress.current_wave_finished += ClearTowerSelected;
+            _progress.CurrentWaveFinished += ClearTowerSelected;
         }
     }
 
@@ -28,7 +28,7 @@ public partial class TowerSelector : Node
 
         if (_progress != null)
         {
-            _progress.current_wave_finished -= ClearTowerSelected;
+            _progress.CurrentWaveFinished -= ClearTowerSelected;
             _progress = null;
         }
     }
@@ -59,7 +59,7 @@ public partial class TowerSelector : Node
 
         _currentTowerSelected = null;
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.towers_manager.select_tower(null);
+        runContext.TowersManager.SelectTower(null);
     }
 
     private void OnTowerSelected(Tower tower)
@@ -97,7 +97,7 @@ public partial class TowerSelector : Node
         if (_currentTowerSelected == towerObj)
         {
             RunContext runContext = GetNode<RunContext>("/root/RunContext");
-            runContext.towers_manager.select_tower(towerObj);
+            runContext.TowersManager.SelectTower(towerObj);
         }
     }
 }

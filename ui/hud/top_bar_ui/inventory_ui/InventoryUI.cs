@@ -10,7 +10,7 @@ public partial class InventoryUI : Control
     public override void _Ready()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _consumablesManager = runContext?.consumables_manager;
+        _consumablesManager = runContext?.ConsumablesManager;
         if (_consumablesManager != null)
         {
             _consumablesManager.ConsumableAdded += OnConsumableAdded;

@@ -10,7 +10,7 @@ public partial class Boot : Node
         GameState gameState = GetNodeOrNull<GameState>("/root/GameState");
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
         gameState?.reset_run();
-        runContext?.reset_run();
+        runContext?.ResetRun();
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         GetTree().ChangeSceneToPacked(PROCEDURAL_TEST);
     }

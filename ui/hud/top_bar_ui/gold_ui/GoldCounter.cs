@@ -15,12 +15,12 @@ public partial class GoldCounter : HBoxContainer
         _amountGoldLabel = GetNode<Label>("AmountGoldLabel");
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _economy = runContext.economy;
+        _economy = runContext.Economy;
 
-        _targetGold = _economy.gold;
-        _currentDisplayedGold = _economy.gold;
+        _targetGold = _economy.Gold;
+        _currentDisplayedGold = _economy.Gold;
 
-        _economy.gold_change += OnGoldChange;
+        _economy.GoldChanged += OnGoldChange;
         UpdateLabel();
     }
 
@@ -28,7 +28,7 @@ public partial class GoldCounter : HBoxContainer
     {
         if (_economy != null)
         {
-            _economy.gold_change -= OnGoldChange;
+            _economy.GoldChanged -= OnGoldChange;
         }
     }
 

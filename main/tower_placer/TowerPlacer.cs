@@ -18,9 +18,9 @@ public partial class TowerPlacer : Node2D
         ClickEvents.TowerBuildButtonPressed += OnTowerButtonPressed;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _progress = runContext.progress;
-        _progress.current_wave_finished += CancelTower;
-        _progress.last_wave_finished += CancelTower;
+        _progress = runContext.Progress;
+        _progress.CurrentWaveFinished += CancelTower;
+        _progress.LastWaveFinished += CancelTower;
     }
 
     public override void _ExitTree()
@@ -29,8 +29,8 @@ public partial class TowerPlacer : Node2D
 
         if (_progress != null)
         {
-            _progress.current_wave_finished -= CancelTower;
-            _progress.last_wave_finished -= CancelTower;
+            _progress.CurrentWaveFinished -= CancelTower;
+            _progress.LastWaveFinished -= CancelTower;
         }
     }
 
@@ -93,7 +93,7 @@ public partial class TowerPlacer : Node2D
         _currentTowerInstance.Enable();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.towers_manager.add_tower_placed(_currentTowerInstance);
+        runContext.TowersManager.AddTowerPlaced(_currentTowerInstance);
 
         _currentTowerInstance = null;
 
@@ -103,25 +103,25 @@ public partial class TowerPlacer : Node2D
     private bool HasEnoughGold(int towerPrice)
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        if (runContext.economy.available_free_towers > 0)
+        if (runContext.Economy.AvailableFreeTowers > 0)
         {
             return true;
         }
 
-        return runContext.economy.gold >= towerPrice;
+        return runContext.Economy.Gold >= towerPrice;
     }
 
     private void HandleCosts(int towerPrice)
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        int freeTowers = runContext.economy.available_free_towers;
+        int freeTowers = runContext.Economy.AvailableFreeTowers;
         if (freeTowers > 0)
         {
-            runContext.economy.available_free_towers = freeTowers - 1;
+            runContext.Economy.AvailableFreeTowers = freeTowers - 1;
         }
         else
         {
-            runContext.economy.gold -= towerPrice;
+            runContext.Economy.Gold -= towerPrice;
         }
     }
 

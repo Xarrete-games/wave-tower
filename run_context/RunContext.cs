@@ -10,62 +10,62 @@ public partial class RunContext : Node
     [Export]
     public Variant CompositeTileMap;
 
-    public OffersManager offers_manager;
+    public OffersManager OffersManager;
 
-    public RunProgress progress;
+    public RunProgress Progress;
 
-    public Economy economy;
+    public Economy Economy;
 
-    public Status status;
+    public Status Status;
 
-    public TowersManager towers_manager;
+    public TowersManager TowersManager;
 
-    public RelicsManager relics_manager;
+    public RelicsManager RelicsManager;
 
-    public ConsumablesManager consumables_manager;
+    public ConsumablesManager ConsumablesManager;
 
-    public EnemyManager enemy_manager;
+    public EnemyManager EnemyManager;
 
     public override void _Ready()
     {
-        reset_run();
+        ResetRun();
     }
 
     public override void _ExitTree()
     {
-        if (status != null)
+        if (Status != null)
         {
-            status.PlayerDied -= OnDie;
+            Status.PlayerDied -= OnDie;
         }
     }
 
-    public void reset_run()
+    public void ResetRun()
     {
         RunContextRuntime.Reset();
 
-        if (status != null)
+        if (Status != null)
         {
-            status.PlayerDied -= OnDie;
+            Status.PlayerDied -= OnDie;
         }
 
-        towers_manager?.dispose_events();
+        TowersManager?.DisposeEvents();
 
-        offers_manager = new OffersManager();
-        progress = new RunProgress();
-        economy = new Economy();
-        relics_manager = new RelicsManager();
+        OffersManager = new OffersManager();
+        Progress = new RunProgress();
+        Economy = new Economy();
+        RelicsManager = new RelicsManager();
 
-        status = new Status();
-        status.Setup(progress, relics_manager);
+        Status = new Status();
+        Status.Setup(Progress, RelicsManager);
 
-        towers_manager = new TowersManager();
-        towers_manager.setup(progress);
+        TowersManager = new TowersManager();
+        TowersManager.Setup(Progress);
 
-        consumables_manager = new ConsumablesManager();
-        enemy_manager = new EnemyManager();
+        ConsumablesManager = new ConsumablesManager();
+        EnemyManager = new EnemyManager();
         IsOnRestarting = false;
 
-        status.PlayerDied += OnDie;
+        Status.PlayerDied += OnDie;
     }
 
     private void OnDie()

@@ -33,9 +33,9 @@ public partial class RunHandler : Node
         SetEventsByType();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _progress = runContext.progress;
-        _progress.current_wave_finished += OnWaveFinished;
-        _progress.last_wave_finished += OnLastWaveFinished;
+        _progress = runContext.Progress;
+        _progress.CurrentWaveFinished += OnWaveFinished;
+        _progress.LastWaveFinished += OnLastWaveFinished;
 
         ShowNextWaveScreen();
     }
@@ -44,8 +44,8 @@ public partial class RunHandler : Node
     {
         if (_progress != null)
         {
-            _progress.current_wave_finished -= OnWaveFinished;
-            _progress.last_wave_finished -= OnLastWaveFinished;
+            _progress.CurrentWaveFinished -= OnWaveFinished;
+            _progress.LastWaveFinished -= OnLastWaveFinished;
         }
     }
 
@@ -63,7 +63,7 @@ public partial class RunHandler : Node
     public async Task ShowChooseCardScreen()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        var cards = runContext.towers_manager.get_random_towers(3);
+        var cards = runContext.TowersManager.GetRandomTowers(3);
 
         ChooseTowerScreen chooseTowerScreen = ChooseTowerScreenScene.Instantiate<ChooseTowerScreen>();
         EventLayer.AddChild(chooseTowerScreen);
@@ -153,7 +153,7 @@ public partial class RunHandler : Node
             return;
         }
 
-        int currentWave = runContext.progress.current_wave;
+        int currentWave = runContext.Progress.CurrentWave;
         EventData eventData = GetNextEvent(currentWave);
         if (eventData == null)
         {
@@ -168,9 +168,9 @@ public partial class RunHandler : Node
     private async void OnLastWaveFinished()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.economy.gold += 50;
+        runContext.Economy.Gold += 50;
 
-        bool isLastWave = runContext.progress.is_last_wave();
+        bool isLastWave = runContext.Progress.IsLastWave();
         if (isLastWave)
         {
             await ToSignal(GetTree().CreateTimer(5, false), SceneTreeTimer.SignalName.Timeout);

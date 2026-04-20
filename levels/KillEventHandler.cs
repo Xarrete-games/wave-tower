@@ -11,7 +11,7 @@ public partial class KillEventHandler : Node
     public override void _Ready()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _enemyManager = runContext?.enemy_manager;
+        _enemyManager = runContext?.EnemyManager;
         if (_enemyManager != null)
         {
             _enemyManager.enemy_die += OnEnemyKilled;

@@ -20,7 +20,7 @@ public partial class GoldPrice : HBoxContainer
             if (_priceLabel != null)
             {
                 _priceLabel.Text = value.ToString();
-                CheckLabelColor(_runContext?.economy?.gold ?? 0);
+                CheckLabelColor(_runContext?.Economy?.Gold ?? 0);
             }
         }
     }
@@ -31,15 +31,15 @@ public partial class GoldPrice : HBoxContainer
         _runContext = GetNode<RunContext>("/root/RunContext");
 
         _priceLabel.Text = _price.ToString();
-        CheckLabelColor(_runContext.economy.gold);
-        _runContext.economy.gold_change += CheckLabelColor;
+        CheckLabelColor(_runContext.Economy.Gold);
+        _runContext.Economy.GoldChanged += CheckLabelColor;
     }
 
     public override void _ExitTree()
     {
-        if (_runContext?.economy != null)
+        if (_runContext?.Economy != null)
         {
-            _runContext.economy.gold_change -= CheckLabelColor;
+            _runContext.Economy.GoldChanged -= CheckLabelColor;
         }
     }
 

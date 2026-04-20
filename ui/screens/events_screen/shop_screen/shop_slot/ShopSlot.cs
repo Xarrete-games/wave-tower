@@ -30,27 +30,27 @@ public partial class ShopSlot : VBoxContainer
         _healthPrice.Visible = false;
 
         _runContext = GetNode<RunContext>("/root/RunContext");
-        if (_runContext?.relics_manager != null)
+        if (_runContext?.RelicsManager != null)
         {
-            _runContext.relics_manager.RelicAdded += OnRelicAdded;
+            _runContext.RelicsManager.RelicAdded += OnRelicAdded;
         }
 
-        if (_runContext?.status != null)
+        if (_runContext?.Status != null)
         {
-            _runContext.status.HealthChanged += OnStatusHealthChange;
+            _runContext.Status.HealthChanged += OnStatusHealthChange;
         }
     }
 
     public override void _ExitTree()
     {
-        if (_runContext?.relics_manager != null)
+        if (_runContext?.RelicsManager != null)
         {
-            _runContext.relics_manager.RelicAdded -= OnRelicAdded;
+            _runContext.RelicsManager.RelicAdded -= OnRelicAdded;
         }
 
-        if (_runContext?.status != null)
+        if (_runContext?.Status != null)
         {
-            _runContext.status.HealthChanged -= OnStatusHealthChange;
+            _runContext.Status.HealthChanged -= OnStatusHealthChange;
         }
     }
 
@@ -98,7 +98,7 @@ public partial class ShopSlot : VBoxContainer
         RelicData relicData = itemData as RelicData;
         if (relicData != null)
         {
-            ShopSlotIcon?.set_background_color(_runContext.relics_manager.GetRarityColor(relicData.Rarity));
+            ShopSlotIcon?.set_background_color(_runContext.RelicsManager.GetRarityColor(relicData.Rarity));
         }
 
         _currentHealthCost = itemOffer.HealthPrice;
@@ -108,7 +108,7 @@ public partial class ShopSlot : VBoxContainer
             _healthPrice.price = _currentHealthCost;
         }
 
-        CheckHealth(_runContext.status.Health, _currentHealthCost);
+        CheckHealth(_runContext.Status.Health, _currentHealthCost);
     }
 
     private void OnGuiInput(InputEvent @event)
@@ -120,12 +120,12 @@ public partial class ShopSlot : VBoxContainer
 
         Resource itemData = _item.ItemData;
         bool isConsumable = itemData is ConsumableData;
-        if (isConsumable && _runContext.consumables_manager.IsFull())
+        if (isConsumable && _runContext.ConsumablesManager.IsFull())
         {
             return;
         }
 
-        if (UIUtilsStatic.IsLeftClickEvent(@event) && _runContext.economy.gold >= _price && _hasEnoughHealth)
+        if (UIUtilsStatic.IsLeftClickEvent(@event) && _runContext.Economy.Gold >= _price && _hasEnoughHealth)
         {
             GetNode<AudioManager>("/root/AudioManager").play_button_click();
             ItemPurchased?.Invoke(_item, this);
@@ -158,13 +158,13 @@ public partial class ShopSlot : VBoxContainer
         Resource itemData = _item.ItemData;
         if (itemData is RelicData)
         {
-            SetItem(_runContext.offers_manager.CreateRelicOfferFromData(itemData as RelicData));
+            SetItem(_runContext.OffersManager.CreateRelicOfferFromData(itemData as RelicData));
             return;
         }
 
         if (itemData is ConsumableData)
         {
-            SetItem(_runContext.offers_manager.CreateConsumableOfferFromData(itemData as ConsumableData));
+            SetItem(_runContext.OffersManager.CreateConsumableOfferFromData(itemData as ConsumableData));
         }
     }
 

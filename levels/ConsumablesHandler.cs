@@ -21,9 +21,9 @@ public partial class ConsumablesHandler : Node
         _runContext = GetNode<RunContext>("/root/RunContext");
         _gameState = GetNode<GameState>("/root/GameState");
 
-        if (_runContext?.consumables_manager != null)
+        if (_runContext?.ConsumablesManager != null)
         {
-            _runContext.consumables_manager.ConsumableClicked += OnConsumableClicked;
+            _runContext.ConsumablesManager.ConsumableClicked += OnConsumableClicked;
         }
 
         if (_gameState != null)
@@ -31,18 +31,18 @@ public partial class ConsumablesHandler : Node
             _gameState.state_change += OnGameStateChanged;
         }
 
-        if (_runContext?.towers_manager != null)
+        if (_runContext?.TowersManager != null)
         {
-            _runContext.towers_manager.tower_hovered += OnTowerHovered;
-            _runContext.towers_manager.tower_unhovered += OnTowerUnhovered;
+            _runContext.TowersManager.TowerHovered += OnTowerHovered;
+            _runContext.TowersManager.TowerUnhovered += OnTowerUnhovered;
         }
     }
 
     public override void _ExitTree()
     {
-        if (_runContext?.consumables_manager != null)
+        if (_runContext?.ConsumablesManager != null)
         {
-            _runContext.consumables_manager.ConsumableClicked -= OnConsumableClicked;
+            _runContext.ConsumablesManager.ConsumableClicked -= OnConsumableClicked;
         }
 
         if (_gameState != null)
@@ -50,10 +50,10 @@ public partial class ConsumablesHandler : Node
             _gameState.state_change -= OnGameStateChanged;
         }
 
-        if (_runContext?.towers_manager != null)
+        if (_runContext?.TowersManager != null)
         {
-            _runContext.towers_manager.tower_hovered -= OnTowerHovered;
-            _runContext.towers_manager.tower_unhovered -= OnTowerUnhovered;
+            _runContext.TowersManager.TowerHovered -= OnTowerHovered;
+            _runContext.TowersManager.TowerUnhovered -= OnTowerUnhovered;
         }
     }
 

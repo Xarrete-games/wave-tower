@@ -11,8 +11,8 @@ public partial class ShopScreenHandler : Node
     public async Task OpenShopAsync(CanvasLayer eventLayer)
     {
         var runContext = GetNode<RunContext>("/root/RunContext");
-        var relics = runContext.offers_manager.CreateRelicOffers(5);
-        var consumables = runContext.offers_manager.CreateConsumablesOffers(5);
+        var relics = runContext.OffersManager.CreateRelicOffers(5);
+        var consumables = runContext.OffersManager.CreateConsumablesOffers(5);
 
         ShopScreen shopScreen = ShopScreenScene.Instantiate<ShopScreen>();
         eventLayer.AddChild(shopScreen);
@@ -28,6 +28,6 @@ public partial class ShopScreenHandler : Node
     private void OnItemPurchased(ItemOffer itemOffer)
     {
         var runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.offers_manager.PurchaseOffer(itemOffer);
+        runContext.OffersManager.PurchaseOffer(itemOffer);
     }
 }

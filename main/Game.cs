@@ -26,7 +26,7 @@ public partial class Game : Node2D
         ClickEvents.ResetGameButtonPressed += ResetGame;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.progress.total_levels = LevelsPaths.Count;
+        runContext.Progress.TotalLevels = LevelsPaths.Count;
 
         GameState gameState = GetNode<GameState>("/root/GameState");
         gameState.state = GameState.IN_GAME;
@@ -35,7 +35,7 @@ public partial class Game : Node2D
 
         if (TriggerFinishWave)
         {
-            runContext.progress.notify_current_wave_finished();
+            runContext.Progress.NotifyCurrentWaveFinished();
         }
     }
 

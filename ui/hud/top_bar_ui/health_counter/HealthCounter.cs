@@ -37,7 +37,7 @@ public partial class HealthCounter : HBoxContainer
         _armorCounter = GetNode<Control>("HBoxContainer/ArmorCounter");
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _status = runContext.status;
+        _status = runContext.Status;
 
         _status.HealthChanged += OnHealthChange;
         _status.MaxHealthChanged += OnMaxHealthChange;

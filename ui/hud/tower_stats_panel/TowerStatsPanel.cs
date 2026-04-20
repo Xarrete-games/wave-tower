@@ -167,7 +167,7 @@ public partial class TowerStatsPanel : Control
         int price = data.UpgradePrice;
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        int gold = runContext.economy.gold;
+        int gold = runContext.Economy.Gold;
         if (gold < price)
         {
             GD.Print("[TowerStatsPanel] Not enough gold for upgrade");
@@ -175,7 +175,7 @@ public partial class TowerStatsPanel : Control
         }
 
         string towerId = data.Id;
-        TowerDataWithInstance towerConfiguration = runContext.towers_manager.get_tower_configuration_by_id(towerId);
+        TowerDataWithInstance towerConfiguration = runContext.TowersManager.GetTowerConfigurationById(towerId);
         if (towerConfiguration == null)
         {
             GD.PushError($"[TowerStatsPanel] Missing tower configuration for id: {towerId}");

@@ -8,7 +8,7 @@ public partial class RelicsBar : Control
     public override void _Ready()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _relicsManager = runContext.relics_manager;
+        _relicsManager = runContext.RelicsManager;
         if (_relicsManager != null)
         {
             _relicsManager.RelicAdded += OnRelicAdded;

@@ -151,7 +151,7 @@ public class ConsumablesManager
 
     private void SyncRuntimeStatusFromLegacy()
     {
-        Status status = GetRunContext()?.status;
+        Status status = GetRunContext()?.Status;
         if (status == null)
         {
             return;
@@ -162,7 +162,7 @@ public class ConsumablesManager
 
     private void SyncLegacyStatusFromRuntime()
     {
-        Status status = GetRunContext()?.status;
+        Status status = GetRunContext()?.Status;
         if (status == null)
         {
             return;
@@ -199,13 +199,13 @@ public class ConsumablesManager
             return;
         }
 
-        TowersManager towersManager = GetRunContext()?.towers_manager;
+        TowersManager towersManager = GetRunContext()?.TowersManager;
         if (towersManager == null)
         {
             return;
         }
 
-        towersManager.sync_runtime_buffs_for_tower(targetTower.GetInstanceId());
+        towersManager.SyncRuntimeBuffsForTower(targetTower.GetInstanceId());
     }
 
     private void SyncConsumableUseTargetToRuntime(Consumable consumableObj, ConsumableModel consumableModel)

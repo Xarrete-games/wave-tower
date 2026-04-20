@@ -51,7 +51,7 @@ public partial class TestData : Node
                 if (typedRelicData != null)
                 {
                     Relic relicInstance = typedRelicData.CreateItem();
-                    runContext.relics_manager.AddRelic(relicInstance);
+                    runContext.RelicsManager.AddRelic(relicInstance);
                 }
                 else
                 {
@@ -72,7 +72,7 @@ public partial class TestData : Node
                 }
 
                 Relic relic = relicDataObj?.CreateItem();
-                runContext.relics_manager.AddRelic(relic);
+                runContext.RelicsManager.AddRelic(relic);
             }
         }
 
@@ -85,7 +85,7 @@ public partial class TestData : Node
                 if (consumableDataObj != null)
                 {
                     Consumable consumableInstance = consumableDataObj.CreateConsumable();
-                    runContext.consumables_manager.AddConsumable(consumableInstance);
+                    runContext.ConsumablesManager.AddConsumable(consumableInstance);
                 }
                 else
                 {

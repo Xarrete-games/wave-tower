@@ -45,7 +45,7 @@ public partial class EnemyGenerator : Node
         }
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.progress.total_waves = TOTAL_WAVES;
+        runContext.Progress.TotalWaves = TOTAL_WAVES;
 
         if (WaveSpawner != null)
         {
@@ -79,7 +79,7 @@ public partial class EnemyGenerator : Node
 
         _waveNumber += 1;
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.progress.current_wave = _waveNumber;
+        runContext.Progress.CurrentWave = _waveNumber;
 
         List<WaveComposer.WaveGroup> groups = _composer.compose_wave(_waveNumber);
 
@@ -153,22 +153,22 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         GameState gameState = GetNode<GameState>("/root/GameState");
 
-        if (runContext.IsOnRestarting || runContext.status.Health <= 0 || gameState.is_on_main_menu())
+        if (runContext.IsOnRestarting || runContext.Status.Health <= 0 || gameState.is_on_main_menu())
         {
             return;
         }
 
         if (_waveNumber >= TOTAL_WAVES)
         {
-            runContext.progress.notify_last_wave_finished();
+            runContext.Progress.NotifyLastWaveFinished();
             return;
         }
 
-        SyncRuntimeStatusFromLegacy(runContext.status);
+        SyncRuntimeStatusFromLegacy(runContext.Status);
         Hooks.OnWaveFinished(Hooks.GetListenersFromRuntime());
-        SyncLegacyStatusFromRuntime(runContext.status);
+        SyncLegacyStatusFromRuntime(runContext.Status);
 
-        runContext.progress.notify_current_wave_finished();
+        runContext.Progress.NotifyCurrentWaveFinished();
     }
 
     private void SyncRuntimeStatusFromLegacy(Status status)
@@ -210,16 +210,16 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (enemy != null)
         {
-            runContext.status.ApplyDamage(enemy.damage);
+            runContext.Status.ApplyDamage(enemy.damage);
         }
 
-        runContext.enemy_manager.notify_enemy_target_reached(enemy);
+        runContext.EnemyManager.notify_enemy_target_reached(enemy);
     }
 
     private void OnEnemyDie(Enemy enemy, Attack attack)
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.enemy_manager.notify_enemy_die(enemy, attack);
+        runContext.EnemyManager.notify_enemy_die(enemy, attack);
     }
 }
 

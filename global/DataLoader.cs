@@ -109,7 +109,7 @@ public partial class DataLoader : Node
     {
         var filtered = new List<RelicData>();
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        RelicsManager relicsManager = runContext?.relics_manager;
+        RelicsManager relicsManager = runContext?.RelicsManager;
 
         for (int index = 0; index < _relics.Count; index++)
         {

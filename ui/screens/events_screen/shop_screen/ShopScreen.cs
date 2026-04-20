@@ -39,7 +39,7 @@ public partial class ShopScreen : Control
         ChangeToBuyMode();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        if (!runContext.economy.is_sell_active)
+        if (!runContext.Economy.IsSellActive)
         {
             SellButton.Visible = false;
         }
@@ -121,10 +121,10 @@ public partial class ShopScreen : Control
             Resource itemData = itemOffer?.ItemData;
             if (itemData is RelicData relicData)
             {
-                runContext.relics_manager.RemoveRelic(relicData.Id);
+                runContext.RelicsManager.RemoveRelic(relicData.Id);
             }
 
-            runContext.economy.AddGold(itemOffer?.Price ?? 0);
+            runContext.Economy.AddGold(itemOffer?.Price ?? 0);
             GetNode<AudioManager>("/root/AudioManager").play_purchase();
             SellButton.disable();
             OnExitButtonPressed();
@@ -170,7 +170,7 @@ public partial class ShopScreen : Control
     private void BuildRelicsForSale()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        var currentRelics = runContext.relics_manager.GetAllRelics();
+        var currentRelics = runContext.RelicsManager.GetAllRelics();
         var currentRelicsData = new List<RelicData>();
         foreach (Relic relic in currentRelics)
         {
@@ -180,7 +180,7 @@ public partial class ShopScreen : Control
             }
         }
 
-        var relicOffers = runContext.offers_manager.CreateRelicOffersFromData(currentRelicsData);
+        var relicOffers = runContext.OffersManager.CreateRelicOffersFromData(currentRelicsData);
         foreach (ItemOffer relicOffer in relicOffers)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();

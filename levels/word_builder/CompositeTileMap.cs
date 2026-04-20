@@ -36,10 +36,10 @@ public partial class CompositeTileMap : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.CompositeTileMap = this;
 
-        _towersManager = runContext.towers_manager;
+        _towersManager = runContext.TowersManager;
         if (_towersManager != null)
         {
-            _towersManager.tower_removed += OnTowerRemoved;
+            _towersManager.TowerRemoved += OnTowerRemoved;
         }
     }
 
@@ -47,7 +47,7 @@ public partial class CompositeTileMap : Node
     {
         if (_towersManager != null)
         {
-            _towersManager.tower_removed -= OnTowerRemoved;
+            _towersManager.TowerRemoved -= OnTowerRemoved;
         }
     }
 

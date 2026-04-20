@@ -335,9 +335,9 @@ public partial class Enemy : CharacterBody2D
         ShowGoldDropped();
 
         RunContext runContext = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
-        if (runContext?.economy != null)
+        if (runContext?.Economy != null)
         {
-            runContext.economy.gold += GoldValue;
+            runContext.Economy.Gold += GoldValue;
         }
 
         QueueFree();

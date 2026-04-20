@@ -10,15 +10,15 @@ public partial class WavesCounterUI : VBoxContainer
         _levelLabel = GetNode<Label>("HBoxContainer2/LevelLabel");
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _progress = runContext.progress;
-        _progress.current_wave_changed += OnWaveChange;
+        _progress = runContext.Progress;
+        _progress.CurrentWaveChanged += OnWaveChange;
     }
 
     public override void _ExitTree()
     {
         if (_progress != null)
         {
-            _progress.current_wave_changed -= OnWaveChange;
+            _progress.CurrentWaveChanged -= OnWaveChange;
         }
     }
 

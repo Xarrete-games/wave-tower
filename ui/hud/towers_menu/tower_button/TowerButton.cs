@@ -108,13 +108,13 @@ public partial class TowerButton : Control
         _amountLabelNode = !AmountLabelPath.IsEmpty ? GetNodeOrNull<Label>(AmountLabelPath) : GetNodeOrNull<Label>("HBoxContainer/MarginContainer/AmountLabel");
 
         _runContext = GetNode<RunContext>("/root/RunContext");
-        _runContext.economy.available_free_towers_change += OnAvailableFreeTowersChange;
-        if (_runContext.relics_manager != null)
+        _runContext.Economy.AvailableFreeTowersChanged += OnAvailableFreeTowersChange;
+        if (_runContext.RelicsManager != null)
         {
-            _runContext.relics_manager.RelicAdded += OnRelicAdded;
-            _runContext.relics_manager.RelicRemoved += OnRelicRemoved;
+            _runContext.RelicsManager.RelicAdded += OnRelicAdded;
+            _runContext.RelicsManager.RelicRemoved += OnRelicRemoved;
         }
-        _runContext.progress.current_wave_finished += CurrentWaveFinished;
+        _runContext.Progress.CurrentWaveFinished += CurrentWaveFinished;
 
         _panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
         UpdateTexture();
@@ -122,20 +122,20 @@ public partial class TowerButton : Control
 
     public override void _ExitTree()
     {
-        if (_runContext?.economy != null)
+        if (_runContext?.Economy != null)
         {
-            _runContext.economy.available_free_towers_change -= OnAvailableFreeTowersChange;
+            _runContext.Economy.AvailableFreeTowersChanged -= OnAvailableFreeTowersChange;
         }
 
-        if (_runContext?.progress != null)
+        if (_runContext?.Progress != null)
         {
-            _runContext.progress.current_wave_finished -= CurrentWaveFinished;
+            _runContext.Progress.CurrentWaveFinished -= CurrentWaveFinished;
         }
 
-        if (_runContext?.relics_manager != null)
+        if (_runContext?.RelicsManager != null)
         {
-            _runContext.relics_manager.RelicAdded -= OnRelicAdded;
-            _runContext.relics_manager.RelicRemoved -= OnRelicRemoved;
+            _runContext.RelicsManager.RelicAdded -= OnRelicAdded;
+            _runContext.RelicsManager.RelicRemoved -= OnRelicRemoved;
         }
     }
 
@@ -177,7 +177,7 @@ public partial class TowerButton : Control
             return;
         }
 
-        if (runContext.economy.available_free_towers > 0)
+        if (runContext.Economy.AvailableFreeTowers > 0)
         {
             Price = 0;
             return;
@@ -218,7 +218,7 @@ public partial class TowerButton : Control
     private void CurrentWaveFinished()
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        if (runContext?.relics_manager != null && runContext.relics_manager.HasRelic("lemon"))
+        if (runContext?.RelicsManager != null && runContext.RelicsManager.HasRelic("lemon"))
         {
             UpdatePrice();
         }
@@ -230,7 +230,7 @@ public partial class TowerButton : Control
         audioManager?.play_button_click();
 
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        if (runContext != null && runContext.economy.gold < Price)
+        if (runContext != null && runContext.Economy.Gold < Price)
         {
             return;
         }

@@ -254,8 +254,8 @@ public partial class WorldMap : Node2D
         attach_next_piece();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        _progress = runContext.progress;
-        _progress.current_wave_finished += OnWaveFinished;
+        _progress = runContext.Progress;
+        _progress.CurrentWaveFinished += OnWaveFinished;
     }
 
     public override void _ExitTree()
@@ -267,7 +267,7 @@ public partial class WorldMap : Node2D
 
         if (_progress != null)
         {
-            _progress.current_wave_finished -= OnWaveFinished;
+            _progress.CurrentWaveFinished -= OnWaveFinished;
         }
     }
 
@@ -604,7 +604,7 @@ public partial class WorldMap : Node2D
     private void OnWaveFinished()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        int currentWave = runContext.progress.current_wave;
+        int currentWave = runContext.Progress.CurrentWave;
 
         if (!EnableFork && currentWave % WavesPerBoss == 0)
         {

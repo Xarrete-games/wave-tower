@@ -58,8 +58,8 @@ public class BuffScheduler
             return;
         }
 
-        int targetWave = progress.current_wave + waves;
-        while (progress.current_wave < targetWave)
+        int targetWave = progress.CurrentWave + waves;
+        while (progress.CurrentWave < targetWave)
         {
             await WaitForWaveFinishedAsync();
         }
@@ -77,11 +77,11 @@ public class BuffScheduler
         TaskCompletionSource<bool> tcs = new();
         void Handler()
         {
-            progress.current_wave_finished -= Handler;
+            progress.CurrentWaveFinished -= Handler;
             tcs.TrySetResult(true);
         }
 
-        progress.current_wave_finished += Handler;
+        progress.CurrentWaveFinished += Handler;
         return tcs.Task;
     }
 

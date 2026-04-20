@@ -2,38 +2,38 @@ using System;
 
 public class RunProgress
 {
-    public event Action<int> current_wave_changed;
-    public event Action current_wave_finished;
-    public event Action last_wave_finished;
+    public event Action<int> CurrentWaveChanged;
+    public event Action CurrentWaveFinished;
+    public event Action LastWaveFinished;
 
     private int _currentWave;
 
-    public int current_wave
+    public int CurrentWave
     {
         get => _currentWave;
         set
         {
             _currentWave = value;
             Hooks.OnWaveInit(Hooks.GetListenersFromRuntime());
-            current_wave_changed?.Invoke(_currentWave);
+            CurrentWaveChanged?.Invoke(_currentWave);
         }
     }
 
-    public int total_levels { get; set; }
-    public int total_waves { get; set; }
+    public int TotalLevels { get; set; }
+    public int TotalWaves { get; set; }
 
-    public bool is_last_wave()
+    public bool IsLastWave()
     {
-        return current_wave >= total_waves;
+        return CurrentWave >= TotalWaves;
     }
 
-    public void notify_current_wave_finished()
+    public void NotifyCurrentWaveFinished()
     {
-        current_wave_finished?.Invoke();
+        CurrentWaveFinished?.Invoke();
     }
 
-    public void notify_last_wave_finished()
+    public void NotifyLastWaveFinished()
     {
-        last_wave_finished?.Invoke();
+        LastWaveFinished?.Invoke();
     }
 }

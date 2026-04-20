@@ -24,7 +24,7 @@ public partial class BloodPactScript : EventScript
             return;
         }
 
-        runContext.status.ApplyDamage(15);
+        runContext.Status.ApplyDamage(15);
 
         List<RelicData> allRelics = DataLoaderAccess.GetNotUsedRelicsTyped();
         if (allRelics.Count == 0)
@@ -37,7 +37,7 @@ public partial class BloodPactScript : EventScript
         Relic relic = relicData?.CreateItem();
         if (relic != null)
         {
-            runContext.relics_manager.AddRelic(relic);
+            runContext.RelicsManager.AddRelic(relic);
         }
     }
 }
