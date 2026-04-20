@@ -39,22 +39,22 @@ public partial class HealthCounter : HBoxContainer
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         _status = runContext.status;
 
-        _status.health_change += OnHealthChange;
-        _status.MaxHealth_change += OnMaxHealthChange;
-        _status.armor_change += OnArmorChange;
+        _status.HealthChanged += OnHealthChange;
+        _status.MaxHealthChanged += OnMaxHealthChange;
+        _status.ArmorChanged += OnArmorChange;
 
         MaxHealth = _status.MaxHealth;
-        health = _status.health;
-        OnArmorChange(_status.armor);
+        health = _status.Health;
+        OnArmorChange(_status.Armor);
     }
 
     public override void _ExitTree()
     {
         if (_status != null)
         {
-            _status.health_change -= OnHealthChange;
-            _status.MaxHealth_change -= OnMaxHealthChange;
-            _status.armor_change -= OnArmorChange;
+            _status.HealthChanged -= OnHealthChange;
+            _status.MaxHealthChanged -= OnMaxHealthChange;
+            _status.ArmorChanged -= OnArmorChange;
         }
     }
 

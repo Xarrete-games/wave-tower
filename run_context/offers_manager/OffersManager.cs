@@ -75,7 +75,7 @@ public class OffersManager
         economy.gold -= price;
         if (healthPrice > 0)
         {
-            status.health -= healthPrice;
+            status.Health -= healthPrice;
         }
 
         Resource itemData = itemOffer.ItemData;
@@ -84,7 +84,7 @@ public class OffersManager
             Consumable item = consumableData.CreateConsumable();
             if (item != null)
             {
-                consumablesManager?.add_consumable(item);
+                consumablesManager?.AddConsumable(item);
             }
             return;
         }

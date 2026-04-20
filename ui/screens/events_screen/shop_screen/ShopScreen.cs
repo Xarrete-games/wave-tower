@@ -124,7 +124,7 @@ public partial class ShopScreen : Control
                 runContext.relics_manager.RemoveRelic(relicData.Id);
             }
 
-            runContext.economy.add_gold(itemOffer?.Price ?? 0);
+            runContext.economy.AddGold(itemOffer?.Price ?? 0);
             GetNode<AudioManager>("/root/AudioManager").play_purchase();
             SellButton.disable();
             OnExitButtonPressed();

@@ -41,7 +41,7 @@ public partial class ChooseRelicScreenHandler : Node
         var runContext = GetNode<RunContext>("/root/RunContext");
         if (healthPrice > 0)
         {
-            runContext.status.health -= healthPrice;
+            runContext.status.Health -= healthPrice;
         }
 
         Relic item = selectedRelicData.CreateItem();

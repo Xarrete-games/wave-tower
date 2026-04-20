@@ -23,7 +23,7 @@ public partial class ConsumablesHandler : Node
 
         if (_runContext?.consumables_manager != null)
         {
-            _runContext.consumables_manager.consumable_clicked += OnConsumableClicked;
+            _runContext.consumables_manager.ConsumableClicked += OnConsumableClicked;
         }
 
         if (_gameState != null)
@@ -42,7 +42,7 @@ public partial class ConsumablesHandler : Node
     {
         if (_runContext?.consumables_manager != null)
         {
-            _runContext.consumables_manager.consumable_clicked -= OnConsumableClicked;
+            _runContext.consumables_manager.ConsumableClicked -= OnConsumableClicked;
         }
 
         if (_gameState != null)

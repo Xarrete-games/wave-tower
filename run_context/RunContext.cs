@@ -35,7 +35,7 @@ public partial class RunContext : Node
     {
         if (status != null)
         {
-            status.player_died -= OnDie;
+            status.PlayerDied -= OnDie;
         }
     }
 
@@ -45,7 +45,7 @@ public partial class RunContext : Node
 
         if (status != null)
         {
-            status.player_died -= OnDie;
+            status.PlayerDied -= OnDie;
         }
 
         towers_manager?.dispose_events();
@@ -56,7 +56,7 @@ public partial class RunContext : Node
         relics_manager = new RelicsManager();
 
         status = new Status();
-        status.setup(progress, relics_manager);
+        status.Setup(progress, relics_manager);
 
         towers_manager = new TowersManager();
         towers_manager.setup(progress);
@@ -65,7 +65,7 @@ public partial class RunContext : Node
         enemy_manager = new EnemyManager();
         IsOnRestarting = false;
 
-        status.player_died += OnDie;
+        status.PlayerDied += OnDie;
     }
 
     private void OnDie()

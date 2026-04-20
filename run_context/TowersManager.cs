@@ -426,7 +426,7 @@ public class TowersManager
             return;
         }
 
-        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.health, status.armor);
+        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.Health, status.Armor);
     }
 
     private void SyncLegacyStatusFromRuntime()
@@ -444,14 +444,14 @@ public class TowersManager
             status.MaxHealth = runtime.MaxHealth;
         }
 
-        if (status.armor != runtime.Armor)
+        if (status.Armor != runtime.Armor)
         {
-            status.armor = runtime.Armor;
+            status.Armor = runtime.Armor;
         }
 
-        if (status.health != runtime.Health)
+        if (status.Health != runtime.Health)
         {
-            status.health = runtime.Health;
+            status.Health = runtime.Health;
         }
     }
 

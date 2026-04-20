@@ -37,7 +37,7 @@ public partial class ShopSlot : VBoxContainer
 
         if (_runContext?.status != null)
         {
-            _runContext.status.health_change += OnStatusHealthChange;
+            _runContext.status.HealthChanged += OnStatusHealthChange;
         }
     }
 
@@ -50,7 +50,7 @@ public partial class ShopSlot : VBoxContainer
 
         if (_runContext?.status != null)
         {
-            _runContext.status.health_change -= OnStatusHealthChange;
+            _runContext.status.HealthChanged -= OnStatusHealthChange;
         }
     }
 
@@ -108,7 +108,7 @@ public partial class ShopSlot : VBoxContainer
             _healthPrice.price = _currentHealthCost;
         }
 
-        CheckHealth(_runContext.status.health, _currentHealthCost);
+        CheckHealth(_runContext.status.Health, _currentHealthCost);
     }
 
     private void OnGuiInput(InputEvent @event)
@@ -120,7 +120,7 @@ public partial class ShopSlot : VBoxContainer
 
         Resource itemData = _item.ItemData;
         bool isConsumable = itemData is ConsumableData;
-        if (isConsumable && _runContext.consumables_manager.is_full())
+        if (isConsumable && _runContext.consumables_manager.IsFull())
         {
             return;
         }

@@ -36,12 +36,12 @@ public class Economy
         }
     }
 
-    public void add_gold(int amount)
+    public void AddGold(int amount)
     {
         gold += amount;
     }
 
-    public bool spend_gold(int amount)
+    public bool SpendGold(int amount)
     {
         if (gold >= amount)
         {

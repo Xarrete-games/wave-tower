@@ -57,6 +57,6 @@ public partial class FountainsOfWishesScript : EventScript
             _ => 0,
         };
 
-        runContext.economy.spend_gold(goldCost);
+        runContext.economy.SpendGold(goldCost);
     }
 }

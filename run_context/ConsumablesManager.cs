@@ -4,22 +4,22 @@ using System;
 
 public class ConsumablesManager
 {
-    public event Action<List<Consumable>> consumables_change;
-    public event Action<Consumable> consumable_added;
-    public event Action<Consumable> consumable_used;
-    public event Action<Consumable> consumable_clicked;
+    public event Action<List<Consumable>> ConsumablesChanged;
+    public event Action<Consumable> ConsumableAdded;
+    public event Action<Consumable> ConsumableUsed;
+    public event Action<Consumable> ConsumableClicked;
 
     private readonly List<Consumable> _consumables = new();
     private readonly Dictionary<Consumable, ConsumableModel> _runtimeConsumableModels = new();
 
-    public bool is_full()
+    public bool IsFull()
     {
         return _consumables.Count == 5;
     }
 
-    public void add_consumable(Consumable consumable)
+    public void AddConsumable(Consumable consumable)
     {
-        if (is_full())
+        if (IsFull())
         {
             return;
         }
@@ -31,13 +31,13 @@ public class ConsumablesManager
 
         _consumables.Add(consumable);
         SyncConsumableAddedToRuntime(consumable);
-        consumable.clicked += _on_consumable_clicked;
-        consumable.used += _on_consumable_used;
-        consumables_change?.Invoke(_consumables);
-        consumable_added?.Invoke(consumable);
+        consumable.clicked += OnConsumableClicked;
+        consumable.used += OnConsumableUsed;
+        ConsumablesChanged?.Invoke(_consumables);
+        ConsumableAdded?.Invoke(consumable);
     }
 
-    public void _on_consumable_used(Consumable consumable)
+    public void OnConsumableUsed(Consumable consumable)
     {
         ConsumableModel consumableModel = null;
         _runtimeConsumableModels.TryGetValue(consumable, out consumableModel);
@@ -53,28 +53,28 @@ public class ConsumablesManager
 
         if (consumable != null)
         {
-            consumable.clicked -= _on_consumable_clicked;
-            consumable.used -= _on_consumable_used;
+            consumable.clicked -= OnConsumableClicked;
+            consumable.used -= OnConsumableUsed;
             SyncConsumableRemovedFromRuntime(consumable);
         }
 
-        consumable_used?.Invoke(consumable);
+        ConsumableUsed?.Invoke(consumable);
         _consumables.Remove(consumable);
 
         bool recoveredByHooks = consumableModel != null && IsConsumablePresentInRuntime(consumableModel);
-        if (recoveredByHooks && consumable != null && !is_full())
+        if (recoveredByHooks && consumable != null && !IsFull())
         {
             _runtimeConsumableModels[consumable] = consumableModel;
             _consumables.Add(consumable);
-            consumable.clicked += _on_consumable_clicked;
-            consumable.used += _on_consumable_used;
-            consumable_added?.Invoke(consumable);
+            consumable.clicked += OnConsumableClicked;
+            consumable.used += OnConsumableUsed;
+            ConsumableAdded?.Invoke(consumable);
         }
 
-        consumables_change?.Invoke(_consumables);
+        ConsumablesChanged?.Invoke(_consumables);
     }
 
-    public void _on_consumable_clicked(Consumable consumable)
+    public void OnConsumableClicked(Consumable consumable)
     {
         if (consumable == null)
         {
@@ -93,7 +93,7 @@ public class ConsumablesManager
         }
         else
         {
-            consumable_clicked?.Invoke(consumable);
+            ConsumableClicked?.Invoke(consumable);
         }
     }
 
@@ -157,7 +157,7 @@ public class ConsumablesManager
             return;
         }
 
-        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.health, status.armor);
+        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.Health, status.Armor);
     }
 
     private void SyncLegacyStatusFromRuntime()
@@ -174,14 +174,14 @@ public class ConsumablesManager
             status.MaxHealth = runtime.MaxHealth;
         }
 
-        if (status.armor != runtime.Armor)
+        if (status.Armor != runtime.Armor)
         {
-            status.armor = runtime.Armor;
+            status.Armor = runtime.Armor;
         }
 
-        if (status.health != runtime.Health)
+        if (status.Health != runtime.Health)
         {
-            status.health = runtime.Health;
+            status.Health = runtime.Health;
         }
     }
 

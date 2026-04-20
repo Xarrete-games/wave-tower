@@ -3,10 +3,10 @@ using System;
 
 public class Status
 {
-    public event Action<int> health_change;
-    public event Action<int> armor_change;
-    public event Action<int> MaxHealth_change;
-    public event Action player_died;
+    public event Action<int> HealthChanged;
+    public event Action<int> ArmorChanged;
+    public event Action<int> MaxHealthChanged;
+    public event Action PlayerDied;
 
     private int _maxHealth = 20;
     private int _health = 20;
@@ -23,17 +23,17 @@ public class Status
                 _health = _maxHealth;
             }
 
-            MaxHealth_change?.Invoke(_maxHealth);
+            MaxHealthChanged?.Invoke(_maxHealth);
         }
     }
 
-    public int health
+    public int Health
     {
         get => _health;
         set
         {
             _health = Mathf.Min(value, _maxHealth);
-            health_change?.Invoke(_health);
+            HealthChanged?.Invoke(_health);
             if (_health <= 0)
             {
                 var statusModel = new StatusModel
@@ -55,77 +55,77 @@ public class Status
 
                 if (maxHealthChanged)
                 {
-                    MaxHealth_change?.Invoke(_maxHealth);
+                    MaxHealthChanged?.Invoke(_maxHealth);
                 }
 
                 if (healthChanged)
                 {
-                    health_change?.Invoke(_health);
+                    HealthChanged?.Invoke(_health);
                 }
 
                 if (armorChanged)
                 {
-                    armor_change?.Invoke(_armor);
+                    ArmorChanged?.Invoke(_armor);
                 }
 
                 if (_health <= 0)
                 {
-                    player_died?.Invoke();
+                    PlayerDied?.Invoke();
                 }
             }
         }
     }
 
-    public int armor
+    public int Armor
     {
         get => _armor;
         set
         {
             _armor = value;
-            armor_change?.Invoke(_armor);
+            ArmorChanged?.Invoke(_armor);
         }
     }
 
-    public RunProgress progress { get; private set; }
-    public RelicsManager relics_manager { get; private set; }
+    public RunProgress Progress { get; private set; }
+    public RelicsManager RelicsManager { get; private set; }
 
-    public void setup(RunProgress runProgress, RelicsManager relicsManager)
+    public void Setup(RunProgress runProgress, RelicsManager relicsManager)
     {
-        if (progress != null)
+        if (Progress != null)
         {
-            progress.current_wave_finished -= OnWaveFinished;
+            Progress.current_wave_finished -= OnWaveFinished;
         }
 
-        progress = runProgress;
-        relics_manager = relicsManager;
+        Progress = runProgress;
+        RelicsManager = relicsManager;
 
-        if (progress != null)
+        if (Progress != null)
         {
-            progress.current_wave_finished += OnWaveFinished;
+            Progress.current_wave_finished += OnWaveFinished;
         }
     }
 
-    public void heal(int amount)
-    {
-        if (amount <= 0)
-        {
-            return;
-        }
-
-        health += amount;
-    }
-
-    public void add_amor(int amount)
+    public void Heal(int amount)
     {
         if (amount <= 0)
         {
             return;
         }
 
-        armor += amount;
+        Health += amount;
     }
 
-    public void add_MaxHealth(int amount)
+    public void AddArmor(int amount)
+    {
+        if (amount <= 0)
+        {
+            return;
+        }
+
+        Armor += amount;
+    }
+
+    public void AddMaxHealth(int amount)
     {
         if (amount <= 0)
         {
@@ -133,10 +133,10 @@ public class Status
         }
 
         MaxHealth += amount;
-        health += amount;
+        Health += amount;
     }
 
-    public void apply_damage(int amount)
+    public void ApplyDamage(int amount)
     {
         if (amount <= 0)
         {
@@ -144,19 +144,19 @@ public class Status
         }
 
         int remainingDamage = amount;
-        bool armorBlockDamage = armor >= remainingDamage;
+        bool armorBlockDamage = Armor >= remainingDamage;
 
-        if (armor > 0)
+        if (Armor > 0)
         {
-            int absorbed = Mathf.Min(armor, remainingDamage);
-            armor -= absorbed;
+            int absorbed = Mathf.Min(Armor, remainingDamage);
+            Armor -= absorbed;
             remainingDamage -= absorbed;
-            armor_change?.Invoke(armor);
+            ArmorChanged?.Invoke(Armor);
         }
 
         if (remainingDamage > 0)
         {
-            health -= remainingDamage;
+            Health -= remainingDamage;
         }
 
         PlayDamageAudio(armorBlockDamage);
@@ -164,7 +164,7 @@ public class Status
 
     private void OnWaveFinished()
     {
-        armor = 0;
+        Armor = 0;
     }
 
     private void PlayDamageAudio(bool armorBlockDamage)

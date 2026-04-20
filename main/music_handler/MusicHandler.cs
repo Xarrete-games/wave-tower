@@ -39,7 +39,7 @@ public partial class MusicHandler : Node
         _status = runContext?.status;
         if (_status != null)
         {
-            _status.player_died += stop_music;
+            _status.PlayerDied += stop_music;
         }
     }
 
@@ -53,7 +53,7 @@ public partial class MusicHandler : Node
 
         if (_status != null)
         {
-            _status.player_died -= stop_music;
+            _status.PlayerDied -= stop_music;
             _status = null;
         }
     }

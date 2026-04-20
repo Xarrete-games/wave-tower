@@ -20,7 +20,7 @@ public partial class HealthPrice : HBoxContainer
             if (_priceLabel != null)
             {
                 _priceLabel.Text = value.ToString();
-                CheckLabelColor(_runContext?.status?.health ?? 0);
+                CheckLabelColor(_runContext?.status?.Health ?? 0);
             }
         }
     }
@@ -29,15 +29,15 @@ public partial class HealthPrice : HBoxContainer
     {
         _priceLabel = GetNode<Label>("PriceLabel");
         _runContext = GetNode<RunContext>("/root/RunContext");
-        _runContext.status.health_change += CheckLabelColor;
-        CheckLabelColor(_runContext.status.health);
+        _runContext.status.HealthChanged += CheckLabelColor;
+        CheckLabelColor(_runContext.status.Health);
     }
 
     public override void _ExitTree()
     {
         if (_runContext?.status != null)
         {
-            _runContext.status.health_change -= CheckLabelColor;
+            _runContext.status.HealthChanged -= CheckLabelColor;
         }
     }
 

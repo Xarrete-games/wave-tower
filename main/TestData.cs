@@ -85,7 +85,7 @@ public partial class TestData : Node
                 if (consumableDataObj != null)
                 {
                     Consumable consumableInstance = consumableDataObj.CreateConsumable();
-                    runContext.consumables_manager.add_consumable(consumableInstance);
+                    runContext.consumables_manager.AddConsumable(consumableInstance);
                 }
                 else
                 {

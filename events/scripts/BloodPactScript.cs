@@ -24,7 +24,7 @@ public partial class BloodPactScript : EventScript
             return;
         }
 
-        runContext.status.apply_damage(15);
+        runContext.status.ApplyDamage(15);
 
         List<RelicData> allRelics = DataLoaderAccess.GetNotUsedRelicsTyped();
         if (allRelics.Count == 0)

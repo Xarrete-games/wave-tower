@@ -13,7 +13,7 @@ public partial class InventoryUISlot : Control
         _consumablesManager = runContext?.consumables_manager;
         if (_consumablesManager != null)
         {
-            _consumablesManager.consumable_used += OnConsumableUsed;
+            _consumablesManager.ConsumableUsed += OnConsumableUsed;
         }
     }
 
@@ -21,7 +21,7 @@ public partial class InventoryUISlot : Control
     {
         if (_consumablesManager != null)
         {
-            _consumablesManager.consumable_used -= OnConsumableUsed;
+            _consumablesManager.ConsumableUsed -= OnConsumableUsed;
             _consumablesManager = null;
         }
     }

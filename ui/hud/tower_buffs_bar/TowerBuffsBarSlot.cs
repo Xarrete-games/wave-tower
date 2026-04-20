@@ -29,11 +29,14 @@ public partial class TowerBuffsBarSlot : Control {
         ApplyBuffVisuals();
     }
     private void ResolveNodes() {
+        bool hasTexturePath = Texture != null && !Texture.IsEmpty;
+        bool hasValueLabelPath = ValueLabel != null && !ValueLabel.IsEmpty;
+
         if (_textureNode == null) {
-            _textureNode = !Texture.IsEmpty ? GetNodeOrNull<TextureRect>(Texture) : GetNodeOrNull<TextureRect>("Texture");
+            _textureNode = hasTexturePath ? GetNodeOrNull<TextureRect>(Texture) : GetNodeOrNull<TextureRect>("Texture");
         }
         if (_valueLabelNode == null) {
-            _valueLabelNode = !ValueLabel.IsEmpty ? GetNodeOrNull<Label>(ValueLabel) : GetNodeOrNull<Label>("Label");
+            _valueLabelNode = hasValueLabelPath ? GetNodeOrNull<Label>(ValueLabel) : GetNodeOrNull<Label>("Label");
         }
     }
     private void ApplyBuffVisuals() {

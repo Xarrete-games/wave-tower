@@ -114,8 +114,8 @@ public static class Hooks
         var model = new StatusModel
         {
             MaxHealth = status.MaxHealth,
-            Health = status.health,
-            Armor = status.armor,
+            Health = status.Health,
+            Armor = status.Armor,
         };
 
         OnBeforeDie(GetListenersFromRuntime(), model);

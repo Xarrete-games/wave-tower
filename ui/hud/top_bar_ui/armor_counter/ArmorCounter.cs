@@ -25,15 +25,15 @@ public partial class ArmorCounter : CenterContainer
         _counterLabel = GetNode<Label>("CounterLabel");
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         _status = runContext.status;
-        _status.armor_change += OnArmorChange;
-        armor = _status.armor;
+        _status.ArmorChanged += OnArmorChange;
+        armor = _status.Armor;
     }
 
     public override void _ExitTree()
     {
         if (_status != null)
         {
-            _status.armor_change -= OnArmorChange;
+            _status.ArmorChanged -= OnArmorChange;
         }
     }
 

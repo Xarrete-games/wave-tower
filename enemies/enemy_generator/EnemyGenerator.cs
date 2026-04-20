@@ -153,7 +153,7 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         GameState gameState = GetNode<GameState>("/root/GameState");
 
-        if (runContext.IsOnRestarting || runContext.status.health <= 0 || gameState.is_on_main_menu())
+        if (runContext.IsOnRestarting || runContext.status.Health <= 0 || gameState.is_on_main_menu())
         {
             return;
         }
@@ -178,7 +178,7 @@ public partial class EnemyGenerator : Node
             return;
         }
 
-        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.health, status.armor);
+        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.Health, status.Armor);
     }
 
     private void SyncLegacyStatusFromRuntime(Status status)
@@ -194,14 +194,14 @@ public partial class EnemyGenerator : Node
             status.MaxHealth = runtime.MaxHealth;
         }
 
-        if (status.armor != runtime.Armor)
+        if (status.Armor != runtime.Armor)
         {
-            status.armor = runtime.Armor;
+            status.Armor = runtime.Armor;
         }
 
-        if (status.health != runtime.Health)
+        if (status.Health != runtime.Health)
         {
-            status.health = runtime.Health;
+            status.Health = runtime.Health;
         }
     }
 
@@ -210,7 +210,7 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (enemy != null)
         {
-            runContext.status.apply_damage(enemy.damage);
+            runContext.status.ApplyDamage(enemy.damage);
         }
 
         runContext.enemy_manager.notify_enemy_target_reached(enemy);

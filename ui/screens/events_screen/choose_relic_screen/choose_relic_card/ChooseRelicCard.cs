@@ -33,7 +33,7 @@ public partial class ChooseRelicCard : Control
     {
         if (_runContext?.status != null && _isHealthSubscribed)
         {
-            _runContext.status.health_change -= OnHealthChanged;
+            _runContext.status.HealthChanged -= OnHealthChanged;
             _isHealthSubscribed = false;
         }
     }
@@ -58,10 +58,10 @@ public partial class ChooseRelicCard : Control
             _itCostsHealth = true;
             _healthPrice.price = _healthCost;
 
-            CheckHealth(_runContext.status.health, _healthCost);
+            CheckHealth(_runContext.status.Health, _healthCost);
             if (!_isHealthSubscribed)
             {
-                _runContext.status.health_change += OnHealthChanged;
+                _runContext.status.HealthChanged += OnHealthChanged;
                 _isHealthSubscribed = true;
             }
         }
@@ -73,7 +73,7 @@ public partial class ChooseRelicCard : Control
 
             if (_runContext?.status != null && _isHealthSubscribed)
             {
-                _runContext.status.health_change -= OnHealthChanged;
+                _runContext.status.HealthChanged -= OnHealthChanged;
                 _isHealthSubscribed = false;
             }
         }

@@ -13,7 +13,7 @@ public partial class InventoryUI : Control
         _consumablesManager = runContext?.consumables_manager;
         if (_consumablesManager != null)
         {
-            _consumablesManager.consumable_added += OnConsumableAdded;
+            _consumablesManager.ConsumableAdded += OnConsumableAdded;
         }
     }
 
@@ -21,7 +21,7 @@ public partial class InventoryUI : Control
     {
         if (_consumablesManager != null)
         {
-            _consumablesManager.consumable_added -= OnConsumableAdded;
+            _consumablesManager.ConsumableAdded -= OnConsumableAdded;
             _consumablesManager = null;
         }
     }
