@@ -11,7 +11,7 @@ public partial class XarretaButton : Button
 
     private void OnMouseEntered()
     {
-        GetNode<AudioManager>("/root/AudioManager").play_button_hover();
+        GetNode<AudioManager>("/root/AudioManager").PlayButtonHover();
     }
 
     private void OnMouseExited()
@@ -20,7 +20,7 @@ public partial class XarretaButton : Button
 
     private void OnPressed()
     {
-        GetNode<AudioManager>("/root/AudioManager").play_button_click();
+        GetNode<AudioManager>("/root/AudioManager").PlayButtonClick();
     }
 
     public void disable()

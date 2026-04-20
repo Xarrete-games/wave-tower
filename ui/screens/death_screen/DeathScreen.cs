@@ -5,7 +5,7 @@ public partial class DeathScreen : CanvasLayer
     public override void _Ready()
     {
         AudioManager audioManager = GetNode<AudioManager>("/root/AudioManager");
-        audioManager.play_defeated_sound();
+        audioManager.PlayDefeatedSound();
         GetTree().Paused = true;
     }
 

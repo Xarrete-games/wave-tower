@@ -34,7 +34,7 @@ public partial class ChooseTowerScreen : Control
     private void OnItemSelected(ChooseTowerScreenItem item)
     {
         _selectedItem = item;
-        GetNode<AudioManager>("/root/AudioManager").play_tower_obtain();
+        GetNode<AudioManager>("/root/AudioManager").PlayTowerObtain();
         OnOkPressed();
     }
 

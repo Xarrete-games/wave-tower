@@ -153,7 +153,7 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         GameState gameState = GetNode<GameState>("/root/GameState");
 
-        if (runContext.IsOnRestarting || runContext.Status.Health <= 0 || gameState.is_on_main_menu())
+        if (runContext.IsOnRestarting || runContext.Status.Health <= 0 || gameState.IsOnMainMenu())
         {
             return;
         }

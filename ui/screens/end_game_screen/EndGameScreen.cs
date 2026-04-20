@@ -13,7 +13,7 @@ public partial class EndGameScreen : CanvasLayer
 
     public override void _Ready()
     {
-        GetNode<AudioManager>("/root/AudioManager").play_main_piano();
+        GetNode<AudioManager>("/root/AudioManager").PlayMainPiano();
 
         _panel = GetNode<Panel>("Panel");
         _label3 = GetNode<Label>("PanelContainer/CenterContainer/VBoxContainer2/Label3");

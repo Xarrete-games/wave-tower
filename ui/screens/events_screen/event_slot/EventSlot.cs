@@ -37,13 +37,13 @@ public partial class EventSlot : VBoxContainer
         }
 
         EventPressed?.Invoke(_event);
-        GetNode<AudioManager>("/root/AudioManager").play_button_click();
+        GetNode<AudioManager>("/root/AudioManager").PlayButtonClick();
     }
 
     private void OnMouseEntered()
     {
         EventTexture.CustomMinimumSize = new Vector2(150, 150);
-        GetNode<AudioManager>("/root/AudioManager").play_button_hover();
+        GetNode<AudioManager>("/root/AudioManager").PlayButtonHover();
     }
 
     private void OnMouseExited()

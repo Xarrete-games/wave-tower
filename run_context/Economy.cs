@@ -62,6 +62,6 @@ public class Economy
         }
 
         AudioManager audioManager = tree.Root.GetNodeOrNull<AudioManager>("/root/AudioManager");
-        audioManager?.play_coins();
+        audioManager?.PlayCoins();
     }
 }

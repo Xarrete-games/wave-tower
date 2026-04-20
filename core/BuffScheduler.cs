@@ -7,7 +7,7 @@ public class BuffScheduler
     public event Action<TowerBuff> BuffExpired;
     public event Action<TowerBuff> BuffApplied;
 
-    private RunProgress progress;
+    private RunProgress _progress;
 
     public BuffScheduler()
     {
@@ -15,7 +15,7 @@ public class BuffScheduler
 
     public BuffScheduler(RunProgress runProgress)
     {
-        progress = runProgress;
+        _progress = runProgress;
     }
 
     public void Schedule(TowerBuff buff)
@@ -26,8 +26,8 @@ public class BuffScheduler
             return;
         }
 
-        float seconds = duration.seconds_duration;
-        int waves = duration.waves_duration;
+        float seconds = duration.SecondsDuration;
+        int waves = duration.WavesDuration;
 
         if (seconds > 0)
         {
@@ -53,13 +53,13 @@ public class BuffScheduler
 
     private async Task ScheduleInWavesAsync(TowerBuff buff, int waves)
     {
-        if (progress == null)
+        if (_progress == null)
         {
             return;
         }
 
-        int targetWave = progress.CurrentWave + waves;
-        while (progress.CurrentWave < targetWave)
+        int targetWave = _progress.CurrentWave + waves;
+        while (_progress.CurrentWave < targetWave)
         {
             await WaitForWaveFinishedAsync();
         }
@@ -69,7 +69,7 @@ public class BuffScheduler
 
     private Task WaitForWaveFinishedAsync()
     {
-        if (progress == null)
+        if (_progress == null)
         {
             return Task.CompletedTask;
         }
@@ -77,11 +77,11 @@ public class BuffScheduler
         TaskCompletionSource<bool> tcs = new();
         void Handler()
         {
-            progress.CurrentWaveFinished -= Handler;
+            _progress.CurrentWaveFinished -= Handler;
             tcs.TrySetResult(true);
         }
 
-        progress.CurrentWaveFinished += Handler;
+        _progress.CurrentWaveFinished += Handler;
         return tcs.Task;
     }
 

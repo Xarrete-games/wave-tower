@@ -13,7 +13,7 @@ public partial class HintLabel : Label
         Text = InitialHint;
 
         _gameState = GetNode<GameState>("/root/GameState");
-        _gameState.state_change += OnStateChange;
+        _gameState.StateChanged += OnStateChange;
 
         await ToSignal(GetTree().CreateTimer(10.0f, false), SceneTreeTimer.SignalName.Timeout);
         if (Text == InitialHint)
@@ -27,13 +27,13 @@ public partial class HintLabel : Label
     {
         if (_gameState != null)
         {
-            _gameState.state_change -= OnStateChange;
+            _gameState.StateChanged -= OnStateChange;
         }
     }
 
     private void OnStateChange(int state)
     {
-        if (state == GameState.IN_GAME && !_waitFirstHint)
+        if (state == GameState.InGame && !_waitFirstHint)
         {
             Text = string.Empty;
         }

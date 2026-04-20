@@ -10,8 +10,8 @@ public partial class MainMenu : Control
 
     public override void _Ready()
     {
-        GetNode<AudioManager>("/root/AudioManager").play_main_piano();
-        GetNode<GameState>("/root/GameState").state = GameState.ON_MAIN_MENU;
+        GetNode<AudioManager>("/root/AudioManager").PlayMainPiano();
+        GetNode<GameState>("/root/GameState").State = GameState.OnMainMenu;
 
         if (DirectInit)
         {
@@ -21,7 +21,7 @@ public partial class MainMenu : Control
 
     private void OnNewRunButtonXarretaPressed()
     {
-        GetNode<AudioManager>("/root/AudioManager").stop_main_piano();
+        GetNode<AudioManager>("/root/AudioManager").StopMainPiano();
         CallDeferred(MethodName.InitGame);
     }
 

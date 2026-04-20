@@ -82,7 +82,7 @@ public partial class ChooseTowerScreenItem : Control
             return;
         }
 
-        GetNode<AudioManager>("/root/AudioManager").play_button_click();
+        GetNode<AudioManager>("/root/AudioManager").PlayButtonClick();
         selected?.Invoke(this);
     }
 }

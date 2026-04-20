@@ -127,14 +127,14 @@ public partial class ShopSlot : Control
 
         if (UIUtilsStatic.IsLeftClickEvent(@event) && _runContext.Economy.Gold >= _price && _hasEnoughHealth)
         {
-            GetNode<AudioManager>("/root/AudioManager").play_button_click();
+            GetNode<AudioManager>("/root/AudioManager").PlayButtonClick();
             ItemPurchased?.Invoke(_item, this);
         }
     }
 
     private void OnMouseEntered()
     {
-        GetNode<AudioManager>("/root/AudioManager").play_button_hover();
+        GetNode<AudioManager>("/root/AudioManager").PlayButtonHover();
         ShopSlotIcon?.IncreaseIconSize();
     }
 

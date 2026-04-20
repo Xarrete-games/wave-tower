@@ -65,7 +65,7 @@ public partial class AnimationComponent : Node
         if (PlayHoverSound)
         {
             AudioManager audioManager = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<AudioManager>("/root/AudioManager");
-            audioManager?.play_button_hover();
+            audioManager?.PlayButtonHover();
         }
     }
 

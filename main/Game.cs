@@ -8,7 +8,7 @@ public partial class Game : Node2D
     public Godot.Collections.Array<string> LevelsPaths { get; set; } = new();
 
     [Export]
-    public PackedScene pause { get; set; }
+    public PackedScene Pause { get; set; }
 
     [Export]
     public bool TriggerFinishWave { get; set; } = false;
@@ -29,7 +29,7 @@ public partial class Game : Node2D
         runContext.Progress.TotalLevels = LevelsPaths.Count;
 
         GameState gameState = GetNode<GameState>("/root/GameState");
-        gameState.state = GameState.IN_GAME;
+        gameState.State = GameState.InGame;
 
         _musicHandler.PlayMusic();
 
@@ -78,7 +78,7 @@ public partial class Game : Node2D
         }
 
         GetTree().Paused = !GetTree().Paused;
-        _pauseInstance = pause.Instantiate<PauseMenu>();
+        _pauseInstance = Pause.Instantiate<PauseMenu>();
         _pauseInstance.ResumeGame += CloseConfigMenu;
         _configLayer.AddChild(_pauseInstance);
     }

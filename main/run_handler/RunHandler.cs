@@ -143,7 +143,7 @@ public partial class RunHandler : Node
 
     private async void OnWaveFinished()
     {
-        GetNode<AudioManager>("/root/AudioManager").play_wave_clear();
+        GetNode<AudioManager>("/root/AudioManager").PlayWaveClear();
         await ShowLootScreen();
         await ShowChooseCardScreen();
 

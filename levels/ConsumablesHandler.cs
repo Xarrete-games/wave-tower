@@ -28,7 +28,7 @@ public partial class ConsumablesHandler : Node
 
         if (_gameState != null)
         {
-            _gameState.state_change += OnGameStateChanged;
+            _gameState.StateChanged += OnGameStateChanged;
         }
 
         if (_runContext?.TowersManager != null)
@@ -47,7 +47,7 @@ public partial class ConsumablesHandler : Node
 
         if (_gameState != null)
         {
-            _gameState.state_change -= OnGameStateChanged;
+            _gameState.StateChanged -= OnGameStateChanged;
         }
 
         if (_runContext?.TowersManager != null)
@@ -208,7 +208,7 @@ public partial class ConsumablesHandler : Node
 
     private void OnGameStateChanged(int newState)
     {
-        if (newState != GameState.IN_GAME && _currentConsumable != null)
+        if (newState != GameState.InGame && _currentConsumable != null)
         {
             ActionManager actionManager = GetNode<ActionManager>("/root/ActionManager");
             actionManager.EndAction();

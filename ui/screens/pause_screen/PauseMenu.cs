@@ -67,7 +67,7 @@ public partial class PauseMenu : Control
         QueueFree();
 
         GameState gameState = GetNode<GameState>("/root/GameState");
-        gameState.state = GameState.ON_MAIN_MENU;
+        gameState.State = GameState.OnMainMenu;
         GetTree().ChangeSceneToPacked(MainMenu);
     }
 

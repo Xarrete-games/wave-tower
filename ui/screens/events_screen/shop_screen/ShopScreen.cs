@@ -72,7 +72,7 @@ public partial class ShopScreen : Control
     private void OnItemPurchase(ItemOffer itemOffer, ShopSlot slotPurchased)
     {
         ItemPurchase?.Invoke(itemOffer);
-        GetNode<AudioManager>("/root/AudioManager").play_purchase();
+        GetNode<AudioManager>("/root/AudioManager").PlayPurchase();
 
         Resource itemData = itemOffer?.ItemData;
         string purchasedId = itemData switch
@@ -125,7 +125,7 @@ public partial class ShopScreen : Control
             }
 
             runContext.Economy.AddGold(itemOffer?.Price ?? 0);
-            GetNode<AudioManager>("/root/AudioManager").play_purchase();
+            GetNode<AudioManager>("/root/AudioManager").PlayPurchase();
             SellButton.disable();
             OnExitButtonPressed();
             return;

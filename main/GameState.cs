@@ -3,35 +3,35 @@ using System;
 
 public partial class GameState : Node
 {
-    public event Action<int> state_change;
-    public event Action<float> speed_change;
+    public event Action<int> StateChanged;
+    public event Action<float> SpeedChanged;
 
-    public const int ON_MAIN_MENU = 0;
-    public const int IN_GAME = 1;
+    public const int OnMainMenu = 0;
+    public const int InGame = 1;
 
     private float _speed = 1.0f;
-    private int _state = ON_MAIN_MENU;
+    private int _state = OnMainMenu;
 
     [Export]
-    public float speed
+    public float Speed
     {
         get => _speed;
         set
         {
             _speed = value;
             Engine.TimeScale = value;
-            speed_change?.Invoke(value);
+            SpeedChanged?.Invoke(value);
         }
     }
 
     [Export]
-    public int state
+    public int State
     {
         get => _state;
         set
         {
             _state = value;
-            state_change?.Invoke(value);
+            StateChanged?.Invoke(value);
         }
     }
 
@@ -45,34 +45,34 @@ public partial class GameState : Node
         ClickEvents.SpeedButtonPressed -= ButtonSpeedPressed;
     }
 
-    public bool is_on_main_menu()
+    public bool IsOnMainMenu()
     {
-        return state == ON_MAIN_MENU;
+        return State == OnMainMenu;
     }
 
-    public bool is_in_game()
+    public bool IsInGame()
     {
-        return state == IN_GAME;
+        return State == InGame;
     }
 
-    public void reset_run()
+    public void ResetRun()
     {
-        speed = 1.0f;
+        Speed = 1.0f;
     }
 
     private void ButtonSpeedPressed()
     {
-        if (Mathf.IsEqualApprox(speed, 1.0f))
+        if (Mathf.IsEqualApprox(Speed, 1.0f))
         {
-            speed = 2.0f;
+            Speed = 2.0f;
         }
-        else if (Mathf.IsEqualApprox(speed, 2.0f))
+        else if (Mathf.IsEqualApprox(Speed, 2.0f))
         {
-            speed = 4.0f;
+            Speed = 4.0f;
         }
         else
         {
-            speed = 1.0f;
+            Speed = 1.0f;
         }
     }
 }

@@ -183,11 +183,11 @@ public class Status
 
         if (armorBlockDamage)
         {
-            audioManager.play_armor_block();
+            audioManager.PlayArmorBlock();
         }
         else
         {
-            audioManager.play_player_hurt();
+            audioManager.PlayPlayerHurt();
         }
     }
 }

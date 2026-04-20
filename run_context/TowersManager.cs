@@ -180,7 +180,7 @@ public class TowersManager
         }
 
         TowerPlaced?.Invoke(tower);
-        GetAudioManager()?.play_place_tower();
+        GetAudioManager()?.PlayPlaceTower();
     }
 
     public void OnTowerRemoved(Tower tower)
