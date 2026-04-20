@@ -11,12 +11,6 @@ public partial class TowerData : BaseData
     [Export]
     public int BuildPrice { get; set; } = 50;
 
-    public int type
-    {
-        get => Type;
-        set => Type = value;
-    }
-
     [Export]
     public int UpgradePrice { get; set; } = 30;
 
@@ -52,26 +46,21 @@ public partial class TowerData : BaseData
     [Export]
     public float CriticDamagePerLevel { get; set; }
 
-    public TowerStats stats { get; set; } = new TowerStats();
-    public TowerStats stats_on_level { get; set; } = new TowerStats();
-
-    public void build()
-    {
-        stats.damage = BaseDamage;
-        stats.attack_range = BaseAttackRange;
-        stats.attack_speed = BaseAttackSpeed;
-        stats.critic_chance = BaseCriticChance;
-        stats.critic_damage = BaseCriticDamage;
-
-        stats_on_level.damage = DamagePerLevel;
-        stats_on_level.attack_range = AttackRangePerLevel;
-        stats_on_level.attack_speed = AttackSpeedPerLevel;
-        stats_on_level.critic_chance = CriticChancePerLevel;
-        stats_on_level.critic_damage = CriticDamagePerLevel;
-    }
+    public TowerStats Stats { get; set; } = new TowerStats();
+    public TowerStats StatsOnLevel { get; set; } = new TowerStats();
 
     public void Build()
     {
-        build();
+        Stats.Damage = BaseDamage;
+        Stats.AttackRange = BaseAttackRange;
+        Stats.AttackSpeed = BaseAttackSpeed;
+        Stats.CritChance = BaseCriticChance;
+        Stats.CritDamage = BaseCriticDamage;
+
+        StatsOnLevel.Damage = DamagePerLevel;
+        StatsOnLevel.AttackRange = AttackRangePerLevel;
+        StatsOnLevel.AttackSpeed = AttackSpeedPerLevel;
+        StatsOnLevel.CritChance = CriticChancePerLevel;
+        StatsOnLevel.CritDamage = CriticDamagePerLevel;
     }
 }

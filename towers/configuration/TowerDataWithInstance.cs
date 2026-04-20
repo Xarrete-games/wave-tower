@@ -12,8 +12,8 @@ public partial class TowerDataWithInstance : Resource
     public Tower GetInstanceNode()
     {
         Tower instance = Scene.Instantiate<Tower>();
-        instance.data = Data;
-        instance.type = (Tower.Type)Data.type;
+        instance.Data = Data;
+        instance.TowerType = (Tower.Type)Data.Type;
         return instance;
     }
 

@@ -44,7 +44,7 @@ public partial class TowerBuffsBarSlot : Control {
         if (_textureNode == null || TowerBuff == null) {
             return;
         }
-        BuffData data = TowerBuff.data;
+        BuffData data = TowerBuff.Data;
         if (data == null) {
             return;
         }

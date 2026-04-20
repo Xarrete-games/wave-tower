@@ -32,9 +32,9 @@ public partial class Tower : Node2D
     public const float ELLIPSE_Y_RATIO = 0.5f;
     public const float TOWER_AREA_RADIUS = 47.042534f;
 
-    [Export] public Type type = Type.FIRE;
+    [Export] public Type TowerType = Type.FIRE;
 
-    public GodotObject data;
+    public GodotObject Data;
     public int BuildPrice { get; set; } = 0;
 
     protected Node2D _currentTarget;
@@ -45,7 +45,7 @@ public partial class Tower : Node2D
     public Tween RangeTween;
 
     private TowerStats _stats;
-    public TowerStats stats
+    public TowerStats Stats
     {
         get => _stats;
         set
@@ -72,7 +72,7 @@ public partial class Tower : Node2D
         }
     }
 
-    public int level = 1;
+    public int Level = 1;
 
     private TowerExpData _expData;
     public TowerExpData ExpData
@@ -85,12 +85,12 @@ public partial class Tower : Node2D
         }
     }
 
-    public string id = string.Empty;
+    public string Id = string.Empty;
     public string TypeId = string.Empty;
 
-    public readonly List<TowerBuff> buffs = new();
+    public readonly List<TowerBuff> Buffs = new();
 
-    public TowerLogic tower_logic;
+    public TowerLogic TowerLogic;
 
     public Source DamageSource
     {
@@ -129,14 +129,14 @@ public partial class Tower : Node2D
 
         TypeId = GetType().Name;
 
-        (data as TowerData)?.build();
-        tower_logic = new TowerLogic(this);
+        (Data as TowerData)?.Build();
+        TowerLogic = new TowerLogic(this);
         _towerAreaCollision.Polygon = BuildEllipsePolygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO);
 
         _towerStatsHandler.StatsChanged += OnStatsChange;
         _towerStatsHandler.BuffApplied += AddBuff;
         _towerStatsHandler.BuffExpired += RemoveBuff;
-        _towerStatsHandler.SetData(data as TowerData, (int)type);
+        _towerStatsHandler.SetData(Data as TowerData, (int)TowerType);
 
         _areaDetector.TargetChanged += OnTargetChange;
         CurrentTargetingMode = _targetingMode;
@@ -261,7 +261,7 @@ public partial class Tower : Node2D
             return;
         }
 
-        buffs.Add(towerBuff);
+        Buffs.Add(towerBuff);
         if (towerBuff is TowerBuffStatsModifier)
         {
             _towerStatsHandler.AddBuff(towerBuff);
@@ -274,22 +274,22 @@ public partial class Tower : Node2D
     {
         List<TowerBuff> removedBuffs = new();
 
-        for (int i = buffs.Count - 1; i >= 0; i--)
+        for (int i = Buffs.Count - 1; i >= 0; i--)
         {
-            TowerBuff buff = buffs[i];
+            TowerBuff buff = Buffs[i];
             if (buff == null)
             {
                 continue;
             }
 
-            string buffSourceId = buff.source?.TypeId ?? string.Empty;
+            string buffSourceId = buff.Source?.TypeId ?? string.Empty;
             if (buffSourceId != sourceId)
             {
                 continue;
             }
 
             removedBuffs.Add(buff);
-            buffs.RemoveAt(i);
+            Buffs.RemoveAt(i);
         }
 
         _towerStatsHandler.RemoveBuff(sourceId);
@@ -304,7 +304,7 @@ public partial class Tower : Node2D
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
         Economy economy = runContext?.Economy;
-        TowerData towerData = data as TowerData;
+        TowerData towerData = Data as TowerData;
         if (economy != null && towerData != null)
         {
             int currentGold = economy.Gold;
@@ -312,13 +312,13 @@ public partial class Tower : Node2D
             economy.Gold = currentGold - upgradePrice;
         }
 
-        level += 1;
-        _towerStatsHandler.LevelUp(level);
+        Level += 1;
+        _towerStatsHandler.LevelUp(Level);
     }
 
     public bool IsMaxLevel()
     {
-        return level >= MAX_LEVEL;
+        return Level >= MAX_LEVEL;
     }
 
     public void CopyTowerData(Tower fromTower)
@@ -342,8 +342,8 @@ public partial class Tower : Node2D
     {
         bool isCritical = IsCriticalHit();
 
-        float baseDamage = stats?.damage ?? 0f;
-        float critDamage = stats?.critic_damage ?? 0f;
+        float baseDamage = Stats?.Damage ?? 0f;
+        float critDamage = Stats?.CritDamage ?? 0f;
         float attackDamage = isCritical ? baseDamage * (1f + critDamage / 100f) : baseDamage;
 
         Attack attack = new(attackDamage, DamageSource, isCritical);
@@ -386,7 +386,7 @@ public partial class Tower : Node2D
 
     private TowerModel BuildTowerModel()
     {
-        TowerModel.TowerType towerType = type switch
+        TowerModel.TowerType towerType = TowerType switch
         {
             Type.FIRE => TowerModel.TowerType.Fire,
             Type.LIGHTNING => TowerModel.TowerType.Lightning,
@@ -396,7 +396,7 @@ public partial class Tower : Node2D
 
         return new TowerModel
         {
-            Id = id,
+            Id = Id,
             TypeId = TypeId,
             Type = towerType,
         };
@@ -405,7 +405,7 @@ public partial class Tower : Node2D
     public bool IsCriticalHit()
     {
         float randomValue = GD.Randf();
-        float critChance = stats?.critic_chance ?? 0f;
+        float critChance = Stats?.CritChance ?? 0f;
         return randomValue < (critChance / 100f);
     }
 
@@ -439,19 +439,19 @@ public partial class Tower : Node2D
 
     public virtual void OnStatsChange(TowerStats newStats)
     {
-        stats = newStats;
+        Stats = newStats;
         ApplyStatsChanges();
     }
 
     public virtual void ApplyStatsChanges()
     {
-        if (stats == null)
+        if (Stats == null)
         {
             return;
         }
 
-        float attackSpeed = stats.attack_speed;
-        float attackRange = stats.attack_range;
+        float attackSpeed = Stats.AttackSpeed;
+        float attackRange = Stats.AttackRange;
 
         _attackTimer.WaitTime = 1.0 / attackSpeed;
         _rangePreview.radius = attackRange;

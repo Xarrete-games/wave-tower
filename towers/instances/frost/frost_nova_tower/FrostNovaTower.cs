@@ -22,7 +22,7 @@ public partial class FrostNovaTower : Tower
         bool isDoubleHit = IsDobleHit();
 
         Attack attack = GetAttack();
-        float attackRange = stats?.attack_range ?? 0f;
+        float attackRange = Stats?.AttackRange ?? 0f;
         projectile.set_stats(attack, attackRange, EnemyDebuff.CreateFrost(DamageSource));
         CallDeferred(MethodName.AddProjectil, projectile);
 

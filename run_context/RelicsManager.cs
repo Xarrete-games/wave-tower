@@ -82,6 +82,8 @@ public class RelicsManager
             RunContextRuntime.RelicsManager.AddRelic(relic);
         }
 
+        SyncLegacyTowersRuntimeBuffs();
+
         // Emit legacy signals only after runtime state is updated so UI recalculations read fresh hooks.
         AddRelicInternal(relic);
     }
@@ -103,6 +105,7 @@ public class RelicsManager
         relicObj.OnRemove();
         relicObj.Changed -= EmitRelicChanged;
         RunContextRuntime.RelicsManager.RemoveRelic(relicId);
+        SyncLegacyTowersRuntimeBuffs();
 
         _relics.Remove(relicId);
 
@@ -154,5 +157,17 @@ public class RelicsManager
 
         AudioManager audioManager = tree.Root.GetNodeOrNull<AudioManager>("/root/AudioManager");
         audioManager?.PlayRelicObtain();
+    }
+
+    private void SyncLegacyTowersRuntimeBuffs()
+    {
+        SceneTree tree = Engine.GetMainLoop() as SceneTree;
+        if (tree == null)
+        {
+            return;
+        }
+
+        RunContext runContext = tree.Root.GetNodeOrNull<RunContext>("/root/RunContext");
+        runContext?.TowersManager?.SyncRuntimeBuffsForAllTowers();
     }
 }

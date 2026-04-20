@@ -5,11 +5,11 @@ public class LongShot : ConsumableTargeteable {
             return;
         }
         Source source = GetSource();
-        TowerBuff towerBuffObj = TowerBuffFactory.create_from_id("attack_range_mult_buff", source, 100);
+        TowerBuff towerBuffObj = TowerBuffFactory.CreateFromId("attack_range_mult_buff", source, 100);
         if (towerBuffObj == null) {
             return;
         }
-        towerBuffObj.duration = new Duration(0, 1);
+        towerBuffObj.Duration = new Duration(0, 1);
         tower.AddBuff(towerBuffObj);
     }
 }

@@ -1,10 +1,10 @@
 public abstract class TowerBuffStatsModifier : TowerBuff {
-    public int value = 0;
+    public int Value = 0;
     protected TowerBuffStatsModifier() {
     }
-    protected TowerBuffStatsModifier(Source source, Duration duration = null, TowerBuff residual_buff = null, BuffData data = null, int buffValue = 0) : base(source, duration, residual_buff, data) {
-        value = buffValue;
+    protected TowerBuffStatsModifier(Source source, Duration duration = null, TowerBuff residualBuff = null, BuffData buffData = null, int buffValue = 0) : base(source, duration, residualBuff, buffData) {
+        Value = buffValue;
     }
-    public abstract void contribute(TowerStatsAccumulator acc);
+    public abstract void Contribute(TowerStatsAccumulator acc);
 }
 

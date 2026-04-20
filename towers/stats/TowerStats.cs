@@ -1,29 +1,29 @@
 public class TowerStats
 {
-    public float damage { get; set; }
-    public float attack_range { get; set; }
-    public float attack_speed { get; set; }
-    public float critic_chance { get; set; }
-    public float critic_damage { get; set; }
+    public float Damage { get; set; }
+    public float AttackRange { get; set; }
+    public float AttackSpeed { get; set; }
+    public float CritChance { get; set; }
+    public float CritDamage { get; set; }
 
-    public TowerStats duplicate()
+    public TowerStats Duplicate()
     {
         return new TowerStats
         {
-            damage = damage,
-            attack_range = attack_range,
-            attack_speed = attack_speed,
-            critic_chance = critic_chance,
-            critic_damage = critic_damage,
+            Damage = Damage,
+            AttackRange = AttackRange,
+            AttackSpeed = AttackSpeed,
+            CritChance = CritChance,
+            CritDamage = CritDamage,
         };
     }
 
-    public void add_stats(TowerStats other)
+    public void AddStats(TowerStats other)
     {
-        damage += other.damage;
-        attack_range += other.attack_range;
-        attack_speed += other.attack_speed;
-        critic_chance += other.critic_chance;
-        critic_damage += other.critic_damage;
+        Damage += other.Damage;
+        AttackRange += other.AttackRange;
+        AttackSpeed += other.AttackSpeed;
+        CritChance += other.CritChance;
+        CritDamage += other.CritDamage;
     }
 }

@@ -11,7 +11,7 @@ region = Rect2(1005, 83, 367, 553)
 
 [sub_resource type="Resource" id="Resource_r2o8q"]
 script = ExtResource("2_fd5ad")
-type = 2
+Type = 2
 BuildPrice = 310
 UpgradePrice = 350
 BaseDamage = 15.0

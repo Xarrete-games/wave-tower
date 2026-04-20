@@ -147,10 +147,10 @@ public class TowersManager
 
         Towers.Add(tower);
 
-        int towerType = (int)tower.type;
+        int towerType = (int)tower.TowerType;
         UpdateTowerCount(towerType);
 
-        TowerData towerData = tower.data as TowerData;
+        TowerData towerData = tower.Data as TowerData;
         if (towerData == null)
         {
             GD.PushError("[TowersManager] Placed tower has no TowerData.");
@@ -164,7 +164,7 @@ public class TowersManager
         TowerDataWithInstance towerConfiguration = GetTowerConfigurationById(towerDataId);
         TowerCardAmountChanged?.Invoke(towerConfiguration, TowerCardsAmount[towerDataId]);
 
-        tower.id = GenerateTowerId(tower);
+        tower.Id = GenerateTowerId(tower);
 
         TowerModel towerModel = BuildTowerModel(tower);
         if (towerModel != null)
@@ -192,10 +192,10 @@ public class TowersManager
 
         Towers.Remove(tower);
 
-        int towerType = (int)tower.type;
+        int towerType = (int)tower.TowerType;
         UpdateTowerCount(towerType);
 
-        TowersIds.Remove(tower.id);
+        TowersIds.Remove(tower.Id);
 
         ulong instanceId = tower.GetInstanceId();
         if (_runtimeTowerModels.ContainsKey(instanceId))
@@ -220,7 +220,7 @@ public class TowersManager
         for (int index = 0; index < Towers.Count; index++)
         {
             Tower tower = Towers[index];
-            if (tower != null && (int)tower.type == towerType)
+            if (tower != null && (int)tower.TowerType == towerType)
             {
                 count++;
             }
@@ -302,6 +302,21 @@ public class TowersManager
         }
 
         ApplyRuntimeBuffsToLegacyTower(instanceId, tower, towerModel);
+    }
+
+    public void SyncRuntimeBuffsForAllTowers()
+    {
+        foreach (KeyValuePair<ulong, TowerModel> entry in _runtimeTowerModels)
+        {
+            ulong instanceId = entry.Key;
+            Tower tower = GodotObject.InstanceFromId(instanceId) as Tower;
+            if (tower == null)
+            {
+                continue;
+            }
+
+            ApplyRuntimeBuffsToLegacyTower(instanceId, tower, entry.Value);
+        }
     }
 
     private float GetTowerWeightForWave(int rarity)
@@ -388,7 +403,7 @@ public class TowersManager
             return null;
         }
 
-        int rawType = (int)tower.type;
+        int rawType = (int)tower.TowerType;
         TowerModel.TowerType towerType = rawType switch
         {
             0 => TowerModel.TowerType.Fire,
@@ -399,7 +414,7 @@ public class TowersManager
 
         var model = new TowerModel
         {
-            Id = tower.id,
+            Id = tower.Id,
             TypeId = tower.TypeId,
             Type = towerType,
         };
@@ -469,16 +484,23 @@ public class TowersManager
         }
 
         var buffs = towerModel.GetBuffs();
+        HashSet<string> activeSources = new HashSet<string>();
         for (int index = 0; index < buffs.Count; index++)
         {
             TowerBuffModel buff = buffs[index];
-            if (buff == null || string.IsNullOrEmpty(buff.SourceId) || appliedSources.Contains(buff.SourceId))
+            if (buff == null || string.IsNullOrEmpty(buff.SourceId))
+            {
+                continue;
+            }
+
+            activeSources.Add(buff.SourceId);
+            if (appliedSources.Contains(buff.SourceId))
             {
                 continue;
             }
 
             Source source = new Source(Source.SourceType.RELIC, buff.SourceId);
-            TowerBuff legacyBuff = TowerBuffFactory.create_from_id(buff.Id, source, buff.Value);
+            TowerBuff legacyBuff = TowerBuffFactory.CreateFromId(buff.Id, source, buff.Value);
             if (legacyBuff == null)
             {
                 continue;
@@ -486,6 +508,27 @@ public class TowersManager
 
             tower.AddBuff(legacyBuff);
             appliedSources.Add(buff.SourceId);
+        }
+
+        if (appliedSources.Count == 0)
+        {
+            return;
+        }
+
+        var staleSources = new List<string>();
+        foreach (string sourceId in appliedSources)
+        {
+            if (!activeSources.Contains(sourceId))
+            {
+                staleSources.Add(sourceId);
+            }
+        }
+
+        for (int index = 0; index < staleSources.Count; index++)
+        {
+            string staleSourceId = staleSources[index];
+            tower.RemoveBuff(staleSourceId);
+            appliedSources.Remove(staleSourceId);
         }
     }
 }

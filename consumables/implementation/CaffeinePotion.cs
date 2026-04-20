@@ -19,17 +19,17 @@ public class CaffeinePotion : ConsumableUsable
             }
 
             Source source = GetSource();
-            TowerBuff debuffObj = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, -20);
-            TowerBuff buffObj = TowerBuffFactory.create_from_id("attack_speed_mult_buff", source, 20);
+            TowerBuff debuffObj = TowerBuffFactory.CreateFromId("attack_speed_mult_buff", source, -20);
+            TowerBuff buffObj = TowerBuffFactory.CreateFromId("attack_speed_mult_buff", source, 20);
             if (debuffObj == null || buffObj == null)
             {
                 continue;
             }
 
             Duration duration = new Duration(5, 0);
-            debuffObj.duration = duration;
-            buffObj.duration = duration;
-            buffObj.residual_buff = debuffObj;
+            debuffObj.Duration = duration;
+            buffObj.Duration = duration;
+            buffObj.ResidualBuff = debuffObj;
 
             tower.AddBuff(buffObj);
         }

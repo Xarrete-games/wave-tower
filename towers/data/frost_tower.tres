@@ -11,7 +11,7 @@ region = Rect2(94, 175, 289, 461)
 
 [sub_resource type="Resource" id="Resource_tjead"]
 script = ExtResource("2_4xtpd")
-type = 2
+Type = 2
 UpgradePrice = 70
 BaseDamage = 30.0
 BaseAttackRange = 450.0

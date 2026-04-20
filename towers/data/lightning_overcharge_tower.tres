@@ -11,7 +11,7 @@ region = Rect2(971, 7, 433, 543)
 
 [sub_resource type="Resource" id="Resource_6h4w4"]
 script = ExtResource("2_mq6v3")
-type = 1
+Type = 1
 BuildPrice = 280
 UpgradePrice = 320
 BaseDamage = 10.0

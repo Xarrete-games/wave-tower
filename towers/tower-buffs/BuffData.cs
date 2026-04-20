@@ -29,9 +29,9 @@ public partial class BuffData : BaseData
             return null;
         }
 
-        buff.source = source;
-        buff.data = this;
-        buff.value = value;
+        buff.Source = source;
+        buff.Data = this;
+        buff.Value = value;
         return buff;
     }
 }

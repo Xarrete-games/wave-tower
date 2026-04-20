@@ -11,7 +11,7 @@ region = Rect2(1456, 3, 415, 633)
 
 [sub_resource type="Resource" id="Resource_gyvde"]
 script = ExtResource("2_wysa5")
-type = 2
+Type = 2
 BuildPrice = 200
 UpgradePrice = 220
 BaseDamage = 30.0

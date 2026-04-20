@@ -9,22 +9,22 @@ public partial class TowerStatsHandler : Node
     public event Action<TowerBuff> BuffApplied;
     public event Action<string> BuffExpired;
 
-    public TowerStats base_stats;
-    public TowerStats stats_on_level;
-    public List<TowerBuff> buffs = new();
+    public TowerStats BaseStats;
+    public TowerStats StatsOnLevel;
+    public List<TowerBuff> Buffs = new();
 
-    private TowerStatsAccumulator _stats_acc = new();
-    public TowerStatsAccumulator stats_acc
+    private TowerStatsAccumulator _statsAcc = new();
+    public TowerStatsAccumulator StatsAcc
     {
-        get => _stats_acc;
+        get => _statsAcc;
         set
         {
-            _stats_acc = value;
+            _statsAcc = value;
             UpdateStats();
         }
     }
 
-    public TowerStats stats;
+    public TowerStats Stats;
     public BuffScheduler BuffScheduler;
 
     public override void _Ready()
@@ -37,17 +37,17 @@ public partial class TowerStatsHandler : Node
 
     public void SetData(TowerData statsConfiguration, int towerType)
     {
-        base_stats = statsConfiguration?.stats?.duplicate() ?? new TowerStats();
-        stats_on_level = statsConfiguration?.stats_on_level?.duplicate() ?? new TowerStats();
-        stats = base_stats.duplicate();
+        BaseStats = statsConfiguration?.Stats?.Duplicate() ?? new TowerStats();
+        StatsOnLevel = statsConfiguration?.StatsOnLevel?.Duplicate() ?? new TowerStats();
+        Stats = BaseStats.Duplicate();
         UpdateStats();
     }
 
     public void AddBuff(TowerBuff towerBuff)
     {
-        buffs.Add(towerBuff);
+        Buffs.Add(towerBuff);
 
-        if (towerBuff?.duration != null)
+        if (towerBuff?.Duration != null)
         {
             BuffScheduler.Schedule(towerBuff);
         }
@@ -57,18 +57,18 @@ public partial class TowerStatsHandler : Node
 
     public void RemoveBuff(string sourceId)
     {
-        int initialSize = buffs.Count;
-        for (int i = buffs.Count - 1; i >= 0; i--)
+        int initialSize = Buffs.Count;
+        for (int i = Buffs.Count - 1; i >= 0; i--)
         {
-            TowerBuff buffObj = buffs[i];
-            string buffSourceId = buffObj?.source?.TypeId ?? string.Empty;
+            TowerBuff buffObj = Buffs[i];
+            string buffSourceId = buffObj?.Source?.TypeId ?? string.Empty;
             if (buffSourceId == sourceId)
             {
-                buffs.RemoveAt(i);
+                Buffs.RemoveAt(i);
             }
         }
 
-        if (buffs.Count != initialSize)
+        if (Buffs.Count != initialSize)
         {
             RebuildStatsAcc();
         }
@@ -76,7 +76,7 @@ public partial class TowerStatsHandler : Node
 
     public void LevelUp(int newLevel)
     {
-        base_stats.add_stats(stats_on_level);
+        BaseStats.AddStats(StatsOnLevel);
         UpdateStats();
     }
 
@@ -87,42 +87,42 @@ public partial class TowerStatsHandler : Node
 
     private void OnScheduledBuffExpired(TowerBuff buff)
     {
-        string sourceId = buff?.source?.TypeId ?? string.Empty;
+        string sourceId = buff?.Source?.TypeId ?? string.Empty;
         BuffExpired?.Invoke(sourceId);
     }
 
     private void RebuildStatsAcc()
     {
         TowerStatsAccumulator acc = new();
-        for (int i = 0; i < buffs.Count; i++)
+        for (int i = 0; i < Buffs.Count; i++)
         {
-            TowerBuffStatsModifier buff = buffs[i] as TowerBuffStatsModifier;
-            buff?.contribute(acc);
+            TowerBuffStatsModifier buff = Buffs[i] as TowerBuffStatsModifier;
+            buff?.Contribute(acc);
         }
 
-        stats_acc = acc;
+        StatsAcc = acc;
     }
 
     private void UpdateStats()
     {
-        if (stats == null || base_stats == null)
+        if (Stats == null || BaseStats == null)
         {
             return;
         }
 
-        TowerStatsAccumulator total = stats_acc ?? new TowerStatsAccumulator();
+        TowerStatsAccumulator total = StatsAcc ?? new TowerStatsAccumulator();
 
-        stats.damage = (base_stats.damage + total.flat_damage) * (1.0f + total.damage_mult);
+        Stats.Damage = (BaseStats.Damage + total.FlatDamage) * (1.0f + total.DamageMult);
 
-        float attackRangeMultiplier = 1.0f + total.attack_range_mult;
-        stats.attack_range = (base_stats.attack_range + total.flat_attack_range) * attackRangeMultiplier;
+        float attackRangeMultiplier = 1.0f + total.AttackRangeMult;
+        Stats.AttackRange = (BaseStats.AttackRange + total.FlatAttackRange) * attackRangeMultiplier;
 
-        float attackSpeedMultiplier = 1.0f + total.attack_speed_mult;
-        stats.attack_speed = (base_stats.attack_speed + total.flat_attack_speed) * attackSpeedMultiplier;
+        float attackSpeedMultiplier = 1.0f + total.AttackSpeedMult;
+        Stats.AttackSpeed = (BaseStats.AttackSpeed + total.FlatAttackSpeed) * attackSpeedMultiplier;
 
-        stats.critic_chance = (base_stats.critic_chance + total.flat_critic_chance) * (1.0f + total.critic_chance_mult);
-        stats.critic_damage = (base_stats.critic_damage + total.flat_critic_damage) * (1.0f + total.critic_damage_mult);
+        Stats.CritChance = (BaseStats.CritChance + total.FlatCritChance) * (1.0f + total.CritChanceMult);
+        Stats.CritDamage = (BaseStats.CritDamage + total.FlatCritDamage) * (1.0f + total.CritDamageMult);
 
-        StatsChanged?.Invoke(stats);
+        StatsChanged?.Invoke(Stats);
     }
 }

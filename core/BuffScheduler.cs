@@ -20,7 +20,7 @@ public class BuffScheduler
 
     public void Schedule(TowerBuff buff)
     {
-        Duration duration = buff?.duration;
+        Duration duration = buff?.Duration;
         if (buff == null || duration == null)
         {
             return;
@@ -108,7 +108,7 @@ public class BuffScheduler
     {
         BuffExpired?.Invoke(buff);
 
-        TowerBuff residual = buff?.residual_buff;
+        TowerBuff residual = buff?.ResidualBuff;
         if (residual != null)
         {
             AddResidual(residual);
@@ -119,7 +119,7 @@ public class BuffScheduler
     {
         BuffApplied?.Invoke(buff);
 
-        if (buff.duration != null)
+        if (buff.Duration != null)
         {
             Schedule(buff);
         }

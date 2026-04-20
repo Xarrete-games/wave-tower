@@ -1,10 +1,10 @@
 public class AttackSpeedMultBuff : TowerBuffStatsModifier {
     public AttackSpeedMultBuff() {
     }
-    public AttackSpeedMultBuff(Source source, Duration duration = null, TowerBuff residual_buff = null, BuffData data = null, int value = 0) : base(source, duration, residual_buff, data, value) {
+    public AttackSpeedMultBuff(Source source, Duration duration = null, TowerBuff residualBuff = null, BuffData buffData = null, int value = 0) : base(source, duration, residualBuff, buffData, value) {
     }
-    public override void contribute(TowerStatsAccumulator acc) {
-        acc.attack_speed_mult += value / 100.0f;
+    public override void Contribute(TowerStatsAccumulator acc) {
+        acc.AttackSpeedMult += Value / 100.0f;
     }
 }
 

@@ -77,8 +77,27 @@ public partial class Game : Node2D
             return;
         }
 
+        if (Pause == null)
+        {
+            GD.PushError("[Game] Pause scene is not assigned.");
+            return;
+        }
+
+        if (_configLayer == null)
+        {
+            GD.PushError("[Game] ConfigLayer node is missing.");
+            return;
+        }
+
         GetTree().Paused = !GetTree().Paused;
         _pauseInstance = Pause.Instantiate<PauseMenu>();
+        if (_pauseInstance == null)
+        {
+            GD.PushError("[Game] Pause scene did not instantiate a PauseMenu.");
+            GetTree().Paused = false;
+            return;
+        }
+
         _pauseInstance.ResumeGame += CloseConfigMenu;
         _configLayer.AddChild(_pauseInstance);
     }

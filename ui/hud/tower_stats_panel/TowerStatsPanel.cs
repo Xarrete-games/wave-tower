@@ -69,17 +69,17 @@ public partial class TowerStatsPanel : Control
         manager.StartAction(ActionManager.ActionState.TowerSelected, HidePanel);
         Visible = true;
 
-        TowerStats stats = tower.stats;
+        TowerStats stats = tower.Stats;
         TowerExpData expData = tower.ExpData;
         UpdateStats(stats);
         UpdateExpData(expData);
 
-        TowerData data = tower.data as TowerData;
+        TowerData data = tower.Data as TowerData;
         _nameLabel.Text = data?.DisplayName ?? string.Empty;
-        _idLabel.Text = tower.id;
+        _idLabel.Text = tower.Id;
         _currentTower = tower;
 
-        _levelLabel.Text = tower.level.ToString();
+        _levelLabel.Text = tower.Level.ToString();
         if (tower.IsMaxLevel())
         {
             HideUpgradeOptions();
@@ -103,9 +103,9 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        _damageStat.SetValue(towerStats.damage);
-        _attackSpeedStat.SetValue(towerStats.attack_speed);
-        _rangeStat.SetValue(towerStats.attack_range);
+        _damageStat.SetValue(towerStats.Damage);
+        _attackSpeedStat.SetValue(towerStats.AttackSpeed);
+        _rangeStat.SetValue(towerStats.AttackRange);
     }
 
     private void UpdateExpData(TowerExpData expData)
@@ -158,7 +158,7 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        TowerData data = _currentTower.data as TowerData;
+        TowerData data = _currentTower.Data as TowerData;
         if (data == null)
         {
             return;
@@ -198,16 +198,16 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        TowerData data = _currentTower.data as TowerData;
-        TowerStats statsOnLevel = data?.stats_on_level;
+        TowerData data = _currentTower.Data as TowerData;
+        TowerStats statsOnLevel = data?.StatsOnLevel;
         if (statsOnLevel == null)
         {
             return;
         }
 
-        _damageStat.ShowUpgradeValue(statsOnLevel.damage);
-        _attackSpeedStat.ShowUpgradeValue(statsOnLevel.attack_speed);
-        _rangeStat.ShowUpgradeValue(statsOnLevel.attack_range);
+        _damageStat.ShowUpgradeValue(statsOnLevel.Damage);
+        _attackSpeedStat.ShowUpgradeValue(statsOnLevel.AttackSpeed);
+        _rangeStat.ShowUpgradeValue(statsOnLevel.AttackRange);
     }
 
     private void OnUpgradeButtonXarretaMouseExited()

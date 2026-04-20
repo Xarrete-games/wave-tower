@@ -91,12 +91,12 @@ public partial class LightningOverchargeTower : Tower
     {
         base.ApplyStatsChanges();
 
-        if (stats == null || buff_area_shape == null)
+        if (Stats == null || buff_area_shape == null)
         {
             return;
         }
 
-        float attackRange = stats.attack_range;
+        float attackRange = Stats.AttackRange;
         buff_area_shape.SetDeferred("polygon", BuildEllipsePolygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
     }
 
@@ -121,7 +121,7 @@ public partial class LightningOverchargeTower : Tower
 
         Source source = new(Source.SourceType.TOWER, Name);
 
-        TowerBuff towerBuff = TowerBuffFactory.create_from_id("damage_mult_buff", source, 10);
+        TowerBuff towerBuff = TowerBuffFactory.CreateFromId("damage_mult_buff", source, 10);
         if (towerBuff == null)
         {
             return;

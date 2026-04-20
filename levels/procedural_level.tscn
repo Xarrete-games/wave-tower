@@ -22,7 +22,7 @@
 
 [node name="ProceduralLevel" type="Node2D" unique_id=1437931111]
 script = ExtResource("1_j1bfp")
-pause = ExtResource("2_oysny")
+Pause = ExtResource("2_oysny")
 
 [node name="RunHandler" parent="." unique_id=283953083 node_paths=PackedStringArray("EventLayer") instance=ExtResource("2_4cdkm")]
 EventLayer = NodePath("../EventLayer")

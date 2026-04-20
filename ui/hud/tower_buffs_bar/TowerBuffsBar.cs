@@ -62,7 +62,7 @@ public partial class TowerBuffsBar : Control
             return;
         }
 
-        int modifierValue = (buff as TowerBuffStatsModifier)?.value ?? 0;
+        int modifierValue = (buff as TowerBuffStatsModifier)?.Value ?? 0;
         if (!buffExists)
         {
             _buffsModifiersStacks[buffId] = modifierValue;
@@ -121,7 +121,7 @@ public partial class TowerBuffsBar : Control
             hasSameBuffInstance = true;
             if (IsStatsModifier(remainingBuff))
             {
-                totalValue += (remainingBuff as TowerBuffStatsModifier)?.value ?? 0;
+                totalValue += (remainingBuff as TowerBuffStatsModifier)?.Value ?? 0;
             }
         }
 
@@ -174,7 +174,7 @@ public partial class TowerBuffsBar : Control
 
     private string GetBuffId(TowerBuff buff)
     {
-        return buff?.data?.Id ?? string.Empty;
+        return buff?.Data?.Id ?? string.Empty;
     }
 
     private bool BuffExists(string buffId)
