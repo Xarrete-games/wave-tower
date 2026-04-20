@@ -1,54 +1,82 @@
 ﻿using Godot;
-public class EnemyDebuff : EnemyEffect {
-    public enum Type {
-        FROST, BURN, }
-        public Type type;
-        public EnemyDebuffData data;
-        public Source source;
-        public float value = 0.0f;
-        public float duration = 0.0f;
-        public float TickInterval = 0.0f;
-        public int MaxStacks = 99;
-        public EnemyDebuff() {
+public class EnemyDebuff : EnemyEffect
+{
+    public enum Type
+    {
+        Frost,
+        Burn,
+    }
+
+    public Type DebuffType;
+    public EnemyDebuffData Data;
+    public Source Source;
+    public float Value = 0.0f;
+    public float Duration = 0.0f;
+    public float TickInterval = 0.0f;
+    public int MaxStacks = 99;
+
+    public EnemyDebuff()
+    {
+    }
+
+    public virtual void Init(EnemyDebuffData debuffData, Source debuffSource)
+    {
+        Data = debuffData;
+        Source = debuffSource;
+        DebuffType = (Type)debuffData.DebuffType;
+        Value = debuffData.Value;
+        Duration = debuffData.Duration;
+        TickInterval = debuffData.TickInterval;
+        MaxStacks = debuffData.MaxStacks;
+    }
+
+    public static EnemyDebuff CreateFrost(Source source)
+    {
+        EnemyDebuffData data = DataLoader.Instance?.GetDebuffData((int)Type.Frost);
+        if (data == null)
+        {
+            return null;
         }
-        public virtual void init(EnemyDebuffData debuffData, Source debuffSource) {
-            data = debuffData;
-            source = debuffSource;
-            type = (Type)debuffData.DebuffType;
-            value = debuffData.Value;
-            duration = debuffData.Duration;
-            TickInterval = debuffData.TickInterval;
-            MaxStacks = debuffData.MaxStacks;
+
+        EnemyDebuff debuff = data.CreateDebuff();
+        debuff?.Init(data, source);
+        return debuff;
+    }
+
+    public static EnemyDebuff CreateBurn(Source source)
+    {
+        EnemyDebuffData data = DataLoader.Instance?.GetDebuffData((int)Type.Burn);
+        if (data == null)
+        {
+            return null;
         }
-        public static EnemyDebuff create_frost(Source source) {
-            EnemyDebuffData data = DataLoader.Instance?.GetDebuffData((int)Type.FROST);
-            if (data == null) {
-                return null;
-            }
-            EnemyDebuff debuff = data.CreateDebuff();
-            debuff?.init(data, source);
-            return debuff;
-        }
-        public static EnemyDebuff create_burn(Source source) {
-            EnemyDebuffData data = DataLoader.Instance?.GetDebuffData((int)Type.BURN);
-            if (data == null) {
-                return null;
-            }
-            EnemyDebuff debuff = data.CreateDebuff();
-            debuff?.init(data, source);
-            return debuff;
-        }
-        public static EnemyDebuff create_from_type(int type, Source source) {
-            return type switch {
-                (int)Type.FROST => create_frost(source), (int)Type.BURN => create_burn(source), _ => null, }
-                ;
-            }
-            public virtual void on_apply(Enemy enemy) {
-            }
-            public virtual void on_tick(Enemy enemy) {
-            }
-            public virtual void on_expire(Enemy enemy) {
-            }
-        }
+
+        EnemyDebuff debuff = data.CreateDebuff();
+        debuff?.Init(data, source);
+        return debuff;
+    }
+
+    public static EnemyDebuff CreateFromType(int type, Source source)
+    {
+        return type switch
+        {
+            (int)Type.Frost => CreateFrost(source),
+            (int)Type.Burn => CreateBurn(source),
+            _ => null,
+        };
+    }
+
+    public virtual void OnApply(Enemy enemy)
+    {
+    }
+
+    public virtual void OnTick(Enemy enemy)
+    {
+    }
+
+    public virtual void OnExpire(Enemy enemy)
+    {
+    }
+}
 
 

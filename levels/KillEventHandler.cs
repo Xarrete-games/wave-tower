@@ -35,7 +35,7 @@ public partial class KillEventHandler : Node
             return;
         }
 
-        Source source = attackObj.source;
+        Source source = attackObj.Source;
         if (source == null)
         {
             return;

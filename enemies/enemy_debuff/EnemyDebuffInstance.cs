@@ -8,7 +8,7 @@ public class EnemyDebuffInstance {
     public EnemyDebuffInstance(EnemyDebuff debuffObj) {
         float now = Time.GetTicksMsec() / 1000.0f;
         debuff = debuffObj;
-        expire_time = now + debuffObj.duration;
+        expire_time = now + debuffObj.Duration;
         next_tick_time = now + debuffObj.TickInterval;
     }
 }

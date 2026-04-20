@@ -84,7 +84,7 @@ public partial class Enemy : CharacterBody2D
         _targetPositionRight = GetNode<Marker2D>("TargetPositionRight");
 
         Speed = BaseSpeed;
-        HealthBar.set_MaxHealth(MaxHealth);
+        HealthBar.SetMaxHealth(MaxHealth);
         SetHealth(MaxHealth);
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), Timer.SignalName.Timeout);
@@ -300,11 +300,11 @@ public partial class Enemy : CharacterBody2D
 
         DamageContext ctx = new(BuildAttackModel(attack), this);
         Hooks.OnBeforeDamage(Hooks.GetListenersFromRuntime(), ctx);
-        float modifiedDamage = ctx.get_total_damage();
+        float modifiedDamage = ctx.GetTotalDamage();
 
-        attack.damage = modifiedDamage;
+        attack.Damage = modifiedDamage;
 
-        SetHealth(Health - attack.damage);
+        SetHealth(Health - attack.Damage);
         PlayHitAnimation();
         ShowDamage(attack);
 
@@ -347,15 +347,15 @@ public partial class Enemy : CharacterBody2D
     {
         var model = new AttackModel
         {
-            Damage = attack?.damage ?? 0f,
-            CritChance = attack?.crit_chance ?? 0f,
-            IsCritical = attack?.is_critical ?? false,
-            IsExecution = attack?.is_execution ?? false,
-            Hits = attack?.hits ?? 1,
-            Bounces = attack?.bounces ?? 0,
+            Damage = attack?.Damage ?? 0f,
+            CritChance = attack?.CritChance ?? 0f,
+            IsCritical = attack?.IsCritical ?? false,
+            IsExecution = attack?.IsExecution ?? false,
+            Hits = attack?.Hits ?? 1,
+            Bounces = attack?.Bounces ?? 0,
         };
 
-        Source source = attack?.source;
+        Source source = attack?.Source;
         model.Source = new SourceModel
         {
             Type = source?.Type switch
@@ -384,14 +384,14 @@ public partial class Enemy : CharacterBody2D
         damageNumbers.GlobalPosition = basePosition + new Vector2(randomOffsetX, randomOffsetY);
 
         GetTree().Root.AddChild(damageNumbers);
-        damageNumbers.set_attack(attack);
+        damageNumbers.SetAttack(attack);
     }
 
     private void ShowGoldDropped()
     {
         GoldDropped goldDropped = GOLD_DROPPED.Instantiate<GoldDropped>();
         GetTree().Root.AddChild(goldDropped);
-        goldDropped.set_gold(GoldValue);
+        goldDropped.SetGold(GoldValue);
         goldDropped.GlobalPosition = TargetPosition;
     }
 
@@ -404,7 +404,7 @@ public partial class Enemy : CharacterBody2D
     private void SetHealth(float newValue)
     {
         Health = newValue;
-        HealthBar.update_health(Health);
+        HealthBar.UpdateHealth(Health);
     }
 }
 

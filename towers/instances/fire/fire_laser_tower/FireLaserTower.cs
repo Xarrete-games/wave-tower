@@ -28,7 +28,7 @@ public partial class FireLaserTower : Tower
 
         float hpPercent = targetEnemy.GetPercentageRemainingHealth();
         Attack nextAttack = hpPercent > execute_threshold ? _get_attack() : GetLetalAttack();
-        EnemyDebuff debuff = apply_burn ? EnemyDebuff.create_burn(DamageSource) : null;
+        EnemyDebuff debuff = apply_burn ? EnemyDebuff.CreateBurn(DamageSource) : null;
 
         red_projectile.SetTarget(targetEnemy, nextAttack, debuff);
         cristal_light?.turn_on();
@@ -43,8 +43,8 @@ public partial class FireLaserTower : Tower
     private Attack GetLetalAttack()
     {
         Attack attack = _get_attack();
-        attack.damage = EXECUTE_DAMAGE;
-        attack.is_execution = true;
+        attack.Damage = EXECUTE_DAMAGE;
+        attack.IsExecution = true;
         return attack;
     }
 }

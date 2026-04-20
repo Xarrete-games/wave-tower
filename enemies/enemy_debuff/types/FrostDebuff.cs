@@ -2,23 +2,23 @@ using Godot;
 
 public class FrostDebuff : EnemyDebuff
 {
-    public override void on_apply(Enemy enemy)
+    public override void OnApply(Enemy enemy)
     {
         if (enemy == null)
         {
             return;
         }
 
-        enemy.SpeedMultiplier -= value / 100.0f;
+        enemy.SpeedMultiplier -= Value / 100.0f;
     }
 
-    public override void on_expire(Enemy enemy)
+    public override void OnExpire(Enemy enemy)
     {
         if (enemy == null)
         {
             return;
         }
 
-        enemy.SpeedMultiplier += value / 100.0f;
+        enemy.SpeedMultiplier += Value / 100.0f;
     }
 }

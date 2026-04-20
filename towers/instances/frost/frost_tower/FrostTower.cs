@@ -25,7 +25,7 @@ public partial class FrostTower : Tower
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
         Attack attack = _get_attack();
-        EnemyDebuff debuff = EnemyDebuff.create_frost(DamageSource);
+        EnemyDebuff debuff = EnemyDebuff.CreateFrost(DamageSource);
         projectile.SetTarget(_current_target, attack, debuff);
     }
 }

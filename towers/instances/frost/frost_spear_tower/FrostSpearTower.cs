@@ -30,9 +30,9 @@ public partial class FrostSpearTower : Tower
         Attack attack = _get_attack();
         int enemyFrostStacks = targetEnemy.GetDebuffStacks(0);
         float damageMultiplier = 1.0f + enemyFrostStacks * 0.10f;
-        attack.damage *= damageMultiplier;
+        attack.Damage *= damageMultiplier;
 
-        EnemyDebuff debuff = EnemyDebuff.create_frost(DamageSource);
+        EnemyDebuff debuff = EnemyDebuff.CreateFrost(DamageSource);
         projectile.SetTarget(targetEnemy, attack, debuff, DebuffStacks);
     }
 }

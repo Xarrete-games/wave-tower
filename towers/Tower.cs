@@ -350,7 +350,7 @@ public partial class Tower : Node2D
         Enemy targetEnemy = _current_target as Enemy;
         AttackContext ctx = new(targetEnemy, BuildAttackModel(attack), BuildTowerModel());
         Hooks.OnBeforeAttack(Hooks.GetListenersFromRuntime(), ctx);
-        attack.damage = ctx.rebuild_attack();
+        attack.Damage = ctx.RebuildAttack();
 
         return attack;
     }
@@ -359,15 +359,15 @@ public partial class Tower : Node2D
     {
         var model = new AttackModel
         {
-            Damage = attack?.damage ?? 0f,
-            CritChance = attack?.crit_chance ?? 0f,
-            IsCritical = attack?.is_critical ?? false,
-            IsExecution = attack?.is_execution ?? false,
-            Hits = attack?.hits ?? 1,
-            Bounces = attack?.bounces ?? 0,
+            Damage = attack?.Damage ?? 0f,
+            CritChance = attack?.CritChance ?? 0f,
+            IsCritical = attack?.IsCritical ?? false,
+            IsExecution = attack?.IsExecution ?? false,
+            Hits = attack?.Hits ?? 1,
+            Bounces = attack?.Bounces ?? 0,
         };
 
-        Source source = attack?.source;
+        Source source = attack?.Source;
         model.Source = new SourceModel
         {
             Type = source?.Type switch

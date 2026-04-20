@@ -85,8 +85,8 @@ public partial class FireFlamethrowerProjectile : Node2D
                 continue;
             }
 
-            Source source = _attack?.source;
-            EnemyDebuff debuff = source != null ? EnemyDebuff.create_burn(source) : null;
+            Source source = _attack?.Source;
+            EnemyDebuff debuff = source != null ? EnemyDebuff.CreateBurn(source) : null;
             Enemy enemy = target as Enemy;
             enemy?.ApplyDamage(_attack);
             if (debuff != null)

@@ -5,24 +5,24 @@ public partial class GoldDropped : Control
 {
     [Export] public float TimeToVanish = 2.0f;
 
-    private Label label;
+    private Label _label;
 
     public override async void _Ready()
     {
-        label = GetNode<Label>("Label");
+        _label = GetNode<Label>("Label");
 
         Tween tween1 = CreateTween();
-        tween1.TweenProperty(label, "position", new Vector2(0, -10), TimeToVanish);
+        tween1.TweenProperty(_label, "position", new Vector2(0, -10), TimeToVanish);
 
         Tween tween2 = CreateTween();
-        tween2.TweenProperty(label, "modulate:a", 0.0f, TimeToVanish);
+        tween2.TweenProperty(_label, "modulate:a", 0.0f, TimeToVanish);
 
         await ToSignal(tween2, Tween.SignalName.Finished);
         QueueFree();
     }
 
-    public void set_gold(int new_value)
+    public void SetGold(int newValue)
     {
-        label.Text = "+" + new_value;
+        _label.Text = "+" + newValue;
     }
 }

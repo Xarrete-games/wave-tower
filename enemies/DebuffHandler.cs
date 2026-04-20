@@ -8,7 +8,7 @@ public partial class DebuffHandler : Node
     public static readonly Color FROST_COLOR = Colors.Aqua;
     public static readonly Color DEFAULT_COLOR = Colors.White;
 
-    public List<EnemyDebuffInstance> debuffs = new();
+    public List<EnemyDebuffInstance> Debuffs = new();
 
     public void AddDebuff(EnemyDebuff debuff, int amount, Variant enemyVar)
     {
@@ -18,16 +18,16 @@ public partial class DebuffHandler : Node
             return;
         }
 
-        EnemyDebuffModel.DebuffType debuffType = debuff.type == EnemyDebuff.Type.BURN
+        EnemyDebuffModel.DebuffType debuffType = debuff.DebuffType == EnemyDebuff.Type.Burn
             ? EnemyDebuffModel.DebuffType.Burn
             : EnemyDebuffModel.DebuffType.Frost;
 
         var debuffModel = new EnemyDebuffModel
         {
-            Id = debuff.data?.Id ?? string.Empty,
+            Id = debuff.Data?.Id ?? string.Empty,
             Type = debuffType,
-            Value = debuff.value,
-            Duration = debuff.duration,
+            Value = debuff.Value,
+            Duration = debuff.Duration,
             TickInterval = debuff.TickInterval,
             MaxStacks = debuff.MaxStacks,
         };
@@ -38,15 +38,15 @@ public partial class DebuffHandler : Node
 
         for (int i = 0; i < stacks; i++)
         {
-            if (GetStacks((int)debuff.type) >= debuff.MaxStacks)
+            if (GetStacks((int)debuff.DebuffType) >= debuff.MaxStacks)
             {
                 break;
             }
 
             EnemyDebuffInstance instance = new(debuff);
-            debuffs.Add(instance);
-            enemy.HealthBar?.set_debuffs(debuffs);
-            debuff.on_apply(enemy);
+            Debuffs.Add(instance);
+            enemy.HealthBar?.SetDebuffs(Debuffs);
+            debuff.OnApply(enemy);
         }
     }
 
@@ -60,22 +60,22 @@ public partial class DebuffHandler : Node
 
         float now = Time.GetTicksMsec() / 1000.0f;
 
-        for (int i = debuffs.Count - 1; i >= 0; i--)
+        for (int i = Debuffs.Count - 1; i >= 0; i--)
         {
-            EnemyDebuffInstance inst = debuffs[i];
+            EnemyDebuffInstance inst = Debuffs[i];
             EnemyDebuff debuff = inst.debuff;
 
             if (debuff.TickInterval > 0.0f && now >= inst.next_tick_time)
             {
-                debuff.on_tick(enemy);
+                debuff.OnTick(enemy);
                 inst.next_tick_time += debuff.TickInterval;
             }
 
             if (now >= inst.expire_time)
             {
-                debuff.on_expire(enemy);
-                debuffs.RemoveAt(i);
-                enemy.HealthBar?.set_debuffs(debuffs);
+                debuff.OnExpire(enemy);
+                Debuffs.RemoveAt(i);
+                enemy.HealthBar?.SetDebuffs(Debuffs);
             }
         }
     }
@@ -83,9 +83,9 @@ public partial class DebuffHandler : Node
     public int GetStacks(int debuffType)
     {
         int count = 0;
-        for (int i = 0; i < debuffs.Count; i++)
+        for (int i = 0; i < Debuffs.Count; i++)
         {
-            if ((int)debuffs[i].debuff.type == debuffType)
+            if ((int)Debuffs[i].debuff.DebuffType == debuffType)
             {
                 count += 1;
             }
@@ -96,15 +96,15 @@ public partial class DebuffHandler : Node
 
     public bool HasAnyDebuff()
     {
-        return debuffs.Count > 0;
+        return Debuffs.Count > 0;
     }
 
     public List<EnemyDebuff> GetActiveDebuffs()
     {
         List<EnemyDebuff> result = new();
-        for (int i = 0; i < debuffs.Count; i++)
+        for (int i = 0; i < Debuffs.Count; i++)
         {
-            result.Add(debuffs[i].debuff);
+            result.Add(Debuffs[i].debuff);
         }
 
         return result;

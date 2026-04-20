@@ -1,18 +1,13 @@
 public class AttackContext
 {
-    public float extra_additive { get; set; }
-    public float extra_multiplicative { get; set; }
-    public float damage_cap { get; set; } = 9999f;
-    public float extra_crit_chance { get; set; }
+    public float ExtraAdditive { get; set; }
+    public float ExtraMultiplicative { get; set; }
+    public float DamageCap { get; set; } = 9999f;
+    public float ExtraCritChance { get; set; }
 
     public Enemy Target { get; }
     public AttackModel Attack { get; }
     public TowerModel Tower { get; }
-
-    public float ExtraAdditive { get => extra_additive; set => extra_additive = value; }
-    public float ExtraMultiplicative { get => extra_multiplicative; set => extra_multiplicative = value; }
-    public float DamageCap { get => damage_cap; set => damage_cap = value; }
-    public float ExtraCritChance { get => extra_crit_chance; set => extra_crit_chance = value; }
 
     public AttackContext(Enemy target, AttackModel attack, TowerModel tower)
     {
@@ -23,16 +18,13 @@ public class AttackContext
 
     public float RebuildAttack()
     {
-        float damage = (Attack?.Damage ?? 0f) + extra_additive;
-        damage *= 1f + extra_multiplicative;
-        return System.MathF.Min(damage, damage_cap);
+        float damage = (Attack?.Damage ?? 0f) + ExtraAdditive;
+        damage *= 1f + ExtraMultiplicative;
+        return System.MathF.Min(damage, DamageCap);
     }
 
     public float GetCritChance()
     {
-        return (Attack?.CritChance ?? 0f) + extra_crit_chance;
+        return (Attack?.CritChance ?? 0f) + ExtraCritChance;
     }
-
-    public float rebuild_attack() => RebuildAttack();
-    public float get_crit_chance() => GetCritChance();
 }

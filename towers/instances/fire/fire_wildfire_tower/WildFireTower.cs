@@ -25,7 +25,7 @@ public partial class WildFireTower : Tower
 
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
-        EnemyDebuff debuff = EnemyDebuff.create_burn(DamageSource);
+        EnemyDebuff debuff = EnemyDebuff.CreateBurn(DamageSource);
         projectile.SetTarget(_current_target, _get_attack(), debuff);
     }
 }

@@ -27,8 +27,8 @@ public partial class EnemyDebuffData : BaseData
     {
         return DebuffType switch
         {
-            (int)EnemyDebuff.Type.FROST => new FrostDebuff(),
-            (int)EnemyDebuff.Type.BURN => new BurnDebuff(),
+            (int)EnemyDebuff.Type.Frost => new FrostDebuff(),
+            (int)EnemyDebuff.Type.Burn => new BurnDebuff(),
             _ => null,
         };
     }

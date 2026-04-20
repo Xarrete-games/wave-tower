@@ -23,7 +23,7 @@ public partial class FrostNovaTower : Tower
 
         Attack attack = _get_attack();
         float attackRange = stats?.attack_range ?? 0f;
-        projectile.set_stats(attack, attackRange, EnemyDebuff.create_frost(DamageSource));
+        projectile.set_stats(attack, attackRange, EnemyDebuff.CreateFrost(DamageSource));
         CallDeferred(MethodName.AddProjectil, projectile);
 
         if (!isDoubleHit)
@@ -36,7 +36,7 @@ public partial class FrostNovaTower : Tower
         cristal_light?.play();
         projectile = FrostNovaProjectileScene.Instantiate<BlueProjectil>();
         attack = _get_attack();
-        projectile.set_stats(attack, attackRange, EnemyDebuff.create_frost(DamageSource));
+        projectile.set_stats(attack, attackRange, EnemyDebuff.CreateFrost(DamageSource));
         CallDeferred(MethodName.AddProjectil, projectile);
     }
 
