@@ -31,8 +31,8 @@ public class ConsumablesManager
 
         _consumables.Add(consumable);
         SyncConsumableAddedToRuntime(consumable);
-        consumable.clicked += OnConsumableClicked;
-        consumable.used += OnConsumableUsed;
+        consumable.Clicked += OnConsumableClicked;
+        consumable.Used += OnConsumableUsed;
         ConsumablesChanged?.Invoke(_consumables);
         ConsumableAdded?.Invoke(consumable);
     }
@@ -53,8 +53,8 @@ public class ConsumablesManager
 
         if (consumable != null)
         {
-            consumable.clicked -= OnConsumableClicked;
-            consumable.used -= OnConsumableUsed;
+            consumable.Clicked -= OnConsumableClicked;
+            consumable.Used -= OnConsumableUsed;
             SyncConsumableRemovedFromRuntime(consumable);
         }
 
@@ -66,8 +66,8 @@ public class ConsumablesManager
         {
             _runtimeConsumableModels[consumable] = consumableModel;
             _consumables.Add(consumable);
-            consumable.clicked += OnConsumableClicked;
-            consumable.used += OnConsumableUsed;
+            consumable.Clicked += OnConsumableClicked;
+            consumable.Used += OnConsumableUsed;
             ConsumableAdded?.Invoke(consumable);
         }
 
@@ -81,15 +81,15 @@ public class ConsumablesManager
             return;
         }
 
-        bool requiresTarget = consumable.requires_target();
+        bool requiresTarget = consumable.RequiresTarget();
         if (!requiresTarget)
         {
             if (consumable is ConsumableUsable usable)
             {
-                usable.use();
+                usable.Use();
             }
 
-            consumable.emit_used();
+            consumable.EmitUsed();
         }
         else
         {
@@ -192,7 +192,7 @@ public class ConsumablesManager
             return;
         }
 
-        Tower targetTower = (consumableObj as ConsumableTargeteable)?.get_target_tower();
+        Tower targetTower = (consumableObj as ConsumableTargeteable)?.GetTargetTower();
 
         if (targetTower == null)
         {
@@ -234,7 +234,7 @@ public class ConsumablesManager
             return false;
         }
 
-        Tower targetTower = targeteable.get_target_tower();
+        Tower targetTower = targeteable.GetTargetTower();
         if (targetTower == null)
         {
             return false;
@@ -250,7 +250,7 @@ public class ConsumablesManager
 
     private ConsumableModel BuildConsumableModel(Consumable consumableObj)
     {
-        ConsumableData data = consumableObj.data;
+        ConsumableData data = consumableObj.Data;
         if (data == null)
         {
             return null;
@@ -262,7 +262,7 @@ public class ConsumablesManager
             ? ConsumableModel.ConsumableType.Potion
             : ConsumableModel.ConsumableType.Other;
 
-        bool requiresTarget = consumableObj.requires_target();
+        bool requiresTarget = consumableObj.RequiresTarget();
         if (!requiresTarget)
         {
             return new SimpleConsumableModel(id, consumableType);

@@ -73,22 +73,22 @@ public static class UIUtilsStatic
 
 public partial class UIUtils : Node
 {
-    public Color primary_color => UIUtilsStatic.PrimaryColor;
-    public Color secondary_color => UIUtilsStatic.SecondaryColor;
-    public Color accent_color => UIUtilsStatic.AccentColor;
+    public Color PrimaryColor => UIUtilsStatic.PrimaryColor;
+    public Color SecondaryColor => UIUtilsStatic.SecondaryColor;
+    public Color AccentColor => UIUtilsStatic.AccentColor;
 
     public override void _Ready()
     {
         UIUtilsStatic.EnsureInitialized();
     }
 
-    public bool is_left_click_event(InputEvent input_event)
+    public bool IsLeftClickEvent(InputEvent inputEvent)
     {
-        return UIUtilsStatic.IsLeftClickEvent(input_event);
+        return UIUtilsStatic.IsLeftClickEvent(inputEvent);
     }
 
-    public bool is_right_click_event(InputEvent input_event)
+    public bool IsRightClickEvent(InputEvent inputEvent)
     {
-        return UIUtilsStatic.IsRightClickEvent(input_event);
+        return UIUtilsStatic.IsRightClickEvent(inputEvent);
     }
 }

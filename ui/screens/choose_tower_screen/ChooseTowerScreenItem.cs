@@ -67,7 +67,7 @@ public partial class ChooseTowerScreenItem : Control
         DamageStat.SetValue(configuration.BaseDamage);
         RangeStat.SetValue(configuration.BaseAttackRange);
         AttackSpeedStat.SetValue(configuration.BaseAttackSpeed);
-        GoldPrice.price = configuration.BuildPrice;
+        GoldPrice.Price = configuration.BuildPrice;
     }
 
     private void ApplyConfigurationDeferred()

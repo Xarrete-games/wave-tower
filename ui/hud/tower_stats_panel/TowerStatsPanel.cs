@@ -86,7 +86,7 @@ public partial class TowerStatsPanel : Control
         }
         else
         {
-            _upgradeTowerPrice.price = data?.UpgradePrice ?? 0;
+            _upgradeTowerPrice.Price = data?.UpgradePrice ?? 0;
             _upgradeButtonContainer.Visible = true;
         }
     }

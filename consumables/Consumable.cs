@@ -3,8 +3,8 @@ using System;
 
 public class Consumable
 {
-	public event Action<Consumable> used;
-	public event Action<Consumable> clicked;
+	public event Action<Consumable> Used;
+	public event Action<Consumable> Clicked;
 
 	public enum Type
 	{
@@ -12,7 +12,7 @@ public class Consumable
 		POTION,
 	}
 
-	public ConsumableData data { get; set; }
+	public ConsumableData Data { get; set; }
 
 	public Consumable()
 	{
@@ -20,33 +20,33 @@ public class Consumable
 
 	public Consumable(ConsumableData consumableData)
 	{
-		init(consumableData);
+		Init(consumableData);
 	}
 
-	public virtual void init(ConsumableData consumableData)
+	public virtual void Init(ConsumableData consumableData)
 	{
-		data = consumableData;
+		Data = consumableData;
 	}
 
-	public virtual bool requires_target()
+	public virtual bool RequiresTarget()
 	{
 		return false;
 	}
 
-	public Source get_source()
+	public Source GetSource()
 	{
-		string id = data?.Id ?? string.Empty;
+		string id = Data?.Id ?? string.Empty;
 		return new Source(Source.SourceType.CONSUMABLE, id);
 	}
 
-	public void emit_used()
+	public void EmitUsed()
 	{
-		used?.Invoke(this);
+		Used?.Invoke(this);
 	}
 
-	public void emit_clicked()
+	public void EmitClicked()
 	{
-		clicked?.Invoke(this);
+		Clicked?.Invoke(this);
 	}
 
 	protected Node GetSingleton(string name)

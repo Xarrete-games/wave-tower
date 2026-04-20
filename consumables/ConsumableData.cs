@@ -40,7 +40,7 @@ public partial class ConsumableData : BaseData
             _ => CreateConsumableFromRuntimeScript(),
         };
 
-        consumable?.init(this);
+        consumable?.Init(this);
         return consumable;
     }
 

@@ -34,7 +34,7 @@ public partial class InventoryUISlot : Control
     public void SetConsumable(Consumable consumable)
     {
         _consumable = consumable;
-        ConsumableData data = consumable?.data;
+        ConsumableData data = consumable?.Data;
         if (data != null)
         {
             _textureRect.Texture = data.Icon;
@@ -53,7 +53,7 @@ public partial class InventoryUISlot : Control
             GetNode<AudioManager>("/root/AudioManager").play_button_click();
             HintManagerStatic.RemoveHint(this);
 
-            _consumable?.emit_clicked();
+            _consumable?.EmitClicked();
         }
     }
 
@@ -80,7 +80,7 @@ public partial class InventoryUISlot : Control
 
         GetNode<AudioManager>("/root/AudioManager").play_button_hover();
 
-        ConsumableData data = _consumable?.data;
+        ConsumableData data = _consumable?.Data;
         if (data == null)
         {
             return;

@@ -53,7 +53,7 @@ public partial class TowerButton : Control
             _price = value;
             if (_goldPriceNode != null)
             {
-                _goldPriceNode.price = value;
+                _goldPriceNode.Price = value;
             }
         }
     }

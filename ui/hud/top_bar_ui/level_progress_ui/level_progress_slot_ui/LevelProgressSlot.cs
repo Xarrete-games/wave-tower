@@ -14,12 +14,12 @@ public partial class LevelProgressSlot : PanelContainer
         AddThemeStyleboxOverride("panel", ProgressSlotEmpty);
     }
 
-    public void set_icon(Texture2D newTexture)
+    public void SetIcon(Texture2D newTexture)
     {
         TextureRec.Texture = newTexture;
     }
 
-    public void fill()
+    public void Fill()
     {
         AddThemeStyleboxOverride("panel", LevelProgressSlotFill);
     }

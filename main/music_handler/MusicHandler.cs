@@ -8,27 +8,27 @@ public partial class MusicHandler : Node
     private const int TOWER_TYPE_LIGHTNING = 1;
     private const int TOWER_TYPE_FROST = 2;
 
-    private Node red_players;
-    private Node blue_players;
-    private Node green_players;
-    private AudioStreamPlayer base_player;
+    private Node _redPlayers;
+    private Node _bluePlayers;
+    private Node _greenPlayers;
+    private AudioStreamPlayer _basePlayer;
     private Status _status;
     private TowersManager _towersManager;
 
-    private readonly Dictionary<int, Node> tower_players = new();
+    private readonly Dictionary<int, Node> _towerPlayers = new();
 
     public override void _Ready()
     {
-        red_players = GetNodeOrNull<Node>("RedPlayers");
-        blue_players = GetNodeOrNull<Node>("BluePlayers");
-        green_players = GetNodeOrNull<Node>("GreenPlayers");
-        base_player = GetNodeOrNull<AudioStreamPlayer>("BasePlayer");
+        _redPlayers = GetNodeOrNull<Node>("RedPlayers");
+        _bluePlayers = GetNodeOrNull<Node>("BluePlayers");
+        _greenPlayers = GetNodeOrNull<Node>("GreenPlayers");
+        _basePlayer = GetNodeOrNull<AudioStreamPlayer>("BasePlayer");
 
-        tower_players[TOWER_TYPE_FIRE] = red_players;
-        tower_players[TOWER_TYPE_FROST] = blue_players;
-        tower_players[TOWER_TYPE_LIGHTNING] = green_players;
+        _towerPlayers[TOWER_TYPE_FIRE] = _redPlayers;
+        _towerPlayers[TOWER_TYPE_FROST] = _bluePlayers;
+        _towerPlayers[TOWER_TYPE_LIGHTNING] = _greenPlayers;
 
-        stop_music();
+        StopMusic();
 
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
         _towersManager = runContext?.TowersManager;
@@ -39,7 +39,7 @@ public partial class MusicHandler : Node
         _status = runContext?.Status;
         if (_status != null)
         {
-            _status.PlayerDied += stop_music;
+            _status.PlayerDied += StopMusic;
         }
     }
 
@@ -53,25 +53,25 @@ public partial class MusicHandler : Node
 
         if (_status != null)
         {
-            _status.PlayerDied -= stop_music;
+            _status.PlayerDied -= StopMusic;
             _status = null;
         }
     }
 
-    public void play_music()
+    public void PlayMusic()
     {
-        base_player?.Play();
-        StartPlayers(red_players);
-        StartPlayers(blue_players);
-        StartPlayers(green_players);
+        _basePlayer?.Play();
+        StartPlayers(_redPlayers);
+        StartPlayers(_bluePlayers);
+        StartPlayers(_greenPlayers);
     }
 
-    public void stop_music()
+    public void StopMusic()
     {
-        StopPlayers(red_players);
-        StopPlayers(blue_players);
-        StopPlayers(green_players);
-        base_player?.Stop();
+        StopPlayers(_redPlayers);
+        StopPlayers(_bluePlayers);
+        StopPlayers(_greenPlayers);
+        _basePlayer?.Stop();
     }
 
     private void StartPlayers(Node node)
@@ -106,14 +106,14 @@ public partial class MusicHandler : Node
         }
     }
 
-    private void OnTowerCountChange(int tower_type, int amount)
+    private void OnTowerCountChange(int towerType, int amount)
     {
         if (amount > MAX_PLAYERS || amount == 0)
         {
             return;
         }
 
-        if (!tower_players.TryGetValue(tower_type, out Node playersNode) || playersNode == null)
+        if (!_towerPlayers.TryGetValue(towerType, out Node playersNode) || playersNode == null)
         {
             return;
         }

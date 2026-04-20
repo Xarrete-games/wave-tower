@@ -11,7 +11,7 @@ public partial class GoldPrice : HBoxContainer
     private RunContext _runContext;
     private int _price;
 
-    public int price
+    public int Price
     {
         get => _price;
         set

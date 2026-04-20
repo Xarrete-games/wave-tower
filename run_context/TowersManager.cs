@@ -214,13 +214,13 @@ public class TowersManager
         tower.QueueFree();
     }
 
-    public int GetTowerCount(int tower_type)
+    public int GetTowerCount(int towerType)
     {
         int count = 0;
         for (int index = 0; index < Towers.Count; index++)
         {
             Tower tower = Towers[index];
-            if (tower != null && (int)tower.type == tower_type)
+            if (tower != null && (int)tower.type == towerType)
             {
                 count++;
             }

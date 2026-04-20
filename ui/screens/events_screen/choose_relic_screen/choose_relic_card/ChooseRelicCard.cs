@@ -56,7 +56,7 @@ public partial class ChooseRelicCard : Control
         {
             _healthPrice.Visible = true;
             _itCostsHealth = true;
-            _healthPrice.price = _healthCost;
+            _healthPrice.Price = _healthCost;
 
             CheckHealth(_runContext.Status.Health, _healthCost);
             if (!_isHealthSubscribed)

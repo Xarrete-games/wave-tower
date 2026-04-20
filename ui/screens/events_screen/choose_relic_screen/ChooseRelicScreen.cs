@@ -40,7 +40,7 @@ public partial class ChooseRelicScreen : Control
             card.CardPressed += OnCardPressed;
         }
 
-        RerollPriece.price = _rerollPrice;
+        RerollPriece.Price = _rerollPrice;
     }
 
     private void OnCardPressed(RelicData relicData)

@@ -64,7 +64,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        ConsumableData data = _currentConsumable.data;
+        ConsumableData data = _currentConsumable.Data;
         if (data != null && data.TargetingType == (int)ConsumableTargeteable.TargetType.BLOCKED_TILE)
         {
             HandleBlockedTilePlacement();
@@ -94,7 +94,7 @@ public partial class ConsumablesHandler : Node
         bool isMouseOnBlockedTile = CompositeTileMap.is_mouse_on_block_tile();
         if (isMouseOnBlockedTile)
         {
-            ConsumableData data = _currentConsumable?.data;
+            ConsumableData data = _currentConsumable?.Data;
             if (data != null)
             {
                 Input.SetCustomMouseCursor(data.CursorIconUsed, Input.CursorShape.Arrow, CenterCursorOffset);
@@ -105,7 +105,7 @@ public partial class ConsumablesHandler : Node
         }
         else
         {
-            ConsumableData data = _currentConsumable?.data;
+            ConsumableData data = _currentConsumable?.Data;
             if (data != null)
             {
                 Input.SetCustomMouseCursor(data.CursorIcon, Input.CursorShape.Arrow, CenterCursorOffset);
@@ -128,7 +128,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        ConsumableData data = _currentConsumable.data;
+        ConsumableData data = _currentConsumable.Data;
         if (data == null || data.TargetingType != (int)ConsumableTargeteable.TargetType.TOWER)
         {
             return;
@@ -146,7 +146,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        ConsumableData data = _currentConsumable.data;
+        ConsumableData data = _currentConsumable.Data;
         if (data == null || data.TargetingType != (int)ConsumableTargeteable.TargetType.TOWER)
         {
             return;
@@ -166,7 +166,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        _currentConsumable.use(_currentTarget);
+        _currentConsumable.Use(_currentTarget);
         CancelConsumable();
 
         ActionManager actionManager = GetNode<ActionManager>("/root/ActionManager");
@@ -188,7 +188,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        if (!targeteable.requires_target())
+        if (!targeteable.RequiresTarget())
         {
             return;
         }
@@ -196,7 +196,7 @@ public partial class ConsumablesHandler : Node
         _currentConsumable = targeteable;
         InvalidateTarget();
 
-        ConsumableData data = _currentConsumable.data;
+        ConsumableData data = _currentConsumable.Data;
         if (data != null)
         {
             Input.SetCustomMouseCursor(data.CursorIcon, Input.CursorShape.Arrow, CenterCursorOffset);

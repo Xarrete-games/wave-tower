@@ -1,6 +1,6 @@
 public class MagicRing : ConsumableUsable
 {
-    public override void use()
+    public override void Use()
     {
         RunContext runContext = GetSingleton("RunContext") as RunContext;
         Economy economy = runContext?.Economy;

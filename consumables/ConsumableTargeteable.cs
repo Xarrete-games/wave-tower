@@ -5,17 +5,17 @@ public abstract class ConsumableTargeteable : Consumable {
             get;
             private set;
         }
-        public override bool requires_target() {
+        public override bool RequiresTarget() {
             return true;
         }
-        public void use(object selectedTarget) {
+        public void Use(object selectedTarget) {
             target = selectedTarget;
-            action(target);
-            emit_used();
+            Action(target);
+            EmitUsed();
         }
-        public Tower get_target_tower() {
+        public Tower GetTargetTower() {
             return target as Tower;
         }
-        public abstract void action(object target);
+        public abstract void Action(object target);
     }
 

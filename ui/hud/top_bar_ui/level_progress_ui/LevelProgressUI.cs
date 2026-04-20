@@ -60,23 +60,23 @@ public partial class LevelProgressUI : Control
             int waveNumber = index + 1;
             if (Contains(WavesWithEvents, waveNumber))
             {
-                slot.set_icon(QuestionIcon);
+                slot.SetIcon(QuestionIcon);
             }
             else if (Contains(WavesWithShops, waveNumber))
             {
-                slot.set_icon(ShopIcon);
+                slot.SetIcon(ShopIcon);
             }
             else if (Contains(WavesWithRelics, waveNumber))
             {
-                slot.set_icon(RelicIcon);
+                slot.SetIcon(RelicIcon);
             }
             else if (Contains(WavesWithBoss, waveNumber))
             {
-                slot.set_icon(SkullIcon);
+                slot.SetIcon(SkullIcon);
             }
             else
             {
-                slot.set_icon(null);
+                slot.SetIcon(null);
             }
         }
     }
@@ -90,7 +90,7 @@ public partial class LevelProgressUI : Control
 
         int value = ((newValue - 1) % 10) + 1;
         LevelProgressSlot slot = SlotsContainer.GetChild<LevelProgressSlot>(value - 1);
-        slot.fill();
+        slot.Fill();
     }
 
     private void OnMouseEntered()

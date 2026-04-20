@@ -31,7 +31,7 @@ public partial class Game : Node2D
         GameState gameState = GetNode<GameState>("/root/GameState");
         gameState.state = GameState.IN_GAME;
 
-        _musicHandler.play_music();
+        _musicHandler.PlayMusic();
 
         if (TriggerFinishWave)
         {

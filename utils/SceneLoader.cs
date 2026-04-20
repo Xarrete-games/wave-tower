@@ -4,7 +4,7 @@ using Godot.Collections;
 [GlobalClass]
 public partial class SceneLoader : Node
 {
-    private static Array<string> _get_scene_files(string path)
+    private static Array<string> GetSceneFiles(string path)
     {
         DirAccess dir = DirAccess.Open(path);
         if (dir == null)
@@ -40,9 +40,9 @@ public partial class SceneLoader : Node
         return sceneFiles;
     }
 
-    public static PackedScene get_random_scene_from_path(string path)
+    public static PackedScene GetRandomSceneFromPath(string path)
     {
-        Array<string> sceneFiles = _get_scene_files(path);
+        Array<string> sceneFiles = GetSceneFiles(path);
         if (sceneFiles.Count == 0)
         {
             return null;
@@ -61,9 +61,9 @@ public partial class SceneLoader : Node
         return null;
     }
 
-    public static PackedScene get_indexed_scene_from_path(string path, int index)
+    public static PackedScene GetIndexedSceneFromPath(string path, int index)
     {
-        Array<string> sceneFiles = _get_scene_files(path);
+        Array<string> sceneFiles = GetSceneFiles(path);
         if (sceneFiles.Count == 0)
         {
             return null;

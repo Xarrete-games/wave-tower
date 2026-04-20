@@ -13,25 +13,25 @@ public partial class ShopSlotIcon : SubViewportContainer
         _hexagon = GetNode<Polygon2D>("SubViewport/Root2D/Hexagon");
 
         _root2d.Position = _root2d.GetViewport().GetVisibleRect().Size * 0.5f;
-        icon_normal_size();
+        SetIconNormalSize();
     }
 
-    public void set_icon(Texture2D texture)
+    public void SetIcon(Texture2D texture)
     {
         _relicTexture.Texture = texture;
     }
 
-    public void set_background_color(Color color)
+    public void SetBackgroundColor(Color color)
     {
         _hexagon.Color = color;
     }
 
-    public void increased_icon_size()
+    public void IncreaseIconSize()
     {
         SetSpritePixelSize(_relicTexture, new Vector2(80, 80));
     }
 
-    public void icon_normal_size()
+    public void SetIconNormalSize()
     {
         SetSpritePixelSize(_relicTexture, new Vector2(64, 64));
     }

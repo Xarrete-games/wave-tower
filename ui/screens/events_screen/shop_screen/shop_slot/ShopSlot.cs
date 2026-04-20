@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class ShopSlot : VBoxContainer
+public partial class ShopSlot : Control
 {
     public event Action<ItemOffer, ShopSlot> ItemPurchased;
 
@@ -91,21 +91,21 @@ public partial class ShopSlot : VBoxContainer
         TooltipText = description;
         if (GoldPrice != null)
         {
-            GoldPrice.price = _price;
+            GoldPrice.Price = _price;
         }
-        ShopSlotIcon?.set_icon(icon);
+        ShopSlotIcon?.SetIcon(icon);
 
         RelicData relicData = itemData as RelicData;
         if (relicData != null)
         {
-            ShopSlotIcon?.set_background_color(_runContext.RelicsManager.GetRarityColor(relicData.Rarity));
+            ShopSlotIcon?.SetBackgroundColor(_runContext.RelicsManager.GetRarityColor(relicData.Rarity));
         }
 
         _currentHealthCost = itemOffer.HealthPrice;
         _healthPrice.Visible = _currentHealthCost > 0;
         if (_currentHealthCost > 0)
         {
-            _healthPrice.price = _currentHealthCost;
+            _healthPrice.Price = _currentHealthCost;
         }
 
         CheckHealth(_runContext.Status.Health, _currentHealthCost);
@@ -135,12 +135,12 @@ public partial class ShopSlot : VBoxContainer
     private void OnMouseEntered()
     {
         GetNode<AudioManager>("/root/AudioManager").play_button_hover();
-        ShopSlotIcon?.increased_icon_size();
+        ShopSlotIcon?.IncreaseIconSize();
     }
 
     private void OnMouseExited()
     {
-        ShopSlotIcon?.icon_normal_size();
+        ShopSlotIcon?.SetIconNormalSize();
     }
 
     private void OnRelicAdded(string id)
