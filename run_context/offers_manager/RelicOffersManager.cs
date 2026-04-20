@@ -17,20 +17,20 @@ public class RelicOffersManager
         _allRelicData.AddRange(DataLoaderAccess.GetAllRelicsTyped());
     }
 
-    public List<ItemOffer> get_relics_offers_by_ids(Godot.Collections.Array<string> relic_ids)
+    public List<ItemOffer> GetRelicsOffersByIds(Godot.Collections.Array<string> relicIds)
     {
         var offers = new List<ItemOffer>();
 
-        for (int index = 0; index < relic_ids.Count; index++)
+        for (int index = 0; index < relicIds.Count; index++)
         {
-            string relicId = relic_ids[index];
+            string relicId = relicIds[index];
             for (int dataIndex = 0; dataIndex < _allRelicData.Count; dataIndex++)
             {
                 RelicData data = _allRelicData[dataIndex];
 
                 if (data.Id == relicId)
                 {
-                    offers.Add(create_relic_offer_from_data(data));
+                    offers.Add(CreateRelicOfferFromData(data));
                     break;
                 }
             }
@@ -39,7 +39,7 @@ public class RelicOffersManager
         return offers;
     }
 
-    public List<ItemOffer> create_relic_offers(int amount)
+    public List<ItemOffer> CreateRelicOffers(int amount)
     {
         var filtered = new List<RelicData>();
 
@@ -50,7 +50,7 @@ public class RelicOffersManager
         {
             RelicData data = _allRelicData[index];
 
-            bool hasRelic = relicsManager != null && relicsManager.has_relic(data.Id);
+            bool hasRelic = relicsManager != null && relicsManager.HasRelic(data.Id);
             bool isCursed = data.IsCursed;
             bool onlyForEvents = data.OnlyForEvents;
 
@@ -65,13 +65,13 @@ public class RelicOffersManager
         var offers = new List<ItemOffer>();
         for (int index = 0; index < filtered.Count && offers.Count < amount; index++)
         {
-            offers.Add(create_relic_offer_from_data(filtered[index]));
+            offers.Add(CreateRelicOfferFromData(filtered[index]));
         }
 
         return offers;
     }
 
-    public ItemOffer create_relic_offer_from_data(RelicData data)
+    public ItemOffer CreateRelicOfferFromData(RelicData data)
     {
         if (data == null)
         {

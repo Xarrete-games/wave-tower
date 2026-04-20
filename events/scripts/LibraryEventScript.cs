@@ -18,7 +18,7 @@ public partial class LibraryEventScript : EventScript
         {
             bool isTome = relicData.IsTome;
             string relicId = relicData.Id;
-            if (!isTome || runContext.relics_manager.has_relic(relicId))
+            if (!isTome || runContext.relics_manager.HasRelic(relicId))
             {
                 continue;
             }
@@ -42,7 +42,7 @@ public partial class LibraryEventScript : EventScript
         Relic relic = relicData.CreateItem();
         if (relic != null)
         {
-            runContext.relics_manager.add_relic(relic);
+            runContext.relics_manager.AddRelic(relic);
         }
     }
 }

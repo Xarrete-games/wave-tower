@@ -9,36 +9,36 @@ public partial class TowerBuffsBar : Control
     [Export]
     public NodePath SlotsContainer;
 
-    private Tower tower;
-    private readonly List<TowerBuff> tower_buffs = new();
-    private readonly Dictionary<string, int> buffs_modifiers_stacks = new();
+    private Tower _tower;
+    private readonly List<TowerBuff> _towerBuffs = new();
+    private readonly Dictionary<string, int> _buffsModifiersStacks = new();
 
     private Control _slotsContainerNode;
 
     public override void _Ready()
     {
-        tower = GetParent() as Tower;
+        _tower = GetParent() as Tower;
         _slotsContainerNode = !SlotsContainer.IsEmpty ? GetNodeOrNull<Control>(SlotsContainer) : GetNodeOrNull<Control>("Container");
 
-        if (tower == null)
+        if (_tower == null)
         {
             return;
         }
 
-        tower.BuffAdded += OnTowerBuffAdded;
-        tower.BuffRemoved += OnTowerBuffRemoved;
+        _tower.BuffAdded += OnTowerBuffAdded;
+        _tower.BuffRemoved += OnTowerBuffRemoved;
     }
 
     public override void _ExitTree()
     {
-        if (tower != null)
+        if (_tower != null)
         {
-            tower.BuffAdded -= OnTowerBuffAdded;
-            tower.BuffRemoved -= OnTowerBuffRemoved;
+            _tower.BuffAdded -= OnTowerBuffAdded;
+            _tower.BuffRemoved -= OnTowerBuffRemoved;
         }
 
-        tower_buffs.Clear();
-        buffs_modifiers_stacks.Clear();
+        _towerBuffs.Clear();
+        _buffsModifiersStacks.Clear();
     }
 
     private void OnTowerBuffAdded(TowerBuff buff)
@@ -55,7 +55,7 @@ public partial class TowerBuffsBar : Control
         }
 
         bool buffExists = BuffExists(buffId);
-        tower_buffs.Add(buff);
+        _towerBuffs.Add(buff);
 
         if (!IsStatsModifier(buff))
         {
@@ -65,7 +65,7 @@ public partial class TowerBuffsBar : Control
         int modifierValue = (buff as TowerBuffStatsModifier)?.value ?? 0;
         if (!buffExists)
         {
-            buffs_modifiers_stacks[buffId] = modifierValue;
+            _buffsModifiersStacks[buffId] = modifierValue;
             TowerBuffsBarSlot slot = SlotScene?.Instantiate() as TowerBuffsBarSlot;
             if (slot == null || _slotsContainerNode == null)
             {
@@ -73,23 +73,23 @@ public partial class TowerBuffsBar : Control
             }
 
             _slotsContainerNode.AddChild(slot);
-            slot.set_buff(buff, modifierValue);
+            slot.SetBuff(buff, modifierValue);
             return;
         }
 
-        buffs_modifiers_stacks[buffId] = buffs_modifiers_stacks.GetValueOrDefault(buffId, 0) + modifierValue;
+        _buffsModifiersStacks[buffId] = _buffsModifiersStacks.GetValueOrDefault(buffId, 0) + modifierValue;
         foreach (Node slotNode in _slotsContainerNode.GetChildren())
         {
             TowerBuffsBarSlot buffSlot = slotNode as TowerBuffsBarSlot;
-            if (buffSlot == null || buffSlot.tower_buff == null)
+            if (buffSlot == null || buffSlot.TowerBuff == null)
             {
                 continue;
             }
 
-            string slotBuffId = GetBuffId(buffSlot.tower_buff);
+            string slotBuffId = GetBuffId(buffSlot.TowerBuff);
             if (slotBuffId == buffId)
             {
-                buffSlot.value = buffs_modifiers_stacks[buffId];
+                buffSlot.Value = _buffsModifiersStacks[buffId];
             }
         }
     }
@@ -111,7 +111,7 @@ public partial class TowerBuffsBar : Control
 
         bool hasSameBuffInstance = false;
         int totalValue = 0;
-        foreach (TowerBuff remainingBuff in tower_buffs)
+        foreach (TowerBuff remainingBuff in _towerBuffs)
         {
             if (remainingBuff == null || GetBuffId(remainingBuff) != buffId)
             {
@@ -128,12 +128,12 @@ public partial class TowerBuffsBar : Control
         foreach (Node slotNode in _slotsContainerNode.GetChildren())
         {
             TowerBuffsBarSlot buffSlot = slotNode as TowerBuffsBarSlot;
-            if (buffSlot == null || buffSlot.tower_buff == null)
+            if (buffSlot == null || buffSlot.TowerBuff == null)
             {
                 continue;
             }
 
-            string slotBuffId = GetBuffId(buffSlot.tower_buff);
+            string slotBuffId = GetBuffId(buffSlot.TowerBuff);
             if (slotBuffId != buffId)
             {
                 continue;
@@ -141,13 +141,13 @@ public partial class TowerBuffsBar : Control
 
             if (hasSameBuffInstance)
             {
-                buffs_modifiers_stacks[buffId] = totalValue;
-                buffSlot.value = totalValue;
+                _buffsModifiersStacks[buffId] = totalValue;
+                buffSlot.Value = totalValue;
             }
             else
             {
                 buffSlot.QueueFree();
-                buffs_modifiers_stacks.Remove(buffId);
+                _buffsModifiersStacks.Remove(buffId);
             }
 
             break;
@@ -156,12 +156,12 @@ public partial class TowerBuffsBar : Control
 
     private void EraseFirstBuffInstance(TowerBuff removedBuff)
     {
-        for (int i = 0; i < tower_buffs.Count; i++)
+        for (int i = 0; i < _towerBuffs.Count; i++)
         {
-            TowerBuff candidate = tower_buffs[i];
+            TowerBuff candidate = _towerBuffs[i];
             if (ReferenceEquals(candidate, removedBuff))
             {
-                tower_buffs.RemoveAt(i);
+                _towerBuffs.RemoveAt(i);
                 return;
             }
         }
@@ -179,7 +179,7 @@ public partial class TowerBuffsBar : Control
 
     private bool BuffExists(string buffId)
     {
-        foreach (TowerBuff buff in tower_buffs)
+        foreach (TowerBuff buff in _towerBuffs)
         {
             if (buff != null && GetBuffId(buff) == buffId)
             {

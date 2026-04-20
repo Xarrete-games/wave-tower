@@ -17,20 +17,20 @@ public class ConsumablesOffersManager
         _allConsumablesData.AddRange(DataLoaderAccess.GetAllConsumablesTyped());
     }
 
-    public List<ItemOffer> create_consumables_offers(int amount)
+    public List<ItemOffer> CreateConsumablesOffers(int amount)
     {
         var consumablesData = new List<ConsumableData>(_allConsumablesData);
         var offers = new List<ItemOffer>();
 
         for (int index = 0; index < consumablesData.Count && offers.Count < amount; index++)
         {
-            offers.Add(create_consumable_offer_from_data(consumablesData[index]));
+            offers.Add(CreateConsumableOfferFromData(consumablesData[index]));
         }
 
         return offers;
     }
 
-    public ItemOffer create_consumable_offer_from_data(ConsumableData data)
+    public ItemOffer CreateConsumableOfferFromData(ConsumableData data)
     {
         if (data == null)
         {

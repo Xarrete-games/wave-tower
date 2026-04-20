@@ -1,10 +1,10 @@
 using Godot;
 public partial class TowerBuffsBarSlot : Control {
-    [Export] public NodePath texture;
+    [Export] public NodePath Texture;
     [Export] public NodePath ValueLabel;
-    public TowerBuff tower_buff;
+    public TowerBuff TowerBuff;
     private int _value = 0;
-    public int value {
+    public int Value {
         get => _value;
         set {
             _value = value;
@@ -18,19 +18,19 @@ public partial class TowerBuffsBarSlot : Control {
     private Label _valueLabelNode;
     public override void _Ready() {
         ResolveNodes();
-        if (tower_buff != null) {
+        if (TowerBuff != null) {
             ApplyBuffVisuals();
         }
-        value = _value;
+        Value = _value;
     }
-    public void set_buff(TowerBuff towerBuff, int stackValue = 0) {
-        tower_buff = towerBuff;
-        value = stackValue;
+    public void SetBuff(TowerBuff towerBuff, int stackValue = 0) {
+        TowerBuff = towerBuff;
+        Value = stackValue;
         ApplyBuffVisuals();
     }
     private void ResolveNodes() {
         if (_textureNode == null) {
-            _textureNode = !texture.IsEmpty ? GetNodeOrNull<TextureRect>(texture) : GetNodeOrNull<TextureRect>("Texture");
+            _textureNode = !Texture.IsEmpty ? GetNodeOrNull<TextureRect>(Texture) : GetNodeOrNull<TextureRect>("Texture");
         }
         if (_valueLabelNode == null) {
             _valueLabelNode = !ValueLabel.IsEmpty ? GetNodeOrNull<Label>(ValueLabel) : GetNodeOrNull<Label>("Label");
@@ -38,10 +38,10 @@ public partial class TowerBuffsBarSlot : Control {
     }
     private void ApplyBuffVisuals() {
         ResolveNodes();
-        if (_textureNode == null || tower_buff == null) {
+        if (_textureNode == null || TowerBuff == null) {
             return;
         }
-        BuffData data = tower_buff.data;
+        BuffData data = TowerBuff.data;
         if (data == null) {
             return;
         }

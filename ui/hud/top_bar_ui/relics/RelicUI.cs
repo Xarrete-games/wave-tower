@@ -9,7 +9,7 @@ public partial class RelicUI : Control
     private Label _amountLabel;
     private AnimationPlayer _animationPlayer;
 
-    public Relic relic;
+    public Relic Relic;
 
     public override void _Ready()
     {
@@ -28,7 +28,7 @@ public partial class RelicUI : Control
             return;
         }
 
-        relic = relicData;
+        Relic = relicData;
         _texture.Texture = data.Icon;
 
         _texture.Modulate = relicData.Disabled ? SemiTransparentColor : OpaqueColor;
@@ -43,7 +43,7 @@ public partial class RelicUI : Control
 
     private void OnMouseEntered()
     {
-        RelicData data = relic?.Data;
+        RelicData data = Relic?.Data;
         if (data == null)
         {
             return;

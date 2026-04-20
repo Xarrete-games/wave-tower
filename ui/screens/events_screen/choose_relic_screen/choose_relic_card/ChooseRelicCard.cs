@@ -3,7 +3,7 @@ using System;
 
 public partial class ChooseRelicCard : Control
 {
-    public event Action<RelicData> card_pressed;
+    public event Action<RelicData> CardPressed;
 
     private RelicData _relicData;
     private bool _hasEnoughLife;
@@ -38,7 +38,7 @@ public partial class ChooseRelicCard : Control
         }
     }
 
-    public void set_relic(RelicData newRelicData)
+    public void SetRelic(RelicData newRelicData)
     {
         _relicData = newRelicData;
         RelicData data = newRelicData;
@@ -78,7 +78,7 @@ public partial class ChooseRelicCard : Control
             }
         }
 
-        _hexagonBorder.Color = _runContext.relics_manager.get_rarity_color(data.Rarity);
+        _hexagonBorder.Color = _runContext.relics_manager.GetRarityColor(data.Rarity);
     }
 
     private void OnGuiInput(InputEvent @event)
@@ -94,7 +94,7 @@ public partial class ChooseRelicCard : Control
         }
 
         GetNode<AudioManager>("/root/AudioManager").play_button_click();
-        card_pressed?.Invoke(_relicData);
+        CardPressed?.Invoke(_relicData);
     }
 
     private void CheckHealth(int currentHealth, int healthCost)

@@ -111,8 +111,8 @@ public partial class TowerButton : Control
         _runContext.economy.available_free_towers_change += OnAvailableFreeTowersChange;
         if (_runContext.relics_manager != null)
         {
-            _runContext.relics_manager.relic_added += OnRelicAdded;
-            _runContext.relics_manager.relic_removed += OnRelicRemoved;
+            _runContext.relics_manager.RelicAdded += OnRelicAdded;
+            _runContext.relics_manager.RelicRemoved += OnRelicRemoved;
         }
         _runContext.progress.current_wave_finished += CurrentWaveFinished;
 
@@ -134,8 +134,8 @@ public partial class TowerButton : Control
 
         if (_runContext?.relics_manager != null)
         {
-            _runContext.relics_manager.relic_added -= OnRelicAdded;
-            _runContext.relics_manager.relic_removed -= OnRelicRemoved;
+            _runContext.relics_manager.RelicAdded -= OnRelicAdded;
+            _runContext.relics_manager.RelicRemoved -= OnRelicRemoved;
         }
     }
 
@@ -218,7 +218,7 @@ public partial class TowerButton : Control
     private void CurrentWaveFinished()
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
-        if (runContext?.relics_manager != null && runContext.relics_manager.has_relic("lemon"))
+        if (runContext?.relics_manager != null && runContext.relics_manager.HasRelic("lemon"))
         {
             UpdatePrice();
         }

@@ -47,7 +47,7 @@ public partial class FountainsOfWishesScript : EventScript
             return;
         }
 
-        runContext.relics_manager.add_relic(relic);
+        runContext.relics_manager.AddRelic(relic);
 
         int goldCost = rarity switch
         {

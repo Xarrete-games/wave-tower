@@ -11,7 +11,7 @@ public partial class HighwayRobberyScript : EventScript
             return new List<EventOptionData>();
         }
 
-        List<Relic> relics = runContext.relics_manager.get_all_relics();
+        List<Relic> relics = runContext.relics_manager.GetAllRelics();
 
         var options = new List<EventOptionData>();
         int count = Mathf.Min(3, relics.Count);
@@ -38,7 +38,7 @@ public partial class HighwayRobberyScript : EventScript
         string relicId = data as string;
         if (!string.IsNullOrEmpty(relicId))
         {
-            runContext.relics_manager.remove_relic(relicId);
+            runContext.relics_manager.RemoveRelic(relicId);
         }
     }
 }

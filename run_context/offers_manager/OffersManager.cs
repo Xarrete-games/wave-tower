@@ -12,17 +12,17 @@ public class OffersManager
         _consumablesOffersManager = new ConsumablesOffersManager();
     }
 
-    public List<ItemOffer> create_relic_offers(int amount)
+    public List<ItemOffer> CreateRelicOffers(int amount)
     {
-        return _relicsOffersManager.create_relic_offers(amount);
+        return _relicsOffersManager.CreateRelicOffers(amount);
     }
 
-    public ItemOffer create_relic_offer_from_data(RelicData data)
+    public ItemOffer CreateRelicOfferFromData(RelicData data)
     {
-        return _relicsOffersManager.create_relic_offer_from_data(data);
+        return _relicsOffersManager.CreateRelicOfferFromData(data);
     }
 
-    public List<ItemOffer> create_relic_offers_from_data(List<RelicData> data)
+    public List<ItemOffer> CreateRelicOffersFromData(List<RelicData> data)
     {
         var offers = new List<ItemOffer>();
         for (int index = 0; index < data.Count; index++)
@@ -30,24 +30,24 @@ public class OffersManager
             RelicData relicData = data[index];
             if (relicData != null)
             {
-                offers.Add(_relicsOffersManager.create_relic_offer_from_data(relicData));
+                offers.Add(_relicsOffersManager.CreateRelicOfferFromData(relicData));
             }
         }
 
         return offers;
     }
 
-    public List<ItemOffer> create_consumables_offers(int amount)
+    public List<ItemOffer> CreateConsumablesOffers(int amount)
     {
-        return _consumablesOffersManager.create_consumables_offers(amount);
+        return _consumablesOffersManager.CreateConsumablesOffers(amount);
     }
 
-    public ItemOffer create_consumable_offer_from_data(ConsumableData data)
+    public ItemOffer CreateConsumableOfferFromData(ConsumableData data)
     {
-        return _consumablesOffersManager.create_consumable_offer_from_data(data);
+        return _consumablesOffersManager.CreateConsumableOfferFromData(data);
     }
 
-    public void purchase_offer(ItemOffer itemOffer)
+    public void PurchaseOffer(ItemOffer itemOffer)
     {
         if (itemOffer == null)
         {
@@ -92,7 +92,7 @@ public class OffersManager
         if (itemData is RelicData relicData)
         {
             Relic relic = relicData.CreateItem();
-            relicsManager?.add_relic(relic);
+            relicsManager?.AddRelic(relic);
             return;
         }
     }

@@ -121,7 +121,7 @@ public partial class ShopScreen : Control
             Resource itemData = itemOffer?.ItemData;
             if (itemData is RelicData relicData)
             {
-                runContext.relics_manager.remove_relic(relicData.Id);
+                runContext.relics_manager.RemoveRelic(relicData.Id);
             }
 
             runContext.economy.add_gold(itemOffer?.Price ?? 0);
@@ -170,7 +170,7 @@ public partial class ShopScreen : Control
     private void BuildRelicsForSale()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        var currentRelics = runContext.relics_manager.get_all_relics();
+        var currentRelics = runContext.relics_manager.GetAllRelics();
         var currentRelicsData = new List<RelicData>();
         foreach (Relic relic in currentRelics)
         {
@@ -180,7 +180,7 @@ public partial class ShopScreen : Control
             }
         }
 
-        var relicOffers = runContext.offers_manager.create_relic_offers_from_data(currentRelicsData);
+        var relicOffers = runContext.offers_manager.CreateRelicOffersFromData(currentRelicsData);
         foreach (ItemOffer relicOffer in relicOffers)
         {
             ShopSlot slot = ShopSlotScene.Instantiate<ShopSlot>();

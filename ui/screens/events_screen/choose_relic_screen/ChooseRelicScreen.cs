@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 public partial class ChooseRelicScreen : Control
 {
-    public event Action<RelicData> item_selected;
-    public event Action reroll_pressed;
+    public event Action<RelicData> ItemSelected;
+    public event Action RerollPressed;
 
     private static readonly PackedScene ChooseRelicCardScene = GD.Load<PackedScene>("uid://dgcv5fdqvfext");
 
@@ -25,7 +25,7 @@ public partial class ChooseRelicScreen : Control
         _enabled = true;
     }
 
-    public void set_relics(List<RelicData> relics)
+    public void SetRelics(List<RelicData> relics)
     {
         foreach (Node child in CardsContainer.GetChildren())
         {
@@ -36,8 +36,8 @@ public partial class ChooseRelicScreen : Control
         {
             ChooseRelicCard card = ChooseRelicCardScene.Instantiate<ChooseRelicCard>();
             CardsContainer.AddChild(card);
-            card.set_relic(relicData);
-            card.card_pressed += OnCardPressed;
+            card.SetRelic(relicData);
+            card.CardPressed += OnCardPressed;
         }
 
         RerollPriece.price = _rerollPrice;
@@ -50,7 +50,7 @@ public partial class ChooseRelicScreen : Control
             return;
         }
 
-        item_selected?.Invoke(relicData);
+        ItemSelected?.Invoke(relicData);
     }
 
     private void OnRerollButtonXarretaPressed()
@@ -59,7 +59,7 @@ public partial class ChooseRelicScreen : Control
         int gold = runContext.economy.gold;
         if (_rerollPrice <= gold)
         {
-            reroll_pressed?.Invoke();
+            RerollPressed?.Invoke();
         }
     }
 

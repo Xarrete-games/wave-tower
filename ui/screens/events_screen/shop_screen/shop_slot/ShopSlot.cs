@@ -32,7 +32,7 @@ public partial class ShopSlot : VBoxContainer
         _runContext = GetNode<RunContext>("/root/RunContext");
         if (_runContext?.relics_manager != null)
         {
-            _runContext.relics_manager.relic_added += OnRelicAdded;
+            _runContext.relics_manager.RelicAdded += OnRelicAdded;
         }
 
         if (_runContext?.status != null)
@@ -45,7 +45,7 @@ public partial class ShopSlot : VBoxContainer
     {
         if (_runContext?.relics_manager != null)
         {
-            _runContext.relics_manager.relic_added -= OnRelicAdded;
+            _runContext.relics_manager.RelicAdded -= OnRelicAdded;
         }
 
         if (_runContext?.status != null)
@@ -98,7 +98,7 @@ public partial class ShopSlot : VBoxContainer
         RelicData relicData = itemData as RelicData;
         if (relicData != null)
         {
-            ShopSlotIcon?.set_background_color(_runContext.relics_manager.get_rarity_color(relicData.Rarity));
+            ShopSlotIcon?.set_background_color(_runContext.relics_manager.GetRarityColor(relicData.Rarity));
         }
 
         _currentHealthCost = itemOffer.HealthPrice;
@@ -158,13 +158,13 @@ public partial class ShopSlot : VBoxContainer
         Resource itemData = _item.ItemData;
         if (itemData is RelicData)
         {
-            SetItem(_runContext.offers_manager.create_relic_offer_from_data(itemData as RelicData));
+            SetItem(_runContext.offers_manager.CreateRelicOfferFromData(itemData as RelicData));
             return;
         }
 
         if (itemData is ConsumableData)
         {
-            SetItem(_runContext.offers_manager.create_consumable_offer_from_data(itemData as ConsumableData));
+            SetItem(_runContext.offers_manager.CreateConsumableOfferFromData(itemData as ConsumableData));
         }
     }
 

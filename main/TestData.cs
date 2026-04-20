@@ -51,7 +51,7 @@ public partial class TestData : Node
                 if (typedRelicData != null)
                 {
                     Relic relicInstance = typedRelicData.CreateItem();
-                    runContext.relics_manager.add_relic(relicInstance);
+                    runContext.relics_manager.AddRelic(relicInstance);
                 }
                 else
                 {
@@ -72,7 +72,7 @@ public partial class TestData : Node
                 }
 
                 Relic relic = relicDataObj?.CreateItem();
-                runContext.relics_manager.add_relic(relic);
+                runContext.relics_manager.AddRelic(relic);
             }
         }
 

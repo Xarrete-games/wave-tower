@@ -37,7 +37,7 @@ public partial class BloodPactScript : EventScript
         Relic relic = relicData?.CreateItem();
         if (relic != null)
         {
-            runContext.relics_manager.add_relic(relic);
+            runContext.relics_manager.AddRelic(relic);
         }
     }
 }

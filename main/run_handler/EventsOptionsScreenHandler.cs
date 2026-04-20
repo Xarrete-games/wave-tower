@@ -33,7 +33,7 @@ public partial class EventsOptionsScreenHandler : Node
         }
         finally
         {
-            if (GodotObject.IsInstanceValid(optionsScreen))
+            if (IsInstanceValid(optionsScreen))
             {
                 optionsScreen.EventCompleted -= OnCompleted;
             }

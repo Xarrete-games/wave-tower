@@ -19,13 +19,13 @@ public partial class ChooseRelicScreenHandler : Node
         var relics = dataLoader.GetRandomAvailableRelics(numberOfRelics);
 
         eventLayer.AddChild(_rewardsScreen);
-        _rewardsScreen.set_relics(relics);
-        _rewardsScreen.item_selected += OnItemSelected;
-        _rewardsScreen.reroll_pressed += OnRerollPressed;
+        _rewardsScreen.SetRelics(relics);
+        _rewardsScreen.ItemSelected += OnItemSelected;
+        _rewardsScreen.RerollPressed += OnRerollPressed;
 
         await ToSignal(_rewardsScreen, Node.SignalName.TreeExited);
-        _rewardsScreen.item_selected -= OnItemSelected;
-        _rewardsScreen.reroll_pressed -= OnRerollPressed;
+        _rewardsScreen.ItemSelected -= OnItemSelected;
+        _rewardsScreen.RerollPressed -= OnRerollPressed;
         _rewardsScreen = null;
     }
 
@@ -45,7 +45,7 @@ public partial class ChooseRelicScreenHandler : Node
         }
 
         Relic item = selectedRelicData.CreateItem();
-        runContext.relics_manager.add_relic(item);
+        runContext.relics_manager.AddRelic(item);
     }
 
     private void OnRerollPressed()
@@ -56,7 +56,7 @@ public partial class ChooseRelicScreenHandler : Node
         int numberOfRelics = GetCurrentRewardsCount();
         DataLoader dataLoader = GetNode<DataLoader>("/root/DataLoader");
         var relics = dataLoader.GetRandomAvailableRelics(numberOfRelics);
-        _rewardsScreen?.set_relics(relics);
+        _rewardsScreen?.SetRelics(relics);
     }
 
     private int GetCurrentRewardsCount()

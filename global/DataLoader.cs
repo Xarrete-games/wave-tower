@@ -145,7 +145,7 @@ public partial class DataLoader : Node
             bool alreadyOwned = false;
             if (relicsManager != null)
             {
-                alreadyOwned = relicsManager.has_relic(relicData.Id);
+                alreadyOwned = relicsManager.HasRelic(relicData.Id);
             }
 
             if (!alreadyOwned)

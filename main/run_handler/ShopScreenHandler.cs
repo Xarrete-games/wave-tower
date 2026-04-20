@@ -6,13 +6,13 @@ public partial class ShopScreenHandler : Node
 {
     private static readonly PackedScene ShopScreenScene = GD.Load<PackedScene>("uid://bpf44acq183yv");
 
-    public event Action shop_closed;
+    public event Action ShopClosed;
 
     public async Task OpenShopAsync(CanvasLayer eventLayer)
     {
         var runContext = GetNode<RunContext>("/root/RunContext");
-        var relics = runContext.offers_manager.create_relic_offers(5);
-        var consumables = runContext.offers_manager.create_consumables_offers(5);
+        var relics = runContext.offers_manager.CreateRelicOffers(5);
+        var consumables = runContext.offers_manager.CreateConsumablesOffers(5);
 
         ShopScreen shopScreen = ShopScreenScene.Instantiate<ShopScreen>();
         eventLayer.AddChild(shopScreen);
@@ -22,12 +22,12 @@ public partial class ShopScreenHandler : Node
 
         await ToSignal(shopScreen, Node.SignalName.TreeExited);
         shopScreen.ItemPurchase -= OnItemPurchased;
-        shop_closed?.Invoke();
+        ShopClosed?.Invoke();
     }
 
     private void OnItemPurchased(ItemOffer itemOffer)
     {
         var runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.offers_manager.purchase_offer(itemOffer);
+        runContext.offers_manager.PurchaseOffer(itemOffer);
     }
 }

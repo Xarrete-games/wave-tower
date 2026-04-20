@@ -3,9 +3,9 @@ using System;
 
 public class RelicsManager
 {
-    public event Action<string> relic_changed;
-    public event Action<string> relic_added;
-    public event Action<string> relic_removed;
+    public event Action<string> RelicChanged;
+    public event Action<string> RelicAdded;
+    public event Action<string> RelicRemoved;
 
     private static readonly Color COMMON_COLOR = Colors.GreenYellow;
     private static readonly Color RARE_COLOR = Colors.DodgerBlue;
@@ -21,17 +21,17 @@ public class RelicsManager
     private readonly Godot.Collections.Dictionary<string, int> _relicsCount = new();
     private readonly System.Collections.Generic.Dictionary<string, Relic> _relics = new();
 
-    public bool has_relic(string relic_id)
+    public bool HasRelic(string relicId)
     {
-        if (!_relics.ContainsKey(relic_id))
+        if (!_relics.ContainsKey(relicId))
         {
             return false;
         }
 
-        return !_relics[relic_id].Disabled;
+        return !_relics[relicId].Disabled;
     }
 
-    public System.Collections.Generic.List<Relic> get_all_relics()
+    public System.Collections.Generic.List<Relic> GetAllRelics()
     {
         var values = new System.Collections.Generic.List<Relic>();
         foreach (Relic relic in _relics.Values)
@@ -42,7 +42,7 @@ public class RelicsManager
         return values;
     }
 
-    public Color get_rarity_color(int rarity)
+    public Color GetRarityColor(int rarity)
     {
         if (!_relicColors.ContainsKey(rarity))
         {
@@ -52,7 +52,7 @@ public class RelicsManager
         return _relicColors[rarity];
     }
 
-    public void add_relic(Relic relic)
+    public void AddRelic(Relic relic)
     {
         if (relic == null)
         {
@@ -86,29 +86,29 @@ public class RelicsManager
         AddRelicInternal(relic);
     }
 
-    public void remove_relic(string relic_id)
+    public void RemoveRelic(string relicId)
     {
-        if (!_relics.ContainsKey(relic_id))
+        if (!_relics.ContainsKey(relicId))
         {
             return;
         }
 
-        Relic relicObj = _relics[relic_id];
+        Relic relicObj = _relics[relicId];
         if (relicObj == null)
         {
-            _relics.Remove(relic_id);
+            _relics.Remove(relicId);
             return;
         }
 
         relicObj.OnRemove();
-        relicObj.Changed -= emit_relic_changed;
-        RunContextRuntime.RelicsManager.RemoveRelic(relic_id);
+        relicObj.Changed -= EmitRelicChanged;
+        RunContextRuntime.RelicsManager.RemoveRelic(relicId);
 
-        _relics.Remove(relic_id);
+        _relics.Remove(relicId);
 
-        int currentCount = _relicsCount.ContainsKey(relic_id) ? _relicsCount[relic_id] : 0;
-        _relicsCount[relic_id] = currentCount - 1;
-        relic_removed?.Invoke(relic_id);
+        int currentCount = _relicsCount.ContainsKey(relicId) ? _relicsCount[relicId] : 0;
+        _relicsCount[relicId] = currentCount - 1;
+        RelicRemoved?.Invoke(relicId);
     }
 
     private void AddRelicInternal(Relic relic)
@@ -125,21 +125,21 @@ public class RelicsManager
         int currentCount = _relicsCount.ContainsKey(relicId) ? _relicsCount[relicId] : 0;
         _relicsCount[relicId] = currentCount + 1;
 
-        relic_added?.Invoke(relicId);
-        relic.Changed += emit_relic_changed;
+        RelicAdded?.Invoke(relicId);
+        relic.Changed += EmitRelicChanged;
     }
 
-    public void emit_relic_changed(Relic relic)
+    public void EmitRelicChanged(Relic relic)
     {
         if (relic == null)
         {
             return;
         }
 
-        relic_changed?.Invoke(relic.Id);
+        RelicChanged?.Invoke(relic.Id);
     }
 
-    public Relic _get_relic(string id)
+    public Relic GetRelic(string id)
     {
         return _relics.ContainsKey(id) ? _relics[id] : null;
     }

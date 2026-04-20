@@ -11,9 +11,9 @@ public partial class RelicsBar : Control
         _relicsManager = runContext.relics_manager;
         if (_relicsManager != null)
         {
-            _relicsManager.relic_added += OnRelicAdded;
-            _relicsManager.relic_removed += OnRelicRemoved;
-            _relicsManager.relic_changed += OnRelicChanged;
+            _relicsManager.RelicAdded += OnRelicAdded;
+            _relicsManager.RelicRemoved += OnRelicRemoved;
+            _relicsManager.RelicChanged += OnRelicChanged;
         }
     }
 
@@ -21,16 +21,16 @@ public partial class RelicsBar : Control
     {
         if (_relicsManager != null)
         {
-            _relicsManager.relic_added -= OnRelicAdded;
-            _relicsManager.relic_removed -= OnRelicRemoved;
-            _relicsManager.relic_changed -= OnRelicChanged;
+            _relicsManager.RelicAdded -= OnRelicAdded;
+            _relicsManager.RelicRemoved -= OnRelicRemoved;
+            _relicsManager.RelicChanged -= OnRelicChanged;
             _relicsManager = null;
         }
     }
 
     private void OnRelicAdded(string relicId)
     {
-        Relic relic = _relicsManager?._get_relic(relicId);
+        Relic relic = _relicsManager?.GetRelic(relicId);
         if (relic == null)
         {
             return;
@@ -43,7 +43,7 @@ public partial class RelicsBar : Control
 
     private void OnRelicChanged(string relicId)
     {
-        Relic relic = _relicsManager?._get_relic(relicId);
+        Relic relic = _relicsManager?.GetRelic(relicId);
         if (relic == null)
         {
             return;
@@ -52,7 +52,7 @@ public partial class RelicsBar : Control
         foreach (Node child in GetChildren())
         {
             RelicUI relicUi = child as RelicUI;
-            if (relicUi?.relic?.Id == relicId)
+            if (relicUi?.Relic?.Id == relicId)
             {
                 relicUi.SetRelic(relic);
             }
@@ -64,7 +64,7 @@ public partial class RelicsBar : Control
         foreach (Node child in GetChildren())
         {
             RelicUI relicUi = child as RelicUI;
-            if (relicUi?.relic?.Id == relicId)
+            if (relicUi?.Relic?.Id == relicId)
             {
                 relicUi.QueueFree();
             }
