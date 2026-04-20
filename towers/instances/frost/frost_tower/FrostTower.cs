@@ -12,9 +12,9 @@ public partial class FrostTower : Tower
         projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
-    protected override void _fire()
+    protected override void Fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target))
+        if (!GodotObject.IsInstanceValid(_currentTarget))
         {
             return;
         }
@@ -24,8 +24,8 @@ public partial class FrostTower : Tower
 
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
-        Attack attack = _get_attack();
+        Attack attack = GetAttack();
         EnemyDebuff debuff = EnemyDebuff.CreateFrost(DamageSource);
-        projectile.SetTarget(_current_target, attack, debuff);
+        projectile.SetTarget(_currentTarget, attack, debuff);
     }
 }

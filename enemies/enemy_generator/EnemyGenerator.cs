@@ -50,9 +50,9 @@ public partial class EnemyGenerator : Node
         if (WaveSpawner != null)
         {
             WaveSpawner.EnemiesContainer = EnemiesContainer;
-            WaveSpawner.wave_started += OnWaveStarted;
-            WaveSpawner.wave_finished += OnWaveFinished;
-            WaveSpawner.enemy_spawned += OnEnemySpawned;
+            WaveSpawner.WaveStarted += OnWaveStarted;
+            WaveSpawner.WaveFinished += OnWaveFinished;
+            WaveSpawner.EnemySpawned += OnEnemySpawned;
         }
 
         ClickEvents.NextWavePressed += StartNextWave;
@@ -81,18 +81,18 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.Progress.CurrentWave = _waveNumber;
 
-        List<WaveComposer.WaveGroup> groups = _composer.compose_wave(_waveNumber);
+        List<WaveComposer.WaveGroup> groups = _composer.ComposeWave(_waveNumber);
 
         int totalEnemies = 0;
         for (int index = 0; index < groups.Count; index++)
         {
-            totalEnemies += groups[index].enemies.Count;
+            totalEnemies += groups[index].Enemies.Count;
         }
 
-        int budget = _composer.get_budget_for_wave(_waveNumber);
+        int budget = _composer.GetBudgetForWave(_waveNumber);
         GD.Print($"[Wave {_waveNumber}] Budget: {budget} | Groups: {groups.Count} | Total enemies: {totalEnemies}");
 
-        WaveSpawner.start_wave(_waveNumber, groups, WaveConfig);
+        WaveSpawner.StartWave(_waveNumber, groups, WaveConfig);
     }
 
     private void OnWaveStarted(int waveNumber)
@@ -213,13 +213,13 @@ public partial class EnemyGenerator : Node
             runContext.Status.ApplyDamage(enemy.damage);
         }
 
-        runContext.EnemyManager.notify_enemy_target_reached(enemy);
+        runContext.EnemyManager.NotifyEnemyTargetReached(enemy);
     }
 
     private void OnEnemyDie(Enemy enemy, Attack attack)
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.EnemyManager.notify_enemy_die(enemy, attack);
+        runContext.EnemyManager.NotifyEnemyDie(enemy, attack);
     }
 }
 

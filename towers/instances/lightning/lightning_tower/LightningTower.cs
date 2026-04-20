@@ -13,9 +13,9 @@ public partial class LightningTower : Tower
         _projectileSpawnPos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
-    protected override void _fire()
+    protected override void Fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || ElectricBallScene == null)
+        if (!GodotObject.IsInstanceValid(_currentTarget) || ElectricBallScene == null)
         {
             return;
         }
@@ -25,6 +25,6 @@ public partial class LightningTower : Tower
 
         projectile.GlobalPosition = _projectileSpawnPos.GlobalPosition;
 
-        projectile.SetTarget(_current_target, _get_attack());
+        projectile.SetTarget(_currentTarget, GetAttack());
     }
 }

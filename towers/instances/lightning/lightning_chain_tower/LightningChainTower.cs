@@ -16,9 +16,9 @@ public partial class LightningChainTower : Tower
         _projectileSpawnPoint = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
-    protected override void _fire()
+    protected override void Fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || LightningChainProjectileScene == null)
+        if (!GodotObject.IsInstanceValid(_currentTarget) || LightningChainProjectileScene == null)
         {
             return;
         }
@@ -32,6 +32,6 @@ public partial class LightningChainTower : Tower
         AddChild(projectile);
         projectile.GlobalPosition = _projectileSpawnPoint.GlobalPosition;
 
-        projectile.SetTarget(_current_target, _get_attack(), CurrentBounces);
+        projectile.SetTarget(_currentTarget, GetAttack(), CurrentBounces);
     }
 }

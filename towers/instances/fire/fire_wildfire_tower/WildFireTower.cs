@@ -13,9 +13,9 @@ public partial class WildFireTower : Tower
         projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
-    protected override void _fire()
+    protected override void Fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || ProjectileScene == null)
+        if (!GodotObject.IsInstanceValid(_currentTarget) || ProjectileScene == null)
         {
             return;
         }
@@ -26,6 +26,6 @@ public partial class WildFireTower : Tower
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
         EnemyDebuff debuff = EnemyDebuff.CreateBurn(DamageSource);
-        projectile.SetTarget(_current_target, _get_attack(), debuff);
+        projectile.SetTarget(_currentTarget, GetAttack(), debuff);
     }
 }

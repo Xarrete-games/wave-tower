@@ -37,9 +37,9 @@ public partial class Tower : Node2D
     public GodotObject data;
     public int BuildPrice { get; set; } = 0;
 
-    protected Node2D _current_target;
+    protected Node2D _currentTarget;
     protected bool _enabled = false;
-    protected bool _first_shot = true;
+    protected bool _firstShot = true;
 
     public Tower CurrentTowerSelected;
     public Tween RangeTween;
@@ -58,29 +58,29 @@ public partial class Tower : Node2D
     public Vector2I TilePos;
     public string CompositeTileKey = string.Empty;
 
-    private int _targeting_mode = (int)TargetingMode.FIRST_IN_PROGRESS;
+    private int _targetingMode = (int)TargetingMode.FIRST_IN_PROGRESS;
     public int CurrentTargetingMode
     {
-        get => _targeting_mode;
+        get => _targetingMode;
         set
         {
-            _targeting_mode = value;
-            if (area_detector != null)
+            _targetingMode = value;
+            if (_areaDetector != null)
             {
-                area_detector.TargetingType = value;
+                _areaDetector.TargetingType = value;
             }
         }
     }
 
     public int level = 1;
 
-    private TowerExpData _exp_data;
+    private TowerExpData _expData;
     public TowerExpData ExpData
     {
-        get => _exp_data;
+        get => _expData;
         set
         {
-            _exp_data = value;
+            _expData = value;
             StatsChanged?.Invoke(this);
         }
     }
@@ -100,60 +100,60 @@ public partial class Tower : Node2D
         }
     }
 
-    protected AreaDetector area_detector;
-    protected RangePreview range_preview;
-    protected CollisionPolygon2D range_collision;
-    protected Control mouse_detector;
-    protected Timer attack_timer;
-    protected CristalLight cristal_light;
-    protected Sprite2D sprite_2d;
-    protected TowerStatsHandler tower_stats_handler;
-    protected Area2D tower_area;
-    protected CollisionPolygon2D tower_area_collision;
+    protected AreaDetector _areaDetector;
+    protected RangePreview _rangePreview;
+    protected CollisionPolygon2D _rangeCollision;
+    protected Control _mouseDetector;
+    protected Timer _attackTimer;
+    protected CristalLight _cristalLight;
+    protected Sprite2D _sprite2D;
+    protected TowerStatsHandler _towerStatsHandler;
+    protected Area2D _towerArea;
+    protected CollisionPolygon2D _towerAreaCollision;
 
     private bool _eventsConnected;
     private TowersManager _towersManager;
 
     public override void _Ready()
     {
-        area_detector = GetNode<AreaDetector>("AreaDetector");
-        range_preview = GetNode<RangePreview>("RangePreview");
-        range_collision = GetNode<CollisionPolygon2D>("AreaDetector/RangeCollision");
-        mouse_detector = GetNode<Control>("MouseDetector");
-        attack_timer = GetNode<Timer>("AttackTimer");
-        cristal_light = GetNodeOrNull<CristalLight>("CristalLight");
-        sprite_2d = GetNodeOrNull<Sprite2D>("Sprite2D");
-        tower_stats_handler = GetNode<TowerStatsHandler>("TowerStatsHandler");
-        tower_area = GetNode<Area2D>("TowerArea");
-        tower_area_collision = GetNode<CollisionPolygon2D>("TowerArea/CollisionShape2D");
+        _areaDetector = GetNode<AreaDetector>("AreaDetector");
+        _rangePreview = GetNode<RangePreview>("RangePreview");
+        _rangeCollision = GetNode<CollisionPolygon2D>("AreaDetector/RangeCollision");
+        _mouseDetector = GetNode<Control>("MouseDetector");
+        _attackTimer = GetNode<Timer>("AttackTimer");
+        _cristalLight = GetNodeOrNull<CristalLight>("CristalLight");
+        _sprite2D = GetNodeOrNull<Sprite2D>("Sprite2D");
+        _towerStatsHandler = GetNode<TowerStatsHandler>("TowerStatsHandler");
+        _towerArea = GetNode<Area2D>("TowerArea");
+        _towerAreaCollision = GetNode<CollisionPolygon2D>("TowerArea/CollisionShape2D");
 
         TypeId = GetType().Name;
 
         (data as TowerData)?.build();
         tower_logic = new TowerLogic(this);
-        tower_area_collision.Polygon = BuildEllipsePolygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO);
+        _towerAreaCollision.Polygon = BuildEllipsePolygon(TOWER_AREA_RADIUS, TOWER_AREA_RADIUS * ELLIPSE_Y_RATIO);
 
-        tower_stats_handler.StatsChanged += _on_stats_change;
-        tower_stats_handler.BuffApplied += AddBuff;
-        tower_stats_handler.BuffExpired += RemoveBuff;
-        tower_stats_handler.SetData(data as TowerData, (int)type);
+        _towerStatsHandler.StatsChanged += OnStatsChange;
+        _towerStatsHandler.BuffApplied += AddBuff;
+        _towerStatsHandler.BuffExpired += RemoveBuff;
+        _towerStatsHandler.SetData(data as TowerData, (int)type);
 
-        area_detector.target_change += OnTargetChange;
-        CurrentTargetingMode = _targeting_mode;
+        _areaDetector.TargetChanged += OnTargetChange;
+        CurrentTargetingMode = _targetingMode;
     }
 
     public override void _ExitTree()
     {
-        if (area_detector != null)
+        if (_areaDetector != null)
         {
-            area_detector.target_change -= OnTargetChange;
+            _areaDetector.TargetChanged -= OnTargetChange;
         }
 
-        if (tower_stats_handler != null)
+        if (_towerStatsHandler != null)
         {
-            tower_stats_handler.StatsChanged -= _on_stats_change;
-            tower_stats_handler.BuffApplied -= AddBuff;
-            tower_stats_handler.BuffExpired -= RemoveBuff;
+            _towerStatsHandler.StatsChanged -= OnStatsChange;
+            _towerStatsHandler.BuffApplied -= AddBuff;
+            _towerStatsHandler.BuffExpired -= RemoveBuff;
         }
 
         if (_eventsConnected)
@@ -164,9 +164,9 @@ public partial class Tower : Node2D
                 _towersManager = null;
             }
 
-            mouse_detector.GuiInput -= OnGuiInput;
-            mouse_detector.MouseEntered -= OnMouseEntered;
-            mouse_detector.MouseExited -= OnMouseExit;
+            _mouseDetector.GuiInput -= OnGuiInput;
+            _mouseDetector.MouseEntered -= OnMouseEntered;
+            _mouseDetector.MouseExited -= OnMouseExit;
             _eventsConnected = false;
         }
     }
@@ -196,22 +196,22 @@ public partial class Tower : Node2D
 
     public void PhantomMode()
     {
-        if (sprite_2d != null)
+        if (_sprite2D != null)
         {
-            sprite_2d.Modulate = PHANTOM_COLOR;
+            _sprite2D.Modulate = PHANTOM_COLOR;
         }
 
-        if (range_preview != null)
+        if (_rangePreview != null)
         {
-            range_preview.Visible = false;
+            _rangePreview.Visible = false;
         }
     }
 
     public void NormalColor()
     {
-        if (sprite_2d != null)
+        if (_sprite2D != null)
         {
-            sprite_2d.Modulate = Colors.White;
+            _sprite2D.Modulate = Colors.White;
         }
 
         ShowRange();
@@ -220,20 +220,20 @@ public partial class Tower : Node2D
     public virtual void PlacementMode()
     {
         _enabled = false;
-        area_detector.Monitoring = false;
-        tower_area.Monitorable = false;
+        _areaDetector.Monitoring = false;
+        _towerArea.Monitorable = false;
     }
 
     public virtual async void Enable()
     {
-        if (sprite_2d != null)
+        if (_sprite2D != null)
         {
-            sprite_2d.Modulate = Colors.White;
+            _sprite2D.Modulate = Colors.White;
         }
 
         _enabled = true;
-        area_detector.Monitoring = true;
-        tower_area.Monitorable = true;
+        _areaDetector.Monitoring = true;
+        _towerArea.Monitorable = true;
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), Timer.SignalName.Timeout);
 
@@ -248,29 +248,29 @@ public partial class Tower : Node2D
             _towersManager.TowerSelected += OnTowerSelected;
         }
 
-        mouse_detector.GuiInput += OnGuiInput;
-        mouse_detector.MouseEntered += OnMouseEntered;
-        mouse_detector.MouseExited += OnMouseExit;
+        _mouseDetector.GuiInput += OnGuiInput;
+        _mouseDetector.MouseEntered += OnMouseEntered;
+        _mouseDetector.MouseExited += OnMouseExit;
         _eventsConnected = true;
     }
 
-    public virtual void AddBuff(TowerBuff tower_buff)
+    public virtual void AddBuff(TowerBuff towerBuff)
     {
-        if (tower_buff == null)
+        if (towerBuff == null)
         {
             return;
         }
 
-        buffs.Add(tower_buff);
-        if (tower_buff is TowerBuffStatsModifier)
+        buffs.Add(towerBuff);
+        if (towerBuff is TowerBuffStatsModifier)
         {
-            tower_stats_handler.AddBuff(tower_buff);
+            _towerStatsHandler.AddBuff(towerBuff);
         }
 
-        BuffAdded?.Invoke(tower_buff);
+        BuffAdded?.Invoke(towerBuff);
     }
 
-    public virtual void RemoveBuff(string source_id)
+    public virtual void RemoveBuff(string sourceId)
     {
         List<TowerBuff> removedBuffs = new();
 
@@ -283,7 +283,7 @@ public partial class Tower : Node2D
             }
 
             string buffSourceId = buff.source?.TypeId ?? string.Empty;
-            if (buffSourceId != source_id)
+            if (buffSourceId != sourceId)
             {
                 continue;
             }
@@ -292,7 +292,7 @@ public partial class Tower : Node2D
             buffs.RemoveAt(i);
         }
 
-        tower_stats_handler.RemoveBuff(source_id);
+        _towerStatsHandler.RemoveBuff(sourceId);
 
         foreach (TowerBuff removedBuff in removedBuffs)
         {
@@ -300,7 +300,7 @@ public partial class Tower : Node2D
         }
     }
 
-    public virtual void upgrade()
+    public virtual void Upgrade()
     {
         RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
         Economy economy = runContext?.Economy;
@@ -313,7 +313,7 @@ public partial class Tower : Node2D
         }
 
         level += 1;
-        tower_stats_handler.LevelUp(level);
+        _towerStatsHandler.LevelUp(level);
     }
 
     public bool IsMaxLevel()
@@ -321,33 +321,33 @@ public partial class Tower : Node2D
         return level >= MAX_LEVEL;
     }
 
-    public void CopyTowerData(Tower from_tower)
+    public void CopyTowerData(Tower fromTower)
     {
-        if (from_tower == null)
+        if (fromTower == null)
         {
             return;
         }
 
-        area_detector.targets_in_range.Clear();
-        foreach (Node2D enemy in from_tower.area_detector.targets_in_range)
+        _areaDetector.TargetsInRange.Clear();
+        foreach (Node2D enemy in fromTower._areaDetector.TargetsInRange)
         {
-            area_detector.targets_in_range.Add(enemy);
+            _areaDetector.TargetsInRange.Add(enemy);
         }
 
-        area_detector.current_target = from_tower.area_detector.current_target;
-        CurrentTargetingMode = from_tower.CurrentTargetingMode;
+        _areaDetector.CurrentTarget = fromTower._areaDetector.CurrentTarget;
+        CurrentTargetingMode = fromTower.CurrentTargetingMode;
     }
 
-    public Attack _get_attack()
+    public Attack GetAttack()
     {
-        bool is_critical = _is_critical_hit();
+        bool isCritical = IsCriticalHit();
 
         float baseDamage = stats?.damage ?? 0f;
         float critDamage = stats?.critic_damage ?? 0f;
-        float attackDamage = is_critical ? baseDamage * (1f + critDamage / 100f) : baseDamage;
+        float attackDamage = isCritical ? baseDamage * (1f + critDamage / 100f) : baseDamage;
 
-        Attack attack = new(attackDamage, DamageSource, is_critical);
-        Enemy targetEnemy = _current_target as Enemy;
+        Attack attack = new(attackDamage, DamageSource, isCritical);
+        Enemy targetEnemy = _currentTarget as Enemy;
         AttackContext ctx = new(targetEnemy, BuildAttackModel(attack), BuildTowerModel());
         Hooks.OnBeforeAttack(Hooks.GetListenersFromRuntime(), ctx);
         attack.Damage = ctx.RebuildAttack();
@@ -402,7 +402,7 @@ public partial class Tower : Node2D
         };
     }
 
-    public bool _is_critical_hit()
+    public bool IsCriticalHit()
     {
         float randomValue = GD.Randf();
         float critChance = stats?.critic_chance ?? 0f;
@@ -411,39 +411,39 @@ public partial class Tower : Node2D
 
     private void OnTargetChange(Node2D enemy)
     {
-        _current_target = enemy;
+        _currentTarget = enemy;
         TargetChanged?.Invoke(enemy);
 
-        if (_first_shot && GodotObject.IsInstanceValid(_current_target))
+        if (_firstShot && GodotObject.IsInstanceValid(_currentTarget))
         {
-            _fire();
+            Fire();
             AttackFired?.Invoke();
-            attack_timer.Start();
-            _first_shot = false;
+            _attackTimer.Start();
+            _firstShot = false;
         }
     }
 
     private void OnAttackTimerTimeout()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || !_enabled)
+        if (!GodotObject.IsInstanceValid(_currentTarget) || !_enabled)
         {
-            _first_shot = true;
+            _firstShot = true;
             return;
         }
 
-        _fire();
+        Fire();
         AttackFired?.Invoke();
     }
 
-    protected virtual void _fire() { }
+    protected virtual void Fire() { }
 
-    public virtual void _on_stats_change(TowerStats new_stats)
+    public virtual void OnStatsChange(TowerStats newStats)
     {
-        stats = new_stats;
-        _apply_stats_changes();
+        stats = newStats;
+        ApplyStatsChanges();
     }
 
-    public virtual void _apply_stats_changes()
+    public virtual void ApplyStatsChanges()
     {
         if (stats == null)
         {
@@ -453,20 +453,20 @@ public partial class Tower : Node2D
         float attackSpeed = stats.attack_speed;
         float attackRange = stats.attack_range;
 
-        attack_timer.WaitTime = 1.0 / attackSpeed;
-        range_preview.radius = attackRange;
-        range_collision.SetDeferred("polygon", BuildEllipsePolygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
+        _attackTimer.WaitTime = 1.0 / attackSpeed;
+        _rangePreview.radius = attackRange;
+        _rangeCollision.SetDeferred("polygon", BuildEllipsePolygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
     }
 
-    public void _on_exp_data_change(Variant new_exp_data)
+    public void OnExpDataChange(Variant newExpData)
     {
-        ExpData = new_exp_data.Obj as TowerExpData;
+        ExpData = newExpData.Obj as TowerExpData;
     }
 
     private void OnTowerSelected(Tower tower)
     {
         CurrentTowerSelected = tower;
-        range_preview.Visible = CurrentTowerSelected == this;
+        _rangePreview.Visible = CurrentTowerSelected == this;
     }
 
     private void OnGuiInput(InputEvent @event)
@@ -504,23 +504,23 @@ public partial class Tower : Node2D
     {
         RangeTween?.Kill();
         RangeTween = CreateTween();
-        range_preview.Visible = true;
-        RangeTween.TweenProperty(range_preview, "self_modulate:a", 1.0f, 0.1f).SetTrans(Tween.TransitionType.Sine);
+        _rangePreview.Visible = true;
+        RangeTween.TweenProperty(_rangePreview, "self_modulate:a", 1.0f, 0.1f).SetTrans(Tween.TransitionType.Sine);
     }
 
     private void HideRange()
     {
         RangeTween?.Kill();
         RangeTween = CreateTween();
-        RangeTween.TweenProperty(range_preview, "self_modulate:a", 0.0f, 0.5f).SetTrans(Tween.TransitionType.Sine);
+        RangeTween.TweenProperty(_rangePreview, "self_modulate:a", 0.0f, 0.5f).SetTrans(Tween.TransitionType.Sine);
         RangeTween.Finished += OnHideRangeTweenFinished;
     }
 
     private void OnHideRangeTweenFinished()
     {
-        if (range_preview != null)
+        if (_rangePreview != null)
         {
-            range_preview.Visible = false;
+            _rangePreview.Visible = false;
         }
     }
 

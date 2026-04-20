@@ -14,7 +14,7 @@ public partial class KillEventHandler : Node
         _enemyManager = runContext?.EnemyManager;
         if (_enemyManager != null)
         {
-            _enemyManager.enemy_die += OnEnemyKilled;
+            _enemyManager.EnemyDied += OnEnemyKilled;
         }
     }
 
@@ -22,20 +22,18 @@ public partial class KillEventHandler : Node
     {
         if (_enemyManager != null)
         {
-            _enemyManager.enemy_die -= OnEnemyKilled;
+            _enemyManager.EnemyDied -= OnEnemyKilled;
         }
     }
 
-    private void OnEnemyKilled(object enemy, object attack)
+    private void OnEnemyKilled(Enemy enemy, Attack attack)
     {
-        Enemy enemyObj = enemy as Enemy;
-        Attack attackObj = attack as Attack;
-        if (enemyObj == null || attackObj == null)
+        if (enemy == null || attack == null)
         {
             return;
         }
 
-        Source source = attackObj.Source;
+        Source source = attack.Source;
         if (source == null)
         {
             return;
@@ -47,7 +45,7 @@ public partial class KillEventHandler : Node
             return;
         }
 
-        Vector2 position = enemyObj.GlobalPosition;
+        Vector2 position = enemy.GlobalPosition;
         SpawnBurnArea(position, source);
     }
 

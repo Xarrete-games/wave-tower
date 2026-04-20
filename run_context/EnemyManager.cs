@@ -2,16 +2,16 @@ using System;
 
 public class EnemyManager
 {
-    public event Action<object, object> enemy_die;
-    public event Action<object> enemy_target_reached;
+    public event Action<Enemy, Attack> EnemyDied;
+    public event Action<Enemy> EnemyTargetReached;
 
-    public void notify_enemy_die(object enemy, object attack)
+    public void NotifyEnemyDie(Enemy enemy, Attack attack)
     {
-        enemy_die?.Invoke(enemy, attack);
+        EnemyDied?.Invoke(enemy, attack);
     }
 
-    public void notify_enemy_target_reached(object enemy)
+    public void NotifyEnemyTargetReached(Enemy enemy)
     {
-        enemy_target_reached?.Invoke(enemy);
+        EnemyTargetReached?.Invoke(enemy);
     }
 }

@@ -182,7 +182,7 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        _currentTower.upgrade();
+        _currentTower.Upgrade();
         ClickEvents.TowerUpgradePressed?.Invoke(_currentTower, towerConfiguration, price);
     }
 

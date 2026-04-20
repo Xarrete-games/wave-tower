@@ -14,14 +14,14 @@ public partial class FrostNovaTower : Tower
         projectil_spawn_point = GetNode<Marker2D>("ProjectilSpawnPoint");
     }
 
-    protected override async void _fire()
+    protected override async void Fire()
     {
-        cristal_light?.play();
+        _cristalLight?.play();
 
         BlueProjectil projectile = FrostNovaProjectileScene.Instantiate<BlueProjectil>();
         bool isDoubleHit = IsDobleHit();
 
-        Attack attack = _get_attack();
+        Attack attack = GetAttack();
         float attackRange = stats?.attack_range ?? 0f;
         projectile.set_stats(attack, attackRange, EnemyDebuff.CreateFrost(DamageSource));
         CallDeferred(MethodName.AddProjectil, projectile);
@@ -33,9 +33,9 @@ public partial class FrostNovaTower : Tower
 
         await ToSignal(GetTree().CreateTimer(0.5f, false), Timer.SignalName.Timeout);
 
-        cristal_light?.play();
+        _cristalLight?.play();
         projectile = FrostNovaProjectileScene.Instantiate<BlueProjectil>();
-        attack = _get_attack();
+        attack = GetAttack();
         projectile.set_stats(attack, attackRange, EnemyDebuff.CreateFrost(DamageSource));
         CallDeferred(MethodName.AddProjectil, projectile);
     }

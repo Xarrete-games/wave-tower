@@ -28,16 +28,16 @@ public partial class FireFlamethrowerTower : Tower
         base._ExitTree();
     }
 
-    protected override void _fire()
+    protected override void Fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target))
+        if (!GodotObject.IsInstanceValid(_currentTarget))
         {
             return;
         }
 
         fire_flamethrower_projectile.Fire();
-        Attack attack = _get_attack();
-        fire_flamethrower_projectile.SetTarget(_current_target, attack);
+        Attack attack = GetAttack();
+        fire_flamethrower_projectile.SetTarget(_currentTarget, attack);
         flame_thrower_duration_timer.Start();
     }
 
@@ -55,7 +55,7 @@ public partial class FireFlamethrowerTower : Tower
             return;
         }
 
-        Attack attack = _get_attack();
+        Attack attack = GetAttack();
         fire_flamethrower_projectile.SetTarget(enemy, attack);
     }
 

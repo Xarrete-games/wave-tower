@@ -25,7 +25,7 @@ public partial class LightningOverchargeTower : Tower
         base._Ready();
 
         buff_area.Monitoring = false;
-        _apply_stats_changes();
+        ApplyStatsChanges();
     }
 
     public override void _ExitTree()
@@ -39,9 +39,9 @@ public partial class LightningOverchargeTower : Tower
         base._ExitTree();
     }
 
-    protected override void _fire()
+    protected override void Fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || ProjectileScene == null)
+        if (!GodotObject.IsInstanceValid(_currentTarget) || ProjectileScene == null)
         {
             return;
         }
@@ -51,7 +51,7 @@ public partial class LightningOverchargeTower : Tower
 
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
-        projectile.SetTarget(_current_target, _get_attack());
+        projectile.SetTarget(_currentTarget, GetAttack());
     }
 
     public override void PlacementMode()
@@ -87,9 +87,9 @@ public partial class LightningOverchargeTower : Tower
         buff_area.Monitoring = true;
     }
 
-    public override void _apply_stats_changes()
+    public override void ApplyStatsChanges()
     {
-        base._apply_stats_changes();
+        base.ApplyStatsChanges();
 
         if (stats == null || buff_area_shape == null)
         {

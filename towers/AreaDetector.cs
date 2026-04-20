@@ -5,19 +5,19 @@ using System;
 [GlobalClass]
 public partial class AreaDetector : Area2D
 {
-    public event Action<Node2D> target_change;
-    public event Action<Node2D> enemy_die;
+    public event Action<Node2D> TargetChanged;
+    public event Action<Node2D> EnemyDied;
 
-    public Array<Node2D> targets_in_range { get; set; } = new();
+    public Array<Node2D> TargetsInRange { get; set; } = new();
 
     private Node2D _currentTarget;
-    public Node2D current_target
+    public Node2D CurrentTarget
     {
         get => _currentTarget;
         set
         {
             _currentTarget = value;
-            target_change?.Invoke(value);
+            TargetChanged?.Invoke(value);
         }
     }
 
@@ -41,11 +41,11 @@ public partial class AreaDetector : Area2D
         }
 
         enemy.TreeExited += () => OnEnemyDie(enemy);
-        targets_in_range.Add(enemy);
+        TargetsInRange.Add(enemy);
 
-        if (!IsInstanceValid(current_target))
+        if (!IsInstanceValid(CurrentTarget))
         {
-            current_target = enemy;
+            CurrentTarget = enemy;
         }
     }
 
@@ -57,9 +57,9 @@ public partial class AreaDetector : Area2D
     private void RemoveTargetAndGetNext(Node2D enemy)
     {
         PruneInvalidTargets();
-        targets_in_range.Remove(enemy);
+        TargetsInRange.Remove(enemy);
 
-        if (!GodotObject.IsInstanceValid(current_target) || enemy != current_target)
+        if (!GodotObject.IsInstanceValid(CurrentTarget) || enemy != CurrentTarget)
         {
             return;
         }
@@ -69,49 +69,49 @@ public partial class AreaDetector : Area2D
 
     private void OnEnemyDie(Node2D enemy)
     {
-        enemy_die?.Invoke(enemy);
+        EnemyDied?.Invoke(enemy);
         RemoveTargetAndGetNext(enemy);
     }
 
     private void PruneInvalidTargets()
     {
-        for (var i = targets_in_range.Count - 1; i >= 0; i--)
+        for (var i = TargetsInRange.Count - 1; i >= 0; i--)
         {
-            var enemy = targets_in_range[i];
+            var enemy = TargetsInRange[i];
             if (!GodotObject.IsInstanceValid(enemy))
             {
-                targets_in_range.RemoveAt(i);
+                TargetsInRange.RemoveAt(i);
             }
         }
 
-        if (current_target != null && !GodotObject.IsInstanceValid(current_target))
+        if (CurrentTarget != null && !GodotObject.IsInstanceValid(CurrentTarget))
         {
-            current_target = null;
+            CurrentTarget = null;
         }
     }
 
     private void SelectNextTarget()
     {
         PruneInvalidTargets();
-        if (targets_in_range.Count == 0 || !Monitoring)
+        if (TargetsInRange.Count == 0 || !Monitoring)
         {
-            current_target = null;
+            CurrentTarget = null;
             return;
         }
 
         switch (TargetingType)
         {
             case 0: // FIRST_IN_PROGRESS
-                current_target = SelectByProgress();
+                CurrentTarget = SelectByProgress();
                 break;
             case 1: // HIGH_HP
-                current_target = SelectByHighestHealth();
+                CurrentTarget = SelectByHighestHealth();
                 break;
             case 2: // LOW_HP
-                current_target = SelectByLowestHealth();
+                CurrentTarget = SelectByLowestHealth();
                 break;
             default:
-                current_target = SelectByProgress();
+                CurrentTarget = SelectByProgress();
                 break;
         }
     }
@@ -121,7 +121,7 @@ public partial class AreaDetector : Area2D
         Node2D bestEnemy = null;
         var highestProgress = -1.0f;
 
-        foreach (var enemy in targets_in_range)
+        foreach (var enemy in TargetsInRange)
         {
             if (enemy is not Enemy typedEnemy || !GodotObject.IsInstanceValid(typedEnemy))
             {
@@ -144,7 +144,7 @@ public partial class AreaDetector : Area2D
         Node2D bestEnemy = null;
         var highestHp = -1.0f;
 
-        foreach (var enemy in targets_in_range)
+        foreach (var enemy in TargetsInRange)
         {
             if (enemy is not Enemy typedEnemy || !GodotObject.IsInstanceValid(typedEnemy))
             {
@@ -167,7 +167,7 @@ public partial class AreaDetector : Area2D
         Node2D bestEnemy = null;
         var lowestHp = float.PositiveInfinity;
 
-        foreach (var enemy in targets_in_range)
+        foreach (var enemy in TargetsInRange)
         {
             if (enemy is not Enemy typedEnemy || !GodotObject.IsInstanceValid(typedEnemy))
             {
@@ -185,10 +185,10 @@ public partial class AreaDetector : Area2D
         return bestEnemy;
     }
 
-    public void clear_targets()
+    public void ClearTargets()
     {
-        targets_in_range.Clear();
-        current_target = null;
+        TargetsInRange.Clear();
+        CurrentTarget = null;
     }
 
     private static bool IsEnemyEnabled(Node2D enemy)

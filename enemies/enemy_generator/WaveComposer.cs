@@ -13,15 +13,15 @@ public class WaveComposer
 
     public class WaveGroup
     {
-        public PressureType pressure = PressureType.MIXED;
-        public Godot.Collections.Array<EnemyData> enemies = new();
+        public PressureType Pressure = PressureType.MIXED;
+        public Godot.Collections.Array<EnemyData> Enemies = new();
 
-        public int get_total_weight()
+        public int GetTotalWeight()
         {
             int total = 0;
-            for (int i = 0; i < enemies.Count; i++)
+            for (int i = 0; i < Enemies.Count; i++)
             {
-                total += enemies[i].Weight;
+                total += Enemies[i].Weight;
             }
 
             return total;
@@ -31,32 +31,32 @@ public class WaveComposer
     private readonly WaveConfig _config;
     private readonly Godot.Collections.Array<EnemyData> _enemyCatalog;
 
-    public WaveComposer(WaveConfig config, Godot.Collections.Array<EnemyData> enemy_catalog)
+    public WaveComposer(WaveConfig config, Godot.Collections.Array<EnemyData> enemyCatalog)
     {
         _config = config;
-        _enemyCatalog = enemy_catalog ?? new Godot.Collections.Array<EnemyData>();
+        _enemyCatalog = enemyCatalog ?? new Godot.Collections.Array<EnemyData>();
     }
 
-    public List<WaveGroup> compose_wave(int wave_number)
+    public List<WaveGroup> ComposeWave(int waveNumber)
     {
-        int totalBudget = CalculateBudget(wave_number);
+        int totalBudget = CalculateBudget(waveNumber);
         var groups = new List<WaveGroup>();
-        PressureType fullPressure = PickFullWavePressure(wave_number);
-        GD.Print($"[WaveComposer] Wave {wave_number} mode: {PressureToString(fullPressure)}");
+        PressureType fullPressure = PickFullWavePressure(waveNumber);
+        GD.Print($"[WaveComposer] Wave {waveNumber} mode: {PressureToString(fullPressure)}");
 
-        if (IsBossWave(wave_number))
+        if (IsBossWave(waveNumber))
         {
-            WaveGroup bossGroup = CreateBossGroup(totalBudget, wave_number);
+            WaveGroup bossGroup = CreateBossGroup(totalBudget, waveNumber);
             if (bossGroup != null)
             {
                 groups.Add(bossGroup);
-                totalBudget -= bossGroup.get_total_weight();
+                totalBudget -= bossGroup.GetTotalWeight();
             }
         }
 
         if (fullPressure != PressureType.MIXED)
         {
-            int numFullGroups = CalculateGroupCount(wave_number);
+            int numFullGroups = CalculateGroupCount(waveNumber);
             int denom = Mathf.Max(numFullGroups, 1);
             int budgetPerFullGroup = totalBudget / denom;
             int fullRemainder = totalBudget - (budgetPerFullGroup * denom);
@@ -69,19 +69,19 @@ public class WaveComposer
                     continue;
                 }
 
-                WaveGroup fullGroup = FillGroup(fullPressure, groupBudget, wave_number, true);
-                if (fullGroup.enemies.Count > 0)
+                WaveGroup fullGroup = FillGroup(fullPressure, groupBudget, waveNumber, true);
+                if (fullGroup.Enemies.Count > 0)
                 {
                     groups.Add(fullGroup);
                 }
             }
 
-            GD.Print($"[WaveComposer] Wave {wave_number} groups: {GroupsToLog(groups)}");
+            GD.Print($"[WaveComposer] Wave {waveNumber} groups: {GroupsToLog(groups)}");
             return groups;
         }
 
-        int numGroups = CalculateGroupCount(wave_number);
-        Godot.Collections.Array<PressureType> pressures = _pick_unique_pressures(numGroups, wave_number);
+        int numGroups = CalculateGroupCount(waveNumber);
+        Godot.Collections.Array<PressureType> pressures = PickUniquePressures(numGroups, waveNumber);
 
         int safeNumGroups = Mathf.Max(numGroups, 1);
         int budgetPerGroup = totalBudget / safeNumGroups;
@@ -95,50 +95,50 @@ public class WaveComposer
                 continue;
             }
 
-            WaveGroup group = FillGroup(pressures[i], groupBudget, wave_number);
-            if (group.enemies.Count > 0)
+            WaveGroup group = FillGroup(pressures[i], groupBudget, waveNumber);
+            if (group.Enemies.Count > 0)
             {
                 groups.Add(group);
             }
         }
 
-        GD.Print($"[WaveComposer] Wave {wave_number} groups: {GroupsToLog(groups)}");
+        GD.Print($"[WaveComposer] Wave {waveNumber} groups: {GroupsToLog(groups)}");
         return groups;
     }
 
-    public int get_budget_for_wave(int wave_number)
+    public int GetBudgetForWave(int waveNumber)
     {
-        return CalculateBudget(wave_number);
+        return CalculateBudget(waveNumber);
     }
 
-    private int CalculateBudget(int wave_number)
+    private int CalculateBudget(int waveNumber)
     {
-        int linearBudget = _config.BaseBudget + ((wave_number - 1) * _config.BudgetPerWave);
+        int linearBudget = _config.BaseBudget + ((waveNumber - 1) * _config.BudgetPerWave);
         int startWave = Mathf.Max(_config.ExponentialStartWave, 1);
-        if (wave_number <= startWave || _config.ExponentialGrowth <= 0.0f)
+        if (waveNumber <= startWave || _config.ExponentialGrowth <= 0.0f)
         {
             return linearBudget;
         }
 
-        int growthSteps = wave_number - startWave;
+        int growthSteps = waveNumber - startWave;
         float multiplier = Mathf.Pow(1.0f + _config.ExponentialGrowth, growthSteps);
         int scaledBudget = Mathf.RoundToInt(linearBudget * multiplier);
         return Mathf.Max(scaledBudget, linearBudget);
     }
 
-    private bool IsBossWave(int wave_number)
+    private bool IsBossWave(int waveNumber)
     {
-        return wave_number % _config.BossWaveEvery == 0;
+        return waveNumber % _config.BossWaveEvery == 0;
     }
 
-    private int CalculateGroupCount(int wave_number)
+    private int CalculateGroupCount(int waveNumber)
     {
-        if (wave_number <= 2)
+        if (waveNumber <= 2)
         {
             return 1;
         }
 
-        if (wave_number <= 4)
+        if (waveNumber <= 4)
         {
             return (int)GD.RandRange(1, 2);
         }
@@ -146,12 +146,12 @@ public class WaveComposer
         return (int)GD.RandRange(2, 3);
     }
 
-    private Godot.Collections.Array<PressureType> _pick_unique_pressures(int count, int wave_number)
+    private Godot.Collections.Array<PressureType> PickUniquePressures(int count, int waveNumber)
     {
-        Godot.Collections.Array<PressureType> pool = _get_available_pressures(wave_number);
+        Godot.Collections.Array<PressureType> pool = GetAvailablePressures(waveNumber);
         if (pool.Count == 0)
         {
-            GD.PushError($"[WaveComposer] No pressure types available for wave {wave_number}");
+            GD.PushError($"[WaveComposer] No pressure types available for wave {waveNumber}");
             return new Godot.Collections.Array<PressureType> { PressureType.MIXED };
         }
 
@@ -165,12 +165,12 @@ public class WaveComposer
         return result;
     }
 
-    private PressureType PickFullWavePressure(int wave_number)
+    private PressureType PickFullWavePressure(int waveNumber)
     {
-        WaveTypeChance chance = GetWaveTypeChance(wave_number);
+        WaveTypeChance chance = GetWaveTypeChance(waveNumber);
         if (chance == null)
         {
-            GD.Print($"[WaveComposer] Wave {wave_number} chances: none -> MIXED");
+            GD.Print($"[WaveComposer] Wave {waveNumber} chances: none -> MIXED");
             return PressureType.MIXED;
         }
 
@@ -180,26 +180,26 @@ public class WaveComposer
 
         if (!IsValidWaveChanceValue(chanceSwarm))
         {
-            GD.PushError($"[WaveComposer] Invalid ChanceFullSwarm in wave {wave_number}. Expected 0..100, got {chanceSwarm}");
+            GD.PushError($"[WaveComposer] Invalid ChanceFullSwarm in wave {waveNumber}. Expected 0..100, got {chanceSwarm}");
             return PressureType.MIXED;
         }
 
         if (!IsValidWaveChanceValue(chanceSpeed))
         {
-            GD.PushError($"[WaveComposer] Invalid ChanceFullSpeed in wave {wave_number}. Expected 0..100, got {chanceSpeed}");
+            GD.PushError($"[WaveComposer] Invalid ChanceFullSpeed in wave {waveNumber}. Expected 0..100, got {chanceSpeed}");
             return PressureType.MIXED;
         }
 
         if (!IsValidWaveChanceValue(chanceTank))
         {
-            GD.PushError($"[WaveComposer] Invalid ChanceFullTank in wave {wave_number}. Expected 0..100, got {chanceTank}");
+            GD.PushError($"[WaveComposer] Invalid ChanceFullTank in wave {waveNumber}. Expected 0..100, got {chanceTank}");
             return PressureType.MIXED;
         }
 
         float totalFull = chanceSwarm + chanceSpeed + chanceTank;
         if (totalFull > 100.0f)
         {
-            GD.PushError($"[WaveComposer] Invalid wave chances in wave {wave_number}. Sum must be <= 100, got {totalFull}");
+            GD.PushError($"[WaveComposer] Invalid wave chances in wave {waveNumber}. Sum must be <= 100, got {totalFull}");
             return PressureType.MIXED;
         }
 
@@ -218,30 +218,30 @@ public class WaveComposer
             pressure = PressureType.TANK;
         }
 
-        GD.Print($"[WaveComposer] Wave {wave_number} chances S:{chanceSwarm} F:{chanceSpeed} T:{chanceTank} | roll: {roll:F2} | picked: {PressureToString(pressure)}");
+        GD.Print($"[WaveComposer] Wave {waveNumber} chances S:{chanceSwarm} F:{chanceSpeed} T:{chanceTank} | roll: {roll:F2} | picked: {PressureToString(pressure)}");
 
         if (pressure == PressureType.MIXED)
         {
             return PressureType.MIXED;
         }
 
-        if (!HasAvailableForPressure(pressure, wave_number))
+        if (!HasAvailableForPressure(pressure, waveNumber))
         {
-            GD.PushError($"[WaveComposer] Wave {wave_number} configured as FULL {PressureToString(pressure)}, but no enemies are available for that pressure in this wave");
+            GD.PushError($"[WaveComposer] Wave {waveNumber} configured as FULL {PressureToString(pressure)}, but no enemies are available for that pressure in this wave");
             return PressureType.MIXED;
         }
 
         return pressure;
     }
 
-    private WaveTypeChance GetWaveTypeChance(int wave_number)
+    private WaveTypeChance GetWaveTypeChance(int waveNumber)
     {
         if (_config.WaveChances == null || _config.WaveChances.Count == 0)
         {
             return null;
         }
 
-        int waveIndex = wave_number - 1;
+        int waveIndex = waveNumber - 1;
         if (waveIndex < 0 || waveIndex >= _config.WaveChances.Count)
         {
             return null;
@@ -255,25 +255,25 @@ public class WaveComposer
         return value >= 0.0f && value <= 100.0f;
     }
 
-    private Godot.Collections.Array<PressureType> _get_available_pressures(int wave_number)
+    private Godot.Collections.Array<PressureType> GetAvailablePressures(int waveNumber)
     {
         var pool = new Godot.Collections.Array<PressureType>();
-        if (HasAvailableForPressure(PressureType.SWARM, wave_number))
+        if (HasAvailableForPressure(PressureType.SWARM, waveNumber))
         {
             pool.Add(PressureType.SWARM);
         }
 
-        if (HasAvailableForPressure(PressureType.SPEED, wave_number))
+        if (HasAvailableForPressure(PressureType.SPEED, waveNumber))
         {
             pool.Add(PressureType.SPEED);
         }
 
-        if (HasAvailableForPressure(PressureType.TANK, wave_number))
+        if (HasAvailableForPressure(PressureType.TANK, waveNumber))
         {
             pool.Add(PressureType.TANK);
         }
 
-        if (_get_all_available(wave_number).Count > 0)
+        if (GetAllAvailable(waveNumber).Count > 0)
         {
             pool.Add(PressureType.MIXED);
         }
@@ -281,15 +281,15 @@ public class WaveComposer
         return pool;
     }
 
-    private bool HasAvailableForPressure(PressureType pressure, int wave_number)
+    private bool HasAvailableForPressure(PressureType pressure, int waveNumber)
     {
         if (pressure == PressureType.MIXED)
         {
-            return _get_all_available(wave_number).Count > 0;
+            return GetAllAvailable(waveNumber).Count > 0;
         }
 
-        EnemyData.EnemyType enemyType = _pressure_to_enemy_type(pressure);
-        return _get_available(enemyType, wave_number).Count > 0;
+        EnemyData.EnemyType enemyType = PressureToEnemyType(pressure);
+        return GetAvailable(enemyType, waveNumber).Count > 0;
     }
 
     private string PressureToString(PressureType pressure)
@@ -308,13 +308,13 @@ public class WaveComposer
         for (int i = 0; i < groups.Count; i++)
         {
             WaveGroup group = groups[i];
-            chunks.Add($"#{i + 1}:{PressureToString(group.pressure)}({group.enemies.Count})");
+            chunks.Add($"#{i + 1}:{PressureToString(group.Pressure)}({group.Enemies.Count})");
         }
 
         return "[" + string.Join(", ", chunks) + "]";
     }
 
-    private EnemyData.EnemyType _pressure_to_enemy_type(PressureType pressure)
+    private EnemyData.EnemyType PressureToEnemyType(PressureType pressure)
     {
         return pressure switch
         {
@@ -325,9 +325,9 @@ public class WaveComposer
         };
     }
 
-    private WaveGroup CreateBossGroup(int available_budget, int wave_number)
+    private WaveGroup CreateBossGroup(int availableBudget, int waveNumber)
     {
-        Godot.Collections.Array<EnemyData> bosses = _get_available(EnemyData.EnemyType.BOSS, wave_number);
+        Godot.Collections.Array<EnemyData> bosses = GetAvailable(EnemyData.EnemyType.BOSS, waveNumber);
         if (bosses.Count == 0)
         {
             return null;
@@ -337,7 +337,7 @@ public class WaveComposer
         for (int i = 0; i < bosses.Count; i++)
         {
             EnemyData data = bosses[i];
-            if (data.Weight <= available_budget)
+            if (data.Weight <= availableBudget)
             {
                 affordableBosses.Add(data);
             }
@@ -349,50 +349,50 @@ public class WaveComposer
         }
 
         EnemyData boss = affordableBosses[(int)(GD.Randi() % (uint)affordableBosses.Count)];
-        var group = new WaveGroup { pressure = PressureType.TANK };
-        group.enemies.Add(boss);
+        var group = new WaveGroup { Pressure = PressureType.TANK };
+        group.Enemies.Add(boss);
         return group;
     }
 
-    private WaveGroup FillGroup(PressureType pressure, int group_budget, int wave_number, bool full_only = false)
+    private WaveGroup FillGroup(PressureType pressure, int groupBudget, int waveNumber, bool fullOnly = false)
     {
-        var group = new WaveGroup { pressure = pressure };
+        var group = new WaveGroup { Pressure = pressure };
 
-        EnemyData.EnemyType primaryType = _pressure_to_enemy_type(pressure);
-        Godot.Collections.Array<EnemyData> primaryCandidates = _get_available(primaryType, wave_number);
+        EnemyData.EnemyType primaryType = PressureToEnemyType(pressure);
+        Godot.Collections.Array<EnemyData> primaryCandidates = GetAvailable(primaryType, waveNumber);
         if (primaryCandidates.Count == 0)
         {
-            primaryCandidates = _get_all_available(wave_number);
+            primaryCandidates = GetAllAvailable(waveNumber);
         }
 
-        int primarySpend = Mathf.RoundToInt(group_budget * _config.PrimaryPressureRatio);
-        if (full_only)
+        int primarySpend = Mathf.RoundToInt(groupBudget * _config.PrimaryPressureRatio);
+        if (fullOnly)
         {
-            primarySpend = group_budget;
+            primarySpend = groupBudget;
         }
 
-        group_budget = FillBudget(group.enemies, primaryCandidates, primarySpend, group_budget);
+        groupBudget = FillBudget(group.Enemies, primaryCandidates, primarySpend, groupBudget);
 
-        if (full_only)
+        if (fullOnly)
         {
-            group.enemies.Shuffle();
+            group.Enemies.Shuffle();
             return group;
         }
 
-        Godot.Collections.Array<EnemyData> mixedCandidates = _get_all_available(wave_number);
-        group_budget = FillBudget(group.enemies, mixedCandidates, group_budget, group_budget);
+        Godot.Collections.Array<EnemyData> mixedCandidates = GetAllAvailable(waveNumber);
+        groupBudget = FillBudget(group.Enemies, mixedCandidates, groupBudget, groupBudget);
 
-        group.enemies.Shuffle();
+        group.Enemies.Shuffle();
         return group;
     }
 
-    private Godot.Collections.Array<EnemyData> _get_available(EnemyData.EnemyType type, int wave_number)
+    private Godot.Collections.Array<EnemyData> GetAvailable(EnemyData.EnemyType type, int waveNumber)
     {
         var result = new Godot.Collections.Array<EnemyData>();
         for (int i = 0; i < _enemyCatalog.Count; i++)
         {
             EnemyData data = _enemyCatalog[i];
-            if (data.Type == type && IsUnlocked(data, wave_number))
+            if (data.Type == type && IsUnlocked(data, waveNumber))
             {
                 result.Add(data);
             }
@@ -401,13 +401,13 @@ public class WaveComposer
         return result;
     }
 
-    private Godot.Collections.Array<EnemyData> _get_all_available(int wave_number)
+    private Godot.Collections.Array<EnemyData> GetAllAvailable(int waveNumber)
     {
         var result = new Godot.Collections.Array<EnemyData>();
         for (int i = 0; i < _enemyCatalog.Count; i++)
         {
             EnemyData data = _enemyCatalog[i];
-            if (data.Type != EnemyData.EnemyType.BOSS && IsUnlocked(data, wave_number))
+            if (data.Type != EnemyData.EnemyType.BOSS && IsUnlocked(data, waveNumber))
             {
                 result.Add(data);
             }
@@ -416,12 +416,12 @@ public class WaveComposer
         return result;
     }
 
-    private bool IsUnlocked(EnemyData data, int wave_number)
+    private bool IsUnlocked(EnemyData data, int waveNumber)
     {
-        return IsWaveAvailableForEnemy(data, wave_number);
+        return IsWaveAvailableForEnemy(data, waveNumber);
     }
 
-    private bool IsWaveAvailableForEnemy(EnemyData data, int wave_number)
+    private bool IsWaveAvailableForEnemy(EnemyData data, int waveNumber)
     {
         if (data.AvailableWaves == null || data.AvailableWaves.Count == 0)
         {
@@ -431,7 +431,7 @@ public class WaveComposer
         for (int i = 0; i < data.AvailableWaves.Count; i++)
         {
             EnemyWaveRange waveRange = data.AvailableWaves[i];
-            if (waveRange != null && IsWaveInRange(wave_number, waveRange))
+            if (waveRange != null && IsWaveInRange(waveNumber, waveRange))
             {
                 return true;
             }
@@ -440,35 +440,35 @@ public class WaveComposer
         return false;
     }
 
-    private bool IsWaveInRange(int wave_number, EnemyWaveRange wave_range)
+    private bool IsWaveInRange(int waveNumber, EnemyWaveRange waveRange)
     {
-        if (wave_number < wave_range.InitialWave)
+        if (waveNumber < waveRange.InitialWave)
         {
             return false;
         }
 
-        if (wave_range.FinalWave <= 0)
+        if (waveRange.FinalWave <= 0)
         {
             return true;
         }
 
-        return wave_number <= wave_range.FinalWave;
+        return waveNumber <= waveRange.FinalWave;
     }
 
     private int FillBudget(
         Godot.Collections.Array<EnemyData> result,
         Godot.Collections.Array<EnemyData> candidates,
-        int target_spend,
-        int total_remaining)
+        int targetSpend,
+        int totalRemaining)
     {
         int spent = 0;
-        while (spent < target_spend && total_remaining > 0)
+        while (spent < targetSpend && totalRemaining > 0)
         {
             var affordable = new Godot.Collections.Array<EnemyData>();
             for (int i = 0; i < candidates.Count; i++)
             {
                 EnemyData candidate = candidates[i];
-                if (candidate.Weight <= total_remaining)
+                if (candidate.Weight <= totalRemaining)
                 {
                     affordable.Add(candidate);
                 }
@@ -482,10 +482,10 @@ public class WaveComposer
             EnemyData pick = affordable[(int)(GD.Randi() % (uint)affordable.Count)];
             result.Add(pick);
             spent += pick.Weight;
-            total_remaining -= pick.Weight;
+            totalRemaining -= pick.Weight;
         }
 
-        return total_remaining;
+        return totalRemaining;
     }
 }
 

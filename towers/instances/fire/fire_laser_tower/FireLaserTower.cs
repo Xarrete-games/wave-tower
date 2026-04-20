@@ -18,31 +18,31 @@ public partial class FireLaserTower : Tower
         execute_threshold = base_execute_threshold;
     }
 
-    protected override async void _fire()
+    protected override async void Fire()
     {
-        Enemy targetEnemy = _current_target as Enemy;
+        Enemy targetEnemy = _currentTarget as Enemy;
         if (!GodotObject.IsInstanceValid(targetEnemy) || red_projectile == null)
         {
             return;
         }
 
         float hpPercent = targetEnemy.GetPercentageRemainingHealth();
-        Attack nextAttack = hpPercent > execute_threshold ? _get_attack() : GetLetalAttack();
+        Attack nextAttack = hpPercent > execute_threshold ? GetAttack() : GetLetalAttack();
         EnemyDebuff debuff = apply_burn ? EnemyDebuff.CreateBurn(DamageSource) : null;
 
         red_projectile.SetTarget(targetEnemy, nextAttack, debuff);
-        cristal_light?.turn_on();
+        _cristalLight?.turn_on();
 
         await ToSignal(GetTree().CreateTimer(0.1f, false), Timer.SignalName.Timeout);
 
         red_projectile.HitTarget();
         red_projectile.Stop();
-        cristal_light?.turn_off();
+        _cristalLight?.turn_off();
     }
 
     private Attack GetLetalAttack()
     {
-        Attack attack = _get_attack();
+        Attack attack = GetAttack();
         attack.Damage = EXECUTE_DAMAGE;
         attack.IsExecution = true;
         return attack;

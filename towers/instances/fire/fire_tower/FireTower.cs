@@ -15,9 +15,9 @@ public partial class FireTower : Tower
         projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
-    protected override void _fire()
+    protected override void Fire()
     {
-        if (!GodotObject.IsInstanceValid(_current_target) || FireBallScene == null)
+        if (!GodotObject.IsInstanceValid(_currentTarget) || FireBallScene == null)
         {
             return;
         }
@@ -27,8 +27,8 @@ public partial class FireTower : Tower
 
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
-        Attack attack = _get_attack();
+        Attack attack = GetAttack();
         EnemyDebuff debuff = apply_burn ? EnemyDebuff.CreateBurn(DamageSource) : null;
-        projectile.SetTarget(_current_target, attack, debuff);
+        projectile.SetTarget(_currentTarget, attack, debuff);
     }
 }

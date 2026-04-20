@@ -5,10 +5,10 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class WaveSpawner : Node
 {
-    public event Action<int> wave_started;
-    public event Action<Enemy> enemy_spawned;
-    public event Action<int, int> group_finished;
-    public event Action<int> wave_finished;
+    public event Action<int> WaveStarted;
+    public event Action<Enemy> EnemySpawned;
+    public event Action<int, int> GroupFinished;
+    public event Action<int> WaveFinished;
 
     [Export]
     public WorldMap WorldMap;
@@ -25,11 +25,11 @@ public partial class WaveSpawner : Node
     [Export]
     public Node2D EnemiesContainer;
 
-    private bool _is_spawning;
+    private bool _isSpawning;
 
-    public async void start_wave(int wave_number, List<WaveComposer.WaveGroup> groups, WaveConfig config)
+    public async void StartWave(int waveNumber, List<WaveComposer.WaveGroup> groups, WaveConfig config)
     {
-        if (_is_spawning)
+        if (_isSpawning)
         {
             GD.PushWarning("[WaveSpawner] Already spawning a wave - ignoring request");
             return;
@@ -47,8 +47,8 @@ public partial class WaveSpawner : Node
             return;
         }
 
-        _is_spawning = true;
-        wave_started?.Invoke(wave_number);
+        _isSpawning = true;
+        WaveStarted?.Invoke(waveNumber);
 
         for (int groupIndex = 0; groupIndex < groups.Count; groupIndex++)
         {
@@ -58,8 +58,8 @@ public partial class WaveSpawner : Node
                 continue;
             }
 
-            Godot.Collections.Array<EnemyData> enemies = group.enemies;
-            int pressure = (int)group.pressure;
+            Godot.Collections.Array<EnemyData> enemies = group.Enemies;
+            int pressure = (int)group.Pressure;
 
             for (int enemyIndex = 0; enemyIndex < enemies.Count; enemyIndex++)
             {
@@ -67,12 +67,12 @@ public partial class WaveSpawner : Node
 
                 if (enemyIndex < enemies.Count - 1)
                 {
-                    float spawnInterval = PickSpawnInterval(pressure, wave_number, config);
+                    float spawnInterval = PickSpawnInterval(pressure, waveNumber, config);
                     await ToSignal(GetTree().CreateTimer(spawnInterval, false), SceneTreeTimer.SignalName.Timeout);
                 }
             }
 
-            group_finished?.Invoke(groupIndex, pressure);
+            GroupFinished?.Invoke(groupIndex, pressure);
 
             if (groupIndex < groups.Count - 1)
             {
@@ -81,14 +81,14 @@ public partial class WaveSpawner : Node
             }
         }
 
-        _is_spawning = false;
-        wave_finished?.Invoke(wave_number);
+        _isSpawning = false;
+        WaveFinished?.Invoke(waveNumber);
     }
 
-    private float PickSpawnInterval(int pressure, int wave_number, WaveConfig config)
+    private float PickSpawnInterval(int pressure, int waveNumber, WaveConfig config)
     {
         Vector2 intervalRange = GetSpawnIntervalRange(pressure, config);
-        Vector2 decayedRange = GetDecayedSpawnIntervalRange(intervalRange, wave_number, config);
+        Vector2 decayedRange = GetDecayedSpawnIntervalRange(intervalRange, waveNumber, config);
         float minSpawnInterval = GetMinSpawnInterval(config);
         float minInterval = Mathf.Max(decayedRange.X, minSpawnInterval);
         float maxInterval = Mathf.Max(decayedRange.Y, minInterval);
@@ -113,15 +113,15 @@ public partial class WaveSpawner : Node
         };
     }
 
-    private Vector2 GetDecayedSpawnIntervalRange(Vector2 base_range, int wave_number, WaveConfig config)
+    private Vector2 GetDecayedSpawnIntervalRange(Vector2 baseRange, int waveNumber, WaveConfig config)
     {
         int everyWaves = Mathf.Max(config.SpawnIntervalMaxDecayEveryWaves, 1);
-        int decaySteps = Mathf.Max((wave_number - 1) / everyWaves, 0);
+        int decaySteps = Mathf.Max((waveNumber - 1) / everyWaves, 0);
         float decayAmount = decaySteps * config.SpawnIntervalMaxDecayAmount;
         float minSpawnInterval = GetMinSpawnInterval(config);
 
-        float decayedMin = Mathf.Max(base_range.X - decayAmount, minSpawnInterval);
-        float decayedMax = Mathf.Max(base_range.Y - decayAmount, minSpawnInterval);
+        float decayedMin = Mathf.Max(baseRange.X - decayAmount, minSpawnInterval);
+        float decayedMax = Mathf.Max(baseRange.Y - decayAmount, minSpawnInterval);
         if (decayedMax < decayedMin)
         {
             decayedMax = decayedMin;
@@ -158,7 +158,7 @@ public partial class WaveSpawner : Node
             return;
         }
 
-        Godot.Collections.Array<Vector2> enemyWaypoints = _build_enemy_waypoints_with_offset(waypoints);
+        Godot.Collections.Array<Vector2> enemyWaypoints = BuildEnemyWaypointsWithOffset(waypoints);
         PackedScene scene = data.Scene ?? FallbackEnemyScene;
         if (scene == null)
         {
@@ -189,12 +189,12 @@ public partial class WaveSpawner : Node
         enemy.Enable();
         enemy.SetWaypoints(enemyWaypoints);
 
-        enemy_spawned?.Invoke(enemy);
+        EnemySpawned?.Invoke(enemy);
     }
 
-    private Godot.Collections.Array<Vector2> _build_enemy_waypoints_with_offset(Godot.Collections.Array<Vector2> base_waypoints)
+    private Godot.Collections.Array<Vector2> BuildEnemyWaypointsWithOffset(Godot.Collections.Array<Vector2> baseWaypoints)
     {
-        if (base_waypoints.Count == 0)
+        if (baseWaypoints.Count == 0)
         {
             return new Godot.Collections.Array<Vector2>();
         }
@@ -205,10 +205,10 @@ public partial class WaveSpawner : Node
         Vector2 offset = new(0.0f, offsetY);
 
         var result = new Godot.Collections.Array<Vector2>();
-        result.Resize(base_waypoints.Count);
-        for (int index = 0; index < base_waypoints.Count; index++)
+        result.Resize(baseWaypoints.Count);
+        for (int index = 0; index < baseWaypoints.Count; index++)
         {
-            result[index] = base_waypoints[index] + offset;
+            result[index] = baseWaypoints[index] + offset;
         }
 
         return result;

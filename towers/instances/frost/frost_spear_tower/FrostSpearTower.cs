@@ -14,9 +14,9 @@ public partial class FrostSpearTower : Tower
         projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
-    protected override void _fire()
+    protected override void Fire()
     {
-        Enemy targetEnemy = _current_target as Enemy;
+        Enemy targetEnemy = _currentTarget as Enemy;
         if (!GodotObject.IsInstanceValid(targetEnemy) || FrostSpearProjectileScene == null)
         {
             return;
@@ -27,7 +27,7 @@ public partial class FrostSpearTower : Tower
 
         projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
 
-        Attack attack = _get_attack();
+        Attack attack = GetAttack();
         int enemyFrostStacks = targetEnemy.GetDebuffStacks(0);
         float damageMultiplier = 1.0f + enemyFrostStacks * 0.10f;
         attack.Damage *= damageMultiplier;
