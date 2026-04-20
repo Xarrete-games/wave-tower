@@ -3,7 +3,7 @@ using System;
 
 public partial class EventSlot : VBoxContainer
 {
-    public event Action<EventData> event_pressed;
+    public event Action<EventData> EventPressed;
 
     [Export]
     public TextureRect EventTexture;
@@ -16,7 +16,7 @@ public partial class EventSlot : VBoxContainer
 
     private EventData _event;
 
-    public void set_event(EventData eventData)
+    public void SetEvent(EventData eventData)
     {
         if (eventData == null)
         {
@@ -36,7 +36,7 @@ public partial class EventSlot : VBoxContainer
             return;
         }
 
-        event_pressed?.Invoke(_event);
+        EventPressed?.Invoke(_event);
         GetNode<AudioManager>("/root/AudioManager").play_button_click();
     }
 

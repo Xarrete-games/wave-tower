@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class FountainsOfWishesScript : EventScript
 {
-    public override List<EventOptionData> get_options()
+    public override List<EventOptionData> GetOptions()
     {
         RunContext runContext = GetRunContext();
         if (runContext == null)
@@ -23,7 +23,7 @@ public partial class FountainsOfWishesScript : EventScript
         return new List<EventOptionData> { option1, option2, option3 };
     }
 
-    public override void handle_response(object data)
+    public override void HandleResponse(object data)
     {
         int rarity = data is int intValue ? intValue : 0;
 

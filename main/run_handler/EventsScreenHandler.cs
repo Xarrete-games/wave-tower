@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 public partial class EventsScreenHandler : Node
 {
-    public event Action event_finished;
+    public event Action EventFinished;
 
     private ShopScreenHandler _shopScreenHandler;
     private EventsOptionsScreenHandler _eventsOptionsScreenHandler;
@@ -21,7 +21,7 @@ public partial class EventsScreenHandler : Node
     {
         if (eventData == null)
         {
-            event_finished?.Invoke();
+            EventFinished?.Invoke();
             return;
         }
 
@@ -39,6 +39,6 @@ public partial class EventsScreenHandler : Node
             await _eventsOptionsScreenHandler.ShowOptionsEventAsync(eventData, eventLayer);
         }
 
-        event_finished?.Invoke();
+        EventFinished?.Invoke();
     }
 }

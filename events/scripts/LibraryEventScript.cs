@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class LibraryEventScript : EventScript
 {
-    public override List<EventOptionData> get_options()
+    public override List<EventOptionData> GetOptions()
     {
         RunContext runContext = GetRunContext();
         if (runContext == null)
@@ -30,7 +30,7 @@ public partial class LibraryEventScript : EventScript
         return options;
     }
 
-    public override void handle_response(object data)
+    public override void HandleResponse(object data)
     {
         RunContext runContext = GetRunContext();
         RelicData relicData = data as RelicData;

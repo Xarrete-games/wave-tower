@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class EventOptionsScreen : Control
 {
-    public event Action event_completed;
+    public event Action EventCompleted;
 
     [Export]
     public PackedScene ButtonOptionScene;
@@ -23,7 +23,7 @@ public partial class EventOptionsScreen : Control
 
     private EventScript _eventScriptInstance;
 
-    public void set_event(EventData eventData)
+    public void SetEvent(EventData eventData)
     {
         if (eventData == null)
         {
@@ -46,7 +46,7 @@ public partial class EventOptionsScreen : Control
             return;
         }
 
-        List<EventOptionData> options = _eventScriptInstance.get_options();
+        List<EventOptionData> options = _eventScriptInstance.GetOptions();
         int index = 0;
         foreach (EventOptionData optionData in options)
         {
@@ -57,24 +57,24 @@ public partial class EventOptionsScreen : Control
 
             EventOptionButton buttonOption = ButtonOptionScene.Instantiate<EventOptionButton>();
             ButtonsContainer.AddChild(buttonOption);
-            buttonOption.Text = optionData.text;
-            buttonOption.option_data = optionData.data;
+            buttonOption.Text = optionData.Text;
+            buttonOption.OptionData = optionData.Data;
             buttonOption.Name = $"OptionButton_{index}";
             index += 1;
 
-            if (optionData.disabled)
+            if (optionData.Disabled)
             {
-                buttonOption.disable_option();
+                buttonOption.DisableOption();
             }
 
-            buttonOption.option_selected += OnOptionSelected;
+            buttonOption.OptionSelected += OnOptionSelected;
         }
     }
 
     private void OnOptionSelected(object data)
     {
-        _eventScriptInstance?.handle_response(data);
-        event_completed?.Invoke();
+        _eventScriptInstance?.HandleResponse(data);
+        EventCompleted?.Invoke();
         QueueFree();
     }
 }

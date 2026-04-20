@@ -5,7 +5,7 @@ public partial class PotionsEventScript : EventScript
 {
     private const int CONSUMABLE_TYPE_POTION = 1;
 
-    public override List<EventOptionData> get_options()
+    public override List<EventOptionData> GetOptions()
     {
         List<ConsumableData> consumables = DataLoaderAccess.GetAllConsumablesByTypeTyped(CONSUMABLE_TYPE_POTION);
         if (consumables.Count == 0)
@@ -34,7 +34,7 @@ public partial class PotionsEventScript : EventScript
         return options;
     }
 
-    public override void handle_response(object data)
+    public override void HandleResponse(object data)
     {
         RunContext runContext = GetRunContext();
         if (runContext == null)

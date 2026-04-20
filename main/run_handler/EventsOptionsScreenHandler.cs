@@ -18,7 +18,7 @@ public partial class EventsOptionsScreenHandler : Node
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
         eventLayer.AddChild(optionsScreen);
-        optionsScreen.set_event(eventData);
+        optionsScreen.SetEvent(eventData);
 
         var completion = new TaskCompletionSource<bool>();
         void OnCompleted()
@@ -26,7 +26,7 @@ public partial class EventsOptionsScreenHandler : Node
             completion.TrySetResult(true);
         }
 
-        optionsScreen.event_completed += OnCompleted;
+        optionsScreen.EventCompleted += OnCompleted;
         try
         {
             await completion.Task;
@@ -35,7 +35,7 @@ public partial class EventsOptionsScreenHandler : Node
         {
             if (GodotObject.IsInstanceValid(optionsScreen))
             {
-                optionsScreen.event_completed -= OnCompleted;
+                optionsScreen.EventCompleted -= OnCompleted;
             }
         }
     }

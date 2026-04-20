@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 public partial class BloodPactScript : EventScript
 {
-    public override List<EventOptionData> get_options()
+    public override List<EventOptionData> GetOptions()
     {
         var option1 = new EventOptionData("Sacrifice 15 of your health to gain a powerful relic.", true);
         var option2 = new EventOptionData("Walk away unharmed.", false);
         return new List<EventOptionData> { option1, option2 };
     }
 
-    public override void handle_response(object data)
+    public override void HandleResponse(object data)
     {
         bool accepted = data is bool boolValue && boolValue;
         if (!accepted)

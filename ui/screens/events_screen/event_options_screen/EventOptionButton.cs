@@ -3,11 +3,11 @@ using System;
 
 public partial class EventOptionButton : Button
 {
-    public event Action<object> option_selected;
+    public event Action<object> OptionSelected;
 
-    public object option_data;
+    public object OptionData;
 
-    public void disable_option()
+    public void DisableOption()
     {
         Disabled = true;
         Modulate = new Color(0.5f, 0.5f, 0.5f);
@@ -21,6 +21,6 @@ public partial class EventOptionButton : Button
     private void OnPressed()
     {
         GetNode<AudioManager>("/root/AudioManager").play_button_click();
-        option_selected?.Invoke(option_data);
+        OptionSelected?.Invoke(OptionData);
     }
 }

@@ -1,23 +1,23 @@
 public class EventOptionData {
-    public string text {
+    public string Text {
         get;
         set;
     }
     = string.Empty;
-    public object data {
+    public object Data {
         get;
         set;
     }
-    public bool disabled {
+    public bool Disabled {
         get;
         set;
     }
     public EventOptionData() {
     }
     public EventOptionData(string optionText, object optionData, bool isDisabled = false) {
-        text = optionText;
-        data = optionData;
-        disabled = isDisabled;
+        Text = optionText;
+        Data = optionData;
+        Disabled = isDisabled;
     }
 }
 

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 public partial class ChestEventScript : EventScript
 {
-    public override List<EventOptionData> get_options()
+    public override List<EventOptionData> GetOptions()
     {
         var option1 = new EventOptionData("Open the chest", 0);
         var option2 = new EventOptionData("Leave it alone", 1);
         return new List<EventOptionData> { option1, option2 };
     }
 
-    public override void handle_response(object data)
+    public override void HandleResponse(object data)
     {
         int selectedOption = data is int intValue ? intValue : -1;
         if (selectedOption != 0)

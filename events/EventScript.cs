@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public abstract class EventScript
 {
-    public abstract List<EventOptionData> get_options();
-    public abstract void handle_response(object data);
+    public abstract List<EventOptionData> GetOptions();
+    public abstract void HandleResponse(object data);
 
     protected RunContext GetRunContext()
     {
