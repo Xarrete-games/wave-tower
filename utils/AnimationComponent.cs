@@ -6,7 +6,7 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class AnimationComponent : Node
 {
-    public event Action entered;
+    public event Action Entered;
 
     private const Tween.TransitionType IMMEDIATE_TRANSITION = Tween.TransitionType.Linear;
 
@@ -45,23 +45,23 @@ public partial class AnimationComponent : Node
     [Export] public float FlickedTime = 0.1f;
     [Export] public Color FlickedColor = new(1, 1, 1, 0.5f);
 
-    private Control target;
-    private Vector2 default_scale;
-    private Dictionary<string, Variant> hover_values = new();
-    private Dictionary<string, Variant> enter_values = new();
-    private Dictionary<string, Variant> default_values = new();
-    private bool on_hover = false;
+    private Control _target;
+    private Vector2 _defaultScale;
+    private Dictionary<string, Variant> _hoverValues = new();
+    private Dictionary<string, Variant> _enterValues = new();
+    private Dictionary<string, Variant> _defaultValues = new();
+    private bool _onHover = false;
 
     public override void _Ready()
     {
-        target = GetParent() as Control;
-        CallDeferred(nameof(setup));
+        _target = GetParent() as Control;
+        CallDeferred(nameof(Setup));
     }
 
-    public void on_hover_entered()
+    public void OnHoverEntered()
     {
-        on_hover = true;
-        _ = add_tween(hover_values, ParallelAnimations, HoverTime, HoverDelay, HoverTransition, HoverEasing);
+        _onHover = true;
+        _ = AddTween(_hoverValues, ParallelAnimations, HoverTime, HoverDelay, HoverTransition, HoverEasing);
         if (PlayHoverSound)
         {
             AudioManager audioManager = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<AudioManager>("/root/AudioManager");
@@ -69,31 +69,31 @@ public partial class AnimationComponent : Node
         }
     }
 
-    public void on_hover_exited()
+    public void OnHoverExited()
     {
-        on_hover = false;
-        _ = add_tween(default_values, ParallelAnimations, HoverTime, HoverDelay, HoverTransition, HoverEasing);
+        _onHover = false;
+        _ = AddTween(_defaultValues, ParallelAnimations, HoverTime, HoverDelay, HoverTransition, HoverEasing);
     }
 
-    public void on_entered_action()
+    public void OnEnteredAction()
     {
-        _ = add_tween(default_values, ParallelAnimations, EnterTime, EnterDelay, EnterTransition, EnterEasing, true);
+        _ = AddTween(_defaultValues, ParallelAnimations, EnterTime, EnterDelay, EnterTransition, EnterEasing, true);
     }
 
-    public void connect_signals()
+    public void ConnectSignals()
     {
-        target.MouseEntered += on_hover_entered;
-        target.MouseExited += on_hover_exited;
+        _target.MouseEntered += OnHoverEntered;
+        _target.MouseExited += OnHoverExited;
 
         if (WaitFor != null)
         {
-            WaitFor.entered += on_entered_action;
+            WaitFor.Entered += OnEnteredAction;
         }
     }
 
-    public async void setup()
+    public async void Setup()
     {
-        if (target == null)
+        if (_target == null)
         {
             return;
         }
@@ -113,68 +113,68 @@ public partial class AnimationComponent : Node
 
         if (FromCenter)
         {
-            target.PivotOffset = target.Size / 2.0f;
+            _target.PivotOffset = _target.Size / 2.0f;
         }
 
-        default_scale = target.Scale;
-        default_values = new Dictionary<string, Variant>
+        _defaultScale = _target.Scale;
+        _defaultValues = new Dictionary<string, Variant>
         {
-            { "scale", target.Scale },
-            { "position", target.Position },
-            { "rotation", target.Rotation },
-            { "size", target.Size },
-            { "self_modulate", target.SelfModulate },
+            { "scale", _target.Scale },
+            { "position", _target.Position },
+            { "rotation", _target.Rotation },
+            { "size", _target.Size },
+            { "self_modulate", _target.SelfModulate },
         };
 
-        hover_values = new Dictionary<string, Variant>
+        _hoverValues = new Dictionary<string, Variant>
         {
             { "scale", HoverScale },
-            { "position", target.Position + HoverPosition },
-            { "rotation", target.Rotation + Mathf.DegToRad(HoverRotation) },
-            { "size", target.Size * HoverSize },
+            { "position", _target.Position + HoverPosition },
+            { "rotation", _target.Rotation + Mathf.DegToRad(HoverRotation) },
+            { "size", _target.Size * HoverSize },
             { "self_modulate", HoverModulate },
         };
 
-        enter_values = new Dictionary<string, Variant>
+        _enterValues = new Dictionary<string, Variant>
         {
             { "scale", EnterScale },
-            { "position", target.Position + EnterPosition },
-            { "rotation", target.Rotation + Mathf.DegToRad(EnterRotation) },
-            { "size", target.Size * EnterSize },
+            { "position", _target.Position + EnterPosition },
+            { "rotation", _target.Rotation + Mathf.DegToRad(EnterRotation) },
+            { "size", _target.Size * EnterSize },
             { "self_modulate", EnterModulate },
         };
 
-        connect_signals();
+        ConnectSignals();
 
         if (flicked)
         {
-            _ = flick_loop();
+            _ = FlickLoop();
         }
 
         if (EnterAnimation)
         {
-            on_enter();
+            OnEnter();
         }
         else
         {
             await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-            entered?.Invoke();
+            Entered?.Invoke();
         }
     }
 
-    public void on_enter()
+    public void OnEnter()
     {
-        _ = add_tween(enter_values, true, 0.0f, 0.0f, IMMEDIATE_TRANSITION, Tween.EaseType.In);
+        _ = AddTween(_enterValues, true, 0.0f, 0.0f, IMMEDIATE_TRANSITION, Tween.EaseType.In);
 
         if (WaitFor == null)
         {
-            on_entered_action();
+            OnEnteredAction();
         }
     }
 
-    public async System.Threading.Tasks.Task add_tween(Dictionary<string, Variant> values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
+    public async System.Threading.Tasks.Task AddTween(Dictionary<string, Variant> values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
     {
-        if (!IsInsideTree() || target == null)
+        if (!IsInsideTree() || _target == null)
         {
             return;
         }
@@ -188,7 +188,7 @@ public partial class AnimationComponent : Node
         {
             string property = properties[i];
             Variant value = values.TryGetValue(property, out Variant configuredValue) ? configuredValue : default;
-            tween.TweenProperty(target, property, value, seconds).SetTrans(transition).SetEase(easing);
+            tween.TweenProperty(_target, property, value, seconds).SetTrans(transition).SetEase(easing);
         }
 
         await ToSignal(GetTree().CreateTimer(delay), Timer.SignalName.Timeout);
@@ -197,37 +197,37 @@ public partial class AnimationComponent : Node
         if (entering)
         {
             await ToSignal(tween, Tween.SignalName.Finished);
-            entered?.Invoke();
+            Entered?.Invoke();
         }
     }
 
-    public async System.Threading.Tasks.Task flick_loop()
+    public async System.Threading.Tasks.Task FlickLoop()
     {
-        if (default_values.Count == 0)
+        if (_defaultValues.Count == 0)
         {
             return;
         }
 
-        Color defaultModulate = default_values["self_modulate"].AsColor();
+        Color defaultModulate = _defaultValues["self_modulate"].AsColor();
         bool useFlick = true;
 
         while (flicked && IsInsideTree())
         {
-            if (on_hover)
+            if (_onHover)
             {
-                target.SelfModulate = defaultModulate;
+                _target.SelfModulate = defaultModulate;
                 await ToSignal(GetTree().CreateTimer(0.05f), Timer.SignalName.Timeout);
                 continue;
             }
 
-            target.SelfModulate = useFlick ? FlickedColor : defaultModulate;
+            _target.SelfModulate = useFlick ? FlickedColor : defaultModulate;
             useFlick = !useFlick;
             await ToSignal(GetTree().CreateTimer(FlickedTime), Timer.SignalName.Timeout);
         }
 
         if (IsInsideTree())
         {
-            target.SelfModulate = defaultModulate;
+            _target.SelfModulate = defaultModulate;
         }
     }
 }

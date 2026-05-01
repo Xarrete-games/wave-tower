@@ -22,27 +22,27 @@ public class GridManager
 
     public readonly HashSet<Vector2I> grid = new();
 
-    public void occupy(Vector2I tile)
+    public void Occupy(Vector2I tile)
     {
         grid.Add(tile);
     }
 
-    public bool is_occupied(Vector2I tile)
+    public bool IsOccupied(Vector2I tile)
     {
         return grid.Contains(tile);
     }
 
-    public Vector2I get_neighbor_tile(Vector2I tile, int dir)
+    public Vector2I GetNeighborTile(Vector2I tile, int dir)
     {
         return tile + GRID_OFFSETS[dir];
     }
 
-    public Vector2I get_offset(int dir)
+    public Vector2I GetOffset(int dir)
     {
         return GRID_OFFSETS[dir];
     }
 
-    public bool would_cause_enclosure_at(Vector2I candidate)
+    public bool WouldCauseEnclosureAt(Vector2I candidate)
     {
         var simulated = new HashSet<Vector2I>(grid) { candidate };
 
@@ -55,7 +55,7 @@ public class GridManager
                 continue;
             }
 
-            if (FloodFill.can_escape_from(n, simulated, GRID_OFFSETS))
+            if (FloodFill.CanEscapeFrom(n, simulated, GRID_OFFSETS))
             {
                 return false;
             }
@@ -64,7 +64,7 @@ public class GridManager
         return true;
     }
 
-    public List<int> get_invalid_edges_at(Vector2I tile, int dir_to_connect)
+    public List<int> GetInvalidEdgesAt(Vector2I tile, int dir_to_connect)
     {
         var invalidDirs = new List<int>();
 
@@ -85,7 +85,7 @@ public class GridManager
 
             var simulated = new HashSet<Vector2I>(grid) { newTile };
 
-            if (!FloodFill.can_escape_from(newTile, simulated, GRID_OFFSETS))
+            if (!FloodFill.CanEscapeFrom(newTile, simulated, GRID_OFFSETS))
             {
                 invalidDirs.Add(dir);
             }
@@ -94,7 +94,7 @@ public class GridManager
         return invalidDirs;
     }
 
-    public bool reachable_to_boundary(Vector2I start, HashSet<string> occ, int lookahead = 8)
+    public bool ReachableToBoundary(Vector2I start, HashSet<string> occ, int lookahead = 8)
     {
         var xs = new List<int>();
         var ys = new List<int>();
@@ -134,7 +134,7 @@ public class GridManager
 
         var q = new Queue<Vector2I>();
         q.Enqueue(start);
-        var seen = new HashSet<string> { vec_key(start) };
+        var seen = new HashSet<string> { VecKey(start) };
         var neighs = new Vector2I[]
         {
             GRID_OFFSETS[EdgeDirNe],
@@ -155,7 +155,7 @@ public class GridManager
             for (int i = 0; i < neighs.Length; i++)
             {
                 Vector2I n = cur + neighs[i];
-                string key = vec_key(n);
+                string key = VecKey(n);
                 if (seen.Contains(key) || occ.Contains(key))
                 {
                     continue;
@@ -169,24 +169,24 @@ public class GridManager
         return false;
     }
 
-    public HashSet<string> create_simulated_occupation(Vector2I? extra_tile = null)
+    public HashSet<string> CreateSimulatedOccupation(Vector2I? extra_tile = null)
     {
         var occ = new HashSet<string>();
         foreach (Vector2I tile in grid)
         {
-            occ.Add(vec_key(tile));
+            occ.Add(VecKey(tile));
         }
 
         Vector2I extra = extra_tile ?? SentinelTile;
         if (extra != SentinelTile)
         {
-            occ.Add(vec_key(extra));
+            occ.Add(VecKey(extra));
         }
 
         return occ;
     }
 
-    public static string vec_key(Vector2I v)
+    public static string VecKey(Vector2I v)
     {
         return $"{v.X},{v.Y}";
     }

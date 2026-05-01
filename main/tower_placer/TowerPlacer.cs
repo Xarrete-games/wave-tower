@@ -41,11 +41,11 @@ public partial class TowerPlacer : Node2D
             return;
         }
 
-        if (CompositeTileMap.is_mouse_on_buildeable_tile())
+        if (CompositeTileMap.IsMouseOnBuildableTile())
         {
             _isValidPlacement = true;
             _currentTowerInstance.NormalColor();
-            _currentTowerInstance.GlobalPosition = CompositeTileMap.get_current_tile_pos();
+            _currentTowerInstance.GlobalPosition = CompositeTileMap.GetCurrentTilePos();
         }
         else
         {
@@ -86,7 +86,7 @@ public partial class TowerPlacer : Node2D
         }
 
         HandleCosts(towerPrice);
-        string key = CompositeTileMap.set_tile_occupied_at_mouse();
+        string key = CompositeTileMap.SetTileOccupiedAtMouse();
         _currentTowerInstance.CompositeTileKey = key;
 
         _isPlacing = false;

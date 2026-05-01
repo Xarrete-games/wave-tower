@@ -100,6 +100,7 @@ Apply these when they do not conflict with CORE or engine constraints:
 - Apply naming and typing fixes first.
 - Replace dynamic containers/patterns with typed models.
 - Keep behavior stable; avoid unrelated rewrites.
+- If a target file cannot be fully migrated because of upstream/downstream dependencies, immediately migrate those dependencies in the same batch so the original file does not require a second pass.
 
 4. Validate immediately
 - Build after each micro-batch.

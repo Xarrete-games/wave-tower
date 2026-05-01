@@ -90,19 +90,27 @@ public partial class MapPieceData : Resource
         return false;
     }
 
-    public Variant GetInstance()
+    public MapPiece GetInstance()
     {
         if (Scene == null)
         {
             GD.PushError("[MapPieceData] Scene is null in GetInstance().");
-            return default;
+            return null;
         }
 
         Node instance = Scene.Instantiate<Node>();
         if (instance == null)
         {
             GD.PushError("[MapPieceData] Could not instantiate scene.");
-            return default;
+            return null;
+        }
+
+        MapPiece mapPiece = instance as MapPiece;
+        if (mapPiece == null)
+        {
+            GD.PushError("[MapPieceData] Instanced node is not a MapPiece.");
+            instance.QueueFree();
+            return null;
         }
 
         var newEdges = new Godot.Collections.Array<Edge>();
@@ -118,16 +126,9 @@ public partial class MapPieceData : Resource
             }
         }
 
-        if (instance is MapPiece mapPiece)
-        {
-            mapPiece.edges = newEdges;
-        }
-        else
-        {
-            GD.PushWarning("[MapPieceData] Instanced node is not a MapPiece; edges were not assigned.");
-        }
+        mapPiece.edges = newEdges;
 
-        return instance;
+        return mapPiece;
     }
 
 }

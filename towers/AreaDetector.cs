@@ -1,6 +1,6 @@
 ﻿using Godot;
-using Godot.Collections;
 using System;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class AreaDetector : Area2D
@@ -8,7 +8,7 @@ public partial class AreaDetector : Area2D
     public event Action<Node2D> TargetChanged;
     public event Action<Node2D> EnemyDied;
 
-    public Array<Node2D> TargetsInRange { get; set; } = new();
+    public List<Node2D> TargetsInRange { get; } = new();
 
     private Node2D _currentTarget;
     public Node2D CurrentTarget

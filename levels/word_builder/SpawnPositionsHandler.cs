@@ -1,4 +1,5 @@
 ﻿using Godot;
+using System.Collections.Generic;
 
 public class SpawnPositionsHandler
 {
@@ -9,78 +10,77 @@ public class SpawnPositionsHandler
     private static readonly PackedScene OrangePortal = GD.Load<PackedScene>("uid://b8g0wp8j02vu4");
 
     private Node2D _portalsContainer;
-    private Godot.Collections.Dictionary _portalEntriesMap = new();
-    private Godot.Collections.Array<Vector2> _portalPositions = new();
-    private Godot.Collections.Dictionary _portalNodes = new();
+    private Dictionary<string, Dictionary<string, object>> _portalEntriesMap = new();
+    private readonly List<Vector2> _portalPositions = new();
+    private readonly Dictionary<string, Node2D> _portalNodes = new();
 
-    public void setup(Node2D portalsContainer)
+    public void Setup(Node2D portalsContainer)
     {
         _portalsContainer = portalsContainer;
     }
 
-    public void update(Godot.Collections.Array<Godot.Collections.Dictionary> entries)
+    public void Update(IReadOnlyList<Dictionary<string, object>> entries)
     {
-        var newMap = new Godot.Collections.Dictionary();
+        var newMap = new Dictionary<string, Dictionary<string, object>>();
 
         for (int index = 0; index < entries.Count; index++)
         {
-            Godot.Collections.Dictionary entry = entries[index];
+            Dictionary<string, object> entry = entries[index];
             if (entry == null)
             {
                 continue;
             }
 
             string key = string.Empty;
-            if (entry.ContainsKey("key"))
+            if (entry.TryGetValue("key", out object keyObj) && keyObj is string rawKey)
             {
-                key = entry["key"].AsString();
+                key = rawKey;
             }
-            else if (entry.ContainsKey("tile"))
+            else if (entry.TryGetValue("tile", out object tileObj) && tileObj is Vector2I tile)
             {
-                key = TileKey(entry["tile"].AsVector2I());
+                key = TileKey(tile);
             }
             else
             {
-                if (!entry.ContainsKey("pos"))
+                if (!entry.TryGetValue("pos", out object posObj) || posObj is not Vector2 pos)
                 {
                     continue;
                 }
 
-                key = PosKey(entry["pos"].AsVector2());
+                key = PosKey(pos);
             }
 
             newMap[key] = entry;
         }
 
-        var toPurge = new Godot.Collections.Array();
-        foreach (Variant keyVar in _portalNodes.Keys)
+        var toPurge = new List<string>();
+        foreach (KeyValuePair<string, Node2D> pair in _portalNodes)
         {
-            Variant nodeVariant = _portalNodes[keyVar];
-            Node node = nodeVariant.AsGodotObject() as Node;
+            Node2D node = pair.Value;
             if (!GodotObject.IsInstanceValid(node))
             {
-                toPurge.Add(keyVar);
+                toPurge.Add(pair.Key);
             }
         }
 
-        for (int i = 0; i < toPurge.Count; i++)
+        for (int index = 0; index < toPurge.Count; index++)
         {
-            _portalNodes.Remove(toPurge[i]);
+            _portalNodes.Remove(toPurge[index]);
         }
 
-        var keysToRemove = new Godot.Collections.Array();
-        foreach (Variant keyVar in _portalNodes.Keys)
+        var keysToRemove = new List<string>();
+        foreach (KeyValuePair<string, Node2D> pair in _portalNodes)
         {
-            if (!newMap.ContainsKey(keyVar))
+            if (!newMap.ContainsKey(pair.Key))
             {
-                keysToRemove.Add(keyVar);
+                keysToRemove.Add(pair.Key);
             }
         }
 
-        for (int i = 0; i < keysToRemove.Count; i++)
+        for (int index = 0; index < keysToRemove.Count; index++)
         {
-            Variant key = keysToRemove[i];
-            Node node = _portalNodes[key].AsGodotObject() as Node;
+            string key = keysToRemove[index];
+            Node2D node = _portalNodes[key];
             if (GodotObject.IsInstanceValid(node))
             {
                 node.QueueFree();
@@ -89,13 +89,13 @@ public class SpawnPositionsHandler
             _portalNodes.Remove(key);
         }
 
-        foreach (Variant key in newMap.Keys)
+        foreach (KeyValuePair<string, Dictionary<string, object>> pair in newMap)
         {
+            string key = pair.Key;
             bool needsCreate = true;
-            if (_portalNodes.ContainsKey(key))
+            if (_portalNodes.TryGetValue(key, out Node2D existingPortal))
             {
-                Node existing = _portalNodes[key].AsGodotObject() as Node;
-                if (GodotObject.IsInstanceValid(existing))
+                if (GodotObject.IsInstanceValid(existingPortal))
                 {
                     needsCreate = false;
                 }
@@ -110,7 +110,7 @@ public class SpawnPositionsHandler
                 continue;
             }
 
-            Godot.Collections.Dictionary entry = newMap[key].AsGodotDictionary();
+            Dictionary<string, object> entry = pair.Value;
             Node2D portal = OrangePortal?.Instantiate() as Node2D;
             if (portal == null)
             {
@@ -127,21 +127,20 @@ public class SpawnPositionsHandler
                 GD.PushError("[SpawnPositionsHandler]: No container to add portals to!");
             }
 
-            if (entry.ContainsKey("pos"))
+            if (entry.TryGetValue("pos", out object portalPosObj) && portalPosObj is Vector2 portalPos)
             {
-                portal.GlobalPosition = entry["pos"].AsVector2();
+                portal.GlobalPosition = portalPos;
             }
 
             portal.AddToGroup(PortalGroup);
 
             int dir = -1;
-            if (entry.ContainsKey("dir"))
+            if (entry.TryGetValue("dir", out object dirObj) && dirObj is int parsedDir)
             {
-                dir = entry["dir"].AsInt32();
+                dir = parsedDir;
             }
-            else if (entry.ContainsKey("edge"))
+            else if (entry.TryGetValue("edge", out object edgeObj) && edgeObj is Edge edge)
             {
-                Edge edge = entry["edge"].As<Edge>();
                 dir = edge != null ? (int)edge.Direction : -1;
             }
 
@@ -170,37 +169,25 @@ public class SpawnPositionsHandler
 
         _portalEntriesMap = newMap;
         _portalPositions.Clear();
-        foreach (Variant key in _portalEntriesMap.Keys)
+        foreach (KeyValuePair<string, Dictionary<string, object>> pair in _portalEntriesMap)
         {
-            Godot.Collections.Dictionary entry = _portalEntriesMap[key].AsGodotDictionary();
-            if (entry.ContainsKey("pos"))
+            Dictionary<string, object> entry = pair.Value;
+            if (entry.TryGetValue("pos", out object posObj) && posObj is Vector2 pos)
             {
-                _portalPositions.Add(entry["pos"].AsVector2());
+                _portalPositions.Add(pos);
             }
         }
     }
 
-    public Godot.Collections.Array<Vector2> get_positions()
+    public List<Vector2> GetPositions()
     {
-        return _portalPositions.Duplicate();
+        return new List<Vector2>(_portalPositions);
     }
 
-    public Godot.Collections.Array<Godot.Collections.Dictionary> get_entries()
+    public void ClearVisuals()
     {
-        var entries = new Godot.Collections.Array<Godot.Collections.Dictionary>();
-        foreach (Variant key in _portalEntriesMap.Keys)
+        foreach (Node2D node in _portalNodes.Values)
         {
-            entries.Add(_portalEntriesMap[key].AsGodotDictionary());
-        }
-
-        return entries;
-    }
-
-    public void clear_visuals()
-    {
-        foreach (Variant key in _portalNodes.Keys)
-        {
-            Node node = _portalNodes[key].AsGodotObject() as Node;
             if (GodotObject.IsInstanceValid(node))
             {
                 node.QueueFree();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public static class FloodFill
 {
-    public static bool can_escape_from(
+    public static bool CanEscapeFrom(
         Vector2I start,
         HashSet<Vector2I> occupied,
         IReadOnlyDictionary<int, Vector2I> gridOffsets)

@@ -17,7 +17,7 @@ public partial class TowerDataWithInstance : Resource
         return instance;
     }
 
-    public Variant GetInstance()
+    public Tower GetInstance()
     {
         return GetInstanceNode();
     }

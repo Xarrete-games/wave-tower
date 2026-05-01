@@ -40,10 +40,10 @@ public partial class HealthBar : Control
         for (int i = 0; i < debuffs.Count; i++)
         {
             EnemyDebuffInstance debuffInstance = debuffs[i];
-            int debuffType = (int)debuffInstance.debuff.DebuffType;
+            int debuffType = (int)debuffInstance.Debuff.DebuffType;
             int current = DebuffsCount.ContainsKey(debuffType) ? DebuffsCount[debuffType] : 0;
             DebuffsCount[debuffType] = current + 1;
-            DebuffDataByType[debuffType] = debuffInstance.debuff.Data;
+            DebuffDataByType[debuffType] = debuffInstance.Debuff.Data;
         }
 
         List<int> slotKeys = new(DebuffsSlots.Keys);

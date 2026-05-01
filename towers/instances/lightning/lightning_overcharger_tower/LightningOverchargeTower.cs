@@ -8,23 +8,23 @@ public partial class LightningOverchargeTower : Tower
     [Export] public PackedScene ProjectileScene;
     [Export] public PackedScene OverchargeParticleScene;
 
-    public readonly List<Tower> towers_in_range = new();
-    public readonly Dictionary<string, Node> particles_dict = new();
+    private readonly List<Tower> _towersInRange = new();
+    private readonly Dictionary<string, Node> _particlesByTowerName = new();
 
-    private Marker2D projectile_spawn_pos;
-    private CollisionPolygon2D buff_area_shape;
-    private Area2D buff_area;
+    private Marker2D _projectileSpawnPos;
+    private CollisionPolygon2D _buffAreaShape;
+    private Area2D _buffArea;
     private TowersManager _towersManager;
 
     public override void _Ready()
     {
-        projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
-        buff_area_shape = GetNode<CollisionPolygon2D>("BuffArea/BuffAreaShape");
-        buff_area = GetNode<Area2D>("BuffArea");
+        _projectileSpawnPos = GetNode<Marker2D>("ProjectileSpawnPos");
+        _buffAreaShape = GetNode<CollisionPolygon2D>("BuffArea/BuffAreaShape");
+        _buffArea = GetNode<Area2D>("BuffArea");
 
         base._Ready();
 
-        buff_area.Monitoring = false;
+        _buffArea.Monitoring = false;
         ApplyStatsChanges();
     }
 
@@ -49,7 +49,7 @@ public partial class LightningOverchargeTower : Tower
         SingleTargetProjectile projectile = ProjectileScene.Instantiate<SingleTargetProjectile>();
         GetParent().AddChild(projectile);
 
-        projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
+        projectile.GlobalPosition = _projectileSpawnPos.GlobalPosition;
 
         projectile.SetTarget(_currentTarget, GetAttack());
     }
@@ -57,13 +57,13 @@ public partial class LightningOverchargeTower : Tower
     public override void PlacementMode()
     {
         base.PlacementMode();
-        buff_area.Monitoring = false;
+        _buffArea.Monitoring = false;
     }
 
     public override void Enable()
     {
         base.Enable();
-        buff_area.Monitoring = true;
+        _buffArea.Monitoring = true;
 
         if (_towersManager == null)
         {
@@ -82,22 +82,22 @@ public partial class LightningOverchargeTower : Tower
             return;
         }
 
-        buff_area.Monitoring = false;
+        _buffArea.Monitoring = false;
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        buff_area.Monitoring = true;
+        _buffArea.Monitoring = true;
     }
 
     public override void ApplyStatsChanges()
     {
         base.ApplyStatsChanges();
 
-        if (Stats == null || buff_area_shape == null)
+        if (Stats == null || _buffAreaShape == null)
         {
             return;
         }
 
         float attackRange = Stats.AttackRange;
-        buff_area_shape.SetDeferred("polygon", BuildEllipsePolygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
+        _buffAreaShape.SetDeferred("polygon", BuildEllipsePolygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
     }
 
     private void OnBuffAreaAreaEntered(Area2D area)
@@ -114,7 +114,7 @@ public partial class LightningOverchargeTower : Tower
 
     private void ApplyBuff(Tower tower)
     {
-        if (tower == null || tower == this || towers_in_range.Contains(tower))
+        if (tower == null || tower == this || _towersInRange.Contains(tower))
         {
             return;
         }
@@ -129,31 +129,31 @@ public partial class LightningOverchargeTower : Tower
 
         Node buffParticle = OverchargeParticleScene?.Instantiate();
         tower.AddBuff(towerBuff);
-        towers_in_range.Add(tower);
+        _towersInRange.Add(tower);
 
         if (buffParticle != null)
         {
             tower.AddChild(buffParticle);
-            particles_dict[tower.Name] = buffParticle;
+            _particlesByTowerName[tower.Name] = buffParticle;
         }
     }
 
     private void RemoveBuff(Tower tower)
     {
-        if (tower == null || !towers_in_range.Contains(tower))
+        if (tower == null || !_towersInRange.Contains(tower))
         {
             return;
         }
 
         tower.RemoveBuff(Name);
-        towers_in_range.Remove(tower);
+        _towersInRange.Remove(tower);
 
-        if (!particles_dict.TryGetValue(tower.Name, out Node particle) || particle == null)
+        if (!_particlesByTowerName.TryGetValue(tower.Name, out Node particle) || particle == null)
         {
             return;
         }
 
         particle.QueueFree();
-        particles_dict.Remove(tower.Name);
+        _particlesByTowerName.Remove(tower.Name);
     }
 }

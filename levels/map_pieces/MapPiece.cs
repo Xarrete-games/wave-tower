@@ -20,8 +20,8 @@ public partial class MapPiece : Node2D
         BOTTOM,
     }
 
-    public static readonly Vector2I size = new(15, 15);
-    private const string BUILDEABLE_CUSTOM_DATA = "buildeable";
+    public static readonly Vector2I Size = new(15, 15);
+    private const string BuildableCustomDataKey = "buildeable";
     private const string BLOCKED_CUSTOM_DATA = "blocked";
     private const int ATLAS_ID = 0;
     private static readonly Vector2I NORMAL_TILE_POS = new(2, 0);
@@ -40,26 +40,34 @@ public partial class MapPiece : Node2D
     [Export]
     public Vector2I LogicalPos { get; set; } = Vector2I.Zero;
 
-    private readonly Godot.Collections.Dictionary<string, Godot.Collections.Array<Godot.Collections.Array<Vector2>>> _routeCache = new();
+    private readonly Dictionary<string, List<List<Vector2>>> _routeCache = new();
 
-    private TileMapLayer tile_map;
-    private Node2D decoration;
+    private TileMapLayer _tileMap;
+    private Node2D _decoration;
 
     public override void _Ready()
     {
-        tile_map = GetNodeOrNull<TileMapLayer>("MapPieceTileMap");
-        decoration = GetNodeOrNull<Node2D>("Decoration");
-        _precalculate_routes();
+        _tileMap = GetNodeOrNull<TileMapLayer>("MapPieceTileMap");
+        _decoration = GetNodeOrNull<Node2D>("Decoration");
+        PrecalculateRoutes();
     }
 
-    public Node2D get_decoration()
+    public Node2D GetDecoration()
     {
-        return decoration;
+        return _decoration;
     }
 
-    public Vector2 get_edge_tile_pos(int dir, int pos = (int)DirPos.MIDDLE)
+    public Vector2 GetEdgeTilePos(int dir, int pos = (int)DirPos.MIDDLE)
     {
-        Godot.Collections.Array<Vector2I> used = tile_map?.GetUsedCells() ?? new Godot.Collections.Array<Vector2I>();
+        List<Vector2I> used = new();
+        if (_tileMap != null)
+        {
+            foreach (Vector2I cell in _tileMap.GetUsedCells())
+            {
+                used.Add(cell);
+            }
+        }
+
         if (used.Count == 0)
         {
             GD.PushError("TileMap has no used cells");
@@ -83,10 +91,10 @@ public partial class MapPiece : Node2D
         };
 
         tileIndex = Mathf.Clamp(tileIndex, 0, edgeSize - 1);
-        return _map_to_local(edgeTiles[tileIndex]);
+        return MapTileToLocal(edgeTiles[tileIndex]);
     }
 
-    public void set_edge_has_connected(Edge edge)
+    public void SetEdgeHasConnected(Edge edge)
     {
         if (edges == null || edges.Count == 0)
         {
@@ -114,7 +122,7 @@ public partial class MapPiece : Node2D
         edges.Remove(toRemove);
     }
 
-    public Edge find_edge_by_dir(int dir)
+    public Edge FindEdgeByDir(int dir)
     {
         for (int i = 0; i < edges.Count; i++)
         {
@@ -130,17 +138,17 @@ public partial class MapPiece : Node2D
 
     public bool HasEdgeDir(int dir)
     {
-        return find_edge_by_dir(dir) != null;
+        return FindEdgeByDir(dir) != null;
     }
 
-    public Vector2 _map_to_local(Vector2I tile_pos)
+    public Vector2 MapTileToLocal(Vector2I tilePos)
     {
-        Vector2 localInTilemap = tile_map.MapToLocal(tile_pos);
-        Vector2 globalPoint = tile_map.ToGlobal(localInTilemap);
+        Vector2 localInTilemap = _tileMap.MapToLocal(tilePos);
+        Vector2 globalPoint = _tileMap.ToGlobal(localInTilemap);
         return ToLocal(globalPoint);
     }
 
-    public Vector2 get_edge_normal(int dir)
+    public Vector2 GetEdgeNormal(int dir)
     {
         return dir switch
         {
@@ -152,7 +160,7 @@ public partial class MapPiece : Node2D
         };
     }
 
-    public Vector2I get_edge_tile_delta(int dir)
+    public Vector2I GetEdgeTileDelta(int dir)
     {
         return dir switch
         {
@@ -164,32 +172,31 @@ public partial class MapPiece : Node2D
         };
     }
 
-    public Vector2 get_tile_local_offset(Vector2I delta)
+    public Vector2 GetTileLocalOffset(Vector2I delta)
     {
-        Vector2 origin = _map_to_local(Vector2I.Zero);
-        Vector2 target = _map_to_local(delta);
+        Vector2 origin = MapTileToLocal(Vector2I.Zero);
+        Vector2 target = MapTileToLocal(delta);
         return target - origin;
     }
 
-    public Godot.Collections.Array<Vector2> get_route_waypoints(int entry_dir, int exit_dir)
+    public List<Vector2> GetRouteWaypoints(int entryDir, int exitDir)
     {
-        string cacheKey = _get_route_cache_key(entry_dir, exit_dir);
-        if (!_routeCache.ContainsKey(cacheKey))
+        string cacheKey = GetRouteCacheKey(entryDir, exitDir);
+        if (!_routeCache.TryGetValue(cacheKey, out List<List<Vector2>> variants))
         {
-            return new Godot.Collections.Array<Vector2>();
+            return new List<Vector2>();
         }
 
-        Godot.Collections.Array<Godot.Collections.Array<Vector2>> variants = _routeCache[cacheKey];
         if (variants.Count == 0)
         {
-            return new Godot.Collections.Array<Vector2>();
+            return new List<Vector2>();
         }
 
-        Godot.Collections.Array<Vector2> cached = variants[(int)(GD.Randi() % (uint)variants.Count)];
-        int canonicalFirst = Mathf.Min(entry_dir, exit_dir);
-        var result = new Godot.Collections.Array<Vector2>();
+        List<Vector2> cached = variants[(int)(GD.Randi() % (uint)variants.Count)];
+        int canonicalFirst = Mathf.Min(entryDir, exitDir);
+        var result = new List<Vector2>(cached.Count);
 
-        if (entry_dir != canonicalFirst)
+        if (entryDir != canonicalFirst)
         {
             for (int i = cached.Count - 1; i >= 0; i--)
             {
@@ -207,7 +214,7 @@ public partial class MapPiece : Node2D
         return result;
     }
 
-    public void _precalculate_routes()
+    public void PrecalculateRoutes()
     {
         _routeCache.Clear();
         var pathNodes = new List<Path2D>();
@@ -241,51 +248,51 @@ public partial class MapPiece : Node2D
                 continue;
             }
 
-            var snappedPoints = new Godot.Collections.Array<Vector2>();
+            var snappedPoints = new List<Vector2>();
             for (int i = 0; i < curve.PointCount; i++)
             {
                 Vector2 pointLocal = path2d.Position + curve.GetPointPosition(i);
-                Vector2 tileCenter = _snap_to_tile_center(pointLocal);
+                Vector2 tileCenter = SnapToTileCenter(pointLocal);
                 if (snappedPoints.Count == 0 || snappedPoints[snappedPoints.Count - 1] != tileCenter)
                 {
                     snappedPoints.Add(tileCenter);
                 }
             }
 
-            string baseKey = _get_route_base_key(path2d.Name.ToString());
+            string baseKey = GetRouteBaseKey(path2d.Name.ToString());
             if (!_routeCache.ContainsKey(baseKey))
             {
-                _routeCache[baseKey] = new Godot.Collections.Array<Godot.Collections.Array<Vector2>>();
+                _routeCache[baseKey] = new List<List<Vector2>>();
             }
 
             _routeCache[baseKey].Add(snappedPoints);
         }
     }
 
-    public Vector2 _snap_to_tile_center(Vector2 local_pos)
+    public Vector2 SnapToTileCenter(Vector2 localPos)
     {
-        Vector2 tilemapLocal = tile_map.ToLocal(ToGlobal(local_pos));
-        Vector2I tileCoord = tile_map.LocalToMap(tilemapLocal);
-        return _map_to_local(tileCoord);
+        Vector2 tilemapLocal = _tileMap.ToLocal(ToGlobal(localPos));
+        Vector2I tileCoord = _tileMap.LocalToMap(tilemapLocal);
+        return MapTileToLocal(tileCoord);
     }
 
-    public string _get_route_cache_key(int dir_a, int dir_b)
+    public string GetRouteCacheKey(int dirA, int dirB)
     {
-        int first = Mathf.Min(dir_a, dir_b);
-        int second = Mathf.Max(dir_a, dir_b);
+        int first = Mathf.Min(dirA, dirB);
+        int second = Mathf.Max(dirA, dirB);
         return $"route_{DIR_NAMES[first]}_{DIR_NAMES[second]}";
     }
 
-    public string _get_route_base_key(string path_name)
+    public string GetRouteBaseKey(string pathName)
     {
-        Match match = Regex.Match(path_name, "^(route_[A-Z]+_[A-Z]+)(?:_\\d+)?$");
-        return match.Success ? match.Groups[1].Value : path_name;
+        Match match = Regex.Match(pathName, "^(route_[A-Z]+_[A-Z]+)(?:_\\d+)?$");
+        return match.Success ? match.Groups[1].Value : pathName;
     }
 
-    public void limit_buildeable_tiles(int max_count)
+    public void LimitBuildableTiles(int maxCount)
     {
-        TileMapLayer tm = tile_map;
-        var buildeableCoords = new Godot.Collections.Array<Vector2I>();
+        TileMapLayer tm = _tileMap;
+        var buildableCoords = new List<Vector2I>();
 
         foreach (Vector2I coords in tm.GetUsedCells())
         {
@@ -300,40 +307,44 @@ public partial class MapPiece : Node2D
                 continue;
             }
 
-            if (td.GetCustomData(BUILDEABLE_CUSTOM_DATA).AsBool())
+            if (td.GetCustomData(BuildableCustomDataKey).AsBool())
             {
-                buildeableCoords.Add(coords);
+                buildableCoords.Add(coords);
             }
         }
 
-        if (buildeableCoords.Count <= max_count)
+        if (buildableCoords.Count <= maxCount)
         {
             return;
         }
 
-        buildeableCoords.Shuffle();
-        for (int i = max_count; i < buildeableCoords.Count; i++)
+        for (int index = buildableCoords.Count - 1; index > 0; index--)
         {
-            tm.SetCell(buildeableCoords[i], ATLAS_ID, NORMAL_TILE_POS);
+            int swapIndex = (int)(GD.Randi() % (uint)(index + 1));
+            (buildableCoords[index], buildableCoords[swapIndex]) = (buildableCoords[swapIndex], buildableCoords[index]);
+        }
+
+        for (int i = maxCount; i < buildableCoords.Count; i++)
+        {
+            tm.SetCell(buildableCoords[i], ATLAS_ID, NORMAL_TILE_POS);
         }
     }
 
-    public Godot.Collections.Array<Vector2> get_final_route_waypoints(int entry_dir)
+    public List<Vector2> GetFinalRouteWaypoints(int entryDir)
     {
-        string cacheKey = $"route_{DIR_NAMES[entry_dir]}_END";
-        if (!_routeCache.ContainsKey(cacheKey))
+        string cacheKey = $"route_{DIR_NAMES[entryDir]}_END";
+        if (!_routeCache.TryGetValue(cacheKey, out List<List<Vector2>> variants))
         {
-            return new Godot.Collections.Array<Vector2>();
+            return new List<Vector2>();
         }
 
-        Godot.Collections.Array<Godot.Collections.Array<Vector2>> variants = _routeCache[cacheKey];
         if (variants.Count == 0)
         {
-            return new Godot.Collections.Array<Vector2>();
+            return new List<Vector2>();
         }
 
-        Godot.Collections.Array<Vector2> cached = variants[(int)(GD.Randi() % (uint)variants.Count)];
-        var result = new Godot.Collections.Array<Vector2>();
+        List<Vector2> cached = variants[(int)(GD.Randi() % (uint)variants.Count)];
+        var result = new List<Vector2>(cached.Count);
         for (int i = 0; i < cached.Count; i++)
         {
             result.Add(cached[i]);
@@ -342,7 +353,7 @@ public partial class MapPiece : Node2D
         return result;
     }
 
-    private List<Vector2I> GetEdgeTilesByDir(Godot.Collections.Array<Vector2I> used, int dir)
+    private List<Vector2I> GetEdgeTilesByDir(List<Vector2I> used, int dir)
     {
         var result = new List<Vector2I>();
         if (used.Count == 0)

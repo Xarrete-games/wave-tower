@@ -1,15 +1,15 @@
 ﻿using Godot;
 public class EnemyDebuffInstance {
-    public EnemyDebuff debuff;
-    public float expire_time;
-    public float next_tick_time;
+    public EnemyDebuff Debuff;
+    public float ExpireTime;
+    public float NextTickTime;
     public EnemyDebuffInstance() {
     }
     public EnemyDebuffInstance(EnemyDebuff debuffObj) {
         float now = Time.GetTicksMsec() / 1000.0f;
-        debuff = debuffObj;
-        expire_time = now + debuffObj.Duration;
-        next_tick_time = now + debuffObj.TickInterval;
+        Debuff = debuffObj;
+        ExpireTime = now + debuffObj.Duration;
+        NextTickTime = now + debuffObj.TickInterval;
     }
 }
 

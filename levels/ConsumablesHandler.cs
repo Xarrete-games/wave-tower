@@ -91,7 +91,7 @@ public partial class ConsumablesHandler : Node
             return;
         }
 
-        bool isMouseOnBlockedTile = CompositeTileMap.is_mouse_on_block_tile();
+        bool isMouseOnBlockedTile = CompositeTileMap.IsMouseOnBlockTile();
         if (isMouseOnBlockedTile)
         {
             ConsumableData data = _currentConsumable?.Data;

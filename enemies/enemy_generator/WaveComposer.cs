@@ -14,7 +14,7 @@ public class WaveComposer
     public class WaveGroup
     {
         public PressureType Pressure = PressureType.MIXED;
-        public Godot.Collections.Array<EnemyData> Enemies = new();
+        public List<EnemyData> Enemies = new();
 
         public int GetTotalWeight()
         {
@@ -29,12 +29,12 @@ public class WaveComposer
     }
 
     private readonly WaveConfig _config;
-    private readonly Godot.Collections.Array<EnemyData> _enemyCatalog;
+    private readonly List<EnemyData> _enemyCatalog;
 
-    public WaveComposer(WaveConfig config, Godot.Collections.Array<EnemyData> enemyCatalog)
+    public WaveComposer(WaveConfig config, List<EnemyData> enemyCatalog)
     {
         _config = config;
-        _enemyCatalog = enemyCatalog ?? new Godot.Collections.Array<EnemyData>();
+        _enemyCatalog = enemyCatalog ?? new List<EnemyData>();
     }
 
     public List<WaveGroup> ComposeWave(int waveNumber)
@@ -81,7 +81,7 @@ public class WaveComposer
         }
 
         int numGroups = CalculateGroupCount(waveNumber);
-        Godot.Collections.Array<PressureType> pressures = PickUniquePressures(numGroups, waveNumber);
+        List<PressureType> pressures = PickUniquePressures(numGroups, waveNumber);
 
         int safeNumGroups = Mathf.Max(numGroups, 1);
         int budgetPerGroup = totalBudget / safeNumGroups;
@@ -146,17 +146,17 @@ public class WaveComposer
         return (int)GD.RandRange(2, 3);
     }
 
-    private Godot.Collections.Array<PressureType> PickUniquePressures(int count, int waveNumber)
+    private List<PressureType> PickUniquePressures(int count, int waveNumber)
     {
-        Godot.Collections.Array<PressureType> pool = GetAvailablePressures(waveNumber);
+        List<PressureType> pool = GetAvailablePressures(waveNumber);
         if (pool.Count == 0)
         {
             GD.PushError($"[WaveComposer] No pressure types available for wave {waveNumber}");
-            return new Godot.Collections.Array<PressureType> { PressureType.MIXED };
+            return new List<PressureType> { PressureType.MIXED };
         }
 
-        pool.Shuffle();
-        var result = new Godot.Collections.Array<PressureType>();
+        ShuffleList(pool);
+        var result = new List<PressureType>();
         for (int i = 0; i < count; i++)
         {
             result.Add(pool[i % pool.Count]);
@@ -255,9 +255,9 @@ public class WaveComposer
         return value >= 0.0f && value <= 100.0f;
     }
 
-    private Godot.Collections.Array<PressureType> GetAvailablePressures(int waveNumber)
+    private List<PressureType> GetAvailablePressures(int waveNumber)
     {
-        var pool = new Godot.Collections.Array<PressureType>();
+        var pool = new List<PressureType>();
         if (HasAvailableForPressure(PressureType.SWARM, waveNumber))
         {
             pool.Add(PressureType.SWARM);
@@ -304,7 +304,7 @@ public class WaveComposer
             return "[]";
         }
 
-        var chunks = new Godot.Collections.Array<string>();
+        var chunks = new List<string>();
         for (int i = 0; i < groups.Count; i++)
         {
             WaveGroup group = groups[i];
@@ -327,13 +327,13 @@ public class WaveComposer
 
     private WaveGroup CreateBossGroup(int availableBudget, int waveNumber)
     {
-        Godot.Collections.Array<EnemyData> bosses = GetAvailable(EnemyData.EnemyType.BOSS, waveNumber);
+        List<EnemyData> bosses = GetAvailable(EnemyData.EnemyType.BOSS, waveNumber);
         if (bosses.Count == 0)
         {
             return null;
         }
 
-        var affordableBosses = new Godot.Collections.Array<EnemyData>();
+        var affordableBosses = new List<EnemyData>();
         for (int i = 0; i < bosses.Count; i++)
         {
             EnemyData data = bosses[i];
@@ -359,7 +359,7 @@ public class WaveComposer
         var group = new WaveGroup { Pressure = pressure };
 
         EnemyData.EnemyType primaryType = PressureToEnemyType(pressure);
-        Godot.Collections.Array<EnemyData> primaryCandidates = GetAvailable(primaryType, waveNumber);
+        List<EnemyData> primaryCandidates = GetAvailable(primaryType, waveNumber);
         if (primaryCandidates.Count == 0)
         {
             primaryCandidates = GetAllAvailable(waveNumber);
@@ -375,20 +375,20 @@ public class WaveComposer
 
         if (fullOnly)
         {
-            group.Enemies.Shuffle();
+            ShuffleList(group.Enemies);
             return group;
         }
 
-        Godot.Collections.Array<EnemyData> mixedCandidates = GetAllAvailable(waveNumber);
+        List<EnemyData> mixedCandidates = GetAllAvailable(waveNumber);
         groupBudget = FillBudget(group.Enemies, mixedCandidates, groupBudget, groupBudget);
 
-        group.Enemies.Shuffle();
+        ShuffleList(group.Enemies);
         return group;
     }
 
-    private Godot.Collections.Array<EnemyData> GetAvailable(EnemyData.EnemyType type, int waveNumber)
+    private List<EnemyData> GetAvailable(EnemyData.EnemyType type, int waveNumber)
     {
-        var result = new Godot.Collections.Array<EnemyData>();
+        var result = new List<EnemyData>();
         for (int i = 0; i < _enemyCatalog.Count; i++)
         {
             EnemyData data = _enemyCatalog[i];
@@ -401,9 +401,9 @@ public class WaveComposer
         return result;
     }
 
-    private Godot.Collections.Array<EnemyData> GetAllAvailable(int waveNumber)
+    private List<EnemyData> GetAllAvailable(int waveNumber)
     {
-        var result = new Godot.Collections.Array<EnemyData>();
+        var result = new List<EnemyData>();
         for (int i = 0; i < _enemyCatalog.Count; i++)
         {
             EnemyData data = _enemyCatalog[i];
@@ -456,15 +456,15 @@ public class WaveComposer
     }
 
     private int FillBudget(
-        Godot.Collections.Array<EnemyData> result,
-        Godot.Collections.Array<EnemyData> candidates,
+        List<EnemyData> result,
+        List<EnemyData> candidates,
         int targetSpend,
         int totalRemaining)
     {
         int spent = 0;
         while (spent < targetSpend && totalRemaining > 0)
         {
-            var affordable = new Godot.Collections.Array<EnemyData>();
+            var affordable = new List<EnemyData>();
             for (int i = 0; i < candidates.Count; i++)
             {
                 EnemyData candidate = candidates[i];
@@ -486,6 +486,15 @@ public class WaveComposer
         }
 
         return totalRemaining;
+    }
+
+    private static void ShuffleList<T>(List<T> items)
+    {
+        for (int i = items.Count - 1; i > 0; i--)
+        {
+            int swapIndex = (int)(GD.Randi() % (uint)(i + 1));
+            (items[i], items[swapIndex]) = (items[swapIndex], items[i]);
+        }
     }
 }
 

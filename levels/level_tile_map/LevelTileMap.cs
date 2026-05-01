@@ -1,18 +1,19 @@
 using Godot;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class LevelTileMap : TileMapLayer
 {
-    private const string BUILDEABLE = "buildeable";
+    private const string BuildableCustomDataKey = "buildeable";
     private const string BLOCKED = "blocked";
     private const int ATLAS_ID = 0;
 
     private static readonly Vector2I UNLOCK_TILE_POS = new(6, 0);
     private static readonly Vector2I NORMAL_TILE_POS = new(2, 0);
 
-    private readonly Godot.Collections.Dictionary<Vector2I, bool> _occupiedTiles = new();
-    private readonly Godot.Collections.Dictionary<Vector2I, bool> _blockedTiles = new();
-    private readonly Godot.Collections.Dictionary<Vector2I, bool> _buildeableTiles = new();
+    private readonly HashSet<Vector2I> _occupiedTiles = new();
+    private readonly HashSet<Vector2I> _blockedTiles = new();
+    private readonly HashSet<Vector2I> _buildableTiles = new();
 
     private TowersManager _towersManager;
 
@@ -36,15 +37,15 @@ public partial class LevelTileMap : TileMapLayer
         }
     }
 
-    public Vector2I get_mouse_tile_pos()
+    public Vector2I GetMouseTilePos()
     {
         Vector2 mousePos = GetGlobalMousePosition();
         return LocalToMap(ToLocal(mousePos));
     }
 
-    public bool is_mouse_on_block_tile()
+    public bool IsMouseOnBlockTile()
     {
-        Vector2I mapCoords = get_mouse_tile_pos();
+        Vector2I mapCoords = GetMouseTilePos();
         TileData tileData = GetCellTileData(mapCoords);
         if (tileData == null)
         {
@@ -54,72 +55,72 @@ public partial class LevelTileMap : TileMapLayer
         return tileData.GetCustomData(BLOCKED).AsBool();
     }
 
-    public bool is_mouse_on_buildeable_tile()
+    public bool IsMouseOnBuildableTile()
     {
-        Vector2I mapCoords = get_mouse_tile_pos();
-        if (!_buildeableTiles.ContainsKey(mapCoords))
+        Vector2I mapCoords = GetMouseTilePos();
+        if (!_buildableTiles.Contains(mapCoords))
         {
             return false;
         }
 
-        return !_occupiedTiles.ContainsKey(mapCoords) && !_blockedTiles.ContainsKey(mapCoords);
+        return !_occupiedTiles.Contains(mapCoords) && !_blockedTiles.Contains(mapCoords);
     }
 
-    public void destroy_random_buildeable_tile()
+    public void DestroyRandomBuildableTile()
     {
-        var buildeableTilesArray = new Godot.Collections.Array<Vector2I>();
-        foreach (Vector2I tilePos in _buildeableTiles.Keys)
+        var buildableTiles = new List<Vector2I>();
+        foreach (Vector2I tilePos in _buildableTiles)
         {
-            if (!_blockedTiles.ContainsKey(tilePos))
+            if (!_blockedTiles.Contains(tilePos))
             {
-                buildeableTilesArray.Add(tilePos);
+                buildableTiles.Add(tilePos);
             }
         }
 
-        if (buildeableTilesArray.Count == 0)
+        if (buildableTiles.Count == 0)
         {
             return;
         }
 
-        int randIndex = (int)(GD.Randi() % (uint)buildeableTilesArray.Count);
-        Vector2I tileToBlock = buildeableTilesArray[randIndex];
-        _occupiedTiles[tileToBlock] = true;
+        int randIndex = (int)(GD.Randi() % (uint)buildableTiles.Count);
+        Vector2I tileToBlock = buildableTiles[randIndex];
+        _occupiedTiles.Add(tileToBlock);
         SetCell(tileToBlock, ATLAS_ID, NORMAL_TILE_POS);
-        _buildeableTiles.Remove(tileToBlock);
+        _buildableTiles.Remove(tileToBlock);
     }
 
-    public Vector2 get_current_tile_pos()
+    public Vector2 GetCurrentTilePos()
     {
-        Vector2 centerPosLocal = MapToLocal(get_mouse_tile_pos());
+        Vector2 centerPosLocal = MapToLocal(GetMouseTilePos());
         centerPosLocal.Y -= 16;
         return ToGlobal(centerPosLocal);
     }
 
-    public void set_tile_occupied(Vector2I map_coords)
+    public void SetTileOccupied(Vector2I mapCoords)
     {
-        _occupiedTiles[map_coords] = true;
-        _buildeableTiles.Remove(map_coords);
+        _occupiedTiles.Add(mapCoords);
+        _buildableTiles.Remove(mapCoords);
     }
 
-    public void set_tile_free(Vector2I map_coords)
+    public void SetTileFree(Vector2I mapCoords)
     {
-        if (_occupiedTiles.ContainsKey(map_coords))
+        if (_occupiedTiles.Contains(mapCoords))
         {
-            _occupiedTiles.Remove(map_coords);
-            _buildeableTiles[map_coords] = true;
+            _occupiedTiles.Remove(mapCoords);
+            _buildableTiles.Add(mapCoords);
         }
     }
 
-    public void unblock_tile(Vector2I map_coords)
+    public void UnblockTile(Vector2I mapCoords)
     {
         if (_blockedTiles.Count == 0)
         {
             return;
         }
 
-        _blockedTiles.Remove(map_coords);
-        SetCell(map_coords, ATLAS_ID, UNLOCK_TILE_POS);
-        _buildeableTiles[map_coords] = true;
+        _blockedTiles.Remove(mapCoords);
+        SetCell(mapCoords, ATLAS_ID, UNLOCK_TILE_POS);
+        _buildableTiles.Add(mapCoords);
     }
 
     private void FillData()
@@ -136,11 +137,11 @@ public partial class LevelTileMap : TileMapLayer
 
             if (tileData.GetCustomData(BLOCKED).AsBool())
             {
-                _blockedTiles[mapCoords] = true;
+                _blockedTiles.Add(mapCoords);
             }
-            else if (tileData.GetCustomData(BUILDEABLE).AsBool())
+            else if (tileData.GetCustomData(BuildableCustomDataKey).AsBool())
             {
-                _buildeableTiles[mapCoords] = true;
+                _buildableTiles.Add(mapCoords);
             }
         }
     }
@@ -153,6 +154,6 @@ public partial class LevelTileMap : TileMapLayer
         }
 
         Vector2I tile = tower.TilePos;
-        set_tile_free(tile);
+        SetTileFree(tile);
     }
 }

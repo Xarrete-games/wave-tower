@@ -14,13 +14,13 @@ public class RouteBuilder
         _adapter = adapter;
     }
 
-    public void setup(PieceConnectionGraph graph, object target)
+    public void Setup(PieceConnectionGraph graph, object target)
     {
         _connectionGraph = graph;
         _targetPiece = target;
     }
 
-    public List<object> build_route_to_target(Dictionary<string, object> spawnEntry)
+    public List<object> BuildRouteToTarget(Dictionary<string, object> spawnEntry)
     {
         var empty = new List<object>();
         if (!spawnEntry.TryGetValue("piece", out object startPiece))
@@ -41,10 +41,10 @@ public class RouteBuilder
             return empty;
         }
 
-        return _connectionGraph.find_path(startPiece, _targetPiece);
+        return _connectionGraph.FindPath(startPiece, _targetPiece);
     }
 
-    public List<Vector2> build_waypoints_from_route(Dictionary<string, object> spawnEntry, List<object> route)
+    public List<Vector2> BuildWaypointsFromRoute(Dictionary<string, object> spawnEntry, List<object> route)
     {
         var waypoints = new List<Vector2>();
         if (route.Count == 0)
@@ -80,14 +80,14 @@ public class RouteBuilder
             else
             {
                 object prevPiece = route[index - 1];
-                entryDir = _connectionGraph.find_connection_dir(prevPiece, piece);
+                entryDir = _connectionGraph.FindConnectionDir(prevPiece, piece);
                 entryDir = _adapter.GetOppositeDir(entryDir);
             }
 
             if (hasExit)
             {
                 object nextPiece = route[index + 1];
-                exitDir = _connectionGraph.find_connection_dir(piece, nextPiece);
+                exitDir = _connectionGraph.FindConnectionDir(piece, nextPiece);
             }
 
             if (hasExit)
@@ -127,9 +127,9 @@ public class RouteBuilder
         return waypoints;
     }
 
-    public List<Vector2> get_waypoints_for_spawn(Dictionary<string, object> spawnEntry)
+    public List<Vector2> GetWaypointsForSpawn(Dictionary<string, object> spawnEntry)
     {
-        List<object> route = build_route_to_target(spawnEntry);
-        return build_waypoints_from_route(spawnEntry, route);
+        List<object> route = BuildRouteToTarget(spawnEntry);
+        return BuildWaypointsFromRoute(spawnEntry, route);
     }
 }

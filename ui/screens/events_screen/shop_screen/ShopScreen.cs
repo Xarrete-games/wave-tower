@@ -126,7 +126,7 @@ public partial class ShopScreen : Control
 
             runContext.Economy.AddGold(itemOffer?.Price ?? 0);
             GetNode<AudioManager>("/root/AudioManager").PlayPurchase();
-            SellButton.disable();
+            SellButton.Disable();
             OnExitButtonPressed();
             return;
         }

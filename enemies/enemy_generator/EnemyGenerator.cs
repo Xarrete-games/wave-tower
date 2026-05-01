@@ -21,7 +21,7 @@ public partial class EnemyGenerator : Node
 
     public override void _Ready()
     {
-        var enemyCatalog = new Godot.Collections.Array<EnemyData>();
+        var enemyCatalog = new List<EnemyData>();
         List<EnemyData> rawEnemyCatalog = DataLoaderAccess.GetAllEnemies();
         for (int index = 0; index < rawEnemyCatalog.Count; index++)
         {
@@ -210,7 +210,7 @@ public partial class EnemyGenerator : Node
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         if (enemy != null)
         {
-            runContext.Status.ApplyDamage(enemy.damage);
+            runContext.Status.ApplyDamage(enemy.Damage);
         }
 
         runContext.EnemyManager.NotifyEnemyTargetReached(enemy);

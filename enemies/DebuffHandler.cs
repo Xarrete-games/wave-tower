@@ -4,9 +4,9 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class DebuffHandler : Node
 {
-    public static readonly Color BURN_COLOR = Colors.DarkOrange;
-    public static readonly Color FROST_COLOR = Colors.Aqua;
-    public static readonly Color DEFAULT_COLOR = Colors.White;
+    public static readonly Color BurnColor = Colors.DarkOrange;
+    public static readonly Color FrostColor = Colors.Aqua;
+    public static readonly Color DefaultColor = Colors.White;
 
     public List<EnemyDebuffInstance> Debuffs = new();
 
@@ -63,15 +63,15 @@ public partial class DebuffHandler : Node
         for (int i = Debuffs.Count - 1; i >= 0; i--)
         {
             EnemyDebuffInstance inst = Debuffs[i];
-            EnemyDebuff debuff = inst.debuff;
+            EnemyDebuff debuff = inst.Debuff;
 
-            if (debuff.TickInterval > 0.0f && now >= inst.next_tick_time)
+            if (debuff.TickInterval > 0.0f && now >= inst.NextTickTime)
             {
                 debuff.OnTick(enemy);
-                inst.next_tick_time += debuff.TickInterval;
+                inst.NextTickTime += debuff.TickInterval;
             }
 
-            if (now >= inst.expire_time)
+            if (now >= inst.ExpireTime)
             {
                 debuff.OnExpire(enemy);
                 Debuffs.RemoveAt(i);
@@ -85,7 +85,7 @@ public partial class DebuffHandler : Node
         int count = 0;
         for (int i = 0; i < Debuffs.Count; i++)
         {
-            if ((int)Debuffs[i].debuff.DebuffType == debuffType)
+            if ((int)Debuffs[i].Debuff.DebuffType == debuffType)
             {
                 count += 1;
             }
@@ -104,7 +104,7 @@ public partial class DebuffHandler : Node
         List<EnemyDebuff> result = new();
         for (int i = 0; i < Debuffs.Count; i++)
         {
-            result.Add(Debuffs[i].debuff);
+            result.Add(Debuffs[i].Debuff);
         }
 
         return result;

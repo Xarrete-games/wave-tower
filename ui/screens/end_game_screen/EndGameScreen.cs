@@ -21,7 +21,7 @@ public partial class EndGameScreen : CanvasLayer
         _label3.Visible = false;
         _panel.Modulate = Colors.White with { A = 1.0f };
 
-        fade_in();
+        FadeIn();
     }
 
     public override void _Input(InputEvent @event)
@@ -32,7 +32,7 @@ public partial class EndGameScreen : CanvasLayer
         }
     }
 
-    public void fade_in()
+    public void FadeIn()
     {
         Tween tween = CreateTween();
         tween.TweenProperty(_panel, "modulate:a", 0.0f, FadeDuration);

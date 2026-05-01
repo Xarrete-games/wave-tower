@@ -71,5 +71,8 @@ texture = ExtResource("8_3h2aw")
 offset = Vector2(0, -20)
 texture_scale = 1.5
 
+[node name="TowerBuffsBar" parent="." index="12" unique_id=773910159]
+SlotsContainer = null
+
 [node name="ElectricParticles" parent="." index="13" unique_id=264814021 instance=ExtResource("6_rk1kn")]
 position = Vector2(1, -140)

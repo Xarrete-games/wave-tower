@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class Enemy : CharacterBody2D
@@ -31,6 +32,13 @@ public partial class Enemy : CharacterBody2D
     [Export] public float MaxHealth = 50.0f;
     [Export] public int GoldValue = 1;
     [Export] public int damage = 1;
+
+    // Keep legacy exported field for serialized scenes and expose PascalCase API.
+    public int Damage
+    {
+        get => damage;
+        set => damage = value;
+    }
 
     public float Health;
     public HealthBar HealthBar;
@@ -165,6 +173,17 @@ public partial class Enemy : CharacterBody2D
     }
 
     public void SetWaypoints(Array<Vector2> waypoints)
+    {
+        var waypointList = new List<Vector2>(waypoints.Count);
+        for (int i = 0; i < waypoints.Count; i++)
+        {
+            waypointList.Add(waypoints[i]);
+        }
+
+        SetWaypoints(waypointList);
+    }
+
+    public void SetWaypoints(IReadOnlyList<Vector2> waypoints)
     {
         _waypoints.Clear();
         for (int i = 0; i < waypoints.Count; i++)

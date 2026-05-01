@@ -23,7 +23,7 @@ public partial class XarretaButton : Button
         GetNode<AudioManager>("/root/AudioManager").PlayButtonClick();
     }
 
-    public void disable()
+    public void Disable()
     {
         Disabled = true;
         if (DisabledThemeOverride != null)
@@ -32,7 +32,7 @@ public partial class XarretaButton : Button
         }
     }
 
-    public void enable()
+    public void Enable()
     {
         Disabled = false;
         if (ThemeOverride != null)

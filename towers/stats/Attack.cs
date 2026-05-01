@@ -1,4 +1,3 @@
-using Godot;
 using System.Collections.Generic;
 
 public class Attack
@@ -8,9 +7,9 @@ public class Attack
 	public bool IsExecution = false;
 	public int Hits = 1;
 	public int Bounces = 0;
-	public List<Variant> Effects = new();
+	public List<object> Effects = new();
 	public Source Source;
-	public Dictionary<string, Variant> Tags = new();
+	public Dictionary<string, object> Tags = new();
 	public float CritChance = 0.0f;
 
 	public Attack()
@@ -22,12 +21,12 @@ public class Attack
 		Source attackSource,
 		bool isCritical = false,
 		bool isExecution = false,
-		Dictionary<string, Variant> attackTags = null)
+		Dictionary<string, object> attackTags = null)
 	{
 		Damage = attackDamage;
 		IsCritical = isCritical;
 		IsExecution = isExecution;
 		Source = attackSource;
-		Tags = attackTags ?? new Dictionary<string, Variant>();
+		Tags = attackTags ?? new Dictionary<string, object>();
 	}
 }

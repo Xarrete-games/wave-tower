@@ -1,6 +1,5 @@
 using Godot;
 using System.Collections.Generic;
-using System.Linq;
 
 [GlobalClass]
 public partial class WorldMap : Node2D
@@ -17,9 +16,13 @@ public partial class WorldMap : Node2D
     [Export]
     public bool EnableFork = true;
 
-    public Godot.Collections.Array<Godot.Collections.Dictionary> portal_entries { get; private set; } = new();
-    public Godot.Collections.Array<Godot.Collections.Dictionary> finalized_portal_entries { get; private set; } = new();
-    public Godot.Collections.Array<Vector2> portal_spawn_positions { get; private set; } = new();
+    private readonly List<Dictionary<string, object>> _portalEntries = new();
+    private readonly List<Dictionary<string, object>> _finalizedPortalEntries = new();
+
+    public IReadOnlyList<Dictionary<string, object>> GetPortalEntries()
+    {
+        return _portalEntries;
+    }
 
     private List<MapPieceData> _mapPieces = new();
     private MapPiece _lastPieceAttached;
@@ -188,13 +191,13 @@ public partial class WorldMap : Node2D
         public IList<Vector2> GetRouteWaypoints(object piece, int entryDir, int exitDir)
         {
             MapPiece mapPiece = AsMapPiece(piece);
-            return mapPiece != null ? mapPiece.get_route_waypoints(entryDir, exitDir) : new List<Vector2>();
+            return mapPiece != null ? mapPiece.GetRouteWaypoints(entryDir, exitDir) : new List<Vector2>();
         }
 
         public IList<Vector2> GetFinalRouteWaypoints(object piece, int entryDir)
         {
             MapPiece mapPiece = AsMapPiece(piece);
-            return mapPiece != null ? mapPiece.get_final_route_waypoints(entryDir) : new List<Vector2>();
+            return mapPiece != null ? mapPiece.GetFinalRouteWaypoints(entryDir) : new List<Vector2>();
         }
 
         public int GetOppositeDir(int dir)
@@ -217,9 +220,9 @@ public partial class WorldMap : Node2D
         _wordBuilderAdapter = new GodotWordBuilderAdapter();
         _connectionGraph = new PieceConnectionGraph(_wordBuilderAdapter);
         _frontierManager = new FrontierManager(_wordBuilderAdapter);
-        _frontierManager.setup(_gridManager, ToObjectList(_mapPieces));
+        _frontierManager.Setup(_gridManager, ToObjectList(_mapPieces));
         _spawnHandler = new SpawnPositionsHandler();
-        _spawnHandler.setup(visual);
+        _spawnHandler.Setup(visual);
 
         if (_gridManager == null || _connectionGraph == null || _spawnHandler == null)
         {
@@ -227,10 +230,10 @@ public partial class WorldMap : Node2D
             return;
         }
 
-        _frontierManager.edge_finalized += OnEdgeFinalized;
+        _frontierManager.EdgeFinalized += OnEdgeFinalized;
 
         MapPieceData initPieceData = PickRandom(dataLoader.GetAllInitialMapPieces());
-        MapPiece initPiece = initPieceData?.GetInstance().AsGodotObject() as MapPiece;
+        MapPiece initPiece = initPieceData?.GetInstance();
         if (initPiece == null)
         {
             GD.PushError("[WorldMap] Could not instantiate initial piece.");
@@ -241,17 +244,17 @@ public partial class WorldMap : Node2D
         initPiece.LogicalPos = Vector2I.Zero;
         MovePieceDecorationToVisuals(initPiece);
 
-        _gridManager.occupy(Vector2I.Zero);
-        _connectionGraph.register_piece(initPiece);
-        CompositeTileMap?.register_piece(initPiece);
-        _frontierManager.add_frontier(initPiece);
+        _gridManager.Occupy(Vector2I.Zero);
+        _connectionGraph.RegisterPiece(initPiece);
+        CompositeTileMap?.RegisterPiece(initPiece);
+        _frontierManager.AddFrontier(initPiece);
 
         _routeBuilder = new RouteBuilder(_wordBuilderAdapter);
-        _routeBuilder.setup(_connectionGraph, initPiece);
+        _routeBuilder.Setup(_connectionGraph, initPiece);
 
         _lastPieceAttached = initPiece;
-        update_portals();
-        attach_next_piece();
+        UpdatePortals();
+        AttachNextPiece();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         _progress = runContext.Progress;
@@ -262,7 +265,7 @@ public partial class WorldMap : Node2D
     {
         if (_frontierManager != null)
         {
-            _frontierManager.edge_finalized -= OnEdgeFinalized;
+            _frontierManager.EdgeFinalized -= OnEdgeFinalized;
         }
 
         if (_progress != null)
@@ -275,19 +278,19 @@ public partial class WorldMap : Node2D
     {
         if (@event.IsActionPressed("test"))
         {
-            attach_next_piece();
+            AttachNextPiece();
         }
     }
 
-    public void attach_next_piece()
+    public void AttachNextPiece()
     {
-        if (!_frontierManager.has_frontiers())
+        if (!_frontierManager.HasFrontiers())
         {
             GD.PushError("No frontiers available for placement");
             return;
         }
 
-        MapPiece frontier = _frontierManager.select_random_frontier() as MapPiece;
+        MapPiece frontier = _frontierManager.SelectRandomFrontier() as MapPiece;
         if (frontier == null)
         {
             GD.PushError("Failed to select frontier");
@@ -297,23 +300,23 @@ public partial class WorldMap : Node2D
         Godot.Collections.Array<Edge> frontierEdges = frontier.edges;
         if (frontierEdges.Count == 0)
         {
-            _frontierManager.remove_frontier(frontier);
-            update_portals();
+            _frontierManager.RemoveFrontier(frontier);
+            UpdatePortals();
             return;
         }
 
         Edge nextEdge = FrontierManagerPickRandomEdge(frontier) as Edge;
         Vector2I frontierLogicalPos = frontier.LogicalPos;
         int nextEdgeDir = nextEdge != null ? (int)nextEdge.Direction : 0;
-        Vector2I candidateTile = _gridManager.get_neighbor_tile(frontierLogicalPos, nextEdgeDir);
+        Vector2I candidateTile = _gridManager.GetNeighborTile(frontierLogicalPos, nextEdgeDir);
 
-        FrontierManager.EdgeValidationResult validation = _frontierManager.validate_edge(frontier, nextEdge, candidateTile);
+        FrontierManager.EdgeValidationResult validation = _frontierManager.ValidateEdge(frontier, nextEdge, candidateTile);
         if (!validation.Valid)
         {
             string reason = string.IsNullOrEmpty(validation.Reason) ? "unknown reason" : validation.Reason;
             GD.PushWarning(reason);
-            _frontierManager.remove_edge_from_frontier(frontier, nextEdge);
-            update_portals();
+            _frontierManager.RemoveEdgeFromFrontier(frontier, nextEdge);
+            UpdatePortals();
             return;
         }
 
@@ -323,37 +326,35 @@ public partial class WorldMap : Node2D
         if (!placed)
         {
             GD.PushWarning($"frontier={frontier} edge={nextEdge} tile={candidateTile} no fitting piece -> removing edge");
-            _frontierManager.remove_edge_from_frontier(frontier, nextEdge);
-            update_portals();
+            _frontierManager.RemoveEdgeFromFrontier(frontier, nextEdge);
+            UpdatePortals();
             return;
         }
 
-        _frontierManager.prune_all_frontiers();
-        update_portals();
+        _frontierManager.PruneAllFrontiers();
+        UpdatePortals();
     }
 
-    public Godot.Collections.Array<Vector2> get_waypoints_for_spawn(Godot.Collections.Dictionary spawn_entry)
+    public List<Vector2> GetWaypointsForSpawnList(Dictionary<string, object> spawnEntry)
     {
         if (_routeBuilder == null)
         {
-            return new Godot.Collections.Array<Vector2>();
+            return new List<Vector2>();
         }
 
-        Dictionary<string, object> spawnEntry = _to_cs_object_dict(spawn_entry);
-        List<Vector2> waypoints = _routeBuilder.get_waypoints_for_spawn(spawnEntry);
-        return new Godot.Collections.Array<Vector2>(waypoints.ToArray());
+        return _routeBuilder.GetWaypointsForSpawn(spawnEntry);
     }
 
-    public void update_portals()
+    public void UpdatePortals()
     {
-        portal_entries.Clear();
+        _portalEntries.Clear();
 
-        for (int index = 0; index < finalized_portal_entries.Count; index++)
+        for (int index = 0; index < _finalizedPortalEntries.Count; index++)
         {
-            portal_entries.Add(finalized_portal_entries[index]);
+            _portalEntries.Add(_finalizedPortalEntries[index]);
         }
 
-        List<object> frontiers = _frontierManager.get_all_frontiers();
+        List<object> frontiers = _frontierManager.GetAllFrontiers();
         for (int index = 0; index < frontiers.Count; index++)
         {
             MapPiece frontier = frontiers[index] as MapPiece;
@@ -370,34 +371,27 @@ public partial class WorldMap : Node2D
                 int pos = edge != null ? (int)edge.Position : 0;
 
                 Vector2I logicalPos = frontier.LogicalPos;
-                Vector2I tile = _gridManager.get_neighbor_tile(logicalPos, dir);
+                Vector2I tile = _gridManager.GetNeighborTile(logicalPos, dir);
                 Vector2 worldPos = frontier.GlobalPosition
                     + PieceGetEdgeTilePos(frontier, dir, pos)
                     + PortalOffset;
                 string key = $"{logicalPos.X},{logicalPos.Y}_{dir}_{pos}";
 
-                var entry = new Godot.Collections.Dictionary
+                var entry = new Dictionary<string, object>
                 {
                     { "key", key },
                     { "tile", tile },
                     { "pos", worldPos },
-                    { "edge", Variant.From(edge) },
+                    { "edge", edge },
                     { "piece", frontier },
                 };
-                portal_entries.Add(entry);
+                _portalEntries.Add(entry);
             }
-        }
-
-        portal_spawn_positions.Clear();
-        for (int index = 0; index < portal_entries.Count; index++)
-        {
-            portal_spawn_positions.Add(portal_entries[index]["pos"].AsVector2());
         }
 
         if (_spawnHandler != null)
         {
-            _spawnHandler.update(portal_entries);
-            portal_spawn_positions = _spawnHandler.get_positions();
+            _spawnHandler.Update(_portalEntries);
         }
     }
 
@@ -414,7 +408,7 @@ public partial class WorldMap : Node2D
         for (int index = 0; index < candidatePieces.Count; index++)
         {
             MapPieceData pieceData = candidatePieces[index] as MapPieceData;
-            MapPiece newPiece = pieceData?.GetInstance().AsGodotObject() as MapPiece;
+            MapPiece newPiece = pieceData?.GetInstance();
             if (newPiece == null)
             {
                 continue;
@@ -422,7 +416,7 @@ public partial class WorldMap : Node2D
 
             AddChild(newPiece);
 
-            HashSet<string> occSim = _gridManager.create_simulated_occupation(candidateTile);
+            HashSet<string> occSim = _gridManager.CreateSimulatedOccupation(candidateTile);
             var remainingEdges = new List<Edge>();
             for (int i = 0; i < newPiece.edges.Count; i++)
             {
@@ -443,14 +437,14 @@ public partial class WorldMap : Node2D
                 }
 
                 int dir = (int)edgeObj.Direction;
-                Vector2I neigh = candidateTile + _gridManager.get_offset(dir);
-                string neighKey = GridManager.vec_key(neigh);
+                Vector2I neigh = candidateTile + _gridManager.GetOffset(dir);
+                string neighKey = GridManager.VecKey(neigh);
                 if (occSim.Contains(neighKey))
                 {
                     continue;
                 }
 
-                if (_gridManager.reachable_to_boundary(neigh, occSim))
+                if (_gridManager.ReachableToBoundary(neigh, occSim))
                 {
                     hasOpenPath = true;
                     break;
@@ -464,13 +458,13 @@ public partial class WorldMap : Node2D
             }
 
             newPiece.LogicalPos = candidateTile;
-            _gridManager.occupy(candidateTile);
-            CompositeTileMap?.register_piece(newPiece);
+            _gridManager.Occupy(candidateTile);
+            CompositeTileMap?.RegisterPiece(newPiece);
 
             PieceSetEdgeHasConnected(frontier, nextEdge);
             PieceSetEdgeHasConnected(newPiece, edgeToConnect);
 
-            _frontierManager.update_after_placement(frontier, newPiece);
+            _frontierManager.UpdateAfterPlacement(frontier, newPiece);
 
             int entryDir = nextEdge != null ? (int)nextEdge.Direction : 0;
             int exitDir = edgeToConnectTyped != null ? (int)edgeToConnectTyped.Direction : 0;
@@ -502,7 +496,7 @@ public partial class WorldMap : Node2D
         Vector2 pieceAPosition = pieceA.GlobalPosition;
         pieceB.GlobalPosition = pieceAPosition + aWorld - bWorld + shift;
 
-        _connectionGraph.connect_pieces(pieceA, pieceB, entryDir, exitDir);
+        _connectionGraph.ConnectPieces(pieceA, pieceB, entryDir, exitDir);
     }
 
     private void MovePieceDecorationToVisuals(MapPiece piece)
@@ -546,8 +540,8 @@ public partial class WorldMap : Node2D
             return;
         }
 
-        Godot.Collections.Array<Node> children = node.GetChildren();
-        if (children.Count == 0)
+        int childCount = node.GetChildCount();
+        if (childCount == 0)
         {
             if (node is Node2D node2D)
             {
@@ -557,9 +551,9 @@ public partial class WorldMap : Node2D
             return;
         }
 
-        for (int index = 0; index < children.Count; index++)
+        for (int index = 0; index < childCount; index++)
         {
-            CollectLeafNode2d(children[index], output);
+            CollectLeafNode2d(node.GetChild(index), output);
         }
     }
 
@@ -574,31 +568,31 @@ public partial class WorldMap : Node2D
         int pos = edge != null ? (int)edge.Position : 0;
         Vector2I logicalPos = piece.LogicalPos;
 
-        Vector2I tile = _gridManager.get_neighbor_tile(logicalPos, dir);
+        Vector2I tile = _gridManager.GetNeighborTile(logicalPos, dir);
         Vector2 position = piece.GlobalPosition
             + PieceGetEdgeTilePos(piece, dir, pos)
             + PortalOffset;
         string key = $"{logicalPos.X},{logicalPos.Y}_{dir}_{pos}";
 
-        for (int index = 0; index < finalized_portal_entries.Count; index++)
+        for (int index = 0; index < _finalizedPortalEntries.Count; index++)
         {
-            Godot.Collections.Dictionary existing = finalized_portal_entries[index];
-            if (existing.ContainsKey("key") && existing["key"].AsString() == key)
+            Dictionary<string, object> existing = _finalizedPortalEntries[index];
+            if (existing.TryGetValue("key", out object existingKeyObj) && existingKeyObj is string existingKey && existingKey == key)
             {
                 return;
             }
         }
 
-        var entry = new Godot.Collections.Dictionary
+        var entry = new Dictionary<string, object>
         {
             { "key", key },
             { "tile", tile },
             { "pos", position },
-            { "edge", Variant.From(edge) },
+            { "edge", edge },
             { "piece", piece },
         };
 
-        finalized_portal_entries.Add(entry);
+        _finalizedPortalEntries.Add(entry);
     }
 
     private void OnWaveFinished()
@@ -613,7 +607,7 @@ public partial class WorldMap : Node2D
 
         if (currentWave % 3 == 0)
         {
-            attach_next_piece();
+            AttachNextPiece();
         }
     }
 
@@ -663,27 +657,27 @@ public partial class WorldMap : Node2D
 
     private Vector2 PieceGetEdgeTilePos(MapPiece piece, int dir, int pos = 1)
     {
-        return piece != null ? piece.get_edge_tile_pos(dir, pos) : Vector2.Zero;
+        return piece != null ? piece.GetEdgeTilePos(dir, pos) : Vector2.Zero;
     }
 
     private Vector2I PieceGetEdgeTileDelta(MapPiece piece, int dir)
     {
-        return piece != null ? piece.get_edge_tile_delta(dir) : Vector2I.Zero;
+        return piece != null ? piece.GetEdgeTileDelta(dir) : Vector2I.Zero;
     }
 
     private Vector2 PieceGetTileLocalOffset(MapPiece piece, Vector2I delta)
     {
-        return piece != null ? piece.get_tile_local_offset(delta) : Vector2.Zero;
+        return piece != null ? piece.GetTileLocalOffset(delta) : Vector2.Zero;
     }
 
     private Node2D PieceGetDecoration(MapPiece piece)
     {
-        return piece?.get_decoration();
+        return piece?.GetDecoration();
     }
 
     private void PieceSetEdgeHasConnected(MapPiece piece, object edge)
     {
-        piece?.set_edge_has_connected(edge as Edge);
+        piece?.SetEdgeHasConnected(edge as Edge);
     }
 
     private void AppendFilteredByFork(List<object> source, List<object> target, bool isFork)
@@ -711,7 +705,7 @@ public partial class WorldMap : Node2D
 
     private object FrontierManagerPickRandomEdge(GodotObject frontier)
     {
-        return FrontierManager.pick_random_edge(frontier, _wordBuilderAdapter);
+        return FrontierManager.PickRandomEdge(frontier, _wordBuilderAdapter);
     }
 
     private void Shuffle(List<object> items)
@@ -721,64 +715,6 @@ public partial class WorldMap : Node2D
             int j = (int)(GD.Randi() % (uint)(i + 1));
             (items[i], items[j]) = (items[j], items[i]);
         }
-    }
-
-    private Dictionary<string, Variant> _to_cs_dict(Godot.Collections.Dictionary source)
-    {
-        var result = new Dictionary<string, Variant>();
-        foreach (Variant key in source.Keys)
-        {
-            result[key.AsString()] = source[key];
-        }
-
-        return result;
-    }
-
-    private List<Dictionary<string, Variant>> _to_cs_entries(Godot.Collections.Array<Godot.Collections.Dictionary> entries)
-    {
-        var result = new List<Dictionary<string, Variant>>(entries.Count);
-        for (int i = 0; i < entries.Count; i++)
-        {
-            result.Add(_to_cs_dict(entries[i]));
-        }
-
-        return result;
-    }
-
-    private Dictionary<string, object> _to_cs_object_dict(Godot.Collections.Dictionary source)
-    {
-        var result = new Dictionary<string, object>();
-        foreach (Variant key in source.Keys)
-        {
-            string stringKey = key.AsString();
-            Variant value = source[key];
-
-            object rawValue = value.VariantType switch
-            {
-                Variant.Type.String => value.AsString(),
-                Variant.Type.Int => value.AsInt32(),
-                Variant.Type.Float => value.AsSingle(),
-                Variant.Type.Vector2 => value.AsVector2(),
-                Variant.Type.Vector2I => value.AsVector2I(),
-                Variant.Type.Object => value.AsGodotObject(),
-                _ => value,
-            };
-
-            result[stringKey] = rawValue;
-        }
-
-        return result;
-    }
-
-    private List<Dictionary<string, object>> _to_cs_entries_object(Godot.Collections.Array<Godot.Collections.Dictionary> entries)
-    {
-        var result = new List<Dictionary<string, object>>(entries.Count);
-        for (int i = 0; i < entries.Count; i++)
-        {
-            result.Add(_to_cs_object_dict(entries[i]));
-        }
-
-        return result;
     }
 
     private List<object> ToObjectList(List<MapPieceData> source)

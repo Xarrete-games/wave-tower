@@ -13,7 +13,7 @@ public class FrontierManager
         public object EdgeToConnect { get; set; }
     }
 
-    public event Action<object, object> edge_finalized;
+    public event Action<object, object> EdgeFinalized;
 
     private readonly IWordBuilderAdapter _adapter;
     private readonly List<object> _frontiers = new();
@@ -25,7 +25,7 @@ public class FrontierManager
         _adapter = adapter;
     }
 
-    public void setup(GridManager gridManager, IEnumerable<object> availablePieces)
+    public void Setup(GridManager gridManager, IEnumerable<object> availablePieces)
     {
         _gridManager = gridManager;
         _frontiers.Clear();
@@ -33,7 +33,7 @@ public class FrontierManager
         _availablePieces.AddRange(availablePieces);
     }
 
-    public void add_frontier(object piece)
+    public void AddFrontier(object piece)
     {
         if (!_adapter.IsPieceValid(piece))
         {
@@ -47,17 +47,17 @@ public class FrontierManager
         }
     }
 
-    public void remove_frontier(object piece)
+    public void RemoveFrontier(object piece)
     {
         _frontiers.Remove(piece);
     }
 
-    public bool has_frontiers()
+    public bool HasFrontiers()
     {
         return _frontiers.Count > 0;
     }
 
-    public object select_random_frontier()
+    public object SelectRandomFrontier()
     {
         if (_frontiers.Count == 0)
         {
@@ -68,7 +68,7 @@ public class FrontierManager
         return _frontiers[index];
     }
 
-    public static object pick_random_edge(object frontier, IWordBuilderAdapter adapter)
+    public static object PickRandomEdge(object frontier, IWordBuilderAdapter adapter)
     {
         if (!adapter.IsPieceValid(frontier))
         {
@@ -85,7 +85,7 @@ public class FrontierManager
         return edgeList[index];
     }
 
-    public EdgeValidationResult validate_edge(object frontier, object nextEdge, Vector2I candidateTile)
+    public EdgeValidationResult ValidateEdge(object frontier, object nextEdge, Vector2I candidateTile)
     {
         object edgeToConnect = _adapter.GetOppositeEdge(nextEdge);
         var result = new EdgeValidationResult
@@ -100,20 +100,20 @@ public class FrontierManager
             return result;
         }
 
-        if (_gridManager.is_occupied(candidateTile))
+        if (_gridManager.IsOccupied(candidateTile))
         {
             result.Reason = $"frontier={frontier} edge={nextEdge} tile={candidateTile} reason=occupied";
             return result;
         }
 
-        if (_gridManager.would_cause_enclosure_at(candidateTile))
+        if (_gridManager.WouldCauseEnclosureAt(candidateTile))
         {
             result.Reason = $"frontier={frontier} edge={nextEdge} tile={candidateTile} reason=enclose";
             return result;
         }
 
         int dir = _adapter.GetEdgeDir(edgeToConnect);
-        List<int> invalidEdges = _gridManager.get_invalid_edges_at(candidateTile, dir);
+        List<int> invalidEdges = _gridManager.GetInvalidEdgesAt(candidateTile, dir);
         result.InvalidEdges.AddRange(invalidEdges);
 
         for (int index = 0; index < _availablePieces.Count; index++)
@@ -150,9 +150,9 @@ public class FrontierManager
         return result;
     }
 
-    public void remove_edge_from_frontier(object frontier, object edge)
+    public void RemoveEdgeFromFrontier(object frontier, object edge)
     {
-        edge_finalized?.Invoke(frontier, edge);
+        EdgeFinalized?.Invoke(frontier, edge);
 
         if (!_adapter.IsPieceValid(frontier))
         {
@@ -167,7 +167,7 @@ public class FrontierManager
         }
     }
 
-    public void update_after_placement(object oldFrontier, object newPiece)
+    public void UpdateAfterPlacement(object oldFrontier, object newPiece)
     {
         if (!_adapter.IsPieceValid(newPiece) || !_adapter.IsPieceValid(oldFrontier))
         {
@@ -185,7 +185,7 @@ public class FrontierManager
         }
     }
 
-    public void prune_all_frontiers()
+    public void PruneAllFrontiers()
     {
         var removeFrontiers = new List<object>();
 
@@ -205,15 +205,15 @@ public class FrontierManager
                 object edge = edgesCopy[ei];
                 int dir = _adapter.GetEdgeDir(edge);
                 Vector2I logicalPos = _adapter.GetPieceLogicalPos(frontier);
-                Vector2I candidate = _gridManager.get_neighbor_tile(logicalPos, dir);
+                Vector2I candidate = _gridManager.GetNeighborTile(logicalPos, dir);
 
-                if (_gridManager.is_occupied(candidate))
+                if (_gridManager.IsOccupied(candidate))
                 {
                     removeEdges.Add(edge);
                     continue;
                 }
 
-                if (_gridManager.would_cause_enclosure_at(candidate))
+                if (_gridManager.WouldCauseEnclosureAt(candidate))
                 {
                     removeEdges.Add(edge);
                     continue;
@@ -221,7 +221,7 @@ public class FrontierManager
 
                 object edgeToConnect = _adapter.GetOppositeEdge(edge);
                 int edgeToConnectDir = _adapter.GetEdgeDir(edgeToConnect);
-                List<int> invalid = _gridManager.get_invalid_edges_at(candidate, edgeToConnectDir);
+                List<int> invalid = _gridManager.GetInvalidEdgesAt(candidate, edgeToConnectDir);
 
                 bool hasPossiblePiece = false;
                 for (int pi = 0; pi < _availablePieces.Count; pi++)
@@ -259,7 +259,7 @@ public class FrontierManager
             for (int ri = 0; ri < removeEdges.Count; ri++)
             {
                 object removeEdge = removeEdges[ri];
-                edge_finalized?.Invoke(frontier, removeEdge);
+                EdgeFinalized?.Invoke(frontier, removeEdge);
                 _adapter.RemoveEdgeFromPiece(frontier, removeEdge);
             }
 
@@ -275,7 +275,7 @@ public class FrontierManager
         }
     }
 
-    public bool frontier_has_valid_edges(object piece)
+    public bool FrontierHasValidEdges(object piece)
     {
         if (!_adapter.IsPieceValid(piece))
         {
@@ -288,21 +288,21 @@ public class FrontierManager
             object edge = edges[ei];
             int dir = _adapter.GetEdgeDir(edge);
             Vector2I logicalPos = _adapter.GetPieceLogicalPos(piece);
-            Vector2I candidate = _gridManager.get_neighbor_tile(logicalPos, dir);
+            Vector2I candidate = _gridManager.GetNeighborTile(logicalPos, dir);
 
-            if (_gridManager.is_occupied(candidate))
+            if (_gridManager.IsOccupied(candidate))
             {
                 continue;
             }
 
-            if (_gridManager.would_cause_enclosure_at(candidate))
+            if (_gridManager.WouldCauseEnclosureAt(candidate))
             {
                 continue;
             }
 
             object edgeToConnect = _adapter.GetOppositeEdge(edge);
             int edgeToConnectDir = _adapter.GetEdgeDir(edgeToConnect);
-            List<int> invalid = _gridManager.get_invalid_edges_at(candidate, edgeToConnectDir);
+            List<int> invalid = _gridManager.GetInvalidEdgesAt(candidate, edgeToConnectDir);
 
             for (int pi = 0; pi < _availablePieces.Count; pi++)
             {
@@ -332,7 +332,7 @@ public class FrontierManager
         return false;
     }
 
-    public List<object> get_all_frontiers()
+    public List<object> GetAllFrontiers()
     {
         return new List<object>(_frontiers);
     }

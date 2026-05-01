@@ -1,5 +1,5 @@
 using Godot;
-using Godot.Collections;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class LightningChainProjectile : Node2D
@@ -8,8 +8,8 @@ public partial class LightningChainProjectile : Node2D
     [Export] public int MaxBounces = 3;
     [Export] public float BounceDelay = 0.1f;
 
-    private readonly Array<Node2D> _enemiesInRange = new();
-    private readonly Array<Node2D> _hitEnemies = new();
+    private readonly List<Node2D> _enemiesInRange = new();
+    private readonly List<Node2D> _hitEnemies = new();
 
     private Node2D _target;
     private float _currentLength;

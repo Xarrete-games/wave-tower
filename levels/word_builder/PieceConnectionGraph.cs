@@ -11,7 +11,7 @@ public class PieceConnectionGraph
         _adapter = adapter;
     }
 
-    public void register_piece(object piece)
+    public void RegisterPiece(object piece)
     {
         long key = _adapter.GetObjectKey(piece);
         if (key == 0)
@@ -27,7 +27,7 @@ public class PieceConnectionGraph
         _objects[key] = piece;
     }
 
-    public void connect_pieces(object pieceA, object pieceB, int dirA, int dirB)
+    public void ConnectPieces(object pieceA, object pieceB, int dirA, int dirB)
     {
         long keyA = _adapter.GetObjectKey(pieceA);
         long keyB = _adapter.GetObjectKey(pieceB);
@@ -36,14 +36,14 @@ public class PieceConnectionGraph
             return;
         }
 
-        register_piece(pieceA);
-        register_piece(pieceB);
+        RegisterPiece(pieceA);
+        RegisterPiece(pieceB);
 
         _connections[keyA][dirA] = keyB;
         _connections[keyB][dirB] = keyA;
     }
 
-    public int find_connection_dir(object fromPiece, object toPiece)
+    public int FindConnectionDir(object fromPiece, object toPiece)
     {
         long fromKey = _adapter.GetObjectKey(fromPiece);
         long toKey = _adapter.GetObjectKey(toPiece);
@@ -63,7 +63,7 @@ public class PieceConnectionGraph
         return 0;
     }
 
-    public List<object> find_path(object fromPiece, object toPiece)
+    public List<object> FindPath(object fromPiece, object toPiece)
     {
         long fromKey = _adapter.GetObjectKey(fromPiece);
         long toKey = _adapter.GetObjectKey(toPiece);
