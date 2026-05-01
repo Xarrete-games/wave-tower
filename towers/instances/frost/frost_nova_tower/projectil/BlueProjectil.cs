@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class BlueProjectil : Area2D
 {
-    private static readonly PackedScene BLUE_EXPLOSION = GD.Load<PackedScene>("uid://bntnbljmfy1p4");
+    private static readonly PackedScene BlueExplosionScene = GD.Load<PackedScene>("uid://bntnbljmfy1p4");
 
     [Export] public float ExpandSpeed = 300.0f;
     [Export] public float YScale = 0.5f;
@@ -13,28 +13,28 @@ public partial class BlueProjectil : Area2D
     private float _radius;
     private CircleShape2D _shape;
     private Attack _attack;
-    private float _max_area_range;
-    private EnemyDebuff _frost_debuff;
+    private float _maxAreaRange;
+    private EnemyDebuff _frostDebuff;
 
-    private CollisionShape2D _collision_shape;
-    private AudioStreamPlayer2D _blue_attack;
+    private CollisionShape2D _collisionShape;
+    private AudioStreamPlayer2D _blueAttack;
 
     public override void _Ready()
     {
-        _collision_shape = GetNode<CollisionShape2D>("CollisionShape");
-        _blue_attack = GetNode<AudioStreamPlayer2D>("BlueAttack");
+        _collisionShape = GetNode<CollisionShape2D>("CollisionShape");
+        _blueAttack = GetNode<AudioStreamPlayer2D>("BlueAttack");
 
         // Keep the nova wave above gameplay sprites so the ring is always visible.
         ZAsRelative = false;
         ZIndex = 50;
 
-        _shape = _collision_shape.Shape as CircleShape2D;
+        _shape = _collisionShape.Shape as CircleShape2D;
         if (_shape != null)
         {
             _shape.Radius = 0.0f;
         }
 
-        _blue_attack.Play();
+        _blueAttack.Play();
     }
 
     public override void _Process(double delta)
@@ -47,27 +47,27 @@ public partial class BlueProjectil : Area2D
 
         QueueRedraw();
 
-        if (_radius >= _max_area_range)
+        if (_radius >= _maxAreaRange)
         {
             QueueFree();
         }
     }
 
-    public void set_stats(Attack attack, float area_range, EnemyDebuff frost_debuff)
+    public void SetStats(Attack attack, float areaRange, EnemyDebuff frostDebuff)
     {
         _attack = attack;
-        _max_area_range = area_range;
-        _frost_debuff = frost_debuff;
+        _maxAreaRange = areaRange;
+        _frostDebuff = frostDebuff;
     }
 
     public override void _Draw()
     {
-        if (_max_area_range <= 0.0f)
+        if (_maxAreaRange <= 0.0f)
         {
             return;
         }
 
-        float radiusProgress = Mathf.Clamp(_radius / _max_area_range, 0.0f, 1.0f);
+        float radiusProgress = Mathf.Clamp(_radius / _maxAreaRange, 0.0f, 1.0f);
         const float fadeStartThreshold = 0.8f;
 
         float alphaFade;
@@ -97,11 +97,11 @@ public partial class BlueProjectil : Area2D
             return;
         }
 
-        CpuParticles2D explosion = BLUE_EXPLOSION.Instantiate<CpuParticles2D>();
+        CpuParticles2D explosion = BlueExplosionScene.Instantiate<CpuParticles2D>();
 
         Enemy enemyNode = enemy as Enemy;
         enemyNode?.ApplyDamage(_attack);
-        enemyNode?.ApplyDebuff(_frost_debuff);
+        enemyNode?.ApplyDebuff(_frostDebuff);
 
         AddChild(explosion);
         explosion.GlobalPosition = enemy.GlobalPosition;

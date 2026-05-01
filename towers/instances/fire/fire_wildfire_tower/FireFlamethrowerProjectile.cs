@@ -1,28 +1,28 @@
 using Godot;
-using Godot.Collections;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class FireFlamethrowerProjectile : Node2D
 {
-    private const float DAMAGE_TICK_INTERVAL = 0.5f;
+    private const float DamageTickInterval = 0.5f;
 
     private Node2D _target;
     private Attack _attack;
-    private readonly Array<Node2D> _targetsInArea = new();
+    private readonly List<Node2D> _targetsInArea = new();
 
-    private CpuParticles2D _fire_particles;
-    private Timer _damage_timer;
+    private CpuParticles2D _fireParticles;
+    private Timer _damageTimer;
     private Area2D _area2D;
     private Node2D _flamethrower;
 
     public override void _Ready()
     {
-        _fire_particles = GetNode<CpuParticles2D>("%FireParticles");
-        _damage_timer = GetNode<Timer>("%DamageTimer");
+        _fireParticles = GetNode<CpuParticles2D>("%FireParticles");
+        _damageTimer = GetNode<Timer>("%DamageTimer");
         _area2D = GetNode<Area2D>("%Area2D");
         _flamethrower = GetNode<Node2D>("%Flamethrower");
 
-        _damage_timer.WaitTime = DAMAGE_TICK_INTERVAL;
+        _damageTimer.WaitTime = DamageTickInterval;
         Stop();
     }
 
@@ -41,8 +41,8 @@ public partial class FireFlamethrowerProjectile : Node2D
 
     public void Fire()
     {
-        _damage_timer.Start();
-        _fire_particles.Emitting = true;
+        _damageTimer.Start();
+        _fireParticles.Emitting = true;
         _area2D.Monitoring = true;
     }
 
@@ -54,15 +54,15 @@ public partial class FireFlamethrowerProjectile : Node2D
 
     public void Stop()
     {
-        _fire_particles.Emitting = false;
+        _fireParticles.Emitting = false;
         _area2D.Monitoring = false;
-        _damage_timer.Stop();
+        _damageTimer.Stop();
         _targetsInArea.Clear();
     }
 
     public bool IsThrowing()
     {
-        return _fire_particles.Emitting;
+        return _fireParticles.Emitting;
     }
 
     private void OnArea2dBodyExited(Node2D body)

@@ -115,7 +115,7 @@ public partial class TowerStatsPanel : Control
             return;
         }
 
-        _levelLabel.Text = expData.level.ToString();
+        _levelLabel.Text = expData.Level.ToString();
     }
 
     private void UpdateTargetingModes(List<TowerTargetingMode> modes)

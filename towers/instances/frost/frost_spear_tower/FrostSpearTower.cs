@@ -6,12 +6,12 @@ public partial class FrostSpearTower : Tower
     [Export] public PackedScene FrostSpearProjectileScene;
     [Export] public int DebuffStacks = 2;
 
-    private Marker2D projectile_spawn_pos;
+    private Marker2D _projectileSpawnPos;
 
     public override void _Ready()
     {
         base._Ready();
-        projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
+        _projectileSpawnPos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
     protected override void Fire()
@@ -25,7 +25,7 @@ public partial class FrostSpearTower : Tower
         SingleTargetProjectile projectile = FrostSpearProjectileScene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
-        projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
+        projectile.GlobalPosition = _projectileSpawnPos.GlobalPosition;
 
         Attack attack = GetAttack();
         int enemyFrostStacks = targetEnemy.GetDebuffStacks(0);

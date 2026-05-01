@@ -5,12 +5,12 @@ public partial class WildFireTower : Tower
 {
     [Export] public PackedScene ProjectileScene;
 
-    private Marker2D projectile_spawn_pos;
+    private Marker2D _projectileSpawnPos;
 
     public override void _Ready()
     {
         base._Ready();
-        projectile_spawn_pos = GetNode<Marker2D>("ProjectileSpawnPos");
+        _projectileSpawnPos = GetNode<Marker2D>("ProjectileSpawnPos");
     }
 
     protected override void Fire()
@@ -23,7 +23,7 @@ public partial class WildFireTower : Tower
         SingleTargetProjectile projectile = ProjectileScene.Instantiate<SingleTargetProjectile>();
         AddChild(projectile);
 
-        projectile.GlobalPosition = projectile_spawn_pos.GlobalPosition;
+        projectile.GlobalPosition = _projectileSpawnPos.GlobalPosition;
 
         EnemyDebuff debuff = EnemyDebuff.CreateBurn(DamageSource);
         projectile.SetTarget(_currentTarget, GetAttack(), debuff);

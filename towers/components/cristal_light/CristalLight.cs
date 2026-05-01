@@ -13,13 +13,13 @@ public partial class CristalLight : PointLight2D
     private Tween _attackScaleTween;
     private Tween _attackEnergyTween;
 
-    public async void play()
+    public async void Play()
     {
-        await turn_on();
-        await turn_off();
+        await TurnOn();
+        await TurnOff();
     }
 
-    public async Task turn_on()
+    public async Task TurnOn()
     {
         KillPreviousAnimation();
         _attackEnergyTween = CreateTween();
@@ -29,7 +29,7 @@ public partial class CristalLight : PointLight2D
         await ToSignal(_attackEnergyTween, Tween.SignalName.Finished);
     }
 
-    public async Task turn_off()
+    public async Task TurnOff()
     {
         KillPreviousAnimation();
         _attackEnergyTween = CreateTween();

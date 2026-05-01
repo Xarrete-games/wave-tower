@@ -1,3 +1,60 @@
 using Godot;
-using Godot.Collections;
-[GlobalClass] public partial class BurnArea : Area2D { private readonly Array<Node2D> _enemies = new(); [Export] public float duration = 0.3f; public Source source; private Timer _duration_timer; private GpuParticles2D _explosion_particles; private CpuParticles2D _cpu_explosion; public override void _Ready() { _duration_timer = GetNode<Timer>("DurationTimer"); _explosion_particles = GetNode<GpuParticles2D>("ExplosionParticles"); _cpu_explosion = GetNode<CpuParticles2D>("CPUExplosion"); _duration_timer.WaitTime = duration; Monitoring = false; } public void setup(Source burnSource) { source = burnSource; _duration_timer.Start(); Monitoring = true; _explosion_particles.Restart(); _explosion_particles.Emitting = true; _cpu_explosion.Restart(); _cpu_explosion.Emitting = true; } private void OnBodyEntered(Node2D body) { _enemies.Add(body); body.TreeExited += () => _enemies.Remove(body); if (!GodotObject.IsInstanceValid(body)) { return; } EnemyDebuff debuff = source != null ? EnemyDebuff.CreateBurn(source) : null; if (debuff != null) { Enemy enemy = body as Enemy; enemy?.ApplyDebuff(debuff); } } private void OnDurationTimerTimeout() { QueueFree(); } }
+using System.Collections.Generic;
+
+[GlobalClass]
+public partial class BurnArea : Area2D
+{
+	private readonly List<Node2D> _enemies = new();
+
+	[Export] public float duration = 0.3f;
+	private Source _source;
+
+	private Timer _durationTimer;
+	private GpuParticles2D _explosionParticles;
+	private CpuParticles2D _cpuExplosion;
+
+	public override void _Ready()
+	{
+		_durationTimer = GetNode<Timer>("DurationTimer");
+		_explosionParticles = GetNode<GpuParticles2D>("ExplosionParticles");
+		_cpuExplosion = GetNode<CpuParticles2D>("CPUExplosion");
+
+		_durationTimer.WaitTime = duration;
+		Monitoring = false;
+	}
+
+	public void Setup(Source burnSource)
+	{
+		_source = burnSource;
+		_durationTimer.Start();
+		Monitoring = true;
+
+		_explosionParticles.Restart();
+		_explosionParticles.Emitting = true;
+		_cpuExplosion.Restart();
+		_cpuExplosion.Emitting = true;
+	}
+
+	private void OnBodyEntered(Node2D body)
+	{
+		_enemies.Add(body);
+		body.TreeExited += () => _enemies.Remove(body);
+
+		if (!GodotObject.IsInstanceValid(body))
+		{
+			return;
+		}
+
+		EnemyDebuff debuff = _source != null ? EnemyDebuff.CreateBurn(_source) : null;
+		if (debuff != null)
+		{
+			Enemy enemy = body as Enemy;
+			enemy?.ApplyDebuff(debuff);
+		}
+	}
+
+	private void OnDurationTimerTimeout()
+	{
+		QueueFree();
+	}
+}

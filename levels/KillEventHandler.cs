@@ -59,6 +59,6 @@ public partial class KillEventHandler : Node
         BurnArea burnArea = BurnAreaScene.Instantiate<BurnArea>();
         AddChild(burnArea);
         burnArea.GlobalPosition = position;
-        burnArea.setup(source);
+        burnArea.Setup(source);
     }
 }

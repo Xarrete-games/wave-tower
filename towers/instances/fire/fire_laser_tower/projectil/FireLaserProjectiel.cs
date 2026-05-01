@@ -11,40 +11,40 @@ public partial class FireLaserProjectiel : Node2D
     private Node2D _target;
     private Attack _attack;
     private EnemyDebuff _debuff;
-    private int _amount_debuff = 1;
+    private int _amountDebuff = 1;
     private Tween _tween;
-    private float _current_laser_length;
-    private bool _is_casting;
+    private float _currentLaserLength;
+    private bool _isCasting;
 
-    private Line2D _line_2d;
-    private float _line_width;
-    private AudioStreamPlayer2D _red_attack_start;
-    private AudioStreamPlayer2D _red_attack_loop;
-    private AudioStreamPlayer2D _red_attack_finish;
-    private CpuParticles2D _fire_particles;
+    private Line2D _line2D;
+    private float _lineWidth;
+    private AudioStreamPlayer2D _redAttackStart;
+    private AudioStreamPlayer2D _redAttackLoop;
+    private AudioStreamPlayer2D _redAttackFinish;
+    private CpuParticles2D _fireParticles;
 
     private readonly float _amplitude = 10f;
     private readonly float _speed = -16f;
-    private readonly float _phase_offset = Mathf.Pi / 3f;
+    private readonly float _phaseOffset = Mathf.Pi / 3f;
     private Color _color = Colors.Red;
 
     public override void _Ready()
     {
-        _line_2d = GetNode<Line2D>("Line2D");
-        _line_width = _line_2d.Width;
-        _red_attack_start = GetNode<AudioStreamPlayer2D>("RedAttack_start");
-        _red_attack_loop = GetNode<AudioStreamPlayer2D>("RedAttack_loop");
-        _red_attack_finish = GetNode<AudioStreamPlayer2D>("RedAttack_finish");
-        _fire_particles = GetNode<CpuParticles2D>("FireParticles");
+        _line2D = GetNode<Line2D>("Line2D");
+        _lineWidth = _line2D.Width;
+        _redAttackStart = GetNode<AudioStreamPlayer2D>("RedAttack_start");
+        _redAttackLoop = GetNode<AudioStreamPlayer2D>("RedAttack_loop");
+        _redAttackFinish = GetNode<AudioStreamPlayer2D>("RedAttack_finish");
+        _fireParticles = GetNode<CpuParticles2D>("FireParticles");
 
         SetColor(color);
-        _fire_particles.Emitting = false;
+        _fireParticles.Emitting = false;
     }
 
     public override void _PhysicsProcess(double delta)
     {
         Enemy targetEnemy = _target as Enemy;
-        if (!_is_casting || !GodotObject.IsInstanceValid(targetEnemy))
+        if (!_isCasting || !GodotObject.IsInstanceValid(targetEnemy))
         {
             return;
         }
@@ -53,23 +53,23 @@ public partial class FireLaserProjectiel : Node2D
         LookAt(targetPosition);
 
         float distanceToTarget = GlobalPosition.DistanceTo(targetPosition);
-        _fire_particles.GlobalPosition = targetPosition;
+        _fireParticles.GlobalPosition = targetPosition;
 
-        _current_laser_length = Mathf.MoveToward(_current_laser_length, distanceToTarget, CastSpeed * (float)delta);
+        _currentLaserLength = Mathf.MoveToward(_currentLaserLength, distanceToTarget, CastSpeed * (float)delta);
 
-        int iMax = _line_2d.GetPointCount() - 1;
+        int iMax = _line2D.GetPointCount() - 1;
         if (iMax <= 0)
         {
             return;
         }
 
         float time = Time.GetTicksMsec() / 1000.0f;
-        for (int i = 0; i < _line_2d.GetPointCount(); i++)
+        for (int i = 0; i < _line2D.GetPointCount(); i++)
         {
-            Vector2 pos = _line_2d.GetPointPosition(i);
-            pos.X = i * _current_laser_length / iMax;
-            pos.Y = Mathf.Sin(time * _speed + i * _phase_offset) * _amplitude * Mathf.Sin(Mathf.Pi * i / iMax);
-            _line_2d.SetPointPosition(i, pos);
+            Vector2 pos = _line2D.GetPointPosition(i);
+            pos.X = i * _currentLaserLength / iMax;
+            pos.Y = Mathf.Sin(time * _speed + i * _phaseOffset) * _amplitude * Mathf.Sin(Mathf.Pi * i / iMax);
+            _line2D.SetPointPosition(i, pos);
         }
     }
 
@@ -99,9 +99,9 @@ public partial class FireLaserProjectiel : Node2D
         _target = target;
         _attack = attack;
         _debuff = debuff;
-        _amount_debuff = amount;
+        _amountDebuff = amount;
 
-        if (!_is_casting)
+        if (!_isCasting)
         {
             SetIsCasting(true);
         }
@@ -118,50 +118,50 @@ public partial class FireLaserProjectiel : Node2D
         enemy?.ApplyDamage(_attack);
         if (_debuff != null)
         {
-            enemy?.ApplyDebuff(_debuff, _amount_debuff);
+            enemy?.ApplyDebuff(_debuff, _amountDebuff);
         }
     }
 
-    public void SetColor(Color new_color)
+    public void SetColor(Color newColor)
     {
-        _color = new_color;
-        if (_line_2d != null)
+        _color = newColor;
+        if (_line2D != null)
         {
-            _line_2d.Modulate = new_color;
+            _line2D.Modulate = newColor;
         }
     }
 
-    private void SetIsCasting(bool new_value)
+    private void SetIsCasting(bool newValue)
     {
-        if (_is_casting == new_value)
+        if (_isCasting == newValue)
         {
             return;
         }
 
-        _is_casting = new_value;
-        if (!_is_casting)
+        _isCasting = newValue;
+        if (!_isCasting)
         {
-            Dissapear();
+            Disappear();
             return;
         }
 
-        _current_laser_length = 0.0f;
+        _currentLaserLength = 0.0f;
         Appear();
     }
 
-    private void Dissapear()
+    private void Disappear()
     {
-        if (_red_attack_loop.IsInsideTree())
+        if (_redAttackLoop.IsInsideTree())
         {
-            _red_attack_loop.Stop();
+            _redAttackLoop.Stop();
         }
 
-        if (_red_attack_finish.IsInsideTree())
+        if (_redAttackFinish.IsInsideTree())
         {
-            _red_attack_finish.Play();
+            _redAttackFinish.Play();
         }
 
-        if (_line_2d == null)
+        if (_line2D == null)
         {
             return;
         }
@@ -171,40 +171,40 @@ public partial class FireLaserProjectiel : Node2D
             _tween.Kill();
         }
 
-        _fire_particles.Emitting = false;
+        _fireParticles.Emitting = false;
         _tween = CreateTween();
-        _tween.TweenProperty(_line_2d, "width", 0.0f, GrowthTime * 2.0f).FromCurrent();
+        _tween.TweenProperty(_line2D, "width", 0.0f, GrowthTime * 2.0f).FromCurrent();
         _tween.Finished += OnDisappearTweenFinished;
     }
 
     private void OnDisappearTweenFinished()
     {
-        _line_2d?.Hide();
-        _current_laser_length = 0.0f;
+        _line2D?.Hide();
+        _currentLaserLength = 0.0f;
     }
 
     private async void Appear()
     {
-        _red_attack_start.Play();
-        if (_line_2d == null)
+        _redAttackStart.Play();
+        if (_line2D == null)
         {
             return;
         }
 
-        _line_2d.Visible = true;
+        _line2D.Visible = true;
         if (_tween != null && _tween.IsRunning())
         {
             _tween.Kill();
         }
 
-        _fire_particles.Emitting = true;
+        _fireParticles.Emitting = true;
         _tween = CreateTween();
-        _tween.TweenProperty(_line_2d, "width", _line_width, GrowthTime * 2.0f).From(0.0f);
+        _tween.TweenProperty(_line2D, "width", _lineWidth, GrowthTime * 2.0f).From(0.0f);
 
-        await ToSignal(_red_attack_start, AudioStreamPlayer2D.SignalName.Finished);
-        if (_is_casting)
+        await ToSignal(_redAttackStart, AudioStreamPlayer2D.SignalName.Finished);
+        if (_isCasting)
         {
-            _red_attack_loop.Play();
+            _redAttackLoop.Play();
         }
     }
 }

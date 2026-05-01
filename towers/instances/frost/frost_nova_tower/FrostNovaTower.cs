@@ -4,27 +4,27 @@ using Godot;
 public partial class FrostNovaTower : Tower
 {
     private static readonly PackedScene FrostNovaProjectileScene = GD.Load<PackedScene>("uid://csif0nju31dcs");
-    public float double_shot_chance = 0;
+    public float DoubleShotChance = 0;
 
-    private Marker2D projectil_spawn_point;
+    private Marker2D _projectileSpawnPoint;
 
     public override void _Ready()
     {
         base._Ready();
-        projectil_spawn_point = GetNode<Marker2D>("ProjectilSpawnPoint");
+        _projectileSpawnPoint = GetNode<Marker2D>("ProjectilSpawnPoint");
     }
 
     protected override async void Fire()
     {
-        _cristalLight?.play();
+        _cristalLight?.Play();
 
         BlueProjectil projectile = FrostNovaProjectileScene.Instantiate<BlueProjectil>();
-        bool isDoubleHit = IsDobleHit();
+        bool isDoubleHit = IsDoubleHit();
 
         Attack attack = GetAttack();
         float attackRange = Stats?.AttackRange ?? 0f;
-        projectile.set_stats(attack, attackRange, EnemyDebuff.CreateFrost(DamageSource));
-        CallDeferred(MethodName.AddProjectil, projectile);
+        projectile.SetStats(attack, attackRange, EnemyDebuff.CreateFrost(DamageSource));
+        CallDeferred(MethodName.AddProjectile, projectile);
 
         if (!isDoubleHit)
         {
@@ -33,25 +33,25 @@ public partial class FrostNovaTower : Tower
 
         await ToSignal(GetTree().CreateTimer(0.5f, false), Timer.SignalName.Timeout);
 
-        _cristalLight?.play();
+        _cristalLight?.Play();
         projectile = FrostNovaProjectileScene.Instantiate<BlueProjectil>();
         attack = GetAttack();
-        projectile.set_stats(attack, attackRange, EnemyDebuff.CreateFrost(DamageSource));
-        CallDeferred(MethodName.AddProjectil, projectile);
+        projectile.SetStats(attack, attackRange, EnemyDebuff.CreateFrost(DamageSource));
+        CallDeferred(MethodName.AddProjectile, projectile);
     }
 
-    private void AddProjectil(Node projectile)
+    private void AddProjectile(Node projectile)
     {
         AddChild(projectile);
         if (projectile is Node2D node2D)
         {
-            node2D.Position = projectil_spawn_point.Position;
+            node2D.Position = _projectileSpawnPoint.Position;
         }
     }
 
-    private bool IsDobleHit()
+    private bool IsDoubleHit()
     {
         float random = GD.Randf();
-        return (double_shot_chance / 100f) >= random;
+        return (DoubleShotChance / 100f) >= random;
     }
 }
