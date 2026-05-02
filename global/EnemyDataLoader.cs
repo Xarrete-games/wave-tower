@@ -5,7 +5,6 @@ public class EnemyDataLoader
 {
     private const string DataPath = "res://enemies/data/";
 
-    public Dictionary<int, EnemyData> EnemiesByLegacyType { get; } = new();
     private readonly List<EnemyData> _enemies = new();
 
     public EnemyDataLoader()
