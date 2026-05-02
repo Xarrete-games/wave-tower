@@ -11,7 +11,7 @@ public partial class HintLabel : Label
 
     public override void _Ready()
     {
-        _ = ReadyAsync();
+        AsyncTaskHelper.FireAndForget(ReadyAsync(), "HintLabel.ReadyAsync");
     }
 
     private async Task ReadyAsync()

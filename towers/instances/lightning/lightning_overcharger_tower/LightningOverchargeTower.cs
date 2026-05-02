@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class LightningOverchargeTower : Tower
@@ -75,7 +76,12 @@ public partial class LightningOverchargeTower : Tower
         }
     }
 
-    private async void OnTowerPlaced(Tower tower)
+    private void OnTowerPlaced(Tower tower)
+    {
+        _ = OnTowerPlacedAsync(tower);
+    }
+
+    private async Task OnTowerPlacedAsync(Tower tower)
     {
         if (tower == this)
         {

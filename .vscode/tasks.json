@@ -22,6 +22,50 @@
 			],
 			"problemMatcher": [],
 			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-runhandler-async",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-towers-async",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-remaining-async",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-task-helper",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
 		}
 	]
 }

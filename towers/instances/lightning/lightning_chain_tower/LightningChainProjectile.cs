@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class LightningChainProjectile : Node2D
@@ -102,7 +103,12 @@ public partial class LightningChainProjectile : Node2D
         _sparks.Visible = false;
     }
 
-    private async void OnHit()
+    private void OnHit()
+    {
+        _ = OnHitAsync();
+    }
+
+    private async Task OnHitAsync()
     {
         _hit = true;
         Enemy enemy = _target as Enemy;

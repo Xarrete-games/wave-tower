@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class Tower : Node2D
@@ -223,7 +224,12 @@ public partial class Tower : Node2D
         _towerArea.Monitorable = false;
     }
 
-    public virtual async void Enable()
+    public virtual void Enable()
+    {
+        AsyncTaskHelper.FireAndForget(EnableAsync(), "Tower.EnableAsync");
+    }
+
+    private async Task EnableAsync()
     {
         if (_sprite2D != null)
         {

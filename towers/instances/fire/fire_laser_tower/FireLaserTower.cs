@@ -1,4 +1,5 @@
 using Godot;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class FireLaserTower : Tower
@@ -18,7 +19,12 @@ public partial class FireLaserTower : Tower
         ExecuteThreshold = BaseExecuteThreshold;
     }
 
-    protected override async void Fire()
+    protected override void Fire()
+    {
+        _ = FireAsync();
+    }
+
+    private async Task FireAsync()
     {
         Enemy targetEnemy = _currentTarget as Enemy;
         if (!GodotObject.IsInstanceValid(targetEnemy) || _redProjectile == null)

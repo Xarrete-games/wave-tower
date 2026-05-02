@@ -1,4 +1,5 @@
 using Godot;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class BlueProjectil : Area2D
@@ -89,7 +90,12 @@ public partial class BlueProjectil : Area2D
         DrawSetTransform(Vector2.Zero, 0.0f, Vector2.One);
     }
 
-    private async void OnBodyEntered(Node2D body)
+    private void OnBodyEntered(Node2D body)
+    {
+        _ = OnBodyEnteredAsync(body);
+    }
+
+    private async Task OnBodyEnteredAsync(Node2D body)
     {
         Node2D enemy = body;
         if (!GodotObject.IsInstanceValid(enemy))

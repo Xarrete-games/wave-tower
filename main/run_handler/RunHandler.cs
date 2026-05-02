@@ -141,7 +141,12 @@ public partial class RunHandler : Node
         EventLayer.CallDeferred(Node.MethodName.AddChild, nextLevelScreen);
     }
 
-    private async void OnWaveFinished()
+    private void OnWaveFinished()
+    {
+        AsyncTaskHelper.FireAndForget(OnWaveFinishedAsync(), "RunHandler.OnWaveFinishedAsync");
+    }
+
+    private async Task OnWaveFinishedAsync()
     {
         GetNode<AudioManager>("/root/AudioManager").PlayWaveClear();
         await ShowLootScreen();
@@ -165,7 +170,12 @@ public partial class RunHandler : Node
         ShowNextWaveScreen();
     }
 
-    private async void OnLastWaveFinished()
+    private void OnLastWaveFinished()
+    {
+        AsyncTaskHelper.FireAndForget(OnLastWaveFinishedAsync(), "RunHandler.OnLastWaveFinishedAsync");
+    }
+
+    private async Task OnLastWaveFinishedAsync()
     {
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         runContext.Economy.Gold += 50;

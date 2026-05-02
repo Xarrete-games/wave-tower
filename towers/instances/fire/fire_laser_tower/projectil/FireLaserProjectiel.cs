@@ -1,4 +1,5 @@
 using Godot;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class FireLaserProjectiel : Node2D
@@ -183,7 +184,12 @@ public partial class FireLaserProjectiel : Node2D
         _currentLaserLength = 0.0f;
     }
 
-    private async void Appear()
+    private void Appear()
+    {
+        _ = AppearAsync();
+    }
+
+    private async Task AppearAsync()
     {
         _redAttackStart.Play();
         if (_line2D == null)

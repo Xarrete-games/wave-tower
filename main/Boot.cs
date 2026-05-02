@@ -8,7 +8,7 @@ public partial class Boot : Node
 
     public override void _Ready()
     {
-        _ = ReadyAsync();
+        AsyncTaskHelper.FireAndForget(ReadyAsync(), "Boot.ReadyAsync");
     }
 
     private async Task ReadyAsync()

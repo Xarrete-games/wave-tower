@@ -1,4 +1,5 @@
 using Godot;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class FrostNovaTower : Tower
@@ -14,7 +15,12 @@ public partial class FrostNovaTower : Tower
         _projectileSpawnPoint = GetNode<Marker2D>("ProjectilSpawnPoint");
     }
 
-    protected override async void Fire()
+    protected override void Fire()
+    {
+        _ = FireAsync();
+    }
+
+    private async Task FireAsync()
     {
         _cristalLight?.Play();
 
