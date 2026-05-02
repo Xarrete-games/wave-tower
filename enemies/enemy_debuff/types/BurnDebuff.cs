@@ -11,7 +11,7 @@ public class BurnDebuff : EnemyDebuff
             return;
         }
 
-        Source debuffSource = new(SourceTypeDebuff, Data.Id, null, Source);
+        Source debuffSource = new(SourceTypeDebuff, Data.Id, Source);
 
         Attack attack = new();
         attack.Damage = Value;

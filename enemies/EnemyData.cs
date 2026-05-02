@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 [GlobalClass]
 public partial class EnemyData : Resource
@@ -47,7 +48,7 @@ public partial class EnemyData : Resource
     public int Weight { get; set; } = 1;
 
     [Export]
-    public Godot.Collections.Array<EnemyWaveRange> AvailableWaves { get; set; } = new();
+    public EnemyWaveRange[] AvailableWaves { get; set; } = Array.Empty<EnemyWaveRange>();
 
     public EnemyType EnemyTypeValue
     {

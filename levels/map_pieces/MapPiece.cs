@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -35,7 +36,7 @@ public partial class MapPiece : Node2D
     };
 
     [Export]
-    public Godot.Collections.Array<Edge> edges { get; set; } = new();
+    public Edge[] edges { get; set; } = Array.Empty<Edge>();
 
     [Export]
     public Vector2I LogicalPos { get; set; } = Vector2I.Zero;
@@ -96,35 +97,37 @@ public partial class MapPiece : Node2D
 
     public void SetEdgeHasConnected(Edge edge)
     {
-        if (edges == null || edges.Count == 0)
+        if (edges == null || edges.Length == 0)
         {
             GD.PushError($"Trying to set edge {edge} as connected, but this piece has no edges");
             return;
         }
 
-        Edge toRemove = null;
-        for (int i = 0; i < edges.Count; i++)
+        int removeIndex = -1;
+        for (int i = 0; i < edges.Length; i++)
         {
             Edge e = edges[i];
             if (e != null && e.Matches(edge))
             {
-                toRemove = e;
+                removeIndex = i;
                 break;
             }
         }
 
-        if (toRemove == null)
+        if (removeIndex < 0)
         {
             GD.PushError($"Trying to set edge {edge} as connected, but it is not an edge in this piece");
             return;
         }
 
-        edges.Remove(toRemove);
+        var updatedEdges = new List<Edge>(edges);
+        updatedEdges.RemoveAt(removeIndex);
+        edges = updatedEdges.ToArray();
     }
 
     public Edge FindEdgeByDir(int dir)
     {
-        for (int i = 0; i < edges.Count; i++)
+        for (int i = 0; i < edges.Length; i++)
         {
             Edge e = edges[i];
             if (e != null && (int)e.Direction == dir)

@@ -1,4 +1,6 @@
 using Godot;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 [GlobalClass]
@@ -8,10 +10,10 @@ public partial class TestData : Node
     public int InitialRandomRelics = 0;
 
     [Export]
-    public Godot.Collections.Array<string> InitialRelicsIds = new();
+    public string[] InitialRelicsIds = Array.Empty<string>();
 
     [Export]
-    public Godot.Collections.Array<string> InitialConsumablesIds = new();
+    public string[] InitialConsumablesIds = Array.Empty<string>();
 
     [Export]
     public EventData InitialEvent;
@@ -48,9 +50,9 @@ public partial class TestData : Node
     {
         RunContext runContext = RunContext.Instance;
 
-        if (InitialRelicsIds.Count > 0)
+        if (InitialRelicsIds.Length > 0)
         {
-            for (int index = 0; index < InitialRelicsIds.Count; index++)
+            for (int index = 0; index < InitialRelicsIds.Length; index++)
             {
                 string relicId = InitialRelicsIds[index];
                 RelicData typedRelicData = DataLoaderAccess.GetRelicById(relicId);
@@ -77,14 +79,14 @@ public partial class TestData : Node
                     continue;
                 }
 
-                Relic relic = relicDataObj?.CreateItem();
+                Relic relic = relicDataObj.CreateItem();
                 runContext.RelicsManager.AddRelic(relic);
             }
         }
 
-        if (InitialConsumablesIds.Count > 0)
+        if (InitialConsumablesIds.Length > 0)
         {
-            for (int index = 0; index < InitialConsumablesIds.Count; index++)
+            for (int index = 0; index < InitialConsumablesIds.Length; index++)
             {
                 string consumableId = InitialConsumablesIds[index];
                 ConsumableData consumableDataObj = DataLoaderAccess.GetConsumableById(consumableId);

@@ -236,13 +236,13 @@ public class WaveComposer
 
     private WaveTypeChance GetWaveTypeChance(int waveNumber)
     {
-        if (_config.WaveChances == null || _config.WaveChances.Count == 0)
+        if (_config.WaveChances == null || _config.WaveChances.Length == 0)
         {
             return null;
         }
 
         int waveIndex = waveNumber - 1;
-        if (waveIndex < 0 || waveIndex >= _config.WaveChances.Count)
+        if (waveIndex < 0 || waveIndex >= _config.WaveChances.Length)
         {
             return null;
         }
@@ -423,12 +423,12 @@ public class WaveComposer
 
     private bool IsWaveAvailableForEnemy(EnemyData data, int waveNumber)
     {
-        if (data.AvailableWaves == null || data.AvailableWaves.Count == 0)
+        if (data.AvailableWaves == null || data.AvailableWaves.Length == 0)
         {
             return true;
         }
 
-        for (int i = 0; i < data.AvailableWaves.Count; i++)
+        for (int i = 0; i < data.AvailableWaves.Length; i++)
         {
             EnemyWaveRange waveRange = data.AvailableWaves[i];
             if (waveRange != null && IsWaveInRange(waveNumber, waveRange))

@@ -1,11 +1,12 @@
 using Godot;
+using System;
 
 public partial class Game : Node2D
 {
     private static readonly PackedScene BootScene = GD.Load<PackedScene>("uid://bfm0i7ehshgsf");
 
     [Export]
-    public Godot.Collections.Array<string> LevelsPaths { get; set; } = new();
+    public string[] LevelsPaths { get; set; } = Array.Empty<string>();
 
     [Export]
     public PackedScene Pause { get; set; }
@@ -26,7 +27,7 @@ public partial class Game : Node2D
         ClickEvents.ResetGameButtonPressed += ResetGame;
 
         RunContext runContext = RunContext.Instance;
-        runContext.Progress.TotalLevels = LevelsPaths.Count;
+        runContext.Progress.TotalLevels = LevelsPaths.Length;
 
         GameState gameState = GetNode<GameState>("/root/GameState");
         gameState.State = GameState.InGame;

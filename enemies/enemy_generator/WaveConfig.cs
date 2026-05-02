@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 [GlobalClass]
 public partial class WaveConfig : Resource
@@ -62,5 +63,5 @@ public partial class WaveConfig : Resource
     public float PrimaryPressureRatio { get; set; } = 0.7f;
 
     [Export]
-    public Godot.Collections.Array<WaveTypeChance> WaveChances { get; set; } = new();
+    public WaveTypeChance[] WaveChances { get; set; } = Array.Empty<WaveTypeChance>();
 }

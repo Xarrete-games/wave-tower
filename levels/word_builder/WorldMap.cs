@@ -59,7 +59,7 @@ public partial class WorldMap : Node2D
             }
 
             var edges = piece.edges;
-            for (int i = 0; i < edges.Count; i++)
+            for (int i = 0; i < edges.Length; i++)
             {
                 result.Add(edges[i]);
             }
@@ -75,12 +75,12 @@ public partial class WorldMap : Node2D
             }
 
             var edges = piece.edges;
-            for (int i = edges.Count - 1; i >= 0; i--)
+            for (int i = edges.Length - 1; i >= 0; i--)
             {
                 Edge currentEdge = edges[i];
                 if (currentEdge != null && currentEdge.Matches(edge))
                 {
-                    edges.RemoveAt(i);
+                    piece.SetEdgeHasConnected(edge);
                     return true;
                 }
             }
@@ -235,7 +235,7 @@ public partial class WorldMap : Node2D
         }
 
         var frontierEdges = frontier.edges;
-        if (frontierEdges.Count == 0)
+        if (frontierEdges.Length == 0)
         {
             _frontierManager.RemoveFrontier(frontier);
             UpdatePortals();
@@ -301,7 +301,7 @@ public partial class WorldMap : Node2D
             }
 
             var edges = frontier.edges;
-            for (int edgeIndex = 0; edgeIndex < edges.Count; edgeIndex++)
+            for (int edgeIndex = 0; edgeIndex < edges.Length; edgeIndex++)
             {
                 Edge edge = edges[edgeIndex];
                 int dir = edge != null ? (int)edge.Direction : 0;
@@ -355,7 +355,7 @@ public partial class WorldMap : Node2D
 
             HashSet<string> occSim = _gridManager.CreateSimulatedOccupation(candidateTile);
             var remainingEdges = new List<Edge>();
-            for (int i = 0; i < newPiece.edges.Count; i++)
+            for (int i = 0; i < newPiece.edges.Length; i++)
             {
                 Edge edge = newPiece.edges[i];
                 if (edge != null && (edgeToConnectTyped == null || !edge.Matches(edgeToConnectTyped)))

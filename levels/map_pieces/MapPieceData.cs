@@ -1,17 +1,18 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 
 [GlobalClass]
 public partial class MapPieceData : Resource
 {
     [Export]
-    public Godot.Collections.Array<Edge> Edges { get; set; } = new();
+    public Edge[] Edges { get; set; } = Array.Empty<Edge>();
 
     [Export]
     public PackedScene Scene { get; set; }
 
     public bool IsFork
     {
-        get => Edges != null && Edges.Count > 2;
+        get => Edges != null && Edges.Length > 2;
     }
 
     public bool HasEdge(Edge edge)
@@ -21,7 +22,7 @@ public partial class MapPieceData : Resource
             return false;
         }
 
-        for (int i = 0; i < Edges.Count; i++)
+        for (int i = 0; i < Edges.Length; i++)
         {
             Edge current = Edges[i];
             if (current != null && current.Matches(edge))
@@ -40,7 +41,7 @@ public partial class MapPieceData : Resource
             return false;
         }
 
-        for (int i = 0; i < Edges.Count; i++)
+        for (int i = 0; i < Edges.Length; i++)
         {
             Edge current = Edges[i];
             if (current != null && current.CanConnectWith(edge))
@@ -59,7 +60,7 @@ public partial class MapPieceData : Resource
             return null;
         }
 
-        for (int i = 0; i < Edges.Count; i++)
+        for (int i = 0; i < Edges.Length; i++)
         {
             Edge current = Edges[i];
             if (current != null && current.CanConnectWith(edge))
@@ -78,7 +79,7 @@ public partial class MapPieceData : Resource
             return false;
         }
 
-        for (int i = 0; i < Edges.Count; i++)
+        for (int i = 0; i < Edges.Length; i++)
         {
             Edge current = Edges[i];
             if (current != null && (int)current.Direction == dir)
@@ -113,10 +114,10 @@ public partial class MapPieceData : Resource
             return null;
         }
 
-        var newEdges = new Godot.Collections.Array<Edge>();
+        var newEdges = new System.Collections.Generic.List<Edge>();
         if (Edges != null)
         {
-            for (int i = 0; i < Edges.Count; i++)
+            for (int i = 0; i < Edges.Length; i++)
             {
                 Edge e = Edges[i];
                 if (e != null)
@@ -126,7 +127,7 @@ public partial class MapPieceData : Resource
             }
         }
 
-        mapPiece.edges = newEdges;
+        mapPiece.edges = newEdges.ToArray();
 
         return mapPiece;
     }
