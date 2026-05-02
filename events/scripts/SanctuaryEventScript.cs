@@ -5,20 +5,15 @@ public partial class SanctuaryEventScript : EventScript
 {
     public override IReadOnlyList<EventOptionData> GetOptions()
     {
-        var option1 = new EventOptionData("Take offering (+50 gold)", 0);
-        var option2 = new EventOptionData("Pray (+10 health and 10 maximum health)", 1);
+        var option1 = new EventOptionData("Take offering (+50 gold)", EventOptionValue.FromInt(0));
+        var option2 = new EventOptionData("Pray (+10 health and 10 maximum health)", EventOptionValue.FromInt(1));
         return new List<EventOptionData> { option1, option2 };
     }
 
-    public override void HandleResponse(object data)
+    public override void HandleResponse(EventOptionValue data)
     {
         RunContext runContext = GetRunContext();
-        if (runContext == null)
-        {
-            return;
-        }
-
-        int selectedOption = data is int intValue ? intValue : -1;
+        int selectedOption = data.RequireInt();
         switch (selectedOption)
         {
             case 0:

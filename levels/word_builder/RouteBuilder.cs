@@ -7,23 +7,24 @@ public class RouteBuilder
 
     private readonly IWordBuilderAdapter _adapter;
     private PieceConnectionGraph _connectionGraph;
-    private object _targetPiece;
+    private MapPiece _targetPiece;
 
     public RouteBuilder(IWordBuilderAdapter adapter)
     {
         _adapter = adapter;
     }
 
-    public void Setup(PieceConnectionGraph graph, object target)
+    public void Setup(PieceConnectionGraph graph, MapPiece target)
     {
         _connectionGraph = graph;
         _targetPiece = target;
     }
 
-    public List<object> BuildRouteToTarget(Dictionary<string, object> spawnEntry)
+    public List<MapPiece> BuildRouteToTarget(SpawnEntry spawnEntry)
     {
-        var empty = new List<object>();
-        if (!spawnEntry.TryGetValue("piece", out object startPiece))
+        var empty = new List<MapPiece>();
+        MapPiece startPiece = spawnEntry?.Piece;
+        if (startPiece == null)
         {
             GD.PushError("[RouteBuilder] spawn_entry has no 'piece'");
             return empty;
@@ -44,7 +45,7 @@ public class RouteBuilder
         return _connectionGraph.FindPath(startPiece, _targetPiece);
     }
 
-    public List<Vector2> BuildWaypointsFromRoute(Dictionary<string, object> spawnEntry, List<object> route)
+    public List<Vector2> BuildWaypointsFromRoute(SpawnEntry spawnEntry, List<MapPiece> route)
     {
         var waypoints = new List<Vector2>();
         if (route.Count == 0)
@@ -53,14 +54,11 @@ public class RouteBuilder
             return waypoints;
         }
 
-        if (spawnEntry.TryGetValue("pos", out object spawnPosObj) && spawnPosObj is Vector2 spawnPos)
-        {
-            waypoints.Add(spawnPos);
-        }
+        waypoints.Add(spawnEntry.Position);
 
         for (int index = 0; index < route.Count; index++)
         {
-            object piece = route[index];
+            MapPiece piece = route[index];
             if (!_adapter.IsPieceValid(piece))
             {
                 continue;
@@ -72,21 +70,21 @@ public class RouteBuilder
 
             if (index == 0)
             {
-                if (spawnEntry.TryGetValue("edge", out object edgeObj))
+                if (spawnEntry?.Edge != null)
                 {
-                    entryDir = _adapter.GetEdgeDir(edgeObj);
+                    entryDir = _adapter.GetEdgeDir(spawnEntry.Edge);
                 }
             }
             else
             {
-                object prevPiece = route[index - 1];
+                MapPiece prevPiece = route[index - 1];
                 entryDir = _connectionGraph.FindConnectionDir(prevPiece, piece);
                 entryDir = _adapter.GetOppositeDir(entryDir);
             }
 
             if (hasExit)
             {
-                object nextPiece = route[index + 1];
+                MapPiece nextPiece = route[index + 1];
                 exitDir = _connectionGraph.FindConnectionDir(piece, nextPiece);
             }
 
@@ -127,9 +125,9 @@ public class RouteBuilder
         return waypoints;
     }
 
-    public List<Vector2> GetWaypointsForSpawn(Dictionary<string, object> spawnEntry)
+    public List<Vector2> GetWaypointsForSpawn(SpawnEntry spawnEntry)
     {
-        List<object> route = BuildRouteToTarget(spawnEntry);
+        List<MapPiece> route = BuildRouteToTarget(spawnEntry);
         return BuildWaypointsFromRoute(spawnEntry, route);
     }
 }

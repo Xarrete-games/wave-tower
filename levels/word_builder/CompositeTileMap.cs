@@ -290,7 +290,7 @@ public partial class CompositeTileMap : Node
             return;
         }
 
-        Godot.Collections.Array<Vector2I> usedCells = tileMap.GetUsedCells();
+        var usedCells = tileMap.GetUsedCells();
         for (int index = 0; index < usedCells.Count; index++)
         {
             Vector2I mapCoords = usedCells[index];

@@ -148,7 +148,7 @@ public partial class WaveSpawner : Node
             return;
         }
 
-        IReadOnlyList<Dictionary<string, object>> portalEntries = WorldMap.GetPortalEntries();
+        IReadOnlyList<SpawnEntry> portalEntries = WorldMap.GetPortalEntries();
         if (portalEntries.Count == 0)
         {
             GD.PushWarning("[WaveSpawner] No spawn points available");
@@ -156,7 +156,7 @@ public partial class WaveSpawner : Node
         }
 
         int portalIndex = (int)(GD.Randi() % (uint)portalEntries.Count);
-        Dictionary<string, object> spawnEntry = portalEntries[portalIndex];
+        SpawnEntry spawnEntry = portalEntries[portalIndex];
         List<Vector2> waypoints = WorldMap.GetWaypointsForSpawnList(spawnEntry);
         if (waypoints.Count == 0)
         {

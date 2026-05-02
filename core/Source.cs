@@ -1,4 +1,4 @@
-public sealed record Source(Source.SourceType Type, string TypeId, object Entity = null, Source Origin = null)
+public sealed record Source(Source.SourceType Type, string TypeId, Source Origin = null)
 {
     public enum SourceType
     {

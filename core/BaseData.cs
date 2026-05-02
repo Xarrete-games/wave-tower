@@ -24,9 +24,4 @@ public partial class BaseData : Resource
 
     [Export]
     public DataRarity Rarity { get; set; } = DataRarity.COMMON;
-
-    public virtual object CreateItem()
-    {
-        return null;
-    }
 }

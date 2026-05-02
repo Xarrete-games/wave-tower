@@ -4,14 +4,14 @@ public class PieceConnectionGraph
 {
     private readonly IWordBuilderAdapter _adapter;
     private readonly Dictionary<long, Dictionary<int, long>> _connections = new();
-    private readonly Dictionary<long, object> _objects = new();
+    private readonly Dictionary<long, MapPiece> _objects = new();
 
     public PieceConnectionGraph(IWordBuilderAdapter adapter)
     {
         _adapter = adapter;
     }
 
-    public void RegisterPiece(object piece)
+    public void RegisterPiece(MapPiece piece)
     {
         long key = _adapter.GetObjectKey(piece);
         if (key == 0)
@@ -27,7 +27,7 @@ public class PieceConnectionGraph
         _objects[key] = piece;
     }
 
-    public void ConnectPieces(object pieceA, object pieceB, int dirA, int dirB)
+    public void ConnectPieces(MapPiece pieceA, MapPiece pieceB, int dirA, int dirB)
     {
         long keyA = _adapter.GetObjectKey(pieceA);
         long keyB = _adapter.GetObjectKey(pieceB);
@@ -43,7 +43,7 @@ public class PieceConnectionGraph
         _connections[keyB][dirB] = keyA;
     }
 
-    public int FindConnectionDir(object fromPiece, object toPiece)
+    public int FindConnectionDir(MapPiece fromPiece, MapPiece toPiece)
     {
         long fromKey = _adapter.GetObjectKey(fromPiece);
         long toKey = _adapter.GetObjectKey(toPiece);
@@ -63,11 +63,11 @@ public class PieceConnectionGraph
         return 0;
     }
 
-    public List<object> FindPath(object fromPiece, object toPiece)
+    public List<MapPiece> FindPath(MapPiece fromPiece, MapPiece toPiece)
     {
         long fromKey = _adapter.GetObjectKey(fromPiece);
         long toKey = _adapter.GetObjectKey(toPiece);
-        var empty = new List<object>();
+        var empty = new List<MapPiece>();
 
         if (fromKey == 0 || toKey == 0)
         {
@@ -76,7 +76,7 @@ public class PieceConnectionGraph
 
         if (fromKey == toKey)
         {
-            if (_objects.TryGetValue(fromKey, out object startObject))
+            if (_objects.TryGetValue(fromKey, out MapPiece startObject))
             {
                 empty.Add(startObject);
             }
@@ -120,14 +120,14 @@ public class PieceConnectionGraph
         return empty;
     }
 
-    private List<object> ReconstructPath(Dictionary<long, long> cameFrom, long end)
+    private List<MapPiece> ReconstructPath(Dictionary<long, long> cameFrom, long end)
     {
-        var path = new List<object>();
+        var path = new List<MapPiece>();
         long current = end;
 
         while (current != 0)
         {
-            if (_objects.TryGetValue(current, out object piece))
+            if (_objects.TryGetValue(current, out MapPiece piece))
             {
                 path.Add(piece);
             }

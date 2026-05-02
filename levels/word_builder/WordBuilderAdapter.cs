@@ -3,25 +3,25 @@ using Godot;
 
 public interface IWordBuilderAdapter
 {
-    long GetObjectKey(object value);
+    long GetObjectKey(MapPiece value);
 
-    bool IsPieceValid(object piece);
-    IList<object> GetPieceEdges(object piece);
-    bool RemoveEdgeFromPiece(object piece, object edge);
-    Vector2I GetPieceLogicalPos(object piece);
+    bool IsPieceValid(MapPiece piece);
+    IList<Edge> GetPieceEdges(MapPiece piece);
+    bool RemoveEdgeFromPiece(MapPiece piece, Edge edge);
+    Vector2I GetPieceLogicalPos(MapPiece piece);
 
-    int GetEdgeDir(object edge);
-    int GetEdgePos(object edge);
-    object GetOppositeEdge(object edge);
-    bool EdgesMatch(object leftEdge, object rightEdge);
+    int GetEdgeDir(Edge edge);
+    int GetEdgePos(Edge edge);
+    Edge GetOppositeEdge(Edge edge);
+    bool EdgesMatch(Edge leftEdge, Edge rightEdge);
 
-    bool PieceDataHasConnectingEdge(object pieceData, object edge);
-    bool PieceDataHasEdgeDir(object pieceData, int dir);
+    bool PieceDataHasConnectingEdge(MapPieceData pieceData, Edge edge);
+    bool PieceDataHasEdgeDir(MapPieceData pieceData, int dir);
 
-    Vector2 GetPieceGlobalPosition(object piece);
-    IList<Vector2> GetRouteWaypoints(object piece, int entryDir, int exitDir);
-    IList<Vector2> GetFinalRouteWaypoints(object piece, int entryDir);
+    Vector2 GetPieceGlobalPosition(MapPiece piece);
+    IList<Vector2> GetRouteWaypoints(MapPiece piece, int entryDir, int exitDir);
+    IList<Vector2> GetFinalRouteWaypoints(MapPiece piece, int entryDir);
     int GetOppositeDir(int dir);
 
-    bool PieceDataIsFork(object pieceData);
+    bool PieceDataIsFork(MapPieceData pieceData);
 }

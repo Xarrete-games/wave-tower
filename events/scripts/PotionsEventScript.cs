@@ -28,22 +28,17 @@ public partial class PotionsEventScript : EventScript
         {
             ConsumableData consumableData = consumables[index];
             string displayName = consumableData.DisplayName;
-            options.Add(new EventOptionData(displayName, consumableData));
+            options.Add(new EventOptionData(displayName, EventOptionValue.FromConsumableData(consumableData)));
         }
 
         return options;
     }
 
-    public override void HandleResponse(object data)
+    public override void HandleResponse(EventOptionValue data)
     {
         RunContext runContext = GetRunContext();
-        if (runContext == null)
-        {
-            return;
-        }
-
-        ConsumableData consumableData = data as ConsumableData;
-        Consumable consumable = consumableData?.CreateConsumable();
+        ConsumableData consumableData = data.RequireConsumableData();
+        Consumable consumable = consumableData.CreateConsumable();
         if (consumable != null)
         {
             runContext.ConsumablesManager.AddConsumable(consumable);

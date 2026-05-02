@@ -4,19 +4,24 @@ public class EventOptionData {
         set;
     }
     = string.Empty;
-    public object Data {
+
+    public EventOptionValue Data {
         get;
         set;
     }
+    = EventOptionValue.Empty;
+
     public bool Disabled {
         get;
         set;
     }
+
     public EventOptionData() {
     }
-    public EventOptionData(string optionText, object optionData, bool isDisabled = false) {
+
+    public EventOptionData(string optionText, EventOptionValue optionData, bool isDisabled = false) {
         Text = optionText;
-        Data = optionData;
+        Data = optionData ?? EventOptionValue.Empty;
         Disabled = isDisabled;
     }
 }

@@ -96,7 +96,7 @@ public partial class Tower : Node2D
     {
         get
         {
-            return new Source(Source.SourceType.TOWER, TypeId, this);
+            return new Source(Source.SourceType.TOWER, TypeId);
         }
     }
 

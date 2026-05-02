@@ -9,6 +9,15 @@ public partial class AnimationComponent : Node
 {
     public event Action Entered;
 
+    private sealed class AnimationSnapshot
+    {
+        public Vector2 Scale { get; set; }
+        public Vector2 Position { get; set; }
+        public float Rotation { get; set; }
+        public Vector2 Size { get; set; }
+        public Color SelfModulate { get; set; }
+    }
+
     private const Tween.TransitionType IMMEDIATE_TRANSITION = Tween.TransitionType.Linear;
 
     [ExportGroup("Options")]
@@ -47,9 +56,9 @@ public partial class AnimationComponent : Node
     [Export] public Color FlickedColor = new(1, 1, 1, 0.5f);
 
     private Control _target;
-    private Dictionary<string, object> _hoverValues = new();
-    private Dictionary<string, object> _enterValues = new();
-    private Dictionary<string, object> _defaultValues = new();
+    private AnimationSnapshot _hoverValues = new();
+    private AnimationSnapshot _enterValues = new();
+    private AnimationSnapshot _defaultValues = new();
     private bool _onHover = false;
     private bool _signalsConnected;
 
@@ -155,31 +164,31 @@ public partial class AnimationComponent : Node
             _target.PivotOffset = _target.Size / 2.0f;
         }
 
-        _defaultValues = new Dictionary<string, object>
+        _defaultValues = new AnimationSnapshot
         {
-            { "scale", _target.Scale },
-            { "position", _target.Position },
-            { "rotation", _target.Rotation },
-            { "size", _target.Size },
-            { "self_modulate", _target.SelfModulate },
+            Scale = _target.Scale,
+            Position = _target.Position,
+            Rotation = _target.Rotation,
+            Size = _target.Size,
+            SelfModulate = _target.SelfModulate,
         };
 
-        _hoverValues = new Dictionary<string, object>
+        _hoverValues = new AnimationSnapshot
         {
-            { "scale", HoverScale },
-            { "position", _target.Position + HoverPosition },
-            { "rotation", _target.Rotation + Mathf.DegToRad(HoverRotation) },
-            { "size", _target.Size * HoverSize },
-            { "self_modulate", HoverModulate },
+            Scale = HoverScale,
+            Position = _target.Position + HoverPosition,
+            Rotation = _target.Rotation + Mathf.DegToRad(HoverRotation),
+            Size = _target.Size * HoverSize,
+            SelfModulate = HoverModulate,
         };
 
-        _enterValues = new Dictionary<string, object>
+        _enterValues = new AnimationSnapshot
         {
-            { "scale", EnterScale },
-            { "position", _target.Position + EnterPosition },
-            { "rotation", _target.Rotation + Mathf.DegToRad(EnterRotation) },
-            { "size", _target.Size * EnterSize },
-            { "self_modulate", EnterModulate },
+            Scale = EnterScale,
+            Position = _target.Position + EnterPosition,
+            Rotation = _target.Rotation + Mathf.DegToRad(EnterRotation),
+            Size = _target.Size * EnterSize,
+            SelfModulate = EnterModulate,
         };
 
         ConnectSignals();
@@ -210,7 +219,7 @@ public partial class AnimationComponent : Node
         }
     }
 
-    private async Task AddTween(Dictionary<string, object> values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
+    private async Task AddTween(AnimationSnapshot values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
     {
         if (!IsInsideTree() || _target == null)
         {
@@ -225,16 +234,13 @@ public partial class AnimationComponent : Node
         for (int i = 0; i < properties.Length; i++)
         {
             string property = properties[i];
-            if (!values.TryGetValue(property, out object configuredValue))
+            PropertyTweener tweener = property switch
             {
-                continue;
-            }
-
-            PropertyTweener tweener = configuredValue switch
-            {
-                float floatValue => tween.TweenProperty(_target, property, floatValue, seconds),
-                Vector2 vector2Value => tween.TweenProperty(_target, property, vector2Value, seconds),
-                Color colorValue => tween.TweenProperty(_target, property, colorValue, seconds),
+                "rotation" => tween.TweenProperty(_target, property, values.Rotation, seconds),
+                "scale" => tween.TweenProperty(_target, property, values.Scale, seconds),
+                "position" => tween.TweenProperty(_target, property, values.Position, seconds),
+                "size" => tween.TweenProperty(_target, property, values.Size, seconds),
+                "self_modulate" => tween.TweenProperty(_target, property, values.SelfModulate, seconds),
                 _ => null,
             };
 
@@ -253,12 +259,12 @@ public partial class AnimationComponent : Node
 
     private async Task FlickLoop()
     {
-        if (_defaultValues.Count == 0)
+        if (_target == null)
         {
             return;
         }
 
-        Color defaultModulate = _defaultValues["self_modulate"] is Color color ? color : Colors.White;
+        Color defaultModulate = _defaultValues.SelfModulate;
         bool useFlick = true;
 
         while (flicked && IsInsideTree())

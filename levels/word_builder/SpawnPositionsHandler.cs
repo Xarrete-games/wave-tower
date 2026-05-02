@@ -10,7 +10,7 @@ public class SpawnPositionsHandler
     private static readonly PackedScene OrangePortal = GD.Load<PackedScene>("uid://b8g0wp8j02vu4");
 
     private Node2D _portalsContainer;
-    private Dictionary<string, Dictionary<string, object>> _portalEntriesMap = new();
+    private Dictionary<string, SpawnEntry> _portalEntriesMap = new();
     private readonly List<Vector2> _portalPositions = new();
     private readonly Dictionary<string, Node2D> _portalNodes = new();
 
@@ -19,35 +19,23 @@ public class SpawnPositionsHandler
         _portalsContainer = portalsContainer;
     }
 
-    public void Update(IReadOnlyList<Dictionary<string, object>> entries)
+    public void Update(IReadOnlyList<SpawnEntry> entries)
     {
-        var newMap = new Dictionary<string, Dictionary<string, object>>();
+        var newMap = new Dictionary<string, SpawnEntry>();
 
         for (int index = 0; index < entries.Count; index++)
         {
-            Dictionary<string, object> entry = entries[index];
+            SpawnEntry entry = entries[index];
             if (entry == null)
             {
                 continue;
             }
 
-            string key = string.Empty;
-            if (entry.TryGetValue("key", out object keyObj) && keyObj is string rawKey)
+            string key = entry.Key;
+            if (string.IsNullOrEmpty(key))
             {
-                key = rawKey;
-            }
-            else if (entry.TryGetValue("tile", out object tileObj) && tileObj is Vector2I tile)
-            {
-                key = TileKey(tile);
-            }
-            else
-            {
-                if (!entry.TryGetValue("pos", out object posObj) || posObj is not Vector2 pos)
-                {
-                    continue;
-                }
-
-                key = PosKey(pos);
+                GD.PushError("[SpawnPositionsHandler] Spawn entry key is required.");
+                continue;
             }
 
             newMap[key] = entry;
@@ -89,7 +77,7 @@ public class SpawnPositionsHandler
             _portalNodes.Remove(key);
         }
 
-        foreach (KeyValuePair<string, Dictionary<string, object>> pair in newMap)
+        foreach (KeyValuePair<string, SpawnEntry> pair in newMap)
         {
             string key = pair.Key;
             bool needsCreate = true;
@@ -110,7 +98,7 @@ public class SpawnPositionsHandler
                 continue;
             }
 
-            Dictionary<string, object> entry = pair.Value;
+            SpawnEntry entry = pair.Value;
             Node2D portal = OrangePortal?.Instantiate() as Node2D;
             if (portal == null)
             {
@@ -127,22 +115,11 @@ public class SpawnPositionsHandler
                 GD.PushError("[SpawnPositionsHandler]: No container to add portals to!");
             }
 
-            if (entry.TryGetValue("pos", out object portalPosObj) && portalPosObj is Vector2 portalPos)
-            {
-                portal.GlobalPosition = portalPos;
-            }
+            portal.GlobalPosition = entry.Position;
 
             portal.AddToGroup(PortalGroup);
 
-            int dir = -1;
-            if (entry.TryGetValue("dir", out object dirObj) && dirObj is int parsedDir)
-            {
-                dir = parsedDir;
-            }
-            else if (entry.TryGetValue("edge", out object edgeObj) && edgeObj is Edge edge)
-            {
-                dir = edge != null ? (int)edge.Direction : -1;
-            }
+            int dir = entry.Dir;
 
             if (dir == EdgeDirNe || dir == EdgeDirSe)
             {
@@ -169,13 +146,10 @@ public class SpawnPositionsHandler
 
         _portalEntriesMap = newMap;
         _portalPositions.Clear();
-        foreach (KeyValuePair<string, Dictionary<string, object>> pair in _portalEntriesMap)
+        foreach (KeyValuePair<string, SpawnEntry> pair in _portalEntriesMap)
         {
-            Dictionary<string, object> entry = pair.Value;
-            if (entry.TryGetValue("pos", out object posObj) && posObj is Vector2 pos)
-            {
-                _portalPositions.Add(pos);
-            }
+            SpawnEntry entry = pair.Value;
+            _portalPositions.Add(entry.Position);
         }
     }
 
@@ -197,14 +171,5 @@ public class SpawnPositionsHandler
         _portalNodes.Clear();
     }
 
-    private string PosKey(Vector2 pos)
-    {
-        return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:F6},{1:F6}", pos.X, pos.Y);
-    }
-
-    private string TileKey(Vector2I tile)
-    {
-        return $"{tile.X},{tile.Y}";
-    }
 }
 

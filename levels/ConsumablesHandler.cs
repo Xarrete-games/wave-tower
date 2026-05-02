@@ -11,7 +11,7 @@ public partial class ConsumablesHandler : Node
 
     private ConsumableTargeteable _currentConsumable;
     private bool _isValidTarget;
-    private object _currentTarget;
+    private Node _currentTarget;
 
     private RunContext _runContext;
     private GameState _gameState;

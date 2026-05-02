@@ -3,9 +3,9 @@ using System;
 
 public partial class EventOptionButton : Button
 {
-    public event Action<object> OptionSelected;
+    public event Action<EventOptionValue> OptionSelected;
 
-    public object OptionData { get; set; }
+    public EventOptionValue OptionData { get; set; } = EventOptionValue.Empty;
 
     public void DisableOption()
     {

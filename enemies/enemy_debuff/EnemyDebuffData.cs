@@ -33,9 +33,4 @@ public partial class EnemyDebuffData : BaseData
         };
     }
 
-    public override object CreateItem()
-    {
-        // Debuffs are now created through CreateDebuff() typed path.
-        return null;
-    }
 }

@@ -122,7 +122,7 @@ public partial class LevelTileMap : TileMapLayer
 
     private void FillData()
     {
-        Godot.Collections.Array<Vector2I> usedCells = GetUsedCells();
+        var usedCells = GetUsedCells();
         for (int i = 0; i < usedCells.Count; i++)
         {
             Vector2I mapCoords = usedCells[i];

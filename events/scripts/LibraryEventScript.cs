@@ -6,11 +6,6 @@ public partial class LibraryEventScript : EventScript
     public override IReadOnlyList<EventOptionData> GetOptions()
     {
         RunContext runContext = GetRunContext();
-        if (runContext == null)
-        {
-            return new List<EventOptionData>();
-        }
-
         List<RelicData> allRelics = DataLoaderAccess.GetNotUsedRelicsTyped();
         var options = new List<EventOptionData>();
 
@@ -24,21 +19,16 @@ public partial class LibraryEventScript : EventScript
             }
 
             string displayName = relicData.DisplayName;
-            options.Add(new EventOptionData($"Acquire the {displayName}", relicData));
+            options.Add(new EventOptionData($"Acquire the {displayName}", EventOptionValue.FromRelicData(relicData)));
         }
 
         return options;
     }
 
-    public override void HandleResponse(object data)
+    public override void HandleResponse(EventOptionValue data)
     {
         RunContext runContext = GetRunContext();
-        RelicData relicData = data as RelicData;
-        if (runContext == null || relicData == null)
-        {
-            return;
-        }
-
+        RelicData relicData = data.RequireRelicData();
         Relic relic = relicData.CreateItem();
         if (relic != null)
         {

@@ -9,15 +9,15 @@ public class FrontierManager
         public bool Valid { get; set; }
         public string Reason { get; set; } = string.Empty;
         public List<int> InvalidEdges { get; } = new();
-        public List<object> ValidPieces { get; } = new();
-        public object EdgeToConnect { get; set; }
+        public List<MapPieceData> ValidPieces { get; } = new();
+        public Edge EdgeToConnect { get; set; }
     }
 
-    public event Action<object, object> EdgeFinalized;
+    public event Action<MapPiece, Edge> EdgeFinalized;
 
     private readonly IWordBuilderAdapter _adapter;
-    private readonly List<object> _frontiers = new();
-    private readonly List<object> _availablePieces = new();
+    private readonly List<MapPiece> _frontiers = new();
+    private readonly List<MapPieceData> _availablePieces = new();
     private GridManager _gridManager;
 
     public FrontierManager(IWordBuilderAdapter adapter)
@@ -25,7 +25,7 @@ public class FrontierManager
         _adapter = adapter;
     }
 
-    public void Setup(GridManager gridManager, IEnumerable<object> availablePieces)
+    public void Setup(GridManager gridManager, IEnumerable<MapPieceData> availablePieces)
     {
         _gridManager = gridManager;
         _frontiers.Clear();
@@ -33,21 +33,21 @@ public class FrontierManager
         _availablePieces.AddRange(availablePieces);
     }
 
-    public void AddFrontier(object piece)
+    public void AddFrontier(MapPiece piece)
     {
         if (!_adapter.IsPieceValid(piece))
         {
             return;
         }
 
-        IList<object> edges = _adapter.GetPieceEdges(piece);
+        IList<Edge> edges = _adapter.GetPieceEdges(piece);
         if (edges.Count > 0 && !_frontiers.Contains(piece))
         {
             _frontiers.Add(piece);
         }
     }
 
-    public void RemoveFrontier(object piece)
+    public void RemoveFrontier(MapPiece piece)
     {
         _frontiers.Remove(piece);
     }
@@ -57,7 +57,7 @@ public class FrontierManager
         return _frontiers.Count > 0;
     }
 
-    public object SelectRandomFrontier()
+    public MapPiece SelectRandomFrontier()
     {
         if (_frontiers.Count == 0)
         {
@@ -68,14 +68,14 @@ public class FrontierManager
         return _frontiers[index];
     }
 
-    public static object PickRandomEdge(object frontier, IWordBuilderAdapter adapter)
+    public static Edge PickRandomEdge(MapPiece frontier, IWordBuilderAdapter adapter)
     {
         if (!adapter.IsPieceValid(frontier))
         {
             return null;
         }
 
-        IList<object> edgeList = adapter.GetPieceEdges(frontier);
+        IList<Edge> edgeList = adapter.GetPieceEdges(frontier);
         if (edgeList.Count == 0)
         {
             return null;
@@ -85,9 +85,9 @@ public class FrontierManager
         return edgeList[index];
     }
 
-    public EdgeValidationResult ValidateEdge(object frontier, object nextEdge, Vector2I candidateTile)
+    public EdgeValidationResult ValidateEdge(MapPiece frontier, Edge nextEdge, Vector2I candidateTile)
     {
-        object edgeToConnect = _adapter.GetOppositeEdge(nextEdge);
+        Edge edgeToConnect = _adapter.GetOppositeEdge(nextEdge);
         var result = new EdgeValidationResult
         {
             Valid = false,
@@ -118,7 +118,7 @@ public class FrontierManager
 
         for (int index = 0; index < _availablePieces.Count; index++)
         {
-            object pieceData = _availablePieces[index];
+            MapPieceData pieceData = _availablePieces[index];
             if (!_adapter.PieceDataHasConnectingEdge(pieceData, nextEdge))
             {
                 continue;
@@ -150,7 +150,7 @@ public class FrontierManager
         return result;
     }
 
-    public void RemoveEdgeFromFrontier(object frontier, object edge)
+    public void RemoveEdgeFromFrontier(MapPiece frontier, Edge edge)
     {
         EdgeFinalized?.Invoke(frontier, edge);
 
@@ -167,7 +167,7 @@ public class FrontierManager
         }
     }
 
-    public void UpdateAfterPlacement(object oldFrontier, object newPiece)
+    public void UpdateAfterPlacement(MapPiece oldFrontier, MapPiece newPiece)
     {
         if (!_adapter.IsPieceValid(newPiece) || !_adapter.IsPieceValid(oldFrontier))
         {
@@ -187,22 +187,22 @@ public class FrontierManager
 
     public void PruneAllFrontiers()
     {
-        var removeFrontiers = new List<object>();
+        var removeFrontiers = new List<MapPiece>();
 
         for (int fi = 0; fi < _frontiers.Count; fi++)
         {
-            object frontier = _frontiers[fi];
+            MapPiece frontier = _frontiers[fi];
             if (!_adapter.IsPieceValid(frontier))
             {
                 continue;
             }
 
-            var removeEdges = new List<object>();
-            var edgesCopy = new List<object>(_adapter.GetPieceEdges(frontier));
+            var removeEdges = new List<Edge>();
+            var edgesCopy = new List<Edge>(_adapter.GetPieceEdges(frontier));
 
             for (int ei = 0; ei < edgesCopy.Count; ei++)
             {
-                object edge = edgesCopy[ei];
+                Edge edge = edgesCopy[ei];
                 int dir = _adapter.GetEdgeDir(edge);
                 Vector2I logicalPos = _adapter.GetPieceLogicalPos(frontier);
                 Vector2I candidate = _gridManager.GetNeighborTile(logicalPos, dir);
@@ -219,14 +219,14 @@ public class FrontierManager
                     continue;
                 }
 
-                object edgeToConnect = _adapter.GetOppositeEdge(edge);
+                Edge edgeToConnect = _adapter.GetOppositeEdge(edge);
                 int edgeToConnectDir = _adapter.GetEdgeDir(edgeToConnect);
                 List<int> invalid = _gridManager.GetInvalidEdgesAt(candidate, edgeToConnectDir);
 
                 bool hasPossiblePiece = false;
                 for (int pi = 0; pi < _availablePieces.Count; pi++)
                 {
-                    object pieceData = _availablePieces[pi];
+                    MapPieceData pieceData = _availablePieces[pi];
                     if (!_adapter.PieceDataHasConnectingEdge(pieceData, edge))
                     {
                         continue;
@@ -255,10 +255,9 @@ public class FrontierManager
                 }
             }
 
-            IList<object> frontierEdges = _adapter.GetPieceEdges(frontier);
             for (int ri = 0; ri < removeEdges.Count; ri++)
             {
-                object removeEdge = removeEdges[ri];
+                Edge removeEdge = removeEdges[ri];
                 EdgeFinalized?.Invoke(frontier, removeEdge);
                 _adapter.RemoveEdgeFromPiece(frontier, removeEdge);
             }
@@ -275,17 +274,17 @@ public class FrontierManager
         }
     }
 
-    public bool FrontierHasValidEdges(object piece)
+    public bool FrontierHasValidEdges(MapPiece piece)
     {
         if (!_adapter.IsPieceValid(piece))
         {
             return false;
         }
 
-        IList<object> edges = _adapter.GetPieceEdges(piece);
+        IList<Edge> edges = _adapter.GetPieceEdges(piece);
         for (int ei = 0; ei < edges.Count; ei++)
         {
-            object edge = edges[ei];
+            Edge edge = edges[ei];
             int dir = _adapter.GetEdgeDir(edge);
             Vector2I logicalPos = _adapter.GetPieceLogicalPos(piece);
             Vector2I candidate = _gridManager.GetNeighborTile(logicalPos, dir);
@@ -300,13 +299,13 @@ public class FrontierManager
                 continue;
             }
 
-            object edgeToConnect = _adapter.GetOppositeEdge(edge);
+            Edge edgeToConnect = _adapter.GetOppositeEdge(edge);
             int edgeToConnectDir = _adapter.GetEdgeDir(edgeToConnect);
             List<int> invalid = _gridManager.GetInvalidEdgesAt(candidate, edgeToConnectDir);
 
             for (int pi = 0; pi < _availablePieces.Count; pi++)
             {
-                object pieceData = _availablePieces[pi];
+                MapPieceData pieceData = _availablePieces[pi];
                 if (!_adapter.PieceDataHasConnectingEdge(pieceData, edge))
                 {
                     continue;
@@ -332,8 +331,8 @@ public class FrontierManager
         return false;
     }
 
-    public List<object> GetAllFrontiers()
+    public List<MapPiece> GetAllFrontiers()
     {
-        return new List<object>(_frontiers);
+        return new List<MapPiece>(_frontiers);
     }
 }

@@ -67,9 +67,4 @@ public partial class ConsumableData : BaseData
         };
     }
 
-    public override object CreateItem()
-    {
-        // Consumables are now plain C# objects; callers should use CreateConsumable().
-        return null;
-    }
 }

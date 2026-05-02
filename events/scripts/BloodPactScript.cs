@@ -5,25 +5,20 @@ public partial class BloodPactScript : EventScript
 {
     public override IReadOnlyList<EventOptionData> GetOptions()
     {
-        var option1 = new EventOptionData("Sacrifice 15 of your health to gain a powerful relic.", true);
-        var option2 = new EventOptionData("Walk away unharmed.", false);
+        var option1 = new EventOptionData("Sacrifice 15 of your health to gain a powerful relic.", EventOptionValue.FromBool(true));
+        var option2 = new EventOptionData("Walk away unharmed.", EventOptionValue.FromBool(false));
         return new List<EventOptionData> { option1, option2 };
     }
 
-    public override void HandleResponse(object data)
+    public override void HandleResponse(EventOptionValue data)
     {
-        bool accepted = data is bool boolValue && boolValue;
+        bool accepted = data.RequireBool();
         if (!accepted)
         {
             return;
         }
 
         RunContext runContext = GetRunContext();
-        if (runContext == null)
-        {
-            return;
-        }
-
         runContext.Status.ApplyDamage(15);
 
         List<RelicData> allRelics = DataLoaderAccess.GetNotUsedRelicsTyped();
@@ -34,7 +29,7 @@ public partial class BloodPactScript : EventScript
 
         int randomIndex = (int)(GD.Randi() % (uint)allRelics.Count);
         RelicData relicData = allRelics[randomIndex];
-        Relic relic = relicData?.CreateItem();
+        Relic relic = relicData.CreateItem();
         if (relic != null)
         {
             runContext.RelicsManager.AddRelic(relic);

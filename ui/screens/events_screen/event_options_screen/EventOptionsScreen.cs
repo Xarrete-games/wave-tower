@@ -71,7 +71,7 @@ public partial class EventOptionsScreen : Control
         }
     }
 
-    private void OnOptionSelected(object data)
+    private void OnOptionSelected(EventOptionValue data)
     {
         _eventScriptInstance?.HandleResponse(data);
         EventCompleted?.Invoke();
