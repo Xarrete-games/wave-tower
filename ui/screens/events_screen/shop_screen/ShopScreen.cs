@@ -38,7 +38,7 @@ public partial class ShopScreen : Control
     {
         ChangeToBuyMode();
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         if (!runContext.Economy.IsSellActive)
         {
             SellButton.Visible = false;
@@ -117,7 +117,7 @@ public partial class ShopScreen : Control
 
             slot.QueueFree();
 
-            RunContext runContext = GetNode<RunContext>("/root/RunContext");
+            RunContext runContext = RunContext.Instance;
             Resource itemData = itemOffer?.ItemData;
             if (itemData is RelicData relicData)
             {
@@ -169,7 +169,7 @@ public partial class ShopScreen : Control
 
     private void BuildRelicsForSale()
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         var currentRelics = runContext.RelicsManager.GetAllRelics();
         var currentRelicsData = new List<RelicData>();
         foreach (Relic relic in currentRelics)

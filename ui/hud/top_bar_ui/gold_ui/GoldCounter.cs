@@ -14,7 +14,7 @@ public partial class GoldCounter : HBoxContainer
     {
         _amountGoldLabel = GetNode<Label>("AmountGoldLabel");
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _economy = runContext.Economy;
 
         _targetGold = _economy.Gold;

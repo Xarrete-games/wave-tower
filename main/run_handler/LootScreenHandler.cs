@@ -64,7 +64,7 @@ public partial class LootScreenHandler : Node
 
     private int GetBaseGold()
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         return BaseGold + (runContext.Progress.CurrentWave * ExtraGoldPerWave);
     }
 }

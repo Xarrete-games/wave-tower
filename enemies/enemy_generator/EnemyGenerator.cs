@@ -45,7 +45,7 @@ public partial class EnemyGenerator : Node
             return;
         }
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         runContext.Progress.TotalWaves = TOTAL_WAVES;
 
         if (WaveSpawner != null)
@@ -109,7 +109,7 @@ public partial class EnemyGenerator : Node
         }
 
         _waveNumber += 1;
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         runContext.Progress.CurrentWave = _waveNumber;
 
         List<WaveComposer.WaveGroup> groups = _composer.ComposeWave(_waveNumber);
@@ -196,7 +196,7 @@ public partial class EnemyGenerator : Node
             return;
         }
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         GameState gameState = GetNode<GameState>("/root/GameState");
 
         if (runContext.Status.Health <= 0 || gameState.IsOnMainMenu())
@@ -219,7 +219,7 @@ public partial class EnemyGenerator : Node
 
     private void OnEnemyTargetReached(Enemy enemy)
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         if (enemy != null)
         {
             runContext.Status.ApplyDamage(enemy.Damage);
@@ -230,7 +230,7 @@ public partial class EnemyGenerator : Node
 
     private void OnEnemyDie(Enemy enemy, Attack attack)
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         runContext.EnemyManager.NotifyEnemyDie(enemy, attack);
     }
 }

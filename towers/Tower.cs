@@ -307,7 +307,7 @@ public partial class Tower : Node2D
 
     public virtual void Upgrade()
     {
-        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         Economy economy = runContext?.Economy;
         TowerData towerData = Data as TowerData;
         if (economy != null && towerData != null)
@@ -529,14 +529,14 @@ public partial class Tower : Node2D
         }
     }
 
-    protected GodotObject GetRunContext()
+    protected RunContext GetRunContext()
     {
-        return GetNodeOrNull<Node>("/root/RunContext") as GodotObject;
+        return RunContext.Instance;
     }
 
     protected TowersManager GetTowersManager()
     {
-        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         return runContext?.TowersManager;
     }
 }

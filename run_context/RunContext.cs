@@ -1,39 +1,36 @@
 using Godot;
 
-public partial class RunContext : Node
+public sealed class RunContext
 {
     private static readonly PackedScene DEATH_SCENE = GD.Load<PackedScene>("uid://dcq16u6g6ahsp");
+    public static RunContext Instance { get; } = new RunContext();
 
-    [Export]
-    public Variant CompositeTileMap;
+    public Variant CompositeTileMap { get; private set; }
 
-    public OffersManager OffersManager;
+    public OffersManager OffersManager { get; private set; }
 
-    public RunProgress Progress;
+    public RunProgress Progress { get; private set; }
 
-    public Economy Economy;
+    public Economy Economy { get; private set; }
 
-    public Status Status;
+    public Status Status { get; private set; }
 
-    public TowersManager TowersManager;
+    public TowersManager TowersManager { get; private set; }
 
-    public RelicsManager RelicsManager;
+    public RelicsManager RelicsManager { get; private set; }
 
-    public ConsumablesManager ConsumablesManager;
+    public ConsumablesManager ConsumablesManager { get; private set; }
 
-    public EnemyManager EnemyManager;
+    public EnemyManager EnemyManager { get; private set; }
 
-    public override void _Ready()
+    private RunContext()
     {
         ResetRun();
     }
 
-    public override void _ExitTree()
+    public void SetCompositeTileMap(Variant compositeTileMap)
     {
-        if (Status != null)
-        {
-            Status.PlayerDied -= OnDie;
-        }
+        CompositeTileMap = compositeTileMap;
     }
 
     public void ResetRun()
@@ -66,7 +63,13 @@ public partial class RunContext : Node
 
     private void OnDie()
     {
+        SceneTree tree = Engine.GetMainLoop() as SceneTree;
+        if (tree?.Root == null)
+        {
+            return;
+        }
+
         Node deathScene = DEATH_SCENE.Instantiate();
-        GetTree().Root.AddChild(deathScene);
+        tree.Root.AddChild(deathScene);
     }
 }

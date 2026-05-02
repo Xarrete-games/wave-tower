@@ -2,7 +2,7 @@ public class CaffeinePotion : ConsumableUsable
 {
     public override void Use()
     {
-        RunContext runContext = GetSingleton("RunContext") as RunContext;
+        RunContext runContext = RunContext.Instance;
         TowersManager towersManager = runContext?.TowersManager;
         if (towersManager == null)
         {

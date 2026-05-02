@@ -25,7 +25,7 @@ public partial class Game : Node2D
         ClickEvents.ConfigButtonPressed += OpenConfigMenu;
         ClickEvents.ResetGameButtonPressed += ResetGame;
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         runContext.Progress.TotalLevels = LevelsPaths.Count;
 
         GameState gameState = GetNode<GameState>("/root/GameState");

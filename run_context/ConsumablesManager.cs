@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 using System;
 
@@ -209,7 +209,7 @@ public class ConsumablesManager
 
     private RunContext GetRunContext()
     {
-        return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
+        return RunContext.Instance;
     }
 
     private ConsumableModel BuildConsumableModel(Consumable consumableObj)

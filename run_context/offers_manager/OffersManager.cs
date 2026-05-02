@@ -99,7 +99,7 @@ public class OffersManager
 
     private RunContext GetRunContext()
     {
-        return (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
+        return RunContext.Instance;
     }
 
 }

@@ -8,8 +8,7 @@ public abstract class EventScript
 
     protected RunContext GetRunContext()
     {
-        SceneTree tree = Engine.GetMainLoop() as SceneTree;
-        return tree?.Root?.GetNodeOrNull<RunContext>("/root/RunContext");
+        return RunContext.Instance;
     }
 
     protected DataLoader GetDataLoader()

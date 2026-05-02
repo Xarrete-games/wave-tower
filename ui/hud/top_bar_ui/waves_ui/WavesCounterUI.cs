@@ -9,7 +9,7 @@ public partial class WavesCounterUI : VBoxContainer
     {
         _levelLabel = GetNode<Label>("HBoxContainer2/LevelLabel");
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _progress = runContext.Progress;
         _progress.CurrentWaveChanged += OnWaveChange;
     }

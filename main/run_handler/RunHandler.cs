@@ -32,7 +32,7 @@ public partial class RunHandler : Node
     {
         SetEventsByType();
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _progress = runContext.Progress;
         _progress.CurrentWaveFinished += OnWaveFinished;
         _progress.LastWaveFinished += OnLastWaveFinished;
@@ -62,7 +62,7 @@ public partial class RunHandler : Node
 
     public async Task ShowChooseCardScreen()
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         var cards = runContext.TowersManager.GetRandomTowers(3);
 
         ChooseTowerScreen chooseTowerScreen = ChooseTowerScreenScene.Instantiate<ChooseTowerScreen>();
@@ -152,7 +152,7 @@ public partial class RunHandler : Node
         await ShowLootScreen();
         await ShowChooseCardScreen();
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         int currentWave = runContext.Progress.CurrentWave;
         EventData eventData = GetNextEvent(currentWave);
         if (eventData == null)
@@ -172,7 +172,7 @@ public partial class RunHandler : Node
 
     private async Task OnLastWaveFinishedAsync()
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         runContext.Economy.Gold += 50;
 
         bool isLastWave = runContext.Progress.IsLastWave();

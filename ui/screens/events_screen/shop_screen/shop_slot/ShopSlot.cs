@@ -29,7 +29,7 @@ public partial class ShopSlot : Control
         _healthPrice = GetNode<HealthPrice>("HealthPrice");
         _healthPrice.Visible = false;
 
-        _runContext = GetNode<RunContext>("/root/RunContext");
+        _runContext = RunContext.Instance;
         if (_runContext?.RelicsManager != null)
         {
             _runContext.RelicsManager.RelicAdded += OnRelicAdded;

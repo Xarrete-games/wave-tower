@@ -23,7 +23,7 @@ public partial class ArmorCounter : CenterContainer
     public override void _Ready()
     {
         _counterLabel = GetNode<Label>("CounterLabel");
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _status = runContext.Status;
         _status.ArmorChanged += OnArmorChange;
         armor = _status.Armor;

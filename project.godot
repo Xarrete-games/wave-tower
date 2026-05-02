@@ -31,7 +31,6 @@ buses/default_bus_layout="uid://b7hgmpfhi17rw"
 AudioManager="*res://main/audio_manager/audio_manager.tscn"
 GameState="*res://main/GameState.cs"
 DataLoader="*res://global/DataLoader.cs"
-RunContext="*res://run_context/RunContext.cs"
 UIUtils="*res://utils/UIUtils.cs"
 ActionManager="*res://global/ActionManager.cs"
 

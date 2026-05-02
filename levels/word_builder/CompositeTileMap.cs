@@ -33,8 +33,8 @@ public partial class CompositeTileMap : Node
 
     public override void _Ready()
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.CompositeTileMap = this;
+        RunContext runContext = RunContext.Instance;
+        runContext.SetCompositeTileMap(this);
 
         _towersManager = runContext.TowersManager;
         if (_towersManager != null)

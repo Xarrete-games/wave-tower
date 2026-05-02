@@ -38,7 +38,7 @@ public partial class ChooseRelicScreenHandler : Node
         }
 
         int healthPrice = selectedRelicData.HealthPrice;
-        var runContext = GetNode<RunContext>("/root/RunContext");
+        var runContext = RunContext.Instance;
         if (healthPrice > 0)
         {
             runContext.Status.Health -= healthPrice;
@@ -50,7 +50,7 @@ public partial class ChooseRelicScreenHandler : Node
 
     private void OnRerollPressed()
     {
-        var runContext = GetNode<RunContext>("/root/RunContext");
+        var runContext = RunContext.Instance;
         runContext.Economy.Gold -= RerollPrice;
 
         int numberOfRelics = GetCurrentRewardsCount();

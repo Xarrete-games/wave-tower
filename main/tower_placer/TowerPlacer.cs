@@ -17,7 +17,7 @@ public partial class TowerPlacer : Node2D
         visual = GetNode<Node2D>("../Visual");
         ClickEvents.TowerBuildButtonPressed += OnTowerButtonPressed;
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _progress = runContext.Progress;
         _progress.CurrentWaveFinished += CancelTower;
         _progress.LastWaveFinished += CancelTower;
@@ -92,7 +92,7 @@ public partial class TowerPlacer : Node2D
         _isPlacing = false;
         _currentTowerInstance.Enable();
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         runContext.TowersManager.AddTowerPlaced(_currentTowerInstance);
 
         _currentTowerInstance = null;
@@ -102,7 +102,7 @@ public partial class TowerPlacer : Node2D
 
     private bool HasEnoughGold(int towerPrice)
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         if (runContext.Economy.AvailableFreeTowers > 0)
         {
             return true;
@@ -113,7 +113,7 @@ public partial class TowerPlacer : Node2D
 
     private void HandleCosts(int towerPrice)
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         int freeTowers = runContext.Economy.AvailableFreeTowers;
         if (freeTowers > 0)
         {

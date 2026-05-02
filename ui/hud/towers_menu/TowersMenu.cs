@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 
 public partial class TowersMenu : Control
@@ -23,7 +23,7 @@ public partial class TowersMenu : Control
             TowerHint.Visible = false;
         }
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _towersManager = runContext?.TowersManager;
         if (_towersManager != null)
         {
@@ -43,7 +43,7 @@ public partial class TowersMenu : Control
 
     private void InitButtonCards()
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         foreach (KeyValuePair<string, int> pair in runContext.TowersManager.TowerCardsAmount)
         {
             TowerDataWithInstance towerConfiguration = runContext.TowersManager.GetTowerConfigurationById(pair.Key);

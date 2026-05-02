@@ -168,7 +168,7 @@ public class RelicsManager
             return;
         }
 
-        RunContext runContext = tree.Root.GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         runContext?.TowersManager?.SyncBuffsForAllTowers();
     }
 }

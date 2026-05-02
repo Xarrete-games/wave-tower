@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System;
 
 public partial class TowerButton : Control
@@ -107,7 +107,7 @@ public partial class TowerButton : Control
         _goldPriceNode = !GoldPricePath.IsEmpty ? GetNodeOrNull<GoldPrice>(GoldPricePath) : GetNodeOrNull<GoldPrice>("VBoxContainer/GoldPrice");
         _amountLabelNode = !AmountLabelPath.IsEmpty ? GetNodeOrNull<Label>(AmountLabelPath) : GetNodeOrNull<Label>("HBoxContainer/MarginContainer/AmountLabel");
 
-        _runContext = GetNode<RunContext>("/root/RunContext");
+        _runContext = RunContext.Instance;
         _runContext.Economy.AvailableFreeTowersChanged += OnAvailableFreeTowersChange;
         if (_runContext.RelicsManager != null)
         {
@@ -171,7 +171,7 @@ public partial class TowerButton : Control
 
     private void UpdatePrice()
     {
-        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         if (runContext == null)
         {
             return;
@@ -217,7 +217,7 @@ public partial class TowerButton : Control
 
     private void CurrentWaveFinished()
     {
-        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         if (runContext?.RelicsManager != null && runContext.RelicsManager.HasRelic("lemon"))
         {
             UpdatePrice();
@@ -229,7 +229,7 @@ public partial class TowerButton : Control
         AudioManager audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
         audioManager?.PlayButtonClick();
 
-        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         if (runContext != null && runContext.Economy.Gold < Price)
         {
             return;

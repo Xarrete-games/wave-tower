@@ -28,7 +28,7 @@ public partial class HealthPrice : HBoxContainer
     public override void _Ready()
     {
         _priceLabel = GetNode<Label>("PriceLabel");
-        _runContext = GetNode<RunContext>("/root/RunContext");
+        _runContext = RunContext.Instance;
         _runContext.Status.HealthChanged += CheckLabelColor;
         CheckLabelColor(_runContext.Status.Health);
     }

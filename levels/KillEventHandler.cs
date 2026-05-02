@@ -10,7 +10,7 @@ public partial class KillEventHandler : Node
 
     public override void _Ready()
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _enemyManager = runContext?.EnemyManager;
         if (_enemyManager != null)
         {

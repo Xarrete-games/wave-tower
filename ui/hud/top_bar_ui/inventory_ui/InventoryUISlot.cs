@@ -9,7 +9,7 @@ public partial class InventoryUISlot : Control
     public override void _Ready()
     {
         _textureRect = GetNode<TextureRect>("CenterContainer/TextureRect");
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _consumablesManager = runContext?.ConsumablesManager;
         if (_consumablesManager != null)
         {

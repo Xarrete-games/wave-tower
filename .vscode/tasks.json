@@ -154,6 +154,90 @@
 			],
 			"problemMatcher": [],
 			"group": "build"
+		},
+		{
+			"label": "replace-runcontext-node-lookups",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$files = Get-ChildItem -Path . -Recurse -Filter *.cs | Select-Object -ExpandProperty FullName; foreach ($f in $files) { $text = Get-Content -Raw -LiteralPath $f; $orig = $text; $text = $text.Replace('GetNode<RunContext>(\"/root/RunContext\")','RunContext.Instance'); $text = $text.Replace('GetNodeOrNull<RunContext>(\"/root/RunContext\")','RunContext.Instance'); $text = $text.Replace('tree?.Root?.GetNodeOrNull<RunContext>(\"/root/RunContext\")','RunContext.Instance'); $text = $text.Replace('(Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>(\"/root/RunContext\")','RunContext.Instance'); $text = $text.Replace('(Engine.GetMainLoop() as SceneTree)?.Root?.GetNodeOrNull<RunContext>(\"/root/RunContext\")','RunContext.Instance'); if ($text -ne $orig) { Set-Content -LiteralPath $f -Value $text -NoNewline } }"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run-replace-runcontext-script",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"scripts/replace_runcontext_lookups.ps1"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "fix-runcontext-instance-patterns",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"scripts/fix_runcontext_instance_patterns.ps1"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-runcontext-singleton",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-runcontext-non-autoload",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-after-script-cleanup",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-runcontext-encapsulation",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
 		}
 	]
 }

@@ -46,7 +46,7 @@ public partial class LootScreenItem : Control
         }
 
         ConsumableData consumable = _lootItemData.Consumable;
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         if (consumable != null)
         {
             bool isFull = runContext.ConsumablesManager.IsFull();

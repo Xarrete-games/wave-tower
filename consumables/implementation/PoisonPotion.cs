@@ -2,7 +2,7 @@ public class PoisonPotion : ConsumableUsable
 {
     public override void Use()
     {
-        RunContext runContext = GetSingleton("RunContext") as RunContext;
+        RunContext runContext = RunContext.Instance;
         runContext?.Status?.ApplyDamage(10);
     }
 }

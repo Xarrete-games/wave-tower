@@ -256,7 +256,7 @@ public partial class WorldMap : Node2D
         UpdatePortals();
         AttachNextPiece();
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _progress = runContext.Progress;
         _progress.CurrentWaveFinished += OnWaveFinished;
     }
@@ -597,7 +597,7 @@ public partial class WorldMap : Node2D
 
     private void OnWaveFinished()
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         int currentWave = runContext.Progress.CurrentWave;
 
         if (!EnableFork && currentWave % WavesPerBoss == 0)

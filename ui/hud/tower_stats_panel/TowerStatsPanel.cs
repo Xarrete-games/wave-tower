@@ -166,7 +166,7 @@ public partial class TowerStatsPanel : Control
 
         int price = data.UpgradePrice;
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         int gold = runContext.Economy.Gold;
         if (gold < price)
         {

@@ -28,7 +28,7 @@ public partial class GoldPrice : HBoxContainer
     public override void _Ready()
     {
         _priceLabel = GetNode<Label>("PriceLabel");
-        _runContext = GetNode<RunContext>("/root/RunContext");
+        _runContext = RunContext.Instance;
 
         _priceLabel.Text = _price.ToString();
         CheckLabelColor(_runContext.Economy.Gold);

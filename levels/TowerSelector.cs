@@ -12,7 +12,7 @@ public partial class TowerSelector : Node
         ClickEvents.TowerBuildButtonPressed += OnTowerButtonPressed;
         ClickEvents.TowerRemovePressed += OnTowerRemovePressed;
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _progress = runContext?.Progress;
         if (_progress != null)
         {
@@ -58,7 +58,7 @@ public partial class TowerSelector : Node
         }
 
         _currentTowerSelected = null;
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         runContext.TowersManager.SelectTower(null);
     }
 
@@ -96,7 +96,7 @@ public partial class TowerSelector : Node
     {
         if (_currentTowerSelected == towerObj)
         {
-            RunContext runContext = GetNode<RunContext>("/root/RunContext");
+            RunContext runContext = RunContext.Instance;
             runContext.TowersManager.SelectTower(towerObj);
         }
     }

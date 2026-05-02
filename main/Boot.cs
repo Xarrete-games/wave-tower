@@ -14,7 +14,7 @@ public partial class Boot : Node
     private async Task ReadyAsync()
     {
         GameState gameState = GetNodeOrNull<GameState>("/root/GameState");
-        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         gameState?.ResetRun();
         runContext?.ResetRun();
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);

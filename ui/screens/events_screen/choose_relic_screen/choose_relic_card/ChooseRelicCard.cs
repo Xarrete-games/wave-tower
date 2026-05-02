@@ -25,7 +25,7 @@ public partial class ChooseRelicCard : Control
         _relicTexture = GetNode<TextureRect>("RelicIcon/RelicTexture");
         _hexagonBorder = GetNode<Polygon2D>("RelicIcon/Hexagon/Control/Root2d/HexagonBorder");
         _healthPrice = GetNode<HealthPrice>("VBoxContainer/HealthPrice");
-        _runContext = GetNode<RunContext>("/root/RunContext");
+        _runContext = RunContext.Instance;
         _healthPrice.Visible = false;
     }
 

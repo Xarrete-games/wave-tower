@@ -22,7 +22,7 @@ public partial class LevelProgressUI : Control
     {
         ClearSlots();
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _progress = runContext.Progress;
         _progress.CurrentWaveChanged += OnWaveInit;
 

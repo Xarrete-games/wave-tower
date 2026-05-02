@@ -18,7 +18,7 @@ public partial class ConsumablesHandler : Node
 
     public override void _Ready()
     {
-        _runContext = GetNode<RunContext>("/root/RunContext");
+        _runContext = RunContext.Instance;
         _gameState = GetNode<GameState>("/root/GameState");
 
         if (_runContext?.ConsumablesManager != null)

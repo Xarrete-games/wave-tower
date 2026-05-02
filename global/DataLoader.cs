@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 
 public partial class DataLoader : Node
@@ -108,7 +108,7 @@ public partial class DataLoader : Node
     public List<RelicData> GetNotUsedRelics(int? rarity = null, bool? isCursed = null)
     {
         var filtered = new List<RelicData>();
-        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         RelicsManager relicsManager = runContext?.RelicsManager;
 
         for (int index = 0; index < _relics.Count; index++)

@@ -19,7 +19,7 @@ public partial class LevelTileMap : TileMapLayer
 
     public override void _Ready()
     {
-        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _towersManager = runContext?.TowersManager;
         if (_towersManager != null)
         {

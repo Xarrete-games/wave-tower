@@ -46,7 +46,7 @@ public partial class TestData : Node
 
     private void HandleInitialRelics()
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
 
         if (InitialRelicsIds.Count > 0)
         {

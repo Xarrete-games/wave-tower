@@ -30,7 +30,7 @@ public partial class MusicHandler : Node
 
         StopMusic();
 
-        RunContext runContext = GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _towersManager = runContext?.TowersManager;
         if (_towersManager != null)
         {

@@ -336,7 +336,7 @@ public partial class Enemy : CharacterBody2D
         Hooks.OnEnemyDie(Hooks.GetListenersFromRuntime(), this, BuildAttackModel(attack));
         ShowGoldDropped();
 
-        RunContext runContext = (Engine.GetMainLoop() as SceneTree)?.Root.GetNodeOrNull<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         if (runContext?.Economy != null)
         {
             runContext.Economy.Gold += GoldValue;

@@ -173,9 +173,9 @@ public class TowersManager
             _runtimeTowerModels[instanceId] = towerModel;
             RunContextRuntime.TowersManager.AddTowerPlaced(towerModel, instanceId);
 
-            RunContextRuntime.Status.SyncFrom((GetSingleton("RunContext") as RunContext)?.Status);
+            RunContextRuntime.Status.SyncFrom(RunContext.Instance.Status);
             Hooks.OnTowerPlaced(Hooks.GetListenersFromRuntime(), towerModel);
-            RunContextRuntime.Status.SyncTo((GetSingleton("RunContext") as RunContext)?.Status);
+            RunContextRuntime.Status.SyncTo(RunContext.Instance.Status);
             ApplyRuntimeBuffsToTower(instanceId, tower, towerModel);
         }
 

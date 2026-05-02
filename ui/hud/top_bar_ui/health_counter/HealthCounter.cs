@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 
 public partial class HealthCounter : HBoxContainer
 {
@@ -36,7 +36,7 @@ public partial class HealthCounter : HBoxContainer
         _counterLabel = GetNode<Label>("CounterLabel");
         _armorCounter = GetNode<Control>("HBoxContainer/ArmorCounter");
 
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
+        RunContext runContext = RunContext.Instance;
         _status = runContext.Status;
 
         _status.HealthChanged += OnHealthChange;
