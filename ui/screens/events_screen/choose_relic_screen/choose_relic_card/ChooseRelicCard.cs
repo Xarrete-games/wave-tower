@@ -31,7 +31,7 @@ public partial class ChooseRelicCard : Control
 
     public override void _ExitTree()
     {
-        if (_runContext?.Status != null && _isHealthSubscribed)
+        if (_runContext != null && _isHealthSubscribed)
         {
             _runContext.Status.HealthChanged -= OnHealthChanged;
             _isHealthSubscribed = false;
@@ -71,7 +71,7 @@ public partial class ChooseRelicCard : Control
             _itCostsHealth = false;
             _hasEnoughLife = true;
 
-            if (_runContext?.Status != null && _isHealthSubscribed)
+            if (_runContext != null && _isHealthSubscribed)
             {
                 _runContext.Status.HealthChanged -= OnHealthChanged;
                 _isHealthSubscribed = false;

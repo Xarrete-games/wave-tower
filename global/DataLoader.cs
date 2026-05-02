@@ -109,7 +109,7 @@ public partial class DataLoader : Node
     {
         var filtered = new List<RelicData>();
         RunContext runContext = RunContext.Instance;
-        RelicsManager relicsManager = runContext?.RelicsManager;
+        RelicsManager relicsManager = runContext.RelicsManager;
 
         for (int index = 0; index < _relics.Count; index++)
         {
@@ -142,11 +142,7 @@ public partial class DataLoader : Node
                 }
             }
 
-            bool alreadyOwned = false;
-            if (relicsManager != null)
-            {
-                alreadyOwned = relicsManager.HasRelic(relicData.Id);
-            }
+            bool alreadyOwned = relicsManager.HasRelic(relicData.Id);
 
             if (!alreadyOwned)
             {

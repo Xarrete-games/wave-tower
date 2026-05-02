@@ -10,11 +10,8 @@ public partial class InventoryUISlot : Control
     {
         _textureRect = GetNode<TextureRect>("CenterContainer/TextureRect");
         RunContext runContext = RunContext.Instance;
-        _consumablesManager = runContext?.ConsumablesManager;
-        if (_consumablesManager != null)
-        {
-            _consumablesManager.ConsumableUsed += OnConsumableUsed;
-        }
+        _consumablesManager = runContext.ConsumablesManager;
+        _consumablesManager.ConsumableUsed += OnConsumableUsed;
     }
 
     public override void _ExitTree()

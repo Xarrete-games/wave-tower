@@ -3,11 +3,7 @@ public class CaffeinePotion : ConsumableUsable
     public override void Use()
     {
         RunContext runContext = RunContext.Instance;
-        TowersManager towersManager = runContext?.TowersManager;
-        if (towersManager == null)
-        {
-            return;
-        }
+        TowersManager towersManager = runContext.TowersManager;
 
         System.Collections.Generic.List<Tower> towers = towersManager.GetPlacedTowers();
         for (int index = 0; index < towers.Count; index++)

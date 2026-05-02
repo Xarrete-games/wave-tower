@@ -13,11 +13,8 @@ public partial class TowerSelector : Node
         ClickEvents.TowerRemovePressed += OnTowerRemovePressed;
 
         RunContext runContext = RunContext.Instance;
-        _progress = runContext?.Progress;
-        if (_progress != null)
-        {
-            _progress.CurrentWaveFinished += ClearTowerSelected;
-        }
+        _progress = runContext.Progress;
+        _progress.CurrentWaveFinished += ClearTowerSelected;
     }
 
     public override void _ExitTree()

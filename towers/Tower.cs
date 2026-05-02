@@ -308,9 +308,9 @@ public partial class Tower : Node2D
     public virtual void Upgrade()
     {
         RunContext runContext = RunContext.Instance;
-        Economy economy = runContext?.Economy;
+        Economy economy = runContext.Economy;
         TowerData towerData = Data as TowerData;
-        if (economy != null && towerData != null)
+        if (towerData != null)
         {
             int currentGold = economy.Gold;
             int upgradePrice = towerData.UpgradePrice;
@@ -463,11 +463,6 @@ public partial class Tower : Node2D
         _rangeCollision.SetDeferred("polygon", BuildEllipsePolygon(attackRange, attackRange * ELLIPSE_Y_RATIO));
     }
 
-    public void OnExpDataChange(Variant newExpData)
-    {
-        ExpData = newExpData.Obj as TowerExpData;
-    }
-
     private void OnTowerSelected(Tower tower)
     {
         CurrentTowerSelected = tower;
@@ -537,7 +532,7 @@ public partial class Tower : Node2D
     protected TowersManager GetTowersManager()
     {
         RunContext runContext = RunContext.Instance;
-        return runContext?.TowersManager;
+        return runContext.TowersManager;
     }
 }
 

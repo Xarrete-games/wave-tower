@@ -20,11 +20,8 @@ public partial class LevelTileMap : TileMapLayer
     public override void _Ready()
     {
         RunContext runContext = RunContext.Instance;
-        _towersManager = runContext?.TowersManager;
-        if (_towersManager != null)
-        {
-            _towersManager.TowerRemoved += OnTowerRemoved;
-        }
+        _towersManager = runContext.TowersManager;
+        _towersManager.TowerRemoved += OnTowerRemoved;
 
         FillData();
     }

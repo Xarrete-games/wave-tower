@@ -30,7 +30,7 @@ public partial class TowerStatsHandler : Node
     public override void _Ready()
     {
         RunContext runContext = RunContext.Instance;
-        BuffScheduler = new BuffScheduler(runContext?.Progress);
+        BuffScheduler = new BuffScheduler(runContext.Progress);
         BuffScheduler.BuffExpired += OnScheduledBuffExpired;
         BuffScheduler.BuffApplied += OnScheduledBuffApplied;
     }

@@ -10,11 +10,8 @@ public partial class InventoryUI : Control
     public override void _Ready()
     {
         RunContext runContext = RunContext.Instance;
-        _consumablesManager = runContext?.ConsumablesManager;
-        if (_consumablesManager != null)
-        {
-            _consumablesManager.ConsumableAdded += OnConsumableAdded;
-        }
+        _consumablesManager = runContext.ConsumablesManager;
+        _consumablesManager.ConsumableAdded += OnConsumableAdded;
     }
 
     public override void _ExitTree()

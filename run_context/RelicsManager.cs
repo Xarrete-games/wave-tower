@@ -169,6 +169,6 @@ public class RelicsManager
         }
 
         RunContext runContext = RunContext.Instance;
-        runContext?.TowersManager?.SyncBuffsForAllTowers();
+        runContext.TowersManager.SyncBuffsForAllTowers();
     }
 }

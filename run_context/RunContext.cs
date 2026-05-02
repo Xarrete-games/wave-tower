@@ -5,7 +5,7 @@ public sealed class RunContext
     private static readonly PackedScene DEATH_SCENE = GD.Load<PackedScene>("uid://dcq16u6g6ahsp");
     public static RunContext Instance { get; } = new RunContext();
 
-    public Variant CompositeTileMap { get; private set; }
+    public CompositeTileMap CompositeTileMap { get; private set; }
 
     public OffersManager OffersManager { get; private set; }
 
@@ -28,7 +28,7 @@ public sealed class RunContext
         ResetRun();
     }
 
-    public void SetCompositeTileMap(Variant compositeTileMap)
+    public void SetCompositeTileMap(CompositeTileMap compositeTileMap)
     {
         CompositeTileMap = compositeTileMap;
     }
@@ -36,6 +36,7 @@ public sealed class RunContext
     public void ResetRun()
     {
         RunContextRuntime.Reset();
+        CompositeTileMap = null;
 
         if (Status != null)
         {

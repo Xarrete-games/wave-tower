@@ -30,26 +30,15 @@ public partial class ShopSlot : Control
         _healthPrice.Visible = false;
 
         _runContext = RunContext.Instance;
-        if (_runContext?.RelicsManager != null)
-        {
-            _runContext.RelicsManager.RelicAdded += OnRelicAdded;
-        }
-
-        if (_runContext?.Status != null)
-        {
-            _runContext.Status.HealthChanged += OnStatusHealthChange;
-        }
+        _runContext.RelicsManager.RelicAdded += OnRelicAdded;
+        _runContext.Status.HealthChanged += OnStatusHealthChange;
     }
 
     public override void _ExitTree()
     {
-        if (_runContext?.RelicsManager != null)
+        if (_runContext != null)
         {
             _runContext.RelicsManager.RelicAdded -= OnRelicAdded;
-        }
-
-        if (_runContext?.Status != null)
-        {
             _runContext.Status.HealthChanged -= OnStatusHealthChange;
         }
     }

@@ -337,10 +337,7 @@ public partial class Enemy : CharacterBody2D
         ShowGoldDropped();
 
         RunContext runContext = RunContext.Instance;
-        if (runContext?.Economy != null)
-        {
-            runContext.Economy.Gold += GoldValue;
-        }
+        runContext.Economy.Gold += GoldValue;
 
         QueueFree();
     }

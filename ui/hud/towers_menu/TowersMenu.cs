@@ -24,11 +24,8 @@ public partial class TowersMenu : Control
         }
 
         RunContext runContext = RunContext.Instance;
-        _towersManager = runContext?.TowersManager;
-        if (_towersManager != null)
-        {
-            _towersManager.TowerCardAmountChanged += OnTowerCardAdded;
-        }
+        _towersManager = runContext.TowersManager;
+        _towersManager.TowerCardAmountChanged += OnTowerCardAdded;
         InitButtonCards();
     }
 

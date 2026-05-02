@@ -44,13 +44,13 @@ public class RelicOffersManager
         var filtered = new List<RelicData>();
 
         RunContext runContext = GetRunContext();
-        RelicsManager relicsManager = runContext?.RelicsManager;
+        RelicsManager relicsManager = runContext.RelicsManager;
 
         for (int index = 0; index < _allRelicData.Count; index++)
         {
             RelicData data = _allRelicData[index];
 
-            bool hasRelic = relicsManager != null && relicsManager.HasRelic(data.Id);
+            bool hasRelic = relicsManager.HasRelic(data.Id);
             bool isCursed = data.IsCursed;
             bool onlyForEvents = data.OnlyForEvents;
 

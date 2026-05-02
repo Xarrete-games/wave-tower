@@ -47,9 +47,9 @@ public partial class AnimationComponent : Node
     [Export] public Color FlickedColor = new(1, 1, 1, 0.5f);
 
     private Control _target;
-    private Dictionary<string, Variant> _hoverValues = new();
-    private Dictionary<string, Variant> _enterValues = new();
-    private Dictionary<string, Variant> _defaultValues = new();
+    private Dictionary<string, object> _hoverValues = new();
+    private Dictionary<string, object> _enterValues = new();
+    private Dictionary<string, object> _defaultValues = new();
     private bool _onHover = false;
     private bool _signalsConnected;
 
@@ -155,7 +155,7 @@ public partial class AnimationComponent : Node
             _target.PivotOffset = _target.Size / 2.0f;
         }
 
-        _defaultValues = new Dictionary<string, Variant>
+        _defaultValues = new Dictionary<string, object>
         {
             { "scale", _target.Scale },
             { "position", _target.Position },
@@ -164,7 +164,7 @@ public partial class AnimationComponent : Node
             { "self_modulate", _target.SelfModulate },
         };
 
-        _hoverValues = new Dictionary<string, Variant>
+        _hoverValues = new Dictionary<string, object>
         {
             { "scale", HoverScale },
             { "position", _target.Position + HoverPosition },
@@ -173,7 +173,7 @@ public partial class AnimationComponent : Node
             { "self_modulate", HoverModulate },
         };
 
-        _enterValues = new Dictionary<string, Variant>
+        _enterValues = new Dictionary<string, object>
         {
             { "scale", EnterScale },
             { "position", _target.Position + EnterPosition },
@@ -210,7 +210,7 @@ public partial class AnimationComponent : Node
         }
     }
 
-    private async Task AddTween(Dictionary<string, Variant> values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
+    private async Task AddTween(Dictionary<string, object> values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
     {
         if (!IsInsideTree() || _target == null)
         {
@@ -225,8 +225,20 @@ public partial class AnimationComponent : Node
         for (int i = 0; i < properties.Length; i++)
         {
             string property = properties[i];
-            Variant value = values.TryGetValue(property, out Variant configuredValue) ? configuredValue : default;
-            tween.TweenProperty(_target, property, value, seconds).SetTrans(transition).SetEase(easing);
+            if (!values.TryGetValue(property, out object configuredValue))
+            {
+                continue;
+            }
+
+            PropertyTweener tweener = configuredValue switch
+            {
+                float floatValue => tween.TweenProperty(_target, property, floatValue, seconds),
+                Vector2 vector2Value => tween.TweenProperty(_target, property, vector2Value, seconds),
+                Color colorValue => tween.TweenProperty(_target, property, colorValue, seconds),
+                _ => null,
+            };
+
+            tweener?.SetTrans(transition).SetEase(easing);
         }
 
         await ToSignal(GetTree().CreateTimer(delay), Timer.SignalName.Timeout);
@@ -246,7 +258,7 @@ public partial class AnimationComponent : Node
             return;
         }
 
-        Color defaultModulate = _defaultValues["self_modulate"].AsColor();
+        Color defaultModulate = _defaultValues["self_modulate"] is Color color ? color : Colors.White;
         bool useFlick = true;
 
         while (flicked && IsInsideTree())

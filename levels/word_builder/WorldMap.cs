@@ -40,49 +40,29 @@ public partial class WorldMap : Node2D
 
     private sealed class GodotWordBuilderAdapter : IWordBuilderAdapter
     {
-        private static MapPiece AsMapPiece(object value)
+        private static T AsGodotTypedObject<T>(object value) where T : GodotObject
         {
-            if (value is MapPiece piece)
+            if (value is T typedValue)
             {
-                return piece;
-            }
-
-            if (value is Variant variant && variant.VariantType == Variant.Type.Object)
-            {
-                return variant.AsGodotObject() as MapPiece;
+                return typedValue;
             }
 
             return null;
+        }
+
+        private static MapPiece AsMapPiece(object value)
+        {
+            return AsGodotTypedObject<MapPiece>(value);
         }
 
         private static Edge AsEdge(object value)
         {
-            if (value is Edge edge)
-            {
-                return edge;
-            }
-
-            if (value is Variant variant && variant.VariantType == Variant.Type.Object)
-            {
-                return variant.AsGodotObject() as Edge;
-            }
-
-            return null;
+            return AsGodotTypedObject<Edge>(value);
         }
 
         private static MapPieceData AsPieceData(object value)
         {
-            if (value is MapPieceData pieceData)
-            {
-                return pieceData;
-            }
-
-            if (value is Variant variant && variant.VariantType == Variant.Type.Object)
-            {
-                return variant.AsGodotObject() as MapPieceData;
-            }
-
-            return null;
+            return AsGodotTypedObject<MapPieceData>(value);
         }
 
         public long GetObjectKey(object value)

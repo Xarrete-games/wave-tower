@@ -21,26 +21,20 @@ public partial class ConsumablesHandler : Node
         _runContext = RunContext.Instance;
         _gameState = GetNode<GameState>("/root/GameState");
 
-        if (_runContext?.ConsumablesManager != null)
-        {
-            _runContext.ConsumablesManager.ConsumableClicked += OnConsumableClicked;
-        }
+        _runContext.ConsumablesManager.ConsumableClicked += OnConsumableClicked;
 
         if (_gameState != null)
         {
             _gameState.StateChanged += OnGameStateChanged;
         }
 
-        if (_runContext?.TowersManager != null)
-        {
-            _runContext.TowersManager.TowerHovered += OnTowerHovered;
-            _runContext.TowersManager.TowerUnhovered += OnTowerUnhovered;
-        }
+        _runContext.TowersManager.TowerHovered += OnTowerHovered;
+        _runContext.TowersManager.TowerUnhovered += OnTowerUnhovered;
     }
 
     public override void _ExitTree()
     {
-        if (_runContext?.ConsumablesManager != null)
+        if (_runContext != null)
         {
             _runContext.ConsumablesManager.ConsumableClicked -= OnConsumableClicked;
         }
@@ -50,7 +44,7 @@ public partial class ConsumablesHandler : Node
             _gameState.StateChanged -= OnGameStateChanged;
         }
 
-        if (_runContext?.TowersManager != null)
+        if (_runContext != null)
         {
             _runContext.TowersManager.TowerHovered -= OnTowerHovered;
             _runContext.TowersManager.TowerUnhovered -= OnTowerUnhovered;

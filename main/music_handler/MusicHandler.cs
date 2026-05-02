@@ -31,16 +31,10 @@ public partial class MusicHandler : Node
         StopMusic();
 
         RunContext runContext = RunContext.Instance;
-        _towersManager = runContext?.TowersManager;
-        if (_towersManager != null)
-        {
-            _towersManager.TowerCountChanged += OnTowerCountChange;
-        }
-        _status = runContext?.Status;
-        if (_status != null)
-        {
-            _status.PlayerDied += StopMusic;
-        }
+        _towersManager = runContext.TowersManager;
+        _towersManager.TowerCountChanged += OnTowerCountChange;
+        _status = runContext.Status;
+        _status.PlayerDied += StopMusic;
     }
 
     public override void _ExitTree()

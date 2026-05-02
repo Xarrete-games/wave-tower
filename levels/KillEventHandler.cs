@@ -11,11 +11,8 @@ public partial class KillEventHandler : Node
     public override void _Ready()
     {
         RunContext runContext = RunContext.Instance;
-        _enemyManager = runContext?.EnemyManager;
-        if (_enemyManager != null)
-        {
-            _enemyManager.EnemyDied += OnEnemyKilled;
-        }
+        _enemyManager = runContext.EnemyManager;
+        _enemyManager.EnemyDied += OnEnemyKilled;
     }
 
     public override void _ExitTree()

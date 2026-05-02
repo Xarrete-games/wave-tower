@@ -109,11 +109,8 @@ public partial class TowerButton : Control
 
         _runContext = RunContext.Instance;
         _runContext.Economy.AvailableFreeTowersChanged += OnAvailableFreeTowersChange;
-        if (_runContext.RelicsManager != null)
-        {
-            _runContext.RelicsManager.RelicAdded += OnRelicAdded;
-            _runContext.RelicsManager.RelicRemoved += OnRelicRemoved;
-        }
+        _runContext.RelicsManager.RelicAdded += OnRelicAdded;
+        _runContext.RelicsManager.RelicRemoved += OnRelicRemoved;
         _runContext.Progress.CurrentWaveFinished += CurrentWaveFinished;
 
         _panelNode?.AddThemeStyleboxOverride("panel", NORMAL_PANEL);
@@ -122,21 +119,15 @@ public partial class TowerButton : Control
 
     public override void _ExitTree()
     {
-        if (_runContext?.Economy != null)
+        if (_runContext == null)
         {
-            _runContext.Economy.AvailableFreeTowersChanged -= OnAvailableFreeTowersChange;
+            return;
         }
 
-        if (_runContext?.Progress != null)
-        {
-            _runContext.Progress.CurrentWaveFinished -= CurrentWaveFinished;
-        }
-
-        if (_runContext?.RelicsManager != null)
-        {
-            _runContext.RelicsManager.RelicAdded -= OnRelicAdded;
-            _runContext.RelicsManager.RelicRemoved -= OnRelicRemoved;
-        }
+        _runContext.Economy.AvailableFreeTowersChanged -= OnAvailableFreeTowersChange;
+        _runContext.Progress.CurrentWaveFinished -= CurrentWaveFinished;
+        _runContext.RelicsManager.RelicAdded -= OnRelicAdded;
+        _runContext.RelicsManager.RelicRemoved -= OnRelicRemoved;
     }
 
     private void UpdateTexture()
@@ -172,11 +163,6 @@ public partial class TowerButton : Control
     private void UpdatePrice()
     {
         RunContext runContext = RunContext.Instance;
-        if (runContext == null)
-        {
-            return;
-        }
-
         if (runContext.Economy.AvailableFreeTowers > 0)
         {
             Price = 0;
@@ -218,7 +204,7 @@ public partial class TowerButton : Control
     private void CurrentWaveFinished()
     {
         RunContext runContext = RunContext.Instance;
-        if (runContext?.RelicsManager != null && runContext.RelicsManager.HasRelic("lemon"))
+        if (runContext.RelicsManager.HasRelic("lemon"))
         {
             UpdatePrice();
         }
@@ -230,7 +216,7 @@ public partial class TowerButton : Control
         audioManager?.PlayButtonClick();
 
         RunContext runContext = RunContext.Instance;
-        if (runContext != null && runContext.Economy.Gold < Price)
+        if (runContext.Economy.Gold < Price)
         {
             return;
         }
