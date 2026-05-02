@@ -66,6 +66,28 @@
 			],
 			"problemMatcher": [],
 			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-enemy-shutdown-gate",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-remove-restart-flag",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
 		}
 	]
 }

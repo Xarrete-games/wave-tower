@@ -5,9 +5,6 @@ public partial class RunContext : Node
     private static readonly PackedScene DEATH_SCENE = GD.Load<PackedScene>("uid://dcq16u6g6ahsp");
 
     [Export]
-    public bool IsOnRestarting = false;
-
-    [Export]
     public Variant CompositeTileMap;
 
     public OffersManager OffersManager;
@@ -63,7 +60,6 @@ public partial class RunContext : Node
 
         ConsumablesManager = new ConsumablesManager();
         EnemyManager = new EnemyManager();
-        IsOnRestarting = false;
 
         Status.PlayerDied += OnDie;
     }

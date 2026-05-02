@@ -153,11 +153,6 @@ public partial class RunHandler : Node
         await ShowChooseCardScreen();
 
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        if (runContext.IsOnRestarting)
-        {
-            return;
-        }
-
         int currentWave = runContext.Progress.CurrentWave;
         EventData eventData = GetNextEvent(currentWave);
         if (eventData == null)

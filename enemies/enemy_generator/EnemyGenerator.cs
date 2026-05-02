@@ -18,6 +18,7 @@ public partial class EnemyGenerator : Node
     private WaveComposer _composer;
     private int _enemiesLeft;
     private bool _isTrackingEnemyExit;
+    private bool _isShuttingDown;
 
     public override void _Ready()
     {
@@ -56,17 +57,47 @@ public partial class EnemyGenerator : Node
         }
 
         ClickEvents.NextWavePressed += StartNextWave;
+        ClickEvents.ResetGameButtonPressed += OnResetGameRequested;
     }
 
     public override void _ExitTree()
     {
         ClickEvents.NextWavePressed -= StartNextWave;
+        ClickEvents.ResetGameButtonPressed -= OnResetGameRequested;
+
+        if (WaveSpawner != null)
+        {
+            WaveSpawner.WaveStarted -= OnWaveStarted;
+            WaveSpawner.WaveFinished -= OnWaveFinished;
+            WaveSpawner.EnemySpawned -= OnEnemySpawned;
+        }
 
         if (_isTrackingEnemyExit && EnemiesContainer != null)
         {
             EnemiesContainer.ChildExitingTree -= OnEnemyLeft;
             _isTrackingEnemyExit = false;
         }
+    }
+
+    private void BeginShutdown()
+    {
+        if (_isShuttingDown)
+        {
+            return;
+        }
+
+        _isShuttingDown = true;
+
+        if (_isTrackingEnemyExit && EnemiesContainer != null)
+        {
+            EnemiesContainer.ChildExitingTree -= OnEnemyLeft;
+            _isTrackingEnemyExit = false;
+        }
+    }
+
+    private void OnResetGameRequested()
+    {
+        BeginShutdown();
     }
 
     public void StartNextWave()
@@ -102,6 +133,11 @@ public partial class EnemyGenerator : Node
 
     private void OnWaveFinished(int waveNumber)
     {
+        if (_isShuttingDown || !IsInsideTree())
+        {
+            return;
+        }
+
         GD.Print($"[EnemyGeneratorProcedural] Wave {waveNumber} finished spawning");
 
         _enemiesLeft = GetTree().GetNodesInGroup("enemy").Count;
@@ -131,6 +167,11 @@ public partial class EnemyGenerator : Node
 
     private void OnEnemyLeft(Node node)
     {
+        if (_isShuttingDown || !IsInsideTree())
+        {
+            return;
+        }
+
         if (node.IsInGroup("enemy"))
         {
             _enemiesLeft -= 1;
@@ -150,10 +191,15 @@ public partial class EnemyGenerator : Node
 
     private void ReportFinished()
     {
+        if (_isShuttingDown || !IsInsideTree())
+        {
+            return;
+        }
+
         RunContext runContext = GetNode<RunContext>("/root/RunContext");
         GameState gameState = GetNode<GameState>("/root/GameState");
 
-        if (runContext.IsOnRestarting || runContext.Status.Health <= 0 || gameState.IsOnMainMenu())
+        if (runContext.Status.Health <= 0 || gameState.IsOnMainMenu())
         {
             return;
         }

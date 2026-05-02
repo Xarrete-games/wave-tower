@@ -65,8 +65,6 @@ public partial class Game : Node2D
 
     public void ResetGame()
     {
-        RunContext runContext = GetNode<RunContext>("/root/RunContext");
-        runContext.IsOnRestarting = true;
         GetTree().ChangeSceneToPacked(BootScene);
     }
 
