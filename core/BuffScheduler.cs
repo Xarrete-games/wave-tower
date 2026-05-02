@@ -31,11 +31,11 @@ public class BuffScheduler
 
         if (seconds > 0)
         {
-            _ = ScheduleInSecondsAsync(buff, seconds);
+            AsyncTaskHelper.FireAndForget(ScheduleInSecondsAsync(buff, seconds), "BuffScheduler.ScheduleInSecondsAsync");
         }
         else if (waves > 0)
         {
-            _ = ScheduleInWavesAsync(buff, waves);
+            AsyncTaskHelper.FireAndForget(ScheduleInWavesAsync(buff, waves), "BuffScheduler.ScheduleInWavesAsync");
         }
     }
 

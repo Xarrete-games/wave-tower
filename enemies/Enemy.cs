@@ -17,14 +17,7 @@ public partial class Enemy : CharacterBody2D
     [Export] public float BaseSpeed = 80.0f;
     [Export] public float MaxHealth = 50.0f;
     [Export] public int GoldValue = 1;
-    [Export] public int damage = 1;
-
-    // Keep legacy exported field for serialized scenes and expose PascalCase API.
-    public int Damage
-    {
-        get => damage;
-        set => damage = value;
-    }
+    [Export] public int Damage = 1;
 
     public float Health;
     public HealthBar HealthBar;
@@ -69,7 +62,7 @@ public partial class Enemy : CharacterBody2D
 
     public override void _Ready()
     {
-        _ = ReadyAsync();
+        AsyncTaskHelper.FireAndForget(ReadyAsync(), "Enemy.ReadyAsync");
     }
 
     private async Task ReadyAsync()
@@ -163,17 +156,6 @@ public partial class Enemy : CharacterBody2D
         }
     }
 
-    public void SetWaypoints(Godot.Collections.Array<Vector2> waypoints)
-    {
-        var waypointList = new List<Vector2>(waypoints.Count);
-        for (int i = 0; i < waypoints.Count; i++)
-        {
-            waypointList.Add(waypoints[i]);
-        }
-
-        SetWaypoints(waypointList);
-    }
-
     public void SetWaypoints(IReadOnlyList<Vector2> waypoints)
     {
         _waypoints.Clear();
@@ -251,7 +233,7 @@ public partial class Enemy : CharacterBody2D
 
     public void Enable()
     {
-        _ = EnableAsync();
+        AsyncTaskHelper.FireAndForget(EnableAsync(), "Enemy.EnableAsync");
     }
 
     private async Task EnableAsync()
@@ -332,7 +314,7 @@ public partial class Enemy : CharacterBody2D
 
     private void PlayHitAnimation()
     {
-        _ = PlayHitAnimationAsync();
+        AsyncTaskHelper.FireAndForget(PlayHitAnimationAsync(), "Enemy.PlayHitAnimationAsync");
     }
 
     private async Task PlayHitAnimationAsync()

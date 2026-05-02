@@ -210,45 +210,11 @@ public partial class EnemyGenerator : Node
             return;
         }
 
-        SyncRuntimeStatusFromLegacy(runContext.Status);
+        RunContextRuntime.Status.SyncFrom(runContext.Status);
         Hooks.OnWaveFinished(Hooks.GetListenersFromRuntime());
-        SyncLegacyStatusFromRuntime(runContext.Status);
+        RunContextRuntime.Status.SyncTo(runContext.Status);
 
         runContext.Progress.NotifyCurrentWaveFinished();
-    }
-
-    private void SyncRuntimeStatusFromLegacy(Status status)
-    {
-        if (status == null)
-        {
-            return;
-        }
-
-        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.Health, status.Armor);
-    }
-
-    private void SyncLegacyStatusFromRuntime(Status status)
-    {
-        if (status == null)
-        {
-            return;
-        }
-
-        StatusRuntime runtime = RunContextRuntime.Status;
-        if (status.MaxHealth != runtime.MaxHealth)
-        {
-            status.MaxHealth = runtime.MaxHealth;
-        }
-
-        if (status.Armor != runtime.Armor)
-        {
-            status.Armor = runtime.Armor;
-        }
-
-        if (status.Health != runtime.Health)
-        {
-            status.Health = runtime.Health;
-        }
     }
 
     private void OnEnemyTargetReached(Enemy enemy)

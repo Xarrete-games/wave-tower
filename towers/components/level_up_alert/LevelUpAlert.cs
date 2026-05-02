@@ -10,7 +10,7 @@ public partial class LevelUpAlert : Control
 
     public override void _Ready()
     {
-        _ = ReadyAsync();
+        AsyncTaskHelper.FireAndForget(ReadyAsync(), "LevelUpAlert.ReadyAsync");
     }
 
     private async Task ReadyAsync()

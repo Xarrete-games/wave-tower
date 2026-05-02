@@ -173,10 +173,10 @@ public class TowersManager
             _runtimeTowerModels[instanceId] = towerModel;
             RunContextRuntime.TowersManager.AddTowerPlaced(towerModel, instanceId);
 
-            SyncRuntimeStatusFromLegacy();
+            RunContextRuntime.Status.SyncFrom((GetSingleton("RunContext") as RunContext)?.Status);
             Hooks.OnTowerPlaced(Hooks.GetListenersFromRuntime(), towerModel);
-            SyncLegacyStatusFromRuntime();
-            ApplyRuntimeBuffsToLegacyTower(instanceId, tower, towerModel);
+            RunContextRuntime.Status.SyncTo((GetSingleton("RunContext") as RunContext)?.Status);
+            ApplyRuntimeBuffsToTower(instanceId, tower, towerModel);
         }
 
         TowerPlaced?.Invoke(tower);
@@ -288,7 +288,7 @@ public class TowersManager
         ClickEvents.TowerUnhovered?.Invoke(tower);
     }
 
-    public void SyncRuntimeBuffsForTower(ulong instanceId)
+    public void SyncBuffsForTower(ulong instanceId)
     {
         if (!_runtimeTowerModels.TryGetValue(instanceId, out TowerModel towerModel))
         {
@@ -301,10 +301,10 @@ public class TowersManager
             return;
         }
 
-        ApplyRuntimeBuffsToLegacyTower(instanceId, tower, towerModel);
+        ApplyRuntimeBuffsToTower(instanceId, tower, towerModel);
     }
 
-    public void SyncRuntimeBuffsForAllTowers()
+    public void SyncBuffsForAllTowers()
     {
         foreach (KeyValuePair<ulong, TowerModel> entry in _runtimeTowerModels)
         {
@@ -315,7 +315,7 @@ public class TowersManager
                 continue;
             }
 
-            ApplyRuntimeBuffsToLegacyTower(instanceId, tower, entry.Value);
+            ApplyRuntimeBuffsToTower(instanceId, tower, entry.Value);
         }
     }
 
@@ -432,45 +432,7 @@ public class TowersManager
         return GetSingleton("AudioManager") as AudioManager;
     }
 
-    private void SyncRuntimeStatusFromLegacy()
-    {
-        RunContext runContext = GetSingleton("RunContext") as RunContext;
-        Status status = runContext?.Status;
-        if (status == null)
-        {
-            return;
-        }
-
-        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.Health, status.Armor);
-    }
-
-    private void SyncLegacyStatusFromRuntime()
-    {
-        RunContext runContext = GetSingleton("RunContext") as RunContext;
-        Status status = runContext?.Status;
-        if (status == null)
-        {
-            return;
-        }
-
-        StatusRuntime runtime = RunContextRuntime.Status;
-        if (status.MaxHealth != runtime.MaxHealth)
-        {
-            status.MaxHealth = runtime.MaxHealth;
-        }
-
-        if (status.Armor != runtime.Armor)
-        {
-            status.Armor = runtime.Armor;
-        }
-
-        if (status.Health != runtime.Health)
-        {
-            status.Health = runtime.Health;
-        }
-    }
-
-    private void ApplyRuntimeBuffsToLegacyTower(ulong instanceId, Tower tower, TowerModel towerModel)
+    private void ApplyRuntimeBuffsToTower(ulong instanceId, Tower tower, TowerModel towerModel)
     {
         if (tower == null || towerModel == null)
         {
@@ -500,13 +462,13 @@ public class TowersManager
             }
 
             Source source = new Source(Source.SourceType.RELIC, buff.SourceId);
-            TowerBuff legacyBuff = TowerBuffFactory.CreateFromId(buff.Id, source, buff.Value);
-            if (legacyBuff == null)
+            TowerBuff towerBuff = TowerBuffFactory.CreateFromId(buff.Id, source, buff.Value);
+            if (towerBuff == null)
             {
                 continue;
             }
 
-            tower.AddBuff(legacyBuff);
+            tower.AddBuff(towerBuff);
             appliedSources.Add(buff.SourceId);
         }
 

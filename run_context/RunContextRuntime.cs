@@ -6,14 +6,14 @@ public static class RunContextRuntime
     private static TowersManagerRuntime _towersManager = new TowersManagerRuntime();
     private static ConsumablesManagerRuntime _consumablesManager = new ConsumablesManagerRuntime();
     private static EconomyRuntime _economy = new EconomyRuntime();
-    private static StatusRuntime _status = new StatusRuntime();
+    private static RunContextRuntimeModels.Status _status = new RunContextRuntimeModels.Status();
     private static CompositeTileMapRuntime _compositeTileMap = new CompositeTileMapRuntime();
 
     public static RelicsManagerRuntime RelicsManager => _relicsManager;
     public static TowersManagerRuntime TowersManager => _towersManager;
     public static ConsumablesManagerRuntime ConsumablesManager => _consumablesManager;
     public static EconomyRuntime Economy => _economy;
-    public static StatusRuntime Status => _status;
+    public static RunContextRuntimeModels.Status Status => _status;
     public static CompositeTileMapRuntime CompositeTileMap => _compositeTileMap;
 
     public static void Reset()
@@ -22,7 +22,7 @@ public static class RunContextRuntime
         _towersManager = new TowersManagerRuntime();
         _consumablesManager = new ConsumablesManagerRuntime();
         _economy = new EconomyRuntime();
-        _status = new StatusRuntime();
+        _status = new RunContextRuntimeModels.Status();
         _compositeTileMap = new CompositeTileMapRuntime();
     }
 

@@ -78,7 +78,7 @@ public partial class LightningOverchargeTower : Tower
 
     private void OnTowerPlaced(Tower tower)
     {
-        _ = OnTowerPlacedAsync(tower);
+        AsyncTaskHelper.FireAndForget(OnTowerPlacedAsync(tower), "LightningOverchargeTower.OnTowerPlacedAsync");
     }
 
     private async Task OnTowerPlacedAsync(Tower tower)

@@ -92,7 +92,7 @@ public partial class BlueProjectil : Area2D
 
     private void OnBodyEntered(Node2D body)
     {
-        _ = OnBodyEnteredAsync(body);
+        AsyncTaskHelper.FireAndForget(OnBodyEnteredAsync(body), "BlueProjectil.OnBodyEnteredAsync");
     }
 
     private async Task OnBodyEnteredAsync(Node2D body)

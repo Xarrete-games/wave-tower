@@ -10,7 +10,7 @@ public partial class DamageNumbers : Control
 
     public override void _Ready()
     {
-        _ = ReadyAsync();
+        AsyncTaskHelper.FireAndForget(ReadyAsync(), "DamageNumbers.ReadyAsync");
     }
 
     private async Task ReadyAsync()

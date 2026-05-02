@@ -45,9 +45,9 @@ public class ConsumablesManager
         if (consumableModel != null)
         {
             SyncConsumableUseTargetToRuntime(consumable, consumableModel);
-            SyncRuntimeStatusFromLegacy();
+            RunContextRuntime.Status.SyncFrom(GetRunContext()?.Status);
             Hooks.OnConsumableUsed(Hooks.GetListenersFromRuntime(), consumableModel);
-            SyncLegacyStatusFromRuntime();
+            RunContextRuntime.Status.SyncTo(GetRunContext()?.Status);
             SyncTowerBuffsFromConsumableTarget(consumable);
         }
 
@@ -149,42 +149,6 @@ public class ConsumablesManager
         return false;
     }
 
-    private void SyncRuntimeStatusFromLegacy()
-    {
-        Status status = GetRunContext()?.Status;
-        if (status == null)
-        {
-            return;
-        }
-
-        RunContextRuntime.Status.SyncFromLegacy(status.MaxHealth, status.Health, status.Armor);
-    }
-
-    private void SyncLegacyStatusFromRuntime()
-    {
-        Status status = GetRunContext()?.Status;
-        if (status == null)
-        {
-            return;
-        }
-
-        StatusRuntime runtime = RunContextRuntime.Status;
-        if (status.MaxHealth != runtime.MaxHealth)
-        {
-            status.MaxHealth = runtime.MaxHealth;
-        }
-
-        if (status.Armor != runtime.Armor)
-        {
-            status.Armor = runtime.Armor;
-        }
-
-        if (status.Health != runtime.Health)
-        {
-            status.Health = runtime.Health;
-        }
-    }
-
     private void SyncTowerBuffsFromConsumableTarget(Consumable consumableObj)
     {
         if (consumableObj == null)
@@ -205,7 +169,7 @@ public class ConsumablesManager
             return;
         }
 
-        towersManager.SyncRuntimeBuffsForTower(targetTower.GetInstanceId());
+        towersManager.SyncBuffsForTower(targetTower.GetInstanceId());
     }
 
     private void SyncConsumableUseTargetToRuntime(Consumable consumableObj, ConsumableModel consumableModel)

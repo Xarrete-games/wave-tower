@@ -15,7 +15,7 @@ public partial class CristalLight : PointLight2D
 
     public void Play()
     {
-        _ = PlayAsync();
+        AsyncTaskHelper.FireAndForget(PlayAsync(), "CristalLight.PlayAsync");
     }
 
     private async Task PlayAsync()

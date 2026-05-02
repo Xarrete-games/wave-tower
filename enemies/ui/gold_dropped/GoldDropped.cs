@@ -10,7 +10,7 @@ public partial class GoldDropped : Control
 
     public override void _Ready()
     {
-        _ = ReadyAsync();
+        AsyncTaskHelper.FireAndForget(ReadyAsync(), "GoldDropped.ReadyAsync");
     }
 
     private async Task ReadyAsync()

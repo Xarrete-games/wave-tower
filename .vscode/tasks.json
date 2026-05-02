@@ -88,6 +88,72 @@
 			],
 			"problemMatcher": [],
 			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-remove-legacy-bridges",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-remove-legacy-bridges-fix",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-next-legacy-pass",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-status-sync-rename",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-enemy-async-helper",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "build-wave-tower-fire-and-forget-pass",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"Wave Tower.sln"
+			],
+			"problemMatcher": [],
+			"group": "build"
 		}
 	]
 }

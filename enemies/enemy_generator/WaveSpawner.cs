@@ -30,7 +30,7 @@ public partial class WaveSpawner : Node
 
     public void StartWave(int waveNumber, List<WaveComposer.WaveGroup> groups, WaveConfig config)
     {
-        _ = StartWaveAsync(waveNumber, groups, config);
+        AsyncTaskHelper.FireAndForget(StartWaveAsync(waveNumber, groups, config), "WaveSpawner.StartWaveAsync");
     }
 
     private async Task StartWaveAsync(int waveNumber, List<WaveComposer.WaveGroup> groups, WaveConfig config)

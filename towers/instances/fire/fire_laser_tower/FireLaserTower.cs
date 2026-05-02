@@ -21,7 +21,7 @@ public partial class FireLaserTower : Tower
 
     protected override void Fire()
     {
-        _ = FireAsync();
+        AsyncTaskHelper.FireAndForget(FireAsync(), "FireLaserTower.FireAsync");
     }
 
     private async Task FireAsync()

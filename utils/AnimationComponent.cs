@@ -127,7 +127,7 @@ public partial class AnimationComponent : Node
 
     private void Setup()
     {
-        _ = SetupAsync();
+        AsyncTaskHelper.FireAndForget(SetupAsync(), "AnimationComponent.SetupAsync");
     }
 
     private async Task SetupAsync()
@@ -186,7 +186,7 @@ public partial class AnimationComponent : Node
 
         if (flicked)
         {
-            _ = FlickLoop();
+            AsyncTaskHelper.FireAndForget(FlickLoop(), "AnimationComponent.FlickLoop");
         }
 
         if (EnterAnimation)

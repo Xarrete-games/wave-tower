@@ -186,7 +186,7 @@ public partial class FireLaserProjectiel : Node2D
 
     private void Appear()
     {
-        _ = AppearAsync();
+        AsyncTaskHelper.FireAndForget(AppearAsync(), "FireLaserProjectiel.AppearAsync");
     }
 
     private async Task AppearAsync()

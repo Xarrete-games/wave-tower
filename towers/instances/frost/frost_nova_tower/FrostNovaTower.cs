@@ -17,7 +17,7 @@ public partial class FrostNovaTower : Tower
 
     protected override void Fire()
     {
-        _ = FireAsync();
+        AsyncTaskHelper.FireAndForget(FireAsync(), "FrostNovaTower.FireAsync");
     }
 
     private async Task FireAsync()

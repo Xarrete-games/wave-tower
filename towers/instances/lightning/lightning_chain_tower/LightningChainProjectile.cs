@@ -105,7 +105,7 @@ public partial class LightningChainProjectile : Node2D
 
     private void OnHit()
     {
-        _ = OnHitAsync();
+        AsyncTaskHelper.FireAndForget(OnHitAsync(), "LightningChainProjectile.OnHitAsync");
     }
 
     private async Task OnHitAsync()

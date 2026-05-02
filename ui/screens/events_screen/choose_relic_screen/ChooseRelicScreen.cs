@@ -21,7 +21,7 @@ public partial class ChooseRelicScreen : Control
 
     public override void _Ready()
     {
-        _ = ReadyAsync();
+        AsyncTaskHelper.FireAndForget(ReadyAsync(), "ChooseRelicScreen.ReadyAsync");
     }
 
     private async Task ReadyAsync()

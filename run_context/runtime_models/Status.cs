@@ -1,4 +1,6 @@
-public sealed class StatusRuntime
+namespace RunContextRuntimeModels;
+
+public sealed class Status
 {
     public int MaxHealth { get; private set; } = 20;
     public int Health { get; private set; } = 20;
@@ -77,10 +79,38 @@ public sealed class StatusRuntime
         }
     }
 
-    public void SyncFromLegacy(int maxHealth, int health, int armor)
+    public void SyncFrom(global::Status status)
     {
-        MaxHealth = maxHealth;
-        Health = health;
-        Armor = armor;
+        if (status == null)
+        {
+            return;
+        }
+
+        MaxHealth = status.MaxHealth;
+        Health = status.Health;
+        Armor = status.Armor;
+    }
+
+    public void SyncTo(global::Status status)
+    {
+        if (status == null)
+        {
+            return;
+        }
+
+        if (status.MaxHealth != MaxHealth)
+        {
+            status.MaxHealth = MaxHealth;
+        }
+
+        if (status.Armor != Armor)
+        {
+            status.Armor = Armor;
+        }
+
+        if (status.Health != Health)
+        {
+            status.Health = Health;
+        }
     }
 }
