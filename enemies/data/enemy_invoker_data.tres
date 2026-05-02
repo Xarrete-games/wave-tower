@@ -12,7 +12,6 @@ FinalWave = 30
 
 [resource]
 script = ExtResource("1_svv2o")
-TypeLegacy = 8
 Name = "Invoker"
 Icon = ExtResource("1_s0iql")
 Scene = ExtResource("2_b23po")

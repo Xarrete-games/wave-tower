@@ -12,7 +12,6 @@ FinalWave = 20
 
 [resource]
 script = ExtResource("1_ucfcj")
-TypeLegacy = 6
 type = 1
 Name = "Black skeleton"
 Icon = ExtResource("1_s0d6s")

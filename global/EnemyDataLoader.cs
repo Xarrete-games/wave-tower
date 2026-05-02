@@ -31,8 +31,6 @@ public class EnemyDataLoader
             {
                 continue;
             }
-
-            EnemiesByLegacyType[enemyData.TypeLegacy] = enemyData;
         }
     }
 

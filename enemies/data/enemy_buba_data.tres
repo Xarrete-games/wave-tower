@@ -12,7 +12,6 @@ FinalWave = 7
 
 [resource]
 script = ExtResource("1_fsua3")
-TypeLegacy = 1
 type = 3
 Name = "Buba"
 Icon = ExtResource("1_a3f8k")

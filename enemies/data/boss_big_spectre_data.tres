@@ -12,7 +12,6 @@ FinalWave = 10
 
 [resource]
 script = ExtResource("3_d6nks")
-TypeLegacy = 2
 type = 4
 Name = "Big Spectre"
 Icon = ExtResource("1_chpqd")

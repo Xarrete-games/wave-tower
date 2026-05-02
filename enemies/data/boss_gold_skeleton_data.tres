@@ -12,7 +12,6 @@ FinalWave = 20
 
 [resource]
 script = ExtResource("1_2btab")
-TypeLegacy = 7
 type = 4
 Name = "Gold Skeleton"
 Icon = ExtResource("1_h7ptv")

@@ -14,9 +14,6 @@ public partial class EnemyData : Resource
 
     [ExportGroup("General")]
     [Export]
-    public int TypeLegacy { get; set; }
-
-    [Export]
     public EnemyType Type { get; set; } = EnemyType.NORMAL;
 
     [Export]

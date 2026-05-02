@@ -12,7 +12,6 @@ FinalWave = 30
 
 [resource]
 script = ExtResource("1_lgdw7")
-TypeLegacy = 5
 type = 3
 Name = "Boss Black Golem"
 Icon = ExtResource("1_bge6u")

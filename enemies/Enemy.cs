@@ -9,20 +9,6 @@ public partial class Enemy : CharacterBody2D
     public event Action<Enemy, Attack> Died;
     public event Action<Enemy> TargetReached;
 
-    public enum TypeLegacy
-    {
-        SPECTRE,
-        BUBA,
-        BIG_SPECTRE,
-        GOLEM,
-        SKELETON,
-        BLACK_GOLEM,
-        BLACK_SKELETON,
-        GOLD_SKELETON,
-        INVOKER,
-        SKULL,
-    }
-
     private static readonly PackedScene GOLD_DROPPED = GD.Load<PackedScene>("uid://cxs4ar5enx4mn");
     private static readonly PackedScene DAMAGE_NUMBERS = GD.Load<PackedScene>("uid://bkiu4qgh3ug1m");
     private const float WAYPOINT_ARRIVAL_THRESHOLD = 8.0f;

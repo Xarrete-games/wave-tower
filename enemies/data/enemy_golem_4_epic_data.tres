@@ -12,7 +12,6 @@ FinalWave = 50
 
 [resource]
 script = ExtResource("4_tcsej")
-TypeLegacy = 3
 type = 3
 Name = "Golem"
 Icon = ExtResource("2_fwr0w")

@@ -11,7 +11,6 @@ FinalWave = 15
 
 [resource]
 script = ExtResource("2_20sk8")
-TypeLegacy = 1
 type = 3
 Name = "Buba_common"
 Scene = ExtResource("3_gopcq")
