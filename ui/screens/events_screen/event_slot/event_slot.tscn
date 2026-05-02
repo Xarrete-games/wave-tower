@@ -10,13 +10,13 @@
 font_size = 22
 font_color = Color(0.7137255, 0.77254903, 0.64705884, 1)
 
-[node name="EventSlot" type="VBoxContainer" node_paths=PackedStringArray("EventTexture", "DescriptionLabel", "TitleLable")]
+[node name="EventSlot" type="VBoxContainer" node_paths=PackedStringArray("EventTexture", "DescriptionLabel", "TitleLabel")]
 offset_right = 120.0
 offset_bottom = 271.0
 script = ExtResource("1_qy0vt")
 EventTexture = NodePath("IconContainer/EventTexture")
 DescriptionLabel = NodePath("TextContainer/DescriptionLabel")
-TitleLable = NodePath("TextContainer/TitleLabel")
+TitleLabel = NodePath("TextContainer/TitleLabel")
 
 [node name="IconContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(200, 186)

@@ -20,11 +20,11 @@ public class TowersManager
     private const float RARE_WEIGHT_END = 0.33f;
     private const float EPIC_WEIGHT_END = 0.33f;
 
-    public Godot.Collections.Dictionary<string, int> LastTowerIds { get; } = new();
-    public Godot.Collections.Array<string> TowersIds { get; } = new();
+    public Dictionary<string, int> LastTowerIds { get; } = new();
+    public List<string> TowersIds { get; } = new();
     public List<Tower> Towers { get; } = new();
     public List<TowerDataWithInstance> AllTowerData { get; private set; } = new();
-    public Godot.Collections.Dictionary<string, int> TowerCardsAmount { get; } = new();
+    public Dictionary<string, int> TowerCardsAmount { get; } = new();
 
     private RunProgress _progress;
     private readonly Dictionary<ulong, TowerModel> _runtimeTowerModels = new();

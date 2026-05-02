@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class RelicOffersManager
 {
-    private static readonly Godot.Collections.Dictionary<int, int> BASE_PRICE_BY_RARITY = new()
+    private static readonly Dictionary<int, int> BasePriceByRarity = new()
     {
         { 0, 50 },
         { 1, 80 },
@@ -17,7 +17,7 @@ public class RelicOffersManager
         _allRelicData.AddRange(DataLoaderAccess.GetAllRelicsTyped());
     }
 
-    public List<ItemOffer> GetRelicsOffersByIds(Godot.Collections.Array<string> relicIds)
+    public List<ItemOffer> GetRelicsOffersByIds(IReadOnlyList<string> relicIds)
     {
         var offers = new List<ItemOffer>();
 
@@ -79,7 +79,7 @@ public class RelicOffersManager
         }
 
         int rarity = (int)data.Rarity;
-        int basePrice = BASE_PRICE_BY_RARITY.ContainsKey(rarity) ? BASE_PRICE_BY_RARITY[rarity] : BASE_PRICE_BY_RARITY[0];
+        int basePrice = BasePriceByRarity.ContainsKey(rarity) ? BasePriceByRarity[rarity] : BasePriceByRarity[0];
         var ctx = new PriceContext(PriceContext.PriceType.Relic, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
 

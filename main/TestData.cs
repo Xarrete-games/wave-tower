@@ -1,4 +1,5 @@
 using Godot;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class TestData : Node
@@ -20,7 +21,12 @@ public partial class TestData : Node
 
     private RunHandler _runHandler;
 
-    public async override void _Ready()
+    public override void _Ready()
+    {
+        _ = ReadyAsync();
+    }
+
+    private async Task ReadyAsync()
     {
         _runHandler = GetNodeOrNull<RunHandler>("../RunHandler");
 

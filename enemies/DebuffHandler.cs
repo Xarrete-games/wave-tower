@@ -10,9 +10,8 @@ public partial class DebuffHandler : Node
 
     public List<EnemyDebuffInstance> Debuffs = new();
 
-    public void AddDebuff(EnemyDebuff debuff, int amount, Variant enemyVar)
+    public void AddDebuff(EnemyDebuff debuff, int amount, Enemy enemy)
     {
-        Enemy enemy = enemyVar.As<Enemy>();
         if (debuff == null || enemy == null)
         {
             return;
@@ -50,9 +49,8 @@ public partial class DebuffHandler : Node
         }
     }
 
-    public void UpdateAll(Variant enemyVar)
+    public void UpdateAll(Enemy enemy)
     {
-        Enemy enemy = enemyVar.As<Enemy>();
         if (enemy == null)
         {
             return;

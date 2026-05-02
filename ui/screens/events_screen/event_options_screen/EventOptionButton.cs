@@ -5,7 +5,7 @@ public partial class EventOptionButton : Button
 {
     public event Action<object> OptionSelected;
 
-    public object OptionData;
+    public object OptionData { get; set; }
 
     public void DisableOption()
     {

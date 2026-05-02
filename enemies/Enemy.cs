@@ -1,7 +1,7 @@
 using Godot;
-using Godot.Collections;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class Enemy : CharacterBody2D
@@ -52,7 +52,7 @@ public partial class Enemy : CharacterBody2D
     private bool _isRightDirection = true;
     private bool _isDead;
 
-    private readonly Array<Vector2> _waypoints = new();
+    private readonly List<Vector2> _waypoints = new();
     private int _currentWaypointIndex;
     private float _totalPathLength;
     private Vector2 _velocity = Vector2.Zero;
@@ -81,7 +81,12 @@ public partial class Enemy : CharacterBody2D
 
     public Vector2 InversedTargetPosition => _isRightDirection ? _targetPositionLeft.GlobalPosition : _targetPositionRight.GlobalPosition;
 
-    public override async void _Ready()
+    public override void _Ready()
+    {
+        _ = ReadyAsync();
+    }
+
+    private async Task ReadyAsync()
     {
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         HealthBar = GetNode<HealthBar>("HealthBar");
@@ -172,7 +177,7 @@ public partial class Enemy : CharacterBody2D
         }
     }
 
-    public void SetWaypoints(Array<Vector2> waypoints)
+    public void SetWaypoints(Godot.Collections.Array<Vector2> waypoints)
     {
         var waypointList = new List<Vector2>(waypoints.Count);
         for (int i = 0; i < waypoints.Count; i++)
@@ -196,7 +201,7 @@ public partial class Enemy : CharacterBody2D
         _totalPathLength = ComputePathLength(_waypoints);
     }
 
-    private float ComputePathLength(Array<Vector2> points)
+    private float ComputePathLength(IReadOnlyList<Vector2> points)
     {
         float length = 0.0f;
         for (int i = 1; i < points.Count; i++)
@@ -258,7 +263,12 @@ public partial class Enemy : CharacterBody2D
         HealthBar.Visible = false;
     }
 
-    public async void Enable()
+    public void Enable()
+    {
+        _ = EnableAsync();
+    }
+
+    private async Task EnableAsync()
     {
         IsEnabled = true;
         if (_animatedSprite2D == null || _collisionShape2D == null || HealthBar == null)
@@ -295,7 +305,7 @@ public partial class Enemy : CharacterBody2D
         return DebuffHandler.GetStacks(debuffType);
     }
 
-    public System.Collections.Generic.List<EnemyDebuff> GetActiveDebuffs()
+    public List<EnemyDebuff> GetActiveDebuffs()
     {
         return DebuffHandler.GetActiveDebuffs();
     }
@@ -334,7 +344,12 @@ public partial class Enemy : CharacterBody2D
         }
     }
 
-    private async void PlayHitAnimation()
+    private void PlayHitAnimation()
+    {
+        _ = PlayHitAnimationAsync();
+    }
+
+    private async Task PlayHitAnimationAsync()
     {
         if (_hitTween != null && _hitTween.IsRunning())
         {

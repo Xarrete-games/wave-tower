@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public abstract class EventScript
 {
-    public abstract List<EventOptionData> GetOptions();
+    public abstract IReadOnlyList<EventOptionData> GetOptions();
     public abstract void HandleResponse(object data);
 
     protected RunContext GetRunContext()

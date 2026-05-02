@@ -1,4 +1,5 @@
 using Godot;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class GoldDropped : Control
@@ -7,7 +8,12 @@ public partial class GoldDropped : Control
 
     private Label _label;
 
-    public override async void _Ready()
+    public override void _Ready()
+    {
+        _ = ReadyAsync();
+    }
+
+    private async Task ReadyAsync()
     {
         _label = GetNode<Label>("Label");
 

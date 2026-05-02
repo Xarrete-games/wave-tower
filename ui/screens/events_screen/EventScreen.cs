@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class EventScreen : Control
 {
@@ -10,13 +11,13 @@ public partial class EventScreen : Control
     [Export]
     public Control EventsContainer;
 
-    public void SetEvents(Godot.Collections.Array<EventData> events)
+    public void SetEvents(IReadOnlyList<EventData> eventsData)
     {
-        for (int index = 0; index < events.Count; index++)
+        for (int index = 0; index < eventsData.Count; index++)
         {
             EventSlot eventSlot = EventSlotScene.Instantiate<EventSlot>();
             EventsContainer.AddChild(eventSlot);
-            eventSlot.SetEvent(events[index]);
+            eventSlot.SetEvent(eventsData[index]);
             eventSlot.EventPressed += OnEventPressed;
         }
     }

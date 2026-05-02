@@ -5,7 +5,7 @@ public partial class PotionsEventScript : EventScript
 {
     private const int CONSUMABLE_TYPE_POTION = 1;
 
-    public override List<EventOptionData> GetOptions()
+    public override IReadOnlyList<EventOptionData> GetOptions()
     {
         List<ConsumableData> consumables = DataLoaderAccess.GetAllConsumablesByTypeTyped(CONSUMABLE_TYPE_POTION);
         if (consumables.Count == 0)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class HighwayRobberyScript : EventScript
 {
-    public override List<EventOptionData> GetOptions()
+    public override IReadOnlyList<EventOptionData> GetOptions()
     {
         RunContext runContext = GetRunContext();
         if (runContext == null)

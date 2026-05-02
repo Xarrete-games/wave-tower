@@ -13,7 +13,12 @@ public partial class CristalLight : PointLight2D
     private Tween _attackScaleTween;
     private Tween _attackEnergyTween;
 
-    public async void Play()
+    public void Play()
+    {
+        _ = PlayAsync();
+    }
+
+    private async Task PlayAsync()
     {
         await TurnOn();
         await TurnOff();

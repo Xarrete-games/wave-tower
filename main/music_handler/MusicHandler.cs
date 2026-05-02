@@ -118,14 +118,14 @@ public partial class MusicHandler : Node
             return;
         }
 
-        Godot.Collections.Array<Node> playerList = playersNode.GetChildren();
+        int playerCount = playersNode.GetChildCount();
         int playerIndex = amount - 1;
-        if (playerIndex < 0 || playerIndex >= playerList.Count)
+        if (playerIndex < 0 || playerIndex >= playerCount)
         {
             return;
         }
 
-        AudioStreamPlayer player = playerList[playerIndex] as AudioStreamPlayer;
+        AudioStreamPlayer player = playersNode.GetChild(playerIndex) as AudioStreamPlayer;
         PlayPlayer(player);
     }
 

@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class ResolutionMenu : VBoxContainer
@@ -9,7 +10,7 @@ public partial class ResolutionMenu : VBoxContainer
     [Export]
     public OptionButton ModeOptionButton;
 
-    private readonly Godot.Collections.Dictionary<string, Vector2I> _resolutions = new()
+    private readonly Dictionary<string, Vector2I> _resolutions = new()
     {
         { "3840x2160", new Vector2I(3840, 2160) },
         { "2560x1440", new Vector2I(2560, 1440) },
@@ -20,7 +21,7 @@ public partial class ResolutionMenu : VBoxContainer
         { "800x600", new Vector2I(800, 600) },
     };
 
-    private readonly Godot.Collections.Array<string> _visibleResolutions = new();
+    private readonly List<string> _visibleResolutions = new();
 
     public override void _Ready()
     {

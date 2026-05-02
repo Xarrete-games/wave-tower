@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 [GlobalClass]
@@ -46,16 +47,21 @@ public partial class AnimationComponent : Node
     [Export] public Color FlickedColor = new(1, 1, 1, 0.5f);
 
     private Control _target;
-    private Vector2 _defaultScale;
     private Dictionary<string, Variant> _hoverValues = new();
     private Dictionary<string, Variant> _enterValues = new();
     private Dictionary<string, Variant> _defaultValues = new();
     private bool _onHover = false;
+    private bool _signalsConnected;
 
     public override void _Ready()
     {
         _target = GetParent() as Control;
         CallDeferred(nameof(Setup));
+    }
+
+    public override void _ExitTree()
+    {
+        DisconnectSignals();
     }
 
     public void OnHoverEntered()
@@ -82,6 +88,11 @@ public partial class AnimationComponent : Node
 
     public void ConnectSignals()
     {
+        if (_signalsConnected || _target == null)
+        {
+            return;
+        }
+
         _target.MouseEntered += OnHoverEntered;
         _target.MouseExited += OnHoverExited;
 
@@ -89,9 +100,37 @@ public partial class AnimationComponent : Node
         {
             WaitFor.Entered += OnEnteredAction;
         }
+
+        _signalsConnected = true;
     }
 
-    public async void Setup()
+    private void DisconnectSignals()
+    {
+        if (!_signalsConnected)
+        {
+            return;
+        }
+
+        if (_target != null)
+        {
+            _target.MouseEntered -= OnHoverEntered;
+            _target.MouseExited -= OnHoverExited;
+        }
+
+        if (WaitFor != null)
+        {
+            WaitFor.Entered -= OnEnteredAction;
+        }
+
+        _signalsConnected = false;
+    }
+
+    private void Setup()
+    {
+        _ = SetupAsync();
+    }
+
+    private async Task SetupAsync()
     {
         if (_target == null)
         {
@@ -116,7 +155,6 @@ public partial class AnimationComponent : Node
             _target.PivotOffset = _target.Size / 2.0f;
         }
 
-        _defaultScale = _target.Scale;
         _defaultValues = new Dictionary<string, Variant>
         {
             { "scale", _target.Scale },
@@ -172,7 +210,7 @@ public partial class AnimationComponent : Node
         }
     }
 
-    public async System.Threading.Tasks.Task AddTween(Dictionary<string, Variant> values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
+    private async Task AddTween(Dictionary<string, Variant> values, bool parallel, float seconds, float delay, Tween.TransitionType transition, Tween.EaseType easing, bool entering = false)
     {
         if (!IsInsideTree() || _target == null)
         {
@@ -201,7 +239,7 @@ public partial class AnimationComponent : Node
         }
     }
 
-    public async System.Threading.Tasks.Task FlickLoop()
+    private async Task FlickLoop()
     {
         if (_defaultValues.Count == 0)
         {

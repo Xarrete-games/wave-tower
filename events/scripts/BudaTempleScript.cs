@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class BudaTempleScript : EventScript
 {
-    public override List<EventOptionData> GetOptions()
+    public override IReadOnlyList<EventOptionData> GetOptions()
     {
         var option1 = new EventOptionData("Enter the temple", 0);
         var option2 = new EventOptionData("Leave it be", 1);

@@ -8,7 +8,12 @@ public partial class LevelUpAlert : Control
 
     private Label _levelUp;
 
-    public override async void _Ready()
+    public override void _Ready()
+    {
+        _ = ReadyAsync();
+    }
+
+    private async Task ReadyAsync()
     {
         _levelUp = GetNode<Label>("LevelUp");
         var tween1 = CreateTween();

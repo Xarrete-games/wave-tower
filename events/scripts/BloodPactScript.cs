@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class BloodPactScript : EventScript
 {
-    public override List<EventOptionData> GetOptions()
+    public override IReadOnlyList<EventOptionData> GetOptions()
     {
         var option1 = new EventOptionData("Sacrifice 15 of your health to gain a powerful relic.", true);
         var option2 = new EventOptionData("Walk away unharmed.", false);

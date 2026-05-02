@@ -1,4 +1,5 @@
 using Godot;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class DamageNumbers : Control
@@ -7,7 +8,12 @@ public partial class DamageNumbers : Control
 
     private Label _damageLabel;
 
-    public override async void _Ready()
+    public override void _Ready()
+    {
+        _ = ReadyAsync();
+    }
+
+    private async Task ReadyAsync()
     {
         _damageLabel = GetNode<Label>("DamageLabel");
 

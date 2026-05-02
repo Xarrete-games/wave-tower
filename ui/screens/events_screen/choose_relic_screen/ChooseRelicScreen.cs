@@ -14,12 +14,17 @@ public partial class ChooseRelicScreen : Control
     public Control CardsContainer;
 
     [Export]
-    public GoldPrice RerollPriece;
+    public GoldPrice RerollPrice;
 
     private bool _enabled;
     private int _rerollPrice = 20;
 
-    public override async void _Ready()
+    public override void _Ready()
+    {
+        _ = ReadyAsync();
+    }
+
+    private async Task ReadyAsync()
     {
         await ToSignal(GetTree().CreateTimer(0.3f, false), SceneTreeTimer.SignalName.Timeout);
         _enabled = true;
@@ -40,7 +45,7 @@ public partial class ChooseRelicScreen : Control
             card.CardPressed += OnCardPressed;
         }
 
-        RerollPriece.Price = _rerollPrice;
+        RerollPrice.Price = _rerollPrice;
     }
 
     private void OnCardPressed(RelicData relicData)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class ConsumablesOffersManager
 {
-    private static readonly Godot.Collections.Dictionary<int, int> BASE_PRICE_BY_RARITY = new()
+    private static readonly Dictionary<int, int> BasePriceByRarity = new()
     {
         { 0, 50 },
         { 1, 80 },
@@ -38,7 +38,7 @@ public class ConsumablesOffersManager
         }
 
         int rarity = (int)data.Rarity;
-        int basePrice = BASE_PRICE_BY_RARITY.ContainsKey(rarity) ? BASE_PRICE_BY_RARITY[rarity] : BASE_PRICE_BY_RARITY[0];
+        int basePrice = BasePriceByRarity.ContainsKey(rarity) ? BasePriceByRarity[rarity] : BasePriceByRarity[0];
         var ctx = new PriceContext(PriceContext.PriceType.Consumable, basePrice);
         Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
 

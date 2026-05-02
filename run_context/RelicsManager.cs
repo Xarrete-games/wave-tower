@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class RelicsManager
 {
@@ -11,15 +12,15 @@ public class RelicsManager
     private static readonly Color RARE_COLOR = Colors.DodgerBlue;
     private static readonly Color EPIC_COLOR = Colors.Gold;
 
-    private readonly Godot.Collections.Dictionary<int, Color> _relicColors = new()
+    private readonly Dictionary<int, Color> _relicColors = new()
     {
         { 0, COMMON_COLOR },
         { 1, RARE_COLOR },
         { 2, EPIC_COLOR },
     };
 
-    private readonly Godot.Collections.Dictionary<string, int> _relicsCount = new();
-    private readonly System.Collections.Generic.Dictionary<string, Relic> _relics = new();
+    private readonly Dictionary<string, int> _relicsCount = new();
+    private readonly Dictionary<string, Relic> _relics = new();
 
     public bool HasRelic(string relicId)
     {
@@ -31,9 +32,9 @@ public class RelicsManager
         return !_relics[relicId].Disabled;
     }
 
-    public System.Collections.Generic.List<Relic> GetAllRelics()
+    public List<Relic> GetAllRelics()
     {
-        var values = new System.Collections.Generic.List<Relic>();
+        var values = new List<Relic>();
         foreach (Relic relic in _relics.Values)
         {
             values.Add(relic);

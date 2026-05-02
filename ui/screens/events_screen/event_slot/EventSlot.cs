@@ -12,7 +12,7 @@ public partial class EventSlot : VBoxContainer
     public RichTextLabel DescriptionLabel;
 
     [Export]
-    public Label TitleLable;
+    public Label TitleLabel;
 
     private EventData _event;
 
@@ -25,7 +25,7 @@ public partial class EventSlot : VBoxContainer
 
         EventTexture.Texture = eventData.Icon;
         DescriptionLabel.Text = eventData.Description;
-        TitleLable.Text = eventData.Title;
+        TitleLabel.Text = eventData.Title;
         _event = eventData;
     }
 

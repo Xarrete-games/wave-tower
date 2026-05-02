@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class SanctuaryEventScript : EventScript
 {
-    public override List<EventOptionData> GetOptions()
+    public override IReadOnlyList<EventOptionData> GetOptions()
     {
         var option1 = new EventOptionData("Take offering (+50 gold)", 0);
         var option2 = new EventOptionData("Pray (+10 health and 10 maximum health)", 1);

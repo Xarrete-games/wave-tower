@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class ChestEventScript : EventScript
 {
-    public override List<EventOptionData> GetOptions()
+    public override IReadOnlyList<EventOptionData> GetOptions()
     {
         var option1 = new EventOptionData("Open the chest", 0);
         var option2 = new EventOptionData("Leave it alone", 1);

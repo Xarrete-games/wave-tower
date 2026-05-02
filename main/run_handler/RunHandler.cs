@@ -17,7 +17,7 @@ public partial class RunHandler : Node
     public CanvasLayer EventLayer;
 
     [Export]
-    public EventsScreenHandler EventsScreenHander;
+    public EventsScreenHandler EventsScreenHandler;
 
     [Export]
     public LootScreenHandler LootScreenHandler;
@@ -91,12 +91,12 @@ public partial class RunHandler : Node
 
     public async Task ShowEventsScreen(EventData eventData)
     {
-        if (EventsScreenHander == null || eventData == null)
+        if (EventsScreenHandler == null || eventData == null)
         {
             return;
         }
 
-        await EventsScreenHander.ShowEventSelectedAsync(eventData, EventLayer);
+        await EventsScreenHandler.ShowEventSelectedAsync(eventData, EventLayer);
     }
 
     private void SetEventsByType()

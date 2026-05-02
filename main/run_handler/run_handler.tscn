@@ -9,9 +9,9 @@
 [ext_resource type="Script" path="res://main/run_handler/ChooseRelicScreenHandler.cs" id="8_c86pb"]
 [ext_resource type="PackedScene" uid="uid://ltio37ylr0pp" path="res://ui/screens/loot_screen/loot_screen.tscn" id="8_sjlqx"]
 
-[node name="RunHandler" type="Node" node_paths=PackedStringArray("EventsScreenHander", "LootScreenHandler")]
+[node name="RunHandler" type="Node" node_paths=PackedStringArray("EventsScreenHandler", "LootScreenHandler")]
 script = ExtResource("1_6aer8")
-EventsScreenHander = NodePath("EventsScreenHandler")
+EventsScreenHandler = NodePath("EventsScreenHandler")
 LootScreenHandler = NodePath("LootScreenHandler")
 
 [node name="LootScreenHandler" type="Node" parent="."]

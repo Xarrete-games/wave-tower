@@ -1,4 +1,5 @@
 using Godot;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class HintLabel : Label
@@ -8,7 +9,12 @@ public partial class HintLabel : Label
     private bool _waitFirstHint = true;
     private GameState _gameState;
 
-    public async override void _Ready()
+    public override void _Ready()
+    {
+        _ = ReadyAsync();
+    }
+
+    private async Task ReadyAsync()
     {
         Text = InitialHint;
 

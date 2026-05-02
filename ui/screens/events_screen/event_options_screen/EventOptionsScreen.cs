@@ -46,7 +46,7 @@ public partial class EventOptionsScreen : Control
             return;
         }
 
-        List<EventOptionData> options = _eventScriptInstance.GetOptions();
+        IReadOnlyList<EventOptionData> options = _eventScriptInstance.GetOptions();
         int index = 0;
         foreach (EventOptionData optionData in options)
         {
