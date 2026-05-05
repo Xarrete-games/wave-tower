@@ -33,6 +33,22 @@ public class EnemyDataLoader
         }
     }
 
+    public EnemyDataLoader(IEnumerable<EnemyData> enemies)
+    {
+        if (enemies == null)
+        {
+            return;
+        }
+
+        foreach (EnemyData enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                _enemies.Add(enemy);
+            }
+        }
+    }
+
     public List<EnemyData> GetAllEnemies()
     {
         var result = new List<EnemyData>(_enemies.Count);

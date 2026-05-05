@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class DataLoader : Node
 {
@@ -23,20 +24,25 @@ public partial class DataLoader : Node
     private readonly List<MapPieceData> _mapPieces = new();
     private readonly List<TowerDataWithInstance> _towerData = new();
     private EnemyDataLoader _enemyData;
+    private bool _isLoaded;
+    private bool _isLoading;
+    private float _loadProgress;
+
+    public bool IsLoaded => _isLoaded;
+    public float LoadProgress => _loadProgress;
 
     public override void _Ready()
     {
         Instance = this;
-        _enemyData = new EnemyDataLoader();
+        AsyncTaskHelper.FireAndForget(LoadAllDataAsync(), "DataLoader.LoadAllDataAsync");
+    }
 
-        LoadRelics();
-        LoadEvents();
-        LoadConsumables();
-        LoadEnemyDebuffs();
-        LoadTowerBuffData();
-        LoadMapPieces();
-        LoadInitialMapPieces();
-        LoadTowerData();
+    public async Task EnsureLoadedAsync()
+    {
+        while (!_isLoaded)
+        {
+            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        }
     }
 
     public override void _ExitTree()
@@ -319,6 +325,119 @@ public partial class DataLoader : Node
                 GD.PushError($"[DataLoader] Loaded relic has invalid type: {loadedArray[index]}");
             }
         }
+    }
+
+    private async Task LoadAllDataAsync()
+    {
+        if (_isLoaded || _isLoading)
+        {
+            return;
+        }
+
+        _isLoading = true;
+        _loadProgress = 0f;
+
+        _relics.Clear();
+        _events.Clear();
+        _consumables.Clear();
+        _enemyDebuffs.Clear();
+        _towerBuffsData.Clear();
+        _initialMapPieces.Clear();
+        _mapPieces.Clear();
+        _towerData.Clear();
+
+        var allFiles = new List<string>();
+        allFiles.AddRange(GetTresFiles(RELICS_DATA_PATH));
+        allFiles.AddRange(GetTresFiles(EVENTS_DATA_PATH));
+        allFiles.AddRange(GetTresFiles(CONSUMABLES_DATA_PATH));
+        allFiles.AddRange(GetTresFiles(ENEMY_DEBUFFS_DATA_PATH));
+        allFiles.AddRange(GetTresFiles(TOWER_BUFFS_DATA_PATH));
+        allFiles.AddRange(GetTresFiles(INITIAL_MAP_PIECES_DATA_PATH));
+        allFiles.AddRange(GetTresFiles(MAP_PIECES_DATA_PATH));
+        allFiles.AddRange(GetTresFiles(TOWER_DATA_PATH));
+        allFiles.AddRange(GetTresFiles(EnemyDataLoaderDataPath));
+
+        int totalFiles = allFiles.Count;
+        int loadedFiles = 0;
+
+        loadedFiles += await LoadTypedResourcesInBatches(RELICS_DATA_PATH, _relics, loadedFiles, totalFiles);
+        loadedFiles += await LoadTypedResourcesInBatches(EVENTS_DATA_PATH, _events, loadedFiles, totalFiles);
+        loadedFiles += await LoadTypedResourcesInBatches(CONSUMABLES_DATA_PATH, _consumables, loadedFiles, totalFiles);
+        loadedFiles += await LoadTypedResourcesInBatches(ENEMY_DEBUFFS_DATA_PATH, _enemyDebuffs, loadedFiles, totalFiles);
+        loadedFiles += await LoadTypedResourcesInBatches(TOWER_BUFFS_DATA_PATH, _towerBuffsData, loadedFiles, totalFiles);
+        loadedFiles += await LoadTypedResourcesInBatches(INITIAL_MAP_PIECES_DATA_PATH, _initialMapPieces, loadedFiles, totalFiles);
+        loadedFiles += await LoadTypedResourcesInBatches(MAP_PIECES_DATA_PATH, _mapPieces, loadedFiles, totalFiles);
+        loadedFiles += await LoadTypedResourcesInBatches(TOWER_DATA_PATH, _towerData, loadedFiles, totalFiles);
+
+        var enemyDefs = new List<EnemyData>();
+        loadedFiles += await LoadTypedResourcesInBatches(EnemyDataLoaderDataPath, enemyDefs, loadedFiles, totalFiles);
+        _enemyData = new EnemyDataLoader(enemyDefs);
+
+        _loadProgress = 1f;
+        _isLoaded = true;
+        _isLoading = false;
+    }
+
+    private const string EnemyDataLoaderDataPath = "res://enemies/data/";
+
+    private async Task<int> LoadTypedResourcesInBatches<T>(string path, List<T> target, int loadedFilesStart, int totalFiles) where T : Resource
+    {
+        List<string> files = GetTresFiles(path);
+        const int batchSize = 16;
+        int loadedInStep = 0;
+
+        for (int index = 0; index < files.Count; index++)
+        {
+            Resource resource = ResourceLoader.Load(path + files[index]);
+            if (resource is T typed)
+            {
+                target.Add(typed);
+            }
+            else if (resource != null)
+            {
+                GD.PushError($"[DataLoader] Loaded resource has invalid type at {path + files[index]}: {resource}");
+            }
+
+            loadedInStep++;
+            if (totalFiles > 0)
+            {
+                _loadProgress = (float)(loadedFilesStart + loadedInStep) / totalFiles;
+            }
+
+            if ((index + 1) % batchSize == 0)
+            {
+                await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            }
+        }
+
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        return loadedInStep;
+    }
+
+    private List<string> GetTresFiles(string path)
+    {
+        var files = new List<string>();
+        using DirAccess dir = DirAccess.Open(path);
+        if (dir == null)
+        {
+            GD.PushError("[DataLoader] Directory not found: " + path);
+            return files;
+        }
+
+        dir.ListDirBegin();
+        string file = dir.GetNext();
+        while (!string.IsNullOrEmpty(file))
+        {
+            if (file.EndsWith(".tres"))
+            {
+                files.Add(file);
+            }
+
+            file = dir.GetNext();
+        }
+
+        dir.ListDirEnd();
+        return files;
     }
 
     private void LoadEvents()

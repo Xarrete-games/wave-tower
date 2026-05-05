@@ -15,8 +15,16 @@ public partial class Boot : Node
     {
         GameState gameState = GetNodeOrNull<GameState>("/root/GameState");
         RunContext runContext = RunContext.Instance;
+        DataLoader dataLoader = GetNodeOrNull<DataLoader>("/root/DataLoader");
+
+        if (dataLoader != null)
+        {
+            await dataLoader.EnsureLoadedAsync();
+        }
+
         gameState?.ResetRun();
         runContext.ResetRun();
+
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         GetTree().ChangeSceneToPacked(PROCEDURAL_TEST);
     }
