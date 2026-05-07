@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://etr820jx2t64"]
 
 [ext_resource type="Theme" uid="uid://b21vyg4n4iq" path="res://ui/styles/themes/action_buttons_theme.tres" id="1_e3pa8"]
-[ext_resource type="Script" uid="uid://bnereur0ds0hf" path="res://ui/screens/events_screen/event_options_screen/event_option_button.gd" id="2_4tgh2"]
+[ext_resource type="Script" path="res://ui/screens/events_screen/event_options_screen/EventOptionButton.cs" id="2_4tgh2"]
 
 [node name="EventOptionButton" type="Button"]
 custom_minimum_size = Vector2(700, 50)
@@ -11,5 +11,6 @@ theme = ExtResource("1_e3pa8")
 text = "Testing"
 script = ExtResource("2_4tgh2")
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
+[connection signal="pressed" from="." to="." method="OnPressed"]
+

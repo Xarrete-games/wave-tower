@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bmihqlkojvphp"]
 
-[ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="2_cjd5i"]
+[ext_resource type="Script" path="res://utils/AnimationComponent.cs" id="2_cjd5i"]
 [ext_resource type="Texture2D" uid="uid://c7q1k1ke1vqoc" path="res://assets/images/icons/bag_item.png" id="2_xbpjj"]
-[ext_resource type="Script" uid="uid://dtookpcol40xx" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui_slot.gd" id="2_xt7kx"]
+[ext_resource type="Script" path="res://ui/hud/top_bar_ui/inventory_ui/InventoryUISlot.cs" id="2_xt7kx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xt7kx"]
 
@@ -43,10 +43,10 @@ expand_mode = 3
 
 [node name="AnimationComponent" type="Node" parent="CenterContainer/TextureRect" unique_id=797447062]
 script = ExtResource("2_cjd5i")
-hover_time = 0.1
-hover_scale = Vector2(1.1, 1.1)
+HoverTime = 0.1
+HoverScale = Vector2(1.1, 1.1)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="gui_input" from="." to="." method="OnGuiInput"]
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseExited"]

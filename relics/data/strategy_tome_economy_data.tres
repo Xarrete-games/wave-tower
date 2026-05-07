@@ -1,16 +1,15 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://blugij0ykyh01"]
 
-[ext_resource type="Script" uid="uid://wigd2ta0efvd" path="res://relics/implementations/strategy_tome_economy.gd" id="1_l5ndh"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_xvjca"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_xvjca"]
 [ext_resource type="Texture2D" uid="uid://irqjwkvb8yq3" path="res://assets/sprites/relics/relics_economy_manual_relic.png" id="2_sjo5h"]
 
 [resource]
 script = ExtResource("1_xvjca")
-is_tome = true
-id = "strategy_tome_economy"
-display_name = "Strategy Tome: 
+IsTome = true
+Id = "strategy_tome_economy"
+DisplayName = "Strategy Tome: 
 Economy"
-description = "Allows you to sell one of your relics upon entering the shop"
-icon = ExtResource("2_sjo5h")
-runtime_script = ExtResource("1_l5ndh")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+Description = "Allows you to sell one of your relics upon entering the shop"
+Icon = ExtResource("2_sjo5h")
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

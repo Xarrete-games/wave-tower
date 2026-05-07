@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ckw22jf820ehi"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_j8mcx"]
-[ext_resource type="Script" uid="uid://cr3iiwr6uj488" path="res://towers/instances/fire/fire_wildfire_tower/fire_wildfire_tower.gd" id="2_sym80"]
+[ext_resource type="Script" path="res://towers/instances/fire/fire_wildfire_tower/WildFireTower.cs" id="2_sym80"]
 [ext_resource type="PackedScene" uid="uid://bs7g64mcrms08" path="res://towers/instances/fire/fire_wildfire_tower/fire_wildfire_projectile.tscn" id="3_8u8ke"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="4_rrd06"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="5_4spxs"]
@@ -104,7 +104,7 @@ alpha_curve = SubResource("CurveTexture_3crl6")
 
 [node name="WildFireTower" unique_id=1829344544 instance=ExtResource("1_j8mcx")]
 script = ExtResource("2_sym80")
-projectile_scene = ExtResource("3_8u8ke")
+ProjectileScene = ExtResource("3_8u8ke")
 
 [node name="CristalLight" parent="." index="1"]
 visible = false

@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://bn8v52iirwk75"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_iilqd"]
-[ext_resource type="Script" uid="uid://bqrq8c3btvh1q" path="res://towers/instances/fire/fire_wildfire_tower/fire_flamethrower_tower.gd" id="2_g6y21"]
+[ext_resource type="Script" path="res://towers/instances/fire/fire_wildfire_tower/FireFlamethrowerTower.cs" id="2_g6y21"]
 [ext_resource type="PackedScene" uid="uid://cg2db7mx3pcxb" path="res://towers/instances/fire/fire_wildfire_tower/fire_flamethrower_projectile.tscn" id="3_sgmw8"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="4_3lssn"]
 [ext_resource type="Texture2D" uid="uid://b522y4oy5hi75" path="res://assets/textures/flame5.jpg" id="6_2p8my"]

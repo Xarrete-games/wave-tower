@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://bxw2isn60dlre"]
 
-[ext_resource type="Script" uid="uid://cgu8nbk0okp77" path="res://ui/screens/choose_tower_screen/choose_tower_screen.gd" id="1_4ckdq"]
+[ext_resource type="Script" path="res://ui/screens/choose_tower_screen/ChooseTowerScreen.cs" id="1_4ckdq"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="1_sybfm"]
 
-[node name="ChooseTowerScreen" type="PanelContainer" unique_id=817166298 node_paths=PackedStringArray("cards_container", "ok_button")]
+[node name="ChooseTowerScreen" type="PanelContainer" unique_id=817166298 node_paths=PackedStringArray("CardsContainer", "OkButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4ckdq")
-cards_container = NodePath("MainContainer/CardsContainer")
-ok_button = NodePath("MainContainer/XarreteActionButton")
+CardsContainer = NodePath("MainContainer/CardsContainer")
+OkButton = NodePath("MainContainer/XarreteActionButton")
 
 [node name="MainContainer" type="VBoxContainer" parent="." unique_id=1340733910]
 layout_mode = 2

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://drm4bn0pi7ue1"]
 
-[ext_resource type="Script" uid="uid://cpnoprvyyakuv" path="res://ui/hud/hud_layer.gd" id="1_tdcwd"]
+[ext_resource type="Script" path="res://ui/hud/HUDLayer.cs" id="1_tdcwd"]
 [ext_resource type="PackedScene" uid="uid://c3qi4qp0ko3iq" path="res://ui/hud/tower_stats_panel/tower_stats_panel.tscn" id="2_tdcwd"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="3_vwkow"]
-[ext_resource type="Script" uid="uid://bkk5aa6qbmbke" path="res://main/hint_label.gd" id="4_xxs7w"]
+[ext_resource type="Script" path="res://main/HintLabel.cs" id="4_xxs7w"]
 [ext_resource type="PackedScene" uid="uid://bfym6wmesrxxa" path="res://ui/hud/towers_menu/towers_menu.tscn" id="5_fgqev"]
 
 [node name="HUDLayer" type="CanvasLayer" unique_id=1379728862]

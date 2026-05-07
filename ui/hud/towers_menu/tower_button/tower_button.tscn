@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://o248nju46k2n"]
 
-[ext_resource type="Script" uid="uid://n67chfk5ae8t" path="res://ui/hud/towers_menu/tower_button/tower_button.gd" id="1_bxa3v"]
+[ext_resource type="Script" path="res://ui/hud/towers_menu/tower_button/TowerButton.cs" id="1_bxa3v"]
 [ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_s7tbd"]
 [ext_resource type="StyleBox" uid="uid://dcjn1y7ofuii7" path="res://ui/styles/box_style/buttons/button_panel.tres" id="2_3ku3x"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_274r1"]
@@ -14,16 +14,16 @@
 atlas = ExtResource("1_s7tbd")
 region = Rect2(0, 0, 128, 191)
 
-[node name="TowerButton" type="HBoxContainer" unique_id=1780577747 node_paths=PackedStringArray("panel", "tower_button", "gold_price", "amount_label")]
+[node name="TowerButton" type="HBoxContainer" unique_id=1780577747 node_paths=PackedStringArray("PanelPath", "TowerButtonPath", "GoldPricePath", "AmountLabelPath")]
 offset_right = 106.0
 offset_bottom = 112.0
 size_flags_vertical = 10
 theme_override_constants/separation = 20
 script = ExtResource("1_bxa3v")
-panel = NodePath("VBoxContainer/CenterContainer/Panel")
-tower_button = NodePath("VBoxContainer/CenterContainer/TowerButton")
-gold_price = NodePath("VBoxContainer/GoldPrice")
-amount_label = NodePath("HBoxContainer/MarginContainer/AmountLabel")
+PanelPath = NodePath("VBoxContainer/CenterContainer/Panel")
+TowerButtonPath = NodePath("VBoxContainer/CenterContainer/TowerButton")
+GoldPricePath = NodePath("VBoxContainer/GoldPrice")
+AmountLabelPath = NodePath("HBoxContainer/MarginContainer/AmountLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1900875026]
 layout_mode = 2
@@ -68,6 +68,6 @@ layout_mode = 2
 text = "x 1"
 label_settings = ExtResource("5_274r1")
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="pressed" from="VBoxContainer/CenterContainer/TowerButton" to="." method="_on_tower_button_pressed"]
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseExited"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/TowerButton" to="." method="OnTowerButtonPressed"]

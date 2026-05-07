@@ -1,0 +1,47 @@
+
+using System.Collections.Generic;
+
+public class ConsumablesOffersManager
+{
+    private static readonly Dictionary<int, int> BasePriceByRarity = new()
+    {
+        { 0, 50 },
+        { 1, 80 },
+        { 2, 120 },
+    };
+
+    private readonly List<ConsumableData> _allConsumablesData = new();
+
+    public ConsumablesOffersManager()
+    {
+        _allConsumablesData.AddRange(DataLoaderAccess.GetAllConsumablesTyped());
+    }
+
+    public List<ItemOffer> CreateConsumablesOffers(int amount)
+    {
+        var consumablesData = new List<ConsumableData>(_allConsumablesData);
+        var offers = new List<ItemOffer>();
+
+        for (int index = 0; index < consumablesData.Count && offers.Count < amount; index++)
+        {
+            offers.Add(CreateConsumableOfferFromData(consumablesData[index]));
+        }
+
+        return offers;
+    }
+
+    public ItemOffer CreateConsumableOfferFromData(ConsumableData data)
+    {
+        if (data == null)
+        {
+            return null;
+        }
+
+        int rarity = (int)data.Rarity;
+        int basePrice = BasePriceByRarity.ContainsKey(rarity) ? BasePriceByRarity[rarity] : BasePriceByRarity[0];
+        var ctx = new PriceContext(PriceContext.PriceType.Consumable, basePrice);
+        Hooks.OnGetPrice(Hooks.GetListenersFromRuntime(), ctx);
+
+        return new ItemOffer(data, ctx.FinalPrice, 0);
+    }
+}

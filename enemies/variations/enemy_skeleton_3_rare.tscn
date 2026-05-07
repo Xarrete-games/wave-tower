@@ -162,7 +162,7 @@ fill = 1
 fill_from = Vector2(0.5071225, 0.48433048)
 
 [node name="Skeleton" unique_id=12608326 instance=ExtResource("1_5ocox")]
-base_speed = 185.0
+BaseSpeed = 185.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=972753897]
 shape = SubResource("CircleShape2D_r3u0i")
@@ -184,3 +184,4 @@ texture = SubResource("GradientTexture2D_r3u0i")
 [node name="HealthBar" parent="." index="4" unique_id=937412680]
 offset_top = -114.0
 offset_bottom = -114.0
+

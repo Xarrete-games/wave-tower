@@ -166,8 +166,8 @@ fill = 1
 fill_from = Vector2(0.5071225, 0.48433048)
 
 [node name="BlackSkeleton" instance=ExtResource("1_nuipo")]
-base_speed = 200.0
-base_gold_value = 2
+BaseSpeed = 200.0
+BaseGoldValue = 2
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_emn2o")
@@ -190,3 +190,4 @@ texture = SubResource("GradientTexture2D_r3u0i")
 [node name="HealthBar" parent="." index="4"]
 offset_top = -117.0
 offset_bottom = -117.0
+

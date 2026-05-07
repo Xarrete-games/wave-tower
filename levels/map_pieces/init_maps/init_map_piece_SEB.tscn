@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://fb0n4wnfxaon"]
 
-[ext_resource type="Script" uid="uid://chj3cku30pmp1" path="res://levels/map_pieces/map_piece.gd" id="1_dqvtw"]
+[ext_resource type="Script" uid="uid://dok4eaedgwho2" path="res://levels/map_pieces/MapPiece.cs" id="1_dqvtw"]
 [ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/map_pieces/map_piece_tile_map.tscn" id="2_hvi5r"]
 [ext_resource type="Texture2D" uid="uid://dygg2e7b7f887" path="res://assets/sprites/decoration/Stone3.png" id="3_60f66"]
 [ext_resource type="TileSet" uid="uid://0mt2a5aix72q" path="res://assets/sprites/tilesheet/tileset v2.tres" id="4_v1gu6"]
-[ext_resource type="Script" uid="uid://bxxphpxqsh7c8" path="res://levels/level_tile_map/level_tile_map.gd" id="5_e30ky"]
+[ext_resource type="Script" uid="uid://dhtvl5qh0aodo" path="res://levels/level_tile_map/LevelTileMap.cs" id="5_e30ky"]
 [ext_resource type="PackedScene" uid="uid://gb8anbp5v7hc" path="res://levels/portal/blue_portal.tscn" id="6_3bvju"]
 [ext_resource type="Texture2D" uid="uid://dpq3114n1y0jr" path="res://assets/sprites/decoration/Stone2.png" id="7_qljte"]
 [ext_resource type="Texture2D" uid="uid://8k5oyrulleh2" path="res://assets/sprites/decoration/Tree1.png" id="8_3qvg6"]
@@ -25,7 +25,7 @@ scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAD6////AAAIAAYAAAD7////AAAGAAYAAAD8////AAAIAAYAAAD8//7/AAAIAAYAAAD9//7/AAAIAAYAAAD+//7/AAAGAAcAAAD+////AAAHAAcAAAD+/wAAAAAHAAcAAAD9/wAAAAAHAAYAAAD9////AAAGAAcAAAD9/wEAAAAGAAcAAAD8/wAAAAAIAAcAAAD+/wEAAAAGAAcAAAD+/wIAAAAIAAcAAAD//wEAAAAIAAcAAAD//wAAAAAGAAYAAAD/////AAAIAAYAAAD///7/AAAGAAYAAAD///3/AAAIAAYAAAA=")
 tile_set = ExtResource("4_v1gu6")
 script = ExtResource("5_e30ky")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="MapPieceTileMap" parent="." unique_id=980340614 instance=ExtResource("2_hvi5r")]
 scale = Vector2(0.5, 0.5)
@@ -41,21 +41,21 @@ position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD7/wMAAAAHAAcAAAD8/wMAAAAGAAYAAAD9/wMAAAAHAAcAAAD8/wIAAAAHAAcAAAD8/wEAAAAIAAcAAAD7/wEAAAAGAAcAAAD7/wIAAAAGAAYAAAD9/wIAAAAHAAcAAAD6/wIAAAAFAAYAAAD6/wMAAAAIAAYAAAD7/wQAAAAHAAYAAAD8/wQAAAAGAAcAAAD5/wIAAAAHAAcAAAD5/wMAAAAIAAYAAAD6/wQAAAAIAAYAAAD///v/AAAIAAcAAAAAAPz/AAAHAAcAAAABAPz/AAAIAAYAAAACAPz/AAAGAAcAAAADAP3/AAAGAAYAAAAEAP3/AAAIAAYAAAAEAP7/AAAFAAcAAAAEAP//AAAIAAcAAAAFAP//AAAFAAYAAAAFAAAAAAAGAAcAAAAGAAAAAAAIAAcAAAAGAP//AAAIAAYAAAAFAP7/AAAFAAYAAAAEAPz/AAAIAAYAAAADAPz/AAAHAAYAAAADAPv/AAAGAAcAAAACAPv/AAAIAAYAAAABAPv/AAAIAAYAAAAFAP3/AAAIAAcAAAAFAPz/AAAIAAYAAAAEAPv/AAAGAAYAAAACAPr/AAAIAAYAAAABAPr/AAAIAAcAAAAAAPr/AAAHAAcAAAAAAPv/AAAHAAcAAAD6//3/AAAGAAYAAAD6//7/AAAHAAcAAAD5//7/AAAHAAYAAAD7//3/AAAHAAYAAAD7//7/AAAIAAYAAAD6//z/AAAFAAcAAAD7//z/AAAGAAcAAAD8//z/AAAFAAcAAAD8//v/AAAGAAcAAAD7//v/AAAFAAYAAAA=")
 tile_set = ExtResource("4_v1gu6")
 script = ExtResource("5_e30ky")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="LevelTileMap" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap" unique_id=1081419563]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD8/wMAAAAGAAcAAAD7/wMAAAAGAAcAAAD8/wIAAAAIAAYAAAD7/wIAAAAFAAYAAAD6//3/AAAHAAcAAAD6//z/AAAIAAYAAAD6//v/AAAIAAcAAAD5//z/AAAFAAcAAAD5//3/AAAHAAcAAAD7//z/AAAFAAcAAAD7//v/AAAGAAcAAAD8//v/AAAGAAcAAAABAPv/AAAGAAcAAAACAPv/AAAFAAYAAAACAPz/AAAHAAYAAAAAAPv/AAAIAAcAAAADAPz/AAAGAAYAAAAEAPz/AAAIAAYAAAAEAP3/AAAGAAcAAAAFAP3/AAAHAAYAAAAFAP7/AAAHAAYAAAAFAP//AAAFAAYAAAAGAAAAAAAIAAYAAAA=")
 tile_set = ExtResource("4_v1gu6")
 script = ExtResource("5_e30ky")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="LevelTileMap" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap/LevelTileMap" unique_id=1086603521]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD7/wIAAAAFAAYAAAD6//z/AAAIAAYAAAD6//v/AAAIAAcAAAD5//z/AAAFAAcAAAD7//v/AAAGAAcAAAABAPv/AAAFAAYAAAACAPv/AAAFAAcAAAA=")
 tile_set = ExtResource("4_v1gu6")
 script = ExtResource("5_e30ky")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="BluePortalPortal" parent="." unique_id=492732705 instance=ExtResource("6_3bvju")]
 position = Vector2(336.00003, -133.99998)

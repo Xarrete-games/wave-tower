@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cxk1x30qq1f7p"]
 
-[ext_resource type="Script" uid="uid://idfo47x20kr4" path="res://ui/hud/towers_menu/tower_button_hint/tower_button_hint.gd" id="1_j4uly"]
+[ext_resource type="Script" path="res://ui/hud/towers_menu/tower_button_hint/TowerButtonHint.cs" id="1_j4uly"]
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="1_wylug"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="3_wylug"]
 [ext_resource type="LabelSettings" uid="uid://d4g1vsd3mdf1g" path="res://ui/styles/label_settings/label_settings_18.tres" id="4_3svv1"]
@@ -70,18 +70,18 @@ size_flags_horizontal = 4
 [node name="DamageStatUi" parent="MarginContainer/VBoxContainer/StatsContainer" unique_id=1581076728 instance=ExtResource("4_wylug")]
 unique_name_in_owner = true
 layout_mode = 2
-stat_name = "Damage"
-stat_icon = ExtResource("6_wylug")
+StatName = "Damage"
+StatIcon = ExtResource("6_wylug")
 
 [node name="AttkSpeedStatUi" parent="MarginContainer/VBoxContainer/StatsContainer" unique_id=608585058 instance=ExtResource("4_wylug")]
 unique_name_in_owner = true
 layout_mode = 2
-stat_name = "Damage"
-stat_icon = ExtResource("7_3svv1")
-is_float = true
+StatName = "Damage"
+StatIcon = ExtResource("7_3svv1")
+IsFloat = true
 
 [node name="RangeStatUi" parent="MarginContainer/VBoxContainer/StatsContainer" unique_id=291331474 instance=ExtResource("4_wylug")]
 unique_name_in_owner = true
 layout_mode = 2
-stat_name = "Range"
-stat_icon = ExtResource("8_wylug")
+StatName = "Range"
+StatIcon = ExtResource("8_wylug")

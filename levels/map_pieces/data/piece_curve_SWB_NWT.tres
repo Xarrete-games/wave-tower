@@ -1,23 +1,24 @@
 [gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://butwjbwaka85m"]
 
-[ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/map_pieces/edge.gd" id="1_q2xnr"]
+[ext_resource type="Script" uid="uid://ysyv6k8aba5o" path="res://levels/map_pieces/Edge.cs" id="1_q2xnr"]
 [ext_resource type="PackedScene" uid="uid://bau1701cgd7ex" path="res://levels/map_pieces/instances/piece_curve_SWB_NWT.tscn" id="2_6nye2"]
-[ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/map_pieces/map_piece_data.gd" id="3_oi2iv"]
+[ext_resource type="Script" uid="uid://buf7cbkrogset" path="res://levels/map_pieces/MapPieceData.cs" id="3_oi2iv"]
 
 [sub_resource type="Resource" id="Resource_w6lbs"]
 script = ExtResource("1_q2xnr")
-dir = 2
-pos = 2
-metadata/_custom_type_script = "uid://rrd2khtr45je"
+Direction = 2
+Position = 2
+metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 
 [sub_resource type="Resource" id="Resource_juhvm"]
 script = ExtResource("1_q2xnr")
-dir = 3
-pos = 0
-metadata/_custom_type_script = "uid://rrd2khtr45je"
+Direction = 3
+Position = 0
+metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 
 [resource]
 script = ExtResource("3_oi2iv")
-edges = Array[ExtResource("1_q2xnr")]([SubResource("Resource_w6lbs"), SubResource("Resource_juhvm")])
-scene = ExtResource("2_6nye2")
-metadata/_custom_type_script = "uid://ndxexeof5w0k"
+Edges = Array[ExtResource("1_q2xnr")]([SubResource("Resource_w6lbs"), SubResource("Resource_juhvm")])
+Scene = ExtResource("2_6nye2")
+metadata/_custom_type_script = "uid://buf7cbkrogset"
+

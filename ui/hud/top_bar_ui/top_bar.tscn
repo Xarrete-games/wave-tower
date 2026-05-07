@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bhdmj77ytfxwb"]
 
-[ext_resource type="Script" uid="uid://cg40tjdw5e2lu" path="res://ui/hud/top_bar_ui/top_bar.gd" id="1_b2kx5"]
+[ext_resource type="Script" path="res://ui/hud/top_bar_ui/TopBar.cs" id="1_b2kx5"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="1_tksin"]
 [ext_resource type="PackedScene" uid="uid://bvafh0bf674y7" path="res://ui/hud/top_bar_ui/relics/bar_relics_ui.tscn" id="2_fdcnu"]
 [ext_resource type="PackedScene" uid="uid://c46d7j3yoj5p7" path="res://ui/hud/top_bar_ui/health_counter/health_counter.tscn" id="3_5yg88"]
@@ -39,7 +39,7 @@ Button/styles/hover = SubResource("StyleBoxEmpty_tns2n")
 Button/styles/normal = SubResource("StyleBoxEmpty_2407u")
 Button/styles/pressed = SubResource("StyleBoxEmpty_fccpc")
 
-[node name="TopBar" type="MarginContainer" unique_id=1440994670 node_paths=PackedStringArray("speed_button")]
+[node name="TopBar" type="MarginContainer" unique_id=1440994670 node_paths=PackedStringArray("SpeedButton")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 130.0
@@ -50,7 +50,7 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 20
 script = ExtResource("1_b2kx5")
-speed_button = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/SpeedButton")
+SpeedButton = NodePath("VBoxContainer/HBoxContainer/HBoxContainer/SpeedButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1817111365]
 layout_mode = 2
@@ -136,4 +136,5 @@ theme_override_styles/panel = ExtResource("3_tksin")
 layout_mode = 2
 size_flags_horizontal = 2
 
-[connection signal="xarreta_pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/SpeedButton" to="." method="_on_xarreta_text_button_xarreta_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/SpeedButton" to="." method="OnXarretaTextButtonXarretaPressed"]
+

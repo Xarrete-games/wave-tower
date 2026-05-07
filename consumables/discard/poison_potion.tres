@@ -1,15 +1,16 @@
 [gd_resource type="Resource" script_class="ConsumableItemData" format=3 uid="uid://dh113lao15bac"]
 
-[ext_resource type="Script" uid="uid://8vi12c2nftkt" path="res://consumables/implementation/poison_potion.gd" id="1_htjlu"]
-[ext_resource type="Script" uid="uid://xnsjgxjhja5s" path="res://consumables/consumable_data.gd" id="1_thdiu"]
+[ext_resource type="Script" path="res://consumables/implementation/PoisonPotion.cs" id="1_htjlu"]
+[ext_resource type="Script" uid="uid://c4vv5l1m0epby" path="res://consumables/ConsumableData.cs" id="1_thdiu"]
 [ext_resource type="Texture2D" uid="uid://bsq8n0trc4cop" path="res://assets/sprites/consumables/purple_potion_relic.png" id="2_sgqh5"]
 
 [resource]
 script = ExtResource("1_thdiu")
-consumable_type = 1
-id = "poison_potion"
-display_name = "Poison potion"
-description = "Lose 10 points of health by drinking it"
-icon = ExtResource("2_sgqh5")
-runtime_script = ExtResource("1_htjlu")
+ConsumableType = 1
+Id = "poison_potion"
+DisplayName = "Poison potion"
+Description = "Lose 10 points of health by drinking it"
+Icon = ExtResource("2_sgqh5")
+RuntimeScript = ExtResource("1_htjlu")
 metadata/_custom_type_script = "uid://xnsjgxjhja5s"
+

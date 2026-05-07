@@ -1,0 +1,71 @@
+﻿using Godot;
+
+public partial class RelicUI : Control
+{
+    private static readonly Color SemiTransparentColor = new(1f, 1f, 1f, 0.5f);
+    private static readonly Color OpaqueColor = new(1f, 1f, 1f, 1f);
+
+    private TextureRect _texture;
+    private Label _amountLabel;
+    private AnimationPlayer _animationPlayer;
+
+    public Relic Relic;
+
+    public override void _Ready()
+    {
+        _texture = GetNode<TextureRect>("VBoxContainer/MarginContainer/texture");
+        _amountLabel = GetNode<Label>("VBoxContainer/MarginContainer/amount");
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+        _animationPlayer.Play("on_enter");
+    }
+
+    public void SetRelic(Relic relicData)
+    {
+        RelicData data = relicData?.Data;
+        if (relicData == null || data == null)
+        {
+            return;
+        }
+
+        Relic = relicData;
+        _texture.Texture = data.Icon;
+
+        _texture.Modulate = relicData.Disabled ? SemiTransparentColor : OpaqueColor;
+
+        bool showCounter = data.ShowCounter;
+        _amountLabel.Visible = showCounter;
+        if (showCounter)
+        {
+            _amountLabel.Text = relicData.Counter.ToString();
+        }
+    }
+
+    private void OnMouseEntered()
+    {
+        RelicData data = Relic?.Data;
+        if (data == null)
+        {
+            return;
+        }
+
+        string description = data.Description;
+        string displayName = data.DisplayName;
+        HintManagerStatic.ShowHint(this, this, description, displayName, HintManagerStatic.PositionHint.BOTTOM);
+    }
+
+    private void OnMouseExited()
+    {
+        HintManagerStatic.RemoveHint(this);
+    }
+
+    private void OnMarginContainerMouseEntered()
+    {
+        OnMouseEntered();
+    }
+
+    private void OnMarginContainerMouseExited()
+    {
+        OnMouseExited();
+    }
+}

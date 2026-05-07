@@ -1,14 +1,13 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://conbc6nnubc6j"]
 
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_4x5p8"]
-[ext_resource type="Script" uid="uid://v6ea55lg48ks" path="res://relics/implementations/vic_microphone.gd" id="1_5dvpv"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_4x5p8"]
 [ext_resource type="Texture2D" uid="uid://dowhe81rikfhj" path="res://assets/sprites/relics/mic_relic.png" id="2_hjwo6"]
 
 [resource]
 script = ExtResource("1_4x5p8")
-id = "vic_microphone"
-display_name = "Vic's microphone"
-description = "Increase the range of frost towers in 20%"
-icon = ExtResource("2_hjwo6")
-runtime_script = ExtResource("1_5dvpv")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+Id = "vic_microphone"
+DisplayName = "Vic's microphone"
+Description = "Increase the range of frost towers in 20%"
+Icon = ExtResource("2_hjwo6")
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://dld3ldr741p6g"]
 
-[ext_resource type="Script" uid="uid://djbo3i8twgv6e" path="res://towers/tower-buffs/tower_buff_data.gd" id="1_data"]
+[ext_resource type="Script" uid="uid://belffx2l18m14" path="res://towers/tower-buffs/BuffData.cs" id="1_data"]
 [ext_resource type="Texture2D" uid="uid://cgnkhq4bdk23" path="res://assets/images/icons/tower_buffs/buff_dmg.png" id="1_utb5y"]
-[ext_resource type="Script" uid="uid://hc748smtghuq" path="res://towers/tower-buffs/scripts/damage_flat_buff.gd" id="2_runtime"]
+[ext_resource type="Script" path="res://towers/tower-buffs/scripts/DamageFlatBuff.cs" id="2_runtime"]
 
 [resource]
 script = ExtResource("1_data")
-runtime_script = ExtResource("2_runtime")
-id = "damage_flat_buff"
-display_name = "Damage Flat Buff"
-description = "Flat damage buff."
-icon = ExtResource("1_utb5y")
+RuntimeScript = ExtResource("2_runtime")
+Id = "damage_flat_buff"
+DisplayName = "Damage Flat Buff"
+Description = "Flat damage buff."
+Icon = ExtResource("1_utb5y")
+

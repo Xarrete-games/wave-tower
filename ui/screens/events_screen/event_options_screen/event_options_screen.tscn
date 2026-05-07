@@ -2,13 +2,13 @@
 
 [ext_resource type="StyleBox" uid="uid://btxteqrjnosen" path="res://ui/styles/box_style/panel_container.tres" id="1_0pqbo"]
 [ext_resource type="Texture2D" uid="uid://hdde3gfutbf5" path="res://assets/images/events/buda_event.png" id="2_3iddy"]
-[ext_resource type="Script" uid="uid://bbdtqbsv17hei" path="res://ui/screens/events_screen/event_options_screen/event_options_screen.gd" id="2_o48s5"]
+[ext_resource type="Script" path="res://ui/screens/events_screen/event_options_screen/EventOptionsScreen.cs" id="2_o48s5"]
 [ext_resource type="PackedScene" uid="uid://etr820jx2t64" path="res://ui/screens/events_screen/event_options_screen/event_option_button.tscn" id="3_u6cdb"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="4_gu0n2"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="5_cpdtn"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="6_u6cdb"]
 
-[node name="EventOptionsScreen" type="PanelContainer" unique_id=2110702547 node_paths=PackedStringArray("buttons_container", "texture_rect", "title_label", "description_label")]
+[node name="EventOptionsScreen" type="PanelContainer" unique_id=2110702547 node_paths=PackedStringArray("ButtonsContainer", "TextureRect", "TitleLabel", "DescriptionLabel")]
 anchors_preset = -1
 anchor_left = 0.223
 anchor_top = 0.23900001
@@ -22,11 +22,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_0pqbo")
 script = ExtResource("2_o48s5")
-button_option_scene = ExtResource("3_u6cdb")
-buttons_container = NodePath("MarginContainer/VBoxContainer/VBoxContainer/OptionsContainer")
-texture_rect = NodePath("MarginContainer/VBoxContainer/DataContainer/TextureRect")
-title_label = NodePath("MarginContainer/VBoxContainer/VBoxContainer/TitleLabel")
-description_label = NodePath("MarginContainer/VBoxContainer/VBoxContainer/DescriptionLabel")
+ButtonOptionScene = ExtResource("3_u6cdb")
+ButtonsContainer = NodePath("MarginContainer/VBoxContainer/VBoxContainer/OptionsContainer")
+TextureRect = NodePath("MarginContainer/VBoxContainer/DataContainer/TextureRect")
+TitleLabel = NodePath("MarginContainer/VBoxContainer/VBoxContainer/TitleLabel")
+DescriptionLabel = NodePath("MarginContainer/VBoxContainer/VBoxContainer/DescriptionLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1299265526]
 layout_mode = 2

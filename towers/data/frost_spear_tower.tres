@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://0pa1w68ymwk8"]
 
-[ext_resource type="Script" uid="uid://byiw835k16yc6" path="res://towers/configuration/tower_data_with_instance.gd" id="1_urdli"]
+[ext_resource type="Script" uid="uid://dfaljyr1spgsy" path="res://towers/configuration/TowerDataWithInstance.cs" id="1_urdli"]
 [ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="1_yybpe"]
-[ext_resource type="Script" uid="uid://ddvtkyy0nswgw" path="res://towers/configuration/tower_data.gd" id="2_wysa5"]
+[ext_resource type="Script" uid="uid://cg5wpcphk2vka" path="res://towers/configuration/TowerData.cs" id="2_wysa5"]
 [ext_resource type="PackedScene" uid="uid://bx8cw8ahrfd21" path="res://towers/instances/frost/frost_spear_tower/frost_spear_tower.tscn" id="4_usdo4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8gag"]
@@ -11,22 +11,23 @@ region = Rect2(1456, 3, 415, 633)
 
 [sub_resource type="Resource" id="Resource_gyvde"]
 script = ExtResource("2_wysa5")
-type = 2
-build_price = 200
-upgrade_price = 220
-base_damage = 30.0
-base_attack_range = 500.0
-damage_per_level = 40.0
-attack_range_per_level = 200.0
-id = "frost_spear"
-display_name = "Frost Spear"
-description = "Frost Spean"
-icon = SubResource("AtlasTexture_h8gag")
-rarity = 1
-metadata/_custom_type_script = "uid://ddvtkyy0nswgw"
+Type = 2
+BuildPrice = 200
+UpgradePrice = 220
+BaseDamage = 30.0
+BaseAttackRange = 500.0
+DamagePerLevel = 40.0
+AttackRangePerLevel = 200.0
+Id = "frost_spear"
+DisplayName = "Frost Spear"
+Description = "Frost Spean"
+Icon = SubResource("AtlasTexture_h8gag")
+Rarity = 1
+metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
 [resource]
 script = ExtResource("1_urdli")
-data = SubResource("Resource_gyvde")
-scene = ExtResource("4_usdo4")
-metadata/_custom_type_script = "uid://byiw835k16yc6"
+Data = SubResource("Resource_gyvde")
+Scene = ExtResource("4_usdo4")
+metadata/_custom_type_script = "uid://dfaljyr1spgsy"
+

@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://diax8n45uy1cu" path="res://enemies/enemy_base.tscn" id="1_25a7e"]
 
 [node name="BigSpectre" unique_id=2103555316 instance=ExtResource("1_25a7e")]
-base_speed = 55.0
-max_health = 15000.0
-base_gold_value = 30
-damage = 20
+BaseSpeed = 55.0
+MaxHealth = 15000.0
+BaseGoldValue = 30
+Damage = 20
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-0.5, 4.5)
@@ -28,3 +28,4 @@ position = Vector2(-8, 0)
 
 [node name="TargetPositionRight" parent="." index="6"]
 position = Vector2(45, 0)
+

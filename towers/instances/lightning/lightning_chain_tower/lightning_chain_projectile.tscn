@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://b4p7ki22j70mo"]
 
-[ext_resource type="Script" uid="uid://crf0kpsqov0e2" path="res://towers/instances/lightning/lightning_chain_tower/lightning_chain_projectile.gd" id="1_3hj8a"]
+[ext_resource type="Script" path="res://towers/instances/lightning/lightning_chain_tower/LightningChainProjectile.cs" id="1_3hj8a"]
 [ext_resource type="Shader" uid="uid://4b3dn4m3y02t" path="res://assets/shaders/lightning_chain.tres" id="1_k0y13"]
 [ext_resource type="Texture2D" uid="uid://bftfwbmu0hfql" path="res://assets/textures/thunder_shader_texture.jpg" id="2_xl0gl"]
 [ext_resource type="Texture2D" uid="uid://bstsepw5wremc" path="res://assets/textures/light-circular-30px.png" id="4_qqgtd"]
@@ -76,7 +76,7 @@ color = Color(1.1638972, 1.1638972, 0.7348413, 1)
 
 [node name="LightningChainProjectile" type="Node2D"]
 script = ExtResource("1_3hj8a")
-max_bounces = 6
+MaxBounces = 6
 
 [node name="Line" type="Line2D" parent="."]
 unique_name_in_owner = true
@@ -109,5 +109,6 @@ lifetime = 0.15000000000000002
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_4jxr5")
 
-[connection signal="body_entered" from="Area" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Area" to="." method="OnArea2dBodyEntered"]
+[connection signal="body_exited" from="Area" to="." method="OnArea2dBodyExited"]
+

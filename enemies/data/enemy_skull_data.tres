@@ -1,25 +1,23 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://cg7te8elp7e0e"]
 
-[ext_resource type="Script" uid="uid://d4kyl7723aunc" path="res://enemies/enemy_wave_range.gd" id="1_054sy"]
+[ext_resource type="Script" path="res://enemies/EnemyWaveRange.cs" id="1_054sy"]
 [ext_resource type="Texture2D" uid="uid://dlj7ftheuaudj" path="res://assets/sprites/enemies/skull/Calavera__0000_Recurso-1.png.png" id="1_d5n7i"]
-[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="1_oeswe"]
+[ext_resource type="Script" path="res://enemies/EnemyData.cs" id="1_oeswe"]
 [ext_resource type="PackedScene" uid="uid://220jhs08twxf" path="res://enemies/variations/enemy_skull.tscn" id="2_054sy"]
 
 [sub_resource type="Resource" id="Resource_iut5q"]
 script = ExtResource("1_054sy")
-initial_wave = 21
-final_wave = 30
-metadata/_custom_type_script = "uid://d4kyl7723aunc"
+InitialWave = 21
+FinalWave = 30
 
 [resource]
 script = ExtResource("1_oeswe")
-type_legacy = 9
 type = 0
-name = "Skull"
-icon = ExtResource("1_d5n7i")
-scene = ExtResource("2_054sy")
-max_health = 400
-base_speed = 220.0
-weight = 3
-available_waves = Array[ExtResource("1_054sy")]([SubResource("Resource_iut5q")])
-metadata/_custom_type_script = "uid://cvnj0agbswaym"
+Name = "Skull"
+Icon = ExtResource("1_d5n7i")
+Scene = ExtResource("2_054sy")
+MaxHealth = 400
+BaseSpeed = 220.0
+Weight = 3
+AvailableWaves = Array[ExtResource("1_054sy")]([SubResource("Resource_iut5q")])
+

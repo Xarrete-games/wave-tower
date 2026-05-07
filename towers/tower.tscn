@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://4fkas61wyppq"]
 
-[ext_resource type="Script" uid="uid://pmu46mvlw67" path="res://towers/stats/tower_stats_handler.gd" id="1_7jtxt"]
+[ext_resource type="Script" path="res://towers/stats/TowerStatsHandler.cs" id="1_7jtxt"]
 [ext_resource type="PackedScene" uid="uid://brwfbw5bi2kmk" path="res://towers/components/cristal_light/cristal_light.tscn" id="2_2233p"]
-[ext_resource type="Script" uid="uid://dj81l6m3k3ywg" path="res://towers/range_preview.gd" id="3_nbqd2"]
+[ext_resource type="Script" path="res://towers/RangePreview.cs" id="3_nbqd2"]
 [ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="4_7jtxt"]
-[ext_resource type="Script" uid="uid://3vv1ts11asqk" path="res://towers/area_detector.gd" id="5_5e1e6"]
+[ext_resource type="Script" path="res://towers/AreaDetector.cs" id="5_5e1e6"]
 [ext_resource type="PackedScene" uid="uid://42h4ynomckod" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar.tscn" id="6_7jtxt"]
+[ext_resource type="Script" path="res://towers/Tower.cs" id="7_1tower"]
 
 [node name="Tower" type="Node2D" unique_id=1114496997 groups=["tower"]]
+script = ExtResource("7_1tower")
 
 [node name="TowerStatsHandler" type="Node" parent="." unique_id=249347199]
 script = ExtResource("1_7jtxt")
@@ -71,6 +73,6 @@ offset_top = -129.0
 offset_right = 155.0
 offset_bottom = 77.0
 
-[connection signal="body_entered" from="AreaDetector" to="AreaDetector" method="_on_body_entered"]
-[connection signal="body_exited" from="AreaDetector" to="AreaDetector" method="_on_body_exited"]
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="AreaDetector" to="AreaDetector" method="OnBodyEntered"]
+[connection signal="body_exited" from="AreaDetector" to="AreaDetector" method="OnBodyExited"]
+[connection signal="timeout" from="AttackTimer" to="." method="OnAttackTimerTimeout"]

@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://x34wpvqdn2i1"]
 
 [ext_resource type="Texture2D" uid="uid://de8rehu3348oj" path="res://assets/images/icons/tower_buffs/buff_at_speed.png" id="1_8m6da"]
-[ext_resource type="Script" uid="uid://djbo3i8twgv6e" path="res://towers/tower-buffs/tower_buff_data.gd" id="1_data"]
-[ext_resource type="Script" uid="uid://bkowv2aja2clq" path="res://towers/tower-buffs/scripts/attack_speed_mult_buff.gd" id="2_runtime"]
+[ext_resource type="Script" uid="uid://belffx2l18m14" path="res://towers/tower-buffs/BuffData.cs" id="1_data"]
+[ext_resource type="Script" path="res://towers/tower-buffs/scripts/AttackSpeedMultBuff.cs" id="2_runtime"]
 
 [resource]
 script = ExtResource("1_data")
-runtime_script = ExtResource("2_runtime")
-id = "attack_speed_mult_buff"
-display_name = "Attack Speed Mult Buff"
-description = "Attack speed multiplier buff."
-icon = ExtResource("1_8m6da")
+RuntimeScript = ExtResource("2_runtime")
+Id = "attack_speed_mult_buff"
+DisplayName = "Attack Speed Mult Buff"
+Description = "Attack speed multiplier buff."
+Icon = ExtResource("1_8m6da")
+

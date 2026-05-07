@@ -1,21 +1,22 @@
 [gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://cp13o0sjidbmp"]
 
-[ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/map_pieces/edge.gd" id="1_necya"]
+[ext_resource type="Script" uid="uid://ysyv6k8aba5o" path="res://levels/map_pieces/Edge.cs" id="1_necya"]
 [ext_resource type="PackedScene" uid="uid://dbvdh5k2p0jb7" path="res://levels/map_pieces/instances/piece_curve_SWT_NWB.tscn" id="2_necya"]
-[ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/map_pieces/map_piece_data.gd" id="3_3dc0n"]
+[ext_resource type="Script" uid="uid://buf7cbkrogset" path="res://levels/map_pieces/MapPieceData.cs" id="3_3dc0n"]
 
 [sub_resource type="Resource" id="Resource_6gner"]
 script = ExtResource("1_necya")
-dir = 3
-pos = 2
+Direction = 3
+Position = 2
 
 [sub_resource type="Resource" id="Resource_3dc0n"]
 script = ExtResource("1_necya")
-dir = 2
-pos = 0
+Direction = 2
+Position = 0
 
 [resource]
 script = ExtResource("3_3dc0n")
-edges = Array[ExtResource("1_necya")]([SubResource("Resource_6gner"), SubResource("Resource_3dc0n")])
-scene = ExtResource("2_necya")
-metadata/_custom_type_script = "uid://ndxexeof5w0k"
+Edges = Array[ExtResource("1_necya")]([SubResource("Resource_6gner"), SubResource("Resource_3dc0n")])
+Scene = ExtResource("2_necya")
+metadata/_custom_type_script = "uid://buf7cbkrogset"
+

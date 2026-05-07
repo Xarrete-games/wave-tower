@@ -6,7 +6,7 @@
 radius = 20.0
 
 [node name="EnemySpectre" unique_id=82686911 instance=ExtResource("1_skkk3")]
-max_health = 80.0
+MaxHealth = 80.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=972753897]
 shape = SubResource("CircleShape2D_skkk3")
@@ -26,3 +26,4 @@ position = Vector2(-4, -12)
 
 [node name="TargetPositionRight" parent="." index="6" unique_id=429096716]
 position = Vector2(26, -12)
+

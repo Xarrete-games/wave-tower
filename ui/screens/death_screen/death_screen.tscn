@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dcq16u6g6ahsp"]
 
-[ext_resource type="Script" uid="uid://emvdt530upjb" path="res://ui/screens/death_screen/death_screen.gd" id="1_4klge"]
+[ext_resource type="Script" path="res://ui/screens/death_screen/DeathScreen.cs" id="1_4klge"]
 [ext_resource type="FontFile" uid="uid://fcp2lwik6lc3" path="res://assets/fonts/Kreon Bold.ttf" id="2_fqko3"]
-[ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="3_5mn61"]
+[ext_resource type="Script" path="res://utils/AnimationComponent.cs" id="3_5mn61"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="3_iyktl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lg0me"]
@@ -35,9 +35,9 @@ label_settings = SubResource("LabelSettings_lg0me")
 
 [node name="AnimationComponent" type="Node" parent="PanelContainer/CenterContainer/VBoxContainer/Label" unique_id=585701245]
 script = ExtResource("3_5mn61")
-enter_animation = true
-enter_time = 5.0
-enter_modulate = Color(1, 1, 1, 0)
+EnterAnimation = true
+EnterTime = 5.0
+EnterModulate = Color(1, 1, 1, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [node name="TryAgainButton" parent="PanelContainer/CenterContainer/VBoxContainer" unique_id=2081541098 instance=ExtResource("3_iyktl")]
@@ -48,10 +48,11 @@ text = "Try Again"
 
 [node name="AnimationComponent" type="Node" parent="PanelContainer/CenterContainer/VBoxContainer/TryAgainButton" unique_id=1237211827]
 script = ExtResource("3_5mn61")
-enter_animation = true
-enter_time = 2.0
-enter_delay = 4.0
-enter_modulate = Color(1, 1, 1, 0)
+EnterAnimation = true
+EnterTime = 2.0
+EnterDelay = 4.0
+EnterModulate = Color(1, 1, 1, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
-[connection signal="xarreta_pressed" from="PanelContainer/CenterContainer/VBoxContainer/TryAgainButton" to="." method="_on_try_again_button_xarreta_pressed"]
+[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/TryAgainButton" to="." method="OnTryAgainButtonXarretaPressed"]
+

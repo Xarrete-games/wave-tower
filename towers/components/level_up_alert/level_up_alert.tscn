@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://v3kg1gg10gnc"]
 
-[ext_resource type="Script" uid="uid://gckpuqq8hoxe" path="res://towers/components/level_up_alert/level_up_alert.gd" id="1_kqhtb"]
+[ext_resource type="Script" path="res://towers/components/level_up_alert/LevelUpAlert.cs" id="1_kqhtb"]
 [ext_resource type="LabelSettings" uid="uid://5y24o0w47m16" path="res://ui/styles/label_settings/label_settings_30.tres" id="2_ablwc"]
 
 [node name="LevelUpAlert" type="Control"]

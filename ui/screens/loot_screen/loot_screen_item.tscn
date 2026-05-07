@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bjdiwjtvkbeb5"]
 
 [ext_resource type="Texture2D" uid="uid://c8vemelotevey" path="res://assets/images/icons/wcoin.png" id="1_cne1v"]
-[ext_resource type="Script" uid="uid://dnsxyviefc8h6" path="res://ui/screens/loot_screen/loot_screen_item.gd" id="1_supgx"]
-[ext_resource type="Script" uid="uid://ddu4lawnpa1sf" path="res://utils/animation_component.gd" id="3_66g07"]
+[ext_resource type="Script" path="res://ui/screens/loot_screen/LootScreenItem.cs" id="1_supgx"]
+[ext_resource type="Script" path="res://utils/AnimationComponent.cs" id="3_66g07"]
 [ext_resource type="Texture2D" uid="uid://bsq8n0trc4cop" path="res://assets/sprites/consumables/purple_potion_relic.png" id="3_pvu0a"]
 [ext_resource type="LabelSettings" uid="uid://d4g1vsd3mdf1g" path="res://ui/styles/label_settings/label_settings_18.tres" id="5_66g07"]
 
@@ -13,21 +13,21 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="LootScreenItem" type="PanelContainer" unique_id=329821247 node_paths=PackedStringArray("texture_rect", "label")]
+[node name="LootScreenItem" type="PanelContainer" unique_id=329821247 node_paths=PackedStringArray("TextureRect", "label")]
 custom_minimum_size = Vector2(360, 0)
 offset_right = 240.0
 offset_bottom = 55.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_cne1v")
 script = ExtResource("1_supgx")
-gold_icon = ExtResource("1_cne1v")
-texture_rect = NodePath("MarginContainer/HBoxContainer/TextureRect")
+GoldIcon = ExtResource("1_cne1v")
+TextureRect = NodePath("MarginContainer/HBoxContainer/TextureRect")
 label = NodePath("MarginContainer/HBoxContainer/Label")
 
 [node name="AnimationComponent" type="Node" parent="." unique_id=1663918096]
 script = ExtResource("3_66g07")
-enter_animation = true
-enter_delay = 0.2
-enter_scale = Vector2(0, 0)
+EnterAnimation = true
+EnterDelay = 0.2
+EnterScale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://ddu4lawnpa1sf"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1828369689]
@@ -54,6 +54,7 @@ mouse_filter = 1
 text = "Big bowl of milk and cookies"
 label_settings = ExtResource("5_66g07")
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="gui_input" from="." to="." method="OnGuiInput"]
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseExited"]
+

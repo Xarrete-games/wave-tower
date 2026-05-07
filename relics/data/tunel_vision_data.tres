@@ -1,14 +1,13 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://c4sjjvplxy0eg"]
 
-[ext_resource type="Script" uid="uid://bhhmkvjj6645y" path="res://relics/implementations/tunel_vision.gd" id="1_6hj3t"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_wvpyy"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_wvpyy"]
 [ext_resource type="Texture2D" uid="uid://v84jlhrs1gjq" path="res://assets/sprites/relics/eye.png" id="2_7utw2"]
 
 [resource]
 script = ExtResource("1_wvpyy")
-id = "Tunel Vision"
-display_name = "Tunel Vision"
-description = "Increases damage by 10% for each consecutive hit on the same enemy"
-icon = ExtResource("2_7utw2")
-runtime_script = ExtResource("1_6hj3t")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+Id = "tunel_vision"
+DisplayName = "Tunel Vision"
+Description = "Increases damage by 10% for each consecutive hit on the same enemy"
+Icon = ExtResource("2_7utw2")
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://42h4ynomckod"]
 
-[ext_resource type="Script" uid="uid://cjcw3vw72ncu8" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar.gd" id="1_dg5wq"]
+[ext_resource type="Script" path="res://ui/hud/tower_buffs_bar/TowerBuffsBar.cs" id="1_dg5wq"]
 [ext_resource type="PackedScene" uid="uid://cfi7esea0276g" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar_slot.tscn" id="2_4jgm5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jgm5"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="TowerBuffsBar" type="PanelContainer" unique_id=773910159 node_paths=PackedStringArray("slots_container")]
+[node name="TowerBuffsBar" type="PanelContainer" unique_id=773910159 node_paths=PackedStringArray("SlotsContainer")]
 offset_right = 34.0
 offset_bottom = 50.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4jgm5")
 script = ExtResource("1_dg5wq")
-slot_scene = ExtResource("2_4jgm5")
-slots_container = NodePath("Container")
+SlotScene = ExtResource("2_4jgm5")
+SlotsContainer = NodePath("Container")
 
 [node name="Container" type="GridContainer" parent="." unique_id=823021992]
 layout_mode = 2

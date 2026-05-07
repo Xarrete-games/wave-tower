@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bapayqqfvsvgb"]
 
-[ext_resource type="Script" uid="uid://c7fudela4cbsd" path="res://towers/instances/single_target_projectile.gd" id="1_7gi64"]
+[ext_resource type="Script" path="res://towers/instances/SingleTargetProjectile.cs" id="1_7gi64"]
 [ext_resource type="Texture2D" uid="uid://c36hp511eekg1" path="res://assets/textures/light-circular-100px.png" id="3_vf7mk"]
 [ext_resource type="Texture2D" uid="uid://um30j8kc2yee" path="res://assets/sprites/proyectiles/ice_spear.png" id="4_dvnag"]
 [ext_resource type="Texture2D" uid="uid://cfefj8cmm3iis" path="res://assets/sprites/proyectiles/ice_spear_NMap.png" id="5_tdi1c"]

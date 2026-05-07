@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://4i6kl0xurgeg"]
 
-[ext_resource type="Script" uid="uid://dqo675n5we5gk" path="res://ui/screens/main_menu/main_menu.gd" id="1_omy8q"]
+[ext_resource type="Script" path="res://ui/screens/main_menu/MainMenu.cs" id="1_omy8q"]
 [ext_resource type="Texture2D" uid="uid://bq6lt7tlxw0te" path="res://assets/sprites/ui/main_menu_background.png" id="2_i5wg5"]
 [ext_resource type="Texture2D" uid="uid://crut4djccohg3" path="res://assets/sprites/ui/wave_tower_logo.png" id="3_i5wg5"]
 [ext_resource type="PackedScene" uid="uid://huthfefiu18l" path="res://ui/components/buttons/xarreta_menu_button.tscn" id="5_kadtk"]
@@ -54,6 +54,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Exit"
 
-[connection signal="xarreta_pressed" from="CenterContainer/VBoxContainer/NewRunButton" to="." method="_on_new_run_button_xarreta_pressed"]
-[connection signal="xarreta_pressed" from="CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_xarreta_pressed"]
-[connection signal="xarreta_pressed" from="CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_xarreta_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NewRunButton" to="." method="OnNewRunButtonXarretaPressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CreditsButton" to="." method="OnCreditsButtonXarretaPressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonXarretaPressed"]
+

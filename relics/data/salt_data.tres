@@ -1,14 +1,13 @@
 [gd_resource type="Resource" script_class="RelicItemData" format=3 uid="uid://c6qpb8rk85bbs"]
 
-[ext_resource type="Script" uid="uid://po13p86frc26" path="res://relics/implementations/salt.gd" id="1_02vrn"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_bv3v8"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_bv3v8"]
 [ext_resource type="Texture2D" uid="uid://b4wlxstebn1ev" path="res://assets/sprites/relics/relic_a_little_bit_of_salt_relic.png" id="3_of58n"]
 
 [resource]
 script = ExtResource("1_bv3v8")
-id = "salt"
-display_name = "Salt"
-description = "Enemies below 30% health receive 15% more damage"
-icon = ExtResource("3_of58n")
-runtime_script = ExtResource("1_02vrn")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+Id = "salt"
+DisplayName = "Salt"
+Description = "Enemies below 30% health receive 15% more damage"
+Icon = ExtResource("3_of58n")
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

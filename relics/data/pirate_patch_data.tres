@@ -1,14 +1,13 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://br066qh37k6am"]
 
-[ext_resource type="Script" uid="uid://b67okroua7dc6" path="res://relics/implementations/pirate_patch.gd" id="1_jj4ya"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_nb88y"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_nb88y"]
 [ext_resource type="Texture2D" uid="uid://byrx7xp7vakrs" path="res://assets/sprites/relics/Blackbeard's_patch_relic.png" id="2_jj4ya"]
 
 [resource]
 script = ExtResource("1_nb88y")
-runtime_script = ExtResource("1_jj4ya")
-id = "pirate_patch"
-display_name = "Pirate patch"
-description = "Recovers 2 health when using an item"
-icon = ExtResource("2_jj4ya")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+Id = "pirate_patch"
+DisplayName = "Pirate patch"
+Description = "Recovers 2 health when using an item"
+Icon = ExtResource("2_jj4ya")
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

@@ -1,21 +1,22 @@
 [gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://cbew2t4hr8uvx"]
 
-[ext_resource type="Script" uid="uid://rrd2khtr45je" path="res://levels/map_pieces/edge.gd" id="1_kmdep"]
+[ext_resource type="Script" uid="uid://ysyv6k8aba5o" path="res://levels/map_pieces/Edge.cs" id="1_kmdep"]
 [ext_resource type="PackedScene" uid="uid://cuqd7fhbyvber" path="res://levels/map_pieces/instances/piece_curve_SWT_SEB.tscn" id="2_kmdep"]
-[ext_resource type="Script" uid="uid://ndxexeof5w0k" path="res://levels/map_pieces/map_piece_data.gd" id="3_4ge6i"]
+[ext_resource type="Script" uid="uid://buf7cbkrogset" path="res://levels/map_pieces/MapPieceData.cs" id="3_4ge6i"]
 
 [sub_resource type="Resource" id="Resource_657pm"]
 script = ExtResource("1_kmdep")
-dir = 1
-pos = 2
+Direction = 1
+Position = 2
 
 [sub_resource type="Resource" id="Resource_4ge6i"]
 script = ExtResource("1_kmdep")
-dir = 2
-pos = 0
+Direction = 2
+Position = 0
 
 [resource]
 script = ExtResource("3_4ge6i")
-edges = Array[ExtResource("1_kmdep")]([SubResource("Resource_657pm"), SubResource("Resource_4ge6i")])
-scene = ExtResource("2_kmdep")
-metadata/_custom_type_script = "uid://ndxexeof5w0k"
+Edges = Array[ExtResource("1_kmdep")]([SubResource("Resource_657pm"), SubResource("Resource_4ge6i")])
+Scene = ExtResource("2_kmdep")
+metadata/_custom_type_script = "uid://buf7cbkrogset"
+

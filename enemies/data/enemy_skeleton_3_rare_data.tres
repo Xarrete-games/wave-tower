@@ -1,24 +1,22 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://dv1b6vi2c4qwq"]
 
-[ext_resource type="Script" uid="uid://d4kyl7723aunc" path="res://enemies/enemy_wave_range.gd" id="1_t07r1"]
+[ext_resource type="Script" path="res://enemies/EnemyWaveRange.cs" id="1_t07r1"]
 [ext_resource type="Texture2D" uid="uid://keav2e8je8b6" path="res://assets/sprites/enemies/esqueleton/esqueleto1.png" id="2_a16k4"]
 [ext_resource type="PackedScene" uid="uid://b3wa2d1vhulle" path="res://enemies/variations/enemy_skeleton_3_rare.tscn" id="3_t07r1"]
-[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="4_sh22p"]
+[ext_resource type="Script" path="res://enemies/EnemyData.cs" id="4_sh22p"]
 
 [sub_resource type="Resource" id="Resource_806lk"]
 script = ExtResource("1_t07r1")
-initial_wave = 21
-final_wave = 31
-metadata/_custom_type_script = "uid://d4kyl7723aunc"
+InitialWave = 21
+FinalWave = 31
 
 [resource]
 script = ExtResource("4_sh22p")
-type_legacy = 4
 type = 1
-name = "Skeleton"
-icon = ExtResource("2_a16k4")
-scene = ExtResource("3_t07r1")
-max_health = 400
-base_speed = 550.0
-available_waves = Array[ExtResource("1_t07r1")]([SubResource("Resource_806lk")])
-metadata/_custom_type_script = "uid://cvnj0agbswaym"
+Name = "Skeleton"
+Icon = ExtResource("2_a16k4")
+Scene = ExtResource("3_t07r1")
+MaxHealth = 400
+BaseSpeed = 550.0
+AvailableWaves = Array[ExtResource("1_t07r1")]([SubResource("Resource_806lk")])
+

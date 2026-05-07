@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://beixhmpysku3t"]
 
-[ext_resource type="Script" uid="uid://brkk62c2s8fer" path="res://enemies/ui/health_bar/debuff_slot/debuff_slot.gd" id="1_4ca0j"]
+[ext_resource type="Script" path="res://enemies/ui/health_bar/debuff_slot/DebuffSlot.cs" id="1_4ca0j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2muor"]
 font_size = 14
 outline_size = 1
 outline_color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
 
-[node name="DebuffSlot" type="CenterContainer" unique_id=215930056 node_paths=PackedStringArray("texture_rect", "label")]
+[node name="DebuffSlot" type="CenterContainer" unique_id=215930056 node_paths=PackedStringArray("TextureRect", "label")]
 custom_minimum_size = Vector2(20, 40)
 anchors_preset = 8
 anchor_left = 0.5
@@ -22,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_4ca0j")
-texture_rect = NodePath("VBoxContainer/DebuffSlot")
+TextureRect = NodePath("VBoxContainer/DebuffSlot")
 label = NodePath("VBoxContainer/Label")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1942969553]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://f34dinc60kaa"]
 
-[ext_resource type="Script" uid="uid://dtjahob531d8j" path="res://ui/hud/top_bar_ui/relics/relic_ui.gd" id="1_ye6dh"]
+[ext_resource type="Script" path="res://ui/hud/top_bar_ui/relics/RelicUI.cs" id="1_ye6dh"]
 [ext_resource type="Texture2D" uid="uid://ddc3y4ouv4tm6" path="res://assets/sprites/relics/paganinis_bow.png" id="2_vhbgb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ye6dh"]
@@ -81,7 +81,8 @@ label_settings = SubResource("LabelSettings_ye6dh")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1187952058]
 libraries/ = SubResource("AnimationLibrary_vdc07")
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="VBoxContainer/MarginContainer" to="." method="_on_margin_container_mouse_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/MarginContainer" to="." method="_on_margin_container_mouse_exited"]
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseExited"]
+[connection signal="mouse_entered" from="VBoxContainer/MarginContainer" to="." method="OnMarginContainerMouseEntered"]
+[connection signal="mouse_exited" from="VBoxContainer/MarginContainer" to="." method="OnMarginContainerMouseExited"]
+

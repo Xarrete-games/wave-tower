@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bpf44acq183yv"]
 
-[ext_resource type="Script" uid="uid://h6gp6drqlqg6" path="res://ui/screens/events_screen/shop_screen/shop_screen.gd" id="1_g4y81"]
+[ext_resource type="Script" path="res://ui/screens/events_screen/shop_screen/ShopScreen.cs" id="1_g4y81"]
 [ext_resource type="StyleBox" uid="uid://cu0b10p3y57qo" path="res://ui/styles/box_style/shop/section_tittle_box.tres" id="2_6ciuw"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="3_g4y81"]
 [ext_resource type="PackedScene" uid="uid://d0qrluaokqdpj" path="res://ui/components/buttons/xarreta_action_button.tscn" id="5_g5vmd"]
@@ -8,7 +8,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nisgj"]
 bg_color = Color(0.09803922, 0.1254902, 0.09411765, 1)
 
-[node name="ShopScreen" type="PanelContainer" node_paths=PackedStringArray("relics_container", "consumables_container", "sell_relics_container", "relics_section", "consumables_section", "sell_section", "exit_button", "sell_button")]
+[node name="ShopScreen" type="PanelContainer" node_paths=PackedStringArray("RelicsContainer", "ConsumablesContainer", "SellRelicsContainer", "RelicsSection", "ConsumablesSection", "SellSection", "ExitButton", "SellButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,14 +16,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nisgj")
 script = ExtResource("1_g4y81")
-relics_container = NodePath("ShopContainer/VBoxContainer/RelicSection/Relics")
-consumables_container = NodePath("ShopContainer/VBoxContainer/ItemsSection/Consumables")
-sell_relics_container = NodePath("ShopContainer/VBoxContainer/SellSection/RelicsToSell")
-relics_section = NodePath("ShopContainer/VBoxContainer/RelicSection")
-consumables_section = NodePath("ShopContainer/VBoxContainer/ItemsSection")
-sell_section = NodePath("ShopContainer/VBoxContainer/SellSection")
-exit_button = NodePath("ShopContainer/ButtonsSection/ExitButton")
-sell_button = NodePath("ShopContainer/ButtonsSection/SellButton")
+RelicsContainer = NodePath("ShopContainer/VBoxContainer/RelicSection/Relics")
+ConsumablesContainer = NodePath("ShopContainer/VBoxContainer/ItemsSection/Consumables")
+SellRelicsContainer = NodePath("ShopContainer/VBoxContainer/SellSection/RelicsToSell")
+RelicsSection = NodePath("ShopContainer/VBoxContainer/RelicSection")
+ConsumablesSection = NodePath("ShopContainer/VBoxContainer/ItemsSection")
+SellSection = NodePath("ShopContainer/VBoxContainer/SellSection")
+ExitButton = NodePath("ShopContainer/ButtonsSection/ExitButton")
+SellButton = NodePath("ShopContainer/ButtonsSection/SellButton")
 
 [node name="ShopContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -127,5 +127,6 @@ custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "EXIT"
 
-[connection signal="xarreta_pressed" from="ShopContainer/ButtonsSection/SellButton" to="." method="_on_sell_button_pressed"]
-[connection signal="xarreta_pressed" from="ShopContainer/ButtonsSection/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ShopContainer/ButtonsSection/SellButton" to="." method="OnSellButtonPressed"]
+[connection signal="pressed" from="ShopContainer/ButtonsSection/ExitButton" to="." method="OnExitButtonPressed"]
+

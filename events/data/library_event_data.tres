@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="EventData" load_steps=4 format=3 uid="uid://b2treo3pjimpy"]
 
-[ext_resource type="Script" uid="uid://badquvdi5lmer" path="res://events/scripts/library_event_script.gd" id="1_cfdss"]
-[ext_resource type="Script" uid="uid://bj6frpye8hpbn" path="res://events/event_data.gd" id="1_kr3af"]
+[ext_resource type="Script" uid="uid://crdb4okpbi5jq" path="res://events/scripts/LibraryEventScript.cs" id="1_cfdss"]
+[ext_resource type="Script" uid="uid://daq85iil68x7r" path="res://events/EventData.cs" id="1_kr3af"]
 [ext_resource type="Texture2D" uid="uid://bc4yla8jg6i7x" path="res://assets/images/events/library_event.png" id="2_fuj2f"]
 
 [resource]
 script = ExtResource("1_kr3af")
-id = "library_event"
+Id = "library_event"
 title = "The LIbrary"
-description = "A mysterious library appears, many books to choose from but you can only take one."
-texture_background = ExtResource("2_fuj2f")
-runtime_script = ExtResource("1_cfdss")
-metadata/_custom_type_script = "uid://bj6frpye8hpbn"
+Description = "A mysterious library appears, many books to choose from but you can only take one."
+TextureBackground = ExtResource("2_fuj2f")
+RuntimeScript = ExtResource("1_cfdss")
+metadata/_custom_type_script = "uid://daq85iil68x7r"
+

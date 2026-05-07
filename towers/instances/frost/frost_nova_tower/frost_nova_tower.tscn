@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cwyyp2r266blt"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ucjx1"]
-[ext_resource type="Script" uid="uid://bpvj36tgrsr8g" path="res://towers/instances/frost/frost_nova_tower/frost_nova_tower.gd" id="2_7kg10"]
+[ext_resource type="Script" path="res://towers/instances/frost/frost_nova_tower/FrostNovaTower.cs" id="2_7kg10"]
 [ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="3_lemm1"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="3_nvigb"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="6_3yhk2"]
@@ -83,9 +83,9 @@ type = 2
 
 [node name="CristalLight" parent="." index="1"]
 color = Color(0.3372549, 1, 1, 1)
-attack_animation_time = 0.3
-max_scale = 3.0
-max_energy = 0.3
+AttackAnimationTime = 0.3
+MaxScale = 3.0
+MaxEnergy = 0.3
 
 [node name="ProjectilSpawnPoint" type="Marker2D" parent="." index="3" unique_id=65424420]
 position = Vector2(0, 8)

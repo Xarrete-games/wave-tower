@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cxs4ar5enx4mn"]
 
-[ext_resource type="Script" uid="uid://cbdpli8qefkjx" path="res://enemies/ui/gold_dropped/gold_dropped.gd" id="1_y7jsp"]
+[ext_resource type="Script" path="res://enemies/ui/gold_dropped/GoldDropped.cs" id="1_y7jsp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0ra75"]
 font_size = 24

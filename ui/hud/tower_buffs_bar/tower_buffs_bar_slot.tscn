@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://cfi7esea0276g"]
 
-[ext_resource type="Script" uid="uid://w2t2qb88lykq" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar_slot.gd" id="1_xymty"]
+[ext_resource type="Script" path="res://ui/hud/tower_buffs_bar/TowerBuffsBarSlot.cs" id="1_xymty"]
 [ext_resource type="Texture2D" uid="uid://cgnkhq4bdk23" path="res://assets/images/icons/tower_buffs/buff_dmg.png" id="2_rrr2d"]
 [ext_resource type="LabelSettings" uid="uid://be6ci8thbq1pj" path="res://ui/styles/label_settings/label_buff_number.tres" id="3_8lnq4"]
 
-[node name="TowerBuffsBarSlot" type="HBoxContainer" unique_id=566470421 node_paths=PackedStringArray("texture", "value_label")]
+[node name="TowerBuffsBarSlot" type="HBoxContainer" unique_id=566470421 node_paths=PackedStringArray("Texture", "ValueLabel")]
 offset_right = 79.0
 offset_bottom = 50.0
 theme_override_constants/separation = 10
 script = ExtResource("1_xymty")
-texture = NodePath("Texture")
-value_label = NodePath("Label")
+Texture = NodePath("Texture")
+ValueLabel = NodePath("Label")
 
 [node name="Texture" type="TextureRect" parent="." unique_id=248053924]
 custom_minimum_size = Vector2(50, 50)

@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://ctympoe3douaa"]
 
-[ext_resource type="Script" uid="uid://chj3cku30pmp1" path="res://levels/map_pieces/map_piece.gd" id="1_4cayg"]
+[ext_resource type="Script" uid="uid://dok4eaedgwho2" path="res://levels/map_pieces/MapPiece.cs" id="1_4cayg"]
 [ext_resource type="PackedScene" uid="uid://ctx8k0e02gp3y" path="res://levels/map_pieces/map_piece_tile_map.tscn" id="2_eqi0q"]
 [ext_resource type="TileSet" uid="uid://0mt2a5aix72q" path="res://assets/sprites/tilesheet/tileset v2.tres" id="3_nne4h"]
-[ext_resource type="Script" uid="uid://bxxphpxqsh7c8" path="res://levels/level_tile_map/level_tile_map.gd" id="4_vo7d0"]
+[ext_resource type="Script" uid="uid://dhtvl5qh0aodo" path="res://levels/level_tile_map/LevelTileMap.cs" id="4_vo7d0"]
 [ext_resource type="Texture2D" uid="uid://c22o1eieco5r3" path="res://assets/sprites/decoration/Plant1.png" id="5_0k2kp"]
 [ext_resource type="Texture2D" uid="uid://b22mju44j5tf0" path="res://assets/sprites/decoration/Bush4.png" id="6_2vn0w"]
 [ext_resource type="Texture2D" uid="uid://f4mk2v0vvh6c" path="res://assets/sprites/decoration/Tree3.png" id="7_jpu3h"]
@@ -27,14 +27,14 @@ position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD4/wcAAAAHAAYAAAD5/wcAAAAGAAcAAAD5/wYAAAAGAAcAAAD4/wUAAAAFAAcAAAD4/wYAAAAIAAcAAAD6/wcAAAAHAAYAAAD6/wYAAAAIAAcAAAAGAPr/AAAFAAYAAAAGAPn/AAAHAAcAAAAFAPn/AAAGAAcAAAAEAPn/AAAGAAYAAAAFAPr/AAAGAAcAAAADAPn/AAAIAAcAAAACAPn/AAAGAAcAAAABAPn/AAAHAAYAAAAEAPr/AAAGAAcAAAD4//n/AAAHAAcAAAD4//r/AAAGAAcAAAD5//r/AAAHAAYAAAD5//n/AAAHAAYAAAA=")
 tile_set = ExtResource("3_nne4h")
 script = ExtResource("4_vo7d0")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="LevelTileMap2" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap"]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAD5/wcAAAAFAAcAAAD4/wcAAAAGAAYAAAAGAPn/AAAFAAYAAAAFAPn/AAAHAAcAAAA=")
 tile_set = ExtResource("3_nne4h")
 script = ExtResource("4_vo7d0")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="Routes" type="Node2D" parent="."]
 

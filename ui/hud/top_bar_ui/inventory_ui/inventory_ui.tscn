@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://epd2ddueq6ho"]
 
-[ext_resource type="Script" uid="uid://bb04ujedsxvl6" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui.gd" id="1_3fmy8"]
+[ext_resource type="Script" path="res://ui/hud/top_bar_ui/inventory_ui/InventoryUI.cs" id="1_3fmy8"]
 [ext_resource type="PackedScene" uid="uid://bmihqlkojvphp" path="res://ui/hud/top_bar_ui/inventory_ui/inventory_ui_slot.tscn" id="1_y3m8t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fmy8"]
@@ -15,12 +15,12 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[node name="InventoryUI" type="PanelContainer" unique_id=21977613 node_paths=PackedStringArray("slots_container")]
+[node name="InventoryUI" type="PanelContainer" unique_id=21977613 node_paths=PackedStringArray("SlotsContainer")]
 size_flags_horizontal = 8
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3fmy8")
 script = ExtResource("1_3fmy8")
-slots_container = NodePath("SlotsConainer")
+SlotsContainer = NodePath("SlotsConainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1223872119]
 visible = false

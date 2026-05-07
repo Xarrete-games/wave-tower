@@ -1,24 +1,22 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://c5y2xy1lc70qe"]
 
-[ext_resource type="Script" uid="uid://d4kyl7723aunc" path="res://enemies/enemy_wave_range.gd" id="1_vdly0"]
+[ext_resource type="Script" path="res://enemies/EnemyWaveRange.cs" id="1_vdly0"]
 [ext_resource type="PackedScene" uid="uid://cohp7jt1lxslx" path="res://enemies/variations/enemy_buba_4_epic.tscn" id="2_vdly0"]
-[ext_resource type="Script" uid="uid://cvnj0agbswaym" path="res://enemies/enemy_data.gd" id="3_1n2q7"]
+[ext_resource type="Script" path="res://enemies/EnemyData.cs" id="3_1n2q7"]
 
 [sub_resource type="Resource" id="Resource_yc7df"]
 script = ExtResource("1_vdly0")
-initial_wave = 24
-final_wave = 30
-metadata/_custom_type_script = "uid://d4kyl7723aunc"
+InitialWave = 24
+FinalWave = 30
 
 [resource]
 script = ExtResource("3_1n2q7")
-type_legacy = 1
 type = 3
-name = "Buba_epic"
-scene = ExtResource("2_vdly0")
-max_health = 1300
-base_speed = 240.0
-base_gold_value = 6
-weight = 6
-available_waves = Array[ExtResource("1_vdly0")]([SubResource("Resource_yc7df")])
-metadata/_custom_type_script = "uid://cvnj0agbswaym"
+Name = "Buba_epic"
+Scene = ExtResource("2_vdly0")
+MaxHealth = 1300
+BaseSpeed = 240.0
+BaseGoldValue = 6
+Weight = 6
+AvailableWaves = Array[ExtResource("1_vdly0")]([SubResource("Resource_yc7df")])
+

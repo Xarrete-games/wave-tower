@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bx8cw8ahrfd21"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ue0bx"]
-[ext_resource type="Script" uid="uid://yt3fjce5gso4" path="res://towers/instances/frost/frost_spear_tower/frost_spear_tower.gd" id="2_dwnik"]
+[ext_resource type="Script" path="res://towers/instances/frost/frost_spear_tower/FrostSpearTower.cs" id="2_dwnik"]
 [ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="3_47it7"]
 [ext_resource type="PackedScene" uid="uid://bapayqqfvsvgb" path="res://towers/instances/frost/frost_spear_tower/frost_spear_projectile.tscn" id="3_dwnik"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="5_4ns80"]
@@ -78,7 +78,8 @@ alpha_curve = SubResource("CurveTexture_3kuch")
 
 [node name="FrostSpearTower" unique_id=870709759 instance=ExtResource("1_ue0bx")]
 script = ExtResource("2_dwnik")
-frost_spear_projectile_scene = ExtResource("3_dwnik")
+type = 2
+FrostSpearProjectileScene = ExtResource("3_dwnik")
 
 [node name="CristalLight" parent="." index="1" unique_id=1008625391]
 color = Color(0.79607844, 1, 1, 1)

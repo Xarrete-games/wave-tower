@@ -1,0 +1,18 @@
+public sealed class PirateHat : Relic
+{
+    private const double _chanceToRecoverConsumable = 0.5;
+    private readonly System.Random _random = new();
+
+    public PirateHat() : base("pirate_hat")
+    {
+    }
+
+    public override void OnConsumableUsed(ConsumableModel consumable)
+    {
+        double value = _random.NextDouble();
+        if (value < _chanceToRecoverConsumable)
+        {
+            RunContextRuntime.ConsumablesManager.AddConsumable(consumable);
+        }
+    }
+}

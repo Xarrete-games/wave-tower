@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvb0ortm3c07f"]
 
-[ext_resource type="Script" uid="uid://c6wortysv8178" path="res://ui/hud/towers_menu/tower_count/tower_counter_panel.gd" id="1_sxpkl"]
+[ext_resource type="Script" path="res://ui/hud/towers_menu/tower_count/TowerCounterPanel.cs" id="1_sxpkl"]
 [ext_resource type="StyleBox" uid="uid://de1oid76vx20r" path="res://assets/shaders/panel_black_box.tres" id="2_j0jdr"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="2_sxpkl"]
 

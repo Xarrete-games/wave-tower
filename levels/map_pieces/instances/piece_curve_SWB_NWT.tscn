@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://2ajf0sqc0tsw" path="res://levels/map_pieces/map_piece_base.tscn" id="1_817sk"]
 [ext_resource type="TileSet" uid="uid://0mt2a5aix72q" path="res://assets/sprites/tilesheet/tileset v2.tres" id="2_j77ux"]
-[ext_resource type="Script" uid="uid://bxxphpxqsh7c8" path="res://levels/level_tile_map/level_tile_map.gd" id="3_hnp0q"]
+[ext_resource type="Script" uid="uid://dhtvl5qh0aodo" path="res://levels/level_tile_map/LevelTileMap.cs" id="3_hnp0q"]
 [ext_resource type="Texture2D" uid="uid://dvqaayu7gl8m5" path="res://assets/sprites/decoration/Stone1.png" id="4_hnp0q"]
 [ext_resource type="Texture2D" uid="uid://01oiloq8py57" path="res://assets/sprites/decoration/mina.png" id="4_vmlc4"]
 [ext_resource type="Texture2D" uid="uid://dpq3114n1y0jr" path="res://assets/sprites/decoration/Stone2.png" id="6_vmlc4"]
@@ -35,14 +35,14 @@ position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAADAP7/AAAGAAcAAAADAP3/AAAFAAYAAAADAPz/AAAHAAYAAAADAPv/AAAIAAcAAAACAPz/AAAFAAcAAAACAP3/AAAFAAYAAAACAP7/AAAGAAcAAAACAPv/AAAHAAYAAAABAPv/AAAHAAYAAAABAPz/AAAHAAYAAAABAP3/AAAIAAYAAAAEAP3/AAAHAAYAAAAEAP7/AAAIAAcAAAAEAPz/AAAGAAcAAAACAPr/AAAIAAcAAAABAPr/AAAIAAYAAAAAAPr/AAAFAAcAAAD///r/AAAGAAcAAAAAAPv/AAAFAAcAAAA=")
 tile_set = ExtResource("2_j77ux")
 script = ExtResource("3_hnp0q")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="LevelTileMap3" type="TileMapLayer" parent="MapPieceTileMap/LevelTileMap/LevelTileMap2/LevelTileMap3/LevelTileMap3" index="0" unique_id=726147580]
 position = Vector2(0, -64)
 tile_map_data = PackedByteArray("AAADAP7/AAAGAAcAAAADAP3/AAAFAAYAAAADAPz/AAAHAAYAAAADAPv/AAAIAAcAAAADAPr/AAAHAAcAAAACAPz/AAAFAAcAAAACAP3/AAAFAAYAAAACAPv/AAAHAAYAAAABAPv/AAAHAAYAAAABAPz/AAAHAAYAAAACAPr/AAAIAAcAAAABAPr/AAAIAAYAAAAAAPr/AAAFAAcAAAA=")
 tile_set = ExtResource("2_j77ux")
 script = ExtResource("3_hnp0q")
-metadata/_custom_type_script = "uid://bxxphpxqsh7c8"
+metadata/_custom_type_script = "uid://dhtvl5qh0aodo"
 
 [node name="route_SW_NW" type="Path2D" parent="Routes" parent_id_path=PackedInt32Array(194311043) index="0" unique_id=628302586]
 curve = SubResource("Curve2D_817sk")

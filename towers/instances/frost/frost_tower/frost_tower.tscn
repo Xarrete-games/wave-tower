@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bpmgxjjnk8kxe"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_jbg6q"]
-[ext_resource type="Script" uid="uid://cvgwrv3uj7gss" path="res://towers/instances/frost/frost_tower/frost_tower.gd" id="2_iw8lg"]
+[ext_resource type="Script" path="res://towers/instances/frost/frost_tower/FrostTower.cs" id="2_iw8lg"]
 [ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="2_q3wv5"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="4_y3lsx"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="5_qopdr"]
@@ -80,6 +80,7 @@ alpha_curve = SubResource("CurveTexture_3kuch")
 
 [node name="FrostTower" unique_id=1290950096 instance=ExtResource("1_jbg6q")]
 script = ExtResource("2_iw8lg")
+type = 2
 upgrade_sprite = SubResource("AtlasTexture_iw8lg")
 
 [node name="Sprite2D" parent="." index="3"]

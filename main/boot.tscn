@@ -1,6 +1,27 @@
 [gd_scene format=3 uid="uid://bfm0i7ehshgsf"]
 
-[ext_resource type="Script" uid="uid://b40ow2be4efp1" path="res://main/boot.gd" id="1_jo8xd"]
+[ext_resource type="Script" uid="uid://ccqmih3cekoil" path="res://main/Boot.cs" id="1_jo8xd"]
+[ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="2_kvc4d"]
 
-[node name="Boot" type="Node" unique_id=331077662]
+[node name="Boot" type="Control" unique_id=271150390]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_jo8xd")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=48831287]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=1794194310]
+layout_mode = 2
+text = "Loading"
+label_settings = ExtResource("2_kvc4d")
+horizontal_alignment = 1

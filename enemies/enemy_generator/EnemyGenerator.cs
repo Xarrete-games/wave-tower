@@ -1,0 +1,237 @@
+using Godot;
+using System.Collections.Generic;
+
+public partial class EnemyGenerator : Node
+{
+    private const int TOTAL_WAVES = 30;
+
+    [Export]
+    public WaveSpawner WaveSpawner;
+
+    [Export]
+    public WaveConfig WaveConfig;
+
+    [Export]
+    public Node2D EnemiesContainer;
+
+    private int _waveNumber;
+    private WaveComposer _composer;
+    private int _enemiesLeft;
+    private bool _isTrackingEnemyExit;
+    private bool _isShuttingDown;
+
+    public override void _Ready()
+    {
+        var enemyCatalog = new List<EnemyData>();
+        List<EnemyData> rawEnemyCatalog = DataLoaderAccess.GetAllEnemies();
+        for (int index = 0; index < rawEnemyCatalog.Count; index++)
+        {
+            EnemyData enemyData = rawEnemyCatalog[index];
+            if (enemyData != null)
+            {
+                enemyCatalog.Add(enemyData);
+            }
+        }
+
+        if (WaveConfig == null)
+        {
+            WaveConfig = GD.Load<WaveConfig>("res://enemies/enemy_generator/WaveConfig.tres");
+        }
+
+        _composer = new WaveComposer(WaveConfig, enemyCatalog);
+        if (_composer == null)
+        {
+            GD.PushError("[EnemyGenerator] Could not instantiate WaveComposer.");
+            return;
+        }
+
+        RunContext runContext = RunContext.Instance;
+        runContext.Progress.TotalWaves = TOTAL_WAVES;
+
+        if (WaveSpawner != null)
+        {
+            WaveSpawner.EnemiesContainer = EnemiesContainer;
+            WaveSpawner.WaveStarted += OnWaveStarted;
+            WaveSpawner.WaveFinished += OnWaveFinished;
+            WaveSpawner.EnemySpawned += OnEnemySpawned;
+        }
+
+        ClickEvents.NextWavePressed += StartNextWave;
+        ClickEvents.ResetGameButtonPressed += OnResetGameRequested;
+    }
+
+    public override void _ExitTree()
+    {
+        ClickEvents.NextWavePressed -= StartNextWave;
+        ClickEvents.ResetGameButtonPressed -= OnResetGameRequested;
+
+        if (WaveSpawner != null)
+        {
+            WaveSpawner.WaveStarted -= OnWaveStarted;
+            WaveSpawner.WaveFinished -= OnWaveFinished;
+            WaveSpawner.EnemySpawned -= OnEnemySpawned;
+        }
+
+        if (_isTrackingEnemyExit && EnemiesContainer != null)
+        {
+            EnemiesContainer.ChildExitingTree -= OnEnemyLeft;
+            _isTrackingEnemyExit = false;
+        }
+    }
+
+    private void BeginShutdown()
+    {
+        if (_isShuttingDown)
+        {
+            return;
+        }
+
+        _isShuttingDown = true;
+
+        if (_isTrackingEnemyExit && EnemiesContainer != null)
+        {
+            EnemiesContainer.ChildExitingTree -= OnEnemyLeft;
+            _isTrackingEnemyExit = false;
+        }
+    }
+
+    private void OnResetGameRequested()
+    {
+        BeginShutdown();
+    }
+
+    public void StartNextWave()
+    {
+        if (WaveSpawner == null)
+        {
+            GD.PushWarning("[EnemyGeneratorProcedural] No WaveSpawner assigned");
+            return;
+        }
+
+        _waveNumber += 1;
+        RunContext runContext = RunContext.Instance;
+        runContext.Progress.CurrentWave = _waveNumber;
+
+        List<WaveComposer.WaveGroup> groups = _composer.ComposeWave(_waveNumber);
+
+        int totalEnemies = 0;
+        for (int index = 0; index < groups.Count; index++)
+        {
+            totalEnemies += groups[index].Enemies.Count;
+        }
+
+        int budget = _composer.GetBudgetForWave(_waveNumber);
+        GD.Print($"[Wave {_waveNumber}] Budget: {budget} | Groups: {groups.Count} | Total enemies: {totalEnemies}");
+
+        WaveSpawner.StartWave(_waveNumber, groups, WaveConfig);
+    }
+
+    private void OnWaveStarted(int waveNumber)
+    {
+        GD.Print($"[EnemyGeneratorProcedural] Wave {waveNumber} started");
+    }
+
+    private void OnWaveFinished(int waveNumber)
+    {
+        if (_isShuttingDown || !IsInsideTree())
+        {
+            return;
+        }
+
+        GD.Print($"[EnemyGeneratorProcedural] Wave {waveNumber} finished spawning");
+
+        _enemiesLeft = GetTree().GetNodesInGroup("enemy").Count;
+        if (_enemiesLeft == 0)
+        {
+            ReportFinished();
+            return;
+        }
+
+        if (!_isTrackingEnemyExit)
+        {
+            EnemiesContainer.ChildExitingTree += OnEnemyLeft;
+            _isTrackingEnemyExit = true;
+        }
+    }
+
+    private void OnEnemySpawned(Enemy enemyObj)
+    {
+        if (enemyObj == null)
+        {
+            return;
+        }
+
+        enemyObj.Died += OnEnemyDie;
+        enemyObj.TargetReached += OnEnemyTargetReached;
+    }
+
+    private void OnEnemyLeft(Node node)
+    {
+        if (_isShuttingDown || !IsInsideTree())
+        {
+            return;
+        }
+
+        if (node.IsInGroup("enemy"))
+        {
+            _enemiesLeft -= 1;
+        }
+
+        if (_enemiesLeft <= 0)
+        {
+            if (_isTrackingEnemyExit)
+            {
+                EnemiesContainer.ChildExitingTree -= OnEnemyLeft;
+                _isTrackingEnemyExit = false;
+            }
+
+            CallDeferred(MethodName.ReportFinished);
+        }
+    }
+
+    private void ReportFinished()
+    {
+        if (_isShuttingDown || !IsInsideTree())
+        {
+            return;
+        }
+
+        RunContext runContext = RunContext.Instance;
+        GameState gameState = GetNode<GameState>("/root/GameState");
+
+        if (runContext.Status.Health <= 0 || gameState.IsOnMainMenu())
+        {
+            return;
+        }
+
+        if (_waveNumber >= TOTAL_WAVES)
+        {
+            runContext.Progress.NotifyLastWaveFinished();
+            return;
+        }
+
+        RunContextRuntime.Status.SyncFrom(runContext.Status);
+        Hooks.OnWaveFinished(Hooks.GetListenersFromRuntime());
+        RunContextRuntime.Status.SyncTo(runContext.Status);
+
+        runContext.Progress.NotifyCurrentWaveFinished();
+    }
+
+    private void OnEnemyTargetReached(Enemy enemy)
+    {
+        RunContext runContext = RunContext.Instance;
+        if (enemy != null)
+        {
+            runContext.Status.ApplyDamage(enemy.Damage);
+        }
+
+        runContext.EnemyManager.NotifyEnemyTargetReached(enemy);
+    }
+
+    private void OnEnemyDie(Enemy enemy, Attack attack)
+    {
+        RunContext runContext = RunContext.Instance;
+        runContext.EnemyManager.NotifyEnemyDie(enemy, attack);
+    }
+}
+

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://damv0wm6yljhs"]
 
-[ext_resource type="Script" uid="uid://lieiuhts3c0d" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.gd" id="1_c8a0f"]
+[ext_resource type="Script" path="res://ui/hud/tower_stats_panel/tower_stat_ui/TowerStatUi.cs" id="1_c8a0f"]
 [ext_resource type="LabelSettings" uid="uid://d4g1vsd3mdf1g" path="res://ui/styles/label_settings/label_settings_18.tres" id="2_c8a0f"]
 
 [node name="TowerStatUi" type="HBoxContainer" unique_id=1410745448]

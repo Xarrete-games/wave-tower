@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bk5qffk5er2tl"]
 
-[ext_resource type="Script" uid="uid://dnnnp11jmm4tn" path="res://ui/screens/pause_screen/volume_control/slider_volumen/slider_volumen.gd" id="1_rj2ka"]
+[ext_resource type="Script" path="res://ui/screens/pause_screen/volume_control/slider_volumen/SliderVolumen.cs" id="1_rj2ka"]
 
 [node name="HSlider" type="HSlider"]
 custom_minimum_size = Vector2(300, 0)

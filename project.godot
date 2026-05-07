@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Wave Tower"
 run/main_scene="uid://bfm0i7ehshgsf"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0.03529412, 0.06666667, 0.06666667, 1)
 boot_splash/stretch_mode=0
 boot_splash/image="uid://csyaj47g8er2i"
@@ -29,13 +29,10 @@ buses/default_bus_layout="uid://b7hgmpfhi17rw"
 [autoload]
 
 AudioManager="*res://main/audio_manager/audio_manager.tscn"
-GameState="*res://main/game_state.gd"
-DataLoader="*res://global/data_loader.gd"
-RunContext="*res://run_context/run_context.gd"
-ClickEvents="*res://global/click_events.gd"
-UIUtils="*res://utils/ui_utils.gd"
-HintManager="*res://utils/hint_manager.gd"
-ActionManager="*uid://b3tlm5afw37yw"
+GameState="*res://main/GameState.cs"
+DataLoader="*res://global/DataLoader.cs"
+UIUtils="*res://utils/UIUtils.cs"
+ActionManager="*res://global/ActionManager.cs"
 
 [debug]
 
@@ -52,6 +49,10 @@ window/size/initial_position_type=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://dchhnma7ta7sp"
+
+[dotnet]
+
+project/assembly_name="Wave Tower"
 
 [global_group]
 

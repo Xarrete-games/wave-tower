@@ -1,14 +1,13 @@
 [gd_resource type="Resource" script_class="RelicData" format=3 uid="uid://dsl5c6x0c5d1u"]
 
-[ext_resource type="Script" uid="uid://dq28b2o4kysot" path="res://relics/implementations/tinfoil_hat.gd" id="1_4qss5"]
-[ext_resource type="Script" uid="uid://blk23o0i7vnyj" path="res://relics/relic_data.gd" id="1_6cu4n"]
+[ext_resource type="Script" uid="uid://brf0xjc2c1qpm" path="res://relics/RelicData.cs" id="1_6cu4n"]
 [ext_resource type="Texture2D" uid="uid://dmkssyvfe6viw" path="res://assets/sprites/relics/relic_ovni_protection_relic.png" id="2_jnqg1"]
 
 [resource]
 script = ExtResource("1_6cu4n")
-runtime_script = ExtResource("1_4qss5")
-id = "tinfoil_hat"
-display_name = "Tinfoil Hat"
-description = "It protects you from the next cursed relic."
-icon = ExtResource("2_jnqg1")
-metadata/_custom_type_script = "uid://blk23o0i7vnyj"
+Id = "tinfoil_hat"
+DisplayName = "Tinfoil Hat"
+Description = "It protects you from the next cursed relic."
+Icon = ExtResource("2_jnqg1")
+metadata/_custom_type_script = "uid://brf0xjc2c1qpm"
+

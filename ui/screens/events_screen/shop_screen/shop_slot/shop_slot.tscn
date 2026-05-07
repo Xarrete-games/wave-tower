@@ -1,19 +1,19 @@
 [gd_scene load_steps=5 format=3 uid="uid://f428sxnliflm"]
 
-[ext_resource type="Script" uid="uid://ca2u5lva3ss8p" path="res://ui/screens/events_screen/shop_screen/shop_slot/shop_slot.gd" id="1_yea32"]
+[ext_resource type="Script" path="res://ui/screens/events_screen/shop_screen/shop_slot/ShopSlot.cs" id="1_yea32"]
 [ext_resource type="PackedScene" uid="uid://w5v1o84mc2gb" path="res://ui/screens/events_screen/shop_screen/shop_slot/shop_slot_icon.tscn" id="2_d3qw0"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="2_r6lm4"]
 [ext_resource type="PackedScene" uid="uid://di132c8on6fw" path="res://ui/components/health_price/health_price.tscn" id="4_eyx8o"]
 
-[node name="ShopSlot" type="VBoxContainer" node_paths=PackedStringArray("title_label", "description_label", "gold_price", "shop_slot_icon")]
+[node name="ShopSlot" type="VBoxContainer" node_paths=PackedStringArray("TitleLabel", "DescriptionLabel", "GoldPrice", "ShopSlotIcon")]
 offset_right = 104.0
 offset_bottom = 188.0
 tooltip_text = "Estamos testings"
 script = ExtResource("1_yea32")
-title_label = NodePath("Title")
-description_label = NodePath("Description")
-gold_price = NodePath("GoldPrice")
-shop_slot_icon = NodePath("ShopSlotIcon")
+TitleLabel = NodePath("Title")
+DescriptionLabel = NodePath("Description")
+GoldPrice = NodePath("GoldPrice")
+ShopSlotIcon = NodePath("ShopSlotIcon")
 
 [node name="ShopSlotIcon" parent="." instance=ExtResource("2_d3qw0")]
 layout_mode = 2
@@ -52,6 +52,8 @@ alignment = 1
 [node name="HealthPrice" parent="." instance=ExtResource("4_eyx8o")]
 layout_mode = 2
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="gui_input" from="." to="." method="OnGuiInput"]
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseExited"]
+
+
