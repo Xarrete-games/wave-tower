@@ -1,13 +1,9 @@
 [gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://5apq3w6n8f53"]
 
-[ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="1_lv5j7"]
+[ext_resource type="Texture2D" uid="uid://esq2b2mqgfy2" path="res://assets/sprites/towers/frost-tower.png" id="1_bfwih"]
 [ext_resource type="Script" uid="uid://cg5wpcphk2vka" path="res://towers/configuration/TowerData.cs" id="2_4xtpd"]
 [ext_resource type="Script" uid="uid://dfaljyr1spgsy" path="res://towers/configuration/TowerDataWithInstance.cs" id="3_7u0s0"]
 [ext_resource type="PackedScene" uid="uid://bpmgxjjnk8kxe" path="res://towers/instances/frost/frost_tower/frost_tower.tscn" id="6_8vsmr"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
-atlas = ExtResource("1_lv5j7")
-region = Rect2(94, 175, 289, 461)
 
 [sub_resource type="Resource" id="Resource_tjead"]
 script = ExtResource("2_4xtpd")
@@ -20,7 +16,7 @@ DamagePerLevel = 30.0
 Id = "frost_tower"
 DisplayName = "Frost Tower"
 Description = "Basic frost tower"
-Icon = SubResource("AtlasTexture_ncsk7")
+Icon = ExtResource("1_bfwih")
 metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
 [resource]
@@ -28,4 +24,3 @@ script = ExtResource("3_7u0s0")
 Data = SubResource("Resource_tjead")
 Scene = ExtResource("6_8vsmr")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
-

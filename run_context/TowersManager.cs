@@ -12,7 +12,9 @@ public class TowersManager
     public event Action<Tower> TowerSelected;
     public event Action<Tower> TowerRemoved;
 
-    private static readonly string[] INITIAL_TOWERS_IDS = { "fire_tower", "frost_tower", "lightning_tower" };
+    private static readonly string[] INITIAL_TOWERS_IDS = { 
+        "fire_tower", "frost_tower", "lightning_tower",
+        "frost_spear", "frost_nova_tower" };
     private const float COMMON_WEIGHT_START = 0.75f;
     private const float RARE_WEIGHT_START = 0.20f;
     private const float EPIC_WEIGHT_START = 0.05f;
@@ -20,10 +22,10 @@ public class TowersManager
     private const float RARE_WEIGHT_END = 0.33f;
     private const float EPIC_WEIGHT_END = 0.33f;
 
-    public Dictionary<string, int> LastTowerIds { get; } = new();
-    public List<string> TowersIds { get; } = new();
-    public List<Tower> Towers { get; } = new();
-    public List<TowerDataWithInstance> AllTowerData { get; private set; } = new();
+    private Dictionary<string, int> LastTowerIds { get; } = new();
+    private List<string> TowersIds { get; } = new();
+    private List<Tower> Towers { get; } = new();
+    private List<TowerDataWithInstance> AllTowerData { get; set; } = new();
     public Dictionary<string, int> TowerCardsAmount { get; } = new();
 
     private RunProgress _progress;

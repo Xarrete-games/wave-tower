@@ -1,13 +1,9 @@
 [gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://nb64k6dawho"]
 
+[ext_resource type="Texture2D" uid="uid://va1a43s3uu8q" path="res://assets/sprites/towers/frost-nova-tower.png" id="1_3nkp5"]
 [ext_resource type="Script" uid="uid://dfaljyr1spgsy" path="res://towers/configuration/TowerDataWithInstance.cs" id="1_idf33"]
-[ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="1_tq48f"]
 [ext_resource type="Script" uid="uid://cg5wpcphk2vka" path="res://towers/configuration/TowerData.cs" id="2_fd5ad"]
 [ext_resource type="PackedScene" uid="uid://cwyyp2r266blt" path="res://towers/instances/frost/frost_nova_tower/frost_nova_tower.tscn" id="2_tq48f"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cq3yl"]
-atlas = ExtResource("1_tq48f")
-region = Rect2(1005, 83, 367, 553)
 
 [sub_resource type="Resource" id="Resource_r2o8q"]
 script = ExtResource("2_fd5ad")
@@ -23,7 +19,7 @@ Id = "frost_nova_tower"
 DisplayName = "Frost Nova Tower"
 Description = "Creates an frost nova around itself, 
 hitting all enemies"
-Icon = SubResource("AtlasTexture_cq3yl")
+Icon = ExtResource("1_3nkp5")
 Rarity = 2
 metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
@@ -32,4 +28,3 @@ script = ExtResource("1_idf33")
 Data = SubResource("Resource_r2o8q")
 Scene = ExtResource("2_tq48f")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
-

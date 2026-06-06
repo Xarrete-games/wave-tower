@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bx8cw8ahrfd21"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ue0bx"]
-[ext_resource type="Script" path="res://towers/instances/frost/frost_spear_tower/FrostSpearTower.cs" id="2_dwnik"]
-[ext_resource type="Texture2D" uid="uid://57i4j1wiy85o" path="res://assets/sprites/towers/frost_towers.png" id="3_47it7"]
+[ext_resource type="Script" uid="uid://cu3dd7ax32kfo" path="res://towers/instances/frost/frost_spear_tower/FrostSpearTower.cs" id="2_dwnik"]
 [ext_resource type="PackedScene" uid="uid://bapayqqfvsvgb" path="res://towers/instances/frost/frost_spear_tower/frost_spear_projectile.tscn" id="3_dwnik"]
+[ext_resource type="Texture2D" uid="uid://durokg2pjt16t" path="res://assets/sprites/towers/frost-spear-tower.png" id="4_4ns80"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="5_4ns80"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="6_3tikj"]
 [ext_resource type="Texture2D" uid="uid://d05fe6tu5vtac" path="res://assets/textures/snow_texture.jpg" id="7_256p4"]
@@ -77,18 +77,19 @@ scale_max = 12.0
 alpha_curve = SubResource("CurveTexture_3kuch")
 
 [node name="FrostSpearTower" unique_id=870709759 instance=ExtResource("1_ue0bx")]
+position = Vector2(0, -7)
 script = ExtResource("2_dwnik")
-type = 2
 FrostSpearProjectileScene = ExtResource("3_dwnik")
+DebuffStacks = 2
 
 [node name="CristalLight" parent="." index="1" unique_id=1008625391]
 color = Color(0.79607844, 1, 1, 1)
 
 [node name="Sprite2D" parent="." index="3" unique_id=1563452745]
-position = Vector2(0, -60)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_47it7")
-region_rect = Rect2(1456, 3, 415, 633)
+position = Vector2(2, -53)
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("4_4ns80")
+region_rect = Rect2(201.75818, 52.952545, 943.1238, 1019.1754)
 
 [node name="RangeCollision" parent="AreaDetector" parent_id_path=PackedInt32Array(366831665) index="0" unique_id=647791958]
 visible = false
@@ -106,9 +107,13 @@ texture = ExtResource("5_4ns80")
 
 [node name="GPUParticlesFireAll" type="GPUParticles2D" parent="." index="12" unique_id=1077980593]
 material = SubResource("ShaderMaterial_155kv")
-position = Vector2(0, -120)
+position = Vector2(-3, -40)
 amount = 130
+amount_ratio = 0.5
 texture = ExtResource("8_p0ute")
-lifetime = 6.0
+lifetime = 3.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_1wvvr")
+
+[node name="TowerBuffsBar" parent="." index="13" unique_id=773910159]
+SlotsContainer = null
