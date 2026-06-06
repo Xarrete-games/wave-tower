@@ -1,13 +1,9 @@
 [gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://brdcadnrqivh8"]
 
-[ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_j5gfa"]
+[ext_resource type="Texture2D" uid="uid://cnpdnple317rt" path="res://assets/sprites/towers/fire-laser-tower.png" id="1_7s1po"]
 [ext_resource type="Script" uid="uid://dfaljyr1spgsy" path="res://towers/configuration/TowerDataWithInstance.cs" id="2_7f661"]
 [ext_resource type="PackedScene" uid="uid://d36t7geqp1sh" path="res://towers/instances/fire/fire_laser_tower/fire_laser_tower.tscn" id="2_j5gfa"]
 [ext_resource type="Script" uid="uid://cg5wpcphk2vka" path="res://towers/configuration/TowerData.cs" id="2_ki8tc"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
-atlas = ExtResource("1_j5gfa")
-region = Rect2(1489, 1, 349, 550)
 
 [sub_resource type="Resource" id="Resource_cr3hy"]
 script = ExtResource("2_ki8tc")
@@ -20,7 +16,7 @@ DamagePerLevel = 120.0
 Id = "fire_laser_tower"
 DisplayName = "Fire Beam Tower"
 Description = "Launch a laser beam at the target, hitting it several times."
-Icon = SubResource("AtlasTexture_ncsk7")
+Icon = ExtResource("1_7s1po")
 Rarity = 2
 metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
@@ -29,4 +25,3 @@ script = ExtResource("2_7f661")
 Data = SubResource("Resource_cr3hy")
 Scene = ExtResource("2_j5gfa")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
-

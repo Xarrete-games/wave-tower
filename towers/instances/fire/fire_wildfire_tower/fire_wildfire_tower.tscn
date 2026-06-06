@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://ckw22jf820ehi"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_j8mcx"]
-[ext_resource type="Script" path="res://towers/instances/fire/fire_wildfire_tower/WildFireTower.cs" id="2_sym80"]
+[ext_resource type="Script" uid="uid://dn4j1cvncqohy" path="res://towers/instances/fire/fire_wildfire_tower/WildFireTower.cs" id="2_sym80"]
 [ext_resource type="PackedScene" uid="uid://bs7g64mcrms08" path="res://towers/instances/fire/fire_wildfire_tower/fire_wildfire_projectile.tscn" id="3_8u8ke"]
+[ext_resource type="Texture2D" uid="uid://62fxfpytnksu" path="res://assets/sprites/towers/fire-wildfire-tower.png" id="4_ji1rv"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="4_rrd06"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="5_4spxs"]
 [ext_resource type="Texture2D" uid="uid://cmddlqwlstsnn" path="res://assets/textures/noises/T_VFX_Noise_2.PNG" id="6_4spxs"]
@@ -84,37 +85,23 @@ scale_max = 20.0
 color_ramp = SubResource("GradientTexture1D_y736y")
 alpha_curve = SubResource("CurveTexture_3crl6")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3crl6"]
-particle_flag_rotate_y = true
-particle_flag_disable_z = true
-emission_shape_offset = Vector3(0, -20, 0)
-emission_shape = 2
-emission_sphere_radius = 64.05
-angle_min = -89.99999
-angle_max = 90.000015
-inherit_velocity_ratio = 20.0
-direction = Vector3(0, -1, 0)
-spread = 10.0
-initial_velocity_max = 60.0
-gravity = Vector3(0, 0, 0)
-scale_min = 5.0
-scale_max = 20.0
-color_ramp = SubResource("GradientTexture1D_y736y")
-alpha_curve = SubResource("CurveTexture_3crl6")
-
 [node name="WildFireTower" unique_id=1829344544 instance=ExtResource("1_j8mcx")]
 script = ExtResource("2_sym80")
 ProjectileScene = ExtResource("3_8u8ke")
 
-[node name="CristalLight" parent="." index="1"]
+[node name="CristalLight" parent="." index="1" unique_id=1008625391]
 visible = false
 position = Vector2(1, -145)
 color = Color(1, 0, 0, 1)
 
-[node name="Sprite2D" parent="." index="3"]
-position = Vector2(0, -60)
-scale = Vector2(0.4, 0.4)
-region_rect = Rect2(958, 0, 475, 550)
+[node name="Sprite2D" parent="." index="3" unique_id=1563452745]
+position = Vector2(2, -57)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("4_ji1rv")
+region_rect = Rect2(177.63501, 50.193054, 714.3098, 1342.658)
+
+[node name="ProjectileSpawnPos" parent="." index="9" unique_id=937664516]
+position = Vector2(0, -145)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10" unique_id=1612597619]
 root_node = NodePath("../PointLight2D")
@@ -128,23 +115,14 @@ energy = 0.5
 texture = ExtResource("4_rrd06")
 texture_scale = 1.5
 
-[node name="ProjectileSpawnPos" parent="." index="12"]
-position = Vector2(0, -145)
+[node name="TowerBuffsBar" parent="." index="12" unique_id=773910159]
+SlotsContainer = null
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="13" unique_id=60291066]
 material = SubResource("ShaderMaterial_ji1rv")
 position = Vector2(-1, -130)
 amount = 250
 texture = ExtResource("7_ic8iu")
-lifetime = 5.0
+lifetime = 6.949999999999999
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_tdnu0")
-
-[node name="GPUParticlesFireAll" type="GPUParticles2D" parent="." index="14" unique_id=264154344]
-material = SubResource("ShaderMaterial_ji1rv")
-position = Vector2(-1, 0)
-amount = 120
-texture = ExtResource("7_ic8iu")
-lifetime = 3.0
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_3crl6")

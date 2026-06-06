@@ -1,13 +1,9 @@
 [gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://c87ypetdh5cks"]
 
-[ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_clbp5"]
+[ext_resource type="Texture2D" uid="uid://62fxfpytnksu" path="res://assets/sprites/towers/fire-wildfire-tower.png" id="1_c8i2k"]
 [ext_resource type="PackedScene" uid="uid://ckw22jf820ehi" path="res://towers/instances/fire/fire_wildfire_tower/fire_wildfire_tower.tscn" id="2_clbp5"]
 [ext_resource type="Script" uid="uid://cg5wpcphk2vka" path="res://towers/configuration/TowerData.cs" id="2_ctmpg"]
 [ext_resource type="Script" uid="uid://dfaljyr1spgsy" path="res://towers/configuration/TowerDataWithInstance.cs" id="3_ctmpg"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ncsk7"]
-atlas = ExtResource("1_clbp5")
-region = Rect2(1011, 1, 355, 550)
 
 [sub_resource type="Resource" id="Resource_4q8u3"]
 script = ExtResource("2_ctmpg")
@@ -21,7 +17,7 @@ AttackRangePerLevel = 100.0
 Id = "wild_fire"
 DisplayName = "Wildfire tower"
 Description = "Fire a flamethrower to burn several enemies"
-Icon = SubResource("AtlasTexture_ncsk7")
+Icon = ExtResource("1_c8i2k")
 Rarity = 1
 metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
@@ -30,4 +26,3 @@ script = ExtResource("3_ctmpg")
 Data = SubResource("Resource_4q8u3")
 Scene = ExtResource("2_clbp5")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
-

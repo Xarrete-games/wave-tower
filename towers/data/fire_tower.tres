@@ -1,13 +1,9 @@
 [gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://c1r5ty1n47m32"]
 
-[ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="1_8d4j1"]
+[ext_resource type="Texture2D" uid="uid://cw7r7i3n5bh4x" path="res://assets/sprites/towers/fire-tower.png" id="1_lwiva"]
 [ext_resource type="Script" uid="uid://cg5wpcphk2vka" path="res://towers/configuration/TowerData.cs" id="2_n2ugo"]
 [ext_resource type="Script" uid="uid://dfaljyr1spgsy" path="res://towers/configuration/TowerDataWithInstance.cs" id="3_qvqv1"]
 [ext_resource type="PackedScene" uid="uid://djdpfy88ujkfb" path="res://towers/instances/fire/fire_tower/fire_tower.tscn" id="6_r0elt"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wv6in"]
-atlas = ExtResource("1_8d4j1")
-region = Rect2(89, 80, 299, 471)
 
 [sub_resource type="Resource" id="Resource_185nb"]
 script = ExtResource("2_n2ugo")
@@ -20,7 +16,7 @@ AttackRangePerLevel = 50.0
 Id = "fire_tower"
 DisplayName = "Fire Tower"
 Description = "Basic fire tower"
-Icon = SubResource("AtlasTexture_wv6in")
+Icon = ExtResource("1_lwiva")
 metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
 [resource]
@@ -28,4 +24,3 @@ script = ExtResource("3_qvqv1")
 Data = SubResource("Resource_185nb")
 Scene = ExtResource("6_r0elt")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
-

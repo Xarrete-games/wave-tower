@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://d36t7geqp1sh"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ywuvy"]
-[ext_resource type="Script" path="res://towers/instances/fire/fire_laser_tower/FireLaserTower.cs" id="2_kgd72"]
-[ext_resource type="PackedScene" path="res://towers/instances/fire/fire_laser_tower/projectil/fire_laser_projectile.tscn" id="3_aspyp"]
+[ext_resource type="Script" uid="uid://dwgchcphw2c8y" path="res://towers/instances/fire/fire_laser_tower/FireLaserTower.cs" id="2_kgd72"]
+[ext_resource type="PackedScene" uid="uid://befy4fve56utf" path="res://towers/instances/fire/fire_laser_tower/projectil/fire_laser_projectile.tscn" id="3_aspyp"]
+[ext_resource type="Texture2D" uid="uid://cnpdnple317rt" path="res://assets/sprites/towers/fire-laser-tower.png" id="3_nwhtn"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="5_83oqa"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="5_ie052"]
 [ext_resource type="Texture2D" uid="uid://cmddlqwlstsnn" path="res://assets/textures/noises/T_VFX_Noise_2.PNG" id="6_83oqa"]
 [ext_resource type="Texture2D" uid="uid://b522y4oy5hi75" path="res://assets/textures/flame5.jpg" id="7_jw6b2"]
 [ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="8_lp1kx"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_0cvpj"]
 
 [sub_resource type="Animation" id="Animation_3h2aw"]
 length = 0.001
@@ -116,15 +115,10 @@ AttackAnimationTime = 0.2
 visible = false
 
 [node name="Sprite2D" parent="." index="3" unique_id=1563452745]
-position = Vector2(0, -60)
-scale = Vector2(0.4, 0.4)
-region_rect = Rect2(1490, 1, 349, 550)
-
-[node name="RangeCollision" parent="AreaDetector" parent_id_path=PackedInt32Array(366831665) index="0" unique_id=647791958]
-shape = SubResource("CircleShape2D_0cvpj")
-
-[node name="CollisionShape2D" parent="TowerArea" parent_id_path=PackedInt32Array(1983938577) index="0" unique_id=590428393]
-debug_color = Color(1, 1, 1, 0.25882354)
+position = Vector2(0, -72)
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("3_nwhtn")
+region_rect = Rect2(205.19055, 85.01965, 618.23303, 1320.0111)
 
 [node name="AttackTimer" parent="." index="6" unique_id=2037163535]
 wait_time = 1.0
@@ -134,9 +128,12 @@ offset_left = -29.0
 offset_top = -153.0
 offset_right = 31.0
 
+[node name="ProjectileSpawnPos" parent="." index="9" unique_id=937664516]
+position = Vector2(0, -145)
+
 [node name="FireLaserProjectile" parent="." index="10" unique_id=946585844 instance=ExtResource("3_aspyp")]
 z_index = 2
-position = Vector2(0, -115)
+position = Vector2(0, -159)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11" unique_id=1564760070]
 root_node = NodePath("../PointLight2D")
@@ -151,6 +148,7 @@ texture = ExtResource("5_ie052")
 texture_scale = 1.5
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="13" unique_id=2005861602]
+visible = false
 material = SubResource("ShaderMaterial_swmql")
 position = Vector2(-1, -130)
 amount = 250
@@ -160,6 +158,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_aiyya")
 
 [node name="GPUParticlesFireAll" type="GPUParticles2D" parent="." index="14" unique_id=1690341374]
+visible = false
 material = SubResource("ShaderMaterial_swmql")
 position = Vector2(-1, 0)
 amount = 120
@@ -168,5 +167,5 @@ lifetime = 3.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_2p35j")
 
-[node name="ProjectileSpawnPos" parent="." index="15" unique_id=937664516]
-position = Vector2(0, -145)
+[node name="TowerBuffsBar" parent="." index="15" unique_id=773910159]
+SlotsContainer = null

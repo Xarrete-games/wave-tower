@@ -14,7 +14,7 @@ public class TowersManager
 
     private static readonly string[] INITIAL_TOWERS_IDS = { 
         "fire_tower", "frost_tower", "lightning_tower",
-        "frost_spear", "frost_nova_tower" };
+        };
     private const float COMMON_WEIGHT_START = 0.75f;
     private const float RARE_WEIGHT_START = 0.20f;
     private const float EPIC_WEIGHT_START = 0.05f;
