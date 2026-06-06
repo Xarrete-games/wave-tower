@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://57i4j1wiy85o"
-path="res://.godot/imported/frost_towers.png-360c07d905049ce689e78fd54aad307e.ctex"
+uid="uid://va1a43s3uu8q"
+path="res://.godot/imported/frost-nova-tower.png-4a6d343e4cac149669872e401fe421dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/towers/frost_towers.png"
-dest_files=["res://.godot/imported/frost_towers.png-360c07d905049ce689e78fd54aad307e.ctex"]
+source_file="res://assets/sprites/towers/frost-nova-tower.png"
+dest_files=["res://.godot/imported/frost-nova-tower.png-4a6d343e4cac149669872e401fe421dc.ctex"]
 
 [params]
 

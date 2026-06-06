@@ -71,7 +71,7 @@ public partial class TowerStatUi : Control
         _upgradeValueLabel.Visible = true;
         if (IsFloat)
         {
-            _upgradeValueLabel.Text = "(+" + Mathf.Snapped(upgradeAmount, 0.01f) + ")";
+            _upgradeValueLabel.Text = $"+{Mathf.Snapped(upgradeAmount, 0.01f):0.00}";
         }
         else
         {
@@ -94,13 +94,8 @@ public partial class TowerStatUi : Control
             return;
         }
 
-        if (IsFloat)
-        {
-            _valueLabel.Text = Mathf.Snapped(StatValue, 0.01f).ToString();
-        }
-        else
-        {
-            _valueLabel.Text = ((int)StatValue).ToString();
-        }
+        _valueLabel.Text = IsFloat
+            ? Mathf.Snapped(StatValue, 0.01f).ToString("0.00")
+            : ((int)StatValue).ToString();
     }
 }

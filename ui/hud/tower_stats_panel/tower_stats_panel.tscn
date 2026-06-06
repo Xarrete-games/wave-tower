@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c3qi4qp0ko3iq"]
 
-[ext_resource type="Script" path="res://ui/hud/tower_stats_panel/TowerStatsPanel.cs" id="1_vyalh"]
+[ext_resource type="Script" uid="uid://c4pioojrj1h11" path="res://ui/hud/tower_stats_panel/TowerStatsPanel.cs" id="1_vyalh"]
 [ext_resource type="StyleBox" uid="uid://5r63ppjcfdsy" path="res://ui/styles/box_style/texture_container.tres" id="2_iqbtr"]
 [ext_resource type="PackedScene" uid="uid://damv0wm6yljhs" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.tscn" id="2_jlxp2"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_g3isl"]
@@ -203,4 +203,3 @@ offset_bottom = -75.26303
 [connection signal="pressed" from="Panel/MarginContainer/MainContainer/UpgradeButtonContainer/UpgradeButton" to="." method="OnUpgradeButtonPressed"]
 [connection signal="pressed" from="Panel/MarginContainer/MainContainer/ButtonsContainer/RemoveButton" to="." method="OnRemoveButtonPressed"]
 [connection signal="item_selected" from="Panel/MarginContainer/MainContainer/TargetingContainer/TargetingModeSelector" to="." method="OnTargetingModeSelectorItemSelected"]
-
