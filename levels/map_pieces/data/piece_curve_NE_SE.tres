@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://c8a63xrsnxmsx"]
 
 [ext_resource type="Script" uid="uid://buf7cbkrogset" path="res://levels/map_pieces/MapPieceData.cs" id="1_0yes7"]
-[ext_resource type="PackedScene" uid="uid://dbn7ue6osj77n" path="res://levels/map_pieces/instances/piece_curve_NE_SE.tscn" id="1_ni3gh"]
 [ext_resource type="Script" uid="uid://ysyv6k8aba5o" path="res://levels/map_pieces/Edge.cs" id="2_edge"]
 
 [sub_resource type="Resource" id="edge_NE"]
@@ -14,6 +13,6 @@ Direction = 1
 [resource]
 script = ExtResource("1_0yes7")
 Edges = Array[ExtResource("2_edge")]([SubResource("edge_NE"), SubResource("edge_SE")])
-Scene = ExtResource("1_ni3gh")
+SceneId = "piece_curve_NE_SE"
 metadata/_custom_type_script = "uid://buf7cbkrogset"
 

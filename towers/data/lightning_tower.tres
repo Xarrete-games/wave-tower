@@ -1,13 +1,9 @@
 [gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://cb8v2oeues41k"]
 
-[ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="1_5g0ei"]
+[ext_resource type="Texture2D" uid="uid://cjx8hkut5eufp" path="res://assets/sprites/towers/lightning-tower.png" id="1_jfbc7"]
 [ext_resource type="Script" uid="uid://cg5wpcphk2vka" path="res://towers/configuration/TowerData.cs" id="2_y8ti3"]
 [ext_resource type="Script" uid="uid://dfaljyr1spgsy" path="res://towers/configuration/TowerDataWithInstance.cs" id="3_b35vm"]
 [ext_resource type="PackedScene" uid="uid://7hfxyb5g3ku" path="res://towers/instances/lightning/lightning_tower/lightning_tower.tscn" id="6_p4ogc"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i5pku"]
-atlas = ExtResource("1_5g0ei")
-region = Rect2(89, 80, 297, 470)
 
 [sub_resource type="Resource" id="Resource_rs7co"]
 script = ExtResource("2_y8ti3")
@@ -22,11 +18,10 @@ AttackSpeedPerLevel = 0.2
 Id = "lightning_tower"
 DisplayName = "Lightning Tower"
 Description = "Basic lightning tower"
-Icon = SubResource("AtlasTexture_i5pku")
+Icon = ExtResource("1_jfbc7")
 
 [resource]
 script = ExtResource("3_b35vm")
 Data = SubResource("Resource_rs7co")
 Scene = ExtResource("6_p4ogc")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
-

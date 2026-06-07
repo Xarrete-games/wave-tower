@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ysyv6k8aba5o" path="res://levels/map_pieces/Edge.cs" id="1_jaglx"]
 [ext_resource type="Script" uid="uid://buf7cbkrogset" path="res://levels/map_pieces/MapPieceData.cs" id="2_1m0ag"]
-[ext_resource type="PackedScene" uid="uid://dkiinp6skcd3i" path="res://levels/map_pieces/instances/piece_straight_NET_SWT.tscn" id="2_hurfv"]
 
 [sub_resource type="Resource" id="Resource_bswbq"]
 script = ExtResource("1_jaglx")
@@ -18,6 +17,6 @@ metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 [resource]
 script = ExtResource("2_1m0ag")
 Edges = Array[ExtResource("1_jaglx")]([SubResource("Resource_bswbq"), SubResource("Resource_vs5e7")])
-Scene = ExtResource("2_hurfv")
+SceneId = "piece_straight_NET_SWT"
 metadata/_custom_type_script = "uid://buf7cbkrogset"
 

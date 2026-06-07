@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="MapPieceData" format=3 uid="uid://cqpuyhftnm606"]
 
 [ext_resource type="Script" uid="uid://ysyv6k8aba5o" path="res://levels/map_pieces/Edge.cs" id="1_xswny"]
-[ext_resource type="PackedScene" uid="uid://dru1g2ll6q7av" path="res://levels/map_pieces/instances/piece_curve_NEM_SEB.tscn" id="2_1s56k"]
 [ext_resource type="Script" uid="uid://buf7cbkrogset" path="res://levels/map_pieces/MapPieceData.cs" id="2_hlguo"]
 
 [sub_resource type="Resource" id="Resource_v1aig"]
@@ -17,6 +16,6 @@ metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 [resource]
 script = ExtResource("2_hlguo")
 Edges = Array[ExtResource("1_xswny")]([SubResource("Resource_v1aig"), SubResource("Resource_baqlv")])
-Scene = ExtResource("2_1s56k")
+SceneId = "piece_curve_NEM_SEB"
 metadata/_custom_type_script = "uid://buf7cbkrogset"
 

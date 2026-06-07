@@ -4,11 +4,20 @@ using Godot;
 [GlobalClass]
 public partial class MapPieceData : Resource
 {
+    private const string DefaultSceneDirectory = "res://levels/map_pieces/instances/";
+    private const string InitialSceneDirectory = "res://levels/map_pieces/init_maps/";
+    private const string SceneExtension = ".tscn";
+
     [Export]
     public Edge[] Edges { get; set; } = Array.Empty<Edge>();
 
     [Export]
-    public PackedScene Scene { get; set; }
+    public string SceneId { get; set; } = string.Empty;
+
+    [Export]
+    public bool IsInitialPiece { get; set; }
+
+    private PackedScene _cachedScene;
 
     public bool IsFork
     {
@@ -93,13 +102,14 @@ public partial class MapPieceData : Resource
 
     public MapPiece GetInstance()
     {
-        if (Scene == null)
+        PackedScene scene = GetScene();
+        if (scene == null)
         {
-            GD.PushError("[MapPieceData] Scene is null in GetInstance().");
+            GD.PushError($"[MapPieceData] Scene could not be loaded from {GetScenePath()}.");
             return null;
         }
 
-        Node instance = Scene.Instantiate<Node>();
+        Node instance = scene.Instantiate<Node>();
         if (instance == null)
         {
             GD.PushError("[MapPieceData] Could not instantiate scene.");
@@ -132,5 +142,78 @@ public partial class MapPieceData : Resource
         return mapPiece;
     }
 
-}
+    private PackedScene GetScene()
+    {
+        if (_cachedScene != null)
+        {
+            return _cachedScene;
+        }
 
+        string scenePath = GetScenePath();
+        if (string.IsNullOrWhiteSpace(scenePath))
+        {
+            GD.PushError("[MapPieceData] Scene path is empty.");
+            return null;
+        }
+
+        _cachedScene = ResourceLoader.Load<PackedScene>(scenePath);
+        if (_cachedScene == null)
+        {
+            GD.PushError($"[MapPieceData] Resource is not a PackedScene or does not exist: {scenePath}");
+        }
+
+        return _cachedScene;
+    }
+
+    private string GetScenePath()
+    {
+        string sceneId = GetSceneId();
+        if (string.IsNullOrWhiteSpace(sceneId))
+        {
+            return string.Empty;
+        }
+
+        string directory = GetSceneDirectory();
+        return $"{directory}{sceneId}{SceneExtension}";
+    }
+
+    private string GetSceneId()
+    {
+        string sceneId = SceneId?.Trim() ?? string.Empty;
+        if (sceneId.EndsWith(SceneExtension, StringComparison.OrdinalIgnoreCase))
+        {
+            sceneId = sceneId[..^SceneExtension.Length];
+        }
+
+        if (!string.IsNullOrWhiteSpace(sceneId))
+        {
+            return sceneId;
+        }
+
+        return GetFileBaseName(ResourcePath);
+    }
+
+    private string GetSceneDirectory()
+    {
+        return IsInitialPiece ? InitialSceneDirectory : DefaultSceneDirectory;
+    }
+
+    private static string GetFileBaseName(string path)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return string.Empty;
+        }
+
+        int slashIndex = path.LastIndexOf('/');
+        string fileName = slashIndex >= 0 ? path[(slashIndex + 1)..] : path;
+        if (fileName.EndsWith(SceneExtension, StringComparison.OrdinalIgnoreCase))
+        {
+            return fileName[..^SceneExtension.Length];
+        }
+
+        int dotIndex = fileName.LastIndexOf('.');
+        return dotIndex >= 0 ? fileName[..dotIndex] : fileName;
+    }
+
+}

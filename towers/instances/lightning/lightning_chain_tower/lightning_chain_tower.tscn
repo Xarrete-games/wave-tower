@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cedwmb3dpm4xn"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_ua04a"]
-[ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="2_qqqk1"]
 [ext_resource type="Script" uid="uid://w75cdxlbdml8" path="res://towers/instances/lightning/lightning_chain_tower/LightningChainTower.cs" id="2_tgeyy"]
 [ext_resource type="PackedScene" uid="uid://b4p7ki22j70mo" path="res://towers/instances/lightning/lightning_chain_tower/lightning_chain_projectile.tscn" id="3_fuhyt"]
+[ext_resource type="Texture2D" uid="uid://cxr7gkgwb83g5" path="res://assets/sprites/towers/lightning-chain-tower.png" id="4_rk1kn"]
 [ext_resource type="PackedScene" uid="uid://betmeynpmbdyk" path="res://towers/instances/lightning/particles/electric_particles.tscn" id="6_rk1kn"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="8_3h2aw"]
 
@@ -50,13 +50,13 @@ script = ExtResource("2_tgeyy")
 LightningChainProjectileScene = ExtResource("3_fuhyt")
 
 [node name="Sprite2D" parent="." index="3" unique_id=1563452745]
-position = Vector2(0, -60)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_qqqk1")
-region_rect = Rect2(1453, 7, 419, 543)
+position = Vector2(-1, -45)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("4_rk1kn")
+region_rect = Rect2(296.99756, 83.16815, 664.18286, 1086.085)
 
 [node name="ProjectileSpawnPos" parent="." index="9" unique_id=937664516]
-position = Vector2(0, -152)
+position = Vector2(0, -109)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10" unique_id=1038272139]
 root_node = NodePath("../PointLight2D")
@@ -74,5 +74,8 @@ texture_scale = 1.5
 [node name="TowerBuffsBar" parent="." index="12" unique_id=773910159]
 SlotsContainer = null
 
-[node name="ElectricParticles" parent="." index="13" unique_id=264814021 instance=ExtResource("6_rk1kn")]
-position = Vector2(1, -140)
+[node name="ElectricParticles2" parent="." index="13" unique_id=1394460305 instance=ExtResource("6_rk1kn")]
+position = Vector2(-4, -49)
+
+[node name="ElectricParticles" parent="." index="14" unique_id=264814021 instance=ExtResource("6_rk1kn")]
+position = Vector2(2, -102)

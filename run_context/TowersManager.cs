@@ -13,7 +13,7 @@ public class TowersManager
     public event Action<Tower> TowerRemoved;
 
     private static readonly string[] INITIAL_TOWERS_IDS = { 
-        "fire_tower", "frost_tower", "lightning_tower",
+        "fire_tower", "frost_tower", "lightning_tower", "lightning_chain_tower", "overcharge_wave_tower"
         };
     private const float COMMON_WEIGHT_START = 0.75f;
     private const float RARE_WEIGHT_START = 0.20f;

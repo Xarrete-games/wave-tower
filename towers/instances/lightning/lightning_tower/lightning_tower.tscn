@@ -1,17 +1,13 @@
 [gd_scene format=3 uid="uid://7hfxyb5g3ku"]
 
 [ext_resource type="PackedScene" uid="uid://4fkas61wyppq" path="res://towers/tower.tscn" id="1_y64o4"]
-[ext_resource type="Script" path="res://towers/instances/lightning/lightning_tower/LightningTower.cs" id="2_epe63"]
-[ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="3_epe63"]
+[ext_resource type="Script" uid="uid://dg4o08w42egmx" path="res://towers/instances/lightning/lightning_tower/LightningTower.cs" id="2_epe63"]
 [ext_resource type="PackedScene" uid="uid://daqi7i1vflaq5" path="res://towers/instances/lightning/lightning_tower/projectile/lighting_ball_projectile.tscn" id="3_vgy5y"]
+[ext_resource type="Texture2D" uid="uid://cjx8hkut5eufp" path="res://assets/sprites/towers/lightning-tower.png" id="4_vln4f"]
 [ext_resource type="Shader" uid="uid://6e1ylyglc0oo" path="res://assets/shaders/fire_shader.tres" id="5_vln4f"]
 [ext_resource type="Texture2D" uid="uid://boajxbopenov6" path="res://assets/textures/sparks1.jpg" id="6_we86v"]
 [ext_resource type="Texture2D" uid="uid://ddflebfeurj6b" path="res://assets/textures/T_1_pixel.jpg" id="7_fcay0"]
 [ext_resource type="Texture2D" uid="uid://csjt080ycub8m" path="res://assets/textures/light-square-100px.png" id="8_cktgl"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_epe63"]
-atlas = ExtResource("3_epe63")
-region = Rect2(476, 0, 474, 550)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vfc8l"]
 shader = ExtResource("5_vln4f")
@@ -84,14 +80,21 @@ _data = {
 [node name="LightningTower" unique_id=262289933 instance=ExtResource("1_y64o4")]
 script = ExtResource("2_epe63")
 ElectricBallScene = ExtResource("3_vgy5y")
-upgrade_sprite = SubResource("AtlasTexture_epe63")
-type = 1
 
-[node name="Sprite2D" parent="." index="3"]
-position = Vector2(0, -55)
-scale = Vector2(0.34, 0.34)
-texture = ExtResource("3_epe63")
-region_rect = Rect2(0, 0, 475, 550)
+[node name="Sprite2D" parent="." index="3" unique_id=1563452745]
+position = Vector2(0, -52)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("4_vln4f")
+region_rect = Rect2(289.1618, 72.15351, 639.11926, 1102.7941)
+
+[node name="MouseDetector" parent="." index="7" unique_id=727078477]
+offset_left = -57.0
+offset_top = -149.0
+offset_right = 55.0
+offset_bottom = 27.0
+
+[node name="ProjectileSpawnPos" parent="." index="9" unique_id=937664516]
+position = Vector2(0, -100)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="10" unique_id=1647855462]
 material = SubResource("ShaderMaterial_vfc8l")
@@ -113,6 +116,3 @@ color = Color(0.62295496, 1, 0.4661066, 1)
 energy = 0.3
 texture = ExtResource("8_cktgl")
 texture_scale = 1.5
-
-[node name="ProjectileSpawnPos" parent="." index="13"]
-position = Vector2(0, -100)

@@ -1,13 +1,9 @@
 [gd_resource type="Resource" script_class="TowerDataWithInstance" format=3 uid="uid://dux7i7iqac1qm"]
 
 [ext_resource type="Script" uid="uid://dfaljyr1spgsy" path="res://towers/configuration/TowerDataWithInstance.cs" id="1_r4475"]
-[ext_resource type="Texture2D" uid="uid://c10oc7vb7rgk8" path="res://assets/sprites/towers/lightning_towers.png" id="1_rqopi"]
+[ext_resource type="Texture2D" uid="uid://cxr7gkgwb83g5" path="res://assets/sprites/towers/lightning-chain-tower.png" id="1_utbir"]
 [ext_resource type="PackedScene" uid="uid://cedwmb3dpm4xn" path="res://towers/instances/lightning/lightning_chain_tower/lightning_chain_tower.tscn" id="2_rqopi"]
 [ext_resource type="Script" uid="uid://cg5wpcphk2vka" path="res://towers/configuration/TowerData.cs" id="2_vgq1q"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i5pku"]
-atlas = ExtResource("1_rqopi")
-region = Rect2(1453, 7, 419, 543)
 
 [sub_resource type="Resource" id="Resource_e85he"]
 script = ExtResource("2_vgq1q")
@@ -22,7 +18,7 @@ AttackRangePerLevel = 100.0
 Id = "lightning_chain_tower"
 DisplayName = "Lightning Chain Tower"
 Description = "Fires a chain of lightning that bounces off several enemies"
-Icon = SubResource("AtlasTexture_i5pku")
+Icon = ExtResource("1_utbir")
 Rarity = 1
 metadata/_custom_type_script = "uid://cg5wpcphk2vka"
 
@@ -31,4 +27,3 @@ script = ExtResource("1_r4475")
 Data = SubResource("Resource_e85he")
 Scene = ExtResource("2_rqopi")
 metadata/_custom_type_script = "uid://dfaljyr1spgsy"
-

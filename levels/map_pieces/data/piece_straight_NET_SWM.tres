@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ysyv6k8aba5o" path="res://levels/map_pieces/Edge.cs" id="1_56kii"]
 [ext_resource type="Script" uid="uid://buf7cbkrogset" path="res://levels/map_pieces/MapPieceData.cs" id="2_etdnk"]
-[ext_resource type="PackedScene" uid="uid://dnb8o3snwvfak" path="res://levels/map_pieces/instances/piece_straight_NET_SWM.tscn" id="2_k5vun"]
 
 [sub_resource type="Resource" id="Resource_1xyoi"]
 script = ExtResource("1_56kii")
@@ -17,6 +16,6 @@ metadata/_custom_type_script = "uid://ysyv6k8aba5o"
 [resource]
 script = ExtResource("2_etdnk")
 Edges = Array[ExtResource("1_56kii")]([SubResource("Resource_1xyoi"), SubResource("Resource_px7w3")])
-Scene = ExtResource("2_k5vun")
+SceneId = "piece_straight_NET_SWM"
 metadata/_custom_type_script = "uid://buf7cbkrogset"
 
