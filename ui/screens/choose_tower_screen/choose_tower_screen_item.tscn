@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://doi3f4my6te83" path="res://ui/styles/box_style/tower_rewards/reward_tower_box_basic.tres" id="1_ojjmy"]
 [ext_resource type="LabelSettings" uid="uid://6ilraj2be7vs" path="res://ui/styles/label_settings/label_settings_32.tres" id="2_0dsth"]
 [ext_resource type="Script" uid="uid://wy030hlyyv0w" path="res://ui/screens/choose_tower_screen/ChooseTowerScreenItem.cs" id="2_l17e5"]
-[ext_resource type="Texture2D" uid="uid://bungn27mmd7l2" path="res://assets/sprites/towers/fire_towers.png" id="4_u2e7x"]
+[ext_resource type="Texture2D" uid="uid://cw7r7i3n5bh4x" path="res://assets/sprites/towers/fire-tower.png" id="4_ojjmy"]
 [ext_resource type="PackedScene" uid="uid://damv0wm6yljhs" path="res://ui/hud/tower_stats_panel/tower_stat_ui/tower_stat_ui.tscn" id="5_fxrf6"]
 [ext_resource type="LabelSettings" uid="uid://d4g1vsd3mdf1g" path="res://ui/styles/label_settings/label_settings_18.tres" id="5_xj3me"]
 [ext_resource type="Texture2D" uid="uid://bus5y7ash7vve" path="res://assets/images/icons/stats/attack_icon_flat.png" id="6_a0r7t"]
@@ -11,10 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://dh4xdb1wo3q44" path="res://assets/images/icons/stats/range_icon_flat.png" id="8_ojjmy"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="9_a0r7t"]
 [ext_resource type="Script" uid="uid://d2ta7qbmbh3kw" path="res://utils/AnimationComponent.cs" id="12_xj3me"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8kd2t"]
-atlas = ExtResource("4_u2e7x")
-region = Rect2(89, 80, 299, 471)
 
 [node name="ChooseTowerScreenItem" type="PanelContainer" unique_id=593375898 node_paths=PackedStringArray("TitleLabel", "DescriptionLabel", "texture", "DamageStat", "RangeStat", "AttackSpeedStat", "GoldPrice")]
 anchors_preset = 15
@@ -57,7 +53,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(180, 220)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = SubResource("AtlasTexture_8kd2t")
+texture = ExtResource("4_ojjmy")
 expand_mode = 3
 stretch_mode = 5
 
