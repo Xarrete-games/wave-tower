@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class FrostTower : Tower
+public partial class FrostTower : TowerNode
 {
     private static readonly PackedScene FrostBallScene = GD.Load<PackedScene>("uid://cibktj8x8j1t8");
     private Marker2D _projectileSpawnPos;

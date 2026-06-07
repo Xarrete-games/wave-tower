@@ -7,7 +7,7 @@ public partial class TowerPlacer : Node2D
 
     private Node2D visual;
     private bool _isPlacing;
-    private Tower _currentTowerInstance;
+    private TowerNode _currentTowerInstance;
     private bool _isValidPlacement;
     private RunProgress _progress;
 
@@ -149,10 +149,10 @@ public partial class TowerPlacer : Node2D
             return;
         }
 
-        Tower instance = towerConfiguration.GetInstanceNode();
+        TowerNode instance = towerConfiguration.GetInstanceNode();
         if (instance == null)
         {
-            GD.PushError("[TowerPlacer] get_instance_node did not return a Tower.");
+            GD.PushError("[TowerPlacer] get_instance_node did not return a TowerNode.");
             return;
         }
 
@@ -164,4 +164,3 @@ public partial class TowerPlacer : Node2D
         GetNode<ActionManager>("/root/ActionManager").StartAction(ActionManager.ActionState.PlacingTower, CancelTower);
     }
 }
-

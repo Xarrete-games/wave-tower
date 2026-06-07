@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://uo0f6wy4062u" path="res://towers/AreaDetector.cs" id="5_5e1e6"]
 [ext_resource type="Texture2D" uid="uid://cw7r7i3n5bh4x" path="res://assets/sprites/towers/fire-tower.png" id="5_2233p"]
 [ext_resource type="PackedScene" uid="uid://42h4ynomckod" path="res://ui/hud/tower_buffs_bar/tower_buffs_bar.tscn" id="6_7jtxt"]
-[ext_resource type="Script" uid="uid://dk410u68tawea" path="res://towers/Tower.cs" id="7_1tower"]
+[ext_resource type="Script" uid="uid://dk410u68tawea" path="res://towers/TowerNode.cs" id="7_1tower"]
 
 [node name="Tower" type="Node2D" unique_id=1114496997 groups=["tower"]]
 script = ExtResource("7_1tower")

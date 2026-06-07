@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System.Collections.Generic;
 using System;
 
@@ -6,11 +6,11 @@ public class TowersManager
 {
     public event Action<int, int> TowerCountChanged;
     public event Action<TowerDataWithInstance, int> TowerCardAmountChanged;
-    public event Action<Tower> TowerPlaced;
-    public event Action<Tower> TowerHovered;
-    public event Action<Tower> TowerUnhovered;
-    public event Action<Tower> TowerSelected;
-    public event Action<Tower> TowerRemoved;
+    public event Action<TowerNode> TowerPlaced;
+    public event Action<TowerNode> TowerHovered;
+    public event Action<TowerNode> TowerUnhovered;
+    public event Action<TowerNode> TowerSelected;
+    public event Action<TowerNode> TowerRemoved;
 
     private static readonly string[] INITIAL_TOWERS_IDS = { 
         "fire_tower", "frost_tower", "lightning_tower", "lightning_chain_tower", "overcharge_wave_tower"
@@ -24,7 +24,7 @@ public class TowersManager
 
     private Dictionary<string, int> LastTowerIds { get; } = new();
     private List<string> TowersIds { get; } = new();
-    private List<Tower> Towers { get; } = new();
+    private List<TowerNode> Towers { get; } = new();
     private List<TowerDataWithInstance> AllTowerData { get; set; } = new();
     public Dictionary<string, int> TowerCardsAmount { get; } = new();
 
@@ -140,7 +140,7 @@ public class TowersManager
         return null;
     }
 
-    public void AddTowerPlaced(Tower tower)
+    public void AddTowerPlaced(TowerNode tower)
     {
         if (tower == null)
         {
@@ -173,6 +173,7 @@ public class TowersManager
         {
             ulong instanceId = tower.GetInstanceId();
             _runtimeTowerModels[instanceId] = towerModel;
+            RunContextRuntime.TowersManager.AddTowerPlaced(tower.Tower);
             RunContextRuntime.TowersManager.AddTowerPlaced(towerModel, instanceId);
 
             RunContextRuntime.Status.SyncFrom(RunContext.Instance.Status);
@@ -185,7 +186,7 @@ public class TowersManager
         GetAudioManager()?.PlayPlaceTower();
     }
 
-    public void OnTowerRemoved(Tower tower)
+    public void OnTowerRemoved(TowerNode tower)
     {
         if (tower == null)
         {
@@ -211,6 +212,7 @@ public class TowersManager
         }
 
         RunContextRuntime.TowersManager.RemoveTowerByInstanceId(instanceId);
+        RunContextRuntime.TowersManager.TowerRemoved(tower.Tower);
 
         TowerRemoved?.Invoke(tower);
         tower.QueueFree();
@@ -221,7 +223,7 @@ public class TowersManager
         int count = 0;
         for (int index = 0; index < Towers.Count; index++)
         {
-            Tower tower = Towers[index];
+            TowerNode tower = Towers[index];
             if (tower != null && (int)tower.TowerType == towerType)
             {
                 count++;
@@ -231,12 +233,12 @@ public class TowersManager
         return count;
     }
 
-    public List<Tower> GetPlacedTowers()
+    public List<TowerNode> GetPlacedTowers()
     {
-        var placedTowers = new List<Tower>();
+        var placedTowers = new List<TowerNode>();
         for (int index = 0; index < Towers.Count; index++)
         {
-            Tower tower = Towers[index];
+            TowerNode tower = Towers[index];
             if (tower != null)
             {
                 placedTowers.Add(tower);
@@ -253,7 +255,7 @@ public class TowersManager
         UpdateTowerCount(2);
     }
 
-    public void SelectTower(Tower tower)
+    public void SelectTower(TowerNode tower)
     {
         TowerSelected?.Invoke(tower);
         ClickEvents.TowerSelected?.Invoke(tower);
@@ -278,13 +280,13 @@ public class TowersManager
         TowerCardAmountChanged?.Invoke(towerData, TowerCardsAmount[id]);
     }
 
-    public void EmitTowerHovered(Tower tower)
+    public void EmitTowerHovered(TowerNode tower)
     {
         TowerHovered?.Invoke(tower);
         ClickEvents.TowerHovered?.Invoke(tower);
     }
 
-    public void EmitTowerUnhovered(Tower tower)
+    public void EmitTowerUnhovered(TowerNode tower)
     {
         TowerUnhovered?.Invoke(tower);
         ClickEvents.TowerUnhovered?.Invoke(tower);
@@ -297,7 +299,7 @@ public class TowersManager
             return;
         }
 
-        Tower tower = GodotObject.InstanceFromId(instanceId) as Tower;
+        TowerNode tower = GodotObject.InstanceFromId(instanceId) as TowerNode;
         if (tower == null)
         {
             return;
@@ -311,7 +313,7 @@ public class TowersManager
         foreach (KeyValuePair<ulong, TowerModel> entry in _runtimeTowerModels)
         {
             ulong instanceId = entry.Key;
-            Tower tower = GodotObject.InstanceFromId(instanceId) as Tower;
+            TowerNode tower = GodotObject.InstanceFromId(instanceId) as TowerNode;
             if (tower == null)
             {
                 continue;
@@ -371,7 +373,7 @@ public class TowersManager
         }
     }
 
-    private string GenerateTowerId(Tower tower)
+    private string GenerateTowerId(TowerNode tower)
     {
         if (tower == null)
         {
@@ -398,30 +400,9 @@ public class TowersManager
         return newId;
     }
 
-    private TowerModel BuildTowerModel(Tower tower)
+    private TowerModel BuildTowerModel(TowerNode tower)
     {
-        if (tower == null)
-        {
-            return null;
-        }
-
-        int rawType = (int)tower.TowerType;
-        TowerModel.TowerType towerType = rawType switch
-        {
-            0 => TowerModel.TowerType.Fire,
-            1 => TowerModel.TowerType.Lightning,
-            2 => TowerModel.TowerType.Frost,
-            _ => TowerModel.TowerType.Fire,
-        };
-
-        var model = new TowerModel
-        {
-            Id = tower.Id,
-            TypeId = tower.TypeId,
-            Type = towerType,
-        };
-
-        return model;
+        return tower?.Tower?.BuildTowerModel();
     }
 
     private Node GetSingleton(string name)
@@ -434,7 +415,7 @@ public class TowersManager
         return GetSingleton("AudioManager") as AudioManager;
     }
 
-    private void ApplyRuntimeBuffsToTower(ulong instanceId, Tower tower, TowerModel towerModel)
+    private void ApplyRuntimeBuffsToTower(ulong instanceId, TowerNode tower, TowerModel towerModel)
     {
         if (tower == null || towerModel == null)
         {
@@ -496,6 +477,4 @@ public class TowersManager
         }
     }
 }
-
-
 

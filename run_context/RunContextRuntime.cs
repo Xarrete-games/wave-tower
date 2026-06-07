@@ -35,9 +35,9 @@ public static class RunContextRuntime
             listeners.Add(relic);
         }
 
-        foreach (TowerLogic towerLogic in _towersManager.GetAllTowerListeners())
+        foreach (Tower tower in _towersManager.GetAllTowerListeners())
         {
-            listeners.Add(towerLogic);
+            listeners.Add(tower);
         }
 
         return listeners;

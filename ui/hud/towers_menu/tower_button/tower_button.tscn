@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://o248nju46k2n"]
 
-[ext_resource type="Script" path="res://ui/hud/towers_menu/tower_button/TowerButton.cs" id="1_bxa3v"]
-[ext_resource type="Texture2D" uid="uid://b67gt8lnugpg3" path="res://assets/sprites/towers/torreticas.png" id="1_s7tbd"]
+[ext_resource type="Script" uid="uid://s5y114dv0thh" path="res://ui/hud/towers_menu/tower_button/TowerButton.cs" id="1_bxa3v"]
 [ext_resource type="StyleBox" uid="uid://dcjn1y7ofuii7" path="res://ui/styles/box_style/buttons/button_panel.tres" id="2_3ku3x"]
+[ext_resource type="Texture2D" uid="uid://j7ei30jctihk" path="res://assets/sprites/towers/lightning-overcharge-tower.png" id="3_274r1"]
 [ext_resource type="LabelSettings" uid="uid://bqa8xh2lpphdf" path="res://ui/styles/label_settings/label_settings_24.tres" id="5_274r1"]
 [ext_resource type="PackedScene" uid="uid://edi2t1ojyywt" path="res://ui/components/gold_price/gold_price.tscn" id="5_dfgrm"]
 
@@ -10,20 +10,20 @@
 
 [sub_resource type="Theme" id="Theme_bxa3v"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c656n"]
-atlas = ExtResource("1_s7tbd")
-region = Rect2(0, 0, 128, 191)
-
-[node name="TowerButton" type="HBoxContainer" unique_id=1780577747 node_paths=PackedStringArray("PanelPath", "TowerButtonPath", "GoldPricePath", "AmountLabelPath")]
+[node name="TowerButton" type="HBoxContainer" unique_id=1780577747]
 offset_right = 106.0
 offset_bottom = 112.0
 size_flags_vertical = 10
 theme_override_constants/separation = 20
 script = ExtResource("1_bxa3v")
-PanelPath = NodePath("VBoxContainer/CenterContainer/Panel")
-TowerButtonPath = NodePath("VBoxContainer/CenterContainer/TowerButton")
-GoldPricePath = NodePath("VBoxContainer/GoldPrice")
-AmountLabelPath = NodePath("HBoxContainer/MarginContainer/AmountLabel")
+PanelPath = Object(Panel,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(60, 60),"layout_direction":0,"layout_mode":2,"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":SubResource("Theme_3ku3x"),"theme_type_variation":&"","theme_override_styles/panel":ExtResource("2_3ku3x"),"script":null)
+
+TowerButtonPath = Object(TextureButton,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(60, 60),"layout_direction":0,"layout_mode":2,"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":1,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":SubResource("Theme_bxa3v"),"theme_type_variation":&"","disabled":false,"toggle_mode":false,"button_pressed":false,"action_mode":1,"button_mask":1,"keep_pressed_outside":false,"button_group":null,"shortcut":null,"shortcut_feedback":true,"shortcut_in_tooltip":true,"texture_normal":ExtResource("3_274r1"),"texture_pressed":null,"texture_hover":null,"texture_disabled":null,"texture_focused":null,"texture_click_mask":null,"ignore_texture_size":true,"stretch_mode":5,"flip_h":false,"flip_v":false,"script":null)
+
+GoldPricePath = Object(HBoxContainer,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(50, 0),"layout_direction":0,"layout_mode":2,"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":1,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","alignment":1,"script":Resource("res://ui/components/gold_price/GoldPrice.cs"))
+
+AmountLabelPath = Object(Label,"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":2,"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":2,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","text":"x 1","label_settings":ExtResource("5_274r1"),"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"autowrap_trim_flags":192,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1900875026]
 layout_mode = 2
@@ -45,7 +45,7 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
 theme = SubResource("Theme_bxa3v")
-texture_normal = SubResource("AtlasTexture_c656n")
+texture_normal = ExtResource("3_274r1")
 ignore_texture_size = true
 stretch_mode = 5
 

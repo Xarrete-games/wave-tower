@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class WildFireTower : Tower
+public partial class WildFireTower : TowerNode
 {
     [Export] public PackedScene ProjectileScene;
 

@@ -324,7 +324,7 @@ public partial class CompositeTileMap : Node
         return piece?.GetNodeOrNull<TileMapLayer>("MapPieceTileMap");
     }
 
-    private void OnTowerRemoved(Tower tower)
+    private void OnTowerRemoved(TowerNode tower)
     {
         string key = tower?.CompositeTileKey;
         if (!string.IsNullOrEmpty(key))

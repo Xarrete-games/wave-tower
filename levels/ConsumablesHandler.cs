@@ -115,7 +115,7 @@ public partial class ConsumablesHandler : Node
         _currentTarget = null;
     }
 
-    private void OnTowerHovered(Tower tower)
+    private void OnTowerHovered(TowerNode tower)
     {
         if (_currentConsumable == null)
         {
@@ -133,7 +133,7 @@ public partial class ConsumablesHandler : Node
         _currentTarget = tower;
     }
 
-    private void OnTowerUnhovered(Tower tower)
+    private void OnTowerUnhovered(TowerNode tower)
     {
         if (_currentConsumable == null)
         {

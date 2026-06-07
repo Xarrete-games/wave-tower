@@ -2,7 +2,7 @@ using Godot;
 
 public partial class TowerSelector : Node
 {
-    private Tower _currentTowerSelected;
+    private TowerNode _currentTowerSelected;
     private RunProgress _progress;
 
     public override void _Ready()
@@ -59,7 +59,7 @@ public partial class TowerSelector : Node
         runContext.TowersManager.SelectTower(null);
     }
 
-    private void OnTowerSelected(Tower tower)
+    private void OnTowerSelected(TowerNode tower)
     {
         if (tower == null)
         {
@@ -84,12 +84,12 @@ public partial class TowerSelector : Node
         ClearTowerSelected();
     }
 
-    private void OnTowerRemovePressed(Tower tower)
+    private void OnTowerRemovePressed(TowerNode tower)
     {
         ClearTowerSelected();
     }
 
-    private void OnStatsChange(Tower towerObj)
+    private void OnStatsChange(TowerNode towerObj)
     {
         if (_currentTowerSelected == towerObj)
         {

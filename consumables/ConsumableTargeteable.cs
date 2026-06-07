@@ -22,11 +22,10 @@ public abstract class ConsumableTargeteable : Consumable
         EmitUsed();
     }
 
-    public Tower GetTargetTower()
+    public TowerNode GetTargetTower()
     {
-        return (Tower)Target;
+        return Target as TowerNode;
     }
 
     public abstract void Action(Node target);
 }
-

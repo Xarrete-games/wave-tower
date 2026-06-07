@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class LightningChainTower : Tower
+public partial class LightningChainTower : TowerNode
 {
     [Export] public PackedScene LightningChainProjectileScene;
 

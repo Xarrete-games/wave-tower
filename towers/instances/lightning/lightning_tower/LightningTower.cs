@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class LightningTower : Tower
+public partial class LightningTower : TowerNode
 {
     [Export] public PackedScene ElectricBallScene;
 

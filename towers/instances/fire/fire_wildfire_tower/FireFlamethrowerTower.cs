@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class FireFlamethrowerTower : Tower
+public partial class FireFlamethrowerTower : TowerNode
 {
     private Timer _flameThrowerDurationTimer;
     private FireFlamethrowerProjectile _fireFlamethrowerProjectile;

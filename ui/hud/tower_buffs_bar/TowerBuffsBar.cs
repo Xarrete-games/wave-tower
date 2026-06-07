@@ -9,7 +9,7 @@ public partial class TowerBuffsBar : Control
     [Export]
     public NodePath SlotsContainer;
 
-    private Tower _tower;
+    private TowerNode _tower;
     private readonly List<TowerBuff> _towerBuffs = new();
     private readonly Dictionary<string, int> _buffsModifiersStacks = new();
 
@@ -17,7 +17,7 @@ public partial class TowerBuffsBar : Control
 
     public override void _Ready()
     {
-        _tower = GetParent() as Tower;
+        _tower = GetParent() as TowerNode;
         _slotsContainerNode = !SlotsContainer.IsEmpty ? GetNodeOrNull<Control>(SlotsContainer) : GetNodeOrNull<Control>("Container");
 
         if (_tower == null)

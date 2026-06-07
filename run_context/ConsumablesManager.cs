@@ -156,7 +156,7 @@ public class ConsumablesManager
             return;
         }
 
-        Tower targetTower = (consumableObj as ConsumableTargeteable)?.GetTargetTower();
+        TowerNode targetTower = (consumableObj as ConsumableTargeteable)?.GetTargetTower();
 
         if (targetTower == null)
         {
@@ -198,7 +198,7 @@ public class ConsumablesManager
             return false;
         }
 
-        Tower targetTower = targeteable.GetTargetTower();
+        TowerNode targetTower = targeteable.GetTargetTower();
         if (targetTower == null)
         {
             return false;

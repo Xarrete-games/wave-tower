@@ -2,7 +2,7 @@ using Godot;
 using System.Threading.Tasks;
 
 [GlobalClass]
-public partial class FireLaserTower : Tower
+public partial class FireLaserTower : TowerNode
 {
     private const float ExecuteDamage = 9999f;
 

@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class FrostSpearTower : Tower
+public partial class FrostSpearTower : TowerNode
 {
     [Export] public PackedScene FrostSpearProjectileScene;
     [Export] public int DebuffStacks = 2;

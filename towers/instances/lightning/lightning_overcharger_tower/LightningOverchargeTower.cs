@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 [GlobalClass]
-public partial class LightningOverchargeTower : Tower
+public partial class LightningOverchargeTower : TowerNode
 {
     [ExportGroup("Scenes")]
     [Export] public PackedScene ProjectileScene;
     [Export] public PackedScene OverchargeParticleScene;
 
-    private readonly List<Tower> _towersInRange = new();
+    private readonly List<TowerNode> _towersInRange = new();
     private readonly Dictionary<string, Node> _particlesByTowerName = new();
 
     private Marker2D _projectileSpawnPos;
@@ -76,12 +76,12 @@ public partial class LightningOverchargeTower : Tower
         }
     }
 
-    private void OnTowerPlaced(Tower tower)
+    private void OnTowerPlaced(TowerNode tower)
     {
         AsyncTaskHelper.FireAndForget(OnTowerPlacedAsync(tower), "LightningOverchargeTower.OnTowerPlacedAsync");
     }
 
-    private async Task OnTowerPlacedAsync(Tower tower)
+    private async Task OnTowerPlacedAsync(TowerNode tower)
     {
         if (tower == this)
         {
@@ -108,17 +108,17 @@ public partial class LightningOverchargeTower : Tower
 
     private void OnBuffAreaAreaEntered(Area2D area)
     {
-        Tower tower = area.GetParent() as Tower;
+        TowerNode tower = area.GetParent() as TowerNode;
         ApplyBuff(tower);
     }
 
     private void OnBuffAreaAreaExited(Area2D area)
     {
-        Tower tower = area.GetParent() as Tower;
+        TowerNode tower = area.GetParent() as TowerNode;
         RemoveBuff(tower);
     }
 
-    private void ApplyBuff(Tower tower)
+    private void ApplyBuff(TowerNode tower)
     {
         if (tower == null || tower == this || _towersInRange.Contains(tower))
         {
@@ -144,7 +144,7 @@ public partial class LightningOverchargeTower : Tower
         }
     }
 
-    private void RemoveBuff(Tower tower)
+    private void RemoveBuff(TowerNode tower)
     {
         if (tower == null || !_towersInRange.Contains(tower))
         {

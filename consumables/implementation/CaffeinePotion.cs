@@ -5,10 +5,10 @@ public class CaffeinePotion : ConsumableUsable
         RunContext runContext = RunContext.Instance;
         TowersManager towersManager = runContext.TowersManager;
 
-        System.Collections.Generic.List<Tower> towers = towersManager.GetPlacedTowers();
+        System.Collections.Generic.List<TowerNode> towers = towersManager.GetPlacedTowers();
         for (int index = 0; index < towers.Count; index++)
         {
-            Tower tower = towers[index];
+            TowerNode tower = towers[index];
             if (tower == null)
             {
                 continue;

@@ -14,7 +14,7 @@ public partial class TowerStatsPanel : Control
     private OptionButton _targetingModeSelector;
     private Control _towerHintPanel;
 
-    private Tower _currentTower;
+    private TowerNode _currentTower;
 
     public override void _Ready()
     {
@@ -41,7 +41,7 @@ public partial class TowerStatsPanel : Control
         ClickEvents.TowerSelected -= OnTowerSelected;
     }
 
-    private void OnTowerSelected(Tower tower)
+    private void OnTowerSelected(TowerNode tower)
     {
         if (tower == null)
         {

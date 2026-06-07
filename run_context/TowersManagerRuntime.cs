@@ -3,24 +3,24 @@ using System.Collections.Generic;
 public sealed class TowersManagerRuntime
 {
     private readonly System.Random _random = new();
-    private readonly List<TowerLogic> _towerListeners = new();
+    private readonly List<Tower> _towerListeners = new();
     private readonly Dictionary<TowerModel.TowerType, int> _towerCounts = new();
     private readonly List<TowerModel> _towers = new();
     private readonly Dictionary<ulong, TowerModel> _towerByInstanceId = new();
 
-    public IReadOnlyList<TowerLogic> GetAllTowerListeners()
+    public IReadOnlyList<Tower> GetAllTowerListeners()
     {
         return _towerListeners;
     }
 
-    public IReadOnlyList<TowerLogic> GetTowerListeners()
+    public IReadOnlyList<Tower> GetTowerListeners()
     {
         return GetAllTowerListeners();
     }
 
-    public void AddTowerPlaced(TowerLogic towerLogic)
+    public void AddTowerPlaced(Tower tower)
     {
-        AddTowerListener(towerLogic);
+        AddTowerListener(tower);
     }
 
     public void AddTowerPlaced(TowerModel tower)
@@ -44,9 +44,9 @@ public sealed class TowersManagerRuntime
         }
     }
 
-    public void TowerRemoved(TowerLogic towerLogic)
+    public void TowerRemoved(Tower tower)
     {
-        RemoveTowerListener(towerLogic);
+        RemoveTowerListener(tower);
     }
 
     public void TowerRemoved(TowerModel tower)
@@ -117,27 +117,27 @@ public sealed class TowersManagerRuntime
         return count;
     }
 
-    public void AddTowerListener(TowerLogic towerLogic)
+    public void AddTowerListener(Tower tower)
     {
-        if (towerLogic == null)
+        if (tower == null)
         {
             return;
         }
 
-        if (!_towerListeners.Contains(towerLogic))
+        if (!_towerListeners.Contains(tower))
         {
-            _towerListeners.Add(towerLogic);
+            _towerListeners.Add(tower);
         }
     }
 
-    public void RemoveTowerListener(TowerLogic towerLogic)
+    public void RemoveTowerListener(Tower tower)
     {
-        if (towerLogic == null)
+        if (tower == null)
         {
             return;
         }
 
-        _towerListeners.Remove(towerLogic);
+        _towerListeners.Remove(tower);
     }
 
     public void Reset()

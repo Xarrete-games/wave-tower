@@ -143,7 +143,7 @@ public partial class LevelTileMap : TileMapLayer
         }
     }
 
-    private void OnTowerRemoved(Tower tower)
+    private void OnTowerRemoved(TowerNode tower)
     {
         if (tower == null)
         {

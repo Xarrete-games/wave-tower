@@ -2,7 +2,7 @@ using Godot;
 using System.Threading.Tasks;
 
 [GlobalClass]
-public partial class FrostNovaTower : Tower
+public partial class FrostNovaTower : TowerNode
 {
     private static readonly PackedScene FrostNovaProjectileScene = GD.Load<PackedScene>("uid://csif0nju31dcs");
     public float DoubleShotChance = 0;
